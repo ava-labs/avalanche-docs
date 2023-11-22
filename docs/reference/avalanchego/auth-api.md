@@ -1,6 +1,6 @@
 ---
 tags: [AvalancheGo APIs]
-description: This page is an overview of the Auth API associated with AvalancheGo. 
+description: This page is an overview of the Auth API associated with AvalancheGo.
 sidebar_label: Auth API
 pagination_label: Auth API
 ---
@@ -17,8 +17,7 @@ An authorization token is provided in the header of an API call. Specifically, t
 `Authorization` should have value `Bearer TOKEN.GOES.HERE` (where `TOKEN.GOES.HERE` is replaced with
 the token).
 
-This API is only reachable if the node is started with [config
-flag](/nodes/configure/avalanchego-config-flags.md)`--api-auth-required`. If the node is
+This API is only reachable if the node is started with [config flag](/nodes/configure/avalanchego-config-flags.md)`--api-auth-required`. If the node is
 started without this CLI, API calls do not require authorization tokens, so this API is not
 reachable. This API never requires an authorization token to be reached.
 
@@ -31,8 +30,7 @@ tokens.
 If you run your node with `--api-auth-required` then some tools like Core or MetaMask may not be
 able to make API calls to your node because they don’t have an auth token.
 
-This API set is for a specific node, it is unavailable on the [public
-server](/tooling/rpc-providers.md).
+This API set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
 
 :::
 
@@ -83,7 +81,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/auth
 ```
 
-This call will generate an authorization token that allows access to API endpoints `/ext/bc/X` 
+This call will generate an authorization token that allows access to API endpoints `/ext/bc/X`
 (that is the X-Chain) and `/ext/info` (that is the [info API](/reference/avalanchego/info-api.md).)
 
 **Example Response:**

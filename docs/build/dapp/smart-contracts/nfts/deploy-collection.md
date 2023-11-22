@@ -2,11 +2,11 @@
 tags: [Build, Dapps]
 description: This tutorial will walkthrough deploying a basic ERC-721 (NFT) smart contract on the Avalanche Network. This is a beginner friendly tutorial; No previous development experience necessary.
 sidebar_label: Deploy an ERC-721
-pagination_label: Deploy an ERC-721 NFT Collection on Avalanche 
+pagination_label: Deploy an ERC-721 NFT Collection on Avalanche
 sidebar_postion: 0
 ---
 
-# Deploy an ERC-721 NFT Collection on Avalanche 
+# Deploy an ERC-721 NFT Collection on Avalanche
 
 This tutorial will start you with a basic [ERC-721
 (NFT)](https://eips.ethereum.org/EIPS/eip-721) smart contract on the Avalanche
@@ -32,10 +32,9 @@ The following tools will be used during this tutorial:
 DISCLAIMER: This Solidity smart contract tutorial is for demonstration purposes
 only. Users should consider proper precautions, error handling, and safeguards
 for production use. No one at Ava Labs is responsible for your development, and
-you must take full responsibility for ensuring your code is secure. 
+you must take full responsibility for ensuring your code is secure.
 
 :::
-
 
 ## Preparing Your NFT Files
 
@@ -44,8 +43,8 @@ ready to use. In this example, the files will get uploaded to Pinata, a pinning
 service that prevents files from being garbage collected on IPFS.
 
 If you're unfamiliar with the process of uploading image and metadata files to
-an IPFS provider for NFT collection usage, please check out [this article on
-preparing NFT files](preparing-nft-files.md). Ensure that your files are
+an IPFS provider for NFT collection usage, please check out
+[this article on preparing NFT files](/build/dapp/smart-contracts/nfts/preparing-nft-files.md). Ensure that your files are
 uploaded and your base URI is ready to plug into your smart contract.
 
 Once the image and metadata files are ready, we can prepare to deploy a smart contract.
@@ -62,13 +61,13 @@ To do that, go to **Settings** and click on **Advanced**.
 ![Settings image 1](/img/c-chain-ERC20/settings1.png)
 
 Here, turn on the **Testnet Mode** feature. This will automatically make Core switch to
-Fuji Testnet. 
+Fuji Testnet.
 
 ![Settings image 2](/img/c-chain-ERC20/settings2.png)
 
 :::info
 
-If you are using other wallets, like Core or MetaMask, you can add the Fuji 
+If you are using other wallets, like Core or MetaMask, you can add the Fuji
 Testnet using the following specs:
 
 - **Network Name**: Avalanche C-Chain
@@ -78,7 +77,6 @@ Testnet using the following specs:
 - **Explorer**: [`https://testnet.snowtrace.io`](https://testnet.snowtrace.io/)
 
 :::
-
 
 ### Getting Testnet Funds
 

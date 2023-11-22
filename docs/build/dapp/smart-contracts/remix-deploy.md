@@ -11,8 +11,8 @@ pagination_label: Deploy a Smart Contract on Avalanche Using Remix and Core
 
 Avalanche's Primary Network is a Subnet that has three chains: P-Chain, X-Chain,
 and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered
-by Avalanche’s Snowman consensus protocol. The [C-Chain
-RPC](/reference/avalanchego/c-chain/api.md) can do anything a typical Ethereum
+by Avalanche’s Snowman consensus protocol. The
+[C-Chain RPC](/reference/avalanchego/c-chain/api.md) can do anything a typical Ethereum
 client can by using the Ethereum-standard RPC calls. The immediate benefits of
 using the C-Chain rather than Ethereum are all of the benefits of using
 Avalanche. These properties that could considerably improve the performance of
@@ -22,9 +22,9 @@ Today, we will deploy and test a smart contract on Avalanche using Remix and Cor
 
 ## Step 1: Setting up Core
 
-If you don't already have a Core wallet, follow this 
+If you don't already have a Core wallet, follow this
 [guide](https://support.avax.network/en/articles/6100129-core-extension-how-do-i-create-a-new-wallet)
-to create a new wallet. 
+to create a new wallet.
 
 If you want to use the **Avalanche C-Chain**, it can be selected from the networks list.
 
@@ -70,7 +70,6 @@ Your address will receive test AVAX in a few seconds.
 On a local network, you can easily fund your addresses by following
 [this](/build/subnet/hello-subnet.md#importing-the-test-private-key).
 
-
 ## Step 3: Connect Core and Deploy a Smart Contract Using Remix
 
 Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
@@ -87,7 +86,7 @@ Select the Solidity compiler tab and compile the contract.
 
 ![Compile contract](/img/remix-core-guide/compile.png)
 
-Navigate to Deploy & Run transactions Tab -&gt; Open the "ENVIRONMENT" drop-down and select 
+Navigate to Deploy & Run transactions Tab -&gt; Open the "ENVIRONMENT" drop-down and select
 Injected Provider (make sure Core is loaded).
 
 ![Deploy and run transactions](/img/remix-core-guide/provider.png)
@@ -135,4 +134,3 @@ The contract ABI and Bytecode are available on the Solidity compiler tab.
 
 If you had any difficulties following this tutorial or simply want to discuss
 Avalanche with us, you can join our community at [Discord](https://chat.avalabs.org/)!
-

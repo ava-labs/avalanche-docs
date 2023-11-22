@@ -2,9 +2,9 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -59,7 +59,7 @@ signatures are indeed foundational to Avalanche.
 At the very highest level, here is an overview of the process we will take you
 through in this tutorial. First we use a simple webapp to gather the three
 inputs: signing address, message, and signature. We extract the cryptographic
-data from them that will be  passed into the dapp to verify the signature.
+data from them that will be passed into the dapp to verify the signature.
 
 The dapp then verifies in two steps. First, it makes sure that all the values
 passed to it are provably related to each other. Then, assuming that they are,
@@ -89,17 +89,15 @@ which network you are connected. For instance:
 
 ```typescript
 function checkMetamaskStatus() {
-    if((window as any).ethereum) {
-        if((window as any).ethereum.chainId != '0xa869') {
-            result = "Failed: Not connected to Avalanche Fuji Testnet via MetaMask."
-        }
-        else {
-            //call required function
-        }
+  if ((window as any).ethereum) {
+    if ((window as any).ethereum.chainId != "0xa869") {
+      result = "Failed: Not connected to Avalanche Fuji Testnet via MetaMask.";
+    } else {
+      //call required function
     }
-    else {
-        result = "Failed: MetaMask is not installed."
-    }
+  } else {
+    result = "Failed: MetaMask is not installed.";
+  }
 }
 ```
 
@@ -132,7 +130,7 @@ if they are not.
 First, you will need to hash the original message. Here is the standard way of
 hashing the message based on the Bitcoin Script format and Ethereum format:
 
-***sha256(length(prefix) + prefix + length(message) + message)***
+**_sha256(length(prefix) + prefix + length(message) + message)_**
 
 The prefix is a so-called "magic prefix" string `0x1AAvalanche Signed
 Message:\n`, where `0x1A` is the length of the prefix text and `length(message)`
@@ -141,15 +139,18 @@ result with `sha256`. For example:
 
 ```typescript
 function hashMessage(message: string) {
-    let mBuf: Buffer = Buffer.from(message, 'utf8')
-    let msgSize: Buffer = Buffer.alloc(4)
-    msgSize.writeUInt32BE(mBuf.length, 0)
-    let msgBuf: Buffer = Buffer.from(`0x1AAvalanche Signed Message:\n${msgSize}${message}`, 'utf8')
-    let hash: Buffer = createHash('sha256').update(msgBuf).digest()
-    let hashex: string = hash.toString('hex')
-    let hashBuff: Buffer = Buffer.from(hashex, 'hex')
-    let messageHash: string = '0x' + hashex
-    return {hashBuff, messageHash}
+  let mBuf: Buffer = Buffer.from(message, "utf8");
+  let msgSize: Buffer = Buffer.alloc(4);
+  msgSize.writeUInt32BE(mBuf.length, 0);
+  let msgBuf: Buffer = Buffer.from(
+    `0x1AAvalanche Signed Message:\n${msgSize}${message}`,
+    "utf8"
+  );
+  let hash: Buffer = createHash("sha256").update(msgBuf).digest();
+  let hashex: string = hash.toString("hex");
+  let hashBuff: Buffer = Buffer.from(hashex, "hex");
+  let messageHash: string = "0x" + hashex;
+  return { hashBuff, messageHash };
 }
 ```
 
@@ -200,13 +201,13 @@ address.
 
 ```typescript
 function recover(msgHash: Buffer, sig: any) {
-    let ec: EC = new EC('secp256k1')
-    const pubk: any = ec.recoverPubKey(msgHash, sig, sig.v)
-    const pubkx: string = '0x' + pubk.x.toString('hex')
-    const pubky: string = '0x' + pubk.y.toString('hex')
-    let pubkCord: Array<string> = [pubkx, pubky]
-    let pubkBuff: Buffer = Buffer.from(pubk.encodeCompressed())
-    return {pubkCord, pubkBuff}
+  let ec: EC = new EC("secp256k1");
+  const pubk: any = ec.recoverPubKey(msgHash, sig, sig.v);
+  const pubkx: string = "0x" + pubk.x.toString("hex");
+  const pubky: string = "0x" + pubk.y.toString("hex");
+  let pubkCord: Array<string> = [pubkx, pubky];
+  let pubkBuff: Buffer = Buffer.from(pubk.encodeCompressed());
+  return { pubkCord, pubkBuff };
 }
 ```
 
@@ -215,22 +216,37 @@ Here is the full code for verification, including the call to the dapp function
 
 ```typescript
 async function verify() {
-    //Create the provider and contract object to access the dapp functions
-    const provider: any = new ethers.providers.Web3Provider((window as any).ethereum)
-    const elliptic: any = new ethers.Contract(contractAddress.Contract, ECArtifact.abi, provider)
-    //Extract all the data needed for signature verification
-    let message: any = hashMessage(msg)
-    let sign: any = splitSig(sig)
-    let publicKey: any = recover(message.hashBuff, sign.sigParam)
-    //prefix and hrp for Bech32 encoding
-    let prefix: string = "fuji"
-    let hrp: Array<any> = []
-    for (var i=0; i<prefix.length; i++) {
-        hrp[i] = prefix.charCodeAt(i)
-    }
-    //Call recoverAddress function from dapp. xchain and msg are user inputs in webapp
-    const tx: string = await elliptic.recoverAddress(message.messageHash, sign.sigHex, publicKey.pubkCord, publicKey.pubkBuff, msg, xchain, prefix, hrp)
-    result = tx 
+  //Create the provider and contract object to access the dapp functions
+  const provider: any = new ethers.providers.Web3Provider(
+    (window as any).ethereum
+  );
+  const elliptic: any = new ethers.Contract(
+    contractAddress.Contract,
+    ECArtifact.abi,
+    provider
+  );
+  //Extract all the data needed for signature verification
+  let message: any = hashMessage(msg);
+  let sign: any = splitSig(sig);
+  let publicKey: any = recover(message.hashBuff, sign.sigParam);
+  //prefix and hrp for Bech32 encoding
+  let prefix: string = "fuji";
+  let hrp: Array<any> = [];
+  for (var i = 0; i < prefix.length; i++) {
+    hrp[i] = prefix.charCodeAt(i);
+  }
+  //Call recoverAddress function from dapp. xchain and msg are user inputs in webapp
+  const tx: string = await elliptic.recoverAddress(
+    message.messageHash,
+    sign.sigHex,
+    publicKey.pubkCord,
+    publicKey.pubkBuff,
+    msg,
+    xchain,
+    prefix,
+    hrp
+  );
+  result = tx;
 }
 ```
 
@@ -259,13 +275,13 @@ The `recoverAddress` function is called in the dapp from the webapp.
 
 `recoverAddress` takes the following parameters:
 
-* messageHash&mdash;the hashed message
-* rs&mdash;r and s value of the signature
-* publicKey&mdash;x and y coordinates of the public key
-* pubk&mdash;33-byte compressed public key
-* xchain&mdash;X-Chain address
-* prefix&mdash;Prefix for Bech32 addressing scheme (AVAX or Fuji)
-* hrp&mdash;Array of each unicode character in the prefix
+- messageHash&mdash;the hashed message
+- rs&mdash;r and s value of the signature
+- publicKey&mdash;x and y coordinates of the public key
+- pubk&mdash;33-byte compressed public key
+- xchain&mdash;X-Chain address
+- prefix&mdash;Prefix for Bech32 addressing scheme (AVAX or Fuji)
+- hrp&mdash;Array of each unicode character in the prefix
 
 Then it performs the following steps:
 
@@ -297,7 +313,7 @@ function recoverAddress(bytes32 messageHash, uint[2] memory rs, uint[2] memory p
         }
         else {
             result = "Signature verification failed!";
-        }    
+        }
     }
     else {
         result = string(abi.encodePacked("Failed: Addresses do not match. Address for this signature/message combination should be ", xc));
@@ -324,7 +340,7 @@ function polymod(uint256 pre) internal view returns(uint) {
     (-((chk >> 1) & 1) & 0x26508e6d) ^
     (-((chk >> 2) & 1) & 0x1ea119fa) ^
     (-((chk >> 3) & 1) & 0x3d4233dd) ^
-    (-((chk >> 4) & 1) & 0x2a1462b3); 
+    (-((chk >> 4) & 1) & 0x2a1462b3);
     return chk;
 }
 
@@ -336,7 +352,7 @@ function prefixCheck(uint[] memory hrp) public view returns (uint) {
         c = hrp[pm];
         chk = polymod(chk) ^ (c >> 5);
     }
-    chk = polymod(chk); 
+    chk = polymod(chk);
     for (uint pm = 0; pm < hrp.length; ++pm) {
         v = hrp[pm];
         chk = polymod(chk) ^ (v & 0x1f);
@@ -390,7 +406,7 @@ function convert(uint[] memory data, uint inBits, uint outBits) public view retu
 It is a simple step, but it is very important to check to see if the extracted
 X-Chain address from the public key matches with the X-Chain address that was
 passed from the webapp. Otherwise, you may have a perfectly valid message
-signature but for a *different* X-Chain address than the webapp requested. Only
+signature but for a _different_ X-Chain address than the webapp requested. Only
 if they match can you proceed to verify the signature. Otherwise, return an
 error message.
 
@@ -420,9 +436,9 @@ function validateSignature(bytes32 messageHash, uint[2] memory rs, uint[2] memor
 
 **validateSignature** takes the same first three parameters as `recoverAddress`:
 
-* messageHash&mdash;the hashed message
-* rs&mdash;r and s value of the signature
-* publicKey&mdash;x and y coordinates of the public key
+- messageHash&mdash;the hashed message
+- rs&mdash;r and s value of the signature
+- publicKey&mdash;x and y coordinates of the public key
 
 ### Finishing Up
 
@@ -436,13 +452,13 @@ will probably want to take further actions accordingly.
 Here are some resources that can use to teach yourself the subjects you need in
 order to understand this tutorial.
 
-1. This is a useful documentation from Ava Labs on cryptographic primitives: <https://docs.avax.network/build/references/cryptographic-primitives>
+1. This is a useful documentation from Ava Labs on cryptographic primitives: [https://docs.avax.network/build/references/cryptographic-primitives](https://docs.avax.network/build/references/cryptographic-primitives)
 2. Here is a great YouTube video by Connor Daly of Ava Labs on how to use
    Hardhat to deploy and run your smart contract on Avalanche network:
-   <https://www.youtube.com/watch?v=UdzHxdfMKkE&t=1812s>
+   [https://www.youtube.com/watch?v=UdzHxdfMKkE&t=1812s](https://www.youtube.com/watch?v=UdzHxdfMKkE&t=1812s)
 3. If you want to learn more on how the private/public keys and the wallets
    work, you may enjoy going through this awesome tutorial by Greg Walker:
-   <https://learnmeabitcoin.com/technical/>
+   [https://learnmeabitcoin.com/technical/](https://learnmeabitcoin.com/technical/)
 4. Andrea Corbellini has done great work explaining Elliptic Curve Cryptography
    in detail in her blog post:
-   <https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/>
+   [https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/](https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/)

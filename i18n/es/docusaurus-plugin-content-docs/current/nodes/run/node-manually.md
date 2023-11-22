@@ -28,14 +28,17 @@ En este tutorial, haremos lo siguiente:
 - Instalar AvalancheGo y ejecutar un nodo Avalanche
 - Conectarse a Avalanche
 
-<details><summary>Otras Opciones</summary>
+<details>
+
+<summary>Otras Opciones</summary>
 <p>
 
 - Para usar un servicio de terceros para alojar su nodo o ejecutar un validador, [vea aquí](/nodes/run/third-party/aws-node.md) tutoriales dedicados.
 
 - Si solo está interesado en configurar un nodo para hacer staking, se recomienda seguir el tutorial [AvalancheGo Install Script](/nodes/run/with-installer/installing-avalanchego.md).
 
-</p></details>
+</p>
+</details>
 
 ## Requisitos de Hardware y Sistema Operativo
 
@@ -191,12 +194,17 @@ Consulte el repositorio [AvalancheGo GitHub](https://github.com/ava-labs/avalanc
 
 Para ejecutarse correctamente, AvalancheGo necesita aceptar conexiones desde Internet en el puerto de red `9651`. Antes de continuar con la instalación, debe determinar el entorno de red en el que se ejecutará su nodo.
 
-<details><summary>Ejecutando en un Proveedor de Nube</summary>
+<details>
+
+<summary>Ejecutando en un Proveedor de Nube</summary>
 <p>
 Si su nodo se está ejecutando en una instancia de computadora de un proveedor de nube, tendrá una IP estática. Descubra cuál es esa IP estática, o configúrela si aún no lo ha hecho.
-</p></details>
+</p>
+</details>
 
-<details><summary>Ejecutando en una Conexión Doméstica</summary>
+<details>
+
+<summary>Ejecutando en una Conexión Doméstica</summary>
 <p>
 
 Si está ejecutando un nodo en una computadora que está en una conexión de internet residencial, tiene una IP dinámica; es decir, su IP cambiará periódicamente. **Para efectos de demostración, puede ignorar la siguiente información.** De lo contrario, deberá configurar el reenvío de puertos de entrada del puerto `9651` desde Internet hacia la computadora en la que se instala el nodo.
@@ -209,7 +217,8 @@ Tenga en cuenta que un nodo Avalanche completamente conectado mantiene y se comu
 
 :::
 
-</p></details>
+</p>
+</details>
 
 :::info
 Para poder realizar llamadas de API a su nodo desde otras máquinas, incluya el argumento `--http-host=` al iniciar el nodo.

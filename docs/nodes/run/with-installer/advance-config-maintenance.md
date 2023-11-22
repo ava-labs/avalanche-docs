@@ -56,27 +56,27 @@ For example:
 
 - To run a Fuji node with indexing enabled and autodetected static IP:
 
-    ```bash
-    ./avalanchego-installer.sh --fuji --ip static --index
-    ```
+  ```bash
+  ./avalanchego-installer.sh --fuji --ip static --index
+  ```
 
 - To run an archival Mainnet node with dynamic IP and database located at `/home/node/db`:
 
-    ```bash
-    ./avalanchego-installer.sh --archival --ip dynamic --db-dir /home/node/db
-    ```
+  ```bash
+  ./avalanchego-installer.sh --archival --ip dynamic --db-dir /home/node/db
+  ```
 
 - To use C-Chain state-sync to quickly bootstrap a Mainnet node, with dynamic IP and local RPC only:
 
-    ```bash
-    ./avalanchego-installer.sh --state-sync on --ip dynamic --rpc local
-    ```
+  ```bash
+  ./avalanchego-installer.sh --state-sync on --ip dynamic --rpc local
+  ```
 
 - To reinstall the node using node version 1.7.10 and use specific IP and local RPC only:
 
-    ```bash
-    ./avalanchego-installer.sh --reinstall --ip 1.2.3.4 --version v1.7.10 --rpc local
-    ```
+  ```bash
+  ./avalanchego-installer.sh --reinstall --ip 1.2.3.4 --version v1.7.10 --rpc local
+  ```
 
 ## Node Configuration
 
@@ -94,8 +94,8 @@ this:
 ```
 
 Note that the configuration file needs to be a properly formatted `JSON` file, so
-switches should formatted differently than they would be for the command line. 
-Therefore, don't enter options like `--public-ip-resolution-service=opendns` as shown 
+switches should formatted differently than they would be for the command line.
+Therefore, don't enter options like `--public-ip-resolution-service=opendns` as shown
 in the example above.
 
 The script also creates an empty C-Chain config file, located at
@@ -202,16 +202,14 @@ did it on our [Twitter](https://twitter.com/avalancheavax),
 If you're on a residential network (dynamic IP), don't forget to set up port
 forwarding. If you're on a cloud service provider, you're good to go.
 
-Now you can [interact with your
-node](/reference/standards/guides/issuing-api-calls.md), [stake your
-tokens](/nodes/validate/what-is-staking.md), or level up your installation by setting up
+Now you can [interact with your node](/reference/standards/guides/issuing-api-calls.md),
+[stake your tokens](/nodes/validate/what-is-staking.md), or level up your installation by setting up
 [node monitoring](/nodes/maintain/setting-up-node-monitoring.md) to get a better
-insight into what your node is doing. Also, you might want to use our [Postman
-Collection](/tooling/avalanchego-postman-collection.md) to more
+insight into what your node is doing. Also, you might want to use our [Postman Collection](/tooling/avalanchego-postman-collection.md) to more
 easily issue commands to your node.
 
-Finally, if you haven't already, it is a good idea to [back
-up](/nodes/maintain/node-backup-and-restore.md) important files in case you ever
+Finally, if you haven't already, it is a good idea to
+[back up](/nodes/maintain/node-backup-and-restore.md) important files in case you ever
 need to restore your node to a different machine.
 
 If you have any questions, or need help, feel free to contact us on our

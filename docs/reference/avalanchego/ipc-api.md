@@ -11,13 +11,11 @@ The IPC API allows users to create Unix domain sockets for blockchains to publis
 blockchain accepts a vertex/block it will publish it to a socket and the decisions contained inside
 will be published to another.
 
-A node will only expose this API if it is started with [config
-flag](/nodes/configure/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
+A node will only expose this API if it is started with [config flag](/nodes/configure/avalanchego-config-flags.md) `api-ipcs-enabled=true`.
 
 :::info
 
-This API set is for a specific node, it is unavailable on the [public
-server](/tooling/rpc-providers.md).
+This API set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
 
 :::
 
@@ -51,7 +49,6 @@ This API uses the `json 2.0` RPC format.
 ## Methods
 
 ### `ipcs.publishBlockchain`
-
 
 :::caution
 

@@ -3,14 +3,14 @@
 Setup requirements:
 
 1. Ansible v2.9.9 or later
-2. Get Vultr.com API key from <https://my.vultr.com/settings/#settingsapi>
+2. Get Vultr.com API key from [https://my.vultr.com/settings/#settingsapi]
 3. Create file at ~/.vultr.ini and fill in your API key like so:
 
 ```text
 [reddev]
 key = quertyuiop123456789
 timeout = 60
- ```
+```
 
 ## Developement Server Creation with VPS
 

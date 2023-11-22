@@ -1,7 +1,7 @@
 # Avalanche Docs
 
 <div align="center">
-  <img src="static/AvalancheLogoRed.png?raw=true">
+  <img src="static/AvalancheLogoRed.png?raw=true"/>
 </div>
 
 ---
@@ -48,7 +48,7 @@ Para proponer nueva documentación o ediciones grandes a nuestras páginas exist
 - Realiza los cambios en tu rama
 - `git add .`
 - **`yarn build` para asegurarte de que la construcción pase**
-- `git commit -m "mensaje de confirmación"` 
+- `git commit -m "mensaje de confirmación"`
 - `git push`
 - Ve a [GitHub](https://github.com/ava-labs/avalanche-docs)
   y abre una nueva solicitud de extracción
@@ -69,7 +69,7 @@ Para proponer nueva documentación o ediciones grandes a nuestras páginas exist
 - Este repositorio utiliza una serie de herramientas de verificación de estilo, linting y formateo. Consulta
   [style-checker-notes.md](style-checker-notes.md) para más detalles y cómo corregir los errores.
 - Todos los archivos de imagen deben incluirse en
-  [static/img/<subdirectorio-correspondiente>](static/img).
+  [static/img/](static/img).
 - La documentación extensa de Docusaurus se puede encontrar [aquí](https://docusaurus.io/docs).
 
 ### Solicitud de Extracción (PR)

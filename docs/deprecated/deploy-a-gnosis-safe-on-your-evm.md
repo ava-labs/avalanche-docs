@@ -20,8 +20,7 @@ This tutorial assumes that:
   [Mainnet](/build/subnet/deploy/mainnet-subnet.md), [Fuji](/build/subnet/deploy/fuji-testnet-subnet.md)
   or a [Local network](/build/subnet/deploy/local-subnet.md).
 - Your node is currently validating your target Subnet.
-- Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis
-  File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
+- Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
 The entirety of this tutorial will require you to work with 3 projects (4 if running locally)
 
@@ -35,18 +34,18 @@ The entirety of this tutorial will require you to work with 3 projects (4 if run
 ### Setup Network
 
 In order for the `gnosis-safe` repo to successfully deploy these contracts, ensure that you have `jq`
-and `yarn` installed. 
+and `yarn` installed.
 
 On Ubuntu, run `sudo apt install jq`, `sudo apt install yarn`.
-On Linux, run `brew install jq`, `brew install yarn`. 
- 
+On Linux, run `brew install jq`, `brew install yarn`.
+
 Next, clone the library. Change `.env.example` to `.env` and set the variable,`MNEMONIC` to the seed
 phrase of the wallet you intend to deploy the contracts with. Set `ADDRESS` to the public key of the
-same wallet. Finally, set `NODE_URL` to the URL of your Subnet's RPC. 
+same wallet. Finally, set `NODE_URL` to the URL of your Subnet's RPC.
 
-:::note 
+:::note
 
-This address you choose must be funded as the transactions will include a gas fee. 
+This address you choose must be funded as the transactions will include a gas fee.
 
 :::
 

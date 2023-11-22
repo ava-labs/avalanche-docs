@@ -628,7 +628,7 @@ If true, don't use TLS when exporting trace data. Defaults to `true`.
 
 #### `--tracing-sample-rate` (float)
 
-The fraction of traces to sample. If >= 1, always sample. If <= 0, never sample.
+The fraction of traces to sample. If >= 1, always sample. If `<= 0`, never sample.
 Defaults to `0.1`.
 
 #### `--tracing-exporter-type`(string)

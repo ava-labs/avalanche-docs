@@ -21,10 +21,8 @@ Avalanche's C-Chain, which is an instance of the EVM.
 
 ## Requirements
 
-You've completed [Run an Avalanche
-Node](/nodes/run/node-manually.md) and are familiar with
-[Avalanche's
-architecture](/learn/avalanche/avalanche-platform.md). You've also
+You've completed [Run an Avalanche Node](/nodes/run/node-manually.md) and are familiar with
+[Avalanche's architecture](/learn/avalanche/avalanche-platform.md). You've also
 performed a cross-chain swap via this [this
 tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)
 to get funds to your C-Chain address.
@@ -98,17 +96,17 @@ npm install @truffle/hdwallet-provider
 One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
 
 ```javascript
-const Web3 = require("web3")
-const HDWalletProvider = require("@truffle/hdwallet-provider")
+const Web3 = require("web3");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
-const protocol = "http"
-const ip = "localhost"
-const port = 9650
+const protocol = "http";
+const ip = "localhost";
+const port = 9650;
 Web3.providers.HttpProvider.prototype.sendAsync =
-  Web3.providers.HttpProvider.prototype.send
+  Web3.providers.HttpProvider.prototype.send;
 const provider = new Web3.providers.HttpProvider(
   `${protocol}://${ip}:${port}/ext/bc/C/rpc`
-)
+);
 
 const privateKeys = [
   "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027",
@@ -121,7 +119,7 @@ const privateKeys = [
   "0xcdbfd34f687ced8c6968854f8a99ae47712c4f4183b78dcc4a903d1bfe8cbf60",
   "0x86f78c5416151fe3546dece84fda4b4b1e36089f2dbc48496faf3a950f16157c",
   "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a",
-]
+];
 
 module.exports = {
   networks: {
@@ -130,14 +128,14 @@ module.exports = {
         return new HDWalletProvider({
           privateKeys: privateKeys,
           providerOrUrl: provider,
-        })
+        });
       },
       network_id: "*",
       gas: 3000000,
       gasPrice: 225000000000,
     },
   },
-}
+};
 ```
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct
@@ -189,11 +187,11 @@ and add the following block of code. This handles deploying the `Storage` smart
 contract to the blockchain.
 
 ```javascript
-const Storage = artifacts.require("Storage")
+const Storage = artifacts.require("Storage");
 
 module.exports = function (deployer) {
-  deployer.deploy(Storage)
-}
+  deployer.deploy(Storage);
+};
 ```
 
 ## Compile Contracts with Truffle
@@ -416,7 +414,7 @@ Now that you have an instance of the `Storage` contract, call it's `store`
 method and pass in a number to write to the blockchain.
 
 ```javascript
-truffle(development) > instance.store(1234)
+truffle(development) > instance.store(1234);
 ```
 
 You should see something like:
@@ -454,19 +452,19 @@ truffle(development)> let i = await instance.retrieve()
 This should return:
 
 ```javascript
-undefined
+undefined;
 ```
 
 The result of the call to `retrieve` is a `BN` (big number). Call its `.toNumber` method to see the value:
 
 ```javascript
-truffle(development) > i.toNumber()
+truffle(development) > i.toNumber();
 ```
 
 You should see the number you stored.
 
 ```javascript
-1234
+1234;
 ```
 
 ## Summary

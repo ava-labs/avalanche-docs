@@ -85,8 +85,7 @@ Ahora estamos listos para descargar la nueva versión del nodo. Puedes descargar
 
 Descargar el binario precompilado es más fácil y se recomienda si solo quieres ejecutar tu propio nodo y hacer stake en él.
 
-Compilar el nodo [desde
-fuente](upgrade-your-avalanchego-node.md#build-from-source) se recomienda si
+Compilar el nodo [desde fuente](upgrade-your-avalanchego-node.md#build-from-source) se recomienda si
 eres un desarrollador que busca experimentar y construir en Avalanche.
 
 ## Descarga el binario precompilado

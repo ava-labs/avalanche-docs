@@ -62,14 +62,13 @@ NodeID is defined by two files:
 In the default installation, they can be found in the working directory,
 specifically in `~/.avalanchego/staking/`. All we need to do to recreate the
 node on another machine is to run a new installation with those same two files.
-If these two files are removed from a node, which is restarted afterwards, they 
-will be recreated and a new node ID will be assigned.  
+If these two files are removed from a node, which is restarted afterwards, they
+will be recreated and a new node ID will be assigned.
 
 :::caution
 
 If you have users defined in the keystore of your node, then you need to back up
-and restore those as well. [Keystore
-API](/reference/avalanchego/keystore-api.md) has methods that can be used to
+and restore those as well. [Keystore API](/reference/avalanchego/keystore-api.md) has methods that can be used to
 export and import user keys. Note that Keystore API is used by developers only
 and not intended for use in production nodes. If you don't know what a keystore
 API is and have not used it, you don't need to worry about it.
@@ -117,8 +116,7 @@ To copy the files from the node, you will need to be able to remotely log into
 the machine. You can use account password, but the secure and recommended way is
 to use the SSH keys. The procedure for acquiring and setting up SSH keys is
 highly dependent on your cloud provider and machine configuration. You can refer
-to our [Amazon Web
-Services](/nodes/run/third-party/aws-node.md)
+to our [Amazon Web Services](/nodes/run/third-party/aws-node.md)
 and [Microsoft Azure](/nodes/run/third-party/microsoft-azure-node.md)
 setup guides for those providers. Other providers will have similar procedures.
 

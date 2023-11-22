@@ -79,8 +79,7 @@ frecuencia a la que se construyen los bloques.
 Las configuraciones de Subnet admiten cargar nuevos parámetros de consenso. Las claves JSON son
 diferentes de sus claves `CLI` correspondientes. Estos parámetros deben agruparse bajo la
 clave `consensusParameters`. Los parámetros de consenso de una Subnet se establecen por defecto en los
-mismos valores utilizados para la Red Primaria, que se dan en [Parámetros Snow
-CLI](/nodes/configure/avalanchego-config-flags.md#snow-parameters).
+mismos valores utilizados para la Red Primaria, que se dan en [Parámetros Snow CLI](/nodes/configure/avalanchego-config-flags.md#snow-parameters).
 
 | Clave CLI                        | Clave JSON            |
 | :------------------------------- | :-------------------- |

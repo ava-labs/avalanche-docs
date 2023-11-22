@@ -99,8 +99,7 @@ Para cada precompilación en la lista, el asistente te guía para proporcionar i
 mediante preguntas relevantes.
 Para este tutorial, selecciona `Lista de permitidos de transacciones`.
 El documento
-[Restringir quién puede enviar
-transacciones](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions)
+[Restringir quién puede enviar transacciones](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions)
 describe de qué se trata esta precompilación.
 
 ```shell

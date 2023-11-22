@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  node_version: 16
+  node_version: 18
 
 jobs:
   Build:

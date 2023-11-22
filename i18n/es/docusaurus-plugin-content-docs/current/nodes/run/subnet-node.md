@@ -35,7 +35,9 @@ ejecutada por las Subnets en Avalanche.
 Se recomienda que primero completes [esta guía completa](/nodes/run/node-manually.md)
 que muestra cómo construir y ejecutar un nodo Avalanche básico. A continuación se presentan los detalles generales.
 
-<details><summary>Requisitos del sistema</summary>
+<details>
+
+<summary>Requisitos del sistema</summary>
 <p>
 
 - CPU: Equivalente a 8 vCPU de AWS
@@ -46,9 +48,12 @@ que muestra cómo construir y ejecutar un nodo Avalanche básico. A continuació
 Tenga en cuenta que a medida que aumenta el uso de la red, los requisitos de hardware pueden
 cambiar.
 
-</p></details>
+</p>
+</details>
 
-<details><summary>Para construir desde el código fuente:</summary>
+<details>
+
+<summary>Para construir desde el código fuente:</summary>
 <p>
 
 1. Instalar [gcc](https://gcc.gnu.org/)
@@ -84,7 +89,8 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
 ```
 
-</p></details>
+</p>
+</details>
 
 ## Gestionar los Binarios de la Subnet
 
@@ -108,7 +114,9 @@ cd $GOPATH/src/github.com/ava-labs/subnet-evm
 ./scripts/build.sh ~/.avalanchego/plugins/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy
 ```
 
-<details><summary>¿Dónde puedo encontrar parámetros de la Subnet como VMID?</summary>
+<details>
+
+<summary>¿Dónde puedo encontrar parámetros de la Subnet como VMID?</summary>
 <p>
 El VMID, ID de Subnet, ChainID y todos los demás parámetros se pueden encontrar en la sección "Chain Info"
 del Subnet Explorer.
@@ -116,7 +124,8 @@ del Subnet Explorer.
 - [Mainnet Avalanche](https://subnets.avax.network/c-chain)
 - [Testnet Fuji](https://subnets-test.avax.network/wagmi)
 
-</p></details>
+</p>
+</details>
 
 ### 3. Especificar el Complemento con un Config.json
 
@@ -144,7 +153,9 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 Nota: El comando anterior incluye el comando `--network-id=fuji` porque la Subnet WAGMI está desplegada
 en la Testnet Fuji.
 
-<details><summary>Ejecutar a través de la línea de comandos en su lugar</summary>
+<details>
+
+<summary>Ejecutar a través de la línea de comandos en su lugar</summary>
 <p>
 
 Si prefiere rastrear Subnets usando una bandera de línea de comandos, en su lugar puede usar la bandera `--track-subnets`.
@@ -155,7 +166,8 @@ Por ejemplo:
 ./build/avalanchego --track-subnets 28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY --network-id=fuji
 ```
 
-</p></details>
+</p>
+</details>
 
 Ahora debería ver la terminal llena de registros e información que sugiere que el nodo se está ejecutando correctamente
 y ha comenzado a arrancar en la red.
