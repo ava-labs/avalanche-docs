@@ -544,3 +544,11 @@
 # 10/05/23
 /build/dapp/smart-contracts/toolchains/truffle /deprecated/truffle 301
 /build/dapp/smart-contracts/verification/verify-truffle /deprecated/verify-truffle 301
+
+# 10/16/2023
+
+/nodes/run/with-installer /nodes/run/with-installer/preparing-your-environment 301
+/es/nodes/run/with-installer /es/nodes/run/with-installer/preparing-your-environment 301
+
+# teleporter marketing 
+/teleporter /learn/avalanche/awm 301

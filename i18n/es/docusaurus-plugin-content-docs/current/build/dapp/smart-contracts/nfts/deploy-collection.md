@@ -34,7 +34,6 @@ Nadie en Ava Labs es responsable de tu desarrollo y debes asumir la responsabili
 
 :::
 
-
 ## Preparando tus Archivos de NFT
 
 El primer paso para configurar un contrato inteligente de NFT es tener tus archivos de NFT
@@ -42,8 +41,7 @@ listos para usar. En este ejemplo, los archivos se cargarán en Pinata, un servi
 que los archivos sean recolectados por garbage collection en IPFS.
 
 Si no estás familiarizado con el proceso de cargar archivos de imagen y metadatos en
-un proveedor de IPFS para uso en colecciones de NFT, por favor revisa [este artículo sobre
-preparar archivos de NFT](preparing-nft-files.md). Asegúrate de que tus archivos estén
+un proveedor de IPFS para uso en colecciones de NFT, por favor revisa [este artículo sobre preparar archivos de NFT](preparing-nft-files.md). Asegúrate de que tus archivos estén
 cargados y tu URI base esté lista para enchufar en tu contrato inteligente.
 
 Una vez que los archivos de imagen y metadatos estén listos, podemos prepararnos para desplegar un contrato inteligente.
@@ -76,7 +74,6 @@ Testnet Fuji usando las siguientes especificaciones:
 - **Explorador**: [`https://testnet.snowtrace.io`](https://testnet.snowtrace.io/)
 
 :::
-
 
 ### Obteniendo Fondos de Testnet
 

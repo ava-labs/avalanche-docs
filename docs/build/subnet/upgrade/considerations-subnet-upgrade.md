@@ -25,7 +25,7 @@ to alter the way Subnet runs, for various business or operational needs. These u
 the purview of your team, and you have complete control over the timing of their roll out. Any such
 change represents a **network upgrade** and needs to be carefully planned and executed.
 
-:::warning 
+:::warning
 Network Upgrades Permanently Change the Rules of Your Subnet.
 
 Procedural mistakes or a botched upgrade can halt your Subnet or lead to data loss!
@@ -33,7 +33,7 @@ Procedural mistakes or a botched upgrade can halt your Subnet or lead to data lo
 When performing a Subnet upgrade, every single validator on the Subnet will need to perform the
 identical upgrade. If you are coordinating a network upgrade, you must schedule advance notice to
 every Subnet validator so that they have time to perform the upgrade prior to activation. Make sure
-you have direct line of communication to all your validators! 
+you have direct line of communication to all your validators!
 :::
 
 This tutorial will guide you through the process of doing various Subnet upgrades and changes. We
@@ -46,8 +46,7 @@ can only make progress if sufficient amount of validating nodes are connected an
 transactions. Each validator on a Subnet is assigned a certain `weight`, which is a numerical value
 representing the significance of the node in consensus decisions. On the Primary Network, weight is
 equal to the amount of AVAX staked on the node. On Subnets, weight is currently assigned by the
-Subnet owners when they issue the transaction [adding a
-validator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) to the Subnet.
+Subnet owners when they issue the transaction [adding a validator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) to the Subnet.
 
 Subnets can operate normally only if validators representing 80% or more of the cumulative validator
 weight is connected. If the amount of connected stake falls close to or below 80%, Subnet
@@ -57,7 +56,7 @@ transactions).
 You as a Subnet operator need to ensure that whatever you do, at least 80% of the validators'
 cumulative weight is connected and working at all times.
 
-:::info 
+:::info
 
 It is mandatory that the cumulative weight of all validators in the Subnet must be at least
 the value of
@@ -65,7 +64,7 @@ the value of
 20). For example, if there is only one validator in the Subnet, its weight must be at least
 `snow-sample-size` . Hence, when assigning weight to the nodes, always use values greater than 20.
 Recall that a validator's weight can't be changed while it is validating, so take care to use an
-appropriate value. 
+appropriate value.
 
 :::
 
@@ -82,11 +81,9 @@ upgrade activates.
 That's why having a node upgrade strategy is absolutely vital, and you should always update to the
 latest AvalancheGo client immediately when it is made available.
 
-For a general guide on upgrading AvalancheGo check out [this
-tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). When upgrading Subnet nodes and
+For a general guide on upgrading AvalancheGo check out [this tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). When upgrading Subnet nodes and
 keeping in mind the previous section, make sure to stagger node upgrades and start a new upgrade
-only once the previous node has successfully upgraded. Use the [Health
-API](/reference/avalanchego/health-api.md#healthhealth) to check that `healthy` value in the response
+only once the previous node has successfully upgraded. Use the [Health API](/reference/avalanchego/health-api.md#healthhealth) to check that `healthy` value in the response
 is `true` on the upgraded node, and on other Subnet validators check that
 [platform.getCurrentValidators()](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators)
 has `true` in `connected` attribute for the upgraded node's `nodeID`. Once those two conditions are
@@ -194,8 +191,7 @@ available precompiles allow you to:
 - Mint Native Coins
 - Configure Dynamic Fees
 
-Please refer to [Customize a
-Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for 
+Please refer to [Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) for
 a detailed discussion
 of possible precompile upgrade parameters.
 

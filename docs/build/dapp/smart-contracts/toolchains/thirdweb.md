@@ -4,7 +4,14 @@ description: Launching any new or existing Solidity decentralized app on Avalanc
 sidebar_label: Thirdweb
 pagination_label: Using thirdweb with the Avalanche C-Chain
 sidebar_position: 1
-keywords: [make a smartcontract, deploy a smartcontract, smartcontract development, thirdweb sdk, use thirdweb to deploy a smartcontract]
+keywords:
+  [
+    make a smartcontract,
+    deploy a smartcontract,
+    smartcontract development,
+    thirdweb sdk,
+    use thirdweb to deploy a smartcontract,
+  ]
 ---
 
 # Deploy a Smart Contract on Avalanche Using thirdweb
@@ -12,17 +19,17 @@ keywords: [make a smartcontract, deploy a smartcontract, smartcontract developme
 ## Introduction
 
 This tutorial walks through creating and deploying a smart contract using thirdweb's command line
-interface. 
+interface.
 
 ---
 
 Alternatively, you can deploy a prebuilt contract for NFTs, tokens, or marketplace directly from the
 thirdweb Explore page:
 
-1. Go to the thirdweb Explore page: <https://thirdweb.com/explore>
+1. Go to the thirdweb Explore page: [https://thirdweb.com/explore](https://thirdweb.com/explore)
 
 2. Choose the type of contract you want to deploy from the available options: NFTs, tokens,
-marketplace, and more.
+   marketplace, and more.
 3. Follow the on-screen prompts to configure and deploy your contract.
 
 > For more information on different contracts available on Explore, check out [thirdweb’s documentation.](https://portal.thirdweb.com/pre-built-contracts)
@@ -44,7 +51,7 @@ To create a new smart contract using thirdweb CLI, follow these steps:
    2. Choose your preferred framework: Hardhat or Foundry.
    3. Name your smart contract.
    4. Choose the type of base contract: Empty, [ERC20](https://portal.thirdweb.com/solidity/base-contracts/erc20base),
-   [ERC721](https://portal.thirdweb.com/solidity/base-contracts/erc721base), or [ERC1155](https://portal.thirdweb.com/solidity/base-contracts/erc1155base).
+      [ERC721](https://portal.thirdweb.com/solidity/base-contracts/erc721base), or [ERC1155](https://portal.thirdweb.com/solidity/base-contracts/erc1155base).
    5. Add any desired [extensions](https://portal.thirdweb.com/solidity/extensions).
 3. Once created, navigate to your project’s directory and open in your preferred code editor.
 4. In the `contracts` folder, you will find the smart contract written in Solidity.
@@ -77,7 +84,7 @@ To create a new smart contract using thirdweb CLI, follow these steps:
    - Implementing any required methods, such as the constructor.
 
 5. After modifying your contract with your desired custom logic, you may deploy it to Avalanche
-with the following command:
+   with the following command:
 
    ```bash
    npx thirdweb deploy
@@ -90,7 +97,7 @@ URLs, exposing your private keys, writing scripts, and other additional setup su
 contract.
 
 1. To deploy your smart contract using deploy, navigate to the root directory of your project and
-execute the following command:
+   execute the following command:
 
    ```bash
    npx thirdweb deploy
@@ -107,10 +114,10 @@ execute the following command:
    - `_symbol`: symbol or "ticker"
    - `_royaltyRecipient`: wallet address to receive royalties from secondary sales
    - `_royaltyBps`: basis points (bps) that will be given to the royalty recipient for each
-   secondary sale. For example: 500 = 5%.
+     secondary sale. For example: 500 = 5%.
 3. Select "Avalanche" as the network.
 4. Manage additional settings on your contract’s dashboard as needed such as uploading NFTs,
-configuring permissions, and more.
+   configuring permissions, and more.
 
 For additional information on deploying smart contracts with thirdweb, please reference [thirdweb’s documentation](https://portal.thirdweb.com/deploy).
 

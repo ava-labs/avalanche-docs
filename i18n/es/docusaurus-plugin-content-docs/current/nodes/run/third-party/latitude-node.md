@@ -43,7 +43,8 @@ Necesitarás instalar el `script de instalación del nodo avalanche` directament
 :::
 
 Después de obtener acceso, necesitaremos configurar nuestro nodo Avalanche. Para hacer esto, sigue las instrucciones
-aquí para instalar y ejecutar tu nodo [Configurar nodo Avalanche con instalador](/nodes/run/with-installer).
+aquí para instalar y ejecutar tu nodo
+[Configurar nodo Avalanche con instalador](/nodes/run/with-installer/installing-avalanchego.md).
 
 Tu nodo AvalancheGo debería estar ahora en funcionamiento y en proceso de bootstrap, lo cual puede llevar algunas
 horas. Para comprobar si ha terminado, puedes emitir una llamada de API usando `curl`.
