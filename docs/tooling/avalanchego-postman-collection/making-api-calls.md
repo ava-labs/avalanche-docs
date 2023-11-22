@@ -57,13 +57,13 @@ Fetching data about a C-Chain transaction using `eth_getTransactionByHash`.
 
 Fetching data about an X-Chain block using `avm.getBlock`.
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/4Yu2G3Zvrdo?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### P-Chain Public API Call
 
 Getting the current P-Chain height using `platform.getHeight`.
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/9d5VPNcODDw?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### API Call Using Variables
 
@@ -80,4 +80,4 @@ We can set up an environment variable with the transaction hash as value and use
 Find out more about variables [here](../avalanchego-postman-collection/variables.md).
 :::
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/26xCiawBRjM?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>

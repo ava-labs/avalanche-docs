@@ -44,7 +44,7 @@ API calls for which data visualization it is available:
 * [`avm.getBlockByHeight`](../../reference/avalanchego/x-chain/api#avmgetblockbyheight)
 * [`avm.getTx`](../../reference/avalanchego/x-chain/api#avmgettx)
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=1" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/2jS5EFWLoGs?modestbranding=1&rel=0&color=white&autoplay=1" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 
 
@@ -110,20 +110,20 @@ Learn how to make an API call with Postman with the help of this guide.
 
 ### `eth_getTransactionByHash`
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/M83WhbXq5R0?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `avm.getBlock`
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/d5E2pHXFInE?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `platform.getCurrentValidators`
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Pkf84edkw_0?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `avax.getAtomicTx`
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/AYIgdQomHqc?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `eth_getBalance`
 
-<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/M3n7cm1DYLE?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
