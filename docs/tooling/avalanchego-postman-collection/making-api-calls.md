@@ -7,8 +7,6 @@ sidebar_position: 2
 
 # Making API Calls
 
-import ReactPlayer from 'react-player'
-
 ## How to Make an API Call
 
 After [installing Postman](../avalanchego-postman-collection/setup#setup)
@@ -53,19 +51,19 @@ Learn how to use it with the help of
 
 Fetching data about a C-Chain transaction using `eth_getTransactionByHash`.
 
-<ReactPlayer playing controls url='/img/postman/postman-39-api-call-example.mov' width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### X-Chain Public API Call
 
 Fetching data about an X-Chain block using `avm.getBlock`.
 
-<ReactPlayer playing controls url='/img/postman/postman-40-api-call-example.mov' width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### P-Chain Public API Call
 
 Getting the current P-Chain height using `platform.getHeight`.
 
-<ReactPlayer playing controls url='/img/postman/postman-41-api-call-example.mov' width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### API Call Using Variables
 
@@ -82,6 +80,4 @@ We can set up an environment variable with the transaction hash as value and use
 Find out more about variables [here](../avalanchego-postman-collection/variables.md).
 :::
 
-<ReactPlayer playing controls url='/img/postman/postman-42-api-call-example.mov' width="1000px" height="600px"/>
-
-
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>

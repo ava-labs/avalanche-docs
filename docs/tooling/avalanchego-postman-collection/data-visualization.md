@@ -7,8 +7,6 @@ sidebar_position: 4
 
 # Data Visualization
 
-import ReactPlayer from 'react-player'
-
 ## API calls with Data Visualization
 
 Data visualization is available for a number of API calls. It takes the request
@@ -46,7 +44,7 @@ API calls for which data visualization it is available:
 * [`avm.getBlockByHeight`](../../reference/avalanchego/x-chain/api#avmgetblockbyheight)
 * [`avm.getTx`](../../reference/avalanchego/x-chain/api#avmgettx)
 
-<ReactPlayer playing controls url='/img/postman/postman-23-visuals-video.mov' width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=1" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 
 
@@ -112,25 +110,20 @@ Learn how to make an API call with Postman with the help of this guide.
 
 ### `eth_getTransactionByHash`
 
-<ReactPlayer playing controls url='/img/postman/postman-33-visualize-response-example.mov'
-width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `avm.getBlock`
 
-<ReactPlayer playing controls url='/img/postman/postman-34-visualize-response-example.mov' 
-width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `platform.getCurrentValidators`
 
-<ReactPlayer playing controls url='/img/postman/postman-35-visualize-response-example.mov' 
-width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `avax.getAtomicTx`
 
-<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' 
-width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
 
 ### `eth_getBalance`
 
-<ReactPlayer playing controls url='/img/postman/postman-36-visualize-response-example.mov' 
-width="1000px" height="600px"/>
+<iframe src="https://www.youtube.com/embed/B9jVNOrrZ_w?modestbranding=1&rel=0&color=white&autoplay=0" allow='autoplay' width="1000" height="800" frameborder="0" allowfullscreen></iframe>
