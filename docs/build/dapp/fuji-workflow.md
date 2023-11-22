@@ -10,8 +10,8 @@ pagination_label: Fuji Workflow
 ## Introduction
 
 Fuji is the Avalanche network's test network. You can use it to test your dapp
-or smart contract after you've developed it locally. (You can use [Avalanche
-Network Runner](/tooling/network-runner.md) to test things locally.) Fuji is
+or smart contract after you've developed it locally. (You can use
+[Avalanche Network Runner](/tooling/network-runner.md) to test things locally.) Fuji is
 typically on the same version as the Avalanche Mainnet, but sometimes it is
 running an unreleased version of AvalancheGo. In general, you can expect Fuji's
 behavior to be about the same as Avalanche Mainnet. Tools such as a explorers

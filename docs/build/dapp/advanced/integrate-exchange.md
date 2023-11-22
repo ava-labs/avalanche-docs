@@ -1,6 +1,6 @@
 ---
 tags: [Build, Dapps]
-description: The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain. 
+description: The objective of this document is to provide a brief overview of how to integrate with the EVM-Compatible Avalanche C-Chain.
 sidebar_label: Exchange Integration
 pagination_label: C-Chain Exchange Integration
 sidebar_position: 3
@@ -30,8 +30,7 @@ website.
 If you want to build your node form source or include it in a docker image,
 reference the [AvalancheGo GitHub
 repository](https://github.com/ava-labs/avalanchego). To quickly get up and
-running, you can use the [node installation
-script](/nodes/run/with-installer/installing-avalanchego.md) that automates installing
+running, you can use the [node installation script](/nodes/run/with-installer/installing-avalanchego.md) that automates installing
 and updating AvalancheGo node as a `systemd` service on Linux, using prebuilt
 binaries.
 

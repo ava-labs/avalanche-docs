@@ -267,8 +267,7 @@ ssh ubuntu@PUBLICIP
 ```
 
 You're logged into the EC2 instance again. Now we’ll need to set up our
-Avalanche node. To do this, follow the [Set Up Avalanche Node With
-Installer](/nodes/run/with-installer/installing-avalanchego.md) tutorial
+Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](/nodes/run/with-installer/installing-avalanchego.md) tutorial
 which automates the installation process. You will need the `PUBLICIP`
 we set up earlier.
 
@@ -322,8 +321,7 @@ In the above example the node ID is`NodeID-DznHmm3o7RkmpLkWMn9NqafH66mqunXbM`.
 Copy your node ID for later. Your node ID is not a secret, so you can just paste
 it into a text editor.
 
-AvalancheGo has other APIs, such as the [Health
-API](/reference/avalanchego/health-api.md), that may be used to interact with
+AvalancheGo has other APIs, such as the [Health API](/reference/avalanchego/health-api.md), that may be used to interact with
 the node. Some APIs are disabled by default. To enable such APIs, modify the
 ExecStart section of `/etc/systemd/system/avalanchego.service` (created during
 the installation process) to include flags that enable these endpoints. Don't
@@ -384,8 +382,7 @@ If you need to increase the volume size, follow these instructions from AWS:
 ## Wrap Up
 
 That's it! You now have an AvalancheGo node running on an AWS EC2 instance. We
-recommend setting up [node monitoring
-](/nodes/maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also
+recommend setting up [node monitoring](/nodes/maintain/setting-up-node-monitoring.md)for your AvalancheGo node. We also
 recommend setting up AWS billing alerts so you're not surprised when the bill
 arrives. If you have feedback on this tutorial, or anything else, send us a
 message on [Discord](https://chat.avalabs.org).

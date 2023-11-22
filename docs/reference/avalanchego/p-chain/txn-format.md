@@ -9,8 +9,7 @@ pagination_label: P-Chain Transaction Format
 
 This file is meant to be the single source of truth for how we serialize
 transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain`
-or `P-Chain`. This document uses the [primitive
-serialization](/reference/standards/serialization-primitives.md) format for packing and
+or `P-Chain`. This document uses the [primitive serialization](/reference/standards/serialization-primitives.md) format for packing and
 [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic
 user identification.
 

@@ -2,9 +2,9 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -227,8 +227,7 @@ This tutorial will cover interacting with the Subnet through
 ### Step 4.1: Using Remix
 
 First, we will be adding our Subnet to [MetaMask](https://metamask.io/). To add
-the Subnet, refer to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and
-MetaMask](/build/subnet/utility/deploy-smart-contract-to-subnet.md#step-1-setting-up-metamask)
+the Subnet, refer to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask](/build/subnet/utility/deploy-smart-contract-to-subnet.md#step-1-setting-up-metamask)
 you should replace the values with your Subnet values that are printed out after
 you have created it. If your balance is zero after you add Subnet to the
 MetaMask, refer to [Access Funded Accounts](#access-funded-accounts).
@@ -307,14 +306,11 @@ To checkout current precompiles provided by Ava Labs refer to
 [this](/build/subnet/upgrade/customize-a-subnet.md#precompiles). There
 are 3 precompiles shared by Ava Labs at the time this documentation is written.
 
-- [Contract Deployer Allow
-  List](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers):
+- [Contract Deployer Allow List](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers):
   restricts the addresses who can deploy contracts
-- [Transaction Allow
-  List](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions):
+- [Transaction Allow List](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions):
   restricts the addresses who can send transactions
-- [Native
-  Minter](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins):
+- [Native Minter](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins):
   allows given addresses to mint native token
 
 This tutorial will show how to interact with them using Remix.
@@ -330,7 +326,7 @@ afterwards.
 ### General Steps to Interact with Precompiles
 
 1. While creating the Subnet you will be prompted `Advanced: Would you like to
-   add a custom precompile to modify the EVM?:` answer `Yes` then choose the
+add a custom precompile to modify the EVM?:` answer `Yes` then choose the
    precompile you would like to add. Continue by selecting `Add Admin`, it will
    ask for an address. This address is your account's public address, it allows
    others to interact with your account. To get your account's public address,
@@ -445,16 +441,12 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
 - `avalanche`, `avalanche subnet`
   - `"command not found: avalanche"` It means that the directory containing
     `avalanche` command is not added to the PATH environment variable. It could
-    be caused by following reasons;
-    - You have added the wrong `bin` directory to your environment variables.
-      - Make sure to find where the `bin` directory is and run `export
-        PATH=$PWD:$PATH` inside the `bin` directory.
-    - You have added it to the PATH environment variable temporarily and
-      restarted your terminal.
-      - You can either add the `bin` directory to the PATH environment variable
-        again by running `export PATH=$PWD:$PATH` inside the downloaded `bin`
-        directory or you can refer to [Add Avalanche Command
-        Permanently](#add-avalanche-command-permanently)
+    be caused by following reasons; - You have added the wrong `bin` directory to your environment variables. - Make sure to find where the `bin` directory is and run `export
+PATH=$PWD:$PATH` inside the `bin` directory. - You have added it to the PATH environment variable temporarily and
+    restarted your terminal. - You can either add the `bin` directory to the PATH environment variable
+    again by running `export PATH=$PWD:$PATH` inside the downloaded `bin`
+    directory or you can refer to [Add Avalanche Command
+    Permanently](#add-avalanche-command-permanently)
 
 ### Step 2: Create the Subnet
 
@@ -464,7 +456,7 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
     created a Subnet with the same name. To check if that is the case, you can
     run `avalanche subnet list` which would list the Subnets you have. If you
     have a Subnet with the same name, you can try to create with a different
-    name, delete the existing Subnet by running `avalanche subnet delete <subnetName>` 
+    name, delete the existing Subnet by running `avalanche subnet delete <subnetName>`
     or overwrite the existing one by running `avalanche subnet create <subnetName> --force`
 
 ### Step 3: Deploy the Subnet
@@ -477,7 +469,7 @@ To check the role of an address run `readAllowList` function. It returns 0, 1 or
     information, try to connect to your Subnet using MetaMask to check if
     everything's all right. If it does not provide network information or you are
     having problems with interacting with your Subnet. Run `avalanche network
-    clean`, this command will stop the local network and delete the state. Then,
+clean`, this command will stop the local network and delete the state. Then,
     run `avalanche subnet deploy <subnetName> -l` again.
 
   - `"Error: failed to query network health: ..."`

@@ -141,8 +141,7 @@ const protocol: string = "http";
 const networkID: number = 5;
 ```
 
-However, to connect directly to the [Avalanche Fuji Testnet API
-server](/tooling/rpc-providers.md), the following changes are
+However, to connect directly to the [Avalanche Fuji Testnet API server](/tooling/rpc-providers.md), the following changes are
 needed:
 
 ```js
@@ -325,10 +324,8 @@ Success! TXID: Sm6Ec2GyguWyG3Li1pARmTpaZ6qLEPuVAHV8QBGL9JWwWAEgM
 The Fuji workflow above can be adapted to Mainnet with the following modifications:
 
 - The correct private key.
-- Network setting should be to a Mainnet node, either [a local node on
-  Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
-  [Avalanche Mainnet API
-  server](/tooling/rpc-providers.md#using-the-public-api-nodes)
+- Network setting should be to a Mainnet node, either [a local node on Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
+  [Avalanche Mainnet API server](/tooling/rpc-providers.md#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
 - `const networkID: number = 1` based on [this](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
 - Set the correct amount to send.

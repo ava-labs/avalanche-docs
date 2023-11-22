@@ -13,10 +13,8 @@ projects.
 
 In this tutorial you will get familiar with [ERC721
 (NFT)](https://medium.com/crypto-currently/the-anatomy-of-erc721-e9db77abfc24)
-smart contracts and how to deploy these to the [Avalanche Fuji
-testnet](/build/dapp/fuji-workflow.md) and
-also the [Avalanche Mainnet
-(C-Chain)](/learn/avalanche/avalanche-platform#c-chain).
+smart contracts and how to deploy these to the [Avalanche Fuji testnet](/build/dapp/fuji-workflow.md) and
+also the [Avalanche Mainnet (C-Chain)](/learn/avalanche/avalanche-platform#c-chain).
 The goal of this tutorial is to be as beginner friendly as possible. I will go
 through each line of code in order to give you a full understanding of what is
 happening, so that you can use the concepts as a basis for your first NFT
@@ -1085,8 +1083,7 @@ export {};
 As you can see, it is pretty straightforward. We import the contracts and deploy
 them via the deployer parameter. This is taken care by Truffle.
 
-2.1. In order to deploy our contracts to the [Fuji
-testnet](https://docs.avax.network/build/tutorials/platform/fuji-workflow), all
+2.1. In order to deploy our contracts to the [Fuji testnet](https://docs.avax.network/build/tutorials/platform/fuji-workflow), all
 we need to do is simply run the command:
 
 ```powershell

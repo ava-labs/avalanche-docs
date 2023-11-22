@@ -317,8 +317,7 @@ Then start the VM
 
 The following instructions show how to connect to the Virtual Machine from a
 Windows 10 machine. For instructions on how to connect from a Ubuntu machine see
-the [AWS
-tutorial](/nodes/run/third-party/aws-node.md).
+the [AWS tutorial](/nodes/run/third-party/aws-node.md).
 
 On your local PC, create a folder on the root of the C: drive called Avalanche
 and then move the Avalanche_key.pem file you downloaded before into the folder.
@@ -380,9 +379,7 @@ You should now be connected to your Node.
 
 ![Image for post](https://miro.medium.com/max/967/1*Kc3rna-3SQV3tnMMLkMi6A.png)
 
-The following section is taken from Colin’s excellent tutorial for [configuring
-an Avalanche Node on Amazon’s
-AWS](/nodes/run/third-party/aws-node.md).
+The following section is taken from Colin’s excellent tutorial for [configuring an Avalanche Node on Amazon’s AWS](/nodes/run/third-party/aws-node.md).
 
 ### Update Linux with Security Patches
 
@@ -403,8 +400,7 @@ or two to boot back up, then log in again, same as before.
 
 ### Set up the Avalanche Node
 
-Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up
-Avalanche Node With Installer](/nodes/run/with-installer/installing-avalanchego.md) tutorial
+Now we’ll need to set up our Avalanche node. To do this, follow the [Set Up Avalanche Node With Installer](/nodes/run/with-installer/installing-avalanchego.md) tutorial
 which automates the installation process. You will need the "IPv4 Public IP"
 copied from the Azure Portal we set up earlier.
 

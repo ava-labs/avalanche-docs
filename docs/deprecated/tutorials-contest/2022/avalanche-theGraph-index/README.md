@@ -2,9 +2,9 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -26,30 +26,30 @@ without compromising on security.
 Avalanche is a high-performance, scalable, customizable, and secure blockchain
 platform. It targets three 15 broad use cases:
 
-* Building application-specific blockchains, spanning permissioned (private) and permissionless (public)
-deployments.
-* Building and launching highly scalable and decentralized applications (dapps).
-* Building arbitrarily complex digital assets with custom rules, covenants, and riders (smart assets).
+- Building application-specific blockchains, spanning permissioned (private) and permissionless (public)
+  deployments.
+- Building and launching highly scalable and decentralized applications (dapps).
+- Building arbitrarily complex digital assets with custom rules, covenants, and riders (smart assets).
 
-## Avalanche Features 3 Built-in Blockchains 
+## Avalanche Features 3 Built-in Blockchains
 
-* Exchange Chain (X-Chain)
-* Platform Chain (P-Chain)
-* Contract Chain (C-Chain)
+- Exchange Chain (X-Chain)
+- Platform Chain (P-Chain)
+- Contract Chain (C-Chain)
 
 The P-chain is for platform management. It handles requests related to the
 validator, the Subnet, and the blockchain. The C-chain is for contract
 management. It is based on EVM; hence its API is almost identical to other EVM
 protocols. It has both RPC and WebSocket endpoints, and it handles requests for
 smart contracts. The X-chain is for asset exchange. It is Avalanche’s native
-platform; it is used for creating and trading assets like AVAX and NFTs. 
+platform; it is used for creating and trading assets like AVAX and NFTs.
 
 These 3 blockchains are secured by the Avalanche Primary Network with is a special kind of Subnet.
 
 The Avalanche Architecture is composed of:
 
-* Subnetworks
-* Virtual Machines
+- Subnetworks
+- Virtual Machines
 
 ## The Graph Protocol
 
@@ -68,15 +68,15 @@ Ethereum and IPFS. Anyone can build and publish open subgraphs.
 
 1. NodeJS and Yarn
 
-    First, install the LTS (long-term support) version of
-    [NodeJS](https://nodejs.org/en). This is `18.x` at the time of writing. NodeJS
-    bundles `npm`.
+   First, install the LTS (long-term support) version of
+   [NodeJS](https://nodejs.org/en). This is `18.x` at the time of writing. NodeJS
+   bundles `npm`.
 
-    Next, install the [yarn](https://yarnpkg.com) package manager:
+   Next, install the [yarn](https://yarnpkg.com) package manager:
 
-    ```zsh
-    npm install -g yarn
-    ```
+   ```zsh
+   npm install -g yarn
+   ```
 
 2. Git
 
@@ -92,8 +92,7 @@ a local network using the
 [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) and deploy a basic
 smart contract using [Remix](https://remix.ethereum.org/). Then Lastly we will
 be indexing our Subnet using [The Graph](https://thegraph.com/). This guide is
-an extension of the [Official Avalanche
-Documentation](/build/subnet/deploy/local-subnet.md).
+an extension of the [Official Avalanche Documentation](/build/subnet/deploy/local-subnet.md).
 
 Please note that all command line inputs and sample codes are MacOs and Linux
 Based. Commands may vary for other operating systems.
@@ -104,13 +103,11 @@ In summary, we will be discussing the following:
 2. Deploying smart contracts with Remix
 3. Indexing our Subnet using The Graph
 
-
 ## Running an EVM Subnet on the Local Network Using the Avalanche-CLI
 
 We will be creating an EVM on our local machine to give us a basic feel on how a
 Subnet functions. The [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli)
 is a novel tool that allow us to have a local network up in minutes.
-
 
 ### Installation
 
@@ -160,28 +157,27 @@ avalanche subnet create fibrinNet
 Since this command does not provide any arguments, you would need to walk
 through the configuration wizard to generate a `genesis file` for your network.
 
-* Choose a Virtual Machine (VM): 
+- Choose a Virtual Machine (VM):
   ![choose a VM](./images/2.png "Choose VM")
   We are going to be making use of the `SubnetEVM`
 
-* Pick a chain ID ![chain ID](./images/3.png "Chain ID") Every EVM based
+- Pick a chain ID ![chain ID](./images/3.png "Chain ID") Every EVM based
   blockchain has a special parameter called a `chainID`. ChainIDs are expected
   to be unique values, you can check [chainlist.org](https://chainlist.org/) to
   see if your proposed chain ID is already in use. We will be making use of the
   chain ID `1970` (A pun on JavaScript dates...lol).
 
-* Select a symbol for the native Subnet token
+- Select a symbol for the native Subnet token
   ![symbol](./images/4.png "token symbol")
 
-* Set fees: Select the `low disk use / low throughput` option
+- Set fees: Select the `low disk use / low throughput` option
   ![fees](./images/5.png "fees")
 
-* Airdrop: default to airdrop 1 million tokens to provided address
+- Airdrop: default to airdrop 1 million tokens to provided address
   ![airdrop](./images/6.png "airdrop")
 
-* Add a custom precompile to modify the EVM: For this section, we will not be using a pre-compile script
+- Add a custom precompile to modify the EVM: For this section, we will not be using a pre-compile script
   ![precompile](./images/7.png "precompile")
-
 
 The wizard won't customize every aspect of the Subnet-EVM genesis for you, we
 will be doing this in the subsequent sections.
@@ -195,7 +191,6 @@ avalanche subnet list
 ```
 
 ![list](./images/9.png "list")
-
 
 ### Deploying the Subnet Locally
 
@@ -221,7 +216,7 @@ experiencing with this account.
 
 I have a [GitHub
 Tutorial](https://github.com/FibrinLab/Avalanche-Local-Environment-Setup) that
-explains how to setup your local development environmet including `MetaMask`. 
+explains how to setup your local development environmet including `MetaMask`.
 
 Lastly don't forget to stop the running local network
 
@@ -282,116 +277,114 @@ Please take note of the deployment address as we will be making use of it subseq
 
 1. Installing Dependencies
 
-    The most efficient way to make use of The Graph in indexing our Subnet is to
-    host a local Graph Node. This is pretty straightforward to setup once you got
-    requirements up and running. This tutorial is an extension of the
-    [Graph-Node](https://github.com/graphprotocol/graph-node) GitHub repository.
+   The most efficient way to make use of The Graph in indexing our Subnet is to
+   host a local Graph Node. This is pretty straightforward to setup once you got
+   requirements up and running. This tutorial is an extension of the
+   [Graph-Node](https://github.com/graphprotocol/graph-node) GitHub repository.
 
-    The following components are needed:
+   The following components are needed:
 
-    * Interplanetary File System (IPFS) for hosting our files.
-      [Installation](https://docs.ipfs.io/install/) instructions.
-    * PostgreSQL, a database management tool for keeping out data.
-      [Installation](https://www.postgresql.org/download/) instructions.
-    * Rust, we will be building and compiling The Graph Node using the cargo package
-      manager. [Installation](https://www.rust-lang.org/en-US/install.html)
-      instructions.
+   - Interplanetary File System (IPFS) for hosting our files.
+     [Installation](https://docs.ipfs.io/install/) instructions.
+   - PostgreSQL, a database management tool for keeping out data.
+     [Installation](https://www.postgresql.org/download/) instructions.
+   - Rust, we will be building and compiling The Graph Node using the cargo package
+     manager. [Installation](https://www.rust-lang.org/en-US/install.html)
+     instructions.
 
+   If the above installation instructions are followed correctly, you should
+   have these tools up and running.
 
-    If the above installation instructions are followed correctly, you should
-    have these tools up and running.
+   ![ipfs](./images/26.png "ipfs")
 
-    ![ipfs](./images/26.png "ipfs")
-
-    ![ipfs2](./images/27.png "ipfs2")
+   ![ipfs2](./images/27.png "ipfs2")
 
 2. Deploying Resources
 
-    After successfully installing IPFS, initialise the daemon by running
+   After successfully installing IPFS, initialise the daemon by running
 
-    ```zsh
-    ipfs init
-    ```
+   ```zsh
+   ipfs init
+   ```
 
-    ![ipfs3](./images/28.png "ipfs3")
+   ![ipfs3](./images/28.png "ipfs3")
 
-    Next run,
+   Next run,
 
-    ```zsh
-    ipfs daemon
-    ```
+   ```zsh
+   ipfs daemon
+   ```
 
-    ![ipfs4](./images/29.png "ipfs4").
+   ![ipfs4](./images/29.png "ipfs4").
 
-    Its now time to get our database all set-up.
+   Its now time to get our database all set-up.
 
-    Run the following commands:
+   Run the following commands:
 
-    ```zsh
-    initdb -D .postgres
-    ```
+   ```zsh
+   initdb -D .postgres
+   ```
 
-    ```zsh
-    pg_ctl -D .postgres -l logfile start
-    ```
+   ```zsh
+   pg_ctl -D .postgres -l logfile start
+   ```
 
-    ```zsh
-    createdb graph-node
-    ```
+   ```zsh
+   createdb graph-node
+   ```
 
 3. Configuring up the Graph Node
 
-    Clone and build `The Graph` node folder
+   Clone and build `The Graph` node folder
 
-    ```zsh
-    git clone https://github.com/graphprotocol/graph-node
-    ```
+   ```zsh
+   git clone https://github.com/graphprotocol/graph-node
+   ```
 
-    :::info
-    The repository cloning method used is HTTPS, but SSH can be used too:
+   :::info
+   The repository cloning method used is HTTPS, but SSH can be used too:
 
-    `git clone git@github.com:graphprotocol/graph-node.git`
+   `git clone git@github.com:graphprotocol/graph-node.git`
 
-    You can find more about SSH and how to use it 
-    [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
-    :::
+   You can find more about SSH and how to use it
+   [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
+   :::
 
+   Build the folder by running
 
-    Build the folder by running 
+   ```zsh
+   cargo build
+   ```
 
-    ```zsh
-    cargo build
-    ```
+   If you have successfully installed Rust but `the command is not found`, you would
+   need to setup some environmental variables. Running this command might help.
 
-    If you have successfully installed Rust but `the command is not found`, you would
-    need to setup some environmental variables. Running this command might help.
+   ```zsh
+   source $HOME/.cargo/env
+   ```
 
-    ```zsh
-    source $HOME/.cargo/env
-    ```
+   Once all dependencies are up and running, run the following command to kick start the node.
 
-    Once all dependencies are up and running, run the following command to kick start the node.
+   ```zsh
+   cargo run -p graph-node --release -- \
+   --postgres-url postgresql://postgres:*fill-in-posgresql-username: :*fill-in-posgresql-password @localhost:5432/graph-node \
+   --ethereum-rpc fuji:http://127.0.0.1:9650/ext/bc/*fill-in-your-blockchain-id/rpc \
+   --ipfs 127.0.0.1:5001
+   ```
 
-    ```zsh
-    cargo run -p graph-node --release -- \
-    --postgres-url postgresql://postgres:*fill-in-posgresql-username: :*fill-in-posgresql-password @localhost:5432/graph-node \ 
-    --ethereum-rpc fuji:http://127.0.0.1:9650/ext/bc/*fill-in-your-blockchain-id/rpc \
-    --ipfs 127.0.0.1:5001
-    ```
+   Before running the above make sure you replace the following:
+   *fill-in-posgresql-username ==> Your Database username. `Defaults to [Postgres]
+   *fill-in-posgresql-password ==> Your Database password.
 
-    Before running the above make sure you replace the following:
-    *fill-in-posgresql-username ==> Your Database username. `Defaults to [Postgres]
-    *fill-in-posgresql-password ==> Your Database password.
+   ![node](./images/30.png "node")
 
-    ![node](./images/30.png "node")
+   If everything goes smoothly. You should get this.
 
-    If everything goes smoothly. You should get this.
-
-    ![success](./images/31.png "success")
+   ![success](./images/31.png "success")
 
 4. Deploying the subgraph
 
-This is where things get interesting. Change directory into the `example-subgraph` folder 
+This is where things get interesting. Change directory into the `example-subgraph` folder
 
 Clone the official subgraph repository and install all the dependencies
 
@@ -404,8 +397,8 @@ The repository cloning method used is HTTPS, but SSH can be used too:
 
 `git clone git@github.com:graphprotocol/example-subgraph.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
 Next, generate the ABI typings
@@ -417,15 +410,13 @@ yarn codegen
 
 Open you the `subgraph.yaml` file and make 2 (two) modifications under `datasources`.
 
-* Switch the network to `local`
+- Switch the network to `local`
 
 ![local](./images/32.png "local")
 
-
-* Input the address of the deployed `Gravity` contract in the `address` field
+- Input the address of the deployed `Gravity` contract in the `address` field
 
 ![address](./images/33.png "address")
-
 
 Finally, run the following
 
@@ -438,14 +429,13 @@ Congratulations, you have successfully deployed a Sub-Graph on a locally deploye
 
 ![done](./images/34.png "done")
 
-After successful deployment, you graph node would need a few minutes to scan all the nodes. 
+After successful deployment, you graph node would need a few minutes to scan all the nodes.
 
 ![done2](./images/35.png "done2")
 
 Once its done, open up the provided link in the browser.
 
 ![graph](./images/36.png "graph").
-
 
 Open up the link and try running a query by filling this into the query box.
 
