@@ -54,27 +54,27 @@ Por ejemplo:
 
 - Para ejecutar un nodo Fuji con indexación habilitada y IP estática autodetectada:
 
-    ```bash
-    ./avalanchego-installer.sh --fuji --ip static --index
-    ```
+  ```bash
+  ./avalanchego-installer.sh --fuji --ip static --index
+  ```
 
 - Para ejecutar un nodo Mainnet de archivo con IP dinámica y base de datos ubicada en `/home/node/db`:
 
-    ```bash
-    ./avalanchego-installer.sh --archival --ip dynamic --db-dir /home/node/db
-    ```
+  ```bash
+  ./avalanchego-installer.sh --archival --ip dynamic --db-dir /home/node/db
+  ```
 
 - Para usar state-sync de C-Chain para arrancar rápidamente un nodo Mainnet, con IP dinámica y solo RPC local:
 
-    ```bash
-    ./avalanchego-installer.sh --state-sync on --ip dynamic --rpc local
-    ```
+  ```bash
+  ./avalanchego-installer.sh --state-sync on --ip dynamic --rpc local
+  ```
 
 - Para reinstalar el nodo usando la versión del nodo 1.7.10 y usar una IP específica y solo RPC local:
 
-    ```bash
-    ./avalanchego-installer.sh --reinstall --ip 1.2.3.4 --version v1.7.10 --rpc local
-    ```
+  ```bash
+  ./avalanchego-installer.sh --reinstall --ip 1.2.3.4 --version v1.7.10 --rpc local
+  ```
 
 ## Configuración del Nodo
 
@@ -135,7 +135,7 @@ etiqueta de la versión. Por ejemplo:
 ./avalanchego-installer.sh --version v1.3.1
 ```
 
-:::peligro
+:::warning
 
 Ten en cuenta que no todas las versiones de AvalancheGo son compatibles. Generalmente deberías ejecutar
 la última versión. Ejecutar una versión que no sea la última puede hacer que tu nodo
@@ -195,12 +195,9 @@ rm -rf ~/.avalanchego/
 
 Si estás en una red residencial (IP dinámica), no olvides configurar el reenvío de puertos. Si estás en un proveedor de servicios en la nube, estás listo para continuar.
 
-Ahora puedes [interactuar con tu
-nodo](/reference/standards/guides/issuing-api-calls.md), [apostar tus
-tokens](/nodes/validate/what-is-staking.md), o mejorar tu instalación configurando
+Ahora puedes [interactuar con tu nodo](/reference/standards/guides/issuing-api-calls.md), [apostar tus tokens](/nodes/validate/what-is-staking.md), o mejorar tu instalación configurando
 [monitoreo del nodo](/nodes/maintain/setting-up-node-monitoring.md) para obtener una mejor
-visión de lo que está haciendo tu nodo. Además, es posible que desees usar nuestra [Colección de Postman
-](/tooling/avalanchego-postman-collection.md) para emitir comandos más
+visión de lo que está haciendo tu nodo. Además, es posible que desees usar nuestra [Colección de Postman](/tooling/avalanchego-postman-collection.md) para emitir comandos más
 fácilmente a tu nodo.
 
 Finalmente, si aún no lo has hecho, es una buena idea [hacer una copia de seguridad](/nodes/maintain/node-backup-and-restore.md)
