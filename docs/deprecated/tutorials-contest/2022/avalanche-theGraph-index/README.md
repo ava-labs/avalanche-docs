@@ -94,7 +94,7 @@ smart contract using [Remix](https://remix.ethereum.org/). Then Lastly we will
 be indexing our Subnet using [The Graph](https://thegraph.com/). This guide is
 an extension of the [Official Avalanche Documentation](/build/subnet/deploy/local-subnet.md).
 
-Please note that all command line inputs and sample codes are MacOs and Linux
+Please note that all command line inputs and sample codes are MacOS and Linux
 Based. Commands may vary for other operating systems.
 
 In summary, we will be discussing the following:
@@ -111,7 +111,7 @@ is a novel tool that allow us to have a local network up in minutes.
 
 ### Installation
 
-Open up you MacOs command line utility and run the following command
+Open up you MacOS command line utility and run the following command
 
 On your home directory, create a new directory and `cd <newdir>` into the
 directory. This is where we will be installing all our project dependencies.

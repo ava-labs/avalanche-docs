@@ -99,7 +99,7 @@ process smoother.
 Open a terminal and navigate to the directory where we will create the
 application. Usually, this will be inside our user home directory but can be
 located wherever is practical. On most Linux distributions this will change into
-/home/ . On macOS, it will be /Users/. On Windows, the user directories are
+/home/ . On MacOS, it will be /Users/. On Windows, the user directories are
 located in C:\Users.
 
 ```bash
@@ -362,7 +362,7 @@ consisting of five predefined tree levels:
 - **address_index** - We can use all the 4 Billion child keys as our address,
   but this index would set the primary address for our wallet.
 
-Avalanche's wallets like [https://wallet.avax.network] use the path `m/44'/9000'/0'/0`
+Avalanche's wallets like [https://wallet.avax.network](https://wallet.avax.network) use the path `m/44'/9000'/0'/0`
 for its key derivation, since the coin type of Avalanche is **52752**. The list
 of different crypto coins along with their type can be found
 [here](https://github.com/satoshilabs/slips/blob/master/slip-0044.md). The coin

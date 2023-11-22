@@ -488,7 +488,7 @@ steps, to collect your first test coins.
 
 ### Visit Avalanche Faucet Site
 
-Go to [https://faucet.avax.network]. You will see various network parameters like network name, faucet
+Go to [https://faucet.avax.network](https://faucet.avax.network). You will see various network parameters like network name, faucet
 balance, drop amount, drop limit, faucet address, etc.
 
 ![faucet 1](/img/faucet/faucet1.png)

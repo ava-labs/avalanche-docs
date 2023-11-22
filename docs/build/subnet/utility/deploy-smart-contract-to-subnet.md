@@ -22,7 +22,7 @@ This tutorial assumes that:
 ### **EVM Subnet Settings:** [(EVM Core Tutorial)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
 
 - **`Network Name`**: Custom Subnet-EVM
-- **`New RPC URL`**: [http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc] (Note: the port number should
+- **`New RPC URL`**: [http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc](http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc) (Note: the port number should
   match your local setting which can be different from 9650.)
 - **`ChainID`**: Subnet-EVM ChainID
 - **`Symbol`**: Subnet-EVM Token Symbol

@@ -34,7 +34,7 @@ server.
 
 ### Server OS
 
-Although AvalancheGo can run on a macOS or a Windows computer, we strongly recommend running nodes
+Although AvalancheGo can run on a MacOS or a Windows computer, we strongly recommend running nodes
 on computers running Linux as they are designed specifically for server loads and all the tools and
 utilities needed for administering a server are native to Linux.
 

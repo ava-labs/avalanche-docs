@@ -683,10 +683,10 @@ We will deploy our contracts on Fuji Testnet.
 Fuji Testnet Settings:
 
 - Network Name: Avalanche Fuji C-Chain
-- New RPC URL: [https://api.avax-test.network/ext/bc/C/rpc]
+- New RPC URL: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 - ChainID: 43113
 - Symbol: AVAX
-- Explorer: [https://testnet.snowtrace.io]
+- Explorer: [https://testnet.snowtrace.io](https://testnet.snowtrace.io)
 
 Next, we will add the network configuration in hardhat config file
 [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js). If you do not
