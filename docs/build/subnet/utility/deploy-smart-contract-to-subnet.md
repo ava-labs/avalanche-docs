@@ -14,16 +14,16 @@ This tutorial assumes that:
 
 - [A Subnet and EVM blockchain](/build/subnet/deploy/fuji-testnet-subnet.md) has been created
 - Your Node is currently validating your target Subnet
-- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your 
-[Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
+- Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your
+  [Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
 ## Step 1: Setting up Core
 
 ### **EVM Subnet Settings:** [(EVM Core Tutorial)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
 
 - **`Network Name`**: Custom Subnet-EVM
-- **`New RPC URL`**: <http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc> (Note: the port number should
-match your local setting which can be different from 9650.)
+- **`New RPC URL`**: [http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc] (Note: the port number should
+  match your local setting which can be different from 9650.)
 - **`ChainID`**: Subnet-EVM ChainID
 - **`Symbol`**: Subnet-EVM Token Symbol
 - **`Explorer`**: N/A
@@ -96,7 +96,7 @@ The contract ABI and Bytecode are available on the compiler tab.
 
 ![remix Subnet evm sc ABI](/img/remix-subnet-evm-sc-abi.png)
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche 
+If you had any difficulties following this tutorial or simply want to discuss Avalanche
 with us, you can join our community at [Discord](https://chat.avalabs.org/)!
 
 ## Other Tools

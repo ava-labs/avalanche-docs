@@ -565,7 +565,7 @@ Si es verdadero, no utiliza TLS al exportar los datos de traza. El valor predete
 
 #### `--tracing-sample-rate` (flotante)
 
-La fracción de trazas a muestrear. Si es >= 1, siempre se muestrea. Si es <= 0, nunca se muestrea.
+La fracción de trazas a muestrear. Si es `>=` 1, siempre se muestrea. Si es `<=` 0, nunca se muestrea.
 El valor predeterminado es `0.1`.
 
 #### `--tracing-exporter-type`(cadena)

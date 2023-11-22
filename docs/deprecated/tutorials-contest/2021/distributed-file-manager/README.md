@@ -1,11 +1,10 @@
-
 # Distributed File Manager (DFM) using Avalanche, IPFS and ReactJS
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -24,23 +23,22 @@ write and compile smart contracts, build artifacts, run migrations and interact
 with deployed contracts. This tutorial illustrates how Truffle can be used with
 the [Avalanche](https://avax.network) network, which is an instance of the EVM.
 
-
 ## Prerequisites
 
-* Basic familiarity with [Git](https://git-scm.com/),
+- Basic familiarity with [Git](https://git-scm.com/),
   [NodeJS](https://nodejs.org/en) and [npm](https://www.npmjs.com/).
-* Basic familiarity with [ReactJS](https://reactjs.org/).
-* Basic familiarity with [Avalanche](https://avax.network) network,
+- Basic familiarity with [ReactJS](https://reactjs.org/).
+- Basic familiarity with [Avalanche](https://avax.network) network,
   [Solidity](https://docs.soliditylang.org/en/v0.8.6/) and
   [Truffle](https://www.trufflesuite.com/truffle).
 
 ## Requirements
 
-* [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >=
+- [NodeJS](https://nodejs.org/en) >= 10.16 and [npm](https://www.npmjs.com/) >=
   5.6 installed.
-* [Truffle](https://www.trufflesuite.com/truffle), which can be installed
+- [Truffle](https://www.trufflesuite.com/truffle), which can be installed
   globally with `npm install -g truffle`
-* [MetaMask](https://metamask.io) extension added to the browser.
+- [MetaMask](https://metamask.io) extension added to the browser.
 
 ## Understanding the Project
 
@@ -52,7 +50,7 @@ text, and all your doubts will be resolved.
 
 ### **Decoding IPFS and How is It Different?**
 
-**IPFS** is an acronym that stands for **InterPlanetary File System**. 
+**IPFS** is an acronym that stands for **InterPlanetary File System**.
 It is a communication protocol and network for storing and sharing
 data. Theoretically, it aims to make a file-sharing system that can communicate
 among the planets, someday. Check out [Awesome IPFS](https://awesome.ipfs.io/)
@@ -274,9 +272,9 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.8.0"
-    }
-  }
+      version: "0.8.0",
+    },
+  },
 };
 ```
 
@@ -315,9 +313,9 @@ randomness in the child keys. HD wallets use the **child key derivation (CKD)**
 function to derive children keys from parent keys. The child key derivation
 functions are based on a one-way hash function that combines:
 
-* A parent private or public key
-* A seed called a chain code (256 bits)
-* An index number (32 bits)
+- A parent private or public key
+- A seed called a chain code (256 bits)
+- An index number (32 bits)
 
 ![master private public key generation](./assets/distributed-file-manager-02-master-private-public-key-generation.png)
 
@@ -352,19 +350,19 @@ consisting of five predefined tree levels:
 
 `m / purpose' / coin_type' / account' / change / address_index`
 
-* **purpose** - Always set to 44'. 
-* **coin\_type** - Specifies the type of cryptocurrency coin, allowing for
+- **purpose** - Always set to 44'.
+- **coin_type** - Specifies the type of cryptocurrency coin, allowing for
   multicurrency HD wallets where each currency has its subtree under the second
   level.
-* **account** - Allows users to subdivide their wallets into separate logical
+- **account** - Allows users to subdivide their wallets into separate logical
   subaccounts, for accounting or organizational purposes.
-* **change** - It has 2 subtrees, one normal receiving address and the other for
+- **change** - It has 2 subtrees, one normal receiving address and the other for
   receiving change tokens which are reverted when you supplied more than the
   required transaction cost.
-* **address\_index** - We can use all the 4 Billion child keys as our address,
+- **address_index** - We can use all the 4 Billion child keys as our address,
   but this index would set the primary address for our wallet.
 
-Avalanche's wallets like <https://wallet.avax.network> use the path `m/44'/9000'/0'/0`
+Avalanche's wallets like [https://wallet.avax.network] use the path `m/44'/9000'/0'/0`
 for its key derivation, since the coin type of Avalanche is **52752**. The list
 of different crypto coins along with their type can be found
 [here](https://github.com/satoshilabs/slips/blob/master/slip-0044.md). The coin
@@ -583,7 +581,7 @@ the `.env` file. Therefore we need to fund the account.
 
 ### **Fund Your Account**
 
-We need funds in our C-Chain address, as smart contracts are deployed on C-Chain, 
+We need funds in our C-Chain address, as smart contracts are deployed on C-Chain,
 the Contract-Chain. This address can easily be found on the [Avalanche
 Wallet](https://wallet.avax.network) dashboard. Avalanche network has 3 chains:
 X-Chain, P-Chain and C-Chain. The address of all these chains can be found by
@@ -782,7 +780,7 @@ Let's understand this component block by block.
 `Infura`. So, the following line would create an IPFS client -
 
 ```javascript
-const  ipfs = create({ host:  'ipfs.infura.io', port:  5001, protocol:  'https' })
+const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
 ```
 
 **state** - **IPFSUploader** component will maintain a state of file properties
@@ -813,7 +811,7 @@ npm install --save ipfs-http-client compressorjs rimble-ui --force
 > Rimble UI library comes with a peer dependency of `react@16.9.0` which is not
 > the latest version of React that we are using which is `react@17.0.2`. Running the
 > `npm install` command without the `--force` tag would cause an `unable to
-> resolve dependency tree` conflict. Thus, the `--force` tag is used to override
+resolve dependency tree` conflict. Thus, the `--force` tag is used to override
 > any type of conflicts and proceeds with the installation anyway. Another way
 > to resolve this conflict is by using the `--legacy-peer-deps` tag instead, but
 > this would ignore all peer dependencies which we do not require, as the
@@ -877,11 +875,11 @@ section.
 
 ```javascript
 // 1. Importing other modules
-import {GetWeb3, GetContract, GetAccount} from './BlockchainUtil';
-import IPFSUploader from './IPFSUploader';
-import IPFSViewer from './IPFSViewer';
+import { GetWeb3, GetContract, GetAccount } from "./BlockchainUtil";
+import IPFSUploader from "./IPFSUploader";
+import IPFSViewer from "./IPFSViewer";
 
-import contractJson from './build/contracts/FileManager.json';
+import contractJson from "./build/contracts/FileManager.json";
 ```
 
 **Load Web3** - Now put the following code under the `//2. Load web3...`
@@ -891,7 +889,7 @@ section. This would set the state with web3 instance.
 // 2. Load web3
 const Web3 = new GetWeb3();
 this.web3 = await Web3.getWeb3();
-this.setState({web3: this.web3});
+this.setState({ web3: this.web3 });
 ```
 
 **Load Account** - Put the following code under the `//3. Load Account...`
@@ -902,7 +900,7 @@ address.
 // 3. Load Account
 const Account = new GetAccount();
 this.account = await Account.getAccount(this.web3);
-this.setState({account: this.account[0]});
+this.setState({ account: this.account[0] });
 ```
 
 **Load Smart contract** - Put the following code under the `//4. Load smart...`
@@ -913,7 +911,7 @@ the contract's interaction using JavaScript.
 // 4. Load Contract
 const Contract = new GetContract();
 this.contract = await Contract.getContract(this.web3, contractJson);
-this.setState({contract: this.contract});
+this.setState({ contract: this.contract });
 ```
 
 **Load components** - Inside the `<div>` tag of `return()` function, replace the
@@ -921,17 +919,26 @@ existing sample text `Distributed File Manager` with the code of the following
 components.
 
 ```jsx
-{/* 5. Navbar */}
-<nav className="navbar navbar-dark shadow" style={{backgroundColor: "#1b2021", height: "60px", color: "white"}}>
+{
+  /* 5. Navbar */
+}
+<nav
+  className="navbar navbar-dark shadow"
+  style={{ backgroundColor: "#1b2021", height: "60px", color: "white" }}
+>
   <b>Distributed File Manager</b>
-  <span style={{float: "right"}}>{this.state.account}</span>
-</nav>
+  <span style={{ float: "right" }}>{this.state.account}</span>
+</nav>;
 
-{/* 6. IPFS Viewer com  ponent */}
-<IPFSViewer state = {this.state} />
+{
+  /* 6. IPFS Viewer com  ponent */
+}
+<IPFSViewer state={this.state} />;
 
-{/* 7. IPFS Uploader component */}
-<IPFSUploader state = {this.state} />
+{
+  /* 7. IPFS Uploader component */
+}
+<IPFSUploader state={this.state} />;
 ```
 
 Your `App.js` would now look like this [file](./frontend/App.js.md)
@@ -949,13 +956,13 @@ account with Avalanche test tokens to upload files.
 In the MetaMask extension, add a custom RPC by clicking at the network dropdown
 in the centre of the extension. Fill in the details as shown in the below image.
 
-| Info | Value |
-| :--- | :--- |
-| Network Name | Avalanche Fuji |
-| New RPC URL | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
-| Chain ID | 43113 |
-| Currency Symbol | AVAX-C |
-| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io) |
+| Info               | Value                                                                                    |
+| :----------------- | :--------------------------------------------------------------------------------------- |
+| Network Name       | Avalanche Fuji                                                                           |
+| New RPC URL        | [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) |
+| Chain ID           | 43113                                                                                    |
+| Currency Symbol    | AVAX-C                                                                                   |
+| Block Explorer URL | [https://testnet.snowtrace.io](https://testnet.snowtrace.io)                             |
 
 > If you find any difficulty in setting up the project, then feel free to clone
 > this repository

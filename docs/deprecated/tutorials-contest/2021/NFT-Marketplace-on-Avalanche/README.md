@@ -2,9 +2,9 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -683,10 +683,10 @@ We will deploy our contracts on Fuji Testnet.
 Fuji Testnet Settings:
 
 - Network Name: Avalanche Fuji C-Chain
-- New RPC URL: <https://api.avax-test.network/ext/bc/C/rpc>
+- New RPC URL: [https://api.avax-test.network/ext/bc/C/rpc]
 - ChainID: 43113
 - Symbol: AVAX
-- Explorer: <https://testnet.snowtrace.io>
+- Explorer: [https://testnet.snowtrace.io]
 
 Next, we will add the network configuration in hardhat config file
 [`hardhat.config.js`](NFT-Marketplace-dApp/hardhat.config.js). If you do not
@@ -1940,9 +1940,9 @@ There are a couple of things to test and consider before going any further.
 - Will the auction creator be able to withdraw the token if there are no bids and the auction times out?
 - Does the minimum increment working correctly?
 
-Before deploying a contract to production, we should test every possible scenario, 
-and it's very hard to do the test one by one on the UI. Instead, we should use 
-[hardhat tests](https://hardhat.org/tutorial/testing-contracts.html), where we can create 
+Before deploying a contract to production, we should test every possible scenario,
+and it's very hard to do the test one by one on the UI. Instead, we should use
+[hardhat tests](https://hardhat.org/tutorial/testing-contracts.html), where we can create
 different scenarios and test all of them in a matter of seconds.
 
 ## Things to Consider
@@ -1962,7 +1962,7 @@ every possible scenario & outcome.
 
 ## Deploying to the Avalanche Mainnet
 
-Deploying to Mainnet is the same as deploying to [Testnet](#avax-fuji-testnet). 
+Deploying to Mainnet is the same as deploying to [Testnet](#avax-fuji-testnet).
 The only difference is that you have to pay real funds instead of test funds.
 
 Again, get the configurations for the Avalanche Mainnet from
@@ -1994,7 +1994,7 @@ npx hardhat run scripts/deploy.js --network mainnet # runs the script on the Ava
 
 You now have the basic knowledge to start your NFT Marketplace.
 
-Don't forget that the react app is a demonstration of interacting with the contracts 
+Don't forget that the react app is a demonstration of interacting with the contracts
 and fetching data from them. A good marketplace would need a better design and a lot of work.
 
 Open an issue if you have any questions.

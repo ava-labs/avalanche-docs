@@ -34,11 +34,11 @@ El archivo génesis de WAGMI se puede encontrar [aquí](https://github.com/ava-l
 
 ```text
 - Nombre de Red: WAGMI
-- URL RPC: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc>
+- URL RPC: [https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc]
 - URL WS: wss://subnets.avax.network/wagmi/wagmi-chain-testnet/ws
 - ID de Cadena: 11111
 - Símbolo: WGM
-- Explorador: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer>
+- Explorador: [https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer]
 ```
 
 :::info
@@ -80,15 +80,15 @@ Para preparar la actualización de red de WAGMI, el 15 de agosto de 2022, anunci
 >
 > Manténganse atentos porque este piloto es literalmente imperdible para cada nodo WAGMI 😉
 >
-> La actualización activará el administrador de configuración de tarifas y permitirá actualizaciones de configuración de tarifas suaves en el futuro <https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees>
+> La actualización activará el administrador de configuración de tarifas y permitirá actualizaciones de configuración de tarifas suaves en el futuro [https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees]
 >
 > Esta actualización cambia cómo se procesan los bloques en WAGMI, por lo que cada nodo WAGMI necesita actualizarse para seguir validando WAGMI correctamente.
 >
 > Para actualizar tu nodo, debes actualizar a Subnet-EVM v0.2.8 y seguir las instrucciones para habilitar una precompilación estatal en Subnet-EVM aquí:
-> <https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles>
+> [https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles]
 >
 > Puedes encontrar el JSON para configurar la actualización de red en este gist:
-> <https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b>
+> [https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b]
 >
 > TLDR; necesitarás colocar el archivo JSON en el directorio de archivos de tu nodo dentro de
 > `directorio-de-configuración-de-cadena/wagmi ID-de-blockchain/upgrade.json` y reiniciar tu nodo.
