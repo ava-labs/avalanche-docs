@@ -11,6 +11,11 @@ sidebar_position: 8
 This page demonstrates how to setup a devnet of cloud-based validators using Avalanche-CLI, 
 and deploy a VM into it.
 
+Devnets (Developer Networks) are isolated avalanche networks deployed on the cloud. Similar to local networks
+in terms of configuration and usage but installed on remote nodes.
+
+Think of DevNets as being an intermediate step in the developer testing process after local network and before Fuji network.
+
 :::warning
 
 ALPHA WARNING: This command is currently in experimental mode. Proceed at your own risk.
@@ -21,22 +26,22 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- Create an AWS account and have an AWS `credentials` file in home directory with [default] profile
+- Created an AWS account and have an updated AWS `credentials` file in home directory with [default] profile
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- A subnet subnet1 was created on CLI based on SubnetEVM, latest version.
+- [Created a subnet configuration `<SubnetName>`](/docs/build/subnet/deploy/fuji-testnet-subnet.md#create-an-evm-subnet) based on SubnetEVM.
 
 Note: the tutorial is based in AWS, but devnets can also be created and operated in other supported
 cloud providers, such as GCP.
 
 ## Creating the Devnet
 
-Start the devnet creation command in interactive mode:
+Start the devnet creation command. It will ask for all needed params:
 
 ```shell
 avalanche node create <clusterName>
 ```
 
-You will be asked to select the network. Choose Devnet:
+Choose Devnet for the network:
 
 ```
 ? Choose a network for the operation:
@@ -44,7 +49,7 @@ You will be asked to select the network. Choose Devnet:
   ▸ Devnet
 ```
 
-Then will be asked on the cloud provider. Set AWS:
+Then you will be asked on the cloud provider to use. Use AWS:
 
 ```
 ? Which cloud service would you like to launch your Avalanche Node(s) in?:
@@ -52,13 +57,13 @@ Then will be asked on the cloud provider. Set AWS:
     Google Cloud Platform
 ```
 
-Then, CLI will ask for the number of nodes. Select 5. Notice it can be from 2 onwards.
+Then, specify a network of 5 nodes (it can be from 2 onwards):
 
 ```
 ✗ How many nodes do you want to set up?: 5
 ```
 
-Then select the AWS region. Choose `us-east-1`:
+Then select the AWS region `us-east-1`:
 
 ```
  Which AWS region do you want to set up your node in?:
@@ -77,9 +82,10 @@ Give authorization to access AWS resources on behalf of the user:
     No
 ```
 
-Next, the nodes will be created. And latest step of devnet configuration will start.
-You will asked which avalanchego version do you want to install in the nodes. Select
-the one associated to subnet1.
+Now, the nodes will be created. 
+
+After that, you will be asked which avalanchego version you want to install in the nodes. Select
+the one associated to `<subnetName>`.
 
 ```
 ...
@@ -88,31 +94,24 @@ New EC2 instance(s) successfully created in AWS!
     Use latest Avalanche Go Version
   ▸ Use the deployed Subnet's VM version that the node will be validating
     Custom
-```
+✗ Which Subnet would you like to use to choose the avalanche go version?: <subnetName>
 
-```
-✗ Which Subnet would you like to use to choose the avalanche go version?: subnet1
-```
-
-Finally the devnet will be fully setup
-
-```
 ...
+
 AvalancheGo and Avalanche-CLI installed and node(s) are bootstrapping!
 ```
 
-You can check the setup with `node status` command. It will give output similar to this after
-some seconds required for network to stabilize:
+You can check the devnet setup with the `node status` command:
 
 ```
-avalanche node status cluster1
+avalanche node status <clusterName>
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
 Getting avalanchego version of node(s)
-All nodes in cluster cluster1 are bootstrapped to Primary Network!
+All nodes in cluster <clusterName> are bootstrapped to Primary Network!
 
-STATUS FOR CLUSTER: cluster1
-============================
+STATUS FOR CLUSTER: <clusterName>
+=================================
 
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
 |      CLOUD ID       |                 NODE ID                  |       IP       | NETWORK | AVAGO VERSION | PRIMARY NETWORK | HEALTHY |
@@ -129,5 +128,209 @@ STATUS FOR CLUSTER: cluster1
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
 ```
 
+## Deploying the Subnet into the Devnet
 
+At this point, you have a working Devnet, but no subnet association:
 
+```
+avalanche node status <clusterName> --subnet <subnetName>
+Checking if node(s) are bootstrapped to Primary Network ...
+Checking if node(s) are healthy ...
+Getting avalanchego version of node(s)
+Error: failed to find the blockchain ID for this subnet, has it been deployed/created on this network?
+exit status 1
+```
+
+So, next step is to deploy `<subnetName>` into `<clusterName>`. So as to create the subnet and blockchain transactions
+needed for posterior syncing and validation of the subnet.
+
+While the `subnet deploy` command can be used [as described here](/docs/build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
+deplying into Devnets is a subset of that operation, and so a quickest command is provided.
+
+It automatically takes into account the API endpoint of the Devnet, and use a common funding option for Devnets, known as EWOQ keys.
+
+```
+avalanche node devnet deploy <clusterName> <subnetName>
+Checking if node(s) are healthy ...
+Checking compatibility of node(s) avalanche go version with Subnet EVM RPC of subnet <subnetName> ...
+Deploying [<subnetName>] to Devnet
+Loading EWOQ key
+Your Subnet's control keys: [P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p]
+Your subnet auth keys for chain creation: [P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p]
+Subnet has been created with ID: giY8tswWgZmcAWzPkoNrmjjrykited7GJ9799SsFzTiq5a1ML
+Now creating blockchain...
++--------------------+----------------------------------------------------+
+| DEPLOYMENT RESULTS |                                                    |
++--------------------+----------------------------------------------------+
+| Chain Name         | subnetName                                         |
++--------------------+----------------------------------------------------+
+| Subnet ID          | giY8tswWgZmcAWzPkoNrmjjrykited7GJ9799SsFzTiq5a1ML  |
++--------------------+----------------------------------------------------+
+| VM ID              | srEXiWaHjBgJPLWjtprZFhiFnFJkY2URD4ug4SJdAnLbkBBGm  |
++--------------------+----------------------------------------------------+
+| Blockchain ID      | 2Hm4V6jYrRTv2efTSHwky51yLd6KvFBUUuSRkwm1TomEXsSzKj |
++--------------------+                                                    +
+| P-Chain TXID       |                                                    |
++--------------------+----------------------------------------------------+
+Subnet successfully deployed into devnet!
+```
+
+You can now check the updated status:
+
+```
+avalanche node status <clusterName> --subnet <subnetName>
+Checking if node(s) are bootstrapped to Primary Network ...
+Checking if node(s) are healthy ...
+Getting avalanchego version of node(s)
+Getting subnet sync status of node(s)
+
+STATUS FOR CLUSTER: <clusterName>
+=================================
+
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
+|      CLOUD ID       |                 NODE ID                  |       IP       | NETWORK | AVAGO VERSION | PRIMARY NETWORK | HEALTHY |  SUBNET SUBNET1  |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
+| i-02825a7abd3933969 | NodeID-5ocvR3Fw2dKyrUF45nwbSXnd7cb3nyq9a | 44.206.157.218 | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | NOT_BOOTSTRAPPED |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
+| i-0a008d94ba7c61f40 | NodeID-Betdv9jBp2QNtf1KgL1cy2pXAuxudMHQA | 34.205.243.57  | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | NOT_BOOTSTRAPPED |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
+| i-0bf856134cd60f5f8 | NodeID-LymKbUAvLTcT7BPrfAJcm1fjJViWrjdAM | 3.216.85.230   | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | NOT_BOOTSTRAPPED |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
+| i-05fc163dc2eefafef | NodeID-4TyRp3MxHQXzfrB27V91txppvegeaapyd | 44.217.75.32   | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | NOT_BOOTSTRAPPED |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
+| i-03697de53219c71b0 | NodeID-EZ3Xt1tm3WyUzMSKmVzg4ahcdnQ1dZGBT | 3.227.214.222  | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | NOT_BOOTSTRAPPED |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
+```
+
+## Syncying the Subnet
+
+Next step is for the Devnet nodes to start keeping up to date with the subnet state, while executing the subnet Virtual Machine.
+
+```
+avalanche node sync <clusterName> <subnetName>
+Checking if node(s) are bootstrapped to Primary Network ...
+Checking if node(s) are healthy ...
+Checking compatibility of node(s) avalanche go version with Subnet EVM RPC of subnet <subnetName> ...
+[aws_node_i-0bf856134cd60f5f8] Track Subnet
+[aws_node_i-03697de53219c71b0] Track Subnet
+[aws_node_i-0a008d94ba7c61f40] Track Subnet
+[aws_node_i-05fc163dc2eefafef] Track Subnet
+[aws_node_i-02825a7abd3933969] Track Subnet
+Node(s) successfully started syncing with Subnet!
+Check node subnet syncing status with avalanche node status <clusterName> --subnet <subnetName>
+
+```
+
+Let's check the updated status:
+
+```
+avalanche node status <clusterName> --subnet <subnetName>
+Checking if node(s) are bootstrapped to Primary Network ...
+Checking if node(s) are healthy ...
+Getting avalanchego version of node(s)
+Getting subnet sync status of node(s)
+All nodes in cluster <clusterName> are synced to Subnet <subnetaName>
+
+STATUS FOR CLUSTER: <clusterName>
+=================================
+
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+|      CLOUD ID       |                 NODE ID                  |       IP       | NETWORK | AVAGO VERSION | PRIMARY NETWORK | HEALTHY | SUBNET SUBNET1 |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-02825a7abd3933969 | NodeID-5ocvR3Fw2dKyrUF45nwbSXnd7cb3nyq9a | 44.206.157.218 | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | SYNCED         |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-0a008d94ba7c61f40 | NodeID-Betdv9jBp2QNtf1KgL1cy2pXAuxudMHQA | 34.205.243.57  | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | SYNCED         |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-0bf856134cd60f5f8 | NodeID-LymKbUAvLTcT7BPrfAJcm1fjJViWrjdAM | 3.216.85.230   | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | SYNCED         |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-05fc163dc2eefafef | NodeID-4TyRp3MxHQXzfrB27V91txppvegeaapyd | 44.217.75.32   | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | SYNCED         |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-03697de53219c71b0 | NodeID-EZ3Xt1tm3WyUzMSKmVzg4ahcdnQ1dZGBT | 3.227.214.222  | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | SYNCED         |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+```
+
+## Validating the Subnet
+
+Latest step is to add the nodes as subnet validators, so as the devnet can change the subnet state under user request.
+
+While you can follow [the instructions here](/tooling/cli-guides/validate-subnets#be-a-subnet-validator), for this
+tutorial we opt for providing the flag `--default-validator-params`, that set for the user most common validator params:
+
+```
+avalanche node validate subne <clusterName> <subnetName> --default-validator-params
+Loading EWOQ key
+Checking if node(s) are bootstrapped to Primary Network ...
+Checking if node(s) are healthy ...
+Avalanche node id for host aws_node_i-02825a7abd3933969 is NodeID-5ocvR3Fw2dKyrUF45nwbSXnd7cb3nyq9a
+Avalanche node id for host aws_node_i-0a008d94ba7c61f40 is NodeID-Betdv9jBp2QNtf1KgL1cy2pXAuxudMHQA
+Avalanche node id for host aws_node_i-0bf856134cd60f5f8 is NodeID-LymKbUAvLTcT7BPrfAJcm1fjJViWrjdAM
+Avalanche node id for host aws_node_i-05fc163dc2eefafef is NodeID-4TyRp3MxHQXzfrB27V91txppvegeaapyd
+Avalanche node id for host aws_node_i-03697de53219c71b0 is NodeID-EZ3Xt1tm3WyUzMSKmVzg4ahcdnQ1dZGBT
+...
+All nodes in cluster <clusterName> are successfully added as Subnet validators!
+```
+
+And the final status is:
+
+```
+avalanche node status <clusterName> --subnet <subnetName>
+Checking if node(s) are bootstrapped to Primary Network ...
+Checking if node(s) are healthy ...
+Getting avalanchego version of node(s)
+Getting subnet sync status of node(s)
+All nodes in cluster <clusterName> are synced to Subnet <subnetaName>
+
+STATUS FOR CLUSTER: <clusterName>
+=================================
+
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+|      CLOUD ID       |                 NODE ID                  |       IP       | NETWORK | AVAGO VERSION | PRIMARY NETWORK | HEALTHY | SUBNET SUBNET1 |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-02825a7abd3933969 | NodeID-5ocvR3Fw2dKyrUF45nwbSXnd7cb3nyq9a | 44.206.157.218 | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | VALIDATING     |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-0a008d94ba7c61f40 | NodeID-Betdv9jBp2QNtf1KgL1cy2pXAuxudMHQA | 34.205.243.57  | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | VALIDATING     |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-0bf856134cd60f5f8 | NodeID-LymKbUAvLTcT7BPrfAJcm1fjJViWrjdAM | 3.216.85.230   | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | VALIDATING     |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-05fc163dc2eefafef | NodeID-4TyRp3MxHQXzfrB27V91txppvegeaapyd | 44.217.75.32   | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | VALIDATING     |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+| i-03697de53219c71b0 | NodeID-EZ3Xt1tm3WyUzMSKmVzg4ahcdnQ1dZGBT | 3.227.214.222  | Devnet  | v1.10.16      | BOOTSTRAPPED    | OK      | VALIDATING     |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
+```
+
+## One command for all needs
+
+CLI provides the `devnet wiz` command that takes care of all the mentioned steps.
+
+As other CLI commands, all the options can be specified by command line flag instead of having the user
+interactively provide the inputs.
+
+As reference we provide example of the flags setting needed for this tutorial:
+
+```
+avalanche node devnet wiz <clusterName> <subnetName> --authorize-access\
+  --aws --num-nodes 5 --region us-east-1 --default-validator-params
+
+Creating the devnet
+...
+Waiting for node(s) in cluster <clusterName> to be healthy...
+...
+Nodes healthy after 33 seconds
+
+Deploying the subnet
+...
+Setting the nodes as subnet trackers
+...
+Waiting for node(s) in cluster <clusterName>to be healthy...
+Nodes healthy after 33 seconds
+...
+Waiting for node(s) in cluster <clusterName> to be syncing subnet <subnetName>...
+Nodes Syncing <subnetName> after 5 seconds
+
+Adding nodes as subnet validators
+...
+Waiting for node(s) in cluster <clusterName> to be validating subnet <subnetName>...
+Nodes Validating <subnetName> after 23 seconds
+
+Devnet <clusterName> has been created and is validating subnet <subnetName>!
+```

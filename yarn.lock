@@ -1205,7 +1205,6 @@
   resolved "https://registry.yarnpkg.com/@docsearch/css/-/css-3.5.2.tgz#610f47b48814ca94041df969d9fcc47b91fc5aac"
   integrity sha512-SPiDHaWKQZpwR2siD0KQUwlStvIAnEyK6tAE2h2Wuoq8ue9skzhlyVQ1ddzOxX6khULnAALDiR/isSF3bnuciA==
 
-<<<<<<< Updated upstream
 "@docsearch/react@^3.5.2":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@docsearch/react/-/react-3.5.2.tgz#2e6bbee00eb67333b64906352734da6aef1232b9"
@@ -1295,12 +1294,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/core/-/core-3.0.0.tgz#46bc9bf2bcd99ca98a1c8f10a70bf3afaaaf9dcb"
   integrity sha512-bHWtY55tJTkd6pZhHrWz1MpWuwN4edZe0/UWgFF7PW/oJeDZvLSXKqwny3L91X1/LGGoypBGkeZn8EOuKeL4yQ==
-=======
-"@docusaurus/core@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/core/-/core-2.4.3.tgz#d86624901386fd8164ce4bff9cc7f16fde57f523"
-  integrity sha512-dWH5P7cgeNSIg9ufReX6gaCl/TmrGKD38Orbwuz05WPhAQtFXHd5B8Qym1TiXfvUNvwoYKkAJOJuGe8ou0Z7PA==
->>>>>>> Stashed changes
   dependencies:
     "@babel/core" "^7.22.9"
     "@babel/generator" "^7.22.9"
@@ -1373,7 +1366,6 @@
     webpack-merge "^5.9.0"
     webpackbar "^5.0.2"
 
-<<<<<<< Updated upstream
 "@docusaurus/cssnano-preset@0.0.0-5752":
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/cssnano-preset/-/cssnano-preset-0.0.0-5752.tgz#6a22fb314687e727d2cdf737c0554c2d0ee80d60"
@@ -1388,19 +1380,12 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/cssnano-preset/-/cssnano-preset-3.0.0.tgz#87fbf9cbc7c383e207119b44c17fb1d05c73af7c"
   integrity sha512-FHiRfwmVvIVdIGsHcijUOaX7hMn0mugVYB7m4GkpYI6Mi56zwQV4lH5p7DxcW5CUYNWMVxz2loWSCiWEm5ikwA==
-=======
-"@docusaurus/cssnano-preset@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/cssnano-preset/-/cssnano-preset-2.4.3.tgz#1d7e833c41ce240fcc2812a2ac27f7b862f32de0"
-  integrity sha512-ZvGSRCi7z9wLnZrXNPG6DmVPHdKGd8dIn9pYbEOFiYihfv4uDR3UtxogmKf+rT8ZlKFf5Lqne8E8nt08zNM8CA==
->>>>>>> Stashed changes
   dependencies:
     cssnano-preset-advanced "^5.3.10"
     postcss "^8.4.26"
     postcss-sort-media-queries "^4.4.1"
     tslib "^2.6.0"
 
-<<<<<<< Updated upstream
 "@docusaurus/logger@0.0.0-5752":
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/logger/-/logger-0.0.0-5752.tgz#d245646b8dd493b969fb2f7e9150570e6889dc1a"
@@ -1413,17 +1398,10 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/logger/-/logger-3.0.0.tgz#02a4bfecec6aa3732c8bd9597ca9d5debab813a6"
   integrity sha512-6eX0eOfioMQCk+qgCnHvbLLuyIAA+r2lSID6d6JusiLtDKmYMfNp3F4yyE8bnb0Abmzt2w68XwptEFYyALSAXw==
-=======
-"@docusaurus/logger@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/logger/-/logger-2.4.3.tgz#518bbc965fb4ebe8f1d0b14e5f4161607552d34c"
-  integrity sha512-Zxws7r3yLufk9xM1zq9ged0YHs65mlRmtsobnFkdZTxWXdTYlWWLWdKyNKAsVC+D7zg+pv2fGbyabdOnyZOM3w==
->>>>>>> Stashed changes
   dependencies:
     chalk "^4.1.2"
     tslib "^2.6.0"
 
-<<<<<<< Updated upstream
 "@docusaurus/mdx-loader@0.0.0-5752":
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/mdx-loader/-/mdx-loader-0.0.0-5752.tgz#56600851d049665ad17c0610e174b7ab2c736d84"
@@ -1460,12 +1438,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/mdx-loader/-/mdx-loader-3.0.0.tgz#2593889e43dc4bbd8dfa074d86c8bb4206cf4171"
   integrity sha512-JkGge6WYDrwjNgMxwkb6kNQHnpISt5L1tMaBWFDBKeDToFr5Kj29IL35MIQm0RfrnoOfr/29RjSH4aRtvlAR0A==
-=======
-"@docusaurus/mdx-loader@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/mdx-loader/-/mdx-loader-2.4.3.tgz#e8ff37f30a060eaa97b8121c135f74cb531a4a3e"
-  integrity sha512-b1+fDnWtl3GiqkL0BRjYtc94FZrcDDBV1j8446+4tptB9BAOlePwG2p/pK6vGvfL53lkOsszXMghr2g67M0vCw==
->>>>>>> Stashed changes
   dependencies:
     "@babel/parser" "^7.22.7"
     "@babel/traverse" "^7.22.8"
@@ -1638,7 +1610,6 @@
     tslib "^2.6.0"
     webpack "^5.88.1"
 
-<<<<<<< Updated upstream
 "@docusaurus/plugin-debug@0.0.0-5752":
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/plugin-debug/-/plugin-debug-0.0.0-5752.tgz#2872debaa4ebfe3a0ab409eca4ba1090a26a1fc1"
@@ -1655,12 +1626,6 @@
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/plugin-google-analytics/-/plugin-google-analytics-0.0.0-5752.tgz#a35bdbe19e6e5d64990583ae520c99d2f4ee633f"
   integrity sha512-9kuPods9JjC7KxYRgkJfrJweGqj18negvVBPv9qbFRG7mn5/TU5z5yoBINh2j/tHFKJkcsfQ13ClEF2GAo4mkQ==
-=======
-"@docusaurus/plugin-google-gtag@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/plugin-google-gtag/-/plugin-google-gtag-2.4.3.tgz#e1a80b0696771b488562e5b60eff21c9932d9e1c"
-  integrity sha512-5FMg0rT7sDy4i9AGsvJC71MQrqQZwgLNdDetLEGDHLfSHLvJhQbTCUGbGXknUgWXQJckcV/AILYeJy+HhxeIFA==
->>>>>>> Stashed changes
   dependencies:
     "@docusaurus/core" "0.0.0-5752"
     "@docusaurus/types" "0.0.0-5752"
@@ -1866,7 +1831,6 @@
     fs-extra "^11.1.1"
     tslib "^2.6.0"
 
-<<<<<<< Updated upstream
 "@docusaurus/theme-translations@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/theme-translations/-/theme-translations-3.0.0.tgz#98590b80589f15b2064e0daa2acc3a82d126f53b"
@@ -1893,12 +1857,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/types/-/types-3.0.0.tgz#3edabe43f70b45f81a48f3470d6a73a2eba41945"
   integrity sha512-Qb+l/hmCOVemReuzvvcFdk84bUmUFyD0Zi81y651ie3VwMrXqC7C0E7yZLKMOsLj/vkqsxHbtkAuYMI89YzNzg==
-=======
-"@docusaurus/types@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/types/-/types-2.4.3.tgz#4aead281ca09f721b3c0a9b926818450cfa3db31"
-  integrity sha512-W6zNLGQqfrp/EoPD0bhb9n7OobP+RHpmvVzpA+Z/IuU3Q63njJM24hmT0GYboovWcDtFmnIJC9wcyx4RVPQscw==
->>>>>>> Stashed changes
   dependencies:
     "@types/history" "^4.7.11"
     "@types/react" "*"
@@ -1909,7 +1867,6 @@
     webpack "^5.88.1"
     webpack-merge "^5.9.0"
 
-<<<<<<< Updated upstream
 "@docusaurus/utils-common@0.0.0-5752":
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils-common/-/utils-common-0.0.0-5752.tgz#06eede7426dec46bf23cf181be5d51d4ed3733d7"
@@ -1921,16 +1878,9 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils-common/-/utils-common-3.0.0.tgz#fb019e5228b20852a5b98f50672a02843a03ba03"
   integrity sha512-7iJWAtt4AHf4PFEPlEPXko9LZD/dbYnhLe0q8e3GRK1EXZyRASah2lznpMwB3lLmVjq/FR6ZAKF+E0wlmL5j0g==
-=======
-"@docusaurus/utils-common@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/utils-common/-/utils-common-2.4.3.tgz#30656c39ef1ce7e002af7ba39ea08330f58efcfb"
-  integrity sha512-/jascp4GbLQCPVmcGkPzEQjNaAk3ADVfMtudk49Ggb+131B1WDD6HqlSmDf8MxGdy7Dja2gc+StHf01kiWoTDQ==
->>>>>>> Stashed changes
   dependencies:
     tslib "^2.6.0"
 
-<<<<<<< Updated upstream
 "@docusaurus/utils-validation@0.0.0-5752":
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils-validation/-/utils-validation-0.0.0-5752.tgz#e31b4c7e5e5dd4052c96a0929a799c234f5cdb9b"
@@ -1946,12 +1896,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils-validation/-/utils-validation-3.0.0.tgz#56f3ba89ceba9826989408a96827897c0b724612"
   integrity sha512-MlIGUspB/HBW5CYgHvRhmkZbeMiUWKbyVoCQYvbGN8S19SSzVgzyy97KRpcjCOYYeEdkhmRCUwFBJBlLg3IoNQ==
-=======
-"@docusaurus/utils-validation@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/utils-validation/-/utils-validation-2.4.3.tgz#8122c394feef3e96c73f6433987837ec206a63fb"
-  integrity sha512-G2+Vt3WR5E/9drAobP+hhZQMaswRwDlp6qOMi7o7ZypB+VO7N//DZWhZEwhcRGepMDJGQEwtPv7UxtYwPL9PBw==
->>>>>>> Stashed changes
   dependencies:
     "@docusaurus/logger" "3.0.0"
     "@docusaurus/utils" "3.0.0"
@@ -1959,7 +1903,6 @@
     js-yaml "^4.1.0"
     tslib "^2.6.0"
 
-<<<<<<< Updated upstream
 "@docusaurus/utils@0.0.0-5752":
   version "0.0.0-5752"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils/-/utils-0.0.0-5752.tgz#e3308ebb3b9dae662e9c3da8acace05375d4d717"
@@ -1987,12 +1930,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils/-/utils-3.0.0.tgz#2ef0c8e434036fe104dca4c694fd50022b2ba1ed"
   integrity sha512-JwGjh5mtjG9XIAESyPxObL6CZ6LO/yU4OSTpq7Q0x+jN25zi/AMbvLjpSyZzWy+qm5uQiFiIhqFaOxvy+82Ekg==
-=======
-"@docusaurus/utils@2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@docusaurus/utils/-/utils-2.4.3.tgz#52b000d989380a2125831b84e3a7327bef471e89"
-  integrity sha512-fKcXsjrD86Smxv8Pt0TBFqYieZZCPh4cbf9oszUq/AMhZn3ujwpKaVYZACPX8mmjtYx0JOgNx52CREBfiGQB4A==
->>>>>>> Stashed changes
   dependencies:
     "@docusaurus/logger" "3.0.0"
     "@svgr/webpack" "^6.5.1"

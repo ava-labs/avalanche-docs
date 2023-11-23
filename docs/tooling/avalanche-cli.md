@@ -89,24 +89,24 @@ avalanche subnet addValidator [subnetName] [flags]
 <!-- markdownlint-disable MD013 -->
 
 ```shell
-      --default-validator-params   use default weight/start/duration params for subnet validator
-      --devnet devnet              add subnet validator on devnet
-      --endpoint string            use the given endpoint for network operations
-  -e, --ewoq                       use ewoq key [fuji/devnet only]
-      --fuji fuji                  add subnet validator on fuji (alias for `testnet`)
-  -h, --help                       help for addValidator
-  -k, --key string                 select the key to use [fuji/devnet only]
-  -g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
-      --ledger-addrs strings       use the given ledger addresses
-      --local local                add subnet validator on local
-      --mainnet mainnet            add subnet validator on mainnet
-      --nodeID string              set the NodeID of the validator to add
-      --output-tx-path string      file path of the add validator tx
-      --staking-period duration    how long this validator will be staking
-      --start-time string          UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
-      --subnet-auth-keys strings   control keys that will be used to authenticate add validator tx
-      --testnet testnet            add subnet validator on testnet (alias for `fuji`)
-      --weight uint                set the staking weight of the validator to add
+    --default-validator-params   use default weight/start/duration params for subnet validator
+    --devnet devnet              add subnet validator on devnet
+    --endpoint string            use the given endpoint for network operations
+-e, --ewoq                       use ewoq key [fuji/devnet only]
+    --fuji fuji                  add subnet validator on fuji (alias for `testnet`)
+-h, --help                       help for addValidator
+-k, --key string                 select the key to use [fuji/devnet only]
+-g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
+    --ledger-addrs strings       use the given ledger addresses
+    --local local                add subnet validator on local
+    --mainnet mainnet            add subnet validator on mainnet
+    --nodeID string              set the NodeID of the validator to add
+    --output-tx-path string      file path of the add validator tx
+    --staking-period duration    how long this validator will be staking
+    --start-time string          UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
+    --subnet-auth-keys strings   control keys that will be used to authenticate add validator tx
+    --testnet testnet            add subnet validator on testnet (alias for `fuji`)
+    --weight uint                set the staking weight of the validator to add
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -180,18 +180,17 @@ avalanche subnet create [subnetName] [flags]
 **Flags:**
 
 ```shell
-      --custom                          use a custom VM template
-      --custom-vm-branch string         custom vm branch
-      --custom-vm-build-script string   custom vm build-script
-      --custom-vm-path string           file path of custom vm to use (deprecation warning: will be generated if not given)
-      --custom-vm-repo-url string       custom vm repository url
-      --evm                             use the Subnet-EVM as the base template
-  -f, --force                           overwrite the existing configuration if one exists
-      --genesis string                  file path of genesis to use
-  -h, --help                            help for create
-      --latest                          use latest Subnet-Evm version, takes precedence over --vm-version
-      --vm-version string               version of Subnet-Evm template to use
-
+    --custom                          use a custom VM template
+    --custom-vm-branch string         custom vm branch
+    --custom-vm-build-script string   custom vm build-script
+    --custom-vm-path string           file path of custom vm to use (deprecation warning: will be generated if not given)
+    --custom-vm-repo-url string       custom vm repository url
+    --evm                             use the Subnet-EVM as the base template
+-f, --force                           overwrite the existing configuration if one exists
+    --genesis string                  file path of genesis to use
+-h, --help                            help for create
+    --latest                          use latest Subnet-Evm version, takes precedence over --vm-version
+    --vm-version string               version of Subnet-Evm template to use
 ```
 
 ### Subnet Delete
@@ -236,16 +235,21 @@ avalanche subnet deploy [subnetName] [flags]
 ```shell
     --avalanchego-version string   use this version of avalanchego (ex: v1.17.12) (default "latest")
     --control-keys strings         addresses that may make subnet changes
+    --devnet                       deploy to a devnet network
+    --endpoint string              use the given endpoint for network operations
+-e, --ewoq                         use ewoq key [fuji/devnet deploy only]
 -f, --fuji testnet                 deploy to fuji (alias to testnet
 -h, --help                         help for deploy
--k, --key string                   select the key to use [fuji deploy only]
--g, --ledger                       use ledger instead of key (always true on mainnet, defaults to false on fuji)
+-k, --key string                   select the key to use [fuji/devnet deploy only]
+-g, --ledger                       use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
     --ledger-addrs strings         use the given ledger addresses
 -l, --local                        deploy to a local network
 -m, --mainnet                      deploy to mainnet
+    --mainnet-chain-id string      use different ChainID for mainnet deployment
     --output-tx-path string        file path of the blockchain creation tx
 -s, --same-control-key             use creation key as control key
     --subnet-auth-keys strings     control keys that will be used to authenticate chain creation
+-u, --subnet-id string             deploy into given subnet id
 -t, --testnet fuji                 deploy to testnet (alias to fuji)
     --threshold uint32             required number of control key signatures to make subnet changes
 ```
@@ -731,21 +735,21 @@ will apply to all nodes in the cluster.
 **Flags:**
 
 ```shell
-      --alternative-key-pair-name string         key pair name to use if default one generates conflicts
-      --authorize-access                         authorize CLI to create cloud resources
-      --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
-      --aws                                      create node/s in AWS cloud
-      --aws-profile string                       aws profile to use (default "default")
-      --devnet                                   create node/s into a new Devnet
-      --fuji                                     create node/s in Fuji Network
-      --gcp                                      create node/s in GCP cloud
-      --gcp-credentials string                   use given GCP credentials
-      --gcp-project string                       use given GCP project
-  -h, --help                                     help for create
-      --latest-avalanchego-version               install latest avalanchego version on node/s
-      --num-nodes int                            number of nodes to create
-      --region string                            create node/s in given region
-      --use-static-ip                            attach static Public IP on cloud servers (default true)
+    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
+    --authorize-access                         authorize CLI to create cloud resources
+    --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
+    --aws                                      create node/s in AWS cloud
+    --aws-profile string                       aws profile to use (default "default")
+    --devnet                                   create node/s into a new Devnet
+    --fuji                                     create node/s in Fuji Network
+    --gcp                                      create node/s in GCP cloud
+    --gcp-credentials string                   use given GCP credentials
+    --gcp-project string                       use given GCP project
+-h, --help                                     help for create
+    --latest-avalanchego-version               install latest avalanchego version on node/s
+    --num-nodes int                            number of nodes to create
+    --region string                            create node/s in given region
+    --use-static-ip                            attach static Public IP on cloud servers (default true)
 ```
 
 ### Node Devnet
@@ -773,7 +777,7 @@ It saves the deploy info both locally and remotely.
 **Flags:**
 
 ```shell
-  -h, --help   help for list
+-h, --help   help for list
 ```
 
 ### Node Devnet Wiz
@@ -789,30 +793,30 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 **Flags:**
 
 ```shell
-      --alternative-key-pair-name string   key pair name to use if default one generates conflicts
-      --authorize-access                   authorize CLI to create cloud resources
-      --aws                                create node/s in AWS cloud
-      --aws-profile string                 aws profile to use (default "default")
-      --chain-config string                path to the chain configuration for subnet
-      --custom-subnet                      use a custom VM as the subnet virtual machine
-      --custom-vm-branch string            custom vm branch
-      --custom-vm-build-script string      custom vm build-script
-      --custom-vm-repo-url string          custom vm repository url
-      --default-validator-params           use default weight/start/duration params for subnet validator
-      --evm-subnet                         use Subnet-EVM as the subnet virtual machine
-      --evm-version string                 version of Subnet-Evm to use
-      --force-subnet-create                overwrite the existing subnet configuration if one exists
-      --gcp                                create node/s in GCP cloud
-      --gcp-credentials string             use given GCP credentials
-      --gcp-project string                 use given GCP project
-  -h, --help                               help for wiz
-      --latest-evm-version                 use latest Subnet-Evm version
-      --node-config string                 path to avalanchego node configuration for subnet
-      --num-nodes int                      number of nodes to create
-      --region string                      create node/s in given region
-      --subnet-config string               path to the subnet configuration for subnet
-      --subnet-genesis string              file path of the subnet genesis
-      --use-static-ip                      attach static Public IP on cloud servers (default true)
+    --alternative-key-pair-name string   key pair name to use if default one generates conflicts
+    --authorize-access                   authorize CLI to create cloud resources
+    --aws                                create node/s in AWS cloud
+    --aws-profile string                 aws profile to use (default "default")
+    --chain-config string                path to the chain configuration for subnet
+    --custom-subnet                      use a custom VM as the subnet virtual machine
+    --custom-vm-branch string            custom vm branch
+    --custom-vm-build-script string      custom vm build-script
+    --custom-vm-repo-url string          custom vm repository url
+    --default-validator-params           use default weight/start/duration params for subnet validator
+    --evm-subnet                         use Subnet-EVM as the subnet virtual machine
+    --evm-version string                 version of Subnet-Evm to use
+    --force-subnet-create                overwrite the existing subnet configuration if one exists
+    --gcp                                create node/s in GCP cloud
+    --gcp-credentials string             use given GCP credentials
+    --gcp-project string                 use given GCP project
+-h, --help                               help for wiz
+    --latest-evm-version                 use latest Subnet-Evm version
+    --node-config string                 path to avalanchego node configuration for subnet
+    --num-nodes int                      number of nodes to create
+    --region string                      create node/s in given region
+    --subnet-config string               path to the subnet configuration for subnet
+    --subnet-genesis string              file path of the subnet genesis
+    --use-static-ip                      attach static Public IP on cloud servers (default true)
 ```
 
 ### Node List
@@ -834,7 +838,7 @@ The `node list` command lists all clusters together with their nodes.
 **Flags:**
 
 ```shell
-  -h, --help   help for list
+-h, --help   help for list
 ```
 
 ### Node Ssh
@@ -858,7 +862,7 @@ If no command is given, just prints the ssh cmdLine to be used to connect to eac
 **Flags:**
 
 ```shell
-  -h, --help            help for status
+-h, --help            help for status
 ```
 
 ### Node Status
@@ -884,7 +888,7 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 **Flags:**
 
 ```shell
-  -h, --help            help for status
+-h, --help            help for status
       --subnet string   specify the subnet the node is syncing with
 ```
 
@@ -909,9 +913,9 @@ Note that a stopped node may still incur cloud server storage fees.
 **Flags:**
 
 ```shell
-      --authorize-access   authorize CLI to release cloud resources
-      --authorize-remove   authorize CLI to remove all local files related to cloud nodes
-  -h, --help   help for stop
+    --authorize-access   authorize CLI to release cloud resources
+    --authorize-remove   authorize CLI to remove all local files related to cloud nodes
+-h, --help   help for stop
 ```
 
 ### Node Sync
@@ -934,7 +938,7 @@ You can check the Subnet bootstrap status by calling avalanche `node status <clu
 **Flags:**
 
 ```shell
-  -h, --help   help for sync
+-h, --help   help for sync
 ```
 
 ### Node Update
@@ -970,7 +974,7 @@ You can check the updated Subnet bootstrap status by calling avalanche
 **Flags:**
 
 ```shell
-  -h, --help   help for subnet
+-h, --help   help for subnet
 ```
 
 ### Node Validate
@@ -1006,15 +1010,15 @@ Network.
 **Flags:**
 
 ```shell
-  -f, --fuji testnet              set up validator in fuji (alias to testnet
-  -h, --help                      help for primary
-  -k, --key string                select the key to use [fuji only]
-  -g, --ledger                    use ledger instead of key (always true on mainnet, defaults to false on fuji)
-      --ledger-addrs strings      use the given ledger addresses
-  -m, --mainnet                   set up validator in mainnet
-      --stake-amount uint         how many AVAX to stake in the validator
-      --staking-period duration   how long validator validates for after start time
-  -t, --testnet fuji              set up validator in testnet (alias to fuji)
+-f, --fuji testnet              set up validator in fuji (alias to testnet
+-h, --help                      help for primary
+-k, --key string                select the key to use [fuji only]
+-g, --ledger                    use ledger instead of key (always true on mainnet, defaults to false on fuji)
+    --ledger-addrs strings      use the given ledger addresses
+-m, --mainnet                   set up validator in mainnet
+    --stake-amount uint         how many AVAX to stake in the validator
+    --staking-period duration   how long validator validates for after start time
+-t, --testnet fuji              set up validator in testnet (alias to fuji)
 ```
 
 ### Node Validate Subnet
@@ -1043,20 +1047,20 @@ You can check the Subnet sync status by calling `avalanche node status <clusterN
 **Flags:**
 
 ```shell
-      --default-validator-params   use default weight/start/duration params for subnet validator
-  -d, --devnet                     set up validator in devnet
-      --endpoint string            use the given endpoint for network operations
-  -e, --ewoq                       use ewoq key [fuji/devnet only]
-  -f, --fuji testnet               set up validator in fuji (alias to testnet
-  -h, --help                       help for subnet
-  -k, --key string                 select the key to use [fuji/devnet only]
-  -g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
-      --ledger-addrs strings       use the given ledger addresses
-  -m, --mainnet                    set up validator in mainnet
-      --stake-amount uint          how many AVAX to stake in the validator
-      --staking-period duration    how long validator validates for after start time
-      --start-time string          UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
-  -t, --testnet fuji               set up validator in testnet (alias to fuji)
+    --default-validator-params   use default weight/start/duration params for subnet validator
+-d, --devnet                     set up validator in devnet
+    --endpoint string            use the given endpoint for network operations
+-e, --ewoq                       use ewoq key [fuji/devnet only]
+-f, --fuji testnet               set up validator in fuji (alias to testnet
+-h, --help                       help for subnet
+-k, --key string                 select the key to use [fuji/devnet only]
+-g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
+    --ledger-addrs strings       use the given ledger addresses
+-m, --mainnet                    set up validator in mainnet
+    --stake-amount uint          how many AVAX to stake in the validator
+    --staking-period duration    how long validator validates for after start time
+    --start-time string          UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
+-t, --testnet fuji               set up validator in testnet (alias to fuji)
 ```
 
 ## Network
@@ -1307,17 +1311,17 @@ avalanche key transfer [options] [flags]
 **Flags:**
 
 ```shell
-  -o, --amount float                 amount to send or receive (AVAX units)
-  -f, --force                        avoid transfer confirmation
-  -u, --fuji                         transfer between testnet (fuji) addresses
-  -h, --help                         help for transfer
-  -k, --key string                   key associated to the sender or receiver address
-  -i, --ledger uint32                ledger index associated to the sender or receiver address (default 32768)
-  -l, --local                        transfer between local network addresses
-  -m, --mainnet                      transfer between mainnet addresses
-  -g, --receive                      receive the transfer
-  -r, --receive-recovery-step uint   receive step to use for multiple step transaction recovery
-  -s, --send                         send the transfer
-  -a, --target-addr string           receiver address
-  -t, --testnet                      transfer between testnet (fuji) addresses
+-o, --amount float                 amount to send or receive (AVAX units)
+-f, --force                        avoid transfer confirmation
+-u, --fuji                         transfer between testnet (fuji) addresses
+-h, --help                         help for transfer
+-k, --key string                   key associated to the sender or receiver address
+-i, --ledger uint32                ledger index associated to the sender or receiver address (default 32768)
+-l, --local                        transfer between local network addresses
+-m, --mainnet                      transfer between mainnet addresses
+-g, --receive                      receive the transfer
+-r, --receive-recovery-step uint   receive step to use for multiple step transaction recovery
+-s, --send                         send the transfer
+-a, --target-addr string           receiver address
+-t, --testnet                      transfer between testnet (fuji) addresses
 ```
