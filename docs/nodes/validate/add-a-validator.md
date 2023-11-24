@@ -36,8 +36,8 @@ our [Discord](https://chat.avalabs.org/) to ask questions.
 You've completed [Run an Avalanche Node](/nodes/run/node-manually.md) and are familiar with
 [Avalanche's architecture](/learn/avalanche/avalanche-platform.md). In this
 tutorial, we use [AvalancheJS](/tooling/avalanchejs-overview.md) and
-[Avalanche’s Postman collection](/tooling/avalanchego-postman-collection.md) to help us
-make API calls.
+[Avalanche’s Postman collection](/tooling/avalanchego-postman-collection/setup.md) 
+to help us make API calls.
 
 In order to ensure your node is well-connected, make sure that your node can
 receive and send TCP traffic on the staking port (`9651` by default) and your node
