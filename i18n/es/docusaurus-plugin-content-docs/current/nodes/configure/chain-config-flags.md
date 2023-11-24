@@ -758,3 +758,4 @@ debería estar en
 
 - Cuando se desactiva la poda sin conexión `(pruning-enabled: false)` desde un estado previamente
   habilitado, esto no afectará a los bloques cuyo estado ya fue podado. Esto devolverá errores de nodo de trie faltante, ya que el nodo no puede buscar el estado de un bloque histórico si ese estado fue eliminado.
+  
