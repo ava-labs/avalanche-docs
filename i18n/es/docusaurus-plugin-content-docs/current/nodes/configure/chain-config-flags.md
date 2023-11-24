@@ -436,7 +436,7 @@ El gas máximo que consumirá una llamada RPC (usado en `eth_estimateGas` y
 #### `rpc-tx-fee-cap` (int)
 
 Límite global de tarifa de transacción (precio \* `gaslimit`) (medido en AVAX) para
-variantes de envío de transacciones. El valor predeterminado es `100`.
+variantes de send-transaction. El valor predeterminado es `100`.
 
 #### `api-max-duration` (duration)
 
