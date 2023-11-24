@@ -448,7 +448,7 @@ Número máximo de bloques para servir por solicitud de `getLogs`. El valor pred
 
 #### `ws-cpu-refill-rate` (duration)
 
-La tasa de recarga especifica la cantidad máxima de tiempo de CPU que se asignará a una sola
+La tasa de relleno especifica la cantidad máxima de tiempo de CPU que se asignará a una sola
 conexión por segundo. El valor predeterminado es sin máximo (`0`).
 
 #### `ws-cpu-max-stored` (duration)
