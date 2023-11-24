@@ -406,7 +406,7 @@ Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor prede
 #### `internal-personal`
 
 El nombre de API `internal-private-personal` está obsoleto a partir de la versión 1.7.15, y las
-API que antes se encontraban bajo este nombre se han migrado a `internal-personal`.
+API que antes estaban bajo este nombre se han migrado a `internal-personal`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `personal_*`. El valor predeterminado es `false`.
 
