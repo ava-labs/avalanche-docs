@@ -650,7 +650,7 @@ Número de lectores concurrentes a utilizar al volver a poblar los tries faltant
 
 #### `allow-missing-tries` (boolean)
 
-Si es `true`, permite que un nodo que alguna vez estuvo configurado como archivador cambie al modo de recorte. Por defecto, es `false`.
+Si es `true`, permite que un nodo que alguna vez se configuró como de archivo cambie al modo de poda. Por defecto, es `false`.
 
 #### `preimages-enabled` (boolean)
 
