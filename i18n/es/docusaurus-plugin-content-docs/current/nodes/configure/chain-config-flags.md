@@ -1,6 +1,6 @@
 ---
-tags: [Nodos]
-description: Referencia de todas las opciones de configuración y banderas disponibles para la cadena.
+etiquetas: [Nodos]
+descripción: Referencia de todas las opciones de configuración y banderas disponibles para la cadena.
 sidebar_label: Configuraciones de la Cadena
 pagination_label: Configuraciones de la Cadena
 sidebar_position: 1
@@ -28,7 +28,7 @@ Esto también se aplica a las Subnets, por ejemplo, si el ID de cadena de una Su
 debería estar en
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
-:::tip
+:::consejo
 
 Por defecto, ninguno de estos directorios y/o archivos existe. Deberá
 crearlos manualmente si es necesario.
@@ -71,8 +71,8 @@ para cada bandera de configuración se especifican a continuación.
 Los valores predeterminados se anulan solo si se especifican en el archivo de configuración dado. Es
 recomendable proporcionar solo valores que sean diferentes de los predeterminados, ya que eso
 hace que la configuración sea más resistente a futuros cambios predeterminados. De lo contrario, si
-los valores predeterminados cambian, su nodo seguirá con los valores antiguos, lo que podría
-afectar negativamente la operación de su nodo.
+los valores predeterminados cambian, su nodo permanecerá con los valores antiguos, lo que podría
+afectar negativamente el funcionamiento de su nodo.
 
 ### Sincronización de Estado
 
@@ -83,7 +83,7 @@ descargará el estado de la cadena de los pares hasta un bloque reciente cerca d
 el arranque normal.
 
 Por defecto, realiza la sincronización de estado si se inicia un nuevo nodo desde cero. Sin embargo, si
-se ejecuta con una base de datos existente, el valor predeterminado será falso y no realizará la sincronización de estado
+se ejecuta con una base de datos existente, por defecto será falso y no realizará la sincronización de estado
 en ejecuciones posteriores.
 
 Tenga en cuenta que si necesita datos históricos, la sincronización de estado no es la opción correcta.
@@ -91,21 +91,22 @@ Sin embargo, es suficiente si solo está ejecutando un validador.
 
 #### `state-sync-skip-resume` (booleano)
 
-Si se establece en `true`, la cadena no reanudará una operación de sincronización de estado iniciada previamente que no se completó. Normalmente, la cadena debería poder reanudar
+Si se establece en `true`, la cadena no reanudará una operación de sincronización de estado
+que no se completó previamente. Normalmente, la cadena debería poder reanudar
 la sincronización de estado sin ningún problema. Por defecto, es `false`.
 
 #### `state-sync-min-blocks` (entero)
 
-Número mínimo de bloques por delante de la cadena que el nodo local debe estar para preferir
+Número mínimo de bloques por delante de la cadena que el nodo local debe preferir
 la sincronización de estado sobre el arranque. Si la base de datos del nodo ya está cerca de la
 punta de la cadena, el arranque es más eficiente. Por defecto, es `300000`.
 
 #### `state-sync-ids` (cadena)
 
-Lista separada por comas de ID de nodo (precedidos de `NodeID-`) para obtener datos de sincronización de estado
-de. Un ejemplo de configuración de este campo sería
+Lista separada por comas de ID de nodo (precedidos de `NodeID-`) para recuperar la sincronización de estado
+datos de. Un ejemplo de configuración de este campo sería
 `--state-sync-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg,NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"`.
-Si no se especifica (o está vacío), se seleccionan pares al azar. Por defecto, es una cadena vacía (`""`).
+Si no se especifica (o está vacío), se seleccionan pares al azar. Por defecto es una cadena vacía (`""`).
 
 #### `state-sync-server-trie-cache` (entero)
 
@@ -117,13 +118,13 @@ un múltiplo de `64`. Por defecto, es `64`.
 #### `continuous-profiler-dir` (cadena)
 
 Habilita el perfilador continuo (captura un perfil de CPU/Memoria/Bloqueo a un
-intervalo especificado). Por defecto, es `""`. Si se proporciona una cadena no vacía, se
-habilita el perfilador continuo y se especifica el directorio para colocar los
+intervalo especificado). Por defecto es `""`. Si se proporciona una cadena no vacía, se
+habilita el perfilador continuo y especifica el directorio para colocar los
 perfiles.
 
 #### `continuous-profiler-frequency` (duración)
 
-Especifica la frecuencia con la que se ejecuta el perfilador continuo. Por defecto, `900000000000`
+Especifica la frecuencia con la que se ejecuta el perfilador continuo. Por defecto `900000000000`
 nanosegundos, que son 15 minutos.
 
 #### `continuous-profiler-max-files` (entero)
@@ -135,16 +136,20 @@ Por defecto, es `5`.
 
 #### `snowman-api-enabled` (booleano)
 
-Habilita la API de Snowman. Por defecto, es `false`.
+Habilita la API de Snowman. Por defecto es `false`.
 
 #### `coreth-admin-api-enabled` (booleano)
 
-Habilita la API de Admin. Por defecto, es `false`.
+Obsoleto a partir de `v0.12.5`. Use `admin-api-enabled` en su lugar.
+
+Habilita la API de Administración. Por defecto es `false`.
 
 #### `coreth-admin-api-dir` (cadena)
 
-Especifica el directorio para que la API de Admin use para almacenar perfiles de CPU/Memoria/Bloqueo.
-Por defecto, es `""`.
+Obsoleto a partir de `v0.12.5`. Use `admin-api-dir` en su lugar.
+
+Especifica el directorio que la API de Administración utiliza para almacenar perfiles de CPU/Memoria/Bloqueo.
+Por defecto es `""`.
 
 ### Habilitando APIs de EVM
 
@@ -154,16 +159,18 @@ Use el campo `eth-apis` para especificar el conjunto exacto de servicios a habil
 su nodo. Si este campo no está configurado, entonces la lista predeterminada será:
 `["eth","eth-filter","net","web3","internal-eth","internal-blockchain","internal-transaction"]`.
 
-:::note
+:::nota
 
 Los nombres utilizados en esta bandera de configuración se han actualizado en Coreth `v0.8.14`.
 Los nombres anteriores que contienen `public-` y `private-` están obsoletos. Si bien
 la versión actual continúa aceptando valores obsoletos, es posible que no se admitan
 en futuras actualizaciones y se recomienda actualizar a los nuevos valores.
 
-La asignación de valores obsoletos y su equivalente actualizado es la siguiente:
+La siguiente es la correspondencia de los valores obsoletos y su equivalente actualizado:
 
-| Obsoleto                           | Usar en su lugar       |
+
+
+| Obsoleto                           | Usar en su lugar      |
 | ---------------------------------- | ---------------------- |
 | `public-eth`                       | `eth`                  |
 | `public-eth-filter`                | `eth-filter`           |
@@ -201,7 +208,7 @@ Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor prede
 #### `eth-filter`
 
 El nombre de API `public-eth-filter` está obsoleto a partir de la versión 1.7.15, y las API
-anteriormente bajo este nombre se han migrado a `eth-filter`.
+bajo este nombre se han migrado a `eth-filter`.
 
 Habilita la API de filtro público para el espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
@@ -223,7 +230,7 @@ documentación completa):
 #### `admin`
 
 El nombre de API `private-admin` está obsoleto a partir de la versión 1.7.15, y las API
-anteriormente bajo este nombre se han migrado a `admin`.
+bajo este nombre se han migrado a `admin`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `admin_*`. El valor predeterminado es `false`.
 
@@ -282,7 +289,7 @@ Agrega las siguientes llamadas RPC al espacio de nombres `web3_*`. El valor pred
 #### `internal-eth`
 
 El nombre de API `internal-public-eth` está obsoleto a partir de la versión 1.7.15, y las API
-anteriormente bajo este nombre se han migrado a `internal-eth`.
+bajo este nombre se han migrado a `internal-eth`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
@@ -320,8 +327,7 @@ Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor prede
 #### `internal-transaction`
 
 El nombre de API `internal-public-transaction-pool` está obsoleto a partir de la versión 1.7.15, y
-las API previamente bajo este nombre se han migrado a
-`internal-transaction`.
+las API previamente bajo este nombre se han migrado a `internal-transaction`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
@@ -358,8 +364,8 @@ Agrega las siguientes llamadas RPC al espacio de nombres `txpool_*`. El valor pr
 #### `internal-debug`
 
 Los nombres de API `internal-private-debug` e `internal-public-debug` están
-obsoletos a partir de la versión 1.7.15, y las API que antes estaban bajo estos nombres se han
-migrado a `internal-debug`.
+obsoletos a partir de la versión 1.7.15, y las API que antes se encontraban
+bajo estos nombres se han migrado a `internal-debug`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor predeterminado es `false`.
 
@@ -392,7 +398,7 @@ Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor pre
 #### `internal-account`
 
 El nombre de API `internal-public-account` está obsoleto a partir de la versión 1.7.15, y las API
-que antes estaban bajo este nombre se han migrado a `internal-account`.
+que antes se encontraban bajo este nombre se han migrado a `internal-account`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
@@ -401,7 +407,7 @@ Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor prede
 #### `internal-personal`
 
 El nombre de API `internal-private-personal` está obsoleto a partir de la versión 1.7.15, y las
-API que antes estaban bajo este nombre se han migrado a `internal-personal`.
+API que antes se encontraban bajo este nombre se han migrado a `internal-personal`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `personal_*`. El valor predeterminado es `false`.
 
@@ -425,13 +431,13 @@ Agrega las siguientes llamadas RPC al espacio de nombres `personal_*`. El valor 
 
 #### `rpc-gas-cap` (int)
 
-El gas máximo que consumirá una llamada RPC (utilizado en `eth_estimateGas` y
+El gas máximo que consumirá una llamada RPC (usado en `eth_estimateGas` y
 `eth_call`). El valor predeterminado es `50,000,000`.
 
 #### `rpc-tx-fee-cap` (int)
 
 Límite global de tarifa de transacción (precio \* `gaslimit`) (medido en AVAX) para
-variantes de send-transaction. El valor predeterminado es `100`.
+variantes de envío de transacciones. El valor predeterminado es `100`.
 
 #### `api-max-duration` (duration)
 
@@ -443,7 +449,7 @@ Número máximo de bloques para servir por solicitud de `getLogs`. El valor pred
 
 #### `ws-cpu-refill-rate` (duration)
 
-La tasa de relleno especifica la cantidad máxima de tiempo de CPU que se asignará a una sola
+La tasa de recarga especifica la cantidad máxima de tiempo de CPU que se asignará a una sola
 conexión por segundo. El valor predeterminado es sin máximo (`0`).
 
 #### `ws-cpu-max-stored` (duration)
@@ -452,7 +458,7 @@ Especifica la cantidad máxima de tiempo de CPU que se pueden almacenar para una
 
 #### `allow-unfinalized-queries` (boolean)
 
-Permite consultas de bloques/transacciones no finalizados (aún no aceptados). El valor predeterminado es `false`.
+Permite consultas de bloques/transacciones no finalizadas (aún no aceptadas). El valor predeterminado es `false`.
 
 #### `accepted-cache-size` `(int)
 
@@ -479,19 +485,25 @@ permitir que se emitan transacciones específicas a través de su API. El valor 
 
 #### `remote-tx-gossip-only-enabled` (boolean)
 
-Si es `true`, el nodo solo difundirá transacciones remotas para evitar que las transacciones
+Obsoleto a partir de `v0.12.5`. Usar en su lugar `tx-gossip-enabled`.
+
+Si es `true`, el nodo solo propagará transacciones remotas para evitar que las transacciones
 emitidas a través de este nodo se transmitan a la red. El valor predeterminado es
 `false`.
 
 #### `tx-regossip-frequency` (duration)
 
-Cantidad de tiempo que debe transcurrir antes de intentar volver a difundir una transacción
-que ya se difundió una vez. El valor predeterminado es `60000000000` nanosegundos, que es
+Obsoleto a partir de `v0.12.5`. Usar en su lugar `regossip-frequency`.
+
+Cantidad de tiempo que debe transcurrir antes de intentar volver a propagar una transacción
+que ya se propagó una vez. El valor predeterminado es `60000000000` nanosegundos, que es
 1 minuto.
 
 #### `tx-regossip-max-size` (int)
 
-Número máximo de transacciones para volver a difundir a la vez. El valor predeterminado es `15`.
+Obsoleto a partir de `v0.12.5`. Usar en su lugar `regossip-max-txs`.
+
+Número máximo de transacciones para volver a propagar a la vez. El valor predeterminado es `15`.
 
 #### `tx-pool-journal` (string)
 
@@ -507,7 +519,7 @@ Intervalo de tiempo para regenerar el diario de transacciones locales. El valor 
 
 #### `tx-pool-price-limit` (int)
 
-Precio mínimo de gas para aplicar para la aceptación en la piscina. El valor predeterminado es 1 wei.
+Precio mínimo de gas para exigir la aceptación en la piscina. El valor predeterminado es 1 wei.
 
 #### `tx-pool-price-bump` (int)
 
@@ -548,8 +560,7 @@ Si es `true`, permite que la generación de instantáneas se ejecute de forma as
 
 #### `snapshot-verification-enabled` (boolean)
 
-Si es `true`, verifica la instantánea completa después de que se ha generado. El valor predeterminado es
-`false`.
+Si es `true`, verifica la instantánea completa después de que se ha generado. El valor predeterminado es `false`.
 
 ### Registro
 
@@ -562,7 +573,7 @@ Define el nivel de registro para la cadena. Debe ser uno de `"trace"`, `"debug"`
 
 Si es `true`, cambia los registros al formato JSON. El valor predeterminado es `false`.
 
-### Configuración de Keystore
+### Configuración de la carpeta de claves
 
 #### `keystore-directory` (string)
 
@@ -576,9 +587,9 @@ Especifica una URI externa para un firmante de tipo clef. El valor predeterminad
 
 #### `keystore-insecure-unlock-allowed` (bool)
 
-Si es `true`, permite desbloquear cuentas en un entorno HTTP inseguro. El valor predeterminado es `false`.
+Si es `true`, permite a los usuarios desbloquear cuentas en un entorno HTTP inseguro. Por defecto, es `false`.
 
-### Base de datos
+### Base de Datos
 
 #### `trie-clean-cache` (int)
 
@@ -590,7 +601,11 @@ Tamaño de la caché utilizada para nodos de trie sucios (en MB). Cuando los nod
 
 #### `trie-dirty-commit-target` (int)
 
-Límite de memoria a alcanzar en la caché sucia antes de realizar una confirmación (en MB). Por defecto, es `20`.
+Límite de memoria para apuntar en la caché sucia antes de realizar un commit (en MB). Por defecto, es `20`.
+
+#### `trie-prefetcher-parallelism` (int)
+
+Máximo de lecturas de disco concurrentes que el prebuscador de trie debe realizar a la vez. Por defecto, es `16`.
 
 #### `snapshot-cache` (int)
 
@@ -598,7 +613,7 @@ Tamaño de la caché limpia de la capa de disco de instantáneas (en MB). Debe s
 
 #### `trie-clean-journal` (string)
 
-Directorio utilizado para guardar la caché limpia del trie (debe estar poblado para habilitar el registro de la caché limpia del trie). Vacío y deshabilitado por defecto.
+Directorio para guardar la caché limpia del trie (debe estar poblado para habilitar el registro de la caché limpia del trie). Vacío y deshabilitado por defecto.
 
 #### `trie-clean-rejournal` (duration)
 
@@ -610,25 +625,25 @@ Especifica el número máximo de bloques en cola durante la aceptación de bloqu
 
 #### `commit-interval` (int)
 
-Especifica el intervalo de confirmación en el que persistir el trie de merkle en disco. Por defecto, es `4096`.
+Especifica el intervalo de commit en el que persistir el trie de merkle en disco. Por defecto, es `4096`.
 
 #### `pruning-enabled` (boolean)
 
-Si es `true`, se habilitará la poda de datos históricos obsoletos de la base de datos. Esto reduce la cantidad de datos escritos en disco, pero no elimina ningún estado que se haya escrito en el disco anteriormente. Esta bandera debe establecerse en `false` para nodos que necesiten acceso a todos los datos en raíces históricas. La poda se hará solo para datos nuevos. Por defecto, es `false` en la versión 1.4.9 y `true` en versiones posteriores.
+Si es `true`, se habilitará el recorte de la base de datos de datos históricos obsoletos. Esto reduce la cantidad de datos escritos en disco, pero no elimina ningún estado que se haya escrito en el disco anteriormente. Esta bandera debe establecerse en `false` para nodos que necesiten acceso a todos los datos en raíces históricas. El recorte se hará sólo para nuevos datos. Por defecto, es `false` en la versión 1.4.9, y `true` en versiones posteriores.
 
 :::note
 
 Si un nodo se ejecuta alguna vez con `pruning-enabled` como `false` (modo de archivo), establecer `pruning-enabled` en `true` resultará en una advertencia y el nodo se apagará. Esto es para protegerse contra configuraciones incorrectas no intencionales de un nodo de archivo.
 
-Para anular esto y cambiar al modo de poda, además de `pruning-enabled: true`, `allow-missing-tries` también debe establecerse en `true`.
+Para anular esto y cambiar al modo de recorte, además de `pruning-enabled: true`, `allow-missing-tries` también debe establecerse en `true`.
 
 :::
 
 #### `populate-missing-tries` (\*uint64)
 
-Si no es nulo, establece el punto de partida para repoblar los tries faltantes y regenerar el bosque de merkle de archivo.
+Si no es nulo, establece el punto de partida para repoblar los tries faltantes para regenerar el bosque de merkle de archivo.
 
-Para restaurar un bosque de merkle de archivo que ha sido corrompido (nodos de trie faltantes para una sección de la cadena de bloques), especifique el punto de partida del último bloque en disco, donde el trie completo estaba disponible en ese bloque para volver a procesar bloques desde esa altura en adelante y regenerar el bosque de merkle de archivo al iniciar. Esta bandera debe usarse una vez para regenerar el bosque de merkle de archivo y debe eliminarse de la configuración después de completar. Esta bandera hará que el nodo retrase su inicio mientras vuelve a procesar bloques antiguos.
+Para restaurar un bosque de merkle de archivo que ha sido corrompido (nodos de trie faltantes para una sección de la cadena de bloques), especifique el punto de partida del último bloque en disco, donde el trie completo estaba disponible en ese bloque para volver a procesar bloques desde esa altura en adelante y regenerar el bosque de merkle de archivo al iniciar. Esta bandera debe usarse una vez para regenerar el bosque de merkle de archivo y debe eliminarse de la configuración después de completarla. Esta bandera hará que el nodo retrase su inicio mientras vuelve a procesar bloques antiguos.
 
 #### `populate-missing-tries-parallelism` (int)
 
@@ -636,7 +651,7 @@ Número de lectores concurrentes a utilizar al volver a poblar los tries faltant
 
 #### `allow-missing-tries` (boolean)
 
-Si es `true`, permite que un nodo que alguna vez se configuró como de archivo cambie al modo de poda. Por defecto, es `false`.
+Si es `true`, permite que un nodo que alguna vez estuvo configurado como archivador cambie al modo de recorte. Por defecto, es `false`.
 
 #### `preimages-enabled` (boolean)
 
@@ -644,31 +659,35 @@ Si es `true`, habilita las preimágenes. Por defecto, es `false`.
 
 #### `offline-pruning-enabled` (boolean)
 
-Si es `true`, la poda sin conexión se ejecutará al iniciar y bloqueará hasta que se complete (aproximadamente una hora en Mainnet). Esto reducirá el tamaño de la base de datos eliminando nodos de trie antiguos. **Mientras se realiza la poda sin conexión, su nodo no podrá procesar bloques y se considerará fuera de línea.** Mientras está en curso, el proceso de poda consume una pequeña cantidad de espacio adicional en disco (para marcadores de eliminación y el filtro de bloom). Para obtener más información, consulte [aquí](/nodes/maintain/run-offline-pruning.md#disk-space-considerations).
+Si es `true`, el recorte sin conexión se ejecutará al iniciar y bloqueará hasta que se complete (aproximadamente una hora en Mainnet). Esto reducirá el tamaño de la base de datos eliminando nodos de trie antiguos. **Mientras se realiza el recorte sin conexión, su nodo no podrá procesar bloques y se considerará fuera de línea.** Mientras está en curso, el proceso de recorte consume una pequeña cantidad de espacio adicional en disco (para marcadores de eliminación y el filtro de bloom). Para más información, consulte [aquí](/nodes/maintain/run-offline-pruning.md#disk-space-considerations).
 
-Dado que la poda sin conexión elimina datos de estado antiguos, esto no debe ejecutarse en nodos que necesiten admitir solicitudes de API de archivo.
+Dado que el recorte sin conexión elimina datos de estado antiguos, esto no debe ejecutarse en nodos que necesiten soportar solicitudes de API de archivo.
 
-Esto está destinado a ejecutarse manualmente, por lo que después de ejecutarlo una vez con esta bandera, debe cambiarse nuevamente a falso antes de ejecutar el nodo nuevamente. Por lo tanto, debe ejecutarse con esta bandera establecida en verdadero y luego establecerla en falso en la ejecución posterior.
+Esto está destinado a ejecutarse manualmente, por lo que después de ejecutarlo una vez con esta bandera, debe cambiarse de nuevo a falso antes de ejecutar el nodo de nuevo. Por lo tanto, debe ejecutarse con esta bandera establecida en verdadero y luego establecerla en falso en la ejecución siguiente.
 
 #### `offline-pruning-bloom-filter-size` (int)
 
-Esta bandera establece el tamaño del filtro de bloom a utilizar en la poda sin conexión (denominado en MB y con un valor predeterminado de 512 MB). El filtro de bloom se mantiene en memoria para verificaciones eficientes durante la poda y también se escribe en disco para permitir que la poda se reanude sin volver a generar el filtro de bloom.
+Esta bandera establece el tamaño del filtro de bloom a utilizar en el recorte sin conexión (denominado en MB y con un valor predeterminado de 512 MB). El filtro de bloom se mantiene en memoria para comprobaciones eficientes durante el recorte y también se escribe en disco para permitir que el recorte se reanude sin volver a generar el filtro de bloom.
 
-El estado activo se agrega al filtro de bloom antes de iterar la base de datos para encontrar nodos de trie que se pueden eliminar de forma segura, cualquier nodo de trie que no esté en el filtro de bloom se considera seguro para su eliminación. El tamaño del filtro de bloom puede afectar su tasa de falsos positivos, lo que puede afectar los resultados de la poda sin conexión. Este es un parámetro avanzado que se ha ajustado a 512 MB y no debe cambiarse sin una consideración cuidadosa.
+El estado activo se agrega al filtro de bloom antes de iterar la base de datos para encontrar nodos de trie que se pueden eliminar de forma segura, cualquier nodo de trie que no esté en el filtro de bloom se considera seguro para su eliminación. El tamaño del filtro de bloom puede afectar su tasa de falsos positivos, lo que puede afectar los resultados del recorte sin conexión. Este es un parámetro avanzado que se ha ajustado a 512 MB y no debe cambiarse sin una consideración cuidadosa.
 
 #### `offline-pruning-data-directory` (string)
 
-Esta bandera debe establecerse cuando se habilita la poda sin conexión y establece el directorio que la poda sin conexión utilizará para escribir su filtro de bloom en disco. Este directorio no debe cambiarse entre ejecuciones hasta que se complete la poda sin conexión.
+Esta bandera debe establecerse cuando se habilita el recorte sin conexión y establece el directorio que el recorte sin conexión utilizará para escribir su filtro de bloom en disco. Este directorio no debe cambiarse entre ejecuciones hasta que el recorte sin conexión haya completado.
 
 #### `tx-lookup-limit` (uint64)
 
 Número de bloques recientes para los cuales mantener índices de búsqueda de transacciones en la base de datos. Si se establece en 0, se mantendrán índices de búsqueda de transacciones para todos los bloques. Por defecto, es `0`.
 
-### VM Networking
+#### `skip-tx-indexing` (bool)
+
+Si se establece en `true`, el nodo no indexará transacciones. El límite de búsqueda de transacciones aún se puede utilizar para controlar la eliminación de índices de transacciones antiguas. Por defecto, es `false`.
+
+### Red de VM
 
 #### `max-outbound-active-requests` (int)
 
-Especifica el número máximo de solicitudes salientes de VM a VM en vuelo a la vez. Por defecto, es `16`.
+Especifica el número máximo de solicitudes salientes de VM2VM en vuelo a la vez. Por defecto, es `16`.
 
 #### `max-outbound-active-cross-chain-requests` (int)
 
@@ -678,7 +697,7 @@ Especifica el número máximo de solicitudes salientes de cadena cruzada en vuel
 
 #### `airdrop` (string)
 
-Ruta a un archivo json que contiene una lista de direcciones para un airdrop de génesis. Cada dirección recibirá un airdrop de `AirdropAmount` en el génesis, y el hash del archivo de airdrop debe coincidir con `AirdropHash`. `AirdropAmount` y `AirdropHash` son parte de la configuración de génesis. Esta opción se aplica solo a `subnet-evm` (no aplicable a `coreth`).
+Ruta a un archivo json que contiene una lista de direcciones para un airdrop de génesis. Cada dirección recibirá un airdrop de `AirdropAmount` en el génesis, y el hash del archivo de airdrop debe coincidir con `AirdropHash`. `AirdropAmount` y `AirdropHash` son parte de la configuración de génesis. Esta opción se aplica sólo a `subnet-evm` (no aplicable a `coreth`).
 
 #### `skip-upgrade-check` (bool)
 
@@ -699,7 +718,7 @@ Esto le permite especificar una configuración que se pasará a la Cadena X. Los
 }
 ```
 
-Los valores predeterminados se anulan solo si se especifican explícitamente en la configuración.
+Los valores predeterminados se anulan sólo si se especifican explícitamente en la configuración.
 
 Los parámetros son los siguientes:
 
@@ -707,25 +726,36 @@ Los parámetros son los siguientes:
 
 ### `index-transactions` (boolean)
 
-Habilita la indexación de transacciones de AVM si se establece en `true`. El valor predeterminado es `false`. Cuando se establece en `true`, las transacciones de AVM se indexan según la `dirección` y el `assetID` involucrados. Estos datos están disponibles a través de la API `avm.getAddressTxs` [API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
+Habilita la indexación de transacciones AVM si se establece en `true`. El valor predeterminado es `false`.
+Cuando se establece en `true`, las transacciones AVM se indexan según la `dirección` y el `assetID` involucrados. Estos datos están disponibles a través de `avm.getAddressTxs`
+[API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
 
 :::note
-Si `index-transactions` se establece en true, siempre debe mantenerse en true durante toda la vida útil del nodo. Si se establece en `false` después de haber sido establecido en true, el nodo se negará a iniciar a menos que `index-allow-incomplete` también se establezca en true (ver más abajo).
+Si `index-transactions` se establece en true, siempre debe estar configurado en true
+durante la vida útil del nodo. Si se establece en `false` después de haber sido establecido en `true`, el
+nodo se negará a iniciar a menos que `index-allow-incomplete` también se establezca en `true`
+(ver más abajo).
 :::
 
 ### `index-allow-incomplete` (booleano)
 
 Permite índices incompletos. El valor predeterminado es `false`.
 
-Este valor de configuración se ignora si no hay datos indexados de la cadena X en la base de datos y `index-transactions` se establece en `false`.
+Este valor de configuración se ignora si no hay datos indexados de la cadena X en la base de datos y
+`index-transactions` se establece en `false`.
 
 ## Configuraciones de la Cadena de Subnet
 
-Como se mencionó anteriormente, si el ID de cadena de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, la configuración para esta cadena debería estar en
-`{directorio-de-configuración-de-cadena}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+Como se mencionó anteriormente, si la id de cadena de una Subnet es
+`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, la configuración para esta cadena
+debería estar en
+`{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
 ## Preguntas frecuentes
 
-- Cuando se utiliza `getBlockNumber`, devolverá bloques finalizados. Para permitir consultas de bloques/transacciones no finalizadas (aún no aceptadas), use `allow-unfainalized-queries` y establézcalo en true (por defecto, está establecido en `false`).
+- Cuando se usa `getBlockNumber` devolverá bloques finalizados. Para permitir consultas
+  de bloques/transacciones no finalizados (aún no aceptados), use `allow-unfainalized-queries`
+  y establezca en true (por defecto está establecido en `false`).
 
-- Cuando se desactiva la poda sin conexión `(pruning-enabled: false)` desde un estado previamente habilitado, esto no afectará a los bloques cuyo estado ya fue podado. Esto devolverá errores de nodo de trie faltante, ya que el nodo no puede buscar el estado de un bloque histórico si ese estado fue eliminado.
+- Cuando se desactiva la poda sin conexión `(pruning-enabled: false)` desde un estado previamente
+  habilitado, esto no afectará a los bloques cuyo estado ya fue podado. Esto devolverá errores de nodo de trie faltante, ya que el nodo no puede buscar el estado de un bloque histórico si ese estado fue eliminado.
