@@ -640,7 +640,7 @@ Para anular esto y cambiar al modo de recorte, además de `pruning-enabled: true
 
 #### `populate-missing-tries` (\*uint64)
 
-Si no es nulo, establece el punto de partida para repoblar los tries faltantes para regenerar el bosque de merkle de archivo.
+Si no es nulo, establece el punto de partida para repoblar los tries faltantes y regenerar el bosque de merkle de archivo.
 
 Para restaurar un bosque de merkle de archivo que ha sido corrompido (nodos de trie faltantes para una sección de la cadena de bloques), especifique el punto de partida del último bloque en disco, donde el trie completo estaba disponible en ese bloque para volver a procesar bloques desde esa altura en adelante y regenerar el bosque de merkle de archivo al iniciar. Esta bandera debe usarse una vez para regenerar el bosque de merkle de archivo y debe eliminarse de la configuración después de completarla. Esta bandera hará que el nodo retrase su inicio mientras vuelve a procesar bloques antiguos.
 
