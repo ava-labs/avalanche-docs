@@ -166,8 +166,7 @@ Los nombres anteriores que contienen `public-` y `private-` están obsoletos. Si
 la versión actual continúa aceptando valores obsoletos, es posible que no se admitan
 en futuras actualizaciones y se recomienda actualizar a los nuevos valores.
 
-La siguiente es la correspondencia de los valores obsoletos y su equivalente actualizado:
-
+La asignación de valores obsoletos y su equivalente actualizado es la siguiente:
 
 
 | Obsoleto                           | Usar en su lugar      |
