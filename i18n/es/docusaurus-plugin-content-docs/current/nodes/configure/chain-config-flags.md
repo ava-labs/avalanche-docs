@@ -586,7 +586,7 @@ Especifica una URI externa para un firmante de tipo clef. El valor predeterminad
 
 #### `keystore-insecure-unlock-allowed` (bool)
 
-Si es `true`, permite a los usuarios desbloquear cuentas en un entorno HTTP inseguro. Por defecto, es `false`.
+Si es `true`, permite desbloquear cuentas en un entorno HTTP inseguro. El valor predeterminado es `false`.
 
 ### Base de Datos
 
