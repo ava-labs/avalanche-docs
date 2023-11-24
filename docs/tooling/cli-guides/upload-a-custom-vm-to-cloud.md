@@ -129,7 +129,7 @@ Finally set the build script:
 
 CLI will generate a locally compiled binary, and then create the Subnet.
 
-```
+```text
 Cloning into ...
 
 Successfully created subnet configuration
@@ -406,6 +406,7 @@ To deploy our Custom VM, run:
 avalanche node sync <clusterName> <subnetName>
 ```
 
+```text
 Node(s) successfully started syncing with Subnet!
 ```
 
