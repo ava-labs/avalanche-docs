@@ -572,7 +572,7 @@ Define el nivel de registro para la cadena. Debe ser uno de `"trace"`, `"debug"`
 
 Si es `true`, cambia los registros al formato JSON. El valor predeterminado es `false`.
 
-### Configuración de la carpeta de claves
+### Configuración de Keystore
 
 #### `keystore-directory` (string)
 
