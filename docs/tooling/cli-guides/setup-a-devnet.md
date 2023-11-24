@@ -43,7 +43,7 @@ avalanche node create <clusterName>
 
 Choose Devnet for the network:
 
-```
+```bash
 ? Choose a network for the operation:
     Fuji
   ▸ Devnet
@@ -51,7 +51,7 @@ Choose Devnet for the network:
 
 Then you will be asked on the cloud provider to use. Use AWS:
 
-```
+```bash
 ? Which cloud service would you like to launch your Avalanche Node(s) in?:
   ▸ Amazon Web Services
     Google Cloud Platform
@@ -59,13 +59,13 @@ Then you will be asked on the cloud provider to use. Use AWS:
 
 Then, specify a network of 5 nodes (it can be from 2 onwards):
 
-```
+```bash
 ✗ How many nodes do you want to set up?: 5
 ```
 
 Then select the AWS region `us-east-1`:
 
-```
+```bash
  Which AWS region do you want to set up your node in?:
   ▸ us-east-1
     us-east-2
@@ -76,7 +76,7 @@ Then select the AWS region `us-east-1`:
 
 Give authorization to access AWS resources on behalf of the user:
 
-```
+```bash
 ? I authorize Avalanche-CLI to access my AWS account:
   ▸ Yes
     No
@@ -87,7 +87,7 @@ Now, the nodes will be created.
 After that, you will be asked which AvalancheGo version you want to install in the nodes. Select
 the one associated to `<subnetName>`.
 
-```
+```bash
 ...
 New EC2 instance(s) successfully created in AWS!
 ? What version of Avalanche Go would you like to install in the node?:
@@ -103,7 +103,7 @@ AvalancheGo and Avalanche-CLI installed and node(s) are bootstrapping!
 
 You can check the Devnet setup with the `node status` command:
 
-```
+```bash
 avalanche node status <clusterName>
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
@@ -132,7 +132,7 @@ STATUS FOR CLUSTER: <clusterName>
 
 At this point, you have a working Devnet, but no Subnet association:
 
-```
+```bash
 avalanche node status <clusterName> --subnet <subnetName>
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
@@ -149,7 +149,7 @@ deploying into Devnets is a subset of that operation, and so a quickest command 
 
 It automatically takes into account the API endpoint of the Devnet, and use a common funding option for Devnets, known as EWOQ keys.
 
-```
+```bash
 avalanche node devnet deploy <clusterName> <subnetName>
 Checking if node(s) are healthy ...
 Checking compatibility of node(s) avalanche go version with Subnet EVM RPC of subnet <subnetName> ...
@@ -177,7 +177,7 @@ Subnet successfully deployed into devnet!
 
 You can now check the updated status:
 
-```
+```bash
 avalanche node status <clusterName> --subnet <subnetName>
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
@@ -206,7 +206,7 @@ STATUS FOR CLUSTER: <clusterName>
 
 Next step is for the Devnet nodes to start keeping up to date with the Subnet state, while executing the Subnet Virtual Machine.
 
-```
+```bash
 avalanche node sync <clusterName> <subnetName>
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
@@ -223,7 +223,7 @@ Check node subnet syncing status with avalanche node status <clusterName> --subn
 
 Let's check the updated status:
 
-```
+```bash
 avalanche node status <clusterName> --subnet <subnetName>
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
@@ -256,7 +256,7 @@ Latest step is to add the nodes as Subnet validators, so as the Devnet can chang
 While you can follow [the instructions here](/tooling/cli-guides/validate-subnets#be-a-subnet-validator), for this
 tutorial we opt for providing the flag `--default-validator-params`, that set for the user most common validator params:
 
-```
+```bash
 avalanche node validate subne <clusterName> <subnetName> --default-validator-params
 Loading EWOQ key
 Checking if node(s) are bootstrapped to Primary Network ...
@@ -272,7 +272,7 @@ All nodes in cluster <clusterName> are successfully added as Subnet validators!
 
 And the final status is:
 
-```
+```bash
 avalanche node status <clusterName> --subnet <subnetName>
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
@@ -307,7 +307,7 @@ interactively provide the inputs.
 
 As reference we provide example of the flags setting needed for this tutorial:
 
-```
+```bash
 avalanche node devnet wiz <clusterName> <subnetName> --authorize-access\
   --aws --num-nodes 5 --region us-east-1 --default-validator-params
 

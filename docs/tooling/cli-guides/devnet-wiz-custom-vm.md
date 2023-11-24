@@ -68,7 +68,7 @@ The command assumes `<clusterName>` and `<subnetName>` have not been previously 
 
 The full command line is:
 
-```
+```bash
 avalanche node devnet wiz <clusterName> <subnetName> --custom-subnet \
   --subnet-genesis <genesisPath> --custom-vm-repo-url <repoUrl> \
   --custom-vm-branch <branch> --custom-vm-build-script <buildScript> \

@@ -27,7 +27,7 @@ a [Fuji Cluster using GCP](/tooling/cli-guides/create-a-validator-gcp), or a [De
 
 Note: An expected warning may be seen when executing the command on a given cluster for the first time:
 
-```
+```bash
 Warning: Permanently added 'IP' (ED25519) to the list of known hosts.
 ```
 
@@ -35,7 +35,7 @@ Warning: Permanently added 'IP' (ED25519) to the list of known hosts.
 
 Just execute `node ssh`:
 
-```
+```bash
 avalanche node ssh
 Cluster "<clusterName>" (Devnet)
   [i-0cf58a280bf3ef9a1] ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no ubuntu@44.219.113.190 -i /home/fm/.ssh/fm-us-east-1-avalanche-cli-us-east-1-kp.pem 
@@ -47,7 +47,7 @@ Cluster "<clusterName>" (Devnet)
 
 ## Get the AvalancheGo PID for All Nodes in `<clusterName>`
 
-```
+```bash
 avalanche node ssh <clusterName> pgrep avalanchego
 [i-0cf58a280bf3ef9a1] ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no ubuntu@44.219.113.190 -i /home/fm/.ssh/fm-us-east-1-avalanche-cli-us-east-1-kp.pem pgrep avalanchego
 14508
@@ -67,7 +67,7 @@ avalanche node ssh <clusterName> pgrep avalanchego
 
 ## Get the AvalancheGo Configuration for All Nodes in `<clusterName>`
 
-```
+```bash
 avalanche node ssh <clusterName> cat /home/ubuntu/.avalanchego/configs/node.json
 [i-0cf58a280bf3ef9a1] ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no ubuntu@44.219.113.190 -i /home/fm/.ssh/fm-us-east-1-avalanche-cli-us-east-1-kp.pem cat /home/ubuntu/.avalanchego/configs/node.json
 {
