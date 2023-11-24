@@ -142,7 +142,7 @@ Habilita la API de Snowman. Por defecto es `false`.
 
 Obsoleto a partir de `v0.12.5`. Use `admin-api-enabled` en su lugar.
 
-Habilita la API de Administración. Por defecto es `false`.
+Habilita la API de Admin. Por defecto es `false`.
 
 #### `coreth-admin-api-dir` (cadena)
 
