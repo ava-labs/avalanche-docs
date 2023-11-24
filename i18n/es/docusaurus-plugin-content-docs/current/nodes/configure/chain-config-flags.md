@@ -159,7 +159,7 @@ Use el campo `eth-apis` para especificar el conjunto exacto de servicios a habil
 su nodo. Si este campo no está configurado, entonces la lista predeterminada será:
 `["eth","eth-filter","net","web3","internal-eth","internal-blockchain","internal-transaction"]`.
 
-:::nota
+:::note
 
 Los nombres utilizados en esta bandera de configuración se han actualizado en Coreth `v0.8.14`.
 Los nombres anteriores que contienen `public-` y `private-` están obsoletos. Si bien
