@@ -1,6 +1,6 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This page demonstrates how to setup a devnet of cloud-based validators using the Avalanche-CLI.
+description: This page demonstrates how to setup a Devnet of cloud-based validators using the Avalanche-CLI.
 pagination_label: Setup a Devnet of Cloud-Based validators using Avalanche-CLI
 sidebar_label: Setup a Devnet
 sidebar_position: 8
@@ -8,7 +8,7 @@ sidebar_position: 8
 
 # Setup a Devnet Using Avalanche-CLI
 
-This page demonstrates how to setup a devnet of cloud-based validators using Avalanche-CLI, 
+This page demonstrates how to setup a Devnet of cloud-based validators using Avalanche-CLI, 
 and deploy a VM into it.
 
 Devnets (Developer Networks) are isolated avalanche networks deployed on the cloud. Similar to local networks
@@ -28,14 +28,14 @@ Before we begin, you will need to have:
 
 - Created an AWS account and have an updated AWS `credentials` file in home directory with [default] profile
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- [Created a subnet configuration `<SubnetName>`](/docs/build/subnet/deploy/fuji-testnet-subnet.md#create-an-evm-subnet) based on SubnetEVM.
+- [Created a Subnet configuration `<SubnetName>`](/docs/build/subnet/deploy/fuji-testnet-subnet.md#create-an-evm-subnet) based on SubnetEVM.
 
-Note: the tutorial is based in AWS, but devnets can also be created and operated in other supported
+Note: the tutorial is based in AWS, but Devnets can also be created and operated in other supported
 cloud providers, such as GCP.
 
 ## Creating the Devnet
 
-Start the devnet creation command. It will ask for all needed params:
+Start the Devnet creation command. It will ask for all needed params:
 
 ```shell
 avalanche node create <clusterName>
@@ -84,7 +84,7 @@ Give authorization to access AWS resources on behalf of the user:
 
 Now, the nodes will be created. 
 
-After that, you will be asked which avalanchego version you want to install in the nodes. Select
+After that, you will be asked which AvalancheGo version you want to install in the nodes. Select
 the one associated to `<subnetName>`.
 
 ```
@@ -101,7 +101,7 @@ New EC2 instance(s) successfully created in AWS!
 AvalancheGo and Avalanche-CLI installed and node(s) are bootstrapping!
 ```
 
-You can check the devnet setup with the `node status` command:
+You can check the Devnet setup with the `node status` command:
 
 ```
 avalanche node status <clusterName>
@@ -130,7 +130,7 @@ STATUS FOR CLUSTER: <clusterName>
 
 ## Deploying the Subnet into the Devnet
 
-At this point, you have a working Devnet, but no subnet association:
+At this point, you have a working Devnet, but no Subnet association:
 
 ```
 avalanche node status <clusterName> --subnet <subnetName>
@@ -141,11 +141,11 @@ Error: failed to find the blockchain ID for this subnet, has it been deployed/cr
 exit status 1
 ```
 
-So, next step is to deploy `<subnetName>` into `<clusterName>`. So as to create the subnet and blockchain transactions
-needed for posterior syncing and validation of the subnet.
+So, next step is to deploy `<subnetName>` into `<clusterName>`. So as to create the Subnet and blockchain transactions
+needed for posterior syncing and validation of the Subnet.
 
 While the `subnet deploy` command can be used [as described here](/docs/build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
-deplying into Devnets is a subset of that operation, and so a quickest command is provided.
+deploying into Devnets is a subset of that operation, and so a quickest command is provided.
 
 It automatically takes into account the API endpoint of the Devnet, and use a common funding option for Devnets, known as EWOQ keys.
 
@@ -202,9 +202,9 @@ STATUS FOR CLUSTER: <clusterName>
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
 ```
 
-## Syncying the Subnet
+## Syncing the Subnet
 
-Next step is for the Devnet nodes to start keeping up to date with the subnet state, while executing the subnet Virtual Machine.
+Next step is for the Devnet nodes to start keeping up to date with the Subnet state, while executing the Subnet Virtual Machine.
 
 ```
 avalanche node sync <clusterName> <subnetName>
@@ -251,7 +251,7 @@ STATUS FOR CLUSTER: <clusterName>
 
 ## Validating the Subnet
 
-Latest step is to add the nodes as subnet validators, so as the devnet can change the subnet state under user request.
+Latest step is to add the nodes as Subnet validators, so as the Devnet can change the Subnet state under user request.
 
 While you can follow [the instructions here](/tooling/cli-guides/validate-subnets#be-a-subnet-validator), for this
 tutorial we opt for providing the flag `--default-validator-params`, that set for the user most common validator params:
@@ -298,7 +298,7 @@ STATUS FOR CLUSTER: <clusterName>
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
 ```
 
-## One command for all needs
+## One Command for All Needs
 
 CLI provides the `devnet wiz` command that takes care of all the mentioned steps.
 

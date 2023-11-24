@@ -31,7 +31,7 @@ Note: An expected warning may be seen when executing the command on a given clus
 Warning: Permanently added 'IP' (ED25519) to the list of known hosts.
 ```
 
-## Get ssh instructions for all clusters managed by the local host
+## Get SSH Connection Instructions for All Clusters
 
 Just execute `node ssh`:
 
@@ -45,7 +45,7 @@ Cluster "<clusterName>" (Devnet)
   [i-0759b102acfd5b585] ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no ubuntu@107.21.158.224 -i /home/fm/.ssh/fm-us-east-1-avalanche-cli-us-east-1-kp.pem 
 ```
 
-## Get the avalanchego PID for all nodes in `<clusterName>`
+## Get the AvalancheGo PID for All Nodes in `<clusterName>`
 
 ```
 avalanche node ssh <clusterName> pgrep avalanchego
@@ -65,7 +65,7 @@ avalanche node ssh <clusterName> pgrep avalanchego
 14555
 ```
 
-## Get the avalanchego configuration for all nodes in `<clusterName>`
+## Get the AvalancheGo Configuration for All Nodes in `<clusterName>`
 
 ```
 avalanche node ssh <clusterName> cat /home/ubuntu/.avalanchego/configs/node.json

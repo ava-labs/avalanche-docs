@@ -765,7 +765,7 @@ You can check the updated status by calling avalanche node status `<clusterName>
 
 ### Node Devnet Deploy
 
-The `node devnet deploy` command deploys a subnet into a devnet cluster, creating subnet and blockchain txs for it.
+The `node devnet deploy` command deploys a Subnet into a devnet cluster, creating Subnet and blockchain TXs for it.
 It saves the deploy info both locally and remotely.
 
 **Usage:**
@@ -782,7 +782,7 @@ It saves the deploy info both locally and remotely.
 
 ### Node Devnet Wiz
 
-The `node devnet wiz` command creates a devnet and deploys, sync and validate a subnet into it. It creates the subnet if so needed.
+The `node devnet wiz` command creates a devnet and deploys, sync and validate a Subnet into it. It creates the Subnet if so needed.
 
 **Usage:**
 
@@ -850,7 +850,7 @@ The `node list` command lists all clusters together with their nodes.
 :::
 
 The `node ssh` command execute a given command using ssh on all nodes in the cluster.
-If no command is given, just prints the ssh cmdLine to be used to connect to each node.
+If no command is given, just prints the ssh command line to be used to connect to each node.
 
 
 **Usage:**

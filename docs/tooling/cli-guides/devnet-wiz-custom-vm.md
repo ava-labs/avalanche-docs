@@ -1,14 +1,14 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This page demonstrates how to use the wiz command to setup a devnet and deploy a custom VM into it using the Avalanche-CLI.
+description: This page demonstrates how to use the wiz command to setup a Devnet and deploy a custom VM into it using the Avalanche-CLI.
 pagination_label: Deploy a Custom VM into a Devnet using one command and without user interaction
 sidebar_label: One command to create a Devnet and deploy a Custom VM into it
 sidebar_position: 9
 ---
 
-# Deploy a Custom VM into a Devnet using the wiz command without user interaction
+# Deploy a Custom VM into a Devnet Using One Command
 
-This page demonstrates how to setup a new devnet of cloud-based validators using Avalanche-CLI, 
+This page demonstrates how to setup a new Devnet of cloud-based validators using Avalanche-CLI, 
 and deploy a new custom VM into it.
 
 Devnets (Developer Networks) are isolated avalanche networks deployed on the cloud. Similar to local networks
@@ -30,15 +30,13 @@ Before we begin, you will need to have:
 - Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - Created a Custom VM, as described [here](/build/vm/intro.md).
 
-Note: the tutorial is based in AWS, but devnets can also be created and operated in other supported
+Note: the tutorial is based in AWS, but Devnets can also be created and operated in other supported
 cloud providers, such as GCP.
 
-## Base example
+## Custom VM
 
 The tutorial will create exactly the same Custom VM as [here](/tooling/cli-guides/upload-a-custom-vm-to-cloud), and the
 same Devnet as [here](/tooling/cli-guides/setup-a-devnet).
-
-## Custom VM
 
 Based on the Custom VM tutorial, we will be deploying the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
 example built with the HyperSDK.
@@ -60,11 +58,11 @@ Following the Custom VM tutorial, create the needed input files, and set their p
 
 Now we are ready to execute the Devnet Wizard. It it going to:
 
-- create the subnet configuration, generating also the local vm binary
-- create the devnet
-- deploy the subnet into the devnet
-- make the devnet nodes to start tracking the subnet
-- make the devnet nodes to start validating the subnet
+- create the Subnet configuration, generating also the local VM binary
+- create the Devnet
+- deploy the Subnet into the Devnet
+- make the Devnet nodes to start tracking the Subnet
+- make the Devnet nodes to start validating the Subnet
 
 The command assumes `<clusterName>` and `<subnetName>` have not been previously created.
 
