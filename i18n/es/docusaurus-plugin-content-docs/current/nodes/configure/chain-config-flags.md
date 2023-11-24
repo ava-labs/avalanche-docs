@@ -397,7 +397,7 @@ Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor pre
 #### `internal-account`
 
 El nombre de API `internal-public-account` está obsoleto a partir de la versión 1.7.15, y las API
-que antes se encontraban bajo este nombre se han migrado a `internal-account`.
+que antes estaban bajo este nombre se han migrado a `internal-account`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `eth_*`. El valor predeterminado es `true`.
 
