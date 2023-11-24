@@ -363,8 +363,8 @@ Agrega las siguientes llamadas RPC al espacio de nombres `txpool_*`. El valor pr
 #### `internal-debug`
 
 Los nombres de API `internal-private-debug` e `internal-public-debug` están
-obsoletos a partir de la versión 1.7.15, y las API que antes se encontraban
-bajo estos nombres se han migrado a `internal-debug`.
+obsoletos a partir de la versión 1.7.15, y las API que antes estaban bajo estos nombres se han
+migrado a `internal-debug`.
 
 Agrega las siguientes llamadas RPC al espacio de nombres `debug_*`. El valor predeterminado es `false`.
 
