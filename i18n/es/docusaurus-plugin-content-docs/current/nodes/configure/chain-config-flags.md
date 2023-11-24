@@ -148,7 +148,7 @@ Habilita la API de Admin. Por defecto es `false`.
 
 Obsoleto a partir de `v0.12.5`. Use `admin-api-dir` en su lugar.
 
-Especifica el directorio que la API de Administración utiliza para almacenar perfiles de CPU/Memoria/Bloqueo.
+Especifica el directorio que la API de Admin utiliza para almacenar perfiles de CPU/Memoria/Bloqueo.
 Por defecto es `""`.
 
 ### Habilitando APIs de EVM
