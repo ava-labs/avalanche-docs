@@ -197,7 +197,7 @@ Si estás en una red residencial (IP dinámica), no olvides configurar el reenv�
 
 Ahora puedes [interactuar con tu nodo](/reference/standards/guides/issuing-api-calls.md), [apostar tus tokens](/nodes/validate/what-is-staking.md), o mejorar tu instalación configurando
 [monitoreo del nodo](/nodes/maintain/setting-up-node-monitoring.md) para obtener una mejor
-visión de lo que está haciendo tu nodo. Además, es posible que desees usar nuestra [Colección de Postman](/tooling/avalanchego-postman-collection.md) para emitir comandos más
+visión de lo que está haciendo tu nodo. Además, es posible que desees usar nuestra [Colección de Postman](/tooling/avalanchego-postman-collection/setup.md) para emitir comandos más
 fácilmente a tu nodo.
 
 Finalmente, si aún no lo has hecho, es una buena idea [hacer una copia de seguridad](/nodes/maintain/node-backup-and-restore.md)

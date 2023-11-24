@@ -2,9 +2,10 @@
 tags: [Tooling, AvalancheGo APIs]
 description: The AvalancheGo Postman collection includes all the public API calls that are available on AvalancheGo instance, allowing you to quickly issue commands to your node and see the response, without having to copy and paste long and complicated `curl` commands.
 pagination_label: AvalancheGo Install Script
+sidebar_position: 1
 ---
 
-# AvalancheGo Postman Collection
+# Setting up Postman
 
 We have made a Postman collection for Avalanche, that includes all the public
 API calls that are available on [AvalancheGo instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables,
@@ -98,36 +99,19 @@ port from the outside by checking the appropriate [command line option](/nodes/c
 
 Now we sorted everything out, and we're ready to query the node.
 
-## Making API Calls
-
-Open one of the API call groups, for example `Health`. Click `health` call:
-
-![API call](/img/postman/postman-7-making-calls.png)
-
-You will see that format of the call uses the `baseURL` environment
-variable. Click `Send`. Request will be sent, and soon you will see
-the response, in the `Body` tab in the `Response`:
-
-![Response](/img/postman/postman-8-response.png)
-
-To see the actual call and the variables that are sent to the node, switch to
-`Body` tab in the API call tabs. There you can quickly change the variables to
-see the response to different queries.
-
 ## Conclusion
 
-If you completed the tutorial, you are now able to quickly issue API calls to
-your node without messing with the curl commands in the terminal. This allows
+If you completed the tutorial, you are now able to quickly
+[issue API calls](/tooling/avalanchego-postman-collection/making-api-calls.md) 
+to your node without messing with the curl commands in the terminal. This allows
 you to quickly see the state of your node, track changes or double-check the
 health or liveness of your node.
 
 ## Contributing
 
 We're hoping to continuously keep this collection up-to-date with the [Avalanche
-APIs](/reference), and also add [data
-visualizations](https://learning.postman.com/docs/sending-requests/visualizer/#visualizing-response-data).
-If you're able to help improve the Avalanche Postman Collection in any way,
-first create a feature branch by branching off of `master`, next make the
+APIs](/reference). If you're able to help improve the Avalanche Postman Collection
+in any way, first create a feature branch by branching off of `master`, next make the
 improvements on your feature branch and lastly create a [pull
 request](https://github.com/ava-labs/avalanche-docs/pulls) to merge your work
 back in to `master`.
