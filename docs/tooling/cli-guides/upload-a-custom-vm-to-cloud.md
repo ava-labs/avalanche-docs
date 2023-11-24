@@ -127,7 +127,7 @@ Finally set the build script:
 ✗ Build script: examples/tokenvm/scripts/build.sh
 ```
 
-CLI will generate a locally compiled binary, and then create the subnet.
+CLI will generate a locally compiled binary, and then create the Subnet.
 
 ```
 Cloning into ...
