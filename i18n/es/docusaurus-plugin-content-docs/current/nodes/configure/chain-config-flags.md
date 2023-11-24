@@ -28,7 +28,7 @@ Esto también se aplica a las Subnets, por ejemplo, si el ID de cadena de una Su
 debería estar en
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
 
-:::consejo
+:::tip
 
 Por defecto, ninguno de estos directorios y/o archivos existe. Deberá
 crearlos manualmente si es necesario.
