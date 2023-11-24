@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Referencia de todas las opciones de configuración y banderas disponibles para la cadena.
+tags: [Nodos]
+description: Referencia de todas las opciones de configuración y banderas disponibles para la cadena.
 sidebar_label: Configuraciones de la Cadena
 pagination_label: Configuraciones de la Cadena
 sidebar_position: 1
