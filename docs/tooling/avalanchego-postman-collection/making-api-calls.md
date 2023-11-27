@@ -16,7 +16,7 @@ You should also make sure the URL is the correct one for the call.
 This URL consists of the base URL and the endpoint: 
 
 * The base URL is set by an environment variable called `baseURL`, and it is by
-default Avalanche's [public API](tooling/rpc-providers.md#mainnet-rpc---public-api-server).
+default Avalanche's [public API](../../tooling/rpc-providers.md#mainnet-rpc---public-api-server).
 If you need to make a local API call, simply change the URL to localhost. 
 This can be done by changing the value
 of the `baseURL` variable or changing the URL directly on the call tab.
