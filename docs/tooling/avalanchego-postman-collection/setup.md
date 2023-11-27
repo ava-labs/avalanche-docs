@@ -8,8 +8,8 @@ sidebar_position: 1
 # Setting up Postman
 
 We have made a Postman collection for Avalanche, that includes all the public
-API calls that are available on [AvalancheGo instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables,
-allowing developers to quickly issue commands to your node and see the response, without having to
+API calls that are available on an [AvalancheGo instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables,
+allowing developers to quickly issue commands to a node and see the response, without having to
 copy and paste long and complicated `curl` commands.
 
 [Link to GitHub](https://github.com/ava-labs/avalanche-postman-collection/)
@@ -22,12 +22,12 @@ an application for Linux, MacOS and Windows. Postman allows you to quickly issue
 API calls and see the responses in a nicely formatted, searchable form.
 
 Along with the API collection, there is also the example Avalanche environment
-for Postman, that defines common variables such as IP address of the node, your
+for Postman, that defines common variables such as IP address of the node, 
 Avalanche addresses and similar common elements of the queries, so you don't
 have to enter them multiple times.
 
-Combined, they will allow you to easily keep tabs on your node, check on its
-state and do quick queries to find out details about its operation.
+Combined, they will allow you to easily keep tabs on an Avalanche node, check 
+on its state and do quick queries to find out details about its operation.
 
 ## Setup
 
@@ -41,8 +41,8 @@ shared between web app and the app installed on your computer.
 
 ![Download Postman](/img/postman/postman-1-download.png)
 
-After you installed the application, run it. It will prompt you to create an
-account or log in. Do so. Again, it is not necessary, but recommended.
+When you run Postman for the first time, it will prompt you to create an
+account or log in. Again, it is not necessary, but recommended.
 
 ### Collection Import
 
@@ -56,7 +56,7 @@ select `Import` and switch to `Link` tab.
 
 ![Import collection](/img/postman/postman-3-import.png)
 
-There, in the URL input field paste the link to the collection:
+There, in the URL input field paste the link below to the collection:
 
 ```text
 https://raw.githubusercontent.com/ava-labs/avalanche-postman-collection/master/Avalanche.postman_collection.json
@@ -71,7 +71,7 @@ collection in your Workspace.
 ### Environment Import
 
 Next, we have to import the environment variables. Again, on the top-left corner of the Workspaces tab
-select `Import` and switch to `Link` tab. This time, paste the link
+select `Import` and switch to `Link` tab. This time, paste the link below
 to the environment JSON:
 
 ```text
@@ -101,7 +101,7 @@ Now we sorted everything out, and we're ready to query the node.
 
 ## Conclusion
 
-If you completed the tutorial, you are now able to quickly
+If you have completed the tutorial, you are now able to quickly
 [issue API calls](/tooling/avalanchego-postman-collection/making-api-calls.md) 
 to your node without messing with the curl commands in the terminal. This allows
 you to quickly see the state of your node, track changes or double-check the
