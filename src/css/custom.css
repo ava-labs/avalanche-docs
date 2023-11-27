@@ -24,17 +24,8 @@
 
   --ifm-table-stripe-background: #EFEFEF;
   --ifm-table-border-width: 0px;
-  --ifm-table-cell-padding: 12px 20px;
+  --ifm-table-cell-padding: 20px;
 }
-table tr:nth-child(2n+1) {
-  background-color: var(--ifm-table-stripe-background); /* Example background color for odd rows */
-}
-table tr:nth-child(2n) {
-  background-color: white;
-}
-/*table thead{*/
-/*  display: none;*/
-/*}*/
 
 html[data-theme='dark'] {
   --ifm-menu-color: #fff;
@@ -44,7 +35,27 @@ html[data-theme='dark'] {
 [data-theme='light'] li hr {
   background-color: #80808040 !important;
 }
-
+.pagination-nav__link--next .pagination-nav__label::after ,.pagination-nav__link--prev .pagination-nav__label::before {
+    content: '';
+    width: 24px;
+    height: 21px;
+}
+.pagination-nav__link--next .pagination-nav__label::after{
+    background-image: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.70492 6L8.29492 7.41L12.8749 12L8.29492 16.59L9.70492 18L15.7049 12L9.70492 6Z" fill="black"/></svg>');
+}
+.pagination-nav__link--prev .pagination-nav__label::before{
+    background-image: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.2951 18L15.7051 16.59L11.1251 12L15.7051 7.41L14.2951 6L8.29508 12L14.2951 18Z" fill="black"/></svg>')
+}
+.pagination-nav__link--next .pagination-nav__label{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pagination-nav__link--prev .pagination-nav__label{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
@@ -170,7 +181,7 @@ main {
   /*}*/
 }
 table thead , table thead tr:nth-child(2n+1){
-  background-color: white;
+  background-color: transparent;
   border-bottom: 0;
 }
 .card {
@@ -284,7 +295,11 @@ li hr {
 [data-theme='dark'] li hr {
   background-color: #333;
 }
-
+.theme-edit-this-page {
+    display: flex;
+    gap:16px;
+    align-items: center;
+}
 span.menu__item {
   padding-left: 7px;
 }
@@ -432,7 +447,7 @@ and (max-width: 996px) {
     text-align: center;
   }
   .footer-row {
-    margin-top: 40px;
+    margin-top: 24px;
   }
   .footer-list {
     margin: 0
@@ -447,7 +462,7 @@ and (max-width: 996px) {
   font-weight: 700;
   line-height: 14.5px;
   padding-block: 16px;
-  
+
 }
 
 .sidebar_subtitle:before {

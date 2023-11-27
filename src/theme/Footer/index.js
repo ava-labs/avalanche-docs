@@ -20,6 +20,7 @@ import {
   BsReddit,
 } from "react-icons/bs";
 import { FaGraduationCap } from "react-icons/fa";
+import {HelpfulSites} from "../../components/HelpfulSites";
 
 function Footer() {
   const { footer } = useThemeConfig();
@@ -34,134 +35,138 @@ function Footer() {
   }
 
   return (
-    <footer className="footer">
-      <div className="container">
-        <div className="row footer-container">
-          <div className="col col--8">
-            <div className="row" style={{ marginTop: "10px" }}>
-              <div className="col" style={{}}>
-                <h4 className="footer-heading">
-                  {translate({ message: "Developers" })}
-                </h4>
-                <a href={translate({ message: "https://forum.avax.network/" })}>
-                  <div className="footer-list">
-                    {translate({ message: "Forum" })}
+      <>
+        <HelpfulSites/>
+        <footer className="footer">
+          <div className="container">
+            <div className="row footer-container">
+              <div className="col col--8">
+                <div className="row" style={{ marginTop: "10px" }}>
+                  <div className="col" style={{}}>
+                    <h4 className="footer-heading">
+                      {translate({ message: "Developers" })}
+                    </h4>
+                    <a href={translate({ message: "https://forum.avax.network/" })}>
+                      <div className="footer-list">
+                        {translate({ message: "Forum" })}
+                      </div>
+                    </a>
+                    <a
+                        href={translate({
+                          message: "https://stats.avax.network/dashboard/overview/",
+                        })}
+                    >
+                      <div className="footer-list">
+                        {translate({ message: "Network Stats" })}
+                      </div>
+                    </a>
+                    <a
+                        href={translate({
+                          message:
+                              "https://www.youtube.com/playlist?list=PLRHl-ulWK4-GTJhSLF9omG2x_qn7E1O7n",
+                        })}
+                    >
+                      <div className="footer-list">
+                        {translate({ message: "Video Tutorials" })}
+                      </div>
+                    </a>
+                    <a
+                        href={translate({
+                          message:
+                              "https://hackenproof.com/avalanche/avalanche-protocol",
+                        })}
+                    >
+                      <div className="footer-list">
+                        {translate({ message: "Bug Bounty" })}
+                      </div>
+                    </a>
                   </div>
-                </a>
-                <a
-                  href={translate({
-                    message: "https://stats.avax.network/dashboard/overview/",
-                  })}
-                >
-                  <div className="footer-list">
-                    {translate({ message: "Network Stats" })}
+                  <div className="col">
+                    <h4 className="footer-heading">
+                      {translate({ message: "Community" })}
+                    </h4>
+                    <a href="https://medium.com/@avaxdevelopers">
+                      <div className="footer-list">Medium</div>
+                    </a>
+                    <a href="https://www.avax.network/blog">
+                      <div className="footer-list">Blog</div>
+                    </a>
+                    <a href="https://shop.avax.network/">
+                      <div className="footer-list">Merch</div>
+                    </a>
+                    <a href="/deprecated/tutorials-contest">
+                      <div className="footer-list">Tutorials Contest</div>
+                    </a>
                   </div>
-                </a>
-                <a
-                  href={translate({
-                    message:
-                      "https://www.youtube.com/playlist?list=PLRHl-ulWK4-GTJhSLF9omG2x_qn7E1O7n",
-                  })}
-                >
-                  <div className="footer-list">
-                    {translate({ message: "Video Tutorials" })}
+                  <div className="col">
+                    <h4 className="footer-heading">
+                      {translate({ message: "More" })}
+                    </h4>
+                    <a href="https://www.avalabs.org/whitepapers">
+                      <div className="footer-list">Whitepapers</div>
+                    </a>
+                    <a href="https://avacloud.io/">
+                      <div className="footer-list">Enterprise Solutions</div>
+                    </a>
+                    <a href="https://github.com/ava-labs/audits">
+                      <div className="footer-list">Audits</div>
+                    </a>
+                    <a href="https://www.avax.network/legal">
+                      <div className="footer-list">Legal</div>
+                    </a>
                   </div>
-                </a>
-                <a
-                  href={translate({
-                    message:
-                      "https://hackenproof.com/avalanche/avalanche-protocol",
-                  })}
-                >
-                  <div className="footer-list">
-                    {translate({ message: "Bug Bounty" })}
-                  </div>
-                </a>
+                </div>
               </div>
-              <div class="col">
-                <h4 className="footer-heading">
-                  {translate({ message: "Community" })}
-                </h4>
-                <a href="https://medium.com/@avaxdevelopers">
-                  <div className="footer-list">Medium</div>
-                </a>
-                <a href="https://www.avax.network/blog">
-                  <div className="footer-list">Blog</div>
-                </a>
-                <a href="https://shop.avax.network/">
-                  <div className="footer-list">Merch</div>
-                </a>
-                <a href="/deprecated/tutorials-contest">
-                  <div className="footer-list">Tutorials Contest</div>
-                </a>
-              </div>
-              <div class="col">
-                <h4 className="footer-heading">
-                  {translate({ message: "More" })}
-                </h4>
-                <a href="https://www.avalabs.org/whitepapers">
-                  <div className="footer-list">Whitepapers</div>
-                </a>
-                <a href="https://avacloud.io/">
-                  <div className="footer-list">Enterprise Solutions</div>
-                </a>
-                <a href="https://github.com/ava-labs/audits">
-                  <div className="footer-list">Audits</div>
-                </a>
-                <a href="https://www.avax.network/legal">
-                  <div className="footer-list">Legal</div>
-                </a>
-              </div>
-            </div>
-          </div>
 
-          <div class="col col--4">
-            <div className="footer-row" style={{marginBottom: '16px'}}>
-              <a href="https://t.me/+KDajA4iToKY2ZjBk">
-                <BsTelegram className="footer-social"></BsTelegram>
-              </a>
-              <a href="https://chat.avax.network/">
-                <BsDiscord className="footer-social"></BsDiscord>
-              </a>
-              <a href="https://github.com/ava-labs">
-                <BsGithub className="footer-social"></BsGithub>
-              </a>
-              <a href="https://twitter.com/AvaxDevelopers">
-                <BsTwitter className="footer-social"></BsTwitter>
-              </a>
-            </div>
-            <div className="footer-row">
-              <a href="https://www.reddit.com/r/Avax/">
-                <BsReddit className="footer-social"></BsReddit>
-              </a>
-              <a href="https://www.youtube.com/@Avalancheavax">
-                <BsYoutube className="footer-social"></BsYoutube>
-              </a>
-              <a href="https://www.linkedin.com/company/avalancheavax">
-                <BsLinkedin className="footer-social"></BsLinkedin>
-              </a>
-              <a href="https://www.facebook.com/avalancheavax">
-                <BsFacebook className="footer-social"></BsFacebook>
-              </a>
-            </div>
-            <div className="footer__bottom text--center">
-              <div
-                className="footer__copyright"
-                style={{ fontSize: "small" }}
-              >
-                Copyright © {new Date().getFullYear()}{" "}
-                <a
-                  href="https://www.avax.network/terms-of-use"
-                  className="hover"
-                >
-                  Ava Labs, Inc.
-                </a>
+              <div className="col col--4">
+                <div className="footer-row" style={{marginBottom: '16px'}}>
+                  <a href="https://t.me/+KDajA4iToKY2ZjBk">
+                    <BsTelegram className="footer-social"></BsTelegram>
+                  </a>
+                  <a href="https://chat.avax.network/">
+                    <BsDiscord className="footer-social"></BsDiscord>
+                  </a>
+                  <a href="https://github.com/ava-labs">
+                    <BsGithub className="footer-social"></BsGithub>
+                  </a>
+                  <a href="https://twitter.com/AvaxDevelopers">
+                    <BsTwitter className="footer-social"></BsTwitter>
+                  </a>
+                </div>
+                <div className="footer-row">
+                  <a href="https://www.reddit.com/r/Avax/">
+                    <BsReddit className="footer-social"></BsReddit>
+                  </a>
+                  <a href="https://www.youtube.com/@Avalancheavax">
+                    <BsYoutube className="footer-social"></BsYoutube>
+                  </a>
+                  <a href="https://www.linkedin.com/company/avalancheavax">
+                    <BsLinkedin className="footer-social"></BsLinkedin>
+                  </a>
+                  <a href="https://www.facebook.com/avalancheavax">
+                    <BsFacebook className="footer-social"></BsFacebook>
+                  </a>
+                </div>
+                <div className="footer__bottom text--center">
+                  <div
+                      className="footer__copyright"
+                      style={{ fontSize: "small" }}
+                  >
+                    Copyright © {new Date().getFullYear()}{" "}
+                    <a
+                        href="https://www.avax.network/terms-of-use"
+                        className="hover"
+                    >
+                      Ava Labs, Inc.
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </footer>
+        </footer>
+      </>
+
   );
 }
 

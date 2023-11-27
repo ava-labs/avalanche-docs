@@ -1,0 +1,28 @@
+.divider {
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(128, 128, 128, 0.25);
+    margin-top: 48px;
+    margin-bottom: 68px;
+}
+.divider:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    height:8px;
+    width: 8px;
+    background-color: #e84142;
+    border-radius: 50%;
+    top: -4px;
+}
+.divider:after{
+    content: '';
+    position: absolute;
+    right: 0;
+    height:8px;
+    width: 8px;
+    background-color: #e84142;
+    border-radius: 50%;
+    top: -4px;
+}

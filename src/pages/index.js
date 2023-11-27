@@ -280,23 +280,6 @@ function Home() {
                     </div>
                 </section>
             </section>
-            <section className={styles.usefulLinks}>
-                <div className="container">
-                    <div
-                        className={clsx("row", styles.usefulContainerGap)}
-                    >
-                        <h3 className={styles.usefulLinksTitle}>
-                            {translate({message: "Helpful Sites"})}
-                        </h3>
-                        <div className={styles.linksContainer}>
-                            <HelpfulSiteItem link='https://subnets.avax.network/' message='Explorer' Svg={FaCompass} />
-                            <HelpfulSiteItem link='https://academy.avax.com/?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=footer' message='Academy' Svg={FaGraduationCap} />
-                            <HelpfulSiteItem link='https://support.avax.network/en/' message='Support' Svg={Support} />
-                            <HelpfulSiteItem link='https://support.avax.network/en/' message='Wallet' Svg={Owl} />
-                        </div>
-                    </div>
-                </div>
-            </section>
         </Layout>
     );
 }
