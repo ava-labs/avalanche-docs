@@ -9,16 +9,15 @@ sidebar_position: 4
 
 ## API calls with Data Visualization
 
-Data visualization is available for a number of API calls. It takes the request
-output and transforms it into a table, with all the information converted in a
-user friendly manner.
+Data visualization is available for a number of API calls whose responses 
+are transformed and presented in tabular format for easy reference.
 
 Please check out
-[how to install Postman](../avalanchego-postman-collection/setup#setup) and
-[how to make API calls with Postman](../avalanchego-postman-collection/making-api-calls.md)
+[Setting up Postman](../avalanchego-postman-collection/setup#setup) and
+[Making API Calls](../avalanchego-postman-collection/making-api-calls.md)
 beforehand, as this guide assumes that the user has already gone through these steps.
 
-API calls for which data visualization it is available:
+Data visualizations are available for following API calls: 
 
 ### C-Chain
 
@@ -50,7 +49,7 @@ API calls for which data visualization it is available:
 
 ## Data Visualization Features
 
-* The request output is displayed in a table, each data category having a
+* The response output is displayed in tabular format, each data category having a
 different color.
 
 ![Data Visualization Feature](/img/postman/postman-24-visualization-feature.png)
@@ -67,8 +66,7 @@ different color.
 
 ![Data Visualization Feature](/img/postman/postman-27-visualization-feature.png)
 
-* The name of the transaction type added besides the transaction.
-type ID.
+* The name of the transaction type added besides the transaction type ID.
 
 ![Data Visualization Feature](/img/postman/postman-28-visualization-feature.png)
 
@@ -80,7 +78,7 @@ of gas was used our of the `gasLimit`.
 * Convert the output for atomic transactions from hexadecimal to user readable.
 
 :::info
-Please note that this only works for C-Chain Mainnet, not Fuji.
+Please note that this only works for C-Chain Mainnet, not Fuji. 
 :::
 
 
@@ -96,8 +94,7 @@ choose an API to make the call.
 
 3. Click on the **Visualize** tab.
 
-4. Now all data from the output
-can be seen displayed in a table.
+4. Now all data from the output is displayed in tabular format.
 
 :::info 
 Learn how to make an API call with Postman with the help of this guide.
