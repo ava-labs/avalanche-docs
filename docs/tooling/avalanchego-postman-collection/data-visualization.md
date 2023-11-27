@@ -10,14 +10,14 @@ sidebar_position: 4
 ## API calls with Data Visualization
 
 Data visualization is available for a number of API calls whose responses 
-are transformed and presented in tabular format for easy references.
+are transformed and presented in tabular format for easy reference.
 
 Please check out
 [Setting up Postman](../avalanchego-postman-collection/setup#setup) and
 [Making API Calls](../avalanchego-postman-collection/making-api-calls.md)
 beforehand, as this guide assumes that the user has already gone through these steps.
 
-Data visualization are available for following API calls: 
+Data visualizations are available for following API calls: 
 
 ### C-Chain
 

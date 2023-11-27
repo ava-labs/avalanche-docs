@@ -41,7 +41,7 @@ shared between web app and the app installed on your computer.
 
 ![Download Postman](/img/postman/postman-1-download.png)
 
-When you run the Postman first time,  it will prompt you to create an
+When you run Postman for the first time, it will prompt you to create an
 account or log in. Again, it is not necessary, but recommended.
 
 ### Collection Import
