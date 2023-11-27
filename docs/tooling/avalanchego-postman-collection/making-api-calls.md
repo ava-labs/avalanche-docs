@@ -10,14 +10,13 @@ sidebar_position: 2
 ## How to Make an API Call
 
 After [installing Postman](../avalanchego-postman-collection/setup#setup)
-and importing the [Avalanche collection](../avalanchego-postman-collection/setup#collection-import),
-choose an API to make the call. 
+and importing the [Avalanche collection](../avalanchego-postman-collection/setup#collection-import), you can choose an API to make the call. 
 
-The next step is to make sure the URL is the correct one for the call.
+You should also make sure the URL is the correct one for the call.
 This URL consists of the base URL and the endpoint: 
 
 * The base URL is set by an environment variable called `baseURL`, and it is by
-default our [public API](../../tooling/rpc-providers.md).
+default Avalanche's [public API](tooling/rpc-providers.md#mainnet-rpc---public-api-server).
 If you need to make a local API call, simply change the URL to localhost. 
 This can be done by changing the value
 of the `baseURL` variable or changing the URL directly on the call tab.
@@ -27,13 +26,12 @@ Check out the [RPC providers](../rpc-providers.md) to see all public URLs.
 [our APIs](../../reference/avalanchego/c-chain/api.md) to find the proper endpoint.
 
 
-Add the needed parameters for the call. For example, if a user wants to fetch data
+The last step is to add the needed parameters for the call. 
+For example, if a user wants to fetch data
 about a certain transaction, the transaction hash is needed. For fetching data about a
 block, depending on the call used, the block hash or number will be required.
 
-Click the **Send** button.
-
-The output will be displayed in the **Body** tab.
+After clicking the **Send** button, if the call is successfully, the output will be displayed in the **Body** tab.
 
 :::info 
 Data visualization is available for a number of methods. 
