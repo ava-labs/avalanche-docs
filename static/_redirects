@@ -476,7 +476,7 @@
 /subnets/reference-cli-commands /tooling/avalanche-cli 301
 /apis/glacier /tooling/glacier 301
 /apis/metrics /tooling/metrics 301
-/apis/avalanchego/postman-avalanche-collection /tooling/avalanchego-postman-collection  301
+/apis/avalanchego/postman-avalanche-collection /tooling/avalanchego-postman-collection/setup  301
 /apis/avalanchego/public-api-server /tooling/rpc-providers 301
 /apis/avalanchejs/api /tooling/avalanchejs-api 301
 /apis/avalanchejs/create-an-asset-on-the-x-chain /tooling/avalanchejs-guides/create-an-asset-on-the-x-chain 301
