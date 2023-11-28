@@ -33,7 +33,20 @@ Before we begin, you will need to have:
 Note: the tutorial is based in AWS, but Devnets can also be created and operated in other supported
 cloud providers, such as GCP.
 
-## Creating the Devnet
+## Choose a Deployment Method
+
+You can either use a sequence of prompt-based commands to get CLI to ask you all the required information for the setup, or
+execute one command than encompasses all steps, with appropriate command line flags for all the needed info.
+
+For the second case we provide two important use cases examples:
+
+- creating a devnet an deploy a preexistent CLI Subnet (same example as the step by step)
+- creating a devnet, create a Subnet based on a Custom VM, and deploy it (similar to [
+this one](/tooling/cli-guides/upload-a-custom-vm-to-cloud))
+
+## Step by Step
+
+### Creating the Devnet
 
 Start the Devnet creation command. It will ask for all needed params:
 
@@ -128,7 +141,7 @@ STATUS FOR CLUSTER: <clusterName>
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
 ```
 
-## Deploying the Subnet into the Devnet
+### Deploying the Subnet into the Devnet
 
 At this point, you have a working Devnet, but no Subnet association:
 
@@ -202,7 +215,7 @@ STATUS FOR CLUSTER: <clusterName>
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+------------------+
 ```
 
-## Syncing the Subnet
+### Syncing the Subnet
 
 Next step is for the Devnet nodes to start keeping up to date with the Subnet state, while executing the Subnet Virtual Machine.
 
@@ -249,7 +262,7 @@ STATUS FOR CLUSTER: <clusterName>
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
 ```
 
-## Validating the Subnet
+### Validating the Subnet
 
 Latest step is to add the nodes as Subnet validators, so as the Devnet can change the Subnet state under user request.
 
@@ -298,7 +311,9 @@ STATUS FOR CLUSTER: <clusterName>
 +---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+----------------+
 ```
 
-## One Command for All Needs
+## Single Command
+
+### Create a Devnet and Deploy a Subnet into It
 
 CLI provides the `devnet wiz` command that takes care of all the mentioned steps.
 
@@ -311,6 +326,82 @@ As reference we provide example of the flags setting needed for this tutorial:
 avalanche node devnet wiz <clusterName> <subnetName> --authorize-access\
   --aws --num-nodes 5 --region us-east-1 --default-validator-params
 
+Creating the devnet
+...
+Waiting for node(s) in cluster <clusterName> to be healthy...
+...
+Nodes healthy after 33 seconds
+
+Deploying the subnet
+...
+Setting the nodes as subnet trackers
+...
+Waiting for node(s) in cluster <clusterName>to be healthy...
+Nodes healthy after 33 seconds
+...
+Waiting for node(s) in cluster <clusterName> to be syncing subnet <subnetName>...
+Nodes Syncing <subnetName> after 5 seconds
+
+Adding nodes as subnet validators
+...
+Waiting for node(s) in cluster <clusterName> to be validating subnet <subnetName>...
+Nodes Validating <subnetName> after 23 seconds
+
+Devnet <clusterName> has been created and is validating subnet <subnetName>!
+```
+
+### Create a Devnet, Create a Custom VM based Subnet, and Deploy It
+
+#### Prerequisites
+
+You will need to have:
+
+- Created a Custom VM, as described [here](/build/vm/intro.md).
+
+#### Custom VM
+
+The tutorial will create exactly the same Custom VM as [here](/tooling/cli-guides/upload-a-custom-vm-to-cloud).
+
+Based on the Custom VM tutorial, we will be deploying the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
+example built with the HyperSDK.
+
+The following settings will be used:
+
+- `<repoUrl>` `https://github.com/ava-labs/hypersdk/`
+- `<branch>` `main`
+- `<buildScript>` `examples/tokenvm/scripts/build.sh`
+
+Following the Custom VM tutorial, create the needed input files, and set their paths to:
+
+- `<genesisPath>` [Genesis File](/tooling/cli-guides/upload-a-custom-vm-to-cloud#genesis-file)
+- `<chainConfigPath>` [Blockchain Config](/tooling/cli-guides/upload-a-custom-vm-to-cloud#blockchain-config)
+- `<subnetConfigPath>` [Subnet Config](/tooling/cli-guides/upload-a-custom-vm-to-cloud#subnet-config)
+- `<avagoConfigPath>` [AvalancheGo Config](/tooling/cli-guides/upload-a-custom-vm-to-cloud#avalanchego-flags)
+
+#### Execute Wiz
+
+Now we are ready to execute the Devnet Wizard. It it going to:
+
+- create the Subnet configuration, generating also the local VM binary
+- create the Devnet
+- deploy the Subnet into the Devnet
+- make the Devnet nodes to start tracking the Subnet
+- make the Devnet nodes to start validating the Subnet
+
+The command assumes `<clusterName>` and `<subnetName>` have not been previously created.
+
+The full command line is:
+
+```bash
+avalanche node devnet wiz <clusterName> <subnetName> --custom-subnet \
+  --subnet-genesis <genesisPath> --custom-vm-repo-url <repoUrl> \
+  --custom-vm-branch <branch> --custom-vm-build-script <buildScript> \
+  --chain-config <chainConfigPath> --subnet-config <subnetConfigPath> \
+  --node-config <avagoConfigPath> --authorize-access --aws --num-nodes 5 \
+  --region us-east-1 --default-validator-params
+
+Creating the subnet
+...
 Creating the devnet
 ...
 Waiting for node(s) in cluster <clusterName> to be healthy...
