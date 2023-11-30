@@ -48,7 +48,7 @@ these may jeopardize your staking reward.
 
 ## Add a Validator with Core extension
 
-First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
+First, we show you how to add your node as a validator by using [Core web](https://core.app).
 
 ### Retrieve the Node ID
 
