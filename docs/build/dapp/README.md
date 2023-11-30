@@ -4,7 +4,6 @@ description: Dapps
 sidebar_label: 🔗 Quick Links
 pagination_label: Dapps Quick Links
 ---
-
 # Dapps Quick Links
 
 ## Software development  
@@ -17,6 +16,8 @@ pagination_label: Dapps Quick Links
 | [**Developer Toolchains**](/build/dapp/smart-contracts/toolchains/hardhat.md)         |  Best practices regarding writing, testing and deployment of smart contracts to Avalanche's C-Chain using common Toolchains like Hardhat and Foundry. |
 | [**Call a Smart Contract with Golang**](/build/dapp/smart-contracts/abigen.md)        |  Compile a solidity contract into Golang to deploy and call contracts programmatically |
 
+<div className='tableDivider' ></div>
+
 ## Advanced Tutorials
 |       |   |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -24,6 +25,10 @@ pagination_label: Dapps Quick Links
 | [**Dynamic Gas Fees**](build/dapp/advanced/sending-transactions-with-dynamic-fees-using-javascript.md) | Send transactions with dynamic fee settings to adjust their priority fee and max fee cap in response to network state |
 | [**Add Network Programmatically**](build/dapp/advanced/add-avalanche-programmatically.md) | Integrate Avalanche Network with your Dapp |
 | [**Exchange Integration**](build/dapp/advanced/integrate-exchange.md) | Integrate an exchange with the EVM-Compatible Avalanche C-Chain |
+
+<div className='tableDivider' ></div>
+
+
 ## End-to-End Walkthroughs
 |     |   |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |

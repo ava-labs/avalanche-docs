@@ -8,7 +8,7 @@ pagination_label: Enlaces Rápidos de Máquinas Virtuales
 
 Una [Máquina Virtual (VM)](/learn/avalanche/virtual-machines) es un plano para una blockchain. Las VM pueden definir cualquier cosa, pero generalmente definen transacciones que se ejecutan y cómo se crean los bloques.
 
-## 🔗 Enlaces Rápidos de Máquinas Virtuales
+## Enlaces Rápidos de Máquinas Virtuales
 
 | Título                                                                                  | Descripción                                                                                                                                                                                              |
 | :-------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

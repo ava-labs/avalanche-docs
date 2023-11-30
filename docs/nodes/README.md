@@ -4,7 +4,7 @@ description: This section provides documents on how to build and maintain an Ava
 sidebar_label: 🔗 Quick Links
 pagination_label: 🔗 Nodes Quick Links
 ---
-# 🔗 Nodes Quick Links
+# Nodes Quick Links
 
 This section provides documents on how to build and maintain an AvalancheGo
 node, and then validate the Avalanche network using an AvalancheGo node.
@@ -24,12 +24,16 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 | [**Tencent Cloud**](/nodes/run/third-party/tencent-cloud-node.md) | Create a node that runs on Tencent Cloud |
 | [**Latitude**](/nodes/run/third-party/latitude-node.md) | Create a node that runs on Latitude.sh |
 
+<div className='tableDivider' ></div>
+
 ## Configure
 |                                                                          |                                                             |
 | :---------------------------------------------------------------------------- | :---------------------------------------------------------- |
 | [**AvalancheGo Configs and Flags**](/nodes/configure/avalanchego-config-flags.md) | This documents list all available configuration and flags for AvalancheGo    |
 | [**Chain Configs and Flags**](/nodes/configure/chain-config-flags.md)          | Reference for all available chain config options and flags    |
 | [**Subnet Configs**](/nodes/configure/subnet-configs.md)             | Reference for all available Subnet config options and flags   |
+
+<div className='tableDivider' ></div>
 
 ## Validate
 |                                                    |                                                                                        |
@@ -38,6 +42,8 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 | [**Key Differences Between Validation and Delegation**](/nodes/validate/validate-or-delegate.md)      | This section details the difference between staking and delegating on Avalanche                                                      |
 | [**How to Stake AVAX**](/nodes/validate/how-to-stake.md)      | This section provides documents on how to stake AVAX on the Avalanche Network
 | [**Add a Node as a Validator**](nodes/validate/add-a-validator.md) | Add a node as a validator to the [Primary Network](/learn/avalanche/avalanche-platform.md) |
+
+<div className='tableDivider' ></div>
 
 ## Maintain
 |                                                                          |                                                             |

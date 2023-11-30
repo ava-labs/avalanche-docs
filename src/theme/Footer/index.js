@@ -40,9 +40,9 @@ function Footer() {
         <footer className="footer">
           <div className="container">
             <div className="row footer-container">
-              <div className="col col--8">
+              <div className="col col--8 footerLinks">
                 <div className="row" style={{ marginTop: "10px" }}>
-                  <div className="col" style={{}}>
+                  <div className="col footerLinks__column" style={{}}>
                     <h4 className="footer-heading">
                       {translate({ message: "Developers" })}
                     </h4>
@@ -81,7 +81,7 @@ function Footer() {
                       </div>
                     </a>
                   </div>
-                  <div className="col">
+                  <div className="col footerLinks__column">
                     <h4 className="footer-heading">
                       {translate({ message: "Community" })}
                     </h4>
@@ -98,7 +98,7 @@ function Footer() {
                       <div className="footer-list">Tutorials Contest</div>
                     </a>
                   </div>
-                  <div className="col">
+                  <div className="col footerLinks__column">
                     <h4 className="footer-heading">
                       {translate({ message: "More" })}
                     </h4>
@@ -118,7 +118,7 @@ function Footer() {
                 </div>
               </div>
 
-              <div className="col col--4">
+              <div className="col col--4 footerSocial">
                 <div className="footer-row" style={{marginBottom: '16px'}}>
                   <a href="https://t.me/+KDajA4iToKY2ZjBk">
                     <BsTelegram className="footer-social"></BsTelegram>

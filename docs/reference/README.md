@@ -1,5 +1,5 @@
 ---
-title: 🔗 Reference Quick Links
+title: Reference Quick Links
 tags: [AvalancheGo APIs]
 description: AvalancheGo is the node implementation for the Avalanche network - a blockchain platform with high throughput and blazing fast transactions. This page is overview of the APIs associated with AvalancheGo. 
 sidebar_label: 🔗 Quick Links
@@ -21,17 +21,23 @@ pagination_label: API Reference Quick Links
 | [**Metrics API**](/reference/avalanchego/metrics-api.md)      | Metrics API Reference |
 | [**Subnet-EVM API**](/reference/subnet-evm/api.md)      | Subnet-EVM API Reference |
 
+<div className='tableDivider' ></div>
+
 | Transaction Formats      | Description  |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**P-Chain**](/reference/avalanchego/p-chain/txn-format.md)      | Platform Chain API Transaction Formatting Guide |
 | [**C-Chain**](/reference/avalanchego/c-chain/txn-format.md)      | Contract Chain API Transaction Formatting Guide |
 | [**X-Chain**](/reference/avalanchego/x-chain/txn-format.md)      | Exchange Chain API Transaction Formatting Guide |
 
+<div className='tableDivider' ></div>
+
 | Avalanche Standards      | Description  |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Avalanche Network Protocol**](/reference/standards/avalanche-network-protocol.md)      | Defines core communication format between Avalanche nodes |
 | [**Cryptography**](/reference/standards/cryptographic-primitives.md)      | Cryptography used by Avalanche at the network and blockchain layers |
 | [**Serialization**](/reference/standards/serialization-primitives.md)      | How primitive types are encoded on the Avalanche platform |
+
+<div className='tableDivider' ></div>
 
 | Development Guides      | Description  |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |

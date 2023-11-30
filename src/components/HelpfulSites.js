@@ -21,7 +21,7 @@ export const HelpfulSites = () => {
                         <HelpfulSiteItem link='https://subnets.avax.network/' message='Explorer' Svg={FaCompass} />
                         <HelpfulSiteItem link='https://academy.avax.com/?utm_source=avalanche-dev-docs&utm_medium=website&utm_content=footer' message='Academy' Svg={FaGraduationCap} />
                         <HelpfulSiteItem link='https://support.avax.network/en/' message='Support' Svg={Support} />
-                        <HelpfulSiteItem link='https://support.avax.network/en/' message='Wallet' Svg={Owl} />
+                        <HelpfulSiteItem link='https://core.app/' message='Wallet' Svg={Owl} />
                     </div>
                 </div>
             </div>

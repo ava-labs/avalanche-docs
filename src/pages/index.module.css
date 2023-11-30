@@ -234,6 +234,13 @@ h3 {
     }
 }
 
+.readMoreBtn:hover {
+    color: var(--ifm-color-primary);
+    background-color: white;
+    border: 1px solid var(--ifm-color-primary);
+    transition: 0.3s;
+}
+
 html[data-theme='dark'] .featuresAcademy {
     background-color: inherit;
 }
