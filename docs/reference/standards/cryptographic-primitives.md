@@ -184,10 +184,14 @@ As an example we will sign the message "Through consensus to the stars"
 After hashing with `sha256` and signing the pre-image we return the value
 [cb58](https://support.avalabs.org/en/articles/4587395-what-is-cb58) encoded:
 `4Eb2zAHF4JjZFJmp4usSokTGqq9mEGwVMY2WZzzCmu657SNFZhndsiS8TvL32n3bexd8emUwiXs8XqKjhqzvoRFvghnvSN`.
-Here's an example using the [Avalanche Web
-Wallet](https://wallet.avax.network/wallet/advanced).
+Here's an example using [Core web](https://core.app/tools/signing-tools/sign/).
 
-![Sign message](/img/sign-message.png)
+:::info
+A full guide on how to sign messages with Core web can be found 
+[here](https://support.avax.network/en/articles/7206948-core-web-how-do-i-use-the-signing-tools).
+:::
+
+![Sign message](/img/signed-message.png)
 
 ## Cryptography in Ethereum Virtual Machine
 
