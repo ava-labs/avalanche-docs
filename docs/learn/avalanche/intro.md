@@ -3,7 +3,7 @@ slug: /intro
 tags: [Avalanche]
 description: Avalanche is an open-source platform for building dApps in an interoperable, decentralized, and highly scalable ecosystem.
 keywords: [docs, avalanche, scalability, build on avalanche, dApps]
-sidebar_label: 🔺 What is Avalanche?
+sidebar_label: What is Avalanche?
 ---
 
 # What Is Avalanche?

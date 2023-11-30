@@ -12,7 +12,8 @@ any Subnets in production on either network. Avalanche Subnet Explorer is an ana
 enables people to search the Subnets and blockchains for transactions, addresses, and other platform
 activities. 
 
-| Links      |   |
-| :------------------------------------------------- |
-| [**Avalanche Mainnet**](https://subnets.avax.network/) 🌐     |
-| [**Fuji Testnet**](https://subnets-test.avax.network/) 🧪  | 
+## Links
+|                                                        |
+|:------------------------------------------------------------|
+| [**Avalanche Mainnet**](https://subnets.avax.network/) 🌐   |
+| [**Fuji Testnet**](https://subnets-test.avax.network/) 🧪   | 

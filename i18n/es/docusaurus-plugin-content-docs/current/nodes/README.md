@@ -5,7 +5,7 @@ sidebar_label: 🔗 Enlaces Rápidos
 pagination_label: 🔗 Enlaces Rápidos de Nodos
 ---
 
-# 🔗 Enlaces Rápidos de Nodos
+# Enlaces Rápidos de Nodos
 
 Esta sección proporciona documentos sobre cómo construir y mantener un nodo AvalancheGo
 y luego validar la red Avalanche usando un nodo AvalancheGo.

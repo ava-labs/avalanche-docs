@@ -1,5 +1,5 @@
 ---
-title: 🔗 Enlaces Rápidos de Referencia
+title: Enlaces Rápidos de Referencia
 tags: [APIs de AvalancheGo]
 description: AvalancheGo es la implementación de nodo para la red Avalanche, una plataforma blockchain con alta capacidad de procesamiento y transacciones rápidas. Esta página es una visión general de las APIs asociadas con AvalancheGo.
 sidebar_label: 🔗 Enlaces Rápidos

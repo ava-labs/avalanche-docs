@@ -224,6 +224,7 @@ const config = {
             type: "dropdown",
             position: "left",
             label: "Build",
+            className: "header-build-dropdown",
             items: [
               {
                 type: "docSidebar",
@@ -274,6 +275,10 @@ const config = {
             className: "header-github-link",
             position: "right",
           },
+          {
+            type: 'search',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -282,6 +287,7 @@ const config = {
         logo: {
           src: "/img/Avalanche_Horizontal_Red.svg",
         },
+        style: 'light'
       },
       prism: {
         theme: lightCodeTheme,

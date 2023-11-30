@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+.feature {
+  min-width: 294px;
+}
+
 .featureSvg {
   height: 200px;
   width: 200px;

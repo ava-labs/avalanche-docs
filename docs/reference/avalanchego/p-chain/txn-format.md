@@ -1194,7 +1194,7 @@ for this type is 24 or `0x00000018`.
     - Must be > 0
 - **`MaximumSupply`** is a long which is the amount to specify as the maximum token supply.
   - Restrictions
-    - Must be >= [InitialSupply]
+    - Must be &gt;&equals; [InitialSupply]
 - **`MinConsumptionRate`** is a long which is the rate to allocate funds if the
   validator's stake duration is 0.
 - **`MaxConsumptionRate`** is a long which is the rate to allocate funds if the
