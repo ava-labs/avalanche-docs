@@ -46,7 +46,7 @@ when executing the AvalancheGo binary, as by default, the node will attempt to p
 NAT traversal to get the node's IP according to its router). Failing to do either of
 these may jeopardize your staking reward.
 
-## Add a Validator with Avalanche Wallet
+## Add a Validator with Core extension
 
 First, we show you how to add your node as a validator by using [Avalanche Wallet](https://wallet.avax.network).
 
@@ -76,27 +76,29 @@ The response has your node’s ID:
 
 ### Add as a Validator
 
-Open [the wallet](https://wallet.avax.network/), and go the `Earn` tab. Choose
-`Add Validator` under the `Validate` section.
+Connect [Core extension](https://join.core.app/extension) to [Core web](https://core.app), and go the 'Staking' tab. 
+Here, choose`Validate` from the menu.
 
-Fill out the staking parameters. They are explained in more detail in [this doc](/nodes/validate/how-to-stake.md). When you’ve filled in all the staking parameters
-and double-checked them, click `Confirm`. Make sure the staking period is at
+Fill out the staking parameters. They are explained in more detail in [this doc](/nodes/validate/how-to-stake.md). When you’ve 
+filled in all the staking parameters and double-checked them, click `Submit Validation`. Make sure the staking period is at
 least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at
-least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet).
+least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet). A full guide about this can be found 
+[here](https://support.avax.network/en/articles/8117267-core-web-how-do-i-validate-in-core-stake).
+
+<iframe src="https://www.youtube.com/embed/1M0LZbuHO5Q?modestbranding=1&rel=0&iv_load_policy=3&color=white" width="800" height="500" title="How to Validate in Core Web" frameborder="0" allowfullscreen></iframe>
 
 You should see a success message, and your balance should be updated.
+
+Go back to the `Stake` tab, and you'll see here an overview of your validation,
+with information like the amount staked, staking time, and more.
+
+![Staking Overview](/img/staking-overview.png)
 
 Calling
 [`platform.getPendingValidators`](/reference/avalanchego/p-chain/api.md#platformgetpendingvalidators)
 verifies that your transaction was accepted. Note that this API call should be
 made before your node's validation start time, otherwise, the return will not
 include your node's id as it is no longer pending.
-
-Go back to the `Earn` tab, and click `Estimated Rewards`.
-
-Once your validator’s start time has passed, you will see the rewards it may
-earn, as well as its start time, end time, and the percentage of its validation
-period that has passed.
 
 You can also call
 [`platform.getCurrentValidators`](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators)
