@@ -535,6 +535,29 @@ aside {
   max-width: 700px;
 }
 
+@media screen and (max-width: 1024px) {
+  .theme-doc-markdown h1:first-of-type{
+    font-size: 56px;
+    line-height: 50px;
+  }
+  .theme-doc-markdown h1:first-of-type:before{
+    margin-right: 20px !important;
+    max-width: 34px !important;
+    height: 95px !important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .theme-doc-markdown h1:first-of-type{
+    font-size: 48px;
+    line-height: 43px;
+  }
+  .theme-doc-markdown h1:first-of-type:before{
+    margin-right: 0 !important;
+    height: 81px !important;
+  }
+}
+
 .theme-doc-markdown h1:first-of-type:before{
   content: '';
   background-image: url('data:image/svg+xml,<svg width="46" height="127" viewBox="0 0 46 127" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_75_1785" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="46" height="127"><rect width="46" height="127" rx="20" fill="%23D9D9D9"/></mask><g mask="url(%23mask0_75_1785)"><line x1="-2.12132" y1="105.879" x2="45.8787" y2="57.8787" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="15.8787" x2="45.8787" y2="-32.1213" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="123.879" x2="45.8787" y2="75.8787" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="33.8787" x2="45.8787" y2="-14.1213" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="141.879" x2="45.8787" y2="93.8787" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="51.8787" x2="45.8787" y2="3.87868" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="159.879" x2="45.8787" y2="111.879" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="69.8787" x2="45.8787" y2="21.8787" stroke="%23E84142" stroke-width="6"/><line x1="-2.12132" y1="87.8787" x2="45.8787" y2="39.8787" stroke="%23E84142" stroke-width="6"/></g></svg>');
