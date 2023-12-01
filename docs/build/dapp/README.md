@@ -30,7 +30,6 @@ pagination_label: Dapps Quick Links
 
 <div className='tableDivider' ></div>
 
-
 ## End-to-End Walkthroughs
 
 |     |   |
