@@ -6,7 +6,8 @@ pagination_label: Dapps Quick Links
 ---
 # Dapps Quick Links
 
-## Software development  
+## Smart Contract Development
+
 |                                                                                       |   |
 |:--------------------------------------------------------------------------------------| :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**💰 Get Test Funds**](/build/dapp/smart-contracts/get-funds-faucet.md)              | How to get a "drip" of test AVAX from the Fuji testnet faucet |
@@ -19,6 +20,7 @@ pagination_label: Dapps Quick Links
 <div className='tableDivider' ></div>
 
 ## Advanced Tutorials
+
 |       |   |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Manually Adjust Gas Prices**](build/dapp/advanced/adjusting-gas-price-during-high-network-activity.md) | Adjust the priority fee and max fee cap during high network activity |
@@ -28,8 +30,8 @@ pagination_label: Dapps Quick Links
 
 <div className='tableDivider' ></div>
 
-
 ## End-to-End Walkthroughs
+
 |     |   |
 | :------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Fuji Workflow**](/build/dapp/fuji-workflow.md) | Walkthrough of necessary development activities for a bare-bones decentralized application |
