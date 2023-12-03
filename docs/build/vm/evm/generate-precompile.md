@@ -278,9 +278,11 @@ Now let's generate the precompile template files!
 In Subnet-EVM precompile implementations reside under the [`./precompile/contracts`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts) directory. Let's generate our precompile
 template in the `./precompile/contracts/helloworld` directory, where `helloworld` is the name of the
 Go package we want to generate the precompile into.
+
 ```bash
 ./scripts/generate_precompile.sh --abi ./contracts/abis/IHelloWorld.abi --type HelloWorld --pkg helloworld
 ```
+
 </TabItem>
 <TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 For Precompile-EVM we don't need to put files under a deep directory structure. We can just generate the

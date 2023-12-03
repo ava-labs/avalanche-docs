@@ -145,7 +145,7 @@ Precompile-EVM repo has also same scripts and the build process as Subnet-EVM.
 Following steps also apply to Precompile-EVM.
 
 You should have cloned [AvalancheGo](https://github.com/ava-labs/avalanchego) within your `$GOPATH` in
-the [Prerequisites](#prerequisites) section, so you can build AvalancheGo with the following command:
+the [Background and Requirements](background-and-reqs.md) section, so you can build AvalancheGo with the following command:
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/avalanchego
