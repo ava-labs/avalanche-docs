@@ -22,8 +22,7 @@ implementación en producción.
 :::
 
 Después de gestionar con éxito una implementación de Subnet en la `Fuji Testnet`, estás listo para
-implementar tu Subnet en Mainnet. Si no lo has hecho, primero [implementa una Subnet en
-Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
+implementar tu Subnet en Mainnet. Si no lo has hecho, primero [implementa una Subnet en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 Este tutorial muestra cómo hacer lo siguiente en `Mainnet`.
 
@@ -45,8 +44,7 @@ tu propia ejecución de este tutorial.
 - [Avalanche-CLI está instalado](/tooling/cli-guides/install-avalanche-cli.md) en cada nodo validador
 - Un dispositivo [Ledger](https://www.ledger.com/)
 - Has [creado una configuración de Subnet](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-  y probado completamente una implementación de Subnet en [Fuji Testnet
-  ](/build/subnet/deploy/fuji-testnet-subnet.md)
+  y probado completamente una implementación de Subnet en [Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
 

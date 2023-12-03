@@ -93,7 +93,7 @@ to shorten the time for bootstrapping.
 
 ## Avalanche-CLI
 
-If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/build/subnet/deploy/local-subnet.md#installation)
+If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/tooling/cli-guides/install-avalanche-cli.md)
 
 ### Private Key
 
@@ -845,7 +845,7 @@ with the following values:
 
 ```text
 - Network Name: testsubnet
-- RPC URL: <http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc>
+- RPC URL: [http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc]
 - Chain ID: 3333
 - Symbol: TST
 ```

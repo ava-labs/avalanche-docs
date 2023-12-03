@@ -60,14 +60,14 @@ Launch" button.
 
 Here you can review the launch configuration details and follow the instructions
 to launch the Avalanche Validator Node. The changes are very minor. Leave the
-  action as "Launch from Website." The EC2 Instance Type should remain
+action as "Launch from Website." The EC2 Instance Type should remain
 `c5.2xlarge`. The primary change you'll need to make is to choose a keypair
 which will enable you to `ssh` into the newly created EC2 instance to run `curl`
 commands on the Validator node. You can search for existing Keypairs or you can
 create a new keypair and download it to your local machine. If you create a new
 keypair you'll need to move the keypair to the appropriate location, change the
 permissions and add it to the OpenSSH authentication agent. For example, on
-MacOS it would look similar to the following: 
+MacOS it would look similar to the following:
 
 ```zsh
 # In this example we have a keypair called avalanche.pem which was downloaded from AWS to ~/Downloads/avalanche.pem
@@ -79,16 +79,16 @@ test -f ~/Downloads/avalanche.pem && echo "avalance.pem exists."
 
 # Move the avalanche.pem keypair from the ~/Downloads directory to the hidden ~/.ssh directory
 mv ~/Downloads/avalanche.pem ~/.ssh
-  
+
 # Next add the private key identity to the OpenSSH authentication agent
-ssh-add ~/.ssh/avalanche.pem; 
+ssh-add ~/.ssh/avalanche.pem;
 
 # Change file modes or Access Control Lists
 sudo chmod 600 ~/.ssh/avalanche.pem
 ```
 
 Once these steps are complete you are ready to launch the Validator node on EC2.
-To make that happen click the "Launch" button 
+To make that happen click the "Launch" button
 
 ![launch successful](/img/one-click-validator-node/launch-successful.png)
 
@@ -97,15 +97,15 @@ the `AMI ID` and click on the `EC2 Console` link for the next step.
 
 ## EC2 Console
 
-Now take the `AMI ID`  from the previous step and input it into the search bar
+Now take the `AMI ID` from the previous step and input it into the search bar
 on the EC2 Console. This will bring you to the dashboard where you can find the
-EC2 instances public IP address. 
+EC2 instances public IP address.
 
 ![AMI instance](/img/one-click-validator-node/ami-instance.png)
 
 Copy that public IP address and open a Terminal or command line prompt. Once you
 have the new Terminal open `ssh` into the EC2 instance with the following
-command. 
+command.
 
 ```zsh
 ssh username@ip.address.of.ec2.instance
@@ -120,8 +120,7 @@ Mainnet. If this is what you are looking for, you can skip this step.
 
 For this tutorial you want to sync and validate the Fuji Testnet. Now
 that you're `ssh`ed into the EC2 instance you can make the required changes to
-sync Fuji instead of Mainnet. 
-
+sync Fuji instead of Mainnet.
 
 First, confirm that the node is syncing the Mainnet by running the `info.getNetworkID` command.
 
@@ -168,9 +167,9 @@ cat /etc/avalanchego/conf.json
 }
 ```
 
-Edit that `/etc/avalanchego/conf.json` with your favorite text editor and change the value of the 
+Edit that `/etc/avalanchego/conf.json` with your favorite text editor and change the value of the
 `"network-id"` property from `"mainnet"` to `"fuji"`. Once that's complete,
-save the file and restart the Avalanche node via `sudo systemctl restart avalanchego`. 
+save the file and restart the Avalanche node via `sudo systemctl restart avalanchego`.
 You can then call the `info.getNetworkID` endpoint to confirm the
 change was successful.
 
@@ -284,12 +283,12 @@ The Avalanche Web Wallet is a web-based application with no middleware or any
 kind of server communication. It can be either accessed
 online or compiled and run locally. The Avalanche Web Wallet is a multi-faceted
 jewel and offers validation/delegation, cross-chain transfers, reward
-estimation, asset/key management, and more. 
+estimation, asset/key management, and more.
 
 ### Switching the Connected Network
 
 Check which network the wallet is connected to by looking at the top right of
-the screen. By default the Avalanche Web Wallet connects to Mainnet. 
+the screen. By default the Avalanche Web Wallet connects to Mainnet.
 
 #### Connected to Mainnet
 
@@ -297,7 +296,7 @@ the screen. By default the Avalanche Web Wallet connects to Mainnet.
 Mainnet" width="60%" />
 
 For the sake of this demo you want to connect the Wallet to the Fuji Testnet. At
-the top right of the wallet click "Mainnet" and from the nav menu select Fuji. 
+the top right of the wallet click "Mainnet" and from the nav menu select Fuji.
 
 #### Selecting Fuji
 
@@ -403,7 +402,7 @@ curl --location --request POST 'https://api.avax-test.network/ext/bc/P' \
 }
 ```
 
-You can also pass in the `NodeID` as a string to the `nodeIDs` array in the request body. 
+You can also pass in the `NodeID` as a string to the `nodeIDs` array in the request body.
 
 ```zsh
 curl --location --request POST 'https://api.avax-test.network/ext/bc/P' \
@@ -514,13 +513,13 @@ curl --location --request POST 'https://api.avax-test.network/ext/bc/P' \
 
 ## Mainnet
 
-All of these steps can be applied to Mainnet. However, the minimum required Avax 
-token amounts to become a validator is 2,000 on the Mainnet. For more information, 
+All of these steps can be applied to Mainnet. However, the minimum required Avax
+token amounts to become a validator is 2,000 on the Mainnet. For more information,
 please read [this doc](/nodes/validate/how-to-stake.md#validators).
 
 ## Maintenance
 
-AWS one click is meant to be used in automated environments, not as an end-user solution. 
+AWS one click is meant to be used in automated environments, not as an end-user solution.
 You can still manage it manually, but it is not as easy as an Ubuntu instance or using the script:
 
 - AvalancheGo binary is at `/usr/local/bin/avalanchego`
@@ -532,11 +531,9 @@ You can still manage it manually, but it is not as easy as an Ubuntu instance or
 For a simple upgrade you would need to place the new binary at `/usr/local/bin/`.
 If you run a Subnet, you would also need to place the VM binary into `/home/avalanche/.avalanchego/plugins`.
 
-You can also look at using 
-[this guide]( https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-tutorial-update-ami.html),
+You can also look at using
+[this guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-tutorial-update-ami.html),
 but that won't address updating the Subnet, if you have one.
-
-
 
 ## Summary
 
@@ -545,5 +542,5 @@ scale of global finance, with near-instant transaction finality. Now with an
 Avalanche Validator node available as a one-click install from the AWS
 Marketplace developers and entrepreneurs can on-ramp into the Avalanche
 ecosystem in a matter of minutes. If you have any questions or want to follow up
-in any way please join our Discord server at <https://chat.avax.network>. For
+in any way please join our Discord server at [https://chat.avax.network](https://chat.avax.network). For
 more developer resources please check out our [Developer Documentation](https://docs.avax.network).

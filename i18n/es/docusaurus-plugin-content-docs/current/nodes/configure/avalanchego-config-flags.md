@@ -36,7 +36,7 @@ Ejemplo de archivo de configuración JSON:
 ```
 
 :::tip
-[El script de instalación](/nodes/run/with-installer.md) crea el archivo de configuración del nodo
+[El script de instalación](/nodes/run/with-installer/installing-avalanchego.md) crea el archivo de configuración del nodo
 en `~/.avalanchego/configs/node.json`. No se crea ningún archivo por defecto si
 [AvalancheGo se construye desde el código fuente](/nodes/run/node-manually.md),
 deberías crearlo manualmente si es necesario.
@@ -565,7 +565,7 @@ Si es verdadero, no utiliza TLS al exportar los datos de traza. El valor predete
 
 #### `--tracing-sample-rate` (flotante)
 
-La fracción de trazas a muestrear. Si es >= 1, siempre se muestrea. Si es <= 0, nunca se muestrea.
+La fracción de trazas a muestrear. Si es `>=` 1, siempre se muestrea. Si es `<=` 0, nunca se muestrea.
 El valor predeterminado es `0.1`.
 
 #### `--tracing-exporter-type`(cadena)

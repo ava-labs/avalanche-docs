@@ -1,6 +1,6 @@
 ---
 tags: [Build, Virtual Machines]
-description: Learn how to develop virtual machines on Avalanche using Rust. 
+description: Learn how to develop virtual machines on Avalanche using Rust.
 sidebar_label: Rust VM
 pagination_label: Build a Rust VM
 sidebar_position: 3
@@ -11,8 +11,7 @@ sidebar_position: 3
 ## Introduction
 
 The Avalanche Rust SDK is a developer toolkit composed of powerful building blocks and primitive
-types. This tutorial will walk you through the creation of a simple VM known as the [TimestampVM
-RS](https://github.com/ava-labs/timestampvm-rs) using the Rust SDK. Each block in the TimestampVM's
+types. This tutorial will walk you through the creation of a simple VM known as the [TimestampVM RS](https://github.com/ava-labs/timestampvm-rs) using the Rust SDK. Each block in the TimestampVM's
 blockchain contains a monotonically increasing timestamp when the block was created and a 32-byte
 payload of data.
 
@@ -23,18 +22,16 @@ payload of data.
   repository, specifically the Subnet traits and helpers defined in the `avalanche-types` crate
 - For developers new to Rust please visit the free online book [The Rust Programming
   Language](https://doc.rust-lang.org/book/).
-  
+
   :::note
   The example VMs in these tutorials are based on
   [avalanche-types-rs](https://github.com/ava-labs/avalanche-types-rs), a predecessor of
   the [avalanche-rs](https://github.com/ava-labs/avalanche-rs) repository that is now the
   accepted standard. Directory locations will vary.
   :::
-  
 
 If you have experimented with our Golang example VMs you will find the Rust SDK fairly familiar.
-Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to
-VMs](/build/vm/intro.md).
+Completely new to creating a custom VM on Avalanche? No problem please review [Introduction to VMs](/build/vm/intro.md).
 
 ## Components
 
@@ -979,7 +976,7 @@ can have better control of element ordering (ex. pop_back(), pop_front()).
 
 :::note
 
-If this method is called, no other method will be called on this VM.  Each registered VM will have a
+If this method is called, no other method will be called on this VM. Each registered VM will have a
 single instance created to handle static APIs. This instance will be handled separately from
 instances created to service an instance of a chain.
 

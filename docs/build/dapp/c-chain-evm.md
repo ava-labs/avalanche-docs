@@ -16,8 +16,8 @@ consensus portions replaced with Avalanche equivalents. What's left is the
 Ethereum VM, which runs Solidity smart contracts and manages data structures and
 blocks on the chain. As a result, you get a blockchain that can run all the
 Solidity smart contracts from Ethereum, but with much greater transaction
-bandwidth and instant finality that [Avalanche's revolutionary
-consensus](learn/avalanche/avalanche-consensus.md) enables.
+bandwidth and instant finality that
+[Avalanche's revolutionary consensus](learn/avalanche/avalanche-consensus.md) enables.
 
 Coreth is loaded as a plugin into
 [AvalancheGo](https://github.com/ava-labs/avalanchego), the client node

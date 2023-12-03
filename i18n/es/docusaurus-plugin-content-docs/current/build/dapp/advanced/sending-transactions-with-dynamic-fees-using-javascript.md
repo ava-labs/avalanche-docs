@@ -11,9 +11,8 @@ sidebar_position: 1
 ## Resumen
 
 El objetivo de este documento es proporcionar y explicar cómo enviar transacciones
-con tarifas dinámicas usando JavaScript. Asegúrese de haber seguido [el tutorial sobre
-ajustar las tarifas dinámicas usando
-MetaMask](/build/dapp/advanced/adjusting-gas-price-during-high-network-activity.md). Allí, hemos
+con tarifas dinámicas usando JavaScript. Asegúrese de haber seguido
+[el tutorial sobre ajustar las tarifas dinámicas usando MetaMask](/build/dapp/advanced/adjusting-gas-price-during-high-network-activity.md). Allí, hemos
 explicado los conceptos clave relacionados con las tarifas dinámicas y el tipo de
 transacciones EIP1559.
 
@@ -53,11 +52,11 @@ archivo con la función `sendAvax()`. Siga el resto del tutorial entendiendo y p
 ## Importación de dependencias y clave privada
 
 ```javascript
-const ethers = require("ethers")
-const Avalanche = require("avalanche").Avalanche
-require("dotenv").config()
+const ethers = require("ethers");
+const Avalanche = require("avalanche").Avalanche;
+require("dotenv").config();
 
-const privateKey = process.env.PRIVATEKEY
+const privateKey = process.env.PRIVATEKEY;
 ```
 
 ## Configuración del proveedor HTTP conectado a la red Fuji
@@ -69,8 +68,8 @@ También puedes conectarte a Mainnet usando la URL -
 
 ```javascript
 // Para enviar una transacción firmada a la red
-const nodeURL = "https://api.avax-test.network/ext/bc/C/rpc"
-const HTTPSProvider = new ethers.providers.JsonRpcProvider(nodeURL)
+const nodeURL = "https://api.avax-test.network/ext/bc/C/rpc";
+const HTTPSProvider = new ethers.providers.JsonRpcProvider(nodeURL);
 ```
 
 ## Configuración de las API de la C-Chain para estimar las tarifas base y de prioridad
@@ -81,14 +80,14 @@ a la red como se muestra a continuación.
 
 ```javascript
 // Para estimar la tarifa máxima y la tarifa de prioridad utilizando las API de la CChain
-const chainId = 43113
+const chainId = 43113;
 const avalanche = new Avalanche(
   "api.avax-test.network",
   undefined,
   "https",
   chainId
-)
-const cchain = avalanche.CChain()
+);
+const cchain = avalanche.CChain();
 ```
 
 ## Configuración de la billetera
@@ -97,8 +96,8 @@ Se requiere una billetera para firmar transacciones con su clave privada y así 
 
 ```javascript
 // Para firmar una transacción no firmada
-const wallet = new ethers.Wallet(privateKey)
-const address = wallet.address
+const wallet = new ethers.Wallet(privateKey);
+const address = wallet.address;
 ```
 
 ## Función para estimar la tarifa máxima y la tarifa máxima de prioridad
@@ -114,23 +113,23 @@ const calcFeeData = async (
   maxFeePerGas = undefined,
   maxPriorityFeePerGas = undefined
 ) => {
-  const baseFee = parseInt(await cchain.getBaseFee(), 16) / 1e9
+  const baseFee = parseInt(await cchain.getBaseFee(), 16) / 1e9;
   maxPriorityFeePerGas =
     maxPriorityFeePerGas == undefined
       ? parseInt(await cchain.getMaxPriorityFeePerGas(), 16) / 1e9
-      : maxPriorityFeePerGas
+      : maxPriorityFeePerGas;
   maxFeePerGas =
-    maxFeePerGas == undefined ? baseFee + maxPriorityFeePerGas : maxFeePerGas
+    maxFeePerGas == undefined ? baseFee + maxPriorityFeePerGas : maxFeePerGas;
 
   if (maxFeePerGas < maxPriorityFeePerGas) {
-    throw "Error: La tarifa máxima por gas no puede ser menor que la tarifa máxima de prioridad por gas"
+    throw "Error: La tarifa máxima por gas no puede ser menor que la tarifa máxima de prioridad por gas";
   }
 
   return {
     maxFeePerGas: maxFeePerGas.toString(),
     maxPriorityFeePerGas: maxPriorityFeePerGas.toString(),
-  }
-}
+  };
+};
 ```
 
 La API real devuelve la tarifa base y la tarifa de prioridad en unidades de `wei`, que es
@@ -164,17 +163,17 @@ const sendAvax = async (
   nonce = undefined
 ) => {
   if (nonce == undefined) {
-    nonce = await HTTPSProvider.getTransactionCount(address)
+    nonce = await HTTPSProvider.getTransactionCount(address);
   }
 
   // Si no se proporciona la tarifa máxima o la tarifa máxima de prioridad, entonces se calculará automáticamente usando las API de CChain
-  ;({ maxFeePerGas, maxPriorityFeePerGas } = await calcFeeData(
+  ({ maxFeePerGas, maxPriorityFeePerGas } = await calcFeeData(
     maxFeePerGas,
     maxPriorityFeePerGas
-  ))
+  ));
 
-  maxFeePerGas = ethers.utils.parseUnits(maxFeePerGas, "gwei")
-  maxPriorityFeePerGas = ethers.utils.parseUnits(maxPriorityFeePerGas, "gwei")
+  maxFeePerGas = ethers.utils.parseUnits(maxFeePerGas, "gwei");
+  maxPriorityFeePerGas = ethers.utils.parseUnits(maxPriorityFeePerGas, "gwei");
 
   // La transacción de tipo 2 es para EIP1559
   const tx = {
@@ -185,24 +184,22 @@ const sendAvax = async (
     maxFeePerGas,
     value: ethers.utils.parseEther(amount),
     chainId,
-  }
+  };
 
-  tx.gasLimit = await HTTPSProvider.estimateGas(tx)
+  tx.gasLimit = await HTTPSProvider.estimateGas(tx);
 
-  const signedTx = await wallet.signTransaction(tx)
-  const txHash = ethers.utils.keccak256(signedTx)
+  const signedTx = await wallet.signTransaction(tx);
+  const txHash = ethers.utils.keccak256(signedTx);
 
-  console.log("Enviando transacción firmada")
+  console.log("Enviando transacción firmada");
 
   // Enviar una transacción firmada y esperar su inclusión
-  await (await HTTPSProvider.sendTransaction(signedTx)).wait()
+  await (await HTTPSProvider.sendTransaction(signedTx)).wait();
 
-
-
-console.log(
-  `Ver transacción con nonce ${nonce}: https://testnet.snowtrace.io/tx/${txHash}`
-)
-}
+  console.log(
+    `Ver transacción con nonce ${nonce}: https://testnet.snowtrace.io/tx/${txHash}`
+  );
+};
 ```
 
 Esta función calcula el hash de la transacción a partir de la transacción firmada y registra en la consola la URL para el estado de la transacción en el explorador Snowtrace.
@@ -215,18 +212,18 @@ Si no pasas estos argumentos, entonces automáticamente estimará la tarifa máx
 
 ```javascript
 // estableciendo la tarifa máxima como 100 y la tarifa de prioridad como 2
-sendAvax("0.01", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 2)
+sendAvax("0.01", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 2);
 ```
 
 **Esta función no debe usarse sin una tarifa máxima por gas. Ya que tendrás que pagar el precio estimado, incluso si es más alto que tu presupuesto.**
 
 Podría haber los siguientes casos -
 
-| Tarifa Máxima | Tarifa de Prioridad Máxima | Comentario                                                                                                                                                                                                                                 |
-| ------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tarifa Máxima  | Tarifa de Prioridad Máxima | Comentario                                                                                                                                                                                                                                                                               |
+| -------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **indefinido** | 2                          | Calculará la tarifa máxima sumando la tarifa de prioridad proporcionada con la tarifa base estimada. Toma precauciones adicionales aquí, ya que la tarifa máxima ahora estará limitada por `baseFee + priorityFee`, lo que puede consumir todas las tarifas de prioridad proporcionadas. |
-| 100           | **indefinido**              | Estimará la tarifa de prioridad y usará la tarifa máxima proporcionada. Si la tarifa de prioridad estimada es mayor que la tarifa máxima proporcionada, entonces arroja un error.                                                       |
-| **indefinido** | **indefinido**              | Estimará la tarifa base y la tarifa de prioridad de la red, y sumará ambos valores para calcular la tarifa máxima por gas. Nuevamente, tendrás que pagar lo que se estime.                                                                 |
+| 100            | **indefinido**             | Estimará la tarifa de prioridad y usará la tarifa máxima proporcionada. Si la tarifa de prioridad estimada es mayor que la tarifa máxima proporcionada, entonces arroja un error.                                                                                                        |
+| **indefinido** | **indefinido**             | Estimará la tarifa base y la tarifa de prioridad de la red, y sumará ambos valores para calcular la tarifa máxima por gas. Nuevamente, tendrás que pagar lo que se estime.                                                                                                               |
 
 Obtendrás la siguiente salida al enviar con éxito las transacciones firmadas. Usando esta URL puedes ver el estado de tu transacción en Snowtrace.
 
@@ -240,10 +237,10 @@ A veces, durante una alta actividad de red, todas las transacciones no logran ll
 
 ```javascript
 // reemitiendo transacción con nonce 25
-sendAvax("0.01", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25)
+sendAvax("0.01", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25);
 
 // cancelando transacción con nonce 25
-sendAvax("0", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25)
+sendAvax("0", "0x856EA4B78947c3A5CD2256F85B2B147fEBDb7124", 100, 10, 25);
 ```
 
 ## Conclusión

@@ -45,8 +45,7 @@ solo pueden progresar si hay una cantidad suficiente de nodos validadores conect
 transacciones. Cada validador en una Subnet se le asigna un cierto `peso`, que es un valor numérico
 que representa la importancia del nodo en las decisiones de consenso. En la Red Primaria, el peso es
 igual a la cantidad de AVAX en staking en el nodo. En las Subnets, el peso se asigna actualmente por los
-propietarios de la Subnet cuando emiten la transacción [agregando un
-validador](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) a la Subnet.
+propietarios de la Subnet cuando emiten la transacción [agregando un validador](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) a la Subnet.
 
 Las Subnets pueden operar normalmente solo si los validadores que representan el 80% o más del peso acumulativo del validador
 están conectados. Si la cantidad de stake conectado cae cerca o por debajo del 80%, el rendimiento de la Subnet
@@ -79,8 +78,7 @@ actualización se active.
 Por eso, tener una estrategia de actualización de nodos es absolutamente vital, y siempre debes actualizar al
 último cliente AvalancheGo inmediatamente cuando esté disponible.
 
-Para una guía general sobre cómo actualizar AvalancheGo, echa un vistazo a [este
-tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). Al actualizar nodos de Subnet y
+Para una guía general sobre cómo actualizar AvalancheGo, echa un vistazo a [este tutorial](/nodes/maintain/upgrade-your-avalanchego-node.md). Al actualizar nodos de Subnet y
 teniendo en cuenta la sección anterior, asegúrate de escalonar las actualizaciones de nodos y comenzar una nueva actualización
 solo una vez que el nodo anterior se haya actualizado correctamente. Usa la [API de Salud](/reference/avalanchego/health-api.md#healthhealth) para verificar que el valor `healthy` en la respuesta
 sea `true` en el nodo actualizado, y en otros validadores de la Subnet verifica que
