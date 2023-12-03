@@ -6,10 +6,10 @@ pagination_label: Executing Your Test Cases
 sidebar_position: 5
 ---
 
+# Executing Your Test Cases
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Executing Your Test Cases
 
 In this section, we will go over how to be able to execute the test cases you wrote last section.
 
@@ -238,7 +238,7 @@ for AvalancheGo and Subnet-EVM [here](https://github.com/ava-labs/subnet-evm#ava
 
 The `build/plugins` directory will later be used as the `AVALANCHEGO_PLUGIN_PATH`.
 
-#### Running Ginkgo Tests
+### Running Ginkgo Tests
 
 To run ONLY the HelloWorld precompile test, run the command:
 

@@ -6,10 +6,10 @@ pagination_label: Deploying Your Precompile
 sidebar_position: 6
 ---
 
+# Deploying Your Precompile
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Deploying Your Precompile
 
 We made it! Everything works in our Ginkgo tests, and now we want to spin up a local network
 with the Hello World precompile activated.
@@ -97,7 +97,7 @@ will supply the standard Ethereum API calls. For example, you can use the RPC UR
 
 to connect to the blockchain through Core, MetaMask, HardHat, etc.
 
-### Maintenance
+## Maintenance
 
 You should always keep your fork up to date with the latest changes in the official Subnet-EVM repo.
 If you have forked the Subnet-EVM repo, there could be conflicts and
@@ -107,7 +107,7 @@ If you used Precompile-EVM, you can update your repo by bumping Subnet-EVM versi
 [`go.mod`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/go.mod#L7) and
 [`version.sh`](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/scripts/versions.sh#L4)
 
-### Conclusion
+## Conclusion
 
 We have now created a stateful precompile from scratch with the precompile generation tool. We hope
 you had fun and learned a little more about the Subnet-EVM. Now that you have created a simple

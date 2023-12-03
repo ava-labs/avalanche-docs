@@ -6,10 +6,10 @@ pagination_label: Generating Your Precompile
 sidebar_position: 2
 ---
 
+# Generating Your Precompile
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Generating Your Precompile
 
 In this section, we will go over the process for automatically generating the template code which
 you can configure accordingly for your stateful precompile.

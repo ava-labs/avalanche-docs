@@ -6,10 +6,10 @@ pagination_label: Background and Requirements
 sidebar_position: 1
 ---
 
+# Background and Requirements
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Background and Requirements
 
 This is a brief overview of what this tutorial will cover.
 
@@ -31,7 +31,7 @@ precompile as an example to learn how to write a stateful precompile. The code i
 outdated.
 You should always use the latest version of Subnet-EVM when you develop your own precompile.
 
-#### Precompile-EVM
+## Precompile-EVM
 
 Subnet-EVM precompiles can be registered from an external repo.
 This allows developer to build their precompiles without maintaining a fork of Subnet-EVM.
@@ -47,9 +47,10 @@ state and modify it.
 There is a template repo for how to build a precompile with this way called
 [Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both Subnet-EVM and Precompile-EVM share
 similar directory structures and common codes.
-You can reference the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2)
 
-### Requirements
+You can reference the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2).
+
+## Requirements
 
 This tutorial assumes familiarity with Golang and JavaScript.
 
@@ -132,7 +133,7 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-network-runner/m
 npm install -g solc
 ```
 
-### Complete Code
+## Complete Code
 
 You can inspect example pull request for the complete code.
 
@@ -153,4 +154,4 @@ You can inspect example pull request for the complete code.
 
 <!-- vale on -->
 
-For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/)
+For a full-fledged example, you can also check out the [Reward Manager Precompile](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/rewardmanager/).

@@ -6,10 +6,10 @@ pagination_label: Writing Test Cases
 sidebar_position: 4
 ---
 
+# Writing Test Cases
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
-# Writing Test Cases
 
 In this section, we will go over the different ways we can write test cases for our stateful precompile.
 
