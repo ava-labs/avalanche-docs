@@ -307,9 +307,17 @@ the value as `Hello World!` In this function, we will be returning whatever valu
 The below code snippet can be copied and pasted to overwrite the default `setGreeting` code.
 
 First, we add a helper function to get the greeting value from the stateDB, this will be helpful
-when we test our contract.
+when we test our contract. We will use the `storageKeyHash` to store the value in the Contract's
+reserved storage in the stateDB.
 
 ```go
+var (
+  // storageKeyHash is the hash of the storage key "storageKey" in the contract storage.
+	// This is used to store the value of the greeting in the contract storage.
+	// It is important to use a unique key here to avoid conflicts with other storage keys
+	// like addresses, AllowList, etc.
+	storageKeyHash = common.BytesToHash([]byte("storageKey"))
+)
 // GetGreeting returns the value of the storage key "storageKey" in the contract storage,
 // with leading zeroes trimmed.
 // This function is mostly used for tests.
@@ -326,7 +334,7 @@ Now we can modify the `sayHello` function to return the stored value.
 
 ```go
 func sayHello(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
-	if remainingGas, err = contract.deductGas(suppliedGas, SayHelloGasCost); err != nil {
+	if remainingGas, err = contract.DeductGas(suppliedGas, SayHelloGasCost); err != nil {
 		return nil, 0, err
 	}
 	// CUSTOM CODE STARTS HERE

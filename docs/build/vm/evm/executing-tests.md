@@ -115,7 +115,7 @@ If you want to use a different test command and genesis path than the defaults, 
 See how they were used with default params [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/tests/utils/subnet.go#L113)
 
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`.
-The string passed in to `utils.ExecuteHardHatTestsOnNewBlockchain(ctx, "your_precompile")` will be used
+The string passed in to `utils.RunDefaultHardhatTests(ctx, "your_precompile")` will be used
 to find both the HardHat test file to execute and the genesis file, which is why you need to use the
 same name for both.
 

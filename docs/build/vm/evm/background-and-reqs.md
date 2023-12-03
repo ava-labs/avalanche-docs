@@ -48,7 +48,7 @@ There is a template repo for how to build a precompile with this way called
 [Precompile-EVM](https://github.com/ava-labs/precompile-evm). Both Subnet-EVM and Precompile-EVM share
 similar directory structures and common codes.
 
-You can reference the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/2).
+You can reference the Precompile-EVM PR that adds Hello World precompile [here](https://github.com/ava-labs/precompile-evm/pull/12).
 
 ## Requirements
 
