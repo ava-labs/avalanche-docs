@@ -1,6 +1,6 @@
 ---
-tags: [Construir, Dapps]
-description: En este documento, aprende cómo implementar y probar un contrato inteligente en Avalanche usando Remix y Core.
+etiquetas: [Construir, Dapps]
+descripción: En este documento, aprende cómo implementar y probar un contrato inteligente en Avalanche usando Remix y Core.
 sidebar_label: Implementar con Remix IDE
 pagination_label: Implementar un Contrato Inteligente en Avalanche Usando Remix y Core
 ---
@@ -9,10 +9,12 @@ pagination_label: Implementar un Contrato Inteligente en Avalanche Usando Remix 
 
 ## Introducción
 
-La Red Primaria de Avalanche es una Subnet que tiene tres cadenas: P-Chain, X-Chain
+La Red Primaria de Avalanche es una Subred que tiene tres cadenas: P-Chain, X-Chain
 y C-Chain. La C-Chain es una instancia de la Máquina Virtual Ethereum alimentada
-por el protocolo de consenso Snowman de Avalanche. La [RPC de la C-Chain](/reference/avalanchego/c-chain/api.md) puede hacer todo lo que un cliente Ethereum típico puede hacer utilizando las llamadas RPC estándar de Ethereum. Los beneficios inmediatos de
-usar la C-Chain en lugar de Ethereum son todos los beneficios de usar Avalanche. Estas propiedades podrían mejorar considerablemente el rendimiento de
+por el protocolo de consenso Snowman de Avalanche. La
+[RPC de la C-Chain](/reference/avalanchego/c-chain/api.md) puede hacer todo lo que un cliente Ethereum típico puede hacer utilizando las llamadas RPC estándar de Ethereum. Los beneficios inmediatos de
+usar la C-Chain en lugar de Ethereum son todos los beneficios de usar
+Avalanche. Estas propiedades podrían mejorar considerablemente el rendimiento de
 las Dapps y la experiencia del usuario.
 
 Hoy, implementaremos y probaremos un contrato inteligente en Avalanche usando Remix y Core Wallet.
@@ -33,29 +35,41 @@ Para cambiar a la **red de prueba Fuji**, ve a Configuración, selecciona Avanza
 
 </div>
 
-Configuración de la **Red de Prueba Local (Avalanche Network Runner)**: [(Tutorial del Avalanche Network Runner)](/tooling/network-runner.md)
+**Configuración de la Red de Prueba Local (Avalanche Network Runner):** [(Tutorial del Avalanche Network Runner)](/tooling/network-runner.md)
 
 - **Nombre de la Red**: Avalanche Local C-Chain
 - **Nueva URL RPC**:
   [http://127.0.0.1:34890/ext/bc/C/rpc](http://127.0.0.1:34890/ext/bc/C/rpc)
-  (Nota: el número de puerto debe coincidir con tu configuración local, que puede ser diferente de 34890.)
+  (Nota: el número de puerto debe coincidir con tu configuración local, que puede ser diferente
+  de 34890.)
 - **ChainID**: `43112`
 - **Símbolo**: `AVAX`
 - **Explorador**: N/A
 
-## Paso 2: Financiar tu Dirección de la C-Chain
+## Paso 2: Financiar tu Dirección en la C-Chain
 
-### **Usando la Billetera Avalanche**
+### **Usando Core web**
 
-En la Mainnet, puedes usar la [Billetera Avalanche](https://wallet.avax.network/) para transferir fondos desde la X-Chain a tu dirección de la C-Chain. El proceso es sencillo, como se explica en este [tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet). La billetera también se puede usar en redes de prueba y locales.
+En la Mainnet, puedes usar [Core
+web](https://core.app/) para transferir fondos desde la X-Chain a tu
+dirección en la C-Chain. El proceso es sencillo, como se explica en este
+[tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake).
+Ten en cuenta que necesitarás una [billetera Core](https://join.core.app/extension) conectada a Core web para hacer transferencias entre cadenas.
+La billetera Core también se puede usar en redes de prueba y locales.
+Esta billetera también está disponible para [móviles](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone).
 
 ### **Usando el Faucet de la Red de Prueba**
 
-Para financiar en la red de prueba, puedes usar el Faucet de la Red de Prueba. Navega a [https://faucet.avax.network/](https://faucet.avax.network/) y pega tu dirección de la C-Chain. El Faucet sabrá automáticamente que necesita enviar los AVAX de prueba a la C-Chain. Haz clic en la casilla de verificación CAPTCHA y selecciona el botón 'Request AVAX'. Tu dirección recibirá AVAX de prueba en unos segundos.
+Para financiar en la red de prueba, puedes usar el Faucet de la Red de Prueba. Navega
+a [https://faucet.avax.network/](https://faucet.avax.network/) y pega tu
+dirección en la C-Chain. El Faucet sabrá automáticamente que necesita enviar los AVAX de prueba
+a la C-Chain. Haz clic en la casilla de verificación CAPTCHA y selecciona el botón 'Request AVAX'.
+Tu dirección recibirá AVAX de prueba en unos segundos.
 
 ### Financiamiento en la Red de Prueba Local
 
-En una red local, puedes financiar fácilmente tus direcciones siguiendo [este](/build/subnet/hello-subnet.md#importing-the-test-private-key) tutorial.
+En una red local, puedes financiar fácilmente tus direcciones siguiendo
+[este](/build/subnet/hello-subnet.md#importing-the-test-private-key) tutorial.
 
 ## Paso 3: Conectar Core e Implementar un Contrato Inteligente Usando Remix
 
