@@ -77,7 +77,7 @@ The response has your node’s ID:
 ### Add as a Validator
 
 Connect [Core extension](https://join.core.app/extension) to [Core web](https://core.app), and go the 'Staking' tab. 
-Here, choose`Validate` from the menu.
+Here, choose 'Validate' from the menu.
 
 Fill out the staking parameters. They are explained in more detail in [this doc](/nodes/validate/how-to-stake.md). When you’ve 
 filled in all the staking parameters and double-checked them, click `Submit Validation`. Make sure the staking period is at
