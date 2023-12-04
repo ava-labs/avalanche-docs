@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: Configurando tu entorno para construir precompilaciones estatales en EVM
+tags: [Construir, Máquinas Virtuales]
+description: Configurando tu entorno para construir precompilaciones estatales en EVM
 sidebar_label: Antecedentes y Requisitos
 pagination_label: Antecedentes y Requisitos
 sidebar_position: 1

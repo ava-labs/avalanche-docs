@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: Generando tu precompilado
+tags: [Construir, Máquinas Virtuales]
+description: Generando tu precompilado
 sidebar_label: Generando tu precompilado
 pagination_label: Generando tu precompilado
 sidebar_position: 2

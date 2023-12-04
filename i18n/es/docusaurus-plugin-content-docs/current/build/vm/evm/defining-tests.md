@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: En este tutorial, repasaremos las diferentes formas en que podemos escribir casos de prueba para nuestro precompilador con estado.
+tags: [Construir, Máquinas Virtuales]
+description: En este tutorial, repasaremos las diferentes formas en que podemos escribir casos de prueba para nuestro precompilador con estado.
 sidebar_label: Escribiendo Casos de Prueba
 pagination_label: Escribiendo Casos de Prueba
 sidebar_position: 4

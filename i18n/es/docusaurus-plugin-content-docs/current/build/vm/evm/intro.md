@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: Guía para empezar a construir precompilaciones estatales para Subnet-EVM y Precompile-EVM
+tags: [Construir, Máquinas Virtuales]
+description: Guía para empezar a construir precompilaciones estatales para Subnet-EVM y Precompile-EVM
 sidebar_label: Introducción
 pagination_label: Introducción
 sidebar_position: 0
