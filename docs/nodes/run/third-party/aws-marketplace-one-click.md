@@ -285,11 +285,11 @@ If you'd like to import an existing wallet to Core extension, follow
 
 ![Core web](/img/one-click-validator-node/core-web.png)
 
-Core web is a free, all-in-one command center giving users a more intuitive and comprehensive way to view,
-and use across the Avalanche network, Avalanche Subnets, and Ethereum. 
-Core web is optimized for use with Core browser extension and Core mobile (iOS, Android), free, 
-personal wallet (self-custodial). Together, they are key components of the Core product 
-suite that brings dApps, NFTs, Avalanche Bridge, Subnets, L2s, and more, directly to users.
+Core web is a free, all-in-one command center that gives users a more intuitive and comprehensive way to view
+assets, and use dApps across the Avalanche network, its various Subnets, and Ethereum. 
+Core web is optimized for use with the Core browser extension and Core mobile (available on both iOS & Android).
+Together, they are key components of the Core product suite that brings dApps,
+NFTs, Avalanche Bridge, Subnets, L2s, and more, directly to users.
 
 ### Switching to Testnet Mode
 
