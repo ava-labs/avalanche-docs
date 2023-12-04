@@ -133,14 +133,14 @@ with the `--local` parameter.
 #### Funding the Ledger
 
 A new Ledger device has no funds on the addresses it controls. You'll need to send funds to it by
-exporting them from the C-Chain to the P-Chain using [Core web](https://core.app)
+exporting them from C-Chain to the P-Chain using [Core web](https://core.app)
 connected to [Core extension](https://join.core.app/extension).
 
 You can load the Ledger's C-Chain address in Core extension, or load in a different private key to 
-[Core extension](https://join.core.app/extension), then connect to Core web . 
+[Core extension](https://join.core.app/extension), and then connect to Core web . 
 
-You can move test funds from the C-Chain to the P-Chain by clicking Stake on Core web, then Cross-Chain Transfer ( find more details on
-[this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake) ).
+You can move test funds from the C-Chain to the P-Chain by clicking Stake on Core web , then Cross-Chain Transfer (find more details on
+[this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
 
 ## Deploy the Subnet
 
