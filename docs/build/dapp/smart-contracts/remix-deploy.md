@@ -57,8 +57,7 @@ C-Chain address. The process is simple, as explained in this
 [tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake).
 Please note that you will need [Core wallet](https://join.core.app/extension) connected to Core web for making cross-chain transfers.
 Core wallet can be used on test and local networks, too. 
-This wallet is available for 
-[mobile](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone) too.
+This wallet is available for [mobile](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone) too.
 
 ### **Using Test Network Faucet**
 
