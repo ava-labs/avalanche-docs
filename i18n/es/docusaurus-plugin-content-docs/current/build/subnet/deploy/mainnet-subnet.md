@@ -1,66 +1,55 @@
 ---
-tags: [Construir, Subnets]
-description: Este tutorial demuestra cómo implementar una Subnet con permisos en la Mainnet de Avalanche.
+etiquetas: [Construir, Subredes]
+descripción: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
 sidebar_label: En la Mainnet de Avalanche
-pagination_label: Implementar una Subnet con permisos en Mainnet
+pagination_label: Implementar una Subred con permisos en Mainnet
 sidebar_position: 2
 ---
 
-# Implementar una Subnet con permisos en Mainnet
+# Implementar una Subred con permisos en Mainnet
 
 :::warning
 
-Implementar una Subnet en Mainnet tiene muchos riesgos. Hacerlo de manera segura requiere un enfoque
-láser en seguridad. Este tutorial hace todo lo posible por señalar peligros comunes, pero puede haber
-otros riesgos no discutidos aquí.
+Implementar una Subred en Mainnet tiene muchos riesgos. Hacerlo de manera segura requiere un enfoque
+láser en seguridad. Este tutorial hace todo lo posible para señalar los problemas comunes, pero puede haber otros riesgos no discutidos aquí.
 
-Este tutorial es un recurso educativo y no ofrece garantías de que seguirlo resulte en una
-implementación segura. Además, este tutorial toma algunos atajos que ayudan a comprender el proceso de
-implementación a expensas de la seguridad. El texto resalta estos atajos y no deben usarse para una
-implementación en producción.
+Este tutorial es un recurso educativo y no ofrece garantías de que seguirlo resulte en una implementación segura. Además, este tutorial toma algunos atajos que ayudan a comprender el proceso de implementación a expensas de la seguridad. El texto resalta estos atajos y no deben usarse para una implementación en producción.
 
 :::
 
-Después de gestionar con éxito una implementación de Subnet en la `Fuji Testnet`, estás listo para
-implementar tu Subnet en Mainnet. Si no lo has hecho, primero [implementa una Subnet en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
+Después de gestionar con éxito una implementación de Subred en la `Fuji Testnet`, estás listo para implementar tu Subred en Mainnet. Si no lo has hecho, primero [implementa una Subred en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 Este tutorial muestra cómo hacer lo siguiente en `Mainnet`.
 
-- Crear una Subnet.
+- Crear una Subred.
 - Implementar una máquina virtual basada en Subnet-EVM.
-- Unir un nodo a la Subnet recién creada.
-- Agregar un nodo como validador a la Subnet.
+- Unir un nodo a la Subred recién creada.
+- Agregar un nodo como validador a la Subred.
 
 :::note
 
-Todos los ID en este artículo son solo con fines ilustrativos. Se garantiza que serán diferentes en
-tu propia ejecución de este tutorial.
+Todos los ID en este artículo son solo con fines ilustrativos. Se garantiza que serán diferentes en tu propia ejecución de este tutorial.
 
 :::
 
-## Requisitos previos
+## Prerrequisitos
 
 - 5+ nodos en ejecución y [totalmente arrancados](/nodes/README.md) en `Mainnet`
-- [Avalanche-CLI está instalado](/tooling/cli-guides/install-avalanche-cli.md) en cada nodo validador
+- [Avalanche-CLI está instalado](/tooling/cli-guides/install-avalanche-cli.md) en la caja de cada nodo validador
 - Un dispositivo [Ledger](https://www.ledger.com/)
-- Has [creado una configuración de Subnet](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-  y probado completamente una implementación de Subnet en [Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
+- Has [creado una configuración de Subred](/build/subnet/hello-subnet.md#create-your-subnet-configuration) y probado completamente una implementación de Subred en [Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
 
-Aunque solo se requiere estrictamente un validador para ejecutar una Subnet, ejecutarla con menos de
-cinco validadores es extremadamente peligroso y garantiza un tiempo de inactividad de la red. Planea
-soportar al menos cinco validadores en tu red de producción.
+Aunque solo se requiere estrictamente un validador para ejecutar una Subred, ejecutarla con menos de cinco validadores es extremadamente peligroso y garantiza un tiempo de inactividad de la red. Planifica soportar al menos cinco validadores en tu red de producción.
 
 :::
 
 ### Obtener tus NodeIDs de Mainnet
 
-Necesitas recopilar los NodeIDs de cada uno de tus validadores. Este tutorial utiliza estos NodeIDs en
-varios comandos.
+Necesitas recopilar los NodeIDs de cada uno de tus validadores. Este tutorial utiliza estos NodeIDs en varios comandos.
 
-Para obtener el NodeID de un nodo `Mainnet`, llama al endpoint
-[info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid). Por ejemplo:
+Para obtener el NodeID de un nodo `Mainnet`, llama al punto final [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid). Por ejemplo:
 
 ```text
 curl -X POST --data '{
@@ -82,26 +71,19 @@ La respuesta debería verse algo así:
 }
 ```
 
-En la respuesta de ejemplo, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` es el NodeID. Ten en cuenta que el
-prefijo `NodeID-` es parte del NodeID.
+En la respuesta de muestra, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` es el NodeID. Ten en cuenta que el prefijo `NodeID-` es parte del NodeID.
 
 ### Configurar tu Ledger
 
-En interés de la seguridad, todas las operaciones Avalanche-CLI en `Mainnet` requieren el uso de un
-dispositivo Ledger conectado. Debes desbloquear tu Ledger y ejecutar la aplicación Avalanche. Consulta
-[Cómo usar Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche)
-para obtener ayuda para configurarlo.
+En interés de la seguridad, todas las operaciones Avalanche-CLI en `Mainnet` requieren el uso de un dispositivo Ledger conectado. Debes desbloquear tu Ledger y ejecutar la aplicación Avalanche. Consulta [Cómo usar Ledger](https://support.avax.network/en/articles/6150237-how-to-use-a-ledger-nano-s-or-nano-x-with-avalanche) para obtener ayuda para configurarlo.
 
-Avalanche-CLI admite los dispositivos Ledger `Nano X`, `Nano S` y `Nano S Plus`.
+Avalanche-CLI es compatible con los dispositivos Ledger `Nano X`, `Nano S` y `Nano S Plus`.
 
-Los dispositivos Ledger admiten la firma de TX para cualquier dirección dentro de una secuencia
-generada automáticamente por el dispositivo.
+Los dispositivos Ledger admiten la firma de TX para cualquier dirección dentro de una secuencia generada automáticamente por el dispositivo.
 
-De forma predeterminada, Avalanche-CLI utiliza la primera dirección de la derivación, y esa dirección
-necesita fondos para emitir las TX para crear la Subnet y agregar validadores.
+De forma predeterminada, Avalanche-CLI utiliza la primera dirección de la derivación, y esa dirección necesita fondos para emitir las TX para crear la Subred y agregar validadores.
 
-Para obtener la primera dirección `Mainnet` de tu dispositivo Ledger, primero asegúrate de que esté
-conectado, desbloqueado y ejecutando la aplicación Avalanche. Luego ejecuta el comando `key list`:
+Para obtener la primera dirección `Mainnet` de tu dispositivo Ledger, primero asegúrate de que esté conectado, desbloqueado y ejecutando la aplicación Avalanche. Luego ejecuta el comando `key list`:
 
 ```bash
 avalanche key list --ledger 0 --mainnet
@@ -111,37 +93,27 @@ avalanche key list --ledger 0 --mainnet
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 |  KIND  |  NAME   |          CHAIN          |                    ADDRESS                    | BALANCE | NETWORK |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
-| ledger | index 0 | P-Chain (Bech32 format) | P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j |      11 | Mainnet |
+| ledger | index 0 | P-Chain (formato Bech32) | P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j |      11 | Mainnet |
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-El comando imprime la dirección de la P-Chain para `Mainnet`,
-`P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, y su saldo. Debes financiar esta dirección con al
-menos 2.5 AVAX para cubrir las tarifas de TX. La tarifa de TX para crear tu Subnet cuesta 2 AVAX. Agregar
-validadores cuesta 0.001 AVAX cada uno. Para más detalles, consulta [Tarifas](/reference/standards/guides/txn-fees)
+El comando imprime la dirección de la P-Chain para `Mainnet`, `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, y su saldo. Debes financiar esta dirección con al menos 2.5 AVAX para cubrir las tarifas de TX. La tarifa de TX para crear tu Subred cuesta 2 AVAX. Agregar validadores cuesta 0.001 AVAX cada uno. Para más detalles, consulta [Tarifas](/reference/standards/guides/txn-fees)
 
 :::note
 
-Puedes usar el comando `key list` para obtener cualquier dirección de Ledger en la secuencia de
-derivación cambiando el parámetro de índice de `0` al deseado, o a una lista de ellos (por ejemplo: `2`,
-o `0,4,7`). Además, puedes solicitar direcciones en `Fuji` con el parámetro `--fuji`, y redes locales
-con el parámetro `--local`.
+Puedes usar el comando `key list` para obtener cualquier dirección de Ledger en la secuencia de derivación cambiando el parámetro de índice de `0` al deseado, o a una lista de ellos (por ejemplo: `2`, o `0,4,7`). Además, puedes solicitar direcciones en `Fuji` con el parámetro `--fuji`, y redes locales con el parámetro `--local`.
 
 :::
 
 #### Financiar el Ledger
 
-Un nuevo dispositivo Ledger no tiene fondos en las direcciones que controla. Debes enviar fondos a él
-exportándolos de la C-Chain a la P-Chain usando la [Billetera Web de
-Avalanche](https://wallet.avax.network).
+Un nuevo dispositivo Ledger no tiene fondos en las direcciones que controla. Deberás enviar fondos a él exportándolos desde C-Chain a P-Chain usando [Core web](https://core.app) conectado a [Core extension](https://join.core.app/extension).
 
-Puedes cargar la dirección de la C-Chain del Ledger en la billetera web o cargar una clave privada
-diferente. Puedes transferir fondos de la C-Chain a la P-Chain haciendo clic en Cross Chain en el lado
-izquierdo de la billetera web. Consulta este
-[tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet-between-x-and-c-chain)
-para obtener más instrucciones.
+Puedes cargar la dirección de C-Chain del Ledger en la extensión Core, o cargar una clave privada diferente en [Core extension](https://join.core.app/extension), y luego conectarte a Core web.
 
-## Implementar la Subnet
+Puedes mover fondos de prueba desde la C-Chain a la P-Chain haciendo clic en Stake en Core web, luego en Transferencia entre Cadenas (encuentra más detalles en [este tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
+
+## Implementar la Subred
 
 Con tu Ledger desbloqueado y ejecutando la aplicación Avalanche, ejecuta
 
@@ -149,18 +121,17 @@ Con tu Ledger desbloqueado y ejecutando la aplicación Avalanche, ejecuta
 avalanche subnet deploy testsubnet
 ```
 
-Esto va a iniciar una nueva serie de comandos.
+Esto va a iniciar una nueva serie de comandos en el prompt.
 
 ```text
-Use las teclas de flecha para navegar: ↓ ↑ → ←
-? Elije una red para implementar en:
+Usa las teclas de flecha para navegar: ↓ ↑ → ←
+? Elige una red para implementar en:
     Red Local
     Fuji
   ▸ Mainnet
 ```
 
-Este tutorial trata sobre la implementación en `Mainnet`, así que navega con las teclas de flecha hasta
-`Mainnet` y presiona enter.
+Este tutorial trata sobre la implementación en `Mainnet`, así que navega con las teclas de flecha hasta `Mainnet` y presiona enter.
 
 ```text
 ✔ Mainnet
@@ -214,8 +185,8 @@ A continuación, la CLI genera una TX para crear la SubnetID y le pide al usuari
 *** Por favor, firma el hash de creación de la subnet en el dispositivo Ledger ***
 ```
 
-Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el botón derecho del Ledger,
-y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
+Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el
+botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
 Si el Ledger no tiene suficientes fondos, es posible que el usuario vea un mensaje de error:
 
@@ -227,12 +198,12 @@ Error: fondos insuficientes: los UTXO proporcionados necesitan 1000000000 unidad
 Si tiene éxito, la CLI te pide que firmes una TX de creación de cadena.
 
 ```text
-La Subnet ha sido creada con ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Ahora creando la blockchain...
+La Subnet se ha creado con ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Ahora creando la blockchain...
 *** Por favor, firma el hash de creación de la blockchain en el dispositivo Ledger ***
 ```
 
-Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el botón derecho del Ledger,
-y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
+Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el
+botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
 
 Después de eso, la CLI crea la blockchain dentro de la Subnet, y aparece una ventana de resumen para la implementación.
 
@@ -240,13 +211,13 @@ Después de eso, la CLI crea la blockchain dentro de la Subnet, y aparece una ve
 +--------------------+------------------------------------------------------------------------------------+
 | RESULTADOS DEPLOYMENT |                                                                                    |
 +--------------------+------------------------------------------------------------------------------------+
-| Nombre de la Cadena | testsubnet                                                                         |
+| Nombre de la cadena | testsubnet                                                                         |
 +--------------------+------------------------------------------------------------------------------------+
 | ID de la Subnet     | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
 +--------------------+------------------------------------------------------------------------------------+
 | ID de la VM         | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                  |
 +--------------------+------------------------------------------------------------------------------------+
-| ID de la Blockchain | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
+| ID de la blockchain | wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG                                  |
 +--------------------+------------------------------------------------------------------------------------+
 | URL RPC             | http://127.0.0.1:9650/ext/bc/wNoEemzDEr54Zy3iNn66yjUxXmZS9LKsZYSUciL89274mHsjG/rpc |
 +--------------------+------------------------------------------------------------------------------------+
@@ -308,7 +279,9 @@ Selecciona automático.
 ✔ Ruta a tu archivo de configuración existente (o donde se va a generar): config.json
 ```
 
-Proporcione la ruta a un archivo de configuración. Si este comando se ejecuta en la máquina donde se está ejecutando su validador, podría apuntar esto al archivo de configuración realmente utilizado, por ejemplo, `/etc/avalanchego/config.json` - solo asegúrese de que la herramienta tenga acceso de **escritura** al archivo. O podría simplemente copiar el archivo más tarde. En cualquier caso, la herramienta va a intentar editar el archivo existente especificado por la ruta dada, o crear un nuevo archivo. Nuevamente, establezca permisos de escritura.
+
+
+Proporcione la ruta a un archivo de configuración. Si este comando se ejecuta en la máquina donde se está ejecutando su validador, podría apuntar esto al archivo de configuración realmente utilizado, por ejemplo, `/etc/avalanchego/config.json` - solo asegúrese de que la herramienta tenga acceso de **escritura** al archivo. O podría copiar el archivo más tarde. En cualquier caso, la herramienta va a intentar editar el archivo existente especificado por la ruta dada, o crear un nuevo archivo. Nuevamente, establezca permisos de escritura.
 
 #### Establecer Directorio de Plugins
 
@@ -388,7 +361,7 @@ Si el comando `join` no se completa con éxito antes de que se complete `addVali
 
 Ahora que el nodo se ha unido a la Subnet, un titular de la clave de control de la Subnet debe llamar a `addValidator` para otorgar al nodo permiso para ser un validador en su Subnet.
 
-Para incluir en la lista blanca a un nodo como un validador reconocido en la Subnet, ejecute:
+Para agregar aprobación de lista blanca a un nodo como validador reconocido en la Subnet, ejecute:
 
 ```bash
 avalanche subnet addValidator testsubnet
@@ -414,19 +387,19 @@ Debido a que esta operación emite una nueva
 claves de control para firmar la operación. Debido a que este tutorial solo usa una clave de control en la Subnet, el proceso se ve ligeramente diferente si se usan múltiples claves de control. La dirección necesita pagar una tarifa de TX de 0.001 AVAX.
 
 ```text
-Sus claves de autenticación de la Subnet para la creación de la TX de addValidator: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Sus claves de autenticación de Subnet para la creación de la transacción add validator: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
 ### Establecer NodeID
 
-Ahora ingrese el [**NodeID**](#obtener-tus-nodeids-de-mainnet) del validador.
+Ahora ingrese el [**NodeID**](#obtener-sus-nodeids-de-mainnet) del validador.
 
 ```text
-A continuación, necesitamos el NodeID del validador que desea incluir en la lista blanca.
+A continuación, necesitamos el NodeID del validador que desea agregar a la lista blanca.
 
 Consulte https://docs.avax.network/apis/avalanchego/apis/info#infogetnodeid para obtener instrucciones sobre cómo consultar el NodeID desde su nodo
 (Edite la dirección IP del host y el puerto para que coincidan con su implementación, si es necesario).
-✔ ¿Cuál es el NodeID del validador que desea incluir en la lista blanca?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
+✔ ¿Cuál es el NodeID del validador que desea agregar a la lista blanca?: NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg█
 ```
 
 Tenga en cuenta que esta ID está modificada intencionalmente para evitar la replicación.
@@ -434,7 +407,7 @@ Tenga en cuenta que esta ID está modificada intencionalmente para evitar la rep
 ### Establecer Peso de Stake
 
 Seleccione 30 como peso de stake. Puede obtener más información sobre el parámetro de peso de stake en
-[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) en la sección
+[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) bajo la sección
 `weight`.
 
 :::warning
@@ -544,10 +517,10 @@ Transacción exitosa, ID de transacción: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQH
 ```
 
 ¡Esto significa que el nodo ahora es un validador en la Subnet dada en `Mainnet`! Sin embargo, tu trabajo no está
-completo. **Debes** terminar la sección [Solicitud para unirse a una Subnet como validador](#solicitud-para-unirse-a-una-subnet-como-validador)
+completo. **Debes** completar la sección [Solicitud para unirse a una Subnet como validador](#solicitud-para-unirse-a-una-subnet-como-validador)
 de lo contrario, tu Subnet corre el riesgo de tiempo de inactividad.
 
-Puedes obtener información de la identificación de la TX en la P-Chain en [Avalanche Explorer](https://subnets.avax.network/)
+Puedes obtener información de la identificación de la TX de la P-Chain en [Avalanche Explorer](https://subnets.avax.network/)
 
 ## Exportar Subnet
 
