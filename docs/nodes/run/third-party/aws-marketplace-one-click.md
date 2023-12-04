@@ -296,7 +296,7 @@ suite that brings dApps, NFTs, Avalanche Bridge, Subnets, L2s, and more, directl
 By default, Core web and Core extension are connected to Mainnet. 
 For the sake of this demo, you want to connect to the Fuji Testnet.
 
-#### On Core extension
+#### On Core Extension
 
 From the hamburger menu on the top-left corner, choose Advanced, and then toggle the Testnet Mode on.
 
@@ -318,12 +318,16 @@ You can follow the same steps for switching back to Mainnet.
 * Node ID: A unique ID derived from each individual node’s staker certificate. 
 Use the `NodeID` which was returned in the `info.getNodeID` response.
 In this example it's `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
+
 * Staking End Date: Your AVAX tokens will be locked until this date.
+
 * Stake Amount: The amount of AVAX to lock for staking. On Mainnet,
 the minimum required amount is 2,000 AVAX. On Testnet the minimum required
 amount is 1 AVAAX.
+
 * Delegation Fee: You will claim this % of the rewards from the delegators on
 your node.
+
 * Reward Address: A reward address is the destination address of the accumulated
 staking rewards.
 :::
