@@ -315,6 +315,7 @@ You can follow the same steps for switching back to Mainnet.
 ### Adding the Validator
 
 :::info
+
 * Node ID: A unique ID derived from each individual node’s staker certificate. 
 Use the `NodeID` which was returned in the `info.getNodeID` response.
 In this example it's `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
@@ -330,6 +331,7 @@ your node.
 
 * Reward Address: A reward address is the destination address of the accumulated
 staking rewards.
+
 :::
 
 To add a node as a Validator, first select the Stake tab on Core web, 
@@ -555,11 +557,11 @@ please read [this doc](/nodes/validate/how-to-stake.md#validators).
 AWS one click is meant to be used in automated environments, not as an end-user solution.
 You can still manage it manually, but it is not as easy as an Ubuntu instance or using the script:
 
-- AvalancheGo binary is at `/usr/local/bin/avalanchego`
-- Main node config is at `/etc/avalanchego/conf.json`
-- Working directory is at `/home/avalanche/.avalanchego/ (and belongs to avalanchego user)`
-- Database is at `/data/avalanchego`
-- Logs are at `/var/log/avalanchego`
+* AvalancheGo binary is at `/usr/local/bin/avalanchego`
+* Main node config is at `/etc/avalanchego/conf.json`
+* Working directory is at `/home/avalanche/.avalanchego/ (and belongs to avalanchego user)`
+* Database is at `/data/avalanchego`
+* Logs are at `/var/log/avalanchego`
 
 For a simple upgrade you would need to place the new binary at `/usr/local/bin/`.
 If you run a Subnet, you would also need to place the VM binary into `/home/avalanche/.avalanchego/plugins`.
