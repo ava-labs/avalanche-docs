@@ -540,7 +540,13 @@ aside {
     font-size: 56px;
     line-height: 50px;
   }
+}
 
+@media screen and (max-width: 375px) {
+  .theme-doc-markdown h1:first-of-type{
+    font-size: 48px;
+    line-height: 43px;
+  }
 }
 
 @media screen and (max-width: 375px) {
