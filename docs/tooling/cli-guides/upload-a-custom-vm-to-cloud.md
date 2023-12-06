@@ -11,7 +11,7 @@ sidebar_position: 7
 This page demonstrates how to deploy a custom VM into cloud-based validators using Avalanche-CLI.
 
 :::info
-Currently, only Fuji network is supported.
+Currently, only Fuji network and Devnets are supported.
 :::
 
 :::warning
@@ -45,22 +45,6 @@ The following settings will be used:
 :::note
 The CLI needs a public repo url in order to be able to download and install the custom VM on cloud.
 :::
-
-### Local Build Stage
-
-A locally compiled binary is needed to setup the Subnet. You can create it by locally
-cloning the HyperSDK, changing to the desired branch, and then executing the build
-script. Eg:
-
-```bash
-git clone https://github.com/ava-labs/hypersdk
-cd hypersdk
-git checkout main
-./examples/tokenvm/scripts/build.sh <vmBinaryPath>
-```
-
-where `<vmBinaryPath>` is the full path where you want the script's
-output binary to be saved (for example `~/tokenvm.bin`).
 
 ### Genesis File
 
@@ -125,10 +109,29 @@ Provide path to genesis:
 ✗ Enter path to custom genesis: <genesisPath>
 ```
 
-Provide path to binary:
+Provide the source code repo url:
 
 ```text
-✗ Enter path to vm binary: <vmBinaryPath>
+✗ Source code repository URL: https://github.com/ava-labs/hypersdk/
+```
+
+Set the branch:
+
+```text
+✗ Branch: main
+```
+
+Finally set the build script:
+
+```text
+✗ Build script: examples/tokenvm/scripts/build.sh
+```
+
+CLI will generate a locally compiled binary, and then create the Subnet.
+
+```text
+Cloning into ...
+
 Successfully created subnet configuration
 ```
 
@@ -401,31 +404,9 @@ To deploy our Custom VM, run:
 
 ```shell
 avalanche node sync <clusterName> <subnetName>
-
-...
-
-Custom VM source code repository, branch and build script not defined for subnet. Filling in the details now.
 ```
 
-Provide the source code repo url:
-
 ```text
-✗ Source code repository URL: https://github.com/ava-labs/hypersdk/
-```
-
-Set the branch:
-
-```text
-✗ Branch: main
-```
-
-Finally set the build script:
-
-```text
-✗ Build script: examples/tokenvm/scripts/build.sh
-
-...
-
 Node(s) successfully started syncing with Subnet!
 ```
 
