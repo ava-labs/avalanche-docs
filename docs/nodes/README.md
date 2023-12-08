@@ -8,7 +8,9 @@ pagination_label: 🔗 Nodes Quick Links
 
 This section provides documents on how to build and maintain an AvalancheGo
 node, and then validate the Avalanche network using an AvalancheGo node.
+
 ## Run a Node
+
 | | |
 | --- | --- |
 | [**Manually**](/nodes/run/node-manually.md) | Compile an Avalanche node from source and run it manually |
@@ -27,6 +29,7 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 <div className='tableDivider' ></div>
 
 ## Configure
+
 |                                                                          |                                                             |
 | :---------------------------------------------------------------------------- | :---------------------------------------------------------- |
 | [**AvalancheGo Configs and Flags**](/nodes/configure/avalanchego-config-flags.md) | This documents list all available configuration and flags for AvalancheGo    |
@@ -36,6 +39,7 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 <div className='tableDivider' ></div>
 
 ## Validate
+
 |                                                    |                                                                                        |
 | :------------------------------------------------- | :------------------------------------------------------------------------------------- |
 | [**What is Staking?**](/nodes/validate/what-is-staking.md)      | Explains the concept of staking                                                         |
@@ -46,6 +50,7 @@ node, and then validate the Avalanche network using an AvalancheGo node.
 <div className='tableDivider' ></div>
 
 ## Maintain
+
 |                                                                          |                                                             |
 | :---------------------------------------------------------------------------- | :---------------------------------------------------------- |
 | [**Node Bootstrapping: What to Expect**](/nodes/maintain/node-bootstrap.md)  | Understand how a node bootstraps                                     |

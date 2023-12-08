@@ -15,8 +15,8 @@
   --ifm-color-primary-lightest: #f29091;
   --ifm-code-font-size: 95%;
 
-  --ifm-line-height-base: 1.2;
-  --ifm-font-size-base: 87.5%;
+  --ifm-line-height-base: 1.5;
+  --ifm-font-size-base: 16pt;
 
   /* --ifm-menu-color-background-active:#E84142; */
   --ifm-menu-color-active: black;
@@ -68,7 +68,7 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 }
 
 .theme-doc-sidebar-menu {
-  font-size: 14px;
+  font-size: 14pt;
 }
 
 html[data-theme='light'] .DocSearch {
@@ -117,7 +117,17 @@ html[data-theme='dark'] .DocSearch {
 }
 .navbar__logo {
   margin-right: 78px;
+  height: 1.5rem;
 }
+
+.DocSearch-Button-Placeholder {
+  font-size: 14px !important;
+}
+
+.dropdown__link {
+  font-size: 14px;
+}
+
 .header-build-dropdown{
   white-space: nowrap;
 }
@@ -237,6 +247,11 @@ a.navbar__item.navbar__link.header-discord-link, a.navbar__item.navbar__link.hea
   padding-left: 0;
 }
 
+.navbar__inner{
+  font-size: 14px;
+  line-height: 100%;
+}
+
 /* github */
 .header-github-link:hover {
   opacity: 0.6;
@@ -306,7 +321,7 @@ span.menu__item {
 
 /* Custom Footer */
 .theme-doc-sidebar-menu {
-  font-size: 13px;
+  font-size: 14pt;
 }
 
 .footer {
@@ -480,8 +495,8 @@ and (max-width: 996px) {
 
 .theme-doc-sidebar-item-link-level-2 .menu__link{
   color:#808080;
-  font-size: 10px;
-  line-height: 9px;
+  font-size: 12pt;
+  line-height: 100%;
 }
 .theme-doc-sidebar-item-link-level-2 .menu__link--active{
   color:white;
