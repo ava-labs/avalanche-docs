@@ -14,7 +14,7 @@ build and test Subnets.
 To get started, look at the documentation for the subcommands or jump right
 in with `avalanche subnet create myNewSubnet`.
 
-[Install Avalanche CLI](https://docs.avax.network/tooling/cli-guides/install-avalanche-cli)
+[Install Avalanche CLI](/tooling/cli-guides/install-avalanche-cli.md)
 
 ## Primary
 
