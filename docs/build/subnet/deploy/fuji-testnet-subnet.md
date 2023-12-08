@@ -56,7 +56,7 @@ _To connect to the Fuji Testnet instead of the main net, use argument `--network
 
 Also it's worth pointing out that
 [it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking.md#fuji-testnet)
-and you can get the test token from the [faucet](https://faucet.avax.network/).
+and you can get the test token from the [faucet](https://faucet.avax.network/). (but you need nowadays some coupon)
 
 To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid):
 
