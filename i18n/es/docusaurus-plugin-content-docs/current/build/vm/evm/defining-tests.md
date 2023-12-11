@@ -146,9 +146,132 @@ Para el contrato de prueba, escribimos nuestra prueba en `./contracts/test/Examp
 
 <!-- vale on -->
 
+```sol
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "../ExampleHelloWorld.sol";
+import "../interfaces/IHelloWorld.sol";
+import "./AllowListTest.sol";
+contract ExampleHelloWorldTest is AllowListTest {
+  IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+  function step_getDefaultHelloWorld() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    assertEq(example.sayHello(), "Hello World!");
+  }
+  function step_doesNotSetGreetingBeforeEnabled() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    try example.setGreeting("testing") {
+      assertTrue(false, "setGreeting should fail");
+    } catch {}
+  }
+  function step_setAndGetGreeting() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    helloWorld.setEnabled(exampleAddress);
+    assertRole(
+      helloWorld.readAllowList(exampleAddress),
+      AllowList.Role.Enabled
+    );
+    string memory greeting = "testgreeting";
+    example.setGreeting(greeting);
+    assertEq(example.sayHello(), greeting);
+  }
+}
+```
 
+</TabItem>
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
+
+Para Precompile-EVM, debes importar AllowListTest con el paquete NPM @avalabs/subnet-evm-contracts:
+
+```sol
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "../ExampleHelloWorld.sol";
+import "../interfaces/IHelloWorld.sol";
+import "@avalabs/subnet-evm-contracts/contracts/test/AllowListTest.sol";
+contract ExampleHelloWorldTest is AllowListTest {
+  IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+  function step_getDefaultHelloWorld() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    assertEq(example.sayHello(), "Hello World!");
+  }
+  function step_doesNotSetGreetingBeforeEnabled() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    try example.setGreeting("testing") {
+      assertTrue(false, "setGreeting should fail");
+    } catch {}
+  }
+  function step_setAndGetGreeting() public {
+    ExampleHelloWorld example = new ExampleHelloWorld();
+    address exampleAddress = address(example);
+    assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
+    helloWorld.setEnabled(exampleAddress);
+    assertRole(
+      helloWorld.readAllowList(exampleAddress),
+      AllowList.Role.Enabled
+    );
+    string memory greeting = "testgreeting";
+    example.setGreeting(greeting);
+    assertEq(example.sayHello(), greeting);
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+<!-- vale on -->
+
+## Adding DS-Test Case
+
+
+Ah, entiendo. Aquí está la traducción manteniendo el enlace original:
+
+Podemos ahora activar este contrato de prueba a través de pruebas de hardhat. 
+El script de prueba utiliza el marco de pruebas test de Subnet-EVM en ./contracts/test.
+Puedes encontrar más información sobre el marco de pruebas
+[aquí](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/test/utils.ts).
+
+<!-- vale off -->
+
+<Tabs groupId="evm-tabs">
+
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
+
+El script de prueba se ve así:
 
 ```ts
+// (c) 2019-2022, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+
+import { ethers } from "hardhat";
+import { test } from "./utils";
+
+// make sure this is always an admin for hello world precompile
+const ADMIN_ADDRESS = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC";
+const HELLO_WORLD_ADDRESS = "0x0300000000000000000000000000000000000000";
+
+describe("ExampleHelloWorldTest", function () {
+  this.timeout("30s");
+
+  beforeEach("Setup DS-Test contract", async function () {
+    const signer = await ethers.getSigner(ADMIN_ADDRESS);
+    const helloWorldPromise = ethers.getContractAt(
+      "IHelloWorld",
+      HELLO_WORLD_ADDRESS,
+      signer
+    );
+
     return ethers
       .getContractFactory("ExampleHelloWorldTest", { signer })
       .then((factory) => factory.deploy())
@@ -176,32 +299,32 @@ Para el contrato de prueba, escribimos nuestra prueba en `./contracts/test/Examp
 ```
 
 </TabItem>
-</Tabs>
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
+The test script looks like this:
 
-<!-- vale off -->
+```ts
+// (c) 2019-2022, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
 
-## Running the Tests
+import { ethers } from "hardhat";
+import { test } from "@avalabs/subnet-evm-contracts";
 
-Now that we have the test contract and the test script ready, we can run the tests using the `hardhat test` command.
+// make sure this is always an admin for hello world precompile
+const ADMIN_ADDRESS = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC";
+const HELLO_WORLD_ADDRESS = "0x0300000000000000000000000000000000000000";
 
-For Subnet-EVM:
+describe("ExampleHelloWorldTest", function () {
+  this.timeout("30s");
 
-```bash
-npx hardhat test --network subnet-evm
-```
+  beforeEach("Setup DS-Test contract", async function () {
+    const signer = await ethers.getSigner(ADMIN_ADDRESS);
+    const helloWorldPromise = ethers.getContractAt(
+      "IHelloWorld",
+      HELLO_WORLD_ADDRESS,
+      signer
+    );
 
-For Precompile-EVM:
-
-```bash
-npx hardhat test --network precompile-evm
-```
-
-The tests should run successfully and provide the output of the test results.
-
-Congratulations! You have successfully written and executed tests for your Solidity contract using the Subnet-EVM or Precompile-EVM environment.
-
-```bash
- return ethers
+    return ethers
       .getContractFactory("ExampleHelloWorldTest", { signer })
       .then((factory) => factory.deploy())
       .then((contract) => {
@@ -213,16 +336,16 @@ Congratulations! You have successfully written and executed tests for your Solid
       .then((tx) => tx.wait());
   });
 
-  test("debería obtener el saludo por defecto", ["paso_obtenerSaludoPorDefecto"]);
+  test("should gets default hello world", ["step_getDefaultHelloWorld"]);
 
   test(
-    "no debería establecer el saludo antes de habilitado",
-    "paso_noEstableceSaludoAntesDeHabilitado"
+    "should not set greeting before enabled",
+    "step_doesNotSetGreetingBeforeEnabled"
   );
 
   test(
-    "debería establecer y obtener el saludo con una cuenta habilitada",
-    "paso_establecerYObtenerSaludo"
+    "should set and get greeting with enabled account",
+    "step_setAndGetGreeting"
   );
 });
 ```
