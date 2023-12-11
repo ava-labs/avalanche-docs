@@ -8,8 +8,8 @@ sidebar_position: 4
 
 # Escribiendo Casos de Prueba
 
-importar Pestañas desde '@theme/Tabs';
-importar ElementoDePestaña desde '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 En esta sección, repasaremos las diferentes formas en que podemos escribir casos de prueba para nuestro precompilador con estado.
 
