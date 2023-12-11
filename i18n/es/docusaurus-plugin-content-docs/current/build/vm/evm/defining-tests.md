@@ -178,7 +178,7 @@ Para el contrato de prueba, escribimos nuestra prueba en `./contracts/test/Examp
 </TabItem>
 </Tabs>
 
-<!-- vale on -->
+<!-- vale off -->
 
 ## Running the Tests
 
@@ -230,4 +230,4 @@ Congratulations! You have successfully written and executed tests for your Solid
 </TabItem>
 </Tabs>
 
-<!-- vale off -->
+<!-- vale on -->
