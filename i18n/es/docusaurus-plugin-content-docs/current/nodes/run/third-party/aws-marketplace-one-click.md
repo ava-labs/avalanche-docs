@@ -210,7 +210,7 @@ curl --location --request POST 'http://127.0.0.1:9650/ext/info' \
 ### Respuesta de `info.getNodeID`
 
 Toma nota del valor `nodeID` que se devuelve, ya que necesitarás usarlo en
-el siguiente paso cuando agregues un validador a través de la Avalanche Web Wallet. En este caso,
+el siguiente paso cuando agregues un validador a través de Core web. En este caso,
 el `nodeID` es `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 
 ```zsh
@@ -227,7 +227,7 @@ el `nodeID` es `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 }
 ```
 
-## Agregar el nodo como validador en Fuji a través de la Web Wallet
+## Agregar el nodo como validador en Fuji a través de el Web Wallet
 
 Para agregar el nuevo nodo como un validador en la red de pruebas Fuji, puedes
 usar la [Avalanche Web Wallet](https://wallet.avax.network).
