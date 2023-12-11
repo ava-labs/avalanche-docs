@@ -205,7 +205,7 @@ const delegationFee: number = 10;
 
 #### ID del Nodo
 
-Este es el ID del nodo del validador que se está agregando. Consulta la [sección anterior](#retrieve-the-node-id) sobre cómo obtener el ID del nodo utilizando la API [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid).
+Este es el ID del nodo del validador que se está agregando. Consulta la [sección anterior](#obtener-el-id-del-nodo) sobre cómo obtener el ID del nodo utilizando la API [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid).
 
 #### Período de Stake
 
@@ -253,7 +253,7 @@ const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
 
 Esto recupera las direcciones de la P-Chain que pertenecen a la `clave privada` que aparece antes en el ejemplo.
 
-No se necesita ningún cambio en las direcciones para la acción predeterminada. Para personalización, consulta [esta sección](#customizing-addresses).
+No se necesita ningún cambio en las direcciones para la acción predeterminada. Para personalización, consulta [esta sección](#personalización-de-direcciones).
 
 #### Ejecutar el Código
 
@@ -273,7 +273,7 @@ La respuesta tiene el ID de transacción.
 
 Podemos verificar el estado de la transacción ejecutando el script de ejemplo: [`getTxStatus.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getTxStatus.ts) siguiendo los pasos a continuación:
 
-1. Asegúrate de que tu [configuración de red](#network-setting) sea correcta antes de ejecutar el script.
+1. Asegúrate de que tu [configuración de red](#configuración-de-red) sea correcta antes de ejecutar el script.
 
 2. Localiza esta línea en el archivo
 
@@ -307,7 +307,7 @@ Esto devuelve:
 
 El estado debería ser `Committed`, lo que significa que la transacción fue exitosa.
 
-Podemos ver si el nodo está ahora en el conjunto de validadores pendientes para la red Fuji utilizando el ejemplo: [`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Simplemente cambia la [configuración de red](#network-setting) para cumplir con los requisitos de Fuji y luego ejecuta el script:
+Podemos ver si el nodo está ahora en el conjunto de validadores pendientes para la red Fuji utilizando el ejemplo: [`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Simplemente cambia la [configuración de red](#configuración-de-red) para cumplir con los requisitos de Fuji y luego ejecuta el script:
 
 ```sh
 ts-node examples/platformvm/getPendingValidators.ts
@@ -352,7 +352,7 @@ let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
 pKeychain.importKey(privKey);
 ```
 
-y reemplaza `privKey` con las claves privadas que controlas. Para generar un nuevo par de claves, podemos usar el script de ejemplo [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) junto con la [Configuración de la Red Fuji](#network-setting).
+y reemplaza `privKey` con las claves privadas que controlas. Para generar un nuevo par de claves, podemos usar el script de ejemplo [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) junto con la [Configuración de la Red Fuji](#configuración-de-red).
 
 ```ts
 let privKey: string =
