@@ -8,8 +8,8 @@ sidebar_position: 2
 
 # Generando tu precompilado
 
-importar Pestañas desde '@theme/Tabs';
-importar ElementoDePestaña desde '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 En esta sección, repasaremos el proceso para generar automáticamente el código de plantilla que
 puedes configurar según corresponda para tu precompilado estatal.
@@ -28,8 +28,8 @@ Para este tutorial, estaremos trabajando en una nueva rama en el repositorio Sub
 
 <!-- vale off -->
 
-<Pestañas groupId="evm-tabs">
-<ElementoDePestaña value="subnet-evm-tab" label="Subnet-EVM" default>
+<Tabs groupId="evm-tabs">
+<TabItem value="subnet-evm-tab" label="Subnet-EVM" default>
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/subnet-evm
@@ -73,8 +73,8 @@ En el mismo directorio, ejecutemos:
 solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis
 ```
 
-</ElementoDePestaña>
-<ElementoDePestaña value="precompile-evm-tab" label="Precompile-EVM"  >
+</TabItem>
+<TabItem value="precompile-evm-tab" label="Precompile-EVM"  >
 
 ```bash
 cd $GOPATH/src/github.com/ava-labs/precompile-evm
@@ -143,8 +143,8 @@ los contratos importados con las siguientes banderas:
 solc --abi ./contracts/interfaces/IHelloWorld.sol -o ./abis --base-path . --include-path ./node_modules
 ```
 
-</ElementoDePestaña>
-</Pestañas>
+</TabItem>
+</Tabs>
 
 <!-- vale on -->
 

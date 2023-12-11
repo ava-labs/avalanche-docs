@@ -8,8 +8,8 @@ sidebar_position: 3
 
 # Definiendo tu Precompilación
 
-importar Tabs desde '@theme/Tabs';
-importar TabItem desde '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Ahora que hemos autogenerado el código de plantilla requerido para nuestra precompilación, vamos a escribir la lógica de la precompilación en sí.
 

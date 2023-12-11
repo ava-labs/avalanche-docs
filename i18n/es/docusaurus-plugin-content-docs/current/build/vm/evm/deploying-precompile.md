@@ -8,6 +8,9 @@ sidebar_position: 6
 
 # Implementando tu Precompilación
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ¡Lo logramos! Todo funciona en nuestras pruebas de Ginkgo, y ahora queremos poner en marcha una red local
 con la precompilación de Hello World activada.
 
