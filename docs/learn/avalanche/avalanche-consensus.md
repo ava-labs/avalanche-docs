@@ -261,7 +261,7 @@ want your transaction to be live then you should not issue a conflicting transac
 Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol
 for linear chains.
 
-If there are no undecided transactions, the Avalanche consensus protocol _quiesce_. That is, it does
+If there are no undecided transactions, the Avalanche consensus protocol _quiesces_. That is, it does
 nothing if there is no work to be done. This makes Avalanche more sustainable than Proof-of-work
 where nodes need to constantly do work.
 
