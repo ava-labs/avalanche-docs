@@ -282,20 +282,6 @@ const main = async (): Promise<any> => {
 main();
 ```
 
-
-
-const main = async (): Promise<any> => {
-  provider.getBalance(address).then((balance) => {
-    // convertir una unidad de moneda de wei a ether
-    const balanceInAvax = ethers.utils.formatEther(balance);
-    console.log(`saldo: ${balanceInAvax} AVAX`);
-    // saldo: 0.02 AVAX
-  });
-};
-
-main();
-```
-
 ### Iniciar sesión en la Extensión Core
 
 Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-desde-una-mnemotecnia) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
