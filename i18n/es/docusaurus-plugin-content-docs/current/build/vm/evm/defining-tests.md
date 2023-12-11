@@ -138,7 +138,6 @@ La razón por la que agregamos otro contrato inteligente de ejemplo es tener pru
 Para el contrato de prueba, escribimos nuestra prueba en `./contracts/test/ExampleHelloWorldTest.sol`.
 
 <!-- vale off -->
-<!-- vale off -->
 
 <Pestañas groupId="evm-tabs">
 
