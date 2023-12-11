@@ -200,7 +200,8 @@ The tests should run successfully and provide the output of the test results.
 
 Congratulations! You have successfully written and executed tests for your Solidity contract using the Subnet-EVM or Precompile-EVM environment.
 
-    return ethers
+```bash
+ return ethers
       .getContractFactory("ExampleHelloWorldTest", { signer })
       .then((factory) => factory.deploy())
       .then((contract) => {
