@@ -81,7 +81,7 @@ La respuesta debería verse algo como:
 ```
 
 Esa parte que dice, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` es el NodeID, todo el conjunto.
-El usuario va a necesitar este ID en la sección posterior al llamar a [addValidator](#add-a-validator).
+El usuario va a necesitar este ID en la sección posterior al llamar a [addValidator](#agregar-un-validador).
 
 :::info
 
@@ -244,7 +244,7 @@ avalanche subnet create testsubnet
 
 Esto va a iniciar una serie de preguntas para personalizar tu Subred EVM según tus necesidades. La mayoría de las preguntas tienen
 alguna validación para reducir problemas debido a una entrada inválida. La primera pregunta pide el tipo de
-máquina virtual (ver [Máquina Virtual](#virtual-machine)).
+máquina virtual (ver [Máquina Virtual](#máquina-virtual)).
 
 ```bash
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
@@ -396,7 +396,10 @@ avalanche subnet describe testsubnet
 | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
 +--------------------------------------------+------------------------+---------------------------+
 
+<!-- markdownlint-disable MD013 -->
+
 ```
+
   _____                                    _ _
  |  __ \                                  (_) |
  | |__) | __ ___  ___ ___  _ __ ___  _ __  _| | ___  ___
@@ -407,7 +410,10 @@ avalanche subnet describe testsubnet
                                     |_|
 
 No se han establecido precompilaciones
+
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 También puedes listar las subredes disponibles:
 

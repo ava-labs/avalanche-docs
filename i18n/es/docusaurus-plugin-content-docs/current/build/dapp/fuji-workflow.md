@@ -284,7 +284,7 @@ main();
 
 ### Iniciar sesión en la Extensión Core
 
-Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-desde-una-mnemotecnia) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
+Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-a-partir-de-una-mnemónica) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
 Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la clave privada.
 
 Usa la clave privada para acceder a la cuenta en la Extensión Core.
@@ -295,7 +295,7 @@ El saldo es correcto y la dirección es la primera dirección derivada.
 
 ![Saldo de la extensión Core](/img/fuji-wf-wallet-alt-info.png) ![3ra dirección derivada BIP44](/img/fuji-wf-alt-wallet-address.png)
 
-Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generar-claves-privadas-desde-una-mnemotecnia).
+Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generar-claves-privadas-a-partir-de-una-mnemónica).
 
 ![Direcciones derivadas de la billetera](/img/fuji-wf-alt-wallet-address-2.png)
 ![Direcciones derivadas de la billetera2](/img/fuji-wf-alt-wallet-address-3.png)  

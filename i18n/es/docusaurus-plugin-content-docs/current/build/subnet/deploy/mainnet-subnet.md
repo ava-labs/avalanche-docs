@@ -418,7 +418,7 @@ Sus claves de autenticación de Subnet para la creación de la TX de add validat
 
 ### Establecer NodeID
 
-Ahora ingrese el [**NodeID**](#obtener-sus-nodeids-de-mainnet) del validador.
+Ahora ingrese el [**NodeID**](#obtener-tus-nodeids-de-mainnet) del validador.
 
 ```text
 A continuación, necesitamos el NodeID del validador que desea agregar a la lista blanca.
