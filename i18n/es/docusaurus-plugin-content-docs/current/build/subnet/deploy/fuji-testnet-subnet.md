@@ -396,9 +396,6 @@ avalanche subnet describe testsubnet
 | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
 +--------------------------------------------+------------------------+---------------------------+
 
-<!-- markdownlint-disable MD013 -->
-
-```
 
   _____                                    _ _
  |  __ \                                  (_) |
@@ -412,8 +409,6 @@ avalanche subnet describe testsubnet
 No se han establecido precompilaciones
 
 ```
-
-<!-- markdownlint-enable MD013 -->
 
 También puedes listar las subredes disponibles:
 
