@@ -218,12 +218,13 @@ the use of a ledger device is strongly recommended.
    if you already have funds on a different address, or get it from the faucet at
    [`https://faucet.avax.network`](https://faucet.avax.network/) using your **C-Chain address**.
 
-2. **Export** your key via the `avalanche key export` command, then paste the output when selecting
-   "Private key" while accessing the [web wallet](https://wallet.avax.network). (Private Key is the
-   first option on the [web wallet](https://wallet.avax.network)).
-3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left
-   side of the web wallet (find more details on
-   [this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)).
+2. **Export** your key via the `avalanche key export` command. The output is your private key,
+   which will help you [import](https://support.avax.network/en/articles/6821877-core-extension-how-can-i-import-an-account)
+   your account into the Core extension.
+
+3. Connect Core extension to [Core web](https://core.app/), and move the test funds from C-Chain to the P-Chain
+   by clicking Stake, then Cross-Chain Transfer (find more details on
+   [this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on `Fuji` Testnet.
 

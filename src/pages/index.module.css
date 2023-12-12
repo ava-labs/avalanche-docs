@@ -77,9 +77,6 @@ h3 {
 .cardTitle {
     color: #e84142;
 }
-.centeredContainer {
-    display: flex;
-}
 .features {
     display: flex;
     align-items: top;
@@ -177,6 +174,7 @@ h3 {
         text-align: center;
     }
     .centeredContainer {
+        display: flex;
         justify-content: center;
     }
     .academyText {
