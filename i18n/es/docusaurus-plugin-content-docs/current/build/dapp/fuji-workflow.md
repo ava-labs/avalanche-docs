@@ -10,21 +10,21 @@ pagination_label: Flujo de trabajo de Fuji
 ## Introducción
 
 Fuji es la red de prueba de la red Avalanche. Puedes usarla para probar tu dapp
-o contrato inteligente después de haberlo desarrollado localmente. (Puedes usar [Avalanche Network Runner](/tooling/network-runner.md) para probar cosas localmente). Fuji es
-típicamente de la misma versión que la Mainnet de Avalanche, pero a veces está
-ejecutando una versión no lanzada de AvalancheGo. En general, puedes esperar que el
-comportamiento de Fuji sea más o menos el mismo que el de la Mainnet de Avalanche.
-Herramientas como exploradores y billeteras deberían funcionar con la Testnet Fuji.
+o contrato inteligente después de haberlo desarrollado localmente. (Puedes usar
+[Avalanche Network Runner](/tooling/network-runner.md) para probar cosas localmente). Fuji está
+típicamente en la misma versión que la Avalanche Mainnet, pero a veces está
+ejecutando una versión no lanzada de AvalancheGo. En general, puedes esperar que el comportamiento de Fuji sea más o menos el mismo que el de Avalanche Mainnet. Herramientas como exploradores
+y billeteras deberían funcionar con la Testnet Fuji.
 
 En este tutorial, pasaremos por un ejemplo de flujo de trabajo de Fuji para mostrar cómo se puede usar. Haremos lo siguiente:
 
 1. Configurar la red Fuji en Core (opcional)
 2. Generar una mnemónica de 24 palabras en inglés a través de AvalancheJS
 3. Derivar direcciones externas de la C-Chain a través de AvalancheJS
-4. Obtener AVAX del faucet de Fuji
+4. Obtener AVAX del grifo de Fuji
 5. Enviar AVAX a través de ethersJS
 6. Examinar la transacción resultante en el Avalanche Explorer
-7. Usar una clave privada derivada de una mnemónica para iniciar sesión en la billetera web
+7. Usar una clave privada derivada de una mnemónica para iniciar sesión en la extensión Core (billetera)
 
 ## Configurar la Red Fuji en Core (opcional)
 
@@ -48,7 +48,8 @@ Fuji Testnet.
 
 :::info
 
-Si estás usando otras billeteras, como MetaMask, puedes agregar la Fuji Testnet usando las siguientes especificaciones:
+Si estás usando otras billeteras, como MetaMask, puedes agregar la Fuji Testnet
+usando las siguientes especificaciones:
 
 - **Nombre de la Red**: Avalanche C-Chain
 - **Nueva URL RPC**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
@@ -140,7 +141,7 @@ podrías actualizar el script de ejemplo anterior al siguiente:
 const cAddresses: string[] = [];
 const privateKeys: string[] = [];
 for (let i: number = 0; i <= 2; i++) {
-  // Derivando la dirección _i_-ésima de la cadena C-Chain BIP44 externa
+  // Derivando la dirección _i_-ésima de la cadena C de la BIP44 externa
   const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`);
   keyChain.importKey(child.privateKey);
   // Convirtiendo las direcciones BIP44 a direcciones hexadecimales
@@ -166,8 +167,8 @@ console.log({ cAddresses, privateKeys });
 ## Obtén un Drip del Fuji Faucet
 
 Podemos obtener un "drip" de AVAX del Fuji faucet. Pega la dirección en el
-sitio web del [Fuji faucet](https://faucet.avax.network). Estos AVAX son para la red de prueba Fuji
-y no tienen valor monetario.
+sitio web del [Fuji faucet](https://faucet.avax.network). Estos AVAX son para la Fuji
+Testnet y no tienen valor monetario.
 
 ![Solicitando AVAX](/img/fuji-workflow/faucet1.png)
 
@@ -186,7 +187,7 @@ Avalanche también tiene un [Mainnet Explorer](https://explorer.avax.network).
 
 ![Detalles de la transacción](/img/faucet-fuji-wf-alt-tx1.png)
 
-### Obtener el Saldo
+### Obtén el Saldo
 
 También podemos usar el Fuji Explorer para obtener el saldo de la primera dirección—[0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://explorer.avax-test.network/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559).
 
@@ -202,10 +203,10 @@ const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
-    // convert a currency unit from wei to ether
+    // convertir una unidad de moneda de wei a ether
     const balanceInAvax = ethers.utils.formatEther(balance);
-    console.log(`balance: ${balanceInAvax} AVAX`);
-    // balance: 2 AVAX
+    console.log(`saldo: ${balanceInAvax} AVAX`);
+    // saldo: 2 AVAX
   });
 };
 
@@ -220,30 +221,30 @@ la primera dirección a la segunda dirección.
 ```typescript
 // importar ethers.js
 import { ethers } from "ethers";
-// red: usando la red de prueba Fuji
-const red = "https://api.avax-test.network/ext/bc/C/rpc";
+// red: usando la testnet Fuji
+const network = "https://api.avax-test.network/ext/bc/C/rpc";
 // proveedor: establecer una conexión RPC con la red
-const proveedor = new ethers.providers.JsonRpcProvider(red);
+const provider = new ethers.providers.JsonRpcProvider(network);
 
 // Clave privada del remitente:
 // dirección correspondiente 0x0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
-let clavePrivada =
+let privateKey =
   "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc";
 // Crear una instancia de billetera
-let billetera = new ethers.Wallet(clavePrivada, proveedor);
+let wallet = new ethers.Wallet(privateKey, provider);
 // Dirección del receptor
-let direccionReceptor = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
+let receiverAddress = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 // Cantidad de AVAX a enviar
-let cantidadEnAvax = "0.01";
+let amountInAvax = "0.01";
 // Crear un objeto de transacción
 let tx = {
-  to: direccionReceptor,
+  to: receiverAddress,
   // Convertir la unidad de moneda de ether a wei
-  value: ethers.utils.parseEther(cantidadEnAvax),
+  value: ethers.utils.parseEther(amountInAvax),
 };
 // Enviar una transacción
-billetera.sendTransaction(tx).then((objTx) => {
-  console.log(`"tx, https://testnet.snowtrace.io/tx/${objTx.hash}`);
+wallet.sendTransaction(tx).then((txObj) => {
+  console.log(`"tx, https://testnet.snowtrace.io/tx/${txObj.hash}`);
   // Un resultado de transacción se puede verificar en un snowtrace con un enlace de transacción que se puede obtener aquí.
 });
 ```
@@ -257,7 +258,7 @@ exitosa usando el Fuji Testnet Explorer. La transacción se puede ver
 
 ![Detalles de la transacción](/img/fuji-wf-alt-tx-2.png)
 
-#### Obtener el Saldo
+#### Obtén el Saldo
 
 También podemos usar el Fuji Explorer para obtener el saldo de la segunda dirección—[0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C).
 
@@ -271,29 +272,30 @@ const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
-    // convert a currency unit from wei to ether
+    // convertir una unidad de moneda de wei a ether
     const balanceInAvax = ethers.utils.formatEther(balance);
-    console.log(`balance: ${balanceInAvax} AVAX`);
-    // balance: 0.02 AVAX
+    console.log(`saldo: ${balanceInAvax} AVAX`);
+    // saldo: 0.01 AVAX
   });
 };
 
 main();
 ```
 
-### Iniciar sesión en la billetera web
+### Iniciar sesión en la Extensión Core
 
-Por último, podemos usar la mnemotecnia para generar una clave privada para acceder a la [Billetera Web Avalanche](https://wallet.avax.network). Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la clave privada.
+Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-a-partir-de-una-mnemónica) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
+Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la clave privada.
 
-Usa la clave privada para acceder a la Billetera Web.
+Usa la clave privada para acceder a la cuenta en la Extensión Core.
 
 ![Acceder a la billetera](/img/fuji-wf-alt-enter-key.png)
 
 El saldo es correcto y la dirección es la primera dirección derivada.
 
-![Saldo de la billetera web](/img/fuji-wf-wallet-alt-info.png) ![3ra dirección derivada BIP44](/img/fuji-wf-alt-wallet-address.png)
+![Saldo de la extensión Core](/img/fuji-wf-wallet-alt-info.png) ![3ra dirección derivada BIP44](/img/fuji-wf-alt-wallet-address.png)
 
-Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el script anterior.
+Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generar-claves-privadas-a-partir-de-una-mnemónica).
 
 ![Direcciones derivadas de la billetera](/img/fuji-wf-alt-wallet-address-2.png)
 ![Direcciones derivadas de la billetera2](/img/fuji-wf-alt-wallet-address-3.png)  
@@ -301,25 +303,23 @@ Podemos repetir este proceso de inicio de sesión usando las claves privadas de 
 
 ## Resumen
 
-La red de pruebas Fuji juega un papel crítico en la prueba de dapps, contratos inteligentes y productos financieros antes de implementar en la red principal. Las herramientas como AvalancheJS, la API pública, el faucet y el explorador ayudan a asegurar que tu entorno de prueba y control de calidad esté cerca de la red principal para que puedas tener confianza cuando lo lanzas en la red principal.
+La red de pruebas Fuji juega un papel crítico en la prueba de dapps, contratos inteligentes y productos financieros antes de implementar en la red principal. Las herramientas como AvalancheJS, la API pública, el grifo y el explorador ayudan a asegurar que tu entorno de prueba y QA esté cerca de la red principal para que puedas tener confianza al lanzar en la red principal.
 
 ## Recursos
 
 Para recursos adicionales y valiosos, consulta a continuación.
 
-### Faucet
+### Grifo
 
 El [Fuji Faucet](https://faucet.avax.network) envía AVAX a direcciones de la cadena X o de la cadena C para ayudarte a probar. (Este AVAX de la red de pruebas no tiene valor.)
 
 ### Billetera
 
-La [Billetera Web Avalanche](https://wallet.avax.network) es una billetera simple, segura y no custodial para almacenar activos Avalanche. Soporta Mainnet, Fuji y redes personalizadas.
+La [extensión Core](https://join.core.app/extension) y la [aplicación móvil Core](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone) son billeteras simples, seguras y no custodiadas para almacenar activos Avalanche. Soportan Mainnet, Fuji y redes personalizadas.
 
 ### Explorador
 
-El Avalanche Explorer te permite explorar la red en
-[Mainnet](https://explorer.avax.network) y
-[Fuji](https://explorer.avax-test.network).
+El Avalanche Explorer te permite explorar la red en [Mainnet](https://explorer.avax.network) y [Fuji](https://explorer.avax-test.network).
 
 ### Puntos finales RPC - Servidor de API pública
 
@@ -327,4 +327,4 @@ Ver [aquí](/tooling/rpc-providers.md).
 
 ### Ejemplos de AvalancheJS
 
-Hay más de [60 ejemplos de scripts AvalancheJS](https://github.com/ava-labs/avalanchejs/tree/master/examples) que demuestran cómo gestionar activos y NFTs, enviar transacciones, agregar validadores y más.
+Hay más de [60 ejemplos de scripts AvalancheJS](https://github.com/ava-labs/avalanchejs/tree/master/examples) que demuestran cómo manejar activos y NFTs, enviar transacciones, agregar validadores y más.

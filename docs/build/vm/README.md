@@ -19,5 +19,5 @@ executed and how blocks are created.
 | [**Create a Simple VM in Golang**](/build/vm/create/golang-vm-simple.md)      | Learn how to build a simple virtual machine  on Avalanche using Golang. |
 | [**Create a Complex VM in Golang**](/build/vm/create/golang-vm-complex.md)      | Learn how to build a complex virtual machine on Avalanche using Golang. |
 | [**Create a Rust VM**](/build/vm/create/rust-vm.md)      | Learn how to develop virtual machines on Avalanche using Rust. |
-| [**Generate a Stateful Precompile**](/build/vm/evm/hello-world-precompile-tutorial.md)      | Create a stateful precompiles for Subnet-EVM from scratch. |
+| [**Generate a Stateful Precompile**](/build/vm/evm/intro.md)      | Create a stateful precompiles for Subnet-EVM from scratch. |
 | [**HyperSDK**](https://github.com/ava-labs/hypersdk#readme)      | An opinionated framework for building hyper-scalable blockchains on Avalanche. This is an external link to HyperSDK's GitHub documentation and repository.|

@@ -272,89 +272,124 @@ the `nodeID` is `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 }
 ```
 
-## Add Node as Validator on Fuji via the Web Wallet
+## Add Node as Validator on Fuji via Core web
 
 For adding the new node as a Validator on the Fuji testnet's Primary Network you can
-use the [Avalanche Web Wallet](https://wallet.avax.network).
+use the [Core web](https://core.app/) 
+[connected](https://support.avax.network/en/articles/6639869-core-web-how-do-i-connect-to-core-web) to
+[Core extension](https://join.core.app/extension).
+If you don't have a Core extension already, check out this
+[guide](https://support.avax.network/en/articles/6100129-core-extension-how-do-i-create-a-new-wallet).
+If you'd like to import an existing wallet to Core extension, follow 
+[these steps](https://support.avax.network/en/articles/6078933-core-extension-how-do-i-access-my-existing-account).
 
-![Avalanche Web Wallet](/img/one-click-validator-node/web-wallet.png)
+![Core web](/img/one-click-validator-node/core-web.png)
 
-The Avalanche Web Wallet is a web-based application with no middleware or any
-kind of server communication. It can be either accessed
-online or compiled and run locally. The Avalanche Web Wallet is a multi-faceted
-jewel and offers validation/delegation, cross-chain transfers, reward
-estimation, asset/key management, and more.
+Core web is a free, all-in-one command center that gives users a more intuitive and comprehensive way to view
+assets, and use dApps across the Avalanche network, its various Subnets, and Ethereum. 
+Core web is optimized for use with the Core browser extension and Core mobile (available on both iOS & Android).
+Together, they are key components of the Core product suite that brings dApps,
+NFTs, Avalanche Bridge, Subnets, L2s, and more, directly to users.
 
-### Switching the Connected Network
+### Switching to Testnet Mode
 
-Check which network the wallet is connected to by looking at the top right of
-the screen. By default the Avalanche Web Wallet connects to Mainnet.
+By default, Core web and Core extension are connected to Mainnet. 
+For the sake of this demo, you want to connect to the Fuji Testnet.
 
-#### Connected to Mainnet
+#### On Core Extension
 
-<img src="/img/one-click-validator-node/network-mainnet.png" alt="Network -
-Mainnet" width="60%" />
+From the hamburger menu on the top-left corner, choose Advanced, and then toggle the Testnet Mode on.
 
-For the sake of this demo you want to connect the Wallet to the Fuji Testnet. At
-the top right of the wallet click "Mainnet" and from the nav menu select Fuji.
+<img src="/img/one-click-validator-node/testnet-core-ext.gif" width="300px"/>
 
-#### Selecting Fuji
+You can follow the same steps for switching back to Mainnet.
 
-<img src="/img/one-click-validator-node/network-selecting-fuji.png" alt="Network - Selecting Fuji" 
-width="60%" />
+#### On Core web
 
-The wallet will display "Connecting..." while it is switching from Mainnet to Fuji.
+Click on the Settings button top-right corner of the page, then toggle Testnet Mode on.
 
-#### Connected to Fuji
+<img src="/img/one-click-validator-node/testnet-core-web.gif"/>
 
-Once the wallet has connected to Fuji a popup will display "Connected to Fuji"
+You can follow the same steps for switching back to Mainnet.
 
-<img src="/img/one-click-validator-node/connected-to-fuji.png" alt="Connected to Fuji" 
-width="80%" />
+### Adding the Validator
 
-#### Connected to Fuji
+:::info
 
-<img src="/img/one-click-validator-node/network-fuji.png" alt="Network - Fuji"
-width="60%" />
+* Node ID: A unique ID derived from each individual node’s staker certificate. 
+Use the `NodeID` which was returned in the `info.getNodeID` response.
+In this example it's `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 
-You can follow the same steps for switching back to Mainnet from Fuji and for adding custom networks.
+* Staking End Date: Your AVAX tokens will be locked until this date.
 
-### The Earn Tab
+* Stake Amount: The amount of AVAX to lock for staking. On Mainnet,
+the minimum required amount is 2,000 AVAX. On Testnet the minimum required
+amount is 1 AVAAX.
 
-To add a node as a Validator, first select the "Earn" tab in the left hand nav
-menu. Next click the "Add Validator" button.
+* Delegation Fee: You will claim this % of the rewards from the delegators on
+your node.
 
-![Avalanche Web Wallet](/img/one-click-validator-node/earn-tab.png)
+* Reward Address: A reward address is the destination address of the accumulated
+staking rewards.
 
-### The `Earn / Validate` Form
+:::
 
-Let's look at the input values for the `Earn / Validate` form.
+To add a node as a Validator, first select the Stake tab on Core web, 
+in the left hand nav menu. Next click the Validate button, and select
+Get Started.
 
-- Node ID: A unique ID derived from each individual node’s staker certificate.
-  Use the `NodeID` which was returned in the `info.getNodeID` response. In this
-  example it's `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
-- Staking End Date: Your AVAX tokens will be locked until this date.
-- Stake Amount: The amount of AVAX to lock for staking. On Mainnet the minimum
-  required amount is 2,000 AVAX. On Testnet the minimum required amount is 1
-  AVAAX.
-- Delegation Fee: You will claim this % of the rewards from the delegators on your node.
-- Reward Address: A reward address is the destination address of the accumulated staking rewards.
+<img src="/img/one-click-validator-node/core-web-validate.gif" width="80%"/>
 
-Fill the fields and confirm! Carefully check the details, and click "Submit"!
+This page will open up.
 
-![Avalanche Web Wallet](/img/one-click-validator-node/validate-form.png)
+<img src="/img/one-click-validator-node/core-web-validate-page.png"/>
 
-### The `AddValidatorTx` Transaction
+Choose the desired Staking Amount, then click Next.
 
-Once the transaction is successfully issued to the Avalanche Network the list of
-transactions in the right column will update with the new `AddValidatorTx`
-pushed to the top of the list. Click the magnifying glass icon and a new browser
-tab will open with the details of the `AddValidatorTx`. It will show details
-such as the total value of AVAX transferred, any AVAX which were burned, the
-blockchainID, the blockID, the NodeID of the validator, and the total time which
-has elapsed from the entire Validation period.
+<img src="/img/one-click-validator-node/core-web-staking-amount.png"/>
 
-![Validator transaction](/img/one-click-validator-node/validation-tx.png)
+Enter you Node ID, then click Next.
+
+<img src="/img/one-click-validator-node/core-web-node-id.png"/>
+
+Here, you'll need to choose the staking duration. There are predefined
+values, like 1 day, 1 month and so on. You can also choose a custom period
+of time. For this example, 22 days were chosen.
+
+<img src="/img/one-click-validator-node/core-web-staking-duration.png"/>
+
+Choose the address that the network will send rewards to. 
+Make sure it's the correct address because once the transaction
+is submitted this cannot be changed later or undone. You can choose the
+wallet's P-Chain address, or a custom P-Chain address. 
+After entering the address, click Next.
+
+<img src="/img/one-click-validator-node/core-web-reward-address.png"/>
+
+Other individuals can stake to your validator and receive rewards too, known as "delegating."
+You will claim this percent of the rewards from the delegators on your node. Click Next.
+
+<img src="/img/one-click-validator-node/core-web-delegation-fee.png"/>
+
+After entering all these details, a summary of your validation will show up.
+If everything is correct, you can proceed and click on Submit Validation.
+A new page will open up, prompting you to accept the transaction. 
+Here, please approve the transaction.
+
+<img src="/img/one-click-validator-node/core-web-validation-summary.png"/>
+
+After the transaction is approved, you will see a message saying that your
+validation transaction was submitted.
+
+<img src="/img/one-click-validator-node/core-web-accepted-tx.png"/>
+
+If you click on View on explorer, a new browser tab will open with the details of the 
+`AddValidatorTx`. It will show details such as the total value of AVAX transferred, any 
+AVAX which were burned, the blockchainID, the blockID, the NodeID of the validator, 
+and the total time which has elapsed from the entire Validation period.
+
+<img src="/img/one-click-validator-node/explorer-transaction-details.png"/>
+
 
 ## Confirm That the Node is a Pending Validator on Fuji
 
@@ -522,11 +557,11 @@ please read [this doc](/nodes/validate/how-to-stake.md#validators).
 AWS one click is meant to be used in automated environments, not as an end-user solution.
 You can still manage it manually, but it is not as easy as an Ubuntu instance or using the script:
 
-- AvalancheGo binary is at `/usr/local/bin/avalanchego`
-- Main node config is at `/etc/avalanchego/conf.json`
-- Working directory is at `/home/avalanche/.avalanchego/ (and belongs to avalanchego user)`
-- Database is at `/data/avalanchego`
-- Logs are at `/var/log/avalanchego`
+* AvalancheGo binary is at `/usr/local/bin/avalanchego`
+* Main node config is at `/etc/avalanchego/conf.json`
+* Working directory is at `/home/avalanche/.avalanchego/ (and belongs to avalanchego user)`
+* Database is at `/data/avalanchego`
+* Logs are at `/var/log/avalanchego`
 
 For a simple upgrade you would need to place the new binary at `/usr/local/bin/`.
 If you run a Subnet, you would also need to place the VM binary into `/home/avalanche/.avalanchego/plugins`.
