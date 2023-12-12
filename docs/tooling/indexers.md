@@ -37,7 +37,7 @@ SubQuery is a leading blockchain data indexer that provides developers with fast
 
 ### Flair
 
-[Flair](https://flair.dev) is a real-time and historical custom data indexing for any evm chain.
+[Flair](https://flair.dev) provides real-time and historical custom data indexing for any EVM-compatible chain.
 
 It offers reusable **indexing primitives** (such as fault-tolerant RPC ingestors, custom processors and aggregations, re-org aware database integrations) to make it easy to receive, transform, store and access your on-chain data.
 
