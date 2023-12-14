@@ -34,3 +34,11 @@ SubQuery is a leading blockchain data indexer that provides developers with fast
 - [Avalanche Quickstart](https://academy.subquery.network/quickstart/quickstart_chains/avalanche.html)
 - [Mainnet Starter Project](https://github.com/subquery/ethereum-subql-starter/tree/main/Avalanche/avalanche-starter)
 - [Fuji Starter Project](https://github.com/subquery/ethereum-subql-starter/tree/main/Avalanche/avalanche-fuji-starter)
+
+### Flair
+
+[Flair](https://flair.dev) provides real-time and historical custom data indexing for any EVM-compatible chain.
+
+It offers reusable **indexing primitives** (such as fault-tolerant RPC ingestors, custom processors and aggregations, re-org aware database integrations) to make it easy to receive, transform, store and access your on-chain data.
+
+To get started, visit the [documentation](https://docs.flair.dev) or clone the [starter boilerplate](https://github.com/flair-sdk/starter-boilerplate) template and follow the instructions.
