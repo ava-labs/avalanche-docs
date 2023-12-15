@@ -270,7 +270,7 @@ While you can follow [the instructions here](/tooling/cli-guides/validate-subnet
 tutorial we opt for providing the flag `--default-validator-params`, that set for the user most common validator params:
 
 ```shell
-avalanche node validate subne <clusterName> <subnetName> --default-validator-params
+avalanche node validate subnet <clusterName> <subnetName> --default-validator-params
 Loading EWOQ key
 Checking if node(s) are bootstrapped to Primary Network ...
 Checking if node(s) are healthy ...
