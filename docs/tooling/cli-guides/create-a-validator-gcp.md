@@ -28,8 +28,6 @@ Before we begin, you will need to:
 - Create a GCP account [here](https://console.cloud.google.com/freetrial) and create a new project
 - Enable Compute Engine API [here](https://console.cloud.google.com/apis/api/compute.googleapis.com)
 - Download the key json for the automatically created service account as shown [here](https://cloud.google.com/iam/docs/keys-create-delete#creating)
-- Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- Install [Ansible](https://adamtheautomator.com/install-ansible/)
 
 ## Start the Validator
 
@@ -55,8 +53,9 @@ Currently, we have set the following specs of the GCP cloud server to a fixed va
 enable customization in the near future:
 
 - OS Image: `Ubuntu 20.04 LTS`
-- Machine Type: `e2-standard-8`
 - Storage: `1 TB`
+- 
+Instance type can be specified via `--node-type` parameter or via interactive menu. `e2-standard-8` is default(recommended) instance size.
 
 The command will ask which region you want to set up your cloud server in: 
 
@@ -83,10 +82,14 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
 - Installed Avalanche Go in cloud server
 - Installed Avalanche CLI in cloud server
 - Downloaded the `.pem` private key file to access the cloud server into your local `.ssh` directory.
-  Back up this private key file as you will not be able to ssh into the cloud server node without it
-- Downloaded `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
+  Back up this private key file as you will not be able to ssh into the cloud server node without it unless `ssh-agent` is used
+- `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
+
+Please note that Avalance CLI can be configured to use `ssh-agent` for ssh communication. In this case public key will 
+be read from there and cloud server will be accessible using it. Yubikey hardware can be also used to store private ssh 
+key. Please use official Yubikey documentation, for example [https://developers.yubico.com/PGP/SSH_authentication/] for more details.
 
 ## Check Bootstrap Status
 
