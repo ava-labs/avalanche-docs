@@ -54,7 +54,7 @@ enable customization in the near future:
 
 - OS Image: `Ubuntu 20.04 LTS`
 - Storage: `1 TB`
-- 
+
 Instance type can be specified via `--node-type` parameter or via interactive menu. `e2-standard-8` is default(recommended) instance size.
 
 The command will ask which region you want to set up your cloud server in: 

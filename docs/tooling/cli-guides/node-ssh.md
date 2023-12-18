@@ -173,6 +173,7 @@ In this case `--parallel=true` flag will be ignored
 
 If no command provided Avalanche-CLI opens interactive session for this single node.
 For example 
+
 ```shell
 avalanche node ssh i-0225fc39626b1edd3
 [or] 
@@ -180,4 +181,5 @@ avalanche node ssh NodeID-9wdKQ3KJU3GqvgFTc4CUYvmefEFe8t6ka
 [or]
 avalanche node ssh 54.159.59.123
 ```
+
 Please use `exit` shell command or Ctrl+D to end this session.
