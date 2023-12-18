@@ -169,7 +169,7 @@ In this case `--parallel=true` flag will be ignored
 
 :::
 
-## Openning ssh shell for `<nodeID>`
+## Opening ssh shell for `<nodeID>`
 
 If no command provided Avalanche-CLI opens interactive session for this single node.
 For example 
