@@ -248,7 +248,6 @@ a.navbar__item.navbar__link.header-discord-link, a.navbar__item.navbar__link.hea
 }
 
 .navbar__inner{
-  font-size: 14px;
   line-height: 100%;
 }
 
@@ -434,8 +433,43 @@ and (max-width: 768px) {
     gap:20px;
   }
 }
+
+@media screen
+and (max-width: 1100px) {
+  .navbar__item {
+    padding-inline: 5px;
+    font-size: 12pt !important
+  }
+}
+
+@media screen
+and (max-width: 1050px) {
+  .navbar__item {
+    padding-inline: 5px;
+    font-size: 10.8pt !important
+  }
+}
+
+@media screen
+and (max-width: 1368px) {
+  .navbar__item {
+    padding-inline: 7px;
+    font-size: 14pt
+  }
+  .header-github-link:before {
+    margin-right: 20px;
+  }
+  .header-discord-link:before {
+    margin-left: 20px;
+  }
+}
+
 @media screen
 and (max-width: 996px) {
+  .navbar__items {
+    max-width: 55vw;
+    justify-content: space-between;
+  }
   .footer-heading {
     margin-top: 10px;
     margin-left: 40px;

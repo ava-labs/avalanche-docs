@@ -123,7 +123,7 @@ contract ExampleHelloWorld {
 }
 ```
 
-:::advertencia
+:::warning
 
 El precompilador Hello World es un contrato diferente al ExampleHelloWorld y tiene una dirección diferente.
 Dado que el precompilador usa AllowList para un acceso permitido,
@@ -234,10 +234,9 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 ## Adding DS-Test Case
 
-
 Ah, entiendo. Aquí está la traducción manteniendo el enlace original:
 
-Podemos ahora activar este contrato de prueba a través de pruebas de hardhat. 
+Podemos ahora activar este contrato de prueba a través de pruebas de hardhat.
 El script de prueba utiliza el marco de pruebas test de Subnet-EVM en ./contracts/test.
 Puedes encontrar más información sobre el marco de pruebas
 [aquí](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/test/utils.ts).
