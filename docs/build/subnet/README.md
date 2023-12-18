@@ -46,8 +46,8 @@ for a broad overview.
 | [**Upgrade a Subnet's Virtual Machine**](/build/subnet/upgrade/upgrade-subnet-vm.md)                   |
 | [**Upgrade a Subnet-EVM Precompile Configuration**](/build/subnet/upgrade/upgrade-precompile.md)       |
 
-| More                                                                        |     |
-| :-------------------------------------------------------------------------- | --- |
+| More                                                                        |
+| :-------------------------------------------------------------------------- |
 | [**Avalanche-CLI Subnet Commands**](/tooling/avalanche-cli.md)              |
 | [**Case Study: WAGMI Subnet**](build/subnet/info/wagmi.md)                  |
 | [**Troubleshooting Deployments**](build/subnet/info/troubleshoot-subnet.md) |
