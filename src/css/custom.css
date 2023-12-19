@@ -514,9 +514,14 @@ and (max-width: 996px) {
 }
 
 .theme-doc-sidebar-menu > li:first-child {
-  padding-block: 16px;
+  padding-top: 16px;
   border-top: 1px solid #80808040;
 }
+
+.theme-doc-sidebar-menu > li:first-child:has( > span) {
+  padding-bottom: 16px;
+}
+
 
 .menu__link {
   padding-left: 20px;
