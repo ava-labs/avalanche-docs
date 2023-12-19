@@ -33,7 +33,7 @@
     "remark-math": "6",
     "url-loader": "4.1.1",
     "yocto-queue": "1.0.0",
-    "zwitch": "2.0.0"
+    "zwitch": "2.0.4"
   },
   "browserslist": {
     "production": [
