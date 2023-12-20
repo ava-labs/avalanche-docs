@@ -38,11 +38,12 @@ cloud providers, such as GCP.
 You can either use a sequence of prompt-based commands to get CLI to ask you all the required information for the setup, or
 execute one command than encompasses all steps, with appropriate command line flags for all the needed info.
 
-For the second case we provide two important use cases examples:
+For the second case we provide three important use cases examples:
 
 - creating a devnet an deploy a preexistent CLI Subnet (same example as the step by step)
 - creating a devnet, create a Subnet based on a Custom VM, and deploy it (similar to [
 this one](/tooling/cli-guides/upload-a-custom-vm-to-cloud))
+- creating a devnet with warp-enabled Subnets
 
 ## Step by Step
 
@@ -324,7 +325,7 @@ As reference we provide example of the flags setting needed for this tutorial:
 
 ```shell
 avalanche node devnet wiz <clusterName> <subnetName> --authorize-access\
-  --aws --num-nodes 5 --region us-east-1 --default-validator-params
+  --aws --num-nodes 5 --region us-east-1 --default-validator-params --node-type default
 
 Creating the devnet
 ...
@@ -398,7 +399,7 @@ avalanche node devnet wiz <clusterName> <subnetName> --custom-subnet \
   --custom-vm-branch <branch> --custom-vm-build-script <buildScript> \
   --chain-config <chainConfigPath> --subnet-config <subnetConfigPath> \
   --node-config <avagoConfigPath> --authorize-access --aws --num-nodes 5 \
-  --region us-east-1 --default-validator-params
+  --region us-east-1 --default-validator-params --node-type default
 
 Creating the subnet
 ...
@@ -425,3 +426,150 @@ Nodes Validating <subnetName> after 23 seconds
 
 Devnet <clusterName> has been created and is validating subnet <subnetName>!
 ```
+
+### Create a Devnet with Warp-Enabled Subnets
+
+It will contain warp-enabled C-Chain (always enabled by default on devnet), and two warp-enabled Subnet-EVM subnets.
+
+#### Subnet-EVM setup
+
+We will provide two different Subnet-EVM genesis files, warp-enabled and with different chain IDs:
+
+- `<genesisPathA>`, with contents:
+
+```
+{
+  "config": {
+    "chainId": 68430,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "subnetEVMTimestamp": 0,
+    "dUpgradeTimestamp": 0,
+    "feeConfig": {
+      "gasLimit": 20000000,
+      "minBaseFee": 1000000000,
+      "targetGas": 100000000,
+      "baseFeeChangeDenominator": 48,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 10000000,
+      "targetBlockRate": 2,
+      "blockGasCostStep": 500000
+    },
+    "warpConfig": {
+      "blockTimestamp": 0
+    }
+  },
+  "alloc": {
+    "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
+      "balance": "0x52B7D2DCC80CD2E4000000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x00",
+  "gasLimit": "0x1312D00",
+  "difficulty": "0x0",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
+
+- `<genesisPathB>`, with contents:
+
+```
+{
+  "config": {
+    "chainId": 68431,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "subnetEVMTimestamp": 0,
+    "dUpgradeTimestamp": 0,
+    "feeConfig": {
+      "gasLimit": 20000000,
+      "minBaseFee": 1000000000,
+      "targetGas": 100000000,
+      "baseFeeChangeDenominator": 48,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 10000000,
+      "targetBlockRate": 2,
+      "blockGasCostStep": 500000
+    },
+    "warpConfig": {
+      "blockTimestamp": 0
+    }
+  },
+  "alloc": {
+    "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
+      "balance": "0x52B7D2DCC80CD2E4000000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x00",
+  "gasLimit": "0x1312D00",
+  "difficulty": "0x0",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
+
+#### Execute Wiz
+
+First create the devnet using the Devnet Wizard. It it going to create the Devnet.
+
+The command assumes `<clusterName>` has not been previously created.
+
+```bash
+avalanche node devnet wiz <clusterName> --authorize-access --aws --num-nodes 5 \
+  --region us-east-1 --latest-avalanchego --node-type default
+
+Creating the subnet
+...
+Creating the devnet
+...
+Waiting for node(s) in cluster <clusterName> to be healthy...
+...
+Nodes healthy after 33 seconds
+
+Devnet <clusterName> has been created.
+```
+
+Next, create the first subnet `<subnetAName>`. It will:
+
+- create the Subnet configuration, generating also the local VM binary
+- deploy the Subnet into the Devnet
+- make the Devnet nodes to start tracking the Subnet
+- make the Devnet nodes to start validating the Subnet
+
+The command assumes `<clusterAName>` has not been previously created.
+
+```bash
+avalanche node devnet wiz <clusterName> <subnetAName>
+--authorize-access --aws --num-nodes 5 \
+node devnet wiz cluster1 subneta --force-subnet-create --subnet-genesis ./subnetGenesis_A.json --node-config ${TELEPORTER_DIR}/docker/defaultNodeConfig.json --chain-config ${TELEPORTER_DIR}/dock
+er/defaultChainConfig.json ---evm-subnet --latest-evm-version --default-validator-params
+```
+
+
