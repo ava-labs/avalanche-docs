@@ -27,6 +27,10 @@
   --ifm-table-cell-padding: 20px;
 }
 
+.markdown {
+  --ifm-h2-vertical-rhythm-top: 1.65;
+}
+
 html[data-theme='dark'] {
   --ifm-menu-color: #fff;
   --ifm-menu-color-active : #fff;
