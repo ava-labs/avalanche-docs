@@ -393,7 +393,7 @@ The command assumes `<clusterName>` and `<subnetName>` have not been previously 
 
 The full command line is:
 
-```bash
+```text
 avalanche node devnet wiz <clusterName> <subnetName> --custom-subnet \
   --subnet-genesis <genesisPath> --custom-vm-repo-url <repoUrl> \
   --custom-vm-branch <branch> --custom-vm-build-script <buildScript> \
@@ -429,15 +429,15 @@ Devnet <clusterName> has been created and is validating subnet <subnetName>!
 
 ### Create a Devnet with Warp-Enabled Subnets
 
-It will contain warp-enabled C-Chain (always enabled by default on devnet), and two warp-enabled Subnet-EVM subnets.
+It will contain a warp-enabled C-Chain (always enabled by default on devnets), and two warp-enabled Subnet-EVM Subnets.
 
-#### Subnet-EVM setup
+#### Subnet-EVM Setup
 
-We will provide two different Subnet-EVM genesis files, warp-enabled and with different chain IDs:
+We will create two Subnet-EVM genesis files, both with warp enabled, but with different chain IDs (68430, 68431):
 
-- `<genesisPathA>`, with contents:
+- create `<genesisPathA>`, with contents:
 
-```
+```text
 {
   "config": {
     "chainId": 68430,
@@ -485,9 +485,9 @@ We will provide two different Subnet-EVM genesis files, warp-enabled and with di
 }
 ```
 
-- `<genesisPathB>`, with contents:
+- create `<genesisPathB>`, with contents:
 
-```
+```text
 {
   "config": {
     "chainId": 68431,
@@ -535,41 +535,226 @@ We will provide two different Subnet-EVM genesis files, warp-enabled and with di
 }
 ```
 
-#### Execute Wiz
+#### Wiz Execution
 
-First create the devnet using the Devnet Wizard. It it going to create the Devnet.
+First create the devnet using the Devnet Wizard.
 
-The command assumes `<clusterName>` has not been previously created.
+The command assumes that `<clusterName>` has not been previously created.
 
-```bash
-avalanche node devnet wiz <clusterName> --authorize-access --aws --num-nodes 5 \
+```text
+avalanche node devnet wiz <clusterName> --authorize-access --aws --num-nodes 5\
   --region us-east-1 --latest-avalanchego --node-type default
 
-Creating the subnet
-...
 Creating the devnet
 ...
 Waiting for node(s) in cluster <clusterName> to be healthy...
 ...
 Nodes healthy after 33 seconds
 
-Devnet <clusterName> has been created.
+Devnet <clusterName> has been created!
 ```
 
-Next, create the first subnet `<subnetAName>`. It will:
+Then, create the Subnets using two wiz commands. They will each:
 
-- create the Subnet configuration, generating also the local VM binary
+- create a Subnet configuration
 - deploy the Subnet into the Devnet
 - make the Devnet nodes to start tracking the Subnet
 - make the Devnet nodes to start validating the Subnet
 
-The command assumes `<clusterAName>` has not been previously created.
+The commands assume that `<subnetNameA>` and `<subnetNameB>` have not been previously created.
 
-```bash
-avalanche node devnet wiz <clusterName> <subnetAName>
---authorize-access --aws --num-nodes 5 \
-node devnet wiz cluster1 subneta --force-subnet-create --subnet-genesis ./subnetGenesis_A.json --node-config ${TELEPORTER_DIR}/docker/defaultNodeConfig.json --chain-config ${TELEPORTER_DIR}/dock
-er/defaultChainConfig.json ---evm-subnet --latest-evm-version --default-validator-params
+Create `<subnetNameA>`:
+
+```text
+avalanche node devnet wiz <clusterName> <subnetNameA> --force-subnet-create\
+  --subnet-genesis <genesisPathA> ---evm-subnet --latest-evm-version\
+  --default-validator-params
+
+Creating the subnet
+...
+Adding subnet into existing devnet <clusterName>
+...
+Waiting for node(s) in cluster <clusterName> to be healthy...
+...
+Nodes healthy after 33 seconds
+
+Deploying the subnet
+...
+Setting the nodes as subnet trackers
+...
+Waiting for node(s) in cluster <clusterName>to be healthy...
+Nodes healthy after 33 seconds
+...
+Waiting for node(s) in cluster <clusterName> to be syncing subnet <subnetNameA>...
+Nodes Syncing <subnetNameA> after 5 seconds
+
+Adding nodes as subnet validators
+...
+Waiting for node(s) in cluster <clusterName> to be validating subnet <subnetNameA>...
+Nodes Validating <subnetNameA> after 23 seconds
+
+Devnet <clusterName> has been created and is validating subnet <subnetNameA>!
 ```
 
+Create `<subnetNameB>`:
+
+```text
+avalanche node devnet wiz <clusterName> <subnetNameB> --force-subnet-create\
+  --subnet-genesis <genesisPathB> ---evm-subnet --latest-evm-version\
+  --default-validator-params
+
+Creating the subnet
+...
+Adding subnet into existing devnet <clusterName>
+...
+Waiting for node(s) in cluster <clusterName> to be healthy...
+...
+Nodes healthy after 33 seconds
+
+Deploying the subnet
+...
+Setting the nodes as subnet trackers
+...
+Waiting for node(s) in cluster <clusterName>to be healthy...
+Nodes healthy after 33 seconds
+...
+Waiting for node(s) in cluster <clusterName> to be syncing subnet <subnetNameB>...
+Nodes Syncing <subnetNameB> after 5 seconds
+
+Adding nodes as subnet validators
+...
+Waiting for node(s) in cluster <clusterName> to be validating subnet <subnetNameB>...
+Nodes Validating <subnetNameB> after 23 seconds
+
+Devnet <clusterName> has been created and is validating subnet <subnetNameB>!
+```
+
+#### Obtaining Warp Devnet Parameters
+
+Certain parameters are usually needed for warp interaction, we will show how to use CLI to obtain them.
+
+##### Blockchain Endpoints
+
+First, use `avalanche node status` to get the IP of the first node:
+
+```text
+avalanche node status <clusterName>
+Checking if node(s) are bootstrapped to Primary Network ...
+Checking if node(s) are healthy ...
+Getting avalanchego version of node(s)
+All nodes in cluster <clusterName> are bootstrapped to Primary Network!
+
+STATUS FOR CLUSTER: <clusterName>
+=================================
+
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
+|      CLOUD ID       |                 NODE ID                  |       IP       | NETWORK | AVAGO VERSION | PRIMARY NETWORK | HEALTHY |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
+| i-0b0f27332a94082f5 | NodeID-6iTKYimySPqhG5ew46BtarNjxSWTng7Hr | 52.204.202.216 | Devnet  | v1.10.17      | BOOTSTRAPPED    | OK      |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
+| i-0eed997028e753be7 | NodeID-JdgaYJotZx33WMDZxNmQuPQ3Ac9gc3i9y | 54.205.99.200  | Devnet  | v1.10.17      | BOOTSTRAPPED    | OK      |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
+| i-0f188fe6a5d0a7452 | NodeID-GdnycZZgXX1rPrE6Bvfigmmemhw5XQLRo | 3.208.253.232  | Devnet  | v1.10.17      | BOOTSTRAPPED    | OK      |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
+| i-0a9f2e841b96ef16d | NodeID-2Xaz3RVVHJBUQbKR8fsPteqPkM5GGzZsW | 34.196.122.72  | Devnet  | v1.10.17      | BOOTSTRAPPED    | OK      |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
+| i-0c41fc9bfb5e31205 | NodeID-CtgpzVfxLrTDcKjvhUFSe8V4etFeNYpRT | 3.233.202.158  | Devnet  | v1.10.17      | BOOTSTRAPPED    | OK      |
++---------------------+------------------------------------------+----------------+---------+---------------+-----------------+---------+
+```
+
+From this, we will take note of the IP of the first node of the list, `52.204.202.216`.
+
+Next, get blockchain id for `<subnetNameA>`
+
+```text
+avalanche subnet describe <subnetNameA>
+
+ _____       _        _ _
+|  __ \     | |      (_) |
+| |  | | ___| |_ __ _ _| |___
+| |  | |/ _ \ __/ _  | | / __|
+| |__| |  __/ || (_| | | \__ \
+|_____/ \___|\__\__,_|_|_|___/
++---------------------+---------------------------------------------------+
+|      PARAMETER      |                       VALUE                       |
++---------------------+---------------------------------------------------+
+| Subnet Name         | <subnetNameA>                                     |
++---------------------+---------------------------------------------------+
+| ChainID             | 68430                                             |
++---------------------+---------------------------------------------------+
+| Mainnet ChainID     | 0                                                 |
++---------------------+---------------------------------------------------+
+| Token Name          | TEST                                              |
++---------------------+---------------------------------------------------+
+| VM Version          | v0.5.10                                           |
++---------------------+---------------------------------------------------+
+| VM ID               | srEXiWaHtoWw6GFGeF3WAxWwAueYWwoD5o2HUjQY9ASJRW32P |
++---------------------+---------------------------------------------------+
+| Devnet SubnetID     | giY8tswWgZmcAWzPkoNrmjjrykited7GJ9799SsFzTiq5a1ML |
++---------------------+---------------------------------------------------+
+| Devnet BlockchainID | JjDfmxM3hAEX3VuaKH4PpQskhrvp2pzGTgYLpDwinMzFeHJYA |
++---------------------+---------------------------------------------------+
+
+...
+```
+
+Take note of the `Devnet BlockchainID` value, `JjDfmxM3hAEX3VuaKH4PpQskhrvp2pzGTgYLpDwinMzFeHJYA`.
+
+Same for `<subnetNameB>`
+
+```text
+avalanche subnet describe <subnetNameB>
+
+ _____       _        _ _
+|  __ \     | |      (_) |
+| |  | | ___| |_ __ _ _| |___
+| |  | |/ _ \ __/ _  | | / __|
+| |__| |  __/ || (_| | | \__ \
+|_____/ \___|\__\__,_|_|_|___/
++---------------------+----------------------------------------------------+
+|      PARAMETER      |                       VALUE                        |
++---------------------+----------------------------------------------------+
+| Subnet Name         | <subnetNameB>                                      |
++---------------------+----------------------------------------------------+
+| ChainID             | 68431                                              |
++---------------------+----------------------------------------------------+
+| Mainnet ChainID     | 0                                                  |
++---------------------+----------------------------------------------------+
+| Token Name          | TEST                                               |
++---------------------+----------------------------------------------------+
+| VM Version          | v0.5.10                                            |
++---------------------+----------------------------------------------------+
+| VM ID               | srEXiWaHu18zGnNCT4fyu9haF1HCw6A9CtjWJN1hhkjEUN3zs  |
++---------------------+----------------------------------------------------+
+| Devnet SubnetID     | 21VBCbPvq8eUugLHTwMdmW6vqZmHPa9TiPksu6jUTchSbQDk2t |
++---------------------+----------------------------------------------------+
+| Devnet BlockchainID | RW37R3svsZUsy2bVLFVjt1BfEH2S6n7E3HwY8KdjGq4JQvz5x  |
++---------------------+----------------------------------------------------+
+```
+
+To get `21VBCbPvq8eUugLHTwMdmW6vqZmHPa9TiPksu6jUTchSbQDk2t`.
+
+The general scheme for obtaining the endpoint is:
+
+```text
+http://DEVNET_ENDPOINT:9650/ext/bc/SUBNET_BLOCKCHAIN_ID/rpc
+```
+
+From this, we can derive that the blockchain endpoints for both Subnets are:
+
+- subnetNameA: `http://52.204.202.216:9650/ext/bc/JjDfmxM3hAEX3VuaKH4PpQskhrvp2pzGTgYLpDwinMzFeHJYA/rpc`
+- subnetNameB: `http://52.204.202.216:9650/ext/bc/21VBCbPvq8eUugLHTwMdmW6vqZmHPa9TiPksu6jUTchSbQDk2t/rpc`
+
+We can for example use the endpoint of `<subnetNameA>` to get balance information:
+
+```bash
+curl http://52.204.202.216:9650/ext/bc/JjDfmxM3hAEX3VuaKH4PpQskhrvp2pzGTgYLpDwinMzFeHJYA/rpc \
+  -X POST \
+  -H "Content-Type: application/json" \
+  --data '{"method":"eth_getBalance","params":["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "latest"],"id":1,"jsonrpc":"2.0"}'
+
+{"jsonrpc":"2.0","id":1,"result":"0x52b7b50bf43753a7c54800"}
+```
+
+C-Chain endpoint follows the same scheme but with the blockchain alias of `C`: `http://52.204.202.216:9650/ext/bc/C/rpc`
 
