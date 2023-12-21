@@ -14,6 +14,7 @@ for a broad overview.
 ## Subnets Quick Links
 
 ## Introduction to Subnets
+
 |                                      |                                                                                                               |
 | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
 | [**Getting Started**](/build/subnet/getting-started.md)      | Planning a successful Subnet deployment starts by determining your application's needs                        |
