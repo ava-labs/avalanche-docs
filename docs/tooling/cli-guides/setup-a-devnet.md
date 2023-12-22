@@ -758,19 +758,35 @@ curl http://52.204.202.216:9650/ext/bc/JjDfmxM3hAEX3VuaKH4PpQskhrvp2pzGTgYLpDwin
 
 C-Chain endpoint follows the same scheme but with the blockchain alias of `C`: `http://52.204.202.216:9650/ext/bc/C/rpc`
 
+<!-- vale off -->
+
 #### Deploy Teleporter
+
+<!-- vale on -->
+
+<!-- vale off -->
 
 [Teleporter](https://github.com/ava-labs/teleporter) is a cross-chain messaging protocol built on top of Warp. Teleporter provides a user-friendly interface to Warp that provides additional features such as replay protection, message delivery incentives, and message execution, to name a few.
 
 Now that the Warp-enabled devnet is up and running, Teleporter can be deployed to the C-Chain and subnet-evm subnets. Teleporter is deployed using [Nick's method](https://yamenmerhi.medium.com/nicks-method-ethereum-keyless-execution-168a6659479c) to ensure that the Teleporter contract is deployed to the same address on all chains. For instructions on how to deploy Teleporter, please see the guide [here.](https://github.com/ava-labs/teleporter/blob/main/utils/contract-deployment/README.md) Follow those instructions to deploy Teleporter to Subnet A, Subnet B, and the C-Chain.
 
+<!-- vale on -->
+
 #### Run an AWM Relayer instance
+
+<!-- vale off -->
 
 In order to deliver Warp and Teleporter messages between chains, an off-chain relayer is required. For this tutorial, we will use [AWM Relayer.](https://github.com/ava-labs/awm-relayer) 
 
+<!-- vale on -->
+
 > **_NOTE:_** In this tutorial, we'll run the relayer on the same local machine from which we deployed the devnets, but these steps can be adapted to deploy the relayer in a cloud environment as well. The application itself has minimal hardware requirements, and is essentially stateless.
 
+<!-- vale off -->
+
 ##### Configure the Relayer
+
+<!-- vale on -->
 
 First, we need to set the configuration using our devnet values. Below is a template relayer configuration with the values for Subnet A (which we deployed previously) filled in:
 
@@ -838,14 +854,18 @@ First, we need to set the configuration using our devnet values. Below is a temp
 
 The following values need to be populated:
 
+<!-- vale off -->
+
 - `<C_CHAIN_BLOCKCHAIN_ID>`: The blockchain ID of the C-Chain. This can be retrieved using [platform.getBlockchains](https://docs.avax.network/reference/avalanchego/p-chain/api#platformgetblockchains) and looking for the blockchain with alias `C`.
 - `<TELEPORTER_CONTRACT_ADDRESS>`: The address of the Teleporter contract on the source and destination chains. This is the same address that Teleporter was deployed to in [Deploy Teleporter](#deploy-teleporter).
 - `<REWARD_ADDRESS>`: The address that the relayer will use to collect rewards for delivering messages. This can be any address.
 - `<ACCOUNT_PRIVATE_KEY>`: The private key of the account that will be used to sign transactions on the source and destination chains. This account must have enough funds to pay for transaction fees on both chains.
 
+<!-- vale on -->
+
 The relayer is now configured to relay messages between the C-Chain and Subnet A. Subnet B can be added as well by extending the `source-subnets` and `destination-subnets` arrays with the appropriate values.
 
-##### Run the relayer
+##### Run the Relayer
 
 To run the relayer, we can either build the application from source, or run using a published [Docker image](https://hub.docker.com/r/avaplatform/awm-relayer/tags). For the following examples, assume we've written the relayer configuration to `~/config/config.json` on the host machine.
 
@@ -872,6 +892,10 @@ docker pull avaplatform/awm-relayer:latest
 docker run --env CONFIG_FILE=/config/config.json -v ~/config:/config avaplatform/awm-relayer:latest
 ```
 
+<!-- vale off -->
+
 #### Interact with Teleporter
 
 With the Warp-enabled devnet deployed, Teleporter deployed on each of the chains, and an AWM Relayer instance running, the Teleporter development environment is ready to go! A good place to start are the [example applications](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/README.md) included in the Teleporter repository. These dApps are built on top of Teleporter and demonstrate various cross-chain messaging use cases.
+
+<!-- vale on -->
