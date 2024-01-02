@@ -3,7 +3,7 @@ tags: [Build, Virtual Machines, Rust, Avalanche-RS]
 description: Learn how to install a Rust-based VM
 sidebar_label: Installing Your VM
 pagination_label: Installing Your VM
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 # Installing a VM
@@ -20,12 +20,12 @@ Copy the binary into the plugins directory.
 cp -n <path to your binary> $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/
 ```
 
-#### Node Is Not Running
+## Node Is Not Running
 
 If your node isn't running yet, you can install all virtual machines under your `plugin` directory
 by starting the node.
 
-#### Node Is Already Running
+## Node Is Already Running
 
 Load the binary with the `loadVMs` API.
 

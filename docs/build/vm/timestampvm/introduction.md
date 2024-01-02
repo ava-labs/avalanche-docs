@@ -10,7 +10,7 @@ sidebar_position: 1
 
 To really get an understanding of how one can use the `avalanche-types` library to build a Rust-based VM, we will look at [TimeStampVM](https://github.com/ava-labs/timestampvm-rs/tree/main), a basic VM which utilizes the `avalanche-types` library. 
 
-### Idea of TimestampVM
+## Idea of TimestampVM
 
 In contrast to complex VMs like the EVM which provide a general-purpose computing environment, TimestampVM is *much, much* simpler. In fact, we can describe the goal of TimestampVM in two bullet points:
 
@@ -23,4 +23,3 @@ Even though the above seems quite simple, this still requires us to define and b
 - Blocks
 - API
 - The VM itself
-

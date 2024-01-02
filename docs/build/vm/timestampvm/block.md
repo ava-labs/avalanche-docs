@@ -51,6 +51,7 @@ type Block interface {
 ## Implementing the Block Data Structure
 
 With the above in mind, we now examine the block data structure:
+
 ```rust
 /// Represents a block, specific to [`Vm`](crate::vm::Vm).
 #[serde_as]
@@ -85,7 +86,7 @@ pub struct Block {
 }
 ```
 
-Notice above that many of the fields of the `Block` struct store the information required to implement the `Snowman.Block` interface we saw previously. Tying the concept of Blocks back to the VM State, notice the last field `state` within the `Block` struct. This is where the `Block` struct stores a copy of the `State` struct from the previous section (and since each field of the `State` stuct is wrapped in an `Arc` pointer, this implies that `Block` is really just storing a reference to both the `db` and `verified_blocks` data structures).
+Notice above that many of the fields of the `Block` struct store the information required to implement the `Snowman.Block` interface we saw previously. Tying the concept of Blocks back to the VM State, notice the last field `state` within the `Block` struct. This is where the `Block` struct stores a copy of the `State` struct from the previous section (and since each field of the `State` struct is wrapped in an `Arc` pointer, this implies that `Block` is really just storing a reference to both the `db` and `verified_blocks` data structures).
 
 ## `Block` Functions
 

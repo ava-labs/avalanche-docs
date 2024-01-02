@@ -32,8 +32,8 @@ pub struct State {
 
 `State` in this context acts like the database of TimestampVM. Within `State`, we are managing two different data structures:
 
-- `db`: a byte-based mapping which maps bytes to bytes. This is where finalized (i.e. accepted blocks are stored)
-- `verified_blocks`: a HashMap which maps block numbers to their respective blocks. This is where all verified, but pending blocks are stored
+- `db`: a byte-based mapping which maps bytes to bytes. This is where finalized (that is, accepted blocks are stored)
+- `verified_blocks`: a hashmap which maps block numbers to their respective blocks. This is where all verified, but pending blocks are stored
 
 While one could have guessed the functionalities of `db` and `verified_blocks` from their respective types `subnet::rpc::database::Database + Send + Sync` and `HashMap<ids::Id, Block>`, it is not immediately clear why we are wrapping these fields with Read/Write locks and Arc pointers. However, as we'll see soon when we examine the Block data structure, blocks need access to the VM state so they can add themselves to state. This is due to the `SetPrefernce` function of SnowmanVM interface, which states:
 
@@ -46,7 +46,7 @@ While one could have guessed the functionalities of `db` and `verified_blocks` f
 Therefore, when building a Rust-based VM (or a VM in any supported language), the VM itself is only responsible for tracking the ID of the most recent finalized block; blocks bear the responsibility of storing themselves in VM state. As a result, we will need to wrap the `db` and `verified_blocks` fields with the following:
 
 - An `Arc` pointer so that whenever we clone the `State` structure, the cloned versions of `db` and `verified_blocks` are still pointing to the same data structures in memory. This allows for multiple Blocks to share the same `db` and `verified_blocks`
-- A read/write lock (i.e. `RwLock`) so that we safely utilize concurrency in our VM
+- A read/write lock (that is, `RwLock`) so that we safely utilize concurrency in our VM
 
 ## `State` Functions
 

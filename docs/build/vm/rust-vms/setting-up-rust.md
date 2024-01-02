@@ -10,11 +10,11 @@ sidebar_position: 2
 
 In this section, we will focus on getting set up with the Rust environment necessary to build with the `avalanche-types` crates (recall that `avalanche-types` contains the SDK we want to use to build our Rust VM).
 
-### Installing Rust
+## Installing Rust
 
 First and foremost, we will need to have Rust installed locally. If you do not have Rust installed, you can install `rustup` (the tool that manages your Rust installation) [here](https://www.rust-lang.org/tools/install).
 
-### Adding `avalanche-types` to Your Project
+## Adding `avalanche-types` to Your Project
 
 Once you have Rust installed and are ready to build, you will want to add the Avalanche-Types crate to your project. Below is a baseline example of how you can do this:
 
@@ -23,7 +23,7 @@ Once you have Rust installed and are ready to build, you will want to add the Av
 avalanche-types = "0.1.4"
 ```
 
-However, if you want to use the [TimestampVM](https://github.com/ava-labs/timestampvm-rs) as a reference for your project, a more appropiate import would be the following:
+However, if you want to use the [TimestampVM](https://github.com/ava-labs/timestampvm-rs) as a reference for your project, a more appropriate import would be the following:
 
 ```toml title="Cargo.toml"
 [dependencies]

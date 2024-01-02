@@ -39,7 +39,7 @@ In contrast to the static API, the chain API of TimestampVM is much more rich in
 
 - `ping`: when called, this function pings an instance of TimestampVM
 - `propose_Block`: write function which passes a block to TimestampVM for consideration to be appended to the blockchain
-- `last_accepted`: read function which returns the last accepted block (i.e. the block at the tip of the blockchain)
+- `last_accepted`: read function which returns the last accepted block (that is, the block at the tip of the blockchain)
 - `get_block`: read function which fetches the requested block
 
 We can see the functions included in the chain API here:

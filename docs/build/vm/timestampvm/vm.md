@@ -6,7 +6,7 @@ pagination_label: Defining the VM Itself
 sidebar_position: 5
 ---
 
-# Achitecture of the TimestampVM Itself
+# Architecture of the TimestampVM
 
 After examining several of the data structures and functionalities that TimestampVM relies on, it is time that we examine the architecture of the TimestampVM itself. In addition, we will look at some data structures that TimestampVM utilizes.
 
@@ -93,4 +93,4 @@ pub struct State {
 }
 ```
 
-We now see the relationship between the `State` and `state` data structure - `State` contains `state` alongside other fields which are relevant to the Snowman consensus algorithm. 
+We now see the relationship between the `State` and `state` data structure - `State` contains `state` alongside other fields which are relevant to the Snowman consensus algorithm.

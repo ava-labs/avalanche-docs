@@ -87,7 +87,7 @@ To learn more about smart contract support, click [here](build/dapp/launch-dapp.
 - [XSVM](https://github.com/ava-labs/xsvm)
   - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
 
-See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/create/golang-vm-simple.md)
+See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/golang-vms/golang-vm-simple.md)
 
 ### Rust
 
