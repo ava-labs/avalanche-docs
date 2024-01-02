@@ -22,7 +22,7 @@ Este tutorial asume que:
 ### **Configuraciones de la Subnet EVM:** [(Tutorial de Core EVM)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
 
 - **`Nombre de Red`**: Subnet-EVM Personalizada
-- **`Nueva URL RPC`**: <http://DirecciónIPNodo:9650/ext/bc/IDBlockchain/rpc> (Nota: el número de puerto debe
+- **`Nueva URL RPC`**: [http://DirecciónIPNodo:9650/ext/bc/IDBlockchain/rpc] (Nota: el número de puerto debe
   coincidir con tu configuración local, que puede ser diferente de 9650.)
 - **`ChainID`**: ID de Cadena de la Subnet-EVM
 - **`Símbolo`**: Símbolo del Token de la Subnet-EVM

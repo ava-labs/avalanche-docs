@@ -32,9 +32,9 @@ in the _Add Contract Libraries_ section.
 
 The C-Chain Explorer can fetch constructor arguments automatically for simple
 smart contracts. More complicated contracts might require you to pass in special
-constructor arguments. Smart contracts with complicated constructors [may have
-validation issues](verify-smart-contracts.md#caveats). You can try this [online
-ABI encoder](https://abi.hashex.org/).
+constructor arguments. Smart contracts with complicated constructors
+[may have validation issues](/build/dapp/smart-contracts/verification/verify-smart-contracts.md#caveats).
+You can try this [online ABI encoder](https://abi.hashex.org/).
 
 ## Requirements
 
@@ -117,7 +117,7 @@ comments. This can cause issues with constructor arguments.
 
 ```javascript
 /// keccak256("1");
-keccak256("2")
+keccak256("2");
 ```
 
 This could cause automatic constructor verification failures. If you receive

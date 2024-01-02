@@ -33,8 +33,6 @@ Las características clave incluyen:
   ataques de denegación de servicio distribuido (DDoS) y ataques de colusión. Su naturaleza probabilística asegura que el resultado del consenso converja al estado deseado, incluso cuando la red
   está bajo ataque.
 
-![Comparación de Consensos](/img/Consensus-protocol-comparison.png)
-
 ## Resumen conceptual
 
 Los protocolos de consenso en la familia Avalanche operan a través de votaciones submuestreadas repetidas. Cuando un

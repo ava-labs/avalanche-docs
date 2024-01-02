@@ -12,7 +12,7 @@ This page demonstrates how to deploy Avalanche validators on GCP using just one 
 command.
 
 :::info
-Currently, only Fuji network is supported.
+Currently, only Fuji network and Devnets are supported.
 :::
 
 :::warning

@@ -191,7 +191,7 @@ txID, err = cli.IssueRawTx(ctx, tx.Bytes())
 
 La [mempool](https://github.com/ava-labs/blobvm/blob/master/mempool/mempool.go) es un búfer de memoria volátil que almacena transacciones pendientes. Las transacciones se almacenan en la mempool cada vez que un nodo aprende sobre una nueva transacción ya sea a través de gossip con otros nodos o a través de una llamada de API emitida por un usuario.
 
-La mempool está implementada como un [heap](<https://en.wikipedia.org/wiki/Heap_(data_structure)>) min-max ordenado por el precio de gas de cada transacción. La mempool se crea durante la [inicialización](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L151) de la VM.
+La mempool está implementada como un [heap](https://en.wikipedia.org/wiki/Heap) min-max ordenado por el precio de gas de cada transacción. La mempool se crea durante la [inicialización](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L151) de la VM.
 
 ```go
 vm.mempool = mempool.New(vm.genesis, vm.config.MempoolSize)

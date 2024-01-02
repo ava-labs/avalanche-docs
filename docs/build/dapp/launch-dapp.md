@@ -57,7 +57,7 @@ Avalanche is as follows.
 - **Symbol**: `AVAX`
 - **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
-In your application's web interface, you can 
+In your application's web interface, you can
 [add Avalanche programmatically](/build/dapp/advanced/add-avalanche-programmatically.md#metamask)
 so your users don't have to enter the network data manually.
 
@@ -91,8 +91,8 @@ For development and experimental purposes,
 how to download, build, and install AvalancheGo. Simpler solution is to use the
 prebuilt binary, available on
 [GitHub](https://github.com/ava-labs/avalanchego/releases). If you're going to
-run a node on a Linux machine, you can use the [installer
-script](/nodes/run/with-installer.md) to install the node as a
+run a node on a Linux machine, you can use the
+[installer script](/nodes/run/with-installer/installing-avalanchego.md) to install the node as a
 `systemd` service. Script also handles node upgrading. If you want to run a node
 in a docker container, there are [build
 scripts](https://github.com/ava-labs/avalanchego/tree/master/scripts) in the

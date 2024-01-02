@@ -6,9 +6,9 @@ description: This tutorial will show you how to setup a Chainlink node with the 
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -22,7 +22,7 @@ We at [red·dev](https://www.red.dev) needed to do learn how to do this for our
 current software project under development,
 [RediYeti](https://www.rediyeti.com). In our case, we needed our dapp (on the
 C-Chain) to gather information from the Avalanche P-Chain, and because Avalanche
-does not allow this natively, we built a Chainlink adapter to do this job. 
+does not allow this natively, we built a Chainlink adapter to do this job.
 
 You, however, can follow this same methodology to gather any real-world
 information that your dapp needs, by following this tutorial and just designing
@@ -34,7 +34,7 @@ a set of Ansible scripts to complete this process automatically. (For more
 information on the devops tool **Ansible**, see the **Resources** section at the
 end of this tutorial.) Ansible creates a development server using a Vultr.com
 vps, and you can find the entire project
-[here](ansible-chainlink-avalanche-setup/README.md). 
+[here](ansible-chainlink-avalanche-setup/README.md).
 
 ## Audience
 
@@ -134,8 +134,8 @@ The repository cloning method used is HTTPS, but SSH can be used too:
 
 `git clone git@github.com:ava-labs/avalanchego.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
 Build the image into docker:
@@ -157,13 +157,12 @@ The image should be tagged as `avaplatform/avalanchego:COMMIT`, where `COMMIT`
 is the shortened commit of the Avalanche source it was built from. In our case
 it is 254b53da.
 
-
 ## Setting Up and Running Chainlink Node
 
-### Dependencies 
+### Dependencies
 
 1. Docker CE
-2. `Smartcontract/chainlink` v0.10.3 
+2. `Smartcontract/chainlink` v0.10.3
 3. AvalancheGo >= 1.4.5
 4. PostgreSQL
 
@@ -180,13 +179,13 @@ Use the command below to run the AvalancheGo image within Docker:
 docker run --name avalanchego-chainlink -d -p 9650:9650 -p 9651:9651 -v /root/.avalanchego:/root/.avalanchego avaplatform/avalanchego:91599fea /avalanchego/build/avalanchego --network-id=fuji --http-host=
 ```
 
-* --name assign a name to the container
-* -d specifies detached mode
-* -p specifies the port number
-* -v specifies the docker host location to store the container volume data
-* `/avalanchego/build/avalanchego --network-id=fuji` is the command to start the
-   AvalancheGo under Fuji test network
-  
+- --name assign a name to the container
+- -d specifies detached mode
+- -p specifies the port number
+- -v specifies the docker host location to store the container volume data
+- `/avalanchego/build/avalanchego --network-id=fuji` is the command to start the
+  AvalancheGo under Fuji test network
+
 Verify that the AvalancheGo node is started and running:
 
 ```bash
@@ -224,10 +223,10 @@ password:
 docker run --name pgchainlink -e POSTGRES_PASSWORD=chainlink -e POSTGRES_USER=chainlink -d -p 5432:5432 -v /root/postgres-data/:/var/lib/postgresql/data postgres
 ```
 
-* -name assign name to the container
-* -e specifies the environment variables used for the container
-* -p specifies the port number used for the container
-* -v specifies the docker host location to store the container volume data 
+- -name assign name to the container
+- -e specifies the environment variables used for the container
+- -p specifies the port number used for the container
+- -v specifies the docker host location to store the container volume data
 
 To verify that PostgreSQL is running, use the command below:
 
@@ -287,6 +286,7 @@ echo $PASSWORD > ~/.chainlink-avalanche/.password
 ```
 
 ---
+
 **NOTE**
 
 Don't forget to replace the $CHAINLINK_HOST, $HOST, $USERNAME and $PASSWORD with actual values.
@@ -326,15 +326,15 @@ Please follow the README.md file to install and start the adaptor.
 ## Login to Chainlink GUI
 
 You can now connect to your Chainlink node's UI interface by navigating to
-<http://localhost:6688>. If using a VPS, you can create a SSH tunnel to your node
+[http://localhost:6688]. If using a VPS, you can create a SSH tunnel to your node
 for 6688:localhost:6688 to enable connectivity to the GUI. Typically this is
-done like this: 
+done like this:
 
 ```bash
 ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 ```
 
-Access <http://localhost:6688> in your favorite browser, and this will return to
+Access [http://localhost:6688] in your favorite browser, and this will return to
 the Chainlink login page:
 
 ![Chainlink-login](img/chainlink-tutorial-07-chainlink-login.png)
@@ -348,7 +348,7 @@ address, which is in our case `http://<$HOST>:8081`
 
 ## Create a New Job
 
-The next step is to create a new job in the Chainlink node. 
+The next step is to create a new job in the Chainlink node.
 
 ### Using Type: "web"
 
@@ -356,26 +356,26 @@ Below is a code snippet for the job specification to test the job within the
 Chainlink GUI. This can be done by using the "type": "web" . Please check the
 Chainlink official [documentation](https://docs.chain.link/docs/job-apis/) for
 more details. Later, in this section we also cover the "type": "runlog" which
-will be used to integrate Chainlink with on-chain contracts. 
+will be used to integrate Chainlink with on-chain contracts.
 
 ```json
 {
-    "name": "Avalanche NodeJS adapter test",
-    "initiators": [
-        {
-            "type": "web"
-        }
-    ],
-    "tasks": [
-        {
-            "type": "avalanchenodejs",
-            "params": {
-                "chain": "P",
-                "method": "platform.getCurrentSupply",
-                "params": {}
-            }
-        }
-    ]
+  "name": "Avalanche NodeJS adapter test",
+  "initiators": [
+    {
+      "type": "web"
+    }
+  ],
+  "tasks": [
+    {
+      "type": "avalanchenodejs",
+      "params": {
+        "chain": "P",
+        "method": "platform.getCurrentSupply",
+        "params": {}
+      }
+    }
+  ]
 }
 ```
 
@@ -410,8 +410,7 @@ initiator to use when integrating Chainlink with on-chain contracts.
       "params": {
         "chain": "P",
         "method": "platform.getCurrentSupply",
-        "params": {
-        }
+        "params": {}
       }
     },
     {
@@ -427,16 +426,15 @@ initiator to use when integrating Chainlink with on-chain contracts.
 }
 ```
 
-* jsonparse, ethuint256 & `ethtx` are core adaptors and are executed
+- jsonparse, ethuint256 & `ethtx` are core adaptors and are executed
   synchronously. For more details, you will find documentation for each
   adapter's usage [here](https://docs.chain.link/docs/core-adapters/).
-* runlog - By adding the address parameter, you make the event filter of the
+- runlog - By adding the address parameter, you make the event filter of the
   RunLog initiator more restrictive, only listening for events from that
   address, instead of any address. By adding the requesters parameter, you only
   allow requests to come from an address within the array. Please have a look at
   this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to learn how
   to get your oracle address.
-
 
 ## Smart Contracts
 
@@ -452,9 +450,9 @@ To deploy the smart contracts go to the Deploy & Run Transactions Tab.
 
 There are 3 type of environments Remix can be plugged to:
 
-* JavaScript VM
-* Injected Web3
-* Web3 Provider
+- JavaScript VM
+- Injected Web3
+- Web3 Provider
 
 Both Injected Web3 and Web3 Provider require the use of an external tool.
 
@@ -481,16 +479,16 @@ import "https://github.com/smartcontractkit/chainlink/contracts/src/v0.4/vendor/
 contract ATestnetConsumer is ChainlinkClient, Ownable {
   uint256 constant private ORACLE_PAYMENT = 1 * LINK;
   uint256 public supply;
-  
+
   event RequestAvaxSupplyFulfilled(
     bytes32 indexed requestId,
     uint256 indexed supply
   );
-  
+
   constructor() public Ownable() {
     setChainlinkToken(0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846);
   }
-  
+
   function requestCurrentAvaxSupply(address _oracle, string _jobId)
     public
     onlyOwner
@@ -501,7 +499,7 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
       req.add("path", "supply");
       sendChainlinkRequestTo(_oracle, req, ORACLE_PAYMENT);
   }
-  
+
   function fulfillAvaxSupply(bytes32 _requestId, uint256 _supply)
     public
     recordChainlinkFulfillment(_requestId)
@@ -535,7 +533,7 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
 Add tokens to the Avalanche Fuji Testnet so that you can transfer some LINKs to
 the deployed blockchain address to perform the transactions. Please refer to
 [link](https://docs.yearn.finance/resources/guides/how-to-add-a-custom-token-to-metamask)
-on how to add custom tokens. 
+on how to add custom tokens.
 
 Use the [Avalanche Faucet](https://linkfaucet.protofire.io/fuji) and send some
 LINK tokens to the Fuji Testnet wallet address.
@@ -545,7 +543,7 @@ Then transfer LINKS to the deployed blockchain address to perform the transactio
 ![smartContract-add-link](img/chainlink-tutorial-12-smart-contract-add-link.png)
 
 Now, call the requestCurrentAvaxSupply method on the deployed blockchain with
-params `oracle_address` & job id. 
+params `oracle_address` & job id.
 
 :::info
 The oracle address should be _your own oracle address_. Please have a look at
@@ -553,8 +551,8 @@ this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to learn how to
 get your own oracle address.
 :::
 
-* `oracle_address` - 0xaC830Beb7a2f1cED128e347e6B9A37DCc2e971B7
-* job id - 52c3344f35eb4f2e93343810199ab313"
+- `oracle_address` - 0xaC830Beb7a2f1cED128e347e6B9A37DCc2e971B7
+- job id - 52c3344f35eb4f2e93343810199ab313"
 
 ![smartContract-confirm-txn](img/chainlink-tutorial-13-smart-contract-confirm-txn.png)
 

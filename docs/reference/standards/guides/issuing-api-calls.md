@@ -26,8 +26,7 @@ where
 
 - `node-ip` is the IP address of the node the call is to.
 - `http-port` is the port the node listens on for HTTP calls. This is specified
-  by [command-line
-  argument](/nodes/configure/avalanchego-config-flags.md#http-server)
+  by [command-line argument](/nodes/configure/avalanchego-config-flags.md#http-server)
   `http-port` (default value `9650`).
 
 For example, if you're making RPC calls on the local node, the base URL might look like this: `127.0.0.1:9650`.
@@ -40,13 +39,13 @@ set up the
 config flag on the node. Also, you will need to make sure the firewall and/or
 security policy allows access to the `http-port` from the internet.
 
-:::caution 
+:::caution
 
 When setting up RPC access to a node, make sure you don't leave the
 `http-port` accessible to everyone! There are malicious actors that scan for
 nodes that have unrestricted access to their RPC port and then use those nodes
 for spamming them with resource-intensive queries which can knock the node
-offline. Only allow access to your node's RPC port from known IP addresses! 
+offline. Only allow access to your node's RPC port from known IP addresses!
 
 :::
 
@@ -119,7 +118,7 @@ To interact with Subnet instances of the EVM via the JSON-RPC endpoint:
 ```
 
 where `blockchainID` is the ID of the blockchain running the EVM. So for
-example, the RPC URL for the DFK Network (a Subnet that runs the DeFi Kingdoms:Crystalvale game) 
+example, the RPC URL for the DFK Network (a Subnet that runs the DeFi Kingdoms:Crystalvale game)
 running on a local node would be:
 
 ```sh
@@ -154,14 +153,14 @@ use:
 ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
-:::info 
+:::info
 
 When using the [Public API](/tooling/rpc-providers.md) or another host
 that supports HTTPS, use `https://` or `wss://` instead of `http://` or `ws://`.
 
 Also, note that the [public API](/tooling/rpc-providers.md#supported-apis) only
 supports C-Chain websocket API calls for API methods that don't exist on the
-C-Chain's HTTP API. 
+C-Chain's HTTP API.
 
 :::
 
@@ -171,8 +170,7 @@ Most of the built-in APIs use the [JSON RPC
 2.0](https://www.jsonrpc.org/specification) format to describe their requests
 and responses. Such APIs include the Platform API and the X-Chain API.
 
-Suppose we want to call the `getTxStatus` method of the [X-Chain
-API](/reference/avalanchego/x-chain/api.md). The X-Chain API documentation tells us that the 
+Suppose we want to call the `getTxStatus` method of the [X-Chain API](/reference/avalanchego/x-chain/api.md). The X-Chain API documentation tells us that the
 endpoint for this API is `/ext/bc/X`.
 
 That means that the endpoint we send our API call to is:

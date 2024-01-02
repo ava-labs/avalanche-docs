@@ -10,8 +10,8 @@ pagination_label: Fuji Workflow
 ## Introduction
 
 Fuji is the Avalanche network's test network. You can use it to test your dapp
-or smart contract after you've developed it locally. (You can use [Avalanche
-Network Runner](/tooling/network-runner.md) to test things locally.) Fuji is
+or smart contract after you've developed it locally. (You can use
+[Avalanche Network Runner](/tooling/network-runner.md) to test things locally.) Fuji is
 typically on the same version as the Avalanche Mainnet, but sometimes it is
 running an unreleased version of AvalancheGo. In general, you can expect Fuji's
 behavior to be about the same as Avalanche Mainnet. Tools such as a explorers
@@ -26,7 +26,7 @@ be used. We'll do the following:
 4. Get AVAX from the Fuji faucet
 5. Send AVAX via ethersJS
 6. Examine the resulting transaction on the Avalanche Explorer
-7. Use a private key derived from a mnemonic to sign into the web wallet
+7. Use a private key derived from a mnemonic to sign into the Core extension (wallet)
 
 ## Set up Fuji Network on Core (optional)
 
@@ -284,20 +284,21 @@ const main = async (): Promise<any> => {
 main();
 ```
 
-### Sign Into the Web Wallet
+### Sign in to Core Extension
 
 Lastly, we can [use the mnemonic to generate a private
-key](#generate-private-keys-from-a-mnemonic) to access the [Avalanche Web
-Wallet](https://wallet.avax.network). We'll see that it has the AVAX balance and
+key](#generate-private-keys-from-a-mnemonic) to access that account in
+[Core extension](https://join.core.app/extension). 
+We'll see that it has the AVAX balance and
 that it derives the hexadecimal address from the private key.
 
-Use the private key to access the Web Wallet.
+Use the private key to access the account in Core Extension.
 
 ![Access the wallet](/img/fuji-wf-alt-enter-key.png)
 
 The balance is correct and the address is the 1st derived address.
 
-![Web wallet balance](/img/fuji-wf-wallet-alt-info.png) ![3rd derived BIP44 address](/img/fuji-wf-alt-wallet-address.png)
+![Core extension balance](/img/fuji-wf-wallet-alt-info.png) ![3rd derived BIP44 address](/img/fuji-wf-alt-wallet-address.png)
 
 We can repeat this login process using the private keys from the remaining 2
 addresses in the [script above](#generate-private-keys-from-a-mnemonic).
@@ -325,9 +326,10 @@ addresses to help you test. (This testnet AVAX has no value.)
 
 ### Wallet
 
-The [Avalanche Web Wallet](https://wallet.avax.network) is a simple, secure,
-non-custodial wallet for storing Avalanche assets. It supports Mainnet, Fuji and
-custom networks.
+[Core extension](https://join.core.app/extension) and
+[Core mobile](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone)
+are simple, secure, non-custodial wallets for storing Avalanche assets. 
+They support Mainnet, Fuji and custom networks.
 
 ### Explorer
 

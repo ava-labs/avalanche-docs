@@ -2,9 +2,9 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -13,8 +13,7 @@ projects.
 
 Hi there! In this tutorial, we will be learning how to create a custom genesis file for your Subnet.
 
-We will start by deploying a very simple Subnet using [the Subnet
-wizard](https://github.com/ava-labs/avalanche-cli). Then we will learn about the
+We will start by deploying a very simple Subnet using [the Subnet wizard](https://github.com/ava-labs/avalanche-cli). Then we will learn about the
 genesis file and how to customize it for our needs.
 
 Next, we will create a simple game!
@@ -246,7 +245,7 @@ the network.
 ## Understanding the Genesis File
 
 Before starting, I'd like to acknowledge that this section is very similar to
-[AVAX docs - Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md). 
+[AVAX docs - Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md).
 However, I've made some changes to make it more comprehensive and easier to understand.
 
 Subnet wizard is an awesome tool to customize your Subnet and might be a good starting point for you.
@@ -367,9 +366,9 @@ single transaction can use.
 #### `targetBlockRate`
 
 The network aims to produce a new block in `targetBlockRate` seconds. This value
-is in **seconds**. If the network starts producing faster than this, 
+is in **seconds**. If the network starts producing faster than this,
 [base fees are increased accordingly](#blockgascoststep). Otherwise, if the network starts
-producing slower than this, [base fees are decreased accordingly](#blockgascoststep). 
+producing slower than this, [base fees are decreased accordingly](#blockgascoststep).
 This value is set to `2` in C-Chain.
 
 #### `minBaseFee`
@@ -441,9 +440,7 @@ This value is set to `200000` in C-Chain.
 
 This configuration allows validators to specify a fee recipient.
 
-Use the following configuration to enable validators to receive fees. [You can
-find more information from the Avalanche
-docs.](/build/subnet/upgrade/customize-a-subnet.md#setting-a-custom-fee-recipient)
+Use the following configuration to enable validators to receive fees. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#setting-a-custom-fee-recipient)
 
 ```json
 {
@@ -478,9 +475,7 @@ properties:
 
 Admin addresses can deploy new contracts and add new Admin and Deployer
 addresses. Precompiled contract is deployed to
-`0x0200000000000000000000000000000000000000`. [You can find more information
-from the Avalanche
-docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers)
+`0x0200000000000000000000000000000000000000`. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-smart-contract-deployers)
 
 #### `contractNativeMinterConfig`
 
@@ -498,9 +493,7 @@ If you'd like to use a smart contract to mint native tokens, you can set the
 ```
 
 Admin addresses can add new Admin and Minter addresses. Precompiled contract is
-deployed to `0x0200000000000000000000000000000000000001`. [You can find more
-information from the Avalanche
-docs.](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins)
+deployed to `0x0200000000000000000000000000000000000001`. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins)
 
 #### `txAllowListConfig`
 
@@ -518,9 +511,7 @@ properties:
 ```
 
 Admin addresses can add new Admin and Allowed addresses. Precompiled contract is
-deployed to `0x0200000000000000000000000000000000000002`. [You can find more
-information from the Avalanche
-docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions)
+deployed to `0x0200000000000000000000000000000000000002`. [You can find more information from the Avalanche docs.](/build/subnet/upgrade/customize-a-subnet.md#restricting-who-can-submit-transactions)
 
 ### Genesis Block
 

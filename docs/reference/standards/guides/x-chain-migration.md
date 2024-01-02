@@ -11,8 +11,8 @@ sidebar_position: 2
 ## Overview
 
 This document summarizes all of the changes made to the X-Chain API to support
-Avalanche Cortina (v1.10.0), which migrates the X-Chain to run Snowman++. 
-In summary, the core transaction submission and confirmation flow is unchanged, 
+Avalanche Cortina (v1.10.0), which migrates the X-Chain to run Snowman++.
+In summary, the core transaction submission and confirmation flow is unchanged,
 however, there are new APIs that must be called to index all transactions.
 
 ## Transaction Broadcast and Confirmation
@@ -44,14 +44,14 @@ accessible even though it will no longer be populated with chain data.
 
 :::note
 
-The index for the X-chain tx and vtx endpoints will never increase 
-again. The index for the X-chain blocks will increase as new 
+The index for the X-chain tx and vtx endpoints will never increase
+again. The index for the X-chain blocks will increase as new
 blocks are added.
 
 :::
 
 After Cortina activation, you will need to migrate to using the new
-*ext/index/X/block* endpoint (shares the same semantics as
+_ext/index/X/block_ endpoint (shares the same semantics as
 [/ext/index/P/block](/reference/avalanchego/index-api.md#p-chain-blocks)) to continue indexing
 X-Chain activity. Because X-Chain ordering is deterministic in Cortina, this
 means that X-Chain blocks across all heights will be consistent across all nodes
@@ -125,7 +125,6 @@ and Subnets. Integrators should make plans to migrate to tools and services that
 optimized for serving queries over Avalanche Network state and avoid keeping any keys on the node
 itself.
 
-
 :::note
 
 This deprecation ONLY applies to APIs that AvalancheGo exposes over the HTTP port.
@@ -134,66 +133,67 @@ Transaction types with similar names to these APIs are NOT being deprecated.
 :::
 
 <!-- vale off -->
-* ipcs
-  * ipcs.publishBlockchain
-  * ipcs.unpublishBlockchain
-  * ipcs.getPublishedBlockchains
-* keystore
-  * keystore.createUser
-  * keystore.deleteUser
-  * keystore.listUsers
-  * keystore.importUser
-  * keystore.exportUser
-* avm/pubsub
-* avm
-  * avm.getAddressTxs
-  * avm.getBalance
-  * avm.getAllBalances
-  * avm.createAsset
-  * avm.createFixedCapAsset
-  * avm.createVariableCapAsset
-  * avm.createNFTAsset
-  * avm.createAddress
-  * avm.listAddresses
-  * avm.exportKey
-  * avm.importKey
-  * avm.mint
-  * avm.sendNFT
-  * avm.mintNFT
-  * avm.import
-  * avm.export
-  * avm.send
-  * avm.sendMultiple
-* avm/wallet
-  * wallet.issueTx
-  * wallet.send
-  * wallet.sendMultiple
-* platform
-  * platform.exportKey
-  * platform.importKey
-  * platform.getBalance
-  * platform.createAddress
-  * platform.listAddresses
-  * platform.getSubnets
-  * platform.addValidator
-  * platform.addDelegator
-  * platform.addSubnetValidator
-  * platform.createSubnet
-  * platform.exportAVAX
-  * platform.importAVAX
-  * platform.createBlockchain
-  * platform.getBlockchains
-  * platform.getStake
-  * platform.getMaxStakeAmount
-  * platform.getRewardUTXOs
-<!-- vale on -->
+
+- ipcs
+  - ipcs.publishBlockchain
+  - ipcs.unpublishBlockchain
+  - ipcs.getPublishedBlockchains
+- keystore
+  - keystore.createUser
+  - keystore.deleteUser
+  - keystore.listUsers
+  - keystore.importUser
+  - keystore.exportUser
+- avm/pubsub
+- avm
+  - avm.getAddressTxs
+  - avm.getBalance
+  - avm.getAllBalances
+  - avm.createAsset
+  - avm.createFixedCapAsset
+  - avm.createVariableCapAsset
+  - avm.createNFTAsset
+  - avm.createAddress
+  - avm.listAddresses
+  - avm.exportKey
+  - avm.importKey
+  - avm.mint
+  - avm.sendNFT
+  - avm.mintNFT
+  - avm.import
+  - avm.export
+  - avm.send
+  - avm.sendMultiple
+- avm/wallet
+  - wallet.issueTx
+  - wallet.send
+  - wallet.sendMultiple
+- platform
+  - platform.exportKey
+  - platform.importKey
+  - platform.getBalance
+  - platform.createAddress
+  - platform.listAddresses
+  - platform.getSubnets
+  - platform.addValidator
+  - platform.addDelegator
+  - platform.addSubnetValidator
+  - platform.createSubnet
+  - platform.exportAVAX
+  - platform.importAVAX
+  - platform.createBlockchain
+  - platform.getBlockchains
+  - platform.getStake
+  - platform.getMaxStakeAmount
+  - platform.getRewardUTXOs
+  <!-- vale on -->
 
 ## Cortina FAQ
 
 ### Do I Have to Upgrade my Node?
 
-If you don’t upgrade your validator to `v1.10.0` before the Avalanche Mainnet activation date, 
-your node will be marked as offline and other nodes will report your node as having lower uptime, 
+If you don’t upgrade your validator to `v1.10.0` before the Avalanche Mainnet activation date,
+your node will be marked as offline and other nodes will report your node as having lower uptime,
 which may jeopardize your staking rewards.
 
 ### Is There any Change in Hardware Requirements?
@@ -204,12 +204,11 @@ No.
 
 No. As a reminder, you can check your validator’s estimated uptime using the [`info.uptime` API call](/reference/avalanchego/info-api.md#infouptime).
 
-
 ### I Think Something Is Wrong. What Should I Do?
 
-First, make sure that you’ve read the documentation thoroughly and checked 
-the [FAQs](https://support.avax.network/en/). 
-If you don’t see an answer to your question, 
-go to our [Discord](https://discord.com/invite/RwXY7P6) 
-server and search for your question. 
+First, make sure that you’ve read the documentation thoroughly and checked
+the [FAQs](https://support.avax.network/en/).
+If you don’t see an answer to your question,
+go to our [Discord](https://discord.com/invite/RwXY7P6)
+server and search for your question.
 If it has not already been asked, please post it in the appropriate channel.

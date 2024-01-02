@@ -210,7 +210,7 @@ curl --location --request POST 'http://127.0.0.1:9650/ext/info' \
 ### Respuesta de `info.getNodeID`
 
 Toma nota del valor `nodeID` que se devuelve, ya que necesitarás usarlo en
-el siguiente paso cuando agregues un validador a través de la Avalanche Web Wallet. En este caso,
+el siguiente paso cuando agregues un validador a través de Core web. En este caso,
 el `nodeID` es `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 
 ```zsh
@@ -227,7 +227,7 @@ el `nodeID` es `NodeID-Q8Gfaaio9FAqCmZVEXDq9bFvNPvDi7rt5`
 }
 ```
 
-## Agregar el nodo como validador en Fuji a través de la Web Wallet
+## Agregar el nodo como validador en Fuji a través de el Web Wallet
 
 Para agregar el nuevo nodo como un validador en la red de pruebas Fuji, puedes
 usar la [Avalanche Web Wallet](https://wallet.avax.network).
@@ -478,4 +478,4 @@ pero eso no abordará la actualización de la Subnet, si tienes una.
 
 ## Resumen
 
-Avalanche es la primera plataforma descentralizada de contratos inteligentes construida para la escala de las finanzas globales, con finalidad de transacción casi instantánea. Ahora, con un nodo validador de Avalanche disponible como instalación de un solo clic desde el AWS Marketplace, los desarrolladores y emprendedores pueden ingresar al ecosistema Avalanche en cuestión de minutos. Si tienes alguna pregunta o quieres hacer un seguimiento de alguna manera, únete a nuestro servidor de Discord en <https://chat.avax.network>. Para obtener más recursos para desarrolladores, por favor consulta nuestra [Documentación para Desarrolladores](https://docs.avax.network).
+Avalanche es la primera plataforma descentralizada de contratos inteligentes construida para la escala de las finanzas globales, con finalidad de transacción casi instantánea. Ahora, con un nodo validador de Avalanche disponible como instalación de un solo clic desde el AWS Marketplace, los desarrolladores y emprendedores pueden ingresar al ecosistema Avalanche en cuestión de minutos. Si tienes alguna pregunta o quieres hacer un seguimiento de alguna manera, únete a nuestro servidor de Discord en [https://chat.avax.network]. Para obtener más recursos para desarrolladores, por favor consulta nuestra [Documentación para Desarrolladores](https://docs.avax.network).

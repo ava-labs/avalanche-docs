@@ -2,9 +2,9 @@
 
 :::warning
 
-These tutorials were published as a snapshot of when they were written, 
+These tutorials were published as a snapshot of when they were written,
 and may contain out-of-date-information.
-For up-to-date information, please reach out to the owners of these 
+For up-to-date information, please reach out to the owners of these
 projects.
 
 :::
@@ -52,7 +52,7 @@ smoother.
 Open a terminal and navigate to the directory where we will create the
 application. Usually, this will be inside our user home directory but can be
 located wherever is practical. On most Linux distributions this will change into
-/home/ . On macOS it will be /Users/. On Windows the user directories are
+/home/ . On MacOS it will be /Users/. On Windows the user directories are
 located in C:\Users.
 
 ```bash
@@ -805,7 +805,7 @@ components.
 > Rimble UI library comes with a peer dependency of `react@16.9.0` which is not
 > the latest version of React that we are using which is `react@17.0.2`. Running the
 > `npm install` command without the `--force` tag would cause an `unable to
-> resolve dependency tree` conflict. Thus, the `--force` tag is used to override
+resolve dependency tree` conflict. Thus, the `--force` tag is used to override
 > any type of conflicts and proceeds with the installation anyway. Another way
 > to resolve this conflict is by using the `--legacy-peer-deps` tag instead, but
 > this would ignore all peer dependencies which we do not require, as the
