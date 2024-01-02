@@ -43,7 +43,7 @@ For the second case we provide three important use cases examples:
 - creating a devnet an deploy a preexistent CLI Subnet (same example as the step by step)
 - creating a devnet, create a Subnet based on a Custom VM, and deploy it (similar to [
 this one](/tooling/cli-guides/upload-a-custom-vm-to-cloud))
-- creating a devnet with warp-enabled Subnets
+- creating a devnet with Warp-enabled Subnets
 
 ## Step by Step
 
@@ -429,11 +429,11 @@ Devnet <clusterName> has been created and is validating subnet <subnetName>!
 
 ### Create a Devnet with Warp-Enabled Subnets
 
-It will contain a warp-enabled C-Chain (always enabled by default on devnets), and two warp-enabled Subnet-EVM Subnets.
+It will contain a Warp-enabled C-Chain (always enabled by default on devnets), and two Warp-enabled Subnet-EVM Subnets.
 
 #### Subnet-EVM Setup
 
-We will create two Subnet-EVM genesis files, both with warp enabled, but with different chain IDs (68430, 68431):
+[Avalanche Warp Messaging](https://docs.avax.network/learn/avalanche/awm) is a cross-chain messaging protocol that allows Avalanche subnets to natively send messages to other subnets. We will create two Subnet-EVM genesis files, both with Warp enabled, but with different chain IDs (68430, 68431):
 
 - create `<genesisPathA>`, with contents:
 
@@ -631,7 +631,7 @@ Devnet <clusterName> has been created and is validating subnet <subnetNameB>!
 
 #### Obtaining Warp Devnet Parameters
 
-Certain parameters are usually needed for warp interaction, we will show how to use CLI to obtain them.
+Certain parameters are usually needed for Warp interaction, we will show how to use CLI to obtain them.
 
 ##### Blockchain Endpoints
 
