@@ -58,7 +58,7 @@ Para obtener más información sobre el soporte de contratos inteligentes, haz c
 - [XSVM](https://github.com/ava-labs/xsvm)
   - Un ejemplo de Mensajería de Warp de Avalanche que implementa transferencias de activos entre Subnets.
 
-Consulta aquí un tutorial sobre [Cómo construir una VM Golang simple](/build/vm/create/golang-vm-simple.md)
+Consulta aquí un tutorial sobre [Cómo construir una VM Golang simple](/build/vm/golang-vms/golang-vm-simple.md)
 
 ### Rust
 
