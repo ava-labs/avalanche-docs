@@ -896,6 +896,11 @@ docker run --env CONFIG_FILE=/config/config.json -v ~/config:/config avaplatform
 
 #### Interact with Teleporter
 
-With the Warp-enabled devnet deployed, Teleporter deployed on each of the chains, and an AWM Relayer instance running, the Teleporter development environment is ready to go! A good place to start are the [example applications](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/README.md) included in the Teleporter repository. These dApps are built on top of Teleporter and demonstrate various cross-chain messaging use cases.
+With the Warp-enabled devnet deployed, Teleporter deployed on each of the chains, and an AWM Relayer instance running, the Teleporter development environment is ready to go!
+A good place to start is to explore the [example applications built on top of Teleporter](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/README.md) included in the Teleporter repository. These dApps abstract away much of Warp and Teleporter from the user, and demonstrate various cross-chain messaging use cases. 
+
+See the [getting started guide](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/GETTING_STARTED.md) for instructions on how to authoer a cross-chain dApp using Teleporter.
+
+An [example script](https://github.com/ava-labs/teleporter/blob/main/scripts/local/examples/basic_send_receive.sh) demonstrates how to interact with Teleporter to send a message from one subnet to another. Note that this script is intended to be used with a [local network running in Docker](https://github.com/ava-labs/teleporter/blob/main/README.md#run-a-local-testnet-in-docker), and will need to be adapted to use the correct values for the devnet subnet IDs, but should serve as a good reference. 
 
 <!-- vale on -->
