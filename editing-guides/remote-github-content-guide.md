@@ -169,7 +169,7 @@ ${updatedContent}`,
   [sidebar_label](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#sidebar_label),
   [sidebar_position](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#sidebar_position).
   **This is mandatory** and custom for each document.
-  Note: If the imported file does not have an <h1> element (in Markdown this is the first level title, like #Overview, with only one hashtag), this can be included as frontmatter with [title](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#title).
+  Note: If the imported file does not have an `h1` element (in Markdown this is the first level title, like #Overview, with only one hashtag), this can be included as frontmatter with [title](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#title).
 
 - `${updatedContent}` is where the content is inserted after it is modified by the `replaceRelativeLinks` function.
 
