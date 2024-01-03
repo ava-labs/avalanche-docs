@@ -3,7 +3,7 @@
 Some pages, such as
 [Teleporter Overview](https://docs.avax.network/build/cross-chain/teleporter/overview),
 are maintained as MarkDown files directly in their respective GitHub repo, and imported into the docs.
-This is accomplished using a community-owned docusaurus plugin called [docusaurus-plugin-remote-content](https://github.com/rdilweb/docusaurus-plugin-remote-content?tab=readme-ov-file#docusaurus-plugin-remote-content). This goes into detail about how this is accomplished and how to maintain it.
+This is accomplished using a community-owned docusaurus plugin called [docusaurus-plugin-remote-content](https://github.com/rdilweb/docusaurus-plugin-remote-content?tab=readme-ov-file#docusaurus-plugin-remote-content). This guide goes into detail about how this is accomplished and how to maintain it.
 
 ## Requirements and Caveats
 
