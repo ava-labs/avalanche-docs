@@ -17,7 +17,7 @@ jobs:
 
       - name: Get all changed English markdown files in the 'docs' directory
         id: changed-docs-markdown
-        uses: tj-actions/changed-files@v40
+        uses: tj-actions/changed-files@v41
         with:
           files_yaml: |
             en:
@@ -33,7 +33,7 @@ jobs:
 
       - name: Get all changed Spanish translation files
         id: changed-es-markdown
-        uses: tj-actions/changed-files@v40
+        uses: tj-actions/changed-files@v41
         with:
           files_yaml: |
             es:
