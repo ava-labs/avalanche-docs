@@ -1,5 +1,7 @@
 // @ts-check
 
+// FOR A GUIDE ON THIS FILE, PLEASE SEE: editing-guides/remote-github-content-guide.md
+
 // Function to replace relative links with absolute links
 function replaceRelativeLinks(content, sourceBaseUrl) {
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)|<img[^>]*src=['"]([^'"]*)['"]/g;
