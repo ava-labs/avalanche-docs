@@ -552,6 +552,7 @@
 
 /nodes/run/with-installer /nodes/run/with-installer/preparing-your-environment 301
 /es/nodes/run/with-installer /es/nodes/run/with-installer/preparing-your-environment 301
+/build/vm/evm/hello-world-precompile-tutorial /build/vm/evm/intro 301
 
 # teleporter marketing 
 /teleporter /learn/avalanche/awm 301

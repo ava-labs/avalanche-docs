@@ -130,9 +130,8 @@ module.exports = {
 
 Create a `.env` file for storing sensitive information which we can't make
 public like the private keys or the mnemonic. Here are the sample private keys,
-which you should not use. You can create a new account on [Avalanche
-Wallet](https://wallet.avax.network/) and paste the mnemonic here for
-demonstration.
+which you should not use. You can create a new account on [Core extension](https://support.avax.network/en/articles/6100129-core-extension-how-do-i-create-a-new-wallet) 
+and paste the mnemonic here for demonstration.
 
 ```env
 PRIVATEKEYS=`[
