@@ -75,6 +75,7 @@ Coreth
 Cortina
 CPUs
 Crabada
+cross-subnet
 crypto
 Crypto
 cryptocurrencies
@@ -299,6 +300,7 @@ superset
 Swapper's
 sybil
 syncer
+Teleporter
 Tencent
 testnet
 Testnet
@@ -325,6 +327,7 @@ unregister
 unscalable
 untrusted
 untyped
+Upgradeability
 uptimes
 URIs
 url
