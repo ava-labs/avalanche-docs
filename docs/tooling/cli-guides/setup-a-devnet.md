@@ -267,7 +267,7 @@ STATUS FOR CLUSTER: <clusterName>
 
 Latest step is to add the nodes as Subnet validators, so as the Devnet can change the Subnet state under user request.
 
-While you can follow [the instructions here](/tooling/cli-guides/validate-subnets#be-a-subnet-validator), for this
+While you can follow [the instructions here](/tooling/cli-guides/validate-#be-a-subnet-validator), for this
 tutorial we opt for providing the flag `--default-validator-params`, that set for the user most common validator params:
 
 ```shell
@@ -433,7 +433,7 @@ It will contain a Warp-enabled C-Chain (always enabled by default on devnets), a
 
 #### Subnet-EVM Setup
 
-[Avalanche Warp Messaging](https://docs.avax.network/learn/avalanche/awm) is a cross-chain messaging protocol that allows Avalanche subnets to natively send messages to other subnets. We will create two Subnet-EVM genesis files, both with Warp enabled, but with different chain IDs (68430, 68431):
+[Avalanche Warp Messaging](https://docs.avax.network/learn/avalanche/awm) is a cross-chain messaging protocol that allows Avalanche  to natively send messages to other . We will create two Subnet-EVM genesis files, both with Warp enabled, but with different chain IDs (68430, 68431):
 
 - create `<genesisPathA>`, with contents:
 
@@ -768,7 +768,7 @@ C-Chain endpoint follows the same scheme but with the blockchain alias of `C`: `
 
 [Teleporter](https://github.com/ava-labs/teleporter) is a cross-chain messaging protocol built on top of Warp. Teleporter provides a user-friendly interface to Warp that provides additional features such as replay protection, message delivery incentives, and message execution, to name a few.
 
-Now that the Warp-enabled devnet is up and running, Teleporter can be deployed to the C-Chain and subnet-evm subnets. Teleporter is deployed using [Nick's method](https://yamenmerhi.medium.com/nicks-method-ethereum-keyless-execution-168a6659479c) to ensure that the Teleporter contract is deployed to the same address on all chains. For instructions on how to deploy Teleporter, please see the guide [here.](https://github.com/ava-labs/teleporter/blob/main/utils/contract-deployment/README.md) Follow those instructions to deploy Teleporter to Subnet A, Subnet B, and the C-Chain.
+Now that the Warp-enabled devnet is up and running, Teleporter can be deployed to the C-Chain and subnet-evm Subnets. Teleporter is deployed using [Nick's method](https://yamenmerhi.medium.com/nicks-method-ethereum-keyless-execution-168a6659479c) to ensure that the Teleporter contract is deployed to the same address on all chains. For instructions on how to deploy Teleporter, please see the guide [here.](https://github.com/ava-labs/teleporter/blob/main/utils/contract-deployment/README.md) Follow those instructions to deploy Teleporter to Subnet A, Subnet B, and the C-Chain.
 
 <!-- vale on -->
 
@@ -901,6 +901,6 @@ A good place to start is to explore the [example applications built on top of Te
 
 See the [getting started guide](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/GETTING_STARTED.md) for instructions on how to authoer a cross-chain dApp using Teleporter.
 
-An [example script](https://github.com/ava-labs/teleporter/blob/main/scripts/local/examples/basic_send_receive.sh) demonstrates how to interact with Teleporter to send a message from one subnet to another. Note that this script is intended to be used with a [local network running in Docker](https://github.com/ava-labs/teleporter/blob/main/README.md#run-a-local-testnet-in-docker), and will need to be adapted to use the correct values for the devnet subnet IDs, but should serve as a good reference. 
+An [example script](https://github.com/ava-labs/teleporter/blob/main/scripts/local/examples/basic_send_receive.sh) demonstrates how to interact with Teleporter to send a message from one Subnet to another. Note that this script is intended to be used with a [local network running in Docker](https://github.com/ava-labs/teleporter/blob/main/README.md#run-a-local-testnet-in-docker), and will need to be adapted to use the correct values for the devnet Subnet IDs, but should serve as a good reference. 
 
 <!-- vale on -->
