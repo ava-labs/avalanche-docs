@@ -55,7 +55,7 @@ enable customization in the near future:
 - OS Image: `Ubuntu 20.04 LTS (HVM), SSD Volume Type`
 - Storage: `1 TB`
 
-Instance type can be specified via `--node-type` parameter or via interactive menu. `c5.2xlarge` is default(recommended) instance size.
+Instance type can be specified via `--node-type` parameter or via interactive menu. `c5.2xlarge` is the default(recommended) instance size.
 
 The command will ask which region you want to set up your cloud server in:
 
@@ -67,8 +67,6 @@ The command will ask which region you want to set up your cloud server in:
     us-west-2
     Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 ```
-
-Multiple regions can be chosen with number of the nodes per each region.  
 
 The command will then ask which Avalanche Go version you would like to install in the cloud server.
 You can choose `default` (which will install the latest version) or you can enter the name of a
@@ -85,8 +83,8 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
 - Installed Avalanche Go in cloud server
 - Installed Avalanche CLI in cloud server
 - Downloaded the `.pem` private key file to access the cloud server into your local `.ssh` directory.
-  Back up this private key file as you will not be able to ssh into the cloud server node without it unless `ssh-agent` is used.
-- `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
+  Back up this private key file as you will not be able to ssh into the cloud server node without it (unless `ssh-agent` is used).
+- Downloaded `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
 

@@ -82,13 +82,12 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
 - Installed Avalanche Go in cloud server
 - Installed Avalanche CLI in cloud server
 - Downloaded the `.pem` private key file to access the cloud server into your local `.ssh` directory.
-  Back up this private key file as you will not be able to ssh into the cloud server node without it unless `ssh-agent` is used
-- `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
+  Back up this private key file as you will not be able to ssh into the cloud server node without it (unless `ssh-agent` is used).
+- Downloaded `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
 
-Please note that Avalance CLI can be configured to use `ssh-agent` for ssh communication. In this case public key will 
-be read from there and cloud server will be accessible using it. Yubikey hardware can be also used to store private ssh 
+Please note that Avalanche CLI can be configured to use `ssh-agent` for ssh access to cloud server. Yubikey hardware can be also used to store private ssh 
 key. Please use official Yubikey documentation, for example [https://developers.yubico.com/PGP/SSH_authentication/] for more details.
 
 ## Check Bootstrap Status

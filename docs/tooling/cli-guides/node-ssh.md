@@ -72,8 +72,6 @@ It's possible to run command on all nodes at the same time by using `--parallel=
 
 :::
 
-
-
 ## Get the AvalancheGo Configuration for All Nodes in `<clusterName>`
 
 ```shell
@@ -153,7 +151,7 @@ avalanche node ssh <clusterName> cat /home/ubuntu/.avalanchego/configs/node.json
 ## Executing command on single node 
 
 As we all know command can be executed on single node similar to the examples above
-Just use `<nodeID>` or `<IP>` or even `<instanceID>` instead of the `<clusterName>`, like 
+To execute ssh command on a single node, use `<nodeID>`, `<IP>` or `<instanceID>` instead of `<clusterName>` as an argument. For example:
 
 ```shell
 avalanche node ssh i-0225fc39626b1edd3 <command>
@@ -171,8 +169,7 @@ In this case `--parallel=true` flag will be ignored
 
 ## Opening ssh shell for `<nodeID>`
 
-If no command provided Avalanche-CLI opens interactive session for this single node.
-For example 
+If no command is provided, Avalanche-CLI will open an interactive session for the specified node. For example:
 
 ```shell
 avalanche node ssh i-0225fc39626b1edd3

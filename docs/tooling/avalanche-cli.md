@@ -717,7 +717,7 @@ The `node create` command sets up a validator on a cloud server of your choice.
 The validator will be validating the Avalanche Primary Network and Subnet 
 of your choice. By default, the command runs an interactive wizard. It 
 walks you through all the steps you need to set up a validator.
-Multiple regions/zones can be used to deploy number of validators in each location.
+Validators can be deployed in multiple regions/zones simultaneously.
 Once this command is run, you will have to wait for the validator
 to finish bootstrapping on the primary network before running further
 commands on it, for example validating a Subnet. You can check the bootstrapping
