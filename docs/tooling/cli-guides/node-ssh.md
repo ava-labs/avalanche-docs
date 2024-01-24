@@ -148,7 +148,7 @@ avalanche node ssh <clusterName> cat /home/ubuntu/.avalanchego/configs/node.json
 }
 ```
 
-## Executing command on single node 
+## Executing command on Single node 
 
 As we all know command can be executed on single node similar to the examples above
 To execute ssh command on a single node, use `<nodeID>`, `<IP>` or `<instanceID>` instead of `<clusterName>` as an argument. For example:
@@ -167,7 +167,7 @@ In this case `--parallel=true` flag will be ignored
 
 :::
 
-## Opening ssh shell for `<nodeID>`
+## Opening SSH Shell for `<nodeID>`
 
 If no command is provided, Avalanche-CLI will open an interactive session for the specified node. For example:
 
