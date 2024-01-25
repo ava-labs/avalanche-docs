@@ -75,7 +75,7 @@ junto con el código fuente de tu contrato y los parámetros utilizados durante 
 
 A continuación se muestra la URL de llamada a la API que debe utilizarse para una solicitud POST: 
 
-```https://api.snowtrace.io/api?module=contract&action=verifysourcecode``
+```https://api.snowtrace.io/api?module=contract&action=verifysourcecode```
 
 Tenga en cuenta que esta URL está configurada específicamente para verificar contratos en Avalanche C-Chain Mainnet. 
 Si desea verificar en Fuji Testnet, utilice:
