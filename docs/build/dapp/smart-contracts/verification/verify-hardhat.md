@@ -68,7 +68,7 @@ menu labeled “Optimization”
    2. If unsuccessful, read the error messages provided and make the appropriate changes
       1. Ensure to check that the compiler version and optimizer runs are the same as when you 
       compiled  the contract prior to deployment -->
-## Verify the Smart Contract programmatically using APIs
+## Verify the Smart Contract Programmatically Using APIs
 
 Ensure you have Postman or any other API platform installed on your computer (or accessible through online services), 
 along with your contract's source code and the parameters utilized during deployment.
