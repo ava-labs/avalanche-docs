@@ -266,7 +266,7 @@ STATUS FOR CLUSTER: <clusterName>
 
 Latest step is to add the nodes as Subnet validators, so as the Devnet can change the Subnet state under user request.
 
-While you can follow [the instructions here](/tooling/cli-guides/validate-#be-a-subnet-validator), for this
+While you can follow [the instructions here](/tooling/cli-guides/validate-subnets#be-a-subnet-validator), for this
 tutorial we opt for providing the flag `--default-validator-params`, that set for the user most common validator params:
 
 ```shell
