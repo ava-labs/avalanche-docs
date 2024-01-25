@@ -75,7 +75,7 @@ along with your contract's source code and the parameters utilized during deploy
 
 Here is the API call URL to use for a POST request: 
 
-```https://api.snowtrace.io/api?module=contract&action=verifysourcecode ```
+```https://api.snowtrace.io/api?module=contract&action=verifysourcecode```
 
 Please note that this URL is specifically configured for Mainnet verification on the Avalanche C-Chain. 
 If you intend to verify on the testnet use:
