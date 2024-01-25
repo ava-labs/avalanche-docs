@@ -105,7 +105,7 @@ Here's the body of the API call with the required parameters:
 This part of the tutorial assumes that the contract was deployed using Hardhat and that all Hardhat 
 dependencies are properly installed to include `'@nomiclabs/hardhat-etherscan'`.
 
-You will need to create a `.env.json` with your _Wallet Seed Phrase_, you don't need an API key to verify on Snowtrace
+You will need to create a `.env.json` with your _Wallet Seed Phrase_. You don't need an API key to verify on Snowtrace.
 
 Example `.env.json`:
 
