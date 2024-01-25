@@ -30,8 +30,11 @@ Some clean-up may be necessary to get the code to compile properly in the Snowtr
   - If the contract uses multiple SPDX licenses, use both licenses by adding AND:
     `SPDX-License-Identifier: MIT AND BSD-3-Clause`
 
-## Verify the Smart Contract using Snowtrace
+## Verify the Smart Contract using Snowtrace UI
 
+Snowtrace is currently working on a new user interface (UI) for smart contract verification. 
+Meanwhile, you may consider using their API for a seamless smart contract verification experience.
+<!--
 1. Search for the contract in Snowtrace
 2. Click on the contract tab
 
@@ -64,23 +67,51 @@ menu labeled “Optimization”
    1. If successful, all Contracts with the same bytecode will be verified
    2. If unsuccessful, read the error messages provided and make the appropriate changes
       1. Ensure to check that the compiler version and optimizer runs are the same as when you 
-      compiled  the contract prior to deployment
+      compiled  the contract prior to deployment -->
+## Verify the Smart Contract Programmatically Using APIs
+
+Ensure you have Postman or any other API platform installed on your computer (or accessible through online services), 
+along with your contract's source code and the parameters utilized during deployment.
+
+Here is the API call URL to use for a POST request: 
+
+```https://api.snowtrace.io/api?module=contract&action=verifysourcecode```
+
+Please note that this URL is specifically configured for verifying contracts on the Avalanche C-Chain Mainnet. 
+If you intend to verify on the Fuji Testnet, use:
+
+```https://api-testnet.snowtrace.io/api?module=contract&action=verifysourcecode ```
+
+Here's the body of the API call with the required parameters:
+
+```json
+{
+  "contractaddress": "YOUR_CONTRACT_ADDRESS",
+  "sourceCode": "YOUR_FLATTENED_SOURCE_CODE",
+  "codeformat": "solidity-single-file",
+  "contractname": "YOUR_CONTRACT_NAME",
+  "compilerversion": "YOUR_COMPILER_VERSION",
+  "optimizationUsed": "YOUR_OPTIMIZATION_VALUE",  // 0 if not optimized, 1 if optimized
+  "runs": "YOUR_OPTIMIZATION_RUNS",  // remove if not applicable
+  "licenseType": "YOUR_LICENSE_TYPE",  // 1 if not specified
+  "apikey": "API_KEY_PLACEHOLDER", // you don't need an API key, use a placeholder
+  "evmversion": "YOUR_EVM_VERSION_ON_REMIX",
+  "constructorArguments": "YOUR_CONSTRUCTOR_ARGUMENTS"  // Remove if not applicable
+}
+```
 
 ## Verifying with Hardhat-Verify
 
 This part of the tutorial assumes that the contract was deployed using Hardhat and that all Hardhat 
 dependencies are properly installed to include `'@nomiclabs/hardhat-etherscan'`.
 
-You will need to create a `.env.json` with your _Wallet Seed Phrase_ and _Snowtrace API key_
-
-You will need to obtain an _API key_ [here](https://snowtrace.io/myapikey)
+You will need to create a `.env.json` with your _Wallet Seed Phrase_. You don't need an API key to verify on Snowtrace.
 
 Example `.env.json`:
 
 ```json
 {
   "MNEMONIC": "your-wallet-seed-phrase",
-  "APIKEY": "your-snowtrace-api-key"
 }
 ```
 
@@ -143,9 +174,7 @@ task(
 )
 export default {
   etherscan: {
-    // Your API key for Snowtrace
-    // Obtain one at https://snowtrace.io/
-    apiKey: APIKEY,
+    // Your don't need an API key for Snowtrace
   },
 
   solidity: {
