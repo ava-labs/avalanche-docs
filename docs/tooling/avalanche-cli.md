@@ -717,6 +717,7 @@ The `node create` command sets up a validator on a cloud server of your choice.
 The validator will be validating the Avalanche Primary Network and Subnet 
 of your choice. By default, the command runs an interactive wizard. It 
 walks you through all the steps you need to set up a validator.
+Validators can be deployed in multiple regions/zones simultaneously.
 Once this command is run, you will have to wait for the validator
 to finish bootstrapping on the primary network before running further
 commands on it, for example validating a Subnet. You can check the bootstrapping
@@ -735,21 +736,24 @@ will apply to all nodes in the cluster.
 **Flags:**
 
 ```shell
-    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
-    --authorize-access                         authorize CLI to create cloud resources
-    --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
-    --aws                                      create node/s in AWS cloud
-    --aws-profile string                       aws profile to use (default "default")
-    --devnet                                   create node/s into a new Devnet
-    --fuji                                     create node/s in Fuji Network
-    --gcp                                      create node/s in GCP cloud
-    --gcp-credentials string                   use given GCP credentials
-    --gcp-project string                       use given GCP project
--h, --help                                     help for create
-    --latest-avalanchego-version               install latest avalanchego version on node/s
-    --num-nodes int                            number of nodes to create
-    --region string                            create node/s in given region
-    --use-static-ip                            attach static Public IP on cloud servers (default true)
+      --alternative-key-pair-name string         key pair name to use if default one generates conflicts
+      --authorize-access                         authorize CLI to create cloud resources
+      --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
+      --aws                                      create node/s in AWS cloud
+      --aws-profile string                       aws profile to use (default "default")
+      --devnet                                   create node/s into a new Devnet
+      --fuji                                     create node/s in Fuji Network
+      --gcp                                      create node/s in GCP cloud
+      --gcp-credentials string                   use given GCP credentials
+      --gcp-project string                       use given GCP project
+  -h, --help                                     help for create
+      --latest-avalanchego-version               install latest avalanchego version on node/s
+      --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
+      --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+      --region strings                           create node(s) in given region(s). Use comma to separate multiple regions
+      --ssh-identity string                      use given ssh identity
+      --use-ssh-agent                            use ssh agent for ssh
+      --use-static-ip                            attach static Public IP on cloud servers (default true)
 ```
 
 ### Node Devnet
@@ -814,8 +818,10 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
     --node-config string                 path to avalanchego node configuration for subnet
     --num-nodes int                      number of nodes to create
     --region string                      create node/s in given region
+    --ssh-identity string                use given ssh identity
     --subnet-config string               path to the subnet configuration for subnet
     --subnet-genesis string              file path of the subnet genesis
+    --use-ssh-agent                      use ssh agent for ssh
     --use-static-ip                      attach static Public IP on cloud servers (default true)
 ```
 
