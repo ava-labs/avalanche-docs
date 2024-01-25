@@ -68,6 +68,27 @@ The command will ask which region you want to set up your cloud server in:
     Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 ```
 
+The command will next ask whether you want to set up monitoring for your nodes. If you choose to
+set up monitoring, you can either set up monitoring on a separate AWS instance or on the same 
+instance.
+
+```text
+  Do you want to set up a separate instance to host monitoring? (This enables you to monitor all your set up instances in one dashboard): 
+  ▸ Yes
+    No
+```
+
+Setting up monitoring on a separate AWS instance enables you to have a unified Grafana dashboard
+for all nodes in a cluster, as seen below:
+
+![Main Dashboard](/img/monitoring-dashboard.png)
+
+The separate monitoring AWS instance will have similar specs to the default AWS cloud server, 
+except for its storage, which will be set to 50 GB. 
+
+Please note that setting up monitoring on a separate AWS instance will incur additional cost of 
+setting up an additional AWS cloud server.
+
 The command will then ask which Avalanche Go version you would like to install in the cloud server.
 You can choose `default` (which will install the latest version) or you can enter the name of a
 Subnet created with CLI that you plan to be validated by this node (we will get the latest version
