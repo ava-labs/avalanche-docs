@@ -78,7 +78,7 @@ Here is the API call URL to use for a POST request:
 ```https://api.snowtrace.io/api?module=contract&action=verifysourcecode```
 
 Please note that this URL is specifically configured for verifying contracts on the Avalanche C-Chain Mainnet. 
-If you intend to verify on the testnet use:
+If you intend to verify on the Fuji Testnet, use:
 
 ```https://api-testnet.snowtrace.io/api?module=contract&action=verifysourcecode ```
 
