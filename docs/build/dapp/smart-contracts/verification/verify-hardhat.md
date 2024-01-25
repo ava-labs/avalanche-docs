@@ -33,7 +33,7 @@ Some clean-up may be necessary to get the code to compile properly in the Snowtr
 ## Verify the Smart Contract using Snowtrace UI
 
 Snowtrace is currently working on a new user interface (UI) for smart contract verification. 
-Meanwhile, consider utilizing our API for a seamless smart contract verification experience.
+Meanwhile, you may consider using their API for a seamless smart contract verification experience.
 <!--
 1. Search for the contract in Snowtrace
 2. Click on the contract tab
