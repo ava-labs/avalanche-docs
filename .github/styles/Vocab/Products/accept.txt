@@ -358,5 +358,6 @@ Wei
 whitepaper
 yargs
 Yellowpaper
+Yubikey
 Zundel
 unstaked

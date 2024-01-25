@@ -8,7 +8,7 @@ sidebar_position: 9
 
 # Execute a SSH command on a Cluster
 
-This page demonstrates how to execute a SSH command on a Cluster managed by Avalanche-CLI
+This page demonstrates how to execute a SSH command on a Cluster or Node managed by Avalanche-CLI
 
 :::warning
 
@@ -64,6 +64,13 @@ avalanche node ssh <clusterName> pgrep avalanchego
 [i-0759b102acfd5b585] ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no ubuntu@107.21.158.224 -i /home/fm/.ssh/fm-us-east-1-avalanche-cli-us-east-1-kp.pem pgrep avalanchego
 14555
 ```
+
+:::note
+
+Please note that commands via `ssh` on cluster are executed sequentially by default.
+It's possible to run command on all nodes at the same time by using `--parallel=true` flag
+
+:::
 
 ## Get the AvalancheGo Configuration for All Nodes in `<clusterName>`
 
@@ -141,3 +148,35 @@ avalanche node ssh <clusterName> cat /home/ubuntu/.avalanchego/configs/node.json
 }
 ```
 
+## Executing Command on a Single Node
+
+As we all know command can be executed on single node similar to the examples above
+To execute ssh command on a single node, use `<nodeID>`, `<IP>` or `<instanceID>` instead of `<clusterName>` as an argument. For example:
+
+```shell
+avalanche node ssh i-0225fc39626b1edd3 <command>
+[or]
+avalanche node ssh NodeID-9wdKQ3KJU3GqvgFTc4CUYvmefEFe8t6ka <command>
+[or]
+avalanche node ssh 54.159.59.123 <command>
+```
+
+:::note
+
+In this case `--parallel=true` flag will be ignored
+
+:::
+
+## Opening SSH Shell for `<nodeID>`
+
+If no command is provided, Avalanche-CLI will open an interactive session for the specified node. For example:
+
+```shell
+avalanche node ssh i-0225fc39626b1edd3
+[or] 
+avalanche node ssh NodeID-9wdKQ3KJU3GqvgFTc4CUYvmefEFe8t6ka
+[or]
+avalanche node ssh 54.159.59.123
+```
+
+Please use `exit` shell command or Ctrl+D to end this session.
