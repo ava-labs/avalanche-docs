@@ -27,7 +27,6 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 Before we begin, you will need to have:
 
 - Created an AWS account and have an updated AWS `credentials` file in home directory with [default] profile
-- Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [Created a Subnet configuration `<SubnetName>`](/build/subnet/deploy/fuji-testnet-subnet.md#create-an-evm-subnet) based on SubnetEVM.
 
 Note: the tutorial is based in AWS, but Devnets can also be created and operated in other supported
