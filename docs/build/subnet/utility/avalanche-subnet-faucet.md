@@ -508,7 +508,7 @@ please request a faucet coupon on
 [Discord](https://discord.com/channels/578992315641626624/1193594716835545170). 
 
 Within a second, you will get a **transaction hash** for the processed transaction. 
-The hash would be ahyperlink to Subnet's explorer. 
+The hash would be a hyperlink to Subnet's explorer. 
 You can see the transaction status, by clicking on that hyperlink.
 
 ![faucet 3](/img/faucet/faucet3.png)
