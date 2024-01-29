@@ -1,6 +1,6 @@
 ---
-tags: [Construir, Dapps]
-description: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
+etiquetas: [Construir, Dapps]
+descripción: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
 sidebar_label: Flujo de trabajo de Fuji
 pagination_label: Flujo de trabajo de Fuji
 ---
@@ -16,7 +16,7 @@ típicamente en la misma versión que la Avalanche Mainnet, pero a veces está
 ejecutando una versión no lanzada de AvalancheGo. En general, puedes esperar que el comportamiento de Fuji sea más o menos el mismo que el de Avalanche Mainnet. Herramientas como exploradores
 y billeteras deberían funcionar con la Testnet Fuji.
 
-En este tutorial, pasaremos por un ejemplo de flujo de trabajo de Fuji para mostrar cómo se puede usar. Haremos lo siguiente:
+En este tutorial, repasaremos un ejemplo de flujo de trabajo de Fuji para mostrar cómo se puede usar. Haremos lo siguiente:
 
 1. Configurar la red Fuji en Core (opcional)
 2. Generar una mnemónica de 24 palabras en inglés a través de AvalancheJS
@@ -141,7 +141,7 @@ podrías actualizar el script de ejemplo anterior al siguiente:
 const cAddresses: string[] = [];
 const privateKeys: string[] = [];
 for (let i: number = 0; i <= 2; i++) {
-  // Derivando la dirección _i_-ésima de la cadena C de la BIP44 externa
+  // Derivando la dirección _i_-ésima de la cadena C-Chain BIP44 externa
   const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`);
   keyChain.importKey(child.privateKey);
   // Convirtiendo las direcciones BIP44 a direcciones hexadecimales
@@ -164,32 +164,25 @@ console.log({ cAddresses, privateKeys });
 // }
 ```
 
-## Obtén un Drip del Fuji Faucet
+## Obtén un goteo del grifo Fuji
 
-Podemos obtener un "drip" de AVAX del Fuji faucet. Pega la dirección en el
-sitio web del [Fuji faucet](https://faucet.avax.network). Estos AVAX son para la Fuji
-Testnet y no tienen valor monetario.
+Podemos obtener un "goteo" de AVAX del grifo Fuji. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de grifo en [Discord](https://discord.com/channels/578992315641626624/1193594716835545170). Estos AVAX son para la red de pruebas Fuji y no tienen valor monetario.
 
 ![Solicitando AVAX](/img/fuji-workflow/faucet1.png)
 
-El faucet enviará algunos AVAX a la dirección y devolverá un ID de transacción
-(txID). Este txID se puede usar con el Fuji Testnet Explorer para obtener más información sobre
-la transacción.
+El grifo enviará algunos AVAX a la dirección y devolverá un ID de transacción (txID). Este txID se puede usar con el Explorer de la red de pruebas Fuji para obtener más información sobre la transacción.
 
 ![Recibiendo AVAX](/img/fuji-workflow/faucet2.png)
 
-### Verificar los Detalles de la Transacción
+### Verificar los detalles de la transacción
 
-El txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`,
-se puede ver en el [Fuji Testnet
-Explorer](https://testnet.snowtrace.io/tx/0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e).
-Avalanche también tiene un [Mainnet Explorer](https://explorer.avax.network).
+El txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`, se puede ver en el [Explorer de la red de pruebas Fuji](https://subnets-test.avax.network/c-chain/tx/0x86eef1a01b0a5fd45f2a71c217f99d63d427230a271d3319004f17fc26d7fb26). Avalanche también tiene un [Explorer de Mainnet](https://explorer.avax.network).
 
 ![Detalles de la transacción](/img/faucet-fuji-wf-alt-tx1.png)
 
-### Obtén el Saldo
+### Obtener el saldo
 
-También podemos usar el Fuji Explorer para obtener el saldo de la primera dirección—[0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://explorer.avax-test.network/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559).
+También podemos usar el Explorer de Fuji para obtener el saldo de la primera dirección - [0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://explorer.avax-test.network/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559).
 
 ![Saldo de la primera dirección derivada](/img/faucet-fuji-wf-alt-balance.png)
 
@@ -215,52 +208,48 @@ main();
 
 ## Enviando AVAX
 
-El faucet envió 2 AVAX a la primera dirección que generamos. Vamos a enviar AVAX desde
-la primera dirección a la segunda dirección.
+El grifo envió 2 AVAX a la primera dirección que generamos. Vamos a enviar AVAX desde la primera dirección a la segunda dirección.
 
 ```typescript
 // importar ethers.js
 import { ethers } from "ethers";
-// red: usando la testnet Fuji
-const network = "https://api.avax-test.network/ext/bc/C/rpc";
+// red: usando la red de pruebas Fuji
+const red = "https://api.avax-test.network/ext/bc/C/rpc";
 // proveedor: establecer una conexión RPC con la red
-const provider = new ethers.providers.JsonRpcProvider(network);
+const proveedor = new ethers.providers.JsonRpcProvider(red);
 
 // Clave privada del remitente:
 // dirección correspondiente 0x0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
-let privateKey =
+let clavePrivada =
   "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc";
 // Crear una instancia de billetera
-let wallet = new ethers.Wallet(privateKey, provider);
+let billetera = new ethers.Wallet(clavePrivada, proveedor);
 // Dirección del receptor
-let receiverAddress = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
+let direccionReceptor = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 // Cantidad de AVAX a enviar
-let amountInAvax = "0.01";
+let cantidadEnAvax = "0.01";
 // Crear un objeto de transacción
 let tx = {
-  to: receiverAddress,
+  to: direccionReceptor,
   // Convertir la unidad de moneda de ether a wei
-  value: ethers.utils.parseEther(amountInAvax),
+  value: ethers.utils.parseEther(cantidadEnAvax),
 };
 // Enviar una transacción
-wallet.sendTransaction(tx).then((txObj) => {
-  console.log(`"tx, https://testnet.snowtrace.io/tx/${txObj.hash}`);
+billetera.sendTransaction(tx).then((objTx) => {
+  console.log(`tx, https://testnet.snowtrace.io/tx/${objTx.hash}`);
   // Un resultado de transacción se puede verificar en un snowtrace con un enlace de transacción que se puede obtener aquí.
 });
 ```
 
-### Verificar el Éxito
+### Verificar el éxito
 
-Podemos verificar que la transacción,
-`0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac`, fue
-exitosa usando el Fuji Testnet Explorer. La transacción se puede ver
-[aquí](https://testnet.snowtrace.io/tx/0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac).
+Podemos verificar que la transacción, `0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac`, fue exitosa usando el Explorer de la red de pruebas Fuji. La transacción se puede ver [aquí](https://testnet.snowtrace.io/tx/0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac).
 
 ![Detalles de la transacción](/img/fuji-wf-alt-tx-2.png)
 
-#### Obtén el Saldo
+#### Obtener el saldo
 
-También podemos usar el Fuji Explorer para obtener el saldo de la segunda dirección—[0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C).
+También podemos usar el Explorer de Fuji para obtener el saldo de la segunda dirección - [0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C).
 
 Alternativamente, podemos usar ethersJS para obtener el saldo.
 
@@ -282,9 +271,23 @@ const main = async (): Promise<any> => {
 main();
 ```
 
+
+
+const main = async (): Promise<any> => {
+  provider.getBalance(address).then((balance) => {
+    // convertir una unidad de moneda de wei a ether
+    const balanceInAvax = ethers.utils.formatEther(balance);
+    console.log(`saldo: ${balanceInAvax} AVAX`);
+    // saldo: 0.02 AVAX
+  });
+};
+
+main();
+```
+
 ### Iniciar sesión en la Extensión Core
 
-Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-a-partir-de-una-mnemónica) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
+Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-desde-una-mnemotecnia) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
 Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la clave privada.
 
 Usa la clave privada para acceder a la cuenta en la Extensión Core.
@@ -295,7 +298,7 @@ El saldo es correcto y la dirección es la primera dirección derivada.
 
 ![Saldo de la extensión Core](/img/fuji-wf-wallet-alt-info.png) ![3ra dirección derivada BIP44](/img/fuji-wf-alt-wallet-address.png)
 
-Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generar-claves-privadas-a-partir-de-una-mnemónica).
+Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generar-claves-privadas-desde-una-mnemotecnia).
 
 ![Direcciones derivadas de la billetera](/img/fuji-wf-alt-wallet-address-2.png)
 ![Direcciones derivadas de la billetera2](/img/fuji-wf-alt-wallet-address-3.png)  
