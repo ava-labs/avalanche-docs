@@ -16,8 +16,16 @@ Testnet and have no monetary value.
 
 ![Requesting AVAX](/img/fuji-workflow/faucet1.png)
 
+ If you already have an AVAX balance greater than zero on Mainnet, 
+paste your C-Chain address there, and request test tokens.
 The faucet will send some AVAX to the address and return a transaction ID
-(txID). This txID can be used with the Fuji Testnet Explorer to learn more about
+(txID). 
+This txID can be used with the Fuji Testnet Explorer to learn more about
 the transaction.
 
 ![Receiving AVAX](/img/fuji-workflow/faucet2.png)
+
+Otherwise, please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+
+![Request Coupon](/img/fuji-workflow/faucet3.png)

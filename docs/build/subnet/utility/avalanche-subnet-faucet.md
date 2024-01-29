@@ -502,9 +502,14 @@ may have a different drop amount).
 
 ### Put Address and Request Coins
 
-Put your wallet address where you want to get a drop, and click the **Request** button. Within a
-second, you will get a **transaction hash** for the processed transaction. The hash would be a
-hyperlink to Subnet's explorer. You can see the transaction status, by clicking on that hyperlink.
+If you already have an AVAX balance greater than zero on Mainnet, 
+paste your C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170). 
+
+Within a second, you will get a **transaction hash** for the processed transaction. 
+The hash would be ahyperlink to Subnet's explorer. 
+You can see the transaction status, by clicking on that hyperlink.
 
 ![faucet 3](/img/faucet/faucet3.png)
 
