@@ -1,43 +1,44 @@
 ---
-tags: [Construir, Subnets]
-description: Implementa un faucet de testnet personalizado para tu Subnet con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
-sidebar_label: Agregar un Faucet de Testnet
-pagination_label: Faucet de Subnet Avalanche
+etiquetas: [Construir, Subredes]
+descripción: Implementa un grifo de testnet personalizado para tu Subred con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
+sidebar_label: Agregar un Grifo de Testnet
+pagination_label: Grifo de Subred Avalanche
 sidebar_position: 1
 ---
 
-# Habilitar Capacidades de Testnet en una Subnet con el Faucet de Subnet Avalanche
+# Habilitar Capacidades de Testnet en una Subred con el Grifo de Subred Avalanche
 
 Hay miles de redes y cadenas en el espacio de la blockchain, cada una con sus propias capacidades y casos de uso. Cada red requiere monedas nativas para realizar cualquier transacción en ellas, las cuales también pueden tener un valor monetario. Estas monedas se pueden recolectar a través de intercambios centralizados, ventas de tokens, etc., a cambio de algunos activos monetarios como USD.
 
-Pero no podemos arriesgar nuestros fondos en la red o en cualquier aplicación alojada en esa red, sin probarlos primero. Por lo tanto, estas redes a menudo tienen redes de prueba o testnets, donde las monedas nativas no tienen ningún valor monetario y, por lo tanto, se pueden obtener libremente a través de faucets.
+Pero no podemos arriesgar nuestros fondos en la red o en cualquier aplicación alojada en esa red, sin probarlos primero. Por lo tanto, estas redes a menudo tienen redes de prueba o testnets, donde las monedas nativas no tienen ningún valor monetario y, por lo tanto, se pueden obtener libremente a través de grifos.
 
-Estas testnets suelen ser los bancos de pruebas para cualquier nueva característica nativa de la propia red, o cualquier dapp o [Subnet](learn/avalanche/subnets-overview.md) que va a vivir en la red principal (Mainnet). Por ejemplo, la red [Fuji](learn/avalanche/fuji.md) es la Testnet para la Mainnet de Avalanche.
+Estas testnets suelen ser los bancos de pruebas para cualquier nueva característica nativa de la propia red, o cualquier dapp o [Subred](learn/avalanche/subnets-overview.md) que va a vivir en la red principal (Mainnet). Por ejemplo, la red [Fuji](learn/avalanche/fuji.md) es la Testnet para la Mainnet de Avalanche.
 
 Además de la Testnet Fuji, el
-[Faucet Avalanche](https://core.app/tools/testnet-faucet/?subnet=c&token=c)
-se puede utilizar para obtener tokens de prueba gratuitos en Subnets de testnet como:
+[Grifo Avalanche](https://core.app/tools/testnet-faucet/?subnet=c&token=c)
+se puede utilizar para obtener tokens de prueba gratuitos en Subredes de testnet como:
 
 - [Testnet WAGMI](https://core.app/tools/testnet-faucet/?subnet=wagmi)
 - [Testnet DeFI Kingdoms](https://core.app/tools/testnet-faucet/?subnet=dfk)
 - [Testnet Beam](https://core.app/tools/testnet-faucet/?subnet=beam&token=beam) y muchos más.
 
-Puedes usar este [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio faucet o simplemente hacer un PR con las
-[configuraciones](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) de la Subnet.
-Este faucet viene con muchas características como soporte para múltiples cadenas, limitación de velocidad personalizada por Subnet, verificación CAPTCHA y manejo de transacciones concurrentes.
+Puedes usar este [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu grifo o
+simplemente hacer un PR con las
+[configuraciones](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) de la Subred.
+Este grifo viene con muchas características como soporte para múltiples cadenas, limitación de velocidad personalizada por Subred, verificación CAPTCHA y manejo de transacciones concurrentes.
 
 ## Resumen
 
-Un [Faucet](https://faucet.avax.network/) alimentado por Avalanche para la Red Fuji y otras Subnets.
-Puedes -
+Un [Grifo](https://faucet.avax.network/) alimentado por Avalanche para la Red Fuji y otras Subredes.
+Puedes:
 
-- Solicitar monedas de prueba para las Subnets soportadas
-- Integrar tu Subnet EVM con el faucet haciendo un PR con las [configuraciones de la cadena](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
-- Hacer un fork del [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu propio faucet para cualquier cadena EVM
+- Solicitar monedas de prueba para las Subredes soportadas
+- Integrar tu Subred EVM con el grifo haciendo un PR con las [configuraciones de la cadena](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
+- Hacer un fork del [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu grifo para cualquier cadena EVM
 
-## Agregar una Nueva Subnet
+## Agregar una Nueva Subred
 
-También puedes integrar una nueva Subnet en el [faucet](https://faucet.avax.network) en vivo con solo unos pocos parámetros de configuración. Todo lo que tienes que hacer es hacer un PR en el repositorio git de [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) con la información de la Subnet. Los siguientes parámetros son requeridos.
+También puedes integrar una nueva Subred en el [grifo](https://faucet.avax.network) en vivo con solo unos pocos parámetros de configuración. Todo lo que tienes que hacer es hacer un PR en el repositorio git de [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) con la información de la Subred. Los siguientes parámetros son requeridos.
 
 ```json
 {
@@ -58,14 +59,14 @@ También puedes integrar una nueva Subnet en el [faucet](https://faucet.avax.net
 }
 ```
 
-- `ID` - Cada cadena de Subnet debe tener un ID único y relacionable.
-- `NAME` - Nombre de la cadena de Subnet que aparecerá en el sitio.
+- `ID` - Cada cadena de Subred debe tener un ID único y relacionable.
+- `NAME` - Nombre de la cadena de Subred que aparecerá en el sitio.
 - `RPC` - Una URL RPC válida para acceder a la cadena.
-- `CHAINID` - ChainID de la cadena
+- `CHAINID` - ID de cadena de la cadena
 - `EXPLORER` - URL base del sitio del explorador estándar.
 - `IMAGE` - URL del icono de la cadena que se mostrará en el menú desplegable.
-- `MAX_PRIORITY_FEE` - Propina máxima por caída de faucet en **wei** o en unidad **10<sup>-18</sup>** (para cadenas compatibles con EIP1559)
-- `MAX_FEE` - Tarifa máxima que se puede pagar por una caída de faucet en **wei** o en unidad **10<sup>-18</sup>**
+- `MAX_PRIORITY_FEE` - Propina máxima por caída de grifo en **wei** o en unidad **10<sup>-18</sup>** (para cadenas compatibles con EIP1559)
+- `MAX_FEE` - Tarifa máxima que se puede pagar por una caída de grifo en **wei** o en unidad **10<sup>-18</sup>**
 - `DRIP_AMOUNT` - Cantidad de monedas a enviar por solicitud en **gwei** o en unidad **10<sup>-9</sup>**
 - `RECALIBRATE` _(opcional)_ - Número de segundos después de los cuales el nonce y el saldo se recalibrarán
 - `RATELIMIT` - Número de veces (MAX_LIMIT) permitidas por usuario dentro del WINDOW_SIZE (en minutos)
@@ -73,9 +74,9 @@ También puedes integrar una nueva Subnet en el [faucet](https://faucet.avax.net
 Agrega la configuración en el arreglo de `evmchains` dentro del archivo
 [config.json](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json) y haz un PR.
 
-## Construcción e Implementación de un Faucet
+## Construcción e Implementación de un Grifo
 
-También puedes implementar y construir tu propio faucet utilizando el repositorio [Avalanche
+También puedes implementar y construir tu propio grifo utilizando el repositorio [Avalanche
 Faucet](https://github.com/ava-labs/avalanche-faucet).
 
 ### Requisitos
@@ -118,9 +119,9 @@ Necesitamos configurar nuestra aplicación con los puntos finales de la API del 
 }
 ```
 
-Coloca la clave del sitio reCAPTCHA de Google sin la cual el cliente del faucet no puede enviar la respuesta CAPTCHA necesaria al servidor. Esta clave no es un secreto y podría ser pública.
+Coloca la clave del sitio reCAPTCHA de Google sin la cual el cliente del grifo no puede enviar la respuesta CAPTCHA necesaria al servidor. Esta clave no es un secreto y podría ser pública.
 
-En el archivo anterior, hay 2 puntos finales base para el servidor del faucet `apiBaseEndpointProduction` y
+En el archivo anterior, hay 2 puntos finales base para el servidor del grifo `apiBaseEndpointProduction` y
 `apiBaseEndpointDevelopment`.
 
 En modo de producción, el lado del cliente se servirá como contenido estático a través del punto final del servidor, y por lo tanto no tenemos que proporcionar la dirección IP o el dominio del servidor.
@@ -260,7 +261,7 @@ La API de envío de tokens requiere un token de respuesta de reCAPTCHA que se ge
 
 ### Limitadores de tasa (Importante)
 
-Los limitadores de tasa se aplican de forma global (a todos los puntos finales) y en la API `/api/sendToken`. Estos se pueden configurar desde el archivo `config.json`. Los parámetros de limitación de tasa para las cadenas se pasan en la configuración de la cadena como se muestra arriba.
+Los limitadores de tasa se aplican a nivel global (todos los puntos finales) y en la API `/api/sendToken`. Estos se pueden configurar desde el archivo `config.json`. Los parámetros de limitación de tasa para las cadenas se pasan en la configuración de la cadena como se muestra arriba.
 
 ```json
 "GLOBAL_RL": {
@@ -279,21 +280,22 @@ Podría haber varios proxies entre el servidor y el cliente. El servidor verá l
 
 Las direcciones IP de todos los proxies a través de los cuales ha pasado la solicitud están almacenadas dentro del arreglo de encabezados **x-forwarded-for**. Pero los proxies intermedios pueden manipular fácilmente estos encabezados para evadir los limitadores de velocidad. Por lo tanto, no podemos confiar en todos los proxies y, por lo tanto, en todas las direcciones IP dentro del encabezado.
 
-Los proxies que son configurados por el propietario del servidor (reverse-proxies) son los proxies confiables en los que podemos confiar y saber que han agregado la IP real de los llamantes en el medio. Cualquier proxy que no sea configurado por el servidor, debe considerarse un proxy no confiable. Por lo tanto, podemos saltar a la dirección IP agregada por el último proxy en el que confiamos. El número de saltos que queremos puede configurarse en el archivo `config.json` dentro del objeto `GLOBAL_RL`.
+Los proxies que son configurados por el propietario del servidor (reverse-proxies) son los proxies confiables en los que podemos confiar y saber que han incluido la IP real de los llamantes en el medio. Cualquier proxy que no sea configurado por el servidor, debe considerarse un proxy no confiable. Por lo tanto, podemos saltar a la dirección IP agregada por el último proxy en el que confiamos. El número de saltos que queremos puede ser configurado en el archivo `config.json` dentro del objeto `GLOBAL_RL`.
 
 ![faucet 5](/img/faucet-5.png)
 
 #### Clientes detrás del mismo proxy
 
-Considera el siguiente diagrama. El servidor está configurado con 2 reverse proxies. Si el cliente está detrás de proxies, entonces no podemos obtener la IP real del cliente y, en su lugar, consideraremos la IP del proxy como la IP del cliente. Y si algún otro cliente está detrás del mismo proxy, entonces esos clientes serán considerados como una sola entidad y podrían ser limitados más rápidamente.
+Considera el siguiente diagrama. El servidor está configurado con 2 reverse proxies. Si el cliente está detrás de proxies, entonces no podemos obtener la IP real del cliente, y en su lugar consideraremos la IP del proxy como la IP del cliente. Y si algún otro cliente está detrás del mismo proxy, entonces esos clientes serán considerados como una sola entidad y podrían ser limitados más rápidamente.
 
 ![faucet 6](/img/faucet-6.png)
 
-Por lo tanto, se recomienda a los usuarios evitar el uso de cualquier proxy para acceder a aplicaciones que tengan límites de velocidad críticos, como esta faucet.
+Por lo tanto, se aconseja a los usuarios que eviten usar cualquier proxy para acceder a aplicaciones que tengan límites de velocidad críticos, como esta faucet.
 
 #### Número incorrecto de reverse proxies
 
-Entonces, si quieres implementar esta faucet y tienes algunos reverse proxies en el medio, entonces debes configurarlo dentro de la clave `GLOBAL_RL` del archivo `config.json`. Si esto no está configurado correctamente, es posible que los usuarios sean limitados con mucha frecuencia, ya que las direcciones IP del proxy del lado del servidor se están viendo como la IP del cliente. Puedes verificar esto en el código [aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/rateLimiter.ts#L25).
+Entonces, si quieres implementar esta faucet, y tienes algunos reverse proxies en el medio, entonces debes configurarlo dentro de la clave `GLOBAL_RL` del archivo `config.json`. Si esto no está configurado correctamente, entonces los usuarios podrían ser limitados de velocidad con mucha frecuencia, ya que las direcciones IP del proxy del lado del servidor están siendo vistas como la IP del cliente. Puedes verificar esto en el código
+[aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/rateLimiter.ts#L25).
 
 ```json
 "GLOBAL_RL": {
@@ -309,9 +311,13 @@ También es bastante común tener a Cloudflare como el último reverse proxy o e
 
 ### Verificación CAPTCHA
 
-CAPTCHA es necesario para demostrar que el usuario es humano y no un bot. Para este propósito, utilizaremos [reCAPTCHA de Google](https://www.google.com/recaptcha/intro/v3.html). El lado del servidor requerirá `CAPTCHA_SECRET` que no debe ser expuesto. Puedes configurar el puntaje umbral para pasar la prueba CAPTCHA por parte de los usuarios [aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/verifyCaptcha.ts#L20).
+CAPTCHA es necesario para demostrar que el usuario es humano y no un bot. Para este propósito, utilizaremos
+[reCAPTCHA de Google](https://www.google.com/recaptcha/intro/v3.html). El lado del servidor requerirá
+`CAPTCHA_SECRET` que no debe ser expuesto. Puedes configurar el puntaje umbral para pasar la prueba CAPTCHA por los usuarios
+[aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/verifyCaptcha.ts#L20).
 
-Puedes desactivar estas verificaciones CAPTCHA y limitadores de velocidad para fines de prueba, ajustando el archivo `server.ts`.
+Puedes desactivar estas verificaciones CAPTCHA y limitadores de velocidad para fines de prueba, ajustando
+en el archivo `server.ts`.
 
 ### Desactivando los limitadores de velocidad
 
@@ -378,15 +384,21 @@ docker build . -t faucet-image
 
 #### Iniciando la Aplicación dentro del Contenedor Docker
 
-Ahora podemos crear cualquier número de contenedores usando la imagen `faucet` anterior. También tenemos que suministrar el archivo `.env` o las variables de entorno con las claves secretas para crear el contenedor. Una vez que se crea el contenedor, estas variables y configuraciones se mantendrán y se pueden iniciar o detener fácilmente con un solo comando.
+Ahora podemos crear cualquier número de contenedores usando la imagen `faucet` anterior. También tenemos que suministrar
+el archivo `.env` o las variables de entorno con las claves secretas para crear el contenedor. Una vez creado el
+contenedor, estas variables y configuraciones se mantendrán y se pueden iniciar o detener fácilmente con un solo comando.
 
 ```bash
 docker run -p 3000:8000 --name faucet-container --env-file ../.env faucet-image
 ```
 
-El servidor se ejecutará en el puerto 8000, y nuestro Docker también expondrá este puerto para que el mundo exterior interactúe. Hemos expuesto este puerto en el `Dockerfile`. Pero no podemos interactuar directamente con el puerto del contenedor, por lo que tuvimos que vincular este puerto del contenedor a nuestro puerto de host. Para el puerto de host, hemos elegido el 3000. Esta bandera `-p 3000:8000` logra lo mismo.
+El servidor se ejecutará en el puerto 8000, y nuestro Docker también expondrá este puerto para que el mundo exterior
+interactúe. Hemos expuesto este puerto en el `Dockerfile`. Pero no podemos interactuar directamente con el
+puerto del contenedor, por lo que tuvimos que vincular este puerto del contenedor a nuestro puerto de host. Para el puerto de host, hemos
+elegido 3000. Esta bandera `-p 3000:8000` logra lo mismo.
 
-Esto iniciará nuestra aplicación de faucet en un contenedor Docker en el puerto 3000 (puerto 8000 en el contenedor). Puedes interactuar con la aplicación visitando [http://localhost:3000] en tu navegador.
+Esto iniciará nuestra aplicación faucet en un contenedor Docker en el puerto 3000 (puerto 8000 en el
+contenedor). Puedes interactuar con la aplicación visitando [http://localhost:3000] en tu navegador.
 
 #### Deteniendo el Contenedor
 
@@ -406,41 +418,51 @@ docker start faucet-container
 
 ## Usando la Faucet
 
-Usar la faucet es bastante sencillo, pero por completitud, repasemos los pasos para recolectar tus primeras monedas de prueba.
+Usar la faucet es bastante sencillo, pero para completar, repasemos los pasos para recolectar tus primeras monedas de prueba.
 
 ### Visita el Sitio de la Faucet Avalanche
 
-Ve a [https://faucet.avax.network]. Verás varios parámetros de red como el nombre de la red, el saldo de la faucet, la cantidad de la gota, el límite de la gota, la dirección de la faucet, etc.
+Ve a [https://faucet.avax.network](https://faucet.avax.network). Verás varios parámetros de red como el nombre de la red, el saldo de la faucet,
+la cantidad de la gota, el límite de la gota, la dirección de la faucet, etc.
 
 ![faucet 1](/img/faucet/faucet1.png)
 
 ### Selecciona la Red
 
-Puedes usar el menú desplegable para seleccionar la red de tu elección y obtener algunas monedas gratis (cada red puede tener una cantidad de gota diferente).
+Puedes usar el menú desplegable para seleccionar la red de tu elección y obtener algunas monedas gratis (cada red
+puede tener una cantidad de gota diferente).
 
 ![faucet 2](/img/faucet/faucet2.png)
 
 ### Ingresa la Dirección y Solicita Monedas
 
-Ingresa tu dirección de billetera donde quieres recibir la gota, y haz clic en el botón **Request**. En un segundo, recibirás un **hash de transacción** para la transacción procesada. El hash será un hipervínculo al explorador de la Subnet. Puedes ver el estado de la transacción haciendo clic en ese hipervínculo.
+Si ya tienes un saldo AVAX mayor que cero en Mainnet, pega tu dirección de la cadena C allí y solicita tokens de prueba. De lo contrario,
+por favor solicita un cupón de faucet en
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+
+En un segundo, recibirás un **hash de transacción** para la transacción procesada. El hash será un hipervínculo al explorador de la Subnet.
+Puedes ver el estado de la transacción haciendo clic en ese enlace.
 
 ![faucet 3](/img/faucet/faucet3.png)
 
 ### Más Interacciones
 
-Esto no es todo. Usando los botones mostrados a continuación, puedes ir al explorador de la Subnet o agregar la Subnet a las extensiones de tu billetera de navegador como Core o MetaMask con un solo clic.
+Esto no es todo. Usando los botones mostrados a continuación, puedes ir al explorador de la Subnet o agregar la
+Subnet a tus extensiones de billetera de navegador como Core o MetaMask con un solo clic.
 
 ![faucet 4](/img/faucet/faucet4.png)
 
 ### Errores Probables y Solución de Problemas
 
-No se esperan errores, pero si te encuentras con algunos de los errores mostrados, puedes intentar solucionarlos de la siguiente manera. Si ninguna de las soluciones de problemas funciona, contáctanos a través de [Discord](https://discord.com/channels/578992315641626624/).
+No se esperan errores, pero si estás enfrentando algunos de los errores mostrados, entonces podrías intentar
+solucionar problemas como se muestra a continuación. Si ninguna de las soluciones de problemas funciona, contáctanos a través de
+[Discord](https://discord.com/channels/578992315641626624/).
 
-- **Demasiadas solicitudes. Por favor, inténtalo de nuevo después de X minutos**. Este es un mensaje de límite de tasa. Cada Subnet puede establecer sus límites de caída. El mensaje anterior sugiere que has alcanzado tu límite de caída, es decir, el número de veces que podrías solicitar monedas dentro de la ventana de X minutos. Deberías intentar solicitar después de X minutos. Si estás enfrentando este problema, incluso cuando estás solicitando por primera vez en la ventana, es posible que estés detrás de algún proxy, Wi-Fi o servicio de VPN que también está siendo utilizado por otro usuario.
+- **Demasiadas solicitudes. Por favor, inténtalo de nuevo después de X minutos**. Este es un mensaje de límite de tasa. Cada subred puede establecer sus límites de caída. El mensaje anterior sugiere que has alcanzado tu límite de caída, es decir, el número de veces que podrías solicitar monedas dentro de la ventana de X minutos. Deberías intentar solicitar después de X minutos. Si estás enfrentando este problema, incluso cuando estás solicitando por primera vez en la ventana, es posible que estés detrás de algún proxy, Wi-Fi o servicio de VPN que también está siendo utilizado por otro usuario.
 
-- **¡La verificación CAPTCHA ha fallado! Intenta refrescar**. Estamos utilizando la versión 3 de [reCAPTCHA](https://developers.google.com/recaptcha/docs/v3) de Google. Esta versión utiliza puntuaciones entre 0 y 1 para calificar la interacción de los humanos con el sitio, siendo 0 el más sospechoso. No tienes que resolver ningún rompecabezas ni marcar la casilla de **No soy un robot**. La puntuación se calculará automáticamente. Queremos que nuestros usuarios obtengan al menos 0.3 para usar el faucet. Esto es configurable y actualizaremos el umbral después de tener datos más amplios. Pero si estás enfrentando este problema, puedes intentar refrescar tu página, desactivar los bloqueadores de anuncios o apagar cualquier VPN. Puedes seguir esta [guía](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers) para deshacerte de este problema.
+- **¡La verificación CAPTCHA ha fallado! Intenta refrescar**. Estamos utilizando la versión 3 de [reCAPTCHA](https://developers.google.com/recaptcha/docs/v3) de Google. Esta versión utiliza puntuaciones entre 0 y 1 para calificar la interacción de los humanos con el sitio, siendo 0 el más sospechoso. No tienes que resolver ningún rompecabezas ni marcar la casilla de **No soy un robot**. La puntuación se calculará automáticamente. Queremos que nuestros usuarios obtengan al menos 0.3 para usar el grifo. Esto es configurable y actualizaremos el umbral después de tener datos más amplios. Pero si estás enfrentando este problema, puedes intentar refrescar tu página, desactivar los bloqueadores de anuncios o apagar cualquier VPN. Puedes seguir esta [guía](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers) para deshacerte de este problema.
 
-- **¡Error interno de RPC! Por favor, inténtalo después de un tiempo**. Este es un error interno en el nodo de la Subnet , en el que estamos haciendo una RPC para enviar transacciones. Una verificación regular actualizará el estado de salud de la RPC cada 30 segundos (por defecto) o lo que esté configurado en la configuración. Esto puede suceder solo en escenarios raros y no puedes hacer mucho al respecto, excepto esperar.
+- **¡Error interno de RPC! Por favor, inténtalo después de un tiempo**. Este es un error interno en el nodo de la subred, en el que estamos haciendo una RPC para enviar transacciones. Una verificación regular actualizará el estado de salud de la RPC cada 30 segundos (por defecto) o lo que esté configurado en la configuración. Esto puede suceder solo en escenarios raros y no puedes hacer mucho al respecto, excepto esperar.
 
 - **Se superó el tiempo de espera de 10000ms**. Puede haber muchas razones para este mensaje. Podría ser un error interno del servidor, o la solicitud no fue recibida por el servidor, internet lento, etc. Podrías intentarlo de nuevo después de un tiempo, y si el problema persiste, entonces deberías plantear este problema en nuestro servidor de [Discord](https://discord.com/channels/578992315641626624/).
 
