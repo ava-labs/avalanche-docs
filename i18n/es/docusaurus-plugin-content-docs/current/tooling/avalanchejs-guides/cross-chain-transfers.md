@@ -1,6 +1,6 @@
 ---
-etiquetas: [Herramientas, AvalancheJS]
-descripción: AvalancheJS es una biblioteca de JavaScript para interactuar con la plataforma Avalanche. Está construida con TypeScript y está destinada a admitir tanto el navegador como Node.js. La biblioteca AvalancheJS permite emitir comandos a las API del nodo Avalanche.
+tags: [Herramientas, AvalancheJS]
+description: AvalancheJS es una biblioteca de JavaScript para interactuar con la plataforma Avalanche. Está construida con TypeScript y está destinada a admitir tanto el navegador como Node.js. La biblioteca AvalancheJS permite emitir comandos a las API del nodo Avalanche.
 etiqueta_de_paginación: Transferir tokens AVAX entre cadenas
 etiqueta_de_barra_lateral: Enviar tokens entre cadenas
 posición_de_barra_lateral: 2

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Lanzar cualquier aplicación descentralizada Solidity nueva o existente en Avalanche C-Chain fomenta la misma experiencia de desarrollo que Ethereum, pero se beneficia de la seguridad, velocidad e interoperabilidad de la Red Avalanche.
+tags: [Construir, Dapps]
+description: Lanzar cualquier aplicación descentralizada Solidity nueva o existente en Avalanche C-Chain fomenta la misma experiencia de desarrollo que Ethereum, pero se beneficia de la seguridad, velocidad e interoperabilidad de la Red Avalanche.
 sidebar_label: Lanzar una Dapp de Ethereum
 pagination_label: Lanzar una Dapp de Ethereum en Avalanche
 ---
