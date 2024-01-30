@@ -1,6 +1,6 @@
 ---
-tags: [Construir, Dapps]
-description: Lanzar cualquier aplicación descentralizada en Solidity nueva o existente en Avalanche C-Chain fomenta la misma experiencia de desarrollo que Ethereum, pero se beneficia de la seguridad, velocidad e interoperabilidad de la Red Avalanche.
+etiquetas: [Construir, Dapps]
+descripción: Lanzar cualquier aplicación descentralizada Solidity nueva o existente en Avalanche C-Chain fomenta la misma experiencia de desarrollo que Ethereum, pero se beneficia de la seguridad, velocidad e interoperabilidad de la Red Avalanche.
 sidebar_label: Lanzar una Dapp de Ethereum
 pagination_label: Lanzar una Dapp de Ethereum en Avalanche
 ---
@@ -9,7 +9,7 @@ pagination_label: Lanzar una Dapp de Ethereum en Avalanche
 
 ## Resumen
 
-El propósito de este documento es ayudarte a lanzar tu dapp existente en Avalanche. Contiene una serie de recursos diseñados para ayudarte a entender los conceptos básicos de la Plataforma Avalanche y cómo funciona, mostrar cómo conectarte a la red, cómo usar tus herramientas y entornos existentes para desarrollar e implementar en Avalanche, así como algunas dificultades comunes que debes considerar al ejecutar tu dapp en Avalanche.
+El propósito de este documento es ayudarte a lanzar tu dapp existente en Avalanche. Contiene una serie de recursos diseñados para ayudarte a entender los conceptos básicos de la Plataforma Avalanche y cómo funciona, mostrar cómo conectarte a la red, cómo usar tus herramientas y entornos existentes para desarrollar y desplegar en Avalanche, así como algunas dificultades comunes que debes considerar al ejecutar tu dapp en Avalanche.
 
 ## Accediendo a Avalanche C-Chain
 
@@ -29,7 +29,7 @@ Puedes acceder a C-Chain a través de MetaMask, definiendo una red personalizada
 
 #### **Configuración de Avalanche Mainnet:**
 
-- **Nombre de la red**: Avalanche Mainnet C-Chain
+- **Nombre de la Red**: Avalanche Mainnet C-Chain
 - **Nueva URL RPC**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
 - **ChainID**: `43114`
 - **Símbolo**: `AVAX`
@@ -37,7 +37,7 @@ Puedes acceder a C-Chain a través de MetaMask, definiendo una red personalizada
 
 #### **Configuración de Avalanche Fuji Testnet:**
 
-- **Nombre de la red**: Avalanche Fuji C-Chain
+- **Nombre de la Red**: Avalanche Fuji C-Chain
 - **Nueva URL RPC**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 - **ChainID**: `43113`
 - **Símbolo**: `AVAX`
@@ -51,13 +51,13 @@ En lugar de enmascarar las operaciones de red a través de MetaMask, puedes usar
 
 El punto final de la API de la C-Chain es [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc) para la Mainnet y [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc) para la testnet.
 
-Para obtener más información, consulta la [documentación](/tooling/rpc-providers.md).
+Para más información, consulta la [documentación](/tooling/rpc-providers.md).
 
 Sin embargo, la API pública no expone todas las API que están disponibles en el nodo, ya que algunas de ellas no tendrían sentido en un servicio de acceso público y otras representarían un riesgo de seguridad. Si necesitas usar una API que no está disponible públicamente, puedes ejecutar tu propio nodo.
 
 ## Ejecutando Tu Propio Nodo
 
-Si no quieres que tu dapp dependa de un servicio centralizado que no controlas, o tienes necesidades específicas que no pueden ser satisfechas a través de la API pública, puedes ejecutar tu propio nodo y acceder a la red de esa manera. Ejecutar tu propio nodo también evita posibles problemas de congestión y límites de velocidad de la API pública.
+Si no quieres que tu dapp dependa de un servicio centralizado que no controlas, o tienes necesidades específicas que no pueden ser satisfechas a través de la API pública, puedes ejecutar tu propio nodo y acceder a la red de esa manera. Ejecutar tu propio nodo también evita posibles problemas de congestión y límites de tasa en la API pública.
 
 Para fines de desarrollo y experimentación, [aquí](/nodes/run/node-manually.md) hay un tutorial que muestra cómo descargar, compilar e instalar AvalancheGo. Una solución más sencilla es usar el binario precompilado, disponible en [GitHub](https://github.com/ava-labs/avalanchego/releases). Si vas a ejecutar un nodo en una máquina Linux, puedes usar el [script de instalación](/nodes/run/with-installer/installing-avalanchego.md) para instalar el nodo como un servicio `systemd`. El script también se encarga de la actualización del nodo. Si quieres ejecutar un nodo en un contenedor de Docker, hay [scripts de compilación](https://github.com/ava-labs/avalanchego/tree/master/scripts) en el repositorio AvalancheGo para varias configuraciones de Docker.
 
@@ -73,7 +73,7 @@ De forma predeterminada, el archivo de configuración de la C-Chain se encuentra
 
 Si necesitas la funcionalidad de un [Nodo de Archivo](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) de Ethereum, debes desactivar la poda de la C-Chain, que está habilitada de forma predeterminada para conservar espacio en disco. Para preservar el estado histórico completo, incluye `"pruning-enabled": false` en el archivo de configuración de la C-Chain.
 
-:::note
+:::nota
 
 Después de cambiar la bandera para desactivar la poda de la base de datos, deberás ejecutar el proceso de inicio rápido nuevamente, ya que el nodo no rellenará ningún dato ya podado y faltante.
 
@@ -85,7 +85,7 @@ Para volver a iniciar el nodo, detenlo, elimina la base de datos (almacenada de 
 
 De forma predeterminada, las API de depuración están deshabilitadas. Para habilitarlas, debes habilitar las API EVM apropiadas en el archivo de configuración incluyendo el valor `eth-apis` en tu archivo de configuración de la C-Chain para incluir las API `debug`, `debug-tracer` e `internal-debug`.
 
-:::note
+:::nota
 
 Incluir `eth-apis` en la bandera de configuración anula los valores predeterminados, ¡así que debes incluir también las API predeterminadas!
 
@@ -129,7 +129,7 @@ Hay un [tutorial](/build/dapp/smart-contracts/remix-deploy.md) para usar Remix p
 
 ### thirdweb
 
-También puedes usar thirdweb para probar y desplegar contratos inteligentes en Avalanche. Descubre cómo en este [tutorial](/build/dapp/smart-contracts/toolchains/thirdweb.md).
+También puedes usar thirdweb para probar e implementar contratos inteligentes en Avalanche. Descubre cómo en este [tutorial](/build/dapp/smart-contracts/toolchains/thirdweb.md).
 
 ### Hardhat
 
@@ -143,24 +143,26 @@ Una parte esencial del entorno de desarrollo de contratos inteligentes es el exp
 
 ## Avalanche Faucet
 
-Para fines de desarrollo, necesitarás tokens de prueba. Avalanche tiene un [Faucet](https://faucet.avax.network/) que gotea tokens de prueba a la dirección de tu elección. Pega tu dirección de la C-Chain allí.
+Para fines de desarrollo, necesitarás tokens de prueba. Avalanche tiene un [Faucet](https://faucet.avax.network/) que gotea tokens de prueba a la dirección de tu elección. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de faucet en [Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 Si es necesario, también puedes ejecutar un faucet localmente, pero construyéndolo a partir del [repositorio](https://github.com/ava-labs/avalanche-faucet).
 
 ## Verificación de contratos
 
-La verificación de contratos inteligentes proporciona transparencia para los usuarios que interactúan con los contratos inteligentes al publicar el código fuente, permitiendo a todos atestiguar que realmente hace lo que afirma hacer. Puedes verificar tus contratos inteligentes utilizando el [explorador C-Chain](https://snowtrace.io/). El procedimiento es sencillo:
+La verificación de contratos inteligentes proporciona transparencia para los usuarios que interactúan con los contratos inteligentes al publicar el código fuente, permitiendo a todos atestiguar que realmente hace lo que afirma hacer. Puedes verificar tus contratos inteligentes usando el [explorador C-Chain](https://snowtrace.io/). El procedimiento es simple:
 
 - navega hasta la dirección de tu contrato publicado en el explorador
 - en la pestaña `code`, selecciona `verify & publish`
 - copia y pega el código fuente aplanado e ingresa todos los parámetros de compilación exactamente como están en el contrato publicado
 - haz clic en `verify & publish`
 
-Si tienes éxito, la pestaña `code` ahora tendrá una marca de verificación verde, y tus usuarios podrán verificar el contenido de tu contrato. Esta es una señal positiva fuerte de que tus usuarios pueden confiar en tus contratos, y se recomienda encarecidamente para todos los contratos de producción.
+Si tiene éxito, la pestaña `code` ahora tendrá una marca de verificación verde y tus usuarios podrán verificar el contenido de tu contrato. Esto es una señal positiva fuerte de que tus usuarios pueden confiar en tus contratos, y se recomienda encarecidamente para todos los contratos de producción.
+
+Consulta [esto](/build/dapp/smart-contracts/verification/verify-hardhat.md) para obtener un tutorial detallado con Hardhat.
 
 ## Verificaciones de seguridad de contratos
 
-Debido a la naturaleza de las aplicaciones distribuidas, es muy difícil corregir errores una vez que la aplicación está implementada. Por eso, asegurarse de que tu aplicación se esté ejecutando correctamente y de manera segura antes de la implementación es de gran importancia. Las revisiones de seguridad de contratos se realizan por parte de empresas y servicios especializados. Pueden ser muy costosos, lo que puede estar fuera del alcance de desarrolladores individuales y startups. Pero también hay servicios y programas automatizados que son gratuitos de usar.
+Debido a la naturaleza de las aplicaciones distribuidas, es muy difícil corregir errores una vez que la aplicación está implementada. Por eso, asegurarse de que tu aplicación se esté ejecutando correctamente y de manera segura antes de la implementación es de gran importancia. Las revisiones de seguridad de contratos se realizan por empresas y servicios especializados. Pueden ser muy costosos, lo que puede estar fuera del alcance de desarrolladores individuales y startups. Pero también hay servicios y programas automatizados que son gratuitos de usar.
 
 Los más populares son:
 
@@ -178,22 +180,22 @@ Aquí están las principales diferencias de las que debes ser consciente.
 
 ### Medición del tiempo
 
-Avalanche no utiliza el mismo mecanismo para medir el tiempo que Ethereum, que utiliza tiempos de bloque consistentes. En cambio, Avalanche admite emisión de bloques asincrónica, y el objetivo de producción de bloques es una tasa de cada 2 segundos. Si hay suficiente demanda, se puede producir un bloque antes. Si no hay demanda, no se producirá un bloque hasta que haya transacciones para que la red las procese.
+Avalanche no utiliza el mismo mecanismo para medir el tiempo que Ethereum, que utiliza tiempos de bloque consistentes. En cambio, Avalanche admite emisión de bloques asincrónica, los objetivos de producción de bloques a una tasa de cada 2 segundos. Si hay suficiente demanda, se puede producir un bloque antes. Si no hay demanda, no se producirá un bloque hasta que haya transacciones para que la red las procese.
 
 Debido a eso, no debes medir el paso del tiempo por el número de bloques que se producen. Los resultados no serán precisos y tu contrato puede ser manipulado por terceros.
 
-En lugar de la tasa de bloque, debes medir el tiempo simplemente leyendo el atributo de marca de tiempo de los bloques producidos. Se garantiza que los tiempos de marca de tiempo aumenten de forma monótona y estén dentro de 30 segundos del tiempo real.
+En lugar de la tasa de bloque, debes medir el tiempo simplemente leyendo el atributo de marca de tiempo de los bloques producidos. Se garantiza que los marcas de tiempo aumenten de forma monótona y estén dentro de 30 segundos del tiempo real.
 
 ### Finalidad
 
-En Ethereum, la blockchain puede ser reorganizada y los bloques pueden ser huérfanos, por lo que no puedes confiar en el hecho de que un bloque haya sido aceptado hasta que esté varios bloques más alejado de la punta (por lo general, se presume que los bloques 6 lugares más profundos son seguros). Ese no es el caso en Avalanche. Los bloques son aceptados o rechazados en uno o dos segundos. Y una vez que el bloque ha sido aceptado, es final y no se puede reemplazar, eliminar o modificar. Por lo tanto, el concepto de 'número de confirmaciones' en Avalanche no se utiliza. Tan pronto como un bloque es aceptado y está disponible en el explorador, es final.
+En Ethereum, la blockchain puede ser reorganizada y los bloques pueden ser huérfanos, por lo que no puedes confiar en el hecho de que un bloque haya sido aceptado hasta que esté varios bloques más lejos de la punta (por lo general, se presume que los bloques a 6 lugares de profundidad son seguros). Ese no es el caso en Avalanche. Los bloques son aceptados o rechazados en uno o dos segundos. Y una vez que el bloque ha sido aceptado, es final y no se puede reemplazar, eliminar o modificar. Por lo tanto, el concepto de 'número de confirmaciones' en Avalanche no se utiliza. Tan pronto como un bloque es aceptado y está disponible en el explorador, es final.
 
 ### Uso de `eth_newFilter` y llamadas relacionadas con la API pública
 
-Si estás utilizando el método de API [`eth_newFilter`](https://eth.wiki/json-rpc/API#eth_newfilter) en el servidor de API pública, es posible que no se comporte como esperas porque la API pública en realidad son varios nodos detrás de un balanceador de carga. Si haces una llamada de `eth_newFilter`, las llamadas posteriores a [`eth_getFilterChanges`](https://eth.wiki/json-rpc/API#eth_getfilterchanges) pueden no terminar en el mismo nodo que la primera llamada, y obtendrás resultados indefinidos.
+Si estás usando el método de API [`eth_newFilter`](https://eth.wiki/json-rpc/API#eth_newfilter) en el servidor de API pública, es posible que no se comporte como esperas porque la API pública en realidad son varios nodos detrás de un balanceador de carga. Si haces una llamada de `eth_newFilter`, las llamadas posteriores a [`eth_getFilterChanges`](https://eth.wiki/json-rpc/API#eth_getfilterchanges) pueden no terminar en el mismo nodo que la primera llamada, y obtendrás resultados indefinidos.
 
 Si necesitas la funcionalidad de filtrado de registros, debes usar una conexión websocket, que asegura que tu cliente siempre esté hablando con el mismo nodo detrás del balanceador de carga. Alternativamente, puedes usar [`eth_getLogs`](https://eth.wiki/json-rpc/API#eth_getlogs), o ejecutar tu propio nodo y hacer llamadas de API a él.
 
 ## Soporte
 
-Utilizando este tutorial, deberías poder familiarizarte rápidamente con Avalanche, implementar y probar tus dapps. Si tienes preguntas, problemas o simplemente quieres charlar con nosotros, puedes encontrarnos en nuestro servidor público de [Discord](https://chat.avalabs.org/). ¡Nos encantaría saber de ti y descubrir qué estás construyendo en Avalanche!
+Usando este tutorial, deberías poder familiarizarte rápidamente con Avalanche, implementar y probar tus dapps. Si tienes preguntas, problemas o simplemente quieres chatear con nosotros, puedes encontrarnos en nuestro servidor público de [Discord](https://chat.avalabs.org/). ¡Nos encantaría saber de ti y descubrir qué estás construyendo en Avalanche!
