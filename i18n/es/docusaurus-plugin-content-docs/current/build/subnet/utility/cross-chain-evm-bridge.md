@@ -1,6 +1,6 @@
 ---
-tags: [Construir, Subnets]
-description: Este tutorial demuestra el proceso de implementación de un puente entre cadenas EVM cruzadas. Construye bajo tu propio riesgo.
+etiquetas: [Construir, Subredes]
+descripción: Este tutorial demuestra el proceso de implementación de un puente entre cadenas EVM cruzadas. Construye bajo tu propio riesgo.
 sidebar_label: Agregar un puente cruzado entre cadenas
 pagination_label: Implementar un puente EVM cruzado entre cadenas
 sidebar_position: 2
@@ -10,7 +10,7 @@ sidebar_position: 2
 
 :::warning
 
-Este tutorial es con fines de demostración sobre cómo construir un puente cruzado entre cadenas. No es para uso en producción.
+Este tutorial es para fines de demostración sobre cómo construir un puente cruzado entre cadenas. No es para uso en producción.
 Debes asumir la responsabilidad total de garantizar la seguridad de tu puente.
 
 :::
@@ -26,7 +26,7 @@ La versión envuelta de una moneda nativa es su representación ERC20 anclada. E
 facilita ciertos procesos como transacciones delegadas. Puedes obtener fácilmente tokens envueltos
 enviando la moneda nativa a la dirección del contrato de token envuelto.
 
-> WAGMI es una cadena de prueba independiente basada en EVM desplegada en una Subnet personalizada en la red Avalanche.
+> WAGMI es una cadena de prueba independiente basada en EVM desplegada en una Subred personalizada en la red Avalanche.
 
 Estaremos utilizando el repositorio del puente de **ChainSafe**, para configurar fácilmente un puente robusto y seguro.
 
@@ -60,12 +60,16 @@ Y acuñimos el token correspondiente (que desplegaremos y, por lo tanto, control
 Estos son los requisitos para seguir este tutorial -
 
 - Configurar [WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-core) y
-  [Fuji](/build/dapp/fuji-workflow.md#set-up-fuji-network-on-core-optional) en Core
+[Fuji](/build/dapp/fuji-workflow.md#set-up-fuji-network-on-core-optional) en Core
 - Importar el token `wWGM` (activo) en la red WAGMI (Core). Aquí está la dirección - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 - Monedas `WGM` en la cadena WAGMI. Gotea `1 WGM` desde el [WAGMI Faucet](https://faucet.trywagmi.xyz/).
-- Monedas `AVAX` en la cadena Fuji. Gotea `10 AVAX` desde el [Fuji Faucet](https://faucet.avax.network/)
+- Monedas `AVAX` en la cadena Fuji. Gotea `10 AVAX` desde el [Fuji Faucet](https://faucet.avax.network/).
+Si ya tienes un saldo de AVAX mayor que cero en Mainnet,
+pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario,
+por favor solicita un cupón de faucet en
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 - Tokens `WGM` envueltos en la cadena WAGMI. Envía algunas monedas `WGM` a la dirección del token `wWGM` (ver
-  segundo punto), para recibir la misma cantidad de `wWGM`. Siempre mantén algunas monedas `WGM`, para cubrir las tarifas de transacción.
+segundo punto), para recibir la misma cantidad de `wWGM`. Siempre mantén algunas monedas `WGM`, para cubrir las tarifas de transacción.
 
 ## Configuración del entorno
 
@@ -73,9 +77,9 @@ Creemos un nuevo directorio `deploy-bridge`, donde guardaremos nuestros códigos
 utilizando los siguientes repositorios -
 
 - [`ChainSafe/chainbridge-deploy`](https://github.com/ChainSafe/chainbridge-deploy) - Esto nos ayudará
-  a configurar nuestros contratos de puente
+a configurar nuestros contratos de puente
 - [`ChainSafe/ChainBridge`](https://github.com/ChainSafe/ChainBridge) - Esto nos ayudará a configurar
-  nuestro relayer fuera de la cadena.
+nuestro relayer fuera de la cadena.
 
 ### Instalando la herramienta de línea de comandos de ChainBridge
 
@@ -94,7 +98,7 @@ Esto construirá los contratos e instalará el comando `cb-sol-cli`.
 
 ### Configurando variables de entorno
 
-Configuremos las variables de entorno, para que no necesitemos escribir sus valores cada vez que
+Configuremos las variables de entorno, para que no tengamos que escribir sus valores cada vez que
 emitimos un comando. Vuelve al directorio `deploy-bridge` (directorio principal del proyecto) y crea un
 nuevo archivo `configVars`. Coloca el siguiente contenido dentro de él -
 
@@ -113,12 +117,12 @@ RESOURCE_ID="0x00"
 
 - `SRC_ADDR` y `DST_ADDR` son las direcciones que desplegarán los contratos de puente y actuarán como relayers.
 - `SRC_TOKEN` es el token que queremos puentear. Aquí está la dirección de la versión envuelta ERC20
-  de la moneda WGM aka wWGM.
+de la moneda WGM aka wWGM.
 - `RESOURCE_ID` podría ser cualquier cosa. Identifica nuestros tokens ERC20 puenteados en ambos lados (WAGMI y Fuji).
 
 Cada vez que hagamos cambios en estas variables de configuración, tenemos que actualizar nuestro entorno bash. Ejecuta
 el siguiente comando de acuerdo a la ubicación relativa del archivo. Estas variables son temporales
-y solo están allí en la sesión terminal actual, y se eliminarán una vez que la sesión haya terminado.
+y solo están allí en la sesión terminal actual, y se eliminarán una vez que la sesión termine.
 Asegúrate de cargar estas variables de entorno en cualquier lugar donde las vayas a usar en los comandos bash
 (como `$SRC_GATEWAY` o `$SRC_ADDR`)
 
@@ -130,51 +134,153 @@ source ./configVars
 
 Necesitamos configurar nuestra cadena fuente de la siguiente manera -
 
-- Desplegar contratos de Puente y Controlador con `$SRC_ADDR` como relayer predeterminado y único
+- Desplegar los contratos de Puente y Controlador con `$SRC_ADDR` como relayer predeterminado y único
 - Registrar el token `wWGM` como un recurso en el puente
 
 ### Desplegar Contratos Fuente
 
 La herramienta de línea de comandos `cb-sol-cli` nos ayudará a desplegar los contratos. Ejecuta el siguiente comando
 en la sesión de terminal donde se cargan las variables de configuración. Agregará `SRC_ADDR` como el relayer predeterminado
-para relayer eventos desde la cadena WAGMI (fuente) a la cadena Fuji (destino).
+para relayar eventos desde la cadena WAGMI (fuente) a la cadena Fuji (destino).
 
 **Uno de los parámetros más importantes a tener en cuenta al desplegar el contrato de puente es el valor de `expiry`**
 **Es el número de bloques después del cual una propuesta se considera cancelada. Por defecto es**
 **establecido en `100`. En Avalanche Mainnet, con este valor, las propuestas podrían expirar en 3-4 minutos.**
 **Deberías elegir un valor de vencimiento muy grande, de acuerdo a la cadena en la que estás desplegando el puente.**
-**De lo contrario, tu propuesta será cancelada si no se reciben el número umbral de propuestas de voto**
-**a tiempo.**
+**De lo contrario, tu propuesta será cancelada si no se reciben el número umbral de propuestas de voto a tiempo.**
 
-También debes tener en cuenta que a veces, durante una alta actividad de red, una transacción podría
-quedarse atascada durante mucho tiempo. Las transacciones de propuesta atascadas en este escenario, podrían resultar en la cancelación
-de propuestas anteriores. Por lo tanto, los valores de vencimiento deben ser lo suficientemente grandes y los relayers deben emitir
-transacciones con un precio de gas máximo competitivo.
+También debes tener en cuenta que a veces, durante períodos de alta actividad de red, una transacción puede quedarse atascada durante mucho tiempo. Las transacciones de propuesta que quedan atascadas en este escenario pueden resultar en la cancelación de propuestas anteriores. Por lo tanto, los valores de vencimiento deben ser lo suficientemente grandes y los relayers deben emitir transacciones con un precio máximo de gas competitivo.
 
 ```bash
-./build/chainbridge relayer generate --config config.json \
-    --srcChainId 0 \
-    --dstChainId 1 \
+cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 25000000000 deploy \
+    --bridge --erc20Handler \
+    --relayers $SRC_ADDR \
+    --relayerThreshold 1 \
+    --expiry 500 \
+    --chainId 0
+```
+
+La salida devolverá las direcciones de los contratos desplegados (Bridge y Handler). Actualiza el archivo `configVars` con estas direcciones agregando las siguientes 2 variables y cargándolas en el entorno.
+
+```env
+SRC_BRIDGE="<dirección del contrato de puente resultante>"
+SRC_HANDLER="<dirección del contrato de manejador erc20 resultante>"
+```
+
+Asegúrate de cargarlas usando el comando `source`.
+
+### Configurar Recurso en el Puente
+
+Ejecuta el siguiente comando para registrar el token `wWGM` como un recurso en el puente fuente.
+
+```bash
+cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 25000000000 bridge register-resource \
     --bridge $SRC_BRIDGE \
     --handler $SRC_HANDLER \
-    --privateKey $RELAYER_PK \
-    --pollInterval 5s \
-    --confirmations 1 \
-    --gasLimit 1000000 \
-    --gasPrice 25000000000 \
-    --rpc $SRC_GATEWAY
+    --resourceId $RESOURCE_ID \
+    --targetContract $SRC_TOKEN
 ```
 
-### Starting Relayer
+## Configurando la Cadena de Destino
 
-Now, run the following command to start the relayer.
+Necesitamos configurar nuestra cadena de destino de la siguiente manera:
+
+- Desplegar el contrato de Puente y Handler con `$DST_ADDR` como relayer predeterminado y único
+- Desplegar el contrato ERC20 mintable y burnable que representa el token `wWGM` bridged
+- Registrar el token `wWGM` como un recurso en el puente
+- Registrar el token `wWGM` como mintable/burnable en el puente
+- Dar permisos al contrato Handler para mintear nuevos tokens `wWGM`
+
+### Desplegar Contratos de Destino
+
+Ejecuta el siguiente comando para desplegar los contratos de Puente, Handler y token `wWGM` en la cadena Fuji. Nuevamente, establecerá `DST_ADDR` como el relayer predeterminado para relayer eventos desde la cadena Fuji (destino) a la cadena WAGMI (fuente). Para este ejemplo, tanto `SRC_ADDR` como `DST_ADDR` representan lo mismo.
 
 ```bash
-./build/chainbridge relayer start --config config.json
+cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 25000000000 deploy\
+    --bridge --erc20 --erc20Handler \
+    --relayers $DST_ADDR \
+    --relayerThreshold 1 \
+    --chainId 1
 ```
 
-The relayer will start polling for deposit events on the source chain and submitting vote proposals
-on the destination chain.
+Actualiza las variables de entorno con los detalles que obtendrás al ejecutar el comando anterior. No olvides cargar estas variables.
+
+```env
+DST_BRIDGE="<dirección del contrato de puente resultante>"
+DST_HANDLER="<dirección del contrato de manejador erc20 resultante>"
+DST_TOKEN="<dirección del contrato de token erc20 resultante>"
+```
+
+### Configurando Recurso en el Puente
+
+Ejecuta el siguiente comando para registrar el token `wWGM` desplegado como un recurso en el puente.
+
+```bash
+cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 25000000000 bridge register-resource \
+    --bridge $DST_BRIDGE \
+    --handler $DST_HANDLER \
+    --resourceId $RESOURCE_ID \
+    --targetContract $DST_TOKEN
+```
+
+### Configurando el Token como Mintable y Burnable en el Puente
+
+El puente tiene dos opciones cuando recibe un depósito de un token:
+
+- Bloquear el token recibido en una cadena y mintear el token correspondiente en la otra cadena
+- Quemar el token recibido en una cadena y liberar el token correspondiente en la otra cadena
+
+No podemos mintear o quemar ningún token que no controlemos. Aunque podemos bloquear y liberar dichos tokens poniéndolos en una caja fuerte de tokens. El puente tiene que saber qué token puede quemar. Con el siguiente comando, podemos establecer el recurso como burnable. El puente elegirá la acción en consecuencia, viendo si el token es burnable o no.
+
+```bash
+cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 25000000000 bridge set-burn \
+    --bridge $DST_BRIDGE \
+    --handler $DST_HANDLER \
+    --tokenContract $DST_TOKEN
+```
+
+### Autorizando al Handler a Mintear Nuevos Tokens
+
+Ahora permitamos que el handler mintee el token ERC20 (wWGM) desplegado en la cadena de destino. Ejecuta el siguiente comando.
+
+```bash
+cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 25000000000 erc20 add-minter \
+    --minter $DST_HANDLER \
+    --erc20Address $DST_TOKEN
+```
+
+> **El desplegador de los contratos (aquí `SRC_ADDR` o `DST_ADDR`) tiene los derechos de administrador. Un administrador**
+**puede agregar o eliminar un nuevo relayer, minter, administrador, etc. También puede mintear nuevos tokens ERC20 en la**
+**cadena de destino. Puedes emitir estos comandos usando `cb-sol-cli` con las opciones mencionadas en**
+**estos [archivos](https://github.com/ChainSafe/chainbridge-deploy/tree/main/cb-sol-cli/docs). El comando mint**
+**no debe usarse manualmente, a menos que se requiera alguna intervención, cuando los relayers no pudieron**
+**mintear los tokens en la cadena de destino a tiempo.**
+
+## Desplegar Relayer
+
+Todas las configuraciones en cadena como desplegar puentes, handlers, tokens, etc. están completas. Pero las dos cadenas no están interconectadas. Necesitamos algún relayer fuera de cadena para comunicar mensajes entre las cadenas. El relayer buscará eventos de depósito en una cadena y enviará propuestas de voto para mintear o liberar el token correspondiente en otra cadena.
+
+Dado que establecimos el umbral del relayer en 1, al desplegar el puente y el handler, requerimos una propuesta de voto de solo 1 relayer. Pero en producción, deberíamos usar un gran conjunto de relayers con un umbral alto para evitar la concentración de poder.
+
+Con este propósito, utilizaremos el relayer de ChainSafe. Sigue los pasos descritos a continuación para desplegar el relayer.
+
+### Clonar y Construir el Relayer
+
+Abre una nueva sesión de terminal, manteniendo la sesión anterior cargada con las variables de entorno. También debemos cargar las variables de entorno en esta sesión. Carga estas variables también en esta sesión usando el comando `source`.
+
+Ahora, muévete al directorio `deploy-bridge` y ejecuta el siguiente comando para clonar el repositorio del relayer (implementado en Go) y construir su binario.
+
+```bash
+git clone -b v1.1.1 --depth 1 https://github.com/ChainSafe/chainbridge \
+&& cd chainbridge \
+&& make build
+```
+
+Esto creará un binario dentro del directorio `chainbridge/build` como `chainbridge`.
+
+### Configurando el Relayer
+
+El relayer requiere algunas configuraciones como cadena fuente, cadena destino, dirección de puente, handler, etc. Ejecuta el siguiente comando. Creará un archivo `config.json` con los detalles requeridos. Puedes actualizar estos detalles según tus necesidades.
 
 ```bash
 echo "{
