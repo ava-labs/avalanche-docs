@@ -1,13 +1,13 @@
 ---
-tags: [Construir, Dapps]
-description: Los tokens ERC-20 son el concepto más fundamental y esencial en Ethereum. Este mismo estándar de token se adopta en el ecosistema Avalanche.
+etiquetas: [Construir, Dapps]
+descripción: Los tokens ERC-20 son el concepto más fundamental y esencial en Ethereum. Este mismo estándar de token se adopta en el ecosistema Avalanche.
 sidebar_label: Crear un Token ERC-20
 pagination_label: Crear un Token ERC-20 usando Solidity
 ---
 
 # Crear un Token ERC-20 usando Solidity
 
-[Los tokens ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) son el concepto más fundamental y esencial en Ethereum. A medida que la comunidad Avalanche y el ecosistema están creciendo, nuevos casos de uso y proyectos que se ejecutan en Ethereum u otras cadenas se implementarán en Avalanche.
+[Los tokens ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) son el concepto más fundamental y esencial en Ethereum. A medida que la comunidad y el ecosistema Avalanche están creciendo, nuevos casos de uso y proyectos que se ejecutan en Ethereum u otras cadenas se implementarán en Avalanche.
 
 Por lo tanto, estaremos creando nuestro propio token ERC-20 mintable y lo mintiremos a cualquier dirección que queramos. El token se generará en la cadena C de Avalanche y será accesible en esa cadena. Estamos utilizando la red de pruebas Fuji en este tutorial.
 
@@ -27,7 +27,7 @@ Aquí, activa la función de **Modo de Red de Pruebas**. Esto hará que Core cam
 
 Si estás usando otras billeteras, como MetaMask, puedes agregar la red de pruebas Fuji utilizando las siguientes especificaciones:
 
-- **Nombre de la Red**: Avalanche C-Chain
+- **Nombre de Red**: Avalanche C-Chain
 - **Nueva URL RPC**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
 - **ChainID**: `43113`
 - **Símbolo**: AVAX
@@ -37,9 +37,9 @@ Si estás usando otras billeteras, como MetaMask, puedes agregar la red de prueb
 
 La configuración está hecha. Por ahora, tenemos 0 AVAX.
 
-## Financia tu dirección en la C-Chain
+## Financia tu Dirección en la C-Chain
 
-Para financiar en la red de pruebas Fuji, puedes usar el Faucet de la Red de Pruebas. Navega a [https://faucet.avax.network/](https://faucet.avax.network/) y pega tu dirección de la C-Chain.
+Avalanche tiene un [Faucet](https://faucet.avax.network/) que gotea tokens de prueba a la dirección que elijas. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de la C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de faucet en [Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 ## Crea un Token Mintable
 
@@ -57,7 +57,7 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 ![Imagen para el post](https://miro.medium.com/max/1408/1*y1wpcCeB8PypnPfs-zhyBg.png)
 
-Después de guardar el archivo, veremos un montón de archivos que se importan a Remix. Esta es una característica de Remix que nos permite importar un repositorio de contratos de GitHub a Remix simplemente dando el enlace URL con una declaración de importación.
+Después de guardar el archivo, veremos un montón de archivos que se importan a Remix. Esta es una característica de Remix que nos permite importar un repositorio de contratos de GitHub a Remix simplemente dando el enlace de URL con una declaración de importación.
 
 ![Imagen para el post](https://miro.medium.com/max/1364/1*6pmdpKWiKj4RW-OcvMSijA.png)
 
@@ -71,7 +71,7 @@ Abre la pestaña con la etiqueta `Solidity compiler` y selecciona la versión de
 
 ![Imagen para el post](https://miro.medium.com/max/1388/1*2jkDckFUJ4z3gMoLYZ_-PQ.png)
 
-Luego, saltemos a la pestaña con la etiqueta `Deploy & run transactions`. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haz clic en el entorno y selecciona "Injected Web3". Si aparece un pop-up y te pide conectar la cuenta, haz clic para conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto "CUENTA".
+Luego, saltemos a la pestaña con la etiqueta `Deploy & run transactions`. Aquí, antes de desplegar nuestro contrato, debemos cambiar el entorno. Haz clic en el entorno y selecciona "Injected Web3". Si aparece un pop-up y te pide que conectes la cuenta, haz clic para conectar. Después, deberías ver la dirección de la cuenta en el cuadro de texto "CUENTA".
 
 Lo último antes del proceso de despliegue es establecer el contrato que se desplegará como un token. Encima del botón de despliegue, hay un menú desplegable para seleccionar un contrato. Selecciona el contrato llamado `ERC20PresetMinterPauser.sol`.
 
@@ -91,9 +91,9 @@ Después de confirmar todos estos pop-ups, hemos desplegado nuestro token en la 
 
 ## Interactúa con el Token
 
-Podemos ver nuestra transacción que se desplegó en la cadena C de Avalanche a través de este [explorador de la cadena C](https://testnet.snowtrace.io/).
+Podemos ver nuestra transacción que se desplegó en la cadena C de Avalanche a través de este [explorador de la c-chain](https://testnet.snowtrace.io/).
 
-Pero primero, veamos nuestro hash de transacción desde la consola de Remix.
+Pero primero, veamos el hash de nuestra transacción desde la consola de Remix.
 
 ![Imagen para el post](https://miro.medium.com/max/1469/1*WTHSIfrDe9R_hk-C5GNq0g.png)
 
@@ -103,19 +103,17 @@ Después de desplegar el contrato, deberíamos ver un registro en la consola de 
 
 Simplemente pega el hash de transacción en el [explorador](https://testnet.snowtrace.io/) que compartí arriba y presiona enter.
 
-![Imagen para el post](https://miro.medium.com/max/1907/1*6GhQaa_UaDvtk3Kvimi3aA.png)
-
 Aquí podemos ver todos los detalles sobre la transacción y el contrato del token.
 
-La primera dirección es la de mi billetera que crea tokens y la segunda dirección es la de mi contrato de token que se llama `test`. Ahora, vamos a crear algunos tokens en nuestra propia dirección.
+La primera imagen muestra la dirección de mi billetera que crea el token y la segunda dirección es la dirección de mi contrato de token que se llama "test". Ahora, vamos a crear algunos tokens en nuestra propia dirección.
 
-Vuelve a Remix y después de desplegar, deberías poder ver el contrato en la sección "Contratos desplegados".
+Vuelve a Remix y después de desplegar, deberías poder ver el contrato en la sección "Contratos Desplegados".
 
-Aquí, tenemos un montón de funciones que podemos usar para interactuar con nuestro contrato de token. Puedes revisar todos estos métodos en la documentación de OpenZeppelin para aprender cómo usarlos. Pero solo usaremos el método de creación de tokens.
+Aquí, tenemos un montón de funciones que podemos usar para interactuar con nuestro contrato de token. Puedes revisar todos estos métodos en la documentación de OpenZeppelin para aprender cómo usarlos. Pero solo usaremos el método de creación de tokens (mint).
 
-Haz clic en la flecha junto al método de creación de tokens para leerlo.
+Haz clic en la flecha junto al método de mint para leerlo.
 
-Ingresa tu dirección y una cantidad en wei. Por ejemplo, voy a crear 1000 tokens `tst`, así que ingresé "1000000000000000000000".
+Ingresa tu dirección y una cantidad en wei. Por ejemplo, voy a crear 1000 tokens "tst", así que ingresé "1000000000000000000000".
 
 ## Agregar Token a Core
 
