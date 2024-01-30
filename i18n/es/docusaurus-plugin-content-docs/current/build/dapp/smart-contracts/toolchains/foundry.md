@@ -2,11 +2,11 @@
 tags: [Construir, Dapps]
 description: Esta guía muestra cómo implementar e interactuar con contratos inteligentes utilizando Foundry en una Red Avalanche local y la C-Chain Fuji.
 sidebar_label: Foundry
-pagination_label: Usando Foundry con la Avalanche C-Chain
+pagination_label: Usando Foundry con la C-Chain Avalanche
 sidebar_position: 2
 ---
 
-# Usando Foundry con la Avalanche C-Chain
+# Usando Foundry con la C-Chain Avalanche
 
 ## Introducción
 
@@ -64,7 +64,7 @@ El método de clonación del repositorio utilizado es HTTPS, pero también se pu
 Puedes encontrar más información sobre SSH y cómo usarlo [aquí](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
-Para implementar contratos, necesitas tener algunos AVAX. Puedes obtener AVAX de la testnet en el [Avalanche Faucet](https://faucet.avax.network), que es una forma fácil de empezar a jugar con Avalanche. Después de familiarizarte con tu código, puedes ejecutarlo en Mainnet después de hacer los cambios necesarios en tu flujo de trabajo.
+Para implementar contratos, necesitas tener algunos AVAX. Puedes obtener AVAX de la testnet desde el [Avalanche Faucet](https://faucet.avax.network), que es una forma fácil de jugar con Avalanche. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario, solicita un cupón de faucet en [Discord](https://discord.com/channels/578992315641626624/1193594716835545170). Después de familiarizarte con tu código, puedes ejecutarlo en Mainnet después de hacer los cambios necesarios en tu flujo de trabajo.
 
 ## Escribir Contratos
 
@@ -151,31 +151,40 @@ Dado que estamos implementando en la testnet Fuji, nuestra exportación de `RPC_
 export RPC_URL=https://api.avax-test.network/ext/bc/C/rpc
 ```
 
-Si deseas verificar tus contratos durante el proceso de implementación (la forma más rápida y fácil), obtén una [Clave de API de Snowtrace](https://docs.snowtrace.io/getting-started/viewing-api-usage-statistics). Agrega esto como una variable de entorno:
+
+
+Si desea verificar sus contratos durante el proceso de implementación (la forma más rápida y fácil),
+obtenga una clave de API de [Snowtrace](https://docs.snowtrace.io/getting-started/viewing-api-usage-statistics).
+Agregue esto como una variable de entorno:
 
 ```zsh
 export ETHERSCAN_API_KEY=<TU-CLAVE-DE-API-DE-SNOWTRACE>
 ```
 
-Una vez configurado, puedes [implementar tu NFT con Forge](https://book.getfoundry.sh/reference/forge/forge-create.html) ejecutando el siguiente comando y agregando los valores para `_name` y `_symbol`, los argumentos de constructor relevantes de contrato NFT. Puedes verificar los contratos con Snowtrace agregando `--verify` antes de `--constructor-args`:
+Una vez configurado, puede [implementar su NFT con Forge](https://book.getfoundry.sh/reference/forge/forge-create.html) ejecutando
+el siguiente comando y agregando los valores para `_name` y `_symbol`, los
+argumentos relevantes del [constructor](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/3ad93abf50fba65e3aab68f23382bcace73968be/contracts/NFT.sol#L13)
+del contrato NFT. Puede verificar los contratos con Snowtrace agregando `--verify` antes de `--constructor-args`:
 
 ```zsh
 forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --verify --constructor-args GameItem ITM
 ```
 
-Después de una implementación exitosa, verás impresa en tu terminal la dirección de la billetera que está implementando, la dirección del contrato y el hash de transacción.
+Después de una implementación exitosa, verá impresa en su terminal la dirección de la billetera que implementó, la
+dirección del contrato y el hash de transacción.
 
-Aquí tienes un ejemplo de salida de una implementación y verificación de NFT.
+Aquí hay un ejemplo de salida de implementación y verificación de un NFT.
 
 ```zsh
-[⠔] Compiling...
-No se cambiaron archivos, compilación omitida
+[⠔] Compilando...
+No se han cambiado archivos, se omitió la compilación
 Implementador: 0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc
 Implementado en: 0x52c84043cd9c865236f11d9fc9f56aa003c1f922
 Hash de transacción: 0xf35c40dbbdc9e4298698ad1cb9937195e5a5e74e557bab1970a5dfd42a32f533
 ```
 
-Después de una verificación exitosa, después de tu implementación verás el estado de verificación del contrato como `verificado exitosamente`:
+Después de una verificación exitosa, después de su implementación verá el estado de verificación del contrato como
+`verificado exitosamente`:
 
 ```zsh
 Iniciando verificación de contrato...
@@ -195,25 +204,28 @@ Respuesta: `NOTOK`
 Detalles: `Pendiente en cola`
 Estado de verificación del contrato:
 Respuesta: `OK`
-Detalles: `Pasar - Verificado`
+Detalles: `Aprobado - Verificado`
 Contrato verificado exitosamente
 ```
 
-_Nota: Por favor, guarda la dirección `Implementado en` para usarla en las siguientes secciones._
+_Nota: Por favor, guarde la dirección `Implementado en` para usarla en las siguientes secciones._
 
 ## Verificación Después de la Implementación
 
-Si no verificaste durante el proceso de implementación, aún puedes verificar un contrato implementado con foundry, usando [`forge verify-contract`](https://book.getfoundry.sh/reference/forge/forge-verify-contract).
+Si no verificó durante el proceso de implementación, aún puede verificar un contrato implementado con
+foundry, usando [`forge verify-contract`](https://book.getfoundry.sh/reference/forge/forge-verify-contract).
 
-_Nota: El archivo foundry.toml y las variables de entorno deberán estar configuradas como lo estaban en la sección anterior_
+_Nota: El archivo foundry.toml y las variables de entorno deberán estar
+configurados como lo estaban en la sección anterior_
 
-Por ejemplo, si quisiéramos verificar el contrato NFT que acabamos de implementar en la sección anterior, se vería así:
+Por ejemplo, si quisiéramos verificar el contrato NFT que acabamos de
+implementar en la sección anterior, se vería así:
 
 ```zsh
 forge verify-contract --chain-id 43113 --watch --constructor-args $(cast abi-encode "constructor(string,string)" "GameItem" "ITM") 0x8e982a4ef70430f8317b5652bd5c28f147fbf912 NFT
 ```
 
-Después de una verificación exitosa, verás el estado de verificación del contrato como `verificado exitosamente`:
+Después de una verificación exitosa, verá el estado de verificación del contrato como `verificado exitosamente`:
 
 ```zsh
 Iniciando verificación de contrato...
@@ -233,17 +245,24 @@ Respuesta: `NOTOK`
 Detalles: `Pendiente en cola`
 Estado de verificación del contrato:
 Respuesta: `OK`
-Detalles: `Pasar - Verificado`
+Detalles: `Aprobado - Verificado`
 Contrato verificado exitosamente
 ```
 
 ## Usando Cast para Interactuar con el Contrato Inteligente
 
-Podemos llamar a funciones en nuestro contrato NFT con [Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), la herramienta de línea de comandos de Foundry para interactuar con contratos inteligentes, enviar transacciones y obtener datos de la cadena. En este escenario, vamos a acuñar un objeto de juego a la billetera de un jugador usando la función [`awardItem`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17) en nuestro contrato inteligente.
+Podemos llamar a funciones en nuestro contrato NFT con
+[Cast](https://book.getfoundry.sh/reference/cast/cast-send.html), la
+herramienta de línea de comandos de Foundry para interactuar con contratos inteligentes, enviar transacciones
+y obtener datos de la cadena. En este escenario, vamos a crear un ítem de juego en la billetera de un jugador
+usando la función [`awardItem`](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/0f29cbb6375a1a452579213f688609c880d52c01/contracts/NFT.sol#L17)
+en nuestro contrato inteligente.
 
-Acuña un NFT desde tu contrato reemplazando `<NFT-CONTRACT-ADDRESS>` con la dirección de `Implementado en` y `<NFT-RECIPIENT-ADDRESS>` con una dirección de tu elección.
+Cree un NFT desde su contrato reemplazando `<NFT-CONTRACT-ADDRESS>` con su
+dirección `Implementado en` y `<NFT-RECIPIENT-ADDRESS>` con una dirección de su
+elección.
 
-_Nota: Esta sección asume que ya has configurado tus variables de entorno de RPC y clave privada durante la implementación_
+_Nota: Esta sección asume que ya ha configurado sus variables de entorno de RPC y clave privada durante la implementación_
 
 ```zsh
 cast send --rpc-url=$RPC_URL  <NFT-CONTRACT-ADDRESS> "awardItem(address)" <NFT-RECIPIENT-ADDRESS> --private-key=$PRIVATE_KEY
@@ -259,66 +278,4 @@ cumulativeGasUsed       90837
 effectiveGasPrice       28000000000
 gasUsed                 90837
 logs                    [{"address":"0x45857b942723fff8ee7acd2b1d6515d9965c16e5","topics":["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef","0x0000000000000000000000000000000000000000000000000000000000000000","0x000000000000000000000000845095a03a6686e24b90fed55e11f4ec808b1ab3","0x0000000000000000000000000000000000000000000000000000000000000001"],"data":"0x","blockHash":"0x1d9b0364fe002eeddd0e32be0c27d6797c63dffb51fe555ea446357759e6a6f8","blockNumber":"0xa37d50","transactionHash":"0x4651ae041a481a6eeb852e5300e9be48e66a1d2332733df22d8e75cf460b0c2c","transactionIndex":"0x0","logIndex":"0x0","removed":false}]
-logsBloom               0x00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000040000000000000000000000000008010000000000000000040000000000000000000000000000020000040000000000000800000000002000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000060080000000000000000000000000000000000000000000000000000000000000000
-root
-status                  1
-transactionHash         0x4651ae041a481a6eeb852e5300e9be48e66a1d2332733df22d8e75cf460b0c2c
-transactionIndex        0
-type                    2
-```
-
-¡Bien hecho! Acabas de crear tu primer NFT desde tu contrato. Puedes verificar al propietario del `tokenId` 1 ejecutando el siguiente comando `cast call`:
-
-```zsh
-cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <DIRECCIÓN-CONTRATO-NFT> "ownerOf(uint256)" 1
-```
-
-La dirección que proporcionaste anteriormente debería aparecer como propietario.
-
-```zsh
-0x000000000000000000000000845095a03a6686e24b90fed55e11f4ec808b1ab3
-```
-
-## Flujo de trabajo en Mainnet
-
-El flujo de trabajo en Fuji se puede adaptar a Mainnet con las siguientes modificaciones en las variables de entorno:
-
-```zsh
-export RPC_URL=https://api.avax.network/ext/bc/C/rpc
-export PRIVATE_KEY=<TU-CLAVE-PRIVADA>
-```
-
-## Flujo de trabajo local
-
-El flujo de trabajo en Fuji se puede adaptar a una red local siguiendo estos pasos:
-
-En una nueva terminal, navega al directorio de [Avalanche Network Runner](/tooling/network-runner.md).
-
-```zsh
-cd /ruta/a/Avalanche-Network-Runner
-```
-
-A continuación, despliega una nueva red Avalanche con cinco nodos (un clúster) localmente.
-
-```zsh
-go run examples/local/fivenodenetwork/main.go
-```
-
-Después, modifica las variables de entorno en tu proyecto Foundry:
-
-```zsh
-export RPC_URL=http://localhost:9650/ext/bc/C/rpc
-export PRIVATE_KEY=56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-```
-
-:::warning
-
-La clave privada de ejemplo proporcionada arriba ofrece una cuenta prefinanciada en Avalanche Network Runner y debe usarse SOLO PARA DESARROLLO LOCAL.
-
-:::
-
-## Resumen
-
-Ahora tienes las herramientas necesarias para lanzar una red Avalanche local, crear un proyecto Foundry, así como crear, compilar, desplegar e interactuar con contratos Solidity.
-
-Únete a nuestro [Servidor de Discord](https://chat.avax.network) para aprender más y hacer cualquier pregunta que puedas tener.
+logsBloom               0x000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000400000000000000000000000000080100000000000000000400000000000
