@@ -84,7 +84,7 @@ La respuesta debería verse algo como:
 ```
 
 Esa parte que dice, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` es el NodeID, todo el asunto.
-El usuario va a necesitar este ID en la sección posterior al llamar a [addValidator](#add-a-validator).
+El usuario va a necesitar este ID en la sección posterior al llamar a [addValidator](#agregar-un-validador).
 
 :::info
 
@@ -234,7 +234,7 @@ Después de seguir estos 3 pasos, tu clave de prueba debería tener ahora un sal
 ## Crea una Subnet EVM
 
 Crear una Subnet con `Avalanche-CLI` para `Fuji` funciona de la misma manera que con una
-red local](/build/subnet/deploy/local-subnet.md#create-a-custom-subnet-configuration). De hecho,
+red [local](/build/subnet/deploy/local-subnet.md#create-a-custom-subnet-configuration). De hecho,
 el comando `create` solo crea una especificación de tu Subnet en el sistema de archivos local.
 Después, la Subnet necesita ser _desplegada_. Esto permite reutilizar las configuraciones, creando la
 configuración con el comando `create`, luego desplegándola primero en una red local y sucesivamente en `Fuji` - y
@@ -248,7 +248,7 @@ avalanche subnet create testsubnet
 
 Esto va a iniciar una serie de preguntas para personalizar tu Subnet EVM según tus necesidades. La mayoría de las preguntas tienen
 alguna validación para reducir problemas debido a entradas inválidas. La primera pregunta pide el tipo de
-máquina virtual (ver [Máquina Virtual](#virtual-machine)).
+máquina virtual (ver [Máquina Virtual](#máquina-virtual)).
 
 ```bash
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
@@ -622,6 +622,7 @@ Es **necesario reiniciar el nodo**.
 Si eliges "Manual" en su lugar, la herramienta simplemente va a imprimir _instrucciones_. El usuario deberá seguir estas instrucciones y aplicarlas al nodo. Ten en cuenta que las ID de la VM y las Subnets serán diferentes en tu caso.
 
 ```bash
+
 ✔ Manual
 
 Para configurar tu nodo, debes hacer dos cosas:
@@ -637,10 +638,6 @@ avalanchego/build/plugins.
 Si inicias tu nodo desde la línea de comandos SIN un archivo de configuración (por ejemplo, a través de un
 script de línea de comandos o systemd), agrega la siguiente bandera al comando de inicio de tu nodo:
 
-```
-
-
-
 --track-subnets=2b175hLJhGdj3CzgXENso9CmwMgejaCQXhMFzBsm8hXbH2MF7H
 (si el nodo ya tiene una configuración de track-subnets, agrega el nuevo valor separado por comas).
 
@@ -654,6 +651,7 @@ CONSEJO: Prueba este comando con la bandera --avalanchego-config apuntando a tu 
 esta herramienta intentará actualizar el archivo automáticamente (asegúrate de que pueda escribir en él).
 
 Después de actualizar tu configuración, deberás reiniciar tu nodo para que los cambios surtan efecto.
+
 ```
 
 ## Agregar un validador

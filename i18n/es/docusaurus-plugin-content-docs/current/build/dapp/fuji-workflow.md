@@ -196,10 +196,10 @@ const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
-    // convertir una unidad de moneda de wei a ether
+    // convert a currency unit from wei to ether
     const balanceInAvax = ethers.utils.formatEther(balance);
-    console.log(`saldo: ${balanceInAvax} AVAX`);
-    // saldo: 2 AVAX
+    console.log(`balance: ${balanceInAvax} AVAX`);
+    // balance: 2 AVAX
   });
 };
 
@@ -269,8 +269,6 @@ const main = async (): Promise<any> => {
 };
 
 main();
-```
-
 
 
 const main = async (): Promise<any> => {
