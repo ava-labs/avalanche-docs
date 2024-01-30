@@ -264,8 +264,8 @@ avalanchejs $ ts-node examples/evm/buildExportTx-xchain-avax.ts
 
 Antes de ejecutar el [script de importación de ejemplo](https://github.com/ava-labs/avalanchejs/blob/master/examples/avm/buildImportTx-cchain.ts), debemos hacer algunos cambios en el código:
 
-1. Cambia la [Configuración de Red](#network-setting) para cumplir con los requisitos de la red Fuji.
-2. Importa tu Clave Privada siguiendo los pasos enumerados [aquí](#private-key).
+1. Cambia la [Configuración de Red](#configuración-de-red) para cumplir con los requisitos de la red Fuji.
+2. Importa tu Clave Privada siguiendo los pasos enumerados [aquí](#clave-privada).
 3. ¡Ejecuta el Script!
 
 ```zsh

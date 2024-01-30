@@ -285,7 +285,7 @@ main();
 
 ### Iniciar sesión en la Extensión Core
 
-Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-desde-una-mnemotecnia) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
+Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-a-partir-de-una-mnemónica) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
 Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la clave privada.
 
 Usa la clave privada para acceder a la cuenta en la Extensión Core.
