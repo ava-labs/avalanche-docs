@@ -12,7 +12,7 @@ Avalanche Warp Messaging offers a basic primitive to enable Cross-Subnet communi
 
 It is intended to allow communication between arbitrary Custom Virtual Machines (including, but not limited to Subnet-EVM and Coreth).
 
-## How does Avalanche Warp Messaging Work
+## How does Avalanche Warp Messaging Work?
 
 Avalanche Warp Messaging uses BLS Multi-Signatures with Public-Key Aggregation where every Avalanche validator registers a public key alongside its NodeID on the Avalanche P-Chain.
 
