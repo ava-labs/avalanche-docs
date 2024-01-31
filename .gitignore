@@ -10,6 +10,7 @@
 
 # Docs direct from GH repo via docusaurus-plugin-remote-content
 docs/build/cross-chain/awm/deep-dive.md
+/build/cross-chain/awm/evm-integration.md
 docs/build/cross-chain/teleporter/overview.md
 docs/build/cross-chain/teleporter/deep-dive.md
 docs/build/cross-chain/teleporter/examples.md

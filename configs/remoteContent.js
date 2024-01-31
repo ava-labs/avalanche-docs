@@ -63,6 +63,7 @@ tags: [Avalanche Warp Messaging, AWM, Cross-Subnet Communication, Cross-Chain Co
 description: Avalanche Warp Messaging (AWM) provides a primitive for cross-subnet communication on the Avalanche Network.
 keywords: [ docs, documentation, avalanche, awm, cross-subnet communication, cross-chain, cross-chain communication ]
 sidebar_label: Deep Dive
+sidebar_position: 1
 ---
               
 ${updatedContent}`,
@@ -262,6 +263,39 @@ description: Teleporter is an EVM-compatible cross-subnet communication protocol
 keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
 sidebar_label: Upgradeability 
 sidebar_position: 5
+---
+
+${updatedContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/build/cross-chain/teleporter/examples.md
+      name: "awm-evm-integration",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/meaghanfitzgerald/coreth/docs-integration/precompile/contracts/warp/",
+      documents: ["README.md"],
+      outDir: "docs/build/cross-chain/awm/",
+      // change file name and add metadata correct links
+      modifyContent(filename, content) {
+        if (filename.includes("README")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/meaghanfitzgerald/coreth/blob/docs-integration/precompile/contracts/warp/"
+          );
+          return {
+            filename: "evm-integration.md",
+            content: `---
+tags: [Avalanche Warp Messaging, Coreth, Subnet-EVM, Cross-Subnet Communication, Cross-Chain Communication]
+description: Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Subnets. The receiving network can verify whether an aggregation of signatures from a set of source Subnet validators represents a threshold of stake large enough for the receiving network to process the message. The Avalanche Warp Precompile enables this flow to send a message from blockchain A to blockchain B.
+keywords: [ coreth, subnet-evm, docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+sidebar_label: EVM Integration 
+sidebar_position: 2
 ---
 
 ${updatedContent}`,

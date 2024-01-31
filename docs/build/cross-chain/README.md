@@ -7,10 +7,11 @@ pagination_label: Cross Chain Quick Links
 
 # 🔗 Cross Chain Quick Links
 
-| Avalanche Warp Messaging                             |                                         |
-| :--------------------------------------------------- | :-------------------------------------- |
-| [**Overview**](/build/cross-chain/awm/overview.md)   | Overview of Avalanche Warp Messaging    |
-| [**Deep Dive**](/build/cross-chain/awm/deep-dive.md) | Deep Dive into Avalanche Warp Messaging |
+| Avalanche Warp Messaging                                         |                                                   |
+| :--------------------------------------------------------------- | :------------------------------------------------ |
+| [**Overview**](/build/cross-chain/awm/overview.md)               | Overview of Avalanche Warp Messaging              |
+| [**Deep Dive**](/build/cross-chain/awm/deep-dive.md)             | Deep Dive into Avalanche Warp Messaging           |
+| [**EVM Integration**](/build/cross-chain/awm/evm-integration.md) | Integrating Avalanche Warp Messaging into the EVM |
 
 | Teleporter                                                              |                                                                                     |
 | :---------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
