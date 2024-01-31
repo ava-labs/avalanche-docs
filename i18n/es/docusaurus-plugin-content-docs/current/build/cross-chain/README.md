@@ -1,13 +1,13 @@
 ---
-etiquetas: [Construir, Funcionalidad de Cadena Cruzada]
-descripción: Funcionalidad de Cadena Cruzada
+tags: [Construir, Funcionalidad de Cadena Cruzada]
+description: Funcionalidad de Cadena Cruzada
 sidebar_label: 🔗 Enlaces Rápidos
 pagination_label: Enlaces Rápidos de Cadena Cruzada
 ---
 
 # 🔗 Enlaces Rápidos de Cadena Cruzada
 
-| Mensajería de Warp Avalanche                                         |                                                   |
+| Avalanche Warp Messaging                                         |                                                   |
 | :--------------------------------------------------------------- | :------------------------------------------------ |
 | [**Visión General**](/build/cross-chain/awm/overview.md)               | Visión general de la Mensajería de Warp Avalanche              |
 | [**Profundidad**](/build/cross-chain/awm/deep-dive.md)             | Profundización en la Mensajería de Warp Avalanche           |
