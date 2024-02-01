@@ -100,7 +100,7 @@ funds to additional addresses.
 Precompiles are Avalanche's way of customizing the behavior of your Subnet. They're strictly an
 advanced feature, so you can safely select `No` for now.
 
-### Wrapping Up
+### Wrapping up
 
 If all worked successfully, the command prints `Successfully created subnet configuration`.
 

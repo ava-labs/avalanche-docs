@@ -489,7 +489,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-### Set Validation Duration
+### Set Validation duration
 
 Finally, specify how long it's going to be validating:
 
