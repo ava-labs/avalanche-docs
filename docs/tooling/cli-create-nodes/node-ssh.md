@@ -20,8 +20,8 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- A Cluster managed by CLI, either a [Fuji Cluster using AWS](/tooling/cli-guides/create-a-validator-aws),
-a [Fuji Cluster using GCP](/tooling/cli-guides/create-a-validator-gcp), or a [Devnet](/tooling/cli-guides/setup-a-devnet),
+- A Cluster managed by CLI, either a [Fuji Cluster using AWS](/tooling/cli-create-nodes/create-a-validator-aws),
+a [Fuji Cluster using GCP](/tooling/cli-create-nodes/create-a-validator-gcp), or a [Devnet](/tooling/cli-create-nodes/setup-a-devnet),
 
 ## SSH Warning
 
