@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to deploy a blockchain run with a custom virtual machine using cloud-based validators using the Avalanche-CLI.
 pagination_label: Deploy a Custom VM to a set of Cloud-Based validators using Avalanche-CLI
 sidebar_label: Deploy a Custom VM
-sidebar_position: 7
+sidebar_position: 5
 ---
 
 # Deploy a Custom VM Using Avalanche-CLI

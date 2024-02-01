@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page provides instructions for halting cloud server nodes established by Avalanche-CLI.
 pagination_label: Stop Nodes Originally Created with Avalanche-CLI
 sidebar_label: Stop a Node
-sidebar_position: 6
+sidebar_position: 7
 ---
 # Stop Nodes Originally Created with Avalanche-CLI
 

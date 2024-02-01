@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to setup a Devnet of cloud-based validators using the Avalanche-CLI.
 pagination_label: Setup a Devnet of Cloud-Based validators using Avalanche-CLI
 sidebar_label: Setup a Devnet
-sidebar_position: 8
+sidebar_position: 2
 ---
 
 # Setup a Devnet Using Avalanche-CLI
