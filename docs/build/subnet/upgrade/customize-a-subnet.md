@@ -1,7 +1,7 @@
 ---
 tags: [Build, Subnets]
 description: How to customize a Subnet by utilizing Genesis, Precompile, and Blockchain Configs.
-sidebar_label: Customize a Subnet
+sidebar_label: Customize a Subnet 
 pagination_label: Customize your EVM-Powered Subnet
 sidebar_position: 1
 ---
@@ -102,13 +102,13 @@ times. Changing these may cause issues, so treat them carefully.
 #### Fee Config
 
 `gasLimit`: Sets the max amount of gas consumed per block. This restriction puts a cap on the
-amount of computation that can be done in a single block, which in turn sets a limit on the
+amount of computation that can be done in a single block, which in turn sets a limit on the 
 maximum gas usage allowed for a single transaction.
 For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it
-indicates that more blocks than anticipated are being issued to the network, resulting in an
+producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it 
+indicates that more blocks than anticipated are being issued to the network, resulting in an 
 increase in base fees.
 For C-chain this value is set to `2`.
 
@@ -129,7 +129,7 @@ For reference, the C-chain value is set to `36`. This value sets the
 base fee to increase or decrease by a factor of `1/36` of the parent block's
 base fee.
 
-`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block.
+`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block. 
 This value is set to `0` in C-Chain.
 
 `maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
@@ -166,16 +166,16 @@ set to match the `gasLimit` set in the `feeConfig`. You do not need to change an
 header fields.
 
 `nonce`, `mixHash` and `difficulty` are remnant parameters from Proof of Work systems.
-For Avalanche, these don't play any relevant role, so you should just leave them as their
+For Avalanche, these don't play any relevant role, so you should just leave them as their 
 default values:
 
-`nonce`: The result of the mining process iteration is this value. It can be any value in
+`nonce`: The result of the mining process iteration is this value. It can be any value in 
 the genesis block. Default value is `0x0`.
 
-`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been
+`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
 cryptographically mined, thus, from this aspect, is valid. Default value is `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
-`difficulty`: The difficulty level applied during the nonce discovering process of this block.
+`difficulty`: The difficulty level applied during the nonce discovering process of this block. 
 Default value is `0x0`.
 
 `timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
@@ -186,9 +186,9 @@ Default value is `0x0`.
 the same value as in the [fee config](#fee-config). The value `e4e1c0` is
 hexadecimal and is equal to `15,000,000`.
 
-`coinbase`: Refers to the address of the block producers. This also means it represents the
+`coinbase`: Refers to the address of the block producers. This also means it represents the 
 recipient of the block reward. It is usually set
-to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in
+to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
 Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
 
 `parentHash`: This is the Keccak 256-bit hash of the entire parent block’s header. It is
@@ -198,7 +198,7 @@ genesis block.
 
 `gasUsed`: This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
-`number`: This is the number of the genesis block. This required to be `0x0` for the genesis.
+`number`: This is the number of the genesis block. This required to be `0x0` for the genesis. 
 Otherwise it will error.
 
 ### Genesis Examples
