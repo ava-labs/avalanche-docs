@@ -1077,8 +1077,8 @@ You can check the Subnet sync status by calling `avalanche node status <clusterN
 
 :::
 
-The `node whitelist` command whitelists IP address for access to open avalanchego ports for specific cluster.
-Nodes created by avalanche-cli are protected by Cloud Security Group and only defined IP addresses 
+The `node whitelist` command whitelists IP address for access to open AvalancheGo ports for specific cluster.
+Nodes created by `Avalanche-CLI` are protected by Cloud Security Group and only defined IP addresses 
 are allowed to access. User IP is whitelisted automatically when cluster is created, but this command can be used in 
 case of IP address changes or granting access to additional IPs. This command detects user current IP address automatically
 if no IP address is provided.
