@@ -2,13 +2,13 @@
 tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to deploy Avalanche validators using just one Avalanche-CLI command.
 pagination_label: Run Avalanche Validators with One Avalanche-CLI Command
-sidebar_label: Run Validators on AWS
-sidebar_position: 3
+sidebar_label: Run Validators on GCP
+sidebar_position: 1
 ---
 
-# Run an Avalanche Validator on AWS with One Avalanche-CLI Command
+# Run an Avalanche Validator on GCP with One Avalanche-CLI Command 
 
-This page demonstrates how to deploy Avalanche validators on AWS using just one Avalanche-CLI
+This page demonstrates how to deploy Avalanche validators on GCP using just one Avalanche-CLI 
 command.
 
 :::info
@@ -25,9 +25,9 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to:
 
-- Create an AWS account and have an AWS `credentials` file in home directory with [default] profile
-  set. More info can be found [here](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html#file-format-creds)
-
+- Create a GCP account [here](https://console.cloud.google.com/freetrial) and create a new project
+- Enable Compute Engine API [here](https://console.cloud.google.com/apis/api/compute.googleapis.com)
+- Download the key json for the automatically created service account as shown [here](https://cloud.google.com/iam/docs/keys-create-delete#creating)
 
 ## Start the Validator
 
@@ -42,34 +42,33 @@ cluster `clusterName` will apply to all nodes in the cluster.
 
 :::note
 
-Please note that running a validator on AWS will incur costs.
+Please note that running a validator on GCP will incur costs.
 
-Ava Labs is not responsible for the cost incurred from running an Avalanche validator on cloud
+Ava Labs is not responsible for the cost incurred from running an Avalanche validator on cloud 
 services via Avalanche-CLI.
 
 :::
 
-Currently, we have set the following specs of the AWS cloud server to a fixed value, but we plan to
+Currently, we have set the following specs of the GCP cloud server to a fixed value, but we plan to 
 enable customization in the near future:
 
-- OS Image: `Ubuntu 20.04 LTS (HVM), SSD Volume Type`
+- OS Image: `Ubuntu 20.04 LTS`
 - Storage: `1 TB`
 
-Instance type can be specified via `--node-type` parameter or via interactive menu. `c5.2xlarge` is the default(recommended) instance size.
+Instance type can be specified via `--node-type` parameter or via interactive menu. `e2-standard-8` is default(recommended) instance size.
 
-The command will ask which region you want to set up your cloud server in:
+The command will ask which region you want to set up your cloud server in: 
 
 ```text
- Which AWS region do you want to set up your node in?: 
-  ▸ us-east-1
-    us-east-2
-    us-west-1
-    us-west-2
-    Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+Which GCP zone do you want to set up your node in?: 
+  ▸ us-east1-b
+    us-central1-c
+    us-west1-b
+    Choose custom zone (list of zones available at https://cloud.google.com/compute/docs/regions-zones)
 ```
 
 The command will next ask whether you want to set up monitoring for your nodes. If you choose to
-set up monitoring, you can either set up monitoring on a separate AWS instance or on the same 
+set up monitoring, you can either set up monitoring on a separate GCP instance or on the same
 instance.
 
 ```text
@@ -78,23 +77,23 @@ instance.
     No
 ```
 
-Setting up monitoring on a separate AWS instance enables you to have a unified Grafana dashboard
+Setting up monitoring on a separate GCP instance enables you to have a unified Grafana dashboard
 for all nodes in a cluster, as seen below:
 
 ![Main Dashboard](/img/monitoring-dashboard.png)
 
-The separate monitoring AWS instance will have similar specs to the default AWS cloud server, 
-except for its storage, which will be set to 50 GB. 
+The separate monitoring GCP instance will have similar specs to the default GCP cloud server, 
+except for its storage, which will be set to 50 GB.
 
-Please note that setting up monitoring on a separate AWS instance will incur additional cost of 
-setting up an additional AWS cloud server.
+Please note that setting up monitoring on a separate GCP instance will incur additional cost of
+setting up an additional GCP cloud server.
 
-The command will then ask which Avalanche Go version you would like to install in the cloud server.
-You can choose `default` (which will install the latest version) or you can enter the name of a
-Subnet created with CLI that you plan to be validated by this node (we will get the latest version
+The command will then ask which Avalanche Go version you would like to install in the cloud server. 
+You can choose `default` (which will install the latest version) or you can enter the name of a 
+Subnet created with CLI that you plan to be validated by this node (we will get the latest version 
 that is compatible with the deployed Subnet's RPC version).
 
-Once the command has successfully completed, Avalanche-CLI outputs all the created cloud server
+Once the command has successfully completed, Avalanche-CLI outputs all the created cloud server 
 node IDs as well as the public IP that each node can be reached at.
 
 Avalanche-CLI also outputs the command that you can use to ssh into each cloud server node.
@@ -109,12 +108,11 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
 
-Please note that Avalance CLI can be configured to use `ssh-agent` for ssh communication. In this case public key will 
-be read from there and cloud server will be accessible using it. Yubikey hardware can be also used to store private ssh 
+Please note that Avalanche CLI can be configured to use `ssh-agent` for ssh access to cloud server. Yubikey hardware can be also used to store private ssh 
 key. Please use official Yubikey documentation, for example [https://developers.yubico.com/PGP/SSH_authentication/] for more details.
 
 ## Check Bootstrap Status
 
-Please note that you will have to wait until the nodes have finished bootstrapping before the
+Please note that you will have to wait until the nodes have finished bootstrapping before the 
 nodes can be Primary Network or Subnet Validators. To check whether all the nodes in a cluster
 have finished bootstrapping, run `avalanche node status <clusterName>`.
