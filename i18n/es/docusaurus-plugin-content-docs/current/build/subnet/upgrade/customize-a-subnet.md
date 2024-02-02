@@ -1,16 +1,16 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Cómo personalizar una Subred utilizando Genesis, Precompilación y Configuraciones de Blockchain.
-sidebar_label: Personalizar una Subred
-pagination_label: Personaliza tu Subred impulsada por EVM
+tags: [Construir, Subnets]
+description: Cómo personalizar una Subnet utilizando Genesis, Precompilación y Configuraciones de Blockchain.
+sidebar_label: Personalizar una Subnet
+pagination_label: Personaliza tu Subnet impulsada por EVM
 sidebar_position: 1
 ---
 
-# Personaliza tu Subred impulsada por EVM
+# Personaliza tu Subnet impulsada por EVM
 
-Todas las Subredes se pueden personalizar utilizando [`Configuraciones de Subred`](#configuraciones-de-subred).
+Todas las Subnets se pueden personalizar utilizando [`Configuraciones de Subnet`](#configuraciones-de-subnet).
 
-Una Subred puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subred, una
+Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subnet, una
 especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
 configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
 
@@ -22,11 +22,11 @@ personalizar utilizando uno o más de los siguientes métodos:
 - [Configuraciones de actualización](#actualizaciones-de-red-habilitardeshabilitar-precompilaciones)
 - [Configuraciones de cadena](#configuraciones-de-cadena-avalanchego)
 
-## Configuraciones de Subred
+## Configuraciones de Subnet
 
-Una Subred se puede personalizar configurando parámetros para lo siguiente:
+Una Subnet se puede personalizar configurando parámetros para lo siguiente:
 
-- [Comunicación solo para validadores para crear una Subred privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
+- [Comunicación solo para validadores para crear una Subnet privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
 - [Consenso](/nodes/configure/subnet-configs.md#parámetros-de-consenso)
 - [Gossip](/nodes/configure/subnet-configs.md#configuraciones-de-gossip)
 
@@ -141,7 +141,8 @@ Si el bloque se produce a la tasa objetivo, el costo de gas del bloque se manten
 Si se produce más rápido/más lento, el costo de gas del bloque se incrementará/decrementará por el valor de paso por
 cada segundo más rápido/más lento que la tasa de bloque objetivo correspondientemente.
 
-:::nota
+:::note
+
 Si el `blockGasCostStep` se establece en un número muy grande, efectivamente requiere que la producción de bloques
 no vaya más rápido que la `targetBlockRate`. Por ejemplo, si un bloque se produce dos segundos más rápido que
 la tasa de bloque objetivo, el costo de gas del bloque aumentará en `2 * blockGasCostStep`.
@@ -751,7 +752,7 @@ Si tanto `allowFeeRecipients` como `rewardAddress` se especifican en el campo `i
 
 ### Mensajería de Avalanche Warp
 
-Warp Precompile habilita la comunicación entre subredes a través de subredes y la red primaria (C-Chain). Para usar el mensajero Warp, las cadenas Subnet-EVM deben activar sus precompilaciones de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
+Warp Precompile habilita la comunicación entre Subnets a través de Subnets y la red primaria (C-Chain). Para usar el mensajero Warp, las cadenas Subnet-EVM deben activar sus precompilaciones de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
 
 ```json
 {
@@ -982,9 +983,11 @@ direcciones de administrador para gestionar la estructura de tarifas con este pr
 actualizará la configuración de tarifas a la configuración de tarifas especificada cuando se active en el `blockTimestamp` `1668950000`.
 
 :::note
+
 Todavía es posible agregar `adminAddresses` o `enabledAddresses` junto con estas configuraciones iniciales.
 En este caso, el precompile se activará con la configuración inicial, y
 las direcciones de administrador/habilitadas pueden acceder al contrato precompilado normalmente.
+
 :::
 
 :::info
@@ -1051,7 +1054,7 @@ Con `allowFeeRecipients` habilitado, los validadores pueden especificar sus dire
 
 :::warning
 
-Si `allowFeeRecipients` o el precompilado `RewardManager` está habilitado en la Subred, pero un validador
+Si `allowFeeRecipients` o el precompilado `RewardManager` está habilitado en la Subnet, pero un validador
 no especifica un "feeRecipient", las tarifas se quemarán en los bloques que produce.
 
 :::
