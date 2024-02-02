@@ -832,7 +832,7 @@ Configurations](#initial-precompile-configurations).
 
 ### Avalanche Warp Messaging
 
-Warp Precompile enabled cross-subnet communication between other subnets and primary-network (C-Chain). In order to use Warp messaging, Subnet-EVM chains must activate their Warp precompiles. Warp can be activated with the following lines in upgrade.json:
+Warp Precompile enabled cross-subnet communication between other Subnets and primary-network (C-Chain). In order to use Warp messaging, Subnet-EVM chains must activate their Warp precompiles. Warp can be activated with the following lines in upgrade.json:
 
 ```json
 {
