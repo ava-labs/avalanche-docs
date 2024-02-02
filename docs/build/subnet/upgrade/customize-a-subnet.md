@@ -1,7 +1,7 @@
 ---
 tags: [Build, Subnets]
 description: How to customize a Subnet by utilizing Genesis, Precompile, and Blockchain Configs.
-sidebar_label: Customize a Subnet 
+sidebar_label: Customize a Subnet
 pagination_label: Customize your EVM-Powered Subnet
 sidebar_position: 1
 ---
@@ -102,13 +102,13 @@ times. Changing these may cause issues, so treat them carefully.
 #### Fee Config
 
 `gasLimit`: Sets the max amount of gas consumed per block. This restriction puts a cap on the
-amount of computation that can be done in a single block, which in turn sets a limit on the 
+amount of computation that can be done in a single block, which in turn sets a limit on the
 maximum gas usage allowed for a single transaction.
 For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it 
-indicates that more blocks than anticipated are being issued to the network, resulting in an 
+producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it
+indicates that more blocks than anticipated are being issued to the network, resulting in an
 increase in base fees.
 For C-chain this value is set to `2`.
 
@@ -129,7 +129,7 @@ For reference, the C-chain value is set to `36`. This value sets the
 base fee to increase or decrease by a factor of `1/36` of the parent block's
 base fee.
 
-`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block. 
+`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block.
 This value is set to `0` in C-Chain.
 
 `maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
@@ -166,16 +166,16 @@ set to match the `gasLimit` set in the `feeConfig`. You do not need to change an
 header fields.
 
 `nonce`, `mixHash` and `difficulty` are remnant parameters from Proof of Work systems.
-For Avalanche, these don't play any relevant role, so you should just leave them as their 
+For Avalanche, these don't play any relevant role, so you should just leave them as their
 default values:
 
-`nonce`: The result of the mining process iteration is this value. It can be any value in 
+`nonce`: The result of the mining process iteration is this value. It can be any value in
 the genesis block. Default value is `0x0`.
 
-`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
+`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been
 cryptographically mined, thus, from this aspect, is valid. Default value is `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
-`difficulty`: The difficulty level applied during the nonce discovering process of this block. 
+`difficulty`: The difficulty level applied during the nonce discovering process of this block.
 Default value is `0x0`.
 
 `timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
@@ -186,9 +186,9 @@ Default value is `0x0`.
 the same value as in the [fee config](#fee-config). The value `e4e1c0` is
 hexadecimal and is equal to `15,000,000`.
 
-`coinbase`: Refers to the address of the block producers. This also means it represents the 
+`coinbase`: Refers to the address of the block producers. This also means it represents the
 recipient of the block reward. It is usually set
-to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
+to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in
 Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
 
 `parentHash`: This is the Keccak 256-bit hash of the entire parent block’s header. It is
@@ -198,7 +198,7 @@ genesis block.
 
 `gasUsed`: This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
-`number`: This is the number of the genesis block. This required to be `0x0` for the genesis. 
+`number`: This is the number of the genesis block. This required to be `0x0` for the genesis.
 Otherwise it will error.
 
 ### Genesis Examples
@@ -830,10 +830,31 @@ then an error will be returned and precompile won't be activated. For further in
 precompile initial configurations see [Initial Precompile
 Configurations](#initial-precompile-configurations).
 
+### Avalanche Warp Messaging
+
+Warp Precompile enabled cross-subnet communication between other subnets and primary-network (C-Chain). In order to use Warp messaging, Subnet-EVM chains must activate their Warp precompiles. Warp can be activated with the following lines in upgrade.json:
+
+```json
+{
+  "warpConfig": {
+    "blockTimestamp": (uint),
+    "quorumNumerator": (uint)
+  }
+}
+```
+
+`blockTimestamp` must be set to a timestamp after Durango date. `quorumNumerator` is the stake percentage of validators that must sign a Warp message for it to be considered valid. It must be set to a value between 33 and 100. The default value is 67. The `warpConfig` precompile can be later disabled by setting `disable` to `true` in the upgrade.json file.
+
+:::warning
+
+Currently Warp Precompile can only be activated in Fuji after Durango occurs. Durango in Fuji is set at 11 AM ET, February 13th 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Fuji you should upgrade to subnet-evm@v0.6.0-fuji and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after Durango date (February 13th 2024 11 AM ET).
+
+:::
+
 ## Contract Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contracts`. It's a hardhat
-project with tests and tasks. For more information see 
+project with tests and tasks. For more information see
 [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contracts#subnet-evm-contracts).
 
 ## Network Upgrades: Enable/Disable Precompiles
