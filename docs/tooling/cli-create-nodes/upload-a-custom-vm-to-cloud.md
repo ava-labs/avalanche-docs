@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to deploy a blockchain run with a custom virtual machine using cloud-based validators using the Avalanche-CLI.
 pagination_label: Deploy a Custom VM to a set of Cloud-Based validators using Avalanche-CLI
 sidebar_label: Deploy a Custom VM
-sidebar_position: 7
+sidebar_position: 5
 ---
 
 # Deploy a Custom VM Using Avalanche-CLI
@@ -24,7 +24,7 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- Created a Cloud Server node as described [here](/tooling/cli-guides/create-a-validator-aws.md)
+- Created a Cloud Server node as described [here](/tooling/cli-create-nodes/create-a-validator-aws.md)
 - Created a Custom VM, as described [here](/build/vm/intro.md).
 - Set up a key to be able to pay for the Fuji Fees, as described [here](/build/subnet/deploy/fuji-testnet-subnet.md).
 

@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to setup a Devnet of cloud-based validators using the Avalanche-CLI.
 pagination_label: Setup a Devnet of Cloud-Based validators using Avalanche-CLI
 sidebar_label: Setup a Devnet
-sidebar_position: 8
+sidebar_position: 2
 ---
 
 # Setup a Devnet Using Avalanche-CLI
@@ -41,7 +41,7 @@ For the second case we provide three important use cases examples:
 
 - creating a devnet an deploy a preexistent CLI Subnet (same example as the step by step)
 - creating a devnet, create a Subnet based on a Custom VM, and deploy it (similar to [
-this one](/tooling/cli-guides/upload-a-custom-vm-to-cloud))
+this one](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud))
 - creating a devnet with warp-enabled Subnets
 
 ## Step by Step
@@ -266,7 +266,7 @@ STATUS FOR CLUSTER: <clusterName>
 
 Latest step is to add the nodes as Subnet validators, so as the Devnet can change the Subnet state under user request.
 
-While you can follow [the instructions here](/tooling/cli-guides/validate-subnets#be-a-subnet-validator), for this
+While you can follow [the instructions here](/tooling/cli-create-nodes/validate-subnets#be-a-subnet-validator), for this
 tutorial we opt for providing the flag `--default-validator-params`, that set for the user most common validator params:
 
 ```shell
@@ -360,7 +360,7 @@ You will need to have:
 
 #### Custom VM
 
-The tutorial will create exactly the same Custom VM as [here](/tooling/cli-guides/upload-a-custom-vm-to-cloud).
+The tutorial will create exactly the same Custom VM as [here](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud).
 
 Based on the Custom VM tutorial, we will be deploying the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
 example built with the HyperSDK.
@@ -373,10 +373,10 @@ The following settings will be used:
 
 Following the Custom VM tutorial, create the needed input files, and set their paths to:
 
-- `<genesisPath>` [Genesis File](/tooling/cli-guides/upload-a-custom-vm-to-cloud#genesis-file)
-- `<chainConfigPath>` [Blockchain Config](/tooling/cli-guides/upload-a-custom-vm-to-cloud#blockchain-config)
-- `<subnetConfigPath>` [Subnet Config](/tooling/cli-guides/upload-a-custom-vm-to-cloud#subnet-config)
-- `<avagoConfigPath>` [AvalancheGo Config](/tooling/cli-guides/upload-a-custom-vm-to-cloud#avalanchego-flags)
+- `<genesisPath>` [Genesis File](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud#genesis-file)
+- `<chainConfigPath>` [Blockchain Config](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud#blockchain-config)
+- `<subnetConfigPath>` [Subnet Config](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud#subnet-config)
+- `<avagoConfigPath>` [AvalancheGo Config](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud#avalanchego-flags)
 
 #### Execute Wiz
 
