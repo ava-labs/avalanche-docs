@@ -845,6 +845,8 @@ Warp Precompile enabled cross-subnet communication between other subnets and pri
 
 `blockTimestamp` must be set to a timestamp after Durango date. `quorumNumerator` is the stake percentage of validators that must sign a Warp message for it to be considered valid. It must be set to a value between 33 and 100. The default value is 67. The `warpConfig` precompile can be later disabled by setting `disable` to `true` in the upgrade.json file.
 
+If you want to use Warp messaging in an existing Subnet-EVM chain, you should coordinate an upgrade with `upgrade.json`. See [Network Upgrades: Enable/Disable Precompiles](#network-upgrades-enabledisable-precompiles) for more information.
+
 :::warning
 
 Currently Warp Precompile can only be activated in Fuji after Durango occurs. Durango in Fuji is set at 11 AM ET, February 13th 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Fuji you should upgrade to subnet-evm@v0.6.0-fuji and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after Durango date (February 13th 2024 11 AM ET).
