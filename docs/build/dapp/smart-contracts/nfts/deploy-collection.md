@@ -81,9 +81,11 @@ Testnet using the following specs:
 ### Getting Testnet Funds
 
 Because we're deploying on the Fuji Network, you'll need to get AVAX on the Fuji
-network. If you visit the [Avalanche Faucet](https://faucet.avax.network/), you
-can request up to 2 Fuji AVAX per day. Please enter the C Chain address of the
-account linked to your Core wallet in the previous step.
+network. Avalanche has a [Faucet](https://faucet.avax.network/) that drips
+test tokens to the address of your choice. If you already have an AVAX balance
+greater than zero on Mainnet, paste your C-Chain address there, and request
+test tokens. Otherwise, please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 ![Avalanche Faucet](intro-to-erc721s/1-faucet.png)
 

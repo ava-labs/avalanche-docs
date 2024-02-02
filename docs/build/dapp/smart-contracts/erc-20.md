@@ -51,9 +51,11 @@ The setup is done. For now, we have 0 AVAX.
 
 ## Fund Your C-Chain Address
 
-For funding on the Fuji Testnet, you can use the Test Network Faucet. Navigate
-to [https://faucet.avax.network/](https://faucet.avax.network/) and paste your
-C-Chain address.
+Avalanche has a [Faucet](https://faucet.avax.network/) that drips test tokens to the address of
+your choice. If you already have an AVAX balance greater than zero on Mainnet, 
+paste your C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 ## Create Mintable Token
 

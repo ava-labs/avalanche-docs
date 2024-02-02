@@ -52,7 +52,12 @@ For this tutorial we will use `ts-node` to run the example scripts directly from
 In order to send AVAX, you need to have some AVAX. You can use a pre-funded
 account on local network or get testnet AVAX from the [Avalanche
 Faucet](https://faucet.avax.network), which is an easy way to get to play around
-with Avalanche. After getting comfortable with your code, you can run the code
+with Avalanche.
+If you already have an AVAX balance greater than zero on Mainnet, 
+paste your C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+After getting comfortable with your code, you can run the code
 on Mainnet after making necessary changes.
 
 ## Transferring AVAX Using AvalancheJS

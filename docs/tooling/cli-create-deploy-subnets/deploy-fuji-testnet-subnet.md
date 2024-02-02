@@ -1,9 +1,9 @@
 ---
-tags: [Build, Subnets]
+tags: [Tooling, Avalanche-CLI]
 description: This tutorial demonstrates how to deploy a permissioned Subnet on Fuji Testnet.
-sidebar_label: On Fuji Testnet
+sidebar_label: Deploy On Fuji Testnet
 pagination_label: Deploy a Permissioned Subnet on Fuji Testnet
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Deploy a Permissioned Subnet on Fuji Testnet
@@ -56,10 +56,7 @@ _To connect to the Fuji Testnet instead of the main net, use argument `--network
 
 Also it's worth pointing out that
 [it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking.md#fuji-testnet)
-and you can get the test token from the [faucet](https://faucet.avax.network/). If you already have an AVAX
-balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, 
-please request a faucet coupon on 
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+and you can get the test token from the [faucet](https://faucet.avax.network/).
 
 To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid):
 
@@ -220,10 +217,6 @@ the use of a ledger device is strongly recommended.
 1. A newly created key has no funds on it. Send funds via transfer to its correspondent addresses
    if you already have funds on a different address, or get it from the faucet at
    [`https://faucet.avax.network`](https://faucet.avax.network/) using your **C-Chain address**.
-   If you already have an AVAX balance greater than zero on Mainnet, 
-   paste your C-Chain address there, and request test tokens. Otherwise, 
-   please request a faucet coupon on 
-   [Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 2. **Export** your key via the `avalanche key export` command. The output is your private key,
    which will help you [import](https://support.avax.network/en/articles/6821877-core-extension-how-can-i-import-an-account)

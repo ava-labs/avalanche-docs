@@ -30,7 +30,11 @@ Es posible que sea necesario hacer algunas limpiezas para que el código se comp
   - Si el contrato utiliza múltiples licencias SPDX, utiliza ambas licencias agregando AND:
     `SPDX-License-Identifier: MIT AND BSD-3-Clause`
 
-## Verificar el Contrato Inteligente usando Snowtrace
+## Verificar el Contrato Inteligente usando Snowtrace UI
+
+Snowtrace está trabajando actualmente en una nueva interfaz de usuario (UI) para la verificación de contratos inteligentes. 
+Mientras tanto, puede considerar el uso de su API para una experiencia de verificación de contratos inteligentes sin problemas.
+<!--
 
 1. Busca el contrato en Snowtrace
 2. Haz clic en la pestaña del contrato
@@ -62,23 +66,52 @@ Es posible que sea necesario hacer algunas limpiezas para que el código se comp
 7. Selecciona Verificar y Publicar
    1. Si tiene éxito, todos los contratos con el mismo bytecode serán verificados
    2. Si no tiene éxito, lee los mensajes de error proporcionados y realiza los cambios apropiados
-      1. Asegúrate de verificar que la versión del compilador y las ejecuciones del optimizador sean las mismas que cuando compilaste el contrato antes de desplegarlo
+      1. Asegúrate de verificar que la versión del compilador y las ejecuciones del optimizador sean las mismas que cuando compilado el contrato antes del despliegue -->
+
+## Verificar el Contrato Inteligente Programáticamente Usando APIs
+
+Asegúrate de tener Postman o cualquier otra plataforma API instalada en tu ordenador (o accesible a través de servicios online), 
+junto con el código fuente de tu contrato y los parámetros utilizados durante el despliegue.
+
+A continuación se muestra la URL de llamada a la API que debe utilizarse para una solicitud POST: 
+
+```https://api.snowtrace.io/api?module=contract&action=verifysourcecode```
+
+Tenga en cuenta que esta URL está configurada específicamente para verificar contratos en Avalanche C-Chain Mainnet. 
+Si desea verificar en Fuji Testnet, utilice:
+
+```https://api-testnet.snowtrace.io/api?module=contract&action=verifysourcecode ```
+
+Aquí está el cuerpo de la llamada a la API con los parámetros requeridos:
+
+```json
+{
+  "contractaddress": "YOUR_CONTRACT_ADDRESS",
+  "sourceCode": "YOUR_FLATTENED_SOURCE_CODE",
+  "codeformat": "solidity-single-file",
+  "contractname": "YOUR_CONTRACT_NAME",
+  "compilerversion": "YOUR_COMPILER_VERSION",
+  "optimizationUsed": "YOUR_OPTIMIZATION_VALUE",  // 0 si no está optimizado, 1 si está optimizado
+  "runs": "YOUR_OPTIMIZATION_RUNS",  // eliminar si no es aplicable
+  "licenseType": "YOUR_LICENSE_TYPE",  // 1 si no se especifica
+  "apikey": "API_KEY_PLACEHOLDER", // no necesita una clave de API, utilice un marcador de posición
+  "evmversion": "YOUR_EVM_VERSION_ON_REMIX",
+  "constructorArguments": "YOUR_CONSTRUCTOR_ARGUMENTS"   // Eliminar si no procede
+}
+```
 
 ## Verificando con Hardhat-Verify
 
 Esta parte del tutorial asume que el contrato fue desplegado usando Hardhat y que todas las dependencias de Hardhat
 están instaladas correctamente, incluyendo `'@nomiclabs/hardhat-etherscan'`.
 
-Necesitarás crear un archivo `.env.json` con tu _Frase de Semilla de Billetera_ y tu _clave de API de Snowtrace_
-
-Necesitarás obtener una _clave de API_ [aquí](https://snowtrace.io/myapikey)
+Necesitará crear un `.env.json` con su _Wallet Seed Phrase_. No necesitas una clave API para verificar en Snowtrace.
 
 Ejemplo de `.env.json`:
 
 ```json
 {
   "MNEMONIC": "tu-frase-de-semilla-de-billetera",
-  "APIKEY": "tu-clave-de-api-de-snowtrace"
 }
 ```
 
@@ -141,9 +174,7 @@ task(
 );
 export default {
   etherscan: {
-    // Tu clave de API para Snowtrace
-    // Obtén una en https://snowtrace.io/
-    apiKey: APIKEY,
+    // No necesita una clave API para Snowtrace
   },
 
   solidity: {

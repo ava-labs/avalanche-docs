@@ -217,7 +217,10 @@ API](https://eth.wiki/json-rpc/API).
 
 For development purposes, you will need test tokens. Avalanche has a
 [Faucet](https://faucet.avax.network/) that drips test tokens to the address of
-your choice. Paste your C-Chain address there.
+your choice. If you already have an AVAX balance greater than zero on Mainnet, 
+paste your C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 If you need, you can also run a faucet locally, but building it from the [repository](https://github.com/ava-labs/avalanche-faucet).
 

@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: En este documento, aprende cómo implementar y probar un contrato inteligente en Avalanche usando Remix y Core.
+tags: [Construir, Dapps]
+description: En este documento, aprende cómo implementar y probar un contrato inteligente en Avalanche usando Remix y Core.
 sidebar_label: Implementar con Remix IDE
 pagination_label: Implementar un Contrato Inteligente en Avalanche Usando Remix y Core
 ---
@@ -47,13 +47,13 @@ Configuración de la **Red de Prueba Local (Avalanche Network Runner)**: [(Tutor
 - **Símbolo**: `AVAX`
 - **Explorador**: N/A
 
-## Paso 2: Financiar tu Dirección de la C-Chain
+## Paso 2: Financiar tu Dirección en la C-Chain
 
 ### **Usando Core web**
 
 En la Mainnet, puedes usar [Core
 web](https://core.app/) para transferir fondos desde la X-Chain a tu
-dirección de la C-Chain. El proceso es sencillo, como se explica en este
+dirección en la C-Chain. El proceso es sencillo, como se explica en este
 [tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake).
 Ten en cuenta que necesitarás una [billetera Core](https://join.core.app/extension) conectada a Core web para hacer transferencias entre cadenas.
 La billetera Core también se puede usar en redes de prueba y locales.
@@ -61,11 +61,12 @@ Esta billetera también está disponible para [móviles](https://support.avax.ne
 
 ### **Usando el Faucet de la Red de Prueba**
 
-Para financiar en la red de prueba, puedes usar el Faucet de la Red de Prueba. Navega
-a [https://faucet.avax.network/](https://faucet.avax.network/) y pega tu
-dirección de la C-Chain. El Faucet sabrá automáticamente que necesita enviar la prueba
-AVAX a la C-Chain. Haz clic en la casilla de verificación CAPTCHA y selecciona el botón 'Request AVAX'.
-Tu dirección recibirá AVAX de prueba en unos segundos.
+Para financiamiento en la red de prueba, Avalanche tiene un
+[Faucet](https://faucet.avax.network/) que gotea tokens de prueba a la dirección de
+tu elección. Si ya tienes un saldo de AVAX mayor que cero en la Mainnet,
+pega tu dirección en la C-Chain allí y solicita tokens de prueba. De lo contrario,
+por favor solicita un cupón del faucet en
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 ### Financiamiento en la Red de Prueba Local
 
@@ -88,7 +89,7 @@ Selecciona la pestaña del compilador de Solidity y compila el contrato.
 
 ![Compilar contrato](/img/remix-core-guide/compile.png)
 
-Navega a la pestaña Deploy & Run transactions -&gt; Abre el menú desplegable "ENVIRONMENT" y selecciona
+Navega a la pestaña "Deploy & Run transactions" -&gt; Abre el menú desplegable "ENVIRONMENT" y selecciona
 Injected Provider (asegúrate de que Core esté cargado).
 
 ![Implementar y ejecutar transacciones](/img/remix-core-guide/provider.png)

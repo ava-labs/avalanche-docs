@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to deploy Avalanche validators using just one Avalanche-CLI command.
 pagination_label: Run Avalanche Validators with One Avalanche-CLI Command
 sidebar_label: Run Validators on GCP
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 # Run an Avalanche Validator on GCP with One Avalanche-CLI Command 
@@ -66,6 +66,27 @@ Which GCP zone do you want to set up your node in?:
     us-west1-b
     Choose custom zone (list of zones available at https://cloud.google.com/compute/docs/regions-zones)
 ```
+
+The command will next ask whether you want to set up monitoring for your nodes. If you choose to
+set up monitoring, you can either set up monitoring on a separate GCP instance or on the same
+instance.
+
+```text
+  Do you want to set up a separate instance to host monitoring? (This enables you to monitor all your set up instances in one dashboard): 
+  ▸ Yes
+    No
+```
+
+Setting up monitoring on a separate GCP instance enables you to have a unified Grafana dashboard
+for all nodes in a cluster, as seen below:
+
+![Main Dashboard](/img/monitoring-dashboard.png)
+
+The separate monitoring GCP instance will have similar specs to the default GCP cloud server, 
+except for its storage, which will be set to 50 GB.
+
+Please note that setting up monitoring on a separate GCP instance will incur additional cost of
+setting up an additional GCP cloud server.
 
 The command will then ask which Avalanche Go version you would like to install in the cloud server. 
 You can choose `default` (which will install the latest version) or you can enter the name of a 
