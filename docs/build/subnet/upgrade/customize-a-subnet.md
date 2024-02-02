@@ -856,7 +856,7 @@ Currently Warp Precompile can only be activated in Fuji after Durango occurs. Du
 ## Contract Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contracts`. It's a hardhat
-project with tests and tasks. For more information see
+project with tests and tasks. For more information see 
 [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contracts#subnet-evm-contracts).
 
 ## Network Upgrades: Enable/Disable Precompiles
