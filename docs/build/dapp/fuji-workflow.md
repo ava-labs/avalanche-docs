@@ -168,9 +168,12 @@ console.log({ cAddresses, privateKeys });
 
 ## Get a Drip from the Fuji Faucet
 
-We can get a "drip" of AVAX from the Fuji faucet. Paste the address into the
-[Fuji faucet website](https://faucet.avax.network). These AVAX are for the Fuji
-Testnet and have no monetary value.
+We can get a "drip" of AVAX from the Fuji faucet. If you already have
+an AVAX balance greater than zero on Mainnet, 
+paste your C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170). 
+These AVAX are for the Fuji Testnet and have no monetary value.
 
 ![Requesting AVAX](/img/fuji-workflow/faucet1.png)
 
@@ -184,7 +187,7 @@ the transaction.
 
 The txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`,
 can be seen on the [Fuji Testnet
-Explorer](https://testnet.snowtrace.io/tx/0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e).
+Explorer](https://subnets-test.avax.network/c-chain/tx/0x86eef1a01b0a5fd45f2a71c217f99d63d427230a271d3319004f17fc26d7fb26).
 Avalanche also has a [Mainnet Explorer](https://explorer.avax.network).
 
 ![Transaction details](/img/faucet-fuji-wf-alt-tx1.png)

@@ -24,7 +24,11 @@ explore the platform without any risk. These testnet tokens have no value in the
 only meant for experimentation purposes within the Fuji test network. 
 
 To receive testnet tokens, users can request funds from the
-[Avalanche Faucet](/build/dapp/smart-contracts/get-funds-faucet.md). 
+[Avalanche Faucet](/build/dapp/smart-contracts/get-funds-faucet.md).
+If there's already an AVAX balance greater than zero on Mainnet, 
+paste the C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 ## Additional Considerations
 
