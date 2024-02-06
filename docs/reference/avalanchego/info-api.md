@@ -179,8 +179,7 @@ info.getNodeID() -> {
 ```
 
 - `nodeID` Node ID is the unique identifier of the node that you set to act as a validator on the 
-Primary Network. If you do not have a node, you can [delegate](https://core.app/stake/delegate/), 
-or [setup a node](https://docs.avax.network/nodes).
+Primary Network.
 - `nodePOP` is this node's BLS key and proof of possession. Nodes must register a BLS key to act as
 a validator on the Primary Network. To prevent
 [rogue key attacks](https://rist.tech.cornell.edu/papers/pkreg.pdf), you must include proof that 
