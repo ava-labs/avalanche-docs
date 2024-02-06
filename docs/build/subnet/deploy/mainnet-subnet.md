@@ -22,8 +22,8 @@ shouldn't be used for a production deployment.
 :::
 
 After managing a successful Subnet deployment on the `Fuji Testnet`, you're ready to deploy your
-Subnet on Mainnet. If you haven't done so, first [Deploy a Subnet on
-Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
+Subnet on Mainnet. If you haven't done so, first
+[Deploy a Subnet on Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 This tutorial shows how to do the following on `Mainnet`.
 
@@ -43,11 +43,10 @@ your own run-through of this tutorial.
 
 - 5+ nodes running and [fully bootstrapped](/nodes/README.md) on `Mainnet`
 - [Avalanche-CLI is installed](/tooling/cli-guides/install-avalanche-cli.md) on each validator node's
- box
+  box
 - A [Ledger](https://www.ledger.com/) device
 - You've [created a Subnet configuration](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-and fully tested a [Fuji Testnet
-  Subnet deployment](/build/subnet/deploy/fuji-testnet-subnet.md)
+  and fully tested a [Fuji Testnet Subnet deployment](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
 
@@ -134,14 +133,14 @@ with the `--local` parameter.
 #### Funding the Ledger
 
 A new Ledger device has no funds on the addresses it controls. You'll need to send funds to it by
-exporting them from the C-Chain to the P-Chain using [Avalanche's Web
-Wallet](https://wallet.avax.network).
+exporting them from C-Chain to the P-Chain using [Core web](https://core.app)
+connected to [Core extension](https://join.core.app/extension).
 
-You can load the Ledger's C-Chain address in the web wallet or load in a different private key. You
-can transfer funds from the C-Chain to the P-Chain by clicking on the Cross Chain on the left side
-of the web wallet. See this
-[tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet-between-x-and-c-chain)
-for more instructions.
+You can load the Ledger's C-Chain address in Core extension, or load in a different private key to 
+[Core extension](https://join.core.app/extension), and then connect to Core web . 
+
+You can move test funds from the C-Chain to the P-Chain by clicking Stake on Core web , then Cross-Chain Transfer (find more details on
+[this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
 
 ## Deploy the Subnet
 
@@ -187,8 +186,7 @@ Ledger's address as the sole control key or the user may specify a custom list.
 In production Subnets, you should always use multiple control keys running in a multisig
 configuration. This tutorial uses a single control key for illustrative purposes only.
 
-For instructions on controlling your Subnet with a multisig, see the [Multisig Deployment
-Tutorial](/build/subnet/deploy/multisig-auth.md).
+For instructions on controlling your Subnet with a multisig, see the [Multisig Deployment Tutorial](/build/subnet/deploy/multisig-auth.md).
 
 :::
 
@@ -261,7 +259,7 @@ Well done. You have just created your own Subnet running on `Mainnet`. Now it's 
 
 ## Request to Join a Subnet as a Validator
 
-The new Subnet created in the previous steps doesn't have any dedicated validators yet. 
+The new Subnet created in the previous steps doesn't have any dedicated validators yet.
 To request permission to validate a Subnet, the following steps are required:
 
 :::info
@@ -299,8 +297,8 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 There are now two choices possible: automatic and Manual configuration. As mentioned earlier,
 "Automatic" attempts to edit your config file and sets up your plugin directory, while "Manual" just
-prints the required config to the screen. If you are running the CLI on the same box as your 
-validator, you should run the commands in automated mode. If you don't want to run Avalanche-CLI 
+prints the required config to the screen. If you are running the CLI on the same box as your
+validator, you should run the commands in automated mode. If you don't want to run Avalanche-CLI
 on the same box as your validator, use the manual commands.
 
 Select automatic.

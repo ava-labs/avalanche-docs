@@ -1,7 +1,7 @@
 ---
 tags: [Build, Subnets]
 description: This tutorial demonstrates how to deploy a permissioned Subnet on Fuji Testnet.
-sidebar_label: On Fuji Testnet 
+sidebar_label: On Fuji Testnet
 pagination_label: Deploy a Permissioned Subnet on Fuji Testnet
 sidebar_position: 1
 ---
@@ -30,13 +30,13 @@ run-through of this tutorial.
 ## Prerequisites
 
 - 1+ nodes running and fully bootstrapped on `Fuji` Testnet. Check out the section
-[Nodes](/nodes/README.md) on how to run a node and become a validator.
+  [Nodes](/nodes/README.md) on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 ## Virtual Machine
 
 Avalanche can run multiple blockchains. Each blockchain is an instance of a
-[Virtual Machine](/docs/learn/avalanche/subnets-overview.md#virtual-machines), much like an object in
+[Virtual Machine](/learn/avalanche/subnets-overview.md#virtual-machines), much like an object in
 an object-oriented language is an instance of a class.
 That's, the VM defines the behavior of the blockchain.
 
@@ -56,7 +56,10 @@ _To connect to the Fuji Testnet instead of the main net, use argument `--network
 
 Also it's worth pointing out that
 [it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking.md#fuji-testnet)
-and you can get the test token from the [faucet](https://faucet.avax.network/).
+and you can get the test token from the [faucet](https://faucet.avax.network/). If you already have an AVAX
+balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
 To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid):
 
@@ -93,7 +96,7 @@ to shorten the time for bootstrapping.
 
 ## Avalanche-CLI
 
-If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/build/subnet/deploy/local-subnet.md#installation)
+If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/tooling/cli-guides/install-avalanche-cli.md)
 
 ### Private Key
 
@@ -215,15 +218,20 @@ the use of a ledger device is strongly recommended.
 :::
 
 1. A newly created key has no funds on it. Send funds via transfer to its correspondent addresses
-if you already have funds on a different address, or get it from the faucet at
-[`https://faucet.avax.network`](https://faucet.avax.network/) using your **C-Chain address**.
+   if you already have funds on a different address, or get it from the faucet at
+   [`https://faucet.avax.network`](https://faucet.avax.network/) using your **C-Chain address**.
+   If you already have an AVAX balance greater than zero on Mainnet, 
+   paste your C-Chain address there, and request test tokens. Otherwise, 
+   please request a faucet coupon on 
+   [Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
 
-2. **Export** your key via the `avalanche key export` command, then paste the output when selecting
-"Private key" while accessing the [web wallet](https://wallet.avax.network). (Private Key is the
-first option on the [web wallet](https://wallet.avax.network)).
-3. Move the test funds from the C-Chain to the P-Chain by clicking on the `Cross Chain` on the left
-side of the web wallet (find more details on
-[this tutorial](https://support.avax.network/en/articles/6169872-how-to-make-a-cross-chain-transfer-in-the-avalanche-wallet)).
+2. **Export** your key via the `avalanche key export` command. The output is your private key,
+   which will help you [import](https://support.avax.network/en/articles/6821877-core-extension-how-can-i-import-an-account)
+   your account into the Core extension.
+
+3. Connect Core extension to [Core web](https://core.app/), and move the test funds from C-Chain to the P-Chain
+   by clicking Stake, then Cross-Chain Transfer (find more details on
+   [this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
 
 After following these 3 steps, your test key should now have a balance on the P-Chain on `Fuji` Testnet.
 
@@ -231,7 +239,7 @@ After following these 3 steps, your test key should now have a balance on the P-
 
 Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a
 [local network](/build/subnet/deploy/local-subnet.md#create-a-custom-subnet-configuration). In fact,
-the `create` commands only creates a specification of your Subnet on the local file system. 
+the `create` commands only creates a specification of your Subnet on the local file system.
 Afterwards the
 Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with the
 `create` command, then first deploying to a local network and successively to `Fuji` - and
@@ -491,7 +499,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 Enter at `Add control key` and provide at least one key. You can enter multiple addresses, just use
- one here. When finishing, hit `Done`. (The address provided here is
+one here. When finishing, hit `Done`. (The address provided here is
 intentionally invalid. The address has a checksum and the tool is going to make sure it's a valid address).
 
 ```bash
@@ -552,7 +560,7 @@ into the search box and you should see your shiny new blockchain information.
 
 ## Request to Join a Subnet as a Validator
 
-The new Subnet created in the previous steps doesn't have any dedicated validators yet. 
+The new Subnet created in the previous steps doesn't have any dedicated validators yet.
 To request permission to validate a Subnet, the following steps are required:
 
 :::info
@@ -571,8 +579,8 @@ First, request permission to validate by running the `join` command along with t
 avalanche subnet join testsubnet
 ```
 
-Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of 
-the Subnet must approve your node to be a validator afterwards by calling `addValidator` as 
+Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of
+the Subnet must approve your node to be a validator afterwards by calling `addValidator` as
 described in the next section.
 
 When you call the `join` command, you are first prompted with the network selection:
@@ -686,7 +694,7 @@ could experience degraded performance or even halt.
 
 :::
 
-Now that the node has joined the Subnet, a Subnet control key holder must call `addValidator` to 
+Now that the node has joined the Subnet, a Subnet control key holder must call `addValidator` to
 grant the node permission to be a validator in your Subnet.
 
 To whitelist a node as a recognized validator on the Subnet, run:
@@ -838,14 +846,14 @@ avalanche subnet list
 
 ### Connect with Core
 
-To connect Core (or MetaMask) with your blockchain on the new 
-Subnet running on your local computer, 
-you can add a new network on your Core wallet 
+To connect Core (or MetaMask) with your blockchain on the new
+Subnet running on your local computer,
+you can add a new network on your Core wallet
 with the following values:
 
 ```text
 - Network Name: testsubnet
-- RPC URL: <http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc>
+- RPC URL: [http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc]
 - Chain ID: 3333
 - Symbol: TST
 ```

@@ -5,6 +5,7 @@ sidebar_label: "Case Study: WAGMI Subnet"
 pagination_label: "WAGMI Subnet"
 sidebar_position: 1
 ---
+
 # WAGMI Subnet
 
 The WAGMI ("We're All Going to Make It") Subnet is a high throughput testbed for EVM (Ethereum
@@ -35,16 +36,15 @@ that surfaces aggregated usage statistics about the Subnet.
 
 The genesis file of WAGMI can be found [here](https://github.com/ava-labs/public-chain-assets/blob/1951594346dcc91682bdd8929bcf8c1bf6a04c33/chains/11111/genesis.json).
 
-
 ### Adding WAGMI to Core
 
 ```text
 - Network Name: WAGMI
-- RPC URL: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc>
+- RPC URL: [https://subnets.avax.network/wagmi/wagmi-chain-testnet/rpc]
 - WS URL: wss://subnets.avax.network/wagmi/wagmi-chain-testnet/ws
 - Chain ID: 11111
 - Symbol: WGM
-- Explorer: <https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer>
+- Explorer: [https://subnets.avax.network/wagmi/wagmi-chain-testnet/explorer]
 ```
 
 :::info
@@ -73,8 +73,7 @@ feature to perform network upgrades by just using a few lines of JSON in a confi
 
 ### Network Upgrades: Enable/Disable Precompiles
 
-Detailed description of how to do this can be found in [Customize a
-Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial.
+Detailed description of how to do this can be found in [Customize a Subnet](/build/subnet/upgrade/customize-a-subnet.md#network-upgrades-enabledisable-precompiles) tutorial.
 Here's a summary:
 
 - Network Upgrade utilizes existing precompiles on the Subnet-EVM:
@@ -100,17 +99,17 @@ media such as Discord, with the following information:
 > Stay tuned because this pilot is literally a can't miss for every WAGMI node 😉
 >
 > The upgrade will activate the fee config manager, and enable smooth fee config updates in the
-> future <https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees>
+> future [https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees](https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees)
 >
 > This upgrade changes how blocks are processed on WAGMI, so every WAGMI node needs to upgrade to
 > continue to validate WAGMI correctly.
 >
 > In order to update your node, you need to update to Subnet-EVM v0.2.8 and follow the instructions
 > to enable a stateful precompile on Subnet-EVM here:
-> <https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles>
+> [https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles](https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles)
 >
 > You can find the JSON to configure the network upgrade in this gist:
-> <https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b>
+> [https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b]
 >
 > TLDR; you will need to place the JSON file into your node's file directory within
 > `chain-config-dir/wagmi blockchainID/upgrade.json` and restart your node.
@@ -182,8 +181,7 @@ set manager address and making calls on the precompiled contract.
 
 We will use [Remix](https://remix.ethereum.org) online Solidity IDE and the [Core Browser
 Extension](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension).
-Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add
-WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-metamask) yourself.
+Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-metamask) yourself.
 
 First using Core, we open the account as the owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
 
@@ -224,8 +222,7 @@ by anyone as it is just a read operation.
 
 Once we have the new desired configuration for the fees on the Subnet, we can use the `setFeeConfig`
 to change the parameters. This action can **only** be performed by the owner
-`0x6f0f6DA1852857d7789f68a28bba866671f3880D` as the `adminAddress` specified in the [`upgrade.json`
-above](#deploying-upgradejson).
+`0x6f0f6DA1852857d7789f68a28bba866671f3880D` as the `adminAddress` specified in the [`upgrade.json` above](#deploying-upgradejson).
 
 ![setFeeConfig](/img/network-upgrade/setFeeConfig.png)
 

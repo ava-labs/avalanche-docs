@@ -36,9 +36,9 @@ Example JSON config file:
 ```
 
 :::tip
-[Install Script](/nodes/run/with-installer.md) creates the node config
-file at `~/.avalanchego/configs/node.json`. No default file is created if
-[AvalancheGo is built from source](/nodes/run/node-manually.md), you
+[Install Script](/nodes/run/with-installer/installing-avalanchego.md) creates the
+node config file at `~/.avalanchego/configs/node.json`. No default file is
+created if [AvalancheGo is built from source](/nodes/run/node-manually.md), you
 would need to create it manually if needed.
 :::
 
@@ -92,11 +92,6 @@ available. Defaults to `false`. See
 
 If set to `false`, this node will not expose the Info API. Defaults to `true`. See
 [here](/reference/avalanchego/info-api.md) for more information.
-
-#### `--api-ipcs-enabled` (boolean)
-
-If set to `true`, this node will expose the IPCs API. Defaults to `false`. See
-[here](/reference/avalanchego/ipc-api.md) for more information.
 
 #### `--api-keystore-enabled` (boolean)
 
@@ -533,18 +528,6 @@ requests from all hosts. API requests where the `Host` field is empty or an IP a
 will always be accepted. An API call whose HTTP `Host` field isn't acceptable will
 receive a 403 error code. Defaults to `localhost`.
 
-## IPCs
-
-#### `--ipcs-chain-ids` (string)
-
-Comma separated list of chain ids to connect to (for example
-`11111111111111111111111111111111LpoYY,4R5p2RXDGLqaifZE4hHWH9owe34pfoBULn1DrQTWivjg8o4aH`).
-There is no default value.
-
-#### `--ipcs-path` (string)
-
-The directory (Unix) or named pipe prefix (Windows) for IPC sockets. Defaults to `/tmp`.
-
 ## File Descriptor Limit
 
 #### `--fd-limit` (int)
@@ -645,7 +628,7 @@ If true, don't use TLS when exporting trace data. Defaults to `true`.
 
 #### `--tracing-sample-rate` (float)
 
-The fraction of traces to sample. If >= 1, always sample. If <= 0, never sample.
+The fraction of traces to sample. If >= 1, always sample. If `<= 0`, never sample.
 Defaults to `0.1`.
 
 #### `--tracing-exporter-type`(string)

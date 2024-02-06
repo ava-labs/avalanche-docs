@@ -31,8 +31,8 @@ the application.
 is familiar with. Developers have fine control over the behavior of their blockchain, and can redefine
 the rules of a blockchain to fit any use-case they have.
 
-- Developers don't need to concern yourself with lower-level logic
-like networking, consensus, and the structure of the blockchain; Avalanche does
+- Developers don't need to concern themselves with lower-level logic
+like networking, consensus, and the structure of the blockchain. Avalanche does
 this behind the scenes so you can focus on building your Dapp, your ecosystem, and your community.
 
 
@@ -87,7 +87,7 @@ To learn more about smart contract support, click [here](build/dapp/launch-dapp.
 - [XSVM](https://github.com/ava-labs/xsvm)
   - An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
 
-See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/create/golang-vm-simple.md)
+See here for a tutorial on [How to Build a Simple Golang VM](/build/vm/golang-vms/golang-vm-simple.md)
 
 ### Rust
 

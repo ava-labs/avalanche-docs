@@ -476,7 +476,7 @@
 /subnets/reference-cli-commands /tooling/avalanche-cli 301
 /apis/glacier /tooling/glacier 301
 /apis/metrics /tooling/metrics 301
-/apis/avalanchego/postman-avalanche-collection /tooling/avalanchego-postman-collection  301
+/apis/avalanchego/postman-avalanche-collection /tooling/avalanchego-postman-collection/setup  301
 /apis/avalanchego/public-api-server /tooling/rpc-providers 301
 /apis/avalanchejs/api /tooling/avalanchejs-api 301
 /apis/avalanchejs/create-an-asset-on-the-x-chain /tooling/avalanchejs-guides/create-an-asset-on-the-x-chain 301
@@ -544,3 +544,15 @@
 # 10/05/23
 /build/dapp/smart-contracts/toolchains/truffle /deprecated/truffle 301
 /build/dapp/smart-contracts/verification/verify-truffle /deprecated/verify-truffle 301
+
+# 10/18/23 Teleporter/AWM
+/learn/avalanche/awm /build/cross-chain/awm/overview 301
+
+# 10/16/2023
+
+/nodes/run/with-installer /nodes/run/with-installer/preparing-your-environment 301
+/es/nodes/run/with-installer /es/nodes/run/with-installer/preparing-your-environment 301
+/build/vm/evm/hello-world-precompile-tutorial /build/vm/evm/intro 301
+
+# teleporter marketing 
+/teleporter /build/cross-chain/teleporter/deep-dive 301

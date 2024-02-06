@@ -147,7 +147,7 @@ fi
 #helper function that prints usage
 usage () {
   echo "Usage: $0 [--list | --help | --reinstall | --remove] [--version <tag>] [--ip dynamic|static|<IP>]"
-  echo "                     [--RPC private|public] [--archival] [--state-sync on|off] [--index] [--db-dir <path>]"
+  echo "                     [--rpc private|public] [--archival] [--state-sync on|off] [--index] [--db-dir <path>]"
   echo "Options:"
   echo "   --help            Shows this message"
   echo "   --list            Lists 10 newest versions available to install"
@@ -364,36 +364,40 @@ else
   foundIP="$ipOpt"
   ipChoice="2"
 fi
-echo ""
-echo "Your node accepts RPC calls on port 9650. If restricted to private, it will be accessible only from this machine."
-echo "Only p2p port (9651 by default) NEEDS to be publicly accessible for correct node operation, RPC port is used for"
-echo "interaction with the node by the operator or applications and SHOULD NOT be freely accessible to the public."
-echo ""
-echo "Note: Validator nodes SHOULD NOT have their RPC port open!"
-echo ""
-while [ "$rpcOpt" != "public" ] && [ "$rpcOpt" != "private" ]
-do
-  read -p "RPC port should be public (this is a public API node) or private (this is a validator)? [public, private]: " rpcOpt
-done
-if [ "$rpcOpt" = "public" ]; then
+if [ "$rpcOpt" = "ask" ]; then
   echo ""
-  echo "If firewall or other form of access control is not provided, your node will be open to denial of service attacks."
-  echo "Node API server is not designed to defend against it! Make sure you configure the firewall to only let through"
-  echo "RPC requests from known IP addresses!"
+  echo "Your node accepts RPC calls on port 9650. If restricted to private, it will be accessible only from this machine."
+  echo "Only p2p port (9651 by default) NEEDS to be publicly accessible for correct node operation, RPC port is used for"
+  echo "interaction with the node by the operator or applications and SHOULD NOT be freely accessible to the public."
   echo ""
-  confirm="ask"
-  while [ "$confirm" != "yes" ] && [ "$confirm" != "no" ]
+  echo "Note: Validator nodes SHOULD NOT have their RPC port open!"
+  echo ""
+  while [ "$rpcOpt" != "public" ] && [ "$rpcOpt" != "private" ]
   do
-    read -p "Are you sure you want to allow public access to the RPC port? [yes, no]: " confirm
+    read -p "RPC port should be public (this is a public API node) or private (this is a validator)? [public, private]: " rpcOpt
   done
-  if [ "$confirm" != "yes" ]; then
-    rpcOpt="private"
-  else
-    echo "RPC port will be accessible publicly. You must set up access controls!"
+  if [ "$rpcOpt" = "public" ]; then
+    echo ""
+    echo "If firewall or other form of access control is not provided, your node will be open to denial of service attacks."
+    echo "Node API server is not designed to defend against it! Make sure you configure the firewall to only let through"
+    echo "RPC requests from known IP addresses!"
+    echo ""
+    confirm="ask"
+    while [ "$confirm" != "yes" ] && [ "$confirm" != "no" ]
+    do
+      read -p "Are you sure you want to allow public access to the RPC port? [yes, no]: " confirm
+    done
+    if [ "$confirm" != "yes" ]; then
+      rpcOpt="private"
+    fi
   fi
 fi
+echo ""
 if [ "$rpcOpt" = "private" ]; then
   echo "RPC port will be accessible only on local interface. RPC calls from remote machines will be blocked."
+fi
+if [ "$rpcOpt" = "public" ]; then
+  echo "WARNING: RPC port will be accessible publicly! You must set up access controls!"
 fi
 echo ""
 if [ "$indexOpt" = "true" ]; then

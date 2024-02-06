@@ -1,7 +1,13 @@
 ---
 tags: [Avalanche Consensus, Avalanche Protocol]
 description: Avalanche Consensus is a consensus protocol that is scalable, robust, and decentralized.
-keywords: [avalanche consensus, snowman consensus, scaling blockchains, nakamoto consensus]
+keywords:
+  [
+    avalanche consensus,
+    snowman consensus,
+    scaling blockchains,
+    nakamoto consensus,
+  ]
 sidebar_label: Avalanche Consensus
 ---
 
@@ -13,30 +19,28 @@ the shared ledger. This agreement is reached through a specific process, a conse
 that ensures that everyone sees the same information and that the information is accurate and trustworthy.
 
 **Avalanche Consensus** is a consensus protocol that is scalable, robust, and decentralized. It
-combines features of both classical and Nakamoto consensus mechanisms to achieve high throughput, 
+combines features of both classical and Nakamoto consensus mechanisms to achieve high throughput,
 fast finality, and
-energy efficiency. For the whitepaper, see [here](https://www.avalabs.org/whitepapers). 
+energy efficiency. For the whitepaper, see [here](https://www.avalabs.org/whitepapers).
 
-Key Features Include: 
+Key Features Include:
 
 - Speed: Avalanche consensus provides sub-second, immutable finality, ensuring that transactions are
-quickly confirmed and irreversible.
+  quickly confirmed and irreversible.
 - Scalability: Avalanche consensus enables high network throughput while ensuring low latency.
 - Energy Efficiency: Unlike other popular consensus protocols, participation in Avalanche consensus
-is neither computationally intensive nor expensive. 
+  is neither computationally intensive nor expensive.
 - Adaptive Security: Avalanche consensus is designed to resist various attacks, including sybil
-attacks, distributed denial-of-service (DDoS) attacks, and collusion attacks. Its probabilistic
-nature ensures that the consensus outcome converges to the desired state, even when the network
-is under attack. 
-
-![Consensus Comparison](/img/Consensus-protocol-comparison.png)
+  attacks, distributed denial-of-service (DDoS) attacks, and collusion attacks. Its probabilistic
+  nature ensures that the consensus outcome converges to the desired state, even when the network
+  is under attack.
 
 ## Conceptual Overview
 
 Consensus protocols in the Avalanche family operate through repeated sub-sampled voting. When a
 node is determining whether a
 [transaction](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction) should be
-accepted, it asks a small, random subset of 
+accepted, it asks a small, random subset of
 [validator nodes](http://support.avalabs.org/en/articles/4064704-what-is-a-blockchain-validator)
 for their preference. Each queried validator replies with the transaction that it prefers, or thinks
 should be accepted.
@@ -45,12 +49,12 @@ should be accepted.
 
 Consensus will never include a transaction that is determined to be **invalid**. For example, if you
 were to submit a transaction to send 100 AVAX to a friend, but your wallet only has 2 AVAX, this transaction
-is considered **invalid** and will not participate in consensus. 
+is considered **invalid** and will not participate in consensus.
 
 :::
 
 If a sufficient majority of the validators sampled reply with the same preferred
-transaction, this becomes the preferred choice of the validator that inquired. 
+transaction, this becomes the preferred choice of the validator that inquired.
 
 In the future, this node will reply with the transaction preferred by the majority.
 
@@ -59,7 +63,7 @@ queried reply with the same answer for a sufficient number of consecutive rounds
 
 - The number of validators required to be considered a "sufficient majority" is referred to as "α" (_alpha_).
 - The number of consecutive rounds required to reach consensus, a.k.a. the "Confidence Threshold,"
-is referred to as "β" (_beta_).
+  is referred to as "β" (_beta_).
 - Both α and β are configurable.
 
 When a transaction has no conflicts, finalization happens very quickly. When
@@ -189,8 +193,8 @@ or data structure that holds a collection of transactions or other relevant info
 is cryptographically linked to the previous block, creating a chain of blocks, hence the term "blockchain."
 
 In addition to storing a reference of its parent, a block contains a set of transactions. These
-transactions can represent various types of information, such as financial transactions, smart 
-contract operations, or data storage requests.  
+transactions can represent various types of information, such as financial transactions, smart
+contract operations, or data storage requests.
 
 If a node receives a vote for a block, it also counts as a vote for all of the block's ancestors
 (its parent, the parents' parent, etc.).
@@ -216,7 +220,7 @@ no blocks processing.
 
 Nodes may not need to wait until they get all _k_ query responses before registering the outcome of a
 poll. If a block has already received _alpha_ votes, then there's no need to wait for the rest of the
-responses. 
+responses.
 
 ### Validators
 
@@ -239,7 +243,7 @@ network is safe, and is live for virtuous transactions.
 
 ### Big Ideas
 
-Two big ideas in Avalanche are **subsampling** and **transitive voting**. 
+Two big ideas in Avalanche are **subsampling** and **transitive voting**.
 
 Subsampling has low message overhead. It doesn't matter if there are twenty validators or two
 thousand validators; the number of consensus messages a node sends during a query remains constant.
@@ -261,7 +265,7 @@ want your transaction to be live then you should not issue a conflicting transac
 Snowman is the name of Ava Labs' implementation of the Avalanche consensus protocol
 for linear chains.
 
-If there are no undecided transactions, the Avalanche consensus protocol _quiesce_. That is, it does
+If there are no undecided transactions, the Avalanche consensus protocol _quiesces_. That is, it does
 nothing if there is no work to be done. This makes Avalanche more sustainable than Proof-of-work
 where nodes need to constantly do work.
 

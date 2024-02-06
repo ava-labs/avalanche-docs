@@ -22,8 +22,8 @@ or [Subnet](learn/avalanche/subnets-overview.md) that is going live on the main 
 example, [Fuji](learn/avalanche/fuji.md) network is the Testnet for Avalanche's Mainnet.
 
 Besides Fuji Testnet, the
-[Avalanche Faucet](https://core.app/tools/testnet-faucet/?subnet=c&token=c) 
-can be used to get free test tokens on testnet Subnets like: 
+[Avalanche Faucet](https://core.app/tools/testnet-faucet/?subnet=c&token=c)
+can be used to get free test tokens on testnet Subnets like:
 
 - [WAGMI Testnet](https://core.app/tools/testnet-faucet/?subnet=wagmi)
 - [DeFI Kingdoms Testnet](https://core.app/tools/testnet-faucet/?subnet=dfk)
@@ -115,8 +115,8 @@ The repository cloning method used is HTTPS, but SSH can be used too:
 
 `git clone git@github.com:ava-labs/avalanche-faucet.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
 ### Client-Side Configurations
@@ -386,8 +386,8 @@ in the `server.ts` file.
 Comment or remove these 2 lines from the `server.ts` file
 
 ```javascript
-new RateLimiter(app, [GLOBAL_RL])
-new RateLimiter(app, evmchains)
+new RateLimiter(app, [GLOBAL_RL]);
+new RateLimiter(app, evmchains);
 ```
 
 ### Disabling CAPTCHA Verification
@@ -463,7 +463,7 @@ container port, so we had to bind this container port to our host port. For the 
 chosen 3000. This flag `-p 3000:8000` achieves the same.
 
 This will start our faucet application in a Docker container at port 3000 (port 8000 on the
-container). You can interact with the application by visiting <http://localhost:3000> in your browser.
+container). You can interact with the application by visiting [http://localhost:3000] in your browser.
 
 #### Stopping the Container
 
@@ -488,7 +488,7 @@ steps, to collect your first test coins.
 
 ### Visit Avalanche Faucet Site
 
-Go to <https://faucet.avax.network>. You will see various network parameters like network name, faucet
+Go to [https://faucet.avax.network](https://faucet.avax.network). You will see various network parameters like network name, faucet
 balance, drop amount, drop limit, faucet address, etc.
 
 ![faucet 1](/img/faucet/faucet1.png)
@@ -502,9 +502,14 @@ may have a different drop amount).
 
 ### Put Address and Request Coins
 
-Put your wallet address where you want to get a drop, and click the **Request** button. Within a
-second, you will get a **transaction hash** for the processed transaction. The hash would be a
-hyperlink to Subnet's explorer. You can see the transaction status, by clicking on that hyperlink.
+If you already have an AVAX balance greater than zero on Mainnet, 
+paste your C-Chain address there, and request test tokens. Otherwise, 
+please request a faucet coupon on 
+[Discord](https://discord.com/channels/578992315641626624/1193594716835545170). 
+
+Within a second, you will get a **transaction hash** for the processed transaction. 
+The hash would be a hyperlink to Subnet's explorer. 
+You can see the transaction status, by clicking on that hyperlink.
 
 ![faucet 3](/img/faucet/faucet3.png)
 

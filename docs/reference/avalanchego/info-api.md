@@ -9,10 +9,6 @@ pagination_label: Info API
 
 This API can be used to access basic information about the node.
 
-:::info
-This API set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
-:::
-
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
@@ -166,6 +162,10 @@ curl -X POST --data '{
 
 Get the ID of this node.
 
+:::info
+This endpoint set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
+:::
+
 **Signature:**
 
 ```sh
@@ -217,6 +217,10 @@ curl -X POST --data '{
 ### `info.getNodeIP`
 
 Get the IP of this node.
+
+:::info
+This endpoint set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
+:::
 
 **Signature:**
 
@@ -367,6 +371,10 @@ curl -X POST --data '{
 ### `info.getVMs`
 
 Get the virtual machines installed on this node.
+
+:::info
+This endpoint set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
+:::
 
 **Signature:**
 

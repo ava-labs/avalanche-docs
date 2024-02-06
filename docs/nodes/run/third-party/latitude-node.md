@@ -42,8 +42,9 @@ be used to access your Latitude.sh machine from your local machine using a termi
 You will need to install the `avalanche node installer script` directly in the server's terminal.
 :::
 
-After gaining access, we’ll need to set up our Avalanche node. To do this, follow the instructions
-here to install and run your node [Set Up Avalanche Node With Installer](/nodes/run/with-installer).
+After gaining access, we’ll need to set up our Avalanche node. To do this, follow
+the instructions here to install and run your node
+[Set Up Avalanche Node With Installer](/nodes/run/with-installer/installing-avalanchego.md).
 
 Your AvalancheGo node should now be running and in the process of bootstrapping, which can take a few
 hours. To check if it's done, you can issue an API call using `curl`.

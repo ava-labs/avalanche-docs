@@ -2,6 +2,7 @@
 Abigen
 ABIs
 accessors
+address_index
 addValidator
 AddValidator
 Agrawal
@@ -62,6 +63,7 @@ CLIs
 codec
 Codec
 coinbase
+coin_type
 composability
 Composability
 Consensys
@@ -73,6 +75,7 @@ Coreth
 Cortina
 CPUs
 Crabada
+cross-subnet
 crypto
 Crypto
 cryptocurrencies
@@ -92,6 +95,7 @@ Deployers
 Deregister
 deserialize
 deserializing
+Dev
 dev
 Dexalot
 dockerhub
@@ -167,6 +171,7 @@ Linearizes
 liveness
 lol
 lookups
+MacOS
 Mainnet
 Manov
 Markdownlint
@@ -182,6 +187,7 @@ minimalistic
 mintable
 Mintable
 mmap'd
+Moralis
 Morty
 multicurrency
 Multiput
@@ -202,6 +208,7 @@ NFTs
 Nimish
 NodeID
 NodeIDs
+Nodies
 NOWNodes
 npm
 npx
@@ -236,6 +243,7 @@ Prepended
 profiler
 Proto
 proxying
+quiesces
 Ranjan
 RC
 RCs
@@ -292,6 +300,7 @@ superset
 Swapper's
 sybil
 syncer
+Teleporter
 Tencent
 testnet
 Testnet
@@ -301,6 +310,7 @@ toolchain
 Toolchains
 trie
 TXIDs
+tx
 TX
 TXs
 typechain
@@ -309,6 +319,7 @@ typings
 uint
 UIs
 unfinalized
+Unfinalized
 unicode
 Uniswap
 Unix
@@ -316,6 +327,7 @@ unregister
 unscalable
 untrusted
 untyped
+Upgradeability
 uptimes
 URIs
 url
@@ -346,5 +358,6 @@ Wei
 whitepaper
 yargs
 Yellowpaper
+Yubikey
 Zundel
 unstaked

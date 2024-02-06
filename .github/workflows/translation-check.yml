@@ -1,0 +1,92 @@
+name: Verify PR Changes for Translated Docs
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  changed_files:
+    runs-on: ubuntu-latest
+    name: Test changed files
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get all changed English markdown files in the 'docs' directory
+        id: changed-docs-markdown
+        uses: tj-actions/changed-files@v41
+        with:
+          files_yaml: |
+            en:
+              - docs/build/**/*.md
+              - docs/learn/**/*.md
+              - docs/nodes/**/*.md
+
+      - name: List all changed English markdown files
+        run: |
+          for file in ${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      - name: Get all changed Spanish translation files
+        id: changed-es-markdown
+        uses: tj-actions/changed-files@v41
+        with:
+          files_yaml: |
+            es:
+              - i18n/es/docusaurus-plugin-content-docs/current/**/*.md
+
+      - name: List all changed Spanish markdown files
+        run: |
+          for file in ${{ steps.changed-es-markdown.outputs.es_all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      - name: If doc file(s) changed, check for corresponding changes in translated files
+        if: steps.changed-docs-markdown.outputs.en_any_changed == 'true'
+        run: |
+          echo "One or more doc file(s) have changed."
+          echo "List all the files that have changed: ${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
+
+          englishChangesStr="${{ steps.changed-docs-markdown.outputs.en_all_changed_files }}"
+          spanishChangesStr="${{ steps.changed-es-markdown.outputs.es_all_changed_files }}"
+
+          # Convert space separated string into newline separated
+          englishChangesStr=$(echo $englishChangesStr | tr ' ' '\n')
+          spanishChangesStr=$(echo $spanishChangesStr | tr ' ' '\n')
+
+          # Then read into an array
+          readarray -t englishChanges <<<"$englishChangesStr"
+          readarray -t spanishChanges <<<"$spanishChangesStr"
+          echo "List of changed Spanish files: $spanishChanges"
+
+          errorMessage=""
+          # Loop through the changed files in the PR
+          for englishDoc in "${englishChanges[@]}"; do
+            echo "Path for changed English doc: $englishDoc"
+            # Extract the corresponding translated file path
+            translated_file=$(echo $englishDoc | sed 's|docs/|i18n/es/docusaurus-plugin-content-docs/current/|')
+            echo "Path for expected Spanish translation with change: $translated_file"
+            # Check that translated_file matches one of the paths in spanishChanges; if not, add to error message
+            if [[ ! " ${spanishChanges[@]} " =~ " ${translated_file} " ]]; then
+              errorMessage+="!ERROR!: No corresponding translated file found for $englishDoc. Those with write access should write the following in a PR comment: /gt $englishDoc $translated_file spanish\n"
+            fi
+          done
+          if [[ ! -z $errorMessage ]]; then
+            echo -e $errorMessage
+            exit 1
+          else
+            echo "PR changes include corresponding translations."
+          fi
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          shell: bash
+      - name: Set Build Status
+        if: failure()
+        run: |
+          echo "The PR does not include corresponding translations."
+          exit 1
