@@ -17,8 +17,8 @@ developer docs](https://docs.gnosis-safe.io/).
 This tutorial assumes that:
 
 - A Subnet and EVM blockchain has been created. Avalanche tools allow users to do this on
-  [Mainnet](/build/subnet/deploy/mainnet-subnet.md), [Fuji](/build/subnet/deploy/fuji-testnet-subnet.md)
-  or a [Local network](/build/subnet/deploy/local-subnet.md).
+  [Mainnet](/tooling/cli-create-deploy-subnets/deploy-mainnet-subnet.md), [Fuji](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md)
+  or a [Local network](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md).
 - Your node is currently validating your target Subnet.
 - Your wallet has a balance of the Subnet native token (specified under _alloc_ in your [Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
@@ -951,9 +951,9 @@ We have successfully done the following:
 
 ### Start the Local Network
 
-Follow [Create a Local Test Network](/build/subnet/deploy/local-subnet.md) to start a local
+Follow [Create a Local Test Network](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md) to start a local
 Subnet-EVM. Make sure that you get one of the port numbers by following running the command:
-[`avalanche network status`](/build/subnet/deploy/local-subnet.md#checking-network-status). In this
+[`avalanche network status`](/build/subnet/maintain/pause-resume-subnet.md#checking-network-status). In this
 tutorial, we will assume one of the ports is 49435.
 
 ### Locate the Hardhat Network Configuration and Make Necessary Changes
