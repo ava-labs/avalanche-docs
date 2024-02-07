@@ -1,13 +1,13 @@
 # 02/06/2024
 
-/tooling/cli-guides/create-a-validator-aws.md /tooling/cli-create-nodes/create-a-validator-aws.md
-/tooling/cli-guides/create-a-validator-gcp.md /tooling/cli-create-nodes/create-a-validator-gcp.md
-/tooling/cli-guides/node-ssh.md /tooling/cli-create-nodes/node-ssh.md docs
-/tooling/cli-guides/setup-a-devnet.md /tooling/cli-create-nodes/setup-a-devnet.md
-/tooling/cli-guides/stop-node.md /tooling/cli-create-nodes/stop-node.md
-/tooling/cli-guides/upload-a-custom-vm-to-cloud.md /tooling/cli-create-nodes/stop-node.md
-/tooling/cli-guides/validate-primary-network.md /tooling/cli-create-nodes/stop-node.md
-/tooling/cli-guides/validate-subnets.md /tooling/cli-create-nodes/stop-node.md
+/tooling/cli-guides/create-a-validator-aws.md /tooling/cli-create-nodes/create-a-validator-aws.md 301
+/tooling/cli-guides/create-a-validator-gcp.md /tooling/cli-create-nodes/create-a-validator-gcp.md 301
+/tooling/cli-guides/node-ssh.md /tooling/cli-create-nodes/node-ssh.md 301
+/tooling/cli-guides/setup-a-devnet.md /tooling/cli-create-nodes/setup-a-devnet.md 301
+/tooling/cli-guides/stop-node.md /tooling/cli-create-nodes/stop-node.md 301
+/tooling/cli-guides/upload-a-custom-vm-to-cloud.md /tooling/cli-create-nodes/stop-node.md 301
+/tooling/cli-guides/validate-primary-network.md /tooling/cli-create-nodes/stop-node.md 301
+/tooling/cli-guides/validate-subnets.md /tooling/cli-create-nodes/stop-node.md 301
 
 # 03/02/2023
 
