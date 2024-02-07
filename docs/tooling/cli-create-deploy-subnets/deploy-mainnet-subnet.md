@@ -267,8 +267,7 @@ To request permission to validate a Subnet, the following steps are required:
 Adding a validator on a Subnet requires that the node is already a validator on the primary network,
 which means that your node has **fully bootstrapped**.
 
-See [here](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to become
-a validator.
+See [here](/nodes/validate/add-a-validator.md) on how to become a validator.
 
 :::
 
