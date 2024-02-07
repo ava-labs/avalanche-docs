@@ -14,7 +14,7 @@ This document describes how to use the new Avalanche-CLI to deploy a Subnet on `
 
 :::
 
-After trying out a Subnet on a local box by following [this tutorial](/build/subnet/deploy/local-subnet.md),
+After trying out a Subnet on a local box by following [this tutorial](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md),
 next step is to try it out on `Fuji` Testnet.
 
 In this article, it's shown how to do the following on `Fuji` Testnet.
@@ -115,7 +115,7 @@ deploy one, as `Mainnet` operations requires ledger usage, while for `Fuji` it's
 You should only use the private key created for this tutorial for testing operations on `Fuji` or
 other testnets. Don't use this key on `Mainnet`. CLI is going to store the key on your file
 system. Whoever gets access to that key is going to have access to all funds secured by that
-private key. To deploy to `Mainnet`, follow [this tutorial](/build/subnet/deploy/mainnet-subnet.md).
+private key. To deploy to `Mainnet`, follow [this tutorial](/tooling/cli-create-deploy-subnets/deploy-mainnet-subnet.md).
 
 :::
 
