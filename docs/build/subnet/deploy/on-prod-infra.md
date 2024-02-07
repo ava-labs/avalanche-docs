@@ -10,9 +10,9 @@ sidebar_position: 3
 
 ## Introduction
 
-After architecting your Subnet environment on the [local machine](/build/subnet/deploy/local-subnet.md),
+After architecting your Subnet environment on the [local machine](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md),
 proving
-the design and testing it out on [the Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md),
+the design and testing it out on [the Fuji Testnet](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md),
 eventually you will
 need to deploy your Subnet to production environment. Running a Subnet in production is much more
 involved than local and Testnet deploys, as your Subnet will have to take care of real world usage,
@@ -146,7 +146,7 @@ which will impact your validator's uptime, thus staking rewards, and the stabili
 Once you have the nodes set up you are ready to deploy the actual Subnet. Right now, the recommended
 tool to do that is [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli).
 
-Instructions for deployment by Avalanche-CLI can be found [here](/build/subnet/deploy/mainnet-subnet.md).
+Instructions for deployment by Avalanche-CLI can be found [here](/tooling/cli-create-deploy-subnets/deploy-mainnet-subnet.md).
 
 ### Ledger HW Wallet
 

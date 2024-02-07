@@ -23,7 +23,7 @@ shouldn't be used for a production deployment.
 
 After managing a successful Subnet deployment on the `Fuji Testnet`, you're ready to deploy your
 Subnet on Mainnet. If you haven't done so, first
-[Deploy a Subnet on Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
+[Deploy a Subnet on Testnet](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md).
 
 This tutorial shows how to do the following on `Mainnet`.
 
@@ -45,8 +45,8 @@ your own run-through of this tutorial.
 - [Avalanche-CLI is installed](/tooling/cli-guides/install-avalanche-cli.md) on each validator node's
   box
 - A [Ledger](https://www.ledger.com/) device
-- You've [created a Subnet configuration](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-  and fully tested a [Fuji Testnet Subnet deployment](/build/subnet/deploy/fuji-testnet-subnet.md)
+- You've [created a Subnet configuration](/tooling/cli-create-deploy-subnets/create-subnet.md.md#create-your-subnet-configuration)
+  and fully tested a [Fuji Testnet Subnet deployment](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md)
 
 :::warning
 
