@@ -448,6 +448,12 @@ go run main.go subnet list --deployed
 
 ## Deploy the Subnet
 
+:::Note
+
+To deploy the Subnet, you will need some testnet AVAX on the P-chain.
+
+:::
+
 To deploy the new Subnet, run
 
 ```bash
