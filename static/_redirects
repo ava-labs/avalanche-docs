@@ -567,3 +567,6 @@
 /tooling/cli-guides/upload-a-custom-vm-to-cloud /tooling/cli-create-nodes/stop-node 301
 /tooling/cli-guides/validate-primary-network /tooling/cli-create-nodes/stop-node 301
 /tooling/cli-guides/validate-subnets /tooling/cli-create-nodes/stop-node 301
+/build/subnet/deploy/fuji-testnet-subnet /tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet 301
+/build/subnet/deploy/mainnet-subnet /tooling/cli-create-deploy-subnets/deploy-mainnet-subnet 301
+/build/subnet/deploy/local-subnet /tooling/cli-create-deploy-subnets/deploy-local-subnet 301
