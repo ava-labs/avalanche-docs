@@ -205,7 +205,7 @@ An example of a node config syncing two Subnets:
 
 But that is not all. Besides tracking the SubnetID, the node also needs to have the
 plugin that contains the VM instance the blockchain in the Subnet will run. You should have already
-been through that on Testnet and Fuji, but for a refresher, you can refer to [this tutorial](/build/subnet/deploy/fuji-testnet-subnet.md).
+been through that on Testnet and Fuji, but for a refresher, you can refer to [this tutorial](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md).
 
 So, name the VM plugin binary as the `VMID` of the Subnet chain and place it in the `plugins`
 directory where the node binary is (for installer-script created nodes that would be

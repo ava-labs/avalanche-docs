@@ -300,7 +300,7 @@ Global Flags:
       --log-level string   log level for the application (default "ERROR")
 ```
 
-Go ahead and [deploy](/build/subnet/deploy/local-subnet.md)
+Go ahead and [deploy](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md)
 first your Subnet if that's your case.
 
 If you already had deployed the Subnet instead, you see something like this:

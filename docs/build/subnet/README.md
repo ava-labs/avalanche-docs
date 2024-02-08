@@ -19,14 +19,14 @@ for a broad overview.
 | [**C-Chain or Subnet?**](/build/subnet/c-chain-vs-subnet.md) | Help developers determine the best place to launch their application                                          |
 | [**Build Your First Subnet**](/build/subnet/hello-subnet.md) | How to use Avalanche-CLI to create a Subnet, deploy it to a local network, and connect to it with Core wallet |
 
-| Deploy a Subnet                                                                |
-| :----------------------------------------------------------------------------- |
-| [**On a Local Network**](/build/subnet/deploy/local-subnet.md)                 |
-| [**On Fuji Testnet**](/build/subnet/deploy/fuji-testnet-subnet.md)             |
-| [**On Avalanche Mainnet**](/build/subnet/deploy/mainnet-subnet.md)             |
-| [**On Production Infrastructure**](/build/subnet/deploy/on-prod-infra.md)      |
-| [**With Multisignature Authorization**](/build/subnet/deploy/multisig-auth.md) |
-| [**With a Custom Virtual Machine**](/build/subnet/deploy/custom-vm-subnet.md)  |
+| Deploy a Subnet                                                                             |
+|:--------------------------------------------------------------------------------------------|
+| [**On a Local Network**](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md)         |
+| [**On Fuji Testnet**](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md)     |
+| [**On Avalanche Mainnet**](/tooling/cli-create-deploy-subnets/deploy-mainnet-subnet.md)     |
+| [**On Production Infrastructure**](/build/subnet/deploy/on-prod-infra.md)                   |
+| [**With Multisignature Authorization**](/build/subnet/deploy/multisig-auth.md)              |
+| [**With a Custom Virtual Machine**](/build/subnet/deploy/custom-vm-subnet.md)               |
 
 | Elastic Subnets                                                                                                    |
 | :----------------------------------------------------------------------------------------------------------------- |

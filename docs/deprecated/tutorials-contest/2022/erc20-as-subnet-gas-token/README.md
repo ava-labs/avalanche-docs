@@ -36,9 +36,8 @@ DISCLAIMER: The bridge implementation in this tutorial is a proof of concept and
     precompile on our Subnet. Familiarity with precompiles and knowledge of
     NativeMinter precompile will be assumed.
 - Having an up and running Subnet which uses NativeMinter precompile.
-  - In this tutorial we will be using a local Subnet. Refer to
-    [this](/build/subnet/deploy/local-subnet.md), to deploy
-    your local Subnet.
+  - In this tutorial we will be using a local Subnet. Refer to 
+    this, to deploy your local Subnet.
 - Basic knowledge of [Hardhat](https://hardhat.org/).
   - We will be writing our code in a Hardhat development environment. We will
     write custom scripts to automate our job and add those scripts as tasks to

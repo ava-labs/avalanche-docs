@@ -92,7 +92,7 @@ a local network using the
 [Avalanche-CLI](https://github.com/ava-labs/avalanche-cli) and deploy a basic
 smart contract using [Remix](https://remix.ethereum.org/). Then Lastly we will
 be indexing our Subnet using [The Graph](https://thegraph.com/). This guide is
-an extension of the [Official Avalanche Documentation](/build/subnet/deploy/local-subnet.md).
+an extension of the Official Avalanche Documentation.
 
 Please note that all command line inputs and sample codes are MacOS and Linux
 Based. Commands may vary for other operating systems.

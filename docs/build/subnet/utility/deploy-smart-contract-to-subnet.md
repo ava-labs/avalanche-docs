@@ -12,14 +12,14 @@ sidebar_position: 0
 
 This tutorial assumes that:
 
-- [A Subnet and EVM blockchain](/build/subnet/deploy/fuji-testnet-subnet.md) has been created
+- [A Subnet and EVM blockchain](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md) has been created
 - Your Node is currently validating your target Subnet
 - Your wallet has a balance of the Subnet Native Token(Specified under _alloc_ in your
   [Genesis File](/build/subnet/upgrade/customize-a-subnet.md#genesis)).
 
 ## Step 1: Setting up Core
 
-### **EVM Subnet Settings:** [(EVM Core Tutorial)](/build/subnet/deploy/fuji-testnet-subnet.md#connect-with-core)
+### **EVM Subnet Settings:** [(EVM Core Tutorial)](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md#connect-with-core)
 
 - **`Network Name`**: Custom Subnet-EVM
 - **`New RPC URL`**: [http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc](http://NodeIPAddress:9650/ext/bc/BlockchainID/rpc) (Note: the port number should
