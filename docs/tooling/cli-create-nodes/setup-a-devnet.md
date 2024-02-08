@@ -27,7 +27,7 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 Before we begin, you will need to have:
 
 - Created an AWS account and have an updated AWS `credentials` file in home directory with [default] profile
-- [Created a Subnet configuration `<SubnetName>`](/build/subnet/deploy/fuji-testnet-subnet.md#create-an-evm-subnet) based on SubnetEVM.
+- [Created a Subnet configuration `<SubnetName>`](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md#create-an-evm-subnet) based on SubnetEVM.
 
 Note: the tutorial is based in AWS, but Devnets can also be created and operated in other supported
 cloud providers, such as GCP.
@@ -157,7 +157,7 @@ exit status 1
 So, next step is to deploy `<subnetName>` into `<clusterName>`. So as to create the Subnet and blockchain transactions
 needed for posterior syncing and validation of the Subnet.
 
-While the `subnet deploy` command can be used [as described here](/build/subnet/deploy/fuji-testnet-subnet.md#deploy-the-subnet),
+While the `subnet deploy` command can be used [as described here](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md#deploy-the-subnet),
 deploying into Devnets is a subset of that operation, and so a quickest command is provided.
 
 It automatically takes into account the API endpoint of the Devnet, and use a common funding option for Devnets, known as EWOQ keys.

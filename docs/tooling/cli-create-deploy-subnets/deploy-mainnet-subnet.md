@@ -45,7 +45,7 @@ your own run-through of this tutorial.
 - [Avalanche-CLI is installed](/tooling/cli-guides/install-avalanche-cli.md) on each validator node's
   box
 - A [Ledger](https://www.ledger.com/) device
-- You've [created a Subnet configuration](/tooling/cli-create-deploy-subnets/create-subnet.md.md#create-your-subnet-configuration)
+- You've [created a Subnet configuration](/tooling/cli-create-deploy-subnets/create-subnet.md#create-your-subnet-configuration)
   and fully tested a [Fuji Testnet Subnet deployment](/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet.md)
 
 :::warning

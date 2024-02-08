@@ -180,7 +180,7 @@ array for each blockchain, with the following possible fields:
    "genesis": path to a file containing the genesis for your blockchain (must be a valid path)
 ```
 
-See the [Avalanche-CLI documentation](/build/subnet/deploy/local-subnet.md) for details about how to
+See the [Avalanche-CLI documentation](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md) for details about how to
 create and run Subnets with our _Avalanche-CLI_ tool.
 
 The network-runner supports AvalancheGo node configuration at different levels.
@@ -383,7 +383,7 @@ For general Subnet documentation, please refer to [Subnets](/learn/avalanche/sub
 ANR can be a great helper
 working with Subnets, and can be used to develop and test new Subnets before deploying them in
 public networks. However, for a smooth and guided experience, we recommend using
-[Avalanche-CLI](/build/subnet/deploy/local-subnet.md). These examples expect a basic understanding of
+[Avalanche-CLI](/tooling/cli-create-deploy-subnets/deploy-local-subnet.md). These examples expect a basic understanding of
 what Subnets are and their usage.
 
 ### RPC Server Subnet-EVM Example
