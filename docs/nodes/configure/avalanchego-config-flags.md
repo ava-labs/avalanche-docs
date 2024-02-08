@@ -245,6 +245,14 @@ As an alternative to `--chain-config-dir`, chains custom configurations can be
 loaded altogether from command line via `--chain-config-content` flag. Content
 must be base64 encoded.
 
+Example:
+
+```bash
+cchainconfig="$(echo -n '{"log-level":"trace"}' | base64)"
+chainconfig="$(echo -n "{\"C\":{\"Config\":\"${cchainconfig}\",\"Upgrade\":null}}" | base64)"
+avalanchego --chain-config-content "${chainconfig}"
+```
+
 #### `--chain-aliases-file` (string)
 
 Path to JSON file that defines aliases for Blockchain IDs. Defaults to
