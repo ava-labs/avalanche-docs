@@ -36,7 +36,7 @@ run-through of this tutorial.
 ## Virtual Machine
 
 Avalanche can run multiple blockchains. Each blockchain is an instance of a
-[Virtual Machine](/learn/avalanche/subnets-overview.md#virtual-machines), much like an object in
+[Virtual Machine](/learn/avalanche/virtual-machines), much like an object in
 an object-oriented language is an instance of a class.
 That's, the VM defines the behavior of the blockchain.
 
@@ -49,13 +49,13 @@ most other Ethereum client features.
 ## Fuji Testnet
 
 For this tutorial, it's recommended that you follow
-[Run an Avalanche Node Manually](/nodes/run/node-manually.md#connect-to-fuji-testnet)
+[Run an Avalanche Node Manually](/nodes/run/node-manually.md#run-an-avalanche-node-from-source)
 and this step below particularly to start your node on `Fuji`:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
 
 Also it's worth pointing out that
-[it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking.md#fuji-testnet)
+[it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking.md)
 and you can get the test token from the [faucet](https://faucet.avax.network/). If you already have an AVAX
 balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, 
 please request a faucet coupon on 
@@ -237,8 +237,8 @@ After following these 3 steps, your test key should now have a balance on the P-
 
 ## Create an EVM Subnet
 
-Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a
-[local network](/build/subnet/deploy/local-subnet.md#create-a-custom-subnet-configuration). In fact,
+Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a local network. 
+In fact,
 the `create` commands only creates a specification of your Subnet on the local file system.
 Afterwards the
 Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with the
@@ -568,7 +568,7 @@ To request permission to validate a Subnet, the following steps are required:
 Before a node can be a validator on a Subnet, the node is required to already be a validator on the
 primary network, which means that your node has **fully bootstrapped**.
 
-See [here](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) on how to
+See [here](/nodes/validate/add-a-validator.md#add-a-validator-with-core-extension) on how to
 become a validator.
 
 :::

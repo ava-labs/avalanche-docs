@@ -58,7 +58,7 @@ Como operador de una Subnet, debes asegurarte de que, hagas lo que hagas, al men
 
 Es obligatorio que el peso acumulativo de todos los validadores en la Subnet sea al menos
 el valor de
-[`snow-sample-size`](/nodes/configure/avalanchego-config-flags.md#snow-sample-size-int) (valor predeterminado
+[`snow-sample-size`](/nodes/configure/avalanchego-config-flags.md#consensus-parameters) (valor predeterminado
 20). Por ejemplo, si solo hay un validador en la Subnet, su peso debe ser al menos
 `snow-sample-size`. Por lo tanto, al asignar peso a los nodos, siempre usa valores mayores que 20.
 Recuerda que el peso de un validador no se puede cambiar mientras está validando, así que asegúrate de usar un
