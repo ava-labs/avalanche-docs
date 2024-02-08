@@ -1843,6 +1843,8 @@ platform.getSubnet({
 - `isPermissioned` indicates if the Subnet is permissioned or not.
 - for permissioned Subnets, `threshold` signatures from addresses in `controlKeys` are needed
   to add a validator to the Subnet.
+- for permissioned Subnets, operations on it will be rejected while `locktime` is in the past
+  regarding current time.
 - for permissionless Subnets, `subnetTransformationTxID` is the ID of the transaction that
   created the permissionless setup.
 
