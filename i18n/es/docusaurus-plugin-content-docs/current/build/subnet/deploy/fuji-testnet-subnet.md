@@ -443,6 +443,12 @@ go run main.go subnet list --deployed
 
 ## Desplegar la Subred
 
+:::note
+
+Para implementar la subred, necesitará algo de AVAX de red de prueba en la cadena P.
+
+:::
+
 Para desplegar la nueva Subred, ejecuta
 
 ```bash

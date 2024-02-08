@@ -450,6 +450,12 @@ go run main.go subnet list --deployed
 
 To deploy the new Subnet, run
 
+:::note
+
+To deploy the Subnet, you will need some testnet AVAX on the P-chain.
+
+:::
+
 ```bash
 avalanche subnet deploy testsubnet
 ```
