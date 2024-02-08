@@ -126,6 +126,9 @@ curl -X POST --data '{
 }
 ```
 
+Network ID of 1 = Mainnet
+Network ID of 5 = Fuji (testnet)
+
 ### `info.getNetworkName`
 
 Get the name of the network this node is participating in.
