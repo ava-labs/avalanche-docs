@@ -185,6 +185,7 @@ a validator on the Primary Network. Your node's POP is logged on startup and is 
 [info.getNodeID](/reference/avalanchego/info-api#infogetnodeid) endpoint.
   - `publicKey` is the 48 byte hex representation of the BLS key.
   - `proofOfPossession` is the 96 byte hex representation of the BLS signature.
+
 **Example Call:**
 
 ```sh
@@ -236,6 +237,7 @@ This endpoint set is for a specific node, it is unavailable on the [public serve
 ```text
 info.getNodeIP() -> {ip: string}
 ```
+
 
 **Example Call:**
 
