@@ -158,9 +158,9 @@ curl -X POST --data '{
 }
 ```
 
-### `info.getNodeID`
+### `info.nodeID`
 
-Get the ID of this node.
+Get the ID, the BLS key, and the proof of possession(BLS signature) of this node.
 
 :::info
 This endpoint set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
@@ -183,7 +183,8 @@ Primary Network.
 - `nodePOP` is this node's BLS key and proof of possession. Nodes must register a BLS key to act as
 a validator on the Primary Network. Your node's POP is logged on startup and is accessible over the
 [info.getNodeID](/reference/avalanchego/info-api#infogetnodeid) endpoint.
-
+  - `publicKey` is the 48 byte hex representation of the BLS key.
+  - `proofOfPossession` is the 96 byte hex representation of the BLS signature.
 **Example Call:**
 
 ```sh
@@ -209,6 +210,18 @@ curl -X POST --data '{
   "id": 1
 }
 ```
+
+**Making the API call via terminal**
+
+![Terminal Call](/img/getNodeID.gif)
+
+**Making the API call via Postman**
+
+![Postman Call](/img/postman-getNodeID.gif)
+
+Learn more about how to make API calls using Postman
+[here](../../tooling/avalanchego-postman-collection/making-api-calls.md).
+
 
 ### `info.getNodeIP`
 
