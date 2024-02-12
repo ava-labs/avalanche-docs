@@ -28,7 +28,7 @@ Returns peer votes for Avalanche Change Proposals (ACPs)
 
 **Signature:**
 
-```sh
+```go
 info.acps() -> {
     acps: map[uint32]{
         supportWeight: uint64
