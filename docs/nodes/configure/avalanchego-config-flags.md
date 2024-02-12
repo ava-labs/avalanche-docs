@@ -58,12 +58,12 @@ among currently supported file format (see
 #### `--acp-support` (array of integers)
 
 The `--acp-support` flag allows an AvalancheGo node to indicate support for a
-set of Avalanche Community Proposals.
+set of [Avalanche Community Proposals](https://github.com/avalanche-foundation/ACPs).
 
 #### `--acp-object` (array of integers)
 
 The `--acp-object` flag allows an AvalancheGo node to indicate objection for a
-set of Avalanche Community Proposals.
+set of [Avalanche Community Proposals](https://github.com/avalanche-foundation/ACPs).
 
 ## APIs
 
