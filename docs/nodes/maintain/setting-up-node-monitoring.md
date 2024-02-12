@@ -142,7 +142,7 @@ Prometheus web interface, available on `http://your-node-host-ip:9090/`
 You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or
 adjust the security settings to allow connections to port 9090 if the node is
 running on a cloud instance. For AWS, you can look it up
-[here](/nodes/run/third-party/aws-node.md#f8df).
+[here](/nodes/run/third-party/aws-node.md#create-a-security-group).
 If on public internet, make sure to only allow your IP to connect!
 
 :::

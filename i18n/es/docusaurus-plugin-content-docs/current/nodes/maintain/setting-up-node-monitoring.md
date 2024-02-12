@@ -124,7 +124,7 @@ Observa el estado `active (running)` (presiona `q` para salir). También puedes 
 :::warning
 
 Es posible que necesites hacer `sudo ufw allow 9090/tcp` si el firewall está activado y/o ajustar la configuración de seguridad para permitir conexiones al puerto 9090 si el nodo se está ejecutando en una instancia en la nube. Para AWS, puedes consultarlo
-[aquí](/nodes/run/third-party/aws-node.md#f8df).
+[aquí](/nodes/run/third-party/aws-node.md#create-a-security-group).
 Si está en Internet público, ¡asegúrate de permitir solo que tu IP se conecte!
 
 :::
