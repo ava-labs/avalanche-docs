@@ -36,7 +36,7 @@ run-through of this tutorial.
 ## Virtual Machine
 
 Avalanche can run multiple blockchains. Each blockchain is an instance of a
-[Virtual Machine](/learn/avalanche/virtual-machines), much like an object in
+[Virtual Machine](/learn/avalanche/virtual-machines.md), much like an object in
 an object-oriented language is an instance of a class.
 That's, the VM defines the behavior of the blockchain.
 
