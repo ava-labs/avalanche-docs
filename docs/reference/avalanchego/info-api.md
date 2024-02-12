@@ -249,7 +249,7 @@ curl -X POST --data '{
 }
 ```
 
-### `info.nodeID`
+### `info.getNodeID`
 
 Get the ID, the BLS key, and the proof of possession(BLS signature) of this node.
 
