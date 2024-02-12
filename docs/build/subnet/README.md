@@ -7,7 +7,7 @@ pagination_label: Subnets Overview
 ---
 
 Avalanche Subnets are a subset of Avalanche Primary Network validators agreeing to run the same
-[Virtual Machines (VM)](/learn/avalanche/virtual-machines). Subnets
+[Virtual Machines (VM)](/learn/avalanche/virtual-machines.md). Subnets
 enable extra dimensions of reliability, efficiency, and data sovereignty. See [here](/learn/avalanche/subnets-overview.md)
 for a broad overview.
 
