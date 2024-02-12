@@ -36,7 +36,7 @@ ejecución de este tutorial.
 ## Máquina Virtual
 
 Avalanche puede ejecutar múltiples blockchains. Cada blockchain es una instancia de una
-[Máquina Virtual](/learn/avalanche/virtual-machines), al igual que un objeto en
+[Máquina Virtual](/learn/avalanche/virtual-machines.md), al igual que un objeto en
 un lenguaje orientado a objetos es una instancia de una clase.
 Es decir, la VM define el comportamiento de la blockchain.
 
