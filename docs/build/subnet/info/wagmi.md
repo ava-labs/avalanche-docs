@@ -181,7 +181,7 @@ set manager address and making calls on the precompiled contract.
 
 We will use [Remix](https://remix.ethereum.org) online Solidity IDE and the [Core Browser
 Extension](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension).
-Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-metamask) yourself.
+Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-core) yourself.
 
 First using Core, we open the account as the owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
 

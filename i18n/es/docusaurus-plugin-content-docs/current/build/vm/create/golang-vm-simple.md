@@ -1302,7 +1302,7 @@ others that weren't already installed previously in the response.
 
 Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and
 `/ext/vm/timestamp`. For more details about VM configs, see
-[here](/nodes/configure/avalanchego-config-flags.md#vm-configs).
+[here](/nodes/configure/avalanchego-config-flags.md#virtual-machine-vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the process. However,
 AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in

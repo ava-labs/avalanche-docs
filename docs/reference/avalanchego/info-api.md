@@ -22,6 +22,97 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Methods
 
+### `info.acps`
+
+Returns peer preferences for Avalanche Community Proposals (ACPs)
+
+**Signature:**
+
+```go
+info.acps() -> {
+    acps: map[uint32]{
+        supportWeight: uint64
+        supporters:    set[string]
+        objectWeight:  uint64
+        objectors:     set[string]
+        abstainWeight: uint64
+    }
+}
+```
+
+**Example Call:**
+
+```sh
+curl -sX POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.acps",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "acps": {
+      "23": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "24": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "25": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "30": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "31": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "41": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "62": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      }
+    }
+  },
+  "id": 1
+}
+```
+
 ### `info.isBootstrapped`
 
 Check whether a given chain is done bootstrapping

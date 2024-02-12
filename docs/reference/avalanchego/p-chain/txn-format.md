@@ -10,7 +10,7 @@ pagination_label: P-Chain Transaction Format
 This file is meant to be the single source of truth for how we serialize
 transactions in Avalanche’s Platform Virtual Machine, aka the `Platform Chain`
 or `P-Chain`. This document uses the [primitive serialization](/reference/standards/serialization-primitives.md) format for packing and
-[secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) for cryptographic
+[secp256k1](/reference/standards/cryptographic-primitives.md#secp256k1-addresses) for cryptographic
 user identification.
 
 ## Codec ID
@@ -219,7 +219,7 @@ Outputs have two possible type: `SECP256K1TransferOutput`, `SECP256K1OutputOwner
 
 ## SECP256K1 Transfer Output
 
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) transfer output
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp256k1-addresses) transfer output
 allows for sending a quantity of an asset to a collection of addresses after a
 specified Unix time. The only valid asset is AVAX.
 
@@ -310,7 +310,7 @@ Let’s make a secp256k1 transfer output with:
 
 ## SECP256K1 Output Owners Output
 
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) output owners
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp256k1-addresses) output owners
 output will receive the staking rewards when the lock up period ends.
 
 ### What SECP256K1 Output Owners Output Contains
@@ -396,7 +396,7 @@ Inputs have one possible type: `SECP256K1TransferInput`.
 
 ## SECP256K1 Transfer Input
 
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) transfer input
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp256k1-addresses) transfer input
 allows for spending an unspent secp256k1 transfer output.
 
 ### What SECP256K1 Transfer Input Contains
@@ -2151,7 +2151,7 @@ of the inputs or operations.
 
 ## SECP256K1 Credential
 
-A [secp256k1](/reference/standards/cryptographic-primitives.md#secp-256-k1-addresses) credential
+A [secp256k1](/reference/standards/cryptographic-primitives.md#secp256k1-addresses) credential
 contains a list of 65-byte recoverable signatures.
 
 ### What SECP256K1 Credential Contains

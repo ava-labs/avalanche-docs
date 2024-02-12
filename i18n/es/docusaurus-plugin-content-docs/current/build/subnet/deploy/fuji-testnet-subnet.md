@@ -36,7 +36,7 @@ ejecución de este tutorial.
 ## Máquina Virtual
 
 Avalanche puede ejecutar múltiples blockchains. Cada blockchain es una instancia de una
-[Máquina Virtual](/learn/avalanche/subnets-overview.md#virtual-machines), al igual que un objeto en
+[Máquina Virtual](/learn/avalanche/virtual-machines.md), al igual que un objeto en
 un lenguaje orientado a objetos es una instancia de una clase.
 Es decir, la VM define el comportamiento de la blockchain.
 
@@ -55,7 +55,7 @@ y este paso a continuación en particular para iniciar tu nodo en `Fuji`:
 _Para conectarte a la Testnet Fuji en lugar de a la red principal, usa el argumento `--network-id=Fuji`_
 
 También vale la pena señalar que
-[solo se necesita 1 AVAX para convertirse en un validador en la Testnet Fuji](/nodes/validate/what-is-staking.md#fuji-testnet)
+[solo se necesita 1 AVAX para convertirse en un validador en la Testnet Fuji](/nodes/validate/what-is-staking.md)
 y puedes obtener el token de prueba desde el [faucet](https://faucet.avax.network/). Si ya tienes un saldo AVAX
 mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario,
 solicita un cupón de faucet en
@@ -553,7 +553,7 @@ La nueva Subnet creada en los pasos anteriores aún no tiene validadores dedicad
 
 Antes de que un nodo pueda ser un validador en una Subnet, se requiere que el nodo ya sea un validador en la red primaria, lo que significa que tu nodo se ha **inicializado completamente**.
 
-Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) cómo convertirte en un validador.
+Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-core-extension) cómo convertirte en un validador.
 
 :::
 
