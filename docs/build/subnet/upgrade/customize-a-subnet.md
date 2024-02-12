@@ -91,7 +91,7 @@ other chains can cause issues. One suggestion is to check with [chainlist.org](h
 to avoid ID collision, reserve and publish your ChainID properly.
 
 You can use `eth_getChainConfig` RPC call to get the current chain config. See
-[here](/reference/subnet-evm/api#ethgetchainconfig) for more info.
+[here](/reference/subnet-evm/api.md#eth_getchainconfig) for more info.
 
 #### Hard Forks
 
@@ -829,6 +829,29 @@ If `allowFeeRecipients` and `rewardAddress` are both specified in the `initialRe
 then an error will be returned and precompile won't be activated. For further information about
 precompile initial configurations see [Initial Precompile
 Configurations](#initial-precompile-configurations).
+
+### Avalanche Warp Messaging
+
+Warp Precompile enabled cross-subnet communication between other Subnets and primary-network (C-Chain). In order to use Warp messaging, Subnet-EVM chains must activate their Warp precompiles. Warp can be activated with the following lines in upgrade.json:
+
+```json
+{
+  "warpConfig": {
+    "blockTimestamp": (uint),
+    "quorumNumerator": (uint)
+  }
+}
+```
+
+`blockTimestamp` must be set to a timestamp after Durango date. `quorumNumerator` is the stake percentage of validators that must sign a Warp message for it to be considered valid. It must be set to a value between 33 and 100. The default value is 67. The `warpConfig` precompile can be later disabled by setting `disable` to `true` in the upgrade.json file.
+
+If you want to use Warp messaging in an existing Subnet-EVM chain, you should coordinate an upgrade with `upgrade.json`. See [Network Upgrades: Enable/Disable Precompiles](#network-upgrades-enabledisable-precompiles) for more information.
+
+:::warning
+
+Currently Warp Precompile can only be activated in Fuji after Durango occurs. Durango in Fuji is set at 11 AM ET, February 13th 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Fuji you should upgrade to `subnet-evm@v0.6.0-fuji` and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after Durango date (February 13th 2024 11 AM ET).
+
+:::
 
 ## Contract Examples
 

@@ -227,7 +227,7 @@ This tutorial will cover interacting with the Subnet through
 ### Step 4.1: Using Remix
 
 First, we will be adding our Subnet to [MetaMask](https://metamask.io/). To add
-the Subnet, refer to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask](/build/subnet/utility/deploy-smart-contract-to-subnet.md#step-1-setting-up-metamask)
+the Subnet, refer to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and MetaMask](/build/subnet/utility/deploy-smart-contract-to-subnet.md#using-remix)
 you should replace the values with your Subnet values that are printed out after
 you have created it. If your balance is zero after you add Subnet to the
 MetaMask, refer to [Access Funded Accounts](#access-funded-accounts).

@@ -85,7 +85,7 @@ $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Therefore, staking for t
 amount of time incurs an additional 11.11% of tokens minted, incentivizing stakers to stake
 for longer periods.
 
-Due to the capped-supply, the above function guarantees that regardless of the governance changes,
+Due to the capped-supply, the above function guarantees that
 AVAX will never exceed a total of $720M$ tokens, or $\lim_{j \to \infty} R(j) = 720M$.
 
 <!-- vale on -->
