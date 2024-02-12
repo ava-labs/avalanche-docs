@@ -39,7 +39,7 @@ basis on which you can easily build further automation.
 ## Architectural Description
 
 This section aims to describe the architecture of the system that the steps in
-the [Setup Instructions](#setup-instructions) section deploy when enacted. This
+the [Setup Instructions](#-setup-instructions) section deploy when enacted. This
 is done so that the executor can not only deploy the reference architecture, but
 also understand and potentially optimize it for their needs.
 

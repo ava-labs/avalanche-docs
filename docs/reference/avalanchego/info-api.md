@@ -22,6 +22,97 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ## Methods
 
+### `info.acps`
+
+Returns peer preferences for Avalanche Community Proposals (ACPs)
+
+**Signature:**
+
+```go
+info.acps() -> {
+    acps: map[uint32]{
+        supportWeight: uint64
+        supporters:    set[string]
+        objectWeight:  uint64
+        objectors:     set[string]
+        abstainWeight: uint64
+    }
+}
+```
+
+**Example Call:**
+
+```sh
+curl -sX POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.acps",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "acps": {
+      "23": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "24": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "25": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "30": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "31": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "41": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "62": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      }
+    }
+  },
+  "id": 1
+}
+```
+
 ### `info.isBootstrapped`
 
 Check whether a given chain is done bootstrapping
@@ -126,6 +217,9 @@ curl -X POST --data '{
 }
 ```
 
+Network ID of 1 = Mainnet
+Network ID of 5 = Fuji (testnet)
+
 ### `info.getNetworkName`
 
 Get the name of the network this node is participating in.
@@ -179,14 +273,10 @@ info.getNodeID() -> {
 ```
 
 - `nodeID` Node ID is the unique identifier of the node that you set to act as a validator on the 
-Primary Network. If you do not have a node, you can [delegate](https://core.app/stake/delegate/), 
-or [setup a node](https://docs.avax.network/nodes).
+Primary Network.
 - `nodePOP` is this node's BLS key and proof of possession. Nodes must register a BLS key to act as
-a validator on the Primary Network. To prevent
-[rogue key attacks](https://rist.tech.cornell.edu/papers/pkreg.pdf), you must include proof that 
-you control this key when setting up your validator by signing a standard message (called a Proof-of-Possession). 
-Your node's Proof-of-Possession (like your Node ID) is logged on startup and is accessible over the
-[info.getNodeID](https://docs.avax.network/reference/avalanchego/info-api#infogetnodeid) endpoint
+a validator on the Primary Network. Your node's POP is logged on startup and is accessible over the
+[info.getNodeID](/reference/avalanchego/info-api#infogetnodeid) endpoint.
 
 **Example Call:**
 

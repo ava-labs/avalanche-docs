@@ -159,7 +159,7 @@ consideren adecuado. Para hacer eso, todo lo que se necesita es acceso a la red,
 establecida y realizar llamadas al contrato precompilado.
 
 Usaremos [Remix](https://remix.ethereum.org) un IDE de Solidity en línea y la [Extensión del Navegador Core](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension).
-Core viene con la red WAGMI incorporada. MetaMask también servirá, pero deberá [agregar WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-metamask) usted mismo.
+Core viene con la red WAGMI incorporada. MetaMask también servirá, pero deberá [agregar WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-core) usted mismo.
 
 Primero, usando Core, abrimos la cuenta como propietario `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
 

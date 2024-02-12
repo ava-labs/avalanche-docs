@@ -57,6 +57,6 @@ $$
 
 Si todo el suministro de tokens en el año $j$ se apuesta durante el máximo tiempo de staking (un año, o 52 semanas), entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 1$. Si, en cambio, cada token se apuesta continuamente durante la duración mínima de stake de dos semanas, entonces $\sum_{\forall u}\rho(u.s_{amount}, u.s_{time}) = 0.9$. Por lo tanto, el staking durante el máximo tiempo de duración incurre en una cantidad adicional del 11.11% de tokens acuñados, incentivando a los stakers a bloquear por períodos más largos.
 
-Debido al suministro limitado, la función anterior garantiza que, independientemente de los cambios de gobernanza, AVAX nunca excederá un total de $720M$ tokens, o $\lim_{j \to \infty} R(j) = 720M$.
+Debido al suministro limitado, la función anterior garantiza que AVAX nunca excederá un total de $720M$ tokens, o $\lim_{j \to \infty} R(j) = 720M$.
 
 <!-- vale on -->
