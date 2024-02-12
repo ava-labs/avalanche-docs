@@ -62,7 +62,7 @@ Avalanche Community Proposals (ACP) using its stake. This feature enables valida
 operators to participate actively in the governance of the network by endorsing
 proposals identified by their unique ACP IDs.
 
-Usage: `--acp-support=[<ACP_ID>, <ACP_ID>, ...]`
+Usage: `--acp-support=<ACP_ID>,<ACP_ID>,...`
 
 #### `--acp-object` (array of integers)
 
@@ -71,7 +71,7 @@ effectively using its stake to oppose the proposal. This mechanism is part of th
 network's governance process, allowing stakeholders to express dissent against
 specific protocol changes or updates.
 
-Usage: `--acp-object=[<ACP_ID>, <ACP_ID>, ...]`
+Usage: `--acp-object=<ACP_ID>,<ACP_ID>,...`
 
 ## APIs
 
