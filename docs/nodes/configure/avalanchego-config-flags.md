@@ -55,23 +55,23 @@ among currently supported file format (see
 
 ## ACPs
 
-#### `--acp-support` (integer)
+#### `--acp-support` (array of integers)
 
 The `--acp-support` flag allows an AvalancheGo node to express support for a specific
 Avalanche Community Proposals (ACP) using its stake. This feature enables validator node
 operators to participate actively in the governance of the network by endorsing
 proposals identified by their unique ACP IDs.
 
-Usage: ```--acp-support=<ACP_ID>```
+Usage: `--acp-support=[<ACP_ID>, <ACP_ID>, ...]`
 
-#### `--acp-object` (integer)
+#### `--acp-object` (array of integers)
 
 The `--acp-object` flag enables an AvalancheGo node to formally raise objection to a specific ACP,
 effectively using its stake to oppose the proposal. This mechanism is part of the
 network's governance process, allowing stakeholders to express dissent against
 specific protocol changes or updates.
 
-Usage: ```--acp-object=<ACP_ID>```
+Usage: `--acp-object=[<ACP_ID>, <ACP_ID>, ...]`
 
 ## APIs
 
