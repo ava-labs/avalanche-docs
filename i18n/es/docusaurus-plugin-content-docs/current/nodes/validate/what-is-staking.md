@@ -12,4 +12,4 @@ El staking es el proceso en el que los usuarios bloquean sus tokens para apoyar 
 
 ## ¿Cómo funciona la prueba de participación?
 
-Para resistir los ataques [sybil](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), una red descentralizada debe requerir que la influencia en la red se pague con un recurso escaso. Esto hace que sea demasiado caro para un atacante obtener suficiente influencia sobre la red para comprometer su seguridad. En Avalanche, el recurso escaso es el token nativo, [AVAX](/learn/avalanche/intro.md#avax). Para que un nodo valide una blockchain en Avalanche, debe hacer staking de AVAX.
+Para resistir los ataques [sybil](https://support.avalabs.org/en/articles/4064853-what-is-a-sybil-attack), una red descentralizada debe requerir que la influencia en la red se pague con un recurso escaso. Esto hace que sea demasiado caro para un atacante obtener suficiente influencia sobre la red para comprometer su seguridad. En Avalanche, el recurso escaso es el token nativo, [AVAX](/learn/avalanche/avax.md). Para que un nodo valide una blockchain en Avalanche, debe hacer staking de AVAX.
