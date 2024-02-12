@@ -24,7 +24,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### `info.acps`
 
-Returns peer votes for Avalanche Change Proposals (ACPs)
+Returns peer preferences for Avalanche Change Proposals (ACPs)
 
 **Signature:**
 
