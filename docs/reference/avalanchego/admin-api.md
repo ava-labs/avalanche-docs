@@ -227,7 +227,7 @@ curl -X POST --data '{
 ### `admin.loadVMs`
 
 Dynamically loads any virtual machines installed on the node as plugins. See
-[here](/build/vm/intro#load-a-vm) for more information on how to install a
+[here](/build/vm/intro#installing-a-vm) for more information on how to install a
 virtual machine on a node.
 
 **Signature:**

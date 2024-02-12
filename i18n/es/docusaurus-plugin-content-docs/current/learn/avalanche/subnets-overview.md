@@ -48,7 +48,7 @@ Los operadores de nodos que validan una Subnet con múltiples blockchains no nec
 
 _Las diferentes aplicaciones basadas en blockchain pueden requerir que los validadores tengan ciertas propiedades como grandes cantidades de RAM o poder de CPU._
 
-- Una Subnet podría requerir que los validadores cumplan con ciertos [requisitos de hardware](/nodes/run/node-manually.md#requirements) para que la aplicación no sufra un rendimiento bajo debido a validadores lentos.
+- Una Subnet podría requerir que los validadores cumplan con ciertos [requisitos de hardware](/nodes/run/node-manually.md#hardware-and-os-requirements) para que la aplicación no sufra un rendimiento bajo debido a validadores lentos.
 
 ### Lanzar una Red Diseñada con Cumplimiento en Mente
 

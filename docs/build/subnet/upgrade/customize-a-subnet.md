@@ -91,7 +91,7 @@ other chains can cause issues. One suggestion is to check with [chainlist.org](h
 to avoid ID collision, reserve and publish your ChainID properly.
 
 You can use `eth_getChainConfig` RPC call to get the current chain config. See
-[here](/reference/subnet-evm/api#ethgetchainconfig) for more info.
+[here](/reference/subnet-evm/api.md#eth_getchainconfig) for more info.
 
 #### Hard Forks
 
