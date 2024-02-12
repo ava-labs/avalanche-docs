@@ -32,14 +32,14 @@ after the network upgrade has occurred.
 ## Vertex -> Block Indexing
 
 Before Cortina, indexing the X-Chain required polling the
-[/ext/index/X/vtx](/reference/avalanchego/index-api.md#x-chain-vertices) endpoint to fetch new
+`/ext/index/X/vtx` endpoint to fetch new
 vertices. During the Cortina activation, a “stop vertex” will be produced using
 a [new codec
 version](https://github.com/ava-labs/avalanchego/blob/c27721a8da1397b218ce9e9ec69839b8a30f9860/snow/engine/avalanche/vertex/codec.go#L17-L18)
 that will contain no transactions. This new vertex type will be the [same
 format](https://github.com/ava-labs/avalanchego/blob/c27721a8da1397b218ce9e9ec69839b8a30f9860/snow/engine/avalanche/vertex/stateless_vertex.go#L95-L102)
 as previous vertices. To ensure historical data can still be accessed in
-Cortina, the [/ext/index/X/vtx](/reference/avalanchego/index-api.md#x-chain-vertices) will remain
+Cortina, the `/ext/index/X/vtx` will remain
 accessible even though it will no longer be populated with chain data.
 
 :::note
