@@ -60,11 +60,11 @@ Instance type can be specified via `--node-type` parameter or via interactive me
 The command will ask which region you want to set up your cloud server in: 
 
 ```text
-Which GCP zone do you want to set up your node in?: 
-  ▸ us-east1-b
-    us-central1-c
-    us-west1-b
-    Choose custom zone (list of zones available at https://cloud.google.com/compute/docs/regions-zones)
+Which Google Region do you want to set up your node(s) in?:
+  ▸ us-east1
+    us-central1
+    us-west1
+    Choose custom Google Region (list of Google Regions available at https://cloud.google.com/compute/docs/regions-zones/)
 ```
 
 The command will next ask whether you want to set up monitoring for your nodes. If you choose to
