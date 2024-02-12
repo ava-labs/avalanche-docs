@@ -56,7 +56,7 @@ _Different blockchain-based applications may require validators to have certain
 properties such as large amounts of RAM or CPU power._
 
 - A Subnet could require that validators
-  meet certain [hardware requirements](/nodes/run/node-manually.md#requirements) so
+  meet certain [hardware requirements](/nodes/run/node-manually.md#hardware-and-os-requirements) so
   that the application doesn’t suffer from low performance due to slow validators.
 
 ### Launch a Network Designed With Compliance In Mind

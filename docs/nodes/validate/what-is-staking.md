@@ -21,5 +21,5 @@ a decentralized network must require that network influence is paid with a
 scarce resource. This makes it infeasibly expensive for an attacker to gain
 enough influence over the network to compromise its security. On Avalanche, the scarce
 resource is the native token,
-[AVAX](/learn/avalanche/intro.md#avax). For a node to validate
+[AVAX](/learn/avalanche/avax.md). For a node to validate
 a blockchain on Avalanche, it must stake AVAX.
