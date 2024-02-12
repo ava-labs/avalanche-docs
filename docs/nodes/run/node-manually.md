@@ -70,7 +70,7 @@ building the binary program.
 ### Install Dependencies
 
 - Install [gcc](https://gcc.gnu.org/)
-- Install [go](https://go.dev/)
+- Install [go](https://go.dev/doc/install)
 
 ### Build and Start
 
