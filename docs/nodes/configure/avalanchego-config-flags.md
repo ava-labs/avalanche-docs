@@ -58,7 +58,7 @@ among currently supported file format (see
 #### `--acp-support` (integer)
 
 The `--acp-support` flag allows an AvalancheGo node to express support for a specific
-Avalanche Consensus Protocol (ACP) using its stake. This feature enables node
+Avalanche Community Proposals (ACP) using its stake. This feature enables validator node
 operators to participate actively in the governance of the network by endorsing
 proposals identified by their unique ACP IDs.
 
