@@ -53,6 +53,26 @@ Specifies the format of the base64 encoded config content. JSON, TOML, YAML are
 among currently supported file format (see
 [here](https://github.com/spf13/viper#reading-config-files) for full list). Defaults to `JSON`.
 
+## ACPs
+
+#### `--acp-support` (array of integers)
+
+The `--acp-support` flag allows an AvalancheGo node to express support for a specific
+Avalanche Community Proposals (ACP) using its stake. This feature enables validator node
+operators to participate actively in the governance of the network by endorsing
+proposals identified by their unique ACP IDs.
+
+Usage: `--acp-support=<ACP_ID>,<ACP_ID>,...`
+
+#### `--acp-object` (array of integers)
+
+The `--acp-object` flag enables an AvalancheGo node to formally raise objection to a specific ACP,
+effectively using its stake to oppose the proposal. This mechanism is part of the
+network's governance process, allowing stakeholders to express dissent against
+specific protocol changes or updates.
+
+Usage: `--acp-object=<ACP_ID>,<ACP_ID>,...`
+
 ## APIs
 
 #### `--api-admin-enabled` (boolean)
