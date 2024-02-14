@@ -306,18 +306,6 @@ curl -X POST --data '{
 }
 ```
 
-**Making the API call via terminal**
-
-![Terminal Call](/img/getNodeID.gif)
-
-**Making the API call via Postman**
-
-![Postman Call](/img/postman-getNodeID.gif)
-
-Learn more about how to make API calls using Postman
-[here](../../tooling/avalanchego-postman-collection/making-api-calls.md).
-
-
 ### `info.getNodeIP`
 
 Get the IP of this node.
@@ -331,7 +319,6 @@ This endpoint set is for a specific node, it is unavailable on the [public serve
 ```text
 info.getNodeIP() -> {ip: string}
 ```
-
 
 **Example Call:**
 
