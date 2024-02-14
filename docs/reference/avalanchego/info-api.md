@@ -24,7 +24,7 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### `info.acps`
 
-Returns peer votes for Avalanche Change Proposals (ACPs)
+Returns peer preferences for Avalanche Community Proposals (ACPs)
 
 **Signature:**
 
@@ -216,6 +216,9 @@ curl -X POST --data '{
   }
 }
 ```
+
+Network ID of 1 = Mainnet
+Network ID of 5 = Fuji (testnet)
 
 ### `info.getNetworkName`
 
