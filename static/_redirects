@@ -556,3 +556,14 @@
 
 # teleporter marketing 
 /teleporter /build/cross-chain/teleporter/deep-dive 301
+
+# 02/06/2024
+
+/tooling/cli-guides/create-a-validator-aws /tooling/cli-create-nodes/create-a-validator-aws 301
+/tooling/cli-guides/create-a-validator-gcp /tooling/cli-create-nodes/create-a-validator-gcp 301
+/tooling/cli-guides/node-ssh /tooling/cli-create-nodes/node-ssh 301
+/tooling/cli-guides/setup-a-devnet /tooling/cli-create-nodes/setup-a-devnet 301
+/tooling/cli-guides/stop-node /tooling/cli-create-nodes/stop-node 301
+/tooling/cli-guides/upload-a-custom-vm-to-cloud /tooling/cli-create-nodes/stop-node 301
+/tooling/cli-guides/validate-primary-network /tooling/cli-create-nodes/stop-node 301
+/tooling/cli-guides/validate-subnets /tooling/cli-create-nodes/stop-node 301

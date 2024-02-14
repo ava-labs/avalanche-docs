@@ -286,7 +286,7 @@ ${updatedContent}`,
         if (filename.includes("README")) {
           const updatedContent = replaceRelativeLinks(
             content,
-            "https://github.com/meaghanfitzgerald/coreth/blob/docs-integration/precompile/contracts/warp/"
+            "https://github.com/ava-labs/coreth/blob/master/precompile/contracts/warp/"
           );
           return {
             filename: "evm-integration.md",
@@ -296,6 +296,39 @@ description: Avalanche Warp Messaging provides a basic primitive for signing and
 keywords: [ coreth, subnet-evm, docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
 sidebar_label: EVM Integration 
 sidebar_position: 2
+---
+
+${updatedContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/learn/acp.md
+      name: "acp-overview",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/meaghanfitzgerald/ACPs/main/",
+      documents: ["README.md"],
+      outDir: "docs/learn/",
+      // change file name and add metadata, correct links
+      modifyContent(filename, content) {
+        if (filename.includes("README")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/avalanche-foundation/ACPs/blob/main/"
+          );
+          return {
+            filename: "acp.md",
+            content: `---
+tags: [Avalanche Community Proposals, ACPs]
+description: An Avalanche Community Proposal is a concise document that introduces a change or best practice for adoption on the Avalanche Network. ACPs should provide clear technical specifications of any proposals and a compelling rationale for their adoption. ACPs are an open framework for proposing improvements and gathering consensus around changes to the Avalanche Network. ACPs can be proposed by anyone. 
+keywords: [ avalanche, nodes, preference, avalanche improvements, open source, acps, avalanche community proposals ]
+sidebar_label: Avalanche Community Proposals
+sidebar_position: 0
 ---
 
 ${updatedContent}`,
