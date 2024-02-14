@@ -128,4 +128,4 @@ editing:_
 
 - If you understand the issue enough to provide a correction, follow the steps
   [here](https://github.com/ava-labs/avalanche-docs#quick-fixes).
-- If not, raise an [Issue](https://github.com/ava-labs/avalanche-docs/issues/new/choose).
+- If not, please raise an [Issue](https://github.com/ava-labs/avalanche-docs/issues/new/choose).
