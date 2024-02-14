@@ -17,6 +17,7 @@ docs/build/cross-chain/teleporter/getting-started.md
 docs/build/cross-chain/teleporter/upgradeability.md
 docs/build/cross-chain/teleporter/cli.md
 docs/build/cross-chain/awm/evm-integration.md
+docs/learn/acp.md
 
 # Misc
 .DS_Store
