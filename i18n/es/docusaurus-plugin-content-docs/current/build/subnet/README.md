@@ -6,7 +6,7 @@ sidebar_label: 🔗 Enlaces rápidos
 pagination_label: Resumen de Subnets
 ---
 
-Las Subnets de Avalanche son un subconjunto de validadores de la red primaria de Avalanche que acuerdan ejecutar las mismas [Máquinas Virtuales (VM)](/learn/avalanche/subnets-overview.md#virtual-machines). Las Subnets permiten dimensiones adicionales de confiabilidad, eficiencia y soberanía de datos. Consulta [aquí](/learn/avalanche/subnets-overview.md) para obtener una visión general amplia.
+Las Subnets de Avalanche son un subconjunto de validadores de la red primaria de Avalanche que acuerdan ejecutar las mismas [Máquinas Virtuales (VM)](/learn/avalanche/virtual-machines.md). Las Subnets permiten dimensiones adicionales de confiabilidad, eficiencia y soberanía de datos. Consulta [aquí](/learn/avalanche/subnets-overview.md) para obtener una visión general amplia.
 
 ## 🔗 Enlaces rápidos de Subnets
 

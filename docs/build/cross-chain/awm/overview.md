@@ -11,13 +11,14 @@ keywords:
     cross-subnet communication,
     cross-chain,
   ]
-sidebar_label: Avalanche Warp Messaging
+sidebar_label: Overview
+sidebar_position: 0
 ---
 
 # Avalanche Warp Messaging
 
 Avalanche Warp Messaging (AWM) enables native cross-Subnet communication and allows
-[Virtual Machine (VM)](/learn/avalanche/subnets-overview.md#virtual-machines) developers to implement arbitrary
+[Virtual Machine (VM)](/learn/avalanche/virtual-machines.md) developers to implement arbitrary
 communication protocols
 between any two Subnets.
 

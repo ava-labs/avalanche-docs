@@ -9,10 +9,6 @@ pagination_label: Info API
 
 This API can be used to access basic information about the node.
 
-:::info
-This API set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
-:::
-
 ## Format
 
 This API uses the `json 2.0` RPC format. For more information on making JSON RPC calls, see
@@ -25,6 +21,97 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 ```
 
 ## Methods
+
+### `info.acps`
+
+Returns peer preferences for Avalanche Community Proposals (ACPs)
+
+**Signature:**
+
+```go
+info.acps() -> {
+    acps: map[uint32]{
+        supportWeight: uint64
+        supporters:    set[string]
+        objectWeight:  uint64
+        objectors:     set[string]
+        abstainWeight: uint64
+    }
+}
+```
+
+**Example Call:**
+
+```sh
+curl -sX POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.acps",
+    "params" :{}
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "acps": {
+      "23": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "24": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "25": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "30": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "31": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "41": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      },
+      "62": {
+        "supportWeight": "0",
+        "supporters": [],
+        "objectWeight": "0",
+        "objectors": [],
+        "abstainWeight": "161147778098286584"
+      }
+    }
+  },
+  "id": 1
+}
+```
 
 ### `info.isBootstrapped`
 
@@ -130,6 +217,9 @@ curl -X POST --data '{
 }
 ```
 
+Network ID of 1 = Mainnet
+Network ID of 5 = Fuji (testnet)
+
 ### `info.getNetworkName`
 
 Get the name of the network this node is participating in.
@@ -164,7 +254,11 @@ curl -X POST --data '{
 
 ### `info.getNodeID`
 
-Get the ID of this node.
+Get the ID, the BLS key, and the proof of possession(BLS signature) of this node.
+
+:::info
+This endpoint set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
+:::
 
 **Signature:**
 
@@ -178,8 +272,12 @@ info.getNodeID() -> {
 }
 ```
 
-- `nodeID` is this node's ID
-- `nodePOP` is this node's BLS key and proof of possession
+- `nodeID` Node ID is the unique identifier of the node that you set to act as a validator on the 
+Primary Network.
+- `nodePOP` is this node's BLS key and proof of possession. Nodes must register a BLS key to act as
+a validator on the Primary Network. Your node's POP is logged on startup and is accessible over this endpoint.
+  - `publicKey` is the 48 byte hex representation of the BLS key.
+  - `proofOfPossession` is the 96 byte hex representation of the BLS signature.
 
 **Example Call:**
 
@@ -210,6 +308,10 @@ curl -X POST --data '{
 ### `info.getNodeIP`
 
 Get the IP of this node.
+
+:::info
+This endpoint set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
+:::
 
 **Signature:**
 
@@ -360,6 +462,10 @@ curl -X POST --data '{
 ### `info.getVMs`
 
 Get the virtual machines installed on this node.
+
+:::info
+This endpoint set is for a specific node, it is unavailable on the [public server](/tooling/rpc-providers.md).
+:::
 
 **Signature:**
 

@@ -37,7 +37,7 @@ Postman can be installed locally or used as a web app. We recommend installing
 the application, as it simplifies operation. You can download Postman from its
 [website](https://www.postman.com/downloads/). It is recommended that you sign
 up using your email address as then your workspace can be easily backed up and
-shared between web app and the app installed on your computer.
+shared between the web app and the app installed on your computer.
 
 ![Download Postman](/img/postman/postman-1-download.png)
 
@@ -46,8 +46,8 @@ account or log in. Again, it is not necessary, but recommended.
 
 ### Collection Import
 
-Select `Create workspace` from Workspaces tab and follow the prompts to crate a new
-workspace. This will where the rest of the work will be done.
+Select `Create workspace` from Workspaces tab and follow the prompts to create a new
+workspace. This will be where the rest of the work will be done.
 
 ![Create workspace](/img/postman/postman-2-workspace.png)
 

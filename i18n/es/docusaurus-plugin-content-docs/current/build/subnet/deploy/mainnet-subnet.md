@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
+tags: [Construir, Subredes]
+description: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
 sidebar_label: En la Mainnet de Avalanche
 pagination_label: Implementar una Subred con permisos en Mainnet
 sidebar_position: 2
@@ -265,7 +265,7 @@ Para solicitar permiso para validar una Subnet, se requieren los siguientes paso
 Agregar un validador en una Subnet requiere que el nodo ya sea un validador en la red primaria,
 lo que significa que tu nodo se ha **iniciado completamente**.
 
-Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-avalanche-wallet) cómo convertirte
+Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-core-extension) cómo convertirte
 en un validador.
 
 :::
