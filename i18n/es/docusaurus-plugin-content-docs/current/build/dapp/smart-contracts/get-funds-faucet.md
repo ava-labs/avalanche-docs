@@ -11,7 +11,7 @@ El [Grifo de la Red de Pruebas Fuji](https://faucet.avax.network) envía AVAX a 
 para ayudarte a hacer pruebas. (Este AVAX de red de pruebas no tiene valor.)
 
 Podemos obtener un "goteo" de AVAX del grifo Fuji. Pega la dirección en el
-sitio web del grifo Fuji](https://faucet.avax.network). Estos AVAX son para la red de pruebas Fuji
+sitio web del [grifo Fuji](https://faucet.avax.network). Estos AVAX son para la red de pruebas Fuji
 y no tienen valor monetario.
 
 ![Solicitando AVAX](/img/fuji-workflow/faucet1.png)
