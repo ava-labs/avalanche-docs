@@ -59,7 +59,8 @@ Also it's worth pointing out that
 and you can get the test token from the [faucet](https://faucet.avax.network/). If you already have an AVAX
 balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, 
 please request a faucet coupon on 
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+[Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6)
+can provide testnet AVAX if developers are unable to obtain it from the other two options.
 
 To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/reference/avalanchego/info-api.md#infogetnodeid):
 
@@ -221,9 +222,11 @@ the use of a ledger device is strongly recommended.
    if you already have funds on a different address, or get it from the faucet at
    [`https://faucet.avax.network`](https://faucet.avax.network/) using your **C-Chain address**.
    If you already have an AVAX balance greater than zero on Mainnet, 
-   paste your C-Chain address there, and request test tokens. Otherwise, 
+   paste your C-Chain address there, and request test tokens.
+   Otherwise, 
    please request a faucet coupon on 
-   [Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+   [Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6)
+   can provide testnet AVAX if developers are unable to obtain it from the other two options.
 
 2. **Export** your key via the `avalanche key export` command. The output is your private key,
    which will help you [import](https://support.avax.network/en/articles/6821877-core-extension-how-can-i-import-an-account)
