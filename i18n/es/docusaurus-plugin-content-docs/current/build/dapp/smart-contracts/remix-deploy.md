@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: En este documento, aprende cómo implementar y probar un contrato inteligente en Avalanche usando Remix y Core.
+tags: [Construir, Dapps]
+description: En este documento, aprende cómo implementar y probar un contrato inteligente en Avalanche usando Remix y Core.
 sidebar_label: Implementar con Remix IDE
 pagination_label: Implementar un Contrato Inteligente en Avalanche Usando Remix y Core
 ---

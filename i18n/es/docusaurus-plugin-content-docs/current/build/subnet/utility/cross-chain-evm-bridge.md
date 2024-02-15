@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Este tutorial demuestra el proceso de implementación de un puente entre cadenas EVM cruzadas. Construye bajo tu propio riesgo.
+tags: [Construir, Subredes]
+description: Este tutorial demuestra el proceso de implementación de un puente entre cadenas EVM cruzadas. Construye bajo tu propio riesgo.
 sidebar_label: Agregar un puente cruzado entre cadenas
 pagination_label: Implementar un puente EVM cruzado entre cadenas
 sidebar_position: 2
