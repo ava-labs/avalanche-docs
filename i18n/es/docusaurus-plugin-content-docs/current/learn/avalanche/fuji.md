@@ -1,6 +1,6 @@
 ---
-tags: [Fuji Testnet]
-description: Fuji Testnet es la red de pruebas oficial para el ecosistema Avalanche.
+etiquetas: [Fuji Testnet]
+descripción: Fuji Testnet es la red de pruebas oficial para el ecosistema Avalanche.
 palabras clave: [docs, fuji, testnet, construir en avalanche]
 sidebar_label: Fuji Testnet
 ---
@@ -9,7 +9,7 @@ sidebar_label: Fuji Testnet
 
 La Fuji Testnet sirve como la red de pruebas oficial para el ecosistema Avalanche.
 
-La infraestructura de Fuji imita a la Avalanche Mainnet. Está compuesta por una
+La infraestructura de Fuji imita a la Mainnet de Avalanche. Está compuesta por una
 [Red Primaria](/learn/avalanche/avalanche-platform.md) formada por instancias de X, P y C-Chain,
 así como muchas Subnets de prueba.
 
@@ -28,7 +28,8 @@ Para recibir tokens de testnet, los usuarios pueden solicitar fondos desde el
 Si ya hay un saldo de AVAX mayor que cero en Mainnet,
 pegue la dirección de la C-Chain allí y solicite tokens de prueba. De lo contrario,
 por favor solicite un cupón de faucet en
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+[Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6)
+oficial pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
 
 ## Consideraciones adicionales
 
