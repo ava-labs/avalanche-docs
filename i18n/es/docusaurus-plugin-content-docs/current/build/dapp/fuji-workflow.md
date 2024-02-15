@@ -1,6 +1,6 @@
 ---
-tags: [Construir, Dapps]
-description: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
+etiquetas: [Construir, Dapps]
+descripción: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
 sidebar_label: Flujo de trabajo de Fuji
 pagination_label: Flujo de trabajo de Fuji
 ---
@@ -138,51 +138,42 @@ Por ejemplo, si quieres generar las claves privadas para las primeras 3 direccio
 podrías actualizar el script de ejemplo anterior al siguiente:
 
 ```typescript
-const cAddresses: string[] = [];
-const privateKeys: string[] = [];
-for (let i: number = 0; i <= 2; i++) {
-  // Derivando la dirección _i_-ésima de la cadena C-Chain BIP44 externa
-  const child: HDNode = hdnode.derive(`m/44'/60'/0'/0/${i}`);
-  keyChain.importKey(child.privateKey);
-  // Convirtiendo las direcciones BIP44 a direcciones hexadecimales
-  const cchainAddress = ethers.utils.computeAddress(child.privateKey);
-  privateKeys.push(child.privateKey.toString("hex"));
-  cAddresses.push(cchainAddress);
-}
-console.log({ cAddresses, privateKeys });
-// {
-//   cAddresses: [
-//     '0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559',
-//     '0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C',
-//     '0xa14dFb7d8593c44a47A07298eCEA774557036ff3'
-//   ],
-//   privateKeys: [
-//     'cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc',
-//     'b85479b26bc8fbada4737e90ab2133204f2fa2a9ea33c1e0de4452cbf8fa3be4',
-//     'c72e18ea0f9aa5457396e3bf810e9de8df0177c8e4e5bf83a85f871512d645a9'
-//   ]
-// }
+const ethers = require("ethers");
+const network = "https://api.avax-test.network/ext/bc/C/rpc";
+const provider = ethers.getDefaultProvider(network);
+const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
+
+const main = async (): Promise<any> => {
+  provider.getBalance(address).then((balance) => {
+    // convert a currency unit from wei to ether
+    const balanceInAvax = ethers.utils.formatEther(balance);
+    console.log(`balance: ${balanceInAvax} AVAX`);
+    // balance: 0.01 AVAX
+  });
+};
+
+main();
 ```
 
-## Obtén un goteo del grifo Fuji
+## Obtener un Goteo del Grifo Fuji
 
-Podemos obtener un "goteo" de AVAX del grifo Fuji. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de grifo en [Discord](https://discord.com/channels/578992315641626624/1193594716835545170). Estos AVAX son para la red de pruebas Fuji y no tienen valor monetario.
+Podemos obtener un "goteo" de AVAX del grifo Fuji. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de la cadena C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de grifo en [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6) oficial pueden proporcionar AVAX de la red de pruebas si los desarrolladores no pueden obtenerlo de las otras dos opciones. Estos AVAX son para la red de pruebas Fuji y no tienen valor monetario.
 
 ![Solicitando AVAX](/img/fuji-workflow/faucet1.png)
 
-El grifo enviará algunos AVAX a la dirección y devolverá un ID de transacción (txID). Este txID se puede usar con el Explorer de la red de pruebas Fuji para obtener más información sobre la transacción.
+El grifo enviará algunos AVAX a la dirección y devolverá un ID de transacción (txID). Este txID se puede usar con el Explorador de la Red de Pruebas Fuji para obtener más información sobre la transacción.
 
 ![Recibiendo AVAX](/img/fuji-workflow/faucet2.png)
 
-### Verificar los detalles de la transacción
+### Verificar los Detalles de la Transacción
 
-El txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`, se puede ver en el [Explorer de la red de pruebas Fuji](https://subnets-test.avax.network/c-chain/tx/0x86eef1a01b0a5fd45f2a71c217f99d63d427230a271d3319004f17fc26d7fb26). Avalanche también tiene un [Explorer de Mainnet](https://explorer.avax.network).
+El txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`, se puede ver en el [Explorador de la Red de Pruebas Fuji](https://subnets-test.avax.network/c-chain/tx/0x86eef1a01b0a5fd45f2a71c217f99d63d427230a271d3319004f17fc26d7fb26). Avalanche también tiene un [Explorador de Mainnet](https://explorer.avax.network).
 
 ![Detalles de la transacción](/img/faucet-fuji-wf-alt-tx1.png)
 
-### Obtener el saldo
+### Obtener el Saldo
 
-También podemos usar el Explorer de Fuji para obtener el saldo de la primera dirección - [0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://explorer.avax-test.network/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559).
+También podemos usar el Explorador Fuji para obtener el saldo de la primera dirección: [0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://explorer.avax-test.network/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559).
 
 ![Saldo de la primera dirección derivada](/img/faucet-fuji-wf-alt-balance.png)
 
@@ -192,91 +183,14 @@ Alternativamente, podemos usar [ethersJS](https://docs.ethers.io/v5/) para obten
 const ethers = require("ethers");
 const network = "https://api.avax-test.network/ext/bc/C/rpc";
 const provider = ethers.getDefaultProvider(network);
-const address = "0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559";
+const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
     // convert a currency unit from wei to ether
     const balanceInAvax = ethers.utils.formatEther(balance);
     console.log(`balance: ${balanceInAvax} AVAX`);
-    // balance: 2 AVAX
-  });
-};
-
-main();
-```
-
-## Enviando AVAX
-
-El grifo envió 2 AVAX a la primera dirección que generamos. Vamos a enviar AVAX desde la primera dirección a la segunda dirección.
-
-```typescript
-// importar ethers.js
-import { ethers } from "ethers";
-// red: usando la red de pruebas Fuji
-const red = "https://api.avax-test.network/ext/bc/C/rpc";
-// proveedor: establecer una conexión RPC con la red
-const proveedor = new ethers.providers.JsonRpcProvider(red);
-
-// Clave privada del remitente:
-// dirección correspondiente 0x0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559
-let clavePrivada =
-  "cd30aef1af167238c627593537e162ecf5aad1d4ab4ea98ed2f96ad4e47006dc";
-// Crear una instancia de billetera
-let billetera = new ethers.Wallet(clavePrivada, proveedor);
-// Dirección del receptor
-let direccionReceptor = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
-// Cantidad de AVAX a enviar
-let cantidadEnAvax = "0.01";
-// Crear un objeto de transacción
-let tx = {
-  to: direccionReceptor,
-  // Convertir la unidad de moneda de ether a wei
-  value: ethers.utils.parseEther(cantidadEnAvax),
-};
-// Enviar una transacción
-billetera.sendTransaction(tx).then((objTx) => {
-  console.log(`tx, https://testnet.snowtrace.io/tx/${objTx.hash}`);
-  // Un resultado de transacción se puede verificar en un snowtrace con un enlace de transacción que se puede obtener aquí.
-});
-```
-
-### Verificar el éxito
-
-Podemos verificar que la transacción, `0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac`, fue exitosa usando el Explorer de la red de pruebas Fuji. La transacción se puede ver [aquí](https://testnet.snowtrace.io/tx/0x3a5f4198b3be8d24b272f8255912aae4dcf2fb1f97f70d1787434de7b3097aac).
-
-![Detalles de la transacción](/img/fuji-wf-alt-tx-2.png)
-
-#### Obtener el saldo
-
-También podemos usar el Explorer de Fuji para obtener el saldo de la segunda dirección - [0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C](https://testnet.snowtrace.io/address/0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C).
-
-Alternativamente, podemos usar ethersJS para obtener el saldo.
-
-```typescript
-const ethers = require("ethers");
-const network = "https://api.avax-test.network/ext/bc/C/rpc";
-const provider = ethers.getDefaultProvider(network);
-const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
-
-const main = async (): Promise<any> => {
-  provider.getBalance(address).then((balance) => {
-    // convertir una unidad de moneda de wei a ether
-    const balanceInAvax = ethers.utils.formatEther(balance);
-    console.log(`saldo: ${balanceInAvax} AVAX`);
-    // saldo: 0.01 AVAX
-  });
-};
-
-main();
-
-
-const main = async (): Promise<any> => {
-  provider.getBalance(address).then((balance) => {
-    // convertir una unidad de moneda de wei a ether
-    const balanceInAvax = ethers.utils.formatEther(balance);
-    console.log(`saldo: ${balanceInAvax} AVAX`);
-    // saldo: 0.02 AVAX
+    // balance: 0.02 AVAX
   });
 };
 
@@ -285,18 +199,18 @@ main();
 
 ### Iniciar sesión en la Extensión Core
 
-Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-a-partir-de-una-mnemónica) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
+Por último, podemos [usar la mnemotecnia para generar una clave privada](#generate-private-keys-from-a-mnemonic) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
 Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la clave privada.
 
 Usa la clave privada para acceder a la cuenta en la Extensión Core.
 
-![Acceder a la billetera](/img/fuji-wf-alt-enter-key.png)
+![Accede a la billetera](/img/fuji-wf-alt-enter-key.png)
 
 El saldo es correcto y la dirección es la primera dirección derivada.
 
 ![Saldo de la extensión Core](/img/fuji-wf-wallet-alt-info.png) ![3ra dirección derivada BIP44](/img/fuji-wf-alt-wallet-address.png)
 
-Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generar-claves-privadas-a-partir-de-una-mnemónica).
+Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generate-private-keys-from-a-mnemonic).
 
 ![Direcciones derivadas de la billetera](/img/fuji-wf-alt-wallet-address-2.png)
 ![Direcciones derivadas de la billetera2](/img/fuji-wf-alt-wallet-address-3.png)  
@@ -304,7 +218,7 @@ Podemos repetir este proceso de inicio de sesión usando las claves privadas de 
 
 ## Resumen
 
-La red de pruebas Fuji juega un papel crítico en la prueba de dapps, contratos inteligentes y productos financieros antes de implementar en la red principal. Las herramientas como AvalancheJS, la API pública, el grifo y el explorador ayudan a asegurar que tu entorno de prueba y QA esté cerca de la red principal para que puedas tener confianza al lanzar en la red principal.
+La red de pruebas Fuji juega un papel crítico en la prueba de dapps, contratos inteligentes y productos financieros antes de implementar en la red principal. Herramientas como AvalancheJS, la API pública, el grifo y el explorador ayudan a asegurar que tu entorno de prueba y QA esté cerca de la red principal para que puedas tener confianza al lanzar en la red principal.
 
 ## Recursos
 
@@ -312,11 +226,12 @@ Para recursos adicionales y valiosos, consulta a continuación.
 
 ### Grifo
 
-El [Fuji Faucet](https://faucet.avax.network) envía AVAX a direcciones de la cadena X o de la cadena C para ayudarte a probar. (Este AVAX de la red de pruebas no tiene valor.)
+El [Fuji Faucet](https://faucet.avax.network) envía AVAX a direcciones de la cadena X o la cadena C para ayudarte a probar. (Este AVAX de la red de pruebas no tiene valor.)
 
 ### Billetera
 
-La [extensión Core](https://join.core.app/extension) y la [aplicación móvil Core](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone) son billeteras simples, seguras y no custodiadas para almacenar activos Avalanche. Soportan Mainnet, Fuji y redes personalizadas.
+La [extensión Core](https://join.core.app/extension) y la [versión móvil Core](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone) son billeteras simples, seguras y no custodiales para almacenar activos Avalanche. 
+Admiten Mainnet, Fuji y redes personalizadas.
 
 ### Explorador
 
@@ -328,4 +243,4 @@ Ver [aquí](/tooling/rpc-providers.md).
 
 ### Ejemplos de AvalancheJS
 
-Hay más de [60 ejemplos de scripts AvalancheJS](https://github.com/ava-labs/avalanchejs/tree/master/examples) que demuestran cómo manejar activos y NFTs, enviar transacciones, agregar validadores y más.
+Hay más de [60 ejemplos de scripts AvalancheJS](https://github.com/ava-labs/avalanchejs/tree/master/examples) que demuestran cómo gestionar activos y NFT, enviar transacciones, agregar validadores y más.
