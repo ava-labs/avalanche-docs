@@ -343,9 +343,3 @@ The Avalanche Explorer allows you to explore the network on
 ### RPC Endpoints - Public API Server
 
 See [here.](/tooling/rpc-providers.md)
-
-### AvalancheJS Examples
-
-There are over [60 example AvalancheJS
-scripts](https://github.com/ava-labs/avalanchejs/tree/master/examples) which
-demonstrate how to assets and NFTs, send transactions, add validators and more.

@@ -50,9 +50,9 @@ these may jeopardize your staking reward.
 
 First, we show you how to add your node as a validator by using [Core web](https://core.app).
 
-### Retrieve the Node ID
+### Retrieve the Node ID, the BLS signature and the BLS key
 
-Get your node’s ID by calling [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid):
+Get this info by calling [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid):
 
 ```sh
 curl -X POST --data '{
@@ -62,13 +62,17 @@ curl -X POST --data '{
 }' -H 'content-type:application/json' 127.0.0.1:9650/ext/info
 ```
 
-The response has your node’s ID:
+The response has your node’s ID, the BLS key (public key) and the BLS signature (proof of possession):
 
 ```json
 {
   "jsonrpc": "2.0",
   "result": {
-    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD",
+    "nodePOP": {
+      "publicKey": "0x8f95423f7142d00a48e1014a3de8d28907d420dc33b3052a6dee03a3f2941a393c2351e354704ca66a3fc29870282e15",
+      "proofOfPossession": "0x86a3ab4c45cfe31cae34c1d06f212434ac71b1be6cfe046c80c162e057614a94a5bc9f1ded1a7029deb0ba4ca7c9b71411e293438691be79c2dbf19d1ca7c3eadb9c756246fc5de5b7b89511c7d7302ae051d9e03d7991138299b5ed6a570a98"
+    }
   },
   "id": 1
 }
@@ -84,8 +88,6 @@ filled in all the staking parameters and double-checked them, click `Submit Vali
 least 2 weeks, the delegation fee rate is at least 2%, and you’re staking at
 least 2,000 AVAX on Mainnet (1 AVAX on Fuji Testnet). A full guide about this can be found 
 [here](https://support.avax.network/en/articles/8117267-core-web-how-do-i-validate-in-core-stake).
-
-<iframe src="https://www.youtube.com/embed/1M0LZbuHO5Q?modestbranding=1&rel=0&iv_load_policy=3&color=white" width="800" height="500" title="How to Validate in Core Web" frameborder="0" allowfullscreen></iframe>
 
 You should see a success message, and your balance should be updated.
 
@@ -141,14 +143,12 @@ to run the example scripts directly from an AvalancheJS directory.
 In this section, we will use Fuji Testnet to show how to add a node to the validator set.
 
 Open your AvalancheJS directory and select the
-[**`examples/platformvm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/platformvm)
+[**`examples/p-chain`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/p-chain)
 folder to view the source code for the examples scripts.
 
 We will use the
-[**`buildAddValidatorTx.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildAddValidatorTx.ts)
-script to add a validator. To learn more about the `buildAddValidatorTx` API,
-please click
-[here](https://github.com/ava-labs/avalanchejs-docs/blob/main/classes/api_platformvm.platformvmapi.md#buildaddvalidatortx).
+[**`validate.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/p-chain/validate.ts)
+script to add a validator.
 
 #### Private Key
 
