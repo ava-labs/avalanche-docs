@@ -843,9 +843,9 @@ An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`,
   - **`Weight`** is a long which is the amount the validator stakes
 - **`SubnetID`** is the 32 byte Subnet ID of the Subnet this validator will validate.
 - **`Signer`** If the [SubnetID] is the primary network, [Signer] is the type ID
-  27 (`0x1B`) followed by a [Proof of Possession](#proof-of-possession). If the
+  28 (`0x1C`) followed by a [Proof of Possession](#proof-of-possession). If the
   [SubnetID] is not the primary network, this value is the empty signer, whose
-  byte representation is only the type ID 28 (`0x1C`).
+  byte representation is only the type ID 27 (`0x1B`).
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`ValidatorRewardsOwner`** Where to send validation rewards when done validating.
 - **`DelegatorRewardsOwner`** Where to send delegation rewards when done validating.
