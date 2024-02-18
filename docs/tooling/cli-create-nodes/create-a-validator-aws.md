@@ -109,8 +109,8 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
 - Started the process of bootstrapping your new Avalanche node to the Primary Network
 
-Please note that Avalance CLI can be configured to use `ssh-agent` for ssh communication. In this case public key will 
-be read from there and cloud server will be accessible using it. Yubikey hardware can be also used to store private ssh 
+Please note that Avalanche CLI can be configured to use `ssh-agent` for ssh communication. In this case public key will
+be read from there and cloud server will be accessible using it. Yubikey hardware can be also used to store private ssh
 key. Please use official Yubikey documentation, for example [https://developers.yubico.com/PGP/SSH_authentication/] for more details.
 
 ## Check Bootstrap Status

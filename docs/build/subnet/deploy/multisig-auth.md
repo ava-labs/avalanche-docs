@@ -292,7 +292,7 @@ like this:
 ```text
 All 2 required Tx signatures have been signed. Saving TX to disk to enable commit.
 
-Overwritting partiallySigned.txt
+Overwriting partiallySigned.txt
 
 Tx is fully signed, and ready to be committed
 
@@ -366,7 +366,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     P-avax12gcy0xl0al6gcjrt0395xqlcuq078ml93wl5h8
     P-avax1g7nkguzg8yju8cq3ndzc9lql2yg69s9ejqa2af
     P-avax1g4eryh40dtcsltmxn9zk925ny07gdq2xyjtf4g
-````
+```
 
 ```text
 ✔ Mainnet
@@ -376,8 +376,8 @@ Your subnet auth keys for add validator TX creation: [P-avax1kdzq569g2c9urm9887c
 ```
 
 ### Finish Assembling the TX
-
 Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for 
+Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for
 additional help issuing this transaction.
 
 :::note
@@ -385,8 +385,8 @@ additional help issuing this transaction.
 If setting up a multisig, don't select your validator start time to be in one minute. Finishing the
 signing process takes significantly longer when using a multisig.
 
-:::
 
+:::
 
 ```text
 Next, we need the NodeID of the validator you want to whitelist.
@@ -474,7 +474,7 @@ Repeat this processes until all required parties have signed the TX. You should 
 
 All 2 required Tx signatures have been signed. Saving TX to disk to enable commit.
 
-Overwritting partialAddValidatorTx.txt
+Overwriting partialAddValidatorTx.txt
 
 Tx is fully signed, and ready to be committed
 
@@ -498,5 +498,5 @@ The CLI recognizes the deployment network automatically and submits the TX appro
 Transaction successful, transaction ID: K7XNSwcmgjYX7BEdtFB3hEwQc6YFKRq9g7hAUPhW4J5bjhEJG
 ```
 
-You've successfully added the validator to the Subnet.
 
+You've successfully added the validator to the Subnet.
