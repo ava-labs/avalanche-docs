@@ -71,7 +71,7 @@ Para crear el contrato inteligente, vamos a usar [Open
 Zeppelin](https://docs.openzeppelin.com/). Open Zeppelin es una herramienta clave para construir contratos inteligentes de forma rápida y sencilla. Aunque solo estamos rascando la superficie en este tutorial, hay amplia documentación disponible en su sitio web para que la leas cuando quieras construir contratos más complejos.
 
 Open Zeppelin proporciona un [Contrato
-Wizard](https://docs.openzeppelin.com/contracts/4.x/wizard) que construirá contratos ERC. Para evitar cualquier entorno de codificación complejo, usaremos esto para crear nuestro contrato ERC-721.
+Wizard](https://docs.openzeppelin.com/contracts/5.x/wizard) que construirá contratos ERC. Para evitar cualquier entorno de codificación complejo, usaremos esto para crear nuestro contrato ERC-721.
 
 ![Contrato Wizard](intro-to-erc721s/2-contract-wizard.png)
 

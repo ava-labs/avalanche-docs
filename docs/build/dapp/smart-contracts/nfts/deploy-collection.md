@@ -98,7 +98,7 @@ surface in this tutorial, ample documentation is available on their website for
 you to read when you want to build more complex contracts.
 
 Open Zeppelin provides a [Contract
-Wizard](https://docs.openzeppelin.com/contracts/4.x/wizard) that will build out
+Wizard](https://docs.openzeppelin.com/contracts/5.x/wizard) that will build out
 ERC contracts. To avoid any complex coding environments, we'll use this to
 create our ERC-721 contract.
 
