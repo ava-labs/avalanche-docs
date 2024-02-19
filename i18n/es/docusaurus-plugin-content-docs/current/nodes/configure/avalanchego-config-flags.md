@@ -204,6 +204,14 @@ La referencia completa de la configuración de actualización de la Subnet `subn
 
 Como alternativa a `--chain-config-dir`, las configuraciones personalizadas de las cadenas se pueden cargar en su totalidad desde la línea de comandos a través de la bandera `--chain-config-content`. El contenido debe estar codificado en base64.
 
+Ejemplo:
+
+```bash
+cchainconfig="$(echo -n '{"log-level":"trace"}' | base64)"
+chainconfig="$(echo -n "{\"C\":{\"Config\":\"${cchainconfig}\",\"Upgrade\":null}}" | base64)"
+avalanchego --chain-config-content "${chainconfig}"
+```
+
 #### `--chain-aliases-file` (cadena)
 
 Ruta al archivo JSON que define alias para ID de Blockchains. Por defecto, es `~/.avalanchego/configs/chains/aliases.json`. Esta bandera se ignora si se especifica `--chain-aliases-file-content`. Ejemplo de contenido:
