@@ -88,33 +88,11 @@ Here's a summary:
 
 ### Preparation
 
-To prepare for the WAGMI network upgrade, on August 15, 2022, we had announced on
+To prepare for the first WAGMI network upgrade, on August 15, 2022, we had announced on
 [Twitter](https://twitter.com/AaronBuchwald/status/1559249414102720512) and shared on other social
-media such as Discord, with the following information:
+media such as Discord.
 
-> With Subnet-EVM v0.2.8 It's time for a whole new Subnet Season: Network Upgrade Edition.
->
-> Like every great show, we're kicking this season off with a pilot episode: WAGMI Network Upgrade.
->
-> Stay tuned because this pilot is literally a can't miss for every WAGMI node 😉
->
-> The upgrade will activate the fee config manager, and enable smooth fee config updates in the
-> future [https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees](https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees)
->
-> This upgrade changes how blocks are processed on WAGMI, so every WAGMI node needs to upgrade to
-> continue to validate WAGMI correctly.
->
-> In order to update your node, you need to update to Subnet-EVM v0.2.8 and follow the instructions
-> to enable a stateful precompile on Subnet-EVM here:
-> [https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles](https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles)
->
-> You can find the JSON to configure the network upgrade in this gist:
-> [https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b]
->
-> TLDR; you will need to place the JSON file into your node's file directory within
-> `chain-config-dir/wagmi blockchainID/upgrade.json` and restart your node.
->
-> Note: the WAGMI blockchainID is 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt.
+TODO: Add second upgrade announcement here
 
 ### Deploying upgrade.json
 
@@ -128,18 +106,31 @@ The content of the `upgrade.json` is:
         "adminAddresses": ["0x6f0f6DA1852857d7789f68a28bba866671f3880D"],
         "blockTimestamp": 1660658400
       }
+    },
+    {
+      "contractNativeMinterConfig": {
+        "blockTimestamp": 1708696800,
+        "adminAddresses": ["0x6f0f6DA1852857d7789f68a28bba866671f3880D"],
+        "managerAddresses": ["0xadFA2910DC148674910c07d18DF966A28CD21331"]
+      }
     }
   ]
 }
 ```
 
-Detailed explanation of feeManagerConfig can be found in the [precompiles documentation](/build/subnet/upgrade/customize-a-subnet.md#configuring-dynamic-fees).
+With the above `upgrade.json`, we intend to perform two network upgrades:
 
-With the above `upgrade.json`, we intend to change the `adminAddresses` at timestamp `1660658400`:
+1. The first upgrade is to activate the FeeManager precompile:
+   - `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the FeeManager precompile.
+   - `1660658400` is the [Unix timestamp](https://www.unixtimestamp.com/) for Tue Aug 16 2022 14:00:00 GMT+0000
+     (future time when we made the announcement) when the new FeeManager change would take effect.
+2. The second upgrade is to activate the NativeMinter precompile:
+   - `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the NativeMinter precompile.
+   - `0xadFA2910DC148674910c07d18DF966A28CD21331` is named as the new Manager of the NativeMinter precompile. Manager addresses are enabled after Durango upgrades which occured on 13 Feb 2024.
+   - `1708696800` is the [Unix timestamp](https://www.unixtimestamp.com/) for Fri Feb 23 2024 14:00:00 GMT+0000
+     (future time when we made the announcement) when the new NativeMinter change would take effect.
 
-- `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the FeeManager
-- `1660658400` is the [Unix timestamp](https://www.unixtimestamp.com/) for 10:00 AM EDT August 16, 2022
-  (future time when we made the announcement) when the new FeeManager change would take effect.
+Detailed explanations of feeManagerConfig can be found in [here](/build/subnet/upgrade/customize-a-subnet.md#configuring-dynamic-fees), and for the contractNativeMinterConfig in [here](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins).
 
 We place the `upgrade.json` file in the chain config directory, which in our case is
 `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/`. After that, we
@@ -148,6 +139,8 @@ restart the node so the upgrade file is loaded.
 When the node restarts, AvalancheGo reads the contents of the JSON file and passes it into
 Subnet-EVM. We see a log of the chain configuration that includes the updated precompile upgrade. It
 looks like this:
+
+TODO: Add log output for second upgrade here
 
 ```text
 INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain>
@@ -167,6 +160,8 @@ We note that `precompileUpgrades` correctly shows the upcoming precompile upgrad
 in and ready.
 
 ### Activation
+
+TODO: Add activation for native minter here
 
 When the time passed 10:00 AM EDT August 16, 2022 (Unix timestamp 1660658400), the `upgrade.json` had
 been executed as planned and the new FeeManager admin address has been activated. From now on, we
@@ -240,6 +235,8 @@ performed by anyone):
 
 That's it, fees changed! No network upgrades, no complex and risky deployments, just making a simple
 contract call and the new fee configuration is in place!
+
+### TODO: Add Using NativeMinter
 
 ### Conclusion
 
