@@ -83,8 +83,10 @@ In order to deploy contracts, you need to have some AVAX. You can get testnet
 AVAX from the [Avalanche Faucet](https://faucet.avax.network), which is an easy
 way to get to play around with Avalanche. If you already have an AVAX balance 
 greater than zero on Mainnet, paste your C-Chain address there, and request 
-test tokens. Otherwise, please request a faucet coupon on 
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+test tokens. Otherwise, 
+please request a faucet coupon on 
+[Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6)
+can provide testnet AVAX if developers are unable to obtain it from the other two options.
 After getting comfortable with your code, you can run it on Mainnet 
 after making the necessary changes to your workflow.
 
