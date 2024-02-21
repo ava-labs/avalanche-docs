@@ -380,6 +380,7 @@ and (max-width: 996px) {
   margin-bottom: 0; 
 }
 
+
 html[data-theme='dark'] {
   .docsRating {
     background-color: #505050;
