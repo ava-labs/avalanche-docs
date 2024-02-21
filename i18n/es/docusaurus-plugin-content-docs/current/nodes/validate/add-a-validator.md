@@ -444,5 +444,5 @@ El flujo de trabajo en Fuji anterior se puede adaptar a Mainnet con las siguient
 
 - La clave privada correcta.
 - La configuración de red debe ser para un nodo de Mainnet, ya sea [un nodo local en Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) o [un servidor de API de Avalanche Mainnet](/tooling/rpc-providers.md#using-the-public-api-nodes) donde se debe usar `api.avax.network` para la `ip`.
-- `const networkID: number = 1` basado en [esto](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1`
 - Establecer la cantidad correcta para apostar.
