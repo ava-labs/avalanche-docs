@@ -190,7 +190,47 @@ _Ejemplo de dirección: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
 Para la Fuji Testnet, 5 es el valor correcto a usar.
 
-Para obtener más información sobre las direcciones codificadas, haz clic [aquí](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
+<details>
+<summary> Detalles sobre las direcciones Bech32 </summary>
+<p>
+Las cadenas X y P utilizan Bech32 para codificar direcciones. Cabe destacar que la cadena C
+también utiliza Bech32 para codificar direcciones para importar y exportar activos; sin embargo,
+la Máquina Virtual de Ethereum (EVM), en general, utiliza codificación hexadecimal para las direcciones. Ejemplo:
+0x46f3e64E4e3f5a46Eaf5c292301c6174B9B646Bf.
+
+Cada dirección Bech32 está compuesta por los siguientes componentes:
+
+Una Parte Legible por Humanos (HRP por sus siglas en inglés).
+El número 1 es un separador (el último dígito 1 visto se considera el separador).
+Cadena codificada en base-32 para la parte de datos de la dirección (la dirección de 20 bytes en sí).
+Un código de corrección de errores de 6 caracteres codificado en base-32 utilizando el algoritmo BCH.
+Por ejemplo, la siguiente dirección Bech32,
+X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg, está compuesta de la siguiente manera:
+
+HRP: avax
+Separador: 1
+Dirección: 9rknw8l0grnfunjrzwxlxync6zrlu33y
+Suma de comprobación: 2jxhrg
+Dependiendo del networkID,
+las direcciones codificadas tendrán un HRP distintivo para cada red.
+
+0 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+1 - X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+5 - X-fuji19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+1337 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+12345 - X-local19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+Aquí está el mapeo del networkID al HRP bech32.
+
+```ts
+  0: "custom",
+  1: "avax",
+  5: "fuji",
+  1337: "custom",
+  12345: "local",
+```
+
+</p>
+</details>
 
 #### Configuración para la Validación
 
