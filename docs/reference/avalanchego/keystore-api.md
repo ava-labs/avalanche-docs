@@ -23,7 +23,15 @@ For validation and cross-chain transfer on the Mainnet, you should issue transac
 the node, which significantly lowers the risk should a computer running a node be compromised. See
 following docs for details:
 
-- [Transfer AVAX Tokens Between Chains](/tooling/avalanchejs-guides/cross-chain-transfers)
+- Transfer AVAX Tokens Between Chains:
+  - C-Chain: [export](https://github.com/ava-labs/avalanchejs/blob/master/examples/c-chain/export.ts) and
+  [import](https://github.com/ava-labs/avalanchejs/blob/master/examples/c-chain/import.ts) 
+  - P-Chain: [export](https://github.com/ava-labs/avalanchejs/blob/master/examples/p-chain/export.ts) and
+  [import](https://github.com/ava-labs/avalanchejs/blob/master/examples/p-chain/import.ts) 
+  - X-Chain: [export](https://github.com/ava-labs/avalanchejs/blob/master/examples/x-chain/export.ts) and
+  [import](https://github.com/ava-labs/avalanchejs/blob/master/examples/x-chain/import.ts)
+ 
+
 - [Add a Node to the Validator Set](/nodes/validate/add-a-validator)
 
 :::info
