@@ -382,12 +382,12 @@ and (max-width: 996px) {
 
 /* Collapsible section */
 .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
-  background-color: #f9f9f9; /* Light grey background */
-  border: 1px solid #ddd !important; /* Light grey border */
-  padding: 0.5em 1em !important; /* Padding around the content */
-  margin: 1em 0; /* Space above and below the details element */
-  border-radius: 4px; /* Slightly rounded corners for a modern look */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important; /* Subtle shadow for depth */
+  background-color: #f9f9f9;
+  border: 1px solid #ddd !important;
+  padding: 0.5em 1em !important;
+  margin: 1em 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
 
 }
 
