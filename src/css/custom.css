@@ -379,3 +379,48 @@ and (max-width: 996px) {
   line-height: 1.5;
   margin-bottom: 0; 
 }
+
+/* Collapsible section */
+.details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
+  background-color: #f9f9f9; /* Light grey background */
+  border: 1px solid #ddd !important; /* Light grey border */
+  padding: 0.5em 1em !important; /* Padding around the content */
+  margin: 1em 0; /* Space above and below the details element */
+  border-radius: 4px; /* Slightly rounded corners for a modern look */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important; /* Subtle shadow for depth */
+
+}
+
+.details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module code {
+  background-color: #E0E0E0;
+}
+
+.details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary::before{
+  border-color: transparent transparent transparent #e11b1c !important;
+}
+
+.collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+  border-top: 1px solid #e11b1c !important;
+}
+
+
+/* Collapsible section Dark Mode */
+html[data-theme='dark']  {
+  .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
+    background-color: #282828; 
+    border: 1px solid #444 !important; 
+
+  }
+
+  .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module code {
+    background-color: #555; 
+  }
+
+  .details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary::before {
+    border-color: transparent transparent transparent #e11b1c !important; 
+  }
+
+  .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+    border-top: 1px solid #e11b1c !important; 
+  }
+}
