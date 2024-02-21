@@ -211,22 +211,30 @@ HRP: avax
 Separador: 1
 Dirección: 9rknw8l0grnfunjrzwxlxync6zrlu33y
 Suma de comprobación: 2jxhrg
-Dependiendo del networkID,
+
+Dependiendo del `networkID`,
 las direcciones codificadas tendrán un HRP distintivo para cada red.
 
-0 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
-1 - X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
-5 - X-fuji19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
-1337 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
-12345 - X-local19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+- 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+- 2 - X-`cascade`19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
+- 3 - X-`denali`19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
+- 4 - X-`everest`19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
+- 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+- 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+
 Aquí está el mapeo del networkID al HRP bech32.
 
 ```ts
-  0: "custom",
+ 0: "custom",
   1: "avax",
+  2: "cascade",
+  3: "denali",
+  4: "everest",
   5: "fuji",
   1337: "custom",
-  12345: "local",
+  12345: "local"
 ```
 
 </p>
