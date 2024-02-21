@@ -139,13 +139,13 @@ loader when running a TypeScript script.
 Let's say that the AvalancheJS repository was cloned.  
 Suppose we want to run `examples/p-chain/export.ts`.
 
-This creates an export transaction from P-Chain to X-Chain.
+This creates an export transaction from C-Chain to X-Chain.
 
 First, make sure you add the environment variables in a
 `.env` file at the root of the project. 
 
 Fill in the private key for your account, 
-and the P-Chain and X-Chain addresses.
+and the C-Chain and X-Chain addresses.
 
 ![avalanchejs2](/img/avalanchejs/avalanchejs-3.png)
 

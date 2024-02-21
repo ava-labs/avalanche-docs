@@ -242,7 +242,7 @@ Here's the mapping of `networkID` to bech32 HRP.
   5: "fuji",
   1337: "custom",
   12345: "local"
-``
+```
 
 </p>
 </details>
