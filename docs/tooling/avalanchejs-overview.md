@@ -137,7 +137,7 @@ loader when running a TypeScript script.
 <p>
 
 Let's say that the AvalancheJS repository was cloned.  
-Suppose the one we want to run `examples/p-chain/export.ts`.
+Suppose we want to run `examples/p-chain/export.ts`.
 
 This creates an export transaction from P-Chain to X-Chain.
 
