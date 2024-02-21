@@ -380,6 +380,7 @@ and (max-width: 996px) {
   margin-bottom: 0; 
 }
 
+
 html[data-theme='dark'] .docsRating {
   background-color: #505050;
   border: 1px solid #484848;
@@ -397,6 +398,7 @@ html[data-theme='dark'] .docsRating p {
   color: #D0D0D0;
   border: 1px solid #484848;
 }
+
 
 /* Collapsible section */
 .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
@@ -440,4 +442,9 @@ html[data-theme='dark']  {
 
   .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
     border-top: 1px solid #e11b1c !important; 
+
   }
+
+  }
+}
+
