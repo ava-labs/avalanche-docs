@@ -317,7 +317,7 @@ and (max-width: 996px) {
   cursor: pointer;
   width: 25px; 
   height: 25px;
-  fill: #737373; 
+  fill: #D0D0D0;; 
   transition: fill 0.2s ease-in-out; 
 }
 
@@ -334,7 +334,7 @@ and (max-width: 996px) {
 }
 
 .docsRating p {
-  color: #737373;
+  color: #D0D0D0;
   font-size: 1.3rem;
   margin-right: 8px; 
 }
@@ -352,7 +352,7 @@ and (max-width: 996px) {
   margin: 8px 0 16px;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid #484848;
   font-size: 1rem;
 }
 
@@ -360,7 +360,7 @@ and (max-width: 996px) {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: #d9534f;
-  color: white;
+  color: #D0D0D0;
   cursor: pointer;
   font-size: 1rem;
   border: none; 
@@ -378,4 +378,9 @@ and (max-width: 996px) {
   margin-right: 10px;
   line-height: 1.5;
   margin-bottom: 0; 
+}
+
+html[data-theme='dark'] .docsRating {
+  background-color: #505050;
+  border: 1px solid #484848;
 }
