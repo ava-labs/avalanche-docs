@@ -380,6 +380,24 @@ and (max-width: 996px) {
   margin-bottom: 0; 
 }
 
+
+html[data-theme='dark'] {
+  .docsRating {
+    background-color: #505050;
+    border: 1px solid #484848;
+  }
+
+  .feedbackInput {
+    border: 1px solid #484848;
+  }
+  .docsRating svg {
+    fill: #D0D0D0;; 
+  }
+  .docsRating p {
+    color: #D0D0D0;
+  }
+}
+
 /* Collapsible section */
 .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
   background-color: #f9f9f9;
