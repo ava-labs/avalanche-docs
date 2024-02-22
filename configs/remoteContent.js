@@ -52,7 +52,7 @@ function insertLinesAfterFirstLine(content, newLines) {
 
 let newLines = [`
 :::info 
-Dive deeper into Teleporter and kickstart your journey in building cross-chain dApps by enroling in our [<ins>Teleporter course</ins>](https://academy.avax.network/course/teleporter).
+Dive deeper into Teleporter and kickstart your journey in building cross-chain dApps by enrolling in our [<ins>Teleporter course</ins>](https://academy.avax.network/course/teleporter).
 :::
 `];
 
