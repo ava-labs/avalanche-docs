@@ -68,7 +68,8 @@ These are the requirement to follow this tutorial -
 If you already have an AVAX balance greater than zero on Mainnet, 
 paste your C-Chain address there, and request test tokens. Otherwise, 
 please request a faucet coupon on 
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+[Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6)
+can provide testnet AVAX if developers are unable to obtain it from the other two options.
 - Wrapped `WGM` tokens on the WAGMI chain. Send a few `WGM` coins to the `wWGM` token address (see
 second point), to receive the same amount of `wWGM`. Always keep some `WGM` coins, to cover transaction
 fees.

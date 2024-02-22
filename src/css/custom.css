@@ -379,3 +379,66 @@ and (max-width: 996px) {
   line-height: 1.5;
   margin-bottom: 0; 
 }
+
+
+html[data-theme='dark'] {
+  .docsRating {
+    background-color: #505050;
+    border: 1px solid #484848;
+  }
+
+  .feedbackInput {
+    border: 1px solid #484848;
+  }
+  .docsRating svg {
+    fill: #D0D0D0;; 
+  }
+  .docsRating p {
+    color: #D0D0D0;
+  }
+}
+
+/* Collapsible section */
+.details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd !important;
+  padding: 0.5em 1em !important;
+  margin: 1em 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+
+}
+
+.details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module code {
+  background-color: #E0E0E0;
+}
+
+.details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary::before{
+  border-color: transparent transparent transparent #e11b1c !important;
+}
+
+.collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+  border-top: 1px solid #e11b1c !important;
+}
+
+
+/* Collapsible section Dark Mode */
+html[data-theme='dark']  {
+  .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module {
+    background-color: #282828; 
+    border: 1px solid #444 !important; 
+
+  }
+
+  .details_node_modules-\@docusaurus-theme-classic-lib-theme-Details-styles-module code {
+    background-color: #555; 
+  }
+
+  .details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary::before {
+    border-color: transparent transparent transparent #e11b1c !important; 
+  }
+
+  .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+    border-top: 1px solid #e11b1c !important; 
+  }
+}

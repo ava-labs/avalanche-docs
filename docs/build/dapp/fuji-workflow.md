@@ -172,7 +172,8 @@ We can get a "drip" of AVAX from the Fuji faucet. If you already have
 an AVAX balance greater than zero on Mainnet, 
 paste your C-Chain address there, and request test tokens. Otherwise, 
 please request a faucet coupon on 
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170). 
+[Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6)
+can provide testnet AVAX if developers are unable to obtain it from the other two options.
 These AVAX are for the Fuji Testnet and have no monetary value.
 
 ![Requesting AVAX](/img/fuji-workflow/faucet1.png)
