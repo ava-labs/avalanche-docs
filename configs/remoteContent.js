@@ -39,6 +39,23 @@ function replaceRelativeLinks(content, sourceBaseUrl) {
   return updatedContent;
 }
 
+// Function to insert lines after the first line of Teleporter docs (for Academy course)
+function insertLinesAfterFirstLine(content, newLines) {
+    let lines = content.split('\n');
+  
+    if (newLines.length > 0 && lines.length > 0) {
+        lines.splice(1, 0, ...newLines);
+    }
+
+    return lines.join('\n');
+}
+
+let newLines = [`
+:::info 
+Dive deeper into Teleporter and kickstart your journey in building cross-chain dApps by enroling in our [<ins>Teleporter course</ins>](https://academy.avax.network/course/teleporter).
+:::
+`];
+
 const remoteContent = [
   [
     "docusaurus-plugin-remote-content",
@@ -89,6 +106,9 @@ ${updatedContent}`,
             content,
             "https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/"
           );
+
+          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+
           return {
             filename: "overview.md",
             content: `---
@@ -99,7 +119,7 @@ sidebar_label: Overview
 sidebar_position: 1
 ---
 
-${updatedContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -122,6 +142,9 @@ ${updatedContent}`,
             content,
             "https://github.com/ava-labs/teleporter/blob/main/"
           );
+
+          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+
           return {
             filename: "deep-dive.md",
             content: `---
@@ -133,7 +156,7 @@ sidebar_position: 2
 title: Teleporter Deep Dive
 ---
 
-${updatedContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -156,6 +179,9 @@ ${updatedContent}`,
             content,
             "https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/"
           );
+
+          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+
           return {
             filename: "getting-started.md",
             content: `---
@@ -166,7 +192,7 @@ sidebar_label: Getting Started
 sidebar_position: 3
 ---
 
-${updatedContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -189,6 +215,9 @@ ${updatedContent}`,
             content,
             "https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/"
           );
+
+          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+
           return {
             filename: "examples.md",
             content: `---
@@ -199,7 +228,7 @@ sidebar_label: Example Applications
 sidebar_position: 4
 ---
 
-${updatedContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -222,6 +251,9 @@ ${updatedContent}`,
             content,
             "https://github.com/ava-labs/teleporter/blob/main/cmd/teleporter-cli/README.md"
           );
+
+          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+
           return {
             filename: "cli.md",
             content: `---
@@ -232,7 +264,7 @@ sidebar_label: CLI
 sidebar_position: 6
 ---
 
-${updatedContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -255,6 +287,9 @@ ${updatedContent}`,
             content,
             "https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/"
           );
+
+          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+
           return {
             filename: "upgradeability.md",
             content: `---
@@ -265,7 +300,7 @@ sidebar_label: Upgradeability
 sidebar_position: 5
 ---
 
-${updatedContent}`,
+${newContent}`,
           };
         }
         return undefined;
