@@ -204,53 +204,33 @@ Next we need to specify the node's validation period and delegation fee.
 
 #### Validation Period
 
-The validation period is by default 21 days, the start date being the
-date and time the transaction is issued.
+The validation period is set by default to 21 days, the start date
+being the date and time the transaction is issued. The start date
+cannot be modified.
 
-These parameters can be adjusted in the code.
+The end date can be adjusted in the code.
 
-Let's say we want the validation period to start 10 days from now, and end after 50 days.
-The start date is calculated by adding 10 days' worth of milliseconds
-to the current date's timestamp. Since each day has 86,400,000 milliseconds
-(24 hours * 60 minutes * 60 seconds * 1000 milliseconds), we multiply this by 10 
-to get 10 days in milliseconds. This value is then added to the current date's timestamp 
-to get the start date. The start date is exactly 10 days from now.
-Similar to calculating the start date, the end date is determined by adding 50 days' 
-worth of milliseconds to the start date's timestamp. This gives us a date 
-that is 50 days after the start date.
-
-Convert Dates to Unix Timestamps: Both the start and end dates are converted into Unix timestamps in seconds 
+Let's say we want the validation period to end after 50 days.
+You can achieve this by adding the number of deired days to
+`endTime.getDate()`, in this case `50`.
 
 ``` ts
-// Calculate the current date
-const currentDate = new Date();
-
-// Calculate the start date, which is 10 days from the current date
-const startDate = new Date(currentDate.getTime() + 10 * 24 * 60 * 60 * 1000); // 10 days in milliseconds
-
-// Calculate the end date, which is 50 days after the start date
-const endDate = new Date(startDate.getTime() + 50 * 24 * 60 * 60 * 1000); // 50 days in milliseconds
-
-// Convert start and end dates to Unix timestamps in seconds
-const start = BigInt(startDate.getTime() / 1000);
-const end = BigInt(endDate.getTime() / 1000);
+// move ending date 50 days into the future
+endTime.setDate(endTime.getDate() + 50);
 ```
 
-Now let's say you want the staking period to activate at a specific 
-date and time, for example March 10, 2024, at 10:30 AM, and end on
-May 15, 2024, at 11:20 AM. This can be done as it shows in the code 
-below.
+Now let's say you want the staking period to end on a specific 
+date and time, for example May 15, 2024, at 11:20 AM.
+It can be achieved as shown in the code below.
 
 ```ts
-// Set the custom start date: March 10, 2024, 10:30:00 AM
-const startDate = new Date(2024, 2, 10, 10, 30, 0); // Note: Month is 0-indexed
-
-// Set the custom end date: May 15, 2024, 11:20:00 AM
-const endDate = new Date(2024, 4, 15, 11, 20, 0); // Note: Month is 0-indexed
-
-// Convert start and end dates to Unix timestamps in seconds
+const startTime = await new PVMApi().getTimestamp();
+const startDate = new Date(startTime.timestamp);
 const start = BigInt(startDate.getTime() / 1000);
-const end = BigInt(endDate.getTime() / 1000);
+
+// Set the end time to a specific date and time
+const endTime = new Date('2024-05-15T11:20:00'); // May 15, 2024, at 11:20 AM
+const end = BigInt(endTime.getTime() / 1000);
 ```
 
 #### Delegation Fee Rate
