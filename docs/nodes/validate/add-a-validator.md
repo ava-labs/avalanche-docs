@@ -150,7 +150,7 @@ We will use the
 [**`validate.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/p-chain/validate.ts)
 script to add a validator.
 
-#### Add necessary environment variables
+#### Add Necessary Environment Variables
 
 Locate the `.env.example` file at the root of AvalancheJS, and remove `.example`
 from the title. Now, this will be the `.env` file for global variables.
@@ -158,7 +158,7 @@ from the title. Now, this will be the `.env` file for global variables.
 Add the private key and the P-Chain address associated with it.
 The API URL is already set to Fuji (`https://api.avax-test.network/`).
 
-![Env Variables](/img/validator-avalanchejs-1.png)
+![env Variables](/img/validator-avalanchejs-1.png)
 
 #### Retrieve the Node ID, the BLS signature and the BLS key
 
@@ -214,7 +214,7 @@ The start date is calculated by adding 10 days' worth of milliseconds
 to the current date's timestamp. Since each day has 86,400,000 milliseconds
 (24 hours * 60 minutes * 60 seconds * 1000 milliseconds), we multiply this by 10 
 to get 10 days in milliseconds. This value is then added to the current date's timestamp 
-to get the start date. The start date is exactly 10 days from "now".
+to get the start date. The start date is exactly 10 days from now.
 Similar to calculating the start date, the end date is determined by adding 50 days' 
 worth of milliseconds to the start date's timestamp. This gives us a date 
 that is 50 days after the start date.
