@@ -76,7 +76,7 @@ See [here](/reference/avalanchego/admin-api.md) for more information.
 
 :::warning
 
-Deprecated as of v1.11.0
+Deprecated as of [**v1.11.0**](https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0).
 
 :::
 
@@ -87,7 +87,7 @@ See [here](/reference/avalanchego/auth-api.md) for more information.
 
 :::warning
 
-Deprecated as of v1.11.0
+Deprecated as of [**v1.11.0**](https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0).
 
 :::
 
@@ -99,7 +99,7 @@ The password needed to create/revoke authorization tokens. If
 
 :::warning
 
-Deprecated as of v1.11.0
+Deprecated as of [**v1.11.0**](https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0).
 
 :::
 

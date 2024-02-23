@@ -247,7 +247,7 @@ curl -X POST --data '{
 
 :::caution
 
-Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/tag/v1.9.12).
+Deprecated as of [**v1.11.0**](https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0).
 
 :::
 

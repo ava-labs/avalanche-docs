@@ -49,6 +49,12 @@ This API uses the `json 2.0` RPC format. For more information on making JSON RPC
 
 ### `auth.newToken`
 
+:::warning
+
+Deprecated as of [**v1.11.0**](https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0).
+
+:::
+
 Creates a new authorization token that grants access to one or more API endpoints.
 
 **Signature:**
@@ -113,6 +119,12 @@ curl -X POST --data '{
 
 ### `auth.revokeToken`
 
+:::warning
+
+Deprecated as of [**v1.11.0**](https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0).
+
+:::
+
 Revoke a previously generated token. The given token will no longer grant access to any endpoint. If
 the token is invalid, does nothing.
 
@@ -155,6 +167,12 @@ curl -X POST --data '{
 ```
 
 ### `auth.changePassword`
+
+:::warning
+
+Deprecated as of [**v1.11.0**](https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0).
+
+:::
 
 Change this node’s authorization token password. Any authorization tokens created under an old
 password will become invalid.
