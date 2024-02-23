@@ -9,7 +9,7 @@ sidebar_postion: 0
 # Desplegar una Colección de NFT ERC-721 en Avalanche
 
 Este tutorial te guiará en el despliegue de un contrato inteligente [ERC-721
-(NFT)](https://eips.ethereum.org/EIPS/eip-721) básico en la Red Avalanche, sin importar tu experiencia previa en desarrollo. Desplegaremos nuestro NFT en la Testnet Fuji de Avalanche y lo veremos en el Snowtrace Testnet Explorer. Ten en cuenta que estos no son transferibles a la Mainnet. Sin embargo, una vez que te sientas cómodo lanzando tu proyecto, puedes hacerlo en la Mainnet de Avalanche y listarlo en un mercado de NFT.
+(NFT)](https://eips.ethereum.org/EIPS/eip-721) básico en la Red Avalanche, sin importar tu experiencia previa en desarrollo. Desplegaremos nuestro NFT en la Testnet Fuji de Avalanche y lo veremos en el explorador Snowtrace de la Testnet. Ten en cuenta que estos no son transferibles a la Mainnet. Sin embargo, una vez que te sientas cómodo lanzando tu proyecto, puedes hacerlo en la Mainnet de Avalanche y listarlos en un mercado de NFT.
 
 Se utilizarán las siguientes herramientas durante este tutorial:
 
@@ -37,9 +37,10 @@ Una vez que los archivos de imagen y metadatos estén listos, podemos prepararno
 
 ## Preparando tu Entorno
 
-### Extensión Core
+### Extensión de Core
 
-Necesitarás tener instalada la Extensión Core en el navegador que estés usando para poder financiar el despliegue del contrato inteligente. Si aún no lo has hecho, descarga Core y habilita el Modo Testnet. Para hacer eso, ve a **Configuración** y haz clic en **Avanzado**.
+Necesitarás tener instalada la Extensión de Core en el navegador que estés usando para poder financiar el despliegue del contrato inteligente. Si aún no lo has hecho, descarga Core y habilita el Modo Testnet.
+Para hacer eso, ve a **Configuración** y haz clic en **Avanzado**.
 
 ![Imagen de Configuración 1](/img/c-chain-ERC20/settings1.png)
 
@@ -61,7 +62,7 @@ Si estás usando otras billeteras, como Core o MetaMask, puedes agregar la Testn
 
 ### Obteniendo Fondos de Testnet
 
-Debido a que estamos desplegando en la Red Fuji, necesitarás obtener AVAX en la red Fuji. Avalanche tiene un [Faucet](https://faucet.avax.network/) que gotea tokens de prueba a la dirección de tu elección. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de faucet en [Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+Debido a que estamos desplegando en la Red Fuji, necesitarás obtener AVAX en la red Fuji. Avalanche tiene un [Faucet](https://faucet.avax.network/) que gotea tokens de prueba a la dirección de tu elección. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de faucet en [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6) oficial pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
 
 ![Avalanche Faucet](intro-to-erc721s/1-faucet.png)
 
@@ -77,11 +78,11 @@ Wizard](https://docs.openzeppelin.com/contracts/5.x/wizard) que construirá cont
 
 Selecciona `ERC-721` en el Contrato Wizard para empezar. Esto creará el contrato en el [lenguaje de programación Solidity](https://docs.soliditylang.org/en/v0.8.15/).
 
-Como puedes ver, el contrato de plantilla está básico. Rellenaremos la información en el panel izquierdo para auto-popularlo en nuestro contrato. Asegúrate de cambiar a la pestaña ERC-721 al comenzar para hacer el contrato adecuado.
+Como puedes ver, el contrato de plantilla está básico. Rellenaremos la información en el panel izquierdo para auto-popularlo en nuestro contrato. Asegúrate de cambiar a la pestaña ERC-721 mientras comienzas para hacer el contrato adecuado.
 
 El Wizard rellena automáticamente un nombre y un símbolo para tu colección de NFT, que modificaremos aquí. Lo estoy llamando `Fotografía` y dándole el símbolo `FOTO`. Si elegiste tus propios archivos para usar durante este tutorial, puedes elegir un nombre y un símbolo relevantes para tu colección.
 
-El campo de Base URI que se muestra aquí es la URL de la carpeta de metadatos cargada en Pinata(por ejemplo, la nuestra es `https://gateway.pinata.cloud/ipfs/QmYdWxbiwsfsYcW1CYQPgYujAc9FMLPG3fgFcxFskbSsFa`). Pega eso en el campo de Base URI. Después de que el Wizard agregue nuestras variables a la plantilla, nuestro contrato debería verse así:
+El campo Base URI que se muestra aquí es la URL de la carpeta de metadatos cargada en Pinata(por ejemplo, la nuestra es `https://gateway.pinata.cloud/ipfs/QmYdWxbiwsfsYcW1CYQPgYujAc9FMLPG3fgFcxFskbSsFa`). Pega eso en el campo Base URI. Después de que el Wizard agregue nuestras variables a la plantilla, nuestro contrato debería verse así:
 
 ![Contrato Wizard Poblado](intro-to-erc721s/3-wizard-populated.png)
 
@@ -101,9 +102,9 @@ Ahora, nuestro contrato está un poco más poblado:
 
 Para este ejemplo simple, no agregaremos ninguna funcionalidad adicional a la función `safeMint`. Actualmente, hace mint de un NFT a la dirección especificada en la llamada de la función. No hay costo para hacer mint del NFT aparte de la tarifa de gas por la transacción en sí.
 
-Esta función `safeMint` actualmente también funciona como una función de airdrop porque la dirección a la que se hace mint del NFT no necesita ser la del propietario de la función. Esta funcionalidad se vuelve muy útil cuando los propietarios de colecciones de NFT quieren regalar NFT de forma gratuita fuera de la ventana de minting normal.
+Esta función `safeMint` actualmente también funciona como una función de airdrop porque la dirección a la que se acuña el NFT no necesita ser la del propietario de la función. Esta funcionalidad se vuelve muy útil cuando los propietarios de colecciones de NFT quieren regalar NFTs de forma gratuita fuera de la ventana de acuñación normal.
 
-En este punto, nuestro contrato inteligente está listo. En la parte superior, puedes hacer clic en `Abrir en Remix` para prepararte para implementar tu contrato inteligente.
+En este punto, nuestro contrato inteligente está listo. En la parte superior, puedes hacer clic en "Abrir en Remix" para prepararte para implementar tu contrato inteligente.
 
 ![Contract Wizard Open Remix](intro-to-erc721s/5-open-remix.png)
 
@@ -111,7 +112,7 @@ En este punto, nuestro contrato inteligente está listo. En la parte superior, p
 
 [Remix IDE](https://remix.ethereum.org/) es un compilador de solidity que te permite editar, compilar e implementar tu contrato inteligente. Esto evitará que necesites descargar otros entornos de programación en esta etapa.
 
-Una vez que hayas importado tu contrato, lo primero que debes hacer es compilarlo. Haz clic en el botón `Compile` en el lado izquierdo. También puedes usar el atajo de teclado `Ctrl / Command + S`.
+Una vez que hayas importado tu contrato, lo primero que debes hacer es compilarlo. Haz clic en el botón "Compile" en el lado izquierdo. También puedes usar el atajo de teclado `Ctrl / Command + S`.
 
 ![Remix Compile](intro-to-erc721s/6-remix-compile.png)
 
@@ -119,7 +120,7 @@ Una vez completado, obtendrás una marca de verificación verde en la pestaña d
 
 ![Remix Deploy Page](intro-to-erc721s/7-deploy-page.png)
 
-Ahora, necesitamos cambiar el entorno que Remix intentará usar para implementar el contrato inteligente. Haz clic en el menú desplegable `Environment` y selecciona `Injected web3`.
+Ahora, necesitamos cambiar el entorno que Remix intentará usar para implementar el contrato inteligente. Haz clic en el menú desplegable "Environment" y selecciona "Injected web3".
 
 ![Remix Web3](intro-to-erc721s/8-provider.png)
 
@@ -129,27 +130,27 @@ Esto debería pedirte que te conectes con tu cuenta de Core. Una vez conectado, 
 
 ![Core account](intro-to-erc721s/10-account2.png)
 
-Ahora haz clic en el menú desplegable `Contract` y selecciona el contrato que creaste y compilaste. Debería aparecer con el nombre que le diste en el Asistente de Open Zeppelin.
+Ahora haz clic en el menú desplegable "Contract" y selecciona el contrato que creaste y compilaste. Debería aparecer con el nombre que le diste en el Asistente de Open Zeppelin.
 
 ![Remix Contract](intro-to-erc721s/11-contract.png)
 
-Ahora, haz clic en implementar. Esto abrirá Core y te pedirá que confirmes la transacción. Haz clic en `Confirm`.
+Ahora, haz clic en "Deploy". Esto abrirá Core y te pedirá que confirmes la transacción. Haz clic en "Confirm".
 
 ![Core Accept](intro-to-erc721s/12-approval.png)
 
-Puede tomar un segundo, pero una vez completado, tu contrato recién implementado aparecerá debajo del campo `Transactions Recorded`.
+Puede tomar un segundo, pero una vez completado, tu contrato recién implementado aparecerá debajo del campo "Transactions Recorded".
 
 ![Remix Record](intro-to-erc721s/13-transaction-record.png)
 
-Copia la dirección de tu contrato y abre el [Explorador de la Testnet de Snowtrace](https://testnet.snowtrace.io/). Pega la dirección de tu contrato en la barra de búsqueda y haz clic en `Search`.
+Copia la dirección de tu contrato y abre el [Snowtrace Testnet Explorer](https://testnet.snowtrace.io/). Pega la dirección de tu contrato en la barra de búsqueda y haz clic en "Search".
 
-Ahora verás [la información de tu contrato en Snowtrace](https://testnet.snowtrace.io/address/0xa03e85f4411e37cbaff635975bf38cb2737f0015). La primera transacción que ves debería ser la implementación del contrato que acabas de hacer en la IDE de Remix.
+Ahora verás [la información de tu contrato en Snowtrace](https://testnet.snowtrace.io/address/0xa03e85f4411e37cbaff635975bf38cb2737f0015). La primera transacción que ves debería ser la implementación del contrato que acabas de hacer en Remix IDE.
 
 ![Snowtrace](intro-to-erc721s/14-snowtrace.png)
 
-## Creando un NFT
+## Acuñando un NFT
 
-Ahora que has implementado el contrato, puedes crear el NFT. Vuelve a la pestaña de la IDE de Remix y haz clic en tu contrato para expandir su información. Aparecerá una lista de funciones con las que puedes interactuar.
+Ahora que has implementado el contrato, puedes acuñar el NFT. Vuelve a la pestaña de Remix IDE y haz clic en tu contrato para expandir su información. Aparecerá una lista de funciones con las que puedes interactuar.
 
 ![Remix Functions](intro-to-erc721s/15-functions.png)
 
@@ -157,21 +158,19 @@ La única función que te interesa es la función `safeMint`. Haz clic en la fle
 
 ![Remix safe mint](intro-to-erc721s/16-safemint.png)
 
-Ahora, copia tu dirección de Core y pégala en este campo de dirección. Esto enviará el NFT a tu dirección cuando se llame a la función de creación. Luego, haz clic en `transact`.
+Ahora, copia tu dirección de Core y pégala en este campo de dirección. Esto enviará el NFT a tu dirección cuando se llame a la función de acuñación. Luego, haz clic en "transact".
 
-Esto abrirá Core nuevamente y te pedirá que verifiques la transacción. Haz clic en `Confirm` para crear tu NFT.
+Esto abrirá Core y te pedirá que verifiques la transacción. Haz clic en "Confirm" para acuñar tu NFT.
 
-Una vez que la transacción se haya confirmado, verás una marca de verificación verde en la terminal en la parte inferior de la IDE de Remix.
+Una vez que la transacción se haya confirmado, verás una marca de verificación verde en la terminal en la parte inferior de Remix IDE.
 
 ![Remix Confirm Mint](intro-to-erc721s/18-remix-confirm.png)
 
-Vuelve a la página del explorador de la Testnet de Snowtrace para tu contrato y actualízala. Ahora deberías ver una segunda transacción, tu llamada a `safeMint`.
+Vuelve a la página del explorador Snowtrace Testnet para tu contrato y actualízala. Ahora deberías ver una segunda transacción, tu llamada a `safeMint`.
 
 ![Snowtrace Mint](intro-to-erc721s/19-snowtrace-mint.png)
 
-Al hacer clic en el [TX
-Hash](https://testnet.snowtrace.io/tx/0x8b698ac72bd20b2a640167c5d9bacdcbb3d86fd696eb8cde6f28347f6f99a2c9),
-¡verás que tu NFT ha sido creado!
+Al hacer clic en el [TX Hash](https://testnet.snowtrace.io/tx/0x8b698ac72bd20b2a640167c5d9bacdcbb3d86fd696eb8cde6f28347f6f99a2c9), ¡verás que tu NFT fue creado!
 
 ![Snowtrace Transaction](intro-to-erc721s/20-snowtrace-txn.png)
 
@@ -179,6 +178,6 @@ Hash](https://testnet.snowtrace.io/tx/0x8b698ac72bd20b2a640167c5d9bacdcbb3d86fd6
 
 Todos los pasos anteriores se pueden utilizar en Mainnet, excepto los siguientes cambios:
 
-- Asegúrate de cambiar a la Avalanche C-Chain en Core.
+- Asegúrate de cambiar a Avalanche C-Chain en Core.
 - Asegúrate de tener tokens AVAX en tu cuenta para cubrir los costos de transacción.
-- Debes usar la versión de Mainnet de [Snowtrace Explorer](https://snowtrace.io/) para ver las transacciones.
+- Debes usar la versión Mainnet de [Snowtrace Explorer](https://snowtrace.io/) para ver las transacciones.
