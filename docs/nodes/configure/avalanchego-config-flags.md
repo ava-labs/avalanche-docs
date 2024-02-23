@@ -74,16 +74,34 @@ See [here](/reference/avalanchego/admin-api.md) for more information.
 
 #### `--api-auth-required` (boolean)
 
+:::warning
+
+Deprecated as of v1.11.0
+
+:::
+
 If set to `true`, API calls require an authorization token. Defaults to `false`.
 See [here](/reference/avalanchego/auth-api.md) for more information.
 
 #### `--api-auth-password` (string)
+
+:::warning
+
+Deprecated as of v1.11.0
+
+:::
 
 The password needed to create/revoke authorization tokens. If
 `--api-auth-required=true`, must be specified; otherwise ignored. See
 [here](/reference/avalanchego/auth-api.md) for more information.
 
 #### `--api-auth-password-file` (string)
+
+:::warning
+
+Deprecated as of v1.11.0
+
+:::
 
 Password file used to initially create/validate API authorization tokens.
 Ignored if `---api-auth-password` is specified.
