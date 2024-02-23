@@ -1820,6 +1820,70 @@ Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
 
 :::
 
+### `platform.getSubnet`
+
+Get information about the specified subnet.
+
+**Signature:**
+
+```sh
+platform.getSubnet({
+    subnetID: string
+}) ->
+{
+    isPermissioned: bool,
+    controlKeys: []string,
+    threshold: string,
+    locktime: string,
+    subnetTransformationTxID: string // optional, if it's a permissionless subnet
+}
+```
+
+- `subnetID` is the ID of the subnet to retrieve information about
+  Subnets. Multiple IDs can be included
+- `isPermissioned` shows whether it is permissioned or not
+- `controlKeys` is the subnet auth information for a permissioned subnet
+- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the
+  Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be
+  empty.
+- `locktime`
+- `subnetTransformationTxID` is the subnet transformation tx ID for a permissionless subnet
+
+See [here](/nodes/validate/add-a-validator.md) for information on adding a validator to a
+Subnet.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "platform.getSubnets",
+    "params": {"ids":["hW8Ma7dLMA7o4xmJf3AXBbo17bXzE7xnThUd3ypM4VAWo1sNJ"]},
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "subnets": [
+      {
+        "id": "hW8Ma7dLMA7o4xmJf3AXBbo17bXzE7xnThUd3ypM4VAWo1sNJ",
+        "controlKeys": [
+          "KNjXsaA1sZsaKCD1cd85YXauDuxshTes2",
+          "Aiz4eEt5xv9t4NCnAWaQJFNz5ABqLtJkR"
+        ],
+        "threshold": "2"
+      }
+    ]
+  },
+  "id": 1
+}
+```
+
 ### `platform.getSubnets`
 
 :::caution
