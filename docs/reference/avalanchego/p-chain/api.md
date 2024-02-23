@@ -1857,32 +1857,15 @@ Subnet.
 ```sh
 curl -X POST --data '{
     "jsonrpc": "2.0",
-    "method": "platform.getSubnets",
-    "params": {"ids":["hW8Ma7dLMA7o4xmJf3AXBbo17bXzE7xnThUd3ypM4VAWo1sNJ"]},
+    "method": "platform.getSubnet",
+    "params": {"subnetID":"hW8Ma7dLMA7o4xmJf3AXBbo17bXzE7xnThUd3ypM4VAWo1sNJ"},
     "id": 1
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
 ```
 
 **Example Response:**
 
-```json
-{
-  "jsonrpc": "2.0",
-  "result": {
-    "subnets": [
-      {
-        "id": "hW8Ma7dLMA7o4xmJf3AXBbo17bXzE7xnThUd3ypM4VAWo1sNJ",
-        "controlKeys": [
-          "KNjXsaA1sZsaKCD1cd85YXauDuxshTes2",
-          "Aiz4eEt5xv9t4NCnAWaQJFNz5ABqLtJkR"
-        ],
-        "threshold": "2"
-      }
-    ]
-  },
-  "id": 1
-}
-```
+To be added
 
 ### `platform.getSubnets`
 
