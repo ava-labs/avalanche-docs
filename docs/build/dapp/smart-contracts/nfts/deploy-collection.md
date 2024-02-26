@@ -84,8 +84,10 @@ Because we're deploying on the Fuji Network, you'll need to get AVAX on the Fuji
 network. Avalanche has a [Faucet](https://faucet.avax.network/) that drips
 test tokens to the address of your choice. If you already have an AVAX balance
 greater than zero on Mainnet, paste your C-Chain address there, and request
-test tokens. Otherwise, please request a faucet coupon on 
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+test tokens. Otherwise, 
+please request a faucet coupon on 
+[Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6)
+can provide testnet AVAX if developers are unable to obtain it from the other two options.
 
 ![Avalanche Faucet](intro-to-erc721s/1-faucet.png)
 
@@ -98,7 +100,7 @@ surface in this tutorial, ample documentation is available on their website for
 you to read when you want to build more complex contracts.
 
 Open Zeppelin provides a [Contract
-Wizard](https://docs.openzeppelin.com/contracts/4.x/wizard) that will build out
+Wizard](https://docs.openzeppelin.com/contracts/5.x/wizard) that will build out
 ERC contracts. To avoid any complex coding environments, we'll use this to
 create our ERC-721 contract.
 

@@ -125,7 +125,9 @@ AvalancheGo, Subnet-EVM, Precompile-EVM e HyperSDK.
 | 28         | v1.10.9-v1.10.12        | v0.5.4-v0.5.6       | v0.1.3-v0.1.4       | v0.0.13-**v0.0.15 (última)** |
 | 29         | v1.10.13-v1.10.14       | v0.5.7-v0.5.8       | v0.1.5              | -                        |
 | 30         | v1.10.15-v1.10.17       | v0.5.9-v0.5.10      | v0.1.6-v0.1.7       | -                        |
-| **31**     | v1.10.18- **v1.10.19 (última)**  | **v0.5.11 (última)**  | **v0.1.8 (última)**   | -            |
+| 31         | v1.10.18- v1.10.19      | v0.5.11             | **v0.1.8 (última)** | -            |
+| **33**     | **v1.11.0 (última)**    | **v0.6.0 (última)** |   -                 | -            |
+
 
 
 Puedes ver la compatibilidad completa de RPC desglosada por versión de lanzamiento para cada herramienta aquí:
