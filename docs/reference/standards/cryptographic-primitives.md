@@ -93,6 +93,46 @@ Avalanche addresses may match this regular expression.
 
 Read more about Avalanche's [addressing scheme](https://support.avalabs.org/en/articles/4596397-what-is-an-address).
 
+<details>
+<summary> Example </summary>
+<p>
+
+For example the following Bech32 address,
+`X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg`, is composed like so:
+
+1. HRP: `avax`
+2. Separator: `1`
+3. Address: `9rknw8l0grnfunjrzwxlxync6zrlu33y`
+4. Checksum: `2jxhrg`
+
+Depending on the `networkID`,
+the encoded addresses will have a distinctive HRP per each network. 
+
+- 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+- 2 - X-`cascade`19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
+- 3 - X-`denali`19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
+- 4 - X-`everest`19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
+- 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+- 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+
+Here's the mapping of `networkID` to bech32 HRP.
+
+```ts
+  0: "custom",
+  1: "avax",
+  2: "cascade",
+  3: "denali",
+  4: "everest",
+  5: "fuji",
+  1337: "custom",
+  12345: "local"
+``` 
+
+</p>
+</details>
+
 ### Secp256k1 Recoverable Signatures
 
 Recoverable signatures are stored as the 65-byte **`[R || S || V]`** where
