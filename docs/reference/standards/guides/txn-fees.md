@@ -59,12 +59,13 @@ This table shows the transaction fee schedule:
 | C        | Simple send               |                   >= 0.001575* |
 +----------+---------------------------+--------------------------------+
 
-On Fuji Testnet, all fees are the same as those on Mainnet, except the following ones:
-- Create Subnet: 0.1 AVAX
-- Create Blockchain: 0.1 AVAX
 
 (*) C-Chain gas price varies. See below.
 ```
+
+On Fuji Testnet, all fees are the same as those on Mainnet, except the following ones:
+- Create Subnet: 0.1 AVAX
+- Create Blockchain: 0.1 AVAX
 
 ## C-Chain Fees
 
