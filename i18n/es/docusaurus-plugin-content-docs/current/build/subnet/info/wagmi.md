@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual EVM (Ethereum). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
+tags: [Construir, Subredes]
+description: La Subred WAGMI ("Todos vamos a lograrlo") es un banco de pruebas de alto rendimiento para optimizaciones de la Máquina Virtual EVM (Ethereum). Está parametrizada para funcionar con una capacidad mayor que la C-Chain Fuji/Mainnet y se utiliza para experimentar con candidatos a versiones antes de incluirlos en una versión oficial de Coreth.
 sidebar_label: "Estudio de caso: Subred WAGMI"
 pagination_label: "Subred WAGMI"
 sidebar_position: 1
