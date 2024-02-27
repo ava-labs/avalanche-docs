@@ -53,7 +53,7 @@ This can be used with other wallets too, such as MetaMask.
 
 :::
 
-## Case Study: WAGMI Upgrade
+## Case Study: WAGMI Upgrades
 
 This case study uses [WAGMI](https://subnets-test.avax.network/wagmi) Subnet upgrade to show how a
 network upgrade on an EVM-based (Ethereum Virtual Machine) Subnet can be done simply, and how the
@@ -81,6 +81,7 @@ Here's a summary:
   - TransactionAllowList, for restricting who can submit transactions
   - NativeMinter, for minting native coins
   - FeeManager, for configuring dynamic fees
+  - RewardManager, for enabling block rewards
 - Each of these precompiles can be individually enabled or disabled at a given timestamp as a
   network upgrade, or any of the parameters governing its behavior changed.
 - These upgrades must be specified in a file named `upgrade.json` placed in the same directory where
@@ -88,33 +89,11 @@ Here's a summary:
 
 ### Preparation
 
-To prepare for the WAGMI network upgrade, on August 15, 2022, we had announced on
+To prepare for the first WAGMI network upgrade, on August 15, 2022, we had announced on
 [Twitter](https://twitter.com/AaronBuchwald/status/1559249414102720512) and shared on other social
-media such as Discord, with the following information:
+media such as Discord.
 
-> With Subnet-EVM v0.2.8 It's time for a whole new Subnet Season: Network Upgrade Edition.
->
-> Like every great show, we're kicking this season off with a pilot episode: WAGMI Network Upgrade.
->
-> Stay tuned because this pilot is literally a can't miss for every WAGMI node 😉
->
-> The upgrade will activate the fee config manager, and enable smooth fee config updates in the
-> future [https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees](https://docs.avax.network/subnets/customize-a-subnet#configuring-dynamic-fees)
->
-> This upgrade changes how blocks are processed on WAGMI, so every WAGMI node needs to upgrade to
-> continue to validate WAGMI correctly.
->
-> In order to update your node, you need to update to Subnet-EVM v0.2.8 and follow the instructions
-> to enable a stateful precompile on Subnet-EVM here:
-> [https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles](https://docs.avax.network/subnets/customize-a-subnet#network-upgrades-enabledisable-precompiles)
->
-> You can find the JSON to configure the network upgrade in this gist:
-> [https://gist.github.com/aaronbuchwald/b3af9da34678f542ce31717e7963085b]
->
-> TLDR; you will need to place the JSON file into your node's file directory within
-> `chain-config-dir/wagmi blockchainID/upgrade.json` and restart your node.
->
-> Note: the WAGMI blockchainID is 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt.
+For the second upgrade, on February 24, 2024, we had another announcement on [X](https://x.com/jceyonur/status/1760777031858745701?s=20).
 
 ### Deploying upgrade.json
 
@@ -128,18 +107,31 @@ The content of the `upgrade.json` is:
         "adminAddresses": ["0x6f0f6DA1852857d7789f68a28bba866671f3880D"],
         "blockTimestamp": 1660658400
       }
+    },
+    {
+      "contractNativeMinterConfig": {
+        "blockTimestamp": 1708696800,
+        "adminAddresses": ["0x6f0f6DA1852857d7789f68a28bba866671f3880D"],
+        "managerAddresses": ["0xadFA2910DC148674910c07d18DF966A28CD21331"]
+      }
     }
   ]
 }
 ```
 
-Detailed explanation of feeManagerConfig can be found in the [precompiles documentation](/build/subnet/upgrade/customize-a-subnet.md#configuring-dynamic-fees).
+With the above `upgrade.json`, we intend to perform two network upgrades:
 
-With the above `upgrade.json`, we intend to change the `adminAddresses` at timestamp `1660658400`:
+1. The first upgrade is to activate the FeeManager precompile:
+   - `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the FeeManager precompile.
+   - `1660658400` is the [Unix timestamp](https://www.unixtimestamp.com/) for Tue Aug 16 2022 14:00:00 GMT+0000
+     (future time when we made the announcement) when the new FeeManager change would take effect.
+2. The second upgrade is to activate the NativeMinter precompile:
+   - `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the NativeMinter precompile.
+   - `0xadFA2910DC148674910c07d18DF966A28CD21331` is named as the new Manager of the NativeMinter precompile. Manager addresses are enabled after Durango upgrades which occurred on February 13, 2024.
+   - `1708696800` is the [Unix timestamp](https://www.unixtimestamp.com/) for Fri Feb 23 2024 14:00:00 GMT+0000
+     (future time when we made the announcement) when the new NativeMinter change would take effect.
 
-- `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the FeeManager
-- `1660658400` is the [Unix timestamp](https://www.unixtimestamp.com/) for 10:00 AM EDT August 16, 2022
-  (future time when we made the announcement) when the new FeeManager change would take effect.
+Detailed explanations of feeManagerConfig can be found in [here](/build/subnet/upgrade/customize-a-subnet.md#configuring-dynamic-fees), and for the contractNativeMinterConfig in [here](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins).
 
 We place the `upgrade.json` file in the chain config directory, which in our case is
 `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/`. After that, we
@@ -150,28 +142,21 @@ Subnet-EVM. We see a log of the chain configuration that includes the updated pr
 looks like this:
 
 ```text
-INFO [08-15|15:09:36.772] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain>
-github.com/ava-labs/subnet-evm/eth/backend.go:155: Initialised chain configuration
-config=“{ChainID: 11111 Homestead: 0 EIP150: 0 EIP155: 0 EIP158: 0 Byzantium: 0
-Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet-EVM: 0, FeeConfig:
-{\“gasLimit\“:20000000,\“targetBlockRate\“:2,\“minBaseFee\“:1000000000,\“targetGas\
-“:100000000,\“baseFeeChangeDenominator\“:48,\“minBlockGasCost\“:0,\“maxBlockGasCost\
-“:10000000,\“blockGasCostStep\“:500000}, AllowFeeRecipients: false, NetworkUpgrades: {\
-“subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\“precompileUpgrades\“:
-[{\“feeManagerConfig\“:{\“adminAddresses\“:[\
-“0x6f0f6da1852857d7789f68a28bba866671f3880d\“],\“blockTimestamp\“:1660658400}}]},
-Engine: Dummy Consensus Engine}”
+INFO [02-22|18:27:06.473] <2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335: Upgrade Config: {"precompileUpgrades":[{"feeManagerConfig":{"adminAddresses":["0x6f0f6da1852857d7789f68a28bba866671f3880d"],"blockTimestamp":1660658400}},{"contractNativeMinterConfig":{"adminAddresses":["0x6f0f6da1852857d7789f68a28bba866671f3880d"],"managerAddresses":["0xadfa2910dc148674910c07d18df966a28cd21331"],"blockTimestamp":1708696800}}]}
 ```
 
-We note that `precompileUpgrades` correctly shows the upcoming precompile upgrade. Upgrade is locked
+We note that `precompileUpgrades` correctly shows the upcoming precompile upgrades. Upgrade is locked
 in and ready.
 
-### Activation
+### Activations
 
 When the time passed 10:00 AM EDT August 16, 2022 (Unix timestamp 1660658400), the `upgrade.json` had
 been executed as planned and the new FeeManager admin address has been activated. From now on, we
 don't need to issue any new code or deploy anything on the WAGMI nodes to change the fee structure.
 Let's see how it works in practice!
+
+For the second upgrade on February 23, 2024, the same process was followed. The `upgrade.json` had been
+executed after Durango, as planned, and the new NativeMinter admin and manager addresses have been activated.
 
 ### Using Fee Manager
 
@@ -210,9 +195,9 @@ GitHub' option from the Remix home screen we load two contracts:
   [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract/contracts/interfaces/IFeeManager.sol).
 
 IFeeManager is our precompile, but it references the IAllowList, so we need that one as well. We
-compile IFeeManager.sol and deploy at the precompile address
+compile IFeeManager.sol and use deployed contract at the precompile address
 `0x0200000000000000000000000000000000000003` used on the
-[Subnet](https://github.com/ava-labs/subnet-evm/blob/master/precompile/params.go#L33).
+[Subnet](https://github.com/ava-labs/subnet-evm/blob/master/precompile/contracts/feemanager/module.go#L21).
 
 ![Deployed contract](/img/network-upgrade/deployed-contract.png)
 
@@ -240,6 +225,37 @@ performed by anyone):
 
 That's it, fees changed! No network upgrades, no complex and risky deployments, just making a simple
 contract call and the new fee configuration is in place!
+
+### Using NativeMinter
+
+For the NativeMinter, we can use the same process to connect to the Subnet and interact with the
+precompile. We can load INativeMinter interface using 'load from
+GitHub' option from the Remix home screen with following contracts:
+
+- [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IAllowList.sol)
+- and
+  [INativeMinter.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/INativeMinter.sol).
+
+We can compile them and interact with the deployed contract at the precompile address
+`0x0200000000000000000000000000000000000001` used on the
+[Subnet](https://github.com/ava-labs/subnet-evm/blob/master/precompile/contracts/nativeminter/module.go#L22).
+
+![Deployed contract](/img/network-upgrade/deploy-minter.png)
+
+The native minter precompile is used to mint native coins to specified addresses. The minted coins is added to the current supply and can be used by the recipient to pay for gas fees.
+For more information about the native minter precompile see [here](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins).
+
+`mintNativeCoin` method can be only called by enabled, manager and admin addresses. For this upgrade we have added both an admin and a manager address in [`upgrade.json` above](#deploying-upgradejson). The manager address was available after Durango upgrades which occurred on February 13, 2024. We will use the manager address `0xadfa2910dc148674910c07d18df966a28cd21331` to mint native coins.
+
+![mintNativeCoin](/img/network-upgrade/mintNativeCoin.png)
+
+When we call that method by pressing the `transact` button, a new transaction is posted to the
+Subnet, and we can see it on [the
+explorer](https://subnets-test.avax.network/wagmi/tx/0xc4aaba7b5863c1b8f6664ac1d483e2d7d392ab58d1a8feb0b6c318cbae7f1e93):
+
+![tx](/img/network-upgrade/mint-tx-result.png)
+
+As a result of this transaction, the native minter precompile minted a new native coin (1 WGM) to the recipient address `0xB78cbAa319ffBD899951AA30D4320f5818938310`. The address page on the explorer [here](https://subnets-test.avax.network/wagmi/address/0xB78cbAa319ffBD899951AA30D4320f5818938310) shows no incoming transaction; this is because the 1 WGM was directly minted by the EVM itself, without any sender.
 
 ### Conclusion
 
