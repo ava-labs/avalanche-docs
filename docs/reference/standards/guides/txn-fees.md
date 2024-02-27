@@ -64,6 +64,7 @@ This table shows the transaction fee schedule:
 ```
 
 On Fuji Testnet, all fees are the same as those on Mainnet, except the following ones:
+
 - Create Subnet: 0.1 AVAX
 - Create Blockchain: 0.1 AVAX
 
