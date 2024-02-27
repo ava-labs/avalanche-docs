@@ -127,7 +127,7 @@ With the above `upgrade.json`, we intend to perform two network upgrades:
      (future time when we made the announcement) when the new FeeManager change would take effect.
 2. The second upgrade is to activate the NativeMinter precompile:
    - `0x6f0f6DA1852857d7789f68a28bba866671f3880D` is named as the new Admin of the NativeMinter precompile.
-   - `0xadFA2910DC148674910c07d18DF966A28CD21331` is named as the new Manager of the NativeMinter precompile. Manager addresses are enabled after Durango upgrades which occured on 13 Feb 2024.
+   - `0xadFA2910DC148674910c07d18DF966A28CD21331` is named as the new Manager of the NativeMinter precompile. Manager addresses are enabled after Durango upgrades which occurred on February 13, 2024.
    - `1708696800` is the [Unix timestamp](https://www.unixtimestamp.com/) for Fri Feb 23 2024 14:00:00 GMT+0000
      (future time when we made the announcement) when the new NativeMinter change would take effect.
 
@@ -230,7 +230,7 @@ contract call and the new fee configuration is in place!
 
 For the NativeMinter, we can use the same process to connect to the Subnet and interact with the
 precompile. We can load INativeMinter interface using 'load from
-GitHub' option option from the Remix home screen with following contracts:
+GitHub' option from the Remix home screen with following contracts:
 
 - [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IAllowList.sol)
 - and
@@ -242,10 +242,10 @@ We can compile them and interact with the deployed contract at the precompile ad
 
 ![Deployed contract](/img/network-upgrade/deploy-minter.png)
 
-The native minter precompile is used to mint native coins to specified adresses. The minted coins is added to the current supply and can be used by the recipient to pay for gas fees.
+The native minter precompile is used to mint native coins to specified addresses. The minted coins is added to the current supply and can be used by the recipient to pay for gas fees.
 For more information about the native minter precompile see [here](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins).
 
-`mintNativeCoin` method can be only called by enabled, manager and admin addresses. For this upgrade we have added both an admin and a manager address in [`upgrade.json` above](#deploying-upgradejson). The manager address was available after Durango upgrades which occured on 13 Feb 2024. We will use the manager address `0xadfa2910dc148674910c07d18df966a28cd21331` to mint native coins.
+`mintNativeCoin` method can be only called by enabled, manager and admin addresses. For this upgrade we have added both an admin and a manager address in [`upgrade.json` above](#deploying-upgradejson). The manager address was available after Durango upgrades which occurred on February 13, 2024. We will use the manager address `0xadfa2910dc148674910c07d18df966a28cd21331` to mint native coins.
 
 ![mintNativeCoin](/img/network-upgrade/mintNativeCoin.png)
 
