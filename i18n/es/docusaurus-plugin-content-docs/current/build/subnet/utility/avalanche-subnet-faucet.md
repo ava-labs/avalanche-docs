@@ -134,7 +134,7 @@ En el lado del servidor, necesitamos configurar 2 archivos: `.env` para claves s
 
 #### Configurar variables de entorno
 
-Configura la variable de entorno con tu clave privada y el secreto de reCAPTCHA. Crea un archivo `.env` en tu ubicación preferida con las siguientes credenciales, ya que este archivo no se enviará al repositorio. El servidor de la llave puede manejar múltiples cadenas EVM y, por lo tanto, requiere claves privadas para direcciones con fondos en cada una de las cadenas.
+Configura la variable de entorno con tu clave privada y el secreto de reCAPTCHA. Crea un archivo `.env` en tu ubicación preferida con las siguientes credenciales, ya que este archivo no se comprometerá en el repositorio. El servidor de la llave puede manejar múltiples cadenas EVM y, por lo tanto, requiere claves privadas para direcciones con fondos en cada una de las cadenas.
 
 Si tienes fondos en la misma dirección en cada cadena, entonces puedes especificarlos con la variable única `PK`. Pero si tienes fondos en direcciones diferentes en diferentes cadenas, entonces puedes proporcionar cada una de las claves privadas contra el ID de la cadena, como se muestra a continuación.
 
@@ -278,24 +278,19 @@ Los limitadores de tasa se aplican a nivel global (todos los puntos finales) y e
 
 Podría haber varios proxies entre el servidor y el cliente. El servidor verá la dirección IP del proxy adyacente conectado con el servidor, y esto puede no ser la IP real del cliente.
 
-Las direcciones IP de todos los proxies a través de los cuales ha pasado la solicitud están almacenadas dentro del arreglo de encabezados **x-forwarded-for**. Pero los proxies intermedios pueden manipular fácilmente estos encabezados para evadir los limitadores de velocidad. Por lo tanto, no podemos confiar en todos los proxies y, por lo tanto, en todas las direcciones IP dentro del encabezado.
+Las direcciones IP de todos los proxies a través de los cuales ha pasado la solicitud están almacenadas dentro del encabezado en un arreglo llamado **x-forwarded-for**. Pero los proxies intermedios pueden manipular fácilmente estos encabezados para evadir los limitadores de velocidad. Por lo tanto, no podemos confiar en todos los proxies y, por lo tanto, en todas las IP dentro del encabezado.
 
-Los proxies que son configurados por el propietario del servidor (reverse-proxies) son los proxies confiables en los que podemos confiar y saber que han incluido la IP real de los llamantes en el medio. Cualquier proxy que no sea configurado por el servidor, debe considerarse un proxy no confiable. Por lo tanto, podemos saltar a la dirección IP agregada por el último proxy en el que confiamos. El número de saltos que queremos puede ser configurado en el archivo `config.json` dentro del objeto `GLOBAL_RL`.
-
-![faucet 5](/img/faucet-5.png)
+Los proxies que son configurados por el propietario del servidor (reverse-proxies) son los proxies confiables en los que podemos confiar y sabemos que han agregado la IP real de los llamantes en el medio. Cualquier proxy que no sea configurado por el servidor, debe considerarse un proxy no confiable. Por lo tanto, podemos saltar a la dirección IP agregada por el último proxy en el que confiamos. El número de saltos que queremos puede configurarse en el archivo `config.json` dentro del objeto `GLOBAL_RL`.
 
 #### Clientes detrás del mismo proxy
 
-Considera el siguiente diagrama. El servidor está configurado con 2 reverse proxies. Si el cliente está detrás de proxies, entonces no podemos obtener la IP real del cliente, y en su lugar consideraremos la IP del proxy como la IP del cliente. Y si algún otro cliente está detrás del mismo proxy, entonces esos clientes serán considerados como una sola entidad y podrían ser limitados más rápidamente.
+Considera el siguiente diagrama. El servidor está configurado con 2 reverse proxies. Si el cliente está detrás de proxies, entonces no podemos obtener la IP real del cliente y en su lugar consideraremos la IP del proxy como la IP del cliente. Y si algún otro cliente está detrás del mismo proxy, entonces esos clientes se considerarán como una sola entidad y podrían ser limitados más rápidamente.
 
-![faucet 6](/img/faucet-6.png)
-
-Por lo tanto, se aconseja a los usuarios que eviten usar cualquier proxy para acceder a aplicaciones que tengan límites de velocidad críticos, como esta faucet.
+Por lo tanto, se aconseja a los usuarios que eviten usar cualquier proxy para acceder a aplicaciones que tengan límites de velocidad críticos, como este grifo.
 
 #### Número incorrecto de reverse proxies
 
-Entonces, si quieres implementar esta faucet, y tienes algunos reverse proxies en el medio, entonces debes configurarlo dentro de la clave `GLOBAL_RL` del archivo `config.json`. Si esto no está configurado correctamente, entonces los usuarios podrían ser limitados de velocidad con mucha frecuencia, ya que las direcciones IP del proxy del lado del servidor están siendo vistas como la IP del cliente. Puedes verificar esto en el código
-[aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/rateLimiter.ts#L25).
+Entonces, si quieres implementar este grifo y tienes algunos reverse proxies en el medio, entonces debes configurarlo dentro de la clave `GLOBAL_RL` del archivo `config.json`. Si esto no está configurado correctamente, es posible que los usuarios sean limitados con mucha frecuencia, ya que las direcciones IP del proxy del lado del servidor se están viendo como la IP del cliente. Puedes verificar esto en el código [aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/rateLimiter.ts#L25).
 
 ```json
 "GLOBAL_RL": {
@@ -305,19 +300,13 @@ Entonces, si quieres implementar esta faucet, y tienes algunos reverse proxies e
         ...
 ```
 
-![faucet 7](/img/faucet-7.png)
-
-También es bastante común tener a Cloudflare como el último reverse proxy o el servidor expuesto. Cloudflare proporciona un encabezado **cf-connecting-ip** que es la IP del cliente que solicitó la faucet y, por lo tanto, Cloudflare. Estamos usando esto como valor predeterminado.
+También es bastante común tener a Cloudflare como el último reverse proxy o el servidor expuesto. Cloudflare proporciona un encabezado **cf-connecting-ip** que es la IP del cliente que solicitó el grifo y, por lo tanto, Cloudflare. Estamos usando esto como valor predeterminado.
 
 ### Verificación CAPTCHA
 
-CAPTCHA es necesario para demostrar que el usuario es humano y no un bot. Para este propósito, utilizaremos
-[reCAPTCHA de Google](https://www.google.com/recaptcha/intro/v3.html). El lado del servidor requerirá
-`CAPTCHA_SECRET` que no debe ser expuesto. Puedes configurar el puntaje umbral para pasar la prueba CAPTCHA por los usuarios
-[aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/verifyCaptcha.ts#L20).
+Se requiere CAPTCHA para demostrar que el usuario es humano y no un bot. Para este propósito, utilizaremos [reCAPTCHA de Google](https://www.google.com/recaptcha/intro/v3.html). El lado del servidor requerirá `CAPTCHA_SECRET` que no debe ser expuesto. Puedes configurar el puntaje umbral para pasar la prueba CAPTCHA por los usuarios [aquí](https://github.com/ava-labs/avalanche-faucet/blob/23eb300635b64130bc9ce10d9e894f0a0b3d81ea/middlewares/verifyCaptcha.ts#L20).
 
-Puedes desactivar estas verificaciones CAPTCHA y limitadores de velocidad para fines de prueba, ajustando
-en el archivo `server.ts`.
+Puedes desactivar estas verificaciones CAPTCHA y limitadores de velocidad para fines de prueba, ajustando el archivo `server.ts`.
 
 ### Desactivando los limitadores de velocidad
 
@@ -332,11 +321,11 @@ new RateLimiter(app, evmchains);
 
 Elimina el middleware `captcha.middleware` de la API `sendToken`.
 
-### Iniciando la Faucet
+### Iniciando el grifo
 
-Sigue los siguientes comandos para iniciar tu faucet local.
+Sigue los siguientes comandos para iniciar tu grifo local.
 
-#### Instalando Dependencias
+#### Instalando dependencias
 
 Esto instalará concurrentemente las dependencias tanto para el cliente como para el servidor.
 
@@ -346,7 +335,7 @@ npm install
 
 Si los puertos tienen una configuración predeterminada, entonces el cliente se iniciará en el puerto 3000 y el servidor se iniciará en el puerto 8000 mientras esté en modo de desarrollo.
 
-#### Iniciando en Modo de Desarrollo
+#### Iniciando en modo de desarrollo
 
 Esto iniciará concurrentemente el servidor y el cliente en modo de desarrollo.
 
@@ -354,7 +343,7 @@ Esto iniciará concurrentemente el servidor y el cliente en modo de desarrollo.
 npm run dev
 ```
 
-#### Construyendo para Producción
+#### Construyendo para producción
 
 El siguiente comando construirá el servidor y el cliente en los directorios `build/` y `build/client`.
 
@@ -362,7 +351,7 @@ El siguiente comando construirá el servidor y el cliente en los directorios `bu
 npm run build
 ```
 
-#### Iniciando en Modo de Producción
+#### Iniciando en modo de producción
 
 Este comando solo debe ejecutarse después de construir correctamente el código del cliente y del servidor.
 
@@ -374,7 +363,7 @@ npm start
 
 Sigue los pasos para ejecutar esta aplicación en un contenedor Docker.
 
-#### Construir la Imagen de Docker
+#### Construir la imagen de Docker
 
 Las imágenes de Docker pueden servir como las versiones construidas de nuestra aplicación, que se pueden usar para implementar en un contenedor Docker.
 
@@ -382,25 +371,19 @@ Las imágenes de Docker pueden servir como las versiones construidas de nuestra 
 docker build . -t faucet-image
 ```
 
-#### Iniciando la Aplicación dentro del Contenedor Docker
+#### Iniciando la aplicación dentro del contenedor Docker
 
-Ahora podemos crear cualquier número de contenedores usando la imagen `faucet` anterior. También tenemos que suministrar
-el archivo `.env` o las variables de entorno con las claves secretas para crear el contenedor. Una vez creado el
-contenedor, estas variables y configuraciones se mantendrán y se pueden iniciar o detener fácilmente con un solo comando.
+Ahora podemos crear cualquier número de contenedores usando la imagen `faucet` anterior. También tenemos que suministrar el archivo `.env` o las variables de entorno con las claves secretas para crear el contenedor. Una vez que se crea el contenedor, estas variables y configuraciones se persistirán y se pueden iniciar o detener fácilmente con un solo comando.
 
 ```bash
 docker run -p 3000:8000 --name faucet-container --env-file ../.env faucet-image
 ```
 
-El servidor se ejecutará en el puerto 8000, y nuestro Docker también expondrá este puerto para que el mundo exterior
-interactúe. Hemos expuesto este puerto en el `Dockerfile`. Pero no podemos interactuar directamente con el
-puerto del contenedor, por lo que tuvimos que vincular este puerto del contenedor a nuestro puerto de host. Para el puerto de host, hemos
-elegido 3000. Esta bandera `-p 3000:8000` logra lo mismo.
+El servidor se ejecutará en el puerto 8000, y nuestro Docker también expondrá este puerto para que el mundo exterior pueda interactuar. Hemos expuesto este puerto en el `Dockerfile`. Pero no podemos interactuar directamente con el puerto del contenedor, por lo que tuvimos que vincular este puerto del contenedor a nuestro puerto de host. Para el puerto de host, hemos elegido el 3000. Esta bandera `-p 3000:8000` logra lo mismo.
 
-Esto iniciará nuestra aplicación faucet en un contenedor Docker en el puerto 3000 (puerto 8000 en el
-contenedor). Puedes interactuar con la aplicación visitando [http://localhost:3000] en tu navegador.
+Esto iniciará nuestra aplicación de grifo en un contenedor Docker en el puerto 3000 (puerto 8000 en el contenedor). Puedes interactuar con la aplicación visitando [http://localhost:3000] en tu navegador.
 
-#### Deteniendo el Contenedor
+#### Deteniendo el contenedor
 
 Puedes detener fácilmente el contenedor usando el siguiente comando
 
@@ -408,7 +391,7 @@ Puedes detener fácilmente el contenedor usando el siguiente comando
 docker stop faucet-container
 ```
 
-#### Reiniciando el Contenedor
+#### Reiniciando el contenedor
 
 Para reiniciar el contenedor, usa el siguiente comando
 
@@ -416,54 +399,46 @@ Para reiniciar el contenedor, usa el siguiente comando
 docker start faucet-container
 ```
 
-## Usando la Faucet
+## Usando el grifo
 
-Usar la faucet es bastante sencillo, pero para completar, repasemos los pasos para recolectar tus primeras monedas de prueba.
+Usar el grifo es bastante sencillo, pero para completar, repasemos los pasos para recolectar tus primeras monedas de prueba.
 
-### Visita el Sitio de la Faucet Avalanche
+### Visita el sitio del grifo Avalanche
 
-Ve a [https://faucet.avax.network](https://faucet.avax.network). Verás varios parámetros de red como el nombre de la red, el saldo de la faucet,
-la cantidad de la gota, el límite de la gota, la dirección de la faucet, etc.
+Ve a [https://faucet.avax.network](https://faucet.avax.network). Verás varios parámetros de red como el nombre de la red, el saldo del grifo, la cantidad de la gota, el límite de la gota, la dirección del grifo, etc.
 
 ![faucet 1](/img/faucet/faucet1.png)
 
-### Selecciona la Red
+### Selecciona la red
 
-Puedes usar el menú desplegable para seleccionar la red de tu elección y obtener algunas monedas gratis (cada red
-puede tener una cantidad de gota diferente).
+Puedes usar el menú desplegable para seleccionar la red de tu elección y obtener algunas monedas gratis (cada red puede tener una cantidad de gota diferente).
 
 ![faucet 2](/img/faucet/faucet2.png)
 
-### Ingresa la Dirección y Solicita Monedas
+### Ingresa la dirección y solicita monedas
 
-Si ya tienes un saldo AVAX mayor que cero en Mainnet, pega tu dirección de la cadena C allí y solicita tokens de prueba. De lo contrario,
-por favor solicita un cupón de faucet en
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de la cadena C allí y solicita tokens de prueba. De lo contrario, solicita un cupón de grifo en [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord oficial](https://discord.com/invite/RwXY7P6) pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
 
-En un segundo, recibirás un **hash de transacción** para la transacción procesada. El hash será un hipervínculo al explorador de la Subnet.
-Puedes ver el estado de la transacción haciendo clic en ese enlace.
+En un segundo, recibirás un **hash de transacción** para la transacción procesada. El hash será un hipervínculo al explorador de la Subred. Puedes ver el estado de la transacción haciendo clic en ese enlace.
 
 ![faucet 3](/img/faucet/faucet3.png)
 
-### Más Interacciones
+### Más interacciones
 
-Esto no es todo. Usando los botones mostrados a continuación, puedes ir al explorador de la Subnet o agregar la
-Subnet a tus extensiones de billetera de navegador como Core o MetaMask con un solo clic.
+Esto no es todo. Usando los botones mostrados a continuación, puedes ir al explorador de la Subred o agregar la Subred a las extensiones de tu billetera de navegador como Core o MetaMask con un solo clic.
 
 ![faucet 4](/img/faucet/faucet4.png)
 
-### Errores Probables y Solución de Problemas
+### Errores probables y solución de problemas
 
-No se esperan errores, pero si estás enfrentando algunos de los errores mostrados, entonces podrías intentar
-solucionar problemas como se muestra a continuación. Si ninguna de las soluciones de problemas funciona, contáctanos a través de
-[Discord](https://discord.com/channels/578992315641626624/).
+No se esperan errores, pero si te encuentras con alguno de los errores mostrados, puedes intentar solucionarlo de la siguiente manera. Si ninguna de las soluciones funciona, contáctanos a través de [Discord](https://discord.com/channels/578992315641626624/).
 
-- **Demasiadas solicitudes. Por favor, inténtalo de nuevo después de X minutos**. Este es un mensaje de límite de tasa. Cada subred puede establecer sus límites de caída. El mensaje anterior sugiere que has alcanzado tu límite de caída, es decir, el número de veces que podrías solicitar monedas dentro de la ventana de X minutos. Deberías intentar solicitar después de X minutos. Si estás enfrentando este problema, incluso cuando estás solicitando por primera vez en la ventana, es posible que estés detrás de algún proxy, Wi-Fi o servicio de VPN que también está siendo utilizado por otro usuario.
+- **Demasiadas solicitudes. Por favor, inténtalo de nuevo después de X minutos** Este es un mensaje de límite de velocidad. Cada Subnet puede establecer sus límites de caída. El mensaje anterior sugiere que has alcanzado tu límite de caída, es decir, el número de veces que puedes solicitar monedas dentro de la ventana de X minutos. Deberías intentar solicitar después de X minutos. Si estás enfrentando este problema, incluso cuando estás solicitando por primera vez en la ventana, es posible que estés detrás de algún proxy, Wi-Fi o servicio de VPN que también está siendo utilizado por otro usuario.
 
-- **¡La verificación CAPTCHA ha fallado! Intenta refrescar**. Estamos utilizando la versión 3 de [reCAPTCHA](https://developers.google.com/recaptcha/docs/v3) de Google. Esta versión utiliza puntuaciones entre 0 y 1 para calificar la interacción de los humanos con el sitio, siendo 0 el más sospechoso. No tienes que resolver ningún rompecabezas ni marcar la casilla de **No soy un robot**. La puntuación se calculará automáticamente. Queremos que nuestros usuarios obtengan al menos 0.3 para usar el grifo. Esto es configurable y actualizaremos el umbral después de tener datos más amplios. Pero si estás enfrentando este problema, puedes intentar refrescar tu página, desactivar los bloqueadores de anuncios o apagar cualquier VPN. Puedes seguir esta [guía](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers) para deshacerte de este problema.
+- **¡La verificación CAPTCHA ha fallado! Intenta refrescar** Estamos utilizando la versión 3 de [reCAPTCHA](https://developers.google.com/recaptcha/docs/v3) de Google. Esta versión utiliza puntuaciones entre 0 y 1 para calificar la interacción de los humanos con el sitio, siendo 0 el más sospechoso. No tienes que resolver ningún rompecabezas ni marcar la casilla de **No soy un robot**. La puntuación se calculará automáticamente. Queremos que nuestros usuarios tengan al menos una puntuación de 0.3 para usar el grifo. Esto es configurable y actualizaremos el umbral después de tener datos más amplios. Pero si estás enfrentando este problema, puedes intentar refrescar tu página, desactivar los bloqueadores de anuncios o apagar cualquier VPN. Puedes seguir esta [guía](https://2captcha.com/blog/google-doesnt-accept-recaptcha-answers) para deshacerte de este problema.
 
-- **¡Error interno de RPC! Por favor, inténtalo después de un tiempo**. Este es un error interno en el nodo de la subred, en el que estamos haciendo una RPC para enviar transacciones. Una verificación regular actualizará el estado de salud de la RPC cada 30 segundos (por defecto) o lo que esté configurado en la configuración. Esto puede suceder solo en escenarios raros y no puedes hacer mucho al respecto, excepto esperar.
+- **¡Error interno de RPC! Por favor, inténtalo después de un tiempo** Este es un error interno en el nodo de la Subnet, en el que estamos haciendo una RPC para enviar transacciones. Una verificación regular actualizará el estado de salud de la RPC cada 30 segundos (por defecto) o lo que esté configurado en la configuración. Esto puede suceder solo en escenarios raros y no puedes hacer mucho al respecto, excepto esperar.
 
-- **Se superó el tiempo de espera de 10000ms**. Puede haber muchas razones para este mensaje. Podría ser un error interno del servidor, o la solicitud no fue recibida por el servidor, internet lento, etc. Podrías intentarlo de nuevo después de un tiempo, y si el problema persiste, entonces deberías plantear este problema en nuestro servidor de [Discord](https://discord.com/channels/578992315641626624/).
+- **Se superó el tiempo de espera de 10000ms** Puede haber muchas razones para este mensaje. Podría ser un error interno del servidor, o la solicitud no fue recibida por el servidor, internet lento, etc. Puedes intentarlo de nuevo después de un tiempo, y si el problema persiste, debes informar este problema en nuestro servidor de [Discord](https://discord.com/channels/578992315641626624/).
 
-- **No se pudo ver ningún estado de transacción en el explorador**. El hash de transacción que obtienes para cada caída se precalcula utilizando el nonce esperado, la cantidad y la dirección del receptor. Aunque las transacciones en Avalanche son casi instantáneas, el explorador puede tardar tiempo en indexar esas transacciones. Deberías esperar unos segundos más antes de plantear cualquier problema o comunicarte con nosotros.
+- **No se pudo ver ningún estado de transacción en el explorador** El hash de transacción que obtienes para cada caída se calcula previamente utilizando el nonce esperado, la cantidad y la dirección del receptor. Aunque las transacciones en Avalanche son casi instantáneas, el explorador puede tardar tiempo en indexar esas transacciones. Deberías esperar unos segundos más antes de plantear cualquier problema o contactarnos.

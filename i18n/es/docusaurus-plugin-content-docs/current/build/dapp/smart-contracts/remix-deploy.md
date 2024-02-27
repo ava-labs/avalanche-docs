@@ -61,12 +61,13 @@ Esta billetera también está disponible para [móviles](https://support.avax.ne
 
 ### **Usando el Faucet de la Red de Prueba**
 
-Para financiamiento en la red de prueba, Avalanche tiene un
+Para financiar en la red de prueba, Avalanche tiene un
 [Faucet](https://faucet.avax.network/) que gotea tokens de prueba a la dirección de
-tu elección. Si ya tienes un saldo de AVAX mayor que cero en la Mainnet,
+tu elección. Si ya tienes un saldo de AVAX mayor que cero en Mainnet,
 pega tu dirección en la C-Chain allí y solicita tokens de prueba. De lo contrario,
-por favor solicita un cupón del faucet en
-[Discord](https://discord.com/channels/578992315641626624/1193594716835545170).
+por favor solicita un cupón de faucet en
+[Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6)
+oficial pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
 
 ### Financiamiento en la Red de Prueba Local
 
