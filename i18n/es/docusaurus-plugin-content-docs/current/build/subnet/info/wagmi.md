@@ -185,7 +185,7 @@ por cualquier persona, ya que es solo una operación de lectura.
 
 Una vez que tengamos la nueva configuración deseada para las tarifas en la Subnet, podemos usar `setFeeConfig`
 para cambiar los parámetros. Esta acción **solo** puede ser realizada por el propietario
-`0x6f0f6DA1852857d7789f68a28bba866671f3880D` como la dirección `adminAddress` especificada en el [`upgrade.json` arriba](#deploying-upgradejson).
+`0x6f0f6DA1852857d7789f68a28bba866671f3880D` como la dirección `adminAddress` especificada en el [`upgrade.json` arriba](#desplegando-upgradejson).
 
 ![setFeeConfig](/img/network-upgrade/setFeeConfig.png)
 
@@ -218,7 +218,7 @@ Podemos compilarlos e interactuar con el contrato desplegado en la dirección de
 El precompilado del minter nativo se utiliza para acuñar monedas nativas a direcciones especificadas. Las monedas acuñadas se agregan a la oferta actual y pueden ser utilizadas por el receptor para pagar las tarifas de gas.
 Para obtener más información sobre el precompilado del minter nativo, consulte [aquí](/build/subnet/upgrade/customize-a-subnet.md#minting-native-coins).
 
-El método `mintNativeCoin` solo puede ser llamado por direcciones habilitadas, de administrador y de gerente. Para esta actualización, hemos agregado tanto una dirección de administrador como una de gerente en [`upgrade.json` arriba](#deploying-upgradejson). La dirección del gerente estuvo disponible después de las actualizaciones de Durango que ocurrieron el 13 de febrero de 2024. Usaremos la dirección del gerente `0xadfa2910dc148674910c07d18df966a28cd21331` para acuñar monedas nativas.
+El método `mintNativeCoin` solo puede ser llamado por direcciones habilitadas, de administrador y de gerente. Para esta actualización, hemos agregado tanto una dirección de administrador como una de gerente en [`upgrade.json` arriba](#desplegando-upgradejson). La dirección del gerente estuvo disponible después de las actualizaciones de Durango que ocurrieron el 13 de febrero de 2024. Usaremos la dirección del gerente `0xadfa2910dc148674910c07d18df966a28cd21331` para acuñar monedas nativas.
 
 ![mintNativeCoin](/img/network-upgrade/mintNativeCoin.png)
 
