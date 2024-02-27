@@ -478,15 +478,8 @@
 /apis/metrics /tooling/metrics 301
 /apis/avalanchego/postman-avalanche-collection /tooling/avalanchego-postman-collection/setup  301
 /apis/avalanchego/public-api-server /tooling/rpc-providers 301
-/apis/avalanchejs/api /tooling/avalanchejs-api 301
-/apis/avalanchejs/create-an-asset-on-the-x-chain /tooling/avalanchejs-guides/create-an-asset-on-the-x-chain 301
-/apis/avalanchejs/generate-a-txid-using-avalanchejs /tooling/avalanchejs-guides/generate-a-txid-using-avalanchejs 301
-/apis/avalanchejs/manage-x-chain-keys /tooling/avalanchejs-guides/manage-x-chain-keys 301
 /apis/avalanchejs/README /tooling/avalanchejs-overview 301
 /apis/avalanchejs/ /tooling/avalanchejs-overview 301
-/apis/avalanchejs/send-an-asset-on-the-x-chain /tooling/avalanchejs-guides/send-an-asset-on-the-x-chain 301
-/quickstart/cross-chain-transfers /tooling/avalanchejs-guides/cross-chain-transfers 301
-/quickstart/multisig-utxos-with-avalanchejs /tooling/avalanchejs-guides/multisig-utxos-with-avalanchejs 301
 /subnets/how-to-import-subnet /tooling/cli-guides/import-subnet 301
 /subnets/how-to-run-cli-with-docker /tooling/cli-guides/run-with-docker 301
 /subnets/install-avalanche-cli /tooling/cli-guides/install-avalanche-cli 301

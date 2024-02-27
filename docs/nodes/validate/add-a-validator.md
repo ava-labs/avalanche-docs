@@ -194,7 +194,58 @@ _Example Address: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
 
 For Fuji Testnet, 5 is the correct value to use.
 
-To learn more about encoded addresses, click [here](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
+
+<details>
+<summary> Details about Bech32 Addresses </summary>
+<p>
+
+The X-Chain and the P-Chain use Bech32 to encode addresses. Note, the C-Chain
+also uses Bech32 to encode addresses for importing and exporting assets however
+the EVM, in general, uses hex encoding for addresses. Ex:
+`0x46f3e64E4e3f5a46Eaf5c292301c6174B9B646Bf`.
+
+Each Bech32 address is composed of the following components
+
+1. A Human-Readable Part (HRP).
+2. The number `1` is a separator (the last digit `1` seen is considered the separator).
+3. Base-32 encoded string for the data part of the address (the 20-byte address itself).
+4. A 6-character base-32 encoded error correction code using the BCH algorithm.
+
+For example the following Bech32 address,
+`X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg`, is composed like so:
+
+1. HRP: `avax`
+2. Separator: `1`
+3. Address: `9rknw8l0grnfunjrzwxlxync6zrlu33y`
+4. Checksum: `2jxhrg`
+
+Depending on the `networkID`,
+the encoded addresses will have a distinctive HRP per each network. 
+
+- 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+- 2 - X-`cascade`19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
+- 3 - X-`denali`19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
+- 4 - X-`everest`19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
+- 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+- 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
+- 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
+
+Here's the mapping of `networkID` to bech32 HRP.
+
+```ts
+  0: "custom",
+  1: "avax",
+  2: "cascade",
+  3: "denali",
+  4: "everest",
+  5: "fuji",
+  1337: "custom",
+  12345: "local"
+```
+
+</p>
+</details>
 
 #### Settings for Validation
 
@@ -454,5 +505,5 @@ The Fuji workflow above can be adapted to Mainnet with the following modificatio
   [a local node on Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) or
   [Avalanche Mainnet API server](/tooling/rpc-providers.md#using-the-public-api-nodes)
   where `api.avax.network` should be used for the `ip`.
-- `const networkID: number = 1` based on [this](/tooling/avalanchejs-guides/manage-x-chain-keys.md#encode-bech32-addresses).
+- `const networkID: number = 1`.
 - Set the correct amount to stake.
