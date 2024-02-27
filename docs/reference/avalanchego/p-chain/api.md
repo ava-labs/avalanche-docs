@@ -1822,7 +1822,7 @@ Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
 
 ### `platform.getSubnet`
 
-Get information about the specified subnet.
+Get info about the Subnet.
 
 **Signature:**
 
@@ -1835,19 +1835,18 @@ platform.getSubnet({
     controlKeys: []string,
     threshold: string,
     locktime: string,
-    subnetTransformationTxID: string // optional, if it's a permissionless subnet
+    subnetTransformationTxID: string
 }
 ```
 
-- `subnetID` is the ID of the subnet to retrieve information about
-  Subnets. Multiple IDs can be included
-- `isPermissioned` shows whether it is permissioned or not
-- `controlKeys` is the subnet auth information for a permissioned subnet
-- `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the
-  Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be
-  empty.
-- `locktime`
-- `subnetTransformationTxID` is the subnet transformation tx ID for a permissionless subnet
+- `subnetID` is the ID of the Subnet to get information about.
+- `isPermissioned` indicates if the Subnet is permissioned or not.
+- for permissioned Subnets, `threshold` signatures from addresses in `controlKeys` are needed
+  to add a validator to the Subnet.
+- for permissioned Subnets, operations on it will be rejected while `locktime` is in the past
+  regarding current time.
+- for permissionless Subnets, `subnetTransformationTxID` is the ID of the transaction that
+  created the permissionless setup.
 
 See [here](/nodes/validate/add-a-validator.md) for information on adding a validator to a
 Subnet.
@@ -1865,7 +1864,22 @@ curl -X POST --data '{
 
 **Example Response:**
 
-To be added
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "isPermissioned": true,
+    "controlKeys": [
+      "P-custom1r9anh8x8usuv9yd62ajcc47n0k2r36lzvr75d9",
+      "P-custom15t8fkwr7sewd8ex0vah4zv366tq9hme8e3fj5q"
+    ],
+    "threshold":"1",
+    "locktime":"0",
+    "subnetTransformationTxID":"11111111111111111111111111111111LpoYY"
+  },
+  "id": 1
+}
+```
 
 ### `platform.getSubnets`
 
