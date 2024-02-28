@@ -504,18 +504,6 @@ Obsoleto a partir de `v0.12.5`. Usar en su lugar `regossip-max-txs`.
 
 Número máximo de transacciones para volver a propagar a la vez. El valor predeterminado es `15`.
 
-#### `tx-pool-journal` (string)
-
-Especifica la ruta de archivo de un diario de transacciones para almacenar transacciones locales que sobreviven
-entre reinicios del nodo.
-
-El valor predeterminado es una cadena vacía y está desactivado. Para habilitar el registro de la piscina de transacciones,
-el usuario debe especificar un diario no vacío y habilitar las transacciones locales a través de `local-txs-enabled`.
-
-#### `tx-pool-rejournal` (duration)
-
-Intervalo de tiempo para regenerar el diario de transacciones locales. El valor predeterminado es 1 hora.
-
 #### `tx-pool-price-limit` (int)
 
 Precio mínimo de gas para exigir la aceptación en la piscina. El valor predeterminado es 1 wei.
