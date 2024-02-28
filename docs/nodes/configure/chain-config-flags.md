@@ -512,18 +512,6 @@ Deprecated as of `v0.12.5`. Use `regossip-max-txs ` instead.
 
 Maximum number of transactions to re-gossip at once. Defaults to `15`.
 
-#### `tx-pool-journal` (string)
-
-Specifies file path to a transaction journal to store local transactions that survive
-between node restarts.
-
-Defaults to empty string and being disabled. To enable transaction pool journaling,
-the user must specify a non-empty journal and enable local transactions via `local-txs-enabled`.
-
-#### `tx-pool-rejournal` (duration)
-
-Time interval to regenerate the local transaction journal. Defaults to 1 hour.
-
 #### `tx-pool-price-limit` (int)
 
 Minimum gas price to enforce for acceptance into the pool. Defaults to 1 wei.
