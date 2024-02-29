@@ -25,7 +25,7 @@ Durango introduces following changes to Subnet-EVM:
 
 ## Avalanche Warp Messaging
 
-Avalanche Warp Messaging (AWM) is a new feature introduced with the Durango network upgrade. It enables native cross-Subnet communication and allows [Virtual Machine (VM)](/learn/avalanche/virtual-machines.md) developers to implement arbitrary communication protocols between any two Subnets. For more information about AWM see [here](../../cross-chain/awm/overview.md).
+Avalanche Warp Messaging (AWM) is a new feature introduced with the Durango network upgrade. It enables native cross-Subnet communication and allows [Virtual Machine (VM)](/learn/avalanche/virtual-machines.md) developers to implement arbitrary communication protocols between any two Subnets. For more information about AWM see [here](/build/cross-chain/awm/overview.m).
 
 Warp Precompile must be enabled for Subnets after Durango. For more information the precompile and activation see [here](./customize-a-subnet.md#avalanche-warp-messaging)
 
@@ -42,9 +42,9 @@ Subnet-EVM Native Precompiles will start emitting events with the Durango networ
 
 ### Custom Events
 
-Events above are already introduced and handled in Subnet-EVM native precompiles. If you have a custom precompile, you can start emitting your custom events using Durango activation. In order to do this you can define your custom event in your solidity interface and regenerate the go bindings using `precompilegen` tool, for more information see [here](../../vm/evm/generate-precompile.md).
+Events above are already introduced and handled in Subnet-EVM native precompiles. If you have a custom precompile, you can start emitting your custom events using Durango activation. In order to do this you can define your custom event in your solidity interface and regenerate the go bindings using `precompilegen` tool, for more information see [here](/build/vm/evm/generate-precompile.md).
 
-Generally ou will generate an `event.go` file in addition to your existing precompile files. You need to implement how to emit your events and your events' gas costs, as in [hello world example](../../vm/evm/defining-precompile.md#event-file). In this guide we will use the hello world example to demonstrate how to emit custom events. The event that will be introduced is:
+Generally ou will generate an `event.go` file in addition to your existing precompile files. You need to implement how to emit your events and your events' gas costs, as in [hello world example](/build/vm/evm/defining-precompile.md#event-file). In this guide we will use the hello world example to demonstrate how to emit custom events. The event that will be introduced is:
 
 ```solidity
 event GreetingChanged(address indexed sender, string oldGreeting, string newGreeting)
