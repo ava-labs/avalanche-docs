@@ -376,6 +376,7 @@ Your subnet auth keys for add validator TX creation: [P-avax1kdzq569g2c9urm9887c
 ```
 
 ### Finish Assembling the TX
+
 Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for 
 Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for
 additional help issuing this transaction.
