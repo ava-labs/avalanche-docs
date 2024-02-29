@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Máquinas Virtuales]
-descripción: En esta guía, definiremos la precompilación implementando la interfaz `HelloWorld`.
+tags: [Construir, Máquinas Virtuales]
+description: En esta guía, definiremos la precompilación implementando la interfaz `HelloWorld`.
 sidebar_label: Definiendo tu Precompilación
 pagination_label: Definiendo tu Precompilación
 sidebar_position: 3
