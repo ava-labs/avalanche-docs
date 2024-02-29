@@ -8,10 +8,10 @@ sidebar_position: 0
 
 # AvalancheJS Overview
 
-AvalancheJS is a JavaScript Library for interfacing with the
-[Avalanche](/learn/avalanche/intro.md) platform. It is built using
-TypeScript and intended to support both browser and Node.js. The AvalancheJS
-library allows one to issue commands to the Avalanche node APIs.
+AvalancheJS is a JavaScript Library for interfacing with the 
+[Avalanche](/learn/avalanche/intro.md) Platform. 
+It is built using TypeScript and intended to support both browser and Node.js. 
+The AvalancheJS library allows you to issue commands to the Avalanche node APIs.
 
 The APIs currently supported by default are:
 
@@ -35,21 +35,17 @@ in the [Platform Chain Specification](/reference/avalanchego/p-chain/api.md), [E
 
 Using AvalancheJS, developers can:
 
-- Locally manage private keys
 - Retrieve balances on addresses
 - Get UTXOs for addresses
 - Build and sign transactions
-- Issue signed transactions to the X-Chain, P-Chain and C-Chain on the Primary network
-- Create a Subnetwork
-- Swap AVAX and assets between the X-Chain, P-Chain and C-Chain
-- Add a Validator to the Primary network
-- Add a Delegator to the Primary network
-- Administer a local node
-- Retrieve Avalanche network information from a node
+- Issue signed transactions to the X-Chain, P-Chain, and C-Chain
+- Perform cross-chain swaps between the X, P and C chains
+- Add Validators and Delegators
+- Create Subnets and Blockchains
 
 ## Requirements
 
-AvalancheJS requires Node.js version 14.18.0 or higher to compile.
+AvalancheJS requires Node.js LTS version 20.11.1 or higher to compile.
 
 ## Installation
 
@@ -91,97 +87,82 @@ or
 
 `yarn build`
 
-This will generate a pure JavaScript library and place it in a folder named
-"web" in the project root. The "avalanchejs" file can then be dropped into any
+This will generate double builds, one is CommonJS, the other one is ESM.
+The "avalanchejs" file can then be dropped into any
 project as a pure JavaScript implementation of Avalanche.
+The "index.js" file can then be dropped into any project as 
+a pure JavaScript implementation of Avalanche.
+Depending on the project, the ESM or CommonJS file will
+be used.
 
-![avalanchejs](/img/avalanchejs/avalanchejs-1.png)
+![avalanchejs1](/img/avalanchejs/avalanchejs-1.png)
+
+![avalanchejs2](/img/avalanchejs/avalanchejs-2.png)
 
 ## Use AvalancheJS in Projects
 
-The AvalancheJS library can be imported into your existing Node.js project as follows:
+The AvalancheJS library can be imported into your existing project as follows:
 
 ```ts
-const avalanche = require("avalanche");
-```
-
-Or into your TypeScript project like this:
-
-```ts
-import { Avalanche } from "avalanche";
+import { avm, pvm, evm } from '@avalabs/avalanchejs';
 ```
 
 ## Importing Essentials
 
 ```ts
-import { Avalanche, BinTools, Buffer, BN } from "avalanche";
+import { avm /** X-chain */, pvm /** P-chain */, evm /** C-chain */, utils } from "@avalabs/avalanchejs"
 
-let bintools = BinTools.getInstance();
+// example calls
+const exportTx = avm.newExportTx(...) // constructs a new export tx from X
+const addValidatorTx = pvm.newAddPermissionlessValidatorTx(...) // constructs a new add validator tx on P
+const importTx = evm.newImportTx(...) // constructs a new import tx to C
+
+const publicKeyBytes = utils.hexToBuffer(publicKeyHex)
+const signature = utils.signHash(bytes, privateKeyBytes)
 ```
-
-The above lines import the libraries used in the tutorials. The libraries include:
-
-- avalanche: Our JavaScript module.
-- bn.js: A big number module use by AvalancheJS.
-- buffer: A Buffer library.
-- BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
 
 ## Run Scripts
 
-### TypeScript File
+When cloning the AvalancheJS repository, there are several handy
+examples and utils. Because it is using ECMAScript Modules (ESM),
+and not CommonJS, the following command needs to be ran:
 
-**Via NPM**
+`node --loader ts-node/esm path/script_name.ts`
 
-Install typescript:
+This command tells Node.js to use the ts-node/esm 
+loader when running a TypeScript script.
 
-`npm install typescript`
+<details>
+<summary> Example </summary>
+<p>
 
-Run the script:
+Let's say that the AvalancheJS repository was cloned.  
+Suppose we want to run `examples/p-chain/export.ts`.
 
-`ts-node script-name.ts`
+This creates an export transaction from C-Chain to X-Chain.
 
-**Via YARN**
+First, make sure you add the environment variables in a
+`.env` file at the root of the project. 
 
-Install typescript:
+Fill in the private key for your account, 
+and the C-Chain and X-Chain addresses.
 
-`yarn add typescript`
-
-Run the script:
-
-`ts-node script-name.ts`
-
-### JavaScript File
-
-As Node.js is already installed per [requirements](#requirements),
-simply run the script:
-
-`node script-name.js`
-
-### Example
-
-Let's say that the AvalancheJS repository was cloned. There are a lot of
-useful scripts in `Examples`. Suppose the one we want to run is AVM's
-`getTx`, which has the path `examples/avm/getTX.ts`.
+![avalanchejs2](/img/avalanchejs/avalanchejs-3.png)
 
 To execute the script, we use:
 
-`ts-node examples/avm/getTx.ts`
+`node --loader ts-node/esm examples/c-chain/export.ts`
 
 It ran successfully, providing the following output:
 
 ```zsh
-lavinia@Lavinias-MacBook-Pro avalanchejs % ts-node examples/avm/getTx.ts
-{
-  unsignedTx: {
-    networkID: 1,
-    blockchainID: '11111111111111111111111111111111LpoYY',
-    outputs: [ [Object] ],
-    inputs: [ [Object] ],
-    memo: '0x',
-    destinationChain: '2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM',
-    exportedOutputs: [ [Object] ]
-  },
-  credentials: [ { signatures: [Array] } ],
-  id: 'MTyhpMPU69qLPJL59dwfYbxpWNzp8bfsHyvy9B4DkzN2kWSQ5'
-}
+laviniatalpas@Lavinias-MacBook-Pro avalanchejs % node --loader ts-node/esm examples/c-chain/export.ts 
+(node:53180) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+{ txID: 'QKiNPBoLjAzbVwEoXsmx3XGWuMGZ2Nmt6e4CWvFC41iMEyu6P' }
 ```
+
+
+</p>
+</details>

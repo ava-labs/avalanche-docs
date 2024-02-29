@@ -122,6 +122,16 @@ Haz clic en el botón **Siguiente: Configurar detalles de la instancia** en la e
 
 Los detalles de la instancia pueden mantenerse en sus valores predeterminados.
 
+:::info
+
+Al configurar un nodo como validador, es crucial seleccionar el tipo de instancia AWS apropiado para asegurar que el nodo pueda procesar transacciones de manera eficiente y manejar la carga de la red. Los tipos de instancia recomendados son los siguientes:
+
+- Para una participación mínima, comience con una instancia optimizada para cómputo como c6, c6i, c6a, c7 y similares.
+- Utilice un tamaño de instancia 2xlarge para la configuración con participación mínima.
+- A medida que aumenta la cantidad apostada, elija tamaños de instancia más grandes para acomodar la carga de trabajo adicional. Por cada orden de magnitud de aumento en la participación, suba un tamaño de instancia. Por ejemplo, para una participación de 20k AVAX, una instancia 4xlarge es adecuada.
+
+:::
+
 ### Opcional: Usar Instancias Reservadas
 
 De forma predeterminada, se te cobrará por hora por ejecutar tu instancia EC2. Para un uso a largo

@@ -123,6 +123,16 @@ Click the **Next: Configure Instance Details** button in the bottom right-hand c
 
 The instance details can stay as their defaults.
 
+:::info
+
+When setting up a node as a validator, it is crucial to select the appropriate AWS instance type to ensure the node can efficiently process transactions and manage the network load. The recommended instance types are as follows:
+
+- For a minimal stake, start with a compute-optimized instance such as c6, c6i, c6a, c7 and similar.
+- Use a 2xlarge instance size for the minimal stake configuration.
+- As the staked amount increases, choose larger instance sizes to accommodate the additional workload. For every order of magnitude increase in stake, move up one instance size. For example, for a 20k AVAX stake, a 4xlarge instance is suitable.
+
+:::
+
 ### Optional: Using Reserved Instances
 
 By default, you will be charged hourly for running your EC2 instance. For a long
