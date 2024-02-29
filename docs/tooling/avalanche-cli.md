@@ -136,6 +136,39 @@ avalanche subnet removeValidator [subnetName] [flags]
     --testnet                               remove validator in existing testnet deployment (alias for `fuji`)
 ```
 
+### Subnet Change Owner
+
+The `subnet changeOwner` changes the owner of the deployed Subnet.
+
+This command currently only works on Subnets deployed to Devnet, Fuji or Mainnet.
+
+**Usage:**
+
+```shell
+  avalanche subnet changeOwner [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+    --control-keys strings       addresses that may make subnet changes
+    --devnet devnet              change subnet owner on devnet
+    --endpoint string            use the given endpoint for network operations
+-e, --ewoq                       use ewoq key [fuji/devnet]
+    --fuji fuji                  change subnet owner on fuji (alias for `testnet`)
+-h, --help                       help for changeOwner
+-k, --key string                 select the key to use [fuji/devnet]
+-g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
+    --ledger-addrs strings       use the given ledger addresses
+    --local local                change subnet owner on local
+    --mainnet mainnet            change subnet owner on mainnet
+    --output-tx-path string      file path of the transfer subnet ownership tx
+-s, --same-control-key           use the fee-paying key as control key
+    --subnet-auth-keys strings   control keys that will be used to authenticate transfer subnet ownership tx
+    --testnet testnet            change subnet owner on testnet (alias for `fuji`)
+    --threshold uint32           required number of control key signatures to make subnet changes
+```
+
 ### Subnet Configure
 
 AvalancheGo nodes support several different configuration files. Subnets have their own
@@ -183,14 +216,21 @@ avalanche subnet create [subnetName] [flags]
     --custom                          use a custom VM template
     --custom-vm-branch string         custom vm branch
     --custom-vm-build-script string   custom vm build-script
-    --custom-vm-path string           file path of custom vm to use (deprecation warning: will be generated if not given)
+    --custom-vm-path string           file path of custom vm to use
     --custom-vm-repo-url string       custom vm repository url
     --evm                             use the Subnet-EVM as the base template
+    --evm-chain-id uint               chain ID to use with Subnet-EVM
+    --evm-defaults                    use default settings for fees/airdrop/precompiles with Subnet-EVM
+    --evm-token string                token name to use with Subnet-EVM
 -f, --force                           overwrite the existing configuration if one exists
+    --from-github-repo                generate custom VM binary from github repository
     --genesis string                  file path of genesis to use
 -h, --help                            help for create
-    --latest                          use latest Subnet-Evm version, takes precedence over --vm-version
-    --vm-version string               version of Subnet-Evm template to use
+    --latest                          use latest Subnet-EVM released version, takes precedence over --vm-version
+    --pre-release                     use latest Subnet-EVM pre-released version, takes precedence over --vm-version
+    --teleporter                      generate a teleporter-ready vm (default true)
+    --vm string                       file path of custom vm to use. alias to custom-vm-path
+    --vm-version string               version of Subnet-EVM template to use
 ```
 
 ### Subnet Delete
@@ -233,6 +273,7 @@ avalanche subnet deploy [subnetName] [flags]
 <!-- markdownlint-disable MD013 -->
 
 ```shell
+    --avalanchego-path string      use this avalanchego binary path
     --avalanchego-version string   use this version of avalanchego (ex: v1.17.12) (default "latest")
     --control-keys strings         addresses that may make subnet changes
     --devnet                       deploy to a devnet network
@@ -736,24 +777,30 @@ will apply to all nodes in the cluster.
 **Flags:**
 
 ```shell
-      --alternative-key-pair-name string         key pair name to use if default one generates conflicts
-      --authorize-access                         authorize CLI to create cloud resources
-      --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
-      --aws                                      create node/s in AWS cloud
-      --aws-profile string                       aws profile to use (default "default")
-      --devnet                                   create node/s into a new Devnet
-      --fuji                                     create node/s in Fuji Network
-      --gcp                                      create node/s in GCP cloud
-      --gcp-credentials string                   use given GCP credentials
-      --gcp-project string                       use given GCP project
-  -h, --help                                     help for create
-      --latest-avalanchego-version               install latest avalanchego version on node/s
-      --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-      --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
-      --region strings                           create node(s) in given region(s). Use comma to separate multiple regions
-      --ssh-identity string                      use given ssh identity
-      --use-ssh-agent                            use ssh agent for ssh
-      --use-static-ip                            attach static Public IP on cloud servers (default true)
+    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
+    --authorize-access                         authorize CLI to create cloud resources
+    --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
+    --aws                                      create node/s in AWS cloud
+    --aws-profile string                       aws profile to use (default "default")
+    --custom-avalanchego-version string        install given avalanchego version on node/s
+    --devnet                                   create node/s into a new Devnet
+    --devnet-api-nodes int                     number of API nodes(nodes without stake) to create in the new Devnet
+    --fuji                                     create node/s in Fuji Network
+    --gcp                                      create node/s in GCP cloud
+    --gcp-credentials string                   use given GCP credentials
+    --gcp-project string                       use given GCP project
+-h, --help                                     help for create
+    --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
+    --latest-avalanchego-version               install latest avalanchego release version on node/s
+    --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
+    --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --region strings                           create node(s) in given region(s). Use comma to separate multiple regions
+    --same-monitoring-instance                 host monitoring for a cloud servers on the same instance
+    --separate-monitoring-instance             host monitoring for all cloud servers on a separate instance
+    --skip-monitoring                          don't set up monitoring in created nodes
+    --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used
+    --use-ssh-agent                            use ssh agent(ex: Yubikey) for ssh auth
+    --use-static-ip                            attach static Public IP on cloud servers (default true)
 ```
 
 ### Node Devnet
@@ -797,32 +844,45 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 **Flags:**
 
 ```shell
-    --alternative-key-pair-name string   key pair name to use if default one generates conflicts
-    --authorize-access                   authorize CLI to create cloud resources
-    --aws                                create node/s in AWS cloud
-    --aws-profile string                 aws profile to use (default "default")
-    --chain-config string                path to the chain configuration for subnet
-    --custom-subnet                      use a custom VM as the subnet virtual machine
-    --custom-vm-branch string            custom vm branch
-    --custom-vm-build-script string      custom vm build-script
-    --custom-vm-repo-url string          custom vm repository url
-    --default-validator-params           use default weight/start/duration params for subnet validator
-    --evm-subnet                         use Subnet-EVM as the subnet virtual machine
-    --evm-version string                 version of Subnet-Evm to use
-    --force-subnet-create                overwrite the existing subnet configuration if one exists
-    --gcp                                create node/s in GCP cloud
-    --gcp-credentials string             use given GCP credentials
-    --gcp-project string                 use given GCP project
--h, --help                               help for wiz
-    --latest-evm-version                 use latest Subnet-Evm version
-    --node-config string                 path to avalanchego node configuration for subnet
-    --num-nodes int                      number of nodes to create
-    --region string                      create node/s in given region
-    --ssh-identity string                use given ssh identity
-    --subnet-config string               path to the subnet configuration for subnet
-    --subnet-genesis string              file path of the subnet genesis
-    --use-ssh-agent                      use ssh agent for ssh
-    --use-static-ip                      attach static Public IP on cloud servers (default true)
+    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
+    --authorize-access                         authorize CLI to create cloud resources
+    --avalanchego-version string               install given avalanchego version on node/s
+    --aws                                      create node/s in AWS cloud
+    --aws-profile string                       aws profile to use (default "default")
+    --chain-config string                      path to the chain configuration for subnet
+    --custom-subnet                            use a custom VM as the subnet virtual machine
+    --custom-vm-branch string                  custom vm branch
+    --custom-vm-build-script string            custom vm build-script
+    --custom-vm-repo-url string                custom vm repository url
+    --default-validator-params                 use default weight/start/duration params for subnet validator
+    --devnet-api-nodes int                     number of API nodes(nodes without stake) to create in the new Devnet
+    --evm-chain-id uint                        chain ID to use with Subnet-EVM
+    --evm-defaults                             use default settings for fees/airdrop/precompiles with Subnet-EVM
+    --evm-subnet                               use Subnet-EVM as the subnet virtual machine
+    --evm-token string                         token name to use with Subnet-EVM
+    --evm-version string                       version of Subnet-EVM to use
+    --force-subnet-create                      overwrite the existing subnet configuration if one exists
+    --gcp                                      create node/s in GCP cloud
+    --gcp-credentials string                   use given GCP credentials
+    --gcp-project string                       use given GCP project
+-h, --help                                     help for wiz
+    --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
+    --latest-avalanchego-version               install latest avalanchego release version on node/s
+    --latest-evm-version                       use latest Subnet-EVM released version
+    --latest-pre-released-evm-version          use latest Subnet-EVM pre-released version
+    --node-config string                       path to avalanchego node configuration for subnet
+    --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
+    --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --region strings                           create node/s in given region(s). Use comma to separate multiple regions
+    --same-monitoring-instance                 host monitoring for a cloud servers on the same instance
+    --separate-monitoring-instance             host monitoring for all cloud servers on a separate instance
+    --skip-monitoring                          don't set up monitoring in created nodes
+    --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used.
+    --subnet-config string                     path to the subnet configuration for subnet
+    --subnet-genesis string                    file path of the subnet genesis
+    --use-ssh-agent                            use ssh agent for ssh
+    --use-static-ip                            attach static Public IP on cloud servers (default true)
+    --validators strings                       deploy subnet into given comma separated list of validators. defaults to all cluster nodes
 ```
 
 ### Node List
@@ -1136,6 +1196,7 @@ avalanche network start [flags]
 **Flags:**
 
 ```shell
+    --avalanchego-path string      use this avalanchego binary path
     --avalanchego-version string   use this version of avalanchego (ex: v1.17.12) (default "latest")
 -h, --help                         help for start
     --snapshot-name string         name of snapshot to use to start the network from (default "default-1654102509")
@@ -1314,14 +1375,18 @@ avalanche key list [flags]
 **Flags:**
 
 ```shell
--a, --all-networks   list all network addresses
--c, --cchain         list C-Chain addresses (default true)
--f, --fuji           list testnet (fuji) network addresses
--h, --help           help for list
--g, --ledger uints   list ledger addresses for the given indices (default [])
--l, --local          list local network addresses
--m, --mainnet        list mainnet network addresses
--t, --testnet        list testnet (fuji) network addresses
+-a, --all-networks    list all network addresses
+-c, --cchain          list C-Chain addresses (default true)
+-f, --fuji            list testnet (fuji) network addresses
+-h, --help            help for list
+-g, --ledger uints    list ledger addresses for the given indices (default [])
+-l, --local           list local network addresses
+-m, --mainnet         list mainnet network addresses
+    --pchain          list P-Chain addresses (default true)
+    --subnet string   provide balance information for the given subnet (Subnet-Evm based only)
+-t, --testnet         list testnet (fuji) network addresses
+-n, --use-nano-avax   use nano Avax for balances
+    --xchain          list X-Chain addresses (default true)
 ```
 
 ### Key Transfer
