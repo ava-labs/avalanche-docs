@@ -1,16 +1,16 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Puedes listar las Subredes que has creado con `avalanche subnet list`.
-sidebar_label: Ver Subredes
-pagination_label: Ver tus Subredes Creadas
+tags: [Construir, Subnets]
+description: Puedes listar las Subnets que has creado con `avalanche subnet list`.
+sidebar_label: Ver Subnets
+pagination_label: Ver tus Subnets Creadas
 sidebar_position: 0
 ---
 
-# Cómo Ver tus Subredes Creadas
+# Cómo Ver tus Subnets Creadas
 
-## Listar Configuraciones de Subredes
+## Listar Configuraciones de Subnets
 
-Puedes listar las Subredes que has creado con
+Puedes listar las Subnets que has creado con
 
 `avalanche subnet list`
 
@@ -25,7 +25,7 @@ Ejemplo:
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 ```
 
-Para ver información detallada sobre tus Subredes desplegadas, agrega la bandera `--deployed`:
+Para ver información detallada sobre tus Subnets desplegadas, agrega la bandera `--deployed`:
 
 ```text
 > avalanche subnet list --deployed
@@ -38,15 +38,15 @@ Para ver información detallada sobre tus Subredes desplegadas, agrega la bander
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 ```
 
-## Describir Configuraciones de Subredes
+## Describir Configuraciones de Subnets
 
 Para ver los detalles de una configuración específica, ejecuta
 
-`avalanche subnet describe <nombreSubred>`
+`avalanche subnet describe <nombreSubnet>`
 
 Ejemplo:
 
-```text
+````text
 > avalanche subnet describe firstsubnet
 
  _____       _        _ _
@@ -58,7 +58,7 @@ Ejemplo:
 +----------------------------+----------------------------------------------------+
 |         PARÁMETRO          |                       VALOR                        |
 +----------------------------+----------------------------------------------------+
-| Nombre de la Subred        | firstsubnet                                        |
+| Nombre de la Subnet        | firstsubnet                                        |
 +----------------------------+----------------------------------------------------+
 | ID de la Cadena            | 12345                                              |
 +----------------------------+----------------------------------------------------+
@@ -74,8 +74,6 @@ Ejemplo:
 +----------------------------+----------------------------------------------------+
 | BlockchainID Red Local     | oaCmwvn8FDuv8QjeTozGpHeczk1Kv2651j2jhm6sR1nraGwVW  |
 +----------------------------+----------------------------------------------------+
-
-
 
 _____              _____             __ _
  / ____|            / ____|           / _(_)
@@ -114,7 +112,7 @@ _____              _____             __ _
                                | |
                                |_|
 +--------------------------------------------+------------------------+---------------------------+
-|                  DIRECCIÓN                 |   CANTIDAD DE AIRDROP   |   CANTIDAD DE AIRDROP (WEI)  |
+|                  DIRECCIÓN                 | CANTIDAD DE AIRDROP (10^18) |   CANTIDAD DE AIRDROP (WEI)    |
 +--------------------------------------------+------------------------+---------------------------+
 | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
 +--------------------------------------------+------------------------+---------------------------+
@@ -188,4 +186,4 @@ No se han establecido precompilaciones.
     "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
     "baseFeePerGas": null
 }
-```
+````
