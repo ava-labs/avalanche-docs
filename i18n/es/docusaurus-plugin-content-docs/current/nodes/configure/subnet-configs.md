@@ -23,8 +23,7 @@ Aquí tienes un ejemplo de archivo de configuración de Subnet:
   "consensusParameters": {
     "k": 25,
     "alpha": 18
-  },
-  "appGossipNonValidatorSize": 10
+  }
 }
 ```
 
@@ -97,9 +96,7 @@ mismos valores utilizados para la Red Primaria, que se dan en [Parámetros Snow 
 ### Configuraciones de Gossip
 
 Es posible definir diferentes configuraciones de Gossip para cada Subnet sin
-cambiar los valores de la Red Primaria. Por ejemplo, en la Red Primaria, las mempools de transacciones no se gossipan a no validadores
-(`--consensus-app-gossip-non-validator-size` es `0`). Puedes cambiar esto para
-tu Subnet y compartir la mempool con no validadores también. Las claves JSON de estos
+cambiar los valores de la Red Primaria. Las claves JSON de estos
 parámetros son diferentes de sus claves `CLI` correspondientes. Estos parámetros
 se establecen por defecto en los mismos valores utilizados para la Red Primaria. Para más información,
 consulta [Configuraciones de Gossip CLI](/nodes/configure/avalanchego-config-flags.md#gossiping).
@@ -112,6 +109,3 @@ consulta [Configuraciones de Gossip CLI](/nodes/configure/avalanchego-config-fla
 | --consensus-on-accept-gossip-validator-size             | gossipOnAcceptValidatorSize            |
 | --consensus-on-accept-gossip-non-validator-size         | gossipOnAcceptNonValidatorSize         |
 | --consensus-on-accept-gossip-peer-size                  | gossipOnAcceptPeerSize                 |
-| --consensus-app-gossip-validator-size                   | appGossipValidatorSize                 |
-| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
-| --consensus-app-gossip-peer-size                        | appGossipPeerSize                      |
