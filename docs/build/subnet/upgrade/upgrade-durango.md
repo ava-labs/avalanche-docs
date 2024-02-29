@@ -1,7 +1,7 @@
 ---
 tags: [Build, Subnets, Durango]
 description: How to upgrade existing Subnet precompiles for DUrango
-sidebar_label: Upgrade a Subnet for Durango
+sidebar_label: Durango Upgrade
 pagination_label: Upgrade Subnet Precompiles for Durango
 sidebar_position: 1
 ---
