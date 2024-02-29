@@ -679,10 +679,7 @@ This gives response:
 Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
-Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain. Before this
-method is called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api.md#avmexport)
-or P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax) with 
-assetID `AVAX` to initiate the transfer.
+Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain.
 
 **Signature:**
 
@@ -747,10 +744,7 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 
 **DEPRECATED—instead use** [`avax.import`](/reference/avalanchego/c-chain/api.md#avaximport)
 
-Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain. Before this method is
-called, you must call the X-Chain’s [`avm.export`](/reference/avalanchego/x-chain/api.md#avmexport) 
-or P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax) with 
-assetID `AVAX` to initiate the transfer.
+Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain.
 
 **Signature:**
 
