@@ -521,8 +521,8 @@ Frequency to request transactions from peers. Defaults to `1000000000` nano seco
 Deprecated as of `v0.12.5`. Use `regossip-frequency` instead.
 
 Amount of time that should elapse before we attempt to re-gossip a transaction
-that was already gossiped once. Defaults to `60000000000` nano seconds which is
-1 minute.
+that was already gossiped once. Defaults to `30000000000` nano seconds which is
+30 seconds.
 
 #### `tx-pool-price-limit` (int)
 
