@@ -908,7 +908,7 @@ If you want to use Warp messaging in an existing Subnet-EVM chain, you should co
 
 :::warning
 
-Currently Warp Precompile can only be activated in Fuji after Durango occurs. Durango in Fuji is set at 11 AM ET, February 13th 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Fuji you should upgrade to `subnet-evm@v0.6.0-fuji` and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after Durango date (February 13th 2024 11 AM ET).
+Currently Warp Precompile can only be activated in Mainnet after Durango occurs. Durango in Mainnet is set at 11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Mainnet you should upgrade to `subnet-evm@v0.6.0` or later and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after `1709740800`, Durango date (11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024).
 
 :::
 

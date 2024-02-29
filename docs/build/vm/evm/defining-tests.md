@@ -107,7 +107,7 @@ doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call 
 that contract, we will be redirected to the HelloWorld precompile address. The below code snippet
 can be copied and pasted into a new file called `ExampleHelloWorld.sol`:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "./IHelloWorld.sol";
@@ -151,7 +151,7 @@ For the test contract we write our test in `./contracts/test/ExampleHelloWorldTe
 
 <!-- vale on -->
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "../ExampleHelloWorld.sol";
@@ -198,7 +198,7 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 For Precompile-EVM, you should import `AllowListTest` with `@avalabs/subnet-evm-contracts` NPM package:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "../ExampleHelloWorld.sol";

@@ -48,7 +48,7 @@ cd contracts/
 
 Create a new file called `IHelloWorld.sol` and copy and paste the below code:
 
-```sol
+```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
@@ -107,13 +107,13 @@ This is already added to the `package.json` file.
 You can install it by running `npm install`.
 In order to import `IAllowList` interface, you can use the following import statement:
 
-```sol
+```solidity
 import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
 ```
 
 The full file looks like this:
 
-```sol
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";

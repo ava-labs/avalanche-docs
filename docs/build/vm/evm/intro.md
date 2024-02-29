@@ -139,7 +139,7 @@ used `IAllowList` interface to provide permission control to the `HelloWorld` pr
 `IAllowList` is defined in Subnet-EVM under [`./contracts/contracts/interfaces/IAllowList.sol`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/contracts/interfaces/IAllowList.sol).
 The interface is as follows:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 

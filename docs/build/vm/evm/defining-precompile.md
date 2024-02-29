@@ -267,7 +267,7 @@ accessibleState.GetStateDB().AddLog(
 
 In this file you should set your event's gas cost and implement the `Get{EventName}EventGasCost` function. This function should take the data you want to emit and calculate the gas cost. In this example we defined our event as follow, and plan to emit it in the `setGreeting` function:
 
-```sol
+```solidity
   event GreetingChanged(address indexed sender, string oldGreeting, string newGreeting);
 ```
 

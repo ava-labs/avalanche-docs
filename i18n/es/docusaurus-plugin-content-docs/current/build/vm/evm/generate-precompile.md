@@ -49,15 +49,17 @@ cd contracts/
 
 Crea un nuevo archivo llamado `IHelloWorld.sol` y copia y pega el siguiente código:
 
-```sol
+```solidity
 // (c) 2022-2023, Ava Labs, Inc. Todos los derechos reservados.
 // Consulta el archivo LICENSE para conocer los términos de licencia.
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import "./IAllowList.sol";
+
 interface IHelloWorld is IAllowList {
   // sayHello devuelve la cadena de saludo almacenada
   function sayHello() external view returns (string calldata result);
+
   // setGreeting almacena la cadena de saludo
   function setGreeting(string calldata response) external;
 }
@@ -98,19 +100,21 @@ Esto ya se ha agregado al archivo `package.json`.
 Puedes instalarlo ejecutando `npm install`.
 Para importar la interfaz `IAllowList`, puedes usar la siguiente declaración de importación:
 
-```sol
+```solidity
 import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
 ```
 
 El archivo completo se ve así:
 
-```sol
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
+
 interface IHelloWorld is IAllowList {
   // sayHello devuelve la cadena de saludo almacenada
   function sayHello() external view returns (string calldata result);
+
   // setGreeting almacena la cadena de saludo
   function setGreeting(string calldata response) external;
 }

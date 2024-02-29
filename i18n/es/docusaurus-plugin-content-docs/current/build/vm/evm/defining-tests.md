@@ -105,18 +105,21 @@ hacerlo, `helloWorld` es ahora un contrato de tipo `IHelloWorld` y cuando llamam
 ese contrato, seremos redirigidos a la dirección del precompilador HelloWorld. El siguiente fragmento de código
 se puede copiar y pegar en un nuevo archivo llamado `ExampleHelloWorld.sol`:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "./IHelloWorld.sol";
+
 // ExampleHelloWorld muestra cómo se puede usar el precompilador HelloWorld en un contrato inteligente.
 contract ExampleHelloWorld {
   address constant HELLO_WORLD_ADDRESS =
     0x0300000000000000000000000000000000000000;
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
   function sayHello() public view returns (string memory) {
     return helloWorld.sayHello();
   }
+
   function setGreeting(string calldata greeting) public {
     helloWorld.setGreeting(greeting);
   }
@@ -146,20 +149,23 @@ Para el contrato de prueba, escribimos nuestra prueba en `./contracts/test/Examp
 
 <!-- vale on -->
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "../ExampleHelloWorld.sol";
 import "../interfaces/IHelloWorld.sol";
 import "./AllowListTest.sol";
+
 contract ExampleHelloWorldTest is AllowListTest {
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
   function step_getDefaultHelloWorld() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
     assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
     assertEq(example.sayHello(), "Hello World!");
   }
+
   function step_doesNotSetGreetingBeforeEnabled() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
@@ -168,6 +174,7 @@ contract ExampleHelloWorldTest is AllowListTest {
       assertTrue(false, "setGreeting should fail");
     } catch {}
   }
+
   function step_setAndGetGreeting() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
@@ -189,20 +196,23 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 Para Precompile-EVM, debes importar AllowListTest con el paquete NPM @avalabs/subnet-evm-contracts:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "../ExampleHelloWorld.sol";
 import "../interfaces/IHelloWorld.sol";
 import "@avalabs/subnet-evm-contracts/contracts/test/AllowListTest.sol";
+
 contract ExampleHelloWorldTest is AllowListTest {
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
   function step_getDefaultHelloWorld() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
     assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
     assertEq(example.sayHello(), "Hello World!");
   }
+
   function step_doesNotSetGreetingBeforeEnabled() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
@@ -211,6 +221,7 @@ contract ExampleHelloWorldTest is AllowListTest {
       assertTrue(false, "setGreeting should fail");
     } catch {}
   }
+
   function step_setAndGetGreeting() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);

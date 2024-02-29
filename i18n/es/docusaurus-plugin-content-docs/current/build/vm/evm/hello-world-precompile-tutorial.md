@@ -139,7 +139,7 @@ used `IAllowList` interface to provide permission control to the `HelloWorld` pr
 `IAllowList` is defined in Subnet-EVM under [`./contracts/contracts/interfaces/IAllowList.sol`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/contracts/interfaces/IAllowList.sol).
 The interface is as follows:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -343,7 +343,7 @@ cd contracts/
 
 Create a new file called `IHelloWorld.sol` and copy and paste the below code:
 
-```sol
+```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
@@ -401,13 +401,13 @@ npm install
 
 In order to import `IAllowList` interface, you can use the following import statement:
 
-```sol
+```solidity
 import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
 ```
 
 The full file looks like this:
 
-```sol
+```solidity
 // SPDX-License-Identifier: MIT
 
 pragma solidity >=0.8.0;
@@ -1288,7 +1288,7 @@ doing so, `helloWorld` is now a contract of type `IHelloWorld` and when we call 
 that contract, we will be redirected to the HelloWorld precompile address. The below code snippet
 can be copied and pasted into a new file called `ExampleHelloWorld.sol`:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -1333,7 +1333,7 @@ For the test contract we write our test in `./contracts/test/ExampleHelloWorldTe
 
 <!-- vale on -->
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -1386,7 +1386,7 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 For Precompile-EVM, you should import `AllowListTest` with `@avalabs/subnet-evm-contracts` NPM package:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
