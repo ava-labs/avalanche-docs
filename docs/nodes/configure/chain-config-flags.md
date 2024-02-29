@@ -508,12 +508,12 @@ Number of peers to periodically send transactions received over the RPC. Default
 
 #### `push-gossip-frequency` (duration)
 
-Freqeuency to send transactions received over the RPC to peers. Defaults to `100000000` nano seconds which is
-100 miliseconds.
+Frequency to send transactions received over the RPC to peers. Defaults to `100000000` nano seconds which is
+100 milliseconds.
 
 #### `pull-gossip-frequency` (duration)
 
-Freqeuency to request transactions from peers. Defaults to `1000000000` nano seconds which is
+Frequency to request transactions from peers. Defaults to `1000000000` nano seconds which is
 1 second.
 
 #### `tx-regossip-frequency` (duration)
