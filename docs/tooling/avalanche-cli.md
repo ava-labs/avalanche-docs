@@ -1405,6 +1405,8 @@ avalanche key transfer [options] [flags]
 -o, --amount float                 amount to send or receive (AVAX units)
 -f, --force                        avoid transfer confirmation
 -u, --fuji                         transfer between testnet (fuji) addresses
+    --fund-p-chain                 fund P-Chain account on target
+    --fund-x-chain                 fund X-Chain account on target
 -h, --help                         help for transfer
 -k, --key string                   key associated to the sender or receiver address
 -i, --ledger uint32                ledger index associated to the sender or receiver address (default 32768)
