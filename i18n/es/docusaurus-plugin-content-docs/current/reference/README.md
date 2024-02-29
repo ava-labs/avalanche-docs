@@ -12,11 +12,9 @@ pagination_label: Enlaces Rápidos de Referencia de API
 | [**API de la Cadena C**](/reference/avalanchego/c-chain/api.md) | Referencia de la API de la Cadena de Contratos   |
 | [**API de la Cadena X**](/reference/avalanchego/x-chain/api.md) | Referencia de la API de la Cadena de Intercambio |
 | [**API de Admin**](/reference/avalanchego/admin-api.md)         | Referencia de la API de Administración           |
-| [**API de Auth**](/reference/avalanchego/auth-api.md)           | Referencia de la API de Autenticación            |
 | [**API de Health**](/reference/avalanchego/health-api.md)       | Referencia de la API de Salud                    |
 | [**API de Index**](/reference/avalanchego/index-api.md)         | Referencia de la API de Índice                   |
 | [**API de Info**](/reference/avalanchego/info-api.md)           | Referencia de la API de Información              |
-| [**API de IPC**](/reference/avalanchego/ipc-api.md)             | Referencia de la API de IPC                      |
 | [**API de Keystore**](/reference/avalanchego/keystore-api.md)   | Referencia de la API de Keystore                 |
 | [**API de Métricas**](/reference/avalanchego/metrics-api.md)    | Referencia de la API de Métricas                 |
 | [**API de Subnet-EVM**](/reference/subnet-evm/api.md)           | Referencia de la API de Subnet-EVM               |

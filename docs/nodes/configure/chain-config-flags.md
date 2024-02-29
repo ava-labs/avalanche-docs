@@ -490,39 +490,39 @@ Specifies an array of transaction hashes that should be allowed to bypass
 replay protection. This flag is intended for node operators that want to explicitly
 allow specific transactions to be issued through their API. Defaults to an empty list.
 
-#### `remote-tx-gossip-only-enabled` (boolean)
+#### `push-gossip-num-validators` (int)
 
-Deprecated as of `v0.12.5`. Use `tx-gossip-enabled` instead.
+Number of validators to initially send transactions received over the RPC. Defaults to 100.
 
-If `true`, the node will only gossip remote transactions to prevent transactions
-issued through this node from being broadcast to the network. Defaults to
-`false`.
+#### `push-gossip-num-peers` (int)
+
+Number of peers to initially send transactions received over the RPC. Defaults to 0.
+
+#### `push-regossip-num-validators` (int)
+
+Number of validators to periodically send transactions received over the RPC. Defaults to 10.
+
+#### `push-regossip-num-peers` (int)
+
+Number of peers to periodically send transactions received over the RPC. Defaults to 0.
+
+#### `push-gossip-frequency` (duration)
+
+Frequency to send transactions received over the RPC to peers. Defaults to `100000000` nano seconds which is
+100 milliseconds.
+
+#### `pull-gossip-frequency` (duration)
+
+Frequency to request transactions from peers. Defaults to `1000000000` nano seconds which is
+1 second.
 
 #### `tx-regossip-frequency` (duration)
 
 Deprecated as of `v0.12.5`. Use `regossip-frequency` instead.
 
 Amount of time that should elapse before we attempt to re-gossip a transaction
-that was already gossiped once. Defaults to `60000000000` nano seconds which is
-1 minute.
-
-#### `tx-regossip-max-size` (int)
-
-Deprecated as of `v0.12.5`. Use `regossip-max-txs ` instead.
-
-Maximum number of transactions to re-gossip at once. Defaults to `15`.
-
-#### `tx-pool-journal` (string)
-
-Specifies file path to a transaction journal to store local transactions that survive
-between node restarts.
-
-Defaults to empty string and being disabled. To enable transaction pool journaling,
-the user must specify a non-empty journal and enable local transactions via `local-txs-enabled`.
-
-#### `tx-pool-rejournal` (duration)
-
-Time interval to regenerate the local transaction journal. Defaults to 1 hour.
+that was already gossiped once. Defaults to `30000000000` nano seconds which is
+30 seconds.
 
 #### `tx-pool-price-limit` (int)
 
@@ -547,6 +547,11 @@ Maximum number of non-executable transaction slots permitted per account. Defaul
 #### `tx-pool-global-queue` (int)
 
 Maximum number of non-executable transaction slots for all accounts. Defaults to 1024.
+
+#### `tx-pool-lifetime` (duration)
+
+Maximum duration a non-executable transaction will be allowed in the poll. Defaults to `600000000000` nano seconds which is
+10 minutes.
 
 ### Metrics
 
