@@ -363,7 +363,7 @@ interface IAllowList {
 `None`, `Enabled`, and `Admin` respectively.
 
 `RoleSet` is an event that is emitted when a role is set for an address. It includes the role, the modified
-address, the sender as indexed parameters and the old role as unindexed parameter. Events in precompiles are
+address, the sender as indexed parameters and the old role as non-indexed parameter. Events in precompiles are
 activated after Durango upgrade.
 
 _Note: `AllowList` is not an actual contract but just an interface. It's not callable by itself._
