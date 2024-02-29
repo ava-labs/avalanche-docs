@@ -532,8 +532,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
-Send an asset from the X-Chain to the P-Chain or C-Chain. After calling this method, you must call
-the [C-Chain's `avax.import`](/reference/avalanchego/c-chain/api.md#avaximport) or the [P-Chain's `platform.importAVAX`](/reference/avalanchego/p-chain/api.md#platformimportavax) to complete the transfer.
+Send an asset from the X-Chain to the P-Chain or C-Chain.
 
 **Signature:**
 
@@ -1403,10 +1402,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
-Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain. Before this method is
-called, you must call the P-Chain’s [`platform.exportAVAX`](/reference/avalanchego/p-chain/api.md#platformexportavax)
-or C-Chain’s [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport) method to initiate
-the transfer.
+Finalize a transfer of an asset from the P-Chain or C-Chain to the X-Chain.
 
 **Signature:**
 

@@ -72,23 +72,6 @@ set of [Avalanche Community Proposals](https://github.com/avalanche-foundation/A
 If set to `true`, this node will expose the Admin API. Defaults to `false`.
 See [here](/reference/avalanchego/admin-api.md) for more information.
 
-#### `--api-auth-required` (boolean)
-
-If set to `true`, API calls require an authorization token. Defaults to `false`.
-See [here](/reference/avalanchego/auth-api.md) for more information.
-
-#### `--api-auth-password` (string)
-
-The password needed to create/revoke authorization tokens. If
-`--api-auth-required=true`, must be specified; otherwise ignored. See
-[here](/reference/avalanchego/auth-api.md) for more information.
-
-#### `--api-auth-password-file` (string)
-
-Password file used to initially create/validate API authorization tokens.
-Ignored if `---api-auth-password` is specified.
-Leading and trailing whitespace is removed from the password. Can be changed via API call.
-
 #### `--api-health-enabled` (boolean)
 
 If set to `false`, this node will not expose the Health API. Defaults to `true`. See
@@ -772,8 +755,7 @@ An example config file is:
   "consensusParameters": {
     "k": 25,
     "alpha": 18
-  },
-  "appGossipNonValidatorSize": 10
+  }
 }
 ```
 
@@ -796,18 +778,6 @@ If this is `true`, print the version and quit. Defaults to `false`.
 The following options may affect the correctness of a node. Only power users should change these.
 
 ### Gossiping
-
-#### `--consensus-app-gossip-validator-size` (uint)
-
-Number of validators to gossip an AppGossip message to. Defaults to `10`.
-
-#### `--consensus-app-gossip-non-validator-size` (uint)
-
-Number of non-validators to gossip an AppGossip message to. Defaults to `0`.
-
-#### `--consensus-app-gossip-peer-size` (uint)
-
-Number of peers (which may or may not be validators) to gossip an AppGossip message to. Defaults to `0`.
 
 #### `--consensus-accepted-frontier-gossip-validator-size` (uint)
 
