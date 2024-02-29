@@ -12,11 +12,9 @@ pagination_label: API Reference Quick Links
 | [**C-Chain API**](/reference/avalanchego/c-chain/api.md)      | Contract Chain API Reference |
 | [**X-Chain API**](/reference/avalanchego/x-chain/api.md)      | Exchange Chain API Reference |
 | [**Admin API**](/reference/avalanchego/admin-api.md)      | Admin API Reference |
-| [**Auth API**](/reference/avalanchego/auth-api.md)      | Auth API Reference |
 | [**Health API**](/reference/avalanchego/health-api.md)      | Health API Reference |
 | [**Index API**](/reference/avalanchego/index-api.md)      | Index API Reference |
 | [**Info API**](/reference/avalanchego/info-api.md)      | Info API Reference |
-| [**IPC API**](/reference/avalanchego/ipc-api.md)      | IPC API Reference |
 | [**Keystore API**](/reference/avalanchego/keystore-api.md)      | Keystore API Reference |
 | [**Metrics API**](/reference/avalanchego/metrics-api.md)      | Metrics API Reference |
 | [**Subnet-EVM API**](/reference/subnet-evm/api.md)      | Subnet-EVM API Reference |

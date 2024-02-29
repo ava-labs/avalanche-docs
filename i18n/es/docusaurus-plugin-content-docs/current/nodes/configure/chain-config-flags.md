@@ -482,14 +482,6 @@ Especifica una matriz de hashes de transacciones que se deben permitir pasar
 la protección de reproducción. Esta bandera está destinada a operadores de nodos que desean explícitamente
 permitir que se emitan transacciones específicas a través de su API. El valor predeterminado es una lista vacía.
 
-#### `remote-tx-gossip-only-enabled` (boolean)
-
-Obsoleto a partir de `v0.12.5`. Usar en su lugar `tx-gossip-enabled`.
-
-Si es `true`, el nodo solo propagará transacciones remotas para evitar que las transacciones
-emitidas a través de este nodo se transmitan a la red. El valor predeterminado es
-`false`.
-
 #### `tx-regossip-frequency` (duration)
 
 Obsoleto a partir de `v0.12.5`. Usar en su lugar `regossip-frequency`.
@@ -497,24 +489,6 @@ Obsoleto a partir de `v0.12.5`. Usar en su lugar `regossip-frequency`.
 Cantidad de tiempo que debe transcurrir antes de intentar volver a propagar una transacción
 que ya se propagó una vez. El valor predeterminado es `60000000000` nanosegundos, que es
 1 minuto.
-
-#### `tx-regossip-max-size` (int)
-
-Obsoleto a partir de `v0.12.5`. Usar en su lugar `regossip-max-txs`.
-
-Número máximo de transacciones para volver a propagar a la vez. El valor predeterminado es `15`.
-
-#### `tx-pool-journal` (string)
-
-Especifica la ruta de archivo de un diario de transacciones para almacenar transacciones locales que sobreviven
-entre reinicios del nodo.
-
-El valor predeterminado es una cadena vacía y está desactivado. Para habilitar el registro de la piscina de transacciones,
-el usuario debe especificar un diario no vacío y habilitar las transacciones locales a través de `local-txs-enabled`.
-
-#### `tx-pool-rejournal` (duration)
-
-Intervalo de tiempo para regenerar el diario de transacciones locales. El valor predeterminado es 1 hora.
 
 #### `tx-pool-price-limit` (int)
 

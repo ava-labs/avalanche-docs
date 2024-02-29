@@ -59,23 +59,6 @@ algunos de los formatos de archivo actualmente soportados (ver
 Si se establece en `true`, este nodo expondrá la API de Administración. Por defecto, es `false`.
 Ver [aquí](/reference/avalanchego/admin-api.md) para más información.
 
-#### `--api-auth-required` (booleano)
-
-Si se establece en `true`, las llamadas de API requieren un token de autorización. Por defecto, es `false`.
-Ver [aquí](/reference/avalanchego/auth-api.md) para más información.
-
-#### `--api-auth-password` (cadena)
-
-La contraseña necesaria para crear/revocar tokens de autorización. Si
-`--api-auth-required=true`, debe especificarse; de lo contrario, se ignora. Ver
-[aquí](/reference/avalanchego/auth-api.md) para más información.
-
-#### `--api-auth-password-file` (cadena)
-
-Archivo de contraseña utilizado para crear/validar inicialmente tokens de autorización de API.
-Se ignora si se especifica `---api-auth-password`.
-Se elimina el espacio en blanco al principio y al final de la contraseña. Se puede cambiar a través de una llamada de API.
-
 #### `--api-health-enabled` (booleano)
 
 Si se establece en `false`, este nodo no expondrá la API de Salud. Por defecto, es `true`. Ver
@@ -680,8 +663,7 @@ Ejemplo: Digamos que tenemos una Subnet con ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oX
   "consensusParameters": {
     "k": 25,
     "alpha": 18
-  },
-  "appGossipNonValidatorSize": 10
+  }
 }
 ```
 
@@ -704,18 +686,6 @@ Si es `true`, imprime la versión y sale. Por defecto es `false`.
 Las siguientes opciones pueden afectar la corrección de un nodo. Solo los usuarios avanzados deben cambiar estas opciones.
 
 ### Gossiping
-
-#### `--consensus-app-gossip-validator-size` (uint)
-
-Número de validadores a los que hacer gossip de un mensaje de AppGossip. Por defecto es `10`.
-
-#### `--consensus-app-gossip-non-validator-size` (uint)
-
-Número de no validadores a los que hacer gossip de un mensaje de AppGossip. Por defecto es `0`.
-
-#### `--consensus-app-gossip-peer-size` (uint)
-
-Número de pares (que pueden o no ser validadores) a los que hacer gossip de un mensaje de AppGossip. Por defecto es `0`.
 
 #### `--consensus-accepted-frontier-gossip-validator-size` (uint)
 
