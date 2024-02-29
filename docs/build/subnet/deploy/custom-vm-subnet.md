@@ -8,7 +8,7 @@ sidebar_position: 5
 
 # Create a Subnet with a Custom Virtual Machine
 
-This tutorial walks through the process of creating a Subnet with a custom virtual machine and 
+This tutorial walks through the process of creating a Subnet with a custom virtual machine and
 deploying it locally.
 Although the tutorial uses a fork of Subnet-EVM as an example, you can extend its lessons to support
 any custom VM binary.
@@ -30,8 +30,8 @@ The repository cloning method used is HTTPS, but SSH can be used too:
 
 `git clone git@github.com:ava-labs/subnet-evm.git`
 
-You can find more about SSH and how to use it 
-[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh). 
+You can find more about SSH and how to use it
+[here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 :::
 
 ### Modify and Build Subnet-EVM
@@ -69,48 +69,47 @@ compatible with your custom VM.
 
 ```json
 {
-    "config": {
-        "byzantiumBlock": 0,
-        "chainId": 12345,
-        "constantinopleBlock": 0,
-        "eip150Block": 0,
-        "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-        "eip155Block": 0,
-        "eip158Block": 0,
-        "feeConfig": {
-            "gasLimit": 15000000,
-            "targetBlockRate": 2,
-            "minBaseFee": 25000000000,
-            "targetGas": 15000000,
-            "baseFeeChangeDenominator": 36,
-            "minBlockGasCost": 0,
-            "maxBlockGasCost": 1000000,
-            "blockGasCostStep": 200000
-        },
-        "homesteadBlock": 0,
-        "istanbulBlock": 0,
-        "muirGlacierBlock": 0,
-        "petersburgBlock": 0,
-        "subnetEVMTimestamp": 0
+  "config": {
+    "byzantiumBlock": 0,
+    "chainId": 12345,
+    "constantinopleBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "feeConfig": {
+      "gasLimit": 15000000,
+      "targetBlockRate": 2,
+      "minBaseFee": 25000000000,
+      "targetGas": 15000000,
+      "baseFeeChangeDenominator": 36,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 1000000,
+      "blockGasCostStep": 200000
     },
-    "nonce": "0x0",
-    "timestamp": "0x0",
-    "extraData": "0x",
-    "gasLimit": "0xe4e1c0",
-    "difficulty": "0x0",
-    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "coinbase": "0x0000000000000000000000000000000000000000",
-    "alloc": {
-        "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
-            "balance": "0xd3c21bcecceda1000000"
-        }
-    },
-    "airdropHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "airdropAmount": null,
-    "number": "0x0",
-    "gasUsed": "0x0",
-    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "baseFeePerGas": null
+    "homesteadBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "petersburgBlock": 0
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x",
+  "gasLimit": "0xe4e1c0",
+  "difficulty": "0x0",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "alloc": {
+    "8db97c7cece249c2b98bdc0226cc4c2a57bf52fc": {
+      "balance": "0xd3c21bcecceda1000000"
+    }
+  },
+  "airdropHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "airdropAmount": null,
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "baseFeePerGas": null
 }
 ```
 
@@ -294,9 +293,9 @@ The command should return
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "id": 1,
-    "result": "0xd3c21bcecceda1000000"
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0xd3c21bcecceda1000000"
 }
 ```
 

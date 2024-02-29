@@ -1580,7 +1580,6 @@ Note: it's important that this has the same name as the HardHat test file we cre
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0,
     "feeConfig": {
       "gasLimit": 20000000,
       "minBaseFee": 1000000000,

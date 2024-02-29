@@ -38,8 +38,6 @@ To see detailed information about your deployed Subnets, add the `--deployed` fl
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 ```
 
-
-
 ## Describe Subnet Configurations
 
 To see the details of a specific configuration, run
@@ -155,7 +153,6 @@ Example:
         "petersburgBlock": 0,
         "istanbulBlock": 0,
         "muirGlacierBlock": 0,
-        "subnetEVMTimestamp": 0,
         "feeConfig": {
             "gasLimit": 15000000,
             "targetBlockRate": 2,
