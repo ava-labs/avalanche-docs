@@ -27,7 +27,7 @@ Durango introduces following changes to Subnet-EVM:
 
 Avalanche Warp Messaging (AWM) is a new feature introduced with the Durango network upgrade. It enables native cross-Subnet communication and allows [Virtual Machine (VM)](/learn/avalanche/virtual-machines.md) developers to implement arbitrary communication protocols between any two Subnets. For more information about AWM see [here](/build/cross-chain/awm/overview.md).
 
-Warp Precompile must be enabled for Subnets after Durango. For more information the precompile and activation see [here](./customize-a-subnet.md#avalanche-warp-messaging)
+Warp Precompile must be enabled for Subnets after Durango. For more information the precompile and activation see [here](/build/subnet/upgrade/customize-a-subnet.md#avalanche-warp-messaging)
 
 ## Events
 
@@ -142,7 +142,7 @@ stateDB.AddLog(
 
 ## Manager Role
 
-Durango introduces a new role called the manager role. The manager role is a mid-role between `Admin` and `Enabled`. The manager role is considered as an `Enabled` account and perform restricted state-changing operations in precompiles. Manager role also can modify other `Enabled` accounts. It can appoint new `Enabled` accounts and remove existing `Enabled` accounts. Manager role cannot modify other `Manager` or `Admin` accounts. For more information about AllowList see [here](./customize-a-subnet.md#allowlist-interface).
+Durango introduces a new role called the manager role. The manager role is a mid-role between `Admin` and `Enabled`. The manager role is considered as an `Enabled` account and perform restricted state-changing operations in precompiles. Manager role also can modify other `Enabled` accounts. It can appoint new `Enabled` accounts and remove existing `Enabled` accounts. Manager role cannot modify other `Manager` or `Admin` accounts. For more information about AllowList see [here](/build/subnet/upgrade/customize-a-subnet.md#allowlist-interface).
 
 If you have any precompile using AllowList, you can issue a call to `setManager` in your precompile to appoint new Manager accounts. For upgrades or new precompiles with AllowList config you can use `managerAddresses` as follow:
 

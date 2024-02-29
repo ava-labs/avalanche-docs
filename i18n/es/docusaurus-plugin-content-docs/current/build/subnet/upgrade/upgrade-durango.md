@@ -27,7 +27,7 @@ Durango introduce los siguientes cambios en Subnet-EVM:
 
 La Mensajería de Warp Avalanche (AWM) es una nueva característica introducida con la actualización de red Durango. Permite la comunicación nativa entre Subnets y permite a los desarrolladores de Máquinas Virtuales (VM) implementar protocolos de comunicación arbitrarios entre cualquier par de Subnets. Para obtener más información sobre AWM, consulta [aquí](/build/cross-chain/awm/overview.md).
 
-La precompilación de Warp debe estar habilitada para las Subnets después de Durango. Para obtener más información sobre la precompilación y la activación, consulta [aquí](./customize-a-subnet.md#avalanche-warp-messaging)
+La precompilación de Warp debe estar habilitada para las Subnets después de Durango. Para obtener más información sobre la precompilación y la activación, consulta [aquí](/build/subnet/upgrade/customize-a-subnet.md#avalanche-warp-messaging)
 
 ## Eventos
 
@@ -142,7 +142,7 @@ stateDB.AddLog(
 
 ## Rol de Gerente
 
-Durango introduce un nuevo rol llamado rol de gerente. El rol de gerente es un rol intermedio entre `Admin` y `Enabled`. El rol de gerente se considera como una cuenta `Enabled` y realiza operaciones restringidas que cambian el estado en precompilaciones. El rol de gerente también puede modificar otras cuentas `Enabled`. Puede designar nuevas cuentas `Enabled` y eliminar cuentas `Enabled` existentes. El rol de gerente no puede modificar otras cuentas `Manager` o `Admin`. Para obtener más información sobre AllowList, consulta [aquí](./customize-a-subnet.md#allowlist-interface).
+Durango introduce un nuevo rol llamado rol de gerente. El rol de gerente es un rol intermedio entre `Admin` y `Enabled`. El rol de gerente se considera como una cuenta `Enabled` y realiza operaciones restringidas que cambian el estado en precompilaciones. El rol de gerente también puede modificar otras cuentas `Enabled`. Puede designar nuevas cuentas `Enabled` y eliminar cuentas `Enabled` existentes. El rol de gerente no puede modificar otras cuentas `Manager` o `Admin`. Para obtener más información sobre AllowList, consulta [aquí](/build/subnet/upgrade/customize-a-subnet.md#allowlist-interface).
 
 Si tienes alguna precompilación que utiliza AllowList, puedes emitir una llamada a `setManager` en tu precompilación para designar nuevas cuentas de gerente. Para actualizaciones o nuevas precompilaciones con la configuración de AllowList, puedes usar `managerAddresses` de la siguiente manera:
 
