@@ -427,7 +427,7 @@ func sayHello(accessibleState contract.AccessibleState, caller common.Address, a
 
 `setGreeting()` function is a simple setter function. It takes in `input`
 and we will set that as the value in the state mapping with the key as `storageKey`. It also checks
-if the VM running the precompile is in read-only mode. If it is, it returns an error. At the end of a successfull execution, it will emit `GreetingChanged` event.
+if the VM running the precompile is in read-only mode. If it is, it returns an error. At the end of a successful execution, it will emit `GreetingChanged` event.
 
 There is also a generated `AllowList` code in that function. This generated code checks if the caller
 address is eligible to perform this state-changing operation. If not, it returns an error.

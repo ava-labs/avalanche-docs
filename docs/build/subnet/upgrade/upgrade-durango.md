@@ -10,7 +10,7 @@ sidebar_position: 1
 
 ## Introduction
 
-Durango will be activated on the Avalanche Mainnet at 11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024. Subnet-EVM introduces a set of new features and backwards-incompatible changes with the Durango network upgrade.This guide will walk you through the process of upgrading your Subnet-EVM and precompiles for the Durango network upgrade. The Durango network upgrade introduces new features and improvements to the Avalanche platform and Subnet-EVM. This guide will help you ensure that your Subnet-EVM and precompiles are compatible with the Durango network upgrade.
+Durango will be activated on the Avalanche Mainnet at 11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024. Subnet-EVM introduces a set of new features and backwards-incompatible changes with the Durango network upgrade. This guide will walk you through the process of upgrading your Subnet-EVM and precompiles for the Durango network upgrade. The Durango network upgrade introduces new features and improvements to the Avalanche platform and Subnet-EVM. This guide will help you ensure that your Subnet-EVM and precompiles are compatible with the Durango network upgrade.
 
 Note: Subnet-EVM already performs these upgrades in native stateful precompiles. This guide is for users who have custom precompiles and need to upgrade them for Durango.
 
@@ -33,10 +33,10 @@ Warp Precompile must be enabled for Subnets after Durango. For more information 
 
 Subnet-EVM Native Precompiles will start emitting events with the Durango network upgrade. This will allow you to listen to events emitted by Subnet-EVM native precompiles. Following events will be introduced:
 
-- `event RoleSet(uint256 indexed role, address indexed account, address indexed sender, uint256 oldRole)`: This event will be emitted when a role is set for an account. Precompiles that uses `IAllowList` interface will emit this event without requiring any changes. The event contains the role, account, sender as indexed parameters and old role as unindex parameter.
-- `event FeeConfigChanged(address indexed sender, FeeConfig oldFeeConfig, FeeConfig newFeeConfig)`: This event will be emitted when the fee configuration is changed in `FeeManager` precompile. The event contains the sender as indexed parameter and old and new fee configuration as unindexed parameters.
-- `event NativeCoinMinted(address indexed sender, address indexed recipient, uint256 amount)`: This event will be emitted whe new native coins are minted. The event contains the sender, recipient as indexed parameters and the amount as unindexed parameter.
-- `event RewardAddressChanged(address indexed sender, address indexed oldRewardAddress, address indexed newRewardAddress)`: This event will be emitted when the reward address is changed in `RewardManager` precompile. The event contains the sender, old and new reward addresses as unindexed parameters.
+- `event RoleSet(uint256 indexed role, address indexed account, address indexed sender, uint256 oldRole)`: This event will be emitted when a role is set for an account. Precompiles that uses `IAllowList` interface will emit this event without requiring any changes. The event contains the role, account, sender as indexed parameters and old role as non-indexed parameter.
+- `event FeeConfigChanged(address indexed sender, FeeConfig oldFeeConfig, FeeConfig newFeeConfig)`: This event will be emitted when the fee configuration is changed in `FeeManager` precompile. The event contains the sender as indexed parameter and old and new fee configuration as non-indexed parameters.
+- `event NativeCoinMinted(address indexed sender, address indexed recipient, uint256 amount)`: This event will be emitted when new native coins are minted. The event contains the sender, recipient as indexed parameters and the amount as non-indexed parameter.
+- `event RewardAddressChanged(address indexed sender, address indexed oldRewardAddress, address indexed newRewardAddress)`: This event will be emitted when the reward address is changed in `RewardManager` precompile. The event contains the sender, old and new reward addresses as non-indexed parameters.
 - `event FeeRecipientsAllowed(address indexed sender)`: This event will be emitted when the fee recipients are allowed in `RewardManager` precompile. The event contains the sender as indexed parameter.
 - `event RewardsDisabled(address indexed sender)`: This event will be emitted when the rewards are disabled in `RewardManager` precompile. The event contains the sender as indexed parameter.
 
@@ -44,7 +44,7 @@ Subnet-EVM Native Precompiles will start emitting events with the Durango networ
 
 Events above are already introduced and handled in Subnet-EVM native precompiles. If you have a custom precompile, you can start emitting your custom events using Durango activation. In order to do this you can define your custom event in your solidity interface and regenerate the go bindings using `precompilegen` tool, for more information see [here](/build/vm/evm/generate-precompile.md).
 
-Generally ou will generate an `event.go` file in addition to your existing precompile files. You need to implement how to emit your events and your events' gas costs, as in [hello world example](/build/vm/evm/defining-precompile.md#event-file). In this guide we will use the hello world example to demonstrate how to emit custom events. The event that will be introduced is:
+Generally you will generate an `event.go` file in addition to your existing precompile files. You need to implement how to emit your events and your events' gas costs, as in [hello world example](/build/vm/evm/defining-precompile.md#event-file). In this guide we will use the hello world example to demonstrate how to emit custom events. The event that will be introduced is:
 
 ```solidity
 event GreetingChanged(address indexed sender, string oldGreeting, string newGreeting)
@@ -118,7 +118,7 @@ if err != nil {
 }
 ```
 
-This will first charge gas for fetching the old greeting from the state fetch and then fetch it from the state. Then it will pack the event data with old and new greeting as unindexed event data.
+This will first charge gas for fetching the old greeting from the state fetch and then fetch it from the state. Then it will pack the event data with old and new greeting as non-indexed event data.
 
 #### Emitting Events
 
@@ -144,7 +144,7 @@ stateDB.AddLog(
 
 Durango introduces a new role called the manager role. The manager role is a mid-role between `Admin` and `Enabled`. The manager role is considered as an `Enabled` account and perform restricted state-changing operations in precompiles. Manager role also can modify other `Enabled` accounts. It can appoint new `Enabled` accounts and remove existing `Enabled` accounts. Manager role cannot modify other `Manager` or `Admin` accounts. For more information about AllowList see [here](./customize-a-subnet.md#allowlist-interface).
 
-If you have any precompile using AllowList, you can issue a call to `setManager` in your precompile to appoint new Manager accounts. For upgrades or new precompiles with allowlist config you can use `managerAddresses` as follow:
+If you have any precompile using AllowList, you can issue a call to `setManager` in your precompile to appoint new Manager accounts. For upgrades or new precompiles with AllowList config you can use `managerAddresses` as follow:
 
 ```json
 {
@@ -214,4 +214,4 @@ if err != nil {
 
 This will ensure that non-strict mode unpacking is used after Durango activation.
 
-Note: This should not impose any critial issue for your custom precompiles. However if your precompile is mainly used from other deployed contracts (Solidity) you should do this transition in order to increase the compatibility of your precompile.
+Note: This should not impose any critical issue for your custom precompiles. However if your precompile is mainly used from other deployed contracts (Solidity) you should do this transition in order to increase the compatibility of your precompile.
