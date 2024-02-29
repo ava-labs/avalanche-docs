@@ -25,7 +25,7 @@ Durango introduces following changes to Subnet-EVM:
 
 ## Avalanche Warp Messaging
 
-Avalanche Warp Messaging (AWM) is a new feature introduced with the Durango network upgrade. It enables native cross-Subnet communication and allows [Virtual Machine (VM)](/learn/avalanche/virtual-machines.md) developers to implement arbitrary communication protocols between any two Subnets. For more information about AWM see [here](/build/cross-chain/awm/overview.m).
+Avalanche Warp Messaging (AWM) is a new feature introduced with the Durango network upgrade. It enables native cross-Subnet communication and allows [Virtual Machine (VM)](/learn/avalanche/virtual-machines.md) developers to implement arbitrary communication protocols between any two Subnets. For more information about AWM see [here](/build/cross-chain/awm/overview.md).
 
 Warp Precompile must be enabled for Subnets after Durango. For more information the precompile and activation see [here](./customize-a-subnet.md#avalanche-warp-messaging)
 
