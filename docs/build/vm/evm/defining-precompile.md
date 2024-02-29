@@ -228,6 +228,51 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 }
 ```
 
+### Event File
+
+The event file contains the events that the precompile can emit. This file is located at
+[`./precompile/helloworld/event.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/event.go) for Subnet-EVM and
+[./helloworld/event.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/event.go) for Precompile-EVM. The file begins with a comment about events and how they can be emitted:
+
+```go
+/* NOTE: Events can only be emitted in state-changing functions. So you cannot use events in read-only (view) functions.
+Events are generally emitted at the end of a state-changing function with AddLog method of the StateDB. The AddLog method takes 4 arguments:
+	1. Address of the contract that emitted the event.
+	2. Topic hashes of the event.
+	3. Encoded non-indexed data of the event.
+	4. Block number at which the event was emitted.
+The first argument is the address of the contract that emitted the event.
+Topics can be at most 4 elements, the first topic is the hash of the event signature and the rest are the indexed event arguments. There can be at most 3 indexed arguments.
+Topics cannot be fully unpacked into their original values since they're 32-bytes hashes.
+The non-indexed arguments are encoded using the ABI encoding scheme. The non-indexed arguments can be unpacked into their original values.
+Before packing the event, you need to calculate the gas cost of the event. The gas cost of an event is the base gas cost + the gas cost of the topics + the gas cost of the non-indexed data.
+See Get{EvetName}EventGasCost functions for more details.
+You can use the following code to emit an event in your state-changing precompile functions (generated packer might be different):
+topics, data, err := PackMyEvent(
+	topic1,
+	topic2,
+	data1,
+	data2,
+)
+if err != nil {
+	return nil, remainingGas, err
+}
+accessibleState.GetStateDB().AddLog(
+	ContractAddress,
+	topics,
+	data,
+	accessibleState.GetBlockContext().Number().Uint64(),
+)
+```
+
+In this file you should set your event's gas cost and implement the `Get{EventName}EventGasCost` function. This function should take the data you want to emit and calculate the gas cost. In this example we defined our event as follow, and plan to emit it in the `setGreeting` function:
+
+```sol
+  event GreetingChanged(address indexed sender, string oldGreeting, string newGreeting);
+```
+
+We used arbitrary strings as non-indexed event data, remind that each emitted event is stored on chain, thus charging right amount is critical. We calculated gas cost according to the length of the string to make sure we're charging right amount of gas. If you're sure that you're dealing with a fixed length data, you can use a fixed gas cost for your event. We will show how events can be emitted under the Contract File section.
+
 ### Contract File
 
 The contract file contains the functions of the precompile contract that will be called by the EVM. The
@@ -265,13 +310,36 @@ These functions are auto-generated
 and will be used in necessary places accordingly.
 You don't need to worry about how to deal with them, but it's good to know what they are.
 
-Each input to a precompile contract function has it's own `Unpacker` function as follows:
+Note: There were few changes to precompile packers with Durango. In this example we assumed that the HelloWorld precompile contract has been deployed before Durango. We need to activate this condition only after Durango. If this is a new precompile and never deployed before Durango, you can activate it immediately by removing the if condition.
+
+Each input to a precompile contract function has it's own `Unpacker` function as follows (if deployed before Durango):
 
 ```go
 // UnpackSetGreetingInput attempts to unpack [input] into the string type argument
 // assumes that [input] does not include selector (omits first 4 func signature bytes)
+// if [useStrictMode] is true, it will return an error if the length of [input] is not [common.HashLength]
+func UnpackSetGreetingInput(input []byte, useStrictMode bool) (string, error) {
+	// Initially we had this check to ensure that the input was the correct length.
+	// However solidity does not always pack the input to the correct length, and allows
+	// for extra padding bytes to be added to the end of the input. Therefore, we have removed
+	// this check with the Durango. We still need to keep this check for backwards compatibility.
+	if useStrictMode && len(input) > common.HashLength {
+		return "", ErrInputExceedsLimit
+	}
+	res, err := HelloWorldABI.UnpackInput("setGreeting", input, useStrictMode)
+	if err != nil {
+		return "", err
+	}
+	unpacked := *abi.ConvertType(res[0], new(string)).(*string)
+	return unpacked, nil
+}
+```
+
+If this is a new precompile that will be deployed after Durango, you can skip strict mode handling and use false:
+
+```go
 func UnpackSetGreetingInput(input []byte) (string, error) {
-	res, err := HelloWorldABI.UnpackInput("setGreeting", input)
+	res, err := HelloWorldABI.UnpackInput("setGreeting", input, false)
 	if err != nil {
 		return "", err
 	}
@@ -357,9 +425,9 @@ func sayHello(accessibleState contract.AccessibleState, caller common.Address, a
 
 #### Modify setGreeting()
 
-We can also modify our `setGreeting()` function. This is a simple setter function. It takes in `input`
+`setGreeting()` function is a simple setter function. It takes in `input`
 and we will set that as the value in the state mapping with the key as `storageKey`. It also checks
-if the VM running the precompile is in read-only mode. If it is, it returns an error.
+if the VM running the precompile is in read-only mode. If it is, it returns an error. At the end of a successfull execution, it will emit `GreetingChanged` event.
 
 There is also a generated `AllowList` code in that function. This generated code checks if the caller
 address is eligible to perform this state-changing operation. If not, it returns an error.
@@ -389,14 +457,15 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 	if readOnly {
 		return nil, remainingGas, vmerrs.ErrWriteProtection
 	}
+	// do not use strict mode after Durango
+	useStrictMode := !contract.IsDurangoActivated(accessibleState)
 	// attempts to unpack [input] into the arguments to the SetGreetingInput.
 	// Assumes that [input] does not include selector
 	// You can use unpacked [inputStruct] variable in your code
-	inputStruct, err := UnpackSetGreetingInput(input)
+	inputStruct, err := UnpackSetGreetingInput(input, useStrictMode)
 	if err != nil {
 		return nil, remainingGas, err
 	}
-
 	// Allow list is enabled and SetGreeting is a state-changer function.
 	// This part of the code restricts the function to be called only by enabled/admin addresses in the allow list.
 	// You can modify/delete this code if you don't want this function to be restricted by the allow list.
@@ -409,9 +478,40 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 	// allow list code ends here.
 
 	// CUSTOM CODE STARTS HERE
-	// Check if the input string is longer than HashLength
-	if len(inputStruct) > common.HashLength {
-		return nil, 0, ErrInputExceedsLimit
+	// With Durango, you can emit an event in your state-changing precompile functions.
+	// Note: If you have been using the precompile before Durango, you should activate it only after Durango.
+	// Activating this code before Durango will result in a consensus failure.
+	// If this is a new precompile and never deployed before Durango, you can activate it immediately by removing
+	// the if condition.
+	// This example assumes that the HelloWorld precompile contract has been deployed before Durango.
+	if contract.IsDurangoActivated(accessibleState) {
+		// We will first read the old greeting. So we should charge the gas for reading the storage.
+		if remainingGas, err = contract.DeductGas(remainingGas, contract.ReadGasCostPerSlot); err != nil {
+			return nil, 0, err
+		}
+		oldGreeting := GetGreeting(stateDB)
+
+		eventData := GreetingChangedEventData{
+			OldGreeting: oldGreeting,
+			NewGreeting: inputStruct,
+		}
+		topics, data, err := PackGreetingChangedEvent(caller, eventData)
+		if err != nil {
+			return nil, remainingGas, err
+		}
+		// Charge the gas for emitting the event.
+		eventGasCost := GetGreetingChangedEventGasCost(eventData)
+		if remainingGas, err = contract.DeductGas(remainingGas, eventGasCost); err != nil {
+			return nil, 0, err
+		}
+
+		// Emit the event
+		stateDB.AddLog(
+			ContractAddress,
+			topics,
+			data,
+			accessibleState.GetBlockContext().Number().Uint64(),
+		)
 	}
 
 	// setGreeting is the execution function
@@ -426,6 +526,8 @@ func setGreeting(accessibleState contract.AccessibleState, caller common.Address
 	return packedOutput, remainingGas, nil
 }
 ```
+
+Note: Precompile events introduced with Durango. In this example we assumed that the HelloWorld precompile contract has been deployed before Durango. If this is a new precompile and it will be deployed after Durango, you can activate it immediately by removing the Durango if condition (`contract.IsDurangoActivated(accessibleState)`)
 
 <!-- markdownlint-enable MD013 -->
 

@@ -111,14 +111,17 @@ can be copied and pasted into a new file called `ExampleHelloWorld.sol`:
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 import "./IHelloWorld.sol";
+
 // ExampleHelloWorld shows how the HelloWorld precompile can be used in a smart contract.
 contract ExampleHelloWorld {
   address constant HELLO_WORLD_ADDRESS =
     0x0300000000000000000000000000000000000000;
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
   function sayHello() public view returns (string memory) {
     return helloWorld.sayHello();
   }
+
   function setGreeting(string calldata greeting) public {
     helloWorld.setGreeting(greeting);
   }
@@ -154,14 +157,17 @@ pragma solidity ^0.8.0;
 import "../ExampleHelloWorld.sol";
 import "../interfaces/IHelloWorld.sol";
 import "./AllowListTest.sol";
+
 contract ExampleHelloWorldTest is AllowListTest {
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
   function step_getDefaultHelloWorld() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
     assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
     assertEq(example.sayHello(), "Hello World!");
   }
+
   function step_doesNotSetGreetingBeforeEnabled() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
@@ -170,6 +176,7 @@ contract ExampleHelloWorldTest is AllowListTest {
       assertTrue(false, "setGreeting should fail");
     } catch {}
   }
+
   function step_setAndGetGreeting() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
@@ -197,14 +204,17 @@ pragma solidity ^0.8.0;
 import "../ExampleHelloWorld.sol";
 import "../interfaces/IHelloWorld.sol";
 import "@avalabs/subnet-evm-contracts/contracts/test/AllowListTest.sol";
+
 contract ExampleHelloWorldTest is AllowListTest {
   IHelloWorld helloWorld = IHelloWorld(HELLO_WORLD_ADDRESS);
+
   function step_getDefaultHelloWorld() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
     assertRole(helloWorld.readAllowList(exampleAddress), AllowList.Role.None);
     assertEq(example.sayHello(), "Hello World!");
   }
+
   function step_doesNotSetGreetingBeforeEnabled() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
@@ -213,6 +223,7 @@ contract ExampleHelloWorldTest is AllowListTest {
       assertTrue(false, "setGreeting should fail");
     } catch {}
   }
+
   function step_setAndGetGreeting() public {
     ExampleHelloWorld example = new ExampleHelloWorld();
     address exampleAddress = address(example);
@@ -238,7 +249,7 @@ contract ExampleHelloWorldTest is AllowListTest {
 
 We can now trigger this test contract via `hardhat` tests. The test script uses Subnet-EVM's `test`
 framework test in `./contracts/test`.
-You can find more information about the test framework [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/test/utils.ts).
+You can find more information about the test framework [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/test/utils.ts). We also can test the events emitted by the precompile. The test script looks like this:
 
 <!-- vale off -->
 
@@ -252,6 +263,9 @@ The test script looks like this:
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
+import { expect } from "chai";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { Contract } from "ethers";
 import { ethers } from "hardhat";
 import { test } from "./utils";
 
@@ -294,6 +308,37 @@ describe("ExampleHelloWorldTest", function () {
     "step_setAndGetGreeting"
   );
 });
+
+describe("IHelloWorld events", function () {
+  let owner: SignerWithAddress;
+  let contract: Contract;
+  let defaultGreeting = "Hello, World!";
+  before(async function () {
+    owner = await ethers.getSigner(ADMIN_ADDRESS);
+    contract = await ethers.getContractAt(
+      "IHelloWorld",
+      HELLO_WORLD_ADDRESS,
+      owner
+    );
+
+    // reset greeting
+    let tx = await contract.setGreeting(defaultGreeting);
+    await tx.wait();
+  });
+
+  it("should emit GreetingChanged event", async function () {
+    let newGreeting = "helloprecompile";
+    await expect(contract.setGreeting(newGreeting))
+      .to.emit(contract, "GreetingChanged")
+      .withArgs(
+        owner.address,
+        // old greeting
+        defaultGreeting,
+        // new greeting
+        newGreeting
+      );
+  });
+});
 ```
 
 </TabItem>
@@ -304,6 +349,9 @@ The test script looks like this:
 // (c) 2019-2022, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
 
+import { expect } from "chai";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { Contract } from "ethers";
 import { ethers } from "hardhat";
 import { test } from "@avalabs/subnet-evm-contracts";
 
@@ -345,6 +393,37 @@ describe("ExampleHelloWorldTest", function () {
     "should set and get greeting with enabled account",
     "step_setAndGetGreeting"
   );
+});
+
+describe("IHelloWorld events", function () {
+  let owner: SignerWithAddress;
+  let contract: Contract;
+  let defaultGreeting = "Hello, World!";
+  before(async function () {
+    owner = await ethers.getSigner(ADMIN_ADDRESS);
+    contract = await ethers.getContractAt(
+      "IHelloWorld",
+      HELLO_WORLD_ADDRESS,
+      owner
+    );
+
+    // reset greeting
+    let tx = await contract.setGreeting(defaultGreeting);
+    await tx.wait();
+  });
+
+  it("should emit GreetingChanged event", async function () {
+    let newGreeting = "helloprecompile";
+    await expect(contract.setGreeting(newGreeting))
+      .to.emit(contract, "GreetingChanged")
+      .withArgs(
+        owner.address,
+        // old greeting
+        defaultGreeting,
+        // new greeting
+        newGreeting
+      );
+  });
 });
 ```
 

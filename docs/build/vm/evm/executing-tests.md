@@ -35,7 +35,6 @@ Note: it's important that this has the same name as the HardHat test file we cre
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0,
     "feeConfig": {
       "gasLimit": 20000000,
       "minBaseFee": 1000000000,
@@ -92,23 +91,20 @@ the e2e test is to declare the new test in `/tests/precompile/solidity/suites.go
 At the bottom of the file you will see the following code commented out:
 
 ```go
-	// TODO: can we refactor this so that it automagically checks to ensure each hardhat test file matches the name of a hardhat genesis file
-	// and then runs the hardhat tests for each one without forcing precompile developers to modify this file.
 	// ADD YOUR PRECOMPILE HERE
 	/*
-		ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
-			ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-			defer cancel()
-			// Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
-			// and the test file in ./contracts/tests/{your_precompile}.ts
-			// If you want to use a different test command and genesis path than the defaults, you can
-			// use the utils.RunTestCMD. See utils.RunDefaultHardhatTests for an example.
-			utils.RunDefaultHardhatTests(ctx, "your_precompile")
-		})
+  ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
+    ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+    defer cancel()
+
+    // Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
+    // and the test file in ./contracts/tests/{your_precompile}.ts
+    blockchainID := subnetsSuite.GetBlockchainID("{your_precompile}")
+    runDefaultHardhatTests(ctx, blockchainID, "{your_precompile}")
 	*/
 ```
 
-`utils.RunDefaultHardhatTests` will run the default Hardhat test command and use the default genesis
+`runDefaultHardhatTests` will run the default Hardhat test command and use the default genesis
 path.
 If you want to use a different test command and genesis path than the defaults, you can use the
 `utils.CreateSubnet` and `utils.RunTestCMD`.
@@ -123,12 +119,13 @@ After modifying the `It` node, it should look like the following (you can copy a
 directly if you prefer):
 
 ```go
-	ginkgo.It("hello world", ginkgo.Label("Precompile"), ginkgo.Label("HelloWorld"), func() {
-		ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
-		defer cancel()
+  ginkgo.It("hello world", ginkgo.Label("Precompile"), ginkgo.Label("HelloWorld"), func() {
+    ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+    defer cancel()
 
-		utils.RunDefaultHardhatTests(ctx, "hello_world")
-	})
+    blockchainID := subnetsSuite.GetBlockchainID("hello_world")
+    runDefaultHardhatTests(ctx, blockchainID, "hello_world")
+  })
 ```
 
 Now that we've set up the new ginkgo test, we can run the ginkgo test that we want by using the
@@ -161,7 +158,7 @@ Once you've built AvalancheGo, you can confirm that it was successful by printin
 This should print something like the following (if you are running AvalancheGo v1.9.7):
 
 ```bash
-avalanche/1.9.7 [database=v1.4.5, rpcchainvm=22, commit=3e3e40f2f4658183d999807b724245023a13f5dc]
+avalanchego/1.11.0 [database=v1.4.5, rpcchainvm=33, commit=c60f7d2dd10c87f57382885b59d6fb2c763eded7, go=1.21.7]
 ```
 
 This path will be used later as the environment variable `AVALANCHEGO_EXEC_PATH` in the network runner.
@@ -196,7 +193,7 @@ $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu
 This should give similar output:
 
 ```bash
-Subnet-EVM/v0.5.2@9a1c5482c83c32b29630ff171cb20ccc889d760e [AvalancheGo=v1.10.2, rpcchainvm=26]
+Subnet-EVM/v0.6.1 [AvalancheGo=v1.11.1, rpcchainvm=33]
 ```
 
 </TabItem>
@@ -223,7 +220,7 @@ $GOPATH/src/github.com/ava-labs/avalanchego/build/plugins/srEXiWaHuhNyGwPUi444Tu
 This should give similar output:
 
 ```bash
-Precompile-EVM/v0.0.0 Subnet-EVM/v0.5.2 [AvalancheGo=v1.10.2, rpcchainvm=26]
+Precompile-EVM/v0.2.0 Subnet-EVM/v0.6.1 [AvalancheGo=v1.11.1, rpcchainvm=33]
 ```
 
 </TabItem>
