@@ -23,8 +23,7 @@ Here is an example of Subnet config file:
   "consensusParameters": {
     "k": 25,
     "alpha": 18
-  },
-  "appGossipNonValidatorSize": 10
+  }
 }
 ```
 
@@ -97,10 +96,7 @@ same values used for the Primary Network, which are given [CLI Snow Parameters](
 ### Gossip Configs
 
 It's possible to define different Gossip configurations for each Subnet without
-changing values for Primary Network. For example in Primary Network transaction
-mempools are not gossiped to non-validators
-(`--consensus-app-gossip-non-validator-size` is `0`). You can change this for
-your Subnet and share mempool with non-validators as well. JSON keys of these
+changing values for Primary Network. JSON keys of these
 parameters are different from their matching `CLI` keys. These parameters
 default to the same values used for the Primary Network. For more information
 see [CLI Gossip Configs](/nodes/configure/avalanchego-config-flags.md#gossiping).
@@ -113,6 +109,3 @@ see [CLI Gossip Configs](/nodes/configure/avalanchego-config-flags.md#gossiping)
 | --consensus-on-accept-gossip-validator-size             | gossipOnAcceptValidatorSize            |
 | --consensus-on-accept-gossip-non-validator-size         | gossipOnAcceptNonValidatorSize         |
 | --consensus-on-accept-gossip-peer-size                  | gossipOnAcceptPeerSize                 |
-| --consensus-app-gossip-validator-size                   | appGossipValidatorSize                 |
-| --consensus-app-gossip-non-validator-size               | appGossipNonValidatorSize              |
-| --consensus-app-gossip-peer-size                        | appGossipPeerSize                      |

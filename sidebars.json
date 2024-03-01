@@ -561,11 +561,9 @@
       ]
     },
     "reference/avalanchego/admin-api",
-    "reference/avalanchego/auth-api",
     "reference/avalanchego/health-api",
     "reference/avalanchego/index-api",
     "reference/avalanchego/info-api",
-    "reference/avalanchego/ipc-api",
     "reference/avalanchego/keystore-api",
     "reference/avalanchego/metrics-api",
     {
