@@ -114,7 +114,7 @@ Notice some details here:
 
 - Two smart contracts are deployed to each Subnet: Teleporter Messenger smart contract and Teleporter Registry smart contract
 - Both Teleporter smart contracts are also deployed to `C-Chain` in the Local Network
-- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer)) is installed, configured and executed in background (A Relayer
+- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer
 [listens](/build/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
 
 CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add
