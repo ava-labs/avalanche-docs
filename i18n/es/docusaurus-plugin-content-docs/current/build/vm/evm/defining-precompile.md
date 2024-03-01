@@ -8,8 +8,8 @@ sidebar_position: 3
 
 # Definiendo tu Precompilación
 
-importar Tabs desde '@theme/Tabs';
-importar TabItem desde '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Ahora que hemos autogenerado el código de plantilla requerido para nuestra precompilación, vamos a escribir la lógica de la precompilación en sí.
 
@@ -47,7 +47,38 @@ En el archivo `helloworld/module.go` puedes ver que la `ContractAddress` se esta
 // ContractNativeMinterAddress      = common.HexToAddress("0x0200000000000000000000000000000000000001")
 // TxAllowListAddress               = common.HexToAddress("0x0200000000000000000000000000000000000002")
 // FeeManagerAddress                = common.HexToAddress("0x0200000000000000000000000000000000000003")
-// RewardManagerAddress             = common.HexToAddress("0x020000000000000000000000000000000000
+// RewardManagerAddress             = common.HexToAddress("0x0200000000000000000000000000000000000004")
+// HelloWorldAddress                = common.HexToAddress("0x0300000000000000000000000000000000000000")
+// AGREGA TU PRECOMPILACIÓN AQUÍ
+// {TuPrecompilación}Address          = common.HexToAddress("0x03000000000000000000000000000000000000??")
+```
+
+No olvides actualizar la variable real `ContractAddress` en `module.go` a la dirección que elegiste. Debería verse así:
+
+```go
+// ContractAddress es la dirección definida del contrato de precompilación.
+// Esto debe ser único entre todos los contratos de precompilación.
+// Consulta params/precompile_modules.go para ver los contratos de precompilación registrados y más información.
+var ContractAddress = common.HexToAddress("0x0300000000000000000000000000000000000000")
+```
+
+Ahora, cuando Subnet-EVM vea la `helloworld.ContractAddress` como entrada al ejecutar [`CALL`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L284), [`CALLCODE`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L355), [`DELEGATECALL`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L396), [`STATICCALL`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/core/vm/evm.go#L445), puede ejecutar la precompilación si la precompilación está habilitada.
+
+## Agregando Código Personalizado
+
+Busca (`CTRL F`) en todo el archivo con `CUSTOM CODE STARTS HERE` para encontrar las áreas en el paquete de precompilación que necesitas modificar. Debes comenzar con el bloque de código de importaciones de referencia.
+
+### Archivo del Módulo
+
+El archivo del módulo contiene información fundamental sobre la precompilación. Esto incluye la clave para la precompilación, la dirección de la precompilación y un configurador. Este archivo se encuentra en [`./precompile/helloworld/module.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/module.go) para Subnet-EVM y [./helloworld/module.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/module.go) para Precompile-EVM.
+
+Este archivo define el módulo para la precompilación. El módulo se utiliza para registrar la precompilación en el registro de precompilaciones. El registro de precompilaciones se utiliza para leer configuraciones y habilitar la precompilación. El registro se realiza en la función `init()` del archivo del módulo. `MakeConfig()` se utiliza para crear una nueva instancia para la configuración de la precompilación. Esto se utilizará en la lógica personalizada de Unmarshal/Marshal. No es necesario anular estas funciones.
+
+#### Configure()
+
+El archivo del módulo contiene un `configurador` que implementa la interfaz `contract.Configurator`. Esta interfaz incluye una función `Configure()` utilizada para configurar la precompilación y establecer el estado inicial de la precompilación. Esta función se llama cuando se habilita la precompilación. Esto se usa típicamente para leer de una configuración dada en JSON de actualización/génesis y establece el estado inicial de la precompilación en consecuencia. Esta función también llama a `AllowListConfig.Configure()` para invocar la configuración de AllowList como último paso. Debes dejarlo como está si quieres usar AllowList. Puedes modificar esta función para tu lógica personalizada. Puedes volver a esta función más tarde después de haber finalizado la implementación de la configuración de la precompilación.
+
+### Archivo de Configuración
 
 El archivo de configuración contiene la configuración para la precompilación. Este archivo se encuentra en
 [`./precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go)
@@ -75,10 +106,10 @@ type Config struct {
 #### Verify()
 
 `Verify()` se llama al inicio y un error se trata como fatal. El código generado contiene una llamada
-a `AllowListConfig.Verify()` para verificar la `AllowListConfig`. Puede dejarlo así y comenzar
+a `AllowListConfig.Verify()` para verificar la `AllowListConfig`. Puede dejar eso como está y comenzar
 a agregar su propio código de verificación personalizado después de eso.
 
-Podemos dejar esta función como está por ahora porque no hay una configuración personalizada no válida para la `Config`.
+Podemos dejar esta función como está por ahora porque no hay una configuración personalizada no válida para el `Config`.
 
 ```go
 // Verify intenta verificar Config y devuelve un error en consecuencia.
@@ -106,14 +137,14 @@ verificar la igualdad de `Upgrade` y `AllowListConfig`.
 ```go
 // Equal devuelve verdadero si [s] es un [*Config] y se ha configurado de manera idéntica a [c].
 func (c *Config) Equal(s precompileconfig.Config) bool {
-	// hacer un molde antes de la comparación
+	// typecast antes de la comparación
 	other, ok := (s).(*Config)
 	if !ok {
 		return false
 	}
 	// EL CÓDIGO PERSONALIZADO COMIENZA AQUÍ
 	// modifique este booleano en consecuencia con su Config personalizado, para verificar si [other] y el actual [c] son iguales
-	// si Config solo contiene Upgrade y AllowListConfig, puede omitir modificarlo.
+	// si Config contiene solo Upgrade y AllowListConfig, puede omitir modificarlo.
 	equals := c.Upgrade.Equal(&other.Upgrade) && c.AllowListConfig.Equal(&other.AllowListConfig)
 	return equals
 }
@@ -121,15 +152,16 @@ func (c *Config) Equal(s precompileconfig.Config) bool {
 
 <!-- markdownlint-enable MD013 -->
 
-Podemos dejar esta función como está, ya que verificamos la igualdad de `Upgrade` y `AllowListConfig`, que son
+Podemos dejar esta función como está ya que verificamos la igualdad de `Upgrade` y `AllowListConfig` que son
 los únicos campos que tiene la estructura `Config`.
 
 ### Modificar Configure()
 
 Ahora podemos volver a `Configure()` en `module.go` ya que terminamos de implementar la estructura `Config`.
 Esta función configura el `state` con la
-configuración inicial en `blockTimestamp` cuando se habilita la precompilación.
-En el ejemplo de HelloWorld, queremos configurar un mapeo de clave-valor predeterminado en el estado donde la clave es `storageKey` y el valor es `Hello World!`. El
+configuración inicial en `blockTimestamp` cuando la precompilación está habilitada.
+En el ejemplo de HelloWorld, queremos configurar un
+mapeo de clave-valor predeterminado en el estado donde la clave es `storageKey` y el valor es `Hello World!`. El
 `StateDB` nos permite almacenar un mapeo de clave-valor de hashes de 32 bytes. El siguiente fragmento de código se puede
 copiar y pegar para sobrescribir el código de `Configure()` por defecto.
 
@@ -215,20 +247,20 @@ func GetHelloWorldAllowListStatus(stateDB contract.StateDB, address common.Addre
 	return allowlist.GetAllowListStatus(stateDB, ContractAddress, address)
 }
 
-// SetHelloWorldAllowListStatus establece los permisos de [dirección] a [rol] para la
-// lista HelloWorld. Asume que [rol] ya ha sido verificado como válido.
-// Esto almacena el [rol] en el almacenamiento del contrato con la dirección [ContractAddress]
-// y el hash de [dirección]. Esto significa que cualquier reutilización de la clave [dirección] para un valor diferente
-// entra en conflicto con el mismo espacio [rol] almacenado.
-// Las implementaciones de precompilación deben usar una clave diferente a [dirección] para su almacenamiento.
+// SetHelloWorldAllowListStatus establece los permisos de [address] a [role] para la
+// lista HelloWorld. Asume que [role] ya ha sido verificado como válido.
+// Esto almacena el [role] en el almacenamiento del contrato con dirección [ContractAddress]
+// y hash [address]. Significa que cualquier reutilización de la clave [address] para un valor diferente
+// entra en conflicto con el mismo slot [role] almacenado.
+// Las implementaciones de precompilación deben usar una clave diferente a [address] para su almacenamiento.
 func SetHelloWorldAllowListStatus(stateDB contract.StateDB, address common.Address, role allowlist.Role) {
 	allowlist.SetAllowListRole(stateDB, ContractAddress, address, role)
 }
 ```
 
-Esto será útil para usar el ayudante de precompilación AllowList en nuestras funciones.
+Estos serán útiles para usar el ayudante de AllowList de precompilación en nuestras funciones.
 
-#### Empaquetadores y Desempaquetadores
+#### Packers y Unpackers
 
 También hay empaquetadores y desempaquetadores generados automáticamente para la ABI. Estos se utilizarán en las funciones `sayHello` y `setGreeting` para cumplir con la ABI. Estas funciones se generan automáticamente y se utilizarán en los lugares necesarios. No tienes que preocuparte por cómo lidiar con ellos, pero es bueno saber qué son.
 
