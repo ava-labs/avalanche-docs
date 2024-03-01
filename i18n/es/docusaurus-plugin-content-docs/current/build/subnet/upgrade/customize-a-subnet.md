@@ -140,7 +140,8 @@ Si el bloque se produce a la tasa objetivo, el costo de gas del bloque se manten
 Si se produce más rápido/más lento, el costo de gas del bloque se incrementará/decrementará por el valor de paso por
 cada segundo más rápido/más lento que la tasa de bloque objetivo correspondientemente.
 
-:::nota
+:::note
+
 Si el `blockGasCostStep` se establece en un número muy grande, efectivamente requiere que la producción de bloques
 no vaya más rápido que la `targetBlockRate`. Por ejemplo, si un bloque se produce dos segundos más rápido que
 la tasa de bloque objetivo, el costo de gas del bloque aumentará en `2 * blockGasCostStep`.

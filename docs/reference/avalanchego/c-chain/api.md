@@ -1,10 +1,11 @@
 ---
 id: api
 tags: [C-Chain, Contract Chain, AvalancheGo APIs]
-description: This page is an overview of the C-Chain API associated with AvalancheGo. 
-sidebar_label: API 
+description: This page is an overview of the C-Chain API associated with AvalancheGo.
+sidebar_label: API
 pagination_label: C-Chain API
 ---
+
 # Contract Chain API
 
 :::info
@@ -88,15 +89,15 @@ for a full description of this API.
 
 :::info
 
-For batched requests on the [public API node](/tooling/rpc-providers.md) , the maximum 
+For batched requests on the [public API node](/tooling/rpc-providers.md) , the maximum
 number of items is 40. We are working on to support a larger batch size.
 
 :::
 
 ### Avalanche - Ethereum APIs
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance`, `eth_baseFee`, 
-`eth_maxPriorityFeePerGas`, and `eth_getChainConfig`. 
+In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance`, `eth_baseFee`,
+`eth_maxPriorityFeePerGas`, and `eth_getChainConfig`.
 
 They use the same endpoint as standard Ethereum APIs:
 
@@ -106,19 +107,19 @@ They use the same endpoint as standard Ethereum APIs:
 
 #### `eth_getAssetBalance`
 
-Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX, 
+Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX,
 which must be fetched with `eth_getBalance`).
 
 :::note
 
-The AssetID for AVAX differs depending on the network you are on. 
+The AssetID for AVAX differs depending on the network you are on.
 
 Mainnet: FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z
 
 Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
 
 For finding the `assetID` of other assets, please note that
-`avax.getUTXOs` and `avax.getAtomicTx` return the `assetID` in 
+`avax.getUTXOs` and `avax.getAtomicTx` return the `assetID` in
 their output.
 
 :::
@@ -302,9 +303,8 @@ To interact with other instances of the EVM AVAX endpoints:
 Not recommended for use on Mainnet. See warning notice in [Keystore API](/reference/avalanchego/keystore-api.md).
 :::
 
-Export an asset from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
-X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport) or P-Chain's
-[`platform.import`](/reference/avalanchego/p-chain/api.md#platformimportavax).
+Export an asset from the C-Chain to X-Chain or P-Chain. If exporting to the X-Chain, you must call the
+X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport).
 
 **Signature:**
 
@@ -364,9 +364,8 @@ Not recommended for use on Mainnet. See warning notice in [Keystore API](/refere
 
 **DEPRECATED—instead use** [`avax.export`](/reference/avalanchego/c-chain/api.md#avaxexport).
 
-Send AVAX from the C-Chain to X-Chain or P-Chain. After calling this method, you must call the
-X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport) or P-Chain's
-[`platform.import`](/reference/avalanchego/p-chain/api.md#platformimportavax) with assetID `AVAX` 
+Send AVAX from the C-Chain to X-Chain or P-Chain. If exporting to the X-Chain, you must call the
+X-Chain's [`avm.import`](/reference/avalanchego/x-chain/api.md#avmimport) with assetID `AVAX`
 on the X-Chain to complete the transfer.
 
 **Signature:**
@@ -475,12 +474,12 @@ curl -X POST --data '{
 
 ```json
 {
-    "jsonrpc": "2.0",
-    "result": {
-        "privateKey": "PrivateKey-2o2uPgTSf3aR5nW6yLHjBEAiatAFKEhApvYzsjvAJKRXVWCYkE",
-        "privateKeyHex": "0xec381fb8d32168be4cf7f8d4ce9d8ca892d77ba574264f3665ad5edb89710157"
-    },
-    "id": 1
+  "jsonrpc": "2.0",
+  "result": {
+    "privateKey": "PrivateKey-2o2uPgTSf3aR5nW6yLHjBEAiatAFKEhApvYzsjvAJKRXVWCYkE",
+    "privateKeyHex": "0xec381fb8d32168be4cf7f8d4ce9d8ca892d77ba574264f3665ad5edb89710157"
+  },
+  "id": 1
 }
 ```
 
