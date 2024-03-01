@@ -28,7 +28,7 @@ machines support Teleporter.
 ## Create Subnets Configurations
 
 Let's create a Subnet called `<subnet1Name>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name,
-and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/build/subnet/hello-subnet#create-your-subnet-configuration)):
+and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/build/subnet/hello-subnet.md#create-your-subnet-configuration)):
 
 ```bash
 avalanche subnet create <subnet1Name> --evm --latest\
