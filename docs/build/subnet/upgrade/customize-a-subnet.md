@@ -1,7 +1,7 @@
 ---
 tags: [Build, Subnets]
 description: How to customize a Subnet by utilizing Genesis, Precompile, and Blockchain Configs.
-sidebar_label: Customize a Subnet 
+sidebar_label: Customize a Subnet
 pagination_label: Customize your EVM-Powered Subnet
 sidebar_position: 1
 ---
@@ -53,7 +53,6 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0,
     "feeConfig": {
       "gasLimit": 15000000,
       "minBaseFee": 25000000000,
@@ -96,19 +95,19 @@ You can use `eth_getChainConfig` RPC call to get the current chain config. See
 #### Hard Forks
 
 `homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`,
-`petersburgBlock`, `istanbulBlock`, `muirGlacierBlock`, `subnetEVMTimestamp` are hard fork activation
+`petersburgBlock`, `istanbulBlock`, `muirGlacierBlock` are EVM hard fork activation
 times. Changing these may cause issues, so treat them carefully.
 
 #### Fee Config
 
 `gasLimit`: Sets the max amount of gas consumed per block. This restriction puts a cap on the
-amount of computation that can be done in a single block, which in turn sets a limit on the 
+amount of computation that can be done in a single block, which in turn sets a limit on the
 maximum gas usage allowed for a single transaction.
 For reference, C-Chain value is set to `15,000,000`.
 
 `targetBlockRate`: Sets the target rate of block production in seconds. A target of 2 will target
-producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it 
-indicates that more blocks than anticipated are being issued to the network, resulting in an 
+producing a block every 2 seconds. If the network starts producing blocks at a faster rate, it
+indicates that more blocks than anticipated are being issued to the network, resulting in an
 increase in base fees.
 For C-chain this value is set to `2`.
 
@@ -129,7 +128,7 @@ For reference, the C-chain value is set to `36`. This value sets the
 base fee to increase or decrease by a factor of `1/36` of the parent block's
 base fee.
 
-`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block. 
+`minBlockGasCost`: Sets the minimum amount of gas to charge for the production of a block.
 This value is set to `0` in C-Chain.
 
 `maxBlockGasCost`: Sets the maximum amount of gas to charge for the production of a block.
@@ -166,16 +165,16 @@ set to match the `gasLimit` set in the `feeConfig`. You do not need to change an
 header fields.
 
 `nonce`, `mixHash` and `difficulty` are remnant parameters from Proof of Work systems.
-For Avalanche, these don't play any relevant role, so you should just leave them as their 
+For Avalanche, these don't play any relevant role, so you should just leave them as their
 default values:
 
-`nonce`: The result of the mining process iteration is this value. It can be any value in 
+`nonce`: The result of the mining process iteration is this value. It can be any value in
 the genesis block. Default value is `0x0`.
 
-`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been 
+`mixHash`: The combination of `nonce` and `mixHash` allows to verify that the Block has really been
 cryptographically mined, thus, from this aspect, is valid. Default value is `0x0000000000000000000000000000000000000000000000000000000000000000`.
 
-`difficulty`: The difficulty level applied during the nonce discovering process of this block. 
+`difficulty`: The difficulty level applied during the nonce discovering process of this block.
 Default value is `0x0`.
 
 `timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
@@ -186,9 +185,9 @@ Default value is `0x0`.
 the same value as in the [fee config](#fee-config). The value `e4e1c0` is
 hexadecimal and is equal to `15,000,000`.
 
-`coinbase`: Refers to the address of the block producers. This also means it represents the 
+`coinbase`: Refers to the address of the block producers. This also means it represents the
 recipient of the block reward. It is usually set
-to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in 
+to `0x0000000000000000000000000000000000000000` for the genesis block. To allow fee recipients in
 Subnet-EVM, refer to [this section.](#setting-a-custom-fee-recipient)
 
 `parentHash`: This is the Keccak 256-bit hash of the entire parent block’s header. It is
@@ -198,7 +197,7 @@ genesis block.
 
 `gasUsed`: This is the amount of gas used by the genesis block. It is usually set to `0x0`.
 
-`number`: This is the number of the genesis block. This required to be `0x0` for the genesis. 
+`number`: This is the number of the genesis block. This required to be `0x0` for the genesis.
 Otherwise it will error.
 
 ### Genesis Examples
@@ -308,11 +307,11 @@ contracts can be activated through `ChainConfig` (in genesis or as an upgrade).
 ### AllowList Interface
 
 The `AllowList` interface is used by precompiles to check if a given address is allowed to use a
-precompiled contract. `AllowList` consist of two main roles, `Admin` and `Enabled`. `Admin` can
-add/remove other `Admin` and `Enabled` addresses. `Enabled` addresses can use the precompiled
-contract, but cannot modify other roles.
+precompiled contract. `AllowList` consist of three roles, `Admin`, `Manager` and `Enabled`. `Admin` can add/remove other `Admin` and `Enabled` addresses.
+`Manager` is introduced with Durango upgrade and can add/remove `Enabled` addresses, without the ability to add/remove `Admin` or `Manager` addresses.
+`Enabled` addresses can use the precompiled contract, but cannot modify other roles.
 
-`AllowList` adds `adminAddresses` and `enabledAddresses` fields to precompile contract configurations.
+`AllowList` adds `adminAddresses`, `managerAddresses`, `enabledAddresses` fields to precompile contract configurations.
 For instance fee manager precompile contract configuration looks like this:
 
 ```json
@@ -320,7 +319,8 @@ For instance fee manager precompile contract configuration looks like this:
   "feeManagerConfig": {
     "blockTimestamp": 0,
     "adminAddresses": [<list of addresses>],
-    "enabledAddresses": [<list of addresses>]
+    "managerAddresses": [<list of addresses>],
+    "enabledAddresses": [<list of addresses>],
   }
 }
 ```
@@ -328,20 +328,30 @@ For instance fee manager precompile contract configuration looks like this:
 `AllowList` configuration affects only the related precompile. For instance, the admin address in
 `feeManagerConfig` does not affect admin addresses in other activated precompiles.
 
-The `AllowList` solidity interface is defined as follows, and can be found in [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IAllowList.sol):
+The `AllowList` solidity interface is defined as follows, and can be found in [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/contracts/interfaces/IAllowList.sol):
 
 ```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 interface IAllowList {
-  // Set [addr] to have the admin role over the precompile
+  event RoleSet(
+    uint256 indexed role,
+    address indexed account,
+    address indexed sender,
+    uint256 oldRole
+  );
+
+  // Set [addr] to have the admin role over the precompile contract.
   function setAdmin(address addr) external;
 
   // Set [addr] to be enabled on the precompile contract.
   function setEnabled(address addr) external;
 
-  // Set [addr] to have no role the precompile contract.
+  // Set [addr] to have the manager role over the precompile contract.
+  function setManager(address addr) external;
+
+  // Set [addr] to have no role for the precompile contract.
   function setNone(address addr) external;
 
   // Read the status of [addr].
@@ -351,6 +361,10 @@ interface IAllowList {
 
 `readAllowList(addr)` will return a uint256 with a value of 0, 1, or 2, corresponding to the roles
 `None`, `Enabled`, and `Admin` respectively.
+
+`RoleSet` is an event that is emitted when a role is set for an address. It includes the role, the modified
+address, the sender as indexed parameters and the old role as non-indexed parameter. Events in precompiles are
+activated after Durango upgrade.
 
 _Note: `AllowList` is not an actual contract but just an interface. It's not callable by itself._
 _This is used by other precompiles. Check other precompile sections to see how this works._
@@ -439,7 +453,7 @@ transactions on chain. Like the previous section, you can activate the precompil
 
 In this example, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` is named as the
 `Admin` of the `TransactionAllowList`. This enables them to add other `Admins` or to add
-`Allowed`. Both `Admins` and `Enabled` can submit transactions to the chain.
+`Allowed`. `Admins`, `Manager` and `Enabled` can submit transactions to the chain.
 
 The `Stateful Precompile` contract powering the `TxAllowList` adheres to the
 [AllowList Solidity interface](#allowlist-interface) at `0x0200000000000000000000000000000000000002`
@@ -449,15 +463,15 @@ The `Stateful Precompile` contract powering the `TxAllowList` adheres to the
   something like:
   ![admin fail](/img/admin_fail.png)
 
-- If you attempt to submit a transaction but you are not an `Admin` or not
+- If you attempt to submit a transaction but you are not an `Admin`, `Manager` or not
   `Enabled`, you will see something like: `cannot issue transaction from non-allow listed address`
 
 - If you call `readAllowList(addr)` then you can read the current role of `addr`, which will return
-  a `uint256` with a value of 0, 1, or 2, corresponding to the roles `None`, `Allowed`, and `Admin` respectively.
+  a `uint256` with a value of 0, 1, 2 or 3 corresponding to the roles `None`, `Allowed`, `Admin` and `Manager` respectively.
 
 :::warning
 
-If you remove all of the admins from the allow list, it will no longer be possible to update the
+If you remove all of the admins and managers from the allow list, it will no longer be possible to update the
 allow list without modifying the Subnet-EVM to schedule a network upgrade.
 
 :::
@@ -499,7 +513,7 @@ can provide `nativeMinterConfig` in genesis:
 }
 ```
 
-`adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and
+`adminAddresses` denotes admin accounts who can add other `Admin`, `Manager` or `Enabled` accounts. `Admin`, `Manager` and
 `Enabled` are both eligible to mint native coins for other addresses. `ContractNativeMinter` uses
 same methods as in `ContractDeployerAllowList`.
 
@@ -515,6 +529,12 @@ pragma solidity ^0.8.0;
 import "./IAllowList.sol";
 
 interface INativeMinter is IAllowList {
+  event NativeCoinMinted(
+    address indexed sender,
+    address indexed recipient,
+    uint256 amount
+  );
+
   // Mint [amount] number of native coins and send to [addr]
   function mintNativeCoin(address addr, uint256 amount) external;
 }
@@ -522,10 +542,11 @@ interface INativeMinter is IAllowList {
 
 `mintNativeCoin` takes an address and amount of native coins to be minted. The amount denotes the
 amount in minimum denomination of native coins (10^18). For example, if you want to mint 1 native
-coin (in AVAX), you need to pass 1 \* 10^18 as the amount.
+coin (in AVAX), you need to pass 1 \* 10^18 as the amount. A `NativeCoinMinted` event is emitted with the
+sender, recipient and amount when a native coin is minted.
 
 Note that this uses `IAllowList` interface directly, meaning that it uses the same `AllowList`
-interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For more information
+interface functions like `readAllowList` and `setAdmin`, `setManager`, `setEnabled`, `setNone`. For more information
 see [AllowList Solidity interface](#allowlist-interface).
 
 :::warning
@@ -596,6 +617,22 @@ pragma solidity ^0.8.0;
 import "./IAllowList.sol";
 
 interface IFeeManager is IAllowList {
+  struct FeeConfig {
+    uint256 gasLimit;
+    uint256 targetBlockRate;
+    uint256 minBaseFee;
+    uint256 targetGas;
+    uint256 baseFeeChangeDenominator;
+    uint256 minBlockGasCost;
+    uint256 maxBlockGasCost;
+    uint256 blockGasCostStep;
+  }
+  event FeeConfigChanged(
+    address indexed sender,
+    FeeConfig oldFeeConfig,
+    FeeConfig newFeeConfig
+  );
+
   // Set fee config fields to contract storage
   function setFeeConfig(
     uint256 gasLimit,
@@ -632,7 +669,7 @@ interface IFeeManager is IAllowList {
 ```
 
 FeeConfigManager precompile uses `IAllowList` interface directly, meaning that it uses the same
-`AllowList` interface functions like `readAllowList` and `setAdmin`, `setEnabled`, `setNone`. For
+`AllowList` interface functions like `readAllowList` and `setAdmin`, `setManager`, `setEnabled`, `setNone`. For
 more information see [AllowList Solidity interface](#allowlist-interface).
 
 In addition to the `AllowList` interface, the FeeConfigManager adds the following capabilities:
@@ -640,7 +677,8 @@ In addition to the `AllowList` interface, the FeeConfigManager adds the followin
 - `getFeeConfig` - retrieves the current dynamic fee config
 - `getFeeConfigLastChangedAt` - retrieves the timestamp of the last block where the fee config was updated
 - `setFeeConfig` - sets the dynamic fee config on chain (see [here](#fee-config) for details on the
-  fee config parameters)
+  fee config parameters). This function can only be called by an `Admin`, `Manager` or `Enabled` address.
+- `FeeConfigChanged` - an event that is emitted when the fee config is updated. Topics include the sender, the old fee config, and the new fee config.
 
 You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more
 information see [here](/reference/subnet-evm/api#eth_feeconfig).
@@ -691,7 +729,7 @@ the genesis file:
 }
 ```
 
-`adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin` and
+`adminAddresses` denotes admin accounts who can add other `Admin` or `Enabled` accounts. `Admin`, `Manager` and
 `Enabled` are both eligible to change the current fee mechanism.
 
 The precompile implements the `RewardManager` interface which includes the `AllowList` interface.
@@ -708,6 +746,19 @@ pragma solidity ^0.8.0;
 import "./IAllowList.sol";
 
 interface IRewardManager is IAllowList {
+  // RewardAddressChanged is the event logged whenever reward address is modified
+  event RewardAddressChanged(
+    address indexed sender,
+    address indexed oldRewardAddress,
+    address indexed newRewardAddress
+  );
+
+  // FeeRecipientsAllowed is the event logged whenever fee recipient is modified
+  event FeeRecipientsAllowed(address indexed sender);
+
+  // RewardsDisabled is the event logged whenever rewards are disabled
+  event RewardsDisabled(address indexed sender);
+
   // setRewardAddress sets the reward address to the given address
   function setRewardAddress(address addr) external;
 
@@ -750,6 +801,14 @@ In addition to the `AllowList` interface, the `RewardManager` adds the following
   custom fee recipients are allowed first.
 
 - `areFeeRecipientsAllowed` - returns true if custom fee recipients are allowed.
+
+- `RewardAddressChanged` - an event that is emitted when the reward address is updated. Topics include
+  the sender, the old reward address, and the new reward address.
+
+- `FeeRecipientsAllowed` - an event that is emitted when fee recipients are allowed. Topics include the
+  sender.
+
+- `RewardsDisabled` - an event that is emitted when rewards are disabled. Topics include the sender.
 
 These 3 mechanisms (burning, sending to a predefined address, and enabling fees to be collected by
 block producers) cannot be enabled at the same time. Enabling one mechanism will take over the
@@ -849,14 +908,14 @@ If you want to use Warp messaging in an existing Subnet-EVM chain, you should co
 
 :::warning
 
-Currently Warp Precompile can only be activated in Fuji after Durango occurs. Durango in Fuji is set at 11 AM ET, February 13th 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Fuji you should upgrade to `subnet-evm@v0.6.0-fuji` and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after Durango date (February 13th 2024 11 AM ET).
+Currently Warp Precompile can only be activated in Mainnet after Durango occurs. Durango in Mainnet is set at 11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Mainnet you should upgrade to `subnet-evm@v0.6.0` or later and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after `1709740800`, Durango date (11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024).
 
 :::
 
 ## Contract Examples
 
 Subnet-EVM contains example contracts for precompiles under `/contracts`. It's a hardhat
-project with tests and tasks. For more information see 
+project with tests and tasks. For more information see
 [contract examples README](https://github.com/ava-labs/subnet-evm/tree/master/contracts#subnet-evm-contracts).
 
 ## Network Upgrades: Enable/Disable Precompiles

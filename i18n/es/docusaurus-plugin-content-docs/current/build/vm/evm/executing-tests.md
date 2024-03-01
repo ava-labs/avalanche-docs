@@ -33,7 +33,6 @@ Nota: es importante que este archivo tenga el mismo nombre que el archivo de pru
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "subnetEVMTimestamp": 0,
     "feeConfig": {
       "gasLimit": 20000000,
       "minBaseFee": 1000000000,
@@ -133,8 +132,6 @@ Deberías haber clonado [AvalancheGo](https://github.com/ava-labs/avalanchego) d
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
 ```
-
-
 
 Una vez que hayas construido AvalancheGo, puedes confirmar que fue exitoso imprimiendo la versión:
 
@@ -286,8 +283,6 @@ INFO [01-27|10:33:51.002] Executing                                cmd="./script
 
 Después de que `BeforeSuite` se complete con éxito, omitirá todas las pruebas de precompilación etiquetadas
 excepto la prueba de `HelloWorld`:
-
-
 
 ```bash
 S [OMITIDO]

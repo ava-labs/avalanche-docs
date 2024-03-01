@@ -138,16 +138,20 @@ usamos la interfaz `IAllowList` para proporcionar control de permisos a la preco
 `IAllowList` está definido en Subnet-EVM bajo [`./contracts/contracts/interfaces/IAllowList.sol`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/contracts/interfaces/IAllowList.sol).
 La interfaz es la siguiente:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
 interface IAllowList {
   // Set [addr] to have the admin role over the precompile contract.
   function setAdmin(address addr) external;
+
   // Set [addr] to be enabled on the precompile contract.
   function setEnabled(address addr) external;
+
   // Set [addr] to have no role for the precompile contract.
   function setNone(address addr) external;
+
   // Read the status of [addr].
   function readAllowList(address addr) external view returns (uint256 role);
 }
