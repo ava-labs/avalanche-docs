@@ -15,7 +15,7 @@ En esta sección, veremos cómo poder ejecutar los casos de prueba que escribist
 
 ## Agregando el Archivo de Génesis de Prueba
 
-Para ejecutar nuestras pruebas de contrato e2e, necesitaremos crear una Subred que tenga el precompilado `Hello World` activado, por lo que copiaremos y pegaremos el siguiente archivo de génesis en: `/tests/precompile/genesis/hello_world.json`.
+Para ejecutar nuestras pruebas de contrato e2e, necesitaremos crear una Subnet que tenga el precompilado `Hello World` activado, por lo que copiaremos y pegaremos el siguiente archivo de génesis en: `/tests/precompile/genesis/hello_world.json`.
 
 Nota: es importante que este archivo tenga el mismo nombre que el archivo de prueba HardHat que creamos anteriormente.
 

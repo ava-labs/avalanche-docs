@@ -9,7 +9,7 @@ pagination_label: Implementar un Contrato Inteligente en Avalanche Usando Remix 
 
 ## Introducción
 
-La Red Primaria de Avalanche es una Subred que tiene tres cadenas: P-Chain, X-Chain
+La Red Primaria de Avalanche es una Subnet que tiene tres cadenas: P-Chain, X-Chain
 y C-Chain. La C-Chain es una instancia de la Máquina Virtual Ethereum alimentada
 por el protocolo de consenso Snowman de Avalanche. La
 [RPC de la C-Chain](/reference/avalanchego/c-chain/api.md) puede hacer todo lo que un cliente Ethereum típico puede hacer

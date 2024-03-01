@@ -1,27 +1,27 @@
 ---
 tags: [Construir, Subredes]
-description: Este tutorial muestra cómo implementar una Subred con permisos en la Testnet Fuji.
+description: Este tutorial muestra cómo implementar una Subnet con permisos en la Testnet Fuji.
 sidebar_label: En la Testnet Fuji
-pagination_label: Implementar una Subred con permisos en la Testnet Fuji
+pagination_label: Implementar una Subnet con permisos en la Testnet Fuji
 sidebar_position: 1
 ---
 
-# Implementar una Subred con permisos en la Testnet Fuji
+# Implementar una Subnet con permisos en la Testnet Fuji
 
 :::note
 
-Este documento describe cómo usar Avalanche-CLI para implementar una Subred en `Fuji`.
+Este documento describe cómo usar Avalanche-CLI para implementar una Subnet en `Fuji`.
 
 :::
 
-Después de probar una Subred en un equipo local siguiendo [este tutorial](/build/subnet/deploy/local-subnet.md),
+Después de probar una Subnet en un equipo local siguiendo [este tutorial](/build/subnet/deploy/local-subnet.md),
 el siguiente paso es probarlo en la Testnet `Fuji`.
 
 En este artículo, se muestra cómo hacer lo siguiente en la Testnet `Fuji`.
 
 - Crear una Subred.
 - Implementar una máquina virtual basada en Subnet-EVM.
-- Unir un nodo a la Subred recién creada.
+- Unir un nodo a la Subnet recién creada.
 - Agregar un nodo como validador a la Subred.
 
 Todos los ID en este artículo son con fines ilustrativos. Pueden ser diferentes en tu propia
@@ -150,8 +150,6 @@ Clave creada
 ```
 
 <!-- markdownlint-enable MD013 -->
-
-
 
 Puedes usar la dirección de la C-Chain (`0x86BB07a534ADF43786ECA5Dd34A97e3F96927e4F`) para financiar tu clave desde el [faucet](https://faucet.avax.network/). El comando también imprime direcciones de la P-Chain para la red local predeterminada y `Fuji`. Esta última (`P-fuji1a3azftqvygc4tlqsdvd82wks2u7nx85rhk6zqh`) es la que se necesita para este tutorial.
 

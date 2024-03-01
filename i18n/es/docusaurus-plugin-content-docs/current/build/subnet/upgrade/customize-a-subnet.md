@@ -1,16 +1,16 @@
 ---
 tags: [Construir, Subredes]
-description: Cómo personalizar una Subred utilizando Genesis, Precompilación y Configuraciones de Blockchain.
+description: Cómo personalizar una Subnet utilizando Genesis, Precompilación y Configuraciones de Blockchain.
 sidebar_label: Personalizar una Subred
-pagination_label: Personaliza tu Subred impulsada por EVM
+pagination_label: Personaliza tu Subnet impulsada por EVM
 sidebar_position: 1
 ---
 
-# Personaliza tu Subred impulsada por EVM
+# Personaliza tu Subnet impulsada por EVM
 
-Todas las Subredes se pueden personalizar utilizando [`Configuraciones de Subred`](#configuraciones-de-subred).
+Todas las Subredes se pueden personalizar utilizando [`Configuraciones de Subred`](#configuraciones-de-subnet).
 
-Una Subred puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subred, una
+Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subred, una
 especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
 configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
 
@@ -24,9 +24,9 @@ personalizar utilizando uno o más de los siguientes métodos:
 
 ## Configuraciones de Subred
 
-Una Subred se puede personalizar configurando parámetros para lo siguiente:
+Una Subnet se puede personalizar configurando parámetros para lo siguiente:
 
-- [Comunicación solo para validadores para crear una Subred privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
+- [Comunicación solo para validadores para crear una Subnet privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
 - [Consenso](/nodes/configure/subnet-configs.md#parámetros-de-consenso)
 - [Gossip](/nodes/configure/subnet-configs.md#configuraciones-de-gossip)
 
@@ -841,7 +841,7 @@ Cualquier error en la configuración de las actualizaciones de red o en su coord
 
 Además de especificar la configuración para cada uno de los precompilados anteriores en la configuración de la cadena génesis, se pueden habilitar o deshabilitar individualmente en un momento dado como una actualización de red. Deshabilitar un precompilado desactiva la llamada al precompilado y destruye su almacenamiento para que pueda habilitarse en un momento posterior con una nueva configuración si se desea.
 
-Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde reside [`config.json`](#configuraciones-de-cadena-avalanchego): `{chain-config-dir}/{blockchainID}/upgrade.json`. Por ejemplo, la actualización de la Subred WAGMI debe colocarse en `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
+Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde reside [`config.json`](#configuraciones-de-cadena-avalanchego): `{chain-config-dir}/{blockchainID}/upgrade.json`. Por ejemplo, la actualización de la Subnet WAGMI debe colocarse en `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
 
 El contenido de `upgrade.json` debe formatearse de acuerdo con lo siguiente:
 
@@ -960,7 +960,7 @@ precompilados activados en una marca de tiempo con el método RPC
 El método RPC [`eth_getChainConfig`](/reference/subnet-evm/api#eth_getchainconfig)
 también devolverá las actualizaciones configuradas en la respuesta.
 
-¡Eso es todo, tu Subred está lista y las actualizaciones deseadas se activarán en la marca de tiempo indicada!
+¡Eso es todo, tu Subnet está lista y las actualizaciones deseadas se activarán en la marca de tiempo indicada!
 
 ### Configuraciones Iniciales de Precompilación
 

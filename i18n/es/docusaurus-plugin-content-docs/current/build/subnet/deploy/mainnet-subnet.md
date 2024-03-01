@@ -1,16 +1,16 @@
 ---
 tags: [Construir, Subredes]
-description: Este tutorial demuestra cómo implementar una Subred con permisos en la Mainnet de Avalanche.
+description: Este tutorial demuestra cómo implementar una Subnet con permisos en la Mainnet de Avalanche.
 sidebar_label: En la Mainnet de Avalanche
-pagination_label: Implementar una Subred con permisos en Mainnet
+pagination_label: Implementar una Subnet con permisos en Mainnet
 sidebar_position: 2
 ---
 
-# Implementar una Subred con permisos en Mainnet
+# Implementar una Subnet con permisos en Mainnet
 
 :::warning
 
-Implementar una Subred en Mainnet tiene muchos riesgos. Hacerlo de manera segura requiere un enfoque
+Implementar una Subnet en Mainnet tiene muchos riesgos. Hacerlo de manera segura requiere un enfoque
 láser en seguridad. Este tutorial hace todo lo posible por señalar las trampas comunes, pero puede haber
 otros riesgos no discutidos aquí.
 
@@ -21,15 +21,15 @@ implementación en producción.
 
 :::
 
-Después de gestionar con éxito una implementación de Subred en la `Fuji Testnet`, estás listo para implementar tu
+Después de gestionar con éxito una implementación de Subnet en la `Fuji Testnet`, estás listo para implementar tu
 Subred en Mainnet. Si no lo has hecho, primero
-[Implementa una Subred en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
+[Implementa una Subnet en Testnet](/build/subnet/deploy/fuji-testnet-subnet.md).
 
 Este tutorial muestra cómo hacer lo siguiente en `Mainnet`.
 
 - Crear una Subred.
 - Implementar una máquina virtual basada en Subnet-EVM.
-- Unir un nodo a la Subred recién creada.
+- Unir un nodo a la Subnet recién creada.
 - Agregar un nodo como validador a la Subred.
 
 :::note
@@ -45,7 +45,7 @@ tu propia ejecución de este tutorial.
 - [Avalanche-CLI está instalado](/tooling/cli-guides/install-avalanche-cli.md) en la caja de cada nodo validador
 - Un dispositivo [Ledger](https://www.ledger.com/)
 - Has [creado una configuración de Subred](/build/subnet/hello-subnet.md#create-your-subnet-configuration)
-  y probado completamente una implementación de Subred en [Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
+  y probado completamente una implementación de Subnet en [Fuji Testnet](/build/subnet/deploy/fuji-testnet-subnet.md)
 
 :::warning
 
@@ -98,7 +98,7 @@ Avalanche-CLI es compatible con los dispositivos Ledger `Nano X`, `Nano S` y `Na
 Los dispositivos Ledger admiten la firma de TX para cualquier dirección dentro de una secuencia generada automáticamente por el dispositivo.
 
 De forma predeterminada, Avalanche-CLI utiliza la primera dirección de la derivación, y esa dirección necesita fondos para
-emitir las TX para crear la Subred y agregar validadores.
+emitir las TX para crear la Subnet y agregar validadores.
 
 Para obtener la primera dirección `Mainnet` de tu dispositivo Ledger, primero asegúrate de que esté conectado,
 desbloqueado y ejecutando la aplicación Avalanche. Luego ejecuta el comando `key list`:
@@ -117,7 +117,7 @@ avalanche key list --ledger 0 --mainnet
 
 El comando imprime la dirección de la P-Chain para `Mainnet`,
 `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, y su saldo. Debes financiar esta dirección con
-al menos 2.5 AVAX para cubrir las tarifas de TX. La tarifa de TX para crear tu Subred cuesta 2 AVAX. Agregar
+al menos 2.5 AVAX para cubrir las tarifas de TX. La tarifa de TX para crear tu Subnet cuesta 2 AVAX. Agregar
 validadores cuesta 0.001 AVAX cada uno. Para más detalles, consulta [Tarifas](/reference/standards/guides/txn-fees)
 
 :::note
@@ -176,20 +176,20 @@ La implementación requiere ejecutar una transacción `createSubnet`
 y una transacción `createBlockchain`,
 por lo que esta primera dirección del Ledger debe tener los fondos para emitir ambas operaciones.
 
-Este tutorial crea una Subred con permisos. Como tal, debes especificar qué direcciones de la Cadena-P pueden controlar la Subred. Estas direcciones se conocen como `Claves de Control`. La CLI puede configurar automáticamente la dirección de tu Ledger como la única clave de control, o el usuario puede especificar una lista personalizada.
+Este tutorial crea una Subnet con permisos. Como tal, debes especificar qué direcciones de la Cadena-P pueden controlar la Subred. Estas direcciones se conocen como `Claves de Control`. La CLI puede configurar automáticamente la dirección de tu Ledger como la única clave de control, o el usuario puede especificar una lista personalizada.
 
 :::warning
 
 En Subredes de producción, siempre debes usar múltiples claves de control que se ejecuten en una configuración de multisig. Este tutorial utiliza una sola clave de control únicamente con fines ilustrativos.
 
-Para obtener instrucciones sobre cómo controlar tu Subred con un multisig, consulta el [Tutorial de Implementación de Multisig](/build/subnet/deploy/multisig-auth.md).
+Para obtener instrucciones sobre cómo controlar tu Subnet con un multisig, consulta el [Tutorial de Implementación de Multisig](/build/subnet/deploy/multisig-auth.md).
 
 :::
 
 ```text
 Configura qué direcciones pueden realizar cambios en la Subred.
 Estas direcciones se conocen como tus claves de control. También vas a
-establecer cuántas claves de control se requieren para hacer un cambio en la Subred (el umbral).
+establecer cuántas claves de control se requieren para hacer un cambio en la Subnet (el umbral).
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
 ? ¿Cómo te gustaría configurar tus claves de control?:
   ▸ Usar dirección del ledger
@@ -200,13 +200,13 @@ Para este tutorial, opta por usar la primera dirección del Ledger, así que ing
 
 ```text
 Claves de control de tu Subred: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
-Tus claves de autenticación de la Subred para la creación de cadenas: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Tus claves de autenticación de la Subnet para la creación de cadenas: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
 A continuación, la CLI genera una TX para crear la SubredID y le pide al usuario que la firme usando el Ledger.
 
 ```text
-*** Por favor, firma el hash de creación de la Subred en el dispositivo Ledger ***
+*** Por favor, firma el hash de creación de la Subnet en el dispositivo Ledger ***
 ```
 
 Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `APROBAR` del Ledger usando el botón derecho del Ledger, y luego autoriza la solicitud presionando ambos botones izquierdo y derecho.
@@ -214,14 +214,14 @@ Esto activa una ventana `Por favor, revisa` en el Ledger. Navega a la ventana `A
 Si el Ledger no tiene suficientes fondos, es posible que el usuario vea un mensaje de error:
 
 ```text
-*** Por favor, firma el hash de creación de la Subred en el dispositivo Ledger ***
+*** Por favor, firma el hash de creación de la Subnet en el dispositivo Ledger ***
 Error: fondos insuficientes: los UTXO proporcionados necesitan 1000000000 unidades más del activo "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
 Si tiene éxito, la CLI te pide que firmes una TX de creación de cadena.
 
 ```text
-La Subred ha sido creada con ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Ahora creando la blockchain...
+La Subnet ha sido creada con ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Ahora creando la blockchain...
 *** Por favor, firma el hash de creación de la blockchain en el dispositivo Ledger ***
 ```
 
@@ -235,7 +235,7 @@ Después de eso, la CLI crea la blockchain dentro de la Subred, y aparece una ve
 +--------------------+------------------------------------------------------------------------------------+
 | Nombre de la Cadena | testsubnet                                                                         |
 +--------------------+------------------------------------------------------------------------------------+
-| ID de la Subred     | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
+| ID de la Subnet     | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
 +--------------------+------------------------------------------------------------------------------------+
 | ID de la VM         | rW1esjm6gy4BtGvxKMpHB2M28MJGFNsqHRY9AmnchdcgeB3ii                                  |
 +--------------------+------------------------------------------------------------------------------------+
@@ -247,15 +247,15 @@ Después de eso, la CLI crea la blockchain dentro de la Subred, y aparece una ve
 +--------------------+------------------------------------------------------------------------------------+
 ```
 
-Bien hecho. Acabas de crear tu propia Subred en ejecución en `Mainnet`. Ahora es hora de agregar tus validadores.
+Bien hecho. Acabas de crear tu propia Subnet en ejecución en `Mainnet`. Ahora es hora de agregar tus validadores.
 
-## Solicitud para unirse a una Subred como validador
+## Solicitud para unirse a una Subnet como validador
 
-La nueva Subred creada en los pasos anteriores aún no tiene ningún validador dedicado. Para solicitar permiso para validar una Subred, se requieren los siguientes pasos:
+La nueva Subnet creada en los pasos anteriores aún no tiene ningún validador dedicado. Para solicitar permiso para validar una Subred, se requieren los siguientes pasos:
 
 :::info
 
-Agregar un validador en una Subred requiere que el nodo ya sea un validador en la red primaria, lo que significa que tu nodo se ha **bootstrapado completamente**.
+Agregar un validador en una Subnet requiere que el nodo ya sea un validador en la red primaria, lo que significa que tu nodo se ha **bootstrapado completamente**.
 
 Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-core-extension) cómo convertirte en un validador.
 
@@ -267,7 +267,7 @@ Primero, solicita permiso para validar ejecutando el comando `join` junto con el
 avalanche subnet join testsubnet
 ```
 
-Nota: ¡Ejecutar el comando `join` no garantiza que tu nodo sea un validador de la Subred! El propietario de la Subred debe aprobar que tu nodo sea un validador posteriormente llamando a `addValidator` como se describe en la siguiente sección.
+Nota: ¡Ejecutar el comando `join` no garantiza que tu nodo sea un validador de la Subred! El propietario de la Subnet debe aprobar que tu nodo sea un validador posteriormente llamando a `addValidator` como se describe en la siguiente sección.
 
 ### Seleccionar Mainnet
 
@@ -503,7 +503,7 @@ Estado de salida 1
 Si el Ledger no tiene suficientes fondos, aparece el siguiente mensaje de error:
 
 ```text
-*** Por favor, firme el hash de creación de la subred en el dispositivo Ledger ***
+*** Por favor, firme el hash de creación de la subnet en el dispositivo Ledger ***
 Error: fondos insuficientes: los UTXO proporcionados necesitan 1000000 unidades más del activo "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
@@ -523,16 +523,16 @@ Esto puede tomar unos segundos. Después, imprime:
 Transacción exitosa, ID de transacción: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
 ```
 
-¡Esto significa que el nodo es ahora un validador en la Subred dada en `Mainnet`! Sin embargo, tu trabajo no está
-completo. **Debes** completar la sección [Solicitud para unirse a una Subred como validador](#request-to-join-a-subnet-as-a-validator)
-de lo contrario, tu Subred corre el riesgo de tiempo de inactividad.
+¡Esto significa que el nodo es ahora un validador en la Subnet dada en `Mainnet`! Sin embargo, tu trabajo no está
+completo. **Debes** completar la sección [Solicitud para unirse a una Subnet como validador](/build/subnet/deploy/mainnet-subnet.md#solicitud-para-unirse-a-una-subnet-como-validador)
+de lo contrario, tu Subnet corre el riesgo de tiempo de inactividad.
 
 Puedes obtener información de identificación de la transacción de la P-Chain en [Avalanche Explorer](https://subnets.avax.network/)
 
 ## Exportación de Subred
 
 Debido a que necesitas configurar múltiples validadores en múltiples máquinas diferentes, necesitas exportar
-la configuración de tu Subred e importarla en cada validador.
+la configuración de tu Subnet e importarla en cada validador.
 
 ```bash
 avalanche subnet export testsubnet
@@ -552,7 +552,7 @@ avalanche subnet import /tmp/testsubnet-export.dat
 Subred importada exitosamente
 ```
 
-Después de esto, toda la configuración de la Subred debería estar disponible en la máquina de destino:
+Después de esto, toda la configuración de la Subnet debería estar disponible en la máquina de destino:
 
 ```text
 avalanche subnet list
