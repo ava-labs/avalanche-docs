@@ -402,7 +402,7 @@ Tus claves de autenticación de la Subnet para la creación de la transacción d
 
 ### Establece el NodeID
 
-Ahora ingresa el [**NodeID**](#obteniendo-tus-nodeids-de-mainnet) del validador.
+Ahora ingrese el [**NodeID**](#obtener-tus-nodeids-de-mainnet) del validador.
 
 ```text
 A continuación, necesitamos el NodeID del validador que deseas agregar a la lista blanca.
