@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subred, incluyendo qué tener en cuenta y las precauciones sugeridas.
+tags: [Construir, Subnets]
+description: Este tutorial te guiará a través del proceso de hacer varias actualizaciones y cambios de Subnet, incluyendo qué tener en cuenta y las precauciones sugeridas.
 sidebar_label: Consideraciones
 pagination_label: Consideraciones clave al actualizar una Subred
 sidebar_position: 0
