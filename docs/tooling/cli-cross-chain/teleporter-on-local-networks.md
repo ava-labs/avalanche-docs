@@ -10,15 +10,16 @@ sidebar_position: 1
 
 This how-to guide focuses on deploying Teleporter-enabled Subnets to a local Avalanche network.
 
-It guides you to create and deploy a pair of Subnets and cross communicate between them and with the local
-`C-Chain` by using Teleporter and the underlying warp technology.
+After this tutorial, you would have created and deployed two Subnets to the local network and have enabled
+them to cross-communicate with each other and with the local C-Chain (through Teleporter and the
+underlying Warp technology.)
 
-For more information and concepts on Cross Chain messaging at Avalanche, Teleporter and Warp, check:
+For more information on Cross Chain messaging through Teleporter and Warp, check:
 
 - [Cross Chain References](/build/cross-chain)
 
-Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) and [Subnet-EVM-Based](https://github.com/ava-labs/precompile-evm) virtual
-machines support Teleporter, so we will using them in this tutorial.
+Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) and [Subnet-EVM-Based](/build/vm/evm/intro) virtual
+machines support Teleporter.
 
 ## Prerequisites
 
@@ -26,12 +27,8 @@ machines support Teleporter, so we will using them in this tutorial.
 
 ## Create Subnets Configurations
 
-Either you can create a Subnet configuration [by interacting with a Wizard](/build/subnet/hello-subnet#create-your-subnet-configuration), 
-or you can use command line flags to bypass interaction.
-
-We will illustrate the second case here.
-
-Let's create `<subnet1Name>` which uses the latest Subnet-evm version, a chain ID of 1, TOKEN1 as token name, and default evm parameters:
+Let's create a Subnet called `<subnet1Name>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name,
+and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/build/subnet/hello-subnet#create-your-subnet-configuration)):
 
 ```bash
 avalanche subnet create <subnet1Name> --evm --latest\
@@ -44,12 +41,12 @@ using latest teleporter version (v0.2.0)
 ✓ Successfully created subnet configuration
 ```
 
-Notice that by default Teleporter is enabled and a stored key is created or used to fund Teleporter related operations (deploy Teleporter
+Notice that by default, Teleporter is enabled and a stored key is created to fund Teleporter related operations (that is deploy Teleporter
 smart contracts, fund Teleporter relayer).
 
-_You need to set command line flag `--teleporter=false` for a Subnet to not support Teleporter._
+To disable Teleporter in your Subnet, use the flag `--teleporter=false` when creating the Subnet.
 
-Now let's create `<subnet2Name>`, with similar settings:
+Now let's create a second Subnet called `<subnet2Name>`, with similar settings:
 
 ```shell
 avalanche subnet create <subnet2Name> --evm --latest\
@@ -62,7 +59,7 @@ using latest teleporter version (v0.2.0)
 ✓ Successfully created subnet configuration
 ```
 
-## Locally Deploy the Subnets
+## Deploy the Subnets to Local Network
 
 Let's deploy `<subnet1Name>`:
 
@@ -113,21 +110,19 @@ Chain ID:         1
 Currency Symbol:  TOKEN1
 ```
 
-Some details can be noticed here:
+Notice some details here:
 
-- two smart contracts are deployed per Subnet, Teleporter messenger and Teleporter registry
-- the Teleporter contracts are also deployed to local `C-Chain`
-- a Teleporter relayer is executed in background
+- Two smart contracts are deployed to each Subnet: Teleporter Messenger smart contract and Teleporter Registry smart contract
+- Both Teleporter smart contracts are also deployed to `C-Chain` in the Local Network
+- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer)) is installed, configured and executed in background (A Relayer
+[listens](/build/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
 
-As part of the deploy, an [AWM Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed.
-A relayer, or some other intermediate procedure, is always needed for a Teleporter or warp message to be sent from
-one Subnet to the other. In this case the relayer is an actor that listens for new messages being generated on a source Subnet,
-and send them to the destination Subnet.
+CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add
+more Subnets, the Relayer will be automatically reconfigured.
 
-On local network, CLI configures the relayer so every Subnet can message to every other Subnet.
+When deploying Subnet `<subnet2Name>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network
+as they have already been deployed when we deployed the first Subnet.
 
-When deploying `<subnet2Name>`, the main change is that `C-Chain` Teleporter contracts are not going to be deployed, as they
-have already been deployed.
 
 ```shell
 avalanche subnet deploy <subnet2Name> --local
@@ -180,16 +175,12 @@ Chain ID:         2
 Currency Symbol:  TOKEN2
 ```
 
-## Basic Check of the Local Teleporter Environment
+## Verify Teleporter Is Successfully Set Up
 
-
-CLI provides an utility command so as to easily verify if the Subnets are communicating each other as excepted.
-
-Let's send a couple of cross messages:
-
+To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```shell
-avalanche teleporter msg C-Chain subnet1Name "this is a message" --local
+avalanche teleporter msg C-Chain subnet1Name "Hello World" --local
 
 Delivering message "this is a message" to source subnet "C-Chain"
 Waiting for message to be received at destination subnet subnet "subnet1Name"
@@ -197,15 +188,15 @@ Message successfully Teleported!
 ```
 
 ```shell
-avalanche teleporter msg subnet2Name subnet1Name "this is a message" --local
+avalanche teleporter msg subnet2Name subnet1Name "Hello World" --local
 
 Delivering message "this is a message" to source subnet "subnet2Name"
 Waiting for message to be received at destination subnet subnet "subnet1Name"
 Message successfully Teleported!
 ```
 
-You have Teleport-ed your first messages in the local network!
+You have Teleport-ed your first message in the Local Network!
 
-_If you are interested in relayer-related stuff, you can check relayer logs at `~/.avalanche-cli/runs/awm-relayer.log`, and
-relayer configuration at `~/.avalanche-cli/runs/awm-relayer-config.json`_
+Relayer related logs can be found at `~/.avalanche-cli/runs/awm-relayer.log`, and
+relayer configuration can be found at `~/.avalanche-cli/runs/awm-relayer-config.json`
 
