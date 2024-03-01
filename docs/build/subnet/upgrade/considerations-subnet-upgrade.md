@@ -46,7 +46,7 @@ can only make progress if sufficient amount of validating nodes are connected an
 transactions. Each validator on a Subnet is assigned a certain `weight`, which is a numerical value
 representing the significance of the node in consensus decisions. On the Primary Network, weight is
 equal to the amount of AVAX staked on the node. On Subnets, weight is currently assigned by the
-Subnet owners when they issue the transaction [adding a validator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) to the Subnet.
+Subnet owners when they issue the transaction adding a validator to the Subnet.
 
 Subnets can operate normally only if validators representing 80% or more of the cumulative validator
 weight is connected. If the amount of connected stake falls close to or below 80%, Subnet

@@ -1,12 +1,12 @@
 ---
 tags: [Construir, Subredes]
-description: Implementa un grifo de testnet personalizado para tu Subred con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
+description: Implementa un grifo de testnet personalizado para tu Subnet con características como soporte para múltiples cadenas, limitación de velocidad personalizada, verificación CAPTCHA y manejo de transacciones concurrentes.
 sidebar_label: Agregar un Grifo de Testnet
-pagination_label: Grifo de Subred Avalanche
+pagination_label: Grifo de Subnet Avalanche
 sidebar_position: 1
 ---
 
-# Habilitar Capacidades de Testnet en una Subred con el Grifo de Subred Avalanche
+# Habilitar Capacidades de Testnet en una Subnet con el Grifo de Subnet Avalanche
 
 Hay miles de redes y cadenas en el espacio de la blockchain, cada una con sus propias capacidades y casos de uso. Cada red requiere monedas nativas para realizar cualquier transacción en ellas, las cuales también pueden tener un valor monetario. Estas monedas se pueden recolectar a través de intercambios centralizados, ventas de tokens, etc., a cambio de algunos activos monetarios como USD.
 
@@ -33,12 +33,12 @@ Un [Grifo](https://faucet.avax.network/) alimentado por Avalanche para la Red Fu
 Puedes:
 
 - Solicitar monedas de prueba para las Subredes soportadas
-- Integrar tu Subred EVM con el grifo haciendo un PR con las [configuraciones de la cadena](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
+- Integrar tu Subnet EVM con el grifo haciendo un PR con las [configuraciones de la cadena](https://github.com/ava-labs/avalanche-faucet/blob/main/config.json)
 - Hacer un fork del [repositorio](https://github.com/ava-labs/avalanche-faucet) para implementar tu grifo para cualquier cadena EVM
 
 ## Agregar una Nueva Subred
 
-También puedes integrar una nueva Subred en el [grifo](https://faucet.avax.network) en vivo con solo unos pocos parámetros de configuración. Todo lo que tienes que hacer es hacer un PR en el repositorio git de [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) con la información de la Subred. Los siguientes parámetros son requeridos.
+También puedes integrar una nueva Subnet en el [grifo](https://faucet.avax.network) en vivo con solo unos pocos parámetros de configuración. Todo lo que tienes que hacer es hacer un PR en el repositorio git de [Avalanche Faucet](https://github.com/ava-labs/avalanche-faucet) con la información de la Subred. Los siguientes parámetros son requeridos.
 
 ```json
 {
@@ -59,8 +59,8 @@ También puedes integrar una nueva Subred en el [grifo](https://faucet.avax.netw
 }
 ```
 
-- `ID` - Cada cadena de Subred debe tener un ID único y relacionable.
-- `NAME` - Nombre de la cadena de Subred que aparecerá en el sitio.
+- `ID` - Cada cadena de Subnet debe tener un ID único y relacionable.
+- `NAME` - Nombre de la cadena de Subnet que aparecerá en el sitio.
 - `RPC` - Una URL RPC válida para acceder a la cadena.
 - `CHAINID` - ID de cadena de la cadena
 - `EXPLORER` - URL base del sitio del explorador estándar.
@@ -425,7 +425,7 @@ En un segundo, recibirás un **hash de transacción** para la transacción proce
 
 ### Más interacciones
 
-Esto no es todo. Usando los botones mostrados a continuación, puedes ir al explorador de la Subred o agregar la Subred a las extensiones de tu billetera de navegador como Core o MetaMask con un solo clic.
+Esto no es todo. Usando los botones mostrados a continuación, puedes ir al explorador de la Subnet o agregar la Subnet a las extensiones de tu billetera de navegador como Core o MetaMask con un solo clic.
 
 ![faucet 4](/img/faucet/faucet4.png)
 

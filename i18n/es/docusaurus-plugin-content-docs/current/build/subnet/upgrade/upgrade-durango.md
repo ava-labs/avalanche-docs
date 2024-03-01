@@ -1,7 +1,7 @@
 ---
 tags: [Construir, Subredes, Durango]
 description: Cómo actualizar las precompilaciones de Subnet existentes para Durango
-sidebar_label: Actualizar una Subred para Durango
+sidebar_label: Actualizar una Subnet para Durango
 pagination_label: Actualizar precompilaciones de Subnet para Durango
 sidebar_position: 1
 ---

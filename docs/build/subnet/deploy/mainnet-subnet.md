@@ -136,8 +136,8 @@ A new Ledger device has no funds on the addresses it controls. You'll need to se
 exporting them from C-Chain to the P-Chain using [Core web](https://core.app)
 connected to [Core extension](https://join.core.app/extension).
 
-You can load the Ledger's C-Chain address in Core extension, or load in a different private key to 
-[Core extension](https://join.core.app/extension), and then connect to Core web . 
+You can load the Ledger's C-Chain address in Core extension, or load in a different private key to
+[Core extension](https://join.core.app/extension), and then connect to Core web .
 
 You can move test funds from the C-Chain to the P-Chain by clicking Stake on Core web , then Cross-Chain Transfer (find more details on
 [this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
@@ -173,8 +173,8 @@ After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
 Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
-The deployment requires running a [createSubnet transaction](/reference/avalanchego/p-chain/api.md#platformcreatesubnet)
-and a [createBlockchain transaction](/reference/avalanchego/p-chain/api.md#platformcreateblockchain),
+The deployment requires running a `createSubnet` transaction
+and a `createBlockchain` transaction,
 and so this first Ledger address must have the funds to issue both operations.
 
 This tutorial creates a permissioned Subnet. As such, you must specify which P-Chain addresses can
@@ -429,7 +429,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 ```
 
 Because this operation issues a new
-[transaction](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator), the CLI needs the
+transaction, the CLI needs the
 control keys to sign the operation. Because this tutorial only uses one control key in the Subnet,
 the process looks slightly different if you use multiple controls keys. The address needs to pay a
 TX fee of 0.001 AVAX.
@@ -455,9 +455,7 @@ Note, this ID is intentionally modified to prevent replication.
 
 ### Set Stake Weight
 
-Select 30 as the stake weight. You can learn more about the stake weight parameter in
-[addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
-`weight` section.
+Select 30 as the stake weight.
 
 :::warning
 

@@ -1,16 +1,16 @@
 ---
-tags: [Construir, Subredes]
-description: Cómo personalizar una Subred utilizando Genesis, Precompilación y Configuraciones de Blockchain.
-sidebar_label: Personalizar una Subred
-pagination_label: Personaliza tu Subred impulsada por EVM
+tags: [Construir, Subnets]
+description: Cómo personalizar una Subnet utilizando Genesis, Precompilación y Configuraciones de Blockchain.
+sidebar_label: Personalizar una Subnet
+pagination_label: Personaliza tu Subnet impulsada por EVM
 sidebar_position: 1
 ---
 
-# Personaliza tu Subred impulsada por EVM
+# Personaliza tu Subnet impulsada por EVM
 
-Todas las Subredes se pueden personalizar utilizando [`Configuraciones de Subred`](#configuraciones-de-subred).
+Todas las Subnets se pueden personalizar utilizando [`Configuraciones de Subnet`](#configuraciones-de-subnet).
 
-Una Subred puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subred, una
+Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subnet, una
 especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
 configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
 
@@ -22,11 +22,11 @@ personalizar utilizando uno o más de los siguientes métodos:
 - [Configuraciones de actualización](#actualizaciones-de-red-habilitardeshabilitar-precompilados)
 - [Configuraciones de cadena](#configuraciones-de-cadena-avalanchego)
 
-## Configuraciones de Subred
+## Configuraciones de Subnet
 
-Una Subred se puede personalizar configurando parámetros para lo siguiente:
+Una Subnet se puede personalizar configurando parámetros para lo siguiente:
 
-- [Comunicación solo para validadores para crear una Subred privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
+- [Comunicación solo para validadores para crear una Subnet privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
 - [Consenso](/nodes/configure/subnet-configs.md#parámetros-de-consenso)
 - [Gossip](/nodes/configure/subnet-configs.md#configuraciones-de-gossip)
 
@@ -37,7 +37,7 @@ Consulta [aquí](/nodes/configure/subnet-configs.md) para obtener más informaci
 Cada blockchain tiene algún estado de genesis cuando se crea. Cada Máquina Virtual define el formato y
 la semántica de sus datos de genesis.
 
-La Subred-EVM de genesis predeterminada proporcionada a continuación tiene algunos parámetros bien definidos:
+La Subnet-EVM de genesis predeterminada proporcionada a continuación tiene algunos parámetros bien definidos:
 
 ```json
 {
@@ -140,7 +140,8 @@ Si el bloque se produce a la tasa objetivo, el costo de gas del bloque se manten
 Si se produce más rápido/más lento, el costo de gas del bloque se incrementará/decrementará por el valor de paso por
 cada segundo más rápido/más lento que la tasa de bloque objetivo correspondientemente.
 
-:::nota
+:::note
+
 Si el `blockGasCostStep` se establece en un número muy grande, efectivamente requiere que la producción de bloques
 no vaya más rápido que la `targetBlockRate`. Por ejemplo, si un bloque se produce dos segundos más rápido que
 la tasa de bloque objetivo, el costo de gas del bloque aumentará en `2 * blockGasCostStep`.
@@ -803,7 +804,7 @@ Si tanto `allowFeeRecipients` como `rewardAddress` se especifican en el campo `i
 
 ### Mensajería de Avalanche Warp
 
-El precompilado de Warp habilita la comunicación entre subredes a través de la red primaria (C-Chain). Para usar la mensajería de Warp, las cadenas Subnet-EVM de las subredes deben activar sus precompilados de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
+El precompilado de Warp habilita la comunicación entre subnets a través de la red primaria (C-Chain). Para usar la mensajería de Warp, las cadenas Subnet-EVM de las subnets deben activar sus precompilados de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
 
 ```json
 {
@@ -840,7 +841,7 @@ Cualquier error en la configuración de las actualizaciones de red o en su coord
 
 Además de especificar la configuración para cada uno de los precompilados anteriores en la configuración de la cadena génesis, se pueden habilitar o deshabilitar individualmente en un momento dado como una actualización de red. Deshabilitar un precompilado desactiva la llamada al precompilado y destruye su almacenamiento para que pueda habilitarse en un momento posterior con una nueva configuración si se desea.
 
-Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde reside [`config.json`](#configuraciones-de-cadena-avalanchego): `{chain-config-dir}/{blockchainID}/upgrade.json`. Por ejemplo, la actualización de la Subred WAGMI debe colocarse en `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
+Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde reside [`config.json`](#configuraciones-de-cadena-avalanchego): `{chain-config-dir}/{blockchainID}/upgrade.json`. Por ejemplo, la actualización de la Subnet WAGMI debe colocarse en `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
 
 El contenido de `upgrade.json` debe formatearse de acuerdo con lo siguiente:
 
@@ -934,7 +935,7 @@ Cuando una deshabilitación de precompilación entra en efecto (es decir, despu�
 se borrará. Si desea volver a habilitarlo, deberá tratarlo como una nueva configuración.
 
 Después de haber creado el archivo `upgrade.json` y colocarlo en el directorio de configuración de la cadena, es necesario
-reiniciar el nodo para que se cargue el archivo de actualización (una vez más, asegúrese de no reiniciar todos los validadores de la Subred
+reiniciar el nodo para que se cargue el archivo de actualización (una vez más, asegúrese de no reiniciar todos los validadores de la Subnet
 ¡a la vez!). Al reiniciar el nodo, imprimirá la configuración de la cadena, donde
 puede verificar que la actualización se haya cargado correctamente. En nuestro ejemplo:
 
@@ -959,7 +960,7 @@ precompilados activados en una marca de tiempo con el método RPC
 El método RPC [`eth_getChainConfig`](/reference/subnet-evm/api#eth_getchainconfig)
 también devolverá las actualizaciones configuradas en la respuesta.
 
-¡Eso es todo, tu Subred está lista y las actualizaciones deseadas se activarán en la marca de tiempo indicada!
+¡Eso es todo, tu Subnet está lista y las actualizaciones deseadas se activarán en la marca de tiempo indicada!
 
 ### Configuraciones Iniciales de Precompilación
 
