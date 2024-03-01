@@ -78,6 +78,7 @@ probability that a given validator is sampled is proportional to its stake.
 When you add a node to the validator set, you specify:
 
 - Your node’s ID
+- Your node's BLS key and BLS signature
 - When you want to start and stop validating
 - How many AVAX you are staking
 - The address to send any rewards to
