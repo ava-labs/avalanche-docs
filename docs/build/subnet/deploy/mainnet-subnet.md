@@ -174,7 +174,7 @@ Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 ```
 
 The deployment requires running a `createSubnet` transaction
-and a `createBlockchai` transaction,
+and a `createBlockchain` transaction,
 and so this first Ledger address must have the funds to issue both operations.
 
 This tutorial creates a permissioned Subnet. As such, you must specify which P-Chain addresses can
