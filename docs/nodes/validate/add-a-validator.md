@@ -211,7 +211,7 @@ cannot be modified.
 The end date can be adjusted in the code.
 
 Let's say we want the validation period to end after 50 days.
-You can achieve this by adding the number of deired days to
+You can achieve this by adding the number of desired days to
 `endTime.getDate()`, in this case `50`.
 
 ``` ts
@@ -320,7 +320,7 @@ laviniatalpas@Lavinias-MacBook-Pro avalanchejs % node --loader ts-node/esm examp
 
 We can check the transaction’s status by running the example script with
 [`platform.getTxStatus`](/docs/reference/avalanchego/p-chain/api.md#platformgettxstatus)
-or looking up the validtor directly on the 
+or looking up the validator directly on the 
 [explorer](https://subnets-test.avax.network/validators/NodeID-JXJNyJXhgXzvVGisLkrDiZvF938zJxnT5).
 
 ![Added Validator](/img/validator-avalanchejs-3.png)
