@@ -1,16 +1,16 @@
 ---
-tags: [Construir, Subredes]
+tags: [Construir, Subnets]
 description: Cómo personalizar una Subnet utilizando Genesis, Precompilación y Configuraciones de Blockchain.
-sidebar_label: Personalizar una Subred
+sidebar_label: Personalizar una Subnet
 pagination_label: Personaliza tu Subnet impulsada por EVM
 sidebar_position: 1
 ---
 
 # Personaliza tu Subnet impulsada por EVM
 
-Todas las Subredes se pueden personalizar utilizando [`Configuraciones de Subred`](#configuraciones-de-subnet).
+Todas las Subnets se pueden personalizar utilizando [`Configuraciones de Subnet`](#configuraciones-de-subnet).
 
-Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subred, una
+Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subnet, una
 especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
 configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
 
@@ -22,7 +22,7 @@ personalizar utilizando uno o más de los siguientes métodos:
 - [Configuraciones de actualización](#actualizaciones-de-red-habilitardeshabilitar-precompilados)
 - [Configuraciones de cadena](#configuraciones-de-cadena-avalanchego)
 
-## Configuraciones de Subred
+## Configuraciones de Subnet
 
 Una Subnet se puede personalizar configurando parámetros para lo siguiente:
 
@@ -37,7 +37,7 @@ Consulta [aquí](/nodes/configure/subnet-configs.md) para obtener más informaci
 Cada blockchain tiene algún estado de genesis cuando se crea. Cada Máquina Virtual define el formato y
 la semántica de sus datos de genesis.
 
-La Subred-EVM de genesis predeterminada proporcionada a continuación tiene algunos parámetros bien definidos:
+La Subnet-EVM de genesis predeterminada proporcionada a continuación tiene algunos parámetros bien definidos:
 
 ```json
 {
@@ -804,7 +804,7 @@ Si tanto `allowFeeRecipients` como `rewardAddress` se especifican en el campo `i
 
 ### Mensajería de Avalanche Warp
 
-El precompilado de Warp habilita la comunicación entre subredes a través de la red primaria (C-Chain). Para usar la mensajería de Warp, las cadenas Subnet-EVM de las subredes deben activar sus precompilados de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
+El precompilado de Warp habilita la comunicación entre subnets a través de la red primaria (C-Chain). Para usar la mensajería de Warp, las cadenas Subnet-EVM de las subnets deben activar sus precompilados de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
 
 ```json
 {
@@ -935,7 +935,7 @@ Cuando una deshabilitación de precompilación entra en efecto (es decir, despu�
 se borrará. Si desea volver a habilitarlo, deberá tratarlo como una nueva configuración.
 
 Después de haber creado el archivo `upgrade.json` y colocarlo en el directorio de configuración de la cadena, es necesario
-reiniciar el nodo para que se cargue el archivo de actualización (una vez más, asegúrese de no reiniciar todos los validadores de la Subred
+reiniciar el nodo para que se cargue el archivo de actualización (una vez más, asegúrese de no reiniciar todos los validadores de la Subnet
 ¡a la vez!). Al reiniciar el nodo, imprimirá la configuración de la cadena, donde
 puede verificar que la actualización se haya cargado correctamente. En nuestro ejemplo:
 
