@@ -15,8 +15,7 @@ In this section, we will go over the process for automatically generating the te
 you can configure accordingly for your stateful precompile.
 
 First, we must create the Solidity interface that we want our precompile to implement. This will be
-the HelloWorld Interface. It will have two simple functions, `sayHello()` and `setGreeting()`. These
-two functions will demonstrate the getting and setting respectively of a value stored in the
+the HelloWorld Interface. It will have two simple functions, `sayHello()`, `setGreeting()` and an event `GreetingChanged` These two functions will demonstrate the getting and setting respectively of a value stored in the
 precompile's state space.
 
 The `sayHello()` function is a `view` function, meaning it does not modify the state of the precompile
@@ -49,15 +48,25 @@ cd contracts/
 
 Create a new file called `IHelloWorld.sol` and copy and paste the below code:
 
-```sol
+```solidity
 // (c) 2022-2023, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
+
 // SPDX-License-Identifier: MIT
+
 pragma solidity >=0.8.0;
 import "./IAllowList.sol";
+
 interface IHelloWorld is IAllowList {
+  event GreetingChanged(
+    address indexed sender,
+    string oldGreeting,
+    string newGreeting
+  );
+
   // sayHello returns the stored greeting string
   function sayHello() external view returns (string calldata result);
+
   // setGreeting  stores the greeting string
   function setGreeting(string calldata response) external;
 }
@@ -98,19 +107,27 @@ This is already added to the `package.json` file.
 You can install it by running `npm install`.
 In order to import `IAllowList` interface, you can use the following import statement:
 
-```sol
+```solidity
 import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
 ```
 
 The full file looks like this:
 
-```sol
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import "@avalabs/subnet-evm-contracts/contracts/interfaces/IAllowList.sol";
+
 interface IHelloWorld is IAllowList {
+  event GreetingChanged(
+    address indexed sender,
+    string oldGreeting,
+    string newGreeting
+  );
+
   // sayHello returns the stored greeting string
   function sayHello() external view returns (string calldata result);
+
   // setGreeting stores the greeting string
   function setGreeting(string calldata response) external;
 }
@@ -152,6 +169,62 @@ This generates the ABI code under `./abis/IHelloWorld.abi`.
 
 ```json
 [
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "oldGreeting",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "newGreeting",
+        "type": "string"
+      }
+    ],
+    "name": "GreetingChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "role",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "oldRole",
+        "type": "uint256"
+      }
+    ],
+    "name": "RoleSet",
+    "type": "event"
+  },
   {
     "inputs": [
       { "internalType": "address", "name": "addr", "type": "address" }
@@ -195,6 +268,15 @@ This generates the ABI code under `./abis/IHelloWorld.abi`.
       { "internalType": "string", "name": "response", "type": "string" }
     ],
     "name": "setGreeting",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "addr", "type": "address" }
+    ],
+    "name": "setManager",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -299,7 +381,7 @@ precompile template under its own directory via `--out ./helloworld` flag.
 
 <!-- markdownlint-enable MD013 -->
 
-This generates a precompile template files `contract.go`, `contract.abi`, `config.go`, `module.go`
+This generates a precompile template files `contract.go`, `contract.abi`, `config.go`, `module.go`, `event.go`
 and `README.md` files. `README.md` explains general guidelines for precompile development.
 You should carefully read this file before modifying the precompile template.
 
@@ -310,25 +392,27 @@ There are some must-be-done changes waiting in the generated file. Each area req
 Additionally there are other files you need to edit to activate your precompile.
 These areas are highlighted with comments "ADD YOUR PRECOMPILE HERE".
 For testing take a look at other precompile tests in contract_test.go and config_test.go in other precompile folders.
-See the tutorial in <https://docs.avax.network/subnets/hello-world-precompile-tutorial> for more information about precompile development.
 General guidelines for precompile development:
+
 1- Set a suitable config key in generated module.go. E.g: "yourPrecompileConfig"
 2- Read the comment and set a suitable contract address in generated module.go. E.g:
 ContractAddress = common.HexToAddress("ASUITABLEHEXADDRESS")
 3- It is recommended to only modify code in the highlighted areas marked with "CUSTOM CODE STARTS HERE". Typically, custom codes are required in only those areas.
 Modifying code outside of these areas should be done with caution and with a deep understanding of how these changes may impact the EVM.
-4- Set gas costs in generated contract.go
-5- Force import your precompile package in precompile/registry/registry.go
-6- Add your config unit tests under generated package config_test.go
-7- Add your contract unit tests under generated package contract_test.go
-8- Additionally you can add a full-fledged VM test for your precompile under plugin/vm/vm_test.go. See existing precompile tests for examples.
-9- Add your solidity interface and test contract to contracts/contracts
-10- Write solidity contract tests for your precompile in contracts/contracts/test/
-11- Write TypeScript DS-Test counterparts for your solidity tests in contracts/test/
-12- Create your genesis with your precompile enabled in tests/precompile/genesis/
-13- Create e2e test for your solidity test in tests/precompile/solidity/suites.go
-14- Run your e2e precompile Solidity tests with './scripts/run_ginkgo.sh`
+4- If you have any event defined in your precompile, review the generated event.go file and set your event gas costs. You should also emit your event in your function in the contract.go file.
+5- Set gas costs in generated contract.go
+6- Force import your precompile package in precompile/registry/registry.go
+7- Add your config unit tests under generated package config_test.go
+8- Add your contract unit tests under generated package contract_test.go
+9- Additionally you can add a full-fledged VM test for your precompile under plugin/vm/vm_test.go. See existing precompile tests for examples.
+10- Add your solidity interface and test contract to contracts/contracts
+11- Write solidity contract tests for your precompile in contracts/contracts/test
+12- Write TypeScript DS-Test counterparts for your solidity tests in contracts/test
+13- Create your genesis with your precompile enabled in tests/precompile/genesis/
+14- Create e2e test for your solidity test in tests/precompile/solidity/suites.go
+15- Run your e2e precompile Solidity tests with './scripts/run_ginkgo.sh`
 ```
 
 Let's follow these steps and create our HelloWorld precompile!
+
 <!-- markdownlint-enable MD013 -->

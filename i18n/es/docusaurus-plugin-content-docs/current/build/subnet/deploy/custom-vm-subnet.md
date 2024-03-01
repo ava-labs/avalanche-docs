@@ -90,8 +90,7 @@ compatible con tu VM personalizada.
     "homesteadBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "petersburgBlock": 0,
-    "subnetEVMTimestamp": 0
+    "petersburgBlock": 0
   },
   "nonce": "0x0",
   "timestamp": "0x0",

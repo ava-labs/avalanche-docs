@@ -144,7 +144,6 @@ No se han establecido precompilaciones.
         "petersburgBlock": 0,
         "istanbulBlock": 0,
         "muirGlacierBlock": 0,
-        "subnetEVMTimestamp": 0,
         "feeConfig": {
             "gasLimit": 15000000,
             "targetBlockRate": 2,

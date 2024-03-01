@@ -134,21 +134,35 @@ with the original precompile interface!
 The AllowList enables a precompile to enforce permissions on addresses. The AllowList is not a contract
 itself, but a helper structure to provide a control mechanism for wrapping contracts.
 It provides an `AllowListConfig` to the precompile so that it can take an initial configuration
-from genesis/upgrade. It also provides 4 functions to set/read the permissions. In this tutorial, we
+from genesis/upgrade. It also provides functions to set/read the permissions. In this tutorial, we
 used `IAllowList` interface to provide permission control to the `HelloWorld` precompile.
 `IAllowList` is defined in Subnet-EVM under [`./contracts/contracts/interfaces/IAllowList.sol`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/contracts/contracts/interfaces/IAllowList.sol).
 The interface is as follows:
 
-```sol
+```solidity
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
 interface IAllowList {
+  event RoleSet(
+    uint256 indexed role,
+    address indexed account,
+    address indexed sender,
+    uint256 oldRole
+  );
+
   // Set [addr] to have the admin role over the precompile contract.
   function setAdmin(address addr) external;
+
   // Set [addr] to be enabled on the precompile contract.
   function setEnabled(address addr) external;
+
+  // Set [addr] to have the manager role over the precompile contract.
+  function setManager(address addr) external;
+
   // Set [addr] to have no role for the precompile contract.
   function setNone(address addr) external;
+
   // Read the status of [addr].
   function readAllowList(address addr) external view returns (uint256 role);
 }

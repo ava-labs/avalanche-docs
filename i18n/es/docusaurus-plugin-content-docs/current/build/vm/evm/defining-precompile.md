@@ -80,8 +80,6 @@ El archivo del módulo contiene un `configurador` que implementa la interfaz `co
 
 ### Archivo de Configuración
 
-
-
 El archivo de configuración contiene la configuración para la precompilación. Este archivo se encuentra en
 [`./precompile/helloworld/config.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/config.go)
 para Subnet-EVM y
@@ -194,18 +192,57 @@ func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompilec
 }
 ```
 
-### Archivo del Contrato
+### Archivo de Eventos
 
-El archivo del contrato contiene las funciones del contrato de precompilación que serán llamadas por el EVM. El
-archivo se encuentra en [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go)
-para Subnet-EVM y
-[./helloworld/contract.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/contract.go)
-para Precompile-EVM.
-Dado que usamos la interfaz `IAllowList`, habrá código generado automáticamente para las funciones `AllowList`
-como se muestra a continuación:
+El archivo de eventos contiene los eventos que la precompilación puede emitir. Este archivo se encuentra en
+[`./precompile/helloworld/event.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/event.go) para Subnet-EVM y
+[./helloworld/event.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/event.go) para Precompile-EVM. El archivo comienza con un comentario sobre los eventos y cómo pueden emitirse:
 
 ```go
-// GetHelloWorldAllowListStatus devuelve el rol de [address] para la lista HelloWorld.
+/* NOTA: Los eventos solo se pueden emitir en funciones que cambian el estado. Por lo tanto, no se pueden usar eventos en funciones de solo lectura (view).
+Los eventos generalmente se emiten al final de una función que cambia el estado con el método AddLog de StateDB. El método AddLog toma 4 argumentos:
+	1. Dirección del contrato que emitió el evento.
+	2. Hashes de los temas del evento.
+	3. Datos no indexados codificados del evento.
+	4. Número de bloque en el que se emitió el evento.
+El primer argumento es la dirección del contrato que emitió el evento.
+Los temas pueden tener como máximo 4 elementos, el primer tema es el hash de la firma del evento y el resto son los argumentos de evento indexados. Puede haber como máximo 3 argumentos indexados.
+Los temas no se pueden desempaquetar completamente en sus valores originales ya que son hashes de 32 bytes.
+Los argumentos no indexados se codifican utilizando el esquema de codificación ABI. Los argumentos no indexados se pueden desempaquetar en sus valores originales.
+Antes de empaquetar el evento, debe calcular el costo de gas del evento. El costo de gas de un evento es el costo de gas base + el costo de gas de los temas + el costo de gas de los datos no indexados.
+Consulte las funciones Get{EvetName}EventGasCost para obtener más detalles.
+Puede usar el siguiente código para emitir un evento en sus funciones de precompilación que cambian el estado (el empaquetador generado puede ser diferente):
+topics, data, err := PackMyEvent(
+	topic1,
+	topic2,
+	data1,
+	data2,
+)
+if err != nil {
+	return nil, remainingGas, err
+}
+accessibleState.GetStateDB().AddLog(
+	ContractAddress,
+	topics,
+	data,
+	accessibleState.GetBlockContext().Number().Uint64(),
+)
+```
+
+En este archivo, debe establecer el costo de gas de su evento e implementar la función `Get{EventName}EventGasCost`. Esta función debe tomar los datos que desea emitir y calcular el costo de gas. En este ejemplo, definimos nuestro evento de la siguiente manera y planeamos emitirlo en la función `setGreeting`:
+
+```solidity
+  event GreetingChanged(address indexed sender, string oldGreeting, string newGreeting);
+```
+
+Utilizamos cadenas arbitrarias como datos de evento no indexados, recuerda que cada evento emitido se almacena en la cadena, por lo que cargar la cantidad correcta es crítico. Calculamos el costo de gas según la longitud de la cadena para asegurarnos de estar cobrando la cantidad correcta de gas. Si estás seguro de que estás tratando con datos de longitud fija, puedes usar un costo de gas fijo para tu evento. Mostraremos cómo se pueden emitir eventos en la sección del Archivo del Contrato.
+
+### Archivo del Contrato
+
+El archivo del contrato contiene las funciones del contrato de precompilación que serán llamadas por la EVM. El archivo se encuentra en [`./precompile/helloworld/contract.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contracts/helloworld/contract.go) para Subnet-EVM y [./helloworld/contract.go](https://github.com/ava-labs/precompile-evm/blob/hello-world-example/helloworld/contract.go) para Precompile-EVM. Dado que usamos la interfaz `IAllowList`, habrá código generado automáticamente para las funciones de `AllowList` como se muestra a continuación:
+
+```go
+// GetHelloWorldAllowListStatus devuelve el rol de [dirección] para la lista HelloWorld.
 func GetHelloWorldAllowListStatus(stateDB contract.StateDB, address common.Address) allowlist.Role {
 	return allowlist.GetAllowListStatus(stateDB, ContractAddress, address)
 }
@@ -225,59 +262,252 @@ Estos serán útiles para usar el ayudante de AllowList de precompilación en nu
 
 #### Packers y Unpackers
 
-También hay Packers y Unpackers generados automáticamente para el ABI. Estos se utilizarán en las funciones `sayHello` y
-`setGreeting` para comodidad del ABI.
-Estas funciones se generan automáticamente
-y se utilizarán en los lugares necesarios en consecuencia.
-No necesita preocuparse por cómo lidiar con ellos, pero es bueno saber qué son.
+También hay empaquetadores y desempaquetadores generados automáticamente para la ABI. Estos se utilizarán en las funciones `sayHello` y `setGreeting` para cumplir con la ABI. Estas funciones se generan automáticamente y se utilizarán en los lugares necesarios. No tienes que preocuparte por cómo lidiar con ellos, pero es bueno saber qué son.
 
-Cada entrada de una función de contrato de precompilación tiene su propia función `Unpacker` de la siguiente manera:
+Nota: Hubo algunos cambios en los empaquetadores de precompilación con Durango. En este ejemplo, asumimos que el contrato de precompilación HelloWorld se ha implementado antes de Durango. Necesitamos activar esta condición solo después de Durango. Si esta es una nueva precompilación y nunca se ha implementado antes de Durango, puedes activarla de inmediato eliminando la condición if.
+
+Cada entrada de una función de contrato de precompilación tiene su propia función `Desempaquetador`, como sigue (si se implementa antes de Durango):
 
 ```go
-const (
-	// Gas cost for the sayHello function
-	SayHelloGasCost = 10000
-
-	// Gas cost for the setGreeting function
-	SetGreetingGasCost = 50000
-)
+// UnpackSetGreetingInput intenta desempaquetar [input] en el argumento de tipo cadena
+// asume que [input] no incluye el selector (omite los primeros 4 bytes de la firma de la función)
+// si [useStrictMode] es verdadero, devolverá un error si la longitud de [input] no es [common.HashLength]
+func UnpackSetGreetingInput(input []byte, useStrictMode bool) (string, error) {
+	// Inicialmente teníamos esta verificación para asegurarnos de que la entrada tuviera la longitud correcta.
+	// Sin embargo, Solidity no siempre empaqueta la entrada a la longitud correcta y permite
+	// que se agreguen bytes de relleno adicionales al final de la entrada. Por lo tanto, hemos eliminado
+	// esta verificación con Durango. Aún necesitamos mantener esta verificación por compatibilidad con versiones anteriores.
+	if useStrictMode && len(input) > common.HashLength {
+		return "", ErrInputExceedsLimit
+	}
+	res, err := HelloWorldABI.UnpackInput("setGreeting", input, useStrictMode)
+	if err != nil {
+		return "", err
+	}
+	desempaquetado := *abi.ConvertType(res[0], new(string)).(*string)
+	return desempaquetado, nil
+}
 ```
 
-These gas costs can be adjusted based on the complexity and resource consumption of the functions. It's important to carefully consider the gas costs to ensure the contract is secure and efficient.
+Si esta es una nueva precompilación que se implementará después de Durango, puedes omitir el manejo del modo estricto y usar false:
 
 ```go
-// Costos de gas para precompilaciones estatales
+func UnpackSetGreetingInput(input []byte) (string, error) {
+	res, err := HelloWorldABI.UnpackInput("setGreeting", input, false)
+	if err != nil {
+		return "", err
+	}
+	desempaquetado := *abi.ConvertType(res[0], new(string)).(*string)
+	return desempaquetado, nil
+}
+```
+
+La ABI es un formato binario y la entrada a la función del contrato de precompilación es un arreglo de bytes. La función `Desempaquetador` convierte esta entrada a un formato más fácil de usar para que podamos usarla en nuestra función.
+
+De manera similar, hay una función `Empaquetador` para cada salida de una función del contrato de precompilación, como sigue:
+
+```go
+// PackSayHelloOutput intenta empaquetar el resultado dado de tipo cadena
+// para cumplir con las salidas de la ABI.
+func PackSayHelloOutput(result string) ([]byte, error) {
+	return HelloWorldABI.PackOutput("sayHello", result)
+}
+```
+
+Esta función convierte la salida de la función a un arreglo de bytes que cumple con la ABI y puede ser devuelto a la EVM como resultado.
+
+#### Modificar sayHello()
+
+El siguiente lugar para modificar es nuestra función `sayHello()`. En un paso anterior, creamos la interfaz `IHelloWorld.sol` con dos funciones `sayHello()` y `setGreeting()`. Finalmente, llegamos a implementarlas aquí. Si algún contrato llama a estas funciones desde la interfaz, la siguiente función se ejecuta. Esta función es una función simple de obtención. En `Configure()`, configuramos un mapeo con la clave `storageKey` y el valor `Hello World!`. En esta función, devolveremos el valor que se encuentre en `storageKey`. El siguiente fragmento de código se puede copiar y pegar para sobrescribir el código `setGreeting` predeterminado.
+
+Primero, agregamos una función auxiliar para obtener el valor de saludo del stateDB, esto será útil cuando probemos nuestro contrato. Usaremos `storageKeyHash` para almacenar el valor en el almacenamiento reservado del Contrato en el stateDB.
+
+```go
+var (
+  // storageKeyHash es el hash de la clave de almacenamiento "storageKey" en el almacenamiento del contrato.
+	// Esto se utiliza para almacenar el valor del saludo en el almacenamiento del contrato.
+	// Es importante usar una clave única aquí para evitar conflictos con otras claves de almacenamiento
+	// como direcciones, AllowList, etc.
+	storageKeyHash = common.BytesToHash([]byte("storageKey"))
+)
+// GetGreeting devuelve el valor de la clave de almacenamiento "storageKey" en el almacenamiento del contrato,
+// con ceros iniciales recortados.
+// Esta función se utiliza principalmente para pruebas.
+func GetGreeting(stateDB contract.StateDB) string {
+	// Obtener el valor establecido en el destinatario
+	value := stateDB.GetState(ContractAddress, storageKeyHash)
+	return string(common.TrimLeftZeroes(value.Bytes()))
+}
+```
+
+Ahora podemos modificar la función `sayHello` para devolver el valor almacenado.
+
+<!-- markdownlint-disable MD013 -->
+
+```go
+func sayHello(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, SayHelloGasCost); err != nil {
+		return nil, 0, err
+	}
+	// EL CÓDIGO PERSONALIZADO COMIENZA AQUÍ
+
+	// Obtener el estado actual
+	currentState := accessibleState.GetStateDB()
+	// Obtener el valor establecido en el destinatario
+	value := GetGreeting(currentState)
+	packedOutput, err := PackSayHelloOutput(value)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// Devolver la salida empaquetada y el gas restante
+	return packedOutput, remainingGas, nil
+}
+```
+
+<!-- markdownlint-enable MD013 -->
+
+#### Modificar setGreeting()
+
+La función `setGreeting()` es una función simple de configuración. Toma como entrada `input` y estableceremos ese valor en el mapeo de estado con la clave `storageKey`. También verifica si la VM que ejecuta el precompilado está en modo de solo lectura. Si lo está, devuelve un error. Al final de una ejecución exitosa, emitirá el evento `GreetingChanged`.
+
+También hay un código generado de `AllowList` en esa función. Este código generado verifica si la dirección del llamador es elegible para realizar esta operación que cambia el estado. Si no lo es, devuelve un error.
+
+Agreguemos la función auxiliar para establecer el valor de saludo en la stateDB, esto será útil cuando probemos nuestro contrato.
+
+```go
+// StoreGreeting establece el valor de la clave de almacenamiento "storageKey" en el almacenamiento del contrato.
+func StoreGreeting(stateDB contract.StateDB, input string) {
+	inputPadded := common.LeftPadBytes([]byte(input), common.HashLength)
+	inputHash := common.BytesToHash(inputPadded)
+
+	stateDB.SetState(ContractAddress, storageKeyHash, inputHash)
+}
+```
+
+El siguiente fragmento de código se puede copiar y pegar para sobrescribir el código `setGreeting()` predeterminado.
+
+<!-- markdownlint-disable MD013 -->
+
+```go
+func setGreeting(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, SetGreetingGasCost); err != nil {
+		return nil, 0, err
+	}
+	if readOnly {
+		return nil, remainingGas, vmerrs.ErrWriteProtection
+	}
+	// no use el modo estricto después de Durango
+	useStrictMode := !contract.IsDurangoActivated(accessibleState)
+	// intenta desempaquetar [input] en los argumentos de SetGreetingInput.
+	// Supone que [input] no incluye el selector
+	// Puede usar la variable desempaquetada [inputStruct] en su código
+	inputStruct, err := UnpackSetGreetingInput(input, useStrictMode)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+	// La lista de permitidos está habilitada y SetGreeting es una función que cambia el estado.
+	// Esta parte del código restringe que la función sea llamada solo por direcciones habilitadas/administradoras en la lista de permitidos.
+	// Puede modificar/eliminar este código si no desea que esta función esté restringida por la lista de permitidos.
+	stateDB := accessibleState.GetStateDB()
+	// Verifica que el llamador esté en la lista de permitidos y, por lo tanto, tenga derecho a llamar a esta función.
+	callerStatus := allowlist.GetAllowListStatus(stateDB, ContractAddress, caller)
+	if !callerStatus.IsEnabled() {
+		return nil, remainingGas, fmt.Errorf("%w: %s", ErrCannotSetGreeting, caller)
+	}
+	// el código de la lista de permitidos termina aquí.
+
+	// EL CÓDIGO PERSONALIZADO COMIENZA AQUÍ
+	// Con Durango, puedes emitir un evento en tus funciones de precompilación que cambian el estado.
+	// Nota: Si has estado usando el precompilado antes de Durango, debes activarlo solo después de Durango.
+	// Activar este código antes de Durango resultará en un fallo de consenso.
+	// Si este es un nuevo precompilado y nunca se ha implementado antes de Durango, puedes activarlo de inmediato eliminando
+	// la condición if.
+	// Este ejemplo asume que el contrato de precompilación HelloWorld se ha implementado antes de Durango.
+	if contract.IsDurangoActivated(accessibleState) {
+		// Primero leeremos el saludo antiguo. Así que debemos cobrar el gas por leer el almacenamiento.
+		if remainingGas, err = contract.DeductGas(remainingGas, contract.ReadGasCostPerSlot); err != nil {
+			return nil, 0, err
+		}
+		oldGreeting := GetGreeting(stateDB)
+
+		eventData := GreetingChangedEventData{
+			OldGreeting: oldGreeting,
+			NewGreeting: inputStruct,
+		}
+		topics, data, err := PackGreetingChangedEvent(caller, eventData)
+		if err != nil {
+			return nil, remainingGas, err
+		}
+		// Cobrar el gas por emitir el evento.
+		eventGasCost := GetGreetingChangedEventGasCost(eventData)
+		if remainingGas, err = contract.DeductGas(remainingGas, eventGasCost); err != nil {
+			return nil, 0, err
+		}
+
+		// Emitir el evento
+		stateDB.AddLog(
+			ContractAddress,
+			topics,
+			data,
+			accessibleState.GetBlockContext().Number().Uint64(),
+		)
+	}
+
+	// setGreeting es la función de ejecución
+	// "SetGreeting(name string)" y establece el storageKey
+	// en la cadena devuelta por hello world
+	StoreGreeting(stateDB, inputStruct)
+
+	// Esta función no devuelve una salida, déjala como está
+	packedOutput := []byte{}
+
+	// Devuelve la salida empaquetada y el gas restante
+	return packedOutput, remainingGas, nil
+}
+```
+
+Nota: Eventos de precompilación introducidos con Durango. En este ejemplo, asumimos que el contrato de precompilación HelloWorld se ha implementado antes de Durango. Si este es un nuevo precompilado y se implementará después de Durango, puedes activarlo de inmediato eliminando la condición Durango (`contract.IsDurangoActivated(accessibleState)`).
+
+<!-- markdownlint-enable MD013 -->
+
+## Configuración de costos de gas
+
+Configurar los costos de gas para las funciones es muy importante y debe hacerse con cuidado. Si los costos de gas se establecen demasiado bajos, las funciones pueden ser abusadas y causar ataques de denegación de servicio (DoS). Si los costos de gas se establecen demasiado altos, entonces el contrato será demasiado caro de ejecutar. Subnet-EVM tiene algunos costos de gas predefinidos para operaciones de escritura y lectura en [`precompile/contract/utils.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/contract/utils.go#L19-L20). Para proporcionar una línea de base para los costos de gas, hemos establecido los siguientes costos de gas.
+
+```go
+// Costos de gas para precompilaciones con estado
 const (
 	WriteGasCostPerSlot = 20_000
 	ReadGasCostPerSlot  = 5_000
 )
 ```
 
-`WriteGasCostPerSlot` es el costo de una escritura, como modificar un espacio de almacenamiento de estado.
+`WriteGasCostPerSlot` es el costo de una escritura, como modificar una ranura de almacenamiento de estado.
 
-`ReadGasCostPerSlot` es el costo de leer un espacio de almacenamiento de estado.
+`ReadGasCostPerSlot` es el costo de leer una ranura de almacenamiento de estado.
 
-Esto debe tenerse en cuenta en tus estimaciones de costo de gas en función de cuántas veces la función de precompilación hace una lectura o escritura. Por ejemplo, si la precompilación modifica el espacio de estado de su dirección de precompilación dos veces, entonces el costo de gas para esa función sería `40_000`. Sin embargo, si la precompilación realiza operaciones adicionales y requiere más poder computacional, entonces debes aumentar los costos de gas en consecuencia.
+Esto debería estar en tus estimaciones de costos de gas según cuántas veces la función de precompilación hace una lectura o escritura. Por ejemplo, si el precompilado modifica la ranura de estado de su dirección de precompilado dos veces, entonces el costo de gas para esa función sería `40_000`. Sin embargo, si el precompilado realiza operaciones adicionales y requiere más poder computacional, entonces debes aumentar los costos de gas en consecuencia.
 
-Además de estos costos de gas, también debemos tener en cuenta los costos de gas de AllowList. Estos son los costos de gas de leer y escribir permisos para direcciones en AllowList. Estos están definidos en [`precompile/allowlist/allowlist.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/allowlist/allowlist.go#L28-L29) de Subnet-EVM. Por defecto, se suman a los costos de gas predeterminados de las funciones de cambio de estado (SetGreeting) de la precompilación. Esto significa que estas funciones costarán un gas adicional de `ReadAllowListGasCost` para leer permisos del almacenamiento. Si no planeas leer permisos del almacenamiento, puedes omitir estos.
+Además de estos costos de gas, también tenemos que tener en cuenta los costos de gas de AllowList. Estos son los costos de gas de leer y escribir permisos para direcciones en AllowList. Estos están definidos en [`precompile/allowlist/allowlist.go`](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/precompile/allowlist/allowlist.go#L28-L29) de Subnet-EVM. Por defecto, estos se suman a los costos de gas predeterminados de las funciones de cambio de estado (SetGreeting) del precompilado. Esto significa que estas funciones costarán un gas adicional de `ReadAllowListGasCost` para leer los permisos del almacenamiento. Si no planeas leer los permisos del almacenamiento, puedes omitir esto.
 
 Ahora volviendo a nuestro `/helloworld/contract.go`, podemos modificar los costos de gas de nuestra función de precompilación. Busca (`CTRL F`) `SET A GAS COST HERE` para ubicar el código de costo de gas predeterminado.
 
 ```go
-SayHelloGasCost    uint64 = 0                                  // SET A GAS COST HERE
-SetGreetingGasCost uint64 = 0 + allowlist.ReadAllowListGasCost // SET A GAS COST HERE
+SayHelloGasCost    uint64 = 0                                  // ESTABLECER UN COSTO DE GAS AQUÍ
+SetGreetingGasCost uint64 = 0 + allowlist.ReadAllowListGasCost // ESTABLECER UN COSTO DE GAS AQUÍ
 ```
 
-Obtenemos y establecemos nuestro saludo con `sayHello()` y `setGreeting()` en un espacio de almacenamiento respectivamente, por lo que podemos definir los costos de gas de la siguiente manera. También leemos permisos de AllowList en `setGreeting()`, así que mantenemos `allowlist.ReadAllowListGasCost`.
+Obtenemos y establecemos nuestro saludo con `sayHello()` y `setGreeting()` en una ranura respectivamente, por lo que podemos definir los costos de gas de la siguiente manera. También leemos permisos de la AllowList en `setGreeting()`, por lo que mantenemos `allowlist.ReadAllowListGasCost`.
 
 ```go
 SayHelloGasCost    uint64 = contract.ReadGasCostPerSlot
 SetGreetingGasCost uint64 = contract.WriteGasCostPerSlot + allowlist.ReadAllowListGasCost
 ```
 
-## Registrando tu Precompilación
+## Registrando tu precompilación
 
-Debemos registrar nuestro paquete de precompilación en Subnet-EVM para que sea descubierto por otros paquetes. Nuestro archivo `Module` contiene una función `init()` que registra nuestra precompilación. `init()` se llama cuando se importa el paquete. Debemos registrar nuestra precompilación en un paquete común para que pueda ser importada por otros paquetes.
+Deberíamos registrar nuestro paquete de precompilación en el Subnet-EVM para que sea descubierto por otros paquetes. Nuestro archivo `Module` contiene una función `init()` que registra nuestra precompilación. `init()` se llama cuando se importa el paquete. Deberíamos registrar nuestra precompilación en un paquete común para que pueda ser importada por otros paquetes.
 
 <!-- vale off -->
 
@@ -289,8 +519,8 @@ Para Subnet-EVM tenemos un registro de precompilaciones en [`/precompile/registr
 Este registro importa forzosamente precompilaciones de otros paquetes, por ejemplo:
 
 ```go
-// Importaciones forzadas de cada precompilación para asegurar que la función init de cada precompilación se ejecute y se registre
-// en el registro.
+// Importaciones forzadas de cada precompilación para asegurar que la función init de cada precompilación se ejecute y se registre a sí misma
+// con el registro.
 import (
 	_ "github.com/ava-labs/subnet-evm/precompile/contracts/deployerallowlist"
 
@@ -310,8 +540,8 @@ import (
 
 <!-- vale off -->
 
-El registro en sí también es importado forzosamente por [`/plugin/evm/vm.go](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/plugin/evm/vm.go#L50).
-Esto asegura que el registro sea importado y las precompilaciones sean registradas.
+El registro en sí también se importa forzosamente en [`/plugin/evm/vm.go](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/plugin/evm/vm.go#L50).
+Esto asegura que el registro se importe y las precompilaciones se registren.
 
 <!-- vale on -->
 
