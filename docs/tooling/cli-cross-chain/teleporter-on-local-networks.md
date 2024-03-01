@@ -18,7 +18,7 @@ For more information on Cross Chain messaging through Teleporter and Warp, check
 
 - [Cross Chain References](/build/cross-chain)
 
-Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) and [Subnet-EVM-Based](/build/vm/evm/intro) virtual
+Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) and [Subnet-EVM-Based](/build/vm/evm/intro.md) virtual
 machines support Teleporter.
 
 ## Prerequisites
