@@ -41,7 +41,7 @@ un lenguaje orientado a objetos es una instancia de una clase.
 Es decir, la VM define el comportamiento de la blockchain.
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) es la VM que define las Cadenas de Contratos de la Subred.
-Subnet-EVM es una versión simplificada de [Cadena C-Avalanche](https://github.com/ava-labs/coreth).
+Subnet-EVM es una versión simplificada de [Cadena C de Avalanche](https://github.com/ava-labs/coreth).
 
 Esta cadena implementa la Máquina Virtual Ethereum y admite contratos inteligentes en Solidity, así como
 la mayoría de las demás características de los clientes Ethereum.
@@ -58,7 +58,7 @@ También vale la pena señalar que
 [solo se necesita 1 AVAX para convertirse en un validador en la Testnet Fuji](/nodes/validate/what-is-staking.md)
 y puedes obtener el token de prueba desde el [faucet](https://faucet.avax.network/). Si ya tienes un saldo AVAX
 mayor que cero en Mainnet, pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario,
-por favor solicita un cupón de faucet en
+solicita un cupón de faucet en
 [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6)
 oficial pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
 
@@ -85,7 +85,7 @@ La respuesta debería verse algo como:
 ```
 
 Esa parte que dice, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` es el NodeID, todo el conjunto.
-El usuario va a necesitar este ID en la sección posterior al llamar a [addValidator](#agregar-un-validador).
+El usuario va a necesitar este ID en la sección posterior al llamar a [addValidator](#add-a-validator).
 
 :::info
 
@@ -209,7 +209,7 @@ avalanche key list
 
 :::danger
 
-Realiza estos pasos solo para seguir este tutorial para direcciones `Fuji`. Para acceder a la billetera en `Mainnet`,
+Realiza estos pasos solo para seguir este tutorial para direcciones `Fuji`. Para acceder a la billetera de `Mainnet`,
 se recomienda encarecidamente el uso de un dispositivo ledger.
 
 :::
@@ -221,7 +221,7 @@ se recomienda encarecidamente el uso de un dispositivo ledger.
    pega tu dirección C-Chain allí y solicita tokens de prueba.
    De lo contrario,
    por favor solicita un cupón de faucet en
-   [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6) oficial
+   [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord oficial](https://discord.com/invite/RwXY7P6)
    pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
 
 2. **Exporta** tu clave a través del comando `avalanche key export`. La salida es tu clave privada,
@@ -238,10 +238,10 @@ Después de seguir estos 3 pasos, tu clave de prueba debería tener ahora un sal
 
 Crear una Subnet con `Avalanche-CLI` para `Fuji` funciona de la misma manera que con una red local.
 De hecho,
-el comando `create` solo crea una especificación de tu Subnet en el sistema de archivos local.
+los comandos `create` solo crean una especificación de tu Subnet en el sistema de archivos local.
 Después, la
 Subnet necesita ser _desplegada_. Esto permite reutilizar las configuraciones, creando la configuración con el
-comando `create`, luego desplegándola primero en una red local y sucesivamente en `Fuji` - y
+comando `create`, luego desplegando primero en una red local y sucesivamente en `Fuji` - y
 eventualmente en `Mainnet`.
 
 Para crear una Subnet EVM, ejecuta el comando `subnet create` con un nombre de tu elección:
@@ -372,7 +372,7 @@ avalanche subnet describe testsubnet
                                              __/ |
                                             |___/
 +--------------------------+-------------+
-|   PARÁMETRO DE GAS        |    VALOR    |
+|    PARÁMETRO DE GAS       |    VALOR    |
 +--------------------------+-------------+
 | GasLimit                 |     15000000 |
 +--------------------------+-------------+
@@ -426,7 +426,7 @@ También puedes listar las subredes disponibles:
 avalanche subnet list
 go run main.go subnet list
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
-|   SUBRED    |    CADENA   | ID DE CADENA |                       ID DE VM                    |    TIPO    | DESDE REPO |
+|   SUBRED    |    CADENA   | ID DE CADENA |                       ID DE VM                    |    TIPO    | DE REPO   |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 | testsubnet  | testsubnet  |     3333 | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Subnet-EVM | false     |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
@@ -438,9 +438,9 @@ Listar información desplegada:
 avalanche subnet list --deployed
 go run main.go subnet list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
-|   SUBRED    |    CADENA   |                       ID DE VM                    | RED LOCAL |                          FUJI (TESTNET)                         | MAINNET |
+|   SUBRED    |    CADENA   |                       ID DE VM                    | RED LOCAL     |                          FUJI (TESTNET)                         | MAINNET |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
-| testsubnet  | testsubnet  | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Sí           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
+| testsubnet  | testsubnet  | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Sí            | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
 +             +             +                                                   +               +-----------------------------------------------------------------+---------+
 |             |             |                                                   |               | BlockchainID: 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR | No      |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
@@ -461,7 +461,7 @@ Para desplegar la Subred, necesitarás algunos AVAX de testnet en la cadena P.
 avalanche subnet deploy testsubnet
 ```
 
-Esto va a iniciar una nueva serie de comandos.
+Esto va a iniciar una nueva serie de prompts.
 
 ```bash
 Use las teclas de flecha para navegar: ↓ ↑ → ←
@@ -473,11 +473,10 @@ Use las teclas de flecha para navegar: ↓ ↑ → ←
 
 Este tutorial trata sobre el despliegue en `Fuji`, así que navega con las teclas de flecha hasta `Fuji` y presiona enter.
 Luego se le pide al usuario que proporcione qué clave privada usar para el despliegue. El despliegue básicamente
-consiste en ejecutar una transacción de
-[createSubnet](/reference/avalanchego/p-chain/api.md#platformcreatesubnet). Por lo tanto, la
+consiste en ejecutar una transacción `createSubnet`. Por lo tanto, la
 clave necesita tener fondos.
 
-Además, este tutorial asume que un nodo está en funcionamiento, completamente arrancado en `Fuji`, y se ejecuta
+Además, este tutorial asume que un nodo está en funcionamiento, completamente bootstrapado en `Fuji`, y se ejecuta
 desde la **misma** máquina.
 
 ```bash
@@ -489,13 +488,13 @@ Use las teclas de flecha para navegar: ↓ ↑ → ←
   ▸ mytestkey
 ```
 
-Las Subredes están actualmente permisionadas solamente. Por lo tanto, el proceso ahora requiere que el usuario proporcione
-_qué claves pueden controlar la Subred_. La CLI le pide al usuario que proporcione una o más **direcciones de la cadena P**.
+Las Subredes están actualmente con permisos solamente. Por lo tanto, el proceso ahora requiere que el usuario proporcione
+qué claves pueden controlar la Subred. La CLI le pide al usuario que proporcione una o más **direcciones de la cadena P**.
 Sólo las claves correspondientes a estas direcciones van a poder agregar o quitar validadores.
 Asegúrate de proporcionar direcciones de la **cadena P Fuji** -`P-Fuji....`-.
 
 ```bash
-Configure qué direcciones pueden agregar nuevos validadores a la subred.
+Configura qué direcciones pueden agregar nuevos validadores a la subred.
 Estas direcciones se conocen como tus claves de control. También vas a
 establecer cuántas claves de control se requieren para agregar un validador.
 Use las teclas de flecha para navegar: ↓ ↑ → ←
@@ -545,7 +544,7 @@ La Subnet se ha creado con ID: 2EkPnvnDiLgudnf8NjtxaNcVFtdAAnUPvaoNBrc9WG5tNmmfa
 Error: autorización insuficiente
 ```
 
-Por lo tanto, el usuario necesita proporcionar una tecla de control de la cual realmente tenga control, y luego tiene éxito.
+Por lo tanto, el usuario necesita proporcionar una tecla de control de la cual tenga control, y luego tiene éxito.
 La salida (asumiendo que el nodo se está ejecutando en `localhost` y el puerto de la API está configurado en el estándar `9650`)
 se verá algo como esto:
 
@@ -608,7 +607,7 @@ A continuación, hay dos opciones de configuración: configuraciones automática
 ```
 
 Proporciona una ruta a un archivo de configuración. Si ejecutas este comando en la máquina donde se está ejecutando tu
-validador, entonces podrías apuntar esto al archivo de configuración utilizado realmente, por ejemplo
+validador, entonces podrías apuntar esto al archivo de configuración utilizado en realidad, por ejemplo
 `/etc/avalanchego/config.json` - solo asegúrate de que la herramienta tenga acceso de **escritura** al archivo. O
 podrías copiar el archivo más tarde. En cualquier caso, la herramienta va a intentar editar el archivo existente especificado
 por la ruta dada, o crear un nuevo archivo. Nuevamente, establece permisos de escritura.
@@ -689,19 +688,19 @@ Después de actualizar tu configuración, deberás reiniciar tu nodo para que lo
 
 :::warning
 
-Si el comando "join" no se completa con éxito antes de que se complete el comando "addValidator", la Subnet puede experimentar un rendimiento degradado o incluso detenerse.
+Si el comando "join" no se completa con éxito antes de que se complete "addValidator", la Subnet podría experimentar un rendimiento degradado o incluso detenerse.
 
 :::
 
 Ahora que el nodo se ha unido a la Subnet, un titular de la clave de control de la Subnet debe llamar a "addValidator" para otorgar al nodo permiso para ser un validador en tu Subnet.
 
-Para agregar un nodo a la lista blanca como un validador reconocido en la Subnet, ejecuta:
+Para agregar a un nodo a la lista blanca como un validador reconocido en la Subnet, ejecuta:
 
 ```bash
 avalanche subnet addValidator testsubnet
 ```
 
-Dado que esta operación implica una nueva transacción, deberás especificar qué clave privada usar:
+Como esta operación implica otra transacción, deberás especificar qué clave privada usar:
 
 ```bash
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
@@ -714,7 +713,7 @@ Elige `Fuji`:
 
 ```bash
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
-? Elige una red en la que implementar. Este comando solo admite Fuji actualmente.:
+? Elige una red para implementar. Este comando solo admite Fuji actualmente.:
   ▸ Fuji
     Mainnet
 ```
@@ -727,9 +726,9 @@ Ahora usa el **NodeID** del nuevo validador definido al principio de este tutori
 
 -este ID está modificado intencionalmente-
 
-La siguiente pregunta requiere un poco de reflexión. Un validador tiene un peso, que define con qué frecuencia el consenso lo selecciona para la toma de decisiones. Debes pensar en cuántos validadores quieres tener inicialmente para identificar un buen valor aquí. El rango es de 1 a 100, pero el mínimo para una Subnet sin ningún validador aún es 20. La estructura se describe un poco en [addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) bajo la sección `weight`.
+La siguiente pregunta requiere un poco de reflexión. Un validador tiene un peso, que define con qué frecuencia el consenso lo selecciona para la toma de decisiones. Debes pensar en cuántos validadores quieres identificar inicialmente un buen valor aquí. El rango es de 1 a 100, pero el mínimo para una Subnet sin ningún validador aún es 20.
 
-Simplemente selecciona 30 para este caso:
+Simplemente selecciona 30 para este:
 
 ```bash
 Usa las teclas de flecha para navegar: ↓ ↑ → ←
@@ -786,7 +785,7 @@ Peso: 30
 Entradas completas, emitiendo transacción para agregar la información del validador proporcionado...
 ```
 
-Esto puede tomar unos segundos y, si tiene éxito, imprimirá:
+Esto puede llevar unos segundos y, si tiene éxito, imprimirá:
 
 ```bash
 Transacción exitosa, ID de transacción: EhZh8PvQyqA9xggxn6EsdemXMnWKyy839NzEJ5DHExTBiXbjV
@@ -843,8 +842,11 @@ con los siguientes valores:
 
 :::note
 
-A menos que implementes tu Subnet en otros nodos, no podrás usar otros nodos, incluido el servidor de API público `https://api.avax-test.network/`, para conectarte a Core.
+A menos que implementes tu Subnet en otros nodos, no podrás usar otros nodos,
+incluido el servidor de API público `https://api.avax-test.network/`, para conectarte a Core.
 
-Si quieres abrir este nodo para que otros accedan a tu Subnet, debes configurarlo correctamente con `https//node-ip-address` en lugar de `http://127.0.0.1:9650`, sin embargo, está fuera del alcance de este tutorial cómo hacerlo.
+Si quieres abrir este nodo para que otros accedan a tu Subnet, debes configurarlo correctamente
+con `https//node-ip-address` en lugar de `http://127.0.0.1:9650`, sin embargo, está fuera del alcance de
+este tutorial cómo hacerlo.
 
 :::
