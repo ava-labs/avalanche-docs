@@ -93,6 +93,42 @@ ${updatedContent}`,
   [
     "docusaurus-plugin-remote-content",
     {
+      // /docs/build/cross-chain/awm/relayer.md
+      name: "relayer-overview",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/awm-relayer/main/",
+      documents: ["README.md"],
+      outDir: "docs/build/cross-chain/awm/",
+      // change file name and add metadata correct links
+      modifyContent(filename, content) {
+        if (filename.includes("README")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/ava-labs/awm-relayer/blob/main/"
+          );
+
+          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+
+          return {
+            filename: "relayer.md",
+            content: `---
+tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
+description: Reference relayer implementation for cross-chain Avalanche Warp Message delivery.
+keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+sidebar_label: AWM Relayer
+sidebar_position: 3
+---
+
+${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
       // /docs/build/cross-chain/teleporter/overview.md
       name: "teleporter-overview",
       sourceBaseUrl:
