@@ -112,7 +112,7 @@ ${updatedContent}`,
           return {
             filename: "relayer.md",
             content: `---
-tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
+tags: [Avalanche Warp Messaging, Relayer]
 description: Reference relayer implementation for cross-chain Avalanche Warp Message delivery.
 keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
 sidebar_label: AWM Relayer
