@@ -1,7 +1,7 @@
 ---
 tags: [Tooling, Avalanche-CLI]
 description: This how-to guide focuses on deploying a couple of teleporter-enabled subnets to a local Avalanche network.
-sidebar_label: Teleporter On a Local Network 
+sidebar_label: Teleporter On a Local Network
 pagination_label: Teleporter On a Local Network
 sidebar_position: 1
 ---
@@ -115,14 +115,13 @@ Notice some details here:
 - Two smart contracts are deployed to each Subnet: Teleporter Messenger smart contract and Teleporter Registry smart contract
 - Both Teleporter smart contracts are also deployed to `C-Chain` in the Local Network
 - [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer
-[listens](/build/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
+  [listens](/build/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
 
 CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add
 more Subnets, the Relayer will be automatically reconfigured.
 
 When deploying Subnet `<subnet2Name>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network
 as they have already been deployed when we deployed the first Subnet.
-
 
 ```shell
 avalanche subnet deploy <subnet2Name> --local
@@ -199,4 +198,3 @@ You have Teleport-ed your first message in the Local Network!
 
 Relayer related logs can be found at `~/.avalanche-cli/runs/awm-relayer.log`, and
 relayer configuration can be found at `~/.avalanche-cli/runs/awm-relayer-config.json`
-

@@ -41,20 +41,22 @@ function replaceRelativeLinks(content, sourceBaseUrl) {
 
 // Function to insert lines after the first line of Teleporter docs (for Academy course)
 function insertLinesAfterFirstLine(content, newLines) {
-    let lines = content.split('\n');
-  
-    if (newLines.length > 0 && lines.length > 0) {
-        lines.splice(1, 0, ...newLines);
-    }
+  let lines = content.split("\n");
 
-    return lines.join('\n');
+  if (newLines.length > 0 && lines.length > 0) {
+    lines.splice(1, 0, ...newLines);
+  }
+
+  return lines.join("\n");
 }
 
-let newLines = [`
+let newLines = [
+  `
 :::info 
 Dive deeper into Teleporter and kickstart your journey in building cross-chain dApps by enrolling in our [<ins>Teleporter course</ins>](https://academy.avax.network/course/teleporter).
 :::
-`];
+`,
+];
 
 const remoteContent = [
   [
@@ -107,7 +109,10 @@ ${updatedContent}`,
             "https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/"
           );
 
-          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+          const newContent = insertLinesAfterFirstLine(
+            updatedContent,
+            newLines
+          );
 
           return {
             filename: "overview.md",
@@ -143,7 +148,10 @@ ${newContent}`,
             "https://github.com/ava-labs/teleporter/blob/main/"
           );
 
-          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+          const newContent = insertLinesAfterFirstLine(
+            updatedContent,
+            newLines
+          );
 
           return {
             filename: "deep-dive.md",
@@ -166,7 +174,7 @@ ${newContent}`,
   [
     "docusaurus-plugin-remote-content",
     {
-      // /docs/build/cross-chain/teleporter/examples.md
+      // /docs/build/cross-chain/teleporter/getting-started.md
       name: "hello-teleporter",
       sourceBaseUrl:
         "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/CrossChainApplications/",
@@ -180,7 +188,10 @@ ${newContent}`,
             "https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/"
           );
 
-          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+          const newContent = insertLinesAfterFirstLine(
+            updatedContent,
+            newLines
+          );
 
           return {
             filename: "getting-started.md",
@@ -202,43 +213,7 @@ ${newContent}`,
   [
     "docusaurus-plugin-remote-content",
     {
-      // /docs/build/cross-chain/teleporter/examples.md
-      name: "teleporter-example-applications",
-      sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/CrossChainApplications/",
-      documents: ["README.md"],
-      outDir: "docs/build/cross-chain/teleporter/",
-      // change file name and add metadata correct links
-      modifyContent(filename, content) {
-        if (filename.includes("README")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/"
-          );
-
-          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
-
-          return {
-            filename: "examples.md",
-            content: `---
-tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
-description: Teleporter is an EVM-compatible cross-subnet communication protocol built on top of Avalanche Warp Messaging. This directory includes cross-chain applications that are built on top of the Teleporter protocol.
-keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-sidebar_label: Example Applications
-sidebar_position: 4
----
-
-${newContent}`,
-          };
-        }
-        return undefined;
-      },
-    },
-  ],
-  [
-    "docusaurus-plugin-remote-content",
-    {
-      // /docs/build/cross-chain/teleporter/examples.md
+      // /docs/build/cross-chain/teleporter/cli.md
       name: "teleporter-cli",
       sourceBaseUrl:
         "https://raw.githubusercontent.com/ava-labs/teleporter/main/cmd/teleporter-cli/",
@@ -252,7 +227,10 @@ ${newContent}`,
             "https://github.com/ava-labs/teleporter/blob/main/cmd/teleporter-cli/README.md"
           );
 
-          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+          const newContent = insertLinesAfterFirstLine(
+            updatedContent,
+            newLines
+          );
 
           return {
             filename: "cli.md",
@@ -274,7 +252,7 @@ ${newContent}`,
   [
     "docusaurus-plugin-remote-content",
     {
-      // /docs/build/cross-chain/teleporter/examples.md
+      // /docs/build/cross-chain/teleporter/upgradeability.md
       name: "teleporter-upgradeability",
       sourceBaseUrl:
         "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/Teleporter/upgrades/",
@@ -288,7 +266,10 @@ ${newContent}`,
             "https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/"
           );
 
-          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+          const newContent = insertLinesAfterFirstLine(
+            updatedContent,
+            newLines
+          );
 
           return {
             filename: "upgradeability.md",
@@ -310,7 +291,7 @@ ${newContent}`,
   [
     "docusaurus-plugin-remote-content",
     {
-      // /docs/build/cross-chain/teleporter/examples.md
+      // /docs/build/cross-chain/teleporter/evm-integration.md
       name: "awm-evm-integration",
       sourceBaseUrl:
         "https://raw.githubusercontent.com/meaghanfitzgerald/coreth/docs-integration/precompile/contracts/warp/",
