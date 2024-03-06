@@ -26,7 +26,7 @@ La versión envuelta de una moneda nativa es su representación ERC20 anclada. E
 facilita ciertos procesos como transacciones delegadas. Puedes obtener fácilmente tokens envueltos
 enviando la moneda nativa a la dirección del contrato de token envuelto.
 
-> WAGMI es una cadena de prueba independiente basada en EVM desplegada en una Subred personalizada en la red Avalanche.
+> WAGMI es una cadena de prueba independiente basada en EVM desplegada en una Subnet personalizada en la red Avalanche.
 
 Estaremos utilizando el repositorio de puentes de **ChainSafe**, para configurar fácilmente un puente robusto y seguro.
 
@@ -59,17 +59,17 @@ acuñir y quemar tokens que no controlamos. Por lo tanto, los bloqueamos en la c
 Estos son los requisitos para seguir este tutorial -
 
 - Configurar [WAGMI](/build/subnet/info/wagmi.md#adding-wagmi-to-core) y
-[Fuji](/build/dapp/fuji-workflow.md#set-up-fuji-network-on-core-optional) en Core
+  [Fuji](/build/dapp/fuji-workflow.md#set-up-fuji-network-on-core-optional) en Core
 - Importar el token `wWGM` (activo) en la red WAGMI (Core). Aquí está la dirección - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 - Monedas `WGM` en la cadena WAGMI. Gotea `1 WGM` desde el [WAGMI Faucet](https://faucet.trywagmi.xyz/).
 - Monedas `AVAX` en la cadena Fuji. Gotea `10 AVAX` desde el [Fuji Faucet](https://faucet.avax.network/).
-Si ya tienes un saldo de AVAX mayor que cero en Mainnet,
-pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario,
-por favor solicita un cupón de faucet en
-[Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6) oficial
-pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
+  Si ya tienes un saldo de AVAX mayor que cero en Mainnet,
+  pega tu dirección de C-Chain allí y solicita tokens de prueba. De lo contrario,
+  por favor solicita un cupón de faucet en
+  [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6) oficial
+  pueden proporcionar AVAX de testnet si los desarrolladores no pueden obtenerlo de las otras dos opciones.
 - Tokens `WGM` envueltos en la cadena WAGMI. Envía algunas monedas `WGM` a la dirección del token `wWGM` (ver
-segundo punto), para recibir la misma cantidad de `wWGM`. Siempre mantén algunas monedas `WGM`, para cubrir las tarifas de transacción.
+  segundo punto), para recibir la misma cantidad de `wWGM`. Siempre mantén algunas monedas `WGM`, para cubrir las tarifas de transacción.
 
 ## Configuración del entorno
 
@@ -77,9 +77,9 @@ Creemos un nuevo directorio `deploy-bridge`, donde guardaremos nuestros códigos
 utilizando los siguientes repositorios -
 
 - [`ChainSafe/chainbridge-deploy`](https://github.com/ChainSafe/chainbridge-deploy) - Esto nos ayudará
-a configurar nuestros contratos de puente
+  a configurar nuestros contratos de puente
 - [`ChainSafe/ChainBridge`](https://github.com/ChainSafe/ChainBridge) - Esto nos ayudará a configurar
-nuestro relayer fuera de la cadena.
+  nuestro relayer fuera de la cadena.
 
 ### Instalando la herramienta de línea de comandos de ChainBridge
 
@@ -117,7 +117,7 @@ RESOURCE_ID="0x00"
 
 - `SRC_ADDR` y `DST_ADDR` son las direcciones que desplegarán los contratos de puente y actuarán como relayers.
 - `SRC_TOKEN` es el token que queremos puentear. Aquí está la dirección de la versión envuelta ERC20
-de la moneda WGM aka wWGM.
+  de la moneda WGM aka wWGM.
 - `RESOURCE_ID` podría ser cualquier cosa. Identifica nuestros tokens ERC20 puenteados en ambos lados (WAGMI y Fuji).
 
 Cada vez que hagamos cambios en estas variables de configuración, tenemos que actualizar nuestro entorno bash. Ejecuta

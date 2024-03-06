@@ -113,11 +113,7 @@ Once that is completed, you will be asked what stake you would like to assign th
 ```
 
 Note that for this part, you are not staking actual AVAX in the validator. This is an arbitrary
-weight that you are assigning to the validator. You can learn more about the stake weight parameter
-in [addSubnetValidator](/reference/avalanchego/p-chain/api.md#platformaddsubnetvalidator) under the
-`weight` section.
-
-Next, enter the start and end time for the node to validate the Subnet.
+weight that you are assigning to the validator. Next, enter the start and end time for the node to validate the Subnet.
 
 Once all input is completed, you will another transaction ID indicating that the node is now
 scheduled to be a Subnet Validator.
