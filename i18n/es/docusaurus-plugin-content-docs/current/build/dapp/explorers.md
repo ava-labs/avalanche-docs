@@ -13,7 +13,7 @@ El Explorador de Subnets de Avalanche es una herramienta de análisis que permit
 personas buscar transacciones, direcciones y otras actividades de la plataforma en las
 Subnets y blockchains.
 
-| Enlaces                                                      |     |
-| :----------------------------------------------------------- | --- |
+| Exploradores                                                 |
+| :----------------------------------------------------------- |
 | [**Mainnet de Avalanche**](https://subnets.avax.network/) 🌐 |
 | [**Testnet Fuji**](https://subnets-test.avax.network/) 🧪    |
