@@ -14,7 +14,7 @@ After this tutorial, you would have created and deployed two Subnets to the loca
 them to cross-communicate with each other and with the local C-Chain (through Teleporter and the
 underlying Warp technology.)
 
-For more information on Cross Chain messaging through Teleporter and Warp, check:
+For more information on cross chain messaging through Teleporter and Warp, check:
 
 - [Cross Chain References](/build/cross-chain)
 
