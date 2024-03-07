@@ -118,15 +118,16 @@ Se requiere una coincidencia de versiones similar en diferentes herramientas del
 que muestra qué versión de RPCChainVM implementa las versiones más recientes de
 AvalancheGo, Subnet-EVM, Precompile-EVM e HyperSDK.
 
-| RPCChainVM | AvalancheGo             | Subnet-EVM          | Precompile-EVM      | HyperSDK |
-| :--------: | :-------:               | :-------:           | :-------:           | :-------: |
-| 26         | v1.10.1-v1.10.4         | v0.5.1-v0.5.2       | v0.1.0-v0.1.1       | v0.0.6-v0.0.9 |
-| 27         | v1.10.5-v1.10.8         | v0.5.3              | v0.1.2              | v0.0.10-v0.0.12 |
-| 28         | v1.10.9-v1.10.12        | v0.5.4-v0.5.6       | v0.1.3-v0.1.4       | v0.0.13-**v0.0.15 (última)** |
-| 29         | v1.10.13-v1.10.14       | v0.5.7-v0.5.8       | v0.1.5              | -                        |
-| 30         | v1.10.15-v1.10.17       | v0.5.9-v0.5.10      | v0.1.6-v0.1.7       | -                        |
-| 31         | v1.10.18- v1.10.19      | v0.5.11             | **v0.1.8 (última)** | -            |
-| **33**     | **v1.11.0 (última)**    | **v0.6.0 (última)** |   -                 | -            |
+| RPCChainVM | AvalancheGo                    | Subnet-EVM          | Precompile-EVM      | HyperSDK |
+| :--------: | :-------:                      | :-------:           | :-------:           | :-------: |
+| 26         | v1.10.1-v1.10.4                | v0.5.1-v0.5.2       | v0.1.0-v0.1.1       | v0.0.6-v0.0.9 |
+| 27         | v1.10.5-v1.10.8                | v0.5.3              | v0.1.2              | v0.0.10-v0.0.12 |
+| 28         | v1.10.9-v1.10.12               | v0.5.4-v0.5.6       | v0.1.3-v0.1.4       | v0.0.13-v0.0.15 |
+| 30         | v1.10.15-v1.10.17              | v0.5.9-v0.5.10      | v0.1.6-v0.1.7       | -            |
+| 29         | v1.10.13-v1.10.14              | v0.5.7-v0.5.8       | v0.1.5              | -            |
+| 31         | v1.10.18- v1.10.19             | v0.5.11             | v0.1.8              | **v0.0.16 (última)**|
+| 33         | v1.11.0                        | v0.6.0-v0.6.1       | **v0.2.0 (última)** | -            |
+| **34**     | v1.11.1- **v1.11.2 (última)**  | **v0.6.2 (última)** |   -                 | -            |
 
 
 
