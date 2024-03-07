@@ -329,6 +329,11 @@
       "dirName": "build/cross-chain/awm"
     },
     {
+      "type": "link",
+      "label": "Relayer Github",
+      "href": "https://github.com/ava-labs/awm-relayer#readme"
+    },
+    {
       "type": "html",
       "value": "<hr/>"
     },
@@ -359,11 +364,6 @@
           "type": "link",
           "label": "Chainlink VRF",
           "href": "https://github.com/ava-labs/subnet-vrf-contracts#readme"
-        },
-        {
-          "type": "link",
-          "label": "Run AWM-Relayer",
-          "href": "https://github.com/ava-labs/awm-relayer#readme"
         }
       ]
     },
