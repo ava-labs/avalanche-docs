@@ -109,7 +109,10 @@ ${updatedContent}`,
             "https://github.com/ava-labs/awm-relayer/blob/main/"
           );
 
-          const newContent = insertLinesAfterFirstLine(updatedContent, newLines);
+          const newContent = insertLinesAfterFirstLine(
+            updatedContent,
+            newLines
+          );
 
           return {
             filename: "relayer.md",
@@ -117,7 +120,7 @@ ${updatedContent}`,
 tags: [Avalanche Warp Messaging, Relayer]
 description: Reference relayer implementation for cross-chain Avalanche Warp Message delivery.
 keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-sidebar_label: AWM Relayer
+sidebar_label: Run a Relayer
 sidebar_position: 3
 ---
 
