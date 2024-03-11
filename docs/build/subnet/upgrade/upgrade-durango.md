@@ -214,4 +214,4 @@ if err != nil {
 
 This will ensure that non-strict mode unpacking is used after Durango activation.
 
-Note: This should not impose any critical issue for your custom precompiles. However if your precompile is mainly used from other deployed contracts (Solidity) you should do this transition in order to increase the compatibility of your precompile.
+Note: This should not impose any critical issue for your custom precompiles. If you want to keep using the old strict mode and keep the backward compatibility you can use `true` for the `useStrictMode` parameter. However if your precompile is mainly used from other deployed contracts (Solidity) you should do this transition in order to increase the compatibility of your precompile.
