@@ -208,11 +208,6 @@ ${newContent}`,
             "https://github.com/ava-labs/teleporter/blob/main/"
           );
 
-          const newContent = insertLinesAfterFirstLine(
-            updatedContent,
-            teleporterCourse
-          );
-
           return {
             filename: "deep-dive.md",
             content: `---
@@ -224,7 +219,7 @@ sidebar_position: 2
 title: Teleporter Deep Dive
 ---
 
-${newContent}`,
+${updatedContent}`,
           };
         }
         return undefined;
