@@ -421,12 +421,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/vms/platformvm/service.md"
           );
           return {
@@ -450,12 +446,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/vms/avm/service.md"
           );
           return {
@@ -479,12 +471,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/api/admin/"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/api/admin/service.md"
           );
           return {
@@ -508,12 +496,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/api/health"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/api/health/service.md"
           );
           return {
@@ -537,12 +521,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/api/info"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/api/info/service.md"
           );
           return {
@@ -566,12 +546,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/api/metrics"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/api/metrics/service.md"
           );
           return {
@@ -595,12 +571,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/api/keystore"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/api/keystore/service.md"
           );
           return {
@@ -624,12 +596,8 @@ ${updatedContent}`,
       // change filename and correct links
       modifyContent(filename, content) {
         if (filename.includes("service")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/avalanchego/blob/master/indexer"
-          );
           const newContent = insertSourceDocLink(
-            updatedContent,
+            content,
             "https://github.com/ava-labs/avalanchego/tree/master/indexer/service.md"
           );
           return {
