@@ -612,6 +612,35 @@ ${updatedContent}`,
       },
     },
   ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/reference/index-api.md
+      name: "index-api",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/indexer/",
+      documents: ["service.md"],
+      outDir: "docs/reference/avalanchego/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/ava-labs/avalanchego/blob/master/indexer"
+          );
+          const newContent = insertSourceDocLink(
+            updatedContent,
+            "https://github.com/ava-labs/avalanchego/tree/master/indexer/service.md"
+          );
+          return {
+            filename: "index-api.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
 ];
 
 module.exports = remoteContent;

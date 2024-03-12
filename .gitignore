@@ -27,6 +27,7 @@ docs/reference/avalanchego/health-api.md
 docs/reference/avalanchego/info-api.md
 docs/reference/avalanchego/metrics-api.md
 docs/reference/avalanchego/keystore-api.md
+docs/reference/avalanchego/index-api.md
 
 # Misc
 .DS_Store
