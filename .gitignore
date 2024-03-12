@@ -23,6 +23,8 @@ docs/learn/acp.md
 docs/reference/avalanchego/p-chain/api.md
 docs/reference/avalanchego/x-chain/api.md
 docs/reference/avalanchego/admin-api.md
+docs/reference/avalanchego/health-api.md
+docs/reference/avalanchego/info-api.md
 
 # Misc
 .DS_Store

@@ -481,7 +481,7 @@ ${updatedContent}`,
         if (filename.includes("service")) {
           const updatedContent = replaceRelativeLinks(
             content,
-            "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/"
+            "https://github.com/ava-labs/avalanchego/blob/master/api/admin/"
           );
           const newContent = insertSourceDocLink(
             updatedContent,
@@ -489,6 +489,64 @@ ${updatedContent}`,
           );
           return {
             filename: "admin-api.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/reference/health-api.md
+      name: "health-api",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/health/",
+      documents: ["service.md"],
+      outDir: "docs/reference/avalanchego/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/ava-labs/avalanchego/blob/master/api/health"
+          );
+          const newContent = insertSourceDocLink(
+            updatedContent,
+            "https://github.com/ava-labs/avalanchego/tree/master/api/health/service.md"
+          );
+          return {
+            filename: "health-api.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/reference/info-api.md
+      name: "info-api",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/info/",
+      documents: ["service.md"],
+      outDir: "docs/reference/avalanchego/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/ava-labs/avalanchego/blob/master/api/info"
+          );
+          const newContent = insertSourceDocLink(
+            updatedContent,
+            "https://github.com/ava-labs/avalanchego/tree/master/api/info/service.md"
+          );
+          return {
+            filename: "info-api.md",
             content: `${newContent}`,
           };
         }
