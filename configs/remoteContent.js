@@ -554,6 +554,64 @@ ${updatedContent}`,
       },
     },
   ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/reference/metrics-api.md
+      name: "metrics-api",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/metrics/",
+      documents: ["service.md"],
+      outDir: "docs/reference/avalanchego/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/ava-labs/avalanchego/blob/master/api/metrics"
+          );
+          const newContent = insertSourceDocLink(
+            updatedContent,
+            "https://github.com/ava-labs/avalanchego/tree/master/api/metrics/service.md"
+          );
+          return {
+            filename: "metrics-api.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/reference/keystore-api.md
+      name: "keystore-api",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/keystore/",
+      documents: ["service.md"],
+      outDir: "docs/reference/avalanchego/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/ava-labs/avalanchego/blob/master/api/keystore"
+          );
+          const newContent = insertSourceDocLink(
+            updatedContent,
+            "https://github.com/ava-labs/avalanchego/tree/master/api/keystore/service.md"
+          );
+          return {
+            filename: "keystore-api.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
 ];
 
 module.exports = remoteContent;
