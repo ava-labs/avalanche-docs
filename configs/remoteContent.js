@@ -438,6 +438,35 @@ ${updatedContent}`,
       },
     },
   ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/reference/x-chain/api.md
+      name: "x-api",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/vms/avm/",
+      documents: ["service.md"],
+      outDir: "docs/reference/avalanchego/x-chain/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const updatedContent = replaceRelativeLinks(
+            content,
+            "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/"
+          );
+          const newContent = insertSourceDocLink(
+            updatedContent,
+            "https://github.com/ava-labs/avalanchego/tree/master/vms/avm/service.md"
+          );
+          return {
+            filename: "api.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
 ];
 
 module.exports = remoteContent;
