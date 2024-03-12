@@ -22,6 +22,7 @@ docs/learn/acp.md
 # AvalancheGo API from GH repo via docusaurus-plugin-remote-content
 docs/reference/avalanchego/p-chain/api.md
 docs/reference/avalanchego/x-chain/api.md
+docs/reference/avalanchego/admin-api.md
 
 # Misc
 .DS_Store
