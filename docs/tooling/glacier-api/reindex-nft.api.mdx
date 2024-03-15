@@ -1,0 +1,103 @@
+---
+id: reindex-nft
+title: "Reindex NFT metadata"
+description: "Triggers reindexing of token metadata for an NFT token. Reindexing can only be called once per hour for each NFT token."
+sidebar_label: "Reindex NFT metadata"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVVGFv2zYQ/SuEvuyLLdmJGztGFiBpkiLpFjRr2g1Yh/VEniTOFKmQlBIv8H/fkZIbBx6GFTBsi6fjvffu3T0npkELXhp9LZJlYlFqgU+3hU9GiUDHrWxCkEL3VpYlWseGd6QumSmYNyvUrEYPAjywwlgGmt1e3feRlP3y8jqniNFqzXKk/0qhoEeOjCCwyrQ2ZiPwaiefcDRggQpQ7WT5+3Oi6YHw8ApkAD0i0A+ttEj4vW1xlMgAtwFf7XE4Y65tGmM9VcauZvEOJsVo+AdKgmMEIleGr7bRlH1yyHyF7GsWz9xXhlo0RmpPKFmJngFT0vkgyEuFbb4LJPAJ6kYF4LPD6XRGJ45XWEOyfE78ugkB5y2plGw2o28kQQiLzn0XybdGewucMPXJpHEEb1FhBwQ54nqNafJ0fjy/vDq+LBbzw9nb+fR4MrtYTCYHV4v86JwfHV2IYz5bwNHl/wQem/ed3bnvc7Z4+cDjFdDp7M1/IvgjFHSN0Q5diB9MJuHndaGANPFQBj8lZDWXUBo5rDJhBhrjfHQdQVwmWTcdmp49D5bbZLrwLuOGHMzDlRQatN5kkTgdDAJslsO4BNRou62JW6vo8sr7xi2zrFTAJdoxNDKFDp5Sjf7R2FUS+DjkrZV+/TGQ7lk9jXcyxitc70hBJ+/pYBC6QhBo6Wnoy37m3ow0ktG5Y401nRTIKllWNKDAeTAT+Z32BZLda+ldyu4NM7mPw0OfPnfEnCw1a5vtOqBc05LzwLMtZaLJlWlFKk2WxoZIXZjIQ/rY6nc9UHb24XrfKuSPnfgWq2OPmB8SjEZJHrcaE9ihCkuOYtJXrG6Vl+N+NOPGorGAMK1E7KwDBZpk/iGwlzXYNRs6MXoJ0oTndOpGxEywS7KqxbZO2a/h+gHUiK1NG/cdgpNh47VSiQBTtNyTihVJQeNIu7cMkwlq7GWN8caKFomxhF8x8r92ED0WQ/G5CNsyvkNCa2LZ9Xn9Js4jShzQdWClaakeecPtr2tqH/EJAkrHSJBzOo95NcQlTUz/IosHbUgxXWJ6kuX2NH5dF5FjBVS+QBQ58FVYnQWCb20g9dCiI67BA74vM2I0xeDixWSfcFyzE2CVxeLHL9/GIexPUOmgVm7AipSbOhNadMdQqZUo1jgzjagXKweFzDzkLpvtWvtLchr6cpLBacrO25LghFtd7Em+BRD6vl9eGO7S0phSYSxLBGqXiQyz6dXZdXP300e8ubO8md+ZW/lg/v754r39fPPutzePzafFwVwc8s/35dXiAeb+z5vph3xcZp3Ex3DNDqy+QaDXrDEetZfU7+2oUzscibcF22P/V6yyrluNhYxA8zBk6zBaigTZlYAGKKyefnhCl+kg7NewXpfPm83mHzlsyjg=
+sidebar_class_name: "post api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  Reindex NFT metadata
+</h1>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/chains/{chainId}/nfts/collections/{address}/tokens/{tokenId}:reindex"}
+>
+  
+</MethodEndpoint>
+
+
+
+Triggers reindexing of token metadata for an NFT token. Reindexing can only be called once per hour for each NFT token.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"chainId","required":true,"in":"path","description":"A supported evm chain id, chain alias or blockchain id. Use the `/chains` endpoint to get a list of supported chain ids.","example":"43114","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"address","required":true,"in":"path","description":"Contract address on the relevant chain.","example":"0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"tokenId","required":true,"in":"path","description":"TokenId on the contract","example":"145","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

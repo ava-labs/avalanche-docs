@@ -1,0 +1,449 @@
+---
+id: list-latest-primary-network-blocks
+title: "List latest blocks"
+description: "Lists latest blocks on one of the Primary Network chains."
+sidebar_label: "List latest blocks"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1WPtT2zgQ/lc0/uXuZkJMCK8yvc4QoKUpZHi3HGWusi3HSmzJSHKIyeR/v13ZwQ5JefSmDI/Y0q6+fX27YuLIlClquBSfA2fHibk2R9QwbU4UT6jKe8zcSzXsxNIfaqfhBEz7iqcoANuPYLsmsRUgnt1DpIBvRmRITMRIqYaUeogfUS50EzSlVNGEGaa0s3MzcQQ8gMaU9tmFHDIBOxS7y7higCuksWYNh+OZdxlT+QKSXYKSxKBogyjmMz5iAQmVTAglqWIjLjOACoCJT+O4CcjkiAcgEnENciBjFGcjZmHrzNNwOhPG6kW82o9YQp2diWPyFKFq2C/6znTamEN/zh/YG8FfwIkJHfMkS4jIEo8pdB83LJkhy5RoEruNC7vNWqvhKALoW+VaqWKGwi6tri4Fz4VhfaYslJBmsXF2WqsNp1QPD/C5UIcLq9OGw8Y0SWOUba06NZtt2G1YIYPqdhuVzcxOqYmWhaxMDlEmR6WK8IBIRWjMqU2W6vB0xW54JiCwWyDsG6f1wtdRKq+vYf+avD7u9K7WWe8wvxuuhYPB1Ya4Oj3a90zS6z7cbej2nW4fyc3QiL3Nj538GIW6V+cdycXg3d5at92+Emb0cG2uur1/gt5a7wu/v/8y8LPk8PLrgbex73VUgkJ379i62jzO2peb2+KyFV4P+t7ZZnd0r87G7c09GaW73zYuT8eabWyMW6cbIJMfbu9vXUS97nCcmGE2Whv0O3T9pHUm2qepWk9P1NbpdS/0A3m+Odw8/JpicT16afz4yS8/3TYcw411Zqceu3oilxF5UzwPOFSOgizkAsRt+AgSAzzMh7Dc8aoQVnvDbMDr2EtGAdi3iFKnUmimUdfa6ir+mUeHDpCQ9MLgGk3TmPuW99yBxg2TRTDSGzAfj04VsqThhXrBxubkkaaWYH+a5iUp3Ufcj4B8BPGgdJFaqCY/HgnvxwIJ4UEF/ZDPYcFTIWdxgHUtE24Ms0XCktTkDZRQjFD4EfIpf0ENQQUXBF1DTJWiyEaWaV423Mr3LD8tocFS/yHV0dJV4HuA89NlK3zBE0gYyJPaloIQqy327RIFZrwnsyK6C5JGUaGpjxF5jf0VsxdnIpl2csP0UuV+ptCy8wxyKl9uOrhRaqb2maE8foWnZwLYk5/Rd2Jd+sKmngzYS3r2kAIOGe9Hy/032/hcfKZVaZ48sRfXKh65mUuketrMJclCStQToAr3k+AuROy2DmthpLHQCgIUoXw5MHZrz3LkzznrleQ7D2fvUTMgmtHvLxHjvN4F51cmVOc8j8q6ZmkM0d+V92pacDBcNkGelTwN6qY2Y2gfxz/n6ZhYzpugEUbESOJo2rfG2s6z47ijlluC1+6k/DR1qwEC3tYHk3IJ8UJejmZDZ6ZiUBYZk+od1+3H1OdMrdCUN+mIjpsz92CH0QzqnJv8HLtEkQzjlZrEypDVix/efGGWW7AHRIwGNtfL9rooudA1Uk7gvYYZqRhTIyhO6K7U95kupkKYumGehT6gYfyTRHoGBydoL7SQbcB82BckS0mIvVigLJYMoYbMTAYz/VhmQZNLt2ljzGd1UEbyUwGU7J58Xjq31tZnWDW5Z16b1HosCaCnxVhIsAZjAklg4uRFSZCAGgqND28RARq2O6IxFeDmP/TTCbFRLWKLg7e6AZYF5MB2vyxpkq+ovgTVILnMbMdlVPM4J17GoX0CzCDz4eJiInBFDNAUTtOK0XjFAN1YjdBtjVSAPyY1grFL9jkEm4s94GgBVo4KOdvsiWdRshLdiCp7+8Dc0PZmZDdBalM0vpje0YHQ2MEhHXhv5RKa21khs2SEvgGPCZgH3rue+mB/wWCANkYUjg8ZCzzqD3EoCBmFSwMaBVMAXtIwB0xxTIPAHEa1VQzpg68T8p6SSLHw7++P5ZBKZWjcLL3lSaqCpi8TNxDB6B2N4mEQ5mxdpkGyPdQ05K6hnnbX66n93fmAcXnv0g9N0sn6AAe16scpyALAuC8eH0hfN/tS9mNmjwUDEu0GLnNbH3c/p6dH56x7qvx061T2+J18ON7/oq66n75t3KeX22tbQdu/uuh/3L6jW+bfbuvEW+m7I87uUU0NVhEgKnKSShwOOcR7VuoQDg3Om4EtsC/FypMkEyzkFqiHRZZjacXgkLoLoICQeoriwSiXQynkFpQcVh+0TZNQO1WWVIFMOn/DflqGk2qw/V8X8pK5DEydbhpjswJAliEnJe3eOKNW1TUQyE51UahxLy48uRZ6j4QegYmoajLxIAcvVTyd4uviZoykHHBNvbh2c/6ptb//0r/UJ5bp5/5TAaHOcJ+9F78e/++/97+Av/xfRQX/Fh8UR/xvjMWfZ+Vw8Bd5y8V+KcBZDxV5HdwM+Fxmvc3hNZAv3FZ/AVc1LcDWsuOjD4vVXWjcqanJLVxBp/Vp59PBBbTj/wBOlMx4
+sidebar_class_name: "get api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  List latest blocks
+</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/networks/{network}/blockchains/{blockchainId}/blocks"}
+>
+  
+</MethodEndpoint>
+
+
+
+Lists latest blocks on one of the Primary Network chains.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"blockchainId","required":true,"in":"path","description":"A primary network blockchain id or alias.","example":"p-chain","schema":{"type":"string","enum":["11111111111111111111111111111111LpoYY","2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM","2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm","2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5","yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp","p-chain","x-chain","c-chain"],"title":"BlockchainId"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"network","required":true,"in":"path","description":"Either mainnet or a testnet.","example":"mainnet","schema":{"type":"string","enum":["mainnet","fuji"],"title":"Network"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Query Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"pageToken","required":false,"in":"query","description":"A page token, received from a previous list call. Provide this to retrieve the subsequent page.","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"pageSize","required":false,"in":"query","description":"The maximum number of items to return. The minimum page size is 1. The maximum pageSize is 100.","schema":{"type":"integer","default":10,"minimum":1,"maximum":100},"example":"10"}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"nextPageToken"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"A token, which can be sent as `pageToken` to retrieve the next page. If this field is omitted or empty, there are no subsequent pages."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                blocks
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object[]
+                              </span><span
+                                className={"openapi-schema__divider"}
+                              >
+                                
+                              </span><span
+                                className={"openapi-schema__required"}
+                              >
+                                required
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                              >
+                                Array [
+                              </div>
+                            </li><SchemaItem
+                              collapsible={false}
+                              name={"blockNumber"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"blockHash"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"parentHash"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"blockTimestamp"}
+                              required={true}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"blockType"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"txCount"}
+                              required={true}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"transactions"}
+                              required={true}
+                              schemaName={"string[]"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"array","items":{"type":"string"}}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"blockSizeBytes"}
+                              required={true}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"currentSupply"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={true}
+                              className={"schemaItem"}
+                            >
+                              <details
+                                style={{}}
+                                className={"openapi-markdown__details"}
+                              >
+                                <summary
+                                  style={{}}
+                                >
+                                  <span
+                                    className={"openapi-schema__container"}
+                                  >
+                                    <strong
+                                      className={"openapi-schema__property"}
+                                    >
+                                      proposerDetails
+                                    </strong><span
+                                      className={"openapi-schema__name"}
+                                    >
+                                       object
+                                    </span>
+                                  </span>
+                                </summary><div
+                                  style={{"marginLeft":"1rem"}}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"proposerId"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"proposerParentId"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"proposerNodeId"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"proposerPChainHeight"}
+                                    required={false}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"proposerTimestamp"}
+                                    required={false}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </div>
+                              </details>
+                            </SchemaItem><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                              >
+                                ]
+                              </div>
+                            </li>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                chainInfo
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span><span
+                                className={"openapi-schema__divider"}
+                              >
+                                
+                              </span><span
+                                className={"openapi-schema__required"}
+                              >
+                                required
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"chainName"}
+                              required={true}
+                              schemaName={"PrimaryNetworkChainName"}
+                              qualifierMessage={"**Possible values:** [`p-chain`, `x-chain`, `c-chain`]"}
+                              schema={{"type":"string","enum":["p-chain","x-chain","c-chain"],"title":"PrimaryNetworkChainName"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"network"}
+                              required={true}
+                              schemaName={"PrimaryNetwork"}
+                              qualifierMessage={"**Possible values:** [`mainnet`, `fuji`]"}
+                              schema={{"type":"string","enum":["mainnet","fuji"],"title":"PrimaryNetwork"}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"nextPageToken\": \"string\",\n  \"blocks\": [\n    {\n      \"blockNumber\": \"string\",\n      \"blockHash\": \"string\",\n      \"parentHash\": \"string\",\n      \"blockTimestamp\": 0,\n      \"blockType\": \"string\",\n      \"txCount\": 0,\n      \"transactions\": [\n        \"string\"\n      ],\n      \"blockSizeBytes\": 0,\n      \"currentSupply\": \"string\",\n      \"proposerDetails\": {\n        \"proposerId\": \"string\",\n        \"proposerParentId\": \"string\",\n        \"proposerNodeId\": \"string\",\n        \"proposerPChainHeight\": 0,\n        \"proposerTimestamp\": 0\n      }\n    }\n  ],\n  \"chainInfo\": {\n    \"chainName\": \"p-chain\",\n    \"network\": \"mainnet\"\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

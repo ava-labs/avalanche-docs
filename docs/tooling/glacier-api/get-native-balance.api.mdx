@@ -1,0 +1,376 @@
+---
+id: get-native-balance
+title: "Get native token balance"
+description: "Gets native token balance of a wallet address."
+sidebar_label: "Get native token balance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  Get native token balance
+</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/chains/{chainId}/addresses/{address}/balances:getNative"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets native token balance of a wallet address.
+
+Balance at a given block can be retrieved with the `blockNumber` parameter.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"chainId","required":true,"in":"path","description":"A supported evm chain id, chain alias or blockchain id. Use the `/chains` endpoint to get a list of supported chain ids.","example":"43114","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"address","required":true,"in":"path","description":"A wallet address.","example":"0x71C7656EC7ab88b098defB751B7401B5f6d8976F","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Query Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"blockNumber","required":false,"in":"query","description":"The block number, if not defined the block number will be the latest block.","example":"6479329","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"currency","required":false,"in":"query","description":"The currency that return values should use. Defaults to USD.","example":"usd","schema":{"type":"string","description":"ISO 4217 currency code.","enum":["usd","eur","aud","cad","chf","clp","cny","czk","dkk","gbp","hkd","huf","jpy","nzd"],"title":"CurrencyCode"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                nativeTokenBalance
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"name"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The contract name.","example":"Wrapped AVAX"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"symbol"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The contract symbol.","example":"WAVAX"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"decimals"}
+                              required={true}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number","description":"The number of decimals the token uses. For example `6`, means to divide the token amount by `1000000` to get its user representation.","example":18}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"logoUri"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The logo uri for the address.","example":"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"chainId"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The evm chain id.","example":"43114"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={true}
+                              className={"schemaItem"}
+                            >
+                              <details
+                                style={{}}
+                                className={"openapi-markdown__details"}
+                              >
+                                <summary
+                                  style={{}}
+                                >
+                                  <span
+                                    className={"openapi-schema__container"}
+                                  >
+                                    <strong
+                                      className={"openapi-schema__property"}
+                                    >
+                                      price
+                                    </strong><span
+                                      className={"openapi-schema__name"}
+                                    >
+                                       object
+                                    </span>
+                                  </span>
+                                </summary><div
+                                  style={{"marginLeft":"1rem"}}
+                                >
+                                  <div
+                                    style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                                  >
+                                    
+                                    
+                                    The token price, if available.
+                                    
+                                    
+                                  </div><SchemaItem
+                                    collapsible={false}
+                                    name={"currencyCode"}
+                                    required={true}
+                                    schemaName={"CurrencyCode"}
+                                    qualifierMessage={"**Possible values:** [`usd`, `eur`, `aud`, `cad`, `chf`, `clp`, `cny`, `czk`, `dkk`, `gbp`, `hkd`, `huf`, `jpy`, `nzd`]"}
+                                    schema={{"type":"string","description":"ISO 4217 currency code.","enum":["usd","eur","aud","cad","chf","clp","cny","czk","dkk","gbp","hkd","huf","jpy","nzd"],"title":"CurrencyCode","example":"usd"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"value"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number","description":"Monetary value in base 10 decimals.","example":"42.42"}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </div>
+                              </details>
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"balance"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The address balance for the token, in units specified by the `decimals` value for the contract.","example":"2000000000000000000"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={true}
+                              className={"schemaItem"}
+                            >
+                              <details
+                                style={{}}
+                                className={"openapi-markdown__details"}
+                              >
+                                <summary
+                                  style={{}}
+                                >
+                                  <span
+                                    className={"openapi-schema__container"}
+                                  >
+                                    <strong
+                                      className={"openapi-schema__property"}
+                                    >
+                                      balanceValue
+                                    </strong><span
+                                      className={"openapi-schema__name"}
+                                    >
+                                       object
+                                    </span>
+                                  </span>
+                                </summary><div
+                                  style={{"marginLeft":"1rem"}}
+                                >
+                                  <div
+                                    style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                                  >
+                                    
+                                    
+                                    The monetary value of the balance, if a price is available for the token.
+                                    
+                                    
+                                  </div><SchemaItem
+                                    collapsible={false}
+                                    name={"currencyCode"}
+                                    required={true}
+                                    schemaName={"CurrencyCode"}
+                                    qualifierMessage={"**Possible values:** [`usd`, `eur`, `aud`, `cad`, `chf`, `clp`, `cny`, `czk`, `dkk`, `gbp`, `hkd`, `huf`, `jpy`, `nzd`]"}
+                                    schema={{"type":"string","description":"ISO 4217 currency code.","enum":["usd","eur","aud","cad","chf","clp","cny","czk","dkk","gbp","hkd","huf","jpy","nzd"],"title":"CurrencyCode","example":"usd"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"value"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number","description":"Monetary value in base 10 decimals.","example":"42.42"}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </div>
+                              </details>
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"nativeTokenBalance\": {\n    \"name\": \"Wrapped AVAX\",\n    \"symbol\": \"WAVAX\",\n    \"decimals\": 18,\n    \"logoUri\": \"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg\",\n    \"chainId\": \"43114\",\n    \"price\": {\n      \"currencyCode\": \"usd\",\n      \"value\": \"42.42\"\n    },\n    \"balance\": \"2000000000000000000\",\n    \"balanceValue\": {\n      \"currencyCode\": \"usd\",\n      \"value\": \"42.42\"\n    }\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

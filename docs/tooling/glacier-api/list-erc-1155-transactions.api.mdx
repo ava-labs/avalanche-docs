@@ -1,0 +1,678 @@
+---
+id: list-erc-1155-transactions
+title: "List ERC-1155 transfers"
+description: "Lists ERC-1155 transfers for an address. Filterable by block range."
+sidebar_label: "List ERC-1155 transfers"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  List ERC-1155 transfers
+</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/chains/{chainId}/addresses/{address}/transactions:listErc1155"}
+>
+  
+</MethodEndpoint>
+
+
+
+Lists ERC-1155 transfers for an address. Filterable by block range.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"chainId","required":true,"in":"path","description":"A supported evm chain id, chain alias or blockchain id. Use the `/chains` endpoint to get a list of supported chain ids.","example":"43114","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"address","required":true,"in":"path","description":"A wallet address.","example":"0x71C7656EC7ab88b098defB751B7401B5f6d8976F","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Query Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"startBlock","required":false,"in":"query","description":"The block range start number, inclusive. If endBlock is not defined when startBlock is defined, the end of the range will be the most recent block.","example":"6479329","schema":{"type":"number"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"endBlock","required":false,"in":"query","description":"The block range end number, exclusive. If startBlock is not defined when endBlock is defined, the start of the range will be the genesis block.","example":"6479330","schema":{"type":"number"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"pageToken","required":false,"in":"query","description":"A page token, received from a previous list call. Provide this to retrieve the subsequent page.","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"pageSize","required":false,"in":"query","description":"The maximum number of items to return. The minimum page size is 1. The maximum pageSize is 100.","schema":{"type":"integer","default":10,"minimum":1,"maximum":100},"example":"10"}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"nextPageToken"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"A token, which can be sent as `pageToken` to retrieve the next page. If this field is omitted or empty, there are no subsequent pages."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                transactions
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object[]
+                              </span><span
+                                className={"openapi-schema__divider"}
+                              >
+                                
+                              </span><span
+                                className={"openapi-schema__required"}
+                              >
+                                required
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                              >
+                                Array [
+                              </div>
+                            </li><SchemaItem
+                              collapsible={false}
+                              name={"blockNumber"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The block number on the chain.","example":"339"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"blockTimestamp"}
+                              required={true}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number","description":"The block finality timestamp.","example":1648672486}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"blockHash"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The block hash identifier.","example":"0x17533aeb5193378b9ff441d61728e7a2ebaf10f61fd5310759451627dfca2e7c"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"txHash"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The transaction hash identifier.","example":"0x3e9303f81be00b4af28515dab7b914bf3dbff209ea10e7071fa24d4af0a112d4"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={true}
+                              className={"schemaItem"}
+                            >
+                              <details
+                                style={{}}
+                                className={"openapi-markdown__details"}
+                              >
+                                <summary
+                                  style={{}}
+                                >
+                                  <span
+                                    className={"openapi-schema__container"}
+                                  >
+                                    <strong
+                                      className={"openapi-schema__property"}
+                                    >
+                                      from
+                                    </strong><span
+                                      className={"openapi-schema__name"}
+                                    >
+                                       object
+                                    </span><span
+                                      className={"openapi-schema__divider"}
+                                    >
+                                      
+                                    </span><span
+                                      className={"openapi-schema__required"}
+                                    >
+                                      required
+                                    </span>
+                                  </span>
+                                </summary><div
+                                  style={{"marginLeft":"1rem"}}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"name"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"The contract name.","example":"Wrapped AVAX"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"symbol"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"The contract symbol.","example":"WAVAX"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"decimals"}
+                                    required={false}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number","description":"The number of decimals the token uses. For example `6`, means to divide the token amount by `1000000` to get its user representation.","example":18}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"logoUri"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"The logo uri for the address.","example":"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"address"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"A wallet or contract address in mixed-case checksum encoding.","example":"0x71C7656EC7ab88b098defB751B7401B5f6d8976F"}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </div>
+                              </details>
+                            </SchemaItem><SchemaItem
+                              collapsible={true}
+                              className={"schemaItem"}
+                            >
+                              <details
+                                style={{}}
+                                className={"openapi-markdown__details"}
+                              >
+                                <summary
+                                  style={{}}
+                                >
+                                  <span
+                                    className={"openapi-schema__container"}
+                                  >
+                                    <strong
+                                      className={"openapi-schema__property"}
+                                    >
+                                      to
+                                    </strong><span
+                                      className={"openapi-schema__name"}
+                                    >
+                                       object
+                                    </span><span
+                                      className={"openapi-schema__divider"}
+                                    >
+                                      
+                                    </span><span
+                                      className={"openapi-schema__required"}
+                                    >
+                                      required
+                                    </span>
+                                  </span>
+                                </summary><div
+                                  style={{"marginLeft":"1rem"}}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"name"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"The contract name.","example":"Wrapped AVAX"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"symbol"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"The contract symbol.","example":"WAVAX"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"decimals"}
+                                    required={false}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number","description":"The number of decimals the token uses. For example `6`, means to divide the token amount by `1000000` to get its user representation.","example":18}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"logoUri"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"The logo uri for the address.","example":"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"address"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"A wallet or contract address in mixed-case checksum encoding.","example":"0x71C7656EC7ab88b098defB751B7401B5f6d8976F"}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </div>
+                              </details>
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"logIndex"}
+                              required={true}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"value"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","example":"10000000000000000000"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={true}
+                              className={"schemaItem"}
+                            >
+                              <details
+                                style={{}}
+                                className={"openapi-markdown__details"}
+                              >
+                                <summary
+                                  style={{}}
+                                >
+                                  <span
+                                    className={"openapi-schema__container"}
+                                  >
+                                    <strong
+                                      className={"openapi-schema__property"}
+                                    >
+                                      erc1155Token
+                                    </strong><span
+                                      className={"openapi-schema__name"}
+                                    >
+                                       object
+                                    </span><span
+                                      className={"openapi-schema__divider"}
+                                    >
+                                      
+                                    </span><span
+                                      className={"openapi-schema__required"}
+                                    >
+                                      required
+                                    </span>
+                                  </span>
+                                </summary><div
+                                  style={{"marginLeft":"1rem"}}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"address"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"A wallet or contract address in mixed-case checksum encoding.","example":"0x71C7656EC7ab88b098defB751B7401B5f6d8976F"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"ercType"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={"**Possible values:** [`ERC-1155`]"}
+                                    schema={{"type":"string","enum":["ERC-1155"]}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"tokenId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"tokenUri"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={true}
+                                    className={"schemaItem"}
+                                  >
+                                    <details
+                                      style={{}}
+                                      className={"openapi-markdown__details"}
+                                    >
+                                      <summary
+                                        style={{}}
+                                      >
+                                        <span
+                                          className={"openapi-schema__container"}
+                                        >
+                                          <strong
+                                            className={"openapi-schema__property"}
+                                          >
+                                            metadata
+                                          </strong><span
+                                            className={"openapi-schema__name"}
+                                          >
+                                             object
+                                          </span><span
+                                            className={"openapi-schema__divider"}
+                                          >
+                                            
+                                          </span><span
+                                            className={"openapi-schema__required"}
+                                          >
+                                            required
+                                          </span>
+                                        </span>
+                                      </summary><div
+                                        style={{"marginLeft":"1rem"}}
+                                      >
+                                        <SchemaItem
+                                          collapsible={false}
+                                          name={"indexStatus"}
+                                          required={true}
+                                          schemaName={"NftTokenMetadataStatus"}
+                                          qualifierMessage={"**Possible values:** [`UNKNOWN`, `MISSING_TOKEN`, `INVALID_TOKEN_URI`, `INVALID_TOKEN_URI_SCHEME`, `UNREACHABLE_TOKEN_URI`, `THROTTLED_TOKEN_URI`, `METADATA_CONTENT_TOO_LARGE`, `INVALID_METADATA`, `INVALID_METADATA_JSON`, `INDEXED`, `UNINDEXED`]"}
+                                          schema={{"example":"indexed","type":"string","description":"The metadata indexing status of the nft.","enum":["UNKNOWN","MISSING_TOKEN","INVALID_TOKEN_URI","INVALID_TOKEN_URI_SCHEME","UNREACHABLE_TOKEN_URI","THROTTLED_TOKEN_URI","METADATA_CONTENT_TOO_LARGE","INVALID_METADATA","INVALID_METADATA_JSON","INDEXED","UNINDEXED"],"title":"NftTokenMetadataStatus"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"metadataLastUpdatedTimestamp"}
+                                          required={false}
+                                          schemaName={"number"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"number"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"name"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"symbol"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"imageUri"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"description"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"animationUri"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"externalUrl"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"background"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"decimals"}
+                                          required={false}
+                                          schemaName={"number"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"number"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"properties"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem>
+                                      </div>
+                                    </details>
+                                  </SchemaItem>
+                                </div>
+                              </details>
+                            </SchemaItem><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                              >
+                                ]
+                              </div>
+                            </li>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"nextPageToken\": \"string\",\n  \"transactions\": [\n    {\n      \"blockNumber\": \"339\",\n      \"blockTimestamp\": 1648672486,\n      \"blockHash\": \"0x17533aeb5193378b9ff441d61728e7a2ebaf10f61fd5310759451627dfca2e7c\",\n      \"txHash\": \"0x3e9303f81be00b4af28515dab7b914bf3dbff209ea10e7071fa24d4af0a112d4\",\n      \"from\": {\n        \"name\": \"Wrapped AVAX\",\n        \"symbol\": \"WAVAX\",\n        \"decimals\": 18,\n        \"logoUri\": \"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg\",\n        \"address\": \"0x71C7656EC7ab88b098defB751B7401B5f6d8976F\"\n      },\n      \"to\": {\n        \"name\": \"Wrapped AVAX\",\n        \"symbol\": \"WAVAX\",\n        \"decimals\": 18,\n        \"logoUri\": \"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg\",\n        \"address\": \"0x71C7656EC7ab88b098defB751B7401B5f6d8976F\"\n      },\n      \"logIndex\": 0,\n      \"value\": \"10000000000000000000\",\n      \"erc1155Token\": {\n        \"address\": \"0x71C7656EC7ab88b098defB751B7401B5f6d8976F\",\n        \"ercType\": \"ERC-1155\",\n        \"tokenId\": \"string\",\n        \"tokenUri\": \"string\",\n        \"metadata\": {\n          \"indexStatus\": \"indexed\",\n          \"metadataLastUpdatedTimestamp\": 0,\n          \"name\": \"string\",\n          \"symbol\": \"string\",\n          \"imageUri\": \"string\",\n          \"description\": \"string\",\n          \"animationUri\": \"string\",\n          \"externalUrl\": \"string\",\n          \"background\": \"string\",\n          \"decimals\": 0,\n          \"properties\": \"string\"\n        }\n      }\n    }\n  ]\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

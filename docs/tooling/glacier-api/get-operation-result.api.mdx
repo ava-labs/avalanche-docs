@@ -1,0 +1,266 @@
+---
+id: get-operation-result
+title: "Get operation"
+description: "Gets operation details for the given operation id."
+sidebar_label: "Get operation"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVm1v2zYQ/iuEvmwDbKt5KZIGXQG3dTM3jZ06StMhLYyTdJLYSKJCUk48w/99d7TcyLHbDgMCxyaPvOdenue48FSFGqxU5TD2TrwU7Xi9MEFT59breDGaSMuK18jkFK0R30+JGC3I3IhEaWEzFKmcYdnal3GPrqhAQ4EWtfFObhZeST/oqrbvjqfxrpYaCYbVNXY8yd4qsNkWhKur4Vuhkqe+yA4foKhyvhtgf//Z80PoRuFR1D2EQ+y+CI8Pus9fJPsY49Hh3sExHTBRhgV4JwvPzis+Z6yWZeotl18ZkalUadDw/v6zZ/xvEwndEKnSYml5D6oql5HD4n8zbLDYdqDCbxhxWivNyK1cXb9Rhy00ncf9wO08taDQy7qg5HrBpD+67L8JhuPRdPD5YjwJpheT4Xl/8vd0NAiux5MzMv610fQy6J8NR6f/0Xh4fvFhsNt28Onco2RaaV1hxhuBtCO7tGBr87PYJlej0QrTmzE7DAZv29+n18Pgr+l1f9IYvesPP5DFLueNL3JfoDGQ7kip27MQg3XlUyWOE9e9Twu5vjzQUBqI+PrBQ6W0PV8fX36lyyKNYDHu20CST0uN2vJJAYao2Wddxb82W7bpcvOESJutsp3gVlw7Ue3E8OMkThqWEKolA7OQMssfzQwfJpeZaiTGCQLx+sTzZ3v+d3jGX7QCWTI7Uc/WmlHrnA5k1lbmxPfTHCKJuguV7MEMHnol2nulbz3mrcGo1tLOL5l7K3o9dFsnurc4byWVVs5ooVGcDCGmFHfWIrV98qkc9SspaN0IYvRMxigymWaoBUQR9ZawSlBMKHJZSGt6IlBChSSapQD6W53tCCPTUtSV01FejyJVl1aAFeuQKcwoV3Xck8rvuRaQZaJcHE1hTldARf9iuAUyIG1u7a+xGnGP4YFoKRcp+gxzLgTtSZuJgqaA7EYZI+amERpz7g4OrD+DHEpK828cvSxAz0VTic7jpjB1SKumQ5HFYkBjQmNd9MQ1X9+A6oi5qkVEoSMYmc9FWMs8ZphxHdHEsRmlIidomshKECDvWmpOd2MmjVWa8OfCPnLQbbnfCcW8sqFElxTlbHXOqluaH6FDiQ26GWipavJHvWF4yKyM1oyh8lE8nEBpBCXkNa27cwUQZBcpqwLnhjJWpth76Yf6lfsYJi7GDMh9ghiHEN0KKndCDKw1B3VXE9seZym56QgaZ2DcxdQ+vFyIlyAyjcmfX77TgdUG8l6TrVCBjnuRKvy4jGcvIMtv42SOh6qKi+NbA4n0LYTGP2y39hfvFdflpQ+veuJ1nRIcvtW4moRrAFz3bfexikwvVSrN0bmlAArjxz76e6TB1ccPl/j+o46qo49qJO/UP+dvz/Sn96efn99XV8f7R/FB9ClI3x3fwZGdvt+7CLupP5N4z9e0YK0KBOVcVIpHrqR6r6lO5TCUvDXYFfadWGVR1CUm0gENmWRzplZOCWmngAjE0rMiD1e5GfXUW0Q5Zl+ljC3ADflGKuhptPEa2WDg4vGl8P/eUI1aWXywfpUTG920YFVcNHJ648322nrPUn/Sng2kjRmhZsvFIqS2utL5csnL1HmaNPGGvjIDIGRBIdWNpeHvJNwJ5AZ/EtPvk2Yg/SF+/D7bGcNahkuWVqpEjauXlVPpjdnm5mgj0IxuZdEnna1s6+zWO2zZHkCng4DU819dssqt
+sidebar_class_name: "get api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  Get operation
+</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/operations/{operationId}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets operation details for the given operation id.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"operationId","required":true,"in":"path","description":"UUID of given operation","example":"aa22054a-cb7c-4a4e-9b83-59f2ede74138","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"operationId"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"operationType"}
+                        required={true}
+                        schemaName={"OperationType"}
+                        qualifierMessage={"**Possible values:** [`TRANSACTION_EXPORT_PRIMARY_NETWORK`, `TRANSACTION_EXPORT_PRIMARY_NETWORK_STAKING`, `TRANSACTION_EXPORT_PRIMARY_NETWORK_SIMPLE`, `TRANSACTION_EXPORT_EVM`]"}
+                        schema={{"type":"string","enum":["TRANSACTION_EXPORT_PRIMARY_NETWORK","TRANSACTION_EXPORT_PRIMARY_NETWORK_STAKING","TRANSACTION_EXPORT_PRIMARY_NETWORK_SIMPLE","TRANSACTION_EXPORT_EVM"],"title":"OperationType"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"operationStatus"}
+                        required={true}
+                        schemaName={"OperationStatus"}
+                        qualifierMessage={"**Possible values:** [`RUNNING`, `COMPLETED`, `COMPLETED_WITH_WARNING`, `FAILED`]"}
+                        schema={{"type":"string","enum":["RUNNING","COMPLETED","COMPLETED_WITH_WARNING","FAILED"],"title":"OperationStatus"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"message"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <strong>
+                              metadata
+                            </strong><span
+                              style={{"opacity":"0.6"}}
+                            >
+                               object
+                            </span><strong
+                              style={{"fontSize":"var(--ifm-code-font-size)","color":"var(--openapi-required)"}}
+                            >
+                               required
+                            </strong>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            
+                          </div><div>
+                            <span
+                              className={"badge badge--info"}
+                            >
+                              oneOf
+                            </span><SchemaTabs>
+                              <TabItem
+                                label={"TransactionExportMetadata"}
+                                value={"0-item-properties"}
+                              >
+                                <SchemaItem
+                                  collapsible={false}
+                                  name={"code"}
+                                  required={false}
+                                  schemaName={"OperationStatusCode"}
+                                  qualifierMessage={"**Possible values:** [`ErrInvalidRequest`, `ErrInternal`, `WarnTruncatedExport`]"}
+                                  schema={{"type":"string","enum":["ErrInvalidRequest","ErrInternal","WarnTruncatedExport"],"title":"OperationStatusCode"}}
+                                >
+                                  
+                                </SchemaItem><SchemaItem
+                                  collapsible={false}
+                                  name={"downloadUrl"}
+                                  required={false}
+                                  schemaName={"string"}
+                                  qualifierMessage={undefined}
+                                  schema={{"type":"string","description":"File download URL. Provided only for COMPLETED and COMPLETED_WITH_WARNING operations."}}
+                                >
+                                  
+                                </SchemaItem><SchemaItem
+                                  collapsible={false}
+                                  name={"nextDate"}
+                                  required={false}
+                                  schemaName={"string"}
+                                  qualifierMessage={undefined}
+                                  schema={{"type":"string","description":"The next date (YYYY-MM-DD) to use as the firstDate in follow up requests if a request results in a transaction history exceeding the max size and has been reported as `COMPLETED_WITH_WARNING` with the warning 'WarnTruncatedExport'."}}
+                                >
+                                  
+                                </SchemaItem>
+                              </TabItem>
+                            </SchemaTabs>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"createdAtTimestamp"}
+                        required={true}
+                        schemaName={"number"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"number"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"updatedAtTimestamp"}
+                        required={true}
+                        schemaName={"number"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"number"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"operationId\": \"string\",\n  \"operationType\": \"TRANSACTION_EXPORT_PRIMARY_NETWORK\",\n  \"operationStatus\": \"RUNNING\",\n  \"message\": \"string\",\n  \"metadata\": {},\n  \"createdAtTimestamp\": 0,\n  \"updatedAtTimestamp\": 0\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      
