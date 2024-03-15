@@ -1,0 +1,293 @@
+---
+id: deactivate-webhook
+title: "Deactivate a webhook"
+description: "Deactivates a webhook by ID."
+sidebar_label: "Deactivate a webhook"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVm1v2zYQ/iuEvmwDbClpsrwhK+AiaZE27fqSNgPSojiJJ4s1JSok5cQz/N93R0mxEnsdMCBwJB5599xzd4+4jEyNFrwy1YWMTiKJkHk1B4/XmBbGzKIRrbnMqpr30I6zhx1OgLhrd4l0IS7OYtpcg4USPVoXndwso4pe6JCSZLJ42yiLFMbbBkeRYnc1+GIjxlWBD56VxMqrXKFl93gPZa3ZZb63J/HgOBvL3b10vH9wvDs+3jnKx0eHO/IAn+FBurNPB1xWYAnRyTLyi5rPOW9VNY1Wq2+MyNWmcujY/mxnh/89RkIeMlN5gsA2qGutssBW8sPxhuVmAJP+wMwzFZa59ap1TxRsgqCE5uT7Kqw+tZKxakqiMQIpCar7HphXfhERdq984OH8wQF5I+ZBgg9wTIV/5qEIT4GtC/Hgeuhx0i5NumBve5+rbysuWqYbiVcWsjavznlqjEaoNkp5XaAv0ApvRHdU+HCWXoUf1LmGhTYg42gd5NJM/2cITSd/FqCxems1sgJUGIQtNufBN+6nZWLGMGL83eOA1W6ePgUvfb0yizRIcuIHbslZipat7fBsgfIo/83OflzhMHvrNhs0ScvDOuuHHIfAOhiPg27m9bEbJQq/YgQeuHY3vTk0GAUuTKsymiQiqAVN/0mUzHeTrkwuWSq5Yiho572KhHJFhfe1O0mSqYaM5GAMtYphDvdxhf7O2FnEI+0wayx17Scey7ZD78eDE+MZLgac0cobWujEqECQRH3P/JaTT3tvUitB607QsM9JqkShptyLkFGLO25JElfqR1Uq72JxZYRJPbEtgP7asyPh1LQSTS1yY8N6lpmm8gK86FOmNDNtGhkrk8ShwqrKTcijK8OrFqiYvL/YKqcDe4/V8WjsiYGoCUl9olm1yKZ8IcpGezUO/SG4ZYRFzX3BiU3moKEimn/h7FUJdiG6SozWRuGalFbdiDKT4pwHFZsyFtfsvgM1EgvTiIxSR3BKL0TaKC0ZpmwyTywWRIUmaBamSBBAj70qMXgslPPGEn7NulI5HjxTBVN4zynndg8RXQFPZWs0M6xEGlBih24OVpmG4lFvOGHyblM/L1Q+yocJVEFcXtB6OFcCQQ6ZssAyN8RYNcX4NEnt8/BzkYccC6DwOaJMIZsJKndOY9ZYTuq2QUe5cg/4NsxI0JcOXHBM7cPLpTgFUVjM//j6MA61sR503LGVGrAyzkyZyErOj6HQM5kvcN/UsjyaOchV4iF1yf6wtb9Gz7kupwk8j8WLZkpw2KsLNUl7AFz3zfDSZC6eGjPVGMJSAqVLZILJ7svJRf3h8hO+/mCz+vCDeaduzd9vz97YL69f/fX7Xf356Nmh3Mu+XE1fHt3Cof/+evd9Op4mc4V37GYAqy0QVAtRG/4aK6p3P+pUDkfk9WBb7FuxqrJsKsxVAJrykC14tDQRMqSABoilpx0ernJ3C6DeopHj6auN8yUE8e2kYn0tWt+Kng7icn2X+K9rVCdPHu99Umsav8FXqxXNm2i+Sxt72aTHE1J6UsCCsLF5uUypeT5bvVrxMvWXJeW7oUfuc0hZNkhbpXL8TLKcg3b4E8i/fuy+Kr+Jf7+gbQXei23FAkp8N9herYIW8wcqXC069WVQrWFCIlr7wZGN+9dq+FU5O788vzondfwHZJS/dQ==
+sidebar_class_name: "delete api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  Deactivate a webhook
+</h1>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/webhooks/{id}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Deactivates a webhook by ID.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"id","required":true,"in":"path","description":"The webhook identifier.","example":"f33de69c-d13b-4691-908f-870d6e2e6b04","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"id"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"eventType"}
+                        required={true}
+                        schemaName={"EventType"}
+                        qualifierMessage={"**Possible values:** [`address_activity`]"}
+                        schema={{"type":"string","enum":["address_activity"],"title":"EventType"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <strong>
+                              metadata
+                            </strong><span
+                              style={{"opacity":"0.6"}}
+                            >
+                               object
+                            </span><strong
+                              style={{"fontSize":"var(--ifm-code-font-size)","color":"var(--openapi-required)"}}
+                            >
+                               required
+                            </strong>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            
+                          </div><div>
+                            <span
+                              className={"badge badge--info"}
+                            >
+                              oneOf
+                            </span><SchemaTabs>
+                              <TabItem
+                                label={"AddressActivityMetadata"}
+                                value={"0-item-properties"}
+                              >
+                                <SchemaItem
+                                  collapsible={false}
+                                  name={"address"}
+                                  required={true}
+                                  schemaName={"string"}
+                                  qualifierMessage={undefined}
+                                  schema={{"type":"string","description":"Ethereum address for the address_activity event type"}}
+                                >
+                                  
+                                </SchemaItem><SchemaItem
+                                  collapsible={false}
+                                  name={"eventSignatures"}
+                                  required={false}
+                                  schemaName={"string[]"}
+                                  qualifierMessage={undefined}
+                                  schema={{"description":"Array of hexadecimal strings of the event signatures.","example":["0x61cbb2a3dee0b6064c2e681aadd61677fb4ef319f0b547508d495626f5a62f64"],"type":"array","items":{"type":"string"}}}
+                                >
+                                  
+                                </SchemaItem>
+                              </TabItem>
+                            </SchemaTabs>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"includeTraces"}
+                        required={false}
+                        schemaName={"boolean"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"boolean","description":"Whether to include traces in the webhook payload."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"includeLogs"}
+                        required={false}
+                        schemaName={"boolean"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"boolean","description":"Whether to include logs in the webhook payload."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"url"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"chainId"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"status"}
+                        required={true}
+                        schemaName={"WebhookStatusType"}
+                        qualifierMessage={"**Possible values:** [`active`, `inactive`]"}
+                        schema={{"type":"string","enum":["active","inactive"],"title":"WebhookStatusType"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"createdAt"}
+                        required={true}
+                        schemaName={"number"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"number"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"name"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"description"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"id\": \"string\",\n  \"eventType\": \"address_activity\",\n  \"metadata\": {},\n  \"includeTraces\": true,\n  \"includeLogs\": true,\n  \"url\": \"string\",\n  \"chainId\": \"string\",\n  \"status\": \"active\",\n  \"createdAt\": 0,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

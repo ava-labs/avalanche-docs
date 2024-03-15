@@ -1,0 +1,384 @@
+---
+id: update-webhook
+title: "Update a webhook"
+description: "Updates an existing webhook."
+sidebar_label: "Update a webhook"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vm1v2zYQ/iuEvmwDbClpsrwYXQG3a7f0ZWvTpB2QFsVJPEmsJVElKSee4f++O0qyldhNi2FYAiQ2j7x7+Nxzd1wGukYDTunqTAaToKklOHyPca71LBgFEm1iVM12sl56qxVQCbxR1qkqE9ft3pA212CgRIfGBpOrZVDRFzqkJJkMfmmUQQrhTIOjQLG7Gly+FeMix96nUBIrp1KFht3jDZR1wS7TgwOJR6fJWO4fxOPDo9P98eneSTo+Od6TR/gAj+K9QzpgkxxLCCbLwC1qPmedIcjBavWxRYTWPdZywTvuAkx05Sg4m6CuC5V4jqLPlkEut13r+DMmjkkwzKhTaNnacrAF4M6ld9gbU+xctw5cY7dNRE/VlMR7AIlTcwyY4+4j3dYp55nrMvvWe7lgDyvemBSNxAsDCQ5dx1oXCNVgy0ud7dyw2kS4HCrovCWZNvAWg7bWlW1jPNjb43+3kx/8Z8ST6nbRh3Py7e99H4NSElT7ydOn3GJI4NO1A/JGYge6rYejK/wz9bq/C2wjrbXrocdpuzTtgr3qfa4+fkdq7lbP+xxdjkY4Lbqjwvmz9FW4QWnVsCg0yPDbyf2OEAWdvC/A18Sc5KB83/mfhJ4YJG3KqRu4JWcxGrb+y1pd3c6wb3cbmQ1E0vKwufX6jkNgHYzbQbfvdd6Vkq8srj7g3F31Zi8wCpxr2fbZJPf9mfrtJIjm+1GXJRstlVwxEjTzvm/7bAW5c7WdRFFWQEINeAy1CmEON2GF7lqbWcBN1GLSGBLtW67KVqA348GJ8QwXA8po5QUtdO0/R5DEfE/8jpN3pTetlaB1K6jW5zQcRK4yliIkpHDLiqRRRnJUpXI2FBda6NgR2TywoD07ElZllWhqkWrj15NEN5UT4ER/ZbpmUuhGhkpHoU8wd5/zzcB42k+i9ZBbi/M24PVyy+n6ay/uoYZvFXo/JQeFyUu+WFPtKe0E8VvLmZi+Pts5Swf2njbLRXogBu1VSFJswf2TbMrlomwKp8ZeqYLFKwwWrFDmeDqHAirK+A+cCFWCWYhOFKONUdgmplU7IpKleMotA5syFO/ZfQdqJBa6EQk/J8CqYiHiRhWSYcomcZTQnLJSEDQDGRIEKMZOleg95vT+0IbwF9zhKstM6sqb/PeU7tzuoZxXwDS3Rj3DSsQeJXbo5mCUbigeydQKnXab+solJdF9mEDl29xjWvfnSiDI/qbc6pkbYqzKMHwYxeaR/3OW+jvmQOFTRBlDMhOkvJQKvjF8Ka8q6+Xo2jAjQeIC6x2Tknm5FA9B5AbTXz6sK7PWxkERdmzFGowME11GspLzU8iLmUwXeKhrWZ7MLKQqchDb6HBYZR+CR5yXhxE8CsXjJiM47NX6nMQ9AM77dnipExtmWmcF+rB0gdJGMsJo/9n0rH7z8i0+f2OS+viN/kN90X+/+vWFeff8t79+vq4vTx4cy4Pk3UX27OQLHLtPz/dfx+Msmiu8ZjcDWG2CoFqIWvO7QFG++65D6bBEXg+2xb4TqyrLpsJUeaAx1/uCq7wgQoYUUAFxF2yLh7PcvUdIW1Ry3AhqbV0J1aDy2/eOgH7w3S3C5eZF8633c9clHd64qC6o9Aazs+3dV8F8nzb23Zs+TmjeUCPOCRebl8uYhHNpitWKl0lbhhrwFX1kjUPMLYNavFSWP9NwSKGweA/kH8+72faT+PrLfCfwvudX3MeJ6wbbB54fCTwm/QOnGwIMqjU8aUOPu+nZH9x6C65G/Ykpdf/a3bt3OA1fTy+e/E674+7lX2rJhwxc81uN/k6CD/RLX7Tnw081v74MqGlkDfUi2tM65p9/APqbmfU=
+sidebar_class_name: "patch api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  Update a webhook
+</h1>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/v1/webhooks/{id}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Updates an existing webhook.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"id","required":true,"in":"path","description":"The webhook identifier.","example":"f33de69c-d13b-4691-908f-870d6e2e6b04","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={false}
+          name={"name"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"description"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"url"}
+          required={false}
+          schemaName={"string"}
+          qualifierMessage={undefined}
+          schema={{"type":"string"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"status"}
+          required={false}
+          schemaName={"WebhookStatusType"}
+          qualifierMessage={"**Possible values:** [`active`, `inactive`]"}
+          schema={{"type":"string","enum":["active","inactive"],"title":"WebhookStatusType"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"includeTraces"}
+          required={false}
+          schemaName={"boolean"}
+          qualifierMessage={undefined}
+          schema={{"type":"boolean"}}
+        >
+          
+        </SchemaItem><SchemaItem
+          collapsible={false}
+          name={"includeLogs"}
+          required={false}
+          schemaName={"boolean"}
+          qualifierMessage={undefined}
+          schema={{"type":"boolean"}}
+        >
+          
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"id"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"eventType"}
+                        required={true}
+                        schemaName={"EventType"}
+                        qualifierMessage={"**Possible values:** [`address_activity`]"}
+                        schema={{"type":"string","enum":["address_activity"],"title":"EventType"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <strong>
+                              metadata
+                            </strong><span
+                              style={{"opacity":"0.6"}}
+                            >
+                               object
+                            </span><strong
+                              style={{"fontSize":"var(--ifm-code-font-size)","color":"var(--openapi-required)"}}
+                            >
+                               required
+                            </strong>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            
+                          </div><div>
+                            <span
+                              className={"badge badge--info"}
+                            >
+                              oneOf
+                            </span><SchemaTabs>
+                              <TabItem
+                                label={"AddressActivityMetadata"}
+                                value={"0-item-properties"}
+                              >
+                                <SchemaItem
+                                  collapsible={false}
+                                  name={"address"}
+                                  required={true}
+                                  schemaName={"string"}
+                                  qualifierMessage={undefined}
+                                  schema={{"type":"string","description":"Ethereum address for the address_activity event type"}}
+                                >
+                                  
+                                </SchemaItem><SchemaItem
+                                  collapsible={false}
+                                  name={"eventSignatures"}
+                                  required={false}
+                                  schemaName={"string[]"}
+                                  qualifierMessage={undefined}
+                                  schema={{"description":"Array of hexadecimal strings of the event signatures.","example":["0x61cbb2a3dee0b6064c2e681aadd61677fb4ef319f0b547508d495626f5a62f64"],"type":"array","items":{"type":"string"}}}
+                                >
+                                  
+                                </SchemaItem>
+                              </TabItem>
+                            </SchemaTabs>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"includeTraces"}
+                        required={false}
+                        schemaName={"boolean"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"boolean","description":"Whether to include traces in the webhook payload."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"includeLogs"}
+                        required={false}
+                        schemaName={"boolean"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"boolean","description":"Whether to include logs in the webhook payload."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"url"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"chainId"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"status"}
+                        required={true}
+                        schemaName={"WebhookStatusType"}
+                        qualifierMessage={"**Possible values:** [`active`, `inactive`]"}
+                        schema={{"type":"string","enum":["active","inactive"],"title":"WebhookStatusType"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"createdAt"}
+                        required={true}
+                        schemaName={"number"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"number"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"name"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"description"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"id\": \"string\",\n  \"eventType\": \"address_activity\",\n  \"metadata\": {},\n  \"includeTraces\": true,\n  \"includeLogs\": true,\n  \"url\": \"string\",\n  \"chainId\": \"string\",\n  \"status\": \"active\",\n  \"createdAt\": 0,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

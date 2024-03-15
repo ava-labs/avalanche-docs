@@ -1,0 +1,248 @@
+---
+id: get-block
+title: "Get block"
+description: "Gets the details of an individual block on the EVM-compatible chain."
+sidebar_label: "Get block"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  Get block
+</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/chains/{chainId}/blocks/{blockId}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets the details of an individual block on the EVM-compatible chain.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"chainId","required":true,"in":"path","description":"A supported evm chain id, chain alias or blockchain id. Use the `/chains` endpoint to get a list of supported chain ids.","example":"43114","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"blockId","required":true,"in":"path","description":"A block identifier which is either a block number or the block hash.","example":"0x17533aeb5193378b9ff441d61728e7a2ebaf10f61fd5310759451627dfca2e7c","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"blockNumber"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The block number on the chain.","example":"339"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"blockTimestamp"}
+                        required={true}
+                        schemaName={"number"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"number","description":"The block finality timestamp.","example":1648672486}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"blockHash"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The block hash identifier.","example":"0x17533aeb5193378b9ff441d61728e7a2ebaf10f61fd5310759451627dfca2e7c"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"txCount"}
+                        required={true}
+                        schemaName={"number"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"number","description":"The number of evm transactions in the block."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"baseFee"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The base gas fee for a transaction to be included in the block."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"gasUsed"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The gas used for transactions in the block."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"gasLimit"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The total gas limit set for transactions in the block."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"gasCost"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"parentHash"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The hash of the parent block."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"feesSpent"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The amount of fees spent/burned for transactions in the block."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"cumulativeTransactions"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"The cumulative number of transactions for the chain including this block."}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"blockNumber\": \"339\",\n  \"blockTimestamp\": 1648672486,\n  \"blockHash\": \"0x17533aeb5193378b9ff441d61728e7a2ebaf10f61fd5310759451627dfca2e7c\",\n  \"txCount\": 0,\n  \"baseFee\": \"string\",\n  \"gasUsed\": \"string\",\n  \"gasLimit\": \"string\",\n  \"gasCost\": \"string\",\n  \"parentHash\": \"string\",\n  \"feesSpent\": \"string\",\n  \"cumulativeTransactions\": \"string\"\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

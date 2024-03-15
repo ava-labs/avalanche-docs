@@ -1,0 +1,909 @@
+---
+id: list-validators
+title: "List validators"
+description: "Lists details for validators. By default, returns details for all validators. Filterable by validator node ids and minimum delegation capacity."
+sidebar_label: "List validators"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  List validators
+</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/networks/{network}/validators"}
+>
+  
+</MethodEndpoint>
+
+
+
+Lists details for validators. By default, returns details for all validators. Filterable by validator node ids and minimum delegation capacity.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"network","required":true,"in":"path","description":"Either mainnet or a testnet.","example":"mainnet","schema":{"type":"string","enum":["mainnet","fuji"],"title":"Network"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Query Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"pageToken","required":false,"in":"query","description":"A page token, received from a previous list call. Provide this to retrieve the subsequent page.","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"pageSize","required":false,"in":"query","description":"The maximum number of items to return. The minimum page size is 1. The maximum pageSize is 100.","schema":{"type":"integer","default":10,"minimum":1,"maximum":100},"example":"10"}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"nodeIds","required":false,"in":"query","description":"A comma separated list of node ids to filter by.","example":"NodeID-111111111111111111116DBWJs,NodeID-222222222222222222227DBWJs","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"sortOrder","required":false,"in":"query","example":"asc","description":"The order by which to sort results. Use \"asc\" for ascending order, \"desc\" for descending order. Sorted by timestamp or the `sortBy` query parameter, if provided.","schema":{"type":"string","enum":["asc","desc"],"title":"SortOrder"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"validationStatus","required":false,"in":"query","description":"Validation status of the node.","example":"completed","schema":{"type":"string","enum":["completed","active","pending","removed"],"title":"ValidationStatusType"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"minDelegationCapacity","required":false,"in":"query","description":"The minimum delegation capacity, in nAVAX, used to filter the set of nodes being returned. Accepts values between 0 and 720,000,000,000,000,000","example":"0","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"maxDelegationCapacity","required":false,"in":"query","description":"The maximum delegation capacity, in nAVAX, used to filter the set of nodes being returned. Accepts values between 0 and 720,000,000,000,000,000.","example":"720000000000000000","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"minTimeRemaining","required":false,"in":"query","description":"The minimum validation time remaining, in seconds, used to filter the set of nodes being returned.","example":0,"schema":{"type":"number","maximum":2147483647,"minimum":0}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"maxTimeRemaining","required":false,"in":"query","description":"The maximum validation time remaining, in seconds, used to filter the set of nodes being returned.","example":2147483647,"schema":{"type":"number","maximum":2147483647,"minimum":0}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"minFeePercentage","required":false,"in":"query","description":"The minimum fee percentage, used to filter the set of nodes being returned.If this field is populated no subnet validations will be returned, as their fee percentage is null, since subnet delegations are not supported. Default is 2, as per the Avalanche spec.","example":2,"schema":{"type":"number","maximum":100,"minimum":2}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"maxFeePercentage","required":false,"in":"query","description":"The maximum fee percentage, used to filter the set of nodes being returned. If this field is populated no subnet validations will be returned, as their fee percentage is null, since subnet delegations are not supported. Default is 100.","example":100,"schema":{"type":"number","maximum":100,"minimum":2}}}
+      >
+        
+      </ParamsItem><ParamsItem
+        className={"paramsItem"}
+        param={{"name":"subnetId","required":false,"in":"query","description":"The subnet ID to filter by. If not provided, then all subnets will be returned.","example":"11111111111111111111111111111111LpoYY","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"nextPageToken"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string","description":"A token, which can be sent as `pageToken` to retrieve the next page. If this field is omitted or empty, there are no subsequent pages."}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                validators
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object[]
+                              </span><span
+                                className={"openapi-schema__divider"}
+                              >
+                                
+                              </span><span
+                                className={"openapi-schema__required"}
+                              >
+                                required
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <div
+                              style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                            >
+                              
+                              
+                              The list of validator Details.
+                              
+                              
+                            </div><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}
+                              >
+                                Array [
+                              </div>
+                            </li><div>
+                              <span
+                                className={"badge badge--info"}
+                              >
+                                oneOf
+                              </span><SchemaTabs>
+                                <TabItem
+                                  label={"CompletedValidatorDetails"}
+                                  value={"0-item-properties"}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"txHash"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"nodeId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"subnetId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"amountStaked"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"delegationFee"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"startTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"endTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"delegatorCount"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={true}
+                                    className={"schemaItem"}
+                                  >
+                                    <details
+                                      style={{}}
+                                      className={"openapi-markdown__details"}
+                                    >
+                                      <summary
+                                        style={{}}
+                                      >
+                                        <span
+                                          className={"openapi-schema__container"}
+                                        >
+                                          <strong
+                                            className={"openapi-schema__property"}
+                                          >
+                                            rewards
+                                          </strong><span
+                                            className={"openapi-schema__name"}
+                                          >
+                                             object
+                                          </span><span
+                                            className={"openapi-schema__divider"}
+                                          >
+                                            
+                                          </span><span
+                                            className={"openapi-schema__required"}
+                                          >
+                                            required
+                                          </span>
+                                        </span>
+                                      </summary><div
+                                        style={{"marginLeft":"1rem"}}
+                                      >
+                                        <SchemaItem
+                                          collapsible={false}
+                                          name={"validationRewardAmount"}
+                                          required={true}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"delegationRewardAmount"}
+                                          required={true}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"rewardAddresses"}
+                                          required={false}
+                                          schemaName={"string[]"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"array","items":{"type":"string"}}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"rewardTxHash"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem>
+                                      </div>
+                                    </details>
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"validationStatus"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={"**Possible values:** [`completed`]"}
+                                    schema={{"type":"string","enum":["completed"]}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </TabItem><TabItem
+                                  label={"ActiveValidatorDetails"}
+                                  value={"1-item-properties"}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"txHash"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"nodeId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"subnetId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"amountStaked"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"delegationFee"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"startTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"endTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"stakePercentage"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"delegatorCount"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"amountDelegated"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"uptimePerformance"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"avalancheGoVersion"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"delegationCapacity"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={true}
+                                    className={"schemaItem"}
+                                  >
+                                    <details
+                                      style={{}}
+                                      className={"openapi-markdown__details"}
+                                    >
+                                      <summary
+                                        style={{}}
+                                      >
+                                        <span
+                                          className={"openapi-schema__container"}
+                                        >
+                                          <strong
+                                            className={"openapi-schema__property"}
+                                          >
+                                            potentialRewards
+                                          </strong><span
+                                            className={"openapi-schema__name"}
+                                          >
+                                             object
+                                          </span><span
+                                            className={"openapi-schema__divider"}
+                                          >
+                                            
+                                          </span><span
+                                            className={"openapi-schema__required"}
+                                          >
+                                            required
+                                          </span>
+                                        </span>
+                                      </summary><div
+                                        style={{"marginLeft":"1rem"}}
+                                      >
+                                        <SchemaItem
+                                          collapsible={false}
+                                          name={"validationRewardAmount"}
+                                          required={true}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"delegationRewardAmount"}
+                                          required={true}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"rewardAddresses"}
+                                          required={false}
+                                          schemaName={"string[]"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"array","items":{"type":"string"}}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"rewardTxHash"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string"}}
+                                        >
+                                          
+                                        </SchemaItem>
+                                      </div>
+                                    </details>
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"validationStatus"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={"**Possible values:** [`active`]"}
+                                    schema={{"type":"string","enum":["active"]}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={true}
+                                    className={"schemaItem"}
+                                  >
+                                    <details
+                                      style={{}}
+                                      className={"openapi-markdown__details"}
+                                    >
+                                      <summary
+                                        style={{}}
+                                      >
+                                        <span
+                                          className={"openapi-schema__container"}
+                                        >
+                                          <strong
+                                            className={"openapi-schema__property"}
+                                          >
+                                            validatorHealth
+                                          </strong><span
+                                            className={"openapi-schema__name"}
+                                          >
+                                             object
+                                          </span><span
+                                            className={"openapi-schema__divider"}
+                                          >
+                                            
+                                          </span><span
+                                            className={"openapi-schema__required"}
+                                          >
+                                            required
+                                          </span>
+                                        </span>
+                                      </summary><div
+                                        style={{"marginLeft":"1rem"}}
+                                      >
+                                        <SchemaItem
+                                          collapsible={false}
+                                          name={"reachabilityPercent"}
+                                          required={true}
+                                          schemaName={"number"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"number","description":"Percent of requests responded to in last polling."}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"benchedPChainRequestsPercent"}
+                                          required={true}
+                                          schemaName={"number"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"number","description":"Percent of requests benched on the P-Chain in last polling."}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"benchedXChainRequestsPercent"}
+                                          required={true}
+                                          schemaName={"number"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"number","description":"Percentage of requests benched on the X-Chain in last polling."}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"benchedCChainRequestsPercent"}
+                                          required={true}
+                                          schemaName={"number"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"number","description":"Percentage of requests benched on the C-Chain in last polling."}}
+                                        >
+                                          
+                                        </SchemaItem>
+                                      </div>
+                                    </details>
+                                  </SchemaItem>
+                                </TabItem><TabItem
+                                  label={"PendingValidatorDetails"}
+                                  value={"2-item-properties"}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"txHash"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"nodeId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"subnetId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"amountStaked"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"delegationFee"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"startTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"endTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"validationStatus"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={"**Possible values:** [`pending`]"}
+                                    schema={{"type":"string","enum":["pending"]}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </TabItem><TabItem
+                                  label={"RemovedValidatorDetails"}
+                                  value={"3-item-properties"}
+                                >
+                                  <SchemaItem
+                                    collapsible={false}
+                                    name={"txHash"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"nodeId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"subnetId"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"amountStaked"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"delegationFee"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"startTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"endTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"removeTxHash"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"removeTimestamp"}
+                                    required={true}
+                                    schemaName={"number"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"number"}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={false}
+                                    name={"validationStatus"}
+                                    required={true}
+                                    schemaName={"string"}
+                                    qualifierMessage={"**Possible values:** [`removed`]"}
+                                    schema={{"type":"string","enum":["removed"]}}
+                                  >
+                                    
+                                  </SchemaItem>
+                                </TabItem>
+                              </SchemaTabs>
+                            </div><li>
+                              <div
+                                style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}
+                              >
+                                ]
+                              </div>
+                            </li>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"nextPageToken\": \"string\",\n  \"validators\": [\n    {},\n    {},\n    {},\n    {}\n  ]\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

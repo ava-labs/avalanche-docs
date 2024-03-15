@@ -7,10 +7,12 @@ const darkCodeTheme = themes.dracula;
 const math = require("remark-math");
 const katex = require("rehype-katex");
 const remoteContent = require("./configs/remoteContent");
+const apiContent = require("./configs/apiContent");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  plugins: [...remoteContent],
+  plugins: [...remoteContent, ...apiContent],
+  themes: ["docusaurus-theme-openapi-docs"],
   i18n: {
     defaultLocale: "en",
     locales: [
@@ -168,6 +170,8 @@ const config = {
           sidebarPath: "./sidebars.json",
           remarkPlugins: [math],
           rehypePlugins: [katex],
+          docRootComponent: "@theme/DocRoot",
+          docItemComponent: "@theme/ApiItem",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

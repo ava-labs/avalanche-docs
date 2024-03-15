@@ -1,0 +1,48 @@
+---
+id: glacier-api
+title: "Glacier API"
+description: "The Glacier API provides web3 application developers with multi-chain data related to Avalanche's primary network, Avalanche subnets, and Ethereum. With Glacier, you can easily build products that leverage real-time and historical transaction and transfer history, native and token balances, and various types of token metadata. The API is in Beta and may be subject to change.</br></br>If you have feedback or feature requests for the API, please submit them <a href='https://portal.productboard.com/dndv9ahlkdfye4opdm8ksafi/tabs/4-glacier-api'>here</a>. Bug reports can be submitted <a href='https://docs.google.com/forms/d/e/1FAIpQLSeJQrcp7QoNiqozMDKrVJGX5wpU827d3cVTgF8qa7t_J1Pb-g/viewform'>here</a>, and any potential security issues can be reported <a href='https://immunefi.com/bounty/avalabs'>here</a>."
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span className={"theme-doc-version-badge badge badge--secondary"}>
+  Version: Beta
+</span>
+
+<h1 className={"openapi__heading"}>Glacier API</h1>
+
+The Glacier API provides web3 application developers with multi-chain data related to Avalanche's primary network, Avalanche subnets, and Ethereum. With Glacier, you can easily build products that leverage real-time and historical transaction and transfer history, native and token balances, and various types of token metadata. The API is in Beta and may be subject to change.<br></br>If you have feedback or feature requests for the API, please submit them <a href="https://portal.productboard.com/dndv9ahlkdfye4opdm8ksafi/tabs/4-glacier-api">here</a>. Bug reports can be submitted <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJQrcp7QoNiqozMDKrVJGX5wpU827d3cVTgF8qa7t_J1Pb-g/viewform">here</a>, and any potential security issues can be reported <a href="https://immunefi.com/bounty/avalabs">here</a>.
+
+<div style={{ marginBottom: "2rem" }}>
+  <h2 id={"authentication"} style={{ marginBottom: "1rem" }}>
+    Authentication
+  </h2>
+  <SchemaTabs className={"openapi-tabs__security-schemes"}>
+    <TabItem label={"API Key: x-glacier-api-key"} value={"x-glacier-api-key"}>
+      Api keys provide higher access to rate limits. To obtain an api key, sign
+      up for an account at https://avacloud.io/.
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Security Scheme Type:</th>
+              <td>apiKey</td>
+            </tr>
+            <tr>
+              <th>Header parameter name:</th>
+              <td>x-glacier-api-key</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </TabItem>
+  </SchemaTabs>
+</div>

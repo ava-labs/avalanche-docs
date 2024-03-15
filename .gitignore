@@ -19,6 +19,10 @@ docs/build/cross-chain/awm/evm-integration.md
 docs/build/cross-chain/awm/relayer.md
 docs/learn/acp.md
 
+# glacier demo
+# docs/tooling/glacier-api/*.mdx
+# docs/tooling/glacier-api/*.md
+
 # Misc
 .DS_Store
 .env.local

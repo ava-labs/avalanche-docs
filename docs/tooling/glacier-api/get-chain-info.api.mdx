@@ -1,0 +1,401 @@
+---
+id: get-chain-info
+title: "Get chain information"
+description: "Gets chain information for the EVM-compatible chain if supported by the api."
+sidebar_label: "Get chain information"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: tooling/glacier-api/glacier-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1
+  className={"openapi__heading"}
+>
+  Get chain information
+</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/chains/{chainId}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Gets chain information for the EVM-compatible chain if supported by the api.
+
+## Request
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"chainId","required":true,"in":"path","description":"A supported evm chain id, chain alias or blockchain id. Use the `/chains` endpoint to get a list of supported chain ids.","example":"43114","schema":{"type":"string"}}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={false}
+                        name={"chainId"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"status"}
+                        required={true}
+                        schemaName={"ChainStatus"}
+                        qualifierMessage={"**Possible values:** [`OK`, `UNAVAILABLE`]"}
+                        schema={{"type":"string","description":"Status of chain nodes. Chain nodes can become temporarily `UNAVAILABLE` for several reasons, such as validator stake falling below threshold. If chain nodes are `UNAVAILABLE`, requests that rely on data from the chain nodes may return 503 errors.","enum":["OK","UNAVAILABLE"],"title":"ChainStatus"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"chainName"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"description"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"platformChainId"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"subnetId"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"vmId"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"vmName"}
+                        required={true}
+                        schemaName={"VmName"}
+                        qualifierMessage={"**Possible values:** [`EVM`, `BITCOIN`, `ETHEREUM`]"}
+                        schema={{"type":"string","enum":["EVM","BITCOIN","ETHEREUM"],"title":"VmName"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"explorerUrl"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"rpcUrl"}
+                        required={true}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"wsUrl"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"isTestnet"}
+                        required={true}
+                        schemaName={"boolean"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"boolean"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                utilityAddresses
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"multicall"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                networkToken
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span><span
+                                className={"openapi-schema__divider"}
+                              >
+                                
+                              </span><span
+                                className={"openapi-schema__required"}
+                              >
+                                required
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"name"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The contract name.","example":"Wrapped AVAX"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"symbol"}
+                              required={true}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The contract symbol.","example":"WAVAX"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"decimals"}
+                              required={true}
+                              schemaName={"number"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"number","description":"The number of decimals the token uses. For example `6`, means to divide the token amount by `1000000` to get its user representation.","example":18}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"logoUri"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The logo uri for the address.","example":"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg"}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"description"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string"}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"chainLogoUri"}
+                        required={false}
+                        schemaName={"string"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"string"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"private"}
+                        required={false}
+                        schemaName={"boolean"}
+                        qualifierMessage={undefined}
+                        schema={{"type":"boolean"}}
+                      >
+                        
+                      </SchemaItem><SchemaItem
+                        collapsible={false}
+                        name={"enabledFeatures"}
+                        required={false}
+                        schemaName={"string[]"}
+                        qualifierMessage={"**Possible values:** [`nftIndexing`]"}
+                        schema={{"type":"array","items":{"type":"string","enum":["nftIndexing"]}}}
+                      >
+                        
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"chainId\": \"string\",\n  \"status\": \"OK\",\n  \"chainName\": \"string\",\n  \"description\": \"string\",\n  \"platformChainId\": \"string\",\n  \"subnetId\": \"string\",\n  \"vmId\": \"string\",\n  \"vmName\": \"EVM\",\n  \"explorerUrl\": \"string\",\n  \"rpcUrl\": \"string\",\n  \"wsUrl\": \"string\",\n  \"isTestnet\": true,\n  \"utilityAddresses\": {\n    \"multicall\": \"string\"\n  },\n  \"networkToken\": {\n    \"name\": \"Wrapped AVAX\",\n    \"symbol\": \"WAVAX\",\n    \"decimals\": 18,\n    \"logoUri\": \"https://images.ctfassets.net/gcj8jwzm6086/5VHupNKwnDYJvqMENeV7iJ/fdd6326b7a82c8388e4ee9d4be7062d4/avalanche-avax-logo.svg\",\n    \"description\": \"string\"\n  },\n  \"chainLogoUri\": \"string\",\n  \"private\": true,\n  \"enabledFeatures\": [\n    \"nftIndexing\"\n  ]\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      
