@@ -76,11 +76,11 @@ avalanche-network-runner control add-node node-name [options] [flags]
 
 #### Flags
 
-- `--avalanchego-path string` avalanchego binary path
+- `--avalanchego-path string` AvalancheGo binary path
 - `--chain-configs string` [optional] JSON string of map from chain id to its config file contents
 - `--node-config string` node config as string
 - `--plugin-dir string` [optional] plugin directory
-- `--subnet-configs string` [optional] JSON string of map from subnet id to its config file contents
+- `--subnet-configs string` [optional] JSON string of map from Subnet id to its config file contents
 - `--upgrade-configs string` [optional] JSON string of map from chain id to its upgrade file contents
 
 #### Example
@@ -99,7 +99,7 @@ curl --location 'http://localhost:8081/v1/control/addnode' \
 
 ### `add-permissionless-delegator`
 
-Delegates to a permissionless validator in an elastic subnet.
+Delegates to a permissionless validator in an Elastic Subnet.
 
 ```sh
 avalanche-network-runner control add-permissionless-delegator permissionlessValidatorSpecs [options] [flags]
@@ -131,7 +131,7 @@ curl --location 'http://localhost:8081/v1/control/addpermissionlessdelegator' \
 
 ### `add-permissionless-validator`
 
-Adds a permissionless validator to elastic subnets.
+Adds a permissionless validator to Elastic Subnets.
 
 ```sh
 avalanche-network-runner control add-permissionless-validator permissionlessValidatorSpecs [options] [flags]
@@ -161,7 +161,7 @@ curl --location 'http://localhost:8081/v1/control/addpermissionlessvalidator' \
 
 ### `add-subnet-validators`
 
-Adds subnet validators.
+Adds Subnet validators.
 
 ```sh
 avalanche-network-runner control add-subnet-validators validatorsSpec [options] [flags]
@@ -231,7 +231,7 @@ curl --location 'http://localhost:8081/v1/control/createblockchains' \
 
 ### `create-subnets`
 
-Creates subnets.
+Creates Subnets.
 
 ```sh
 avalanche-network-runner control create-subnets [options] [flags]
@@ -260,7 +260,7 @@ curl --location 'http://localhost:8081/v1/control/createsubnets' \
 
 ### `elastic-subnets`
 
-Transforms subnets to elastic subnets.
+Transforms Subnets to Elastic Subnets.
 
 ```sh
 avalanche-network-runner control elastic-subnets elastic_subnets_specs [options] [flags]
@@ -356,7 +356,7 @@ curl --location --request POST 'http://localhost:8081/v1/control/listrpcs'
 
 ### `list-subnets`
 
-Lists all subnet ids of the network.
+Lists all Subnet IDs of the network.
 
 ```sh
 avalanche-network-runner control list-subnets [flags]
@@ -385,13 +385,13 @@ avalanche-network-runner control load-snapshot snapshotName --avalanchego-path /
 
 #### Flags
 
-- `--avalanchego-path string`     avalanchego binary path
+- `--avalanchego-path string`     AvalancheGo binary path
 - `--chain-configs string`        [optional] JSON string of map from chain id to its config file contents
 - `--global-node-config string`   [optional] global node config as JSON string, applied to all nodes
 - `--plugin-dir string`           plugin directory
 - `--reassign-ports-if-used`      true to reassign snapshot ports if already taken
 - `--root-data-dir string`        root data directory to store logs and configurations
-- `--subnet-configs string`       [optional] JSON string of map from subnet id to its config file contents
+- `--subnet-configs string`       [optional] JSON string of map from Subnet id to its config file contents
 - `--upgrade-configs string`      [optional] JSON string of map from chain id to its upgrade file contents
 
 #### Example
@@ -480,7 +480,7 @@ curl --location 'http://localhost:8081/v1/control/removesnapshot' \
 
 ### `remove-subnet-validator`
 
-Removes a subnet validator.
+Removes a Subnet validator.
 
 ```sh
 avalanche-network-runner control remove-subnet-validator removeValidatorSpec [options] [flags]
@@ -508,12 +508,12 @@ avalanche-network-runner control restart-node node-name [options] [flags]
 
 #### Flags
 
-- `--avalanchego-path string`      avalanchego binary path
+- `--avalanchego-path string`      AvalancheGo binary path
 - `--chain-configs string`         [optional] JSON string of map from chain id to its config file contents
 - `--plugin-dir string`            [optional] plugin directory
-- `--subnet-configs string`        [optional] JSON string of map from subnet id to its config file contents
+- `--subnet-configs string`        [optional] JSON string of map from Subnet id to its config file contents
 - `--upgrade-configs string`       [optional] JSON string of map from chain id to its upgrade file contents
-- `--whitelisted-subnets string`   [optional] whitelisted subnets (comma-separated)
+- `--whitelisted-subnets string`   [optional] whitelisted Subnets (comma-separated)
 
 #### Example
 
@@ -636,7 +636,7 @@ avalanche-network-runner control start [options] [flags]
 
 #### Flags
 
-- `--avalanchego-path string`                  avalanchego binary path
+- `--avalanchego-path string`                  AvalancheGo binary path
 - `--blockchain-specs string`                  [optional] JSON string of array of [(VM name, genesis file path)]
 - `--chain-configs string`                     [optional] JSON string of map from chain id to its config file contents
 - `--custom-node-configs global-node-config`   [optional] custom node configs as JSON string of map, for each node individually. Common entries override global-node-config, but can be combined. Invalidates `number-of-nodes` (provide all node configs if used).
@@ -646,9 +646,9 @@ avalanche-network-runner control start [options] [flags]
 - `--plugin-dir string`                        [optional] plugin directory
 - `--reassign-ports-if-used`                   true to reassign default/given ports if already taken
 - `--root-data-dir string`                     [optional] root data directory to store logs and configurations
-- `--subnet-configs string`                    [optional] JSON string of map from subnet id to its config file contents
+- `--subnet-configs string`                    [optional] JSON string of map from Subnet id to its config file contents
 - `--upgrade-configs string`                  [optional] JSON string of map from chain id to its upgrade file contents
-- `--whitelisted-subnets string`               [optional] whitelisted subnets (comma-separated)
+- `--whitelisted-subnets string`               [optional] whitelisted Subnets (comma-separated)
 
 #### Example
 
@@ -734,7 +734,7 @@ curl --location --request POST 'http://localhost:8081/v1/control/streamstatus'
 
 ### `uris`
 
-Lists network uris.
+Lists network URIs.
 
 ```sh
 avalanche-network-runner control uris [options] [flags]
@@ -752,7 +752,7 @@ curl --location --request POST 'http://localhost:8081/v1/control/uris'
 
 ### `vmid`
 
-Returns the vm id associated to the given vm name.
+Returns the VM ID associated to the given VM name.
 
 ```sh
 avalanche-network-runner control vmid vm-name [flags]
@@ -774,7 +774,7 @@ curl --location 'http://localhost:8081/v1/control/vmid' \
 
 ### `wait-for-healthy`
 
-Waits until local cluster and custom vms are ready.
+Waits until local cluster and custom VMs are ready.
 
 ```sh
 avalanche-network-runner control wait-for-healthy [options] [flags]
