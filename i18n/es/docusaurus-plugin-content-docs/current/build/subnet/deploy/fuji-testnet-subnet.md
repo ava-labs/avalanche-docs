@@ -572,7 +572,7 @@ Para solicitar permiso para validar una Subnet, se requieren los siguientes paso
 Antes de que un nodo pueda ser un validador en una Subnet, se requiere que el nodo ya sea un validador en la
 red primaria, lo que significa que tu nodo se ha **inicializado completamente**.
 
-Además, si el validador está dentro de las 24 horas posteriores a la presentación de componentes en la red principal, no se puede agregar a la subred.
+Si el validador está a menos de 24 horas de expirar en la red principal, no se puede agregar a la subred.
 
 Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-core-extension) cómo
 convertirte en un validador.
