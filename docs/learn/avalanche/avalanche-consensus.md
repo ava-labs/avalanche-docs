@@ -203,7 +203,7 @@ If a node receives a vote for a block, it also counts as a vote for all of the b
 
 Avalanche consensus is probabilistically safe up to a safety threshold. That is, the probability
 that a correct node accepts a transaction that another correct node rejects can be made arbitrarily
-low by adjusting system parameters. In Nakamoto consensus protocol (as used in Bitcoin and Ethereum,
+low by adjusting system parameters. In Nakamoto consensus protocol (as used in Bitcoin and old Ethereum (EthPoW),
 for example), a block may be included in the chain but then be removed and not end up in the
 canonical chain. This means waiting an hour for transaction settlement. In Avalanche,
 acceptance/rejection are **final and irreversible** and only take a few seconds.
