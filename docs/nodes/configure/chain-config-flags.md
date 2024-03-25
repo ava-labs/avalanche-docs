@@ -490,6 +490,10 @@ Specifies an array of transaction hashes that should be allowed to bypass
 replay protection. This flag is intended for node operators that want to explicitly
 allow specific transactions to be issued through their API. Defaults to an empty list.
 
+#### `push-gossip-percent-stake` (float)
+
+Percentage of the total stake to send transactions received over the RPC. Defaults to 0.9.
+
 #### `push-gossip-num-validators` (int)
 
 Number of validators to initially send transactions received over the RPC. Defaults to 100.
