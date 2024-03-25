@@ -620,7 +620,7 @@ ${updatedContent}`,
       outDir: "docs/nodes/configure/",
       // change filename and correct links
       modifyContent(filename, content) {
-        if (filename.includes("service")) {
+        if (filename.includes("config")) {
           const newContent = insertSourceDocLink(
             content,
             "https://github.com/ava-labs/avalanchego/tree/master/config/config.md"
@@ -645,7 +645,7 @@ ${updatedContent}`,
       outDir: "docs/nodes/configure/",
       // change filename and correct links
       modifyContent(filename, content) {
-        if (filename.includes("service")) {
+        if (filename.includes("config")) {
           const newContent = insertSourceDocLink(
             content,
             "https://github.com/ava-labs/avalanchego/tree/master/subnets/config.md"
