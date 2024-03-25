@@ -289,7 +289,7 @@ Debes enviar al menos `135422040` nAVAX a la cuenta para cubrir el costo de desp
 ### APIs Personales
 
 Las APIs personales interactúan con las cuentas del nodo. `web3` tiene algunas funciones que la utilizan, por ejemplo: `web3.eth.personal.newAccount`, `web3.eth.personal.unlockAccount`, etc... Sin embargo, esta API está desactivada por defecto. Puede ser activada con las configuraciones de `C-chain`/`Coreth`. El Avalanche Network Runner actualmente no soporta la activación de esta API. Así que si quieres usar estas características, necesitas ejecutar tu propia red manualmente con la API `internal-private-personal` habilitada a través de la bandera `eth-apis`. Consulta y
-[Configuraciones de C-Chain](/nodes/configure/chain-config-flags.md#c-chain-configs).
+[Configuraciones de C-Chain](/nodes/configure/chain-configs/C.md).
 
 ## Ejecutar Migraciones
 

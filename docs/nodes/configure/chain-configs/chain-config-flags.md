@@ -1,0 +1,77 @@
+---
+tags: [Nodes]
+description: Reference for all available chain config options and flags.
+sidebar_label: Overview
+pagination_label: Chain Configs
+sidebar_position: 0
+---
+
+# Chain Configs
+
+Some chains allow the node operator to provide a custom configuration.
+AvalancheGo can read chain configurations from files and pass them to the
+corresponding chains on initialization.
+
+AvalancheGo looks for these files in the directory specified by
+`--chain-config-dir` AvalancheGo flag, as documented
+[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value
+defaults to `$HOME/.avalanchego/configs/chains`. This directory can have
+sub-directories whose names are chain IDs or chain aliases. Each sub-directory
+contains the configuration for the chain specified in the directory name. Each
+sub-directory should contain a file named `config`, whose value is passed in
+when the corresponding chain is initialized (see below for extension). For
+example, config for the C-Chain should be at:
+`{chain-config-dir}/C/config.json`.
+
+This also applies to Subnets, for example, if a Subnet's chain id is
+`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain
+should be at
+`{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+
+:::tip
+
+By default, none of these directories and/or files exist. You would need to
+create them manually if needed.
+
+:::
+
+The filename extension that these files should have, and the contents of these
+files, is VM-dependent. For example, some chains may expect `config.txt` while
+others expect `config.json`. If multiple files are provided with the same name
+but different extensions (for example `config.json` and `config.txt`) in the same
+sub-directory, AvalancheGo will exit with an error.
+
+For a given chain, AvalancheGo will follow the sequence below to look for its
+config file, where all folder and file names are case sensitive:
+
+- First it looks for a config sub-directory whose name is the chain ID - If it
+  isn't found, it looks for a config sub-directory whose name is the chain's
+  primary alias - If it's not found, it looks for a config sub-directory whose
+  name is another alias for the chain
+
+Alternatively, for some setups it might be more convenient to provide config
+entirely via the command line. For that, you can use AvalancheGo
+`--chain-config-content` flag, as documented
+[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-content-string).
+
+It is not required to provide these custom configurations. If they are not
+provided, a VM-specific default config will be used. And the values of these
+default config are printed when the node starts.
+
+## Subnet Chain Configs
+
+As mentioned above, if a Subnet's chain id is
+`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain
+should be at
+`{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
+
+## FAQ
+
+- When using `getBlockNumber` it will return finalized blocks. To allow for queries
+  for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries`
+  and set to true (by default it is set to `false`)
+
+- When deactivating offline pruning `(pruning-enabled: false)` from previously
+  enabled state, this will not impact blocks whose state was already pruned. This will
+  return missing trie node errors, as the node can't lookup the state of a historical
+  block if that state was deleted.

@@ -90,7 +90,7 @@ The user is going to need this ID in the later section when calling [addValidato
 :::info
 
 With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch.
-You can use [State-Sync](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean)
+You can use [State-Sync](/nodes/configure/chain-configs/C.md#state-sync-enabled)
 to shorten the time for bootstrapping.
 
 :::
@@ -576,6 +576,8 @@ To request permission to validate a Subnet, the following steps are required:
 
 Before a node can be a validator on a Subnet, the node is required to already be a validator on the
 primary network, which means that your node has **fully bootstrapped**.
+
+If the validator is within 24 hours of expiring on the primary network, it can't be added to the Subnet.
 
 See [here](/nodes/validate/add-a-validator.md#add-a-validator-with-core-extension) on how to
 become a validator.

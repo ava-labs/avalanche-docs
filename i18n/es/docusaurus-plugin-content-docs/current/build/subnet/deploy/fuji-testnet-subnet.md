@@ -90,7 +90,7 @@ El usuario va a necesitar este ID en la sección posterior al llamar a addValida
 :::info
 
 Con más datos en `Fuji`, puede llevar tiempo inicializar la Testnet `Fuji` desde cero.
-Puedes usar [State-Sync](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean)
+Puedes usar [State-Sync](/nodes/configure/chain-configs/C.md#state-sync-enabled)
 para acortar el tiempo de inicialización.
 
 :::
@@ -571,6 +571,8 @@ Para solicitar permiso para validar una Subnet, se requieren los siguientes paso
 
 Antes de que un nodo pueda ser un validador en una Subnet, se requiere que el nodo ya sea un validador en la
 red primaria, lo que significa que tu nodo se ha **inicializado completamente**.
+
+Si el validador está a menos de 24 horas de expirar en la red principal, no se puede agregar a la subred.
 
 Consulta [aquí](/nodes/validate/add-a-validator.md#add-a-validator-with-core-extension) cómo
 convertirte en un validador.

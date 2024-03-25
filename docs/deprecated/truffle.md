@@ -308,7 +308,7 @@ etc... However this API is disabled by default. It can be activated with
 support activating this API. So if you want to use these features you need to
 run your own network manually with `internal-private-personal` API enabled via
 the `eth-apis` flag. See and
-[C-Chain Configs](/nodes/configure/chain-config-flags.md#c-chain-configs).
+[C-Chain Configs](/nodes/configure/chain-configs/C.md).
 
 ## Run Migrations
 
