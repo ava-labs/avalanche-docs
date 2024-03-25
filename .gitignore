@@ -19,6 +19,18 @@ docs/build/cross-chain/awm/evm-integration.md
 docs/build/cross-chain/awm/relayer.md
 docs/learn/acp.md
 
+# AvalancheGo API from GH repo via docusaurus-plugin-remote-content
+docs/reference/avalanchego/p-chain/api.md
+docs/reference/avalanchego/x-chain/api.md
+docs/reference/avalanchego/admin-api.md
+docs/reference/avalanchego/health-api.md
+docs/reference/avalanchego/info-api.md
+docs/reference/avalanchego/metrics-api.md
+docs/reference/avalanchego/keystore-api.md
+docs/reference/avalanchego/index-api.md
+docs/nodes/configure/avalanchego-config-flags.md
+docs/nodes/configure/subnet-configs.md
+
 # Misc
 .DS_Store
 .env.local

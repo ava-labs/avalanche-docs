@@ -1,11 +1,11 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: Avalanche-CLI is a command-line tool that gives developers access to everything Avalanche. This release specializes in helping developers build and test Subnets. 
+description: Avalanche-CLI is a command-line tool that gives developers access to everything Avalanche. This release specializes in helping developers build and test Subnets.
 pagination_label: Avalanche-CLI
 sidebar_postion: 0
 ---
 
-# Avalanche-CLI 
+# Avalanche-CLI
 
 Avalanche-CLI is a command-line tool that gives developers access to
 everything Avalanche. This release specializes in helping developers
@@ -18,9 +18,8 @@ in with `avalanche subnet create myNewSubnet`.
 
 ## Primary
 
-The `primary` command suite provides a collection of tools for interacting with the Avalanche 
+The `primary` command suite provides a collection of tools for interacting with the Avalanche
 Primary Network.
-
 
 ### Primary AddValidator
 
@@ -28,7 +27,7 @@ The `primary addValidator` command adds an Avalanche node as a validator in the 
 Network with [AddPermissionlessValidatorTx](/reference/standards/guides/banff-changes.md#addpermissionlessvalidatortx).
 
 This command requires the node's BLS key and proof of possession key, more information regarding BLS
-can be found [here](/reference/avalanchego/p-chain/txn-format.md#proof-of-possession). 
+can be found [here](/reference/avalanchego/p-chain/txn-format.md#proof-of-possession).
 
 To get a node's BLS key and proof of possession key, call info.getNodeID API as shown [here](/reference/avalanchego/info-api.md#infogetnodeid)
 
@@ -406,8 +405,6 @@ avalanche subnet import public [subnetPath] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-
-
 ### Subnet Join
 
 The `subnet join` command configures your validator node to begin validating a new Subnet.
@@ -522,7 +519,7 @@ The `subnet vmid` command prints the virtual machine ID (VMID) for the given Sub
 avalanche subnet vmid [subnetName]
 ```
 
-## Elastic Subnet 
+## Elastic Subnet
 
 ### Transforms permissioned Subnet into Elastic Subnet
 
@@ -625,7 +622,7 @@ necessary instructions to upgrade your node manually.
 
 After you update your validator's configuration, you need to restart your validator manually. If you
 provide the `--avalanchego-chain-config-dir` flag, this command attempts to write the upgrade file
-at that path. Refer to [this doc](/nodes/configure/chain-config-flags.md#subnet-chain-configs) for
+at that path. Refer to [this doc](/nodes/configure/chain-configs/chain-config-flags.md#subnet-chain-configs) for
 related documentation.
 
 **Usage:**
@@ -739,11 +736,11 @@ avalanche subnet upgrade export [subnetName] [flags]
 
 ## Node
 
-The `node` command suite provides a collection of tools for creating and maintaining 
+The `node` command suite provides a collection of tools for creating and maintaining
 validators on the Avalanche Network.
 
 To get started, use the node create command wizard to walk through the
-configuration to make your node a primary validator on Avalanche public network. You can use the 
+configuration to make your node a primary validator on Avalanche public network. You can use the
 rest of the commands to maintain your node and make your node a Subnet Validator.
 
 ### Node Create
@@ -754,15 +751,15 @@ rest of the commands to maintain your node and make your node a Subnet Validator
 
 :::
 
-The `node create` command sets up a validator on a cloud server of your choice. 
-The validator will be validating the Avalanche Primary Network and Subnet 
-of your choice. By default, the command runs an interactive wizard. It 
+The `node create` command sets up a validator on a cloud server of your choice.
+The validator will be validating the Avalanche Primary Network and Subnet
+of your choice. By default, the command runs an interactive wizard. It
 walks you through all the steps you need to set up a validator.
 Validators can be deployed in multiple regions/zones simultaneously.
 Once this command is run, you will have to wait for the validator
 to finish bootstrapping on the primary network before running further
 commands on it, for example validating a Subnet. You can check the bootstrapping
-status by running `avalanche node status`. 
+status by running `avalanche node status`.
 
 The created node will be part of group of validators called `<clusterName>`
 and users can call node commands with `<clusterName>` so that the command
@@ -918,7 +915,6 @@ The `node list` command lists all clusters together with their nodes.
 The `node ssh` command execute a given command using ssh on all nodes in the cluster.
 If no command is given, just prints the ssh command line to be used to connect to each node.
 
-
 **Usage:**
 
 ```shell
@@ -939,7 +935,7 @@ If no command is given, just prints the ssh command line to be used to connect t
 
 :::
 
-The `node status` command gets the bootstrap status of all nodes in a cluster 
+The `node status` command gets the bootstrap status of all nodes in a cluster
 with the Primary Network.
 If no cluster is given, defaults to node list behaviour.
 
@@ -992,7 +988,7 @@ Note that a stopped node may still incur cloud server storage fees.
 
 :::
 
-The `node sync` command enables all nodes in a cluster to be bootstrapped to a Subnet. 
+The `node sync` command enables all nodes in a cluster to be bootstrapped to a Subnet.
 You can check the Subnet bootstrap status by calling avalanche `node status <clusterName> --subnet <subnetName>`
 
 **Usage:**
@@ -1053,7 +1049,7 @@ You can check the updated Subnet bootstrap status by calling avalanche
 
 The `node validate` command suite provides a collection of commands for nodes to join
 the Primary Network and Subnets as validators.
-If any of the commands is run before the nodes are bootstrapped on the Primary Network, the command 
+If any of the commands is run before the nodes are bootstrapped on the Primary Network, the command
 will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`.
 
 ### Node Validate Primary
@@ -1097,9 +1093,9 @@ Network.
 
 The `node validate subnet` command enables all nodes in a cluster to be validators of a Subnet.
 If the command is run before the nodes are Primary Network validators, the command will first
-make the nodes Primary Network validators before making them Subnet validators. 
+make the nodes Primary Network validators before making them Subnet validators.
 If The command is run before the nodes are bootstrapped on the Primary Network, the command
-will fail. 
+will fail.
 You can check the bootstrap status by calling `avalanche node status <clusterName>`.
 If The command is run before the nodes are synced to the Subnet, the command will fail.
 You can check the Subnet sync status by calling `avalanche node status <clusterName> --subnet <subnetName>`.
@@ -1139,10 +1135,10 @@ You can check the Subnet sync status by calling `avalanche node status <clusterN
 
 The `node whitelist` command suite provides a collection of tools for granting access to the cluster.
 
-Nodes created by `Avalanche-CLI` are protected by Cloud Security Group and only defined IP addresses 
-are allowed to access. User IP is whitelisted automatically when cluster is created, but this command can be used in 
+Nodes created by `Avalanche-CLI` are protected by Cloud Security Group and only defined IP addresses
+are allowed to access. User IP is whitelisted automatically when cluster is created, but this command can be used in
 case of IP address changes or granting access to additional IPs. This command detects user current IP address automatically
-if no IP address is provided. 
+if no IP address is provided.
 
 Secure SSH protocol is used to communicate with cloud instances. `node whitelist` command authorizes SSH public key on all nodes in the cluster if --ssh params is specified. Please keep your SSH private keys safe and secure, only share public keys to grant shell access to cloud instances running `avalanchego`.
 

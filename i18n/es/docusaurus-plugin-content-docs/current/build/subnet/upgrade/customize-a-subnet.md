@@ -12,7 +12,7 @@ Todas las Subnets se pueden personalizar utilizando [`Configuraciones de Subnet`
 
 Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subnet, una
 especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
-configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
+configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-configs/chain-config-flags.md) para obtener una explicación detallada.
 
 Una blockchain creada por o bifurcada de [Subnet-EVM](https://github.com/ava-labs/subnet-evm) se puede
 personalizar utilizando uno o más de los siguientes métodos:
@@ -1035,7 +1035,7 @@ Consulte cada configuración inicial de precompilación en sus secciones relevan
 
 ## Configuraciones de Cadena AvalancheGo
 
-Como se describe en [este documento](/nodes/configure/chain-config-flags.md#subnet-chain-configs), cada blockchain de Subnets puede tener su propia configuración personalizada. Si el ChainID de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, el archivo de configuración para esta cadena se encuentra en `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
+Como se describe en [este documento](/nodes/configure/chain-configs/chain-config-flags.md#subnet-chain-configs), cada blockchain de Subnets puede tener su propia configuración personalizada. Si el ChainID de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, el archivo de configuración para esta cadena se encuentra en `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
 Para blockchains creadas por o bifurcadas de Subnet-EVM, la mayoría de las configuraciones de C-Chain son aplicables, excepto las API específicas de Avalanche.
 
