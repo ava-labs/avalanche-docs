@@ -1,12 +1,11 @@
 ---
 tags: [Nodes]
 description: Reference for all available C-Chain config options and flags.
-sidebar_label: C-Chain
 pagination_label: C-Chain Configs
 sidebar_position: 3
 ---
 
-# C-Chain Configs
+# C-Chain
 
 In order to specify a config for the C-Chain, a JSON config file should be
 placed at `{chain-config-dir}/C/config.json`. This file does not exist by
@@ -75,7 +74,7 @@ _Integer_
 Size of trie cache used for providing state sync data to peers in MBs. Should be
 a multiple of `64`. Defaults to `64`.
 
-### Continuous Profiling
+## Continuous Profiling
 
 ### `continuous-profiler-dir`
 
@@ -100,7 +99,7 @@ _Integer_
 Specifies the maximum number of profiles to keep before removing the oldest.
 Defaults to `5`.
 
-### Enabling Avalanche Specific APIs
+## Enabling Avalanche Specific APIs
 
 ### `snowman-api-enabled`
 
@@ -400,7 +399,7 @@ Adds the following RPC calls to the `personal_*` namespace. Defaults to `false`.
 - `personal_initializeWallet`
 - `personal_unpair`
 
-### API Configuration
+## API Configuration
 
 ### `rpc-gas-cap`
 
@@ -571,7 +570,7 @@ _Duration_
 Maximum duration a non-executable transaction will be allowed in the poll. Defaults to `600000000000` nano seconds which is
 10 minutes.
 
-### Metrics
+## Metrics
 
 ### `metrics-enabled`
 
@@ -585,7 +584,7 @@ _Boolean_
 
 Enables expensive metrics. Defaults to `false`.
 
-### Snapshots
+## Snapshots
 
 ### `snapshot-async`
 
@@ -640,7 +639,7 @@ _Boolean_
 If `true`, allow users to unlock accounts in unsafe HTTP environment. Defaults
 to `false`.
 
-### Database
+## Database
 
 ### `trie-clean-cache`
 
@@ -817,7 +816,7 @@ _Boolean_
 If set to `true`, the node will not index transactions. TxLookupLimit can be still used to control deleting old transaction indices.
 Defaults to `false`.
 
-### VM Networking
+## VM Networking
 
 ### `max-outbound-active-requests`
 
@@ -831,7 +830,7 @@ _Integer_
 
 Specifies the maximum number of outbound cross-chain requests in flight at once. Defaults to `64`.
 
-### Miscellaneous
+## Miscellaneous
 
 ### `airdrop`
 
