@@ -1,16 +1,16 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Cómo personalizar una Subred utilizando Genesis, Precompilación y Configuraciones de Blockchain.
-sidebar_label: Personalizar una Subred
-pagination_label: Personaliza tu Subred impulsada por EVM
+tags: [Construir, Subnets]
+description: Cómo personalizar una Subnet utilizando Genesis, Precompilación y Configuraciones de Blockchain.
+sidebar_label: Personalizar una Subnet
+pagination_label: Personaliza tu Subnet impulsada por EVM
 sidebar_position: 1
 ---
 
-# Personaliza tu Subred impulsada por EVM
+# Personaliza tu Subnet impulsada por EVM
 
-Todas las Subredes se pueden personalizar utilizando [`Configuraciones de Subred`](#configuraciones-de-subred).
+Todas las Subnets se pueden personalizar utilizando [`Configuraciones de Subnet`](#configuraciones-de-subnet).
 
-Una Subred puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subred, una
+Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subnet, una
 especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
 configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
 
@@ -18,15 +18,15 @@ Una blockchain creada por o bifurcada de [Subnet-EVM](https://github.com/ava-lab
 personalizar utilizando uno o más de los siguientes métodos:
 
 - [Genesis](#genesis)
-- [Precompilación](#precompilaciones)
-- [Configuraciones de actualización](#actualizaciones-de-red-habilitardeshabilitar-precompilaciones)
+- [Precompilación](#precompilados)
+- [Configuraciones de actualización](#actualizaciones-de-red-habilitardeshabilitar-precompilados)
 - [Configuraciones de cadena](#configuraciones-de-cadena-avalanchego)
 
-## Configuraciones de Subred
+## Configuraciones de Subnet
 
-Una Subred se puede personalizar configurando parámetros para lo siguiente:
+Una Subnet se puede personalizar configurando parámetros para lo siguiente:
 
-- [Comunicación solo para validadores para crear una Subred privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
+- [Comunicación solo para validadores para crear una Subnet privada](/nodes/configure/subnet-configs.md#validatoronly-bool)
 - [Consenso](/nodes/configure/subnet-configs.md#parámetros-de-consenso)
 - [Gossip](/nodes/configure/subnet-configs.md#configuraciones-de-gossip)
 
@@ -37,7 +37,7 @@ Consulta [aquí](/nodes/configure/subnet-configs.md) para obtener más informaci
 Cada blockchain tiene algún estado de genesis cuando se crea. Cada Máquina Virtual define el formato y
 la semántica de sus datos de genesis.
 
-La Subred-EVM de genesis predeterminada proporcionada a continuación tiene algunos parámetros bien definidos:
+La Subnet-EVM de genesis predeterminada proporcionada a continuación tiene algunos parámetros bien definidos:
 
 ```json
 {
@@ -101,7 +101,7 @@ Cambiar estos valores puede causar problemas, así que trátalos con cuidado.
 #### Configuración de Tarifas
 
 `gasLimit`: Establece la cantidad máxima de gas consumido por bloque. Esta restricción pone un límite en el
-cantidad de cómputo que se puede hacer en un solo bloque, lo que a su vez establece un límite en el
+cantidad de computación que se puede hacer en un solo bloque, lo que a su vez establece un límite en el
 uso máximo de gas permitido para una sola transacción.
 Para referencia, el valor de la cadena C se establece en `15,000,000`.
 
@@ -121,8 +121,8 @@ por encima/por debajo del `targetGas`, aumenta/disminuye la tarifa base proporci
 la actividad de red real está del objetivo. Si la red comienza a producir bloques con un costo de gas más alto que
 esto, las tarifas base se incrementan en consecuencia.
 
-`baseFeeChangeDenominator`: Divide la diferencia entre la utilización real y la objetivo para determinar
-cuánto aumentar/disminuir la tarifa base. Un denominador más grande indica una tarifa base que cambia más lentamente, más pegajosa,
+`baseFeeChangeDenominator`: Divide la diferencia entre la utilización real y objetivo para determinar
+cuánto aumentar/disminuir la tarifa base. Un denominador más grande indica una tarifa base más lenta y pegajosa,
 mientras que un denominador más bajo permite que la tarifa base se ajuste más rápidamente.
 Para referencia, el valor de la cadena C se establece en `36`. Este valor establece la
 tarifa base para aumentar o disminuir en un factor de `1/36` de la tarifa base del bloque padre.
@@ -140,7 +140,8 @@ Si el bloque se produce a la tasa objetivo, el costo de gas del bloque se manten
 Si se produce más rápido/más lento, el costo de gas del bloque se incrementará/decrementará por el valor de paso por
 cada segundo más rápido/más lento que la tasa de bloque objetivo correspondientemente.
 
-:::nota
+:::note
+
 Si el `blockGasCostStep` se establece en un número muy grande, efectivamente requiere que la producción de bloques
 no vaya más rápido que la `targetBlockRate`. Por ejemplo, si un bloque se produce dos segundos más rápido que
 la tasa de bloque objetivo, el costo de gas del bloque aumentará en `2 * blockGasCostStep`.
@@ -149,11 +150,11 @@ la tasa de bloque objetivo, el costo de gas del bloque aumentará en `2 * blockG
 
 #### Destinatarios de Tarifas Personalizados
 
-Consulta la sección [Configuración de un Destinatario de Tarifas Personalizado](#configuración-de-un-destinatario-de-tarifas-personalizado)
+Consulta la sección [Configuración de un Destinatario de Tarifas Personalizado](#destinatarios-de-tarifas-personalizados)
 
 ### Alloc
 
-Consulta la sección [Configuración de la Asignación de Genesis](#configuración-de-la-asignación-de-genesis)
+Consulta la sección [Configuración de la Asignación de Genesis](#configurando-la-asignación-del-génesis)
 
 ### Header
 
@@ -185,7 +186,7 @@ hexadecimal y es igual a `15,000,000`.
 `coinbase`: Se refiere a la dirección de los productores de bloques. Esto también significa que representa la
 receptor de la recompensa del bloque. Comúnmente se establece
 en `0x0000000000000000000000000000000000000000` para el bloque génesis. Para permitir receptores de tarifas en
-Subnet-EVM, consulta [esta sección.](#configuración-de-un-receptor-de-tarifas-personalizado)
+Subnet-EVM, consulta [esta sección.](#configurando-un-receptor-de-tarifas-personalizado)
 
 `parentHash`: Este es el hash Keccak de 256 bits de la cabecera completa del bloque padre. Comúnmente se establece en
 `0x0000000000000000000000000000000000000000000000000000000000000000` para el
@@ -276,7 +277,7 @@ archivo génesis (bajo la clave `"config"`):
 #### Dirección del Receptor de Tarifas
 
 Con `allowFeeRecipients` habilitado, tus validadores pueden especificar sus direcciones para recolectar tarifas. Ellos
-necesitan actualizar su [configuración de cadena](#configuraciones-de-cadena-de-avalanchego) de EVM con lo siguiente para especificar dónde
+necesitan actualizar su [configuración de cadena](#configuraciones-de-cadena-avalanchego) de EVM con lo siguiente para especificar dónde
 debe enviarse la tarifa.
 
 ```json
@@ -387,7 +388,7 @@ desplegador válido en lugar del llamador de `CREATE`. Esto significa que los co
 crear nuevos contratos siempre que el remitente de la transacción original sea un desplegador permitido.
 
 El contrato de precompilación `Stateful Precompile` que alimenta la `ContractDeployerAllowList` se adhiere a la
-[interfaz de solidity AllowList](#interfaz-allowlist) en `0x0200000000000000000000000000000000000000`
+[interfaz de solidity AllowList](#interfaz-de-allowlist) en `0x0200000000000000000000000000000000000000`
 (puedes cargar esta interfaz e interactuar directamente en Remix):
 
 - Si intentas agregar un `Enabled` y no eres un `Admin`, verás algo como:
@@ -407,7 +408,7 @@ lista de permitidos sin modificar la Subnet-EVM para programar una actualizació
 
 :::
 
-#### Configuración inicial de la lista de contratos permitidos
+#### Configuración inicial de la lista de permitidos de contratos
 
 Es posible habilitar esta precompilación con una configuración inicial para activar su efecto en
 la marca de tiempo de activación. Esto proporciona una forma de habilitar la precompilación sin una dirección de administrador para gestionar
@@ -426,11 +427,11 @@ de tu archivo de génesis o de actualización:
 ```
 
 Esto permitirá que solo `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` despliegue contratos. Para obtener más
-información sobre las configuraciones iniciales de precompilación, consulta [Configuraciones iniciales de precompilación](#configuraciones-iniciales-de-precompilación).
+información sobre las configuraciones iniciales de precompilaciones, consulta [Configuraciones iniciales de precompilaciones](#configuraciones-iniciales-de-precompilación).
 
 ### Restringir quién puede enviar transacciones
 
-Similar a restringir a los desplegadores de contratos, esta precompilación restringe qué direcciones pueden enviar
+Similar a la restricción de los desplegadores de contratos, esta precompilación restringe qué direcciones pueden enviar
 transacciones en la cadena. Al igual que en la sección anterior, puedes activar la precompilación incluyendo una
 configuración de `AllowList` en tu archivo de génesis:
 
@@ -450,7 +451,7 @@ En este ejemplo, `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` se nombra como el
 `Allowed`. `Admins`, `Manager` y `Enabled` pueden enviar transacciones a la cadena.
 
 El contrato de precompilación `Stateful Precompile` que alimenta la `TxAllowList` se adhiere a la
-[interfaz de solidity AllowList](#interfaz-allowlist) en `0x0200000000000000000000000000000000000002`
+[interfaz de solidity AllowList](#interfaz-de-allowlist) en `0x0200000000000000000000000000000000000002`
 (puedes cargar esta interfaz e interactuar directamente en Remix):
 
 - Si intentas agregar un `Enabled` y no eres un `Admin`, verás algo como:
@@ -469,7 +470,7 @@ lista de permitidos sin modificar la Subnet-EVM para programar una actualizació
 
 :::
 
-#### Configuración inicial de la lista de transacciones permitidas
+#### Configuración inicial de la lista de permitidos de transacciones
 
 Es posible habilitar esta precompilación con una configuración inicial para activar su efecto en
 la marca de tiempo de activación. Esto proporciona una forma de habilitar la precompilación sin una dirección de administrador para gestionar
@@ -488,7 +489,7 @@ el campo `enabledAddresses` de tu archivo de génesis o de actualización:
 ```
 
 Esto permitirá que solo `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` envíe transacciones. Para obtener más
-información sobre las configuraciones iniciales de precompilación, consulta [Configuraciones iniciales de precompilación](#configuraciones-iniciales-de-precompilación).
+información sobre las configuraciones iniciales de precompilaciones, consulta [Configuraciones iniciales de precompilaciones](#configuraciones-iniciales-de-precompilación).
 
 ### Acuñando monedas nativas
 
@@ -523,14 +524,14 @@ interface INativeMinter is IAllowList {
     uint256 amount
   );
 
-  // Acuña [amount] de monedas nativas y las envía a [addr]
+  // Acuña [amount] número de monedas nativas y las envía a [addr]
   function mintNativeCoin(address addr, uint256 amount) external;
 }
 ```
 
 `mintNativeCoin` toma una dirección y una cantidad de monedas nativas que se van a acuñar. La cantidad denota la cantidad en la denominación mínima de las monedas nativas (10^18). Por ejemplo, si quieres acuñar 1 moneda nativa (en AVAX), debes pasar 1 \* 10^18 como la cantidad. Se emite un evento `NativeCoinMinted` con el remitente, el destinatario y la cantidad cuando se acuña una moneda nativa.
 
-Ten en cuenta que esto utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de la interfaz `AllowList` como `readAllowList` y `setAdmin`, `setManager`, `setEnabled`, `setNone`. Para obtener más información, consulta [Interfaz de Solidity de AllowList](#interfaz-de-allowlist).
+Ten en cuenta que esto utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de interfaz de `AllowList` como `readAllowList` y `setAdmin`, `setManager`, `setEnabled`, `setNone`. Para obtener más información, consulta [Interfaz de Solidity de AllowList](#interfaz-de-allowlist).
 
 :::warning
 
@@ -554,7 +555,7 @@ Es posible habilitar esta precompilación con una configuración inicial para ac
 }
 ```
 
-En el campo de cantidad, puedes especificar una cadena decimal o hexadecimal. Esto acuñará 1000000000000000000 (equivalente a 1 moneda nativa denominada como 10^18) a ambas direcciones. Ten en cuenta que ambas están en formato de cadena. El hexa "0xde0b6b3a7640000" es equivalente a 1000000000000000000. Para obtener más información sobre las configuraciones iniciales de las precompilaciones, consulta [Configuraciones iniciales de las precompilaciones](#configuraciones-iniciales-de-las-precompilaciones).
+En el campo de cantidad, puedes especificar una cadena decimal o hexadecimal. Esto acuñará 1000000000000000000 (equivalente a 1 moneda nativa denominada como 10^18) a ambas direcciones. Ten en cuenta que ambas están en formato de cadena. El hex "0xde0b6b3a7640000" es equivalente a 1000000000000000000. Para obtener más información sobre las configuraciones iniciales de las precompilaciones, consulta [Configuraciones iniciales de las precompilaciones](#configuraciones-iniciales-de-precompilación).
 
 ### Configuración de tarifas dinámicas
 
@@ -633,13 +634,13 @@ interface IFeeManager is IAllowList {
 }
 ```
 
-El precompilado FeeConfigManager utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de la interfaz `AllowList` como `readAllowList` y `setAdmin`, `setManager`, `setEnabled`, `setNone`. Para obtener más información, consulta [Interfaz de Solidity de AllowList](#interfaz-de-allowlist).
+El precompilado FeeConfigManager utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de interfaz de `AllowList` como `readAllowList` y `setAdmin`, `setManager`, `setEnabled`, `setNone`. Para obtener más información, consulta [Interfaz de Solidity de AllowList](#interfaz-de-allowlist).
 
 Además de la interfaz `AllowList`, el FeeConfigManager agrega las siguientes capacidades:
 
 - `getFeeConfig` - recupera la configuración dinámica actual de las tarifas
 - `getFeeConfigLastChangedAt` - recupera la marca de tiempo del último bloque en el que se actualizó la configuración de tarifas
-- `setFeeConfig` - establece la configuración dinámica de tarifas en la cadena (ver [aquí](#fee-config) para más detalles sobre los parámetros de configuración de tarifas). Esta función sólo puede ser llamada por una dirección `Admin`, `Manager` o `Enabled`.
+- `setFeeConfig` - establece la configuración dinámica de tarifas en la cadena (ver [aquí](#configuración-de-tarifas) para más detalles sobre los parámetros de configuración de tarifas). Esta función sólo puede ser llamada por una dirección `Admin`, `Manager` o `Enabled`.
 - `FeeConfigChanged` - un evento que se emite cuando se actualiza la configuración de tarifas. Los temas incluyen el remitente, la configuración de tarifas antigua y la nueva configuración de tarifas.
 
 También puedes obtener la configuración de tarifas en un bloque con el método RPC `eth_feeConfig`. Para más información, consulta [aquí](/reference/subnet-evm/api#eth_feeconfig).
@@ -666,7 +667,7 @@ Es posible habilitar este precompilado con una configuración inicial para activ
 }
 ```
 
-Esto establecerá la configuración de tarifas en los valores especificados en el campo `initialFeeConfig`. Para obtener más información sobre las configuraciones iniciales de precompilación, consulta [Configuraciones Iniciales de Precompilación](#initial-precompile-configurations).
+Esto establecerá la configuración de tarifas en los valores especificados en el campo `initialFeeConfig`. Para obtener más información sobre las configuraciones iniciales de precompilación, consulta [Configuraciones Iniciales de Precompilación](#configuraciones-iniciales-de-precompilación).
 
 ### Cambiando los Mecanismos de Recompensa de Tarifas
 
@@ -685,7 +686,7 @@ El mecanismo de recompensa de tarifas se puede configurar con este contrato de p
 
 `adminAddresses` denota las cuentas de administrador que pueden agregar otras cuentas `Admin` o `Enabled`. Tanto `Admin`, `Manager` como `Enabled` son elegibles para cambiar el mecanismo de tarifas actual.
 
-El precompilado implementa la interfaz `RewardManager` que incluye la interfaz `AllowList`. Para un ejemplo de la interfaz `AllowList`, consulta el [TxAllowList](#allowlist-interface) de arriba.
+El precompilado implementa la interfaz `RewardManager` que incluye la interfaz `AllowList`. Para un ejemplo de la interfaz `AllowList`, consulta el [TxAllowList](#interfaz-de-allowlist) anterior.
 
 El contrato de precompilación `Stateful Precompile` que alimenta al `RewardManager` se adhiere a la siguiente interfaz de Solidity en `0x0200000000000000000000000000000000000004` (puedes cargar esta interfaz e interactuar directamente en Remix). También se puede encontrar en [IRewardManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IRewardManager.sol):
 
@@ -725,13 +726,13 @@ interface IRewardManager is IAllowList {
 }
 ```
 
-El precompilado `RewardManager` utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de la interfaz `AllowList` como `readAllowList` y `setAdmin`, `setEnabled`, `setNone`. Para más información, consulta la [Interfaz de Solidity de AllowList](#allowlist-interface).
+El precompilado `RewardManager` utiliza la interfaz `IAllowList` directamente, lo que significa que utiliza las mismas funciones de interfaz de `AllowList` como `readAllowList` y `setAdmin`, `setEnabled`, `setNone`. Para más información, consulta la [Interfaz de Solidity de AllowList](#interfaz-de-allowlist).
 
 Además de la interfaz `AllowList`, el `RewardManager` agrega las siguientes capacidades:
 
 - `setRewardAddress` - establece la dirección a la que se envían las tarifas. Esta dirección puede ser un contrato o una dirección de usuario. La dirección se convierte en la dirección de coinbase requerida para los bloques en los que se habilita este mecanismo. Esto significa que recibirá las tarifas recolectadas de las transacciones en el bloque. Recibir tarifas no llamará a ninguna función de contrato ni a funciones de fallback. Simplemente aumentará el saldo de la dirección en la cantidad de tarifas.
 
-- `allowFeeRecipients` - permite a los productores de bloques reclamar tarifas. Esto permitirá a los productores de bloques reclamar tarifas especificando sus propias direcciones en sus configuraciones de cadena. Consulta [aquí](#fee-recipient) para obtener más información sobre cómo especificar la dirección del receptor de tarifas en la configuración de la cadena.
+- `allowFeeRecipients` - permite a los productores de bloques reclamar tarifas. Esto permitirá a los productores de bloques reclamar tarifas especificando sus propias direcciones en sus configuraciones de cadena. Consulta [aquí](#receptor-de-tarifas) para obtener más información sobre cómo especificar la dirección del receptor de tarifas en la configuración de la cadena.
 
 - `disableRewards` - desactiva las recompensas de bloque y comienza a quemar tarifas.
 
@@ -747,20 +748,21 @@ Además de la interfaz `AllowList`, el `RewardManager` agrega las siguientes cap
 
 Estos 3 mecanismos (quemar, enviar a una dirección predefinida y habilitar que los productores de bloques recojan tarifas) no se pueden habilitar al mismo tiempo. Habilitar un mecanismo tomará el control sobre el mecanismo anterior. Por ejemplo, si habilitas `allowFeeRecipients` y luego habilitas `disableRewards`, el `disableRewards` tomará el control y las tarifas se quemarán.
 
-_Nota: Las direcciones de recompensa o las direcciones de receptores de tarifas no necesitan ser cuentas de administrador o habilitadas._ 
+_Nota: Las direcciones de recompensa o las direcciones de receptores de tarifas no necesitan ser cuentas de administrador o habilitadas._
 
 #### Configuración Inicial
 
-Es posible habilitar este precompilado con una configuración inicial para activar su efecto en la marca de tiempo de activación. Esto proporciona una forma de habilitar el precompilado sin una dirección de administrador para cambiar el mecanismo de recompensa de tarifas. Esto puede ser útil para redes que requieren un cambio de mecanismo de recompensa de una sola vez sin especificar ninguna dirección de administrador. Sin esta configuración inicial, el precompilado heredará el mecanismo de `feeRecipients` activado en el génesis. Esto significa que si `allowFeeRecipients` se establece en true en el archivo de génesis, el precompilado se habilitará con el mecanismo `allowFeeRecipients`. De lo contrario, seguirá quemando tarifas. Para usar la configuración inicial, debes especificar el mecanismo de recompensa inicial en el campo `initialRewardConfig` de tu archivo de génesis o actualización.
+Es posible habilitar este precompilado con una configuración inicial para activar su efecto en la marca de tiempo de activación. Esto proporciona una forma de habilitar el precompilado sin una dirección de administrador para cambiar el mecanismo de recompensa de tarifas. Esto puede ser útil para redes que requieren un cambio de mecanismo de recompensa de una sola vez sin especificar ninguna dirección de administrador. Sin esta configuración inicial, el precompilado heredará el mecanismo de `feeRecipients` activado en el génesis. Esto significa que si `allowFeeRecipients` se establece en true en el archivo de génesis, el precompilado se habilitará con el mecanismo `allowFeeRecipients`. De lo contrario, seguirá quemando tarifas. Para usar la configuración inicial, debes especificar el mecanismo de recompensa inicial en el campo `initialRewardConfig` en tu archivo de génesis o actualización.
 
 Para permitir receptores de tarifas personalizados, debes especificar el campo `allowFeeRecipients` en el `initialRewardConfig`:
 
-```json
+````json
 {
   "rewardManagerConfig": {
     "blockTimestamp": 0,
     "initialRewardConfig": {
       "allowFeeRecipients": true
+    }
 
 
 Para establecer una dirección para recibir todas las recompensas de transacción, debes especificar el campo `rewardAddress` en `initialRewardConfig`:
@@ -774,7 +776,7 @@ Para establecer una dirección para recibir todas las recompensas de transacció
     }
   }
 }
-```
+````
 
 Para desactivar las recompensas y comenzar a quemar tarifas, debes dejar todos los campos en `initialRewardConfig` vacíos:
 
@@ -798,11 +800,11 @@ Sin embargo, esto es diferente al comportamiento predeterminado del precompilado
 }
 ```
 
-Si tanto `allowFeeRecipients` como `rewardAddress` se especifican en el campo `initialRewardConfig`, se devolverá un error y el precompilado no se activará. Para obtener más información sobre las configuraciones iniciales de los precompilados, consulta [Configuraciones Iniciales de los Precompilados](#initial-precompile-configurations).
+Si tanto `allowFeeRecipients` como `rewardAddress` se especifican en el campo `initialRewardConfig`, se devolverá un error y el precompilado no se activará. Para obtener más información sobre las configuraciones iniciales de los precompilados, consulta [Configuraciones Iniciales de los Precompilados](#configuraciones-iniciales-de-precompilación).
 
 ### Mensajería de Avalanche Warp
 
-El precompilado de Warp habilita la comunicación entre subredes a través de la red primaria (C-Chain). Para usar la mensajería de Warp, las cadenas Subnet-EVM de las subredes deben activar sus precompilados de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
+El precompilado de Warp habilita la comunicación entre subnets a través de la red primaria (C-Chain). Para usar la mensajería de Warp, las cadenas Subnet-EVM de las subnets deben activar sus precompilados de Warp. Warp se puede activar con las siguientes líneas en upgrade.json:
 
 ```json
 {
@@ -815,7 +817,7 @@ El precompilado de Warp habilita la comunicación entre subredes a través de la
 
 `blockTimestamp` debe establecerse en una marca de tiempo después de la fecha de Durango. `quorumNumerator` es el porcentaje de participación de los validadores que deben firmar un mensaje de Warp para que se considere válido. Debe establecerse en un valor entre 33 y 100. El valor predeterminado es 67. El precompilado `warpConfig` se puede desactivar más tarde estableciendo `disable` en `true` en el archivo upgrade.json.
 
-Si quieres usar la mensajería de Warp en una cadena Subnet-EVM existente, debes coordinar una actualización con `upgrade.json`. Consulta [Actualizaciones de Red: Habilitar/Deshabilitar Precompilados](#network-upgrades-enabledisable-precompiles) para obtener más información.
+Si quieres usar la mensajería de Warp en una cadena Subnet-EVM existente, debes coordinar una actualización con `upgrade.json`. Consulta [Actualizaciones de Red: Habilitar/Deshabilitar Precompilados](#actualizaciones-de-red-habilitardeshabilitar-precompilados) para obtener más información.
 
 :::warning
 
@@ -831,15 +833,15 @@ Subnet-EVM contiene ejemplos de contratos para precompilados en `/contracts`. Es
 
 :::warning
 
-Realizar una actualización de red requiere coordinar la actualización en toda la red. Una actualización de red cambia el conjunto de reglas utilizado para procesar y verificar bloques, por lo que cualquier nodo que se actualice incorrectamente o no se actualice a tiempo cuando esa actualización entre en vigencia puede quedar fuera de sincronización con el resto de la red.
+Realizar una actualización de red requiere coordinar la actualización en toda la red. Una actualización de red cambia el conjunto de reglas utilizado para procesar y verificar bloques, por lo que cualquier nodo que se actualice incorrectamente o no se actualice a tiempo para que esa actualización entre en vigencia puede quedar fuera de sincronización con el resto de la red.
 
-Cualquier error en la configuración de las actualizaciones de red de la red o en su coordinación en los validadores puede hacer que la red se detenga y la recuperación puede ser difícil.
+Cualquier error en la configuración de las actualizaciones de red o en su coordinación en los validadores puede hacer que la red se detenga y la recuperación puede ser difícil.
 
 :::
 
 Además de especificar la configuración para cada uno de los precompilados anteriores en la configuración de la cadena génesis, se pueden habilitar o deshabilitar individualmente en un momento dado como una actualización de red. Deshabilitar un precompilado desactiva la llamada al precompilado y destruye su almacenamiento para que pueda habilitarse en un momento posterior con una nueva configuración si se desea.
 
-Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde reside [`config.json`](#avalanchego-chain-configs): `{chain-config-dir}/{blockchainID}/upgrade.json`. Por ejemplo, la actualización de la Subred WAGMI debe colocarse en `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
+Estas actualizaciones deben especificarse en un archivo llamado `upgrade.json` ubicado en el mismo directorio donde reside [`config.json`](#configuraciones-de-cadena-avalanchego): `{chain-config-dir}/{blockchainID}/upgrade.json`. Por ejemplo, la actualización de la Subnet WAGMI debe colocarse en `~/.avalanchego/configs/chains/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/upgrade.json`.
 
 El contenido de `upgrade.json` debe formatearse de acuerdo con lo siguiente:
 
@@ -849,7 +851,7 @@ El contenido de `upgrade.json` debe formatearse de acuerdo con lo siguiente:
     {
       "[NOMBRE_PRECOMPILADO]": {
         "blockTimestamp": "[TIMESTAMP_ACTIVACIÓN]", // marca de tiempo Unix en la que el precompilado debe activarse
-        "[PARÁMETRO]": "[VALOR]" // opciones de configuración específicas del precompilado, p. ej., "adminAddresses"
+        "[PARÁMETRO]": "[VALOR]" // opciones de configuración específicas del precompilado, por ejemplo, "adminAddresses"
       }
     }
   ]
@@ -890,7 +892,7 @@ Habilitar y deshabilitar un precompilado es una actualización de red y siempre 
 
 :::danger
 
-Por seguridad, siempre debes tratar `precompileUpgrades` como solo de agregado.
+Por seguridad, siempre debes tratar `precompileUpgrades` como solo de agregar.
 
 Como medida de último recurso, es posible abortar o reconfigurar una actualización de precompilado que no se ha activado, ya que la cadena aún está procesando bloques utilizando el conjunto de reglas anterior.
 
@@ -932,8 +934,9 @@ en el primer bloque con una marca de tiempo >= `1668970000`.
 Cuando una deshabilitación de precompilación entra en efecto (es decir, después de que su `blockTimestamp` ha pasado), su almacenamiento
 se borrará. Si desea volver a habilitarlo, deberá tratarlo como una nueva configuración.
 
-Después de haber creado el archivo `upgrade.json` y haberlo colocado en el directorio de configuración de la cadena, es necesario
-reiniciar el nodo para que se cargue el archivo de actualización (nuevamente, ¡asegúrese de no reiniciar todos los validadores de la Subred a la vez!). Al reiniciar el nodo, imprimirá la configuración de la cadena, donde
+Después de haber creado el archivo `upgrade.json` y colocarlo en el directorio de configuración de la cadena, es necesario
+reiniciar el nodo para que se cargue el archivo de actualización (una vez más, asegúrese de no reiniciar todos los validadores de la Subnet
+¡a la vez!). Al reiniciar el nodo, imprimirá la configuración de la cadena, donde
 puede verificar que la actualización se haya cargado correctamente. En nuestro ejemplo:
 
 <!-- markdownlint-disable MD013 -->
@@ -951,18 +954,18 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 
 <!-- markdownlint-enable MD013 -->
 
-Observa que la entrada `precompileUpgrades` refleja correctamente los cambios. También puedes verificar los
+Observe que la entrada `precompileUpgrades` refleja correctamente los cambios. También puede verificar los
 precompilados activados en una marca de tiempo con el método RPC
 [`eth_getActivePrecompilesAt`](/reference/subnet-evm/api#eth_getactiveprecompilesat).
 El método RPC [`eth_getChainConfig`](/reference/subnet-evm/api#eth_getchainconfig)
 también devolverá las actualizaciones configuradas en la respuesta.
 
-¡Eso es todo, tu Subred está lista y las actualizaciones deseadas se activarán en la marca de tiempo indicada!
+¡Eso es todo, tu Subnet está lista y las actualizaciones deseadas se activarán en la marca de tiempo indicada!
 
 ### Configuraciones Iniciales de Precompilación
 
-Los precompilados pueden ser gestionados por algunas direcciones privilegiadas para cambiar sus configuraciones y activar
-sus efectos. Por ejemplo, el precompilado `feeManagerConfig` puede tener `adminAddresses` que pueden
+Las precompilaciones pueden ser gestionadas por algunas direcciones privilegiadas para cambiar sus configuraciones y activar
+sus efectos. Por ejemplo, la precompilación `feeManagerConfig` puede tener `adminAddresses` que pueden
 cambiar la estructura de tarifas de la red.
 
 ```json
@@ -979,14 +982,14 @@ cambiar la estructura de tarifas de la red.
 ```
 
 En este ejemplo, solo la dirección `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` tiene permitido cambiar
-la estructura de tarifas de la red. La dirección de administrador debe llamar al precompilado para activar
+la estructura de tarifas de la red. La dirección de administrador debe llamar a la precompilación para activar
 su efecto; es decir, necesita enviar una transacción con una nueva configuración de tarifas para realizar la actualización.
 Esta es una característica muy poderosa, pero también otorga una gran cantidad de poder a la dirección de administrador. Si
 la dirección `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` se ve comprometida, la red está comprometida.
 
-Con las configuraciones iniciales, los precompilados pueden activar inmediatamente su efecto en la marca de tiempo de activación.
+Con las configuraciones iniciales, las precompilaciones pueden activar inmediatamente su efecto en la marca de tiempo de activación.
 De esta manera, las direcciones de administrador pueden omitirse en la configuración de precompilación. Por ejemplo,
-el precompilado `feeManagerConfig` puede tener `initialFeeConfig` para configurar la configuración de tarifas en la
+la precompilación `feeManagerConfig` puede tener `initialFeeConfig` para configurar la configuración de tarifas en la
 activación:
 
 ```json
@@ -1011,24 +1014,24 @@ activación:
 }
 ```
 
-Observa que no hay un campo `adminAddresses` en la configuración. Esto significa que no habrá
-direcciones de administrador para gestionar la estructura de tarifas con este precompilado. El precompilado simplemente
+Observe que no hay un campo `adminAddresses` en la configuración. Esto significa que no habrá
+direcciones de administrador para gestionar la estructura de tarifas con esta precompilación. La precompilación simplemente
 actualizará la configuración de tarifas a la configuración de tarifas especificada cuando se active en el `blockTimestamp` `1668950000`.
 
 :::note
 Todavía es posible agregar `adminAddresses` o `enabledAddresses` junto con estas configuraciones iniciales.
-En este caso, el precompilado se activará con la configuración inicial, y
+En este caso, la precompilación se activará con la configuración inicial, y
 las direcciones de administrador/habilitadas pueden acceder al contrato precompilado normalmente.
 :::
 
 :::info
 
-Si deseas cambiar la configuración inicial del precompilado, primero deberás deshabilitarlo y luego
-activar el precompilado nuevamente con la nueva configuración.
+Si desea cambiar la configuración inicial de la precompilación, primero deberá deshabilitarla y luego
+activar la precompilación nuevamente con la nueva configuración.
 
 :::
 
-Consulta cada configuración inicial de precompilación en sus secciones relevantes de `Configuración Inicial` bajo [Precompilados](#precompilados).
+Consulte cada configuración inicial de precompilación en sus secciones relevantes de `Configuración Inicial` bajo [Precompilaciones](#precompilados).
 
 ## Configuraciones de Cadena AvalancheGo
 
@@ -1040,7 +1043,7 @@ Para blockchains creadas por o bifurcadas de Subnet-EVM, la mayoría de las conf
 
 Una transacción se "regossipea" cuando el nodo no encuentra la transacción en un bloque después de `priority-regossip-frequency` (por defecto, `1m`). Por defecto, hasta 16 transacciones (máximo 1 por dirección) se regossipan a validadores por minuto.
 
-Los operadores pueden usar "regossip de prioridad" para regossipar más agresivamente transacciones para un conjunto de direcciones importantes (como relayers de puentes). Para hacerlo, deberá actualizar su configuración de cadena con lo siguiente:
+Los operadores pueden usar "regossip de prioridad" para regossipar más agresivamente transacciones para un conjunto de direcciones importantes (como relayers de puentes). Para hacerlo, deberás actualizar tu configuración de cadena con lo siguiente:
 
 ```json
 {
@@ -1048,7 +1051,7 @@ Los operadores pueden usar "regossip de prioridad" para regossipar más agresiva
 }
 ```
 
-Por defecto, hasta 32 transacciones de direcciones prioritarias (máximo 16 por dirección) se regossipan a validadores por segundo. Puede anular estos valores predeterminados con la siguiente configuración:
+Por defecto, hasta 32 transacciones de direcciones prioritarias (máximo 16 por dirección) se regossipan a validadores por segundo. Puedes anular estos valores predeterminados con la siguiente configuración:
 
 ```json
 {
@@ -1061,7 +1064,7 @@ Por defecto, hasta 32 transacciones de direcciones prioritarias (máximo 16 por 
 
 ### Receptor de tarifas
 
-Esto funciona junto con [`allowFeeRecipients`](#setting-a-custom-fee-recipient) y el precompilado de RewardManager para especificar a dónde se deben enviar las tarifas.
+Esto funciona junto con [`allowFeeRecipients`](#configurando-un-receptor-de-tarifas-personalizado) y el precompilado de RewardManager para especificar a dónde se deben enviar las tarifas.
 
 Con `allowFeeRecipients` habilitado, los validadores pueden especificar sus direcciones para recolectar tarifas.
 
@@ -1081,13 +1084,13 @@ Si `allowFeeRecipients` o el precompilado de `RewardManager` está habilitado en
 
 Subnet-EVM permite a los operadores de red especificar una modificación de estado que se llevará a cabo al comienzo del primer bloque con una marca de tiempo mayor o igual a la especificada en la configuración.
 
-Esto proporciona un camino de último recurso para actualizar contratos no actualizables a través de una actualización de red (por ejemplo, para solucionar problemas cuando se ejecuta su propia blockchain).
+Esto proporciona un camino de último recurso para actualizar contratos no actualizables a través de una actualización de red (por ejemplo, para solucionar problemas cuando estás ejecutando tu propia blockchain).
 
 :::warning
 
 Esto solo debe usarse como una alternativa de último recurso a bifurcar `subnet-evm` y especificar la actualización de red en el código.
 
-Usar una actualización de red para modificar el estado no es parte de las operaciones normales de la EVM. Debe asegurarse de que las modificaciones no invaliden ninguna de las suposiciones de los contratos desplegados o causen incompatibilidades con la infraestructura aguas abajo, como los exploradores de bloques.
+Usar una actualización de red para modificar el estado no es parte de las operaciones normales de la EVM. Debes asegurarte de que las modificaciones no invaliden ninguna de las suposiciones de los contratos desplegados o causen incompatibilidades con la infraestructura aguas abajo, como los exploradores de bloques.
 
 :::
 
@@ -1096,16 +1099,16 @@ Las marcas de tiempo para las actualizaciones en `stateUpgrades` deben estar en 
 Se admiten las siguientes tres modificaciones de estado:
 
 - `balanceChange`: agrega una cantidad especificada al saldo de una cuenta dada. Esta cantidad se puede especificar en hexadecimal o decimal y debe ser positiva.
-- `storage`: modifica las ranuras de almacenamiento especificadas a los valores especificados. Las claves y los valores deben ser de 32 bytes especificados en hexadecimal, con un prefijo `0x`.
+- `storage`: modifica las ranuras de almacenamiento especificadas a los valores especificados. Las claves y valores deben ser de 32 bytes especificados en hexadecimal, con un prefijo `0x`.
 - `code`: modifica el código almacenado en la cuenta especificada. El código debe ser _solo_ la parte de tiempo de ejecución de un código. El código debe comenzar con un prefijo `0x`.
 
 :::warning
 
-Si se modifica el código, _solo_ se debe proporcionar la parte de tiempo de ejecución del bytecode en `upgrades.json`. No utilice el bytecode que se usaría para desplegar un nuevo contrato, ya que esto incluye el código del constructor también. Consulte la documentación de su compilador para obtener información sobre cómo encontrar la parte de tiempo de ejecución del contrato que desea modificar.
+Si se modifica el código, _solo_ se debe proporcionar la parte de tiempo de ejecución del bytecode en `upgrades.json`. No uses el bytecode que se usaría para desplegar un nuevo contrato, ya que esto incluye el código del constructor también. Consulta la documentación de tu compilador para obtener información sobre cómo encontrar la parte de tiempo de ejecución del contrato que deseas modificar.
 
 :::
 
-El archivo `upgrades.json` que se muestra a continuación describe una actualización de red que realizará las siguientes modificaciones de estado en el primer bloque después (o en) del `8 de marzo de 2023 1:30:00 AM GMT`:
+El archivo `upgrades.json` que se muestra a continuación describe una actualización de red que realizará las siguientes modificaciones de estado en el primer bloque después (o en) `8 de marzo de 2023 1:30:00 AM GMT`:
 
 - Establece el código para la cuenta en `0x71562b71999873DB5b286dF957af199Ec94617F7`,
 - Y agrega `100` wei al saldo de la cuenta en `0xb794f5ea0ba39494ce839613fffba74279579268`,
@@ -1131,47 +1134,3 @@ El archivo `upgrades.json` que se muestra a continuación describe una actualiza
   ]
 }
 ```
-
-## Actualizaciones de red: Reprogramación de actualizaciones de red obligatorias
-
-Un caso típico en el que una red pierde cualquier activación obligatoria resultaría en una red que no puede operar. Esto se debe a que los validadores/nodos que ejecutan la versión antigua procesarían las transacciones de manera diferente a los nodos que ejecutan la nueva versión y terminarían en un estado diferente. Esto resultaría en una bifurcación en la red y los nuevos nodos no podrían sincronizarse con la red. Normalmente, esto pone la cadena en un alto y requiere una bifurcación dura para solucionar el problema. A partir de Subnet-EVM v0.6.3, puede reprogramar activaciones obligatorias como Durango a través de configuraciones de actualización (upgrade.json en el directorio de la cadena). Esta es una operación muy avanzada y solo debe hacerse si su red no puede operar en el futuro. La operación de reprogramación debe coordinarse con todos los nodos de su red. Las anulaciones de actualización de red se pueden definir en el `upgrade.json` de la siguiente manera:
-
-```json
-{
-  "networkUpgradeOverrides": {
-    "{networkUpgrade1}": timestamp1,
-    "{networkUpgrade2}": timestamp2,
-  }
-}
-```
-
-El `timestamp` debe ser una marca de tiempo Unix en segundos.
-
-Por ejemplo, si te perdiste la activación de Durango en Fuji (13 de febrero de 2024, 16:00 UTC) o en Mainnet (6 de marzo de 2024, 16:00 UTC) y tienes problemas en tu red, puedes reprogramar la activación de Durango a través de actualizaciones. Para hacer esto, necesitas preparar un nuevo upgrade.json que incluya lo siguiente:
-
-```json
-{
-  "networkUpgradeOverrides": {
-    "durangoTimestamp": 1712419200
-  }
-}
-```
-
-Esto reprograma la activación de Durango para el 6 de noviembre de 2024, 16:00:00 UTC (un mes después de la activación real). Después de preparar el upgrade.json, debes actualizar el directorio de la cadena con el nuevo upgrade.json y reiniciar tus nodos. Deberías ver registros similares a los siguientes:
-
-```go
-INFO [03-22|14:04:48.284] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/plugin/evm/vm.go:367: Aplicando anulaciones de actualización de red overrides="{\"durangoTimestamp\":1712419200}"
-...
-INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335: Actualizaciones de Avalanche (basadas en marca de tiempo):
-INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335:  - Marca de tiempo de SubnetEVM:           @0          (https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0)
-INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335:  - Marca de tiempo de Durango:            @1712419200 (https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0)
-...
-```
-
-Esto significa que tu nodo está listo y cargado para la nueva activación de Durango. Después de que se alcance la nueva marca de tiempo, tu nodo activará Durango y comenzará a procesar transacciones con las nuevas características de Durango.
-
-:::caution
-Los nodos que ejecutan una versión no compatible (ejecutando una versión anterior a Durango después de la activación de Durango) deben actualizarse a la versión más reciente de Subnet-EVM (v0.6.3+) y deben tener el nuevo upgrade.json para reprogramar la activación de Durango. Ejecutar una nueva versión sin el upgrade.json de reprogramación podría crear una bifurcación en la red.
-
-Todos los nodos de la red, incluso aquellos que se actualizaron correctamente a Durango y están ejecutando la versión correcta desde la activación de Durango, deben reiniciarse con el nuevo upgrade.json para reprogramar la activación de Durango. Esta es una operación a nivel de red y debe coordinarse con todos los nodos de la red.
-:::
