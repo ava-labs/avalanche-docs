@@ -659,6 +659,56 @@ ${updatedContent}`,
       },
     },
   ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/nodes/configure/chain-configs/P.md
+      name: "P-configs",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/vms/platformvm/config/",
+      documents: ["config.md"],
+      outDir: "docs/nodes/configure/chain-configs/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("config")) {
+          const newContent = insertSourceDocLink(
+            content,
+            "https://github.com/ava-labs/avalanchego/tree/master/vms/platformvm/config/config.md"
+          );
+          return {
+            filename: "P.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/nodes/configure/chain-configs/X.md
+      name: "X-configs",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/vms/avm/",
+      documents: ["config.md"],
+      outDir: "docs/nodes/configure/chain-configs/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("config")) {
+          const newContent = insertSourceDocLink(
+            content,
+            "https://github.com/ava-labs/avalanchego/tree/master/vms/avm/config.md"
+          );
+          return {
+            filename: "X.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
 ];
 
 module.exports = remoteContent;
