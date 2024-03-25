@@ -90,7 +90,7 @@ The user is going to need this ID in the later section when calling [addValidato
 :::info
 
 With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch.
-You can use [State-Sync](/nodes/configure/chain-configs/C.md#state-sync-enabled-boolean)
+You can use [State-Sync](/nodes/configure/chain-configs/C.md#state-sync-enabled)
 to shorten the time for bootstrapping.
 
 :::

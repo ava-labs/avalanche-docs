@@ -169,7 +169,7 @@ Algunas blockchains permiten que el operador del nodo proporcione configuracione
 
 #### `--chain-config-dir` (cadena)
 
-Especifica el directorio que contiene las configuraciones de la cadena, como se describe [aquí](chain-config-flags.md). Por defecto, es `$HOME/.avalanchego/configs/chains`. Si no se proporciona esta bandera y el directorio predeterminado no existe, AvalancheGo no saldrá ya que las configuraciones personalizadas son opcionales. Sin embargo, si se establece la bandera, la carpeta especificada debe existir, o AvalancheGo saldrá con un error. Esta bandera se ignora si se especifica `--chain-config-content`.
+Especifica el directorio que contiene las configuraciones de la cadena, como se describe [aquí](/nodes/configure/chain-configs/chain-config-flags.md). Por defecto, es `$HOME/.avalanchego/configs/chains`. Si no se proporciona esta bandera y el directorio predeterminado no existe, AvalancheGo no saldrá ya que las configuraciones personalizadas son opcionales. Sin embargo, si se establece la bandera, la carpeta especificada debe existir, o AvalancheGo saldrá con un error. Esta bandera se ignora si se especifica `--chain-config-content`.
 
 :::note
 Por favor, reemplace `chain-config-dir` y `blockchainID` con sus valores reales.
@@ -179,7 +179,7 @@ Las actualizaciones de red se pasan desde la ubicación: `chain-config-dir`/`blo
 
 Las configuraciones de la cadena se pasan desde la ubicación `chain-config-dir`/`blockchainID`/`config.*`. Los archivos de configuración suelen estar codificados en json y, por lo tanto, se llaman `config.json`. Sin embargo, el formato del archivo depende de la VM. Esta configuración es utilizada por la VM para manejar banderas de configuración opcionales como habilitar/deshabilitar APIs, actualizar el nivel de registro, etc. La configuración de la cadena está destinada a proporcionar parámetros de configuración opcionales y la VM utilizará valores predeterminados si no se pasa nada.
 
-La referencia completa de todas las opciones de configuración para algunas cadenas estándar se puede encontrar en un documento separado de [banderas de configuración de la cadena](chain-config-flags.md).
+La referencia completa de todas las opciones de configuración para algunas cadenas estándar se puede encontrar en un documento separado de [banderas de configuración de la cadena](/nodes/configure/chain-configs/chain-config-flags.md).
 
 La referencia completa de la configuración de actualización de la Subnet `subnet-evm` se puede encontrar en un documento separado de [Personalizar una Subnet](/build/subnet/upgrade/customize-a-subnet.md).
 
