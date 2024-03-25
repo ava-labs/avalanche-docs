@@ -521,7 +521,6 @@
       "value": "<hr/>"
     },
     "tooling/avalanchejs-overview",
-
     "tooling/glacier",
     "tooling/metrics",
     {
@@ -534,7 +533,12 @@
       "value": "<hr/>"
     },
     "tooling/avalanchego-installer",
-    "tooling/network-runner",
+    {
+      "type": "category",
+      "label": "Avalanche Network Runner",
+      "collapsed": true,
+      "items": ["tooling/network-runner", "tooling/anr-reference"]
+    },
     "tooling/avalanche-plugin-manager",
     "tooling/avalanche-ops",
     {
