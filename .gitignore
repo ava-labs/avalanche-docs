@@ -30,6 +30,8 @@ docs/reference/avalanchego/keystore-api.md
 docs/reference/avalanchego/index-api.md
 docs/nodes/configure/avalanchego-config-flags.md
 docs/nodes/configure/subnet-configs.md
+docs/nodes/configure/chain-configs/P.md
+docs/nodes/configure/chain-configs/X.md
 
 # Misc
 .DS_Store
