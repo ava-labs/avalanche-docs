@@ -609,6 +609,56 @@ ${updatedContent}`,
       },
     },
   ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/nodes/configure/avalanchego-config-flags.md
+      name: "avalanchego-config-flags",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/config/",
+      documents: ["config.md"],
+      outDir: "docs/nodes/configure/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const newContent = insertSourceDocLink(
+            content,
+            "https://github.com/ava-labs/avalanchego/tree/master/config/config.md"
+          );
+          return {
+            filename: "avalanchego-config-flags.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
+  [
+    "docusaurus-plugin-remote-content",
+    {
+      // /docs/nodes/configure/subnet-configs.md
+      name: "subnet-configs",
+      sourceBaseUrl:
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/subnets/",
+      documents: ["config.md"],
+      outDir: "docs/nodes/configure/",
+      // change filename and correct links
+      modifyContent(filename, content) {
+        if (filename.includes("service")) {
+          const newContent = insertSourceDocLink(
+            content,
+            "https://github.com/ava-labs/avalanchego/tree/master/subnets/config.md"
+          );
+          return {
+            filename: "subnet-configs.md",
+            content: `${newContent}`,
+          };
+        }
+        return undefined;
+      },
+    },
+  ],
 ];
 
 module.exports = remoteContent;
