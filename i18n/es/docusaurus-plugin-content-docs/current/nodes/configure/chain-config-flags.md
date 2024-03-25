@@ -168,8 +168,7 @@ en futuras actualizaciones y se recomienda actualizar a los nuevos valores.
 
 La asignación de valores obsoletos y su equivalente actualizado es la siguiente:
 
-
-| Obsoleto                           | Usar en su lugar      |
+| Obsoleto                           | Usar en su lugar       |
 | ---------------------------------- | ---------------------- |
 | `public-eth`                       | `eth`                  |
 | `public-eth-filter`                | `eth-filter`           |
@@ -482,6 +481,10 @@ Especifica una matriz de hashes de transacciones que se deben permitir pasar
 la protección de reproducción. Esta bandera está destinada a operadores de nodos que desean explícitamente
 permitir que se emitan transacciones específicas a través de su API. El valor predeterminado es una lista vacía.
 
+#### `push-gossip-percent-stake` (float)
+
+Porcentaje de la participación total para enviar transacciones recibidas a través del RPC. El valor predeterminado es 0.9.
+
 #### `tx-regossip-frequency` (duration)
 
 Obsoleto a partir de `v0.12.5`. Usar en su lugar `regossip-frequency`.
@@ -732,4 +735,3 @@ debería estar en
 
 - Cuando se desactiva la poda sin conexión `(pruning-enabled: false)` desde un estado previamente
   habilitado, esto no afectará a los bloques cuyo estado ya fue podado. Esto devolverá errores de nodo de trie faltante, ya que el nodo no puede buscar el estado de un bloque histórico si ese estado fue eliminado.
-  
