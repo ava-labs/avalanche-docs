@@ -772,52 +772,6 @@ upgrades have taken place before the last accepted block on startup. This allows
 node operators to recover if their node has accepted blocks after a network
 upgrade with a version of the code prior to the upgrade. Defaults to `false`.
 
-## X-Chain Configs
-
-In order to specify a config for the X-Chain, a JSON config file should be
-placed at `{chain-config-dir}/X/config.json`.
-
-For example if `chain-config-dir` has the default value which is
-`$HOME/.avalanchego/configs/chains`, then `config.json` can be placed at
-`$HOME/.avalanchego/configs/chains/X/config.json`.
-
-This allows you to specify a config to be passed into the X-Chain. The default
-values for this config are:
-
-```json
-{
-  "index-transactions": false,
-  "index-allow-incomplete": false
-}
-```
-
-Default values are overridden only if explicitly specified in the config.
-
-The parameters are as follows:
-
-**Transaction Indexing**
-
-### `index-transactions` (boolean)
-
-Enables AVM transaction indexing if set to `true`. Default value is `false`.
-When set to `true`, AVM transactions are indexed against the `address` and
-`assetID` involved. This data is available via `avm.getAddressTxs`
-[API](/reference/avalanchego/x-chain/api.md#avmgetaddresstxs).
-
-:::note
-If `index-transactions` is set to true, it must always be set to true
-for the node's lifetime. If set to `false` after having been set to `true`, the
-node will refuse to start unless `index-allow-incomplete` is also set to `true`
-(see below).
-:::
-
-### `index-allow-incomplete` (boolean)
-
-Allows incomplete indices. Default value is `false`.
-
-This config value is ignored if there is no X-Chain indexed data in the DB and
-`index-transactions` is set to `false`.
-
 ## Subnet Chain Configs
 
 As mentioned above, if a Subnet's chain id is
