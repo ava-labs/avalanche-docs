@@ -898,7 +898,7 @@ curl -X POST --data '{
 ## Admin API
 
 This API can be used for debugging. Note that the Admin API is disabled by default. To run a node
-with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/nodes/configure/chain-config-flags.md#coreth-admin-api-enabled-boolean).
+with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/nodes/configure/chain-configs/chain-config-flags.md#coreth-admin-api-enabled-boolean).
 
 ### Endpoint
 

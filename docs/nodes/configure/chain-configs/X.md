@@ -3,7 +3,7 @@ tags: [Nodes, AvalancheGo]
 description: Reference for all available X-chain config options and flags.
 sidebar_label: X-Chain
 pagination_label: X-Chain Configs
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # X-Chain Configs

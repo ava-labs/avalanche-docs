@@ -118,7 +118,7 @@ semana, pero hay formas de acortar ese proceso, dependiendo de tus circunstancia
 #### Sincronización de Estado
 
 Si los nodos que ejecutarás como validadores no necesitan tener todo el historial de transacciones, entonces
-puedes usar [sincronización de estado](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean). Con
+puedes usar [sincronización de estado](/nodes/configure/chain-configs/C.md#state-sync-enabled-boolean). Con
 esta bandera habilitada, en lugar de reproducir toda la historia para llegar al estado actual, los nodos simplemente
 descargan solo el estado actual de otros pares de la red, acortando el proceso de inicio desde
 varios días a un par de horas. Si los nodos se utilizarán exclusivamente para validación de Subnet, puedes

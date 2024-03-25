@@ -1,64 +1,12 @@
 ---
 tags: [Nodes]
-description: Reference for all available chain config options and flags.
-sidebar_label: Chain Configs
-pagination_label: Chain Configs
-sidebar_position: 1
+description: Reference for all available C-Chain config options and flags.
+sidebar_label: C-Chain
+pagination_label: C-Chain Configs
+sidebar_position: 3
 ---
 
-# Chain Configs
-
-Some chains allow the node operator to provide a custom configuration.
-AvalancheGo can read chain configurations from files and pass them to the
-corresponding chains on initialization.
-
-AvalancheGo looks for these files in the directory specified by
-`--chain-config-dir` AvalancheGo flag, as documented
-[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-dir-string). If omitted, value
-defaults to `$HOME/.avalanchego/configs/chains`. This directory can have
-sub-directories whose names are chain IDs or chain aliases. Each sub-directory
-contains the configuration for the chain specified in the directory name. Each
-sub-directory should contain a file named `config`, whose value is passed in
-when the corresponding chain is initialized (see below for extension). For
-example, config for the C-Chain should be at:
-`{chain-config-dir}/C/config.json`.
-
-This also applies to Subnets, for example, if a Subnet's chain id is
-`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain
-should be at
-`{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
-
-:::tip
-
-By default, none of these directories and/or files exist. You would need to
-create them manually if needed.
-
-:::
-
-The filename extension that these files should have, and the contents of these
-files, is VM-dependent. For example, some chains may expect `config.txt` while
-others expect `config.json`. If multiple files are provided with the same name
-but different extensions (for example `config.json` and `config.txt`) in the same
-sub-directory, AvalancheGo will exit with an error.
-
-For a given chain, AvalancheGo will follow the sequence below to look for its
-config file, where all folder and file names are case sensitive:
-
-- First it looks for a config sub-directory whose name is the chain ID - If it
-  isn't found, it looks for a config sub-directory whose name is the chain's
-  primary alias - If it's not found, it looks for a config sub-directory whose
-  name is another alias for the chain
-
-Alternatively, for some setups it might be more convenient to provide config
-entirely via the command line. For that, you can use AvalancheGo
-`--chain-config-content` flag, as documented
-[here](/nodes/configure/avalanchego-config-flags.md#--chain-config-content-string).
-
-It is not required to provide these custom configurations. If they are not
-provided, a VM-specific default config will be used. And the values of these
-default config are printed when the node starts.
-
-## C-Chain Configs
+# C-Chain Configs
 
 In order to specify a config for the C-Chain, a JSON config file should be
 placed at `{chain-config-dir}/C/config.json`. This file does not exist by
@@ -77,9 +25,11 @@ makes the config more resilient to future default changes. Otherwise, if
 defaults change, your node will remain with the old values, which might
 adversely affect your node operation.
 
-### State Sync
+## State Sync
 
-#### `state-sync-enabled` (boolean)
+### `state-sync-enabled`
+
+_Boolean_
 
 Set to `true` to start the chain with state sync enabled. The peer will
 download chain state from peers up to a recent block near tip, then proceed with
@@ -92,19 +42,25 @@ sync on subsequent runs.
 Please note that if you need historical data, state sync isn't the right option.
 However, it is sufficient if you are just running a validator.
 
-#### `state-sync-skip-resume` (boolean)
+### `state-sync-skip-resume`
+
+_Boolean_
 
 If set to `true`, the chain will not resume a previously started state sync
 operation that did not complete. Normally, the chain should be able to resume
 state syncing without any issue. Defaults to `false`.
 
-#### `state-sync-min-blocks` (int)
+### `state-sync-min-blocks`
+
+_Integer_
 
 Minimum number of blocks the chain should be ahead of the local node to prefer
 state syncing over bootstrapping. If the node's database is already close to the
 chain's tip, bootstrapping is more efficient. Defaults to `300000`.
 
-#### `state-sync-ids` (string)
+### `state-sync-ids`
+
+_String_
 
 Comma separated list of node IDs (prefixed with `NodeID-`) to fetch state sync
 data from. An example setting of this field would be
@@ -112,43 +68,57 @@ data from. An example setting of this field would be
 If not specified (or empty), peers are selected at random. Defaults to empty
 string (`""`).
 
-#### `state-sync-server-trie-cache` (int)
+### `state-sync-server-trie-cache`
+
+_Integer_
 
 Size of trie cache used for providing state sync data to peers in MBs. Should be
 a multiple of `64`. Defaults to `64`.
 
 ### Continuous Profiling
 
-#### `continuous-profiler-dir` (string)
+### `continuous-profiler-dir`
+
+_String_
 
 Enables the continuous profiler (captures a CPU/Memory/Lock profile at a
 specified interval). Defaults to `""`. If a non-empty string is provided, it
 enables the continuous profiler and specifies the directory to place the
 profiles in.
 
-#### `continuous-profiler-frequency` (duration)
+### `continuous-profiler-frequency`
+
+_Duration_
 
 Specifies the frequency to run the continuous profiler. Defaults `900000000000`
 nano seconds which is 15 minutes.
 
-#### `continuous-profiler-max-files` (int)
+### `continuous-profiler-max-files`
+
+_Integer_
 
 Specifies the maximum number of profiles to keep before removing the oldest.
 Defaults to `5`.
 
 ### Enabling Avalanche Specific APIs
 
-#### `snowman-api-enabled` (boolean)
+### `snowman-api-enabled`
+
+_Boolean_
 
 Enables the Snowman API. Defaults to `false`.
 
-#### `coreth-admin-api-enabled` (boolean)
+### `coreth-admin-api-enabled`
+
+_Boolean_
 
 Deprecated as of `v0.12.5`. Use `admin-api-enabled` instead.
 
 Enables the Admin API. Defaults to `false`.
 
-#### `coreth-admin-api-dir` (string)
+### `coreth-admin-api-dir`
+
+_String_
 
 Deprecated as of `v0.12.5`. Use `admin-api-dir` instead.
 
@@ -157,7 +127,7 @@ Defaults to `""`.
 
 ### Enabling EVM APIs
 
-#### `eth-apis` ([]string)
+### `eth-apis` ([]string)
 
 Use the `eth-apis` field to specify the exact set of below services to enable on
 your node. If this field is not set, then the default list will be:
@@ -197,7 +167,7 @@ every service you wish to enable.
 
 :::
 
-#### `eth`
+### `eth`
 
 The API name `public-eth` is deprecated as of v1.7.15, and the APIs previously
 under this name have been migrated to `eth`.
@@ -207,7 +177,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 `eth_coinbase`
 `eth_etherbase`
 
-#### `eth-filter`
+### `eth-filter`
 
 The API name `public-eth-filter` is deprecated as of v1.7.15, and the APIs
 previously under this name have been migrated to `eth-filter`.
@@ -229,7 +199,7 @@ complete documentation):
 - `eth_getFilterLogs`
 - `eth_getFilterChanges`
 
-#### `admin`
+### `admin`
 
 The API name `private-admin` is deprecated as of v1.7.15, and the APIs
 previously under this name have been migrated to `admin`.
@@ -239,7 +209,7 @@ Adds the following RPC calls to the `admin_*` namespace. Defaults to `false`.
 - `admin_importChain`
 - `admin_exportChain`
 
-#### `debug`
+### `debug`
 
 The API names `private-debug` and `public-debug` are deprecated as of v1.7.15,
 and the APIs previously under these names have been migrated to `debug`.
@@ -255,7 +225,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 - `debug_getModifiedAccountsByHash`
 - `debug_getAccessibleState`
 
-#### `net`
+### `net`
 
 Adds the following RPC calls to the `net_*` namespace. Defaults to `true`.
 
@@ -268,7 +238,7 @@ networking layer, so `net_listening` always returns true and `net_peerCount`
 always returns 0. For accurate metrics on the network layer, users should use
 the AvalancheGo APIs.
 
-#### `debug-tracer`
+### `debug-tracer`
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
@@ -281,14 +251,14 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 - `debug_traceTransaction`
 - `debug_traceCall`
 
-#### `web3`
+### `web3`
 
 Adds the following RPC calls to the `web3_*` namespace. Defaults to `true`.
 
 - `web3_clientVersion`
 - `web3_sha3`
 
-#### `internal-eth`
+### `internal-eth`
 
 The API name `internal-public-eth` is deprecated as of v1.7.15, and the APIs
 previously under this name have been migrated to `internal-eth`.
@@ -300,7 +270,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 - `eth_maxPriorityFeePerGas`
 - `eth_feeHistory`
 
-#### `internal-blockchain`
+### `internal-blockchain`
 
 The API name `internal-public-blockchain` is deprecated as of v1.7.15, and the
 APIs previously under this name have been migrated to `internal-blockchain`.
@@ -326,7 +296,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 - `eth_estimateGas`
 - `eth_createAccessList`
 
-#### `internal-transaction`
+### `internal-transaction`
 
 The API name `internal-public-transaction-pool` is deprecated as of v1.7.15, and
 the APIs previously under this name have been migrated to
@@ -352,7 +322,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 - `eth_pendingTransactions`
 - `eth_resend`
 
-#### `internal-tx-pool`
+### `internal-tx-pool`
 
 The API name `internal-public-tx-pool` is deprecated as of v1.7.15, and the APIs
 previously under this name have been migrated to `internal-tx-pool`.
@@ -364,7 +334,7 @@ Adds the following RPC calls to the `txpool_*` namespace. Defaults to `false`.
 - `txpool_status`
 - `txpool_inspect`
 
-#### `internal-debug`
+### `internal-debug`
 
 The API names `internal-private-debug` and `internal-public-debug` are
 deprecated as of v1.7.15, and the APIs previously under these names have been
@@ -378,7 +348,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 - `debug_chaindbProperty`
 - `debug_chaindbCompact`
 
-#### `debug-handler`
+### `debug-handler`
 
 Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 
@@ -398,7 +368,7 @@ Adds the following RPC calls to the `debug_*` namespace. Defaults to `false`.
 - `debug_freeOSMemory`
 - `debug_setGCPercent`
 
-#### `internal-account`
+### `internal-account`
 
 The API name `internal-public-account` is deprecated as of v1.7.15, and the APIs
 previously under this name have been migrated to `internal-account`.
@@ -407,7 +377,7 @@ Adds the following RPC calls to the `eth_*` namespace. Defaults to `true`.
 
 - `eth_accounts`
 
-#### `internal-personal`
+### `internal-personal`
 
 The API name `internal-private-personal` is deprecated as of v1.7.15, and the
 APIs previously under this name have been migrated to `internal-personal`.
@@ -432,91 +402,125 @@ Adds the following RPC calls to the `personal_*` namespace. Defaults to `false`.
 
 ### API Configuration
 
-#### `rpc-gas-cap` (int)
+### `rpc-gas-cap`
+
+_Integer_
 
 The maximum gas to be consumed by an RPC Call (used in `eth_estimateGas` and
 `eth_call`). Defaults to `50,000,000`.
 
-#### `rpc-tx-fee-cap` (int)
+### `rpc-tx-fee-cap`
+
+_Integer_
 
 Global transaction fee (price \* `gaslimit`) cap (measured in AVAX) for
 send-transaction variants. Defaults to `100`.
 
-#### `api-max-duration` (duration)
+### `api-max-duration`
+
+_Duration_
 
 Maximum API call duration. If API calls exceed this duration, they will time
 out. Defaults to `0` (no maximum).
 
-#### `api-max-blocks-per-request` (int)
+### `api-max-blocks-per-request`
+
+_Integer_
 
 Maximum number of blocks to serve per `getLogs` request. Defaults to `0` (no
 maximum).
 
-#### `ws-cpu-refill-rate` (duration)
+### `ws-cpu-refill-rate`
+
+_Duration_
 
 The refill rate specifies the maximum amount of CPU time to allot a single
 connection per second. Defaults to no maximum (`0`).
 
-#### `ws-cpu-max-stored` (duration)
+### `ws-cpu-max-stored`
+
+_Duration_
 
 Specifies the maximum amount of CPU time that can be stored for a single WS
 connection. Defaults to no maximum (`0`).
 
-#### `allow-unfinalized-queries` (boolean)
+### `allow-unfinalized-queries`
 
 Allows queries for unfinalized (not yet accepted) blocks/transactions. Defaults
 to `false`.
 
-#### `accepted-cache-size` `(int)
+### `accepted-cache-size`
+
+_Integer_
 
 Specifies the depth to keep accepted headers and accepted logs in the cache. This
 is particularly useful to improve the performance of `eth_getLogs` for recent logs.
 
-### Transaction Pool
+## Transaction Pool
 
-#### `local-txs-enabled` (boolean)
+### `local-txs-enabled`
+
+_Boolean_
 
 Enables local transaction handling (prioritizes transactions submitted through
 this node). Defaults to `false`.
 
-#### `allow-unprotected-txs` (boolean)
+### `allow-unprotected-txs`
+
+_Boolean_
 
 If `true`, the APIs will allow transactions that are not replay protected
 (EIP-155) to be issued through this node. Defaults to `false`.
 
-#### `allow-unprotected-tx-hashes` ([]TxHash)
+### `allow-unprotected-tx-hashes`
+
+_[]TxHash_
 
 Specifies an array of transaction hashes that should be allowed to bypass
 replay protection. This flag is intended for node operators that want to explicitly
 allow specific transactions to be issued through their API. Defaults to an empty list.
 
-#### `push-gossip-num-validators` (int)
+### `push-gossip-num-validators`
+
+_Integer_
 
 Number of validators to initially send transactions received over the RPC. Defaults to 100.
 
-#### `push-gossip-num-peers` (int)
+### `push-gossip-num-peers`
+
+_Integer_
 
 Number of peers to initially send transactions received over the RPC. Defaults to 0.
 
-#### `push-regossip-num-validators` (int)
+### `push-regossip-num-validators`
+
+_Integer_
 
 Number of validators to periodically send transactions received over the RPC. Defaults to 10.
 
-#### `push-regossip-num-peers` (int)
+### `push-regossip-num-peers`
+
+_Integer_
 
 Number of peers to periodically send transactions received over the RPC. Defaults to 0.
 
-#### `push-gossip-frequency` (duration)
+### `push-gossip-frequency`
+
+_Duration_
 
 Frequency to send transactions received over the RPC to peers. Defaults to `100000000` nano seconds which is
 100 milliseconds.
 
-#### `pull-gossip-frequency` (duration)
+### `pull-gossip-frequency`
+
+_Duration_
 
 Frequency to request transactions from peers. Defaults to `1000000000` nano seconds which is
 1 second.
 
-#### `tx-regossip-frequency` (duration)
+### `tx-regossip-frequency`
+
+_Duration_
 
 Deprecated as of `v0.12.5`. Use `regossip-frequency` instead.
 
@@ -524,134 +528,186 @@ Amount of time that should elapse before we attempt to re-gossip a transaction
 that was already gossiped once. Defaults to `30000000000` nano seconds which is
 30 seconds.
 
-#### `tx-pool-price-limit` (int)
+### `tx-pool-price-limit`
+
+_Integer_
 
 Minimum gas price to enforce for acceptance into the pool. Defaults to 1 wei.
 
-#### `tx-pool-price-bump` (int)
+### `tx-pool-price-bump`
+
+_Integer_
 
 Minimum price bump percentage to replace an already existing transaction (nonce). Defaults to 10%.
 
-#### `tx-pool-account-slots` (int)
+### `tx-pool-account-slots`
+
+_Integer_
 
 Number of executable transaction slots guaranteed per account. Defaults to 16.
 
-#### `tx-pool-global-slots` (int)
+### `tx-pool-global-slots`
+
+_Integer_
 
 Maximum number of executable transaction slots for all accounts. Defaults to 5120.
 
-#### `tx-pool-account-queue` (int)
+### `tx-pool-account-queue`
+
+_Integer_
 
 Maximum number of non-executable transaction slots permitted per account. Defaults to 64.
 
-#### `tx-pool-global-queue` (int)
+### `tx-pool-global-queue`
+
+_Integer_
 
 Maximum number of non-executable transaction slots for all accounts. Defaults to 1024.
 
-#### `tx-pool-lifetime` (duration)
+### `tx-pool-lifetime`
+
+_Duration_
 
 Maximum duration a non-executable transaction will be allowed in the poll. Defaults to `600000000000` nano seconds which is
 10 minutes.
 
 ### Metrics
 
-#### `metrics-enabled` (boolean)
+### `metrics-enabled`
+
+_Boolean_
 
 Enables metrics. Defaults to `false`.
 
-#### `metrics-expensive-enabled` (boolean)
+### `metrics-expensive-enabled`
+
+_Boolean_
 
 Enables expensive metrics. Defaults to `false`.
 
 ### Snapshots
 
-#### `snapshot-async` (boolean)
+### `snapshot-async`
+
+_Boolean_
 
 If `true`, allows snapshot generation to be executed asynchronously. Defaults to
 `true`.
 
-#### `snapshot-verification-enabled` (boolean)
+### `snapshot-verification-enabled`
+
+_Boolean_
 
 If `true`, verifies the complete snapshot after it has been generated. Defaults
 to `false`.
 
-### Logging
+## Logging
 
-#### `log-level` (string)
+### `log-level`
+
+_String_
 
 Defines the log level for the chain. Must be one of `"trace"`, `"debug"`, `"info"`,
 `"warn"`, `"error"`, `"crit"`. Defaults to `"info"`.
 
-#### `log-json-format` (bool)
+### `log-json-format`
+
+_Boolean_
 
 If `true`, changes logs to JSON format. Defaults to `false`.
 
 ### Keystore Settings
 
-#### `keystore-directory` (string)
+### `keystore-directory`
+
+_String_
 
 The directory that contains private keys. Can be given as a relative path. If
 empty, uses a temporary directory at `coreth-keystore`. Defaults to the empty
 string (`""`).
 
-#### `keystore-external-signer` (string)
+### `keystore-external-signer`
+
+_String_
 
 Specifies an external URI for a clef-type signer. Defaults to the empty string
 (`""` as not enabled).
 
-#### `keystore-insecure-unlock-allowed` (bool)
+### `keystore-insecure-unlock-allowed`
+
+_Boolean_
 
 If `true`, allow users to unlock accounts in unsafe HTTP environment. Defaults
 to `false`.
 
 ### Database
 
-#### `trie-clean-cache` (int)
+### `trie-clean-cache`
+
+_Integer_
 
 Size of cache used for clean trie nodes (in MBs). Should be a multiple of `64`.
 Defaults to `512`.
 
-#### `trie-dirty-cache` (int)
+### `trie-dirty-cache`
+
+_Integer_
 
 Size of cache used for dirty trie nodes (in MBs). When the dirty nodes exceed
 this limit, they are written to disk. Defaults to `256`.
 
-#### `trie-dirty-commit-target` (int)
+### `trie-dirty-commit-target`
+
+_Integer_
 
 Memory limit to target in the dirty cache before performing a commit (in MBs).
 Defaults to `20`.
 
-#### `trie-prefetcher-parallelism` (int)
+### `trie-prefetcher-parallelism`
+
+_Integer_
 
 Max concurrent disk reads trie pre-fetcher should perform at once.
 Defaults to `16`.
 
-#### `snapshot-cache` (int)
+### `snapshot-cache`
+
+_Integer_
 
 Size of the snapshot disk layer clean cache (in MBs). Should be a multiple of
 `64`. Defaults to `256`.
 
-#### `trie-clean-journal` (string)
+### `trie-clean-journal`
+
+_String_
 
 Directory to use to save the trie clean cache (must be populated to enable
 journaling the trie clean cache). Empty and disabled by default.
 
-#### `trie-clean-rejournal` (duration)
+### `trie-clean-rejournal`
+
+_Duration_
 
 Frequency to re-journal the trie clean cache to disk (minimum 1 minute, must
 be populated to enable journaling the trie clean cache).
 
-#### `acceptor-queue-limit` (int)
+### `acceptor-queue-limit`
+
+_Integer_
 
 Specifies the maximum number of blocks to queue during block acceptance before
 blocking on Accept. Defaults to `64`.
 
-#### `commit-interval` (int)
+### `commit-interval`
+
+_Integer_
 
 Specifies the commit interval at which to persist the merkle trie to disk.
 Defaults to `4096`.
 
-#### `pruning-enabled` (boolean)
+### `pruning-enabled`
+
+_Boolean_
 
 If `true`, database pruning of obsolete historical data will be enabled. This reduces the amount
 of data written to disk, but does not delete any state that is written to the disk previously.
@@ -671,7 +727,9 @@ true`, `allow-missing-tries` should be set to `true` as well.
 
 :::
 
-#### `populate-missing-tries` (\*uint64)
+### `populate-missing-tries`
+
+_uint64_
 
 If non-nil, sets the starting point for repopulating missing tries to
 re-generate archival merkle forest.
@@ -684,21 +742,29 @@ This flag should be used once to re-generate the archival merkle forest and
 should be removed from the config after completion. This flag will cause the
 node to delay starting up while it re-processes old blocks.
 
-#### `populate-missing-tries-parallelism` (int)
+### `populate-missing-tries-parallelism`
+
+_Integer_
 
 Number of concurrent readers to use when re-populating missing tries on startup.
 Defaults to 1024.
 
-#### `allow-missing-tries` (boolean)
+### `allow-missing-tries`
+
+_Boolean_
 
 If `true`, allows a node that was once configured as archival to switch to
 pruning mode. Defaults to `false`.
 
-#### `preimages-enabled` (boolean)
+### `preimages-enabled`
+
+_Boolean_
 
 If `true`, enables preimages. Defaults to `false`.
 
-#### `offline-pruning-enabled` (boolean)
+### `offline-pruning-enabled`
+
+_Boolean_
 
 If `true`, offline pruning will run on startup and block until it completes
 (approximately one hour on Mainnet). This will reduce the size of the database
@@ -715,7 +781,9 @@ This is meant to be run manually, so after running with this flag once, it must
 be toggled back to false before running the node again. Therefore, you should
 run with this flag set to true and then set it to false on the subsequent run.
 
-#### `offline-pruning-bloom-filter-size` (int)
+### `offline-pruning-bloom-filter-size`
+
+_Integer_
 
 This flag sets the size of the bloom filter to use in offline pruning
 (denominated in MB and defaulting to 512 MB). The bloom filter is kept in memory
@@ -729,35 +797,45 @@ false positive rate, which can impact the results of offline pruning. This is an
 advanced parameter that has been tuned to 512 MB and should not be changed
 without thoughtful consideration.
 
-#### `offline-pruning-data-directory` (string)
+### `offline-pruning-data-directory`
+
+_String_
 
 This flag must be set when offline pruning is enabled and sets the directory
 that offline pruning will use to write its bloom filter to disk. This directory
 should not be changed in between runs until offline pruning has completed.
 
-#### `tx-lookup-limit` (uint64)
+### `tx-lookup-limit` (uint64)
 
 Number of recent blocks for which to maintain transaction lookup indices in the database. If set to 0,
 transaction lookup indices will be maintained for all blocks. Defaults to `0`.
 
-#### `skip-tx-indexing` (bool)
+### `skip-tx-indexing`
+
+_Boolean_
 
 If set to `true`, the node will not index transactions. TxLookupLimit can be still used to control deleting old transaction indices.
 Defaults to `false`.
 
 ### VM Networking
 
-#### `max-outbound-active-requests` (int)
+### `max-outbound-active-requests`
+
+_Integer_
 
 Specifies the maximum number of outbound VM2VM requests in flight at once. Defaults to `16`.
 
-#### `max-outbound-active-cross-chain-requests` (int)
+### `max-outbound-active-cross-chain-requests`
+
+_Integer_
 
 Specifies the maximum number of outbound cross-chain requests in flight at once. Defaults to `64`.
 
 ### Miscellaneous
 
-#### `airdrop` (string)
+### `airdrop`
+
+_String_
 
 Path to a json file that contains a list of addresses for a genesis airdrop.
 Each address will be airdropped `AirdropAmount` at genesis, and the hash of the
@@ -765,27 +843,11 @@ airdrop file must match `AirdropHash`. `AirdropAmount` and `AirdropHash` are
 part of the genesis config. This option applies to `subnet-evm` only (not
 applicable to `coreth`).
 
-#### `skip-upgrade-check` (bool)
+### `skip-upgrade-check`
+
+_Boolean_
 
 If set to `true`, the chain will skip verifying that all expected network
 upgrades have taken place before the last accepted block on startup. This allows
 node operators to recover if their node has accepted blocks after a network
 upgrade with a version of the code prior to the upgrade. Defaults to `false`.
-
-## Subnet Chain Configs
-
-As mentioned above, if a Subnet's chain id is
-`2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config for this chain
-should be at
-`{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`
-
-## FAQ
-
-- When using `getBlockNumber` it will return finalized blocks. To allow for queries
-  for unfinalized (not yet accepted) blocks/transactions use `allow-unfainalized-queries`
-  and set to true (by default it is set to `false`)
-
-- When deactivating offline pruning `(pruning-enabled: false)` from previously
-  enabled state, this will not impact blocks whose state was already pruned. This will
-  return missing trie node errors, as the node can't lookup the state of a historical
-  block if that state was deleted.
