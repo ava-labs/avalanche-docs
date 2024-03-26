@@ -43,16 +43,6 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
 {
   "config": {
     "chainId": 43214,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
     "feeConfig": {
       "gasLimit": 15000000,
       "minBaseFee": 25000000000,
@@ -96,7 +86,13 @@ You can use `eth_getChainConfig` RPC call to get the current chain config. See
 
 `homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`,
 `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock` are EVM hard fork activation
-times. Changing these may cause issues, so treat them carefully.
+times. Subnet-EVM provides valid default values for these hard forks (and other network upgrades), so you can omit them in your genesis configuration. You can still change them but changing these may cause issues, so treat them carefully.
+
+:::note
+
+Before Subnet-EVM v0.6.3 these fields were mandatory. If you are using an older version, you need to provide these fields in your genesis configuration. You can find examples in the repository like [here for v0.6.2](https://github.com/ava-labs/subnet-evm/blob/v0.6.2/tests/load/genesis/genesis.json). For the latest version, you can omit these fields like above in [Genesis section](#genesis).
+
+:::
 
 #### Fee Config
 
@@ -1268,6 +1264,36 @@ state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM G
 ```
 
 ## Network Upgrades: Rescheduling Mandatory Network Upgrades
+
+Mandatory Network Upgrades (or hardforks), like Durango, are critical for the network to be on the same page and continue to operate with new rules and features. Mandatory upgrades are scheduled in advance and all network nodes should be upgraded to the new version before the activation time. In Avalanche, activation times are set in the AvalancheGo code and are not configurable by the network operators. Subnet-EVM also utilizes these activation times in AvalancheGo for mandatory upgrades. For instance Durango is scheduled at the same time in all Subnet-EVM networks and primary network.
+
+With Subnet-EVM v0.6.3 and later, you can reschedule mandatory network upgrades in both genesis and later via `upgrade.json` file. Subnet-EVM will continue to provide default activation times for mandatory upgrades in the future, you can reschedule them if needed.
+
+:::caution
+
+Rescheduling mandatory network upgrades is a very advanced operation and should be done only if your network having issues or you have a very good reason to do so. You also might need to reschedule other subsequent activations since upgrades are dependent on each other Rescheduling mandatory network upgrades might create a fork in the network if not done correctly.
+
+:::
+
+In order to reschedule a mandatory network (e.g. Durango) in genesis chain config file, you need to specify the new activation time as follows:
+
+```json
+{
+  "config": {
+    "chainId": 99999,
+    "durangoTimestamp": 1711464683,
+    ...
+  },
+  "alloc": {
+    ...
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  ...
+}
+```
+
+### Missed Upgrades
 
 A typical case when a network misses any mandatory activation would result in a network that is not able to operate. This is because validators/nodes running the old version would process transactions differently than nodes running the new version and end up different state. This would result in a fork in the network and new nodes would not be able to sync with the network. Normally this puts the chain in a halt and requires a hard fork to fix the issue. Starting with Subnet-EVM v0.6.3, you can reschedule mandatory activations like Durango via upgrade configs (upgrade.json in chain directory). This is a very advanced operation and should be done only if your network cannot operate going forward. The reschedule operation should be coordinated with your entire network nodes. Network upgrade overrides can be defined in the `upgrade.json` as follows:
 

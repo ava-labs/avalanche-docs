@@ -391,11 +391,11 @@ used **less** gas than its target, the base fee should **decrease**.
 
 Here are the calculations:
 
-If the parent block used **more** gas than its target:  
- `baseFee = max(1, parentBaseFee * (parentGasUsed - parentGasTarget) / parentGasTarget / baseFeeChangeDenominator)`
+If the parent block used **more** gas than its target:
+`baseFee = max(1, parentBaseFee * (parentGasUsed - parentGasTarget) / parentGasTarget / baseFeeChangeDenominator)`
 
-If the parent block used **less** gas than its target:  
- `baseFee = max(0, parentBaseFee * (parentGasUsed - parentGasTarget) / parentGasTarget / baseFeeChangeDenominator)`
+If the parent block used **less** gas than its target:
+`baseFee = max(0, parentBaseFee * (parentGasUsed - parentGasTarget) / parentGasTarget / baseFeeChangeDenominator)`
 
 The `baseFeeChangeDenominator` is set to `36` in C-Chain. This value sets the
 base fee to increase or decrease by a factor of `1/36` of the parent block's
@@ -922,20 +922,20 @@ This is the `ContractNativeMinter` interface. We know the contract is deployed a
 pragma solidity >=0.8.0;
 
 interface NativeMinterInterface {
-    // Set [addr] to have the admin role over the minter list
-    function setAdmin(address addr) external;
+  // Set [addr] to have the admin role over the minter list
+  function setAdmin(address addr) external;
 
-    // Set [addr] to be enabled on the minter list
-    function setEnabled(address addr) external;
+  // Set [addr] to be enabled on the minter list
+  function setEnabled(address addr) external;
 
-    // Set [addr] to have no role over the minter list
-    function setNone(address addr) external;
+  // Set [addr] to have no role over the minter list
+  function setNone(address addr) external;
 
-    // Read the status of [addr]
-    function readAllowList(address addr) external view returns (uint256);
+  // Read the status of [addr]
+  function readAllowList(address addr) external view returns (uint256);
 
-    // Mint [amount] number of native coins and send to [addr]
-    function mintNativeCoin(address addr, uint256 amount) external;
+  // Mint [amount] number of native coins and send to [addr]
+  function mintNativeCoin(address addr, uint256 amount) external;
 }
 ```
 
@@ -952,26 +952,23 @@ pragma solidity ^0.8.7;
 import "./NativeMinterInterface.sol";
 
 contract Game {
+  // native minter is deployed at 0x0200000000000000000000000000000000000001
+  NativeMinterInterface minter =
+    NativeMinterInterface(0x0200000000000000000000000000000000000001);
 
-    // native minter is deployed at 0x0200000000000000000000000000000000000001
-    NativeMinterInterface minter = NativeMinterInterface(0x0200000000000000000000000000000000000001);
+  function random() internal view returns (uint) {
+    // never use this random number generation in a real project
+    // it's deterministic and easily hackable.
+    return uint(keccak256(abi.encodePacked(block.timestamp)));
+  }
 
-    function random() internal view returns (uint) {
-        // never use this random number generation in a real project
-        // it's deterministic and easily hackable.
-        return uint(keccak256(abi.encodePacked(block.timestamp)));
+  function play() external payable {
+    uint256 randomNumber = random();
+
+    if (randomNumber % 2 == 0) {
+      minter.mintNativeCoin(msg.sender, msg.value * 2);
     }
-
-    function play() external payable {
-        uint256 randomNumber = random();
-
-        if(randomNumber % 2 == 0){
-            minter.mintNativeCoin(
-                msg.sender,
-                msg.value * 2
-            );
-        }
-    }
+  }
 }
 ```
 

@@ -70,13 +70,7 @@ compatible with your custom VM.
 ```json
 {
   "config": {
-    "byzantiumBlock": 0,
     "chainId": 12345,
-    "constantinopleBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
     "feeConfig": {
       "gasLimit": 15000000,
       "targetBlockRate": 2,
@@ -86,11 +80,7 @@ compatible with your custom VM.
       "minBlockGasCost": 0,
       "maxBlockGasCost": 1000000,
       "blockGasCostStep": 200000
-    },
-    "homesteadBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
-    "petersburgBlock": 0
+    }
   },
   "nonce": "0x0",
   "timestamp": "0x0",

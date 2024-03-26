@@ -8,7 +8,7 @@ sidebar_position: 2
 
 # Setup a Devnet Using Avalanche-CLI
 
-This page demonstrates how to setup a Devnet of cloud-based validators using Avalanche-CLI, 
+This page demonstrates how to setup a Devnet of cloud-based validators using Avalanche-CLI,
 and deploy a VM into it.
 
 Devnets (Developer Networks) are isolated avalanche networks deployed on the cloud. Similar to local networks
@@ -41,7 +41,7 @@ For the second case we provide three important use cases examples:
 
 - creating a devnet an deploy a preexistent CLI Subnet (same example as the step by step)
 - creating a devnet, create a Subnet based on a Custom VM, and deploy it (similar to [
-this one](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud))
+  this one](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud))
 - creating a devnet with warp-enabled Subnets
 
 ## Step by Step
@@ -95,7 +95,7 @@ Give authorization to access AWS resources on behalf of the user:
     No
 ```
 
-Now, the nodes will be created. 
+Now, the nodes will be created.
 
 After that, you will be asked which AvalancheGo version you want to install in the nodes. Select
 the one associated to `<subnetName>`.
@@ -440,16 +440,6 @@ We will create two Subnet-EVM genesis files, both with warp enabled, but with di
 {
   "config": {
     "chainId": 68430,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
     "subnetEVMTimestamp": 0,
     "dUpgradeTimestamp": 0,
     "feeConfig": {
@@ -490,16 +480,6 @@ We will create two Subnet-EVM genesis files, both with warp enabled, but with di
 {
   "config": {
     "chainId": 68431,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
     "subnetEVMTimestamp": 0,
     "dUpgradeTimestamp": 0,
     "feeConfig": {
@@ -756,4 +736,3 @@ curl http://52.204.202.216:9650/ext/bc/JjDfmxM3hAEX3VuaKH4PpQskhrvp2pzGTgYLpDwin
 ```
 
 C-Chain endpoint follows the same scheme but with the blockchain alias of `C`: `http://52.204.202.216:9650/ext/bc/C/rpc`
-
