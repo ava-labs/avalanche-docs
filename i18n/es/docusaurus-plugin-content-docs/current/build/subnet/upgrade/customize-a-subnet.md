@@ -12,7 +12,7 @@ Todas las Subnets se pueden personalizar utilizando [`Configuraciones de Subnet`
 
 Una Subnet puede tener una o más blockchains. Por ejemplo, la Red Primaria, que es una Subnet, una
 especial, tiene 3 blockchains. Cada cadena se puede personalizar aún más utilizando un archivo de
-configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-config-flags.md) para obtener una explicación detallada.
+configuración específico de la cadena. Consulta [aquí](/nodes/configure/chain-configs/chain-config-flags.md) para obtener una explicación detallada.
 
 Una blockchain creada por o bifurcada de [Subnet-EVM](https://github.com/ava-labs/subnet-evm) se puede
 personalizar utilizando uno o más de los siguientes métodos:
@@ -1035,7 +1035,7 @@ Consulte cada configuración inicial de precompilación en sus secciones relevan
 
 ## Configuraciones de Cadena AvalancheGo
 
-Como se describe en [este documento](/nodes/configure/chain-config-flags.md#subnet-chain-configs), cada blockchain de Subnets puede tener su propia configuración personalizada. Si el ChainID de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, el archivo de configuración para esta cadena se encuentra en `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
+Como se describe en [este documento](/nodes/configure/chain-configs/chain-config-flags.md#subnet-chain-configs), cada blockchain de Subnets puede tener su propia configuración personalizada. Si el ChainID de una Subnet es `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, el archivo de configuración para esta cadena se encuentra en `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
 Para blockchains creadas por o bifurcadas de Subnet-EVM, la mayoría de las configuraciones de C-Chain son aplicables, excepto las API específicas de Avalanche.
 
@@ -1134,3 +1134,47 @@ El archivo `upgrades.json` que se muestra a continuación describe una actualiza
   ]
 }
 ```
+
+## Actualizaciones de red: reprogramación de actualizaciones de red obligatorias
+
+Un caso típico en el que una red omite cualquier activación obligatoria daría como resultado una red que no puede funcionar. Esto se debe a que los validadores/nodos que ejecutan la versión anterior procesarían las transacciones de manera diferente a los nodos que ejecutan la nueva versión y terminarían en un estado diferente. Esto daría como resultado una bifurcación en la red y los nuevos nodos no podrían sincronizarse con la red. Normalmente, esto detiene la cadena y requiere una bifurcación dura para solucionar el problema. A partir de Subnet-EVM v0.6.3, puede reprogramar activaciones obligatorias como Durango mediante configuraciones de actualización (upgrade.json en el directorio de cadena). Esta es una operación muy avanzada y debe realizarse sólo si su red no puede funcionar en el futuro. La operación de reprogramación debe coordinarse con todos los nodos de su red. Las anulaciones de actualización de red se pueden definir en `upgrade.json` de la siguiente manera:
+
+```json
+{
+   "networkUpgradeOverrides": {
+     "{networkUpgrade1}": marcadetiempo1,
+     "{networkUpgrade2}": marcadetiempo2,
+   }
+}
+```
+
+La "marca de tiempo" debe ser una marca de tiempo de Unix en segundos.
+
+Por ejemplo, si se perdió la activación de Durango en Fuji (13 de febrero de 2024, 16:00 UTC) o Mainnet (6 de marzo de 2024, 16:00 UTC) y tiene problemas en su red, puede reprogramar la activación de Durango mediante actualizaciones. Para hacer esto, necesita preparar un nuevo update.json que incluya lo siguiente:
+
+```json
+{
+  "networkUpgradeOverrides": {
+    "durangoMarca de tiempo": 1712419200
+  }
+}
+```
+
+Esto reprograma la activación de Durango para el 6 de noviembre de 2024 a las 16:00:00 UTC (un mes después de la activación real). Después de preparar el Upgrade.json, debe actualizar el directorio de la cadena con el nuevo Upgrade.json y reiniciar los nodos. Debería ver registros similares al siguiente:
+
+```go
+INFO [03-22|14:04:48.284] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/plugin/evm/vm.go:367: Applying network upgrade overrides overrides="{\"durangoTimestamp\":1712419200}"
+...
+INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335: Avalanche Upgrades (timestamp based):
+INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335:  - SubnetEVM Timestamp:           @0          (https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0)
+INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335:  - Durango Timestamp:            @1712419200 (https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0)
+...
+```
+
+Esto significa que su nodo está bloqueado y cargado para la nueva activación de Durango. Una vez alcanzada la nueva marca de tiempo, su nodo activará Durango y comenzará a procesar transacciones con las nuevas funciones de Durango.
+
+:::caution
+Los nodos que ejecutan una versión no compatible (que ejecutan una versión anterior a Durango después de la activación de Durango) deben actualizarse a la versión más reciente de Subnet-EVM (v0.6.3+) y deben tener el nuevo update.json para reprogramar la activación de Durango. Ejecutar una nueva versión sin reprogramar el archivo update.json podría crear una bifurcación en la red.
+
+Todos los nodos de la red, incluso los que se actualizaron correctamente a Durango y ejecutaron la versión correcta desde la activación de Durango, deben reiniciarse con el nuevo update.json para reprogramar la activación de Durango. Esta es una operación que afecta a toda la red y debe coordinarse con todos los nodos de la red.
+:::

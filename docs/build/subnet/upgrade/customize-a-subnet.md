@@ -12,7 +12,7 @@ All Subnets can be customized by utilizing [`Subnet Configs`](#subnet-configs).
 
 A Subnet can have one or more blockchains. For example, the Primary Network, which is a Subnet, a
 special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific
-configuration file. See [here](/nodes/configure/chain-config-flags.md) for detailed explanation.
+configuration file. See [here](/nodes/configure/chain-configs/chain-config-flags.md) for detailed explanation.
 
 A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be
 customized by utilizing one or more of the following methods:
@@ -1140,14 +1140,14 @@ See every precompile initial configuration in their relevant `Initial Configurat
 
 ## AvalancheGo Chain Configs
 
-As described in [this doc](/nodes/configure/chain-config-flags.md#subnet-chain-configs), each blockchain
+As described in [this doc](/nodes/configure/chain-configs/chain-config-flags.md#subnet-chain-configs), each blockchain
 of Subnets can have its own custom configuration. If a Subnet's ChainID is
 `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at
 `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
 For blockchains created by or forked from Subnet-EVM, most
-[C-Chain configs](/nodes/configure/chain-config-flags.md#c-chain-configs) are applicable except
-[Avalanche Specific APIs](/nodes/configure/chain-config-flags.md#enabling-avalanche-specific-apis).
+[C-Chain configs](/nodes/configure/chain-configs/C.md) are applicable except
+[Avalanche Specific APIs](/nodes/configure/chain-configs/C.md#enabling-avalanche-specific-apis).
 
 ### Priority Regossip
 
@@ -1157,7 +1157,7 @@ a block after `priority-regossip-frequency` (defaults to `1m`). By default, up t
 
 Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of
 important addresses (like bridge relayers). To do so, you'll need to update your
-[chain config](/nodes/configure/chain-config-flags.md#subnet-chain-configs) with the following:
+[chain config](/nodes/configure/chain-configs/chain-config-flags.md#subnet-chain-configs) with the following:
 
 ```json
 {
@@ -1266,3 +1266,47 @@ state modifications at the first block after (or at) `March 8, 2023 1:30:00 AM G
   ]
 }
 ```
+
+## Network Upgrades: Rescheduling Mandatory Network Upgrades
+
+A typical case when a network misses any mandatory activation would result in a network that is not able to operate. This is because validators/nodes running the old version would process transactions differently than nodes running the new version and end up different state. This would result in a fork in the network and new nodes would not be able to sync with the network. Normally this puts the chain in a halt and requires a hard fork to fix the issue. Starting with Subnet-EVM v0.6.3, you can reschedule mandatory activations like Durango via upgrade configs (upgrade.json in chain directory). This is a very advanced operation and should be done only if your network cannot operate going forward. The reschedule operation should be coordinated with your entire network nodes. Network upgrade overrides can be defined in the `upgrade.json` as follows:
+
+```json
+{
+  "networkUpgradeOverrides": {
+    "{networkUpgrade1}": timestamp1,
+    "{networkUpgrade2}": timestamp2,
+  }
+}
+```
+
+The `timestamp` should be a Unix timestamp in seconds.
+
+For instance, if you missed the Durango activation in Fuji (February 13th, 2024, 16:00 UTC) or Mainnet (March 6th, 2024, 16:00 UTC) and having issues in your network, you can reschedule the Durango activation via upgrades. In order to do this, you need to prepare a new upgrade.json including following:
+
+```json
+{
+  "networkUpgradeOverrides": {
+    "durangoTimestamp": 1712419200
+  }
+}
+```
+
+This reschedules the Durango activation to 2024-11-06 16:00:00 UTC (one month later than the actual activation). After preparing the upgrade.json, you need to update the chain directory with the new upgrade.json and restart your nodes. You should see logs similar to the following:
+
+```go
+INFO [03-22|14:04:48.284] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/plugin/evm/vm.go:367: Applying network upgrade overrides overrides="{\"durangoTimestamp\":1712419200}"
+...
+INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335: Avalanche Upgrades (timestamp based):
+INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335:  - SubnetEVM Timestamp:           @0          (https://github.com/ava-labs/avalanchego/releases/tag/v1.10.0)
+INFO [03-22|14:04:48.288] <fPypUHjNvJqBKXBx2LEoJ9u5b8rRxMtEhb4v2QEDQejEiTtMG Chain> github.com/ava-labs/subnet-evm/core/blockchain.go:335:  - Durango Timestamp:            @1712419200 (https://github.com/ava-labs/avalanchego/releases/tag/v1.11.0)
+...
+```
+
+This means your node is lock and loaded for the new Durango activation. After the new timestamp is reached, your node will activate Durango and start processing transactions with the new Durango features.
+
+:::caution
+Nodes running non-compatible version (running pre-Durango version after Durango activation), should be updated to most recent version of Subnet-EVM (v0.6.3+) and must have the new upgrade.json to reschedule the Durango activation. Running a new version without the rescheduling upgrade.json might create a fork in the network.
+
+All of network nodes, even ones correctly upgraded to Durango and running the correct version since Durango activation, should be restarted with the new upgrade.json to reschedule the Durango activation. This is a network-wide operation and should be coordinated with all network nodes.
+:::

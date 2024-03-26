@@ -121,7 +121,7 @@ week, but there are ways to shorten that process, depending on your circumstance
 #### State Sync
 
 If the nodes you will be running as validators don't need to have the full transaction history, then
-you can use [state sync](/nodes/configure/chain-config-flags.md#state-sync-enabled-boolean). With
+you can use [state sync](/nodes/configure/chain-configs/C.md#state-sync-enabled). With
 this flag enabled, instead of replaying the whole history to get to the current state, nodes simply
 download only the current state from other network peers, shortening the bootstrap process from
 multiple days to a couple of hours. If the nodes will be used for Subnet validation exclusively, you

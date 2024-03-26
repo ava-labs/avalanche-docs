@@ -26,7 +26,7 @@ Todas las opciones de configuración y sus valores predeterminados se describen 
 
 Puede proporcionar opciones de configuración en la línea de comandos o utilizar un archivo de configuración, que puede ser más fácil de usar cuando se proporcionan muchas opciones. Puede especificar la ubicación del archivo de configuración con `--config-file=config.json`, donde `config.json` es un archivo JSON cuyas claves y valores son nombres de opciones y valores.
 
-Las cadenas individuales, incluida la C-Chain, tienen sus propias opciones de configuración que son independientes de las opciones a nivel de nodo. Estos también se pueden especificar en un archivo de configuración. Para más detalles, consulte [aquí](/nodes/configure/chain-config-flags.md#c-chain-configs).
+Las cadenas individuales, incluida la C-Chain, tienen sus propias opciones de configuración que son independientes de las opciones a nivel de nodo. Estos también se pueden especificar en un archivo de configuración. Para más detalles, consulte [aquí](/nodes/configure/chain-configs/C.md).
 
 El archivo de configuración de la C-Chain debería estar en `$HOME/.avalanchego/configs/chains/C/config.json`. También puede indicarle a AvalancheGo que busque en otro lugar el archivo de configuración de la C-Chain con la opción `--chain-config-dir`. Un ejemplo de archivo de configuración de la C-Chain:
 

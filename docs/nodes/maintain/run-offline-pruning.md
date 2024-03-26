@@ -44,7 +44,7 @@ The default location of the C-Chain config file is
 `~/.avalanchego/configs/chains/C/config.json`. **Please note that by default,
 this file does not exist. You would need to create it manually.** You can update
 the directory for chain configs by passing in the directory of your choice via
-the CLI argument: `chain-config-dir`. See [this](/nodes/configure/chain-config-flags.md) for more
+the CLI argument: `chain-config-dir`. See [this](/nodes/configure/chain-configs/chain-config-flags.md) for more
 info. For example, if you start your node with:
 
 ```zsh
