@@ -481,7 +481,7 @@
 # Docs Revamp - Nodes Tab
 /nodes/validate/staking /nodes/validate/what-is-staking 301
 /nodes/maintain/avalanchego-config-flags /nodes/configure/avalanchego-config-flags 301
-/nodes/maintain/chain-config-flags /nodes/configure/chain-config-flags 301
+/nodes/maintain/chain-config-flags /nodes/configure/chain-configs/chain-config-flags 301
 /nodes/maintain/subnet-configs /nodes/configure/subnet-configs 301
 /nodes/build/run-avalanche-node-manually /nodes/run/node-manually 301
 /nodes/subnets/setup-dfk-node /nodes/run/subnet-node 301
@@ -554,3 +554,6 @@
 /tooling/cli-guides/upload-a-custom-vm-to-cloud /tooling/cli-create-nodes/stop-node 301
 /tooling/cli-guides/validate-primary-network /tooling/cli-create-nodes/stop-node 301
 /tooling/cli-guides/validate-subnets /tooling/cli-create-nodes/stop-node 301
+
+# 03/25/2024
+/nodes/configure/chain-configs/chain-config-flags /nodes/configure/chain-configs/chain-config-flags 301

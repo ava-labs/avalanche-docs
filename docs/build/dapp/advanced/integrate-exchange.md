@@ -46,7 +46,7 @@ a JSON file whose keys and values are option names and values.
 Individual chains, including the C-Chain, have their own configuration options
 which are separate from the node-level options. These can also be specified in a
 config file. For more details, see
-[here](/nodes/configure/chain-config-flags.md#c-chain-configs).
+[here](/nodes/configure/chain-configs/C.md).
 
 The C-Chain config file should be at
 `$HOME/.avalanchego/configs/chains/C/config.json`. You can also tell AvalancheGo

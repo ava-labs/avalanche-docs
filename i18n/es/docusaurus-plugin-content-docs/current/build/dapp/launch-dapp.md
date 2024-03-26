@@ -65,7 +65,7 @@ Para fines de desarrollo y experimentación, [aquí](/nodes/run/node-manually.md
 
 Las opciones de configuración del nodo se explican [aquí](/nodes/configure/avalanchego-config-flags.md). Pero a menos que tengas necesidades específicas, en su mayoría puedes dejar las opciones de configuración principales del nodo en sus valores predeterminados.
 
-Por otro lado, es probable que necesites ajustar la configuración de la C-Chain para adaptarla a tu uso previsto. Puedes consultar las opciones de configuración completas para la C-Chain [aquí](/nodes/configure/chain-config-flags.md#c-chain-configs), así como la configuración predeterminada. Ten en cuenta que solo las opciones que son diferentes de sus valores predeterminados deben incluirse en el archivo de configuración.
+Por otro lado, es probable que necesites ajustar la configuración de la C-Chain para adaptarla a tu uso previsto. Puedes consultar las opciones de configuración completas para la C-Chain [aquí](/nodes/configure/chain-configs/C.md), así como la configuración predeterminada. Ten en cuenta que solo las opciones que son diferentes de sus valores predeterminados deben incluirse en el archivo de configuración.
 
 De forma predeterminada, el archivo de configuración de la C-Chain se encuentra en `$HOME/.avalanchego/configs/chains/C/config.json`. Repasaremos cómo ajustar la configuración para cubrir algunos casos de uso comunes en las secciones siguientes.
 
@@ -111,7 +111,7 @@ Un ejemplo de archivo de configuración de la C-Chain que incluye el modo de arc
 }
 ```
 
-Los valores de configuración predeterminados para la C-Chain se pueden ver [aquí](/nodes/configure/chain-config-flags.md#c-chain-configs).
+Los valores de configuración predeterminados para la C-Chain se pueden ver [aquí](/nodes/configure/chain-configs/C.md).
 
 ### Ejecutando una Red de Pruebas Local
 

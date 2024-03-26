@@ -6,9 +6,9 @@ keywords: [rpc, avalanche rpc, endpoint, curl, rpc provider]
 
 # 🔌 RPC Providers
 
-There are multiple RPC providers from which you can choose from. These providers will work as 
+There are multiple RPC providers from which you can choose from. These providers will work as
 intermediaries to help you interact with the Avalanche network. You'll experience different latency
-levels depending on the provider's configurations. You can potentially use multiple providers for 
+levels depending on the provider's configurations. You can potentially use multiple providers for
 redundancy and balancing.
 
 ## Mainnet RPC - Public API Server
@@ -59,7 +59,7 @@ don't exist on the C-Chain's HTTP API.
 For batched C-Chain requests on the public API node, the maximum number of items
 is 40. We're working on to support a larger batch size.
 
-The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/nodes/configure/chain-config-flags.md#api-max-blocks-per-request-int).
+The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/nodes/configure/chain-configs/C.md#api-max-blocks-per-request).
 
 #### Sticky Sessions
 
@@ -75,7 +75,7 @@ If you're using [AvalancheJS](/tooling/avalanchejs-overview.md) to access the pu
 API, simply set the following in your code:
 
 ```javascript
-avalanche.setRequestConfig("withCredentials", true)
+avalanche.setRequestConfig("withCredentials", true);
 ```
 
 #### Availability
@@ -110,16 +110,16 @@ project.
 #### Mainnet
 
 - Standard EVM API, the URL is `https://rpc.ankr.com/avalanche`.
-- For C-Chain API, the URL is `https://rpc.ankr.com/avalanche-c`. On ANKR the C-Chain API doesn't 
-support standard EVM APIs. For that use the Standard EVM API.
+- For C-Chain API, the URL is `https://rpc.ankr.com/avalanche-c`. On ANKR the C-Chain API doesn't
+  support standard EVM APIs. For that use the Standard EVM API.
 - For X-Chain API, the URL is `https://rpc.ankr.com/avalanche-x`.
 - For P-Chain API, the URL is `https://rpc.ankr.com/avalanche-p`.
 
 #### Testnet (Fuji)
 
 - Standard EVM API, the URL is `https://rpc.ankr.com/avalanche_fuji`.
-- For C-Chain API, the URL is `https://rpc.ankr.com/avalanche_fuji-c`. On ANKR the C-Chain API 
-doesn't support standard EVM APIs. For that use the Standard EVM API.
+- For C-Chain API, the URL is `https://rpc.ankr.com/avalanche_fuji-c`. On ANKR the C-Chain API
+  doesn't support standard EVM APIs. For that use the Standard EVM API.
 - For X-Chain API, the URL is `https://rpc.ankr.com/avalanche_fuji-x`.
 - For P-Chain API, the URL is `https://rpc.ankr.com/avalanche_fuji-p`.
 
@@ -183,31 +183,31 @@ Features:
 
 ##### HTTP
 
-- For C-Chain API, the regional elastic node URL is 
-`https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`, 
-and the global elastic node URL is 
-`https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc/API_KEY`
-- For X-Chain API, the regional elastic node URL is 
-`https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`, 
-and the global elastic node URL is 
-`https://avalanche-mainnet.core.chainstack.com/ext/bc/X/API_KEY`
-- For P-Chain API, the regional elastic node URL is 
-`https://nd-123-145-789.p2pify.com/API_KEY/ext/P`,
-and the global elastic node URL is 
-`https://avalanche-mainnet.core.chainstack.com/ext/P/API_KEY`
+- For C-Chain API, the regional elastic node URL is
+  `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/rpc`,
+  and the global elastic node URL is
+  `https://avalanche-mainnet.core.chainstack.com/ext/bc/C/rpc/API_KEY`
+- For X-Chain API, the regional elastic node URL is
+  `https://nd-123-145-789.p2pify.com/API_KEY/ext/bc/X`,
+  and the global elastic node URL is
+  `https://avalanche-mainnet.core.chainstack.com/ext/bc/X/API_KEY`
+- For P-Chain API, the regional elastic node URL is
+  `https://nd-123-145-789.p2pify.com/API_KEY/ext/P`,
+  and the global elastic node URL is
+  `https://avalanche-mainnet.core.chainstack.com/ext/P/API_KEY`
 
 ##### Websockets
 
 Websockets are available for the C-chain and the X-chain.
 
-- For C-Chain API, the regional elastic node URL is 
-`wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`, 
-and the global elastic node URL is 
-`wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/C/ws/API_KEY`
-- For X-Chain API, the regional elastic node URL is 
-`wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`, 
-and the global elastic node URL is 
-`wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/X/events/API_KEY`
+- For C-Chain API, the regional elastic node URL is
+  `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`,
+  and the global elastic node URL is
+  `wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/C/ws/API_KEY`
+- For X-Chain API, the regional elastic node URL is
+  `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`,
+  and the global elastic node URL is
+  `wss://avalanche-mainnet.core.chainstack.com/ws/ext/bc/X/events/API_KEY`
 
 #### Testnet (Fuji)
 
@@ -223,11 +223,10 @@ Websockets are available for the C-chain and the X-chain.
 
 - For C-Chain API, the URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/C/ws`
 - For X-Chain API, the URL is `wss://ws-nd-123-145-789.p2pify.com/API_KEY/ext/bc/X/events`
- 
+
 ### DRPC
 
 [DRPC](https://drpc.org/) supports the C-Chain.
-
 
 #### Mainnet
 
@@ -244,19 +243,19 @@ Websockets are available for the C-chain and the X-chain.
 - Unlimited compute units per month on the free tier
 - On free-tier is available Websockets
 
-### GetBlock 
+### GetBlock
 
 [GetBlock](https://getblock.io/nodes/avax) currently only supports the C-Chain.
 
 #### HTTP
 
-- For C-Chain API, the URL is  `https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+- For C-Chain API, the URL is `https://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
 
 Note: on Fuji Testnet, the URL is `https://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
 
 #### Websockets
 
-- For C-Chain API, the URL is  `wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
+- For C-Chain API, the URL is `wss://avax.getblock.io/api_key/mainnet/ext/bc/C/ws?api_key=`
 
 Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc/C/ws?api_key=`.
 
@@ -267,7 +266,7 @@ only supports the C-Chain.
 
 #### HTTP
 
-- For C-Chain API, the URL is  `https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY`
+- For C-Chain API, the URL is `https://avalanche-mainnet.infura.io/v3/YOUR-API-KEY`
 
 Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-KEY`.
 
@@ -278,15 +277,15 @@ Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-
 #### Mainnet
 
 - [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs) for getting NFT metadata, balances,
-transfers, sales and more
+  transfers, sales and more
 - [Token API](https://moralis.io/api/token/?utm_source=avax-docs) for getting ERC20 metadata, balances,
-transfers, prices, burns, mints and more
+  transfers, prices, burns, mints and more
 - [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs) for getting wallet balances,
-transaction history, net worth and more
+  transaction history, net worth and more
 - [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs) for getting data about blocks,
-transactions, logs and events
+  transactions, logs and events
 - [Streams API](https://moralis.io/streams/?utm_source=avax-docs) for getting real-time webhooks about
-any on-chain event
+  any on-chain event
 
 Features:
 
@@ -305,11 +304,11 @@ Features:
 
 #### HTTP
 
-- For `C-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/C/rpc`
-- For `X-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/X`
-- For `P-Chain`, the URL is  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/P`
+- For `C-Chain`, the URL is `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/C/rpc`
+- For `X-Chain`, the URL is `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/X`
+- For `P-Chain`, the URL is `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/P`
 - For `DFK-Subnet`, the URL is
-`https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
+  `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
 
 ### QuickNode
 
@@ -318,11 +317,11 @@ P-Chain, C-Chain, and Index API.
 
 #### HTTP
 
-- The URL is  `http://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
+- The URL is `http://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
 
 #### Websockets
 
-- The URL is  `wss://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
+- The URL is `wss://sample-endpoint-name.network.quiknode.pro/token-goes-here/`
 
 ### Stackup
 
@@ -347,17 +346,17 @@ Features:
 - Privacy oriented (non custodial, no KYC)
 - Dedicated access with no limits by request
 - Free starter plan
-- Technical guides 
+- Technical guides
 
 #### Mainnet
 
 #### RPC
 
-- The URL is  `https://avalanche.nownodes.io/your-api-key`
-  
+- The URL is `https://avalanche.nownodes.io/your-api-key`
+
 #### Blockbook
 
-- The URL is  `https://avax-blockbook.nownodes.io/your-request`
+- The URL is `https://avax-blockbook.nownodes.io/your-request`
 
 ### PublicNode by Allnodes
 
@@ -391,7 +390,7 @@ Features:
 - For X-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/x`
 - For P-Chain RPC Endpoint, the URL is `https://1rpc.io/avax/p`
 
-## Subnets RPC - Public API Servers 
+## Subnets RPC - Public API Servers
 
 ### Beam
 
