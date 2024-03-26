@@ -43,10 +43,10 @@ Aquí puedes revisar los detalles de la configuración de lanzamiento y seguir l
 ```zsh
 # En este ejemplo tenemos un par de claves llamado avalanche.pem que se descargó de AWS a ~/Downloads/avalanche.pem
 # Confirma que el archivo existe con el siguiente comando
-test -f ~/Downloads/avalanche.pem && echo "avalance.pem existe."
+test -f ~/Downloads/avalanche.pem && echo "avalanche.pem existe."
 
 # Ejecutar el comando anterior mostrará lo siguiente:
-# avalance.pem existe.
+# avalanche.pem existe.
 
 # Mueve el par de claves avalanche.pem del directorio ~/Downloads al directorio oculto ~/.ssh
 mv ~/Downloads/avalanche.pem ~/.ssh

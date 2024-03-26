@@ -1,6 +1,6 @@
 ---
 tags: [Build, Subnets, Avalanche-CLI]
-description:  If you need to send funds to your Subnet control key or need to move funds from one Ledger address index to another, this guide will demostrate how to enable direct transfers between ledger P-Chain addresses using the Avalanche-CLI command `avalanche key transfer`.
+description: If you need to send funds to your Subnet control key or need to move funds from one Ledger address index to another, this guide will demonstrate how to enable direct transfers between ledger P-Chain addresses using the Avalanche-CLI command `avalanche key transfer`.
 sidebar_label: Transfer P-Chain Funds
 pagination_label: How to Use Avalanche-CLI to Transfer P-Chain Funds
 sidebar_position: 3
@@ -332,4 +332,3 @@ avalanche key transfer --receive-recovery-step 1
 ```
 
 Then, the CLI is going to resume where it left off.
-

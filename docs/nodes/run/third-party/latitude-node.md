@@ -19,7 +19,7 @@ To get started, you'll need:
 - A Latitude.sh account
 - A terminal with which to SSH into your Latitude.sh machine
 
-For the instructions on creating an account and server with Lattitude.sh, please reference their
+For the instructions on creating an account and server with Latitude.sh, please reference their
 [GitHub tutorial](https://github.com/NottherealIllest/Latitude.sh-post/blob/main/avalanhe/avax-copy.md)
 , or visit [this page](https://www.latitude.sh/dashboard/signup) to sign up and create your first project.
 
@@ -35,7 +35,7 @@ server according to the instructions linked above.
 
 ### Access Your Server & Further Steps
 
-All your Lattitude.sh credentials are available by clicking the `server` under your project, and can
+All your Latitude.sh credentials are available by clicking the `server` under your project, and can
 be used to access your Latitude.sh machine from your local machine using a terminal.
 
 :::note
