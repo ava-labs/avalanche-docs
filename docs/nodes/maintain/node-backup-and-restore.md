@@ -61,8 +61,8 @@ NodeID is defined by two files:
 
 NodePOP is this node's BLS key and proof of possession. Nodes must register a BLS key to act as
 a validator on the Primary Network. Your node's POP is logged on startup and is accessible over this endpoint.
-  - `publicKey` is the 48 byte hex representation of the BLS key.
-  - `proofOfPossession` is the 96 byte hex representation of the BLS signature.
+- `publicKey` is the 48 byte hex representation of the BLS key.
+- `proofOfPossession` is the 96 byte hex representation of the BLS signature.
 
 NodePOP is defined by the `signer.key` file.
 
@@ -74,13 +74,17 @@ node on another machine is to run a new installation with those same three files
 If `staker.key` and `staker.crt` are removed from a node, which is restarted afterwards, they
 will be recreated and a new node ID will be assigned.
 
-If the `signer.key`is regenerated, the node will lose its previous BLS identity, which includes its public key and proof of possession. This change means that the node's former identity on the network will no longer be recognized, affecting its ability to participate in the consensus mechanism as before. Consequently, the node may lose its established reputation and any associated staking rewards. 
+If the `signer.key` is regenerated, the node will lose its previous BLS identity, which includes 
+its public key and proof of possession. This change means that the node's former identity on the 
+network will no longer be recognized, affecting its ability to participate in the consensus 
+mechanism as before. Consequently, the node may lose its established reputation and any 
+associated staking rewards. 
 
 :::caution
 
 If you have users defined in the keystore of your node, then you need to back up
-and restore those as well. [Keystore API](/reference/avalanchego/keystore-api.md) has methods that can be used to
-export and import user keys. Note that Keystore API is used by developers only
+and restore those as well. [Keystore API](/reference/avalanchego/keystore-api.md) has methods 
+that can be used to export and import user keys. Note that Keystore API is used by developers only
 and not intended for use in production nodes. If you don't know what a keystore
 API is and have not used it, you don't need to worry about it.
 
