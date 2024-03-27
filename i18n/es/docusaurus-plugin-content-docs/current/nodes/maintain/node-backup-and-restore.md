@@ -31,7 +31,18 @@ NodeID es un identificador único que diferencia tu nodo de todos los demás par
 - `staker.crt`
 - `staker.key`
 
-En la instalación por defecto, se pueden encontrar en el directorio de trabajo, específicamente en `~/.avalanchego/staking/`. Todo lo que necesitamos hacer para recrear el nodo en otra máquina es ejecutar una nueva instalación con esos mismos dos archivos. Si estos dos archivos se eliminan de un nodo, que se reinicia después, se recrearán y se asignará un nuevo ID de nodo.
+NodePOP es la clave BLS de este nodo y la prueba de posesión. Los nodos deben registrar una clave BLS para actuar como un validador en la Red Primaria. El POP de tu nodo se registra al inicio y es accesible a través de este punto final.
+
+- `publicKey` es la representación hexadecimal de 48 bytes de la clave BLS.
+- `proofOfPossession` es la representación hexadecimal de 96 bytes de la firma BLS.
+
+NodePOP está definido por el archivo `signer.key`.
+
+En la instalación por defecto, se pueden encontrar en el directorio de trabajo, específicamente en `~/.avalanchego/staking/`. Todo lo que necesitamos hacer para recrear el nodo en otra máquina es ejecutar una nueva instalación con esos mismos tres archivos.
+
+Si se eliminan `staker.key` y `staker.crt` de un nodo, que se reinicia después, se recrearán y se asignará un nuevo ID de nodo.
+
+Si el `signer.key` se regenera, el nodo perderá su identidad BLS anterior, que incluye su clave pública y su prueba de posesión. Este cambio significa que la identidad anterior del nodo en la red ya no será reconocida, afectando su capacidad para participar en el mecanismo de consenso como antes. En consecuencia, el nodo puede perder su reputación establecida y cualquier recompensa de staking asociada.
 
 :::caution
 
@@ -41,11 +52,13 @@ Si tienes usuarios definidos en el keystore de tu nodo, entonces también necesi
 
 ### Copia de seguridad
 
-Para hacer una copia de seguridad de tu nodo, necesitamos almacenar los archivos `staker.crt` y `staker.key` en algún lugar seguro y privado, preferiblemente en una computadora diferente, en tu almacenamiento privado en la nube, en una memoria USB u otro lugar similar. Almacenarlos en un par de ubicaciones seguras y diferentes aumenta la seguridad.
+Para hacer una copia de seguridad de tu nodo, necesitamos almacenar los archivos `staker.crt`, `staker.key` y `signer.key` en algún lugar seguro y privado, preferiblemente en una computadora diferente, en tu almacenamiento privado en la nube, en una memoria USB u otro lugar similar. Almacenarlos en un par de ubicaciones seguras y diferentes aumenta la seguridad.
 
 :::caution
 
 Si alguien obtiene tus archivos de staker, aún no pueden acceder a tus fondos, ya que están controlados por las claves privadas de la billetera, no por el nodo. Pero podrían recrear tu nodo en otro lugar y, dependiendo de las circunstancias, hacerte perder las recompensas de staking. Así que asegúrate de que tus archivos de staker estén seguros.
+
+Si alguien obtiene acceso a tu `signer.key`, potencialmente podrían firmar transacciones en nombre de tu nodo, lo que podría interrumpir las operaciones e integridad de tu nodo en la red.
 
 :::
 
@@ -66,22 +79,22 @@ Para copiar los archivos desde el nodo, necesitarás poder iniciar sesión de fo
 Cuando tengas los medios para iniciar sesión de forma remota en la máquina, puedes copiar los archivos con el siguiente comando:
 
 ```text
-scp -r ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
+scp -r ubuntu@IPPUBLICA:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
 ```
 
-Esto asume que el nombre de usuario en la máquina es `ubuntu`, reemplázalo con el nombre de usuario correcto en ambos lugares si es diferente. Además, reemplaza `DIRECCION_IP_PUBLICA` con la IP pública real de la máquina. Si `scp` no utiliza automáticamente tu clave SSH descargada, puedes apuntar a ella manualmente:
+Esto asume que el nombre de usuario en la máquina es `ubuntu`, reemplázalo con el nombre de usuario correcto en ambos lugares si es diferente. Además, reemplaza `IPPUBLICA` con la IP pública real de la máquina. Si `scp` no utiliza automáticamente tu clave SSH descargada, puedes apuntar a ella manualmente:
 
 ```text
-scp -i /ruta/a/la/clave.pem -r ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
+scp -i /ruta/a/la/clave.pem -r ubuntu@IPPUBLICA:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
 ```
 
-Una vez ejecutado, este comando creará un directorio `avalanche_backup` en tu directorio de inicio y colocará los archivos de staker en él. Debes almacenarlos en algún lugar seguro.
+Una vez ejecutado, este comando creará un directorio `avalanche_backup` en tu directorio de inicio y colocará esos tres archivos en él. Debes almacenarlos en algún lugar seguro.
 
 ### Restauración
 
-Para restaurar tu nodo desde una copia de seguridad, necesitamos hacer lo contrario: restaurar los archivos `staker.key` y `staker.crt` desde la copia de seguridad al directorio de trabajo del nodo.
+Para restaurar tu nodo desde una copia de seguridad, necesitamos hacer lo contrario: restaurar `staker.key`, `staker.crt` y `signer.key` desde la copia de seguridad al directorio de trabajo del nodo.
 
-Primero, necesitamos hacer la instalación habitual del nodo. Esto creará un nuevo NodeID, que necesitamos reemplazar. Cuando el nodo esté instalado correctamente, inicia sesión en la máquina donde se está ejecutando el nodo y detenlo:
+Primero, necesitamos hacer la instalación habitual del nodo según las [instrucciones](/nodes/run/with-installer/installing-avalanchego.md). Esto creará un nuevo NodeID, una nueva clave BLS y una nueva firma BLS, que necesitamos reemplazar. Cuando el nodo esté instalado correctamente, inicia sesión en la máquina donde se está ejecutando el nodo y detenlo:
 
 ```text
 sudo systemctl stop avalanchego
@@ -91,20 +104,19 @@ Estamos listos para restaurar el nodo.
 
 #### A un nodo local
 
-Si estás ejecutando el nodo localmente, simplemente copia los archivos `staker.key` y `staker.crt` desde la ubicación de la copia de seguridad al directorio de trabajo, que en la instalación de Linux por defecto será `/home/USUARIO/.avalanchego/staking/`. Reemplaza `USUARIO` con el nombre de usuario real utilizado para ejecutar el nodo.
+Si estás ejecutando el nodo localmente, simplemente copia los archivos `staker.key`, `staker.crt` y `signer.key` desde la ubicación de la copia de seguridad al directorio de trabajo, que en una instalación de Linux por defecto será `/home/USUARIO/.avalanchego/staking/`. Reemplaza `USUARIO` con el nombre de usuario real utilizado para ejecutar el nodo.
 
 #### A un nodo remoto usando `scp`
 
-Nuevamente, el proceso es simplemente la operación inversa. Usando `scp` necesitamos copiar los archivos `staker.key` y `staker.crt` desde la ubicación de la copia de seguridad al directorio de trabajo remoto. Suponiendo que los archivos de copia de seguridad se encuentran en el directorio donde el procedimiento de copia de seguridad anterior los colocó:
+Nuevamente, el proceso es simplemente la operación inversa. Usando `scp`, necesitamos copiar los archivos `staker.key`, `staker.crt` y `signer.key` desde la ubicación de la copia de seguridad al directorio de trabajo remoto. Suponiendo que los archivos de copia de seguridad se encuentren en el directorio donde el procedimiento de copia de seguridad anterior los colocó:
 
 ```text
-scp ~/avalanche_backup/staker.* ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking
-```
+scp ~/avalanche_backup/{staker.*,signer.key} ubuntu@DIRECCIONIPUBLICA:/home/ubuntu/.avalanchego/staking
 
 O si necesitas especificar la ruta a la clave SSH:
 
 ```text
-scp -i /ruta/a/la/clave.pem ~/avalanche_backup/staker.* ubuntu@DIRECCION_IP_PUBLICA:/home/ubuntu/.avalanchego/staking
+scp -i /ruta/hacia/la/clave.pem ~/avalanche_backup/{staker.*,signer.key} ubuntu@DIRECCIONIPUBLICA:/home/ubuntu/.avalanchego/staking
 ```
 
 Y de nuevo, reemplaza `ubuntu` con el nombre de usuario correcto si es diferente, y `PUBLICIP` con la IP pública real de la máquina que ejecuta el nodo, así como la ruta a la clave SSH si se utiliza.
@@ -127,7 +139,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-Deberías ver tu NodeID original. El proceso de restauración está completo.
+Deberías ver tu NodeID y NodePOP originales (clave BLS y firma BLS). El proceso de restauración está completo.
 
 ## Base de Datos
 
@@ -158,20 +170,20 @@ _Nota: Puede tomar más de 30 minutos comprimir la base de datos del nodo._
 A continuación, puedes transferir la copia de seguridad a otra máquina:
 
 ```bash
-scp -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
+scp -r ubuntu@DIRECCIONIPUBLICA:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
 ```
 
-Esto asume que el nombre de usuario en la máquina es `ubuntu`, reemplázalo con el nombre de usuario correcto en ambos lugares si es diferente. Además, reemplaza `PUBLICIP` con la IP pública real de la máquina. Si `scp` no utiliza automáticamente tu clave SSH descargada, puedes apuntar a ella manualmente:
+Esto asume que el nombre de usuario en la máquina es `ubuntu`, reemplázalo con el nombre de usuario correcto en ambos lugares si es diferente. Además, reemplaza `DIRECCIONIPUBLICA` con la IP pública real de la máquina. Si `scp` no utiliza automáticamente tu clave SSH descargada, puedes especificarla manualmente:
 
 ```bash
-scp -i /ruta/a/la/clave.pem -r ubuntu@PUBLICIP:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
+scp -i /ruta/hacia/la/clave.pem -r ubuntu@DIRECCIONIPUBLICA:/home/ubuntu/avalanche_db_backup.zip ~/avalanche_db_backup.zip
 ```
 
 Una vez ejecutado, este comando creará el directorio `avalanche_db_backup.zip` en tu directorio de inicio.
 
 ### Restauración de la Base de Datos
 
-_Este tutorial asume que ya has completado "Respaldo de la Base de Datos" y tienes una copia de seguridad en ~/avalanche_db_backup.zip._
+_Este tutorial asume que ya has completado "Copia de Seguridad de la Base de Datos" y tienes una copia de seguridad en `~/avalanche_db_backup.zip`._
 
 Primero, necesitamos hacer la instalación habitual del nodo de [instalación](/nodes/run/with-installer/installing-avalanchego.md). Cuando el nodo esté instalado correctamente, inicia sesión en la máquina donde se está ejecutando el nodo y detenlo:
 
