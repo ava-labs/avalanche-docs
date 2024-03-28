@@ -214,4 +214,4 @@ if err != nil {
 
 Esto asegurará que se use el desempaquetado en modo no estricto después de la activación de Durango.
 
-Nota: Esto no debería causar ningún problema importante para tus precompilaciones personalizadas. Sin embargo, si tu precompilación se utiliza principalmente desde otros contratos desplegados (Solidity), debes hacer esta transición para aumentar la compatibilidad de tu precompilación.
+Nota: Esto no debería causar ningún problema importante para tus precompilaciones personalizadas. Si quieres seguir usando el antiguo modo estricto y mantener la compatibilidad con versiones anteriores puedes usar `true` para el parámetro `useStrictMode`. Sin embargo, si tu precompilación se utiliza principalmente desde otros contratos desplegados (Solidity), debes hacer esta transición para aumentar la compatibilidad de tu precompilación.

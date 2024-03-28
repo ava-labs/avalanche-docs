@@ -101,7 +101,7 @@ in the example above.
 The script also creates an empty C-Chain config file, located at
 `~/.avalanchego/configs/chains/C/config.json`. By editing that file, you can
 configure the C-Chain, as described in detail
-[here](/nodes/configure/chain-config-flags.md).
+[here](/nodes/configure/chain-configs/chain-config-flags.md).
 
 ## Using a Previous Version
 

@@ -16,7 +16,7 @@ visit [AvaCloud portal](https://avacloud.io/).
 By leveraging Glacier, developers can:
 
 - Retrieve native and ERC-20 token balances and associated pricing information
-- Get details related to blocks, transactions and UTXOs
+- Get details related to blocks, transactions, and UTXOs
 - Retrieve digital collectible (ERC-721/1155) balances and metadata
 - Get native asset and token transfer history
 

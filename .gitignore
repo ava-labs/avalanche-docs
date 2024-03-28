@@ -12,12 +12,26 @@
 docs/build/cross-chain/awm/deep-dive.md
 docs/build/cross-chain/teleporter/overview.md
 docs/build/cross-chain/teleporter/deep-dive.md
-docs/build/cross-chain/teleporter/examples.md
 docs/build/cross-chain/teleporter/getting-started.md
 docs/build/cross-chain/teleporter/upgradeability.md
 docs/build/cross-chain/teleporter/cli.md
 docs/build/cross-chain/awm/evm-integration.md
+docs/build/cross-chain/awm/relayer.md
 docs/learn/acp.md
+
+# AvalancheGo API from GH repo via docusaurus-plugin-remote-content
+docs/reference/avalanchego/p-chain/api.md
+docs/reference/avalanchego/x-chain/api.md
+docs/reference/avalanchego/admin-api.md
+docs/reference/avalanchego/health-api.md
+docs/reference/avalanchego/info-api.md
+docs/reference/avalanchego/metrics-api.md
+docs/reference/avalanchego/keystore-api.md
+docs/reference/avalanchego/index-api.md
+docs/nodes/configure/avalanchego-config-flags.md
+docs/nodes/configure/subnet-configs.md
+docs/nodes/configure/chain-configs/P.md
+docs/nodes/configure/chain-configs/X.md
 
 # Misc
 .DS_Store

@@ -107,7 +107,7 @@ default values.
 
 On the other hand, you will most likely need to adjust C-Chain configuration to
 suit your intended use. You can look up complete configuration options for
-C-Chain [here](/nodes/configure/chain-config-flags.md#c-chain-configs) as well
+C-Chain [here](/nodes/configure/chain-configs/C.md) as well
 as the default configuration. Note that only the options that are different from
 their default values need to be included in the config file.
 
@@ -169,7 +169,7 @@ APIs as well as default EVM APIs:
 }
 ```
 
-Default config values for the C-Chain can be seen [here](/nodes/configure/chain-config-flags.md#c-chain-configs).
+Default config values for the C-Chain can be seen [here](/nodes/configure/chain-configs/C.md).
 
 ### Running a Local Test Network
 
@@ -217,9 +217,9 @@ API](https://eth.wiki/json-rpc/API).
 
 For development purposes, you will need test tokens. Avalanche has a
 [Faucet](https://faucet.avax.network/) that drips test tokens to the address of
-your choice. If you already have an AVAX balance greater than zero on Mainnet, 
-paste your C-Chain address there, and request test tokens. Otherwise, 
-please request a faucet coupon on 
+your choice. If you already have an AVAX balance greater than zero on Mainnet,
+paste your C-Chain address there, and request test tokens. Otherwise,
+please request a faucet coupon on
 [Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6)
 can provide testnet AVAX if developers are unable to obtain it from the other two options.
 

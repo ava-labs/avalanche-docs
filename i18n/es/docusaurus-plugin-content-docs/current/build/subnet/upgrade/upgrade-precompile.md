@@ -418,7 +418,7 @@ Para instalar el archivo de actualización en tu validador:
    ******************************************************************************************************************
    * Las actualizaciones son complicadas. La corrección sintáctica del archivo de actualización es importante.       *
    * La secuencia de actualizaciones debe observarse estrictamente.                                                  *
-   * Asegúrate de entender https://docs.avax.network/nodes/configure/chain-config-flags.md#subnet-chain-configs     *
+   * Asegúrate de entender https://docs.avax.network/nodes/configure/chain-configs/chain-config-flags.md#subnet-chain-configs     *
    * antes de aplicar actualizaciones manualmente.                                                                   *
    ******************************************************************************************************************
 ```

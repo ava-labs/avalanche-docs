@@ -98,7 +98,7 @@ como `--public-ip-resolution-service=opendns` sino como en el ejemplo anterior.
 El script también crea un archivo de configuración vacío de C-Chain, ubicado en
 `~/.avalanchego/configs/chains/C/config.json`. Al editar ese archivo, puedes
 configurar la C-Chain, como se describe en detalle
-[aquí](/nodes/configure/chain-config-flags.md).
+[aquí](/nodes/configure/chain-configs/chain-config-flags.md).
 
 ## Usando una Versión Anterior
 
