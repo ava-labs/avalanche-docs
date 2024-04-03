@@ -311,7 +311,7 @@ else
     shouldBuild=false
   fi
   if [ "$shouldBuild" = "false" ]; then
-    echo "Unable to find AvalancheGo version $version. Exiting."
+    echo "Unable to find AvalancheGo release $version. Exiting."
     if [ "$foundAvalancheGo" = "true" ]; then
       echo "Restarting service..."
       sudo systemctl start avalanchego
@@ -319,7 +319,7 @@ else
     exit
   fi
 
-  echo "Unable to find AvalancheGo version $version. Attempting to build $version from source."
+  echo "Unable to find AvalancheGo release $version. Attempting to build $version from source."
   git clone https://github.com/ava-labs/avalanchego
   cd avalanchego
   git checkout $version || {
