@@ -287,22 +287,49 @@ else
 fi
 if [[ `wget -S --spider $fileName  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
   echo "Node version found."
+  echo "Attempting to download: $fileName"
+  wget -nv --show-progress $fileName
+
+  echo "Unpacking node files..."
+  mkdir -p $HOME/avalanche-node
+  tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
+  mkdir -p $HOME/.avalanchego/plugins
+  rm avalanchego-linux-*.tar.gz
+  echo "Node files unpacked into $HOME/avalanche-node"
 else
-  echo "Unable to find AvalancheGo version $version. Exiting."
-  if [ "$foundAvalancheGo" = "true" ]; then
-    echo "Restarting service..."
-    sudo systemctl start avalanchego
+  shouldBuild=true
+  if ! command -v git >/dev/null 2>&1 ; then
+    shouldBuild=false
   fi
-  exit
+  if ! command -v go >/dev/null 2>&1 ; then
+    shouldBuild=false
+  fi
+  if ! command -v gcc >/dev/null 2>&1 ; then
+    shouldBuild=false
+  fi
+  if [ "$shouldBuild" = "false" ]; then
+    echo "Unable to find AvalancheGo version $version. Exiting."
+    if [ "$foundAvalancheGo" = "true" ]; then
+      echo "Restarting service..."
+      sudo systemctl start avalanchego
+    fi
+    exit
+  fi
+
+  echo "Unable to find AvalancheGo version $version. Attempting to build $version from source."
+  git clone https://github.com/ava-labs/avalanchego
+  cd avalanchego
+  git checkout $version
+  ./scripts/build.sh
+
+  echo "Moving node binary..."
+  mkdir -p $HOME/avalanche-node
+  cp -r ./build/* $HOME/avalanche-node
+  mkdir -p $HOME/.avalanchego/plugins
+  cd ..
+  rm -rf avalanchego
+  echo "Node binary move to $HOME/avalanche-node"
 fi
-echo "Attempting to download: $fileName"
-wget -nv --show-progress $fileName
-echo "Unpacking node files..."
-mkdir -p $HOME/avalanche-node
-tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
-mkdir -p $HOME/.avalanchego/plugins
-rm avalanchego-linux-*.tar.gz
-echo "Node files unpacked into $HOME/avalanche-node"
 echo
 # on RHEL based systems, selinux prevents systemd running execs from home-dir, lets change this
 if [ "$osType" = "RHEL" ]; then
