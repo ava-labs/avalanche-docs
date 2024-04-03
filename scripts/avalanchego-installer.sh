@@ -299,12 +299,15 @@ if [[ `wget -S --spider $fileName  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
 else
   shouldBuild=true
   if ! command -v git >/dev/null 2>&1 ; then
+    echo "Missing git, will not attempt to build $version from source."
     shouldBuild=false
   fi
   if ! command -v go >/dev/null 2>&1 ; then
+    echo "Missing go, will not attempt to build $version from source."
     shouldBuild=false
   fi
   if ! command -v gcc >/dev/null 2>&1 ; then
+    echo "Missing gcc, will not attempt to build $version from source."
     shouldBuild=false
   fi
   if [ "$shouldBuild" = "false" ]; then
