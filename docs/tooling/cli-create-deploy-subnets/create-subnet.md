@@ -60,6 +60,10 @@ The following sections walk through each question in the wizard.
 
 Select `SubnetEVM`.
 
+### Subnet-EVM Version
+
+Select `Use latest version`.
+
 ### Enter Your Subnet's ChainID
 
 Choose a positive integer for your EVM-style ChainID.
@@ -74,10 +78,6 @@ tools.
 
 Enter a string to name your Subnet's native token. The token symbol doesn't necessarily need to be unique.
 Example token symbols are AVAX, JOE, and BTC.
-
-### Subnet-EVM Version
-
-Select `Use latest version`.
 
 ### Gas Fee Configuration
 
