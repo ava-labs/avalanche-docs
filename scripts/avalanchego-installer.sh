@@ -319,8 +319,22 @@ else
   echo "Unable to find AvalancheGo version $version. Attempting to build $version from source."
   git clone https://github.com/ava-labs/avalanchego
   cd avalanchego
-  git checkout $version
-  ./scripts/build.sh
+  git checkout $version || {
+    echo "Unable to find AvalancheGo commit $version. Exiting."
+    if [ "$foundAvalancheGo" = "true" ]; then
+      echo "Restarting service..."
+      sudo systemctl start avalanchego
+    fi
+    exit
+  }
+  ./scripts/build.sh || {
+    echo "Unable to build AvalancheGo commit $version. Exiting."
+    if [ "$foundAvalancheGo" = "true" ]; then
+      echo "Restarting service..."
+      sudo systemctl start avalanchego
+    fi
+    exit
+  }
 
   echo "Moving node binary..."
   mkdir -p $HOME/avalanche-node
