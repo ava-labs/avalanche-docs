@@ -35,9 +35,10 @@ avalanche subnet create <subnet1Name> --evm --latest\
     --evm-chain-id 1 --evm-token TOKEN1 --evm-defaults
 
 creating genesis for <subnet subnet1Name>
+configuring airdrop to stored key "subnet_<subnet1Name>_airdrop" with address 0x0EF8151A3e6ad1d4e17C8ED4128b20EB5edc58B1
 loading stored key "cli-teleporter-deployer" for teleporter deploys
   (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
-using latest teleporter version (v0.2.0)
+using latest teleporter version (v1.0.0)
 ✓ Successfully created subnet configuration
 ```
 
@@ -46,6 +47,8 @@ smart contracts, fund Teleporter relayer).
 
 To disable Teleporter in your Subnet, use the flag `--teleporter=false` when creating the Subnet.
 
+To disable Relayer in your Subnet, use the flag `--relayer=false` when creating the Subnet.
+
 Now let's create a second Subnet called `<subnet2Name>`, with similar settings:
 
 ```shell
@@ -53,9 +56,10 @@ avalanche subnet create <subnet2Name> --evm --latest\
     --evm-chain-id 2 --evm-token TOKEN2 --evm-defaults
 
 creating genesis for <subnet subnet2Name>
+configuring airdrop to stored key "subnet_<subnet2Name>_airdrop" with address 0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB
 loading stored key "cli-teleporter-deployer" for teleporter deploys
   (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
-using latest teleporter version (v0.2.0)
+using latest teleporter version (v1.1.0)
 ✓ Successfully created subnet configuration
 ```
 
@@ -67,24 +71,21 @@ Let's deploy `<subnet1Name>`:
 avalanche subnet deploy <subnet1Name> --local
 
 Deploying [<subnet1Name>] to Local Network
-Backend controller started, pid: 149427, output at: /home/fm/.avalanche-cli/runs/server_20240229_165923/avalanche-cli-backend.log
+Backend controller started, pid: 149427, output at: ~/.avalanche-cli/runs/server_20240229_165923/avalanche-cli-backend.log
 
 Booting Network. Wait until healthy...
-Node logs directory: /home/fm/.avalanche-cli/runs/network_20240229_165923/node<i>/logs
+Node logs directory: ~/.avalanche-cli/runs/network_20240229_165923/node<i>/logs
 Network ready to use.
 
 Deploying Blockchain. Wait until network acknowledges...
 
-Loading stored key "cli-awm-relayer" for relayer ops
-
 Teleporter Messenger successfully deployed to c-chain (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
 Teleporter Registry successfully deployed to c-chain (0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25)
 
-Loading cli-teleporter-deployer key
 Teleporter Messenger successfully deployed to <subnet1Name> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
 Teleporter Registry successfully deployed to <subnet1Name> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
 
-using latest awm-relayer version (v0.2.13)
+using latest awm-relayer version (v1.1.0)
 Executing AWM-Relayer...
 
 Blockchain ready to use. Local network node endpoints:
@@ -104,7 +105,7 @@ Blockchain ready to use. Local network node endpoints:
 
 Browser Extension connection details (any node URL from above works):
 RPC URL:          http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Funded address:   0x0EF8151A3e6ad1d4e17C8ED4128b20EB5edc58B1 with 1000000 (10^18) - private key: 16289399c9466912ffffffdc093c9b51124f0dc54ac7a766b2bc5ccf558d8eee
 Network name:     <subnet1Name>
 Chain ID:         1
 Currency Symbol:  TOKEN1
@@ -130,15 +131,12 @@ Deploying [<subnet2Name>] to Local Network
 
 Deploying Blockchain. Wait until network acknowledges...
 
-Loading stored key "cli-awm-relayer" for relayer ops
-
 Teleporter Messenger has already been deployed to c-chain
 
-Loading cli-teleporter-deployer key
 Teleporter Messenger successfully deployed to <subnet2Name> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
 Teleporter Registry successfully deployed to <subnet2Name> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
 
-using latest awm-relayer version (v0.2.13)
+using latest awm-relayer version (v1.1.0)
 Executing AWM-Relayer...
 
 Blockchain ready to use. Local network node endpoints:
@@ -168,7 +166,7 @@ Blockchain ready to use. Local network node endpoints:
 
 Browser Extension connection details (any node URL from above works):
 RPC URL:          http://127.0.0.1:9650/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Funded address:   0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
 Network name:     <subnet2Name>
 Chain ID:         2
 Currency Symbol:  TOKEN2
@@ -198,3 +196,32 @@ You have Teleport-ed your first message in the Local Network!
 
 Relayer related logs can be found at `~/.avalanche-cli/runs/awm-relayer.log`, and
 relayer configuration can be found at `~/.avalanche-cli/runs/awm-relayer-config.json`
+
+## Obtaining Information on Teleporter Deploys
+
+Teleporter Messenger and Registry contract addresses can be obtained with `subnet describe`
+command, together with blockchaind IDs both in hex and in 
+
+## Controlling relayer execution
+
+Besides having the option to not use a relayer at subnet creation time, the relayer
+can be stopped and restarted on used request.
+
+To stop the relayer:
+
+```shell
+avalanche teleporter relayer stop --local
+
+✓ Local AWM Relayer successfully stopped
+```
+
+To start it again:
+
+```shell
+avalanche teleporter relayer start --local
+
+using latest awm-relayer version (v1.1.0)
+Executing AWM-Relayer...
+✓ Local AWM Relayer successfully started
+Logs can be found at ~/.avalanche-cli/runs/awm-relayer.log
+```
