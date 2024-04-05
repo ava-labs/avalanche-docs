@@ -25,7 +25,7 @@ machines support Teleporter.
 
 - [Avalanche-CLI installed](/tooling/cli-guides/install-avalanche-cli.md)
 
-## Create Subnet configurations
+## Create Subnet Configurations
 
 Let's create a Subnet called `<subnet1Name>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name,
 and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/build/subnet/hello-subnet.md#create-your-subnet-configuration)):

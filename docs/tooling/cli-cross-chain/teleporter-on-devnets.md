@@ -30,7 +30,7 @@ Before we begin, you will need to have:
 Note: the tutorial is based in AWS, but Devnets can also be created and operated in other supported
 cloud providers, such as GCP.
 
-## Create Subnets configurations
+## Create Subnets Configurations
 
 For this section we will follow this [instructions](/tooling/cli-cross-chain/teleporter-on-local-networks.md#create-subnets-configurations),
 in order to create two Teleporter-enabled Subnets, `<subnet1Name>` and `<subnet2Name>`.
@@ -87,7 +87,7 @@ Notice some details here:
 CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add
 more Subnets, the Relayer will be automatically reconfigured.
 
-## Checking devnet configuration and Relayer logs
+## Checking Devnet Configuration and Relayer Logs
 
 Execute `node list` command to get a list of the devnet nodes:
 
