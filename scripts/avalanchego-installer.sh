@@ -324,8 +324,7 @@ else
   cd avalanchego
   git init
   git remote add origin https://github.com/ava-labs/avalanchego
-  git fetch --depth 1 origin $version
-  git checkout $version || {
+  git fetch --depth 1 origin $version || {
     echo "Unable to find AvalancheGo commit $version. Exiting."
     if [ "$foundAvalancheGo" = "true" ]; then
       echo "Restarting service..."
@@ -333,6 +332,7 @@ else
     fi
     exit 1
   }
+  git checkout $version
   ./scripts/build.sh || {
     echo "Unable to build AvalancheGo commit $version. Exiting."
     if [ "$foundAvalancheGo" = "true" ]; then
