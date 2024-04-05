@@ -1,17 +1,17 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This how-to guide focuses on deploying a couple of teleporter-enabled subnets to a local Avalanche network.
-sidebar_label: Teleporter On a Local Network
-pagination_label: Teleporter On a Local Network
-sidebar_position: 1
+description: This how-to guide focuses on deploying a couple of teleporter-enabled subnets to a Devnet.
+sidebar_label: Teleporter On a Devnet
+pagination_label: Teleporter On a Devnet
+sidebar_position: 2
 ---
 
-# How to Deploy Teleporter Enabled Subnets on a Local Network
+# How to Deploy Teleporter Enabled Subnets on a Devnet
 
-This how-to guide focuses on deploying Teleporter-enabled Subnets to a local Avalanche network.
+This how-to guide focuses on deploying Teleporter-enabled Subnets to a Devnet.
 
-After this tutorial, you would have created and deployed two Subnets to the local network and have enabled
-them to cross-communicate with each other and with the local C-Chain (through Teleporter and the
+After this tutorial, you would have created a Devnet and deployed two Subnets onto it, and have enabled
+them to cross-communicate with each other and with the C-Chain (through Teleporter and the
 underlying Warp technology.)
 
 For more information on cross chain messaging through Teleporter and Warp, check:
@@ -23,153 +23,158 @@ machines support Teleporter.
 
 ## Prerequisites
 
-- [Avalanche-CLI installed](/tooling/cli-guides/install-avalanche-cli.md)
+Before we begin, you will need to have:
 
-## Create Subnet configurations
+- Created an AWS account and have an updated AWS `credentials` file in home directory with [default] profile
 
-Let's create a Subnet called `<subnet1Name>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name,
-and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/build/subnet/hello-subnet.md#create-your-subnet-configuration)):
+Note: the tutorial is based in AWS, but Devnets can also be created and operated in other supported
+cloud providers, such as GCP.
 
-```bash
-avalanche subnet create <subnet1Name> --evm --latest\
-    --evm-chain-id 1 --evm-token TOKEN1 --evm-defaults
+## Create Subnets configurations
 
-creating genesis for <subnet subnet1Name>
-configuring airdrop to stored key "subnet_<subnet1Name>_airdrop" with address 0x0EF8151A3e6ad1d4e17C8ED4128b20EB5edc58B1
-loading stored key "cli-teleporter-deployer" for teleporter deploys
-  (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
-using latest teleporter version (v1.0.0)
-✓ Successfully created subnet configuration
-```
+For this section we will follow this [instructions](/tooling/cli-cross-chain/teleporter-on-local-networks.md#create-subnets-configurations),
+in order to create two Teleporter-enabled Subnets, `<subnet1Name>` and `<subnet2Name>`.
 
-Notice that by default, Teleporter is enabled and a stored key is created to fund Teleporter related operations (that is deploy Teleporter
-smart contracts, fund Teleporter Relayer).
+## Create a devnet and Deploy a Subnet into it
 
-To disable Teleporter in your Subnet, use the flag `--teleporter=false` when creating the Subnet.
+Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<subnet1Name>` onto it.
 
-To disable Relayer in your Subnet, use the flag `--relayer=false` when creating the Subnet.
-
-Now let's create a second Subnet called `<subnet2Name>`, with similar settings:
+The devnet will be created in the `us-east-1` region of Amazon Cloud Service, and will consist of 5 validators only.
 
 ```shell
-avalanche subnet create <subnet2Name> --evm --latest\
-    --evm-chain-id 2 --evm-token TOKEN2 --evm-defaults
+avalanche node devnet wiz <devnetName> <subnet1Name> --aws --node-type default --region us-east-1 --num-validators 5 --num-apis 0 --enable-monitoring=false --default-validator-params 
 
-creating genesis for <subnet subnet2Name>
-configuring airdrop to stored key "subnet_<subnet2Name>_airdrop" with address 0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB
-loading stored key "cli-teleporter-deployer" for teleporter deploys
-  (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
-using latest teleporter version (v1.1.0)
-✓ Successfully created subnet configuration
-```
+Creating the devnet...
 
-## Deploy the Subnets to Local Network
+Creating new EC2 instance(s) on AWS...
+...
 
-Let's deploy `<subnet1Name>`:
+Deploying [subnet1Name] to Cluster <devnetName>
+...
 
-```shell
-avalanche subnet deploy <subnet1Name> --local
+configuring AWM RElayer on host i-0f1815c016b555fcc
 
-Deploying [<subnet1Name>] to Local Network
-Backend controller started, pid: 149427, output at: ~/.avalanche-cli/runs/server_20240229_165923/avalanche-cli-backend.log
+Setting the nodes as subnet trackers
+...
 
-Booting Network. Wait until healthy...
-Node logs directory: ~/.avalanche-cli/runs/network_20240229_165923/node<i>/logs
-Network ready to use.
+Setting up teleporter on subnet
 
-Deploying Blockchain. Wait until network acknowledges...
+Teleporter Messenger successfully deployed to subnet1Name (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+Teleporter Registry successfully deployed to subnet1Name (0xb623C4495220C603D0A939D32478F55891a61750)
+Teleporter Messenger successfully deployed to c-chain (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+Teleporter Registry successfully deployed to c-chain (0x5DB9A7629912EBF95876228C24A848de0bfB43A9)
 
-Teleporter Messenger successfully deployed to c-chain (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
-Teleporter Registry successfully deployed to c-chain (0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25)
+Starting AWM Relayer Service
 
-Teleporter Messenger successfully deployed to <subnet1Name> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
-Teleporter Registry successfully deployed to <subnet1Name> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
+setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet subnet1Name
+updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-using latest awm-relayer version (v1.1.0)
-Executing AWM-Relayer...
+Devnet <devnetName> is successfully created and is now validating subnet subnet1Name!
 
-Blockchain ready to use. Local network node endpoints:
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| NODE  |     VM        |                                        URL                                         |                  ALIAS URL                     |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node1 | <subnet1Name> | http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9650/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node2 | <subnet1Name> | http://127.0.0.1:9652/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9652/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node3 | <subnet1Name> | http://127.0.0.1:9654/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9654/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node4 | <subnet1Name> | http://127.0.0.1:9656/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9656/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node5 | <subnet1Name> | http://127.0.0.1:9658/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9658/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc
-Funded address:   0x0EF8151A3e6ad1d4e17C8ED4128b20EB5edc58B1 with 1000000 (10^18) - private key: 16289399c9466912ffffffdc093c9b51124f0dc54ac7a766b2bc5ccf558d8eee
-Network name:     <subnet1Name>
-Chain ID:         1
-Currency Symbol:  TOKEN1
+Subnet <subnet1Name> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
+ 
+✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
 
 Notice some details here:
 
-- Two smart contracts are deployed to each Subnet: Teleporter Messenger smart contract and Teleporter Registry smart contract
-- Both Teleporter smart contracts are also deployed to `C-Chain` in the Local Network
-- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer
-  [listens](/build/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
+- Two smart contracts are deployed to the Subnet: Teleporter Messenger smart contract and Teleporter Registry smart contract
+- Both Teleporter smart contracts are also deployed to `C-Chain`
+- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed and configured as a service into one of the nodes
+  (A Relayer [listens](/build/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source
+ Subnet and sends them to the destination Subnet.)
 
 CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add
 more Subnets, the Relayer will be automatically reconfigured.
+
+## Checking devnet configuration and Relayer logs
+
+Execute `node list` command to get a list of the devnet nodes:
+
+```shell
+avalanche node list
+
+Cluster "<devnetName>" (Devnet)
+  Node i-0f1815c016b555fcc (NodeID-91PGQ7keavfSV1XVFva2WsQXWLWZqqqKe) 67.202.23.231 [Validator,Relayer]
+  Node i-026392a651571232c (NodeID-AkPyyTs9e9nPGShdSoxdvWYZ6X2zYoyrK) 52.203.183.68 [Validator]
+  Node i-0d1b98d5d941d6002 (NodeID-ByEe7kuwtrPStmdMgY1JiD39pBAuFY2mS) 50.16.235.194 [Validator]
+  Node i-0c291f54bb38c2984 (NodeID-8SE2CdZJExwcS14PYEqr3VkxFyfDHKxKq) 52.45.0.56 [Validator]
+  Node i-049916e2f35231c29 (NodeID-PjQY7xhCGaB8rYbkXYddrr1mesYi29oFo) 3.214.163.110 [Validator]
+```
+
+Notice that, in this case, `i-0f1815c016b555fcc` was set as Relayer. This host contains a
+`systemd` service called `awm-relayer` that can be used to check the Relayer logs, and set the execution
+status.
+
+To view the Relayer logs, the following command can be used:
+
+```shell
+avalanche node ssh i-0f1815c016b555fcc "journalctl -u awm-relayer --no-pager"
+
+  [Node i-0f1815c016b555fcc (NodeID-91PGQ7keavfSV1XVFva2WsQXWLWZqqqKe) 67.202.23.231 [Validator,Relayer]]
+Warning: Permanently added '67.202.23.231' (ED25519) to the list of known hosts.
+-- Logs begin at Fri 2024-04-05 14:11:43 UTC, end at Fri 2024-04-05 14:30:24 UTC. --
+Apr 05 14:15:06 ip-172-31-47-187 systemd[1]: Started AWM Relayer systemd service.
+Apr 05 14:15:07 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:07.018Z","logger":"awm-relayer","caller":"main/main.go:66","msg":"Initializing awm-relayer"}
+Apr 05 14:15:07 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:07.018Z","logger":"awm-relayer","caller":"main/main.go:71","msg":"Set config options."}
+Apr 05 14:15:07 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:07.018Z","logger":"awm-relayer","caller":"main/main.go:78","msg":"Initializing destination clients"}
+Apr 05 14:15:07 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:07.021Z","logger":"awm-relayer","caller":"main/main.go:97","msg":"Initializing app request network"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.159Z","logger":"awm-relayer","caller":"main/main.go:309","msg":"starting metrics server...","port":9090}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.160Z","logger":"awm-relayer","caller":"main/main.go:251","msg":"Creating relayer","originBlockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.160Z","logger":"awm-relayer","caller":"main/main.go:251","msg":"Creating relayer","originBlockchainID":"2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.160Z","logger":"awm-relayer","caller":"relayer/relayer.go:114","msg":"Creating relayer","subnetID":"11111111111111111111111111111111LpoYY","subnetIDHex":"0000000000000000000000000000000000000000000000000000000000000000","blockchainID":"2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6","blockchainIDHex":"a2b6b947cf2b9bf6df03c8caab08e38ab951d8b120b9c37265d9be01d86bb170"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.160Z","logger":"awm-relayer","caller":"relayer/relayer.go:114","msg":"Creating relayer","subnetID":"giY8tswWgZmcAWzPkoNrmjjrykited7GJ9799SsFzTiq5a1ML","subnetIDHex":"5a2e2d87d74b4ec62fdd6626e7d36a44716484dfcc721aa4f2168e8a61af63af","blockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p","blockchainIDHex":"582fc7bd55472606c260668213bf1b6d291df776c9edf7e042980a84cce7418a"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.171Z","logger":"awm-relayer","caller":"evm/subscriber.go:247","msg":"Successfully subscribed","blockchainID":"2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.171Z","logger":"awm-relayer","caller":"relayer/relayer.go:161","msg":"processed-missed-blocks set to false, starting processing from chain head","blockchainID":"2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.172Z","logger":"awm-relayer","caller":"relayer/message_relayer.go:662","msg":"Updating latest processed block in database","relayerID":"0xea06381426934ec1800992f41615b9d362c727ad542f6351dbfa7ad2849a35bf","latestBlock":6}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.173Z","logger":"awm-relayer","caller":"relayer/message_relayer.go:662","msg":"Updating latest processed block in database","relayerID":"0x175e14327136d57fe22d4bdd295ff14bea8a7d7ab1884c06a4d9119b9574b9b3","latestBlock":6}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.173Z","logger":"awm-relayer","caller":"main/main.go:272","msg":"Created relayer","blockchainID":"2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.173Z","logger":"awm-relayer","caller":"main/main.go:295","msg":"Relayer initialized. Listening for messages to relay.","originBlockchainID":"2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.178Z","logger":"awm-relayer","caller":"evm/subscriber.go:247","msg":"Successfully subscribed","blockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.178Z","logger":"awm-relayer","caller":"relayer/relayer.go:161","msg":"processed-missed-blocks set to false, starting processing from chain head","blockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.179Z","logger":"awm-relayer","caller":"relayer/message_relayer.go:662","msg":"Updating latest processed block in database","relayerID":"0xe584ccc0df44506255811f6b54375e46abd5db40a4c84fd9235a68f7b69c6f06","latestBlock":6}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.179Z","logger":"awm-relayer","caller":"relayer/message_relayer.go:662","msg":"Updating latest processed block in database","relayerID":"0x70f14d33bde4716928c5c4723d3969942f9dfd1f282b64ffdf96f5ac65403814","latestBlock":6}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.180Z","logger":"awm-relayer","caller":"main/main.go:272","msg":"Created relayer","blockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p"}
+Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.180Z","logger":"awm-relayer","caller":"main/main.go:295","msg":"Relayer initialized. Listening for messages to relay.","originBlockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p"}
+```
+
+## Deploying the Second Subnet
+
+Let's use the `devnet wiz` command again to deploy `<subnet2Name>`.
 
 When deploying Subnet `<subnet2Name>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network
 as they have already been deployed when we deployed the first Subnet.
 
 ```shell
-avalanche subnet deploy <subnet2Name> --local
+avalanche node devnet wiz <devnetName> <subnet2Name> --default-validator-params 
 
-Deploying [<subnet2Name>] to Local Network
+Adding subnet into existing devnet <devnetName>...
+...
 
-Deploying Blockchain. Wait until network acknowledges...
+Deploying [subnet2Name] to Cluster <devnetName>
+...
 
+Stopping AWM Relayer Service
+
+Setting the nodes as subnet trackers
+...
+
+Setting up teleporter on subnet
+
+Teleporter Messenger successfully deployed to subnet2Name (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+Teleporter Registry successfully deployed to subnet2Name (0xb623C4495220C603D0A939D32478F55891a61750)
 Teleporter Messenger has already been deployed to c-chain
 
-Teleporter Messenger successfully deployed to <subnet2Name> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
-Teleporter Registry successfully deployed to <subnet2Name> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
+Starting AWM Relayer Service
 
-using latest awm-relayer version (v1.1.0)
-Executing AWM-Relayer...
+setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet subnet2Name
+updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-Blockchain ready to use. Local network node endpoints:
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| NODE  |     VM        |                                         URL                                         |                  ALIAS URL                     |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node1 | <subnet2Name> | http://127.0.0.1:9650/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9650/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node1 | <subnet1Name> | http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9650/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node2 | <subnet2Name> | http://127.0.0.1:9652/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9652/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node2 | <subnet1Name> | http://127.0.0.1:9652/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9652/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node3 | <subnet2Name> | http://127.0.0.1:9654/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9654/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node3 | <subnet1Name> | http://127.0.0.1:9654/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9654/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node4 | <subnet2Name> | http://127.0.0.1:9656/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9656/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node4 | <subnet1Name> | http://127.0.0.1:9656/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9656/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node5 | <subnet1Name> | http://127.0.0.1:9658/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9658/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node5 | <subnet2Name> | http://127.0.0.1:9658/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9658/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
+Devnet <devnetName> is now validating subnet subnet2Name
 
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc
-Funded address:   0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     <subnet2Name>
-Chain ID:         2
-Currency Symbol:  TOKEN2
+Subnet <subnet2Name> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
+
+✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
 
 ## Verify Teleporter Is Successfully Set Up
@@ -177,25 +182,22 @@ Currency Symbol:  TOKEN2
 To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```shell
-avalanche teleporter msg C-Chain subnet1Name "Hello World" --local
+avalanche teleporter msg C-Chain subnet1Name "Hello World" --cluster <devnetName>
 
-Delivering message "this is a message" to source subnet "C-Chain"
-Waiting for message to be received at destination subnet subnet "subnet1Name"
+Delivering message "this is a message" to source subnet "C-Chain" (2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6)
+Waiting for message to be received at destination subnet subnet "subnet1Name" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
 ```shell
-avalanche teleporter msg subnet2Name subnet1Name "Hello World" --local
+avalanche teleporter msg subnet2Name subnet1Name "Hello World" --cluster <devnetName>
 
-Delivering message "this is a message" to source subnet "subnet2Name"
-Waiting for message to be received at destination subnet subnet "subnet1Name"
+Delivering message "this is a message" to source subnet "subnet2Name" (29WP91AG7MqPUFEW2YwtKnsnzVrRsqcWUpoaoSV1Q9DboXGf4q)
+Waiting for message to be received at destination subnet subnet "subnet1Name" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
-You have Teleport-ed your first message in the Local Network!
-
-Relayer related logs can be found at `~/.avalanche-cli/runs/awm-relayer.log`, and
-Relayer configuration can be found at `~/.avalanche-cli/runs/awm-relayer-config.json`
+You have Teleport-ed your first message in the Devnet!
 
 ## Obtaining Information on Teleporter Deploys
 
@@ -204,6 +206,7 @@ Relayer configuration can be found at `~/.avalanche-cli/runs/awm-relayer-config.
 By executing `subnet describe` on a Teleporter enabled Subnet, the following relevant information
 can be found:
 
+- Blockchain RPC URL
 - Blockchain ID in cb58 format
 - Blockchain ID in plain hex format
 - Teleporter Messenger address
@@ -220,33 +223,38 @@ avalanche subnet describe <subnet1Name>
 | |  | |/ _ \ __/ _  | | / __|
 | |__| |  __/ || (_| | | \__ \
 |_____/ \___|\__\__,_|_|_|___/
-+--------------------------------+--------------------------------------------------------------------+
-|           PARAMETER            |                               VALUE                                |
-+--------------------------------+--------------------------------------------------------------------+
-| Subnet Name                    | subnet1Name                                                        |
-+--------------------------------+--------------------------------------------------------------------+
-| ChainID                        | 1                                                                  |
-+--------------------------------+--------------------------------------------------------------------+
-| Token Name                     | TOKEN1 Token                                                       |
-+--------------------------------+--------------------------------------------------------------------+
-| Token Symbol                   | TOKEN1                                                             |
-+--------------------------------+--------------------------------------------------------------------+
-| VM Version                     | v0.6.3                                                             |
-+--------------------------------+--------------------------------------------------------------------+
-| VM ID                          | srEXiWaHjFEgKSgK2zBgnWQUVEy2MZA7UUqjqmBSS7MZYSCQ5                  |
-+--------------------------------+--------------------------------------------------------------------+
-| Local Network SubnetID         | 2CZP2ndbQnZxTzGuZjPrJAm5b4s2K2Bcjh8NqWoymi8NZMLYQk                 |
-+--------------------------------+--------------------------------------------------------------------+
-| Local Network BlockchainID     | 2cFWSgGkmRrmKtbPkB8yTpnq9ykK3Dc2qmxphwYtiGXCvnSwg8                 |
-+                                +--------------------------------------------------------------------+
-|                                | 0xd3bc5f71e6946d17c488d320cd1f6f5337d9dce75b3fac5023433c4634b6e91e |
-+--------------------------------+--------------------------------------------------------------------+
-| Local Network Teleporter       | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf                         |
-| Messenger Address              |                                                                    |
-+--------------------------------+--------------------------------------------------------------------+
-| Local Network Teleporter       | 0xbD9e8eC38E43d34CAB4194881B9BF39d639D7Bd3                         |
-| Registry Address               |                                                                    |
-+--------------------------------+--------------------------------------------------------------------+
+
++--------------------------------+----------------------------------------------------------------------------------------+
+|           PARAMETER            |                               VALUE                                                    |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Subnet Name                    | subnet1Name                                                                            |
++--------------------------------+----------------------------------------------------------------------------------------+
+| ChainID                        | 1                                                                                      |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Token Name                     | TOKEN1 Token                                                                           |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Token Symbol                   | TOKEN1                                                                                 |
++--------------------------------+----------------------------------------------------------------------------------------+
+| VM Version                     | v0.6.3                                                                                 |
++--------------------------------+----------------------------------------------------------------------------------------+
+| VM ID                          | srEXiWaHjFEgKSgK2zBgnWQUVEy2MZA7UUqjqmBSS7MZYSCQ5                                      |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Cluster <devnetName> SubnetID  | giY8tswWgZmcAWzPkoNrmjjrykited7GJ9799SsFzTiq5a1ML                                      |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Cluster <devnetName> RPC URL   | http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Cluster <devnetName>           | fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p                                      |
+| BlockchainID                   |                                                                                        |
++                                +----------------------------------------------------------------------------------------+
+|                                | 0x582fc7bd55472606c260668213bf1b6d291df776c9edf7e042980a84cce7418a                     |
+|                                |                                                                                        |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Cluster <devnetName> Teleporter| 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf                                             |
+| Messenger Address              |                                                                                        |
++--------------------------------+----------------------------------------------------------------------------------------+
+| Cluster <devnetName> Teleporter| 0xb623C4495220C603D0A939D32478F55891a61750                                             |
+| Registry Address               |                                                                                        |
++--------------------------------+----------------------------------------------------------------------------------------+
 
 ...
 ```
@@ -256,7 +264,7 @@ avalanche subnet describe <subnet1Name>
 Similar information can be found for C-Chain by using `primary describe`:
 
 ```shell
-avalanche primary describe --local
+avalanche primary describe --cluster <devnetName>
 
    _____       _____ _           _         _____
   / ____|     / ____| |         (_)       |  __ \
@@ -268,7 +276,7 @@ avalanche primary describe --local
 +------------------------------+--------------------------------------------------------------------+
 |          PARAMETER           |                               VALUE                                |
 +------------------------------+--------------------------------------------------------------------+
-| RPC URL                      | http://127.0.0.1:9650/ext/bc/C/rpc                                 |
+| RPC URL                      | http://67.202.23.231:9650/ext/bc/C/rpc                             |
 +------------------------------+--------------------------------------------------------------------+
 | EVM Chain ID                 | 43112                                                              |
 +------------------------------+--------------------------------------------------------------------+
@@ -276,40 +284,30 @@ avalanche primary describe --local
 +------------------------------+--------------------------------------------------------------------+
 | Address                      | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC                         |
 +------------------------------+--------------------------------------------------------------------+
-| Balance                      | 49999489.829989485                                                 |
+| Balance                      | 49999489.815751426                                                 |
 +------------------------------+--------------------------------------------------------------------+
 | Private Key                  | 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027   |
 +------------------------------+--------------------------------------------------------------------+
-| BlockchainID                 | 2JeJDKL9Bvn1vLuuPL1DpUccBCVUh7iRnkv3a5pV9kJW5HbuQz                 |
+| BlockchainID                 | 2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6                 |
 +                              +--------------------------------------------------------------------+
-|                              | 0xabc1bd35cb7313c8a2b62980172e6d7ef42aaa532c870499a148858b0b6a34fd |
+|                              | 0xa2b6b947cf2b9bf6df03c8caab08e38ab951d8b120b9c37265d9be01d86bb170 |
 +------------------------------+--------------------------------------------------------------------+
 | Teleporter Messenger Address | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf                         |
 +------------------------------+--------------------------------------------------------------------+
-| Teleporter Registry Address  | 0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25                         |
+| Teleporter Registry Address  | 0x5DB9A7629912EBF95876228C24A848de0bfB43A9                         |
 +------------------------------+--------------------------------------------------------------------+
 ```
 
 ## Controlling Relayer Execution
 
-Besides having the option to not use a Relayer at Subnet creation time, the Relayer
-can be stopped and restarted on used request.
-
-To stop the Relayer:
+CLI provides two commands to remotely control Relayer execution:
 
 ```shell
-avalanche teleporter relayer stop --local
-
-✓ Local AWM Relayer successfully stopped
+avalanche teleporter relayer stop --cluster <devnetName>
+✓ Remote AWM Relayer on i-0f1815c016b555fcc successfully stopped
 ```
 
-To start it again:
-
 ```shell
-avalanche teleporter relayer start --local
-
-using latest awm-relayer version (v1.1.0)
-Executing AWM-Relayer...
-✓ Local AWM Relayer successfully started
-Logs can be found at ~/.avalanche-cli/runs/awm-relayer.log
+avalanche teleporter relayer start --cluster <devnetName>
+✓ Remote AWM Relayer on i-0f1815c016b555fcc successfully started
 ```
