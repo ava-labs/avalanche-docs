@@ -59,7 +59,7 @@ creating genesis for <subnet subnet2Name>
 configuring airdrop to stored key "subnet_<subnet2Name>_airdrop" with address 0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB
 loading stored key "cli-teleporter-deployer" for teleporter deploys
   (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
-using latest teleporter version (v1.1.0)
+using latest teleporter version (v1.0.0)
 ✓ Successfully created subnet configuration
 ```
 
