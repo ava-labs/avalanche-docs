@@ -8,7 +8,7 @@ set -e
 #running as root gives the wrong homedir, check and exit if run with sudo.
 if ((EUID == 0)); then
     echo "The script is not designed to run as root user. Please run it without sudo prefix."
-    exit
+    exit 1
 fi
 
 #helper function to create avalanchego.service file
@@ -249,7 +249,7 @@ else
   #sorry, don't know you.
   echo "Unsupported OS or linux distribution found: $osType"
   echo "Exiting."
-  exit
+  exit 1
 fi
 foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 foundArch="$(uname -m)"                         #get system architecture
@@ -263,7 +263,7 @@ else
   #sorry, don't know you.
   echo "Unsupported architecture: $foundArch!"
   echo "Exiting."
-  exit
+  exit 1
 fi
 if test -f "/etc/systemd/system/avalanchego.service"; then
   foundAvalancheGo=true
@@ -311,24 +311,27 @@ else
     shouldBuild=false
   fi
   if [ "$shouldBuild" = "false" ]; then
-    echo "Unable to find AvalancheGo release $version. Exiting."
+    echo "One or more building tools are missing. Exiting."
     if [ "$foundAvalancheGo" = "true" ]; then
       echo "Restarting service..."
       sudo systemctl start avalanchego
     fi
-    exit
+    exit 1
   fi
 
   echo "Unable to find AvalancheGo release $version. Attempting to build $version from source."
-  git clone https://github.com/ava-labs/avalanchego
+  mkdir -p avalanchego
   cd avalanchego
+  git init
+  git remote add origin https://github.com/ava-labs/avalanchego
+  git fetch --depth 1 origin $version
   git checkout $version || {
     echo "Unable to find AvalancheGo commit $version. Exiting."
     if [ "$foundAvalancheGo" = "true" ]; then
       echo "Restarting service..."
       sudo systemctl start avalanchego
     fi
-    exit
+    exit 1
   }
   ./scripts/build.sh || {
     echo "Unable to build AvalancheGo commit $version. Exiting."
@@ -336,7 +339,7 @@ else
       echo "Restarting service..."
       sudo systemctl start avalanchego
     fi
-    exit
+    exit 1
   }
 
   echo "Moving node binary..."
@@ -360,7 +363,7 @@ if [ "$foundAvalancheGo" = "true" ]; then
   echo "New node version:"
   $HOME/avalanche-node/avalanchego --version
   echo "Done!"
-  exit
+  exit 0
 fi
 if [ "$ipOpt" = "ask" ]; then
   echo "To complete the setup, some networking information is needed."
