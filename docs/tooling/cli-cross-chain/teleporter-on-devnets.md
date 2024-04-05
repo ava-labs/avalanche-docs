@@ -35,7 +35,7 @@ cloud providers, such as GCP.
 For this section we will follow this [instructions](/tooling/cli-cross-chain/teleporter-on-local-networks.md#create-subnets-configurations),
 in order to create two Teleporter-enabled Subnets, `<subnet1Name>` and `<subnet2Name>`.
 
-## Create a devnet and Deploy a Subnet into it
+## Create a Devnet and Deploy a Subnet into it
 
 Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<subnet1Name>` onto it.
 

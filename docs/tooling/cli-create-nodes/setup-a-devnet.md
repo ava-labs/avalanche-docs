@@ -46,7 +46,7 @@ this one](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud))
 
 ## Step by Step
 
-### Creating the devnet
+### Creating the Devnet
 
 Start the Devnet creation command. It will ask for all needed params:
 
