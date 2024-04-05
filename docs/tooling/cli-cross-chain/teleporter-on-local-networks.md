@@ -199,7 +199,7 @@ relayer configuration can be found at `~/.avalanche-cli/runs/awm-relayer-config.
 
 ## Obtaining Information on Teleporter Deploys
 
-## Obtaining Subnet Information
+### Obtaining Subnet Information
 
 By executing `subnet describe` on a teleporter enabled subnet, the following relevant information
 can be found:
@@ -250,7 +250,7 @@ avalanche subnet describe <subnet1Name>
 
 ...
 ```
-## Obtaining C-Chain Information
+### Obtaining C-Chain Information
 
 Similar information can be found for C-Chain by using `primary describe`:
 
