@@ -366,7 +366,7 @@
         },
         {
           "type": "ref",
-          "label": "Local Deployment",
+          "label": "Devnet Deployment",
           "id": "tooling/cli-cross-chain/teleporter-on-devnets"
         },
         {

@@ -27,15 +27,15 @@ machines support Teleporter.
 
 ## Create Subnet Configurations
 
-Let's create a Subnet called `<subnet1Name>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name,
+Let's create a Subnet called `<subnet1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name,
 and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/build/subnet/hello-subnet.md#create-your-subnet-configuration)):
 
 ```bash
-avalanche subnet create <subnet1Name> --evm --latest\
+avalanche subnet create <subnet1> --evm --latest\
     --evm-chain-id 1 --evm-token TOKEN1 --evm-defaults
 
-creating genesis for <subnet subnet1Name>
-configuring airdrop to stored key "subnet_<subnet1Name>_airdrop" with address 0x0EF8151A3e6ad1d4e17C8ED4128b20EB5edc58B1
+creating genesis for <subnet subnet1>
+configuring airdrop to stored key "subnet_<subnet1>_airdrop" with address 0x0EF8151A3e6ad1d4e17C8ED4128b20EB5edc58B1
 loading stored key "cli-teleporter-deployer" for teleporter deploys
   (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
 using latest teleporter version (v1.0.0)
@@ -49,14 +49,14 @@ To disable Teleporter in your Subnet, use the flag `--teleporter=false` when cre
 
 To disable Relayer in your Subnet, use the flag `--relayer=false` when creating the Subnet.
 
-Now let's create a second Subnet called `<subnet2Name>`, with similar settings:
+Now let's create a second Subnet called `<subnet2>`, with similar settings:
 
 ```shell
-avalanche subnet create <subnet2Name> --evm --latest\
+avalanche subnet create <subnet2> --evm --latest\
     --evm-chain-id 2 --evm-token TOKEN2 --evm-defaults
 
-creating genesis for <subnet subnet2Name>
-configuring airdrop to stored key "subnet_<subnet2Name>_airdrop" with address 0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB
+creating genesis for <subnet subnet2>
+configuring airdrop to stored key "subnet_<subnet2>_airdrop" with address 0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB
 loading stored key "cli-teleporter-deployer" for teleporter deploys
   (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
 using latest teleporter version (v1.0.0)
@@ -65,12 +65,12 @@ using latest teleporter version (v1.0.0)
 
 ## Deploy the Subnets to Local Network
 
-Let's deploy `<subnet1Name>`:
+Let's deploy `<subnet1>`:
 
 ```shell
-avalanche subnet deploy <subnet1Name> --local
+avalanche subnet deploy <subnet1> --local
 
-Deploying [<subnet1Name>] to Local Network
+Deploying [<subnet1>] to Local Network
 Backend controller started, pid: 149427, output at: ~/.avalanche-cli/runs/server_20240229_165923/avalanche-cli-backend.log
 
 Booting Network. Wait until healthy...
@@ -82,38 +82,38 @@ Deploying Blockchain. Wait until network acknowledges...
 Teleporter Messenger successfully deployed to c-chain (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
 Teleporter Registry successfully deployed to c-chain (0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25)
 
-Teleporter Messenger successfully deployed to <subnet1Name> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
-Teleporter Registry successfully deployed to <subnet1Name> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
+Teleporter Messenger successfully deployed to <subnet1> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
+Teleporter Registry successfully deployed to <subnet1> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
 
-using latest awm-relayer version (v1.1.0)
+Using latest awm-relayer version (v1.1.0)
 Executing AWM-Relayer...
 
 Blockchain ready to use. Local network node endpoints:
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| NODE  |     VM        |                                        URL                                         |                  ALIAS URL                     |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node1 | <subnet1Name> | http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9650/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node2 | <subnet1Name> | http://127.0.0.1:9652/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9652/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node3 | <subnet1Name> | http://127.0.0.1:9654/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9654/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node4 | <subnet1Name> | http://127.0.0.1:9656/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9656/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
-| node5 | <subnet1Name> | http://127.0.0.1:9658/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9658/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+------------------------------------------------------------------------------------+------------------------------------------------+
++-------+-----------+------------------------------------------------------------------------------------+--------------------------------------------+
+| NODE  |     VM    |                                        URL                                         |                  ALIAS URL                 |
++-------+-----------+------------------------------------------------------------------------------------+--------------------------------------------+
+| node1 | <subnet1> | http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9650/ext/bc/<subnet1>/rpc |
++-------+-----------+------------------------------------------------------------------------------------+--------------------------------------------+
+| node2 | <subnet1> | http://127.0.0.1:9652/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9652/ext/bc/<subnet1>/rpc |
++-------+-----------+------------------------------------------------------------------------------------+--------------------------------------------+
+| node3 | <subnet1> | http://127.0.0.1:9654/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9654/ext/bc/<subnet1>/rpc |
++-------+-----------+------------------------------------------------------------------------------------+--------------------------------------------+
+| node4 | <subnet1> | http://127.0.0.1:9656/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9656/ext/bc/<subnet1>/rpc |
++-------+-----------+------------------------------------------------------------------------------------+--------------------------------------------+
+| node5 | <subnet1> | http://127.0.0.1:9658/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc | http://127.0.0.1:9658/ext/bc/<subnet1>/rpc |
++-------+-----------+------------------------------------------------------------------------------------+--------------------------------------------+
 
 Browser Extension connection details (any node URL from above works):
 RPC URL:          http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc
 Funded address:   0x0EF8151A3e6ad1d4e17C8ED4128b20EB5edc58B1 with 1000000 (10^18) - private key: 16289399c9466912ffffffdc093c9b51124f0dc54ac7a766b2bc5ccf558d8eee
-Network name:     <subnet1Name>
+Network name:     <subnet1>
 Chain ID:         1
 Currency Symbol:  TOKEN1
 ```
 
 Notice some details here:
 
-- Two smart contracts are deployed to each Subnet: Teleporter Messenger smart contract and Teleporter Registry smart contract
+- Two smart contracts are deployed to each Subnet: Teleporter Messenger and Teleporter Registry
 - Both Teleporter smart contracts are also deployed to `C-Chain` in the Local Network
 - [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer
   [listens](/build/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
@@ -121,53 +121,53 @@ Notice some details here:
 CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add
 more Subnets, the Relayer will be automatically reconfigured.
 
-When deploying Subnet `<subnet2Name>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network
+When deploying Subnet `<subnet2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network
 as they have already been deployed when we deployed the first Subnet.
 
 ```shell
-avalanche subnet deploy <subnet2Name> --local
+avalanche subnet deploy <subnet2> --local
 
-Deploying [<subnet2Name>] to Local Network
+Deploying [<subnet2>] to Local Network
 
 Deploying Blockchain. Wait until network acknowledges...
 
 Teleporter Messenger has already been deployed to c-chain
 
-Teleporter Messenger successfully deployed to <subnet2Name> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
-Teleporter Registry successfully deployed to <subnet2Name> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
+Teleporter Messenger successfully deployed to <subnet2> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
+Teleporter Registry successfully deployed to <subnet2> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
 
-using latest awm-relayer version (v1.1.0)
+Using latest awm-relayer version (v1.1.0)
 Executing AWM-Relayer...
 
 Blockchain ready to use. Local network node endpoints:
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| NODE  |     VM        |                                         URL                                         |                  ALIAS URL                     |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node1 | <subnet2Name> | http://127.0.0.1:9650/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9650/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node1 | <subnet1Name> | http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9650/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node2 | <subnet2Name> | http://127.0.0.1:9652/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9652/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node2 | <subnet1Name> | http://127.0.0.1:9652/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9652/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node3 | <subnet2Name> | http://127.0.0.1:9654/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9654/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node3 | <subnet1Name> | http://127.0.0.1:9654/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9654/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node4 | <subnet2Name> | http://127.0.0.1:9656/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9656/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node4 | <subnet1Name> | http://127.0.0.1:9656/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9656/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node5 | <subnet1Name> | http://127.0.0.1:9658/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9658/ext/bc/<subnet1Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
-| node5 | <subnet2Name> | http://127.0.0.1:9658/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9658/ext/bc/<subnet2Name>/rpc |
-+-------+---------------+-------------------------------------------------------------------------------------+------------------------------------------------+
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| NODE  |     VM    |                                         URL                                         |                  ALIAS URL                 |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node1 | <subnet2> | http://127.0.0.1:9650/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9650/ext/bc/<subnet2>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node1 | <subnet1> | http://127.0.0.1:9650/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9650/ext/bc/<subnet1>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node2 | <subnet2> | http://127.0.0.1:9652/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9652/ext/bc/<subnet2>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node2 | <subnet1> | http://127.0.0.1:9652/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9652/ext/bc/<subnet1>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node3 | <subnet2> | http://127.0.0.1:9654/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9654/ext/bc/<subnet2>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node3 | <subnet1> | http://127.0.0.1:9654/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9654/ext/bc/<subnet1>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node4 | <subnet2> | http://127.0.0.1:9656/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9656/ext/bc/<subnet2>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node4 | <subnet1> | http://127.0.0.1:9656/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9656/ext/bc/<subnet1>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node5 | <subnet1> | http://127.0.0.1:9658/ext/bc/MzN4AbtFzQ3eKqPhFaDpwCMJmagciWSCgghkZx6YeC6jRdvb6/rpc  | http://127.0.0.1:9658/ext/bc/<subnet1>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
+| node5 | <subnet2> | http://127.0.0.1:9658/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc | http://127.0.0.1:9658/ext/bc/<subnet2>/rpc |
++-------+-----------+-------------------------------------------------------------------------------------+--------------------------------------------+
 
 Browser Extension connection details (any node URL from above works):
 RPC URL:          http://127.0.0.1:9650/ext/bc/2tVGwEQmeXtdnFURW1YSq5Yf4jbJPfTBfVcu68KWHdHe5e5gX5/rpc
 Funded address:   0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     <subnet2Name>
+Network name:     <subnet2>
 Chain ID:         2
 Currency Symbol:  TOKEN2
 ```
@@ -177,18 +177,18 @@ Currency Symbol:  TOKEN2
 To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```shell
-avalanche teleporter msg C-Chain subnet1Name "Hello World" --local
+avalanche teleporter msg C-Chain subnet1 "Hello World" --local
 
 Delivering message "this is a message" to source subnet "C-Chain"
-Waiting for message to be received at destination subnet subnet "subnet1Name"
+Waiting for message to be received at destination subnet subnet "subnet1"
 Message successfully Teleported!
 ```
 
 ```shell
-avalanche teleporter msg subnet2Name subnet1Name "Hello World" --local
+avalanche teleporter msg subnet2 subnet1 "Hello World" --local
 
-Delivering message "this is a message" to source subnet "subnet2Name"
-Waiting for message to be received at destination subnet subnet "subnet1Name"
+Delivering message "this is a message" to source subnet "subnet2"
+Waiting for message to be received at destination subnet subnet "subnet1"
 Message successfully Teleported!
 ```
 
@@ -210,10 +210,10 @@ can be found:
 - Teleporter Messenger address
 - Teleporter Registry address
 
-Let's get the information for `<subnet1Name>`:
+Let's get the information for `<subnet1>`:
 
 ```shell
-avalanche subnet describe <subnet1Name>
+avalanche subnet describe <subnet1>
 
  _____       _        _ _
 |  __ \     | |      (_) |
@@ -224,7 +224,7 @@ avalanche subnet describe <subnet1Name>
 +--------------------------------+-------------------------------------------------------------------------------------+
 |           PARAMETER            |                               VALUE                                                 |
 +--------------------------------+-------------------------------------------------------------------------------------+
-| Subnet Name                    | subnet1Name                                                                         |
+| Subnet Name                    | subnet1                                                                             |
 +--------------------------------+-------------------------------------------------------------------------------------+
 | ChainID                        | 1                                                                                   |
 +--------------------------------+-------------------------------------------------------------------------------------+
