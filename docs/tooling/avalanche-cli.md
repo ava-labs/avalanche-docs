@@ -968,7 +968,7 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
       --subnet string   specify the subnet the node is syncing with
 ```
 
-### Node Stop
+### Node Destroy
 
 :::warning
 
@@ -976,21 +976,21 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 
 :::
 
-The `node stop` command stops a running node in cloud server
-
-Note that a stopped node may still incur cloud server storage fees.
+The `node destroy` command terminates all running nodes in a cluster
 
 **Usage:**
 
 ```shell
-  avalanche node stop [clusterName] [flags]
+  avalanche node destroy [clusterName] [flags]
 ```
 
 **Flags:**
 
 ```shell
-    --authorize-access   authorize CLI to release cloud resources
-    --authorize-remove   authorize CLI to remove all local files related to cloud nodes
+    --authorize-access        authorize CLI to release cloud resources
+    --authorize-remove        authorize CLI to remove all local files related to cloud nodes
+    --authorize-all           authorize all CLI requests
+    --aws-profile string      aws profile to use
 -h, --help   help for stop
 ```
 
