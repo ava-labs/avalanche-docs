@@ -8,7 +8,7 @@ sidebar_position: 2
 
 # Setup a Devnet Using Avalanche-CLI
 
-This page demonstrates how to setup a Devnet of cloud-based validators using Avalanche-CLI, 
+This page demonstrates how to set up a Devnet of cloud-based validators using Avalanche-CLI, 
 and deploy a VM into it.
 
 Devnets (Developer Networks) are isolated avalanche networks deployed on the cloud. Similar to local networks
@@ -34,15 +34,16 @@ cloud providers, such as GCP.
 
 ## Choose a Deployment Method
 
-You can either use a sequence of prompt-based commands to get CLI to ask you all the required information for the setup, or
-execute one command than encompasses all steps, with appropriate command line flags for all the needed info.
+Setting up a Devnet consists of:
+    - Creating a cluster of cloud servers
+    - Deploying a Subnet into the cluster
+    - Adding the cloud servers as validator nodes in the Subnet
 
-For the second case we provide three important use cases examples:
+To execute all steps above in one command, run:
 
-- creating a devnet an deploy a preexistent CLI Subnet (same example as the step by step)
-- creating a devnet, create a Subnet based on a Custom VM, and deploy it (similar to [
-this one](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud))
-- creating a devnet with warp-enabled Subnets
+```shell
+avalanche node devnet wiz <clusterName>
+```
 
 ## Step by Step
 
