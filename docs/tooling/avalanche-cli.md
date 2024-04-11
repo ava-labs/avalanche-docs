@@ -790,12 +790,20 @@ will apply to all nodes in the cluster.
     --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
     --latest-avalanchego-version               install latest avalanchego release version on node/s
     --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-    --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --num-validators ints                      number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --num-apis strings                         number of API nodes(nodes without stake) to create in the new Devnet
     --region strings                           create node(s) in given region(s). Use comma to separate multiple regions
     --enable-monitoring                        set up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incurs additional cost
     --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used
     --use-ssh-agent                            use ssh agent(ex: Yubikey) for ssh auth
     --use-static-ip                            attach static Public IP on cloud servers (default true)
+    --aws-iops int                             AWS iops (for gp3, io1, and io2 volume types only)
+    --aws-throughput int                       AWS throughput in MiB/s (for gp3 volume type only)
+    --aws-volume-type string                   AWS volume type
+    --aws-volume-size int                      AWS volume size in GB
+    --teleporter                               generate a teleporter-ready vm
+    --relayer                                  run AWM relayer when deploying the vm
+    --grafana-pkg string                       use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
 ```
 
 ### Node Devnet
