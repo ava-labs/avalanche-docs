@@ -1249,8 +1249,6 @@ to shutdown, restart, and clear that network.
 
 This network currently supports multiple, concurrently deployed Subnets.
 
-
-
 ### Network Clean
 
 The `network clean` command shuts down your local, multi-node network. All deployed Subnets
