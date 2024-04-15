@@ -280,6 +280,10 @@ XXX.XX.XX.XXX:9650/ext/bc/C/rpc
 si se ejecuta en un proveedor de nube. El "XXX.XX.XX.XXX" debe ser reemplazado por la IP pública
 de tu instancia EC2.
 
+:::note
+Las 3 cadenas arrancarán en el siguiente orden: cadena P, cadena X, cadena C.
+:::
+
 Para obtener más información sobre las solicitudes disponibles en estos puntos finales, consulta la
 documentación de referencia de la API de AvalancheGo.
 
