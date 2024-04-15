@@ -254,6 +254,10 @@ have to wait for the slowest to finish. They'll restart bootstrapping in the
 meantime, to make sure they won't fall back too much with respect to the network
 accepted frontier.
 
+## What order do the chains bootstrap?
+
+The 3 chains will bootstrap in the following order: P-chain, X-chain, C-chain.
+
 ### Why Are AvalancheGo APIs Disabled During Bootstrapping?
 
 AvalancheGo APIs are [explicitly disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379)
