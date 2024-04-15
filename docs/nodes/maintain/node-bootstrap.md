@@ -254,7 +254,7 @@ have to wait for the slowest to finish. They'll restart bootstrapping in the
 meantime, to make sure they won't fall back too much with respect to the network
 accepted frontier.
 
-## What order do the chains bootstrap?
+## What Order Do The Chains Bootstrap?
 
 The 3 chains will bootstrap in the following order: P-chain, X-chain, C-chain.
 
