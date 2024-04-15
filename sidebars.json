@@ -365,6 +365,11 @@
           "id": "tooling/cli-cross-chain/teleporter-on-local-networks"
         },
         {
+          "type": "ref",
+          "label": "Devnet Deployment",
+          "id": "tooling/cli-cross-chain/teleporter-on-devnets"
+        },
+        {
           "type": "link",
           "label": "Token Bridge",
           "href": "https://github.com/ava-labs/teleporter-token-bridge#readme"

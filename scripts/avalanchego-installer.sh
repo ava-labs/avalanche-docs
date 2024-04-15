@@ -8,7 +8,7 @@ set -e
 #running as root gives the wrong homedir, check and exit if run with sudo.
 if ((EUID == 0)); then
     echo "The script is not designed to run as root user. Please run it without sudo prefix."
-    exit
+    exit 1
 fi
 
 #helper function to create avalanchego.service file
@@ -249,7 +249,7 @@ else
   #sorry, don't know you.
   echo "Unsupported OS or linux distribution found: $osType"
   echo "Exiting."
-  exit
+  exit 1
 fi
 foundIP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 foundArch="$(uname -m)"                         #get system architecture
@@ -263,7 +263,7 @@ else
   #sorry, don't know you.
   echo "Unsupported architecture: $foundArch!"
   echo "Exiting."
-  exit
+  exit 1
 fi
 if test -f "/etc/systemd/system/avalanchego.service"; then
   foundAvalancheGo=true
@@ -287,22 +287,69 @@ else
 fi
 if [[ `wget -S --spider $fileName  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
   echo "Node version found."
+  echo "Attempting to download: $fileName"
+  wget -nv --show-progress $fileName
+
+  echo "Unpacking node files..."
+  mkdir -p $HOME/avalanche-node
+  tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
+  mkdir -p $HOME/.avalanchego/plugins
+  rm avalanchego-linux-*.tar.gz
+  echo "Node files unpacked into $HOME/avalanche-node"
 else
-  echo "Unable to find AvalancheGo version $version. Exiting."
-  if [ "$foundAvalancheGo" = "true" ]; then
-    echo "Restarting service..."
-    sudo systemctl start avalanchego
+  shouldBuild=true
+  if ! command -v git >/dev/null 2>&1 ; then
+    echo "Missing git, will not attempt to build $version from source."
+    shouldBuild=false
   fi
-  exit
+  if ! command -v go >/dev/null 2>&1 ; then
+    echo "Missing go, will not attempt to build $version from source."
+    shouldBuild=false
+  fi
+  if ! command -v gcc >/dev/null 2>&1 ; then
+    echo "Missing gcc, will not attempt to build $version from source."
+    shouldBuild=false
+  fi
+  if [ "$shouldBuild" = "false" ]; then
+    echo "One or more building tools are missing. Exiting."
+    if [ "$foundAvalancheGo" = "true" ]; then
+      echo "Restarting service..."
+      sudo systemctl start avalanchego
+    fi
+    exit 1
+  fi
+
+  echo "Unable to find AvalancheGo release $version. Attempting to build $version from source."
+  mkdir -p avalanchego
+  cd avalanchego
+  git init
+  git remote add origin https://github.com/ava-labs/avalanchego
+  git fetch --depth 1 origin $version || {
+    echo "Unable to find AvalancheGo commit $version. Exiting."
+    if [ "$foundAvalancheGo" = "true" ]; then
+      echo "Restarting service..."
+      sudo systemctl start avalanchego
+    fi
+    exit 1
+  }
+  git checkout $version
+  ./scripts/build.sh || {
+    echo "Unable to build AvalancheGo commit $version. Exiting."
+    if [ "$foundAvalancheGo" = "true" ]; then
+      echo "Restarting service..."
+      sudo systemctl start avalanchego
+    fi
+    exit 1
+  }
+
+  echo "Moving node binary..."
+  mkdir -p $HOME/avalanche-node
+  cp -r ./build/* $HOME/avalanche-node
+  mkdir -p $HOME/.avalanchego/plugins
+  cd ..
+  rm -rf avalanchego
+  echo "Node binary move to $HOME/avalanche-node"
 fi
-echo "Attempting to download: $fileName"
-wget -nv --show-progress $fileName
-echo "Unpacking node files..."
-mkdir -p $HOME/avalanche-node
-tar xvf avalanchego-linux*.tar.gz -C $HOME/avalanche-node --strip-components=1;
-mkdir -p $HOME/.avalanchego/plugins
-rm avalanchego-linux-*.tar.gz
-echo "Node files unpacked into $HOME/avalanche-node"
 echo
 # on RHEL based systems, selinux prevents systemd running execs from home-dir, lets change this
 if [ "$osType" = "RHEL" ]; then
@@ -316,7 +363,7 @@ if [ "$foundAvalancheGo" = "true" ]; then
   echo "New node version:"
   $HOME/avalanche-node/avalanchego --version
   echo "Done!"
-  exit
+  exit 0
 fi
 if [ "$ipOpt" = "ask" ]; then
   echo "To complete the setup, some networking information is needed."
