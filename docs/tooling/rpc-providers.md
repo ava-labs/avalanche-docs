@@ -353,19 +353,19 @@ Features:
 
 #### RPC
 
-- Full Node endpiont: `avax.nownodes.io`
+- Full Node endpoint: `https://avax.nownodes.io`
 
 #### Explorer
 
-- The URL is `avax-blockbook.nownodes.io`
+- The URL is: `https://avax-blockbook.nownodes.io`
 
 #### WSS
 
-- Endpoint is `avax.nownodes.io/wss`
+- Endpoint is: `https://avax.nownodes.io/wss`
 
 #### Blockbook WSS
 
-- Endpoint is `avax-blockbook.nownodes.io/wss`
+- Endpoint is: `https://avax-blockbook.nownodes.io/wss`
 
 ### PublicNode by Allnodes
 
