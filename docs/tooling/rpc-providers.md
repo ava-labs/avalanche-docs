@@ -349,7 +349,6 @@ Features:
 - Technical guides
 - 24/7 Support
 
-#### Mainnet
 
 #### RPC
 
