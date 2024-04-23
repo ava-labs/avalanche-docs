@@ -1156,6 +1156,88 @@ Secure SSH protocol is used to communicate with cloud instances. `node whitelist
       --ssh string   ssh public key to whitelist
 ```
 
+### Node Export
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node export` command exports cluster configuration including their nodes to a text file.
+If no file is specified, the configuration is printed to the stdout.
+Use `--include-secrets` to include keys in the export. In this case this command can be used to backup your cluster
+configuration. Please keep the file secure as it contains sensitive information.
+
+Exported cluster configuration without secrets it can be imported by another user using `node import` command. 
+
+
+**Usage:**
+
+```shell
+  avalanche node export [clusterName] [flags]
+
+Flags:
+      --file string       specify the file to export the cluster configuration to
+      --force             overwrite the file if it exists
+  -h, --help              help for export
+      --include-secrets   include keys in the export
+```
+
+### Node Import
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node import` command imports cluster configuration and cluster nodes from a text file.
+This file should be created using the `node export` command. 
+
+This command is useful with `node whitelist` command. With your SSH public key and IP whitelisted by 
+cluster owner you will be able to execute commands and use `avalanche-cli` to manage this cluster.
+Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli` so some commands 
+affecting cloud nodes like `node create` or `node destroy` will be not applicable for it. 
+
+
+**Usage:**
+
+```shell
+  avalanche node import [clusterName] [flags]
+
+Flags:
+      --file string   specify the file to export the cluster configuration to
+  -h, --help          help for import
+```
+
+### Node Resize
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node resize` command can be used to resize cluster instance size and/or size of the cloud persistent storage attached to the instance. 
+In another words, it can change amount of CPU, memory and disk space available for the cluster nodes.
+
+Please note that disk resize operation can affect disk performance during cloud operation to resize it.
+Please note that instance resize operation will replace cluster instances one by one, which might affect cluster stability. 
+
+
+**Usage:**
+
+```shell
+  avalanche node resize [clusterName] [flags]
+
+Flags:
+      --aws-profile string   aws profile to use (default "default")
+      --disk-size string     Disk size to resize in Gb (e.g. 1000Gb)
+  -h, --help                 help for resize
+      --node-type string     Node type to resize (e.g. t3.2xlarge)
+```
+
 ## Network
 
 The `network` command suite provides a collection of tools for managing local Subnet
