@@ -96,7 +96,7 @@ API is and have not used it, you don't need to worry about it.
 To back up your node, we need to store `staker.crt` and `staker.key` files
 somewhere safe and private, preferably to a different computer, to your private
 To back up your node, we need to store `staker.crt`, `staker.key` and `signer.key`
-files somewhere safe and private, preferably to a different computer, to your private
+files somewhere safe and private, preferably to a different computer.
 
 :::caution
 
@@ -162,7 +162,7 @@ three files in it. You need to store them somewhere safe.
 ### Restore
 
 To restore your node from a backup, we need to do the reverse: restore
-`staker.key`, `staker.crt` and `signer.key` from the backup to the working directory of the
+`staker.key`, `staker.crt` and `signer.key` from the backup to the working directory of the new node.
 
 First, we need to do the usual
 [installation](/nodes/run/with-installer/installing-avalanchego.md) of the node.
