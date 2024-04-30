@@ -85,7 +85,7 @@ La respuesta debería verse algo como:
 ```
 
 Esa parte que dice, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` es el NodeID, todo el asunto.
-El usuario va a necesitar este ID en la sección posterior al llamar a [addValidator](#add-a-validator).
+El usuario va a necesitar este ID en la sección posterior al llamar a `addValidator`.
 
 :::info
 
