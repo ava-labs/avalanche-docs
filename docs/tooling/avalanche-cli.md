@@ -806,6 +806,32 @@ will apply to all nodes in the cluster.
     --use-static-ip bool                              attach static Public IP on cloud servers (default true)
 ```
 
+### Node Destroy
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node destroy` command terminates all running nodes in a cluster
+
+**Usage:**
+
+```shell
+  avalanche node destroy [clusterName] [flags]
+```
+
+**Flags:**
+
+```shell
+    --authorize-access        authorize CLI to release cloud resources
+    --authorize-remove        authorize CLI to remove all local files related to cloud nodes
+    --authorize-all           authorize all CLI requests
+    --aws-profile string      aws profile to use
+-h, --help   help for stop
+```
+
 ### Node Devnet
 
 :::warning
@@ -896,6 +922,66 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
     --validators strings                              deploy subnet into given comma separated list of validators (defaults to all cluster nodes)
 ```
 
+### Node Export
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node export` command exports cluster configuration and its nodes config to a text file.
+
+If no file is specified, the configuration is printed to the stdout.
+
+Use `--include-secrets` to include keys in the export. In this case this command can be used to backup your cluster
+configuration. Please keep the file secure as it contains sensitive information.
+
+Exported cluster configuration without secrets can be imported by another user using `node import` command.
+
+
+**Usage:**
+
+```shell
+  avalanche node export [clusterName] [flags]
+
+Flags:
+      --file string       specify the file to export the cluster configuration to
+      --force             overwrite the file if it exists
+  -h, --help              help for export
+      --include-secrets   include keys in the export
+```
+
+### Node Import
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node import` command imports cluster configuration and its nodes configuration from a text file
+created from the `node export` command.
+
+Prior to calling this command, call `node whitelist` command to have your SSH public key and IP whitelisted by
+the cluster owner.  
+
+The `node import` command enables you to use `avalanche-cli` commands to manage the imported cluster.
+
+Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli`, so some commands
+affecting cloud nodes like `node create` or `node destroy` will be not applicable to it.
+
+
+**Usage:**
+
+```shell
+  avalanche node import [clusterName] [flags]
+
+Flags:
+      --file string   specify the file to export the cluster configuration to
+  -h, --help          help for import
+```
+
 ### Node List
 
 :::warning
@@ -916,6 +1002,32 @@ The `node list` command lists all clusters together with their nodes.
 
 ```shell
 -h, --help   help for list
+```
+
+### Node Resize
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node resize` command can be used to change amount of CPU, memory and disk space available for the cluster nodes.
+
+Please note that while disk is being resized, disk performance might be affected.
+In addition, instance resize operation will replace cluster instances sequentially, which might affect cluster stability.
+
+
+**Usage:**
+
+```shell
+  avalanche node resize [clusterName] [flags]
+
+Flags:
+      --aws-profile string   aws profile to use (default "default")
+      --disk-size string     Disk size to resize in Gb (e.g. 1000Gb)
+  -h, --help                 help for resize
+      --node-type string     Node type to resize (e.g. t3.2xlarge)
 ```
 
 ### Node Ssh
@@ -966,32 +1078,6 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 ```shell
 -h, --help            help for status
       --subnet string   specify the subnet the node is syncing with
-```
-
-### Node Destroy
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node destroy` command terminates all running nodes in a cluster
-
-**Usage:**
-
-```shell
-  avalanche node destroy [clusterName] [flags]
-```
-
-**Flags:**
-
-```shell
-    --authorize-access        authorize CLI to release cloud resources
-    --authorize-remove        authorize CLI to remove all local files related to cloud nodes
-    --authorize-all           authorize all CLI requests
-    --aws-profile string      aws profile to use
--h, --help   help for stop
 ```
 
 ### Node Sync
@@ -1154,7 +1240,7 @@ are allowed to access. User IP is whitelisted automatically when cluster is crea
 case of IP address changes or granting access to additional IPs. This command detects user current IP address automatically
 if no IP address is provided.
 
-Secure SSH protocol is used to communicate with cloud instances. `node whitelist` command authorizes SSH public key on all nodes in the cluster if --ssh params is specified. Please keep your SSH private keys safe and secure, only share public keys to grant shell access to cloud instances running `avalanchego`.
+Secure SSH protocol is used to communicate with cloud instances. `node whitelist` command authorizes the provided SSH public key on all nodes in the cluster if --ssh params is specified.
 
 **Usage:**
 
@@ -1168,88 +1254,6 @@ Secure SSH protocol is used to communicate with cloud instances. `node whitelist
   -h, --help         help for whitelist
       --ip string    ip address to whitelist
       --ssh string   ssh public key to whitelist
-```
-
-### Node Export
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node export` command exports cluster configuration including their nodes to a text file.
-If no file is specified, the configuration is printed to the stdout.
-Use `--include-secrets` to include keys in the export. In this case this command can be used to backup your cluster
-configuration. Please keep the file secure as it contains sensitive information.
-
-Exported cluster configuration without secrets it can be imported by another user using `node import` command. 
-
-
-**Usage:**
-
-```shell
-  avalanche node export [clusterName] [flags]
-
-Flags:
-      --file string       specify the file to export the cluster configuration to
-      --force             overwrite the file if it exists
-  -h, --help              help for export
-      --include-secrets   include keys in the export
-```
-
-### Node Import
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node import` command imports cluster configuration and cluster nodes from a text file.
-This file should be created using the `node export` command. 
-
-This command is useful with `node whitelist` command. With your SSH public key and IP whitelisted by 
-cluster owner you will be able to execute commands and use `avalanche-cli` to manage this cluster.
-Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli` so some commands 
-affecting cloud nodes like `node create` or `node destroy` will be not applicable for it. 
-
-
-**Usage:**
-
-```shell
-  avalanche node import [clusterName] [flags]
-
-Flags:
-      --file string   specify the file to export the cluster configuration to
-  -h, --help          help for import
-```
-
-### Node Resize
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node resize` command can be used to resize cluster instance size and/or size of the cloud persistent storage attached to the instance. 
-In another words, it can change amount of CPU, memory and disk space available for the cluster nodes.
-
-Please note that disk resize operation can affect disk performance during cloud operation to resize it.
-Please note that instance resize operation will replace cluster instances one by one, which might affect cluster stability. 
-
-
-**Usage:**
-
-```shell
-  avalanche node resize [clusterName] [flags]
-
-Flags:
-      --aws-profile string   aws profile to use (default "default")
-      --disk-size string     Disk size to resize in Gb (e.g. 1000Gb)
-  -h, --help                 help for resize
-      --node-type string     Node type to resize (e.g. t3.2xlarge)
 ```
 
 ## Network
