@@ -5,7 +5,7 @@ pagination_label: Terminate Nodes Originally Created with Avalanche-CLI
 sidebar_label: Terminate All Nodes
 sidebar_position: 7
 ---
-# Terminate Nodes Originally Created with Avalanche-CLI
+# Terminate Nodes Created By Avalanche-CLI
 
 This page provides instructions for terminating cloud server nodes created by Avalanche-CLI.
 
@@ -31,5 +31,5 @@ directory (which are used to back up your node). More info about node backup can
 
 :::
 
-Once completed, the instance set up on AWS / GCP would have been terminated and the Static Public 
+Once completed, the instance set up on AWS / GCP would have been terminated and any Static Public 
 IP associated with it would have been released.
