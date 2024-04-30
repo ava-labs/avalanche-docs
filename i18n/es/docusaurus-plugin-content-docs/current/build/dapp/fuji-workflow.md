@@ -155,31 +155,47 @@ const main = async (): Promise<any> => {
 main();
 ```
 
-## Congratulations!
+## Obtener un Goteo del Grifo Fuji
 
-You have successfully generated C-Chain addresses, obtained test AVAX from the Fuji faucet, and sent AVAX from one address to another on the Fuji Testnet. Keep exploring and building on Avalanche!
+Podemos obtener un "goteo" de AVAX del grifo Fuji. Si ya tienes un saldo de AVAX mayor que cero en Mainnet, pega tu dirección de la cadena C-Chain allí y solicita tokens de prueba. De lo contrario, por favor solicita un cupón de grifo en [Guild](https://guild.xyz/avalanche). Los administradores y moderadores en el [Discord](https://discord.com/invite/RwXY7P6) oficial pueden proporcionar AVAX de la red de pruebas si los desarrolladores no pueden obtenerlo de las otras dos opciones. Estos AVAX son para la red de pruebas Fuji y no tienen valor monetario.
+
+![Solicitando AVAX](/img/fuji-workflow/faucet1.png)
+
+El grifo enviará algunos AVAX a la dirección y devolverá un ID de transacción (txID). Este txID se puede usar con el Explorador de la Red de Pruebas Fuji para obtener más información sobre la transacción.
+
+![Recibiendo AVAX](/img/fuji-workflow/faucet2.png)
+
+### Verificar los Detalles de la Transacción
+
+El txID, `0x1419b04559bf140ab82216f7696110936fb7d4bc1f147e3b85fef7ca1008a19e`, se puede ver en el [Explorador de la Red de Pruebas Fuji](https://subnets-test.avax.network/c-chain/tx/0x86eef1a01b0a5fd45f2a71c217f99d63d427230a271d3319004f17fc26d7fb26). Avalanche también tiene un [Explorador de Mainnet](https://explorer.avax.network).
+
+![Detalles de la transacción](/img/faucet-fuji-wf-alt-tx1.png)
+
+### Obtener el Saldo
+
+También podemos usar el Explorador Fuji para obtener el saldo de la primera dirección: [0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559](https://explorer.avax-test.network/address/0x2d1d87fF3Ea2ba6E0576bCA4310fC057972F2559).
+
+![Saldo de la primera dirección derivada](/img/faucet-fuji-wf-alt-balance.png)
+
+Alternativamente, podemos usar [ethersJS](https://docs.ethers.io/v5/) para obtener el saldo.
 
 ```typescript
 const ethers = require("ethers");
-const network = "https://api.avax-test.network/ext/bc/C/rpc";
-const provider = ethers.getDefaultProvider(network);
-const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
+	@@ -187,10 +167,10 @@ const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
-    // convertir una unidad de moneda de wei a ether
+    // convert a currency unit from wei to ether
     const balanceInAvax = ethers.utils.formatEther(balance);
-    console.log(`saldo: ${balanceInAvax} AVAX`);
-    // saldo: 0.02 AVAX
+    console.log(`balance: ${balanceInAvax} AVAX`);
+    // balance: 0.02 AVAX
   });
 };
-
-main();
 ```
 
 ### Iniciar sesión en la Extensión Core
 
-Por último, podemos [usar la mnemotecnia para generar una clave privada](#generate-private-keys-from-a-mnemonic) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
+Por último, podemos [usar la mnemotecnia para generar una clave privada](#generar-claves-privadas-a-partir-de-una-mnemónica) para acceder a esa cuenta en la [extensión Core](https://join.core.app/extension).
 Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la clave privada.
 
 Usa la clave privada para acceder a la cuenta en la Extensión Core.
@@ -190,7 +206,7 @@ El saldo es correcto y la dirección es la primera dirección derivada.
 
 ![Saldo de la extensión Core](/img/fuji-wf-wallet-alt-info.png) ![3ra dirección derivada BIP44](/img/fuji-wf-alt-wallet-address.png)
 
-Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generate-private-keys-from-a-mnemonic).
+Podemos repetir este proceso de inicio de sesión usando las claves privadas de las otras 2 direcciones en el [script anterior](#generar-claves-privadas-a-partir-de-una-mnemónica).
 
 ![Direcciones derivadas de la billetera](/img/fuji-wf-alt-wallet-address-2.png)
 ![Direcciones derivadas de la billetera2](/img/fuji-wf-alt-wallet-address-3.png)  
