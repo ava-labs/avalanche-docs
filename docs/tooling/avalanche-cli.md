@@ -774,36 +774,62 @@ will apply to all nodes in the cluster.
 **Flags:**
 
 ```shell
-    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
-    --authorize-access                         authorize CLI to create cloud resources
-    --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
-    --aws                                      create node/s in AWS cloud
-    --aws-profile string                       aws profile to use (default "default")
-    --custom-avalanchego-version string        install given avalanchego version on node/s
-    --devnet                                   create node/s into a new Devnet
-    --devnet-api-nodes int                     number of API nodes(nodes without stake) to create in the new Devnet
-    --fuji                                     create node/s in Fuji Network
-    --gcp                                      create node/s in GCP cloud
-    --gcp-credentials string                   use given GCP credentials
-    --gcp-project string                       use given GCP project
--h, --help                                     help for create
-    --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
-    --latest-avalanchego-version               install latest avalanchego release version on node/s
-    --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-    --num-validators ints                      number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
-    --num-apis strings                         number of API nodes(nodes without stake) to create in the new Devnet
-    --region strings                           create node(s) in given region(s). Use comma to separate multiple regions
-    --enable-monitoring                        set up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incurs additional cost
-    --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used
-    --use-ssh-agent                            use ssh agent(ex: Yubikey) for ssh auth
-    --use-static-ip                            attach static Public IP on cloud servers (default true)
-    --aws-iops int                             AWS iops (for gp3, io1, and io2 volume types only)
-    --aws-throughput int                       AWS throughput in MiB/s (for gp3 volume type only)
-    --aws-volume-type string                   AWS volume type
-    --aws-volume-size int                      AWS volume size in GB
-    --teleporter                               generate a teleporter-ready vm
-    --relayer                                  run AWM relayer when deploying the vm
-    --grafana-pkg string                       use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+    --alternative-key-pair-name string                key pair name to use if default one generates conflicts
+    --authorize-access bool                           authorize CLI to create cloud resources
+    --avalanchego-version-from-subnet string          install latest avalanchego version, that is compatible with the given subnet, on node/s
+    --aws bool                                        create node/s in AWS cloud
+    --aws-iops int                                    AWS iops (for gp3, io1, and io2 volume types only, defaults to respective default iops values for gp3, io1, and io2 volume types)
+    --aws-profile string                              AWS profile to use (defaults to "default")
+    --aws-throughput int                              AWS throughput in MiB/s (for gp3 volume type only, defaults to default throughput value for gp3 volume type)
+    --aws-volume-type string                          AWS volume type (defaults to gp3)
+    --aws-volume-size int                             AWS volume size in GB (defaults to 1000 GB)
+    --custom-avalanchego-version string               install given avalanchego version on node/s
+    --devnet bool                                     create node/s in Devnet
+    --devnet-api-nodes int                            number of API nodes(nodes without stake) to create in the new Devnet
+    --enable-monitoring bool                          set up Prometheus monitoring for created nodes (defaults to false). Please note that this option creates a separate monitoring instance and incurs additional cost
+    --fuji bool                                       create node/s in Fuji Network
+    --gcp bool                                        create node/s in GCP cloud
+    --gcp-credentials string                          use given GCP credentials
+    --gcp-project string                              use given GCP project
+    --grafana-pkg string                              use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+-h, --help                                            help for create
+    --latest-avalanchego-pre-release-version bool     install latest avalanchego pre-release version on node/s
+    --latest-avalanchego-version bool                 install latest avalanchego release version on node/s
+    --node-type string                                cloud instance type. Use 'default' to use recommended default instance type
+    --num-validators ints                             number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --num-apis strings                                number of API nodes(nodes without stake) to create (for Devnet only)
+    --relayer bool                                    run AWM relayer when deploying the vm
+    --region strings                                  create node(s) in given region(s). Use comma to separate multiple regions
+    --ssh-agent-identity string                       use given ssh identity(only for ssh agent). If not set, default will be used
+    --teleporter bool                                 generate a teleporter-ready vm (defaults to false)
+    --use-ssh-agent bool                              use ssh agent(ex: Yubikey) for ssh auth
+    --use-static-ip bool                              attach static Public IP on cloud servers (default true)
+```
+
+### Node Destroy
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node destroy` command terminates all running nodes in a cluster
+
+**Usage:**
+
+```shell
+  avalanche node destroy [clusterName] [flags]
+```
+
+**Flags:**
+
+```shell
+    --authorize-access        authorize CLI to release cloud resources
+    --authorize-remove        authorize CLI to remove all local files related to cloud nodes
+    --authorize-all           authorize all CLI requests
+    --aws-profile string      aws profile to use
+-h, --help   help for stop
 ```
 
 ### Node Devnet
@@ -847,53 +873,108 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 **Flags:**
 
 ```shell
-    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
-    --authorize-access                         authorize CLI to create cloud resources
-    --custom-avalanchego-version string        install given avalanchego version on node/s
-    --aws                                      create node/s in AWS cloud
-    --aws-profile string                       aws profile to use (default "default")
-    --chain-config string                      path to the chain configuration for subnet
-    --custom-subnet                            use a custom VM as the subnet virtual machine
-    --custom-vm-branch string                  custom vm branch
-    --custom-vm-build-script string            custom vm build-script
-    --custom-vm-repo-url string                custom vm repository url
-    --default-validator-params                 use default weight/start/duration params for subnet validator
-    --devnet-api-nodes int                     number of API nodes(nodes without stake) to create in the new Devnet
-    --evm-chain-id uint                        chain ID to use with Subnet-EVM
-    --evm-defaults                             use default settings for fees/airdrop/precompiles with Subnet-EVM
-    --evm-subnet                               use Subnet-EVM as the subnet virtual machine
-    --evm-token string                         token name to use with Subnet-EVM
-    --evm-version string                       version of Subnet-EVM to use
-    --force-subnet-create                      overwrite the existing subnet configuration if one exists
-    --gcp                                      create node/s in GCP cloud
-    --gcp-credentials string                   use given GCP credentials
-    --gcp-project string                       use given GCP project
--h, --help                                     help for wiz
-    --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
-    --latest-avalanchego-version               install latest avalanchego release version on node/s
-    --latest-evm-version                       use latest Subnet-EVM released version
-    --latest-pre-released-evm-version          use latest Subnet-EVM pre-released version
-    --add-grafana-dashboard string             path to additional grafana dashboard json file
-    --node-config string                       path to avalanchego node configuration for subnet
-    --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-    --num-validators ints                      number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
-    --region strings                           create node/s in given region(s). Use comma to separate multiple regions
-    --remote-cli-version string                install given CLI version on remote nodes. defaults to latest CLI release
-    --enable-monitoring                        set up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incurs additional cost
-    --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used.
-    --subnet-config string                     path to the subnet configuration for subnet
-    --subnet-genesis string                    file path of the subnet genesis
-    --use-ssh-agent                            use ssh agent for ssh
-    --use-static-ip                            attach static Public IP on cloud servers (default true)
-    --validators strings                       deploy subnet into given comma separated list of validators. defaults to all cluster nodes
-    --num-apis strings                         number of API nodes(nodes without stake) to create in the new Devnet
-    --aws-iops int                             AWS iops (for gp3, io1, and io2 volume types only)
-    --aws-throughput int                       AWS throughput in MiB/s (for gp3 volume type only)
-    --aws-volume-type string                   AWS volume type
-    --aws-volume-size int                      AWS volume size in GB
-    --teleporter                               generate a teleporter-ready vm
-    --relayer                                  run AWM relayer when deploying the vm
-    --grafana-pkg string                       use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+    --add-grafana-dashboard string                    path to additional grafana dashboard json file
+    --alternative-key-pair-name string                key pair name to use if default one generates conflicts
+    --authorize-access bool                           authorize CLI to create cloud resources
+    --aws bool                                        create node/s in AWS cloud
+    --aws-iops int                                    AWS iops (for gp3, io1, and io2 volume types only, defaults to respective default iops values for gp3, io1, and io2 volume types)
+    --aws-profile string                              AWS profile to use (defaults to "default")
+    --aws-throughput int                              AWS throughput in MiB/s (for gp3 volume type only, defaults to default throughput value for gp3 volume type)
+    --aws-volume-type string                          AWS volume type (defaults to gp3)
+    --aws-volume-size int                             AWS volume size in GB (defaults to 1000 GB)
+    --chain-config string                             path to the chain configuration for subnet
+    --custom-avalanchego-version string               install given avalanchego version on node/s
+    --custom-subnet bool                              use a custom VM as the subnet virtual machine
+    --custom-vm-branch string                         custom vm branch
+    --custom-vm-build-script string                   custom vm build-script
+    --custom-vm-repo-url string                       custom vm repository url
+    --default-validator-params bool                   use default weight/start/duration params for subnet validator
+    --devnet-api-nodes int                            number of API nodes (nodes without stake) to create in the new Devnet
+    --enable-monitoring bool                          set up Prometheus monitoring for created nodes (defaults to false). Please note that this option creates a separate monitoring instance and incurs additional cost
+    --evm-chain-id uint                               chain ID to use with Subnet-EVM
+    --evm-defaults bool                               use default settings for fees/airdrop/precompiles with Subnet-EVM
+    --evm-subnet bool                                 use Subnet-EVM as the subnet virtual machine
+    --evm-token string                                token name to use with Subnet-EVM
+    --evm-version string                              version of Subnet-EVM to use
+    --force-subnet-create                             overwrite the existing subnet configuration if one exists
+    --gcp bool                                        create node/s in GCP cloud
+    --gcp-credentials string                          use given GCP credentials
+    --gcp-project string                              use given GCP project
+    --grafana-pkg string                              use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+-h, --help                                            help for wiz
+    --latest-avalanchego-pre-release-version bool     install latest avalanchego pre-release version on node/s
+    --latest-avalanchego-version bool                 install latest avalanchego release version on node/s
+    --latest-evm-version bool                         use latest Subnet-EVM released version
+    --latest-pre-released-evm-version bool            use latest Subnet-EVM pre-released version
+    --num-apis strings                                number of API nodes(nodes without stake) to create in the new Devnet
+    --node-config string                              path to avalanchego node configuration for subnet
+    --node-type string                                cloud instance type. Use 'default' to use recommended default instance type
+    --num-validators ints                             number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --relayer bool                                    run AWM relayer when deploying the vm (defaults to false)
+    --region strings                                  create node/s in given region(s). Use comma to separate multiple regions
+    --remote-cli-version string                       install given CLI version on remote nodes. defaults to latest CLI release
+    --ssh-agent-identity string                       use given ssh identity(only for ssh agent). If not set, default will be used.
+    --subnet-config string                            path to the subnet configuration for subnet
+    --subnet-genesis string                           file path of the subnet genesis
+    --teleporter bool                                 generate a teleporter-ready vm (defaults to false)
+    --use-ssh-agent bool                              use ssh agent for ssh
+    --use-static-ip bool                              attach static Public IP on cloud servers (defaults to true)
+    --validators strings                              deploy subnet into given comma separated list of validators (defaults to all cluster nodes)
+```
+
+### Node Export
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node export` command exports cluster configuration including their nodes to a text file.
+If no file is specified, the configuration is printed to the stdout.
+Use `--include-secrets` to include keys in the export. In this case this command can be used to backup your cluster
+configuration. Please keep the file secure as it contains sensitive information.
+
+Exported cluster configuration without secrets it can be imported by another user using `node import` command.
+
+
+**Usage:**
+
+```shell
+  avalanche node export [clusterName] [flags]
+
+Flags:
+      --file string       specify the file to export the cluster configuration to
+      --force             overwrite the file if it exists
+  -h, --help              help for export
+      --include-secrets   include keys in the export
+```
+
+### Node Import
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node import` command imports cluster configuration and cluster nodes from a text file.
+This file should be created using the `node export` command.
+
+This command is useful with `node whitelist` command. With your SSH public key and IP whitelisted by
+cluster owner you will be able to execute commands and use `avalanche-cli` to manage this cluster.
+Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli` so some commands
+affecting cloud nodes like `node create` or `node destroy` will be not applicable for it.
+
+
+**Usage:**
+
+```shell
+  avalanche node import [clusterName] [flags]
+
+Flags:
+      --file string   specify the file to export the cluster configuration to
+  -h, --help          help for import
 ```
 
 ### Node List
@@ -916,6 +997,32 @@ The `node list` command lists all clusters together with their nodes.
 
 ```shell
 -h, --help   help for list
+```
+
+### Node Resize
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+The `node resize` command can be used to change amount of CPU, memory and disk space available for the cluster nodes.
+
+Please note that while disk is being resized, disk performance might be affected.
+In addition, instance resize operation will replace cluster instances sequentially, which might affect cluster stability.
+
+
+**Usage:**
+
+```shell
+  avalanche node resize [clusterName] [flags]
+
+Flags:
+      --aws-profile string   aws profile to use (default "default")
+      --disk-size string     Disk size to resize in Gb (e.g. 1000Gb)
+  -h, --help                 help for resize
+      --node-type string     Node type to resize (e.g. t3.2xlarge)
 ```
 
 ### Node Ssh
@@ -966,32 +1073,6 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 ```shell
 -h, --help            help for status
       --subnet string   specify the subnet the node is syncing with
-```
-
-### Node Destroy
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node destroy` command terminates all running nodes in a cluster
-
-**Usage:**
-
-```shell
-  avalanche node destroy [clusterName] [flags]
-```
-
-**Flags:**
-
-```shell
-    --authorize-access        authorize CLI to release cloud resources
-    --authorize-remove        authorize CLI to remove all local files related to cloud nodes
-    --authorize-all           authorize all CLI requests
-    --aws-profile string      aws profile to use
--h, --help   help for stop
 ```
 
 ### Node Sync
@@ -1168,88 +1249,6 @@ Secure SSH protocol is used to communicate with cloud instances. `node whitelist
   -h, --help         help for whitelist
       --ip string    ip address to whitelist
       --ssh string   ssh public key to whitelist
-```
-
-### Node Export
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node export` command exports cluster configuration including their nodes to a text file.
-If no file is specified, the configuration is printed to the stdout.
-Use `--include-secrets` to include keys in the export. In this case this command can be used to backup your cluster
-configuration. Please keep the file secure as it contains sensitive information.
-
-Exported cluster configuration without secrets it can be imported by another user using `node import` command. 
-
-
-**Usage:**
-
-```shell
-  avalanche node export [clusterName] [flags]
-
-Flags:
-      --file string       specify the file to export the cluster configuration to
-      --force             overwrite the file if it exists
-  -h, --help              help for export
-      --include-secrets   include keys in the export
-```
-
-### Node Import
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node import` command imports cluster configuration and cluster nodes from a text file.
-This file should be created using the `node export` command. 
-
-This command is useful with `node whitelist` command. With your SSH public key and IP whitelisted by 
-cluster owner you will be able to execute commands and use `avalanche-cli` to manage this cluster.
-Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli` so some commands 
-affecting cloud nodes like `node create` or `node destroy` will be not applicable for it. 
-
-
-**Usage:**
-
-```shell
-  avalanche node import [clusterName] [flags]
-
-Flags:
-      --file string   specify the file to export the cluster configuration to
-  -h, --help          help for import
-```
-
-### Node Resize
-
-:::warning
-
-(ALPHA Warning) This command is currently in experimental mode.
-
-:::
-
-The `node resize` command can be used to resize cluster instance size and/or size of the cloud persistent storage attached to the instance. 
-In another words, it can change amount of CPU, memory and disk space available for the cluster nodes.
-
-Please note that disk resize operation can affect disk performance during cloud operation to resize it.
-Please note that instance resize operation will replace cluster instances one by one, which might affect cluster stability. 
-
-
-**Usage:**
-
-```shell
-  avalanche node resize [clusterName] [flags]
-
-Flags:
-      --aws-profile string   aws profile to use (default "default")
-      --disk-size string     Disk size to resize in Gb (e.g. 1000Gb)
-  -h, --help                 help for resize
-      --node-type string     Node type to resize (e.g. t3.2xlarge)
 ```
 
 ## Network
