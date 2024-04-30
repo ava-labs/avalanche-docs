@@ -930,12 +930,14 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 
 :::
 
-The `node export` command exports cluster configuration including their nodes to a text file.
+The `node export` command exports cluster configuration and its nodes config to a text file.
+
 If no file is specified, the configuration is printed to the stdout.
+
 Use `--include-secrets` to include keys in the export. In this case this command can be used to backup your cluster
 configuration. Please keep the file secure as it contains sensitive information.
 
-Exported cluster configuration without secrets it can be imported by another user using `node import` command.
+Exported cluster configuration without secrets can be imported by another user using `node import` command.
 
 
 **Usage:**
@@ -958,13 +960,16 @@ Flags:
 
 :::
 
-The `node import` command imports cluster configuration and cluster nodes from a text file.
-This file should be created using the `node export` command.
+The `node import` command imports cluster configuration and its nodes configuration from a text file
+created from the `node export` command.
 
-This command is useful with `node whitelist` command. With your SSH public key and IP whitelisted by
-cluster owner you will be able to execute commands and use `avalanche-cli` to manage this cluster.
-Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli` so some commands
-affecting cloud nodes like `node create` or `node destroy` will be not applicable for it.
+Prior to calling this command, call `node whitelist` command to have your SSH public key and IP whitelisted by
+the cluster owner.  
+
+The `node import` command enables you to use `avalanche-cli` commands to manage the imported cluster.
+
+Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli`, so some commands
+affecting cloud nodes like `node create` or `node destroy` will be not applicable to it.
 
 
 **Usage:**
@@ -1235,7 +1240,7 @@ are allowed to access. User IP is whitelisted automatically when cluster is crea
 case of IP address changes or granting access to additional IPs. This command detects user current IP address automatically
 if no IP address is provided.
 
-Secure SSH protocol is used to communicate with cloud instances. `node whitelist` command authorizes SSH public key on all nodes in the cluster if --ssh params is specified. Please keep your SSH private keys safe and secure, only share public keys to grant shell access to cloud instances running `avalanchego`.
+Secure SSH protocol is used to communicate with cloud instances. `node whitelist` command authorizes the provided SSH public key on all nodes in the cluster if --ssh params is specified.
 
 **Usage:**
 
