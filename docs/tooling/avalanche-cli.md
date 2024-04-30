@@ -790,14 +790,20 @@ will apply to all nodes in the cluster.
     --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
     --latest-avalanchego-version               install latest avalanchego release version on node/s
     --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-    --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --num-validators ints                      number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --num-apis strings                         number of API nodes(nodes without stake) to create in the new Devnet
     --region strings                           create node(s) in given region(s). Use comma to separate multiple regions
-    --same-monitoring-instance                 host monitoring for a cloud servers on the same instance
-    --separate-monitoring-instance             host monitoring for all cloud servers on a separate instance
-    --skip-monitoring                          don't set up monitoring in created nodes
+    --enable-monitoring                        set up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incurs additional cost
     --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used
     --use-ssh-agent                            use ssh agent(ex: Yubikey) for ssh auth
     --use-static-ip                            attach static Public IP on cloud servers (default true)
+    --aws-iops int                             AWS iops (for gp3, io1, and io2 volume types only)
+    --aws-throughput int                       AWS throughput in MiB/s (for gp3 volume type only)
+    --aws-volume-type string                   AWS volume type
+    --aws-volume-size int                      AWS volume size in GB
+    --teleporter                               generate a teleporter-ready vm
+    --relayer                                  run AWM relayer when deploying the vm
+    --grafana-pkg string                       use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
 ```
 
 ### Node Devnet
@@ -843,7 +849,7 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 ```shell
     --alternative-key-pair-name string         key pair name to use if default one generates conflicts
     --authorize-access                         authorize CLI to create cloud resources
-    --avalanchego-version string               install given avalanchego version on node/s
+    --custom-avalanchego-version string        install given avalanchego version on node/s
     --aws                                      create node/s in AWS cloud
     --aws-profile string                       aws profile to use (default "default")
     --chain-config string                      path to the chain configuration for subnet
@@ -867,19 +873,27 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
     --latest-avalanchego-version               install latest avalanchego release version on node/s
     --latest-evm-version                       use latest Subnet-EVM released version
     --latest-pre-released-evm-version          use latest Subnet-EVM pre-released version
+    --add-grafana-dashboard string             path to additional grafana dashboard json file
     --node-config string                       path to avalanchego node configuration for subnet
     --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-    --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --num-validators ints                      number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
     --region strings                           create node/s in given region(s). Use comma to separate multiple regions
-    --same-monitoring-instance                 host monitoring for a cloud servers on the same instance
-    --separate-monitoring-instance             host monitoring for all cloud servers on a separate instance
-    --skip-monitoring                          don't set up monitoring in created nodes
+    --remote-cli-version string                install given CLI version on remote nodes. defaults to latest CLI release
+    --enable-monitoring                        set up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incurs additional cost
     --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used.
     --subnet-config string                     path to the subnet configuration for subnet
     --subnet-genesis string                    file path of the subnet genesis
     --use-ssh-agent                            use ssh agent for ssh
     --use-static-ip                            attach static Public IP on cloud servers (default true)
     --validators strings                       deploy subnet into given comma separated list of validators. defaults to all cluster nodes
+    --num-apis strings                         number of API nodes(nodes without stake) to create in the new Devnet
+    --aws-iops int                             AWS iops (for gp3, io1, and io2 volume types only)
+    --aws-throughput int                       AWS throughput in MiB/s (for gp3 volume type only)
+    --aws-volume-type string                   AWS volume type
+    --aws-volume-size int                      AWS volume size in GB
+    --teleporter                               generate a teleporter-ready vm
+    --relayer                                  run AWM relayer when deploying the vm
+    --grafana-pkg string                       use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
 ```
 
 ### Node List
@@ -954,7 +968,7 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
       --subnet string   specify the subnet the node is syncing with
 ```
 
-### Node Stop
+### Node Destroy
 
 :::warning
 
@@ -962,21 +976,21 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 
 :::
 
-The `node stop` command stops a running node in cloud server
-
-Note that a stopped node may still incur cloud server storage fees.
+The `node destroy` command terminates all running nodes in a cluster
 
 **Usage:**
 
 ```shell
-  avalanche node stop [clusterName] [flags]
+  avalanche node destroy [clusterName] [flags]
 ```
 
 **Flags:**
 
 ```shell
-    --authorize-access   authorize CLI to release cloud resources
-    --authorize-remove   authorize CLI to remove all local files related to cloud nodes
+    --authorize-access        authorize CLI to release cloud resources
+    --authorize-remove        authorize CLI to remove all local files related to cloud nodes
+    --authorize-all           authorize all CLI requests
+    --aws-profile string      aws profile to use
 -h, --help   help for stop
 ```
 
