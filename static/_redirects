@@ -242,8 +242,7 @@
 /build/tutorials/nodes-and-staking/run-offline-pruning /nodes/maintain/run-offline-pruning 301
 /build/references/avalanchego-config-flags/ /nodes/maintain/avalanchego-config-flags 301
 /build/references/avalanchego-config-flags /nodes/maintain/avalanchego-config-flags
-/build/references/chain-config-flags/ /nodes/maintain/chain-config-flags 301
-/build/references/chain-config-flags /nodes/maintain/chain-config-flags 301
+/build/references/chain-config-flags/ /nodes/configure/chain-configs/chain-config-flags 301
 /learn/platform-overview/staking/ /nodes/validate/staking 301
 /learn/platform-overview/staking /nodes/validate/staking 301
 
@@ -554,6 +553,3 @@
 /tooling/cli-guides/upload-a-custom-vm-to-cloud /tooling/cli-create-nodes/stop-node 301
 /tooling/cli-guides/validate-primary-network /tooling/cli-create-nodes/stop-node 301
 /tooling/cli-guides/validate-subnets /tooling/cli-create-nodes/stop-node 301
-
-# 03/25/2024
-/nodes/configure/chain-configs/chain-config-flags /nodes/configure/chain-configs/chain-config-flags 301

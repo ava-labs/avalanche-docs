@@ -59,17 +59,33 @@ NodeID is defined by two files:
 - `staker.crt`
 - `staker.key`
 
+NodePOP is this node's BLS key and proof of possession. Nodes must register a BLS key to act as
+a validator on the Primary Network. Your node's POP is logged on startup and is accessible over this endpoint.
+
+- `publicKey` is the 48 byte hex representation of the BLS key.
+- `proofOfPossession` is the 96 byte hex representation of the BLS signature.
+
+NodePOP is defined by the `signer.key` file.
+
+
 In the default installation, they can be found in the working directory,
 specifically in `~/.avalanchego/staking/`. All we need to do to recreate the
-node on another machine is to run a new installation with those same two files.
-If these two files are removed from a node, which is restarted afterwards, they
+node on another machine is to run a new installation with those same three files.
+
+If `staker.key` and `staker.crt` are removed from a node, which is restarted afterwards, they
 will be recreated and a new node ID will be assigned.
+
+If the `signer.key` is regenerated, the node will lose its previous BLS identity, which includes 
+its public key and proof of possession. This change means that the node's former identity on the 
+network will no longer be recognized, affecting its ability to participate in the consensus 
+mechanism as before. Consequently, the node may lose its established reputation and any 
+associated staking rewards. 
 
 :::caution
 
 If you have users defined in the keystore of your node, then you need to back up
-and restore those as well. [Keystore API](/reference/avalanchego/keystore-api.md) has methods that can be used to
-export and import user keys. Note that Keystore API is used by developers only
+and restore those as well. [Keystore API](/reference/avalanchego/keystore-api.md) has methods 
+that can be used to export and import user keys. Note that Keystore API is used by developers only
 and not intended for use in production nodes. If you don't know what a keystore
 API is and have not used it, you don't need to worry about it.
 
@@ -79,8 +95,8 @@ API is and have not used it, you don't need to worry about it.
 
 To back up your node, we need to store `staker.crt` and `staker.key` files
 somewhere safe and private, preferably to a different computer, to your private
-storage in the cloud, a USB stick or similar. Storing them to a couple of
-different, secure locations increases the safety.
+To back up your node, we need to store `staker.crt`, `staker.key` and `signer.key`
+files somewhere safe and private, preferably to a different computer.
 
 :::caution
 
@@ -90,9 +106,13 @@ they could re-create your node somewhere else, and depending on the
 circumstances make you lose the staking rewards. So make sure your staker files
 are secure.
 
+If someone gains access to your `signer.key`, they could potentially sign 
+transactions on behalf of your node, which might disrupt the operations and 
+integrity of your node on the network. 
+
 :::
 
-Let's get the staker files off the machine running the node.
+Let's get the files off the machine running the node.
 
 #### From Local Node
 
@@ -136,18 +156,18 @@ downloaded SSH key, you can point to it manually:
 scp -i /path/to/the/key.pem -r ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking ~/avalanche_backup
 ```
 
-Once executed, this command will create `avalanche_backup` directory in you home
-directory and place staker files in it. You need to store them somewhere safe.
+Once executed, this command will create `avalanche_backup` directory and place those 
+three files in it. You need to store them somewhere safe.
 
 ### Restore
 
 To restore your node from a backup, we need to do the reverse: restore
-`staker.key` and `staker.crt` from the backup to the working directory of the
-node.
+`staker.key`, `staker.crt` and `signer.key` from the backup to the working directory of the new node.
 
 First, we need to do the usual
 [installation](/nodes/run/with-installer/installing-avalanchego.md) of the node.
-This will create a new NodeID, which we need to replace. When the node is
+This will create a new NodeID, a new BLS key and a new BLS signature,
+which we need to replace. When the node is
 installed correctly, log into the machine where the node is running and stop it:
 
 ```text
@@ -158,26 +178,26 @@ We're ready to restore the node.
 
 #### To Local Node
 
-If you're running the node locally, just copy the `staker.key` and `staker.crt`
-files from the backup location into the working directory, which on the default
-Linux installation will be `/home/USERNAME/.avalanchego/staking/`. Replace
-`USERNAME` with the actual username used to run the node.
+If you're running the node locally, just copy the `staker.key`, `staker.crt`
+and `signer.key` files from the backup location into the working directory, 
+which on the default Linux installation will be `/home/USERNAME/.avalanchego/staking/`. 
+Replace `USERNAME` with the actual username used to run the node.
 
 #### To Remote Node Using `scp`
 
 Again, the process is just the reverse operation. Using `scp` we need to copy
-the `staker.key` and `staker.crt` files from the backup location into the remote
-working directory. Assuming the backed up files are located in the directory
-where the above backup procedure placed them:
+the `staker.key`, `staker.crt` and `signer.key` files from the backup location 
+into the remote working directory. Assuming the backed up files are located in 
+the directory where the above backup procedure placed them:
 
 ```text
-scp ~/avalanche_backup/staker.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
+scp ~/avalanche_backup/{staker.*,signer.key} ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
 ```
 
 Or if you need to specify the path to the SSH key:
 
 ```text
-scp -i /path/to/the/key.pem ~/avalanche_backup/staker.* ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
+scp -i /path/to/the/key.pem ~/avalanche_backup/{staker.*,signer.key} ubuntu@PUBLICIP:/home/ubuntu/.avalanchego/staking
 ```
 
 And again, replace `ubuntu` with correct username if different, and `PUBLICIP`
@@ -192,9 +212,9 @@ Once the files have been replaced, log into the machine and start the node using
 sudo systemctl start avalanchego
 ```
 
-You can now check that the node is restored with the correct NodeID by issuing
-the [getNodeID](/reference/avalanchego/info-api.md#infogetnodeid) API call in
-the same console you ran the previous command:
+You can now check that the node is restored with the correct NodeID and NodePOP 
+by issuing the [getNodeID](/reference/avalanchego/info-api.md#infogetnodeid) 
+API call in the same console you ran the previous command:
 
 ```text
 curl -X POST --data '{
@@ -204,7 +224,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-You should see your original NodeID. Restore process is done.
+You should see your original NodeID and NodePOP (BLS key and BLS signature). Restore process is done.
 
 ## Database
 

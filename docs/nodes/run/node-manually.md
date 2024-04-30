@@ -290,6 +290,10 @@ it will return `API call rejected because chain is not done bootstrapping`. If
 you are still experiencing issues please contact us on
 [Discord.](https://chat.avalabs.org/)
 
+:::note
+The 3 chains will bootstrap in the following order: P-chain, X-chain, C-chain.
+:::
+
 Learn more about bootstrapping [here](/nodes/maintain/node-bootstrap).
 
 ## RPC
