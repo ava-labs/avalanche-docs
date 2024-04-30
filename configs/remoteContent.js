@@ -415,7 +415,7 @@ ${updatedContent}`,
       // /docs/reference/p-chain/api.md
       name: "p-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/vms/platformvm/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/platformvm/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/p-chain/",
       // change filename and correct links
@@ -440,7 +440,7 @@ ${updatedContent}`,
       // /docs/reference/x-chain/api.md
       name: "x-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/vms/avm/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/x-chain/",
       // change filename and correct links
@@ -465,7 +465,7 @@ ${updatedContent}`,
       // /docs/reference/admin-api.md
       name: "admin-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/admin/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/api/admin/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/",
       // change filename and correct links
@@ -490,7 +490,7 @@ ${updatedContent}`,
       // /docs/reference/health-api.md
       name: "health-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/health/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/api/health/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/",
       // change filename and correct links
@@ -515,7 +515,7 @@ ${updatedContent}`,
       // /docs/reference/info-api.md
       name: "info-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/info/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/api/info/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/",
       // change filename and correct links
@@ -540,7 +540,7 @@ ${updatedContent}`,
       // /docs/reference/metrics-api.md
       name: "metrics-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/metrics/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/api/metrics/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/",
       // change filename and correct links
@@ -565,7 +565,7 @@ ${updatedContent}`,
       // /docs/reference/keystore-api.md
       name: "keystore-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/api/keystore/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/api/keystore/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/",
       // change filename and correct links
@@ -590,7 +590,7 @@ ${updatedContent}`,
       // /docs/reference/index-api.md
       name: "index-api",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/indexer/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/indexer/",
       documents: ["service.md"],
       outDir: "docs/reference/avalanchego/",
       // change filename and correct links
@@ -615,7 +615,7 @@ ${updatedContent}`,
       // /docs/nodes/configure/avalanchego-config-flags.md
       name: "avalanchego-config-flags",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/config/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/config/",
       documents: ["config.md"],
       outDir: "docs/nodes/configure/",
       // change filename and correct links
@@ -640,7 +640,7 @@ ${updatedContent}`,
       // /docs/nodes/configure/subnet-configs.md
       name: "subnet-configs",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/subnets/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/subnets/",
       documents: ["config.md"],
       outDir: "docs/nodes/configure/",
       // change filename and correct links
@@ -665,7 +665,7 @@ ${updatedContent}`,
       // /docs/nodes/configure/chain-configs/P.md
       name: "P-configs",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/vms/platformvm/config/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/platformvm/config/",
       documents: ["config.md"],
       outDir: "docs/nodes/configure/chain-configs/",
       // change filename and correct links
@@ -690,7 +690,7 @@ ${updatedContent}`,
       // /docs/nodes/configure/chain-configs/X.md
       name: "X-configs",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/avalanchego/meag/docs-format/vms/avm/",
+        "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/",
       documents: ["config.md"],
       outDir: "docs/nodes/configure/chain-configs/",
       // change filename and correct links

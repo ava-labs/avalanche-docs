@@ -348,16 +348,24 @@ Features:
 - Dedicated access with no limits by request
 - Free starter plan
 - Technical guides
+- 24/7 Support
 
-#### Mainnet
 
 #### RPC
 
-- The URL is `https://avalanche.nownodes.io/your-api-key`
+- Full Node endpoint: `https://avax.nownodes.io`
 
-#### Blockbook
+#### Explorer
 
-- The URL is `https://avax-blockbook.nownodes.io/your-request`
+- The URL is: `https://avax-blockbook.nownodes.io`
+
+#### WSS
+
+- Endpoint is: `https://avax.nownodes.io/wss`
+
+#### Blockbook WSS
+
+- Endpoint is: `https://avax-blockbook.nownodes.io/wss`
 
 ### PublicNode by Allnodes
 
