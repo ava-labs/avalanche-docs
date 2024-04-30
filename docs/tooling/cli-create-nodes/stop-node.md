@@ -1,13 +1,13 @@
 ---
 tags: [Tooling, Avalanche-CLI]
 description: This page provides instructions for halting cloud server nodes established by Avalanche-CLI.
-pagination_label: Stop Nodes Originally Created with Avalanche-CLI
-sidebar_label: Stop a Node
+pagination_label: Terminate Nodes Originally Created with Avalanche-CLI
+sidebar_label: Terminate All Nodes
 sidebar_position: 7
 ---
-# Stop Nodes Originally Created with Avalanche-CLI
+# Terminate Nodes Originally Created with Avalanche-CLI
 
-This page provides instructions for halting cloud server nodes established by Avalanche-CLI.
+This page provides instructions for terminating cloud server nodes created by Avalanche-CLI.
 
 :::warning
 
@@ -15,12 +15,12 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 :::
 
-## Stopping A Node
+## Terminating All Nodes
 
-To stop all nodes in a cluster, run:
+To terminate all nodes in a cluster, run:
 
 ```shell
-avalanche node stop <clusterName>
+avalanche node destroy <clusterName>
 ```
 
 :::warning
@@ -31,15 +31,5 @@ directory (which are used to back up your node). More info about node backup can
 
 :::
 
-
-:::note
-
-Please note that a stopped node on AWS / GCP can still incur cost (such as storage fees).
-
-Ava Labs is not responsible for the cost incurred from stopping an Avalanche node with
-Avalanche-CLI.
-
-:::
-
-Once completed, the instance set up on AWS / GCP would have been stopped and the Static Public IP
-associated with it would have been released.
+Once completed, the instance set up on AWS / GCP would have been terminated and the Static Public 
+IP associated with it would have been released.
