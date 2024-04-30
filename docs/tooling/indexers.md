@@ -42,3 +42,11 @@ SubQuery is a leading blockchain data indexer that provides developers with fast
 It offers reusable **indexing primitives** (such as fault-tolerant RPC ingestors, custom processors and aggregations, re-org aware database integrations) to make it easy to receive, transform, store and access your on-chain data.
 
 To get started, visit the [documentation](https://docs.flair.dev) or clone the [starter boilerplate](https://github.com/flair-sdk/starter-boilerplate) template and follow the instructions.
+
+### Envio 
+
+[Envio](https://envio.dev) is a full-featured data indexing solution that provides application developers with a seamless and efficient way to index and aggregate real-time and historical blockchain data for any EVM.
+
+Envio supports [HyperSync](https://docs.envio.dev/docs/hypersync) on Avalanche. HyperSync is a real-time indexed layer of the Avalanche blockchain, providing accelerated APIs (JSON-RPC bypass) for the hyper-speed syncing of Avalanche data. Developers do not need to worry about RPC URLs, rate-limiting, or managing infrastructure, and can easily sync large datasets in a few minutes, something that would usually take 100x longer via standard RPC.
+
+To get started, visit the [documentation](https://docs.envio.dev/docs/getting-started) or follow the [quickstart](https://docs.envio.dev/docs/contract-import) guide.
