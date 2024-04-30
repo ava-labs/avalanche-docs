@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes, Avalanche-CLI]
-descripción: Si necesitas enviar fondos a tu clave de control de Subred o necesitas mover fondos de un índice de dirección Ledger a otro, esta guía demostrará cómo habilitar transferencias directas entre direcciones de la cadena P utilizando el comando Avalanche-CLI `avalanche key transfer`.
+tags: [Construir, Subredes, Avalanche-CLI]
+description: Si necesitas enviar fondos a tu clave de control de Subred o necesitas mover fondos de un índice de dirección Ledger a otro, esta guía demostrará cómo habilitar transferencias directas entre direcciones de la cadena P utilizando el comando Avalanche-CLI `avalanche key transfer`.
 sidebar_label: Transferir Fondos de la Cadena P
 pagination_label: Cómo Usar Avalanche-CLI para Transferir Fondos de la Cadena P
 sidebar_position: 3
