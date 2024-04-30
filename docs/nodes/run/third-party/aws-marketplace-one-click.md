@@ -72,10 +72,10 @@ MacOS it would look similar to the following:
 ```zsh
 # In this example we have a keypair called avalanche.pem which was downloaded from AWS to ~/Downloads/avalanche.pem
 # Confirm the file exists with the following command
-test -f ~/Downloads/avalanche.pem && echo "avalance.pem exists."
+test -f ~/Downloads/avalanche.pem && echo "Avalanche.pem exists."
 
 # Running the above command will output the following:
-# avalance.pem exists.
+# Avalanche.pem exists.
 
 # Move the avalanche.pem keypair from the ~/Downloads directory to the hidden ~/.ssh directory
 mv ~/Downloads/avalanche.pem ~/.ssh
