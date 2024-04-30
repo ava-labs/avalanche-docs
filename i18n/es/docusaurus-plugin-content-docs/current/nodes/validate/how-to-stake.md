@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Esta sección proporciona documentos sobre cómo apostar AVAX en la Red Avalanche.
+tags: [Nodos]
+description: Esta sección proporciona documentos sobre cómo apostar AVAX en la Red Avalanche.
 sidebar_label: Cómo Apostar
 pagination_label: Cómo Apostar AVAX
 sidebar_position: 2

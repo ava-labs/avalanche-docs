@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Dapps]
-descripción: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
+tags: [Construir, Dapps]
+description: Un recorrido completo de las actividades de desarrollo necesarias para una aplicación descentralizada básica.
 sidebar_label: Flujo de trabajo de Fuji
 pagination_label: Flujo de trabajo de Fuji
 ---

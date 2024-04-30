@@ -1,6 +1,6 @@
 ---
-etiquetas: [Nodos]
-descripción: Esta sección proporciona documentos sobre cómo construir y mantener un nodo AvalancheGo, y luego validar la red Avalanche utilizando un nodo AvalancheGo.
+tags: [Nodos]
+description: Esta sección proporciona documentos sobre cómo construir y mantener un nodo AvalancheGo, y luego validar la red Avalanche utilizando un nodo AvalancheGo.
 sidebar_label: Nodo ➡️ Validador
 pagination_label: Agregar un nodo al conjunto de validadores
 sidebar_position: 3
