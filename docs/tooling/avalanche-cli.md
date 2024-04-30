@@ -774,36 +774,36 @@ will apply to all nodes in the cluster.
 **Flags:**
 
 ```shell
-    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
-    --authorize-access                         authorize CLI to create cloud resources
-    --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
-    --aws                                      create node/s in AWS cloud
-    --aws-profile string                       aws profile to use (default "default")
-    --custom-avalanchego-version string        install given avalanchego version on node/s
-    --devnet                                   create node/s into a new Devnet
-    --devnet-api-nodes int                     number of API nodes(nodes without stake) to create in the new Devnet
-    --fuji                                     create node/s in Fuji Network
-    --gcp                                      create node/s in GCP cloud
-    --gcp-credentials string                   use given GCP credentials
-    --gcp-project string                       use given GCP project
--h, --help                                     help for create
-    --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
-    --latest-avalanchego-version               install latest avalanchego release version on node/s
-    --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-    --num-validators ints                      number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
-    --num-apis strings                         number of API nodes(nodes without stake) to create in the new Devnet
-    --region strings                           create node(s) in given region(s). Use comma to separate multiple regions
-    --enable-monitoring                        set up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incurs additional cost
-    --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used
-    --use-ssh-agent                            use ssh agent(ex: Yubikey) for ssh auth
-    --use-static-ip                            attach static Public IP on cloud servers (default true)
-    --aws-iops int                             AWS iops (for gp3, io1, and io2 volume types only)
-    --aws-throughput int                       AWS throughput in MiB/s (for gp3 volume type only)
-    --aws-volume-type string                   AWS volume type
-    --aws-volume-size int                      AWS volume size in GB
-    --teleporter                               generate a teleporter-ready vm
-    --relayer                                  run AWM relayer when deploying the vm
-    --grafana-pkg string                       use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+    --alternative-key-pair-name string                key pair name to use if default one generates conflicts
+    --authorize-access bool                           authorize CLI to create cloud resources
+    --avalanchego-version-from-subnet string          install latest avalanchego version, that is compatible with the given subnet, on node/s
+    --aws bool                                        create node/s in AWS cloud
+    --aws-iops int                                    AWS iops (for gp3, io1, and io2 volume types only, defaults to respective default iops values for gp3, io1, and io2 volume types)
+    --aws-profile string                              AWS profile to use (defaults to "default")
+    --aws-throughput int                              AWS throughput in MiB/s (for gp3 volume type only, defaults to default throughput value for gp3 volume type)
+    --aws-volume-type string                          AWS volume type (defaults to gp3)
+    --aws-volume-size int                             AWS volume size in GB (defaults to 1000 GB)
+    --custom-avalanchego-version string               install given avalanchego version on node/s
+    --devnet bool                                     create node/s in Devnet
+    --devnet-api-nodes int                            number of API nodes(nodes without stake) to create in the new Devnet
+    --enable-monitoring bool                          set up Prometheus monitoring for created nodes (defaults to false). Please note that this option creates a separate monitoring instance and incurs additional cost
+    --fuji bool                                       create node/s in Fuji Network
+    --gcp bool                                        create node/s in GCP cloud
+    --gcp-credentials string                          use given GCP credentials
+    --gcp-project string                              use given GCP project
+    --grafana-pkg string                              use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+-h, --help                                            help for create
+    --latest-avalanchego-pre-release-version bool     install latest avalanchego pre-release version on node/s
+    --latest-avalanchego-version bool                 install latest avalanchego release version on node/s
+    --node-type string                                cloud instance type. Use 'default' to use recommended default instance type
+    --num-validators ints                             number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --num-apis strings                                number of API nodes(nodes without stake) to create (for Devnet only)
+    --relayer bool                                    run AWM relayer when deploying the vm
+    --region strings                                  create node(s) in given region(s). Use comma to separate multiple regions
+    --ssh-agent-identity string                       use given ssh identity(only for ssh agent). If not set, default will be used
+    --teleporter bool                                 generate a teleporter-ready vm (defaults to false)
+    --use-ssh-agent bool                              use ssh agent(ex: Yubikey) for ssh auth
+    --use-static-ip bool                              attach static Public IP on cloud servers (default true)
 ```
 
 ### Node Devnet
@@ -847,53 +847,53 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 **Flags:**
 
 ```shell
-    --alternative-key-pair-name string         key pair name to use if default one generates conflicts
-    --authorize-access                         authorize CLI to create cloud resources
-    --custom-avalanchego-version string        install given avalanchego version on node/s
-    --aws                                      create node/s in AWS cloud
-    --aws-profile string                       aws profile to use (default "default")
-    --chain-config string                      path to the chain configuration for subnet
-    --custom-subnet                            use a custom VM as the subnet virtual machine
-    --custom-vm-branch string                  custom vm branch
-    --custom-vm-build-script string            custom vm build-script
-    --custom-vm-repo-url string                custom vm repository url
-    --default-validator-params                 use default weight/start/duration params for subnet validator
-    --devnet-api-nodes int                     number of API nodes(nodes without stake) to create in the new Devnet
-    --evm-chain-id uint                        chain ID to use with Subnet-EVM
-    --evm-defaults                             use default settings for fees/airdrop/precompiles with Subnet-EVM
-    --evm-subnet                               use Subnet-EVM as the subnet virtual machine
-    --evm-token string                         token name to use with Subnet-EVM
-    --evm-version string                       version of Subnet-EVM to use
-    --force-subnet-create                      overwrite the existing subnet configuration if one exists
-    --gcp                                      create node/s in GCP cloud
-    --gcp-credentials string                   use given GCP credentials
-    --gcp-project string                       use given GCP project
--h, --help                                     help for wiz
-    --latest-avalanchego-pre-release-version   install latest avalanchego pre-release version on node/s
-    --latest-avalanchego-version               install latest avalanchego release version on node/s
-    --latest-evm-version                       use latest Subnet-EVM released version
-    --latest-pre-released-evm-version          use latest Subnet-EVM pre-released version
-    --add-grafana-dashboard string             path to additional grafana dashboard json file
-    --node-config string                       path to avalanchego node configuration for subnet
-    --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
-    --num-validators ints                      number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
-    --region strings                           create node/s in given region(s). Use comma to separate multiple regions
-    --remote-cli-version string                install given CLI version on remote nodes. defaults to latest CLI release
-    --enable-monitoring                        set up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incurs additional cost
-    --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used.
-    --subnet-config string                     path to the subnet configuration for subnet
-    --subnet-genesis string                    file path of the subnet genesis
-    --use-ssh-agent                            use ssh agent for ssh
-    --use-static-ip                            attach static Public IP on cloud servers (default true)
-    --validators strings                       deploy subnet into given comma separated list of validators. defaults to all cluster nodes
-    --num-apis strings                         number of API nodes(nodes without stake) to create in the new Devnet
-    --aws-iops int                             AWS iops (for gp3, io1, and io2 volume types only)
-    --aws-throughput int                       AWS throughput in MiB/s (for gp3 volume type only)
-    --aws-volume-type string                   AWS volume type
-    --aws-volume-size int                      AWS volume size in GB
-    --teleporter                               generate a teleporter-ready vm
-    --relayer                                  run AWM relayer when deploying the vm
-    --grafana-pkg string                       use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+    --add-grafana-dashboard string                    path to additional grafana dashboard json file
+    --alternative-key-pair-name string                key pair name to use if default one generates conflicts
+    --authorize-access bool                           authorize CLI to create cloud resources
+    --aws bool                                        create node/s in AWS cloud
+    --aws-iops int                                    AWS iops (for gp3, io1, and io2 volume types only, defaults to respective default iops values for gp3, io1, and io2 volume types)
+    --aws-profile string                              AWS profile to use (defaults to "default")
+    --aws-throughput int                              AWS throughput in MiB/s (for gp3 volume type only, defaults to default throughput value for gp3 volume type)
+    --aws-volume-type string                          AWS volume type (defaults to gp3)
+    --aws-volume-size int                             AWS volume size in GB (defaults to 1000 GB)
+    --chain-config string                             path to the chain configuration for subnet
+    --custom-avalanchego-version string               install given avalanchego version on node/s
+    --custom-subnet bool                              use a custom VM as the subnet virtual machine
+    --custom-vm-branch string                         custom vm branch
+    --custom-vm-build-script string                   custom vm build-script
+    --custom-vm-repo-url string                       custom vm repository url
+    --default-validator-params bool                   use default weight/start/duration params for subnet validator
+    --devnet-api-nodes int                            number of API nodes (nodes without stake) to create in the new Devnet
+    --enable-monitoring bool                          set up Prometheus monitoring for created nodes (defaults to false). Please note that this option creates a separate monitoring instance and incurs additional cost
+    --evm-chain-id uint                               chain ID to use with Subnet-EVM
+    --evm-defaults bool                               use default settings for fees/airdrop/precompiles with Subnet-EVM
+    --evm-subnet bool                                 use Subnet-EVM as the subnet virtual machine
+    --evm-token string                                token name to use with Subnet-EVM
+    --evm-version string                              version of Subnet-EVM to use
+    --force-subnet-create                             overwrite the existing subnet configuration if one exists
+    --gcp bool                                        create node/s in GCP cloud
+    --gcp-credentials string                          use given GCP credentials
+    --gcp-project string                              use given GCP project
+    --grafana-pkg string                              use provided grafana pkg instead of apt repo (default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
+-h, --help                                            help for wiz
+    --latest-avalanchego-pre-release-version bool     install latest avalanchego pre-release version on node/s
+    --latest-avalanchego-version bool                 install latest avalanchego release version on node/s
+    --latest-evm-version bool                         use latest Subnet-EVM released version
+    --latest-pre-released-evm-version bool            use latest Subnet-EVM pre-released version
+    --num-apis strings                                number of API nodes(nodes without stake) to create in the new Devnet
+    --node-config string                              path to avalanchego node configuration for subnet
+    --node-type string                                cloud instance type. Use 'default' to use recommended default instance type
+    --num-validators ints                             number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
+    --relayer bool                                    run AWM relayer when deploying the vm (defaults to false)
+    --region strings                                  create node/s in given region(s). Use comma to separate multiple regions
+    --remote-cli-version string                       install given CLI version on remote nodes. defaults to latest CLI release
+    --ssh-agent-identity string                       use given ssh identity(only for ssh agent). If not set, default will be used.
+    --subnet-config string                            path to the subnet configuration for subnet
+    --subnet-genesis string                           file path of the subnet genesis
+    --teleporter bool                                 generate a teleporter-ready vm (defaults to false)
+    --use-ssh-agent bool                              use ssh agent for ssh
+    --use-static-ip bool                              attach static Public IP on cloud servers (defaults to true)
+    --validators strings                              deploy subnet into given comma separated list of validators (defaults to all cluster nodes)
 ```
 
 ### Node List
