@@ -1,6 +1,6 @@
 ---
-tags: [Nodos]
-description: Esta sección proporciona documentos sobre cómo construir y mantener un nodo AvalancheGo, y luego validar la red Avalanche utilizando un nodo AvalancheGo.
+etiquetas: [Nodos]
+descripción: Esta sección proporciona documentos sobre cómo construir y mantener un nodo AvalancheGo, y luego validar la red Avalanche utilizando un nodo AvalancheGo.
 sidebar_label: Nodo ➡️ Validador
 pagination_label: Agregar un nodo al conjunto de validadores
 sidebar_position: 3
@@ -14,8 +14,8 @@ La [Red Primaria](/learn/avalanche/avalanche-platform.md)
 es inherente a la plataforma Avalanche y valida las blockchains incorporadas en Avalanche.
 En este tutorial, agregaremos un nodo a la Red Primaria en Avalanche.
 
-La P-Chain gestiona metadatos en Avalanche. Esto incluye rastrear qué nodos
-están en qué Subnets, qué blockchains existen y qué Subnets están validando
+La P-Chain gestiona metadatos en Avalanche. Esto incluye hacer un seguimiento de qué nodos
+están en qué Subredes, qué blockchains existen y qué Subredes están validando
 qué blockchains. Para agregar un validador, emitiremos
 [transacciones](http://support.avalabs.org/en/articles/4587384-what-is-a-transaction)
 a la P-Chain.
@@ -23,8 +23,8 @@ a la P-Chain.
 :::warning
 
 Ten en cuenta que una vez que emites la transacción para agregar un nodo como validador, no hay
-forma de cambiar los parámetros. **No puedes eliminar tu participación temprano o cambiar
-la cantidad de participación, el ID del nodo o la dirección de recompensa.** Asegúrate de usar
+forma de cambiar los parámetros. **No puedes quitar tu participación temprano o cambiar
+la cantidad de participación, el ID del nodo, o la dirección de recompensa.** Asegúrate de usar
 los valores correctos en las llamadas de API a continuación. Si no estás seguro, no dudes en unirte
 a nuestro [Discord](https://chat.avalabs.org/) para hacer preguntas.
 
@@ -33,25 +33,25 @@ a nuestro [Discord](https://chat.avalabs.org/) para hacer preguntas.
 ## Requisitos
 
 Has completado [Ejecutar un Nodo Avalanche](/nodes/run/node-manually.md) y estás familiarizado con
-la arquitectura de Avalanche](/learn/avalanche/avalanche-platform.md). En este
+la arquitectura de Avalanche (/learn/avalanche/avalanche-platform.md). En este
 tutorial, usamos [AvalancheJS](/tooling/avalanchejs-overview.md) y
-[la colección de Postman de Avalanche](/tooling/avalanchego-postman-collection/setup.md)
+la [colección de Postman de Avalanche](/tooling/avalanchego-postman-collection/setup.md)
 para ayudarnos a realizar llamadas de API.
 
 Para asegurarte de que tu nodo esté bien conectado, asegúrate de que tu nodo pueda
 recibir y enviar tráfico TCP en el puerto de participación (`9651` de forma predeterminada) y que tu nodo
 tenga una dirección IP pública (es opcional establecer --public-ip=[LA IP PÚBLICA DE TU NODO AQUÍ]
-cuando ejecutes el binario AvalancheGo, ya que de forma predeterminada, el nodo intentará realizar
-traversal NAT para obtener la IP del nodo según su enrutador). No hacer ninguno de
-estos puede poner en peligro tu recompensa de participación.
+al ejecutar el binario AvalancheGo, ya que de forma predeterminada, el nodo intentará realizar
+traversal NAT para obtener la IP del nodo según su enrutador). No hacer ninguna de
+estas cosas puede poner en peligro tu recompensa de participación.
 
 ## Agregar un validador con la extensión Core
 
 Primero, te mostramos cómo agregar tu nodo como validador usando [Core web](https://core.app).
 
-### Obtener el ID del nodo
+### Obtén el ID del nodo, la firma BLS y la clave BLS
 
-Obtén el ID de tu nodo llamando a [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid):
+Obtén esta información llamando a [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid):
 
 ```sh
 curl -X POST --data '{
@@ -61,13 +61,17 @@ curl -X POST --data '{
 }' -H 'content-type:application/json' 127.0.0.1:9650/ext/info
 ```
 
-La respuesta tiene el ID de tu nodo:
+La respuesta tiene el ID de tu nodo, la clave BLS (clave pública) y la firma BLS (prueba de posesión):
 
 ```json
 {
   "jsonrpc": "2.0",
   "result": {
-    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD"
+    "nodeID": "NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD",
+    "nodePOP": {
+      "publicKey": "0x8f95423f7142d00a48e1014a3de8d28907d420dc33b3052a6dee03a3f2941a393c2351e354704ca66a3fc29870282e15",
+      "proofOfPossession": "0x86a3ab4c45cfe31cae34c1d06f212434ac71b1be6cfe046c80c162e057614a94a5bc9f1ded1a7029deb0ba4ca7c9b71411e293438691be79c2dbf19d1ca7c3eadb9c756246fc5de5b7b89511c7d7302ae051d9e03d7991138299b5ed6a570a98"
+    }
   },
   "id": 1
 }
@@ -75,16 +79,14 @@ La respuesta tiene el ID de tu nodo:
 
 ### Agregar como validador
 
-Conecta la [extensión Core](https://join.core.app/extension) a [Core web](https://core.app) y ve a la pestaña 'Staking'.
+Conecta la [extensión Core](https://join.core.app/extension) a [Core web](https://core.app), y ve a la pestaña 'Staking'.
 Aquí, elige 'Validate' en el menú.
 
 Completa los parámetros de participación. Se explican con más detalle en [este documento](/nodes/validate/how-to-stake.md). Cuando hayas
-completado todos los parámetros de participación y los hayas revisado, haz clic en `Submit Validation`. Asegúrate de que el período de participación sea al menos
-2 semanas, la tasa de tarifa de delegación sea al menos 2% y estés participando con
-al menos 2,000 AVAX en Mainnet (1 AVAX en Fuji Testnet). Una guía completa sobre esto se puede encontrar
+completado todos los parámetros de participación y los hayas revisado, haz clic en `Submit Validation`. Asegúrate de que el período de participación sea de al menos
+2 semanas, la tasa de tarifa de delegación sea de al menos 2% y estés poniendo en juego al menos
+2,000 AVAX en Mainnet (1 AVAX en Fuji Testnet). Una guía completa sobre esto se puede encontrar
 [aquí](https://support.avax.network/en/articles/8117267-core-web-how-do-i-validate-in-core-stake).
-
-<iframe src="https://www.youtube.com/embed/1M0LZbuHO5Q?modestbranding=1&rel=0&iv_load_policy=3&color=white" width="800" height="500" title="Cómo validar en Core Web" frameborder="0" allowfullscreen></iframe>
 
 Deberías ver un mensaje de éxito y tu saldo debería actualizarse.
 
@@ -95,13 +97,13 @@ con información como la cantidad de participación, el tiempo de participación
 
 Llamar a
 [`platform.getPendingValidators`](/reference/avalanchego/p-chain/api.md#platformgetpendingvalidators)
-verifica que tu transacción fue aceptada. Ten en cuenta que esta llamada de API debe hacerse
+verifica que tu transacción haya sido aceptada. Ten en cuenta que esta llamada de API debe hacerse
 antes de la hora de inicio de validación de tu nodo, de lo contrario, el retorno no incluirá
 el ID de tu nodo ya que ya no está pendiente.
 
 También puedes llamar a
 [`platform.getCurrentValidators`](/reference/avalanchego/p-chain/api.md#platformgetcurrentvalidators)
-para verificar que el ID de tu nodo esté incluido en la respuesta.
+para comprobar que el ID de tu nodo está incluido en la respuesta.
 
 ¡Eso es todo!
 
@@ -135,322 +137,180 @@ yarn add @avalabs/avalanchejs
 Para este tutorial, usaremos [`ts-node`](https://www.npmjs.com/package/ts-node)
 para ejecutar los scripts de ejemplo directamente desde un directorio AvalancheJS.
 
-### Flujo de trabajo de Fuji
+### Flujo de trabajo en Fuji
 
 En esta sección, usaremos Fuji Testnet para mostrar cómo agregar un nodo al conjunto de validadores.
 
 Abre tu directorio AvalancheJS y selecciona la carpeta
-[**`examples/platformvm`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/platformvm)
+[**`examples/p-chain`**](https://github.com/ava-labs/avalanchejs/tree/master/examples/p-chain)
 para ver el código fuente de los scripts de ejemplo.
 
 Usaremos el script
-[**`buildAddValidatorTx.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/buildAddValidatorTx.ts)
-para agregar un validador. Para obtener más información sobre la API `buildAddValidatorTx`,
-haz clic
-[aquí](https://github.com/ava-labs/avalanchejs-docs/blob/main/classes/api_platformvm.platformvmapi.md#buildaddvalidatortx).
+[**`validate.ts`**](https://github.com/ava-labs/avalanchejs/blob/master/examples/p-chain/validate.ts)
+para agregar un validador.
 
-#### Clave privada
+#### Agregar variables de entorno necesarias
 
-Localiza esta línea en el archivo
+Localiza el archivo `.env.example` en la raíz de AvalancheJS y elimina `.example`
+del título. Ahora, este será el archivo `.env` para las variables globales.
 
-```js
-const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
+Agrega la clave privada y la dirección de la P-Chain asociadas con ella.
+La URL de la API ya está configurada en Fuji (`https://api.avax-test.network/`).
+
+![Variables de entorno](/img/validator-avalanchejs-1.png)
+
+#### Obtener el ID del nodo, la firma BLS y la clave BLS
+
+Obtén esta información llamando a [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid):
+
+```sh
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getNodeID"
+}' -H 'content-type:application/json' 127.0.0.1:9650/ext/info
 ```
 
-y reemplázala con una clave privada que controles. Puedes usar [este código para generar una nueva clave](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts).
+La respuesta tiene el ID de tu nodo, la clave BLS (clave pública) y la firma BLS (prueba de posesión):
 
-```js
-const privKey: string = "<TU-CLAVE-PRIVADA-AQUÍ>";
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "nodeID": "NodeID-JXJNyJXhgXzvVGisLkrDiZvF938zJxnT5",
+    "nodePOP": {
+      "publicKey": "0xb982b485916c1d74e3b749e7ce49730ac0e52d28279ce4c5c989d75a43256d3012e04b1de0561276631ea6c2c8dc4429",
+      "proofOfPossession": "0xb6cdf3927783dba3245565bd9451b0c2a39af2087fdf401956489b42461452ec7639b9082195b7181907177b1ea09a6200a0d32ebbc668d9c1e9156872633cfb7e161fbd0e75943034d28b25ec9d9cdf2edad4aaf010adf804af8f6d0d5440c5"
+    }
+  },
+  "id": 1
+}
 ```
 
-#### Configuración de red
+#### Rellena el ID del nodo, la firma BLS y la clave BLS
 
-La siguiente configuración funciona cuando se usa un nodo local iniciado con
-[`--network-id=fuji`](/nodes/configure/avalanchego-config-flags.md#network-id):
+Después de obtener estos datos, ve a `examples/p-chain/validate.ts`.
 
-```js
-const ip: string = "localhost";
-const port: number = 9650;
-const protocol: string = "http";
-const networkID: number = 5;
-```
+Reemplaza el `nodeID`, `blsPublicKey` y `blsSignature` con los valores de tu propio nodo.
 
-Sin embargo, para conectarse directamente al servidor de la API de la [Avalanche Fuji Testnet](/tooling/rpc-providers.md), se necesitan los siguientes cambios:
+![Valores reemplazados](/img/validator-avalanchejs-2.png)
 
-```js
-const ip: string = "api.avax-test.network";
-const port: number = 443;
-const protocol: string = "https";
-const networkID: number = 5;
-```
 
-Dependiendo del networkID pasado al instanciar un objeto `Avalanche` en el código, las direcciones codificadas utilizadas tendrán una Parte Legible por Humanos (HRP) distintiva por red.
-
-_Ejemplo de dirección: 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h_
-
-Para la Fuji Testnet, 5 es el valor correcto a usar.
-
-<details>
-<summary> Detalles sobre las direcciones Bech32 </summary>
-<p>
-Las cadenas X y P utilizan Bech32 para codificar direcciones. Cabe destacar que la cadena C
-también utiliza Bech32 para codificar direcciones para importar y exportar activos; sin embargo,
-la Máquina Virtual de Ethereum (EVM), en general, utiliza codificación hexadecimal para las direcciones. Ejemplo:
-0x46f3e64E4e3f5a46Eaf5c292301c6174B9B646Bf.
-
-Cada dirección Bech32 está compuesta por los siguientes componentes:
-
-Una Parte Legible por Humanos (HRP por sus siglas en inglés).
-El número 1 es un separador (el último dígito 1 visto se considera el separador).
-Cadena codificada en base-32 para la parte de datos de la dirección (la dirección de 20 bytes en sí).
-Un código de corrección de errores de 6 caracteres codificado en base-32 utilizando el algoritmo BCH.
-Por ejemplo, la siguiente dirección Bech32,
-X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg, está compuesta de la siguiente manera:
-
-HRP: avax
-Separador: 1
-Dirección: 9rknw8l0grnfunjrzwxlxync6zrlu33y
-Suma de comprobación: 2jxhrg
-
-Dependiendo del `networkID`,
-las direcciones codificadas tendrán un HRP distintivo para cada red.
-
-- 0 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
-- 1 - X-`avax`19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
-- 2 - X-`cascade`19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
-- 3 - X-`denali`19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
-- 4 - X-`everest`19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
-- 5 - X-`fuji`19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
-- 1337 - X-`custom`19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
-- 12345 - X-`local`19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
-
-Aquí está el mapeo del networkID al HRP bech32.
-
-```ts
- 0: "custom",
-  1: "avax",
-  2: "cascade",
-  3: "denali",
-  4: "everest",
-  5: "fuji",
-  1337: "custom",
-  12345: "local"
-```
-
-</p>
-</details>
-
-#### Configuración para la Validación
+#### Configuración para la validación
 
 A continuación, necesitamos especificar el período de validación y la tarifa de delegación del nodo.
 
-```ts
-const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg";
-const startTime: BN = UnixNow().add(new BN(60 * 1));
-const endTime: BN = startTime.add(new BN(26300000));
-const delegationFee: number = 10;
+
+#### Período de validación
+
+El período de validación está configurado de forma predeterminada en 21 días, siendo la fecha de inicio la fecha y hora en que se emite la transacción. La fecha de inicio no se puede modificar.
+
+La fecha de finalización se puede ajustar en el código.
+
+Digamos que queremos que el período de validación termine después de 50 días. Puedes lograr esto agregando el número de días deseados a `endTime.getDate()`, en este caso `50`.
+
+``` ts
+// mueve la fecha de finalización 50 días en el futuro
+endTime.setDate(endTime.getDate() + 50);
 ```
 
-#### ID del Nodo
-
-Este es el ID del nodo del validador que se está agregando. Consulta la [sección anterior](#obtener-el-id-del-nodo) sobre cómo obtener el ID del nodo utilizando la API [`info.getNodeID`](/reference/avalanchego/info-api.md#infogetnodeid).
-
-#### Período de Stake
-
-`startTime` y `endTime` son necesarios para especificar el tiempo de inicio/fin de la validación. La duración mínima en la que se puede validar la Red Primaria es de 2 semanas, y la duración máxima es de un año. Se puede iniciar una nueva validación en la Red Primaria después de terminar una, simplemente que la duración máxima _continua_ es de un año. `startTime` y `endTime` son los tiempos Unix en los que tu validador comenzará y dejará de validar la Red Primaria, respectivamente. `startTime` debe estar en el futuro en relación con el momento en que se emite la transacción.
-
-El código de ejemplo usa `const startTime: BN = UnixNow().add(new BN(60 * 1))` y `const endTime: BN = startTime.add(new BN(26300000))` para calcular el tiempo Unix 1 minuto y 304 días en el futuro (en el momento en que se escribió este artículo) para usar como valores de `startTime` y `endTime`, respectivamente.
-
-:::tip
-
-Puedes crear tu propio timestamp Unix [aquí](https://www.unixtimestamp.com/) o utilizando el método `UnixNow()`
-
-:::
-
-Para crear tus propios tiempos de inicio, sigue los pasos a continuación:
-
-Localiza esta línea en el archivo
+Ahora digamos que quieres que el período de staking termine en una fecha y hora específicas, por ejemplo, el 15 de mayo de 2024, a las 11:20 AM. Se puede lograr de la siguiente manera en el código:
 
 ```ts
-const startTime: BN = UnixNow().add(new BN(60 * 1));
-const endTime: BN = startTime.add(new BN(26300000));
+const startTime = await new PVMApi().getTimestamp();
+const startDate = new Date(startTime.timestamp);
+const start = BigInt(startDate.getTime() / 1000);
+
+// Establece la hora de finalización en una fecha y hora específicas
+const endTime = new Date('2024-05-15T11:20:00'); // 15 de mayo de 2024, a las 11:20 AM
+const end = BigInt(endTime.getTime() / 1000);
 ```
 
-Cambia `startTime` y `endTime` por nuevos valores de `BN`, por ejemplo:
+#### Tarifa de delegación
+
+Avalanche permite la delegación de stake. Este parámetro es la tarifa porcentual que cobra este validador cuando otros delegan stake en él. Por ejemplo, si `delegationFeeRate` es `10` y alguien delega a este validador, entonces cuando el período de delegación haya terminado, el 10% de la recompensa va al validador y el resto va al delegador, si este nodo cumple con los requisitos de recompensa de validación.
+
+La tarifa de delegación en AvalancheJS está establecida en `20`. Para cambiar esto, debes proporcionar el porcentaje de tarifa deseado como parámetro a `newAddPermissionlessValidatorTx`, que por defecto es `1e4 * 20`.
+
+Por ejemplo, si quieres que sea `10`, el código actualizado se vería así:
 
 ```ts
-const startTime: BN = new BN(1654656829); // Mié Jun 08 2022 02:53:49 GMT+0000
-const endTime: BN = new BN(1662602029); // Jue Sep 08 2022 01:53:49 GMT+0000
+const tx = newAddPermissionlessValidatorTx(
+    context,
+    utxos,
+    [bech32ToBytes(P_CHAIN_ADDRESS)],
+    nodeID,
+    PrimaryNetworkID.toString(),
+    start,
+    end,
+    BigInt(1e9),
+    [bech32ToBytes(P_CHAIN_ADDRESS)],
+    [bech32ToBytes(P_CHAIN_ADDRESS)],
+    1e4 * 10, // tarifa de delegación, reemplazado 20 con 10
+    undefined,
+    1,
+    0n,
+    blsPublicKey,
+    blsSignature,
+  );
 ```
 
-#### Tarifa de Delegación
 
-Avalanche permite la delegación de stake. Este parámetro es la tarifa porcentual que cobra este validador cuando otros delegan stake en él. Por ejemplo, si la tarifa de delegación es `10` y alguien delega en este validador, entonces cuando el período de delegación haya terminado, el 10% de la recompensa va al validador y el resto va al delegador, si este nodo cumple con los requisitos de recompensa de validación.
+#### Cantidad de stake
 
-#### Cantidad de Stake
+Establece la cantidad que se bloqueará para la validación al llamar a `newAddPermissionlessValidatorTx`, reemplazando `weight` con un número en la unidad de nAVAX. Por ejemplo, `2 AVAX` serían `2e9 nAVAX`.
 
-Establece la cantidad adecuada de stake al llamar a `pchain.buildAddValidatorTx` reemplazando `stakeAmount.minValidatorStake` con un número en la unidad de gwei, por ejemplo, `BN(1e12)` que son 10,000 AVAX.
-
-#### Direcciones
-
-Por defecto, el ejemplo utiliza la variable `pAddressStrings` para definir `toAddresses`, `fromAddresses`, `changeAddresses` y `rewardAddresses`:
-
-```js
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
+``` ts
+  const tx = newAddPermissionlessValidatorTx(
+    context,
+    utxos,
+    [bech32ToBytes(P_CHAIN_ADDRESS)],
+    nodeID,
+    PrimaryNetworkID.toString(),
+    start,
+    end,
+    BigInt(2e9), // la cantidad a staked
+    [bech32ToBytes(P_CHAIN_ADDRESS)],
+    [bech32ToBytes(P_CHAIN_ADDRESS)],
+    1e4 * 10,
+    undefined,
+    1,
+    0n,
+    blsPublicKey,
+    blsSignature,
+  );
 ```
 
-Esto recupera las direcciones de la P-Chain que pertenecen a la `clave privada` que aparece antes en el ejemplo.
-
-No se necesita ningún cambio en las direcciones para la acción predeterminada. Para personalización, consulta [esta sección](#personalización-de-direcciones).
-
-#### Ejecutar el Código
+#### Ejecuta el código
 
 Ahora que hemos realizado todos los cambios necesarios en el script de ejemplo, es hora de agregar un validador a la Red Fuji.
 
 Ejecuta el comando:
 
 ```zsh
-ts-node examples/platformvm/buildAddValidatorTx.ts
+node --loader ts-node/esm examples/p-chain/validate.ts
 ```
 
-La respuesta tiene el ID de transacción.
+La respuesta:
 
 ```zsh
-¡Éxito! TXID: 2ftDVwmss5eJk8HFsNVi6a3vWK9s3szZFhEeSY2HCS8xDb8Cra
+laviniatalpas@Lavinias-MacBook-Pro avalanchejs % node --loader ts-node/esm examples/p-chain/validate.ts
+(node:87616) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+{ txID: 'RVe3CFRieRbBvKXKPu24Zbt1QehdyGVT6X4tPWVBeACPX3Ab8' }
 ```
 
-Podemos verificar el estado de la transacción ejecutando el script de ejemplo: [`getTxStatus.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getTxStatus.ts) siguiendo los pasos a continuación:
+Podemos verificar el estado de la transacción ejecutando el script de ejemplo con [`platform.getTxStatus`](/docs/reference/avalanchego/p-chain/api.md#platformgettxstatus) o buscando el validador directamente en el [explorador](https://subnets-test.avax.network/validators/NodeID-JXJNyJXhgXzvVGisLkrDiZvF938zJxnT5).
 
-1. Asegúrate de que tu [configuración de red](#configuración-de-red) sea correcta antes de ejecutar el script.
+![Validador agregado](/img/validator-avalanchejs-3.png)
 
-2. Localiza esta línea en el archivo
-
-```js
-const main = async (): Promise<any> => {
-  const txID: string = "x1NLb9JaHkKTXvSRReVSsFwQ38mY7bfD1Ky1BPv721VhrpuSE"
-  ...
-  }
-```
-
-y reemplázala con el TXID de _buildAddValidator_
-
-```js
-const main = async (): Promise<any> => {
- const txID: string = "2ftDVwmss5eJk8HFsNVi6a3vWK9s3szZFhEeSY2HCS8xDb8Cra"
- ...
- }
-```
-
-Ejecuta el comando:
-
-```sh
-ts-node examples/platformvm/getTxStatus.ts
-```
-
-Esto devuelve:
-
-```sh
-{ status: 'Committed' }
-```
-
-El estado debería ser `Committed`, lo que significa que la transacción fue exitosa.
-
-Podemos ver si el nodo está ahora en el conjunto de validadores pendientes para la red Fuji utilizando el ejemplo: [`getPendingValidators.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/getPendingValidators.ts). Simplemente cambia la [configuración de red](#configuración-de-red) para cumplir con los requisitos de Fuji y luego ejecuta el script:
-
-```sh
-ts-node examples/platformvm/getPendingValidators.ts
-```
-
-La respuesta debería incluir el nodo que acabamos de agregar:
-
-```json
-{
-  "validators": [
-    {
-      "nodeID": "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
-      "startTime": "1654656829",
-      "endtime": "1662602029",
-      "stakeAmount": "1000000000"
-    }
-  ],
-  "delegators": []
-}
-```
-
-Cuando el tiempo alcance `1654656829` (Mié Jun 08 2022 02:53:49 GMT+0000), este nodo comenzará a validar la Red Primaria. Cuando alcance `1662602029` (Jue Sep 08 2022 01:53:49 GMT+0000), este nodo dejará de validar la Red Primaria. El AVAX con stake y las recompensas, si las hay, se devolverán a `pAddressStrings`.
-
-#### Personalización de Direcciones
-
-Hay 4 direcciones que se necesitan al llamar a `pchain.buildAddValidatorTx`. Solo 2 de ellas se pueden cambiar: `toAddresses` y `rewardAddresses`. Por razones de compatibilidad con versiones anteriores, `fromAddresses` y `changeAddresses` son solo marcadores de posición y se ignoran.
-
-`toAddresses`
-
-Un arreglo de direcciones que reciben los tokens apostados al final del período de apuesta.
-
-`rewardAddresses`
-
-Cuando un validador deja de validar la Red Primaria, recibirá una recompensa si fue suficientemente receptivo y correcto mientras validaba la Red Primaria. Estos tokens se envían a `rewardAddresses`. La apuesta original se enviará de vuelta a las direcciones definidas en `toAddresses`.
-
-La apuesta de un validador nunca se recorta, sin importar su comportamiento, siempre recibirán su apuesta de vuelta cuando terminen de validar.
-
-Localiza esta parte del código
-
-```ts
-let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`;
-pKeychain.importKey(privKey);
-```
-
-y reemplaza `privKey` con las claves privadas que controlas. Para generar un nuevo par de claves, podemos usar el script de ejemplo [`createKeypair.ts`](https://github.com/ava-labs/avalanchejs/blob/master/examples/platformvm/createKeypair.ts) junto con la [Configuración de la Red Fuji](#configuración-de-red).
-
-```ts
-let privKey: string =
-  "PrivateKey-PY2dvfxzvBAe1a5nn7x23wmZMgAYJaS3XAZXzdUa22JtzUvKM";
-pKeychain.importKey(privKey);
-privKey = "PrivateKey-2Y3Vg9LShMJyUDBHzQqv5WtKDJ8yAVHyM3H5CNCBBmtg3pQEQG";
-pKeychain.importKey(privKey);
-privKey = "PrivateKey-NaV16owRSfa5TAtxtoU1BPUoM2y1ohttRbwKJG1j7onE4Ge1s";
-pKeychain.importKey(privKey);
-priKey = "PrivateKey-26JMUsR5RCkf5k9ME8WxKCWEuCK5s2SrALUn7vEa2urwyDDc91";
-pKeychain.importKey(privKey);
-
-const pAddressStrings: string[] = pchain.keyChain().getAddressStrings();
-```
-
-Este ejemplo crearía una cadena de claves con 4 direcciones:
-
-```ts
-  "P-fuji1jx644d9y00y5q4hz8cq4wr75a2erne2y4e32xc", // pAddressStrings[0]
-  "P-fuji1wchdgdp94j8tszlpsp56qvgkvdn20svpmnm8qk", // pAddressStrings[1]
-  "P-fuji1f36kkpy6yzd7ayrywxvvprns7qlrcu3hwqdya8", // pAddressStrings[2]
-  "P-fuji1qw7yt3fp43kuwsufff4vhezs2yl00slr09vmh5", // pAddressStrings[3]
-```
-
-Ahora podemos pasar cada dirección según su posición en el arreglo `pAddressStrings`:
-
-```ts
-const unsignedTx: UnsignedTx = await pchain.buildAddValidatorTx(
-  utxoSet,
-  [pAddressStrings[0], pAddressStrings[1]], // toAddresses, una o más direcciones
-  [pAddressStrings[0]], // fromAddresses, requerido para compatibilidad con versiones anteriores
-  [pAddressStrings[0]], // changeAddresses, requerido para compatibilidad con versiones anteriores
-  nodeID,
-  startTime,
-  endTime,
-  stakeAmount.minValidatorStake,
-  [pAddressStrings[2], pAddressStrings[3]], //rewardAddresses, una o más direcciones
-  delegationFee,
-  locktime,
-  threshold,
-  memo,
-  asOf
-);
-```
 
 ### Flujo de trabajo en Mainnet
 
 El flujo de trabajo en Fuji anterior se puede adaptar a Mainnet con las siguientes modificaciones:
 
-- La clave privada correcta.
-- La configuración de red debe ser para un nodo de Mainnet, ya sea [un nodo local en Mainnet](/nodes/configure/avalanchego-config-flags.md#network-id) o [un servidor de API de Avalanche Mainnet](/tooling/rpc-providers.md#using-the-public-api-nodes) donde se debe usar `api.avax.network` para la `ip`.
-- `const networkID: number = 1`
-- Establecer la cantidad correcta para apostar.
+- `AVAX_PUBLIC_URL` debería ser `https://api.avax.network/`.
+- `P_CHAIN_ADDRESS` debería ser la dirección de la cadena P-Chain en Mainnet.
+- Establece la cantidad correcta para apostar.
+- La `blsPublicKey`, `blsSignature` y `nodeID` deben ser las correspondientes a tu Nodo en Mainnet.
