@@ -272,19 +272,20 @@ Note: on Fuji Testnet, the URL is `https://avalanche-fuji.infura.io/v3/YOUR-API-
 
 ### Moralis
 
-[Moralis](https://moralis.io/?utm_source=avax-docs) currently supports the C-Chain.
+[Moralis](https://moralis.io/?utm_source=avax-docs&utm_medium=partner-docs) currently supports the C-Chain.
 
 #### Mainnet
 
-- [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs) for getting NFT metadata, balances,
+- [Moralis RPC Nodes](https://moralis.io/nodes/?utm_source=avax-docs&utm_medium=partner-docs) for RPC Nodes
+- [NFT API](https://moralis.io/api/nft/?utm_source=avax-docs&utm_medium=partner-docs) for getting NFT metadata, balances,
   transfers, sales and more
-- [Token API](https://moralis.io/api/token/?utm_source=avax-docs) for getting ERC20 metadata, balances,
+- [Token API](https://moralis.io/api/token/?utm_source=avax-docs&utm_medium=partner-docs) for getting ERC20 metadata, balances,
   transfers, prices, burns, mints and more
-- [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs) for getting wallet balances,
+- [Wallet API](https://moralis.io/api/wallet/?utm_source=avax-docs&utm_medium=partner-docs) for getting wallet balances,
   transaction history, net worth and more
-- [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs) for getting data about blocks,
+- [Blockchain API](https://moralis.io/api/block/?utm_source=avax-docs&utm_medium=partner-docs) for getting data about blocks,
   transactions, logs and events
-- [Streams API](https://moralis.io/streams/?utm_source=avax-docs) for getting real-time webhooks about
+- [Streams API](https://moralis.io/streams/?utm_source=avax-docs&utm_medium=partner-docs) for getting real-time webhooks about
   any on-chain event
 
 Features:
@@ -347,16 +348,24 @@ Features:
 - Dedicated access with no limits by request
 - Free starter plan
 - Technical guides
+- 24/7 Support
 
-#### Mainnet
 
 #### RPC
 
-- The URL is `https://avalanche.nownodes.io/your-api-key`
+- Full Node endpoint: `https://avax.nownodes.io`
 
-#### Blockbook
+#### Explorer
 
-- The URL is `https://avax-blockbook.nownodes.io/your-request`
+- The URL is: `https://avax-blockbook.nownodes.io`
+
+#### WSS
+
+- Endpoint is: `https://avax.nownodes.io/wss`
+
+#### Blockbook WSS
+
+- Endpoint is: `https://avax-blockbook.nownodes.io/wss`
 
 ### PublicNode by Allnodes
 
