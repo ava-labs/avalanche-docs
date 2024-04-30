@@ -292,7 +292,7 @@ like this:
 ```text
 All 2 required Tx signatures have been signed. Saving TX to disk to enable commit.
 
-Overwritting partiallySigned.txt
+Overwriting partiallySigned.txt
 
 Tx is fully signed, and ready to be committed
 
@@ -377,7 +377,7 @@ Your subnet auth keys for add validator TX creation: [P-avax1kdzq569g2c9urm9887c
 
 ### Finish Assembling the TX
 
-Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for 
+Take a look at [Add a Validator](/build/subnet/deploy/mainnet-subnet.md#add-a-validator) for
 additional help issuing this transaction.
 
 :::note
@@ -474,7 +474,7 @@ Repeat this processes until all required parties have signed the TX. You should 
 
 All 2 required Tx signatures have been signed. Saving TX to disk to enable commit.
 
-Overwritting partialAddValidatorTx.txt
+Overwriting partialAddValidatorTx.txt
 
 Tx is fully signed, and ready to be committed
 

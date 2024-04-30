@@ -1,6 +1,6 @@
 ---
-tags: [Construir, Subnets, Avalanche-CLI]
-description: Si necesitas enviar fondos a tu clave de control de Subnet o necesitas mover fondos de un índice de dirección Ledger a otro, esta guía demostrará cómo habilitar transferencias directas entre direcciones de la cadena P utilizando el comando Avalanche-CLI `avalanche key transfer`.
+tags: [Construir, Subredes, Avalanche-CLI]
+description: Si necesitas enviar fondos a tu clave de control de Subred o necesitas mover fondos de un índice de dirección Ledger a otro, esta guía demostrará cómo habilitar transferencias directas entre direcciones de la cadena P utilizando el comando Avalanche-CLI `avalanche key transfer`.
 sidebar_label: Transferir Fondos de la Cadena P
 pagination_label: Cómo Usar Avalanche-CLI para Transferir Fondos de la Cadena P
 sidebar_position: 3
@@ -10,12 +10,12 @@ sidebar_position: 3
 
 Transferir fondos entre billeteras de la Cadena P se vuelve necesario en ciertas situaciones:
 
-1. Los fondos necesitan ser enviados a la clave de control de la Subnet, que podría tener un saldo cero debido a pagos de tarifas. La clave de control de la Subnet requiere financiamiento para asegurar un soporte adecuado para las operaciones de la Subnet.
+1. Los fondos necesitan ser enviados a la clave de control de la Subred, que podría tener un saldo cero debido a pagos de tarifas. La clave de control de la Subred requiere financiamiento para asegurar un soporte adecuado para las operaciones de la Subred.
 2. Los fondos necesitan ser movidos de un índice de dirección Ledger a otro. Un Ledger administra una secuencia infinita de direcciones, todas derivadas de una clave privada maestra y puede firmar por cualquiera de esas direcciones. Cada una se denomina por un índice, o la dirección asociada. Avalanche-CLI suele esperar usar el índice 0, pero a veces, los fondos están en un índice diferente. Ocasionalmente, una transferencia hecha a un ledger se puede hacer a una dirección diferente a la que usa por defecto la CLI.
 
-Para habilitar transferencias directas entre direcciones de la Cadena P, usa el comando `avalanche key transfer` de Avalanche-CLI. Esta operación implica una serie de acciones de importación/exportación con la Cadena P y la Cadena X. La tarifa por esta operación es cuatro veces la tarifa típica de operación de importación, lo que equivale a 0.004 AVAX. Puedes encontrar más información sobre las tarifas [aquí](/reference/standards/guides/txn-fees).
+Para habilitar transferencias directas entre direcciones de la Cadena P, usa el comando `avalanche key transfer` de Avalanche-CLI. Esta operación implica una serie de acciones de importación/exportación con la Cadena P y la Cadena X. La tarifa para esta operación es cuatro veces la tarifa típica de operación de importación, lo que equivale a 0.004 AVAX. Puedes encontrar más información sobre las tarifas [aquí](/reference/standards/guides/txn-fees).
 
-:::note
+:::nota
 
 El comando `key transfer` también se puede aplicar a las claves almacenadas gestionadas por la CLI. Permite mover fondos de una clave almacenada a otra, y de un ledger a una clave almacenada o viceversa.
 
@@ -38,7 +38,7 @@ Un ledger puede gestionar una cantidad infinita de direcciones derivadas de una 
 
 Después de confirmar con una billetera web que hay 4.5 AVAX disponibles en la dirección de la cadena p `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0`, conecta el ledger A.
 
-Con la aplicación Avalanche en ejecución, ejecuta:
+Con la aplicación avalanche en ejecución, ejecuta:
 
 ```bash
 avalanche key list --mainnet --ledger 0,1,2,3,4,5
@@ -68,7 +68,7 @@ La dirección `P-avax10an3cucdfqru984pnvv6y0rspvvclz63e523m0` tiene 4.5 AVAX y e
 
 ### Determinar el Índice de la Dirección del Receptor
 
-En este caso, el usuario quiere usar el índice 0, el que la CLI espera contener fondos de forma predeterminada.
+En este caso, el usuario quiere usar el índice 0, el que por defecto la CLI espera que contenga fondos.
 
 Para el comando de transferencia, también es necesario conocer la dirección de la cadena p de destino. Haz lo siguiente para obtenerla:
 
@@ -104,7 +104,7 @@ Luego, inicie el comando:
 avalanche key transfer
 ```
 
-El primer paso es especificar la red. `Mainnet` en este caso:
+El primer paso es especificar la red. En este caso, "Mainnet":
 
 ```text
 Use las teclas de flecha para navegar: ↓ ↑ → ←
@@ -114,7 +114,7 @@ Use las teclas de flecha para navegar: ↓ ↑ → ←
     Red local
 ```
 
-A continuación, se debe especificar el paso de la transferencia. Enviar en este caso:
+A continuación, se debe especificar el paso de la transferencia. En este caso, "Enviar":
 
 ```text
 ? ¿Paso de la transferencia?:
@@ -122,7 +122,7 @@ A continuación, se debe especificar el paso de la transferencia. Enviar en este
     Recibir
 ```
 
-A continuación, se solicita la fuente de clave para la dirección del remitente. Es decir, la clave que va a firmar las transacciones de envío. Seleccione `Usar ledger`:
+A continuación, se solicita la fuente de clave para la dirección del remitente. Es decir, la clave que va a firmar las transacciones de envío. Seleccione "Usar ledger":
 
 ```text
 ? ¿Qué fuente de clave se debe usar para la dirección del remitente?:
@@ -148,7 +148,7 @@ Luego, se requiere la dirección de destino:
 ✗ Dirección del receptor: P-avax1r4aceznjkz8ch4pmpqrmkq4f3sl952mdrdt6xm
 ```
 
-Después de eso, se imprime un mensaje de confirmación. Lea cuidadosamente y elija `Sí`:
+Después de eso, se imprime un mensaje de confirmación. Léalo cuidadosamente y elija "Sí":
 
 ```text
 esta operación va a:
@@ -180,7 +180,7 @@ Luego, inicie el comando:
 avalanche key transfer
 ```
 
-Especifique la red `Mainnet`:
+Especifique la red "Mainnet":
 
 ```text
 Use las teclas de flecha para navegar: ↓ ↑ → ←
@@ -190,7 +190,7 @@ Use las teclas de flecha para navegar: ↓ ↑ → ←
     Red local
 ```
 
-A continuación, se debe especificar el paso de la transferencia. Recibir en este caso:
+A continuación, se debe especificar el paso de la transferencia. En este caso, "Recibir":
 
 ```text
 ? ¿Paso de la transferencia?:
@@ -218,7 +218,7 @@ A continuación, se solicita la cantidad a recibir:
 ✗ Cantidad a enviar (unidades de AVAX): 4.496
 ```
 
-Después de eso, se imprime un mensaje de confirmación. Seleccione `Sí`:
+Después de eso, se imprime un mensaje de confirmación. Seleccione "Sí":
 
 ```text
 esta operación va a:
@@ -238,7 +238,7 @@ Emitiendo ExportTx X -> P
 Emitiendo ImportTx X -> P
 ```
 
-### Verificar los resultados de la operación de transferencia usando `key list`
+### Verificando los resultados de la operación de transferencia usando `key list`
 
 Primero verifique las cuentas del ledger A. Conecte el ledger A y abra la aplicación avalanche:
 
