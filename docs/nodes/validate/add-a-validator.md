@@ -187,6 +187,7 @@ The response has your node’s ID, the BLS key (public key) and the BLS signatur
   "id": 1
 }
 ```
+
 #### Fill in the Node ID, the BLS signature and the BLS key
 
 After retrieving this data, go to `examples/p-chain/validate.ts`.
