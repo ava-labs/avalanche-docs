@@ -86,7 +86,7 @@ Instalador de monitoreo de AvalancheGo
 PASO 1: Instalando Prometheus
 
 Comprobando el entorno...
-Se encontró la arquitectura arm64...
+Se encontró una arquitectura arm64...
 Se encontró el archivo de instalación de Prometheus:
 https://github.com/prometheus/prometheus/releases/download/v2.31.0/prometheus-2.31.0.linux-arm64.tar.gz
 Intentando descargar:
@@ -141,7 +141,7 @@ Ejecuta el script para ejecutar el segundo paso:
 
 Debería producir una salida similar a esta:
 
-````text
+```text
 Instalador de monitoreo de AvalancheGo
 --------------------------------
 PASO 2: Instalando Grafana
@@ -162,16 +162,16 @@ Para asegurarte de que está funcionando correctamente:
 
 ```text
 sudo systemctl status grafana-server
-````
+```
 
-lo cual debería mostrar nuevamente a Grafana como `activo`. Grafana ahora debería estar disponible en
+lo cual debería mostrar Grafana como `activo`. Grafana ahora debería estar disponible en
 `http://tu-dirección-ip-del-nodo:3000/` desde tu navegador. Inicia sesión con nombre de usuario: admin,
 contraseña: admin, y se te pedirá que configures una nueva contraseña segura. Haz
 eso.
 
 :::warning
 
-Es posible que necesites hacer `sudo ufw allow 3000/tcp` si el firewall está activado y/o
+Es posible que necesites hacer `sudo ufw allow 3000/tcp` si el firewall está activado, y/o
 ajustar la configuración de la instancia en la nube para permitir conexiones al puerto 3000. Si estás en
 internet público, ¡asegúrate de permitir solo que tu IP se conecte!
 
@@ -213,7 +213,7 @@ Nuevamente, verificamos que el servicio se esté ejecutando correctamente:
 sudo systemctl status node_exporter
 ```
 
-Si el servicio está en ejecución, Prometheus, Grafana y `node_exporter` deberían funcionar todos
+Si el servicio está en ejecución, Prometheus, Grafana y `node_exporter` deberían funcionar
 juntos ahora. Para verificarlo, en tu navegador visita la interfaz web de Prometheus en
 `http://tu-dirección-ip-del-nodo:9090/targets`. Deberías ver tres objetivos habilitados:
 
@@ -282,8 +282,8 @@ Selecciona 'Avalanche Main Dashboard' haciendo clic en su título. Debería carg
 
 ![Panel de control principal](/img/monitoring-02-main-dashboard.png)
 
-Algunas gráficas pueden tardar un poco en llenarse por completo, ya que necesitan una serie de
-puntos de datos para renderizarse correctamente.
+Algunos gráficos pueden tardar un poco en llenarse por completo, ya que necesitan una serie de
+puntos de datos para renderizar correctamente.
 
 Puedes marcar el panel de control principal como favorito, ya que muestra la información más importante
 sobre el nodo de un vistazo. Cada panel de control tiene un enlace a todos los demás como la
@@ -330,7 +330,7 @@ Después de editar los valores, presiona "Actualizar" y luego haz clic en el bot
 
 ## Actualización
 
-Las métricas disponibles del nodo se actualizan constantemente, se agregan nuevas y se eliminan las obsoletas, por lo que es buena práctica actualizar los paneles de control de vez en cuando, especialmente si notas datos faltantes en los paneles. Actualizar los paneles de control es fácil, simplemente ejecuta el script sin argumentos y actualizará los paneles de control con las versiones más recientes disponibles. Permítele hasta 30 segundos para que los paneles de control se actualicen en Grafana.
+Las métricas disponibles del nodo se actualizan constantemente, se agregan nuevas y se eliminan las obsoletas, por lo que es una buena práctica actualizar los paneles de control de vez en cuando, especialmente si notas datos faltantes en los paneles. Actualizar los paneles de control es fácil, simplemente ejecuta el script sin argumentos y actualizará los paneles de control con las versiones más recientes disponibles. Permítele hasta 30 segundos para que los paneles de control se actualicen en Grafana.
 
 Si agregaste los paneles de control opcionales adicionales (paso 5), también se actualizarán.
 
