@@ -53,7 +53,7 @@ Let's go through several examples with the full command (with flags) provided.
 
 For example, to spin up a Devnet with 5 validator nodes and 1 API node in 5 regions each 
 (us-west-2,us-east-1,ap-south-1,ap-northeast-1,eu-west-1) in AWS with each node having spec of 
-c7g.8xlarge AWS EC2 instance type and io2 volume type, with an existing Subnet <subnetName> deployed 
+c7g.8xlarge AWS EC2 instance type and io2 volume type, with Subnet `<subnetName>` deployed 
 into the Devnet, we will run :
 
 ```shell
@@ -103,8 +103,8 @@ The following settings will be used:
 
 To spin up a Devnet with 5 validator nodes and 1 API node in 5 regions each
 (us-west-2,us-east-1,ap-south-1,ap-northeast-1,eu-west-1) in AWS with each node having spec of
-c7g.8xlarge AWS EC2 instance type and io2 volume type, with the Custom VM based Subnet <subnetName> 
-deployed into the Devnet, we will run :
+c7g.8xlarge AWS EC2 instance type and io2 volume type, with the Custom VM based Subnet 
+`<subnetName>` deployed into the Devnet, we will run :
 
 ```shell
 avalanche node devnet wiz <clusterName> <subnetName> --custom-subnet \
