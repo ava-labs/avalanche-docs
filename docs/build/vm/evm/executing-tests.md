@@ -59,7 +59,7 @@ Note: it's important that this has the same name as the HardHat test file we cre
     }
   },
   "nonce": "0x0",
-  "timestamp": "0x0",
+  "timestamp": "0x66321C34",
   "extraData": "0x00",
   "gasLimit": "0x1312D00",
   "difficulty": "0x0",
@@ -71,7 +71,7 @@ Note: it's important that this has the same name as the HardHat test file we cre
 }
 ```
 
-Adding this to our genesis enables our HelloWorld precompile at the very first block (timestamp 0), with
+Adding this to our genesis enables our HelloWorld precompile at the genesis block (0th block), with
 `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` as the admin address.
 
 ```json

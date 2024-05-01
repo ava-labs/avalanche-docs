@@ -44,8 +44,6 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
   "config": {
     "chainId": 43214,
     "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
     "eip155Block": 0,
     "eip158Block": 0,
     "byzantiumBlock": 0,
@@ -71,7 +69,7 @@ The default genesis Subnet-EVM provided below has some well defined parameters:
     }
   },
   "nonce": "0x0",
-  "timestamp": "0x0",
+  "timestamp": "0x66321C34",
   "extraData": "0x00",
   "gasLimit": "0xe4e1c0",
   "difficulty": "0x0",
@@ -94,7 +92,7 @@ You can use `eth_getChainConfig` RPC call to get the current chain config. See
 
 #### Hard Forks
 
-`homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`,
+`homesteadBlock`, `eip150Block`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`,
 `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock` are EVM hard fork activation
 times. Changing these may cause issues, so treat them carefully.
 
@@ -177,7 +175,9 @@ cryptographically mined, thus, from this aspect, is valid. Default value is `0x0
 `difficulty`: The difficulty level applied during the nonce discovering process of this block.
 Default value is `0x0`.
 
-`timestamp`: The timestamp of the creation of the genesis block. This is commonly set to `0x0`.
+`timestamp`: The hexadecimal Unix timestamp of the creation of the genesis block. `0x66321C34` represents
+the timestamp 1714560052 which is the time this tutorial was written. Providing timestamps affect the activation of
+upgrades and precompiles in genesis block. It's recommended to set this to the current time.
 
 `extraData`: Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
 
