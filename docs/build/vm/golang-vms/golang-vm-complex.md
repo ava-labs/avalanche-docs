@@ -1,6 +1,6 @@
 ---
 tags: [Build, Virtual Machines]
-description: Learn how to build a complex virtual machine on Avalanche using Golang. 
+description: Learn how to build a complex virtual machine on Avalanche using Golang.
 sidebar_label: Complex Golang VM
 pagination_label: Build a Complex Golang VM
 sidebar_position: 2
@@ -297,7 +297,7 @@ func (t *Transaction) Execute(g *Genesis, db database.Database, blk *StatelessBl
 	}
 	if !context.RecentBlockIDs.Contains(t.GetBlockID()) {
 		// Hash must be recent to be any good
-		// Should not happen beause of mempool cleanup
+		// Should not happen because of mempool cleanup
 		return ErrInvalidBlockID
 	}
 	if context.RecentTxIDs.Contains(t.ID()) {

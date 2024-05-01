@@ -79,10 +79,10 @@ Network ready to use.
 
 Deploying Blockchain. Wait until network acknowledges...
 
-Teleporter Messenger successfully deployed to c-chain (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
+Teleporter Messenger successfully deployed to c-chain (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
 Teleporter Registry successfully deployed to c-chain (0x17aB05351fC94a1a67Bf3f56DdbB941aE6c63E25)
 
-Teleporter Messenger successfully deployed to <subnet1> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
+Teleporter Messenger successfully deployed to <subnet1> (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
 Teleporter Registry successfully deployed to <subnet1> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
 
 Using latest awm-relayer version (v1.1.0)
@@ -133,7 +133,7 @@ Deploying Blockchain. Wait until network acknowledges...
 
 Teleporter Messenger has already been deployed to c-chain
 
-Teleporter Messenger successfully deployed to <subnet2> (0xF7cBd95f1355f0d8d659864b92e2e9fbfaB786f7)
+Teleporter Messenger successfully deployed to <subnet2> (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
 Teleporter Registry successfully deployed to <subnet2> (0x9EDc4cB4E781413b1b82CC3A92a60131FC111F58)
 
 Using latest awm-relayer version (v1.1.0)

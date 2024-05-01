@@ -714,7 +714,7 @@ To whitelist a node as a recognized validator on the Subnet, run:
 avalanche subnet addValidator testsubnet
 ```
 
-As this operation involves another transaction, you will need to specify
+As this operation involves a new transaction, you will need to specify
 which private key to use:
 
 ```bash

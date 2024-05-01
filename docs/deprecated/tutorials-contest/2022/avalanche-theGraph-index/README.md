@@ -216,7 +216,7 @@ experiencing with this account.
 
 I have a [GitHub
 Tutorial](https://github.com/FibrinLab/Avalanche-Local-Environment-Setup) that
-explains how to setup your local development environmet including `MetaMask`.
+explains how to setup your local development environment including `MetaMask`.
 
 Lastly don't forget to stop the running local network
 
@@ -259,7 +259,7 @@ compiler version and makes use of it to compile your contract.
 
 ![remix2](./images/24.png "remix2")
 
-`Always make sure to confirm the Environmet Chain ID is the same as that of your selected MetaMask account`.
+`Always make sure to confirm the environment Chain ID is the same as that of your selected MetaMask account`.
 
 With this all set go ahead and deploy your smart contract on your local Subnet
 by clicking the `deploy` button. Approve the MetaMask request and pay the
