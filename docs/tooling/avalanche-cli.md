@@ -1002,7 +1002,7 @@ The `node list` command lists all clusters together with their nodes.
 -h, --help   help for list
 ```
 
-### Node Loadtest Start
+### Node Load Test Start
 
 :::warning
 
@@ -1042,7 +1042,7 @@ The command will then run the load test binary based on the provided load test r
       --use-ssh-agent bool              use ssh agent(ex: Yubikey) for ssh auth
 ```
 
-### Node Loadtest Stop
+### Node Load Test Stop
 
 :::warning
 

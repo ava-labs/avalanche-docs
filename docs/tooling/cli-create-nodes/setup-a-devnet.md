@@ -33,6 +33,7 @@ cloud providers, such as GCP.
 ## Choose a Deployment Method
 
 Setting up a Devnet consists of:
+
 - Creating a cluster of cloud servers
 - Deploying a Subnet into the cluster
 - Adding the cloud servers as validator nodes in the Subnet
