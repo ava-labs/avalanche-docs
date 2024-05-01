@@ -109,7 +109,7 @@ Open a text editor and copy the preceding text into a file called `custom_genesi
 :::note
 
 The `timestamp` field is the Unix timestamp of the genesis block. `0x66321C34` represents
-the timestamp 1714560052 which is the time this tutorial was written. You can use the current
+the timestamp 1714560052 which is the time this tutorial was written. You can use the
 timestamp when you create your genesis file.
 
 :::
