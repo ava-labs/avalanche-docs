@@ -92,7 +92,7 @@ You can use `eth_getChainConfig` RPC call to get the current chain config. See
 
 #### Hard Forks
 
-`homesteadBlock`, `eip150Block`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`,
+`homesteadBlock`, `eip150Block`, `eip155Block`, `eip158Block`, `byzantiumBlock`, `constantinopleBlock`,
 `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock` are EVM hard fork activation
 times. Changing these may cause issues, so treat them carefully.
 
