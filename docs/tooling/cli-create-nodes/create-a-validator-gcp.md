@@ -29,9 +29,9 @@ Before we begin, you will need to:
 - Enable Compute Engine API [here](https://console.cloud.google.com/apis/api/compute.googleapis.com)
 - Download the key json for the automatically created service account as shown [here](https://cloud.google.com/iam/docs/keys-create-delete#creating)
 
-## Start the Validator
+## Create Validator
 
-To start Avalanche validators, run:
+To create Avalanche validators, run:
 
 ```shell
 avalanche node create <clusterName>
@@ -67,9 +67,7 @@ Which Google Region do you want to set up your node(s) in?:
     Choose custom Google Region (list of Google Regions available at https://cloud.google.com/compute/docs/regions-zones/)
 ```
 
-The command will next ask whether you want to set up monitoring for your nodes. If you choose to
-set up monitoring, you can either set up monitoring on a separate GCP instance or on the same
-instance.
+The command will next ask whether you want to set up monitoring for your nodes. 
 
 ```text
   Do you want to set up a separate instance to host monitoring? (This enables you to monitor all your set up instances in one dashboard): 
@@ -80,6 +78,7 @@ instance.
 Setting up monitoring on a separate GCP instance enables you to have a unified Grafana dashboard
 for all nodes in a cluster, as seen below:
 
+![Centralized Logs](/img/centralized-logs.png)
 ![Main Dashboard](/img/monitoring-dashboard.png)
 
 The separate monitoring GCP instance will have similar specs to the default GCP cloud server, 
@@ -112,6 +111,12 @@ Please note that Avalanche CLI can be configured to use `ssh-agent` for ssh acce
 key. Please use official Yubikey documentation, for example [https://developers.yubico.com/PGP/SSH_authentication/] for more details.
 
 ## Check Bootstrap Status
+
+:::note
+
+Ignore for Devnet
+
+:::
 
 Please note that you will have to wait until the nodes have finished bootstrapping before the 
 nodes can be Primary Network or Subnet Validators. To check whether all the nodes in a cluster

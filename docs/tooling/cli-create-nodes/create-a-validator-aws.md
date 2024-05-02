@@ -29,9 +29,9 @@ Before we begin, you will need to:
   set. More info can be found [here](https://docs.aws.amazon.com/sdkref/latest/guide/file-format.html#file-format-creds)
 
 
-## Start the Validator
+## Create Validators
 
-To start Avalanche validators, run:
+To create Avalanche validators, run:
 
 ```shell
 avalanche node create <clusterName>
@@ -68,9 +68,7 @@ The command will ask which region you want to set up your cloud server in:
     Choose custom region (list of regions available at https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
 ```
 
-The command will next ask whether you want to set up monitoring for your nodes. If you choose to
-set up monitoring, you can either set up monitoring on a separate AWS instance or on the same 
-instance.
+The command will next ask whether you want to set up monitoring for your nodes. 
 
 ```text
   Do you want to set up a separate instance to host monitoring? (This enables you to monitor all your set up instances in one dashboard): 
@@ -78,9 +76,10 @@ instance.
     No
 ```
 
-Setting up monitoring on a separate AWS instance enables you to have a unified Grafana dashboard
-for all nodes in a cluster, as seen below:
+Setting up monitoring on a separate AWS instance enables you to have a centralized Grafana logs and 
+dashboard for all nodes in a cluster, as seen below:
 
+![Centralized Logs](/img/centralized-logs.png)
 ![Main Dashboard](/img/monitoring-dashboard.png)
 
 The separate monitoring AWS instance will have similar specs to the default AWS cloud server, 
@@ -107,13 +106,19 @@ By the end of successful run of `create` command, Avalanche-CLI would have:
   Back up this private key file as you will not be able to ssh into the cloud server node without it (unless `ssh-agent` is used).
 - Downloaded `staker.crt` and `staker.key` files to your local `.avalanche-cli` directory so that
   you can back up your node. More info about node backup can be found [here](/nodes/maintain/node-backup-and-restore.md)
-- Started the process of bootstrapping your new Avalanche node to the Primary Network
+- Started the process of bootstrapping your new Avalanche node to the Primary Network (for non-Devnet only).
 
 Please note that Avalanche CLI can be configured to use `ssh-agent` for ssh communication. In this case public key will 
 be read from there and cloud server will be accessible using it. Yubikey hardware can be also used to store private ssh 
 key. Please use official Yubikey documentation, for example [https://developers.yubico.com/PGP/SSH_authentication/] for more details.
 
 ## Check Bootstrap Status
+
+:::note
+
+Ignore for Devnet
+
+:::
 
 Please note that you will have to wait until the nodes have finished bootstrapping before the
 nodes can be Primary Network or Subnet Validators. To check whether all the nodes in a cluster
