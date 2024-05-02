@@ -1,9 +1,9 @@
 ---
 tags: [Tooling, Avalanche-CLI]
-description: This page demonstrates how to setup a Devnet of cloud-based validators using the Avalanche-CLI.
-pagination_label: Setup a Devnet of Cloud-Based validators using Avalanche-CLI
-sidebar_label: Setup a Devnet
-sidebar_position: 2
+description: This page demonstrates how to run load test on a Subnet deployed on a cluster of cloud-based validators using Avalanche-CLI.
+pagination_label: Run Load Test using Avalanche-CLI
+sidebar_label: Run Load Test
+sidebar_position: 3
 ---
 
 # Run Load Test With Avalanche-CLI
