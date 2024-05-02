@@ -10,7 +10,7 @@ sidebar_position: 2
 
 This page demonstrates how to set up a Devnet of cloud-based validators using Avalanche-CLI.
 
-Devnets (Developer Networks) are isolated avalanche networks deployed on the cloud. Similar to local networks
+Devnets (Developer Networks) are isolated Avalanche networks deployed on the cloud. Similar to local networks
 in terms of configuration and usage but installed on remote nodes.
 
 Think of Devnets as being an intermediate step in the developer testing process after local network and before Fuji network.
