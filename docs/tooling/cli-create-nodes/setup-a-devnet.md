@@ -30,7 +30,7 @@ Before we begin, you will need to have:
 Note: the tutorial uses AWS hosts, but Devnets can also be created and operated in other supported
 cloud providers, such as GCP.
 
-## Choose a Deployment Method
+## Setting up a Devnet
 
 Setting up a Devnet consists of:
 
