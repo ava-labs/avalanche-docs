@@ -52,7 +52,7 @@ Grafana URL like the example below:
 
 ## Stop Load Test
 
-To stop the load test process on the load test instance <loadtestName> and terminate the load test
+To stop the load test process on the load test instance `<loadtestName>` and terminate the load test
 instance, run:
 
 ```shell
