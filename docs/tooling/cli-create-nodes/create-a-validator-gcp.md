@@ -97,6 +97,9 @@ node IDs as well as the public IP that each node can be reached at.
 
 Avalanche-CLI also outputs the command that you can use to ssh into each cloud server node.
 
+Finally, if monitoring is set up, Avalanche-CLI will also output the Grafana link where the
+centralized dashboards and logs can be accessed.
+
 By the end of successful run of `create` command, Avalanche-CLI would have:
 
 - Installed Avalanche Go in cloud server
