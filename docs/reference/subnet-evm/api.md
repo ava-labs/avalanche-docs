@@ -211,7 +211,7 @@ timestamp is provided it returns the latest block timestamp. This API is enabled
 eth_getActiveRulesAt([timestamp uint]) -> {rules: json}
 ```
 
-- `timestamp` specifies the timestamp to show the rukes active at this time. If omitted it
+- `timestamp` specifies the timestamp to show the rules active at this time. If omitted it
   shows rules activated at the latest block timestamp.
 
 **Example Call:**
