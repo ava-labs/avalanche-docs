@@ -9,7 +9,7 @@ sidebar_position: 3
 # Configure a Node to Validate a Subnet with Avalanche-CLI
 
 This page demonstrates how to configure nodes to validate an Avalanche Subnet.
-Validation via Avalanche-CLI is currently only supported on Fuji.
+Subnet Validation via Avalanche-CLI is currently only supported on Fuji and Devnet.
 
 :::warning
 
@@ -24,11 +24,11 @@ Before we begin, you will need to have:
 - Created a Cloud Server node as described for [AWS](/tooling/cli-create-nodes/create-a-validator-aws.md)
   or [GCP](/tooling/cli-create-nodes/create-a-validator-gcp.md)
 - A node bootstrapped to the Primary Network (run `avalanche node status <clusterName>` to check
-  bootstrap status)
-- Deployed a Subnet on Fuji through CLI as described [here](/build/subnet/deploy/fuji-testnet-subnet)
+  bootstrap status) (Ignore for Devnet)
+- Deployed a Subnet on [Fuji](/build/subnet/deploy/fuji-testnet-subnet) or Devnet
 - Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network
   and Subnet Validator transactions. Instructions on how to fund stored key on Fuji can be found
-  [here](/build/subnet/deploy/fuji-testnet-subnet.md#funding-the-key)
+  [here](/build/subnet/deploy/fuji-testnet-subnet.md#funding-the-key) (Ignore for Devnet)
 
 ## Sync with Subnet
 
@@ -61,8 +61,8 @@ To have the nodes be Subnet Validators, run:
 avalanche node validate subnet <clusterName> <subnetName>
 ```
 
-If any of the nodes is not yet a Primary Network Validator, we will first add it as a Primary
-Network Validator.
+For Fuji Only: If any of the nodes is not yet a Primary Network Validator, we will first add it as 
+a Primary Network Validator.
 
 The wizard will ask us how we want to pay for the transaction fees.
 Choose `Use stored key` for Fuji:
@@ -97,8 +97,6 @@ a Primary Network Validator.
 Note: if you see an error indicating that the transaction is not committed, run
 `avalanche node validate subnet <clusterName> <subnetName>` again as it could be due to
 the validator start time having elapsed.
-
-Next, we will wait for 20 seconds for the node to officially start as a Primary Network Validator.
 
 We will then proceed with adding the node as a Subnet Validator. Similar to adding the node as a
 Primary Network Validator, the wizard will ask you for how you would like to pay for the transaction

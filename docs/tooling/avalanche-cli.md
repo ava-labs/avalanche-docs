@@ -964,9 +964,7 @@ The `node import` command imports cluster configuration and its nodes configurat
 created from the `node export` command.
 
 Prior to calling this command, call `node whitelist` command to have your SSH public key and IP whitelisted by
-the cluster owner.  
-
-The `node import` command enables you to use `avalanche-cli` commands to manage the imported cluster.
+the cluster owner. This will enable you to use `avalanche-cli` commands to manage the imported cluster.
 
 Please note, that this imported cluster will be considered as EXTERNAL by `avalanche-cli`, so some commands
 affecting cloud nodes like `node create` or `node destroy` will be not applicable to it.
@@ -1002,6 +1000,72 @@ The `node list` command lists all clusters together with their nodes.
 
 ```shell
 -h, --help   help for list
+```
+
+### Node Load Test Start
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+For Devnet Only. 
+
+The `node loadtest start` command starts load testing for an existing devnet cluster. If the cluster does
+not have an existing load test host, the command creates a separate cloud server and builds the load
+test binary based on the provided load test Git Repo URL and load test binary build command.
+
+The command will then run the load test binary based on the provided load test run command.
+
+**Usage:**
+
+```shell
+  avalanche node loadtest start [loadtestName] [clusterName] [subnetName] [flags]
+```
+
+**Flags:**
+
+```shell
+      --authorize-access bool           authorize CLI to create cloud resources
+      --aws bool                        create loadtest node in AWS cloud
+      --aws-profile string              aws profile to use
+      --gcp bool                        create loadtest node in GCP cloud
+  -h, --help                            help for loadtest start
+      --load-test-branch string         load test branch or commit
+      --load-test-build-cmd string      command to build load test binary
+      --load-test-cmd string            command to run load test
+      --load-test-repo string           load test repo url to use
+      --node-type string                cloud instance type for loadtest script
+      --region string                   create load test node in a given region
+      --ssh-agent-identity string       use given ssh identity(only for ssh agent). If not set, default will be used
+      --use-ssh-agent bool              use ssh agent(ex: Yubikey) for ssh auth
+```
+
+### Node Load Test Stop
+
+:::warning
+
+(ALPHA Warning) This command is currently in experimental mode.
+
+:::
+
+For Devnet Only. 
+
+The `node loadtest stop` command stops load testing for an existing devnet cluster and terminates the
+separate cloud server created to host the load test.
+
+**Usage:**
+
+```shell
+  avalanche node loadtest stop [clusterName] [flags]
+```
+
+**Flags:**
+
+```shell
+  -h, --help                 help for loadtest stop
+      --load-test string     stop specified load test node(s). Use comma to separate multiple load test instance names
 ```
 
 ### Node Resize

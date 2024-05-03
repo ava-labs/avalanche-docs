@@ -16,7 +16,7 @@ típicamente en la misma versión que la Avalanche Mainnet, pero a veces está
 ejecutando una versión no lanzada de AvalancheGo. En general, puedes esperar que el comportamiento de Fuji sea más o menos el mismo que el de Avalanche Mainnet. Herramientas como exploradores
 y billeteras deberían funcionar con la Testnet Fuji.
 
-En este tutorial, repasaremos un ejemplo de flujo de trabajo de Fuji para mostrar cómo se puede usar. Haremos lo siguiente:
+En este tutorial, pasaremos por un ejemplo de flujo de trabajo de Fuji para mostrar cómo se puede usar. Haremos lo siguiente:
 
 1. Configurar la red Fuji en Core (opcional)
 2. Generar una mnemónica de 24 palabras en inglés a través de AvalancheJS
@@ -181,9 +181,7 @@ Alternativamente, podemos usar [ethersJS](https://docs.ethers.io/v5/) para obten
 
 ```typescript
 const ethers = require("ethers");
-const network = "https://api.avax-test.network/ext/bc/C/rpc";
-const provider = ethers.getDefaultProvider(network);
-const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
+	@@ -187,10 +167,10 @@ const address = "0x25d83F090D842c1b4645c1EFA46B15093d4CaC7C";
 
 const main = async (): Promise<any> => {
   provider.getBalance(address).then((balance) => {
@@ -193,8 +191,6 @@ const main = async (): Promise<any> => {
     // balance: 0.02 AVAX
   });
 };
-
-main();
 ```
 
 ### Iniciar sesión en la Extensión Core
@@ -204,7 +200,7 @@ Veremos que tiene el saldo de AVAX y que deriva la dirección hexadecimal de la 
 
 Usa la clave privada para acceder a la cuenta en la Extensión Core.
 
-![Accede a la billetera](/img/fuji-wf-alt-enter-key.png)
+![Acceder a la billetera](/img/fuji-wf-alt-enter-key.png)
 
 El saldo es correcto y la dirección es la primera dirección derivada.
 
@@ -226,12 +222,12 @@ Para recursos adicionales y valiosos, consulta a continuación.
 
 ### Grifo
 
-El [Fuji Faucet](https://faucet.avax.network) envía AVAX a direcciones de la cadena X o la cadena C para ayudarte a probar. (Este AVAX de la red de pruebas no tiene valor.)
+El [Fuji Faucet](https://faucet.avax.network) envía AVAX a direcciones de la cadena X o de la cadena C para ayudarte a probar. (Este AVAX de la red de pruebas no tiene valor.)
 
 ### Billetera
 
 La [extensión Core](https://join.core.app/extension) y la [versión móvil Core](https://support.avax.network/en/articles/6115608-core-mobile-where-can-i-download-core-mobile-to-my-phone) son billeteras simples, seguras y no custodiales para almacenar activos Avalanche. 
-Admiten Mainnet, Fuji y redes personalizadas.
+Soportan Mainnet, Fuji y redes personalizadas.
 
 ### Explorador
 
@@ -240,7 +236,3 @@ El Avalanche Explorer te permite explorar la red en [Mainnet](https://explorer.a
 ### Puntos finales RPC - Servidor de API pública
 
 Ver [aquí](/tooling/rpc-providers.md).
-
-### Ejemplos de AvalancheJS
-
-Hay más de [60 ejemplos de scripts AvalancheJS](https://github.com/ava-labs/avalanchejs/tree/master/examples) que demuestran cómo gestionar activos y NFT, enviar transacciones, agregar validadores y más.
