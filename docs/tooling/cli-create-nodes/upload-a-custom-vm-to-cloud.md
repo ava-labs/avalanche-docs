@@ -24,12 +24,11 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 
 Before we begin, you will need to have:
 
-- Created a Cloud Server node as described [here](/tooling/cli-create-nodes/create-a-validator-aws.md)
+- Created a cloud server node as described [here](/tooling/cli-create-nodes/create-a-validator-aws.md)
 - Created a Custom VM, as described [here](/build/vm/intro.md).
-- Set up a key to be able to pay for the Fuji Fees, as described [here](/build/subnet/deploy/fuji-testnet-subnet.md).
+- (Ignore for Devnet) Set up a key to be able to pay for transaction Fees, as described [here](/build/subnet/deploy/fuji-testnet-subnet.md).
 
-Currently, we only support AWS cloud services, but we plan to add support for more cloud
-services in the near future.
+Currently, only AWS & GCP cloud services are supported.
 
 ## Deploying the VM
 
@@ -135,9 +134,9 @@ Cloning into ...
 Successfully created subnet configuration
 ```
 
-## Deploy Subnet on Fuji
+## Deploy Subnet 
 
-To deploy the Subnet and blockchain on Fuji, run:
+For this example, we will deploy the Subnet and blockchain on Fuji. Run:
 
 ```shell
 avalanche subnet deploy <subnetName>
