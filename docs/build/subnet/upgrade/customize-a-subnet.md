@@ -175,8 +175,7 @@ cryptographically mined, thus, from this aspect, is valid. Default value is `0x0
 `difficulty`: The difficulty level applied during the nonce discovering process of this block.
 Default value is `0x0`.
 
-`timestamp`: The hexadecimal Unix timestamp of the creation of the genesis block. `0x66321C34` represents
-the timestamp 1714560052 which is the time this tutorial was written. Providing timestamps affect the activation of
+`timestamp`: The hexadecimal Unix timestamp of the creation of the genesis block. `0x66321C34` represents the timestamp 1714560052 which is the time this tutorial was written. Providing timestamps affect the activation of
 upgrades and precompiles in genesis block. It's recommended to set this to the time of the genesis block creation.
 
 `extraData`: Optional extra data that can be included in the genesis block. This is commonly set to `0x`.
