@@ -26,6 +26,7 @@ ALPHA WARNING: This command is currently in experimental mode. Proceed at your o
 Before we begin, you will need to have:
 
 - Created an AWS account and have an updated AWS `credentials` file in home directory with [default] profile
+  or set up your GCP account according to [here](/tooling/cli-create-nodes/create-a-validator-gcp.md#prerequisites)
 
 Note: the tutorial uses AWS hosts, but Devnets can also be created and operated in other supported
 cloud providers, such as GCP.

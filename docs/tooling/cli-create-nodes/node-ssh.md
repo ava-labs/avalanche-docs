@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to execute a SSH command on all nodes of a Cluster using the Avalanche-CLI.
 pagination_label: Execute a SSH command on all nodes of a Cluster.
 sidebar_label: Execute a SSH command on a Cluster
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Execute a SSH command on a Cluster
