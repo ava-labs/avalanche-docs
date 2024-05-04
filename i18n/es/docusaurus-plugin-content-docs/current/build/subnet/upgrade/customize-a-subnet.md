@@ -44,8 +44,6 @@ La Subnet-EVM de genesis predeterminada proporcionada a continuación tiene algu
   "config": {
     "chainId": 43214,
     "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
     "eip155Block": 0,
     "eip158Block": 0,
     "byzantiumBlock": 0,
@@ -71,7 +69,7 @@ La Subnet-EVM de genesis predeterminada proporcionada a continuación tiene algu
     }
   },
   "nonce": "0x0",
-  "timestamp": "0x0",
+  "timestamp": "0x66321C34",
   "extraData": "0x00",
   "gasLimit": "0xe4e1c0",
   "difficulty": "0x0",
@@ -94,7 +92,7 @@ Puedes usar la llamada RPC `eth_getChainConfig` para obtener la configuración d
 
 #### Hard Forks
 
-`homesteadBlock`, `eip150Block`, `eip150Hash`, `eip155Block`, `byzantiumBlock`, `constantinopleBlock`,
+`homesteadBlock`, `eip150Block`, `eip155Block`, `eip158Block`, `byzantiumBlock`, `constantinopleBlock`,
 `petersburgBlock`, `istanbulBlock`, `muirGlacierBlock` son tiempos de activación de hard fork de EVM.
 Cambiar estos valores puede causar problemas, así que trátalos con cuidado.
 
@@ -175,7 +173,8 @@ minado criptográficamente, por lo tanto, desde este aspecto, es válido. El val
 `difficulty`: El nivel de dificultad aplicado durante el proceso de descubrimiento de nonce de este bloque.
 El valor predeterminado es `0x0`.
 
-`timestamp`: La marca de tiempo de la creación del bloque génesis. Comúnmente se establece en `0x0`.
+`timestamp`: La marca de tiempo hexadecimal Unix de la creación del bloque de génesis. `0x66321C34` representa la marca de tiempo 1714560052, que es la hora en que se escribió este tutorial. Proporcionar marcas de tiempo afecta la activación de
+actualizaciones y precompilaciones en el bloque génesis. Se recomienda establecer esto en el momento de la creación del bloque de génesis.
 
 `extraData`: Datos extra opcionales que se pueden incluir en el bloque génesis. Comúnmente se establece en `0x`.
 

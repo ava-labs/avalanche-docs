@@ -57,7 +57,7 @@ Nota: es importante que este archivo tenga el mismo nombre que el archivo de pru
     }
   },
   "nonce": "0x0",
-  "timestamp": "0x0",
+  "timestamp": "0x66321C34",
   "extraData": "0x00",
   "gasLimit": "0x1312D00",
   "difficulty": "0x0",
@@ -69,7 +69,8 @@ Nota: es importante que este archivo tenga el mismo nombre que el archivo de pru
 }
 ```
 
-Al agregar esto a nuestro génesis, habilitamos nuestro precompilado HelloWorld en el primer bloque (timestamp 0), con `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` como dirección de administrador.
+Agregar esto a nuestra génesis habilita nuestra precompilación HelloWorld en el bloque génesis (bloque 0), con
+`0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` como dirección de administrador.
 
 ```json
 {

@@ -198,3 +198,79 @@ curl -X POST --data '{
   }
 }
 ```
+
+## `eth_getActiveRulesAt`
+
+`eth_getActiveRulesAt` returns activated rules (precompiles, upgrades) at a specific timestamp. If no
+timestamp is provided it returns the latest block timestamp. This API is enabled by default with
+`internal-blockchain` namespace.
+
+**Signature:**
+
+```sh
+eth_getActiveRulesAt([timestamp uint]) -> {rules: json}
+```
+
+- `timestamp` specifies the timestamp to show the rules active at this time. If omitted it
+  shows rules activated at the latest block timestamp.
+
+**Example Call:**
+
+```sh
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getActiveRulesAt",
+    "params": [],
+    "id": 1
+}'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/Nvqcm33CX2XABS62iZsAcVUkavfnzp1Sc5k413wn5Nrf7Qjt7/rpc
+```
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "ChainID": 99999,
+    "IsHomestead": true,
+    "IsEIP150": true,
+    "IsEIP155": true,
+    "IsEIP158": true,
+    "IsByzantium": true,
+    "IsConstantinople": true,
+    "IsPetersburg": true,
+    "IsIstanbul": true,
+    "IsCancun": true,
+    "IsSubnetEVM": true,
+    "IsDurango": true,
+    "IsEUpgrade": true,
+    "ActivePrecompiles": {
+      "0x0200000000000000000000000000000000000003": {
+        "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+        "blockTimestamp": 0
+      },
+      "0x0200000000000000000000000000000000000004": {
+        "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
+        "blockTimestamp": 1712918700
+      },
+      "0x0200000000000000000000000000000000000005": {
+        "blockTimestamp": 1714158045,
+        "quorumNumerator": 0
+      }
+    },
+    "Predicaters": {
+      "0x0200000000000000000000000000000000000005": {
+        "blockTimestamp": 1714158045,
+        "quorumNumerator": 0
+      }
+    },
+    "AccepterPrecompiles": {
+      "0x0200000000000000000000000000000000000005": {
+        "blockTimestamp": 1714158045,
+        "quorumNumerator": 0
+      }
+    }
+  }
+}
+```
