@@ -70,13 +70,7 @@ compatible con tu VM personalizada.
 ```json
 {
   "config": {
-    "byzantiumBlock": 0,
     "chainId": 12345,
-    "constantinopleBlock": 0,
-    "eip150Block": 0,
-    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
-    "eip155Block": 0,
-    "eip158Block": 0,
     "feeConfig": {
       "gasLimit": 15000000,
       "targetBlockRate": 2,
@@ -86,14 +80,10 @@ compatible con tu VM personalizada.
       "minBlockGasCost": 0,
       "maxBlockGasCost": 1000000,
       "blockGasCostStep": 200000
-    },
-    "homesteadBlock": 0,
-    "istanbulBlock": 0,
-    "muirGlacierBlock": 0,
-    "petersburgBlock": 0
+    }
   },
   "nonce": "0x0",
-  "timestamp": "0x0",
+  "timestamp": "0x66321C34",
   "extraData": "0x",
   "gasLimit": "0xe4e1c0",
   "difficulty": "0x0",
@@ -113,7 +103,16 @@ compatible con tu VM personalizada.
 }
 ```
 
-Abre un editor de texto y copia el texto anterior en un archivo llamado `custom_genesis.json`.
+Abre un editor de texto y copia el texto anterior en un archivo llamado `custom_genesis.json`. Para obtener un desglose completo del archivo génesis, consulte el
+[Archivo Génesis](/build/subnet/upgrade/customize-a-subnet.md#genesis).
+
+:::note
+
+El campo "marca de tiempo" es la marca de tiempo Unix del bloque de génesis. `0x66321C34` representa
+la marca de tiempo 1714560052, que es la hora en que se escribió este tutorial. Deberías usar el
+marca de tiempo cuando crea su archivo génesis.
+
+:::
 
 ## Crear la Configuración de la Subnet
 
