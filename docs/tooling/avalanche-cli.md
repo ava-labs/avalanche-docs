@@ -227,9 +227,11 @@ avalanche subnet create [subnetName] [flags]
 -h, --help                            help for create
     --latest                          use latest Subnet-EVM released version, takes precedence over --vm-version
     --pre-release                     use latest Subnet-EVM pre-released version, takes precedence over --vm-version
+    --relayer                         run AWM relayer when deploying the vm
     --teleporter                      generate a teleporter-ready vm (default true)
     --vm string                       file path of custom vm to use. alias to custom-vm-path
     --vm-version string               version of Subnet-EVM template to use
+    --warp                            generate a vm with warp support (needed for teleporter)
 ```
 
 ### Subnet Delete
