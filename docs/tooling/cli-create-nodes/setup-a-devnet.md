@@ -89,14 +89,14 @@ Devnet <clusterName> has been created and is validating subnet <subnetName>!
 
 ### Create a Devnet and Deploy a Custom VM based Subnet into the Devnet
 
-For this example, we will be using the custom VM [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
+For this example, we will be using the custom VM [MorpheusVM](https://github.com/ava-labs/hypersdk/tree/main/examples/morpheusvm)
 built with [HyperSDK](https://github.com/ava-labs/hypersdk).
 
 The following settings will be used:
 
 - `<repoUrl>` `https://github.com/ava-labs/hypersdk/`
-- `<branch>` `main`
-- `<buildScript>` `examples/tokenvm/scripts/build.sh`
+- `<branch>` `vryx-poc`
+- `<buildScript>` `examples/morpheusvm/scripts/build.sh`
 - `<genesisPath>` [Genesis File](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud#genesis-file)
 - `<chainConfigPath>` [Blockchain Config](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud#blockchain-config)
 - `<subnetConfigPath>` [Subnet Config](/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud#subnet-config)
