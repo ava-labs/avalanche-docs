@@ -32,14 +32,14 @@ Currently, only AWS & GCP cloud services are supported.
 
 ## Deploying the VM
 
-We will be deploying the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
+We will be deploying the [MorpheusVM](https://github.com/ava-labs/hypersdk/tree/main/examples/morpheusvm)
 example built with the HyperSDK.
 
 The following settings will be used:
 
 - Repo url: `https://github.com/ava-labs/hypersdk/`
-- Branch Name: `main`
-- Build Script: `examples/tokenvm/scripts/build.sh`
+- Branch Name: `vryx-poc`
+- Build Script: `examples/morpheusvm/scripts/build.sh`
 
 :::note
 The CLI needs a public repo url in order to be able to download and install the custom VM on cloud.
@@ -48,38 +48,45 @@ The CLI needs a public repo url in order to be able to download and install the 
 ### Genesis File
 
 The following contents will serve as the chain genesis. They were generated using
-`token-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/scripts/run.sh).
+`morpheus-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/main/examples/morpheusvm/scripts/run.sh).
 
-Save it into a file with path `<genesisPath>` (for example `~/tokenvm_genesis.json`):
+Save it into a file with path `<genesisPath>` (for example `~/morpheusvm_genesis.json`):
 
 ```json
 {
-  "hrp": "token",
-  "minBlockGap": 100,
-  "minEmptyBlockGap": 2500,
-  "minUnitPrice": [100, 100, 100, 100, 100],
-  "unitPriceChangeDenominator": [48, 48, 48, 48, 48],
-  "windowTargetUnits": [40000000, 450000, 450000, 450000, 450000],
-  "maxBlockUnits": [1800000, 15000, 15000, 2500, 15000],
-  "validityWindow": 60000,
-  "baseUnits": 1,
-  "baseWarpUnits": 1024,
-  "warpUnitsPerSigner": 128,
-  "outgoingWarpComputeUnits": 1024,
-  "coldStorageKeyReadUnits": 5,
-  "coldStorageValueReadUnits": 2,
-  "warmStorageKeyReadUnits": 1,
-  "warmStorageValueReadUnits": 1,
-  "storageKeyCreateUnits": 20,
-  "storageKeyValueUnits": 5,
-  "coldStorageKeyModificationUnits": 10,
-  "coldStorageValueModificationUnits": 3,
-  "warmStorageKeyModificationUnits": 5,
-  "warmStorageValueModificationUnits": 3,
+  "stateBranchFactor":16,
+  "minBlockGap":1000,
+  "minUnitPrice":[1,1,1,1,1],
+  "maxChunkUnits":[1800000,18446744073709551615,18446744073709551615,18446744073709551615,18446744073709551615],
+  "epochDuration":60000,
+  "validityWindow":59000,
+  "partitions":8,
+  "baseUnits":1,
+  "baseWarpUnits":1024,
+  "warpUnitsPerSigner":128,
+  "outgoingWarpComputeUnits":1024,
+  "storageKeyReadUnits":5,
+  "storageValueReadUnits":2,
+  "storageKeyAllocateUnits":20,
+  "storageValueAllocateUnits":5,
+  "storageKeyWriteUnits":10,
+  "storageValueWriteUnits":3,
   "customAllocation": [
     {
-      "address": "token1rvzhmceq997zntgvravfagsks6w0ryud3rylh4cdvayry0dl97nsjzf3yp",
-      "balance": 10000000000000000000
+      "address":"morpheus1qrzvk4zlwj9zsacqgtufx7zvapd3quufqpxk5rsdd4633m4wz2fdjk97rwu",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qryyvfut6td0l2vwn8jwae0pmmev7eqxs2vw0fxpd2c4lr37jj7wvrj4vc3",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qp52zjc3ul85309xn9stldfpwkseuth5ytdluyl7c5mvsv7a4fc76g6c4w4",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qzqjp943t0tudpw06jnvakdc0y8w790tzk7suc92aehjw0epvj93s0uzasn",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qz97wx3vl3upjuquvkulp56nk20l3jumm3y4yva7v6nlz5rf8ukty8fh27r",
+      "balance":3000000000000000000
     }
   ]
 }
