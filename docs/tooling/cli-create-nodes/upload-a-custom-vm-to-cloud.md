@@ -32,14 +32,14 @@ Currently, only AWS & GCP cloud services are supported.
 
 ## Deploying the VM
 
-We will be deploying the [TokenVM](https://github.com/ava-labs/hypersdk/tree/main/examples/tokenvm)
+We will be deploying the [MorpheusVM](https://github.com/ava-labs/hypersdk/tree/main/examples/morpheusvm)
 example built with the HyperSDK.
 
 The following settings will be used:
 
 - Repo url: `https://github.com/ava-labs/hypersdk/`
-- Branch Name: `main`
-- Build Script: `examples/tokenvm/scripts/build.sh`
+- Branch Name: `vryx-poc`
+- Build Script: `examples/morpheusvm/scripts/build.sh`
 
 :::note
 The CLI needs a public repo url in order to be able to download and install the custom VM on cloud.
@@ -48,38 +48,45 @@ The CLI needs a public repo url in order to be able to download and install the 
 ### Genesis File
 
 The following contents will serve as the chain genesis. They were generated using
-`token-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/scripts/run.sh).
+`morpheus-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/main/examples/morpheusvm/scripts/run.sh).
 
-Save it into a file with path `<genesisPath>` (for example `~/tokenvm_genesis.json`):
+Save it into a file with path `<genesisPath>` (for example `~/morpheusvm_genesis.json`):
 
 ```json
 {
-  "hrp": "token",
-  "minBlockGap": 100,
-  "minEmptyBlockGap": 2500,
-  "minUnitPrice": [100, 100, 100, 100, 100],
-  "unitPriceChangeDenominator": [48, 48, 48, 48, 48],
-  "windowTargetUnits": [40000000, 450000, 450000, 450000, 450000],
-  "maxBlockUnits": [1800000, 15000, 15000, 2500, 15000],
-  "validityWindow": 60000,
-  "baseUnits": 1,
-  "baseWarpUnits": 1024,
-  "warpUnitsPerSigner": 128,
-  "outgoingWarpComputeUnits": 1024,
-  "coldStorageKeyReadUnits": 5,
-  "coldStorageValueReadUnits": 2,
-  "warmStorageKeyReadUnits": 1,
-  "warmStorageValueReadUnits": 1,
-  "storageKeyCreateUnits": 20,
-  "storageKeyValueUnits": 5,
-  "coldStorageKeyModificationUnits": 10,
-  "coldStorageValueModificationUnits": 3,
-  "warmStorageKeyModificationUnits": 5,
-  "warmStorageValueModificationUnits": 3,
+  "stateBranchFactor":16,
+  "minBlockGap":1000,
+  "minUnitPrice":[1,1,1,1,1],
+  "maxChunkUnits":[1800000,18446744073709551615,18446744073709551615,18446744073709551615,18446744073709551615],
+  "epochDuration":60000,
+  "validityWindow":59000,
+  "partitions":8,
+  "baseUnits":1,
+  "baseWarpUnits":1024,
+  "warpUnitsPerSigner":128,
+  "outgoingWarpComputeUnits":1024,
+  "storageKeyReadUnits":5,
+  "storageValueReadUnits":2,
+  "storageKeyAllocateUnits":20,
+  "storageValueAllocateUnits":5,
+  "storageKeyWriteUnits":10,
+  "storageValueWriteUnits":3,
   "customAllocation": [
     {
-      "address": "token1rvzhmceq997zntgvravfagsks6w0ryud3rylh4cdvayry0dl97nsjzf3yp",
-      "balance": 10000000000000000000
+      "address":"morpheus1qrzvk4zlwj9zsacqgtufx7zvapd3quufqpxk5rsdd4633m4wz2fdjk97rwu",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qryyvfut6td0l2vwn8jwae0pmmev7eqxs2vw0fxpd2c4lr37jj7wvrj4vc3",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qp52zjc3ul85309xn9stldfpwkseuth5ytdluyl7c5mvsv7a4fc76g6c4w4",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qzqjp943t0tudpw06jnvakdc0y8w790tzk7suc92aehjw0epvj93s0uzasn",
+      "balance":3000000000000000000
+    },
+    {"address":"morpheus1qz97wx3vl3upjuquvkulp56nk20l3jumm3y4yva7v6nlz5rf8ukty8fh27r",
+      "balance":3000000000000000000
     }
   ]
 }
@@ -123,7 +130,7 @@ Set the branch:
 Finally set the build script:
 
 ```text
-✗ Build script: examples/tokenvm/scripts/build.sh
+✗ Build script: examples/morpheusvm/scripts/build.sh
 ```
 
 CLI will generate a locally compiled binary, and then create the Subnet.
@@ -217,28 +224,36 @@ The following example uses all of them, but the user can decide to provide a sub
 
 ### AvalancheGo Flags
 
-Save the following content (as defined [here](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/tests/e2e/e2e_test.go))
-into a file with path `<avagoFlagsPath>` (for example `~/tokenvm_avago.json`):
+Save the following content (as defined [here](https://github.com/ava-labs/hypersdk/blob/vryx-poc/examples/morpheusvm/tests/e2e/e2e_test.go))
+into a file with path `<avagoFlagsPath>` (for example `~/morpheusvm_avago.json`):
 
 ```json
 {
-  "log-display-level": "info",
-  "proposervm-use-current-height": true,
-  "throttler-inbound-validator-alloc-size": "10737418240",
-  "throttler-inbound-at-large-alloc-size": "10737418240",
-  "throttler-inbound-node-max-processing-msgs": "100000",
-  "throttler-inbound-bandwidth-refill-rate": "1073741824",
-  "throttler-inbound-bandwidth-max-burst-size": "1073741824",
-  "throttler-inbound-cpu-validator-alloc": "100000",
-  "throttler-inbound-disk-validator-alloc": "10737418240000",
-  "throttler-outbound-validator-alloc-size": "10737418240",
-  "throttler-outbound-at-large-alloc-size": "10737418240",
-  "consensus-on-accept-gossip-validator-size": "10",
-  "consensus-on-accept-gossip-peer-size": "10",
-  "network-compression-type": "zstd",
-  "consensus-app-concurrency": "512",
-  "profile-continuous-enabled": false,
-  "profile-continuous-freq": "1m"
+  "log-level":"INFO",
+  "log-display-level":"INFO",
+  "proposervm-use-current-height":true,
+  "throttler-inbound-validator-alloc-size":"10737418240",
+  "throttler-inbound-at-large-alloc-size":"10737418240",
+  "throttler-inbound-node-max-processing-msgs":"1000000",
+  "throttler-inbound-node-max-at-large-bytes":"10737418240",
+  "throttler-inbound-bandwidth-refill-rate":"1073741824",
+  "throttler-inbound-bandwidth-max-burst-size":"1073741824",
+  "throttler-inbound-cpu-validator-alloc":"100000",
+  "throttler-inbound-cpu-max-non-validator-usage":"100000",
+  "throttler-inbound-cpu-max-non-validator-node-usage":"100000",
+  "throttler-inbound-disk-validator-alloc":"10737418240000",
+  "throttler-outbound-validator-alloc-size":"10737418240",
+  "throttler-outbound-at-large-alloc-size":"10737418240",
+  "throttler-outbound-node-max-at-large-bytes":"10737418240",
+  "consensus-on-accept-gossip-validator-size":"10",
+  "consensus-on-accept-gossip-peer-size":"10",
+  "network-compression-type":"zstd",
+  "consensus-app-concurrency":"128",
+  "profile-continuous-enabled":true,
+  "profile-continuous-freq":"1m",
+  "http-host":"",
+  "http-allowed-origins": "*",
+  "http-allowed-hosts": "*"
 }
 ```
 
@@ -277,24 +292,31 @@ File ~/.avalanche-cli/subnets/subnetName/node-config.json successfully written
 
 ### Blockchain Config
 
-`token-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/scripts/run.sh).
-Save the following content (generated by this [script](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/scripts/run.sh))
-in a known file path (for example `~/tokenvm_chain.json`):
+`morpheus-cli` as shown [here](https://github.com/ava-labs/hypersdk/blob/vryx-poc/examples/morpheusvm/scripts/run.sh).
+Save the following content (generated by this [script](https://github.com/ava-labs/hypersdk/blob/vryx-poc/examples/morpheusvm/scripts/run.sh))
+in a known file path (for example `~/morpheusvm_chain.json`):
 
 ```json
 {
-  "mempoolSize": 10000000,
-  "mempoolPayerSize": 10000000,
-  "mempoolExemptPayers": [
-    "token1rvzhmceq997zntgvravfagsks6w0ryud3rylh4cdvayry0dl97nsjzf3yp"
-  ],
-  "parallelism": 5,
-  "verifySignatures": true,
-  "storeTransactions": false,
+  "chunkBuildFrequency": 250,
+  "targetChunkBuildDuration": 250,
+  "blockBuildFrequency": 100,
+  "mempoolSize": 2147483648,
+  "mempoolSponsorSize": 10000000,
+  "authExecutionCores": 16,
+  "precheckCores": 16,
+  "actionExecutionCores": 8,
+  "missingChunkFetchers": 48,
+  "verifyAuth": true,
+  "authRPCCores": 48,
+  "authRPCBacklog": 10000000,
+  "authGossipCores": 16,
+  "authGossipBacklog": 10000000,
+  "chunkStorageCores": 16,
+  "chunkStorageBacklog": 10000000,
   "streamingBacklogSize": 10000000,
-  "trackedPairs": ["*"],
-  "logLevel": "info",
-  "stateSyncServerDelay": 0
+  "continuousProfilerDir":"/home/ubuntu/morpheusvm-profiles",
+  "logLevel": "INFO"
 }
 ```
 
@@ -318,7 +340,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 Provide the path to the blockchain config file:
 
 ```text
-✗ Enter the path to your configuration file: ~/tokenvm_chain.json
+✗ Enter the path to your configuration file: ~/morpheusvm_chain.json
 ```
 
 Finally choose no:
@@ -333,13 +355,13 @@ File ~/.avalanche-cli/subnets/subnetName/chain.json successfully written
 
 ### Subnet Config
 
-Save the following content (generated by this [script](https://github.com/ava-labs/hypersdk/blob/main/examples/tokenvm/scripts/run.sh))
-in a known path (for example `~/tokenvm_subnet.json`):
+Save the following content (generated by this [script](https://github.com/ava-labs/hypersdk/blob/vryx-poc/examples/morpheusvm/scripts/run.sh))
+in a known path (for example `~/morpheusvm_subnet.json`):
 
 ```json
 {
   "proposerMinBlockDelay": 0,
-  "proposerNumHistoricalBlocks": 768
+  "proposerNumHistoricalBlocks": 512
 }
 ```
 
@@ -363,7 +385,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 Provide the path to the Subnet config file:
 
 ```text
-✗ Enter the path to your configuration file: ~/tokenvm_subnet.json
+✗ Enter the path to your configuration file: ~/morpheusvm_subnet.json
 ```
 
 Choose no:
@@ -379,7 +401,7 @@ File ~/.avalanche-cli/subnets/subnetName/subnet.json successfully written
 ### Network Upgrades
 
 Save the following content (currently with no network upgrades) in a known path
-(for example `~/tokenvm_upgrades.json`):
+(for example `~/morpheusvm_upgrades.json`):
 
 ```json
 {}
@@ -394,7 +416,7 @@ avalanche subnet upgrade import subnetName
 Provide the path to the network upgrades file:
 
 ```text
-✗ Provide the path to the upgrade file to import: ~/tokenvm_upgrades.json
+✗ Provide the path to the upgrade file to import: ~/morpheusvm_upgrades.json
 ```
 
 ## Deploy Our Custom VM
