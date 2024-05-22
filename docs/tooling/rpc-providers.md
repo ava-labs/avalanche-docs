@@ -105,6 +105,41 @@ project.
 
 :::
 
+### Allnodes
+
+[Allnodes](https://avalanche.publicnode.com) supports the C-Chain, X-Chain, and P-Chain.
+
+Features:
+
+- Free
+- Privacy oriented
+- Globally distributed infrastructure on Allnodes
+- Optimized for speed and reliability - check our page for stats
+
+#### Mainnet
+
+##### HTTP
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche-c-chain-rpc.publicnode.com`
+- For X-Chain RPC Endpoint, the URL is `https://avalanche-x-chain-rpc.publicnode.com`
+- For P-Chain RPC Endpoint, the URL is `https://avalanche-p-chain-rpc.publicnode.com`
+
+##### Websockets
+
+- For C-Chain WSS Endpoint, the URL is `wss://avalanche-c-chain-rpc.publicnode.com`
+
+#### Testnet (Fuji)
+
+##### HTTP
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche-fuji-c-chain-rpc.publicnode.com`
+- For X-Chain RPC Endpoint, the URL is `https://avalanche-fuji-x-chain-rpc.publicnode.com`
+- For P-Chain RPC Endpoint, the URL is `https://avalanche-fuji-p-chain-rpc.publicnode.com`
+
+##### Websockets
+
+- For C-Chain WSS Endpoint, the URL is `wss://avalanche-fuji-c-chain-rpc.publicnode.com`
+
 ### ANKR
 
 #### Mainnet
@@ -366,21 +401,6 @@ Features:
 #### Blockbook WSS
 
 - Endpoint is: `https://avax-blockbook.nownodes.io/wss`
-
-### PublicNode by Allnodes
-
-[PublicNode](https://avalanche.publicnode.com) supports the C-Chain on the Mainnet.
-
-Features:
-
-- Free
-- Privacy oriented
-- Globally distributed infrastructure on Allnodes
-- Optimized for speed and reliability - check our page for stats
-
-#### Mainnet
-
-- For C-Chain API, the URL is `https://avalanche-c-chain.publicnode.com`
 
 ### 1RPC
 
