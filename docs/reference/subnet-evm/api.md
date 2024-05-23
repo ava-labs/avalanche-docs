@@ -152,6 +152,8 @@ curl -X POST --data '{
 
 ## `eth_getActivePrecompilesAt`
 
+**DEPRECATED—instead use** [`eth_getActiveRulesAt`](#eth_getactiveprecompilesat).
+
 `eth_getActivePrecompilesAt` returns activated precompiles at a specific timestamp. If no
 timestamp is provided it returns the latest block timestamp. This API is enabled by default with
 `internal-blockchain` namespace.
@@ -232,43 +234,31 @@ curl -X POST --data '{
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "ChainID": 99999,
-    "IsHomestead": true,
-    "IsEIP150": true,
-    "IsEIP155": true,
-    "IsEIP158": true,
-    "IsByzantium": true,
-    "IsConstantinople": true,
-    "IsPetersburg": true,
-    "IsIstanbul": true,
-    "IsCancun": true,
-    "IsSubnetEVM": true,
-    "IsDurango": true,
-    "IsEUpgrade": true,
-    "ActivePrecompiles": {
-      "0x0200000000000000000000000000000000000003": {
-        "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-        "blockTimestamp": 0
-      },
-      "0x0200000000000000000000000000000000000004": {
-        "adminAddresses": ["0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc"],
-        "blockTimestamp": 1712918700
-      },
-      "0x0200000000000000000000000000000000000005": {
-        "blockTimestamp": 1714158045,
-        "quorumNumerator": 0
-      }
+    "ethRules": {
+      "IsHomestead": true,
+      "IsEIP150": true,
+      "IsEIP155": true,
+      "IsEIP158": true,
+      "IsByzantium": true,
+      "IsConstantinople": true,
+      "IsPetersburg": true,
+      "IsIstanbul": true,
+      "IsCancun": true
     },
-    "Predicaters": {
-      "0x0200000000000000000000000000000000000005": {
-        "blockTimestamp": 1714158045,
-        "quorumNumerator": 0
-      }
+    "avalancheRules": {
+      "IsSubnetEVM": true,
+      "IsDurango": true,
+      "IsEUpgrade": true
     },
-    "AccepterPrecompiles": {
-      "0x0200000000000000000000000000000000000005": {
-        "blockTimestamp": 1714158045,
-        "quorumNumerator": 0
+    "precompiles": {
+      "contractNativeMinterConfig": {
+        "timestamp": 0
+      },
+      "rewardManagerConfig": {
+        "timestamp": 1712918700
+      },
+      "warpConfig": {
+        "timestamp": 1714158045
       }
     }
   }
