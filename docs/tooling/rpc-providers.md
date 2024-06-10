@@ -195,14 +195,6 @@ Note: soft limited to 1 million daily requests per IP or referring domain. Batch
 
 - For C-Chain WSS Endpoint, the URL is `wss://ava-testnet.public.blastapi.io/ext/bc/C/ws`
 
-### BlockSpaces
-
-[BlockSpaces](https://www.blockspaces.com/web3-infrastructure) supports the C-Chain.
-
-#### HTTP
-
-- For C-Chain RPC Endpoint AVAX, the URL is `https://web3endpoints.com/avax-mainnet`
-
 ### Chainstack
 
 [Chainstack](https://chainstack.com/build-better-with-avalanche/) supports the
@@ -296,7 +288,7 @@ Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc
 
 ### Infura
 
-[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network) currently
+[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/) currently
 only supports the C-Chain.
 
 #### HTTP
