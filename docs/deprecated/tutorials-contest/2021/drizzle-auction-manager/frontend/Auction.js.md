@@ -21,7 +21,7 @@ function Auction() {
     });
     const [auctionAnalyticsCacheKey, setAuctionAnalyticsCacheKey] = useState(null);
 
-    // Setting up cache calls for requried functions
+    // Setting up cache calls for required functions
     const cacheCalls = {
         isRegistered: subscriber?.isRegistered[cacheKeys?.isRegistered]?.value,
         user: subscriber?.users[cacheKeys?.uId]?.value,
