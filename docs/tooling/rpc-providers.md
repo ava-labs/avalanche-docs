@@ -148,13 +148,9 @@ Features:
 
 - 50,000 requests per day with free tier
 - Support for over 40 blockchains
-  
 <!-- vale off -->
-
 - JSON-RPC (EVM, Tendermint), REST, and WebSocket APIs supported
-
 <!-- vale on -->
-
 - Unlimited access to archive data
 - 24/7 technical support with over 99.9% uptime
 - Faucet available on multiple chains
