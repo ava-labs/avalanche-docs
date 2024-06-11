@@ -140,6 +140,46 @@ Features:
 
 - For C-Chain WSS Endpoint, the URL is `wss://avalanche-fuji-c-chain-rpc.publicnode.com`
 
+### All That Nodes
+
+[All That Node](https://www.allthatnode.com/avalanche.dsrv) supports the C-Chain.
+
+Features:
+
+- 50,000 requests per day with free tier
+- Support for over 40 blockchains
+  
+<!-- vale off -->
+
+- JSON-RPC (EVM, Tendermint), REST, and WebSocket APIs supported
+
+<!-- vale on -->
+
+- Unlimited access to archive data
+- 24/7 technical support with over 99.9% uptime
+- Faucet available on multiple chains
+- Unlimited endpoint access with an unlimited number of API keys
+- Trace/Debug API supported
+- Automated updates
+
+#### Mainnet
+
+##### HTTP
+
+<!-- vale off -->
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche-mainnet.g.allthatnode.com/full/evm`
+- For C-Chain RPC Endppoint,the URL is 'https://avalanche-mainnet.g.allthatnode.com/archive/evm'
+
+<!-- vale on -->
+  
+#### Testnet (Fuji)
+
+##### HTTP
+
+- For C-Chain RPC Endpoint, the URL is `https://avalanche-fuji.g.allthatnode.com/full/evm`
+- For C-Chain RPC Endpoint, the URL is `https://avalanche-fuji.g.allthatnode.com/archive/evm`
+
 ### ANKR
 
 #### Mainnet
