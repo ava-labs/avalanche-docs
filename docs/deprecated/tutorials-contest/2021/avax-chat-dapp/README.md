@@ -541,7 +541,7 @@ export function App( props ) {
 		}
     }
 
-    // Sends messsage to an user 
+    // Sends message to an user 
     async function sendMessage( data ) {
         if( !( activeChat && activeChat.publicKey ) ) return;
         const recieverAddress = activeChat.publicKey;

@@ -711,7 +711,7 @@ Output:
 
 ```zsh
 Transferring ownership of ProxyAdmin...
-✔ 0x1189D8E94cAD398612cc4638f80B18d421e74a31 (transparent) proxy ownership transfered through admin proxy
+✔ 0x1189D8E94cAD398612cc4638f80B18d421e74a31 (transparent) proxy ownership transferred through admin proxy
 Transferred ownership of ProxyAdmin to: 0xCA2922E98339C359D818b8f7ad3c897C0e18a7ff
 ```
 
