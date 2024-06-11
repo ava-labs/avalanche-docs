@@ -107,7 +107,7 @@ enum Status { Accepted, Rejected, Pending }
 ```
 
 For the other proposal properties we can use an `struct` type.  
-`Structs` alow us to define a custom group of properties. **[see more about
+`Structs` allow us to define a custom group of properties. **[see more about
 structs](https://docs.soliditylang.org/en/v0.8.7/types.html#structs)**
 
 ```solidity
