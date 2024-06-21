@@ -108,7 +108,7 @@ avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,tes
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
 ```
 
-## Transfer the token from C-Chain to our Subnet
+## Transfer The Token From C-Chain To Our Subnet
 
 Now we will transfer 100 TOK tokens from our ewoq address in C-Chain to subnet_testSubnet_airdrop
 address in our Subnet `testSubnet`. Note that we will be using the Home address `0x4Ac1d98D9cEF99EC6546dEd4Bd550b0b287aaD6D`
@@ -127,7 +127,7 @@ Enter the address of the Bridge on testSubnet: 0x7DD1190e6F6CE8eE13C08F007FdAEE2
 Amount to send (TOKEN units): 100
 ```
 
-## Verify that transfer is successful
+## Verify That Transfer Is Successful
 
 We will call `avalanche key list` command again to verify that the transfer is successful.
 
