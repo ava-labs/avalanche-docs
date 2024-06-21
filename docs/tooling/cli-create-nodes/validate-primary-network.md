@@ -3,7 +3,7 @@ tags: [Tooling, Avalanche-CLI]
 description: This page demonstrates how to configure nodes to validate the Avalanche Primary Network. Validation via Avalanche-CLI is currently only supported on Fuji.
 pagination_label: Configure Nodes to Validate the Primary Network with Avalanche-CLI
 sidebar_label: Validate the Primary Network
-sidebar_position: 54
+sidebar_position: 5
 ---
 
 # Configure Nodes to Validate the Primary Network with Avalanche-CLI
