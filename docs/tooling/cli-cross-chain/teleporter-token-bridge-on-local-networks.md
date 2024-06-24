@@ -91,10 +91,10 @@ list` command to check our initial balances in C-Chain and Subnet.
 
 We will inquire the balances of our ERC-20 Token TOK both in C-Chain and our Subnet, which has the 
 address of `0x5DB9A7629912EBF95876228C24A848de0bfB43A9` in the C-Chain and address of
-`0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0` in our subnet `testSubnet`.
+`0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0` in our Subnet `testSubnet`.
 
 ```bash
-avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,testSubnet --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0
+`avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,testSubnet --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0`
 +--------+--------------------+------------+--------------------------------------------+---------------+-----------------+---------------+
 |  KIND  |        NAME        | SUBNET     |                  ADDRESS                   |     TOKEN     |     BALANCE     |    NETWORK    |
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
@@ -108,9 +108,9 @@ avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,tes
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
 ```
 
-## Transfer The Token From C-chain To Our Subnet
+## Transfer the Token from C-Chain to Our Subnet
 
-Now we will transfer 100 TOK tokens from our ewoq address in C-Chain to subnet_testSubnet_airdrop
+Now we will transfer 100 TOK tokens from our `ewoq` address in C-Chain to subnet_testSubnet_airdrop
 address in our Subnet `testSubnet`. Note that we will be using the Home contract address `0x4Ac1d98D9cEF99EC6546dEd4Bd550b0b287aaD6D`
 and Remote contract address `0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0`.
 
