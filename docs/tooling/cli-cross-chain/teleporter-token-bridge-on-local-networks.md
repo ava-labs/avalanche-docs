@@ -15,7 +15,7 @@ For more information on Teleporter Token Bridge, check:
 
 - [Teleporter Token Bridge README](https://github.com/ava-labs/teleporter-token-bridge)
 
-# How to Deploy Teleporter Token Bridge on a Local Network
+## How to Deploy Teleporter Token Bridge on a Local Network
 
 This how-to guide focuses on deploying Teleporter Token Bridge on a local Avalanche network.
 
