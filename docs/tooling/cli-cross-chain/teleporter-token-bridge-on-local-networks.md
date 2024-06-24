@@ -91,11 +91,11 @@ list` command to check our initial balances in C-Chain and Subnet.
 
 We will inquire the balances of our ERC-20 Token TOK both in C-Chain and our Subnet, which has the 
 address of `0x5DB9A7629912EBF95876228C24A848de0bfB43A9` in the C-Chain and address of
-`0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0` in our Remote contract.
+`0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0` in our subnet `testSubnet`.
 
 ```bash
 avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,testSubnet --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0
-+--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
++--------+--------------------+------------+--------------------------------------------+---------------+-----------------+---------------+
 |  KIND  |        NAME        | SUBNET     |                  ADDRESS                   |     TOKEN     |     BALANCE     |    NETWORK    |
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
 | stored | ewoq               | testSubnet | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x7DD1.) |               0 | Local Network |
@@ -108,11 +108,11 @@ avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,tes
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
 ```
 
-## Transfer The Token From C-Chain To Our Subnet
+## Transfer The Token From C-chain To Our Subnet
 
 Now we will transfer 100 TOK tokens from our ewoq address in C-Chain to subnet_testSubnet_airdrop
-address in our Subnet `testSubnet`. Note that we will be using the Home address `0x4Ac1d98D9cEF99EC6546dEd4Bd550b0b287aaD6D`
-and Remote address `0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0`.
+address in our Subnet `testSubnet`. Note that we will be using the Home contract address `0x4Ac1d98D9cEF99EC6546dEd4Bd550b0b287aaD6D`
+and Remote contract address `0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0`.
 
 ```bash
 avalanche key transfer
@@ -136,7 +136,7 @@ account now has 99900 TOK tokens in C-Chain.
 
 ```bash
 avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,testSubnet --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0
-+--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
++--------+--------------------+------------+--------------------------------------------+---------------+-----------------+---------------+
 |  KIND  |        NAME        | SUBNET     |                  ADDRESS                   |     TOKEN     |     BALANCE     |    NETWORK    |
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
 | stored | ewoq               | testSubnet | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x7DD1.) |               0 | Local Network |
