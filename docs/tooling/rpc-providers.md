@@ -388,7 +388,7 @@ Features:
 for Avalanche
 
 ### Custom Methods
-
+<!-- vale off -->
 - Learn more about the [Custom JSON-RPC API](https://docs.omniatech.io/rpc-api-docs/chains/avalanche-c-chain/custom-json-rpc-api) for the Avalanche C-Chain in
 the Omnia official documentation.
 
@@ -406,9 +406,7 @@ Features:
     - Bring a Node, Run a Node
     - RPC Protect (DeFi)
     - Reinforced Transactions
-    <!-- vale off -->
     - Frontrunning Protection
-    <!-- vale on -->
     - Private Transactions
     - Metadata Protection
     - Honeypot Protection
@@ -417,6 +415,7 @@ Features:
     - Advanced Debugging
     - Multiple Pricing Tiers. Pay in Crypto or credit card.
     - 24/7 Discord Support & Direct Support option
+<!-- vale on -->
 
 ### QuickNode
 
