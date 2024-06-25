@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Funcionalidad de Cadena Cruzada]
-descripción: Funcionalidad de Cadena Cruzada
+tags: [Construir, Funcionalidad de Cadena Cruzada]
+description: Funcionalidad de Cadena Cruzada
 sidebar_label: 🔗 Enlaces Rápidos
 pagination_label: Enlaces Rápidos de Cadena Cruzada
 ---
