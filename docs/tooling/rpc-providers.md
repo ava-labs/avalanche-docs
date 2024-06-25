@@ -376,18 +376,20 @@ Features:
 
 ### OMNIA Protocol
 
-[OMNIA Protocol] supports the C-Chain Mainnet and Testnet (Fuji).
+[OMNIA Protocol](https://app.omniatech.io/dashboard/generate-endpoints) supports the C-Chain Mainnet and Testnet (Fuji).
 
 #### HTTP
-For C-Chain RPC Endpoint Mainnet, the URL is `https://endpoints.omniatech.io/v1/avax/mainnet/public`
 
-### Testnet and WSS 
-- Please go to (https://app.omniatech.io/dashboard/generate-endpoints) and generate a private pair of HTTP and WSS endpoints
+- For C-Chain RPC Endpoint Mainnet, the URL is `https://endpoints.omniatech.io/v1/avax/mainnet/public`
+
+### Testnet and WSS
+
+- Please go to https://app.omniatech.io/dashboard/generate-endpoints and generate a private pair of HTTP and WSS endpoints
 for Avalanche
 
 ### Custom Methods
 
-- (https://docs.omniatech.io/rpc-api-docs/chains/avalanche-c-chain/custom-json-rpc-api)
+- https://docs.omniatech.io/rpc-api-docs/chains/avalanche-c-chain/custom-json-rpc-api
 
 Features:
     - Get started for Free (100,000 requests daily, 50RPS)
