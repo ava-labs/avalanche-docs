@@ -389,7 +389,8 @@ for Avalanche
 
 ### Custom Methods
 
-- Learn more about the [Custom JSON-RPC API](https://docs.omniatech.io/rpc-api-docs/chains/avalanche-c-chain/custom-json-rpc-api) for the Avalanche C-Chain on Omniatech.
+- Learn more about the [Custom JSON-RPC API](https://docs.omniatech.io/rpc-api-docs/chains/avalanche-c-chain/custom-json-rpc-api) for the Avalanche C-Chain in
+the Omnia official documentation.
 
 Features:
     - Get started for Free (100,000 requests daily, 50RPS)
