@@ -384,12 +384,12 @@ Features:
 
 ### Testnet and WSS
 
-- Please go to https://app.omniatech.io/dashboard/generate-endpoints and generate a private pair of HTTP and WSS endpoints
+- Please go [here](https://app.omniatech.io/dashboard/generate-endpoints) and generate a private pair of HTTP and WSS endpoints
 for Avalanche
 
 ### Custom Methods
 
-- https://docs.omniatech.io/rpc-api-docs/chains/avalanche-c-chain/custom-json-rpc-api
+- Learn more about the [Custom JSON-RPC API](https://docs.omniatech.io/rpc-api-docs/chains/avalanche-c-chain/custom-json-rpc-api) for the Avalanche C-Chain on Omniatech.
 
 Features:
     - Get started for Free (100,000 requests daily, 50RPS)
@@ -405,7 +405,9 @@ Features:
     - Bring a Node, Run a Node
     - RPC Protect (DeFi)
     - Reinforced Transactions
+    <!-- vale off -->
     - Frontrunning Protection
+    <!-- vale on -->
     - Private Transactions
     - Metadata Protection
     - Honeypot Protection
