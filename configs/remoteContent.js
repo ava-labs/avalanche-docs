@@ -229,45 +229,6 @@ ${updatedContent}`,
   [
     "docusaurus-plugin-remote-content",
     {
-      // /docs/build/cross-chain/teleporter/getting-started.md
-      name: "hello-teleporter",
-      sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/CrossChainApplications/",
-      documents: ["GETTING_STARTED.md"],
-      outDir: "docs/build/cross-chain/teleporter/",
-      // change file name and add metadata correct links
-      modifyContent(filename, content) {
-        if (filename.includes("GETTING_STARTED")) {
-          const updatedContent = replaceRelativeLinks(
-            content,
-            "https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/"
-          );
-
-          const newContent = insertLinesAfterFirstLine(
-            updatedContent,
-            teleporterCourse
-          );
-
-          return {
-            filename: "getting-started.md",
-            content: `---
-tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
-description: Teleporter is an EVM-compatible cross-subnet communication protocol built on top of Avalanche Warp Messaging.This section walks through how to build an example cross-chain application on top of the Avalanche Teleporter Protocol.
-keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-sidebar_label: Getting Started
-sidebar_position: 3
----
-
-${newContent}`,
-          };
-        }
-        return undefined;
-      },
-    },
-  ],
-  [
-    "docusaurus-plugin-remote-content",
-    {
       // /docs/build/cross-chain/teleporter/cli.md
       name: "teleporter-cli",
       sourceBaseUrl:
