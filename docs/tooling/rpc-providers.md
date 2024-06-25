@@ -374,6 +374,40 @@ Features:
 - For `DFK-Subnet`, the URL is
   `https://lb.nodies.app/v1/105f8099e80f4123976b59df1ebfb433/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc`
 
+### OMNIA Protocol
+[OMNIA Protocol] supports the C-Chain Mainnet and Testnet (Fuji).
+
+#### HTTP
+For C-Chain RPC Endpoint Mainnet, the URL is `https://endpoints.omniatech.io/v1/avax/mainnet/public`
+
+### Testnet and WSS 
+- please go to (https://app.omniatech.io/dashboard/generate-endpoints) and generate a private pair of HTTP and WSS endpoints
+for Avalanche
+
+Features:
+    - Get started for Free (100,000 requests daily, 50RPS)
+    - WSS on free tier
+    - Reliable, fast, secure and scalable RPC API services
+    - SLA of 99.9%
+    - Low Latency
+    - Advanced Caching
+    - Decentralized Infrastructure
+    - 24/7 Monitoring and Real-time Alerts
+    - Benchmark HealthCheck Monitor
+    - RPC, HTTPS, WSS endpoints and Graph QL Support
+    - Bring a Node, Run a Node
+    - RPC Protect (DeFi)
+    - Reinforced Transactions
+    - Frontrunning Protection
+    - Private Transactions
+    - Metadata Protection
+    - Honeypot Protection
+    - MEV Cashback
+    - OMNIA Dashboard & Advanced Analytics
+    - Advanced Debugging
+    - Multiple Pricing Tiers. Pay in Crypto or credit card.
+    - 24/7 Discord Support & Direct Support option
+
 ### QuickNode
 
 [QuickNode](https://www.quicknode.com/chains/avax) supports the X-Chain,
