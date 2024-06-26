@@ -55,7 +55,7 @@ to look somewhere else for the C-Chain config file with option
 
 :::caution
 
-If you need Ethereum [Archive
+If you need Ethereum`s [Archive
 Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node)
 functionality, you need to disable C-Chain pruning, which has been enabled by
 default since AvalancheGo v1.4.10. To disable pruning, include

@@ -117,7 +117,7 @@ the config to cover some common use cases in the following sections.
 
 #### Running an Archival Node
 
-If you need Ethereum [Archive
+If you need Ethereum`s [Archive
 Node](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node)
 functionality, you need to disable C-Chain pruning, which is enabled by default
 to conserve disk space. To preserve full historical state, include
