@@ -353,7 +353,6 @@ Network is Up:
 
 ```
 
-
 </details>
 
 ## Interacting with Your Subnet
