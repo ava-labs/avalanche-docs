@@ -163,6 +163,7 @@ Dirección financiada:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC con 1000000 
 Nombre de red:     mySubnet
 ID de cadena:         54325
 Símbolo de moneda:  TUTORIAL
+```
 
 Puedes usar los detalles de conexión de la extensión del navegador para conectarte e interactuar con tu Subnet. Ahora es el momento de interactuar con ella.
 
@@ -427,4 +428,3 @@ Subnet un paso más cerca de la producción.
 **¿Cómo se determina la ID de la Subnet al crearla?**
 
 La ID de la Subnet es el hash de la transacción que creó la Subnet.
-```

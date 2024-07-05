@@ -169,7 +169,7 @@ You can use the deployment details to connect to and interact with your Subnet. 
 interact with it.
 
 <details>
-<summary> Full Subnet Creation and Deployment Example </summary>
+<summary> Full Local Subnet Creation and Deployment Example </summary>
 
 ```bash
 laviniatalpas@Lavinias-MacBook-Pro ~ % cd desktop
