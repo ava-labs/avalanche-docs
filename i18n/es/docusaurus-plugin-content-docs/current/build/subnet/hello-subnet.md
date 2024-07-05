@@ -1,6 +1,6 @@
 ---
-etiquetas: [Construir, Subredes]
-descripción: Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred, desplegarla en una red local y conectarte a ella con la billetera Core.
+tags: [Construir, Subredes]
+description: Este tutorial te guía a través del proceso de usar Avalanche-CLI para crear una Subred, desplegarla en una red local y conectarte a ella con la billetera Core.
 sidebar_label: Construye tu primera Subred
 pagination_label: Construye tu primera Subred
 ---
