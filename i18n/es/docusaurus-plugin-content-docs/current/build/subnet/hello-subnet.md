@@ -398,7 +398,7 @@ icono ` + ` en la esquina superior derecha.
 ![Agregar red](/img/first-subnet/network1.png)
 
 Ingresa los detalles de tu Subnet, que se encuentran en la salida de tu comando `avalanche subnet deploy`
-[command](#deploying-subnets-locally), en el formulario y haz clic en `Guardar`.
+[command](#desplegando-subnets-localmente), en el formulario y haz clic en `Guardar`.
 
 ![Agregar red 2](/img/first-subnet/network2.png)
 
