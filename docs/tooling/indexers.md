@@ -50,3 +50,15 @@ To get started, visit the [documentation](https://docs.flair.dev) or clone the [
 Envio supports [HyperSync](https://docs.envio.dev/docs/hypersync) on Avalanche. HyperSync is a real-time indexed layer of the Avalanche blockchain, providing accelerated APIs (JSON-RPC bypass) for the hyper-speed syncing of Avalanche data. Developers do not need to worry about RPC URLs, rate-limiting, or managing infrastructure, and can easily sync large datasets in a few minutes, something that would usually take 100x longer via standard RPC.
 
 To get started, visit the [documentation](https://docs.envio.dev/docs/getting-started) or follow the [quickstart](https://docs.envio.dev/docs/contract-import) guide.
+
+### SQD
+
+[SQD](https://sqd.dev/) is a decentralized hyper-scalable data platform optimized for providing efficient, permissionless access to large volumes of data. It currently serves historical on-chain data, including event logs, transaction receipts, traces, and per-transaction state diffs. SQD offers a powerful toolkit for creating custom data extraction and processing pipelines, achieving an indexing speed of up to 150k blocks per second.
+
+To get started, visit the [documentation](https://docs.sqd.dev/) or see [EVM examples](https://github.com/subsquid-labs/squid-evm-examples) of what you can build with SQD.
+
+#### Supported Networks
+
+- Avalanche	
+- Avalanche Testnet
+
