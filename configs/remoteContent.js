@@ -99,13 +99,13 @@ const remoteContent = [
           return {
             filename: "deep-dive.md",
             content: `---
-tags: [Avalanche Warp Messaging, AWM, Cross-Subnet Communication, Cross-Chain Communication]
-description: Avalanche Warp Messaging (AWM) provides a primitive for cross-subnet communication on the Avalanche Network.
-keywords: [ docs, documentation, avalanche, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-sidebar_label: Deep Dive
-sidebar_position: 1
+  tags: [Avalanche Warp Messaging, AWM, Cross-Subnet Communication, Cross-Chain Communication]
+  description: Avalanche Warp Messaging (AWM) provides a primitive for cross-subnet communication on the Avalanche Network.
+  keywords: [ docs, documentation, avalanche, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+  sidebar_label: Deep Dive
+  sidebar_position: 1
 ---
-              
+
 ${updatedContent}`,
           };
         }
@@ -138,14 +138,14 @@ ${updatedContent}`,
           return {
             filename: "relayer.md",
             content: `---
-  tags: [Avalanche Warp Messaging, Relayer]
-  description: Reference relayer implementation for cross-chain Avalanche Warp Message delivery.
-  keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-  sidebar_label: Run a Relayer
-  sidebar_position: 3
-  ---
+      tags: [Avalanche Warp Messaging, Relayer]
+      description: Reference relayer implementation for cross-chain Avalanche Warp Message delivery.
+      keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+      sidebar_label: Run a Relayer
+      sidebar_position: 3
+---
 
-  ${newContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -158,7 +158,7 @@ ${updatedContent}`,
       // /docs/build/cross-chain/teleporter/overview.md
       name: "teleporter-overview",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/Teleporter/",
+        "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/teleporter/",
       documents: ["README.md"],
       outDir: "docs/build/cross-chain/teleporter/",
       // change file name and add metadata correct links
@@ -166,7 +166,7 @@ ${updatedContent}`,
         if (filename.includes("README")) {
           const updatedContent = replaceRelativeLinks(
             content,
-            "https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/"
+            "https://github.com/ava-labs/teleporter/blob/main/contracts/src/teleporter/"
           );
 
           const newContent = insertLinesAfterFirstLine(
@@ -177,14 +177,14 @@ ${updatedContent}`,
           return {
             filename: "overview.md",
             content: `---
-    tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
-    description: Teleporter is a messaging protocol built on top of Avalanche Warp Messaging that provides a developer-friendly interface for sending and receiving cross-chain messages from within the EVM.
-    keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-    sidebar_label: Overview
-    sidebar_position: 1
-    ---
+        tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
+        description: Teleporter is a messaging protocol built on top of Avalanche Warp Messaging that provides a developer-friendly interface for sending and receiving cross-chain messages from within the EVM.
+        keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+        sidebar_label: Overview
+        sidebar_position: 1
+---
 
-    ${newContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -211,15 +211,15 @@ ${updatedContent}`,
           return {
             filename: "deep-dive.md",
             content: `---
-    tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
-    description: Teleporter is an EVM compatible cross-subnet communication protocol built on top of Avalanche Warp Messaging (AWM), and implemented as a Solidity smart contract. It provides a mechanism to asynchronously invoke smart contract functions on other EVM blockchains within Avalanche. Teleporter provides a handful of useful features on top of AWM, such as specifying relayer incentives for message delivery, replay protection, message delivery and execution retries, and a standard interface for sending and receiving messages within a dApp deployed across multiple subnets.
-    keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-    sidebar_label: Deep Dive
-    sidebar_position: 2
-    title: Teleporter Deep Dive
-    ---
+        tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
+        description: Teleporter is an EVM compatible cross-subnet communication protocol built on top of Avalanche Warp Messaging (AWM), and implemented as a Solidity smart contract. It provides a mechanism to asynchronously invoke smart contract functions on other EVM blockchains within Avalanche. Teleporter provides a handful of useful features on top of AWM, such as specifying relayer incentives for message delivery, replay protection, message delivery and execution retries, and a standard interface for sending and receiving messages within a dApp deployed across multiple subnets.
+        keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+        sidebar_label: Deep Dive
+        sidebar_position: 2
+        title: Teleporter Deep Dive
+---
 
-    ${updatedContent}`,
+${updatedContent}`,
           };
         }
         return undefined;
@@ -251,14 +251,14 @@ ${updatedContent}`,
           return {
             filename: "cli.md",
             content: `---
-    tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
-    description: This page the source code for the Avalanche Teleporter CLI. The CLI is a command line interface for interacting with the Teleporter contracts. It is written with [cobra](https://github.com/spf13/cobra) commands as a Go application.
-    keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication, teleporter cli ]
-    sidebar_label: CLI
-    sidebar_position: 6
-    ---
+        tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
+        description: This page the source code for the Avalanche Teleporter CLI. The CLI is a command line interface for interacting with the Teleporter contracts. It is written with [cobra](https://github.com/spf13/cobra) commands as a Go application.
+        keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication, teleporter cli ]
+        sidebar_label: CLI
+        sidebar_position: 6
+---
 
-    ${newContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -271,7 +271,7 @@ ${updatedContent}`,
       // /docs/build/cross-chain/teleporter/upgradeability.md
       name: "teleporter-upgradeability",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/Teleporter/upgrades/",
+        "https://raw.githubusercontent.com/ava-labs/teleporter/main/contracts/src/teleporter/registry/",
       documents: ["README.md"],
       outDir: "docs/build/cross-chain/teleporter/",
       // change file name and add metadata correct links
@@ -279,7 +279,7 @@ ${updatedContent}`,
         if (filename.includes("README")) {
           const updatedContent = replaceRelativeLinks(
             content,
-            "https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/"
+            "https://github.com/ava-labs/teleporter/blob/main/contracts/src/teleporter/registry/"
           );
 
           const newContent = insertLinesAfterFirstLine(
@@ -290,14 +290,14 @@ ${updatedContent}`,
           return {
             filename: "upgradeability.md",
             content: `---
-    tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
-    description: Teleporter is an EVM-compatible cross-subnet communication protocol built on top of Avalanche Warp Messaging. The TeleporterMessenger contract is non-upgradable, once a version of the contract is deployed it cannot be changed. However, there could still be new versions of TeleporterMessenger contracts needed to be deployed in the future.
-    keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-    sidebar_label: Upgradeability
-    sidebar_position: 5
-    ---
+            tags: [Teleporter, Cross-Subnet Communication, Cross-Chain Communication]
+            description: Teleporter is an EVM-compatible cross-subnet communication protocol built on top of Avalanche Warp Messaging. The TeleporterMessenger contract is non-upgradable, once a version of the contract is deployed it cannot be changed. However, there could still be new versions of TeleporterMessenger contracts needed to be deployed in the future.
+            keywords: [ docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+            sidebar_label: Upgradeability
+            sidebar_position: 5
+---
 
-    ${newContent}`,
+${newContent}`,
           };
         }
         return undefined;
@@ -310,7 +310,7 @@ ${updatedContent}`,
       // /docs/build/cross-chain/teleporter/evm-integration.md
       name: "awm-evm-integration",
       sourceBaseUrl:
-        "https://raw.githubusercontent.com/meaghanfitzgerald/coreth/docs-integration/precompile/contracts/warp/",
+        "https://raw.githubusercontent.com/ava-labs/coreth/master/precompile/contracts/warp/",
       documents: ["README.md"],
       outDir: "docs/build/cross-chain/awm/",
       // change file name and add metadata correct links
@@ -323,14 +323,14 @@ ${updatedContent}`,
           return {
             filename: "evm-integration.md",
             content: `---
-  tags: [Avalanche Warp Messaging, Coreth, Subnet-EVM, Cross-Subnet Communication, Cross-Chain Communication]
-  description: Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Subnets. The receiving network can verify whether an aggregation of signatures from a set of source Subnet validators represents a threshold of stake large enough for the receiving network to process the message. The Avalanche Warp Precompile enables this flow to send a message from blockchain A to blockchain B.
-  keywords: [ coreth, subnet-evm, docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
-  sidebar_label: EVM Integration
-  sidebar_position: 2
-  ---
+    tags: [Avalanche Warp Messaging, Coreth, Subnet-EVM, Cross-Subnet Communication, Cross-Chain Communication]
+    description: Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Subnets. The receiving network can verify whether an aggregation of signatures from a set of source Subnet validators represents a threshold of stake large enough for the receiving network to process the message. The Avalanche Warp Precompile enables this flow to send a message from blockchain A to blockchain B.
+    keywords: [ coreth, subnet-evm, docs, documentation, avalanche, teleporter, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+    sidebar_label: EVM Integration
+    sidebar_position: 2
+---
 
-  ${updatedContent}`,
+${updatedContent}`,
           };
         }
         return undefined;
