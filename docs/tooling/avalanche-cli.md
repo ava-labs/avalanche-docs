@@ -137,9 +137,9 @@ avalanche blockchain removeValidator [blockchainName] [flags]
 
 ### Subnet Change Owner
 
-The `blockchain changeOwner` changes the owner of the deployed Subnet.
+The `blockchain changeOwner` changes the owner of the deployed Blockchain.
 
-This command currently only works on Subnets deployed to Devnet, Fuji or Mainnet.
+This command currently only works on Blockchains deployed to Devnet, Fuji or Mainnet.
 
 **Usage:**
 
@@ -191,9 +191,9 @@ avalanche blockchain configure [blockchainName] [flags]
 
 ### Blockchain Create
 
-The `blockchain create` command builds a new genesis file to configure your Subnet.
+The `blockchain create` command builds a new genesis file to configure your Blockchain.
 By default, the command runs an interactive wizard. It walks you through
-all the steps you need to create your first Subnet.
+all the steps you need to create your first Blockchain.
 
 The tool supports deploying Subnet-EVM and custom VMs. You
 can create a custom, user-generated genesis with a custom VM by providing
