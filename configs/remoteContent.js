@@ -313,7 +313,7 @@ ${newContent}`,
         "https://raw.githubusercontent.com/ava-labs/coreth/master/precompile/contracts/warp/",
       documents: ["README.md"],
       outDir: "docs/build/cross-chain/awm/",
-      // change file name and add metadata correct links
+      // change the file name and add metadata correct links
       modifyContent(filename, content) {
         if (filename.includes("README")) {
           const updatedContent = replaceRelativeLinks(
