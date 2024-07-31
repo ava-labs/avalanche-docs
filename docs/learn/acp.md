@@ -37,41 +37,41 @@ There are three kinds of ACP:
 There are four statuses of an ACP:
 
 - A `Proposed` ACP has been merged into the main branch of the ACP repository. It is actively being discussed by the Avalanche Community and may be modified based on feedback.
-- An `Implementable` ACP is considered "ready for implementation" by the author(s) and will no longer change meaningfully from its current form (which would require a new ACP).
+- An `Implementable` ACP is considered "ready for implementation" by the author and will no longer change meaningfully from its current form (which would require a new ACP).
 - An `Activated` ACP has been activated on the Avalanche Network via a coordinated upgrade by the Avalanche Community. Once an ACP is `Activated`, it is locked.
-- A `Stale` ACP has been abandoned by its author(s) because it is not supported by the Avalanche Community or has been replaced with another ACP.
+- A `Stale` ACP has been abandoned by its author because it is not supported by the Avalanche Community or has been replaced with another ACP.
 
 ## ACP Workflow
 
 ### Step 0: Think of a Novel Improvement to Avalanche
 
-The ACP process begins with a new idea for Avalanche. Each potential ACP must have an author(s): someone who writes the ACP using the style and format described below, shepherds the associated GitHub Discussion, and attempts to build consensus around the idea. Note that ideas and any resulting ACP is public. Authors should not post any ideas or anything in an ACP that the Author wants to keep confidential or to keep ownership rights in (such as intellectual property rights).
+The ACP process begins with a new idea for Avalanche. Each potential ACP must have an author: someone who writes the ACP using the style and format described below, shepherds the associated GitHub Discussion, and attempts to build consensus around the idea. Note that ideas and any resulting ACP is public. Authors should not post any ideas or anything in an ACP that the Author wants to keep confidential or to keep ownership rights in (such as intellectual property rights).
 
 ### Step 1: Post Your Idea to [GitHub Discussions](https://github.com/avalanche-foundation/ACPs/discussions/categories/ideas)
 
-The author(s) should first attempt to ascertain whether there is support for their idea by posting in the "Ideas" category of GitHub Discussions. Vetting an idea publicly before going as far as writing an ACP is meant to save both the potential author(s) and the wider Avalanche Community time. Asking the Avalanche Community first if an idea is original helps prevent too much time being spent on something that is guaranteed to be rejected based on prior discussions (searching the Internet does not always do the trick). It also helps to make sure the idea is applicable to the entire community and not just the author(s). Small enhancements or patches often don't need standardization between multiple projects; these don't need an ACP and should be injected into the relevant development workflow with a patch submission to the applicable ANC issue tracker.
+The author should first attempt to ascertain whether there is support for their idea by posting in the "Ideas" category of GitHub Discussions. Vetting an idea publicly before going as far as writing an ACP is meant to save both the potential author and the wider Avalanche Community time. Asking the Avalanche Community first if an idea is original helps prevent too much time being spent on something that is guaranteed to be rejected based on prior discussions (searching the Internet does not always do the trick). It also helps to make sure the idea is applicable to the entire community and not just the author. Small enhancements or patches often don't need standardization between multiple projects; these don't need an ACP and should be injected into the relevant development workflow with a patch submission to the applicable ANC issue tracker.
 
 ### Step 2: Propose an ACP via [Pull Request](https://github.com/avalanche-foundation/ACPs/pulls)
 
-Once the author(s) feels confident that an idea has a decent chance of acceptance, an ACP should be drafted and submitted as a pull request (PR). This draft must be written in ACP style as described below. It is highly recommended that a single ACP contain a single key proposal or new idea. The more focused the ACP, the more successful it tends to be. If in doubt, split your ACP into several well-focused ones. The PR number of the ACP will become its assigned number.
+Once the author feels confident that an idea has a decent chance of acceptance, an ACP should be drafted and submitted as a pull request (PR). This draft must be written in ACP style as described below. It is highly recommended that a single ACP contain a single key proposal or new idea. The more focused the ACP, the more successful it tends to be. If in doubt, split your ACP into several well-focused ones. The PR number of the ACP will become its assigned number.
 
 ### Step 3: Build Consensus on [GitHub Discussions](https://github.com/avalanche-foundation/ACPs/discussions/categories/discussion) and Provide an Implementation (if Applicable)
 
-ACPs will be merged by ACP maintainers if the proposal is generally well-formatted and coherent. ACP editors will attempt to merge anything worthy of discussion, regardless of feasibility or complexity, that is not a duplicate or incomplete. After an ACP is merged, an official GitHub Discussion will be opened for the ACP and linked to the proposal for community discussion. It is recommended for author(s) or supportive Avalanche Community members to post an accompanying non-technical overview of their ACP for general consumption in this GitHub Discussion. The ACP should be reviewed and broadly supported before a reference implementation is started, again to avoid wasting the author(s) and the Avalanche Community's time, unless a reference implementation will aid people in studying the ACP.
+ACPs will be merged by ACP maintainers if the proposal is generally well-formatted and coherent. ACP editors will attempt to merge anything worthy of discussion, regardless of feasibility or complexity, that is not a duplicate or incomplete. After an ACP is merged, an official GitHub Discussion will be opened for the ACP and linked to the proposal for community discussion. It is recommended for author or supportive Avalanche Community members to post an accompanying non-technical overview of their ACP for general consumption in this GitHub Discussion. The ACP should be reviewed and broadly supported before a reference implementation is started, again to avoid wasting the author and the Avalanche Community's time, unless a reference implementation will aid people in studying the ACP.
 
 ### Step 4: Mark ACP as `Implementable` via [Pull Request](https://github.com/avalanche-foundation/ACPs/pulls)
 
-Once an ACP is considered complete by the author(s), it should be marked as `Implementable`. At this point, all open questions should be addressed and an associated reference implementation should be provided (if applicable). As mentioned earlier, the Avalanche Foundation meets periodically to recommend the ratification of specific ACPs but it is ultimately up to members of the Avalanche Network/Community to adopt ACPs they support by running a compatible Avalanche Network Client (ANC), such as [AvalancheGo](https://github.com/ava-labs/avalanchego).
+Once an ACP is considered complete by the author, it should be marked as `Implementable`. At this point, all open questions should be addressed and an associated reference implementation should be provided (if applicable). As mentioned earlier, the Avalanche Foundation meets periodically to recommend the ratification of specific ACPs but it is ultimately up to members of the Avalanche Network/Community to adopt ACPs they support by running a compatible Avalanche Network Client (ANC), such as [AvalancheGo](https://github.com/ava-labs/avalanchego).
 
 ### [Optional] Step 5: Mark ACP as `Stale` via [Pull Request](https://github.com/avalanche-foundation/ACPs/pulls)
 
-An ACP can be superseded by a different ACP, rendering the original obsolete. If this occurs, the original ACP will be marked as `Stale`. ACPs may also be marked as `Stale` if the author(s) abandon work on it for a prolonged period of time (12+ months). ACPs may be reopened and moved back to `Proposed` if the author(s) restart work.
+An ACP can be superseded by a different ACP, rendering the original obsolete. If this occurs, the original ACP will be marked as `Stale`. ACPs may also be marked as `Stale` if the author abandon work on it for a prolonged period of time (12+ months). ACPs may be reopened and moved back to `Proposed` if the author restart work.
 
-## What belongs in a successful ACP?
+## What Belongs in a Successful ACP?
 
 Each ACP must have the following parts:
 
-- `Preamble`: Markdown table containing metadata about the ACP, including the ACP number, a short descriptive title, the author(s), and optionally the contact info for each author, etc.
+- `Preamble`: Markdown table containing metadata about the ACP, including the ACP number, a short descriptive title, the author, and optionally the contact info for each author, etc.
 - `Abstract`: Concise (~200 word) description of the ACP
 - `Motivation`: Rationale for adopting the ACP and the specific issue/challenge/opportunity it addresses
 - `Specification`: Complete description of the semantics of any change should allow any ANC/Avalanche Community member to implement the ACP

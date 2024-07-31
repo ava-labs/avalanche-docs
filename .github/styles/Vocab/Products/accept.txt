@@ -16,6 +16,7 @@ alloc
 Alloc
 alloweds
 ANR's
+ANCs
 Ansible
 API's
 apis
@@ -150,6 +151,7 @@ infeasibly
 Infura
 inlined
 ints
+interoperate
 IPCs
 ipfs
 IPFS
