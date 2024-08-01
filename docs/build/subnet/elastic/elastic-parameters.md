@@ -309,7 +309,7 @@ parameters on Mainnet:
   genesis one, so it's shared across networks.
 - `UptimeRequirement = 0.8`, that is `80%`.
 
-### Interactive graph
+### Interactive Graph
 
 The graph below demonstrates the reward as a function of the length of time
 staked. The x-axis depicts $\frac{StakingPeriod}{MintingPeriod}$ as a percentage
