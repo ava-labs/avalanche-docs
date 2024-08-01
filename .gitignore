@@ -17,7 +17,6 @@ docs/build/cross-chain/teleporter/upgradeability.md
 docs/build/cross-chain/teleporter/cli.md
 docs/build/cross-chain/awm/evm-integration.md
 docs/build/cross-chain/awm/relayer.md
-docs/learn/acp.md
 
 # AvalancheGo API from GH repo via docusaurus-plugin-remote-content
 docs/reference/avalanchego/p-chain/api.md
