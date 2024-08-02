@@ -521,8 +521,6 @@ The `blockchain vmid` command prints the virtual machine ID (VMID) for the given
 avalanche subnet vmid [blockchainName]
 ```
 
-## Subnet Upgrade
-
 ## Blockchain Upgrade
 
 The `blockchain upgrade` command suite provides a collection of tools for
