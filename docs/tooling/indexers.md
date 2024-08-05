@@ -23,6 +23,18 @@ project.
 
 :::
 
+### Blockflow 
+
+[Blockflow](https://www.blockflow.network/) simplifies building data backends for dApps.
+The modular architecture seamlessly handles on-chain data retrieval, re-org handling, indexing, streaming, storage, and API consumption, allowing developers to focus on building innovative applications rather than wrestling with complex data infrastructure.
+
+Blockflow's modular architecture for data indexing has three key components:
+- **Instances:** Serverless functions that act as your data transformation and compute layer. These functions are triggered by blockchain events,  function calls, transactions, and traces, allowing you to filter and process data exactly as you need it.
+- **Managed Storage:** A scalable storage solution that houses your transformed blockchain data. Our storage layer ensures data integrity by handling chain reorganizations, providing you with a reliable, always-consistent dataset.
+- **Flexible Querying:** Access your data effortlessly through our REST and GraphQL APIs. Define your own query logic to retrieve precisely the information you need, when you need it.
+
+To get started visit our [documentation](https://docs.blockflow.network/v/cli). Also do checkout an example [here](https://docs.blockflow.network/v/cli/hands-on-project/ens).
+
 ### SubQuery
 
 SubQuery is a leading blockchain data indexer that provides developers with fast, flexible, universal, open source and decentralised APIs for web3 projects. Another one of SubQuery's competitive advantages is the ability to aggregate data not only within a chain but across multiple blockchains all within a single project.
