@@ -12,7 +12,7 @@ everything Avalanche. This release specializes in helping developers
 build and test Subnets.
 
 To get started, look at the documentation for the subcommands or jump right
-in with `avalanche subnet create myNewSubnet`.
+in with `avalanche blockchain create myNewBlockchain`.
 
 [Install Avalanche CLI](/tooling/cli-guides/install-avalanche-cli.md)
 
@@ -55,23 +55,23 @@ avalanche primary addValidator [flags]
     --delegation-fee uint           set the delegation fee (20 000 is equivalent to 2%)
 ```
 
-## Subnet
+## Blockchain
 
-The `subnet` command suite provides a collection of tools for developing
+The `blockchain` command suite provides a collection of tools for developing
 and deploying Subnets.
 
-To get started, use the `subnet create` command wizard to walk through the
+To get started, use the `blockchain create` command wizard to walk through the
 configuration of your very first Subnet. Then, go ahead and deploy it
-with the `subnet deploy` command. You can use the rest of the commands to
+with the `blockchain deploy` command. You can use the rest of the commands to
 manage your Subnet configurations and live deployments.
 
-### Subnet AddValidator
+### Blockchain AddValidator
 
-The `subnet addValidator` command whitelists a primary network validator to
+The `blockchain addValidator` command whitelists a primary network validator to
 validate the provided deployed Subnet.
 
 To add the validator to the Subnet's allow list, you first need to provide
-the subnetName and the validator's unique NodeID. The command then prompts
+the blockchainName and the validator's unique NodeID. The command then prompts
 for the validation start time, duration, and stake weight. You can bypass
 these prompts by providing the values with flags.
 
@@ -80,7 +80,7 @@ This command currently only works on Subnets deployed to either the Fuji Testnet
 **Usage:**
 
 ```shell
-avalanche subnet addValidator [subnetName] [flags]
+avalanche blockchain addValidator [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -117,7 +117,7 @@ This command removes a node as a validator in a Subnet.
 **Usage:**
 
 ```shell
-avalanche subnet removeValidator [subnetName] [flags]
+avalanche blockchain removeValidator [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -137,14 +137,14 @@ avalanche subnet removeValidator [subnetName] [flags]
 
 ### Subnet Change Owner
 
-The `subnet changeOwner` changes the owner of the deployed Subnet.
+The `blockchain changeOwner` changes the owner of the deployed Blockchain.
 
-This command currently only works on Subnets deployed to Devnet, Fuji or Mainnet.
+This command currently only works on Blockchains deployed to Devnet, Fuji or Mainnet.
 
 **Usage:**
 
 ```shell
-  avalanche subnet changeOwner [subnetName] [flags]
+  avalanche blockchain changeOwner [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -168,7 +168,7 @@ This command currently only works on Subnets deployed to Devnet, Fuji or Mainnet
     --threshold uint32           required number of control key signatures to make subnet changes
 ```
 
-### Subnet Configure
+### Blockchain Configure
 
 AvalancheGo nodes support several different configuration files. Subnets have their own
 Subnet config which applies to all chains/VMs in the Subnet. Each chain within the Subnet
@@ -177,7 +177,7 @@ can have its own chain config. This command allows you to set both config files.
 **Usage:**
 
 ```shell
-avalanche subnet configure [subnetName] [flags]
+avalanche blockchain configure [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -189,24 +189,24 @@ avalanche subnet configure [subnetName] [flags]
     --subnet-config string           path to the subnet configuration
 ```
 
-### Subnet Create
+### Blockchain Create
 
-The `subnet create` command builds a new genesis file to configure your Subnet.
+The `blockchain create` command builds a new genesis file to configure your Blockchain.
 By default, the command runs an interactive wizard. It walks you through
-all the steps you need to create your first Subnet.
+all the steps you need to create your first Blockchain.
 
 The tool supports deploying Subnet-EVM and custom VMs. You
 can create a custom, user-generated genesis with a custom VM by providing
 the path to your genesis and VM binaries with the `--genesis` and `--vm` flags.
 
-By default, running the command with a `subnetName` that already exists
+By default, running the command with a `blockchainName` that already exists
 causes the command to fail. If you’d like to overwrite an existing
 configuration, pass the `-f` flag.
 
 **Usage:**
 
 ```shell
-avalanche subnet create [subnetName] [flags]
+avalanche blockchain create [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -234,14 +234,14 @@ avalanche subnet create [subnetName] [flags]
     --warp                            generate a vm with warp support (needed for teleporter)
 ```
 
-### Subnet Delete
+### Blockchain Delete
 
-The `subnet delete` command deletes an existing Subnet configuration.
+The `blockchain delete` command deletes an existing Subnet configuration.
 
 **Usage:**
 
 ```shell
-avalanche subnet delete [flags]
+avalanche blockchain delete [flags]
 ```
 
 **Flags:**
@@ -250,9 +250,9 @@ avalanche subnet delete [flags]
 -h, --help help for delete
 ```
 
-### Subnet Deploy
+### Blockchain Deploy
 
-The `subnet deploy` command deploys your Subnet configuration locally, to Fuji Testnet, or to Mainnet.
+The `blockchain deploy` command deploys your Subnet configuration locally, to Fuji Testnet, or to Mainnet.
 
 At the end of the call, the command prints the RPC URL you can use to interact with the Subnet.
 
@@ -266,7 +266,7 @@ networks, so you can take your locally tested Subnet and deploy it on Fuji or Ma
 **Usage:**
 
 ```shell
-avalanche subnet deploy [subnetName] [flags]
+avalanche blockchain deploy [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -298,16 +298,16 @@ avalanche subnet deploy [subnetName] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-### Subnet Describe
+### Blockchain Describe
 
-The `subnet describe` command prints the details of a Subnet configuration to the console.
+The `blockchain describe` command prints the details of a Subnet configuration to the console.
 By default, the command prints a summary of the configuration. By providing the `--genesis`
 flag, the command instead prints out the raw genesis file.
 
 **Usage:**
 
 ```shell
-avalanche subnet describe [subnetName] [flags]
+avalanche blockchain describe [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -317,9 +317,9 @@ avalanche subnet describe [subnetName] [flags]
 -h, --help      help for describe
 ```
 
-### Subnet Export
+### Blockchain Export
 
-The `subnet export` command write the details of an existing Subnet deploy to a file.
+The `blockchain export` command write the details of an existing Subnet deploy to a file.
 
 The command prompts for an output path. You can also provide one with
 the `--output` flag.
@@ -327,7 +327,7 @@ the `--output` flag.
 **Usage:**
 
 ```shell
-avalanche subnet export [subnetName] [flags]
+avalanche blockchain export [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -337,9 +337,9 @@ avalanche subnet export [subnetName] [flags]
 -o, --output string   write the export data to the provided file path
 ```
 
-### Subnet Import
+### Blockchain Import
 
-The `subnet import` command imports configurations into Avalanche-CLI.
+The `blockchain import` command imports configurations into Avalanche-CLI.
 
 This command supports importing from a file created on another computer,
 or importing from Subnets running public networks
@@ -356,7 +356,7 @@ flag.
 **Usage:**
 
 ```shell
-avalanche subnet import file [subnetPath] [flags]
+avalanche blockchain import file [blockchainPath] [flags]
 ```
 
 **Flags:**
@@ -375,7 +375,7 @@ avalanche subnet import file [subnetPath] [flags]
 
 #### Import from a Public Network
 
-The `subnet import public` command imports a Subnet configuration from a running network.
+The `blockchain import public` command imports a Subnet configuration from a running network.
 
 The genesis file should be available from the disk for this to work. By default, an imported Subnet
 doesn't overwrite an existing Subnet with the same name. To allow overwrites, provide the `--force`
@@ -384,7 +384,7 @@ flag.
 **Usage:**
 
 ```shell
-avalanche subnet import public [subnetPath] [flags]
+avalanche blockchain import public [blockchainPath] [flags]
 ```
 
 **Flags:**
@@ -407,9 +407,9 @@ avalanche subnet import public [subnetPath] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-### Subnet Join
+### Blockchain Join
 
-The `subnet join` command configures your validator node to begin validating a new Subnet.
+The `blockchain join` command configures your validator node to begin validating a new Subnet.
 
 To complete this process, you must have access to the machine running your validator. If the
 CLI is running on the same machine as your validator, it can generate or update your node's
@@ -427,7 +427,7 @@ This command currently only supports Subnets deployed on the Fuji Testnet and Ma
 **Usage:**
 
 ```shell
-avalanche subnet join [subnetName] [flags]
+avalanche blockchain join [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -447,16 +447,16 @@ avalanche subnet join [subnetName] [flags]
     --testnet testnet             join on testnet (alias for `fuji`)
 ```
 
-### Subnet List
+### Blockchain List
 
-The `subnet list` command prints the names of all created Subnet configurations. Without any flags,
+The `blockchain list` command prints the names of all created Subnet configurations. Without any flags,
 it prints some general, static information about the Subnet. With the `--deployed` flag, the command
 shows additional information including the VMID, BlockchainID and SubnetID.
 
 **Usage:**
 
 ```shell
-avalanche subnet list [flags]
+avalanche blockchain list [flags]
 ```
 
 **Flags:**
@@ -466,14 +466,14 @@ avalanche subnet list [flags]
 -h, --help       help for list
 ```
 
-### Subnet Publish
+### Blockchain Publish
 
-The `subnet publish` command publishes the Subnet's VM to a repository.
+The `blockchain publish` command publishes the Subnet's VM to a repository.
 
 **Usage:**
 
 ```shell
-avalanche subnet publish [subnetName] [flags]
+avalanche blockchain publish [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -492,14 +492,14 @@ avalanche subnet publish [subnetName] [flags]
 
 <!-- markdownlint-enable MD013 -->
 
-### Subnet Stats
+### Blockchain Stats
 
-The `subnet stats` command prints validator statistics for the given Subnet.
+The `blockchain stats` command prints validator statistics for the given Subnet.
 
 **Usage:**
 
 ```shell
-avalanche subnet stats [subnetName] [flags]
+avalanche blockchain stats [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -511,14 +511,14 @@ avalanche subnet stats [subnetName] [flags]
     --testnet testnet   print stats on testnet (alias for `fuji`)
 ```
 
-### Subnet VMID
+### Blockchain VMID
 
-The `subnet vmid` command prints the virtual machine ID (VMID) for the given Subnet.
+The `blockchain vmid` command prints the virtual machine ID (VMID) for the given Subnet.
 
 **Usage:**
 
 ```shell
-avalanche subnet vmid [subnetName]
+avalanche subnet vmid [blockchainName]
 ```
 
 ## Elastic Subnet
@@ -608,12 +608,12 @@ avalanche subnet addPermissionlessDelegator [subnetName] [flags]
     --testnet                               add permissionless delegator in existing testnet deployment (alias for `fuji`)
 ```
 
-## Subnet Upgrade
+## Blockchain Upgrade
 
-The `subnet upgrade` command suite provides a collection of tools for
+The `blockchain upgrade` command suite provides a collection of tools for
 updating your developmental and deployed Subnets.
 
-### Subnet Upgrade Apply
+### Blockchain Upgrade Apply
 
 Apply generated upgrade bytes to running Subnet nodes to trigger a network upgrade.
 
@@ -630,7 +630,7 @@ related documentation.
 **Usage:**
 
 ```shell
-avalanche subnet upgrade apply [subnetName] [flags]
+avalanche blockchain upgrade apply [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -647,14 +647,14 @@ avalanche subnet upgrade apply [subnetName] [flags]
     --testnet testnet                       apply upgrade existing testnet deployment (alias for `fuji`)
 ```
 
-### Subnet Upgrade Export
+### Blockchain Upgrade Export
 
 Export the upgrade bytes file to a location of choice on disk.
 
 **Usage:**
 
 ```shell
-avalanche subnet upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -665,15 +665,15 @@ avalanche subnet upgrade export [subnetName] [flags]
     --upgrade-filepath string   Export upgrade bytes file to location of choice on disk
 ```
 
-### Subnet Upgrade Generate
+### Blockchain Upgrade Generate
 
-The `subnet upgrade generate` command builds a new upgrade.json file to customize your Subnet. It
+The `blockchain upgrade generate` command builds a new upgrade.json file to customize your Subnet. It
 guides the user through the process using an interactive wizard.
 
 **Usage:**
 
 ```shell
-avalanche subnet upgrade generate [subnetName] [flags]
+avalanche blockchain upgrade generate [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -682,14 +682,14 @@ avalanche subnet upgrade generate [subnetName] [flags]
 -h, --help   help for generate
 ```
 
-### Subnet Upgrade Import
+### Blockchain Upgrade Import
 
 Import the upgrade bytes file into the local environment.
 
 **Usage:**
 
 ```shell
-avalanche subnet upgrade import [subnetName] [flags]
+avalanche blockchain upgrade import [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -699,14 +699,14 @@ avalanche subnet upgrade import [subnetName] [flags]
     --upgrade-filepath string   Import upgrade bytes file into local environment
 ```
 
-### Subnet Upgrade Print
+### Blockchain Upgrade Print
 
 Print the upgrade.json file content.
 
 **Usage:**
 
 ```shell
-avalanche subnet upgrade print [subnetName] [flags]
+avalanche blockchain upgrade print [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -715,9 +715,9 @@ avalanche subnet upgrade print [subnetName] [flags]
 -h, --help       help for list
 ```
 
-### Subnet Upgrade VM
+### Blockchain Upgrade VM
 
-The `subnet upgrade vm` command enables the user to upgrade their Subnet's VM binary. The command
+The `blockchain upgrade vm` command enables the user to upgrade their Subnet's VM binary. The command
 can upgrade both local Subnets and publicly deployed Subnets on Fuji and Mainnet.
 
 The command walks the user through an interactive wizard. The user can skip the wizard by providing
@@ -726,7 +726,7 @@ command line flags.
 **Usage:**
 
 ```shell
-avalanche subnet upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -853,7 +853,7 @@ It saves the deploy info both locally and remotely.
 **Usage:**
 
 ```shell
-  avalanche node devnet deploy [clusterName] [subnetName] [flags]
+  avalanche node devnet deploy [clusterName] [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -869,7 +869,7 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 **Usage:**
 
 ```shell
-  avalanche node devnet wiz [clusterName] [subnetName] [flags]
+  avalanche node devnet wiz [clusterName] [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -1023,7 +1023,7 @@ The command will then run the load test binary based on the provided load test r
 **Usage:**
 
 ```shell
-  avalanche node loadtest start [loadtestName] [clusterName] [subnetName] [flags]
+  avalanche node loadtest start [loadtestName] [clusterName] [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -1155,12 +1155,12 @@ To get the bootstrap status of a node with a Subnet, use the `--subnet` flag.
 :::
 
 The `node sync` command enables all nodes in a cluster to be bootstrapped to a Subnet.
-You can check the Subnet bootstrap status by calling avalanche `node status <clusterName> --subnet <subnetName>`
+You can check the Subnet bootstrap status by calling avalanche `node status <clusterName> --subnet <blockchainName>`
 
 **Usage:**
 
 ```shell
-  avalanche node sync [clusterName] [subnetName] [flags]
+  avalanche node sync [clusterName] [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -1191,12 +1191,12 @@ You can check the status after update by calling `avalanche node status`
 
 The `node update subnet` command updates all nodes in a cluster with latest Subnet configuration and
 You can check the updated Subnet bootstrap status by calling avalanche
-`node status <clusterName> --subnet <subnetName>`
+`node status <clusterName> --subnet <blockchainName>`
 
 **Usage:**
 
 ```shell
-  avalanche node update subnet [clusterName] [subnetName] [flags]
+  avalanche node update subnet [clusterName] [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -1264,12 +1264,12 @@ If The command is run before the nodes are bootstrapped on the Primary Network, 
 will fail.
 You can check the bootstrap status by calling `avalanche node status <clusterName>`.
 If The command is run before the nodes are synced to the Subnet, the command will fail.
-You can check the Subnet sync status by calling `avalanche node status <clusterName> --subnet <subnetName>`.
+You can check the Subnet sync status by calling `avalanche node status <clusterName> --subnet <blockchainName>`.
 
 **Usage:**
 
 ```shell
-  avalanche node validate subnet [clusterName] [subnetName] [flags]
+  avalanche node validate subnet [clusterName] [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -1328,7 +1328,7 @@ The `network` command suite provides a collection of tools for managing local Su
 deployments.
 
 When you deploy a Subnet locally, it runs on a local, multi-node Avalanche network. The
-`subnet deploy` command starts this network in the background. This command suite allows you
+`blockchain deploy` command starts this network in the background. This command suite allows you
 to shutdown, restart, and clear that network.
 
 This network currently supports multiple, concurrently deployed Subnets.
@@ -1426,7 +1426,7 @@ The `transaction commit` command commits a transaction by submitting it to the P
 **Usage:**
 
 ```shell
-avalanche transaction commit [subnetName] [flags]
+avalanche transaction commit [blockchainName] [flags]
 ```
 
 **Flags:**
@@ -1443,7 +1443,7 @@ The `transaction sign` command signs a multisig transaction.
 **Usage:**
 
 ```shell
-avalanche transaction sign [subnetName] [flags]
+avalanche transaction sign [blockchainName] [flags]
 ```
 
 **Flags:**

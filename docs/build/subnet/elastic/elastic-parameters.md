@@ -308,3 +308,18 @@ parameters on Mainnet:
 - `MaxValidatorWeightFactor = 5`. This is a platformVM parameter rather than a
   genesis one, so it's shared across networks.
 - `UptimeRequirement = 0.8`, that is `80%`.
+
+### Interactive Graph
+
+The graph below demonstrates the reward as a function of the length of time
+staked. The x-axis depicts $\frac{StakingPeriod}{MintingPeriod}$ as a percentage
+while the y-axis depicts $Reward$ as a percentage of $MaximumSupply - Supply$,
+the amount of tokens left to be emitted.
+
+Graph variables correspond to those defined above:
+
+- `h` (high) = $MaxConsumptionRate$
+- `l` (low) = $MinConsumptionRate$
+- `s` = $\frac{Stake}{Supply}$
+
+<iframe src="https://www.desmos.com/calculator/uqtank2gcn" width="100%" height="400px"></iframe>
