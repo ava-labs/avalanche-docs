@@ -7,7 +7,7 @@ Avalanche-CLI is a command-line tool that gives developers access to everything 
 
 To get started, look at the documentation for the subcommands or jump right in with `avalanche subnet create myNewSubnet`.
 
-[Install Avalanche CLI](/docs/tooling/guides/get-avalanche-cli)
+[Install Avalanche CLI](/tooling/guides/get-avalanche-cli)
 
 Primary[​](#primary "Direct link to heading")
 ---------------------------------------------
@@ -16,11 +16,11 @@ The `primary` command suite provides a collection of tools for interacting with 
 
 ### Primary AddValidator[​](#primary-addvalidator "Direct link to heading")
 
-The `primary addValidator` command adds an Avalanche node as a validator in the Avalanche Primary Network with [AddPermissionlessValidatorTx](/docs/api-reference/standards/guides/banff-changes#addpermissionlessvalidatortx).
+The `primary addValidator` command adds an Avalanche node as a validator in the Avalanche Primary Network with [AddPermissionlessValidatorTx](/api-reference/standards/guides/banff-changes#addpermissionlessvalidatortx).
 
-This command requires the node's BLS key and proof of possession key, more information regarding BLS can be found [here](/docs/api-reference/p-chain/transaction-format#proof-of-possession).
+This command requires the node's BLS key and proof of possession key, more information regarding BLS can be found [here](/api-reference/p-chain/transaction-format#proof-of-possession).
 
-To get a node's BLS key and proof of possession key, call info.getNodeID API as shown [here](/docs/api-reference/info-api#infogetnodeid)
+To get a node's BLS key and proof of possession key, call info.getNodeID API as shown [here](/api-reference/info-api#infogetnodeid)
 
 **Usage**:
 
@@ -545,7 +545,7 @@ Apply generated upgrade bytes to running Subnet nodes to trigger a network upgra
 
 For public networks (Fuji Testnet or Mainnet), to complete this process, you must have access to the machine running your validator. If the CLI is running on the same machine as your validator, it can manipulate your node's configuration automatically. Alternatively, the command can print the necessary instructions to upgrade your node manually.
 
-After you update your validator's configuration, you need to restart your validator manually. If you provide the `--avalanchego-chain-config-dir` flag, this command attempts to write the upgrade file at that path. Refer to [this doc](/docs/nodes/configure/configs-flags#subnet-chain-configs) for related documentation.
+After you update your validator's configuration, you need to restart your validator manually. If you provide the `--avalanchego-chain-config-dir` flag, this command attempts to write the upgrade file at that path. Refer to [this doc](/nodes/configure/configs-flags#subnet-chain-configs) for related documentation.
 
 **Usage**:
 

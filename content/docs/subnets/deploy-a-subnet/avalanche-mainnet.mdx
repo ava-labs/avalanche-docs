@@ -8,7 +8,7 @@ Deploying a Subnet to Mainnet has many risks. Doing so safely requires a laser f
 This tutorial is an educational resource and provides no guarantees that following it results in a secure deployment. Additionally, this tutorial takes some shortcuts that aid the understanding of the deployment process at the expense of security. The text highlights these shortcuts and they shouldn't be used for a production deployment.
 </Callout>
 
-After managing a successful Subnet deployment on the `Fuji Testnet`, you're ready to deploy your Subnet on Mainnet. If you haven't done so, first [Deploy a Subnet on Testnet](/docs/subnets/deploy-a-subnet/fuji-testnet).
+After managing a successful Subnet deployment on the `Fuji Testnet`, you're ready to deploy your Subnet on Mainnet. If you haven't done so, first [Deploy a Subnet on Testnet](/subnets/deploy-a-subnet/fuji-testnet).
 
 This tutorial shows how to do the following on `Mainnet`.
 
@@ -23,10 +23,10 @@ All IDs in this article are for illustration purposes only. They are guaranteed 
 
 ## Prerequisites
 
-- 5+ nodes running and [fully bootstrapped](/docs/nodes/quick-links) on `Mainnet`
-- [Avalanche-CLI is installed](/docs/tooling/guides/get-avalanche-cli) on each validator node's box
+- 5+ nodes running and [fully bootstrapped](/nodes/quick-links) on `Mainnet`
+- [Avalanche-CLI is installed](/tooling/guides/get-avalanche-cli) on each validator node's box
 - A [Ledger](https://www.ledger.com/) device
-- You've [created a Subnet configuration](/docs/subnets/build-first-subnet#create-your-subnet-configuration) and fully tested a [Fuji Testnet Subnet deployment](/docs/subnets/deploy-a-subnet/fuji-testnet)
+- You've [created a Subnet configuration](/subnets/build-first-subnet#create-your-subnet-configuration) and fully tested a [Fuji Testnet Subnet deployment](/subnets/deploy-a-subnet/fuji-testnet)
 
 <Callout type="warn">
 Although only one validator is strictly required to run a Subnet, running with less than five validators is extremely dangerous and guarantees network downtime. Plan to support at least five validators in your production network.
@@ -36,7 +36,7 @@ Although only one validator is strictly required to run a Subnet, running with l
 
 You need to collect the NodeIDs for each of your validators. This tutorial uses these NodeIDs in several commands.
 
-To get the NodeID of a `Mainnet` node, call the [info.getNodeID](/docs/api-reference/info-api#infogetnodeid) endpoint. For example:
+To get the NodeID of a `Mainnet` node, call the [info.getNodeID](/api-reference/info-api#infogetnodeid) endpoint. For example:
 
 ```bash
 curl -X POST --data '{
@@ -84,7 +84,7 @@ avalanche key list --ledger 0 --mainnet
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-The command prints the P-Chain address for `Mainnet`, `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, and its balance. You should fund this address with at least 2.5 AVAX to cover TX fees. the TX fee for creating your Subnet costs 2 AVAX. Adding validators costs 0.001 AVAX each. For more details, see [Fees](/docs/api-reference/standards/guides/transaction-fees)
+The command prints the P-Chain address for `Mainnet`, `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, and its balance. You should fund this address with at least 2.5 AVAX to cover TX fees. the TX fee for creating your Subnet costs 2 AVAX. Adding validators costs 0.001 AVAX each. For more details, see [Fees](/api-reference/standards/guides/transaction-fees)
 
 <Callout title="Note">
 You can use the `key list` command to get any Ledger address in the derivation sequence by changing the index parameter from `0` to the one desired, or to a list of them (for example: `2`, or `0,4,7`). Also, you can ask for addresses on `Fuji` with the `--fuji` parameter, and local networks with the `--local` parameter.
@@ -137,7 +137,7 @@ This tutorial creates a permissioned Subnet. As such, you must specify which P-C
 <Callout type="warn">
 In production Subnets, you should always use multiple control keys running in a multisig configuration. This tutorial uses a single control key for illustrative purposes only.
 
-For instructions on controlling your Subnet with a multisig, see the [Multisig Deployment Tutorial](/docs/subnets/deploy-a-subnet/multisig-auth).
+For instructions on controlling your Subnet with a multisig, see the [Multisig Deployment Tutorial](/subnets/deploy-a-subnet/multisig-auth).
 </Callout>
 
 ```bash
@@ -211,7 +211,7 @@ The new Subnet created in the previous steps doesn't have any dedicated validato
 <Callout title="Note">
 Adding a validator on a Subnet requires that the node is already a validator on the primary network, which means that your node has **fully bootstrapped**.
 
-See [here](/docs/nodes/validate/node-validator#add-a-validator-with-core-extension) on how to become a validator.
+See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) on how to become a validator.
 </Callout>
 
 First, request permission to validate by running the `join` command along with the Subnet name:

@@ -11,7 +11,7 @@ There is a public API server that allows developers to access the Avalanche netw
 
 ### Using the Public API Nodes[​](#using-the-public-api-nodes "Direct link to heading")
 
-The public API server is at `api.avax.network` for Avalanche Mainnet and `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API, just append the relevant API endpoint, as documented [here](/docs/api-reference/standards/guides/api-calls). Namely, use the following end points for each chain respectively:
+The public API server is at `api.avax.network` for Avalanche Mainnet and `api.avax-test.network` for Avalanche Fuji Testnet. To access a particular API, just append the relevant API endpoint, as documented [here](/api-reference/standards/guides/api-calls). Namely, use the following end points for each chain respectively:
 
 #### HTTP[​](#http "Direct link to heading")
 
@@ -29,9 +29,9 @@ Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
 #### Supported APIs[​](#supported-apis "Direct link to heading")
 
-The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](/docs/api-reference/x-chain/api), [P-Chain](/docs/api-reference/p-chain/api), [C-Chain](/docs/api-reference/c-chain/api), and full archival for the Primary Network. However, it doesn't support [Index APIs](/docs/api-reference/index-api), which includes the X-Chain API's `getAddressTxs` method.
+The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](/api-reference/x-chain/api), [P-Chain](/api-reference/p-chain/api), [C-Chain](/api-reference/c-chain/api), and full archival for the Primary Network. However, it doesn't support [Index APIs](/api-reference/index-api), which includes the X-Chain API's `getAddressTxs` method.
 
-For a full list of available APIs see [here](/docs/api-reference/quicklinks).
+For a full list of available APIs see [here](/api-reference/quicklinks).
 
 #### Limitations[​](#limitations "Direct link to heading")
 
@@ -39,13 +39,13 @@ The public API only supports C-Chain WebSocket API calls for API methods that do
 
 For batched C-Chain requests on the public API node, the maximum number of items is 40. We're working on to support a larger batch size.
 
-The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/docs/nodes/configure/chain-configs/c-chain#api-max-blocks-per-request).
+The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/nodes/configure/chain-configs/c-chain#api-max-blocks-per-request).
 
 #### Sticky Sessions[​](#sticky-sessions "Direct link to heading")
 
 Requests to the public API server API are distributed by a load balancer to an individual node. As a result, consecutive requests may go to different nodes. That can cause issues for some use cases. For example, one node may think a given transaction is accepted, while for another node the transaction is still processing. To work around this, you can use 'sticky sessions', as documented [here](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials). This allows consecutive API calls to be routed to the same node.
 
-If you're using [AvalancheJS](/docs/tooling/avalanche-js) to access the public API, simply set the following in your code:
+If you're using [AvalancheJS](/tooling/avalanche-js) to access the public API, simply set the following in your code:
 
 ```
 avalanche.setRequestConfig("withCredentials", true);

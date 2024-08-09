@@ -7,7 +7,7 @@ import { map } from '.map';
 import { create } from '@/components/ui/icon';
 
 export const { getPage, getPages, pageTree } = loader({
-  baseUrl: '/docs',
+  baseUrl: '/',
   rootDir: 'docs',
   icon(icon) {
     if (icon && icon in icons)
@@ -25,7 +25,7 @@ export const { getPage, getPages, pageTree } = loader({
 });
 
 export const utils = loader({
-  baseUrl: '/docs',
+  baseUrl: '/',
   rootDir: 'docs',
   icon(icon) {
     if (icon && icon in icons)
