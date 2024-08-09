@@ -1,0 +1,24 @@
+{
+  "title": "Nodes",
+  "root": true,
+  "pages": [
+    "index",
+    "---Run A Node---",
+    "run-a-node/manually",
+    "using-install-script",
+    "run-a-node/subnet-nodes",
+    "on-third-party-services",
+    "run-a-node/common-errors",
+    "---Configure---",
+    "configure/configs-flags",
+    "chain-configs",
+    "configure/subnet-configs",
+    "---Validate---",
+    "validate/what-is-staking",
+    "validate/validate-vs-delegate",
+    "validate/how-to-stake",
+    "validate/node-validator",
+    "---Maintain---",
+    "...maintain"
+  ]
+}

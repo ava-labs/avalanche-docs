@@ -1,0 +1,70 @@
+---
+title: Subnet Virtual Machine
+description: This how-to guide explains how to upgrade an already-deployed Subnet.
+---
+
+Upgrading a Local VM[​](#upgrading-a-local-vm "Direct link to heading")
+-----------------------------------------------------------------------
+
+To upgrade a local Subnet, you first need to pause the local network. To do so, run:
+
+```bash
+avalanche network stop
+```
+
+Next, you need to select the new VM to run your Subnet on. If you're running a Subnet-EVM Subnet, you likely want to bump to the latest released version. If you're running a Custom VM, you'll want to choose another custom binary.
+
+Start the upgrade wizard with:
+
+```bash
+avalanche subnet upgrade vm <subnetName>
+```
+
+where you replace `<subnetName>` with the name of the Subnet you would like to upgrade.
+
+### Selecting a VM Deployment to Upgrade[​](#selecting-a-vm-deployment-to-upgrade "Direct link to heading")
+
+After starting the Subnet Upgrade Wizard, you should see something like this:
+
+```bash
+? What deployment would you like to upgrade:
+  ▸ Update config for future deployments
+    Existing local deployment
+```
+
+If you select the first option, Avalanche-CLI updates your Subnet's config and any future calls to `avalanche subnet deploy` use the new version you select. However, any existing local deployments continue to use the old version.
+
+If you select the second option, the opposite occurs. The existing local deployment switches to the new VM but subsequent deploys use the original.
+
+### Select a VM to Upgrade To[​](#select-a-vm-to-upgrade-to "Direct link to heading")
+
+The next option asks you to select your new virtual machine.
+
+```bash
+? How would you like to update your subnet's virtual machine:
+  ▸ Update to latest version
+    Update to a specific version
+    Update to a custom binary
+```
+
+If you're using the Subnet-EVM, you'll have the option to upgrade to the latest released version. You can also select a specific version or supply a custom binary. If your Subnet already uses a custom VM, you need to select another custom binary.
+
+Once you select your VM, you should see something like:
+
+```bash
+Upgrade complete. Ready to restart the network.
+```
+
+### Restart the Network[​](#restart-the-network "Direct link to heading")
+
+<Callout title="Note">
+If you are running multiple Subnets concurrently, you may need to update multiple Subnets to restart the network. All of your deployed must be using the same RPC Protocol version. You can see more details about this [here](/docs/subnets/troubleshooting#incompatible-rpc-version-for-custom-vm).
+</Callout>
+
+Finally, restart the network with:
+
+```bash
+avalanche network start
+```
+
+If the network starts correctly, your Subnet is now running the upgraded VM.
