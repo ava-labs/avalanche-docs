@@ -1,0 +1,24 @@
+{
+  "title": "api-reference",
+  "root": true,
+  "pages": [
+    "---AvalancheGo---",
+    "p-chain",
+    "x-chain",
+    "c-chain",
+    "---Other AvalancheGo References---",
+    "admin-api",
+    "health-api",
+    "index-api",
+    "info-api",
+    "keystore-api",
+    "metrics-api",
+    "avalanche-go-configs-flags",
+    "---Avalanche Subnets---",
+    "subnet-evm-api",
+    "---Miscellaneous---",
+    "standards",
+    "rpc-providers",
+    "install-script"
+  ]
+}

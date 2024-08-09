@@ -1,0 +1,19 @@
+{
+  "title": "learn",
+  "root": true,
+  "pages": [
+    "index",
+    "avalanche-consensus",
+    "avax-token",
+    "---Multi-chain Architecture---",
+    "subnets",
+    "primary-network",
+    "virtual-machines",
+    "---Networks---",
+    "networks/mainnet",
+    "networks/fuji-testnet",
+    "---Extras---",
+    "avalanche-community-proposals",
+    "disclaimer"
+  ]
+}
