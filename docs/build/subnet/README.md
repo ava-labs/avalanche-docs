@@ -27,12 +27,7 @@ for a broad overview.
 | [**On Production Infrastructure**](/build/subnet/deploy/on-prod-infra.md)      |
 | [**With Multisignature Authorization**](/build/subnet/deploy/multisig-auth.md) |
 | [**With a Custom Virtual Machine**](/build/subnet/deploy/custom-vm-subnet.md)  |
-
-| Elastic Subnets                                                                                                    |
-| :----------------------------------------------------------------------------------------------------------------- |
-| [**Transform a Permissioned Subnet into an Elastic Subnet**](/build/subnet/elastic/transform-to-elastic-subnet.md) |
-| [**Elastic Subnet Parameters**](/build/subnet/elastic/elastic-parameters.md)                                       |
-
+                                    
 | Manage Subnets                                                                                         |
 | :----------------------------------------------------------------------------------------------------- |
 | [**View Your Created Subnets**](/build/subnet/maintain/view-subnets.md)                                |
