@@ -69,7 +69,7 @@ export const docsOptions: DocsLayoutProps = {
             url: '/docs/cross-chain',
           },
           {
-            title: 'Toolings',
+            title: 'Tooling',
             description: 'CLI, Scripts, and More',
             icon: <Settings />,
             url: '/docs/tooling/avalanche-cli',
