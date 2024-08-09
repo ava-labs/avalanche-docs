@@ -36,49 +36,49 @@ export const docsOptions: DocsLayoutProps = {
             title: 'Avalanche Protocol',
             description: 'Learn about Avalanche',
             icon: <SproutIcon />,
-            url: '/docs/learn',
+            url: '/learn',
           },
           {
             title: 'Smart Contracts',
             description: 'Build Apps on Avalanche',
             icon: <SquareGanttChart />,
-            url: '/docs/dapps',
+            url: '/dapps',
           },
           {
             title: 'Avalanche L1s',
             description: 'Build Your L1 Blockchain',
             icon: <Layers />,
-            url: '/docs/subnets',
+            url: '/subnets',
           },
           {
             title: 'Virtual Machines',
             description: 'Customize Your Execution Layer',
             icon: <IndentDecrease />,
-            url: '/docs/virtual-machines',
+            url: '/virtual-machines',
           },
           {
             title: 'Nodes & Validators',
             description: 'Participate in the Network',
             icon: <MonitorCheck />,
-            url: '/docs/nodes',
+            url: '/nodes',
           },
           {
             title: 'Interoperability',
             description: 'AWM and Teleporter',
             icon: <MailIcon />,
-            url: '/docs/cross-chain',
+            url: '/cross-chain',
           },
           {
             title: 'Tooling',
             description: 'CLI, Scripts, and More',
             icon: <Settings />,
-            url: '/docs/tooling/avalanche-cli',
+            url: '/tooling/avalanche-cli',
           },
           {
             title: 'API Docs',
             description: 'Avalanche API References',
             icon: <Webhook />,
-            url: '/docs/api-reference/p-chain/api',
+            url: '/api-reference/p-chain/api',
           }
         ]}
       />
