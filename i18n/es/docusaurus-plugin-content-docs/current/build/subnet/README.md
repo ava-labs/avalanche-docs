@@ -25,11 +25,6 @@ Las Subnets de Avalanche son un subconjunto de validadores de la red primaria de
 | [**Con autorización de firma múltiple**](/build/subnet/deploy/multisig-auth.md)       |
 | [**Con una Máquina Virtual personalizada**](/build/subnet/deploy/custom-vm-subnet.md) |
 
-| Subnets elásticas                                                                                                      |     |
-| :--------------------------------------------------------------------------------------------------------------------- | --- |
-| [**Transformar una Subnet permisionada en una Subnet elástica**](/build/subnet/elastic/transform-to-elastic-subnet.md) |
-| [**Parámetros de la Subnet elástica**](/build/subnet/elastic/elastic-parameters.md)                                    |
-
 | Gestionar Subnets                                                                                                   |     |
 | :------------------------------------------------------------------------------------------------------------------ | --- |
 | [**Ver tus Subnets creadas**](/build/subnet/maintain/view-subnets.md)                                               |
