@@ -1,6 +1,0 @@
-type Transfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  amount: BigInt!
-}
