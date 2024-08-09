@@ -7,18 +7,18 @@ You can customize Subnet-EVM based Subnets after deployment by enabling and disa
 
 This document describes how to perform such network upgrades. It's specific for Subnet-EVM upgrades.
 
-The document [Upgrade a Subnet](/docs/subnets/upgrade/considerations) describes all the background information required regarding Subnet upgrades.
+The document [Upgrade a Subnet](/subnets/upgrade/considerations) describes all the background information required regarding Subnet upgrades.
 
 <Callout type="warn">
 It's very important that you have read and understood the previously linked document. Failing to do so can potentially grind your network to a halt.
 </Callout>
 
-This tutorial assumes that you have already [installed](/docs/tooling/guides/get-avalanche-cli) Avalanche-CLI. It assumes you have already created and deployed a Subnet called `testSubnet`.
+This tutorial assumes that you have already [installed](/tooling/guides/get-avalanche-cli) Avalanche-CLI. It assumes you have already created and deployed a Subnet called `testSubnet`.
 
 Generate the Upgrade File[​](#generate-the-upgrade-file "Direct link to heading")
 ---------------------------------------------------------------------------------
 
-The [Precompiles](/docs/subnets/upgrade/customize-subnet#network-upgrades-enabledisable-precompiles) documentation describes what files the network upgrade requires, and where to place them.
+The [Precompiles](/subnets/upgrade/customize-subnet#network-upgrades-enabledisable-precompiles) documentation describes what files the network upgrade requires, and where to place them.
 
 To generate a valid `upgrade.json` file, run:
 
@@ -33,7 +33,7 @@ avalanche subnet upgrade generate testSubnet
 The provided subnet name "testSubnet" does not exist
 ```
 
-Again, it makes no sense to try the upgrade command if the Subnet doesn't exist. If that's the case, please go ahead and [create](/docs/subnets/build-first-subnet) the Subnet first.
+Again, it makes no sense to try the upgrade command if the Subnet doesn't exist. If that's the case, please go ahead and [create](/subnets/build-first-subnet) the Subnet first.
 
 If the Subnet definition exists, the tool launches a wizard. It may feel a bit redundant, but you first see some warnings, to draw focus to the dangers involved:
 
@@ -71,11 +71,11 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Transaction Allow List
 ```
 
-Refer to [Precompiles](/docs/subnets/upgrade/customize-subnet#precompiles) for a description of available precompiles and how to configure them.
+Refer to [Precompiles](/subnets/upgrade/customize-subnet#precompiles) for a description of available precompiles and how to configure them.
 
 Make sure you understand precompiles thoroughly and how to configure them before attempting to continue.
 
-For every precompile in the list, the wizard guides you to provide correct information by prompting relevant questions. For the sake of this tutorial, select `Transaction Allow List`. The document [Restricting Who Can Submit Transactions](/docs/subnets/upgrade/customize-subnet#restricting-who-can-submit-transactions) describes what this precompile is about.
+For every precompile in the list, the wizard guides you to provide correct information by prompting relevant questions. For the sake of this tutorial, select `Transaction Allow List`. The document [Restricting Who Can Submit Transactions](/subnets/upgrade/customize-subnet#restricting-who-can-submit-transactions) describes what this precompile is about.
 
 ```bash
 ✔ Transaction Allow List
@@ -254,7 +254,7 @@ Global Flags:
       --log-level string   log level for the application (default "ERROR")
 ```
 
-Go ahead and [deploy](/docs/subnets/deploy-a-subnet/local-network) first your Subnet if that's your case.
+Go ahead and [deploy](/subnets/deploy-a-subnet/local-network) first your Subnet if that's your case.
 
 If you already had deployed the Subnet instead, you see something like this:
 

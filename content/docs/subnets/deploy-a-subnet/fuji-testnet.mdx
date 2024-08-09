@@ -7,7 +7,7 @@ description: Learn how to deploy a Subnet on the Fuji Testnet.
 This document describes how to use the new Avalanche-CLI to deploy a Subnet on `Fuji`.
 </Callout>
 
-After trying out a Subnet on a local box by following [this tutorial](/docs/subnets/deploy-a-subnet/local-network), next step is to try it out on `Fuji` Testnet.
+After trying out a Subnet on a local box by following [this tutorial](/subnets/deploy-a-subnet/local-network), next step is to try it out on `Fuji` Testnet.
 
 In this article, it's shown how to do the following on `Fuji` Testnet.
 
@@ -20,13 +20,13 @@ All IDs in this article are for illustration purposes. They can be different in 
 
 ## Prerequisites
 
-- 1+ nodes running and fully bootstrapped on `Fuji` Testnet. Check out the section [Nodes](/docs/nodes/quick-links) on how to run a node and become a validator.
+- 1+ nodes running and fully bootstrapped on `Fuji` Testnet. Check out the section [Nodes](/nodes/quick-links) on how to run a node and become a validator.
 - [`Avalanche-CLI`](https://github.com/ava-labs/avalanche-cli) installed
 
 Virtual Machine[​](#virtual-machine "Direct link to heading")
 -------------------------------------------------------------
 
-Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine](/docs/learn/virtual-machines), much like an object in an object-oriented language is an instance of a class. That's, the VM defines the behavior of the blockchain.
+Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine](/learn/virtual-machines), much like an object in an object-oriented language is an instance of a class. That's, the VM defines the behavior of the blockchain.
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) is the VM that defines the Subnet Contract Chains. Subnet-EVM is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
 
@@ -35,13 +35,13 @@ This chain implements the Ethereum Virtual Machine and supports Solidity smart c
 Fuji Testnet[​](#fuji-testnet "Direct link to heading")
 -------------------------------------------------------
 
-For this tutorial, it's recommended that you follow [Run an Avalanche Node Manually](/docs/nodes/run-a-node/manually#run-an-avalanche-node-from-source) and this step below particularly to start your node on `Fuji`:
+For this tutorial, it's recommended that you follow [Run an Avalanche Node Manually](/nodes/run-a-node/manually#run-an-avalanche-node-from-source) and this step below particularly to start your node on `Fuji`:
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
 
-Also it's worth pointing out that [it only needs 1 AVAX to become a validator on the Fuji Testnet](/docs/nodes/validate/what-is-staking) and you can get the test token from the [faucet](https://faucet.avax.network/). If you already have an AVAX balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, please request a faucet coupon on [Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6) can provide testnet AVAX if developers are unable to obtain it from the other two options.
+Also it's worth pointing out that [it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking) and you can get the test token from the [faucet](https://faucet.avax.network/). If you already have an AVAX balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, please request a faucet coupon on [Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6) can provide testnet AVAX if developers are unable to obtain it from the other two options.
 
-To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/docs/api-reference/info-api#infogetnodeid):
+To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/api-reference/info-api#infogetnodeid):
 
 ```bash
 curl -X POST --data '{
@@ -66,13 +66,13 @@ The response should look something like:
 That portion that says, `NodeID-5mb46qkSBj81k9g9e4VFjGGSbaaSLFRzD` is the NodeID, the entire thing. The user is going to need this ID in the later section when calling [addValidator](#add-a-validator).
 
 <Callout title="Note">
-With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch. You can use [State-Sync](/docs/nodes/configure/chain-configs/c-chain#state-sync-enabled) to shorten the time for bootstrapping.
+With more data on `Fuji`, it may take a while to bootstrap `Fuji` Testnet from scratch. You can use [State-Sync](/nodes/configure/chain-configs/c-chain#state-sync-enabled) to shorten the time for bootstrapping.
 </Callout>
 
 Avalanche-CLI[​](#avalanche-cli "Direct link to heading")
 ---------------------------------------------------------
 
-If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/docs/tooling/guides/get-avalanche-cli)
+If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/tooling/guides/get-avalanche-cli)
 
 ### Private Key[​](#private-key "Direct link to heading")
 
@@ -88,7 +88,7 @@ This tutorial focuses on stored key usage and leave ledger operation details for
 - list
 
 <Callout type="warn">
-You should only use the private key created for this tutorial for testing operations on `Fuji` or other testnets. Don't use this key on `Mainnet`. CLI is going to store the key on your file system. Whoever gets access to that key is going to have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](/docs/subnets/deploy-a-subnet/avalanche-mainnet).
+You should only use the private key created for this tutorial for testing operations on `Fuji` or other testnets. Don't use this key on `Mainnet`. CLI is going to store the key on your file system. Whoever gets access to that key is going to have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](/subnets/deploy-a-subnet/avalanche-mainnet).
 </Callout>
 
 Run `create` if you don't have any private key available yet. You can create multiple named keys. Each command requiring a key is going to therefore require the appropriate key name you want to use.
@@ -236,7 +236,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 
 You can accept the default -again, NOT for production-, or customize your airdrop. In the latter case the wizard would continue. Assume the default here.
 
-The final question is asking for precompiles. Precompiles are powerful customizations of your EVM. Read about them at [precompiles](/docs/subnets/upgrade/customize-subnet#precompiles).
+The final question is asking for precompiles. Precompiles are powerful customizations of your EVM. Read about them at [precompiles](/subnets/upgrade/customize-subnet#precompiles).
 
 ```bash
 ✔ Airdrop 1 million tokens to the default address (do not use in production)
@@ -472,7 +472,7 @@ Before a node can be a validator on a Subnet, the node is required to already be
 
 If the validator is within 24 hours of expiring on the primary network, it can't be added to the Subnet.
 
-See [here](/docs/nodes/validate/node-validator#add-a-validator-with-core-extension) on how to become a validator.
+See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) on how to become a validator.
 </Callout>
 
 First, request permission to validate by running the `join` command along with the Subnet name:

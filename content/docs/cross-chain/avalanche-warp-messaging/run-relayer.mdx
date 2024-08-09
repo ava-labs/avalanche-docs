@@ -79,11 +79,11 @@ Requirements[​](#requirements "Direct link to heading")
         - info.getNodeID
         - info.getNodeIP
 
-The Fuji and Mainnet [public API nodes](/docs/tooling/rpc-providers) provided by Avalanche have these methods enabled, and are suitable for use with the relayer.
+The Fuji and Mainnet [public API nodes](/tooling/rpc-providers) provided by Avalanche have these methods enabled, and are suitable for use with the relayer.
 
 ### Peer-to-Peer Connections[​](#peer-to-peer-connections "Direct link to heading")
 
-- The AWM relayer implementation gathers BLS signatures from the validators of the source Subnet via peer-to-peer `AppRequest` messages. Validator nodes need to be configured to accept incoming peer connections. Otherwise, the relayer will fail to gather Warp message signatures. For example, networking rules may need to be adjusted to allow traffic on the default AvalancheGo P2P port (9651), or the public IP may need to be manually set in the [node configuration](/docs/nodes/configure/configs-flags#public-ip).
+- The AWM relayer implementation gathers BLS signatures from the validators of the source Subnet via peer-to-peer `AppRequest` messages. Validator nodes need to be configured to accept incoming peer connections. Otherwise, the relayer will fail to gather Warp message signatures. For example, networking rules may need to be adjusted to allow traffic on the default AvalancheGo P2P port (9651), or the public IP may need to be manually set in the [node configuration](/nodes/configure/configs-flags#public-ip).
 
 Usage[​](#usage "Direct link to heading")
 -----------------------------------------

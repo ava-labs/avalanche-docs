@@ -32,9 +32,9 @@ Example JSON config file:
 ```
 
 <Callout title="Tip" icon = {<BadgeCheck className="size-5 text-card" fill="green" />} >
-[Install Script](/docs/nodes/run/using-install-script/installing-avalanche-go) creates the
+[Install Script](/nodes/run/using-install-script/installing-avalanche-go) creates the
 node config file at `~/.avalanchego/configs/node.json`. No default file is
-created if [AvalancheGo is built from source](/docs/nodes/run-a-node/manually), you
+created if [AvalancheGo is built from source](/nodes/run-a-node/manually), you
 would need to create it manually if needed.
 </Callout>
 
@@ -66,33 +66,33 @@ set of [Avalanche Community Proposals](https://github.com/avalanche-foundation/A
 #### `--api-admin-enabled` (boolean)
 
 If set to `true`, this node will expose the Admin API. Defaults to `false`.
-See [here](/docs/api-reference/admin-api.md) for more information.
+See [here](/api-reference/admin-api.md) for more information.
 
 #### `--api-health-enabled` (boolean)
 
 If set to `false`, this node will not expose the Health API. Defaults to `true`. See
-[here](/docs/api-reference/health-api.md) for more information.
+[here](/api-reference/health-api.md) for more information.
 
 #### `--index-enabled` (boolean)
 
 If set to `true`, this node will enable the indexer and the Index API will be
 available. Defaults to `false`. See
-[here](/docs/api-reference/index-api.md) for more information.
+[here](/api-reference/index-api.md) for more information.
 
 #### `--api-info-enabled` (boolean)
 
 If set to `false`, this node will not expose the Info API. Defaults to `true`. See
-[here](/docs/api-reference/info-api.md) for more information.
+[here](/api-reference/info-api.md) for more information.
 
 #### `--api-keystore-enabled` (boolean)
 
 If set to `true`, this node will expose the Keystore API. Defaults to `false`.
-See [here](/docs/api-reference/keystore-api.md) for more information.
+See [here](/api-reference/keystore-api.md) for more information.
 
 #### `--api-metrics-enabled` (boolean)
 
 If set to `false`, this node will not expose the Metrics API. Defaults to
-`true`. See [here](/docs/api-reference/metrics-api.md) for more information.
+`true`. See [here](/api-reference/metrics-api.md) for more information.
 
 #### `--http-shutdown-wait` (duration)
 
@@ -185,7 +185,7 @@ them into the VM on initialization.
 #### `--chain-config-dir` (string)
 
 Specifies the directory that contains chain configs, as described
-[here](/docs/nodes/configure/configs-flags). Defaults to `$HOME/.avalanchego/configs/chains`.
+[here](/nodes/configure/configs-flags). Defaults to `$HOME/.avalanchego/configs/chains`.
 If this flag is not provided and the default directory does not exist,
 AvalancheGo will not exit since custom configs are optional. However, if the
 flag is set, the specified folder must exist, or AvalancheGo will exit with an
@@ -213,10 +213,10 @@ The chain configuration is intended to provide optional configuration parameters
 and the VM will use default values if nothing is passed in.
 
 Full reference for all configuration options for some standard chains can be
-found in a separate [chain config flags](/docs/nodes/configure/configs-flags) document.
+found in a separate [chain config flags](/nodes/configure/configs-flags) document.
 
 Full reference for `subnet-evm` upgrade configuration can be found in a separate
-[Customize a Subnet](/docs/subnets/upgrade/customize-subnet) document.
+[Customize a Subnet](/subnets/upgrade/customize-subnet) document.
 
 #### `--chain-config-content` (string)
 
@@ -1358,7 +1358,7 @@ GiB).
 
 #### `--plugin-dir` (string)
 
-Sets the directory for [VM plugins](/docs/virtual-machines). The default value is `$HOME/.avalanchego/plugins`.
+Sets the directory for [VM plugins](/virtual-machines). The default value is `$HOME/.avalanchego/plugins`.
 
 ### Virtual Machine (VM) Configs
 

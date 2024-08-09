@@ -8,18 +8,18 @@ After this tutorial, you would have created and deployed two Subnets to the loca
 
 For more information on cross chain messaging through Teleporter and Warp, check:
 
-- [Cross Chain References](/docs/cross-chain/quicklinks)
+- [Cross Chain References](/cross-chain/quicklinks)
 
-Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) and [Subnet-EVM-Based](/docs/virtual-machines/evm-customization/introduction) virtual machines support Teleporter.
+Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) and [Subnet-EVM-Based](/virtual-machines/evm-customization/introduction) virtual machines support Teleporter.
 
 ## Prerequisites
 
-- [Avalanche-CLI installed](/docs/tooling/guides/get-avalanche-cli)
+- [Avalanche-CLI installed](/tooling/guides/get-avalanche-cli)
 
 Create Subnet Configurations[​](#create-subnet-configurations "Direct link to heading")
 ---------------------------------------------------------------------------------------
 
-Let's create a Subnet called `<subnet1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name, and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/docs/subnets/build-first-subnet#create-your-subnet-configuration)):
+Let's create a Subnet called `<subnet1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name, and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/subnets/build-first-subnet#create-your-subnet-configuration)):
 
 ```
 avalanche subnet create <subnet1> --evm --latest\
@@ -106,7 +106,7 @@ Notice some details here:
 
 - Two smart contracts are deployed to each Subnet: Teleporter Messenger and Teleporter Registry
 - Both Teleporter smart contracts are also deployed to `C-Chain` in the Local Network
-- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer [listens](/docs/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
+- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer [listens](/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
 
 CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add more Subnets, the Relayer will be automatically reconfigured.
 

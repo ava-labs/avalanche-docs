@@ -7,7 +7,7 @@ description: The Avalanche Network Runner (ANR) allows a user to define, create 
 
 Developing P2P systems is hard, and blockchains are no different. A developer can't just focus on the functionality of a node, but needs to consider the dynamics of the network, the interaction of nodes and emergent system properties. A lot of testing can't be addressed by unit testing, but needs a special kind of integration testing, where the code runs in interaction with other nodes, attempting to simulate real network scenarios.
 
-In the context of Avalanche, **[Subnets](/docs/learn/subnets)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem.
+In the context of Avalanche, **[Subnets](/learn/subnets)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem.
 
 The ANR aims at being a tool for developers and system integrators alike, offering functionality to run networks of AvalancheGo nodes with support for custom node, Subnet and network configurations, allowing to locally test code before deploying to Mainnet or even public testnets like `fuji`.
 
@@ -130,7 +130,7 @@ Additional optional parameters which can be passed to the start command:
    "genesis": path to a file containing the genesis for your blockchain (must be a valid path)
 ```
 
-See the [Avalanche-CLI documentation](/docs/subnets/deploy-a-subnet/local-network) for details about how to create and run Subnets with our _Avalanche-CLI_ tool.
+See the [Avalanche-CLI documentation](/subnets/deploy-a-subnet/local-network) for details about how to create and run Subnets with our _Avalanche-CLI_ tool.
 
 The network-runner supports AvalancheGo node configuration at different levels.
 
@@ -293,7 +293,7 @@ It's also possible to provide individual node config parameters:
 	--node-config '{"index-enabled":false, "api-admin-enabled":true,"network-peer-list-gossip-frequency":"300ms"}'
 ```
 
-`--node-config` allows to specify specific AvalancheGo config parameters to the new node. See [here](/docs/nodes/configure/configs-flags) for the reference of supported flags.
+`--node-config` allows to specify specific AvalancheGo config parameters to the new node. See [here](/nodes/configure/configs-flags) for the reference of supported flags.
 
 **Note**: The following parameters will be _ignored_ if set in `--node-config`, because the network runner needs to set its own in order to function properly: `--log-dir` `--db-dir`
 
@@ -317,7 +317,7 @@ avalanche-network-runner control stop \
 
 ## Subnets
 
-For general Subnet documentation, please refer to [Subnets](/docs/learn/subnets). ANR can be a great helper working with Subnets, and can be used to develop and test new Subnets before deploying them in public networks. However, for a smooth and guided experience, we recommend using [Avalanche-CLI](/docs/subnets/deploy-a-subnet/local-network). These examples expect a basic understanding of what Subnets are and their usage.
+For general Subnet documentation, please refer to [Subnets](/learn/subnets). ANR can be a great helper working with Subnets, and can be used to develop and test new Subnets before deploying them in public networks. However, for a smooth and guided experience, we recommend using [Avalanche-CLI](/subnets/deploy-a-subnet/local-network). These examples expect a basic understanding of what Subnets are and their usage.
 
 ### RPC Server Subnet-EVM Example
 
