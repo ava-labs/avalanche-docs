@@ -5,14 +5,14 @@ description: Learn about the Avalanche Primary Network and its three blockchains
 
 Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous networks, where all applications reside in the same chain, heterogeneous networks allow separate chains to be created for different applications.
 
-The Primary Network is a special [Subnet](/docs/learn/subnets) that runs three blockchains:
+The Primary Network is a special [Subnet](/learn/subnets) that runs three blockchains:
 
-- The Contract Chain [(C-Chain)](/docs/learn/primary-network#c-chain)
-- The Platform Chain [(P-Chain)](/docs/learn/primary-network#p-chain)
-- The Exchange Chain [(X-Chain)](/docs/learn/primary-network#x-chain)
+- The Contract Chain [(C-Chain)](/learn/primary-network#c-chain)
+- The Platform Chain [(P-Chain)](/learn/primary-network#p-chain)
+- The Exchange Chain [(X-Chain)](/learn/primary-network#x-chain)
 
 <Callout title="Note">
-[Avalanche Mainnet](/docs/learn/networks/mainnet) is comprised of the Primary Network and all deployed Subnets.
+[Avalanche Mainnet](/learn/networks/mainnet) is comprised of the Primary Network and all deployed Subnets.
 </Callout>
 
 A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
@@ -25,19 +25,19 @@ All validators of the Primary Network are required to validate and secure the fo
 
 ### C-Chain
 
-The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM). The [C-Chain's API](/docs/api-reference/c-chain/api) supports Geth's API and supports the deployment and execution of smart contracts written in Solidity.
+The **C-Chain** is an implementation of the Ethereum Virtual Machine (EVM). The [C-Chain's API](/api-reference/c-chain/api) supports Geth's API and supports the deployment and execution of smart contracts written in Solidity.
 
 The C-Chain is an instance of the [Coreth](https://github.com/ava-labs/coreth) Virtual Machine.
 
 ### P-Chain
 
-The **P-Chain** is responsible for all validator and Subnet-level operations. The [P-Chain API](/docs/api-reference/p-chain/api) supports the creation of new blockchains and Subnets, the addition of validators to Subnets, staking operations, and other platform-level operations.
+The **P-Chain** is responsible for all validator and Subnet-level operations. The [P-Chain API](/api-reference/p-chain/api) supports the creation of new blockchains and Subnets, the addition of validators to Subnets, staking operations, and other platform-level operations.
 
 The P-Chain is an instance of the Platform Virtual Machine.
 
 ### X-Chain
 
-The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a bond) with sets of rules that govern its behavior, like "can't be traded until tomorrow." The [X-Chain API](/docs/api-reference/x-chain/api) supports the creation and trade of Avalanche Native Tokens.
+The **X-Chain** is responsible for operations on digital smart assets known as **Avalanche Native Tokens**. A smart asset is a representation of a real-world resource (for example, equity, or a bond) with sets of rules that govern its behavior, like "can't be traded until tomorrow." The [X-Chain API](/api-reference/x-chain/api) supports the creation and trade of Avalanche Native Tokens.
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 

@@ -49,22 +49,22 @@ export default function HomePage(): React.ReactElement {
 function Highlights(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-r md:grid-cols-2 lg:grid-cols-3">
-      <Highlight icon={SproutIcon} heading="Avalanche Protocol" link="/docs/learn">
+      <Highlight icon={SproutIcon} heading="Avalanche Protocol" link="/learn">
         Learn about Avalanche Protocol and it's groundbreaking consensus algorithm.
       </Highlight>
-      <Highlight icon={SquareGanttChart} heading="Smart Contracts" link="/docs/dapps">
+      <Highlight icon={SquareGanttChart} heading="Smart Contracts" link="/dapps">
         Your one stop shop to deploy smart contracts on the Avalanche C-Chain.
       </Highlight>
-      <Highlight icon={Layers} heading="Avalanche L1s" link="/docs/subnets">
+      <Highlight icon={Layers} heading="Avalanche L1s" link="/subnets">
         Utilize the Avalanche tech stack to build your own L1 blockchain.
       </Highlight>
-      <Highlight icon={IndentDecrease} heading="Virtual Machines" link="/docs/virtual-machines">
+      <Highlight icon={IndentDecrease} heading="Virtual Machines" link="/virtual-machines">
         Learn how to customize the EVM or build new virtual machines from scratch.
       </Highlight>
-      <Highlight icon={MonitorCheck} heading="Nodes & Validators" link="/docs/nodes">
+      <Highlight icon={MonitorCheck} heading="Nodes & Validators" link="/nodes">
         Become an active participant in the network by running a node or validator.
       </Highlight>
-      <Highlight icon={MailIcon} heading="Interoperability" link="/docs/cross-chain">
+      <Highlight icon={MailIcon} heading="Interoperability" link="/cross-chain">
         Advanced interoperability protocols to communicate with other blockchains.
       </Highlight>
     </div>
@@ -156,7 +156,7 @@ function Features(): React.ReactElement {
         description="We provide a suite of tools to make your development experience as smooth as possible."
       >
       <div className="mt-8 flex flex-col gap-4">
-        <Link href="/docs/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+        <Link href="/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
             <Terminal />
             <h3 className="font-semibold">Avalanche CLI</h3>
             <p className="text-sm text-fd-muted-foreground">
@@ -179,7 +179,7 @@ function Features(): React.ReactElement {
         description="Well documented APIs for the Avalanche Network. You can also try out the interactive Glacier API playground."
       >
         <div className="flex flex-row flex-wrap gap-2 py-4">
-          <Link href="/docs/api-reference/p-chain/api" className={cn(buttonVariants())}>
+          <Link href="/api-reference/p-chain/api" className={cn(buttonVariants())}>
             API Docs
           </Link>
           <Link href="https://glacier.docs.avacloud.io/reference/getting-started-with-your-api" className={cn(buttonVariants())}>

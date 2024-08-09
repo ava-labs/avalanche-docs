@@ -3,7 +3,7 @@ title: Contract Chain API
 ---
 
 <Callout title="Note">
-Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche's view of networkID and chainID and are purely internal to the [C-Chain](/docs/learn/primary-network#c-chain). On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods.
+Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche's view of networkID and chainID and are purely internal to the [C-Chain](/learn/primary-network#c-chain). On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` and `chainID` can also be obtained using the `net_version` and `eth_chainId` methods.
 </Callout>
 
 ## Ethereum APIs
@@ -29,7 +29,7 @@ where `blockchainID` is the ID of the blockchain running the EVM.
 #### WebSocket Endpoints
 
 <Callout title="info">
-On the [public API node](/docs/tooling/rpc-providers#supported-apis), it only supports C-Chain
+On the [public API node](/tooling/rpc-providers#supported-apis), it only supports C-Chain
 websocket API calls for API methods that don't exist on the C-Chain's HTTP API
 </Callout>
 
@@ -46,7 +46,7 @@ ws://127.0.0.1:9650/ext/bc/C/ws
 ```
 
 <Callout title="Tip" icon = {<BadgeCheck className="size-5 text-card" fill="green" />} >
-On localhost, use `ws://`. When using the [Public API](/docs/tooling/rpc-providers) or another
+On localhost, use `ws://`. When using the [Public API](/tooling/rpc-providers) or another
 host that supports encryption, use `wss://`.
 </Callout>
 
@@ -76,7 +76,7 @@ and [Geth's JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server)
 for a full description of this API.
 
 <Callout title="info">
-For batched requests on the [public API node](/docs/tooling/rpc-providers) , the maximum
+For batched requests on the [public API node](/tooling/rpc-providers) , the maximum
 number of items is 40. We are working on to support a larger batch size.
 </Callout>
 
@@ -216,7 +216,7 @@ curl -X POST --data '{
 ```
 
 For more information on dynamic fees see the [C-Chain section of the transaction fee
-documentation](/docs/api-reference/standards/guides/txn-fees#c-chain-fees).
+documentation](/api-reference/standards/guides/txn-fees#c-chain-fees).
 
 #### `eth_getChainConfig`
 
@@ -286,11 +286,11 @@ To interact with other instances of the EVM AVAX endpoints:
 ### `avax.export`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api.md).
 </Callout>
 
 Export an asset from the C-Chain to X-Chain or P-Chain. If exporting to the X-Chain, you must call the
-X-Chain's [`avm.import`](/docs/api-reference/x-chain/api.md#avmimport).
+X-Chain's [`avm.import`](/api-reference/x-chain/api.md#avmimport).
 
 **Signature:**
 
@@ -345,13 +345,13 @@ curl -X POST --data '{
 ### `avax.exportAVAX`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api.md).
 </Callout>
 
-**DEPRECATED—instead use** [`avax.export`](/docs/api-reference/c-chain/api.md#avaxexport).
+**DEPRECATED—instead use** [`avax.export`](/api-reference/c-chain/api.md#avaxexport).
 
 Send AVAX from the C-Chain to X-Chain or P-Chain. If exporting to the X-Chain, you must call the
-X-Chain's [`avm.import`](/docs/api-reference/x-chain/api.md#avmimport) with assetID `AVAX`
+X-Chain's [`avm.import`](/api-reference/x-chain/api.md#avmimport) with assetID `AVAX`
 on the X-Chain to complete the transfer.
 
 **Signature:**
@@ -412,7 +412,7 @@ curl -X POST --data '{
 ### `avax.exportKey`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api.md).
 </Callout>
 
 Get the private key that controls a given address. The returned private key can be added to a user
@@ -661,7 +661,7 @@ This gives response:
 ### `avax.import`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api.md).
 </Callout>
 
 Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain.
@@ -724,10 +724,10 @@ curl -X POST --data '{
 ### `avax.importAVAX`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api.md).
 </Callout>
 
-**DEPRECATED—instead use** [`avax.import`](/docs/api-reference/c-chain/api.md#avaximport)
+**DEPRECATED—instead use** [`avax.import`](/api-reference/c-chain/api.md#avaximport)
 
 Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain.
 
@@ -788,7 +788,7 @@ curl -X POST --data '{
 ### `avax.importKey`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api.md).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api.md).
 </Callout>
 
 Give a user control over an address by providing the private key that controls the address.
@@ -884,7 +884,7 @@ curl -X POST --data '{
 ## Admin API
 
 This API can be used for debugging. Note that the Admin API is disabled by default. To run a node
-with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/docs/nodes/chain-configs/c-chain#coreth-admin-api-enabled).
+with the Admin API enabled, use [C-Chain config flag`--coreth-admin-api-enabled:true`](/nodes/chain-configs/c-chain#coreth-admin-api-enabled).
 
 ### Endpoint
 
