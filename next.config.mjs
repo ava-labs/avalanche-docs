@@ -15,8 +15,6 @@ const config = {
   reactStrictMode: true,
   async redirects() {
     return [
-
-      // Wildcard path matching
       {
         source: '/build/:path*',
         destination: '/:path*',
