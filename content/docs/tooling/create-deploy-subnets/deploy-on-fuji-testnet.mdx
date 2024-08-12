@@ -39,7 +39,7 @@ For this tutorial, it's recommended that you follow [Run an Avalanche Node Manua
 
 _To connect to the Fuji Testnet instead of the main net, use argument `--network-id=Fuji`_
 
-Also it's worth pointing out that [it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking) and you can get the test token from the [faucet](https://faucet.avax.network/).
+Also it's worth pointing out that [it only needs 1 AVAX to become a validator on the Fuji Testnet](/nodes/validate/what-is-staking) and you can get the test token from the [faucet](https://core.app/tools/testnet-faucet/).
 
 To get the NodeID of this `Fuji` node, call the following curl command to [info.getNodeID](/api-reference/info-api#infogetnodeid):
 
@@ -113,7 +113,7 @@ Key created
 +-----------+-------------------------------+-------------------------------------------------+---------------+
 ```
 
-You may use the C-Chain address (`0x86BB07a534ADF43786ECA5Dd34A97e3F96927e4F`) to fund your key from the [faucet](https://faucet.avax.network/). The command also prints P-Chain addresses for both the default local network and `Fuji`. The latter (`P-fuji1a3azftqvygc4tlqsdvd82wks2u7nx85rhk6zqh`) is the one needed for this tutorial.
+You may use the C-Chain address (`0x86BB07a534ADF43786ECA5Dd34A97e3F96927e4F`) to fund your key from the [faucet](https://core.app/tools/testnet-faucet/). The command also prints P-Chain addresses for both the default local network and `Fuji`. The latter (`P-fuji1a3azftqvygc4tlqsdvd82wks2u7nx85rhk6zqh`) is the one needed for this tutorial.
 
 The `delete` command of course deletes a private key:
 
@@ -167,7 +167,7 @@ avalanche key list
 Do these steps only to follow this tutorial for `Fuji` addresses. To access the wallet for `Mainnet`, the use of a ledger device is strongly recommended.
 </Callout>
 
-1. A newly created key has no funds on it. Send funds via transfer to its correspondent addresses if you already have funds on a different address, or get it from the faucet at [`https://faucet.avax.network`](https://faucet.avax.network/) using your **C-Chain address**.    
+1. A newly created key has no funds on it. Send funds via transfer to its correspondent addresses if you already have funds on a different address, or get it from the faucet at [`https://core.app/tools/testnet-faucet/`](https://core.app/tools/testnet-faucet/) using your **C-Chain address**.    
 2. **Export** your key via the `avalanche key export` command. The output is your private key, which will help you [import](https://support.avax.network/en/articles/6821877-core-extension-how-can-i-import-an-account) your account into the Core extension. 
 3. Connect Core extension to [Core web](https://core.app/), and move the test funds from C-Chain to the P-Chain by clicking Stake, then Cross-Chain Transfer (find more details on [this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
     
