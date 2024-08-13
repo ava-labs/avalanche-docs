@@ -31,7 +31,7 @@ export default function Page({
         enabled: page.data.toc,
         footer: (
           <a
-            href={`https://github.com/ava-labs/avalanche-docs/blob/main/${path}`}
+            href={`https://github.com/ava-labs/avalanche-docs/blob/master/${path}`}
             target="_blank"
             rel="noreferrer noopener"
             className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
