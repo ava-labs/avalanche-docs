@@ -20,8 +20,15 @@ const config = {
         destination: '/:path*',
         permanent: true,
       },
+      {
+        source: '/cross-chain/awm/overview',
+        destination: '/cross-chain',
+        permanent: true,
+      },
     ]
   },
 };
+
+
 
 export default withMDX(config);
