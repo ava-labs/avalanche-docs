@@ -33,7 +33,7 @@ const config = {
 
 ### [sidebars.json](/sidebars.json)
 
-- Imported files need a path to go in. This file's function is essentially to pull .md files from the [docs](/docs) directory and host them on our site. See [this](#outdir) comment for specifics.
+- Imported files need a path to go in. This file's function is essentially to pull .md files from the [docs]() directory and host them on our site. See [this](#outdir) comment for specifics.
 
 ### [package.json](/package.json)
 

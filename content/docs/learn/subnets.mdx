@@ -1,0 +1,71 @@
+---
+title: Subnets
+description: Explore the multi-chain architecture of Avalanche ecosystem.
+---
+
+A Subnet is a sovereign network which defines its own rules regarding its membership and token economics. It is composed of a dynamic subset of Avalanche validators working together to achieve consensus on the state of one or more blockchains. Each blockchain is validated by exactly one Subnet, while a Subnet can validate many blockchains.
+
+Avalanche's [Primary Network](/learn/primary-network) is a special Subnet running three blockchains:
+
+- The Platform Chain [(P-Chain)](/learn/primary-network#p-chain)
+- The Contract Chain [(C-Chain)](/learn/primary-network#c-chain)
+- The Exchange Chain [(X-Chain)](/learn/primary-network#x-chain)
+
+![image](/images/subnet1.png)
+
+(Image adopted from [this article](https://www.coinbase.com/cloud/discover/dev-foundations/intro-to-avalanche-subnets))
+
+<Callout title="Note">
+Every validator in a Subnet **must** also validate the Primary Network.
+</Callout>
+
+Node operators that validate a Subnet with multiple chains do not need to run multiple machines for validation. For example, the Primary Network is a Subnet with three coexisting chains, all of which can be validated by a single node, or a single machine.
+
+## Advantages
+
+### Independent Networks
+
+- Subnets use virtual machines to specify their own execution logic, determine their own fee regime, maintain their own state, facilitate their own networking, and provide their own security.
+- Each Subnet's performance is isolated from other Subnets in the ecosystem, so increased usage on one Subnet won't affect another.
+- Subnets can have their own token economics with their own native tokens, fee markets, and incentives determined by the Subnet deployer.
+- One Subnet can host multiple blockchains with customized [virtual machines](/learn/virtual-machines).
+
+### Native Interoperability
+
+Avalanche Warp Messaging enables native cross-Subnet communication and allows Virtual Machine (VM) developers to implement arbitrary communication protocols between any two Subnets.
+
+### Accommodate App-Specific Requirements
+
+Different blockchain-based applications may require validators to have certain properties such as large amounts of RAM or CPU power.
+
+A Subnet could require that validators meet certain [hardware requirements](/nodes/run-a-node/manually#hardware-and-os-requirements) so that the application doesn't suffer from low performance due to slow validators.
+
+### Launch Networks Designed With Compliance
+
+Avalanche's Subnet architecture makes regulatory compliance manageable. As mentioned above, a Subnet may require validators to meet a set of requirements.
+
+Some examples of requirements the creators of a Subnet may choose include:
+
+- Validators must be located in a given country.
+- Validators must pass KYC/AML checks.
+- Validators must hold a certain license.
+
+### Control Privacy of On-Chain Data
+
+Subnets are ideal for organizations interested in keeping their information private.
+
+Institutions conscious of their stakeholders' privacy can create a private Subnet where the contents of the blockchains would be visible only to a set of pre-approved validators.
+
+Define this at creation with a [single parameter](/nodes/configure/subnet-configs#private-subnet).
+
+### Validator Sovereignty
+
+In a heterogeneous network of blockchains, some validators will not want to validate certain blockchains because they simply have no interest in those blockchains.
+
+The Subnet model enables validators to concern themselves only with blockchain networks they choose to participate in. This greatly reduces the computational burden on validators.
+
+## Develop Your Own Subnet
+
+Subnets on Avalanche are deployed by default with [Subnet-EVM](https://github.com/ava-labs/subnet-evm#subnet-evm), a fork of go-ethereum. It implements the Ethereum Virtual Machine and supports Solidity smart contracts as well as most other Ethereum client functionality.
+
+To get started, check out the tutorials in our [Subnets](/subnets/build-first-subnet) section.

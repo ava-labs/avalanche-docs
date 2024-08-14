@@ -1,0 +1,129 @@
+---
+title: Setup a Devnet
+description: This page demonstrates how to setup a Devnet of cloud-based validators using Avalanche-CLI, and deploy a VM into it.
+---
+
+Devnets (Developer Networks) are isolated Avalanche networks deployed on the cloud. Similar to local networks in terms of configuration and usage but installed on remote nodes.
+
+Think of DevNets as being an intermediate step in the developer testing process after local network and before Fuji network.
+
+<Callout type="warn">
+ALPHA WARNING: This command is currently in experimental mode. Proceed at your own risk.
+</Callout>
+
+## Prerequisites
+
+Before we begin, you will need to create an AWS account and have an updated AWS `credentials` file in home directory with [default] profile or set up your GCP account according to [here](/tooling/create-avalanche-nodes/run-validators-gcp).
+
+Note: the tutorial uses AWS hosts, but Devnets can also be created and operated in other supported cloud providers, such as GCP.
+
+## Setting up a Devnet
+
+Setting up a Devnet consists of:
+
+- Creating a cluster of cloud servers
+- Deploying a Subnet into the cluster
+- Adding the cloud servers as validator nodes in the Subnet
+
+To execute all steps above in one command, run:
+
+```bash
+avalanche node devnet wiz <clusterName>
+```
+
+Command line flags can be used instead of interacting with the prompts. The complete command line
+flags for `devnet wiz` command can be found [here](/tooling/avalanche-cli#node-devnet-wiz).
+
+Let's go through several examples with the full command (with flags) provided.
+
+### Create a Devnet and Deploy Subnet-EVM Based Subnet into the Devnet
+
+For example, to spin up a Devnet with 5 validator nodes and 1 API node in 5 regions each 
+(us-west-2,us-east-1,ap-south-1,ap-northeast-1,eu-west-1) in AWS with each node having spec of 
+c7g.8xlarge AWS EC2 instance type and io2 volume type, with Subnet `<subnetName>` deployed 
+into the Devnet, we will run :
+
+```bash
+avalanche node devnet wiz <clusterName> <subnetName> --authorize-access
+  --aws --num-apis 1,1,1,1,1 --num-validators 5,5,5,5,5 
+  --region us-west-2,us-east-1,ap-south-1,ap-northeast-1,eu-west-1 --default-validator-params 
+  --node-type c7g.8xlarge --aws-volume-type=io2
+
+Creating the devnet
+...
+Waiting for node(s) in cluster <clusterName> to be healthy...
+...
+Nodes healthy after 33 seconds
+
+Deploying the subnet
+...
+Setting the nodes as subnet trackers
+...
+Waiting for node(s) in cluster <clusterName>to be healthy...
+Nodes healthy after 33 seconds
+...
+Waiting for node(s) in cluster <clusterName> to be syncing subnet <subnetName>...
+Nodes Syncing <subnetName> after 5 seconds
+
+Adding nodes as subnet validators
+...
+Waiting for node(s) in cluster <clusterName> to be validating subnet <subnetName>...
+Nodes Validating <subnetName> after 23 seconds
+
+Devnet <clusterName> has been created and is validating subnet <subnetName>!
+```
+
+### Create a Devnet and Deploy a Custom VM based Subnet into the Devnet
+
+For this example, we will be using the custom VM [MorpheusVM](https://github.com/ava-labs/hypersdk/tree/main/examples/morpheusvm)
+built with [HyperSDK](https://github.com/ava-labs/hypersdk).
+
+The following settings will be used:
+
+- `<repoUrl>` `https://github.com/ava-labs/hypersdk/`
+- `<branch>` `vryx-poc`
+- `<buildScript>` `examples/morpheusvm/scripts/build.sh`
+- `<genesisPath>` [Genesis File](/tooling/create-avalanche-nodes/deploy-custom-vm#genesis-file)
+- `<chainConfigPath>` [Blockchain Config](/tooling/create-avalanche-nodes/deploy-custom-vm#blockchain-config)
+- `<subnetConfigPath>` [Subnet Config](/tooling/create-avalanche-nodes/deploy-custom-vm#subnet-config)
+- `<avagoConfigPath>` [AvalancheGo Config](/tooling/create-avalanche-nodes/deploy-custom-vm#avalanchego-flags)
+
+To spin up a Devnet with 5 validator nodes and 1 API node in 5 regions each
+(us-west-2,us-east-1,ap-south-1,ap-northeast-1,eu-west-1) in AWS with each node having spec of
+c7g.8xlarge AWS EC2 instance type and io2 volume type, with the Custom VM based Subnet 
+`<subnetName>` deployed into the Devnet, we will run :
+
+```bash
+avalanche node devnet wiz <clusterName> <subnetName> --custom-subnet \
+  --subnet-genesis <genesisPath> --custom-vm-repo-url <repoUrl> \
+  --custom-vm-branch <branch> --custom-vm-build-script <buildScript> \
+  --chain-config <chainConfigPath> --subnet-config <subnetConfigPath> \
+  --node-config <avagoConfigPath> --authorize-access --aws --num-apis 1,1,1,1,1 \
+  --num-validators 5,5,5,5,5  --region us-west-2,us-east-1,ap-south-1,ap-northeast-1,eu-west-1 \
+  --default-validator-params --node-type default
+
+Creating the subnet
+...
+Creating the devnet
+...
+Waiting for node(s) in cluster <clusterName> to be healthy...
+...
+Nodes healthy after 33 seconds
+
+Deploying the subnet
+...
+Setting the nodes as subnet trackers
+...
+Waiting for node(s) in cluster <clusterName>to be healthy...
+Nodes healthy after 33 seconds
+...
+Waiting for node(s) in cluster <clusterName> to be syncing subnet <subnetName>...
+Nodes Syncing <subnetName> after 5 seconds
+
+Adding nodes as subnet validators
+...
+Waiting for node(s) in cluster <clusterName> to be validating subnet <subnetName>...
+Nodes Validating <subnetName> after 23 seconds
+
+Devnet <clusterName> has been created and is validating subnet <subnetName>!
+```

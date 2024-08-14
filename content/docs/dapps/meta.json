@@ -1,0 +1,22 @@
+{
+  "title": "dapps",
+  "root": true,
+  "pages": [
+    "---dApps on Avalanche---",
+    "index",
+    "chain-settings",
+    "block-explorers",
+    "---Smart Contract Development---",
+    "smart-contract-dev/get-test-funds",
+    "smart-contract-dev/deploy-with-remix-ide",
+    "smart-contract-dev/erc-20-token",
+    "deploy-nft-collection",
+    "verify-contract",
+    "toolchains",
+    "smart-contract-dev/interact-golang-map",
+    "---Advanced Tutorials---",
+    "...advanced-tutorials",
+    "---End-to-End Walkthroughs---",
+    "...end-to-end"
+  ]
+}

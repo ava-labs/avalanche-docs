@@ -1,0 +1,8 @@
+{
+  "title": "Platform Chain",
+  "pages": [
+    "api",
+    "transaction-format",
+    "configs"
+  ]
+}

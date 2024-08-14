@@ -1,0 +1,27 @@
+{
+  "title": "Toolings",
+  "root": true,
+  "pages": [
+    "---Avalanche CLI---",
+    "avalanche-cli",
+    "guides",
+    "create-deploy-subnets",
+    "create-avalanche-nodes",
+    "cross-chain",
+    "transfer-p-chain-funds",
+    "---Scripts & APIs---",
+    "avalanche-js",
+    "glacier-api",
+    "metrics-api",
+    "avalanche-postman",
+    "---Avalanche Network Runner---",
+    "avalanche-network-runner/introduction",
+    "avalanche-network-runner/anr-commands",
+    "---Miscellaneous---",
+    "avalanche-go-installer",
+    "avalanche-plugin-manager",
+    "avalanche-ops",
+    "rpc-providers",
+    "indexers"
+  ]
+}
