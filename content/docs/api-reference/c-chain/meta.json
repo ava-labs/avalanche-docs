@@ -2,7 +2,7 @@
   "title": "Contract Chain",
   "pages": [
     "api",
-    "transaction-format",
+    "txn-format",
     "configs"
   ]
 }
