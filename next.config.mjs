@@ -300,6 +300,111 @@ const config = {
         destination: '/virtual-machines/golang-vms/complex-golang-vm',
         permanent: true,
       },
+      {
+        source: '/build/dapp/advanced/adjusting-gas-price-during-high-network-activity',
+        destination: '/dapps/advanced-tutorials/manually-adjust-gas-price',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/advanced/integrate-exchange',
+        destination: '/dapps/advanced-tutorials/exchange-integration',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/advanced/sending-transactions-with-dynamic-fees-using-javascript',
+        destination: '/dapps/advanced-tutorials/dynamic-gas-fees',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/advanced/add-avalanche-programmatically',
+        destination: '/dapps/advanced-tutorials/add-network-programmatically',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/fuji-workflow',
+        destination: '/dapps/end-to-end/fuji-workflow',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/launch-dapp',
+        destination: '/dapps/end-to-end/launch-ethereum-dapp',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/c-chain-evm',
+        destination: '/dapps/index',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/chain-settings',
+        destination: '/dapps/chain-settings',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/README',
+        destination: '/dapps/README',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/erc-20',
+        destination: '/dapps/smart-contract-dev/erc-20-token',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/remix-deploy',
+        destination: '/dapps/smart-contract-dev/deploy-with-remix-ide',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/abigen',
+        destination: '/dapps/smart-contract-dev/interact-golang-app',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/verification/verify-smart-contracts',
+        destination: '/dapps/verify-contract/snowtrace',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/verification/verify-hardhat',
+        destination: '/dapps/verify-contract/hardhat',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/get-funds-faucet',
+        destination: '/dapps/smart-contract-dev/get-test-funds',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/nfts/preparing-nft-files',
+        destination: '/dapps/deploy-nft-collection/prep-nft-files',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/nfts/deploy-collection',
+        destination: '/dapps/deploy-nft-collection/deploy-erc-721',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/toolchains/foundry',
+        destination: '/dapps/toolchains/foundry',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/toolchains/thirdweb',
+        destination: '/dapps/toolchains/thirdweb',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/smart-contracts/toolchains/hardhat',
+        destination: '/dapps/toolchains/hardhat',
+        permanent: true,
+      },
+      {
+        source: '/build/dapp/explorers',
+        destination: '/dapps/block-explorers',
+        permanent: true,
+      },
     ]
   },
 };
