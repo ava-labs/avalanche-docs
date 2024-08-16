@@ -341,11 +341,6 @@ const config = {
         permanent: true,
       },
       {
-        source: '/build/dapp/README',
-        destination: '/dapps/README',
-        permanent: true,
-      },
-      {
         source: '/build/dapp/smart-contracts/erc-20',
         destination: '/dapps/smart-contract-dev/erc-20-token',
         permanent: true,
