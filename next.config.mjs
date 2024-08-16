@@ -585,6 +585,191 @@ const config = {
         destination: '/nodes/on-third-party-services/microsoft-azure',
         permanent: true,
       },
+      {
+        source: '/tooling/avalanche-plugin-manager',
+        destination: '/tooling/avalanche-plugin-manager',
+        permanent: true,
+      },
+      {
+        source: '/tooling/indexers',
+        destination: '/tooling/indexers',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanchego-postman-collection/data-visualization',
+        destination: '/tooling/avalanche-postman/data-visualization',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanchego-postman-collection/making-api-calls',
+        destination: '/tooling/avalanche-postman/making-api-calls',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanchego-postman-collection/setup',
+        destination: '/tooling/avalanche-postman/add-postman-collection',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanchego-postman-collection/variables',
+        destination: '/tooling/avalanche-postman/variables',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-cross-chain/teleporter-on-local-networks',
+        destination: '/tooling/cross-chain/teleporter-local-network',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-cross-chain/teleporter-token-bridge-on-local-networks',
+        destination: '/tooling/cross-chain/teleporter-token-bridge',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-cross-chain/teleporter-on-devnets',
+        destination: '/tooling/cross-chain/teleporter-devnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/network-runner',
+        destination: '/tooling/avalanche-network-runner/introduction',
+        permanent: true,
+      },
+      {
+        source: '/tooling/rpc-providers',
+        destination: '/tooling/rpc-providers',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/create-a-validator-aws',
+        destination: '/tooling/create-avalanche-nodes/run-validators-aws',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/validate-primary-network',
+        destination: '/tooling/create-avalanche-nodes/validate-primary-network',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/run-loadtest',
+        destination: '/tooling/create-avalanche-nodes/run-loadtest',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/node-ssh',
+        destination: '/tooling/create-avalanche-nodes/execute-ssh-commands',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/validate-subnets',
+        destination: '/tooling/create-avalanche-nodes/validate-subnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/upload-a-custom-vm-to-cloud',
+        destination: '/tooling/create-avalanche-nodes/deploy-custom-vm',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/setup-a-devnet',
+        destination: '/tooling/create-avalanche-nodes/setup-devnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/stop-node',
+        destination: '/tooling/create-avalanche-nodes/stop-node',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-nodes/create-a-validator-gcp',
+        destination: '/tooling/create-avalanche-nodes/run-validators-gcp',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-guides/run-with-docker',
+        destination: '/tooling/guides/run-with-docker',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-guides/install-avalanche-cli',
+        destination: '/tooling/guides/get-avalanche-cli',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-guides/import-subnet',
+        destination: '/tooling/guides/import-subnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-transfer-funds/how-to-transfer-funds',
+        destination: '/tooling/transfer-p-chain-funds',
+        permanent: true,
+      },
+      {
+        source: '/tooling/README',
+        destination: '/tooling/README',
+        permanent: true,
+      },
+      {
+        source: '/tooling/anr-reference',
+        destination: '/tooling/avalanche-network-runner/anr-commands',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanchejs-overview',
+        destination: '/tooling/avalanche-js',
+        permanent: true,
+      },
+      {
+        source: '/tooling/metrics',
+        destination: '/tooling/metrics-api',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-deploy-subnets/deploy-fuji-testnet-subnet',
+        destination: '/tooling/create-deploy-subnets/deploy-on-fuji-testnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-deploy-subnets/create-subnet',
+        destination: '/tooling/create-deploy-subnets/create-subnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-deploy-subnets/view-subnets',
+        destination: '/tooling/create-deploy-subnets/view-subnets',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-deploy-subnets/deploy-mainnet-subnet',
+        destination: '/tooling/create-deploy-subnets/deploy-on-mainnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/cli-create-deploy-subnets/deploy-local-subnet',
+        destination: '/tooling/create-deploy-subnets/deploy-locally',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanche-cli',
+        destination: '/tooling/avalanche-cli',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanche-ops',
+        destination: '/tooling/avalanche-ops',
+        permanent: true,
+      },
+      {
+        source: '/tooling/avalanchego-installer',
+        destination: '/tooling/avalanche-go-installer',
+        permanent: true,
+      },
+      {
+        source: '/tooling/glacier',
+        destination: '/tooling/glacier-api',
+        permanent: true,
+      },
     ]
   },
 };
