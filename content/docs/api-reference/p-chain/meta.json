@@ -2,7 +2,7 @@
   "title": "Platform Chain",
   "pages": [
     "api",
-    "transaction-format",
+    "txn-format",
     "configs"
   ]
 }
