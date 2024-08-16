@@ -406,11 +406,6 @@ const config = {
         permanent: true,
       },
       {
-        source: '/learn/avalanche/virtual-machines',
-        destination: '/learn/avalanche/virtual-machines',
-        permanent: true,
-      },
-      {
         source: '/learn/avalanche/fuji',
         destination: '/learn/avalanche/networks/fuji-testnet',
         permanent: true,
@@ -423,11 +418,6 @@ const config = {
       {
         source: '/learn/avalanche/intro',
         destination: '/learn/avalanche/index',
-        permanent: true,
-      },
-      {
-        source: '/learn/avalanche/avalanche-consensus',
-        destination: '/learn/avalanche/avalanche-consensus',
         permanent: true,
       },
       {
@@ -448,16 +438,6 @@ const config = {
       {
         source: '/nodes/validate/add-a-validator',
         destination: '/nodes/validate/node-validator',
-        permanent: true,
-      },
-      {
-        source: '/nodes/validate/how-to-stake',
-        destination: '/nodes/validate/how-to-stake',
-        permanent: true,
-      },
-      {
-        source: '/nodes/validate/what-is-staking',
-        destination: '/nodes/validate/what-is-staking',
         permanent: true,
       },
       {
@@ -586,16 +566,6 @@ const config = {
         permanent: true,
       },
       {
-        source: '/tooling/avalanche-plugin-manager',
-        destination: '/tooling/avalanche-plugin-manager',
-        permanent: true,
-      },
-      {
-        source: '/tooling/indexers',
-        destination: '/tooling/indexers',
-        permanent: true,
-      },
-      {
         source: '/tooling/avalanchego-postman-collection/data-visualization',
         destination: '/tooling/avalanche-postman/data-visualization',
         permanent: true,
@@ -633,11 +603,6 @@ const config = {
       {
         source: '/tooling/network-runner',
         destination: '/tooling/avalanche-network-runner/introduction',
-        permanent: true,
-      },
-      {
-        source: '/tooling/rpc-providers',
-        destination: '/tooling/rpc-providers',
         permanent: true,
       },
       {
@@ -706,11 +671,6 @@ const config = {
         permanent: true,
       },
       {
-        source: '/tooling/README',
-        destination: '/tooling/README',
-        permanent: true,
-      },
-      {
         source: '/tooling/anr-reference',
         destination: '/tooling/avalanche-network-runner/anr-commands',
         permanent: true,
@@ -748,21 +708,6 @@ const config = {
       {
         source: '/tooling/cli-create-deploy-subnets/deploy-local-subnet',
         destination: '/tooling/create-deploy-subnets/deploy-locally',
-        permanent: true,
-      },
-      {
-        source: '/tooling/avalanche-cli',
-        destination: '/tooling/avalanche-cli',
-        permanent: true,
-      },
-      {
-        source: '/tooling/avalanche-ops',
-        destination: '/tooling/avalanche-ops',
-        permanent: true,
-      },
-      {
-        source: '/tooling/avalanchego-installer',
-        destination: '/tooling/avalanche-go-installer',
         permanent: true,
       },
       {
