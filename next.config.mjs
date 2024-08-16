@@ -770,6 +770,11 @@ const config = {
         destination: '/tooling/glacier-api',
         permanent: true,
       },
+      {
+        source: '/build/cross-chain/awm/overview',
+        destination: '/cross-chain/avalanche-warp-messaging/overview',
+        permanent: true,
+      },
     ]
   },
 };
