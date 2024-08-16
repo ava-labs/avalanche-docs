@@ -205,6 +205,101 @@ const config = {
         destination: '/subnets/build-first-subnet',
         permanent: true,
       },
+      {
+        source: '/build/vm/rust-vms/introduction-to-avalanche-rs',
+        destination: '/virtual-machines/rust-vms/intro-avalanche-rs',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/rust-vms/installing-vm',
+        destination: '/virtual-machines/rust-vms/installing-vm',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/rust-vms/setting-up-rust',
+        destination: '/virtual-machines/rust-vms/setting-up-environment',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/timestampvm/api',
+        destination: '/virtual-machines/timestamp-vm/apis',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/timestampvm/state',
+        destination: '/virtual-machines/timestamp-vm/state',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/timestampvm/block',
+        destination: '/virtual-machines/timestamp-vm/blocks',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/timestampvm/introduction',
+        destination: '/virtual-machines/timestamp-vm/introduction',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/timestampvm/vm',
+        destination: '/virtual-machines/timestamp-vm/defining-vm-itself',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/intro',
+        destination: '/virtual-machines/index',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/any-lang-vm',
+        destination: '/virtual-machines/simple-vm-any-language',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/evm/generate-precompile',
+        destination: '/virtual-machines/evm-customization/generating-your-precompile',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/evm/intro',
+        destination: '/virtual-machines/evm-customization/introduction',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/evm/executing-tests',
+        destination: '/virtual-machines/evm-customization/executing-test-cases',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/evm/background-and-reqs',
+        destination: '/virtual-machines/evm-customization/background-requirements',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/evm/defining-precompile',
+        destination: '/virtual-machines/evm-customization/defining-precompile',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/evm/defining-tests',
+        destination: '/virtual-machines/evm-customization/writing-test-cases',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/evm/deploying-precompile',
+        destination: '/virtual-machines/evm-customization/deploying-precompile',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/golang-vms/golang-vm-simple',
+        destination: '/virtual-machines/golang-vms/simple-golang-vm',
+        permanent: true,
+      },
+      {
+        source: '/build/vm/golang-vms/golang-vm-complex',
+        destination: '/virtual-machines/golang-vms/complex-golang-vm',
+        permanent: true,
+      },
     ]
   },
 };
