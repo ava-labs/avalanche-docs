@@ -400,6 +400,191 @@ const config = {
         destination: '/dapps/block-explorers',
         permanent: true,
       },
+      {
+        source: '/learn/acp',
+        destination: '/learn/avalanche-community-proposals',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/virtual-machines',
+        destination: '/learn/avalanche/virtual-machines',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/fuji',
+        destination: '/learn/avalanche/networks/fuji-testnet',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/mainnet',
+        destination: '/learn/avalanche/networks/mainnet',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/intro',
+        destination: '/learn/avalanche/index',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/avalanche-consensus',
+        destination: '/learn/avalanche/avalanche-consensus',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/subnets-overview',
+        destination: '/learn/avalanche/subnets',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/avax',
+        destination: '/learn/avalanche/avax-token',
+        permanent: true,
+      },
+      {
+        source: '/learn/avalanche/avalanche-platform',
+        destination: '/learn/avalanche/primary-network',
+        permanent: true,
+      },
+      {
+        source: '/nodes/validate/add-a-validator',
+        destination: '/nodes/validate/node-validator',
+        permanent: true,
+      },
+      {
+        source: '/nodes/validate/how-to-stake',
+        destination: '/nodes/validate/how-to-stake',
+        permanent: true,
+      },
+      {
+        source: '/nodes/validate/what-is-staking',
+        destination: '/nodes/validate/what-is-staking',
+        permanent: true,
+      },
+      {
+        source: '/nodes/validate/validate-or-delegate',
+        destination: '/nodes/validate/validate-vs-delegate',
+        permanent: true,
+      },
+      {
+        source: '/nodes/system-requirements',
+        destination: '/nodes/index',
+        permanent: true,
+      },
+      {
+        source: '/nodes/configure/chain-configs/C',
+        destination: '/nodes/chain-configs/c-chain',
+        permanent: true,
+      },
+      {
+        source: '/nodes/configure/chain-configs/chain-config-flags',
+        destination: '/nodes/configure/configs-flags',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/node-backup-and-restore',
+        destination: '/nodes/maintain/backup-restore',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/run-offline-pruning',
+        destination: '/nodes/maintain/reduce-disk-usage',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/upgrade-your-avalanchego-node',
+        destination: '/nodes/maintain/upgrade',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/avalanche-notify',
+        destination: '/nodes/maintain/enroll-in-avalanche-notify',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/setting-up-node-monitoring',
+        destination: '/nodes/maintain/monitoring',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/node-bootstrap',
+        destination: '/nodes/maintain/bootstrapping',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/background-service-config',
+        destination: '/nodes/maintain/run-as-background-service',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/node-manually',
+        destination: '/nodes/run-a-node/manually',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/with-installer/installing-avalanchego',
+        destination: '/nodes/using-install-script/installing-avalanche-go',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/with-installer/managing-avalanchego',
+        destination: '/nodes/using-install-script/managing-avalanche-go',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/with-installer/advance-config-maintenance',
+        destination: '/nodes/using-install-script/node-config-maintenance',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/with-installer/preparing-your-environment',
+        destination: '/nodes/using-install-script/preparing-environment',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/FAQ',
+        destination: '/nodes/run-a-node/common-errors',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/subnet-node',
+        destination: '/nodes/run-a-node/subnet-nodes',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/third-party/tencent-cloud-node',
+        destination: '/nodes/on-third-party-services/tencent',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/third-party/aws-marketplace-one-click',
+        destination: '/nodes/on-third-party-services/aws-marketplace',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/third-party/alibaba-cloud-node',
+        destination: '/nodes/on-third-party-services/alibaba',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/third-party/google-cloud-node',
+        destination: '/nodes/on-third-party-services/google-cloud',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/third-party/aws-node',
+        destination: '/nodes/on-third-party-services/amazon-web-services',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/third-party/latitude-node',
+        destination: '/nodes/on-third-party-services/latitude',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run/third-party/microsoft-azure-node',
+        destination: '/nodes/on-third-party-services/microsoft-azure',
+        permanent: true,
+      },
     ]
   },
 };
