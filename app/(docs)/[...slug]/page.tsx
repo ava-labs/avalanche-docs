@@ -59,8 +59,7 @@ export default function Page({
 }
 
 function Category({ page }: { page: Page }): React.ReactElement {
-  const filtered = utils
-    .getPages()
+  const filtered = getPages()
     .filter(
       (item) =>
         item.file.dirname === page.file.dirname && item.file.name !== 'index',
