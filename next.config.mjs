@@ -407,32 +407,32 @@ const config = {
       },
       {
         source: '/learn/avalanche/fuji',
-        destination: '/learn/avalanche/networks/fuji-testnet',
+        destination: '/learn/networks/fuji-testnet',
         permanent: true,
       },
       {
         source: '/learn/avalanche/mainnet',
-        destination: '/learn/avalanche/networks/mainnet',
+        destination: '/learn/networks/mainnet',
         permanent: true,
       },
       {
         source: '/learn/avalanche/intro',
-        destination: '/learn/avalanche/index',
+        destination: '/learn/index',
         permanent: true,
       },
       {
         source: '/learn/avalanche/subnets-overview',
-        destination: '/learn/avalanche/subnets',
+        destination: '/learn/subnets',
         permanent: true,
       },
       {
         source: '/learn/avalanche/avax',
-        destination: '/learn/avalanche/avax-token',
+        destination: '/learn/avax-token',
         permanent: true,
       },
       {
         source: '/learn/avalanche/avalanche-platform',
-        destination: '/learn/avalanche/primary-network',
+        destination: '/learn/primary-network',
         permanent: true,
       },
       {
@@ -458,6 +458,21 @@ const config = {
       {
         source: '/nodes/configure/chain-configs/chain-config-flags',
         destination: '/nodes/configure/configs-flags',
+        permanent: true,
+      },
+      {
+        source: '/nodes/configure/avalanchego-config-flags',
+        destination: '/nodes/configure/configs-flags',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/avalanchego-config-flags',
+        destination: '/nodes/configure/configs-flags',
+        permanent: true,
+      },
+      {
+        source: '/nodes/maintain/chain-config-flags',
+        destination: '/api-reference/avalanche-go-configs-flags',
         permanent: true,
       },
       {
