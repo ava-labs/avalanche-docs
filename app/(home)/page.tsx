@@ -179,14 +179,25 @@ function Features(): React.ReactElement {
         description="Well documented APIs for the Avalanche Network. You can also try out the interactive Glacier API playground."
       >
         <div className="flex flex-row flex-wrap gap-2 py-4">
-          <Link href="/api-reference/p-chain/api" className={cn(buttonVariants())}>
-            API Docs
+          <Link href="/api-reference/c-chain/api" className={cn(buttonVariants())}>
+            C-Chain API
           </Link>
-          <Link href="https://glacier.docs.avacloud.io/reference/getting-started-with-your-api" className={cn(buttonVariants())}>
-            Try Glacier API Playground <ArrowUpRight style={{width: 18, height: 18, color: 'inherit'}}/>
+          <Link href="/api-reference/p-chain/api" className={cn(buttonVariants())}>
+            P-Chain API
+          </Link>
+          <Link href="/api-reference/x-chain/api" className={cn(buttonVariants())}>
+            X-Chain API
+          </Link>
+          <Link href="/api-reference/admin-api" className={cn(buttonVariants())}>
+            AvalanchgeGo API
+          </Link>
+          <Link href="/api-reference/subnet-evm-api" className={cn(buttonVariants())}>
+            Subnet-EVM API
+          </Link>
+          <Link href="https://glacier.docs.avacloud.io/reference/getting-started-with-your-api" target="_blank" className={cn(buttonVariants())}>
+            Glacier API <ArrowUpRight style={{width: 18, height: 18, color: 'inherit'}}/>
           </Link>
         </div>
-      <div className="col-span-full mx-auto h-[200px] py-12"><img src="./logo.png"/></div>
       </Feature>
     </div>
   );
