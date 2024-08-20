@@ -65,6 +65,5 @@ export const integrations = loader({
   }),
 });
 
-console.log(integrations);
 export type Page = InferPageType<typeof utils>;
 export type Meta = InferMetaType<typeof utils>;

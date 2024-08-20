@@ -47,19 +47,27 @@ export default function Page(): React.ReactElement {
                         {Object.entries(groupedIntegrations).map(([category, integrations]) => (
                             <div key={category}>
                                 <section id={category}>
-                                <h3 className="text-2xl font-bold mt-8">{category}</h3>
+                                    <h3 className="text-2xl font-bold mt-8">{category}</h3>
                                 </section>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto w-full">
-                                {integrations.map((integration) => ( 
+                                    {integrations.map((integration) => (
                                         <Link
                                             key={integration.url}
                                             href={integration.url}
                                             className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 w-full w-auto h-auto"
                                         >
-                                            {/* <img src={integration.data.logo} alt={integration.data.title} className="w-16 h-16 mr-4" /> */}
-                                            <div>
-                                                <h3 className="text-xl">{integration.data.title}</h3>
-                                                <p className="text-sm text-gray-500">{integration.data.description}</p>
+                                            <div className="flex items-center">
+                                                <div className="w-16 h-16 mr-4 rounded-full overflow-hidden">
+                                                    <img
+                                                        src={integration.data.logo}
+                                                        alt={integration.data.title}
+                                                        className="w-full h-full object-contain"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xl">{integration.data.title}</h3>
+                                                    <p className="text-sm text-gray-500">{integration.data.description}</p>
+                                                </div>
                                             </div>
                                         </Link>
                                     ))}

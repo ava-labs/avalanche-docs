@@ -7,7 +7,7 @@ import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { SiX } from '@icons-pack/react-simple-icons';
-//import { Control } from '@/app/(home)/blog/[slug]/page.client';
+// import { Control } from '@/app/(home)/blog/[slug]/page.client';
 
 interface Param {
     slug: string;
@@ -24,7 +24,7 @@ export default function Page({
 
     if (!page) notFound();
 
-    const path = `integrations/${page.file.path}`;
+    const path = `content/integrations/${page.file.path}`;
 
     return (
         <>
