@@ -18,7 +18,7 @@ Create Subnet Configurations[​](#create-subnet-configurations "Direct link to 
 Let's create a Subnet called `<subnet1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name, and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/subnets/build-first-subnet#create-your-subnet-configuration)):
 
 ```
-avalanche subnet create <subnet1> --evm --latest\
+avalanche blockchain create <subnet1> --evm --latest\
     --evm-chain-id 1 --evm-token TOKEN1 --evm-defaults
 
 creating genesis for <subnet subnet1>
@@ -38,7 +38,7 @@ To disable Relayer in your Subnet, use the flag `--relayer=false` when creating 
 Now let's create a second Subnet called `<subnet2>`, with similar settings:
 
 ```
-avalanche subnet create <subnet2> --evm --latest\
+avalanche blockchain create <subnet2> --evm --latest\
     --evm-chain-id 2 --evm-token TOKEN2 --evm-defaults
 
 creating genesis for <subnet subnet2>
@@ -55,7 +55,7 @@ Deploy the Subnets to Local Network[​](#deploy-the-subnets-to-local-network "D
 Let's deploy `<subnet1>`:
 
 ```
-avalanche subnet deploy <subnet1> --local
+avalanche blockchain deploy <subnet1> --local
 
 Deploying [<subnet1>] to Local Network
 Backend controller started, pid: 149427, output at: ~/.avalanche-cli/runs/server_20240229_165923/avalanche-cli-backend.log
@@ -109,7 +109,7 @@ CLI configures the Relayer to enable every Subnet to send messages to all other 
 When deploying Subnet `<subnet2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
 
 ```
-avalanche subnet deploy <subnet2> --local
+avalanche blockchain deploy <subnet2> --local
 
 Deploying [<subnet2>] to Local Network
 
@@ -197,7 +197,7 @@ By executing `subnet describe` on a Teleporter enabled Subnet, the following rel
 Let's get the information for `<subnet1>`:
 
 ```
-avalanche subnet describe <subnet1>
+avalanche blockchain describe <subnet1>
 
  _____       _        _ _
 |  __ \     | |      (_) |

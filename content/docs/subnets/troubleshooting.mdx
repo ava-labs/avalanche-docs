@@ -9,7 +9,7 @@ Deployment Times Out[​](#deployment-times-out "Direct link to heading")
 During a local deployment, your network may fail to start. Your error may look something like this:
 
 ```bash
-[~]$ avalanche subnet deploy mySubnet
+[~]$ avalanche blockchain deploy mySubnet
 ✔ Local Network
 Deploying [mySubnet] to Local Network
 Backend controller started, pid: 26388, output at: /Users/user/.avalanche-cli/runs/server_20221231_111605/avalanche-cli-backend
@@ -47,7 +47,7 @@ Incompatible RPC Version for Custom VM[​](#incompatible-rpc-version-for-custom
 If you're locally deploying a custom VM, you may run into this error message.
 
 ```bash
-[~]$ avalanche subnet deploy mySubnet
+[~]$ avalanche blockchain deploy mySubnet
 ✔ Local Network
 Deploying [mySubnet] to Local Network
 Backend controller started, pid: 26388, output at: /Users/user/.avalanche-cli/runs/server_20221231_111605/avalanche-cli-backend
@@ -123,7 +123,7 @@ Updates to AvalancheGo's RPC version are **not** tied to its semantic version sc
 Fix for MacBook Air M1/M2: ‘Bad CPU type in executable' Error[​](#fix-for-macbook-air-m1m2-bad-cpu-type-in-executable-error "Direct link to heading")
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-When running `avalanche subnet deploy` via the Avalanche-CLI, the terminal may throw an error that contains the following:
+When running `avalanche blockchain deploy` via the Avalanche-CLI, the terminal may throw an error that contains the following:
 
 ```bash
 zsh: bad CPU type in executable:

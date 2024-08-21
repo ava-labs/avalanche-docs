@@ -5,7 +5,7 @@ description: Learn about Avalanche CLI and its different commands for Subnets.
 
 Avalanche-CLI is a command-line tool that gives developers access to everything Avalanche. This release specializes in helping developers build and test Subnets.
 
-To get started, look at the documentation for the subcommands or jump right in with `avalanche subnet create myNewSubnet`.
+To get started, look at the documentation for the subcommands or jump right in with `avalanche blockchain create myNewSubnet`.
 
 [Install Avalanche CLI](/tooling/guides/get-avalanche-cli)
 
@@ -176,7 +176,7 @@ By default, running the command with a `subnetName` that already exists causes t
 **Usage**:
 
 ```bash
-avalanche subnet create [subnetName] [flags]
+avalanche blockchain create [subnetName] [flags]
 ```
 
 **Flags**:
@@ -229,7 +229,7 @@ Avalanche-CLI only supports deploying an individual Subnet once per network. Sub
 **Usage**:
 
 ```bash
-avalanche subnet deploy [subnetName] [flags]
+avalanche blockchain deploy [subnetName] [flags]
 ```
 
 **Flags**:
@@ -264,7 +264,7 @@ The `subnet describe` command prints the details of a Subnet configuration to th
 **Usage**:
 
 ```bash
-avalanche subnet describe [subnetName] [flags]
+avalanche blockchain describe [subnetName] [flags]
 ```
 
 **Flags**:
