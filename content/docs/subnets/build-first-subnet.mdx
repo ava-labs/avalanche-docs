@@ -38,7 +38,7 @@ The Subnet command suite provides a collection of tools for developing and deplo
 The Subnet Creation Wizard walks you through the process of creating your Subnet. To get started, first pick a name for your Subnet. This tutorial uses `mySubnet`, but feel free to substitute that with any name you like. Once you've picked your name, run:
 
 ```bash
-avalanche subnet create mySubnet
+avalanche blockchain create mySubnet
 ```
 
 The following sections walk through each question in the wizard.
@@ -91,7 +91,7 @@ Deploying Subnets Locally[​](#deploying-subnets-locally "Direct link to headin
 To deploy your Subnet, run:
 
 ```bash
-avalanche subnet deploy mySubnet
+avalanche blockchain deploy mySubnet
 ```
 
 Make sure to substitute the name of your Subnet if you used a different one than `mySubnet`.
@@ -105,7 +105,7 @@ Note: If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on 
 If all works as expected, the command output should look something like this:
 
 ```bash
-avalanche subnet deploy mySubnet
+avalanche blockchain deploy mySubnet
 
 # output
 ✔ Local Network
@@ -195,7 +195,7 @@ In the Core Extension click, `See All Networks` and then select the `+` icon in 
 
 ![Add network](/images/deploy-subnet5.png)
 
-Enter your Subnet's details, found in the output of your `avalanche subnet deploy` [command](#deploying-subnets-locally), into the form and click `Save`.
+Enter your Subnet's details, found in the output of your `avalanche blockchain deploy` [command](#deploying-subnets-locally), into the form and click `Save`.
 
 ![Add network 2](/images/deploy-subnet6.png)
 

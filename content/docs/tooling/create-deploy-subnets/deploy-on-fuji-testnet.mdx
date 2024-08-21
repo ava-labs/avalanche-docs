@@ -181,7 +181,7 @@ Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a l
 To create an EVM Subnet, run the `subnet create` command with a name of your choice:
 
 ```bash
-avalanche subnet create testsubnet
+avalanche blockchain create testsubnet
 ```
 
 This is going to start a series of prompts to customize your EVM Subnet to your needs. Most prompts have some validation to reduce issues due to invalid input. The first prompt asks for the type of the virtual machine (see [Virtual Machine](#virtual-machine)).
@@ -261,7 +261,7 @@ At this point, CLI creates the specification of the new Subnet on disk, but isn'
 Print the specification to disk by running the `describe` command:
 
 ```bash
-avalanche subnet describe testsubnet
+avalanche blockchain describe testsubnet
  _____       _        _ _
 |  __ \     | |      (_) |
 | |  | | ___| |_ __ _ _| |___
@@ -375,7 +375,7 @@ Deploy the Subnet[​](#deploy-the-subnet "Direct link to heading")
 To deploy the new Subnet, run
 
 ```bash
-avalanche subnet deploy testsubnet
+avalanche blockchain deploy testsubnet
 ```
 
 This is going to start a new prompt series.

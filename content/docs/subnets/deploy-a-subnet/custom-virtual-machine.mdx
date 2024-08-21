@@ -107,7 +107,7 @@ Create the Subnet Configuration[​](#create-the-subnet-configuration "Direct li
 Now that you have your binary, it's time to create the Subnet configuration. This tutorial uses `myCustomSubnet` as it Subnet name. Invoke the Subnet Creation Wizard with this command:
 
 ```bash
-avalanche subnet create myCustomSubnet
+avalanche blockchain create myCustomSubnet
 ```
 
 ### Choose Your VM[​](#choose-your-vm "Direct link to heading")
@@ -146,7 +146,7 @@ Now it's time to deploy it.
 Deploy the Subnet Locally[​](#deploy-the-subnet-locally "Direct link to heading")
 ---------------------------------------------------------------------------------
 
-To deploy your Subnet, run: `avalanche subnet deploy myCustomSubnet`
+To deploy your Subnet, run: `avalanche blockchain deploy myCustomSubnet`
 
 Make sure to substitute the name of your Subnet if you used a different one than `myCustomSubnet`.
 
@@ -165,7 +165,7 @@ This command boots a five node Avalanche network on your machine. It needs to do
 If all works as expected, the command output should look something like this:
 
 ```bash
-> avalanche subnet deploy myCustomSubnet
+> avalanche blockchain deploy myCustomSubnet
 ✔ Local Network
 Deploying [myCustomSubnet] to Local Network
 Backend controller started, pid: 26110, output at: /home/fm/.avalanche-cli/runs/server_20230816_131014/avalanche-cli-backend.log

@@ -18,13 +18,13 @@ In the following commands, make sure to substitute the name of your Subnet confi
 To deploy your Subnet, run:
 
 ```bash
-avalanche subnet deploy <subnetName>
+avalanche blockchain deploy <subnetName>
 ```
 
 and select `Local Network` to deploy on. Alternatively, you can bypass this prompt by providing the `--local` flag. For example:
 
 ```bash
-avalanche subnet deploy <subnetName> --local
+avalanche blockchain deploy <subnetName> --local
 ```
 
 The command may take a couple minutes to run.
@@ -36,7 +36,7 @@ Note: If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on 
 If all works as expected, the command output should look something like this:
 
 ```bash
-> avalanche subnet deploy mySubnet
+> avalanche blockchain deploy mySubnet
 ✔ Local Network
 Deploying [mySubnet] to Local Network
 Installing subnet-evm-v0.4.3...
@@ -88,5 +88,5 @@ To redeploy the Subnet, you first need to wipe the Subnet state. This permanentl
 You are now free to redeploy your Subnet with
 
 ```bash
-avalanche subnet deploy <subnetName> --local
+avalanche blockchain deploy <subnetName> --local
 ```
