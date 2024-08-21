@@ -39,7 +39,7 @@ export default function Page(): React.ReactElement {
                         <div className="mx-auto w-full lg:mx-0">
                             <h2 className="text-center text-5xl font-bold tracking-tight sm:text-10xl">Find an Integration</h2>
                             <p className="m-12 text-center text-lg leading-8 text-muted-foreground">
-                                Extend your application by integrating with our ecosystem.
+                                Extend your application by integrating with the Avalanche ecosystem.
                             </p>
                         </div>
 
