@@ -5,6 +5,7 @@
     "index",
     "avalanche-consensus",
     "avax-token",
+    "rewards-formula",
     "---Multi-chain Architecture---",
     "subnets",
     "primary-network",
