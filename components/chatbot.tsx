@@ -16,6 +16,7 @@ const Chatbot: React.FC<KapaWidgetProps> = ({ websiteId, projectName, projectCol
     script.setAttribute("data-project-name", projectName);
     script.setAttribute("data-project-color", projectColor);
     script.setAttribute("data-project-logo", projectLogo);
+    script.setAttribute("data-user-analytics-fingerprint-enabled", "true");
     script.async = true;
     document.head.appendChild(script);
 
