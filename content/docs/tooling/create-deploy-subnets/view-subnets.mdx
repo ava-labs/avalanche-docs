@@ -5,12 +5,12 @@ description: CLI commands for viewing subnets.
 
 ## List Subnet Configurations
 
-You can list the Subnets you've created with: `avalanche subnet list`
+You can list the Subnets you've created with: `avalanche blockchain list`
 
 Example:
 
 ```bash
-> avalanche subnet list
+> avalanche blockchain list
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 |   SUBNET    |    CHAIN    | CHAIN ID |                       VM ID                       |    TYPE    | FROM REPO |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
@@ -21,7 +21,7 @@ Example:
 To see detailed information about your deployed Subnets, add the `--deployed` flag:
 
 ```bash
-> avalanche subnet list --deployed
+> avalanche blockchain list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 |   SUBNET    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+

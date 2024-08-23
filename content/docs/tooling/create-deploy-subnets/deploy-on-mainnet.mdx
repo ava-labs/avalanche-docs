@@ -218,7 +218,7 @@ See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) o
 First, request permission to validate by running the `join` command along with the Subnet name:
 
 ```bash
-avalanche subnet join testsubnet
+avalanche blockchain join testsubnet
 ```
 
 Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of the Subnet must approve your node to be a validator afterwards by calling `addValidator` as described in the next section.
@@ -335,7 +335,7 @@ Now that the node has joined the Subnet, a Subnet control key holder must call `
 To whitelist a node as a recognized validator on the Subnet, run:
 
 ```bash
-avalanche subnet addValidator testsubnet
+avalanche blockchain addValidator testsubnet
 ```
 
 You need to repeat this process for every validator you add to the network.
@@ -489,7 +489,7 @@ Subnet Export[​](#subnet-export "Direct link to heading")
 Because you need to setup multiple validators on multiple different machines, you need to export your Subnet's configuration and import it on each validator.
 
 ```bash
-avalanche subnet export testsubnet
+avalanche blockchain export testsubnet
 ✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
 ```
 
@@ -501,14 +501,14 @@ Subnet Import[​](#subnet-import "Direct link to heading")
 To import a VM configuration, move the file you exported in the previous section to your desired machine and issue the `import` command with the path to the file.
 
 ```bash
-avalanche subnet import /tmp/testsubnet-export.dat
+avalanche blockchain import /tmp/testsubnet-export.dat
 Subnet imported successfully
 ```
 
 After this the whole Subnet configuration should be available on the target machine:
 
 ```bash
-avalanche subnet list
+avalanche blockchain list
 +---------------+---------------+----------+-----------+----------+
 |    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
 +---------------+---------------+----------+-----------+----------+

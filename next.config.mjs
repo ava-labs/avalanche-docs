@@ -111,16 +111,6 @@ const config = {
         permanent: true,
       },
       {
-        source: '/build/subnet/elastic/transform-to-elastic-subnet',
-        destination: '/subnets/elastic-subnets/make-subnet-permissionless',
-        permanent: true,
-      },
-      {
-        source: '/build/subnet/elastic/elastic-parameters',
-        destination: '/subnets/elastic-subnets/parameters',
-        permanent: true,
-      },
-      {
         source: '/build/subnet/deploy/mainnet-subnet',
         destination: '/subnets/deploy-a-subnet/avalanche-mainnet',
         permanent: true,

@@ -62,7 +62,7 @@ This command currently only works on Subnets deployed to either the Fuji Testnet
 **Usage**:
 
 ```bash
-avalanche subnet addValidator [subnetName] [flags]
+avalanche blockchain addValidator [subnetName] [flags]
 ```
 
 **Flags**:
@@ -95,7 +95,7 @@ This command removes a node as a validator in a Subnet.
 **Usage**:
 
 ```bash
-avalanche subnet removeValidator [subnetName] [flags]
+avalanche blockchain removeValidator [subnetName] [flags]
 ```
 
 **Flags**:
@@ -122,7 +122,7 @@ This command currently only works on Subnets deployed to Devnet, Fuji or Mainnet
 **Usage**:
 
 ```bash
-avalanche subnet changeOwner [subnetName] [flags]
+avalanche blockchain changeOwner [subnetName] [flags]
 ```
 
 **Flags**:
@@ -153,7 +153,7 @@ AvalancheGo nodes support several different configuration files. Subnets have th
 **Usage**:
 
 ```bash
-avalanche subnet configure [subnetName] [flags]
+avalanche blockchain configure [subnetName] [flags]
 ```
 
 **Flags**:
@@ -211,7 +211,7 @@ The `subnet delete` command deletes an existing Subnet configuration.
 **Usage**:
 
 ```bash
-avalanche subnet delete [flags]
+avalanche blockchain delete [flags]
 ```
 
 **Flags**:
@@ -285,7 +285,7 @@ The command prompts for an output path. You can also provide one with the `--out
 **Usage**:
 
 ```bash
-avalanche subnet export [subnetName] [flags]
+avalanche blockchain export [subnetName] [flags]
 ```
 
 **Flags**:
@@ -308,7 +308,7 @@ To import from a file, you can optionally provide the path as a command-line arg
 **Usage**:
 
 ```bash
-avalanche subnet import file [subnetPath] [flags]
+avalanche blockchain import file [subnetPath] [flags]
 ```
 
 **Flags**:
@@ -330,7 +330,7 @@ The genesis file should be available from the disk for this to work. By default,
 **Usage**:
 
 ```bash
-avalanche subnet import public [subnetPath] [flags]
+avalanche blockchain import public [subnetPath] [flags]
 ```
 
 **Flags**:
@@ -362,7 +362,7 @@ This command currently only supports Subnets deployed on the Fuji Testnet and Ma
 **Usage**:
 
 ```bash
-avalanche subnet join [subnetName] [flags]
+avalanche blockchain join [subnetName] [flags]
 ```
 
 **Flags**:
@@ -389,7 +389,7 @@ The `subnet list` command prints the names of all created Subnet configurations.
 **Usage**:
 
 ```bash
-avalanche subnet list [flags]
+avalanche blockchain list [flags]
 ```
 
 **Flags**:
@@ -406,7 +406,7 @@ The `subnet publish` command publishes the Subnet's VM to a repository.
 **Usage**:
 
 ```bash
-avalanche subnet publish [subnetName] [flags]
+avalanche blockchain publish [subnetName] [flags]
 ```
 
 **Flags**:
@@ -428,7 +428,7 @@ The `subnet stats` command prints validator statistics for the given Subnet.
 **Usage**:
 
 ```bash
-avalanche subnet stats [subnetName] [flags]
+avalanche blockchain stats [subnetName] [flags]
 ```
 
 **Flags**:
@@ -447,7 +447,7 @@ The `subnet vmid` command prints the virtual machine ID (VMID) for the given Sub
 **Usage**:
 
 ```bash
-avalanche subnet vmid [subnetName]
+avalanche blockchain vmid [subnetName]
 ```
 
 Elastic Subnet[​](#elastic-subnet "Direct link to heading")
@@ -460,7 +460,7 @@ This command transforms your permissioned Subnet into an Elastic Subnet (NOTE: t
 **Usage**:
 
 ```bash
-avalanche subnet elastic [subnetName] [flags]
+avalanche blockchain elastic [subnetName] [flags]
 ```
 
 **Flags**:
@@ -493,7 +493,7 @@ This command adds a node as a permissionless validator in an Elastic Subnet.
 **Usage**:
 
 ```bash
-avalanche subnet join [subnetName] --elastic [flags]
+avalanche blockchain join [subnetName] --elastic [flags]
 ```
 
 **Flags**:
@@ -519,7 +519,7 @@ This command delegates stake to a permissionless validator in an Elastic Subnet.
 **Usage**:
 
 ```bash
-avalanche subnet addPermissionlessDelegator [subnetName] [flags]
+avalanche blockchain addPermissionlessDelegator [subnetName] [flags]
 ```
 
 **Flags**:
@@ -554,7 +554,7 @@ After you update your validator's configuration, you need to restart your valida
 **Usage**:
 
 ```bash
-avalanche subnet upgrade apply [subnetName] [flags]
+avalanche blockchain upgrade apply [subnetName] [flags]
 ```
 
 **Flags**:
@@ -578,7 +578,7 @@ Export the upgrade bytes file to a location of choice on disk.
 **Usage**:
 
 ```bash
-avalanche subnet upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [subnetName] [flags]
 ```
 
 **Flags**:
@@ -596,7 +596,7 @@ The `subnet upgrade generate` command builds a new upgrade.json file to customiz
 **Usage**:
 
 ```bash
-avalanche subnet upgrade generate [subnetName] [flags]
+avalanche blockchain upgrade generate [subnetName] [flags]
 ```
 
 **Flags**:
@@ -612,7 +612,7 @@ Import the upgrade bytes file into the local environment.
 **Usage**:
 
 ```bash
-avalanche subnet upgrade import [subnetName] [flags]
+avalanche blockchain upgrade import [subnetName] [flags]
 ```
 
 **Flags**:
@@ -629,7 +629,7 @@ Print the upgrade.json file content.
 **Usage**:
 
 ```bash
-avalanche subnet upgrade print [subnetName] [flags]
+avalanche blockchain upgrade print [subnetName] [flags]
 ```
 
 **Flags**:
@@ -643,7 +643,7 @@ The command walks the user through an interactive wizard. The user can skip the 
 **Usage**:
 
 ```bash
-avalanche subnet upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [subnetName] [flags]
 ```
 
 **Flags**:
