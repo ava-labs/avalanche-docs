@@ -15,12 +15,12 @@ This how-to guide focuses on taking an already created permissioned Subnet and t
 Getting Started[​](#getting-started "Direct link to heading")
 -------------------------------------------------------------
 
-In the following commands, make sure to substitute the name of your Subnet configuration for `<subnetName>`.
+In the following commands, make sure to substitute the name of your Subnet configuration for `<blockchainName>`.
 
 To transform your permissioned Subnet into an Elastic Subnet (NOTE: this action is irreversible), run:
 
 ```bash
-avalanche subnet elastic <subnetName>
+avalanche subnet elastic <blockchainName>
 ```
 
 and, select the network that you want to transform the Subnet on. Alternatively, you can bypass this prompt by providing the `--local`, `--fuji`, or `--mainnet` flag.
@@ -50,12 +50,12 @@ You can use the output details such as the Asset ID and Elastic Subnet ID to con
 Adding Permissionless Validators to Elastic Subnet[​](#adding-permissionless-validators-to-elastic-subnet "Direct link to heading")
 -----------------------------------------------------------------------------------------------------------------------------------
 
-If you are running this command on local network, you will need to first remove permissioned validators (by running `avalanche subnet removeValidator <subnetName>`) so that you can have a list of local nodes to choose from to be added as a permissionless validator in the Elastic Subnet.
+If you are running this command on local network, you will need to first remove permissioned validators (by running `avalanche subnet removeValidator <blockchainName>`) so that you can have a list of local nodes to choose from to be added as a permissionless validator in the Elastic Subnet.
 
 To add permissionless validators to an Elastic Subnet, run:
 
 ```bash
-avalanche subnet join <subnetName> --elastic
+avalanche subnet join <blockchainName> --elastic
 ```
 
 You will be prompted with which node you would like to add as a permissionless validator. You can skip this prompt by using `--nodeID` flag.
@@ -70,7 +70,7 @@ Adding Permissionless Delegator to a Permissionless Validator in Elastic Subnet[
 To add permissionless delegators, run:
 
 ```bash
-avalanche subnet addPermissionlessDelegator <subnetName>
+avalanche subnet addPermissionlessDelegator <blockchainName>
 ```
 
 You will be prompted with which Subnet validator you would like to delegate to. You can skip this prompt by using `--nodeID` flag.

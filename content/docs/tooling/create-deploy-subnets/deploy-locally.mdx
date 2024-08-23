@@ -13,18 +13,18 @@ This how-to guide focuses on taking an already created Subnet configuration and 
 Deploying Subnets Locally[​](#deploying-subnets-locally "Direct link to heading")
 ---------------------------------------------------------------------------------
 
-In the following commands, make sure to substitute the name of your Subnet configuration for `<subnetName>`.
+In the following commands, make sure to substitute the name of your Subnet configuration for `<blockchainName>`.
 
 To deploy your Subnet, run:
 
 ```bash
-avalanche blockchain deploy <subnetName>
+avalanche blockchain deploy <blockchainName>
 ```
 
 and select `Local Network` to deploy on. Alternatively, you can bypass this prompt by providing the `--local` flag. For example:
 
 ```bash
-avalanche blockchain deploy <subnetName> --local
+avalanche blockchain deploy <blockchainName> --local
 ```
 
 The command may take a couple minutes to run.
@@ -88,5 +88,5 @@ To redeploy the Subnet, you first need to wipe the Subnet state. This permanentl
 You are now free to redeploy your Subnet with
 
 ```bash
-avalanche blockchain deploy <subnetName> --local
+avalanche blockchain deploy <blockchainName> --local
 ```

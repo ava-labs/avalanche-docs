@@ -26,14 +26,14 @@ Before the nodes can be Subnet Validators, the nodes need to first sync with the
 To have all nodes in cluster `clusterName` sync with Subnet `subnetName`, run:
 
 ```bash
-avalanche node sync <clusterName> <subnetName>
+avalanche node sync <clusterName> <blockchainName>
 ```
 
 All the nodes in cluster `clusterName` will now be syncing to Subnet `subnetName`.
 
 Wait until nodes are successfully `Syncing` with the Subnet before running the next commands.
 
-To check sync status, run `avalanche node status <clusterName> --subnet <subnetName>`. Once the node is finished syncing, the response will be:
+To check sync status, run `avalanche node status <clusterName> --subnet <blockchainName>`. Once the node is finished syncing, the response will be:
 
 ```bash
 All nodes in cluster `clusterName` are synced to Subnet `subnetName`
@@ -47,7 +47,7 @@ Once the nodes have synced, we can now have the nodes be Subnet Validators.
 To have the nodes be Subnet Validators, run:
 
 ```bash
-avalanche node validate subnet <clusterName> <subnetName>
+avalanche node validate subnet <clusterName> <blockchainName>
 ```
 
 **For Fuji Only**: If any of the nodes is not yet a Primary Network Validator, we will first add it as a Primary Network Validator.
@@ -78,7 +78,7 @@ Next, choose how long the node will be validating for:
 
 Once all the inputs are completed you will see a transaction ID indicating that the node is now a Primary Network Validator.
 
-Note: if you see an error indicating that the transaction is not committed, run `avalanche node validate subnet <clusterName> <subnetName>` again as it could be due to the validator start time having elapsed.
+Note: if you see an error indicating that the transaction is not committed, run `avalanche node validate subnet <clusterName> <blockchainName>` again as it could be due to the validator start time having elapsed.
 
 We will then proceed with adding the node as a Subnet Validator. Similar to adding the node as a Primary Network Validator, the wizard will ask you for how you would like to pay for the transaction fee.
 
@@ -94,7 +94,7 @@ Note that for this part, you are not staking actual AVAX in the validator. This 
 
 Once all input is completed, you will another transaction ID indicating that the node is now scheduled to be a Subnet Validator.
 
-Once the start time that you chose for the node to be a Subnet Validator has elapsed, verify that the node is a Subnet validator by running `avalanche node status <clusterName> --subnet <subnetName>`.
+Once the start time that you chose for the node to be a Subnet Validator has elapsed, verify that the node is a Subnet validator by running `avalanche node status <clusterName> --subnet <blockchainName>`.
 
 You should see:
 
