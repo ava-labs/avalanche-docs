@@ -40,9 +40,16 @@ export default function Page({
                     backgroundBlendMode: 'difference, difference, normal',
                 }}
             >
-                <h1 className="mb-2 text-3xl font-bold text-white">
-                    {page.data.title}
-                </h1>
+                <div className="flex items-center">
+                    <img
+                        src={page.data.logo}
+                        alt={page.data.title}
+                        className="w-12 h-12 object-contain mr-4"
+                    />
+                    <h1 className="mb-2 text-3xl font-bold text-white">
+                        {page.data.title}
+                    </h1>
+                </div>
                 <p className="mb-4 text-white/80">{page.data.description}</p>
                 <Link
                     href="/integrations"
@@ -53,43 +60,34 @@ export default function Page({
             </div>
             <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
                 <div className="prose p-4">
-                    <InlineTOC items={page.data.exports.toc} />
                     <page.data.exports.default />
                 </div>
-                <div className="flex flex-col gap-4 border-l p-4 text-sm">
+                <div className="flex flex-col gap-4 border-l p-4 text-lg">
                     <div>
-                        <p className="mb-1 text-muted-foreground">Written by</p>
-                        <div className="col-span-2 flex flex-col gap-2">
-                            {page.data.authors.map(author => (
-                                <Link
-                                    key={author}
-                                    href={`https://x.com/${author}`}
-                                    target='_blank'
-                                    className="text-foreground transition-colors flex flex-row items-center gap-2 group"
-                                >
-                                    <SiX size={12} />
-                                    <span className="flex-grow truncate">{author}</span>
-                                </Link>
-                            ))}
+                        <p className="mb-2 font-bold">Details</p>
+                        <hr className="my-2" />
+                        <div>
+                            <p className="mb-1 text-muted-foreground">Developer:</p>
+                            <p>{page.data.developer}</p>
                         </div>
-                    </div>
-                    <div>
-                        <p className="mb-1 text-sm text-muted-foreground">On</p>
-                        <p className="font-medium">
-                            {new Date(page.data.date ?? page.file.name).toDateString()}
-                        </p>
-                    </div>
-
-                    <div>
-                        <p className="mb-2 text-muted-foreground">Topics</p>
-                        <div className="flex flex-wrap items-center gap-4 text-xs">
-                            {page.data.topics.map(item => (
-                                <span key={item}
-                                    className="relative z-10 rounded-full bg-accent px-3 py-1.5 font-medium text-muted-foreground"
-                                >
-                                    {item}
-                                </span>
-                            ))}
+                        <hr className="my-2" />
+                        <div>
+                            <p className="mb-1 text-muted-foreground">Category:</p>
+                            <p>{page.data.category}</p>
+                        </div>
+                        <hr className="my-2" />
+                        <div>
+                            <p className="mb-1 text-muted-foreground">Website:</p>
+                            <a href={page.data.website} target="_blank" rel="noreferrer noopener">
+                                {page.data.website}
+                            </a>
+                        </div>
+                        <hr className="my-2" />
+                        <div>
+                            <p className="mb-1 text-muted-foreground">Documentation:</p>
+                            <a href={page.data.documentation} target="_blank" rel="noreferrer noopener">
+                                {page.data.documentation}
+                            </a>
                         </div>
                     </div>
 
@@ -102,7 +100,7 @@ export default function Page({
                         <ArrowUpRightIcon className="size-5" /> Edit on Github 
                     </a>
 
-                    {/*<Control url={page.url} />*/}
+                    {/* <Control url={page.url} /> */}
                 </div>
             </article>
         </>

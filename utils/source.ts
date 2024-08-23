@@ -52,14 +52,11 @@ export const integrations = loader({
   source: createMDXSource(map, {
     schema: {
       frontmatter: defaultSchemas.frontmatter.extend({
-        preview: z.string().optional(),
-        toc: z.boolean().default(true),
-        index: z.boolean().default(false),
-        topics: z.array(z.string()).default([]),
-        date: z.string().optional(),
-        authors: z.array(z.string()).default([]),
         category: z.string().optional(),
         logo: z.string().optional(),
+        developer: z.string().optional(),
+        website: z.string().optional(),
+        documentation: z.string().optional(),
       }),
     },
   }),

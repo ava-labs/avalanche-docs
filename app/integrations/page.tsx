@@ -3,8 +3,8 @@ import { integrations } from '@/utils/source';
 
 export default function Page(): React.ReactElement {
     const integrationsList = [...integrations.getPages()]
-    const groupedIntegrations = integrationsList.reduce((acc, integration) => {
-        const categories = integration.data.category.split(',').map((category) => category.trim());
+    const groupedIntegrations: { [key: string]: any[] } = integrationsList.reduce((acc: { [key: string]: any[] }, integration) => {
+        const categories = integration.data.category ? integration.data.category.split(',').map((category) => category.trim()) : [];
         categories.forEach((category) => {
             if (!acc[category]) {
                 acc[category] = [];
@@ -25,13 +25,15 @@ export default function Page(): React.ReactElement {
                             <input type="text" placeholder="Search" className="w-full p-2 mb-4" />
                             <ul className="space-y-2">
                                 {/* Render the categories on sidelist */}
-                                {Object.keys(groupedIntegrations).map((category) => (
-                                    <li key={category}>
-                                        <a href={`#${category}`} className="text-lg font-bold">
-                                            {category}
-                                        </a>
-                                    </li>
-                                ))}
+                                {Object.keys(groupedIntegrations)
+                                    .sort()
+                                    .map((category) => (
+                                        <li key={category}>
+                                            <a href={`#${category}`} className="text-lg font-bold">
+                                                {category}
+                                            </a>
+                                        </li>
+                                    ))}
                             </ul>
                         </div>
                     </div>
@@ -44,7 +46,7 @@ export default function Page(): React.ReactElement {
                         </div>
 
                         {/* Render the integrations for each category */}
-                        {Object.entries(groupedIntegrations).map(([category, integrations]) => (
+                        {Object.entries(groupedIntegrations).sort().map(([category, integrations]) => (
                             <div key={category}>
                                 <section id={category}>
                                     <h3 className="text-2xl font-bold mt-8">{category}</h3>
