@@ -4,7 +4,7 @@ import { baseOptions } from '@/app/layout.config';
 
 export default function HomePage(): React.ReactElement {
   return <Layout {...baseOptions}>
-    <>
+    <div>
         <main className="flex h-screen flex-col text-center mt-[180px]">
         <h1 className="mb-4 text-2xl font-bold">😢{' '}Page Not Found</h1>
         <p className="text-fd-muted-foreground">
@@ -14,6 +14,6 @@ export default function HomePage(): React.ReactElement {
             to find relevant docs.
         </p>
         </main>
-    </>
+    </div>
   </Layout>;
 }
