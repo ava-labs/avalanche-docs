@@ -82,8 +82,8 @@ export default function HomePage(): React.ReactElement {
                         Hm, interesting choice ...
                       </AlertDialogTitle>
                       <AlertDialogDescription>
-                        That's awfully nice of you, but we to think about this a
-                        bit more.
+                        That's awfully nice of you, but we need to think about
+                        this a bit more.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
