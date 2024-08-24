@@ -6,6 +6,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Cards, Card } from 'fumadocs-ui/components/card';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import defaultComponents from 'fumadocs-ui/mdx';
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import {
   CodeBlock,
   type CodeBlockProps,
@@ -54,6 +55,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </Tabs>
     ),
     blockquote: (props) => <Callout>{props.children}</Callout>,
+    img: (props) => <ImageZoom {...props} />,
     ...components,
   };
 }
