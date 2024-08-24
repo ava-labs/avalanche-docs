@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Layout } from "fumadocs-ui/layout";
 import { baseOptions } from "@/app/layout.config";
 import {
@@ -58,10 +59,14 @@ export default function HomePage(): React.ReactElement {
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogAction>Docs Home</AlertDialogAction>
-                      <AlertDialogCancel>
-                        Scold Intern on Twitter
-                      </AlertDialogCancel>
+                      <Link href="/">
+                        <AlertDialogAction>Docs Home</AlertDialogAction>
+                      </Link>
+                      <Link href="https://x.com/AvalancheIntern">
+                        <AlertDialogCancel>
+                          Scold Intern on Twitter
+                        </AlertDialogCancel>
+                      </Link>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
@@ -82,8 +87,12 @@ export default function HomePage(): React.ReactElement {
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogAction>Docs Home</AlertDialogAction>
-                      <AlertDialogCancel>Give Him Advice</AlertDialogCancel>
+                      <Link href="/">
+                        <AlertDialogAction>Docs Home</AlertDialogAction>
+                      </Link>
+                      <Link href="https://x.com/AvalancheIntern">
+                        <AlertDialogCancel>Give Him Advice</AlertDialogCancel>
+                      </Link>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
