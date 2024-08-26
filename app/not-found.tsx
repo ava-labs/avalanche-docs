@@ -29,7 +29,7 @@ export default function HomePage(): React.ReactElement {
           <div className="column w-full md:w-1/2 px-4 mb-16 md:mb-0">
             <div className="flex flex-wrap">
               <div className="md:max-w-xl text-center md:text-left">
-                <span className="inline-block py-px px-2 mb-4 text- s leading font-medium rounded-full shadow-sm bg-red-600">
+                <span className="inline-block py-px px-2 mb-4 text-s leading font-medium rounded-full bg-red-600" style={{color: "#fff"}}>
                   Error 404
                 </span>
                 <h2 className="mb-4 text-4xl md:text-5xl leading-tight font-bold tracking-tighter">
