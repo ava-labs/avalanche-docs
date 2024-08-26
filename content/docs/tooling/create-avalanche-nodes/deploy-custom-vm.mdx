@@ -85,10 +85,10 @@ Save it into a file with path `<genesisPath>` (for example `~/morpheusvm_genesis
 Create the Subnet[​](#create-the-subnet "Direct link to heading")
 -----------------------------------------------------------------
 
-Let's create a Subnet called `<subnetName>`, with custom VM binary and genesis.
+Let's create a Subnet called `<blockchainName>`, with custom VM binary and genesis.
 
 ```bash
-avalanche blockchain create <subnetName>
+avalanche blockchain create <blockchainName>
 ```
 
 Choose custom
@@ -131,7 +131,7 @@ Successfully created subnet configuration
 For this example, we will deploy the Subnet and blockchain on Fuji. Run:
 
 ```bash
-avalanche blockchain deploy <subnetName>
+avalanche blockchain deploy <blockchainName>
 ```
 
 Choose Fuji:
@@ -181,7 +181,7 @@ Now creating blockchain...
 +--------------------+----------------------------------------------------+
 | DEPLOYMENT RESULTS |                                                    |
 +--------------------+----------------------------------------------------+
-| Chain Name         | subnetName                                         |
+| Chain Name         | blockchainName                                     |
 +--------------------+----------------------------------------------------+
 | Subnet ID          | RU72cWmBmcXber6ZBPT7R5scFFuVSoFRudcS3vayf3L535ZE3  |
 +--------------------+----------------------------------------------------+
@@ -244,7 +244,7 @@ into a file with path `<avagoFlagsPath>` (for example `~/morpheusvm_avago.json`)
 Then set the Subnet to use it by executing:
 
 ```bash
-avalanche subnet configure subnetName
+avalanche blockchain configure blockchainName
 ```
 
 Select node-config.json:
@@ -307,7 +307,7 @@ in a known file path (for example `~/morpheusvm_chain.json`):
 Then set the Subnet to use it by executing:
 
 ```bash
-avalanche subnet configure subnetName
+avalanche blockchain configure blockchainName
 ```
 
 Select chain.json:
@@ -352,7 +352,7 @@ in a known path (for example `~/morpheusvm_subnet.json`):
 Then set the Subnet to use it by executing:
 
 ```bash
-avalanche subnet configure subnetName
+avalanche blockchain configure blockchainName
 ```
 
 Select `subnet.json`:
@@ -389,7 +389,7 @@ Save the following content (currently with no network upgrades) in a known path 
 Then set the Subnet to use it by executing:
 
 ```bash
-avalanche subnet upgrade import subnetName
+avalanche blockchain upgrade import blockchainName
 ```
 
 Provide the path to the network upgrades file:
@@ -404,7 +404,7 @@ Deploy Our Custom VM[​](#deploy-our-custom-vm "Direct link to heading")
 To deploy our Custom VM, run:
 
 ```bash
-avalanche node sync <clusterName> <subnetName>
+avalanche node sync <clusterName> <blockchainName>
 ```
 
 ```bash
@@ -413,4 +413,4 @@ Node(s) successfully started syncing with Subnet!
 
 Your custom VM is successfully deployed!
 
-You can also use `avalanche node update subnet <subnetName>` to reinstall the binary when the branch is updated, or update the config files.
+You can also use `avalanche node update blockchain <blockchainName>` to reinstall the binary when the branch is updated, or update the config files.

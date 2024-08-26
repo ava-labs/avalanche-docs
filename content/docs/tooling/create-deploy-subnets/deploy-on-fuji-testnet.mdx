@@ -178,7 +178,7 @@ Create an EVM Subnet[​](#create-an-evm-subnet "Direct link to heading")
 
 Creating a Subnet with `Avalanche-CLI` for `Fuji` works the same way as with a local network. In fact, the `create` commands only creates a specification of your Subnet on the local file system. Afterwards the Subnet needs to be _deployed_. This allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` - and eventually to `Mainnet`.
 
-To create an EVM Subnet, run the `subnet create` command with a name of your choice:
+To create an EVM Subnet, run the `blockchain create` command with a name of your choice:
 
 ```bash
 avalanche blockchain create testsubnet
@@ -345,7 +345,7 @@ No precompiles set
 Also you can list the available Subnets:
 
 ```bash
-avalanche subnet list
+avalanche blockchain list
 go run main.go subnet list
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 |   SUBNET    |    CHAIN    | CHAIN ID |                       VM ID                       |    TYPE    | FROM REPO |
@@ -357,7 +357,7 @@ go run main.go subnet list
 List deployed information:
 
 ```bash
-avalanche subnet list --deployed
+avalanche blockchain list --deployed
 go run main.go subnet list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 |   SUBNET    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
@@ -472,7 +472,7 @@ See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) o
 First, request permission to validate by running the `join` command along with the Subnet name:
 
 ```bash
-avalanche subnet join testsubnet
+avalanche blockchain join testsubnet
 ```
 
 Note: Running `join` does not guarantee that your node is a validator of the Subnet! The owner of the Subnet must approve your node to be a validator afterwards by calling `addValidator` as described in the next section.
@@ -574,7 +574,7 @@ Now that the node has joined the Subnet, a Subnet control key holder must call `
 To whitelist a node as a recognized validator on the Subnet, run:
 
 ```bash
-avalanche subnet addValidator testsubnet
+avalanche blockchain addValidator testsubnet
 ```
 
 As this operation involves a new transaction, you will need to specify which private key to use:
@@ -676,7 +676,7 @@ Subnet Export[​](#subnet-export "Direct link to heading")
 This tool is most useful on the machine where a validator is or is going to be running. In order to allow a VM to run on a different machine, you can export the configuration. Just need to provide a path to where to export the data:
 
 ```bash
-avalanche subnet export testsubnet
+avalanche blockchain export testsubnet
 ✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
 ```
 
@@ -688,14 +688,14 @@ Subnet Import[​](#subnet-import "Direct link to heading")
 To import a VM specification exported in the previous section, just issue the `import` command with the path to the file after having copied the file over:
 
 ```bash
-avalanche subnet import /tmp/testsubnet-export.dat
+avalanche blockchain import /tmp/testsubnet-export.dat
 Subnet imported successfully
 ```
 
 After this the whole Subnet configuration should be available on the target machine:
 
 ```bash
-avalanche subnet list
+avalanche blockchain list
 +---------------+---------------+----------+-----------+----------+
 |    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
 +---------------+---------------+----------+-----------+----------+

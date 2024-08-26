@@ -13,18 +13,18 @@ This how-to guide focuses on taking an already created Subnet configuration and 
 Deploying Subnets Locally[​](#deploying-subnets-locally "Direct link to heading")
 ---------------------------------------------------------------------------------
 
-In the following commands, make sure to substitute the name of your Subnet configuration for `<subnetName>`.
+In the following commands, make sure to substitute the name of your Subnet configuration for `<blockchainName>`.
 
 To deploy your Subnet, run:
 
 ```bash
-avalanche blockchain deploy <subnetName>
+avalanche blockchain deploy <blockchainName>
 ```
 
 and select `Local Network` to deploy on. Alternatively, you can bypass this prompt by providing the `--local` flag. For example:
 
 ```bash
-avalanche blockchain deploy <subnetName> --local
+avalanche blockchain deploy <blockchainName> --local
 ```
 
 The command may take a couple minutes to run.
@@ -36,9 +36,10 @@ Note: If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on 
 If all works as expected, the command output should look something like this:
 
 ```bash
-> avalanche blockchain deploy mySubnet
+> avalanche blockchain deploy myblockchain
+
 ✔ Local Network
-Deploying [mySubnet] to Local Network
+Deploying [myblockchain] to Local Network
 Installing subnet-evm-v0.4.3...
 subnet-evm-v0.4.3 installation successful
 Backend controller started, pid: 93928, output at: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
@@ -53,21 +54,21 @@ Network ready to use. Local network node endpoints:
 +-------+----------+------------------------------------------------------------------------------------+
 | NODE  |    VM    |                                        URL                                         |
 +-------+----------+------------------------------------------------------------------------------------+
-| node2 | mySubnet | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| node2 | myblockchain | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node3 | mySubnet | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| node3 | myblockchain | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node4 | mySubnet | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| node4 | myblockchain | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node5 | mySubnet | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| node5 | myblockchain | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
-| node1 | mySubnet | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
+| node1 | myblockchain | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
 +-------+----------+------------------------------------------------------------------------------------+
 
 Browser Extension connection details (any node URL from above works):
 RPC URL:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
 Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     mySubnet
+Network name:     myblockchain
 Chain ID:         54325
 Currency Symbol:  TUTORIAL
 ```
@@ -88,5 +89,5 @@ To redeploy the Subnet, you first need to wipe the Subnet state. This permanentl
 You are now free to redeploy your Subnet with
 
 ```bash
-avalanche blockchain deploy <subnetName> --local
+avalanche blockchain deploy <blockchainName> --local
 ```

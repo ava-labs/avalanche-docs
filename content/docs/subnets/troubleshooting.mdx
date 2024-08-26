@@ -9,9 +9,10 @@ Deployment Times Out[​](#deployment-times-out "Direct link to heading")
 During a local deployment, your network may fail to start. Your error may look something like this:
 
 ```bash
-[~]$ avalanche blockchain deploy mySubnet
+[~]$ avalanche blockchain deploy myblockchain
+
 ✔ Local Network
-Deploying [mySubnet] to Local Network
+Deploying [myblockchain] to Local Network
 Backend controller started, pid: 26388, output at: /Users/user/.avalanche-cli/runs/server_20221231_111605/avalanche-cli-backend
 VMs ready.
 Starting network...
@@ -47,9 +48,10 @@ Incompatible RPC Version for Custom VM[​](#incompatible-rpc-version-for-custom
 If you're locally deploying a custom VM, you may run into this error message.
 
 ```bash
-[~]$ avalanche blockchain deploy mySubnet
+[~]$ avalanche blockchain deploy myblockchain
+
 ✔ Local Network
-Deploying [mySubnet] to Local Network
+Deploying [myblockchain] to Local Network
 Backend controller started, pid: 26388, output at: /Users/user/.avalanche-cli/runs/server_20221231_111605/avalanche-cli-backend
 VMs ready.
 Starting network...
@@ -82,7 +84,7 @@ This error occurs when the RPCChainVM protocol version used by VMs like Subnet-E
 If your VM has an RPC version mismatch, you have two options:
 
 1.  Update the version of AvalancheGo you use in your VM. This is the correct long-term approach.
-2.  Use Avalanche-CLI to deploy an older version of AvalancheGo by using the `--avalanchego-version` flag. Both the [`subnet deploy`](/tooling/avalanche-cli#subnet-deploy) and [`network start`](/tooling/avalanche-cli#network-start) commands support setting the AvalancheGo version explicitly.
+2.  Use Avalanche-CLI to deploy an older version of AvalancheGo by using the `--avalanchego-version` flag. Both the [`blockchain deploy`](/tooling/avalanche-cli#subnet-deploy) and [`network start`](/tooling/avalanche-cli#network-start) commands support setting the AvalancheGo version explicitly.
 
 Although it's very important to keep your version of AvalancheGo up-to-date, this workaround helps you avoid broken builds in the short term.
 

@@ -22,17 +22,17 @@ Note: the tutorial uses AWS hosts, but Devnets can also be created and operated 
 Create Subnets Configurations[​](#create-subnets-configurations "Direct link to heading")
 -----------------------------------------------------------------------------------------
 
-For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-subnets-configurations), to create two Teleporter-enabled Subnets, `<subnet1>` and `<subnet2>`.
+For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-subnets-configurations), to create two Teleporter-enabled Subnets, `<chain1>` and `<chain2>`.
 
 Create a Devnet and Deploy a Subnet in It[​](#create-a-devnet-and-deploy-a-subnet-in-it "Direct link to heading")
 -----------------------------------------------------------------------------------------------------------------
 
-Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<subnet1>` in it.
+Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<chain1>` in it.
 
 The devnet will be created in the `us-east-1` region of AWS, and will consist of 5 validators only.
 
 ```
-avalanche node devnet wiz <devnetName> <subnet1> --aws --node-type default --region us-east-1 --num-validators 5 --num-apis 0 --enable-monitoring=false --default-validator-params 
+avalanche node devnet wiz <devnetName> <chain1> --aws --node-type default --region us-east-1 --num-validators 5 --num-apis 0 --enable-monitoring=false --default-validator-params 
 
 Creating the devnet...
 
@@ -61,7 +61,7 @@ updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/
 
 Devnet <devnetName> is successfully created and is now validating subnet subnet1!
 
-Subnet <subnet1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
+Subnet <chain1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
  
 ✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
@@ -127,12 +127,12 @@ Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":
 Deploying the Second Subnet[​](#deploying-the-second-subnet "Direct link to heading")
 -------------------------------------------------------------------------------------
 
-Let's use the `devnet wiz` command again to deploy `<subnet2>`.
+Let's use the `devnet wiz` command again to deploy `<chain2>`.
 
-When deploying Subnet `<subnet2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
+When deploying Subnet `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
 
 ```
-avalanche node devnet wiz <devnetName> <subnet2> --default-validator-params 
+avalanche node devnet wiz <devnetName> <chain2> --default-validator-params 
 
 Adding subnet into existing devnet <devnetName>...
 ...
@@ -158,7 +158,7 @@ updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/
 
 Devnet <devnetName> is now validating subnet subnet2
 
-Subnet <subnet2> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
+Subnet <chain2> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
 
 ✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
@@ -191,7 +191,7 @@ Obtaining Information on Teleporter Deploys[​](#obtaining-information-on-telep
 
 ### Obtaining Subnet Information[​](#obtaining-subnet-information "Direct link to heading")
 
-By executing `subnet describe` on a Teleporter enabled Subnet, the following relevant information can be found:
+By executing `blockchain describe` on a Teleporter enabled Subnet, the following relevant information can be found:
 
 - Blockchain RPC URL
 - Blockchain ID in cb58 format
@@ -199,10 +199,10 @@ By executing `subnet describe` on a Teleporter enabled Subnet, the following rel
 - Teleporter Messenger address
 - Teleporter Registry address
 
-Let's get the information for `<subnet1>`:
+Let's get the information for `<chain1>`:
 
 ```
-avalanche blockchain describe <subnet1>
+avalanche blockchain describe <chain1>
 
  _____       _        _ _
 |  __ \     | |      (_) |

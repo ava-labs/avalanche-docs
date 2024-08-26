@@ -4,7 +4,7 @@ description: Learn how to view Subnets deployed using Avalanche-CLI.
 ---
 
 ```bash
-avalanche subnet list
+avalanche blockchain list
 
 # output
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
@@ -17,7 +17,7 @@ avalanche subnet list
 To see detailed information about your deployed Subnets, add the `--deployed` flag:
 
 ```bash
-avalanche subnet list --deployed
+avalanche blockchain list --deployed
 
 # output
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
@@ -30,7 +30,7 @@ avalanche subnet list --deployed
 ```
 
 ```bash
-avalanche blockchain describe firstsubnet
+avalanche blockchain describe myblockchain
 
 #output
  _____       _        _ _
@@ -42,7 +42,7 @@ avalanche blockchain describe firstsubnet
 +----------------------------+----------------------------------------------------+
 |         PARAMETER          |                       VALUE                        |
 +----------------------------+----------------------------------------------------+
-| Subnet Name                | firstsubnet                                        |
+| Subnet Name                | myblockchain                                        |
 +----------------------------+----------------------------------------------------+
 | ChainID                    | 12345                                              |
 +----------------------------+----------------------------------------------------+
@@ -117,7 +117,7 @@ No precompiles set
 If you'd like to see the raw genesis file, supply the `--genesis` flag to the describe command:
 
 ```bash
-avalanche blockchain describe firstsubnet --genesis
+avalanche blockchain describe myblockchain --genesis
 
 # output
 {
