@@ -165,18 +165,18 @@ Verify Teleporter Is Successfully Set Up[​](#verify-teleporter-is-successfully
 To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```bash
-avalanche teleporter msg C-Chain subnet1 "Hello World" --local
+avalanche teleporter msg C-Chain chain1 "Hello World" --local
 
 Delivering message "this is a message" to source subnet "C-Chain"
-Waiting for message to be received at destination subnet subnet "subnet1"
+Waiting for message to be received at destination subnet subnet "chain1"
 Message successfully Teleported!
 ```
 
 ```bash
-avalanche teleporter msg subnet2 subnet1 "Hello World" --local
+avalanche teleporter msg chain2 chain1 "Hello World" --local
 
-Delivering message "this is a message" to source subnet "subnet2"
-Waiting for message to be received at destination subnet subnet "subnet1"
+Delivering message "this is a message" to source subnet "chain2"
+Waiting for message to be received at destination subnet subnet "chain1"
 Message successfully Teleported!
 ```
 
@@ -202,6 +202,7 @@ Let's get the information for `<chain1>`:
 ```bash
 avalanche blockchain describe <chain1>
 
+
  _____       _        _ _
 |  __ \     | |      (_) |
 | |  | | ___| |_ __ _ _| |___
@@ -211,7 +212,7 @@ avalanche blockchain describe <chain1>
 +--------------------------------+-------------------------------------------------------------------------------------+
 |           PARAMETER            |                               VALUE                                                 |
 +--------------------------------+-------------------------------------------------------------------------------------+
-| Subnet Name                    | subnet1                                                                             |
+| Subnet Name                    | chain1                                                                              |
 +--------------------------------+-------------------------------------------------------------------------------------+
 | ChainID                        | 1                                                                                   |
 +--------------------------------+-------------------------------------------------------------------------------------+

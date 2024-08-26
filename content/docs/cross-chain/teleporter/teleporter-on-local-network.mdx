@@ -39,7 +39,6 @@ Now let's create a second Subnet called `<chain2>`, with similar settings:
 
 ```
 avalanche blockchain create <chain2> --evm --latest\
-    --evm-chain-id 2 --evm-token TOKEN2 --evm-defaults
 
 creating genesis for <blockchain chain2>
 configuring airdrop to stored key "subnet_<chain2>_airdrop" with address 0x0EF815FFFF6ad1d4e17C8ED4128b20EB5edAABBB
@@ -56,6 +55,7 @@ Let's deploy `<chain1>`:
 
 ```
 avalanche blockchain deploy <chain1> --local
+
 
 Deploying [<chain1>] to Local Network
 Backend controller started, pid: 149427, output at: ~/.avalanche-cli/runs/server_20240229_165923/avalanche-cli-backend.log
@@ -162,18 +162,18 @@ Verify Teleporter Is Successfully Set Up[​](#verify-teleporter-is-successfully
 To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```
-avalanche teleporter msg C-Chain subnet1 "Hello World" --local
+avalanche teleporter msg C-Chain chain1 "Hello World" --local
 
 Delivering message "this is a message" to source subnet "C-Chain"
-Waiting for message to be received at destination subnet subnet "subnet1"
+Waiting for message to be received at destination subnet subnet "chain1"
 Message successfully Teleported!
 ```
 
 ```
-avalanche teleporter msg subnet2 subnet1 "Hello World" --local
+avalanche teleporter msg chain2 chain1 "Hello World" --local
 
-Delivering message "this is a message" to source subnet "subnet2"
-Waiting for message to be received at destination subnet subnet "subnet1"
+Delivering message "this is a message" to source subnet "chain2"
+Waiting for message to be received at destination subnet subnet "chain1"
 Message successfully Teleported!
 ```
 
@@ -208,7 +208,7 @@ avalanche blockchain describe <chain1>
 +--------------------------------+-------------------------------------------------------------------------------------+
 |           PARAMETER            |                               VALUE                                                 |
 +--------------------------------+-------------------------------------------------------------------------------------+
-| Subnet Name                    | subnet1                                                                             |
+| Subnet Name                    | chain1                                                                             |
 +--------------------------------+-------------------------------------------------------------------------------------+
 | ChainID                        | 1                                                                                   |
 +--------------------------------+-------------------------------------------------------------------------------------+
