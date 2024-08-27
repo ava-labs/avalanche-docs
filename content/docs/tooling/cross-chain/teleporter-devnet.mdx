@@ -22,24 +22,24 @@ Note: the tutorial uses AWS hosts, but Devnets can also be created and operated 
 Create Subnets Configurations[​](#create-subnets-configurations "Direct link to heading")
 -----------------------------------------------------------------------------------------
 
-For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-subnets-configurations), to create two Teleporter-enabled Subnets, `<subnet1>` and `<subnet2>`.
+For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-subnets-configurations), to create two Teleporter-enabled Subnets, `<chain1>` and `<chain2>`.
 
 Create a Devnet and Deploy a Subnet in It[​](#create-a-devnet-and-deploy-a-subnet-in-it "Direct link to heading")
 -----------------------------------------------------------------------------------------------------------------
 
-Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<subnet1>` in it.
+Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<chain1>` in it.
 
 The devnet will be created in the `us-east-1` region of AWS, and will consist of 5 validators only.
 
 ```bash
-avalanche node devnet wiz <devnetName> <subnet1> --aws --node-type default --region us-east-1 --num-validators 5 --num-apis 0 --enable-monitoring=false --default-validator-params 
+avalanche node devnet wiz <devnetName> <chain1> --aws --node-type default --region us-east-1 --num-validators 5 --num-apis 0 --enable-monitoring=false --default-validator-params 
 
 Creating the devnet...
 
 Creating new EC2 instance(s) on AWS...
 ...
 
-Deploying [subnet1] to Cluster <devnetName>
+Deploying [chain1] to Cluster <devnetName>
 ...
 
 configuring AWM RElayer on host i-0f1815c016b555fcc
@@ -49,19 +49,19 @@ Setting the nodes as subnet trackers
 
 Setting up teleporter on subnet
 
-Teleporter Messenger successfully deployed to subnet1 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
-Teleporter Registry successfully deployed to subnet1 (0xb623C4495220C603D0A939D32478F55891a61750)
+Teleporter Messenger successfully deployed to chain1 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+Teleporter Registry successfully deployed to chain1 (0xb623C4495220C603D0A939D32478F55891a61750)
 Teleporter Messenger successfully deployed to c-chain (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
 Teleporter Registry successfully deployed to c-chain (0x5DB9A7629912EBF95876228C24A848de0bfB43A9)
 
 Starting AWM Relayer Service
 
-setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet subnet1
+setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet chain1
 updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-Devnet <devnetName> is successfully created and is now validating subnet subnet1!
+Devnet <devnetName> is successfully created and is now validating subnet chain1!
 
-Subnet <subnet1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
+Subnet <chain1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
  
 ✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
@@ -127,17 +127,17 @@ Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":
 Deploying the Second Subnet[​](#deploying-the-second-subnet "Direct link to heading")
 -------------------------------------------------------------------------------------
 
-Let's use the `devnet wiz` command again to deploy `<subnet2>`.
+Let's use the `devnet wiz` command again to deploy `<chain2>`.
 
-When deploying Subnet `<subnet2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
+When deploying Subnet `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
 
 ```bash
-avalanche node devnet wiz <devnetName> <subnet2> --default-validator-params 
+avalanche node devnet wiz <devnetName> <chain2> --default-validator-params 
 
 Adding subnet into existing devnet <devnetName>...
 ...
 
-Deploying [subnet2] to Cluster <devnetName>
+Deploying [chain2] to Cluster <devnetName>
 ...
 
 Stopping AWM Relayer Service
@@ -147,18 +147,18 @@ Setting the nodes as subnet trackers
 
 Setting up teleporter on subnet
 
-Teleporter Messenger successfully deployed to subnet2 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
-Teleporter Registry successfully deployed to subnet2 (0xb623C4495220C603D0A939D32478F55891a61750)
+Teleporter Messenger successfully deployed to chain2 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+Teleporter Registry successfully deployed to chain2 (0xb623C4495220C603D0A939D32478F55891a61750)
 Teleporter Messenger has already been deployed to c-chain
 
 Starting AWM Relayer Service
 
-setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet subnet2
+setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet chain2
 updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-Devnet <devnetName> is now validating subnet subnet2
+Devnet <devnetName> is now validating subnet chain2
 
-Subnet <subnet2> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
+Subnet <chain2> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
 
 ✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
@@ -169,18 +169,18 @@ Verify Teleporter Is Successfully Set Up[​](#verify-teleporter-is-successfully
 To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```bash
-avalanche teleporter msg C-Chain subnet1 "Hello World" --cluster <devnetName>
+avalanche teleporter msg C-Chain chain1 "Hello World" --cluster <devnetName>
 
 Delivering message "this is a message" to source subnet "C-Chain" (2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6)
-Waiting for message to be received at destination subnet subnet "subnet1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
+Waiting for message to be received at destination subnet subnet "chain1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
 ```bash
-avalanche teleporter msg subnet2 subnet1 "Hello World" --cluster <devnetName>
+avalanche teleporter msg chain2 chain1 "Hello World" --cluster <devnetName>
 
-Delivering message "this is a message" to source subnet "subnet2" (29WP91AG7MqPUFEW2YwtKnsnzVrRsqcWUpoaoSV1Q9DboXGf4q)
-Waiting for message to be received at destination subnet subnet "subnet1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
+Delivering message "this is a message" to source subnet "chain2" (29WP91AG7MqPUFEW2YwtKnsnzVrRsqcWUpoaoSV1Q9DboXGf4q)
+Waiting for message to be received at destination subnet subnet "chain1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
@@ -191,7 +191,7 @@ Obtaining Information on Teleporter Deploys[​](#obtaining-information-on-telep
 
 ### Obtaining Subnet Information[​](#obtaining-subnet-information "Direct link to heading")
 
-By executing `subnet describe` on a Teleporter enabled Subnet, the following relevant information can be found:
+By executing `blockchain describe` on a Teleporter enabled Subnet, the following relevant information can be found:
 
 - Blockchain RPC URL
 - Blockchain ID in cb58 format
@@ -199,10 +199,10 @@ By executing `subnet describe` on a Teleporter enabled Subnet, the following rel
 - Teleporter Messenger address
 - Teleporter Registry address
 
-Let's get the information for `<subnet1>`:
+Let's get the information for `<chain1>`:
 
 ```bash
-avalanche subnet describe <subnet1>
+avalanche blockchain describe <chain1>
 
  _____       _        _ _
 |  __ \     | |      (_) |
@@ -214,7 +214,7 @@ avalanche subnet describe <subnet1>
 +--------------------------------+----------------------------------------------------------------------------------------+
 |           PARAMETER            |                               VALUE                                                    |
 +--------------------------------+----------------------------------------------------------------------------------------+
-| Subnet Name                    | subnet1                                                                                |
+| Subnet Name                    | chain1                                                                                 |
 +--------------------------------+----------------------------------------------------------------------------------------+
 | ChainID                        | 1                                                                                      |
 +--------------------------------+----------------------------------------------------------------------------------------+
