@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { integrations } from '@/utils/source';
 
+
 export default function Page(): React.ReactElement {
     const integrationsList = [...integrations.getPages()]
     const groupedIntegrations: { [key: string]: any[] } = integrationsList.reduce((acc: { [key: string]: any[] }, integration) => {
@@ -15,14 +16,12 @@ export default function Page(): React.ReactElement {
     }
     , {});
 
-    
     return (
         <main className="py-12 sm:py-24">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="flex">
                     <div className="w-1/4">
                         <div className="sticky top-0">
-                            <input type="text" placeholder="Search" className="w-full p-2 mb-4" />
                             <ul className="space-y-2">
                                 {/* Render the categories on sidelist */}
                                 {Object.keys(groupedIntegrations)

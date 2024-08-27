@@ -66,7 +66,7 @@ export default function Page({
                 </div>
                 <div className="flex flex-col gap-4 border-l p-4 text-lg">
                     <div>
-                        <p className="mb-2 font-bold">Details</p>
+                        <p className="mb-2 font-bold text-lg">Details:</p>
                         <hr className="my-2" />
                         <div>
                             <p className="mb-1 text-muted-foreground">Developer:</p>
