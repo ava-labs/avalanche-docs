@@ -26,6 +26,8 @@ export default function Page({
 
     const path = `content/integrations/${page.file.path}`;
 
+    const categories = page.data.category ? page.data.category.split(',').map((category) => category.trim()) : [];
+
     return (
         <>
             <div
@@ -73,7 +75,14 @@ export default function Page({
                         <hr className="my-2" />
                         <div>
                             <p className="mb-1 text-muted-foreground">Category:</p>
-                            <p>{page.data.category}</p>
+                            {categories.map((category) => (
+                                <div
+                                    key={category}
+                                    className="inline-flex items-center justify-center px-2 py-1 text-sm font-semibold text-white bg-red-500 rounded-full mr-2" // Added mr-2 for spacing
+                                >
+                                    <p>{category}</p>
+                                </div>
+                            ))}
                         </div>
                         <hr className="my-2" />
                         <div>
