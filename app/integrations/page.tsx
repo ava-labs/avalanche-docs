@@ -59,7 +59,7 @@ export default function Page(): React.ReactElement {
                                         <Link
                                             key={integration.url}
                                             href={integration.url}
-                                            className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 w-full w-auto h-auto"
+                                            className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 w-auto h-auto"
                                         >
                                             <div className="flex items-center mb-4">
                                                 <div className="w-8 h-8 mr-2 rounded-full overflow-hidden">
