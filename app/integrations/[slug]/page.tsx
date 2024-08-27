@@ -6,7 +6,6 @@ import { integrations } from '@/utils/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';
-import { SiX } from '@icons-pack/react-simple-icons';
 // import { Control } from '@/app/(home)/blog/[slug]/page.client';
 
 interface Param {
@@ -64,41 +63,37 @@ export default function Page({
                 <div className="prose p-4">
                     <page.data.exports.default />
                 </div>
-                <div className="flex flex-col gap-4 border-l p-4 text-lg">
+                <div className="flex flex-col gap-4 border-l p-4 text-sm">
                     <div>
-                        <p className="mb-2 font-bold text-lg">Details:</p>
-                        <hr className="my-2" />
-                        <div>
-                            <p className="mb-1 text-muted-foreground">Developer:</p>
-                            <p>{page.data.developer}</p>
-                        </div>
-                        <hr className="my-2" />
-                        <div>
-                            <p className="mb-1 text-muted-foreground">Category:</p>
+                        <p className="mb-1 text-sm text-muted-foreground">Developer:</p>
+                        <p className="font-medium">{page.data.developer}</p>
+                    </div>
+                    <div>
+                        <p className="mb-2 text-muted-foreground">Category:</p>
+                        <div className="flex flex-wrap items-center gap-4 text-xs">
                             {categories.map((category) => (
                                 <div
                                     key={category}
-                                    className="inline-flex items-center justify-center px-2 py-1 text-sm font-semibold text-white bg-red-500 rounded-full mr-2" // Added mr-2 for spacing
+                                    className="relative z-10 rounded-full bg-accent px-3 py-1.5 font-medium text-muted-foreground"
                                 >
-                                    <p>{category}</p>
+                                    {category}
                                 </div>
                             ))}
                         </div>
-                        <hr className="my-2" />
-                        <div>
-                            <p className="mb-1 text-muted-foreground">Website:</p>
-                            <a href={page.data.website} target="_blank" rel="noreferrer noopener">
-                                {page.data.website}
-                            </a>
-                        </div>
-                        <hr className="my-2" />
-                        <div>
-                            <p className="mb-1 text-muted-foreground">Documentation:</p>
-                            <a href={page.data.documentation} target="_blank" rel="noreferrer noopener">
-                                {page.data.documentation}
-                            </a>
-                        </div>
                     </div>
+                    <div>
+                        <p className="mb-1 text-muted-foreground">Website:</p>
+                        <a href={page.data.website} target="_blank" rel="noreferrer noopener">
+                            {page.data.website}
+                        </a>
+                    </div>
+                    <div>
+                        <p className="mb-1 text-muted-foreground">Documentation:</p>
+                        <a href={page.data.documentation} target="_blank" rel="noreferrer noopener">
+                            {page.data.documentation}
+                        </a>
+                    </div>
+
 
                     <a
                         href={`https://github.com/ava-labs/avalanche-academy/blob/dev/${path}`}
@@ -106,7 +101,7 @@ export default function Page({
                         rel="noreferrer noopener"
                         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
                     >
-                        <ArrowUpRightIcon className="size-5" /> Edit on Github 
+                        <ArrowUpRightIcon className="size-5" /> Edit on Github
                     </a>
 
                     {/* <Control url={page.url} /> */}
@@ -117,35 +112,35 @@ export default function Page({
 }
 
 export function generateMetadata({ params }: { params: Param }): Metadata {
-  const page = integrations.getPage([params.slug]);
+    const page = integrations.getPage([params.slug]);
 
-  if (!page) notFound();
+    if (!page) notFound();
 
-  const description =
-    page.data.description ?? 'Learn how to build on Avalanche blockchain with Academy';
+    const description =
+        page.data.description ?? 'Learn how to build on Avalanche blockchain with Academy';
 
-  const imageParams = new URLSearchParams();
-  imageParams.set('title', page.data.title);
-  imageParams.set('description', description);
+    const imageParams = new URLSearchParams();
+    imageParams.set('title', page.data.title);
+    imageParams.set('description', description);
 
-  const image = {
-    alt: 'Banner',
-    url: `/api/og/guide/${params.slug[0]}?${imageParams.toString()}`,
-    width: 1200,
-    height: 630,
-  };
+    const image = {
+        alt: 'Banner',
+        url: `/api/og/guide/${params.slug[0]}?${imageParams.toString()}`,
+        width: 1200,
+        height: 630,
+    };
 
-  return createMetadata({
-    title: page.data.title,
-    description,
-    openGraph: {
-      url: `/docs/${page.slugs.join('/')}`,
-      images: image,
-    },
-    twitter: {
-      images: image,
-    },
-  });
+    return createMetadata({
+        title: page.data.title,
+        description,
+        openGraph: {
+            url: `/docs/${page.slugs.join('/')}`,
+            images: image,
+        },
+        twitter: {
+            images: image,
+        },
+    });
 }
 
 

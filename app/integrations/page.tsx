@@ -28,10 +28,10 @@ export default function Page(): React.ReactElement {
                 <div className="flex flex-col md:flex-row md:space-x-12">
                     <div className="w-full mb-12 md:w-1/5">
                         <div className="sticky top-0 pt-20">
-                            <div className="inline-flex items-center gap-2 rounded-full border bg-secondary/50 p-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground w-full mb-4">
+                            {/**<div className="inline-flex items-center gap-2 rounded-full border bg-secondary/50 p-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground w-full mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-search ms-1 size-4"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
                                 <input type="text" placeholder="Search" className="w-full bg-transparent focus:outline-none" />
-                            </div>
+                            </div>**/}
                             <ul className="space-y-2">
                                 {/* Render the categories on sidelist */}
                                 {Object.keys(groupedIntegrations)
@@ -46,13 +46,13 @@ export default function Page(): React.ReactElement {
                             </ul>
                         </div>
                     </div>
-                    <div className="w-full md:w-4/5 pt-20">
+                    <div className="w-full md:w-4/5">
 
                         {/* Render the integrations for each category */}
                         {Object.entries(groupedIntegrations).sort().map(([category, integrations]) => (
-                            <div key={category} className="mb-12">
+                            <div key={category}>
                                 <section id={category}>
-                                    <h2 className="text-2xl mb-8">{category}</h2>
+                                    <h2 className="text-2xl mb-8 pt-20">{category}</h2>
                                 </section>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto w-full">
                                     {integrations.map((integration) => (
@@ -61,8 +61,8 @@ export default function Page(): React.ReactElement {
                                             href={integration.url}
                                             className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 w-full w-auto h-auto"
                                         >
-                                            <div className="flex items-center">
-                                                <div className="w-16 h-16 mr-4 rounded-full overflow-hidden">
+                                            <div className="flex items-center mb-4">
+                                                <div className="w-8 h-8 mr-2 rounded-full overflow-hidden">
                                                     <img
                                                         src={integration.data.logo}
                                                         alt={integration.data.title}
@@ -71,9 +71,9 @@ export default function Page(): React.ReactElement {
                                                 </div>
                                                 <div>
                                                     <h3 className="text-xl">{integration.data.title}</h3>
-                                                    <p className="text-sm text-gray-500">{integration.data.description}</p>
                                                 </div>
                                             </div>
+                                            <p className="text-sm text-gray-500">{integration.data.description}</p>
                                         </Link>
                                     ))}
                                 </div>
