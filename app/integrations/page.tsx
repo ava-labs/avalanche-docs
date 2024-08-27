@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { integrations } from '@/utils/source';
+import { cn } from '@/utils/cn';
+import { buttonVariants } from '@/components/ui/button';
 
 
 export default function Page(): React.ReactElement {
@@ -15,6 +17,7 @@ export default function Page(): React.ReactElement {
         return acc;
     }
         , {});
+    const firstCategory = Object.keys(groupedIntegrations).sort()[0];
 
     return (
         <main className="py-12 sm:py-24">
@@ -24,6 +27,10 @@ export default function Page(): React.ReactElement {
                     <p className="mb-6 h-fit text-center p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl">
                         Discover best-in-class intergrations for your Avalanche L1 and learn how to use them.
                     </p>
+                    <div className='inline-flex items-center gap-3'>
+                        <Link className={cn(buttonVariants())} href={`#${firstCategory}`}>Discover Integrations</Link>
+                        <Link className={cn(buttonVariants({ variant: 'outline' }))} href="https://github.com/ava-labs/avalanche-docs/blob/master/content/integrations" target='_blank'>Add your Integration</Link>
+                    </div>
                 </div>
                 <div className="flex flex-col md:flex-row md:space-x-12">
                     <div className="w-full mb-12 md:w-1/5">
