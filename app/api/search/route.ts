@@ -1,4 +1,4 @@
-import { getPages } from '@/utils/source';
+import { getPages } from '@/utils/docs-loader';
 import { createSearchAPI } from 'fumadocs-core/search/server';
 
 export const { GET } = createSearchAPI('advanced', {

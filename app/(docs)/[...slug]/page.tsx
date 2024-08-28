@@ -3,7 +3,7 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 import { DocsPage, DocsBody } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import { createMetadata } from '@/utils/metadata';
-import { getPage, getPages, type Page } from '@/utils/source';
+import { getPage, getPages, type Page } from '@/utils/docs-loader';
 import { ArrowUpRightIcon } from '@heroicons/react/20/solid';
 
 interface Param {
