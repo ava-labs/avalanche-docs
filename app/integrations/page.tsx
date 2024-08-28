@@ -10,7 +10,9 @@ export default function Page(): React.ReactElement {
 
     const groupedIntegrations: { [key: string]: any[] } = integrationsList.reduce((acc: { [key: string]: any[] }, integration) => {
         const category = integration.data.category;
-        
+        if (integration.data.title === 'README') {
+            return acc;
+        }
         if (!acc[category]) {
             acc[category] = [];
         }
