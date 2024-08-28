@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
-import { integrations } from '@/utils/source';
+import { getPage, getPages } from '@/utils/integrations-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';
+import { Pills } from '@/components/ui/pills';
 // import { Control } from '@/app/(home)/blog/[slug]/page.client';
 
 interface Param {
@@ -19,13 +19,11 @@ export default function Page({
 }: {
     params: Param;
 }): React.ReactElement {
-    const page = integrations.getPage([params.slug]);
+    const page = getPage([params.slug]);
 
     if (!page) notFound();
 
     const path = `content/integrations/${page.file.path}`;
-
-    const categories = page.data.category ? page.data.category.split(',').map((category) => category.trim()) : [];
 
     return (
         <>
@@ -69,16 +67,15 @@ export default function Page({
                         <p className="font-medium">{page.data.developer}</p>
                     </div>
                     <div>
-                        <p className="mb-2 text-muted-foreground">Category:</p>
+                        <p className="mb-2 text-muted-foreground">Categories:</p>
                         <div className="flex flex-wrap items-center gap-4 text-xs">
-                            {categories.map((category) => (
-                                <div
-                                    key={category}
-                                    className="relative z-10 rounded-full bg-accent px-3 py-1.5 font-medium text-muted-foreground"
-                                >
-                                    {category}
-                                </div>
-                            ))}
+                            <Pills items={[page.data.category]} />
+                        </div>
+                    </div>
+                    <div>
+                        <p className="mb-2 text-muted-foreground">Available For:</p>
+                        <div className="flex flex-wrap items-center gap-4 text-xs">
+                            <Pills items={page.data.available} />
                         </div>
                     </div>
                     <div>
@@ -112,7 +109,7 @@ export default function Page({
 }
 
 export function generateMetadata({ params }: { params: Param }): Metadata {
-    const page = integrations.getPage([params.slug]);
+    const page = getPage([params.slug]);
 
     if (!page) notFound();
 
@@ -145,7 +142,7 @@ export function generateMetadata({ params }: { params: Param }): Metadata {
 
 
 export function generateStaticParams(): Param[] {
-    return integrations.getPages().map<Param>((page) => ({
+    return getPages().map<Param>((page) => ({
         slug: page.slugs[0],
     }));
 }

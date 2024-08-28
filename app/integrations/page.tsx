@@ -1,22 +1,25 @@
 import Link from 'next/link';
-import { integrations } from '@/utils/source';
+import { getPages } from '@/utils/integrations-loader';
 import { cn } from '@/utils/cn';
 import { buttonVariants } from '@/components/ui/button';
+import { Pills } from '@/components/ui/pills';
 
 
 export default function Page(): React.ReactElement {
-    const integrationsList = [...integrations.getPages()]
+    const integrationsList = [...getPages()]
+
     const groupedIntegrations: { [key: string]: any[] } = integrationsList.reduce((acc: { [key: string]: any[] }, integration) => {
-        const categories = integration.data.category ? integration.data.category.split(',').map((category) => category.trim()) : [];
-        categories.forEach((category) => {
-            if (!acc[category]) {
-                acc[category] = [];
-            }
-            acc[category].push(integration);
-        });
+        const category = integration.data.category;
+        
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push(integration);
+        
         return acc;
     }
         , {});
+
     const firstCategory = Object.keys(groupedIntegrations).sort()[0];
 
     return (
@@ -44,8 +47,8 @@ export default function Page(): React.ReactElement {
                                 {Object.keys(groupedIntegrations)
                                     .sort()
                                     .map((category) => (
-                                        <li key={category}>
-                                            <a href={`#${category}`} className="text-md">
+                                        <li key={category} className='w-full'>
+                                            <a href={`#${category}`} className="block w-full text-md leading-6 mb-4 rounded-md ring-1 ring-slate-900/10 dark:ring-slate-500 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
                                                 {category}
                                             </a>
                                         </li>
@@ -66,7 +69,7 @@ export default function Page(): React.ReactElement {
                                         <Link
                                             key={integration.url}
                                             href={integration.url}
-                                            className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 w-auto h-auto"
+                                            className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 dark:hover:bg-slate-700 w-auto h-auto"
                                         >
                                             <div className="flex items-center mb-4">
                                                 <div className="w-8 h-8 mr-2 rounded-full overflow-hidden">
@@ -80,7 +83,14 @@ export default function Page(): React.ReactElement {
                                                     <h3 className="text-xl">{integration.data.title}</h3>
                                                 </div>
                                             </div>
+                                            
                                             <p className="text-sm text-gray-500">{integration.data.description}</p>
+                                            
+                                            {integration.data.available && integration.data.available.length > 0 && <div className="flex content-center mt-4">
+                                                <p className="text-sm text-gray-500 mr-3">Available For: </p>
+                                                <Pills items={integration.data.available} />
+                                            </div>}
+                                            
                                         </Link>
                                     ))}
                                 </div>
