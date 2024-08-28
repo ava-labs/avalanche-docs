@@ -104,10 +104,10 @@ timestamp when you create your genesis file.
 Create the Subnet Configuration[​](#create-the-subnet-configuration "Direct link to heading")
 ---------------------------------------------------------------------------------------------
 
-Now that you have your binary, it's time to create the Subnet configuration. This tutorial uses `myCustomSubnet` as it Subnet name. Invoke the Subnet Creation Wizard with this command:
+Now that you have your binary, it's time to create the Subnet configuration. This tutorial uses `myblockchain` as it Subnet name. Invoke the Subnet Creation Wizard with this command:
 
 ```bash
-avalanche subnet create myCustomSubnet
+avalanche blockchain create myblockchain
 ```
 
 ### Choose Your VM[​](#choose-your-vm "Direct link to heading")
@@ -146,9 +146,10 @@ Now it's time to deploy it.
 Deploy the Subnet Locally[​](#deploy-the-subnet-locally "Direct link to heading")
 ---------------------------------------------------------------------------------
 
-To deploy your Subnet, run: `avalanche subnet deploy myCustomSubnet`
+To deploy your Subnet, run: `avalanche blockchain deploy myblockchain`
 
-Make sure to substitute the name of your Subnet if you used a different one than `myCustomSubnet`.
+
+Make sure to substitute the name of your Subnet if you used a different one than `myblockchain`.
 
 Next, select `Local Network`:
 
@@ -165,9 +166,10 @@ This command boots a five node Avalanche network on your machine. It needs to do
 If all works as expected, the command output should look something like this:
 
 ```bash
-> avalanche subnet deploy myCustomSubnet
+> avalanche blockchain deploy myblockchain
+
 ✔ Local Network
-Deploying [myCustomSubnet] to Local Network
+Deploying [myblockchain] to Local Network
 Backend controller started, pid: 26110, output at: /home/fm/.avalanche-cli/runs/server_20230816_131014/avalanche-cli-backend.log
 Installing avalanchego-v1.10.8...
 avalanchego-v1.10.8 installation successful
@@ -181,15 +183,15 @@ Network ready to use. Local network node endpoints:
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
 | NODE  |       VM       |                                        URL                                         |                    ALIAS URL                    |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
-| node1 | myCustomSubnet | http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9650/ext/bc/myCustomSubnet/rpc |
+| node1 | myblockchain | http://127.0.0.1:9650/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9650/ext/bc/myblockchain/rpc |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
-| node2 | myCustomSubnet | http://127.0.0.1:9652/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9652/ext/bc/myCustomSubnet/rpc |
+| node2 | myblockchain | http://127.0.0.1:9652/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9652/ext/bc/myblockchain/rpc |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
-| node3 | myCustomSubnet | http://127.0.0.1:9654/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9654/ext/bc/myCustomSubnet/rpc |
+| node3 | myblockchain | http://127.0.0.1:9654/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9654/ext/bc/myblockchain/rpc |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
-| node4 | myCustomSubnet | http://127.0.0.1:9656/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9656/ext/bc/myCustomSubnet/rpc |
+| node4 | myblockchain | http://127.0.0.1:9656/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9656/ext/bc/myblockchain/rpc |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
-| node5 | myCustomSubnet | http://127.0.0.1:9658/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9658/ext/bc/myCustomSubnet/rpc |
+| node5 | myblockchain | http://127.0.0.1:9658/ext/bc/z9a7L6XmFYskbaHuuLFCxThByKg4xqsYYbaqT5ke6xVutDQTp/rpc | http://127.0.0.1:9658/ext/bc/myblockchain/rpc |
 +-------+----------------+------------------------------------------------------------------------------------+-------------------------------------------------+
 
 Browser Extension connection details (any node URL from above works):
@@ -245,7 +247,7 @@ Your results may be slightly different, but you can see that in addition to the 
 If you used the default genesis, your custom VM has a prefunded address. You can verify its balance with a curl command. Make sure to substitute the command's URL with the `RPC URL` from your deployment output.
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:9650/ext/bc/myCustomSubnet/rpc' \
+curl --location --request POST 'http://127.0.0.1:9650/ext/bc/myblockchain/rpc' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "jsonrpc": "2.0",

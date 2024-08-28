@@ -81,6 +81,11 @@ const config = {
         permanent: true,
       },
       {
+        source: '/api-reference/standards/guides/transaction-fees',
+        destination: '/api-reference/standards/guides/txn-fees',
+        permanent: true,
+      },
+      {
         source: '/build/subnet/upgrade/upgrade-subnet-vm',
         destination: '/subnets/upgrade/subnet-virtual-machine',
         permanent: true,

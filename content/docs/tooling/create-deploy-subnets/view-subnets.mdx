@@ -5,12 +5,12 @@ description: CLI commands for viewing subnets.
 
 ## List Subnet Configurations
 
-You can list the Subnets you've created with: `avalanche subnet list`
+You can list the Subnets you've created with: `avalanche blockchain list`
 
 Example:
 
 ```bash
-> avalanche subnet list
+> avalanche blockchain list
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 |   SUBNET    |    CHAIN    | CHAIN ID |                       VM ID                       |    TYPE    | FROM REPO |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
@@ -21,7 +21,7 @@ Example:
 To see detailed information about your deployed Subnets, add the `--deployed` flag:
 
 ```bash
-> avalanche subnet list --deployed
+> avalanche blockchain list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 |   SUBNET    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
@@ -34,12 +34,12 @@ To see detailed information about your deployed Subnets, add the `--deployed` fl
 
 ## Describe Subnet Configurations
 
-To see the details of a specific configuration, run: `avalanche subnet describe <subnetName>`
+To see the details of a specific configuration, run: `avalanche blockchain describe <blockchainName>`
 
 Example:
 
 ```bash
-> avalanche subnet describe firstsubnet
+> avalanche blockchain describe myblockchain
 
  _____       _        _ _
 |  __ \     | |      (_) |
@@ -50,7 +50,7 @@ Example:
 +----------------------------+----------------------------------------------------+
 |         PARAMETER          |                       VALUE                        |
 +----------------------------+----------------------------------------------------+
-| Subnet Name                | firstsubnet                                        |
+| Subnet Name                | myblockchain                                        |
 +----------------------------+----------------------------------------------------+
 | ChainID                    | 12345                                              |
 +----------------------------+----------------------------------------------------+
@@ -123,12 +123,13 @@ No precompiles set
 
 ## Viewing a Genesis File
 
-If you'd like to see the raw genesis file, supply the `--genesis` flag to the describe command: `avalanche subnet describe <subnetName> --genesis`
+If you'd like to see the raw genesis file, supply the `--genesis` flag to the describe command: `avalanche blockchain describe <blockchainName> --genesis`
 
 Example:
 
 ```bash
-> avalanche subnet describe firstsubnet --genesis
+> avalanche blockchain describe myblockchain --genesis
+
 {
     "config": {
         "chainId": 12345,
