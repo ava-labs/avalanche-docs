@@ -45,6 +45,7 @@ export const utils = loader({
 export const integrations = loader({
   baseUrl: '/integrations',
   rootDir: 'integrations',
+  ignore: ['README.mdx'],
   icon(icon) {
     if (icon && icon in icons)
       return create({ icon: icons[icon as keyof typeof icons] });
