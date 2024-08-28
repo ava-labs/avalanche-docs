@@ -211,6 +211,11 @@ const config = {
         permanent: true,
       },
       {
+        source: '/subnets/create-custom-subnet',
+        destination: '/subnets/deploy-a-subnet/custom-virtual-machine',
+        permanent: true,
+      },
+      {
         source: '/build/vm/rust-vms/introduction-to-avalanche-rs',
         destination: '/virtual-machines/rust-vms/intro-avalanche-rs',
         permanent: true,
