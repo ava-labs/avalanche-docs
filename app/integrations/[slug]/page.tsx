@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getPage, getPages } from '@/utils/integrations-loader';
+import { getIntegrationPage, getIntegrationPages } from '@/utils/integrations-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';
@@ -19,7 +19,7 @@ export default function Page({
 }: {
     params: Param;
 }): React.ReactElement {
-    const page = getPage([params.slug]);
+    const page = getIntegrationPage([params.slug]);
 
     if (!page) notFound();
 
@@ -109,7 +109,7 @@ export default function Page({
 }
 
 export function generateMetadata({ params }: { params: Param }): Metadata {
-    const page = getPage([params.slug]);
+    const page = getIntegrationPage([params.slug]);
 
     if (!page) notFound();
 
@@ -142,7 +142,7 @@ export function generateMetadata({ params }: { params: Param }): Metadata {
 
 
 export function generateStaticParams(): Param[] {
-    return getPages().map<Param>((page) => ({
+    return getIntegrationPages().map<Param>((page) => ({
         slug: page.slugs[0],
     }));
 }
