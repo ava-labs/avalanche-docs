@@ -5,7 +5,6 @@ import { loader } from 'fumadocs-core/source';
 import { icons } from 'lucide-react';
 import { map } from '.map';
 import { create } from '@/components/ui/icon';
-import { availableMemory } from 'process';
 
 const loaderOutput = loader({
     baseUrl: '/integrations',

@@ -1,6 +1,6 @@
 import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { Title } from '@/app/layout.client';
-import { pageTree } from '@/utils/docs-loader';
+import { docsPageTree } from '@/utils/docs-loader';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook } from 'lucide-react';
 
@@ -30,7 +30,7 @@ export const baseOptions: BaseLayoutProps = {
 // docs layout configuration
 export const docsOptions: DocsLayoutProps = {
   ...baseOptions,
-  tree: pageTree,
+  tree: docsPageTree,
   sidebar: {
     defaultOpenLevel: 0,
     banner: (

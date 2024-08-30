@@ -1,10 +1,10 @@
-import { getPages } from '@/utils/docs-loader';
+import { getDocsPages } from '@/utils/docs-loader';
 import { getIntegrationPages } from '@/utils/integrations-loader';
 import { createSearchAPI } from 'fumadocs-core/search/server';
 
 export const { GET } = createSearchAPI('advanced', {
   indexes: [
-    ...getPages().map((page) => ({
+    ...getDocsPages().map((page) => ({
       title: page.data.title,
       structuredData: page.data.exports.structuredData,
       id: page.url,
