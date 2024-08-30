@@ -3,7 +3,7 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 import { DocsPage, DocsBody } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import { createMetadata } from '@/utils/metadata';
-import { getPage, getPages, type Page } from '@/utils/docs-loader';
+import { getDocsPage, getDocsPages, type Page } from '@/utils/docs-loader';
 import { ArrowUpRightIcon } from '@heroicons/react/20/solid';
 
 interface Param {
@@ -17,7 +17,7 @@ export default function Page({
 }: {
   params: Param;
 }): React.ReactElement {
-  const page = getPage(params.slug);
+  const page = getDocsPage(params.slug);
 
   if (!page) notFound();
 
@@ -59,7 +59,7 @@ export default function Page({
 }
 
 function Category({ page }: { page: Page }): React.ReactElement {
-  const filtered = getPages()
+  const filtered = getDocsPages()
     .filter(
       (item) =>
         item.file.dirname === page.file.dirname && item.file.name !== 'index',
@@ -80,13 +80,13 @@ function Category({ page }: { page: Page }): React.ReactElement {
 }
 
 export async function generateStaticParams() {
-  return getPages().map((page) => ({
+  return getDocsPages().map((page) => ({
     slug: page.slugs,
   }));
 }
 
 export function generateMetadata({ params }: { params: Param }): Metadata {
-  const page = getPage(params.slug);
+  const page = getDocsPage(params.slug);
 
   if (!page) notFound();
 

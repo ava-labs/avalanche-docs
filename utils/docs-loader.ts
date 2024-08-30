@@ -26,4 +26,4 @@ const loaderOutput = loader({
 
 export type Page = InferPageType<typeof loaderOutput>;
 export type Meta = InferMetaType<typeof loaderOutput>;
-export const { getPage, getPages, pageTree } = loaderOutput;
+export const { getPage: getDocsPage, getPages: getDocsPages, pageTree: docsPageTree } = loaderOutput;

@@ -5,7 +5,6 @@ import { loader } from 'fumadocs-core/source';
 import { icons } from 'lucide-react';
 import { map } from '.map';
 import { create } from '@/components/ui/icon';
-import { availableMemory } from 'process';
 
 const loaderOutput = loader({
     baseUrl: '/integrations',
@@ -30,4 +29,4 @@ const loaderOutput = loader({
 
 export type Page = InferPageType<typeof loaderOutput>;
 export type Meta = InferMetaType<typeof loaderOutput>;
-export const { getPage, getPages, pageTree } = loaderOutput;
+export const { getPage: getIntegrationPage, getPages: getIntegrationPages, pageTree: integrationPageTree } = loaderOutput;
