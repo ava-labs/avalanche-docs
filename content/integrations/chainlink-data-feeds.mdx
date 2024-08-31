@@ -1,0 +1,115 @@
+---
+title: Chainlink Data Feeds
+category: Data Feeds
+available: ["C-Chain"]
+description: Chainlink Data Feeds are the quickest way to connect your smart contracts to the real-world data such as asset prices and reserve balances.
+logo: /images/chainlink.png
+developer: Chainlink Labs
+website: https://chain.link/
+documentation: https://chain.link/data-feeds
+---
+
+## Overview
+
+Chainlink Data Feeds are the quickest way to connect your smart contracts to the real-world data such as asset prices and reserve balances.
+
+If you already started a project and need to integrate Chainlink, you can [add Chainlink to your existing project](https://docs.chain.link/resources/create-a-chainlinked-project?parent=dataFeeds#installing-into-existing-projects) with the `@chainlink/contracts` NPM package.
+
+## Data Feed Best Practices
+
+Before you use Data Feeds, read and understand the best practices on the [Selecting Quality Data Feeds](https://docs.chain.link/data-feeds/selecting-data-feeds) page. For best practices about data for specific asset types, see the following sections:
+
+- [Best Practices for ETF and Forex feeds](https://docs.chain.link/data-feeds/selecting-data-feeds#etf-and-forex-feeds)
+- [Best Practices for Exchange Rate Feeds](https://docs.chain.link/data-feeds/selecting-data-feeds#exchange-rate-feeds)
+- [Risk Categories](https://docs.chain.link/data-feeds/selecting-data-feeds#data-feed-categories)
+
+## Types of data feeds
+Data feeds provide many different types of data for your applications.
+
+- [Price Feeds](https://docs.chain.link/data-feeds#price-feeds)
+- [Proof of Reserve Feeds](https://docs.chain.link/data-feeds#proof-of-reserve-feeds)
+- [Rate and Volatility Feeds](https://docs.chain.link/data-feeds#rate-and-volatility-feeds)
+
+## Using Data Feeds on the Avalanche Primary Network
+
+To consume price data, your smart contract should reference `AggregatorV3Interface`, which defines the external functions implemented by Data Feeds.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
+
+import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+
+/**
+ * THIS IS AN EXAMPLE CONTRACT THAT USES HARDCODED
+ * VALUES FOR CLARITY.
+ * THIS IS AN EXAMPLE CONTRACT THAT USES UN-AUDITED CODE.
+ * DO NOT USE THIS CODE IN PRODUCTION.
+ */
+
+
+contract DataConsumerV3 {
+    AggregatorV3Interface internal dataFeed;
+
+    /**
+     * Network: Avalanche Primary Network
+     * Aggregator: AVAX/USD
+     * Address: 0x0A77230d17318075983913bC2145DB16C7366156
+     */
+    constructor() {
+        dataFeed = AggregatorV3Interface(
+            0x0A77230d17318075983913bC2145DB16C7366156
+        );
+    }
+
+    /**
+     * Returns the latest answer.
+     */
+    function getChainlinkDataFeedLatestAnswer() public view returns (int) {
+        // prettier-ignore
+        (
+            /* uint80 roundID */,
+            int answer,
+            /*uint startedAt*/,
+            /*uint timeStamp*/,
+            /*uint80 answeredInRound*/
+        ) = dataFeed.latestRoundData();
+        return answer;
+    }
+}
+```
+
+### Primary Network Price Feed Addresses
+
+| **Status** | **Pair**                   | **Contract Address**                            | **Asset Name**              | **Asset Type** | **Market Hours** |
+|------------|----------------------------|-------------------------------------------------|-----------------------------|----------------|------------------|
+| 🟢         | AAVE / USD                  | 0x3CA13391E9fb38a75330fb28f8cc2eB3D9ceceED      | Aave                        | Crypto         | Crypto           |
+| 🔵         | AAVE Network Emergency Count (Avalanche) | 0x41185495Bc8297a65DC46f94001DC7233775EbEe | N/A                         | N/A            | N/A              |
+| 🟢         | ADA / USD                   | 0x69C2703b8F1A85a2EF6aBDd085699a9F909BE053      | Cardano                     | Crypto         | Crypto           |
+| 🟡         | ALPHA / USD                 | 0x7B0ca9A6D03FE0467A31Ca850f5bcA51e027B3aF      | Alpha Finance               | Crypto         | Crypto           |
+| 🟢         | AVAX / USD                  | 0x0A77230d17318075983913bC2145DB16C7366156      | Avalanche                   | Crypto         | Crypto           |
+| 🟡         | AXS / USD                   | 0x155835C5755205597d62703a5A0b37e57a26Ee5C      | Axie Infinity               | Crypto         | Crypto           |
+| 🟡         | BAT / USD                   | 0xe89B3CE86D25599D1e615C0f6a353B4572FF868D      | Basic Attention Token       | Crypto         | Crypto           |
+| 🟠         | BEAM / USD                  | 0x3427232b88Ce4e7d62A03289247eE0cA5324f6ba      | Beam                        | Crypto         | Crypto           |
+
+
+### Primary Network Proof of Reserve Addresses
+
+| **Status** | **Asset**                     | **Contract Address**                              | **Reserve Type** | **Data Source** | **Reporting/Auditor**    |
+|------------|--------------------------------|---------------------------------------------------|-----------------|----------------|-------------------------|
+| 🔵         | AAVE.e PoR                     | 0x14C4c668E34c09E1FBA823aD5DB47F60aeBDD4F7        | Cross-chain     | Cross-chain    | Wallet address          |
+| 🔵         | BTC.b PoR                      | 0x99311B4bf6D8E3D3B4b9fbdD09a1B0F4Ad8e06E9        | Cross-chain     | Cross-chain    | Wallet address          |
+| 🔵         | DAI.e PoR                      | 0x976D7fAc81A49FA71EF20694a3C56B9eFB93c30B        | Cross-chain     | Cross-chain    | Wallet address          |
+| 🔵         | Ion Digital Total Reserve      | 0x121C188f76831f504bD29C753074B37a4177cEc3        | Off-chain       | Instruxi       | Third-party auditor      |
+| 🔵         | LINK.e PoR                     | 0x943cEF1B112Ca9FD7EDaDC9A46477d3812a382b6        | Cross-chain     | Cross-chain    | Wallet address          |
+| 🔵         | USDC.e PoR                     | 0x63769951E4cfDbDC653dD9BBde63D2Ce0746e5F2        | Cross-chain     | Cross-chain    | Wallet address          |
+| 🔵         | USDT.e PoR                     | 0x94D8c2548018C27F1aa078A23C4158206bE1CC72        | Cross-chain     | Cross-chain    | Wallet address          |
+| 🔵         | WBTC.e PoR                     | 0xebEfEAA58636DF9B20a4fAd78Fad8759e6A20e87        | Cross-chain     | Cross-chain    | Wallet address          |
+
+
+### Primary Network Rate and Volatility Feed Addresses
+
+| **Asset**                   | **Contract Address**                              |
+|-----------------------------|---------------------------------------------------|
+| BTC-USD 30-Day Realized Vol  | 0x93b9B82158846cefa8b4040f22A3Bff05c365226        |
+| ETH-USD 30-Day Realized Vol  | 0x89983A2FDd082FA40d8062BCE3986Fc601D2d29B        |
