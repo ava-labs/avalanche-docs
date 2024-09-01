@@ -86,10 +86,10 @@ export default function Page(): React.ReactElement {
                                                 </div>
                                             </div>
                                             
-                                            <p className="text-sm text-gray-500">{integration.data.description}</p>
+                                            <p className="text-sm text-gray-500 flex-grow">{integration.data.description}</p>
                                             
                                             {integration.data.available && integration.data.available.length > 0 && <div className="flex content-center mt-4">
-                                                <p className="text-sm text-gray-500 mr-3">Available For: </p>
+                                                <p className="text-sm my-auto text-gray-500 mr-3">Available For: </p>
                                                 <Pills items={integration.data.available} />
                                             </div>}
                                             
