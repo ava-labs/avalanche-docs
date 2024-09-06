@@ -48,7 +48,7 @@ type Block interface {
 With the above in mind, we now examine the block data structure:
 
 ```rust
-/// Represents a block, specific to [`Vm`](crate::vm::Vm).
+/// Represents a block, specific to [`Vm`] crate::vm::Vm.
 #[serde_as]
 #[derive(Serialize, Deserialize, Clone, Derivative, Default)]
 #[derivative(Debug, PartialEq, Eq)]
@@ -93,7 +93,7 @@ This function verifies that a block is valid and stores it in memory. Note that 
 
 ```rust
 /// Verifies [`Block`](Block) properties (e.g., heights),
-/// and once verified, records it to the [`State`](crate::state::State).
+/// and once verified, records it to the [`State`] crate::state::State.
 /// # Errors
 /// Can fail if the parent block can't be retrieved.
 pub async fn verify(&mut self) -> io::Result<()> {
@@ -165,7 +165,7 @@ pub async fn verify(&mut self) -> io::Result<()> {
 When called by the Snowman Consensus Engine, this tells the VM that the particular block has been rejected.
 
 ```rust
-/// Mark this [`Block`](Block) rejected and updates [`State`](crate::state::State) accordingly.
+/// Mark this [`Block`](Block) rejected and updates [`State`] crate::state::State accordingly.
 /// # Errors
 /// Returns an error if the state can't be updated.
 pub async fn reject(&mut self) -> io::Result<()> {
@@ -184,7 +184,7 @@ pub async fn reject(&mut self) -> io::Result<()> {
 When called by the Snowman Consensus Engine, this tells the VM that the particular block has been rejected.
 
 ```rust
-/// Mark this [`Block`](Block) accepted and updates [`State`](crate::state::State) accordingly.
+/// Mark this [`Block`](Block) accepted and updates [`State`] crate::state::State accordingly.
 /// # Errors
 /// Returns an error if the state can't be updated.
 pub async fn accept(&mut self) -> io::Result<()> {

@@ -41,7 +41,7 @@ Integrating `TeleporterRegistry` with `TeleporterUpgradeable`[​](#integrating-
 
 ![Upgrade UML diagram](/images/upgrade1.png)
 
-[TeleporterUpgradeable](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/TeleporterUpgradeable.sol) is an abstract contract that helps integrate the `TeleporterRegistry` into a dApp built on top of Teleporter. By inheriting from `TeleporterUpgradeable`, dapps get:
+[TeleporterUpgradeable](https://github.com/ava-labs/teleporter/tree/main/contracts/teleporter/registry) is an abstract contract that helps integrate the `TeleporterRegistry` into a dApp built on top of Teleporter. By inheriting from `TeleporterUpgradeable`, dapps get:
 
 - Ability to send Teleporter messages through the latest version of the Teleporter contract registered in the Teleporter registry. (The dApp can also override this to use a specific version of the Teleporter contract.)
 - `minTeleporterVersion` management that allows the dApp to specify the minimum Teleporter version that can send messages to the dApp.
@@ -96,7 +96,7 @@ The `TeleporterUpgradeable.updateMinTeleporterVersion` function updates the `min
 
 #### Checking Teleporter upgrade access[​](#checking-teleporter-upgrade-access "Direct link to heading")
 
-To prevent anyone from calling the dApp's `updateMinTeleporterVersion`, which would disallow messages from old Teleporter versions from being received, this function should be safeguarded with access controls. All contracts deriving from `TeleporterUpgradeable` will need to implement `TeleporterUpgradeable._checkTeleporterUpgradeAccess`. For example, [TeleporterOwnerUpgrade](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/TeleporterOwnerUpgradeable.sol) is an abstract contract that inherits `TeleporterUpgradeable`, and implements `_checkTeleporterUpgradeAccess` to check whether the caller is the owner.
+To prevent anyone from calling the dApp's `updateMinTeleporterVersion`, which would disallow messages from old Teleporter versions from being received, this function should be safeguarded with access controls. All contracts deriving from `TeleporterUpgradeable` will need to implement `TeleporterUpgradeable._checkTeleporterUpgradeAccess`. For example, [TeleporterOwnerUpgrade](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/registry/TeleporterRegistryOwnableAppUpgradeable.sol) is an abstract contract that inherits `TeleporterUpgradeable`, and implements `_checkTeleporterUpgradeAccess` to check whether the caller is the owner.
 
 ```
     function _checkTeleporterUpgradeAccess() internal view virtual override {
@@ -147,7 +147,7 @@ Using specific version:
 
 #### Receiving from specific Teleporter versions[​](#receiving-from-specific-teleporter-versions "Direct link to heading")
 
-`TeleporterUpgradeable` also provides an initial implementation of [ITeleporterReceiver.receiveTeleporterMessage](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/ITeleporterReceiver.sol) that ensures `_msgSender` is a `TeleporterMessenger` contract with a version greater than or equal to `minTeleporterVersion`. This supports the case where a dApp wants to upgrade to a new version of the `TeleporterMessenger` contract, but still wants to be able to receive messages from the old Teleporter contract.The dApp can override `_receiveTeleporterMessage` to implement its own logic for receiving messages from Teleporter contracts.
+`TeleporterUpgradeable` also provides an initial implementation of [ITeleporterReceiver.receiveTeleporterMessage](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/ITeleporterReceiver.sol) that ensures `_msgSender` is a `TeleporterMessenger` contract with a version greater than or equal to `minTeleporterVersion`. This supports the case where a dApp wants to upgrade to a new version of the `TeleporterMessenger` contract, but still wants to be able to receive messages from the old Teleporter contract.The dApp can override `_receiveTeleporterMessage` to implement its own logic for receiving messages from Teleporter contracts.
 
 #### Pausing Teleporter version interactions[​](#pausing-teleporter-version-interactions "Direct link to heading")
 

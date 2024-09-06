@@ -2,7 +2,7 @@
 title: Deep Dive into Teleporter
 ---
 
-![](/images/deep-dive1.png)
+![](/images/deepdive1.png)
 
 Teleporter is an EVM compatible cross-subnet communication protocol built on top of [Avalanche Warp Messaging (AWM)](/cross-chain/avalanche-warp-messaging/overview), and implemented as a Solidity smart contract. It provides a mechanism to asynchronously invoke smart contract functions on other EVM blockchains within Avalanche. Teleporter provides a handful of useful features on top of AWM, such as specifying relayer incentives for message delivery, replay protection, message delivery and execution retries, and a standard interface for sending and receiving messages within a dApp deployed across multiple subnets.
 
@@ -178,11 +178,11 @@ The user wallet set in `.env` must have native tokens for each of the Subnets us
 
 ## Upgradeability
 
-The Teleporter contract is non-upgradeable and can not be changed once it is deployed. This provides immutability to the contracts, and ensures that the contract's behavior at each address is unchanging. However, to allow for new features and potential bug fixes, new versions of the Teleporter contract can be deployed to different addresses. The [TeleporterRegistry](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/TeleporterRegistry.sol) is used to keep track of the deployed versions of Teleporter, and to provide a standard interface for dApps to interact with the different Teleporter versions.
+The Teleporter contract is non-upgradeable and can not be changed once it is deployed. This provides immutability to the contracts, and ensures that the contract's behavior at each address is unchanging. However, to allow for new features and potential bug fixes, new versions of the Teleporter contract can be deployed to different addresses. The [TeleporterRegistry](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/registry/TeleporterRegistry.sol) is used to keep track of the deployed versions of Teleporter, and to provide a standard interface for dApps to interact with the different Teleporter versions.
 
 `TeleporterRegistry` **is not mandatory** for dApps built on top of Teleporter, but dApp's are recommended to leverage the registry to ensure they use the latest Teleporter version available. Another recommendation standard is to have a single canonical `TeleporterRegistry` for each Subnet chain, and unlike the Teleporter contract, the registry does not need to be deployed to the same address on every chain. This means the registry does not need a Nick's method deployment, and can be at different contract addresses on different chains.
 
-For more information on the registry and how to integrate with Teleporter dApps, see the [Upgradeability doc](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/README.md).
+For more information on the registry and how to integrate with Teleporter dApps, see the [Upgradeability doc](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/registry/UPGRADING.md).
 
 ## Deploy Teleporter to a Subnet
 
@@ -233,10 +233,10 @@ The auto-generated bindings should be written under the `abi-bindings/` director
 
 ## Docs
 
-- [Teleporter Protocol Overview](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/README.md)
+- [Teleporter Protocol Overview](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/README.md)
 - [Cross Chain Applications](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/README.md)
 - [Getting Started](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/GETTING_STARTED.md)
-- [Teleporter Upgradeability](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/README.md)
+- [Teleporter Upgradeability](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/registry/UPGRADING.md)
 - [Contract Deployment](https://github.com/ava-labs/teleporter/blob/main/utils/contract-deployment/README.md)
 - [Teleporter CLI](https://github.com/ava-labs/teleporter/blob/main/cmd/teleporter-cli/README.md)
 

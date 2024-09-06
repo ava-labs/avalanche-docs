@@ -139,7 +139,7 @@ We then switch to WAGMI in the networks dropdown. We are ready to move on to Rem
 Good, we're talking to WAGMI Subnet. Next we need to load the contracts into Remix. Using 'load from GitHub' option from the Remix home screen we load two contracts:
 
 - [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IAllowList.sol)
-- and [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract/contracts/interfaces/IFeeManager.sol).
+- and [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IFeeManager.sol).
 
 IFeeManager is our precompile, but it references the IAllowList, so we need that one as well. We compile IFeeManager.sol and use deployed contract at the precompile address `0x0200000000000000000000000000000000000003` used on the [Subnet](https://github.com/ava-labs/subnet-evm/blob/master/precompile/contracts/feemanager/module.go#L21).
 

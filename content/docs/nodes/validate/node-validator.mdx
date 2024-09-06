@@ -45,7 +45,7 @@ First, we show you how to add your node as a validator by using [Core web](https
 
 ### Retrieve the Node ID, the BLS signature and the BLS key
 
-Get this info by calling [`info.getNodeID`](/api-reference/info-api.md#infogetnodeid):
+Get this info by calling [`info.getNodeID`](/api-reference/info-api#infogetnodeid):
 
 ```bash
 curl -X POST --data '{
@@ -87,16 +87,15 @@ You should see a success message, and your balance should be updated.
 Go back to the `Stake` tab, and you'll see here an overview of your validation,
 with information like the amount staked, staking time, and more.
 
-![Staking Overview](/images/staking-overview.png)
 
 Calling
-[`platform.getPendingValidators`](/api-reference/p-chain/api.md#platformgetpendingvalidators)
+[`platform.getPendingValidators`](/api-reference/p-chain/api#platformgetpendingvalidators)
 verifies that your transaction was accepted. Note that this API call should be
 made before your node's validation start time, otherwise, the return will not
 include your node's id as it is no longer pending.
 
 You can also call
-[`platform.getCurrentValidators`](/api-reference/p-chain/api.md#platformgetcurrentvalidators)
+[`platform.getCurrentValidators`](/api-reference/p-chain/api#platformgetcurrentvalidators)
 to check that your node's id is included in the response.
 
 That's it!
@@ -155,7 +154,7 @@ The API URL is already set to Fuji (`https://api.avax-test.network/`).
 
 #### Retrieve the Node ID, the BLS signature and the BLS key
 
-Get this info by calling [`info.getNodeID`](/api-reference/info-api.md#infogetnodeid):
+Get this info by calling [`info.getNodeID`](/api-reference/info-api#infogetnodeid):
 
 ```bash
 curl -X POST --data '{
