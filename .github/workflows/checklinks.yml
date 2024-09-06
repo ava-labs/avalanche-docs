@@ -1,0 +1,24 @@
+name: Check MDX Links
+
+on:
+  push:
+    paths:
+      - '**/*.mdx'
+  pull_request:
+    paths:
+      - '**/*.mdx'
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19'
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+          yarn global add tsx
+      - name: Check links
+        run: yarn check-links
