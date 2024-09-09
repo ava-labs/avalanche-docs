@@ -22,6 +22,7 @@ const loaderOutput = loader({
           developer: z.string().optional(),
           website: z.string().optional(),
           documentation: z.string().optional(),
+          featured: z.boolean().default(false).optional()
         }),
       },
     }),
