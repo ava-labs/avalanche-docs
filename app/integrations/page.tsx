@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { getIntegrationPages } from '@/utils/integrations-loader';
 import { cn } from '@/utils/cn';
 import { buttonVariants } from '@/components/ui/button';
-import { Pills } from '@/components/ui/pills';
+import { Pill, Pills } from '@/components/ui/pills';
 
 
 export default function Page(): React.ReactElement {
@@ -16,13 +16,30 @@ export default function Page(): React.ReactElement {
         if (!acc[category]) {
             acc[category] = [];
         }
+        const featured = integration.data.featured;
+        if (featured === true) {
+            if (!acc["Featured"]) {
+                acc["Featured"] = [];
+            }
+            acc["Featured"].push(integration);
+        }
         acc[category].push(integration);
-        
+
         return acc;
     }
         , {});
 
-    const firstCategory = Object.keys(groupedIntegrations).sort()[0];
+
+    const categories = Object.keys(groupedIntegrations);
+    categories.sort((a, b) => {
+        if (a === "Featured") {
+            return -1;
+        } else if (b === "Featured") {
+            return 1;
+        } else {
+            return a.localeCompare(b);
+        }
+    });
 
     return (
         <main className="py-12 sm:py-24">
@@ -33,7 +50,7 @@ export default function Page(): React.ReactElement {
                         Discover best-in-class integrations for your Avalanche L1 and learn how to use them.
                     </p>
                     <div className='inline-flex items-center gap-3'>
-                        <Link className={cn(buttonVariants())} href={`#${firstCategory}`}>Discover Integrations</Link>
+                        <Link className={cn(buttonVariants())} href={`#Featured`}>Discover Integrations</Link>
                         <Link className={cn(buttonVariants({ variant: 'outline' }))} href="https://github.com/ava-labs/avalanche-docs/blob/master/content/integrations" target='_blank'>Add your Integration</Link>
                     </div>
                 </div>
@@ -46,9 +63,7 @@ export default function Page(): React.ReactElement {
                             </div>**/}
                             <ul className="space-y-2">
                                 {/* Render the categories on sidelist */}
-                                {Object.keys(groupedIntegrations)
-                                    .sort()
-                                    .map((category) => (
+                                {categories.map((category) => (
                                         <li key={category} className='w-full'>
                                             <a href={`#${category}`} className="block w-full text-md leading-6 mb-4 rounded-md ring-1 ring-slate-900/10 dark:ring-slate-500 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
                                                 {category}
@@ -61,19 +76,19 @@ export default function Page(): React.ReactElement {
                     <div className="w-full md:w-4/5">
 
                         {/* Render the integrations for each category */}
-                        {Object.entries(groupedIntegrations).sort().map(([category, integrations]) => (
+                        {categories.map(category => (
                             <div key={category}>
                                 <section id={category}>
                                     <h2 className="text-2xl mb-8 pt-20">{category}</h2>
                                 </section>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto w-full">
-                                    {integrations.map((integration) => (
+                                    {groupedIntegrations[category].map((integration) => (
                                         <Link
                                             key={integration.url}
                                             href={integration.url}
-                                            className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 dark:hover:bg-slate-700 w-auto h-auto"
+                                            className="flex flex-col bg-card p-4 rounded-lg transition-shadow shadow hover:shadow-lg dark:bg-card-dark dark:border dark:border-slate-500 dark:hover:bg-slate-700 w-auto h-auto gap-4"
                                         >
-                                            <div className="flex items-center mb-4">
+                                            <div className="flex items-center">
                                                 <div className="w-8 h-8 mr-2 rounded-full overflow-hidden">
                                                     <img
                                                         src={integration.data.logo}
@@ -88,7 +103,11 @@ export default function Page(): React.ReactElement {
                                             
                                             <p className="text-sm text-gray-500 flex-grow">{integration.data.description}</p>
                                             
-                                            {integration.data.available && integration.data.available.length > 0 && <div className="flex content-center mt-4">
+                                            { category !== "Featured" && integration.data.featured && <Pill item="Featured" /> }
+
+                                            { category === "Featured" && integration.data.featured && <Pill item={integration.data.category} /> }
+                                            
+                                            {integration.data.available && integration.data.available.length > 0 && <div className="flex content-center">
                                                 <p className="text-sm my-auto text-gray-500 mr-3">Available For: </p>
                                                 <Pills items={integration.data.available} />
                                             </div>}
