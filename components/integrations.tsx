@@ -201,7 +201,7 @@ export default function Integrations({ list }: { list: any[] }) {
 
                                         {category === "Featured" && integration.data.featured && <Pill item={{ text: integration.data.category }} />}
 
-                                        {integration.data.available && integration.data.available.length > 0 && <div className="flex content-center">
+                                        {integration.data.available && integration.data.available.length > 0 && <div className="flex content-center flex-col gap-4">
                                             <p className="text-sm my-auto text-gray-500 mr-3">Available For: </p>
                                             <Pills items={integration.data.available.map((c: string) => { return { text: c } })} />
                                         </div>}
