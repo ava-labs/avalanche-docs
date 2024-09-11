@@ -5,7 +5,7 @@ import { getIntegrationPage, getIntegrationPages } from '@/utils/integrations-lo
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';
-import { Pills } from '@/components/ui/pills';
+import { Pill, Pills } from '@/components/ui/pills';
 // import { Control } from '@/app/(home)/blog/[slug]/page.client';
 
 interface Param {
@@ -69,15 +69,17 @@ export default function Page({
                     <div>
                         <p className="mb-2 text-muted-foreground">Categories:</p>
                         <div className="flex flex-wrap items-center gap-4 text-xs">
-                            <Pills items={[page.data.category]} />
+                            <Pill item={{ text: page.data.category }} />
                         </div>
                     </div>
-                    <div>
-                        <p className="mb-2 text-muted-foreground">Available For:</p>
-                        <div className="flex flex-wrap items-center gap-4 text-xs">
-                            <Pills items={page.data.available} />
+                    {
+                        page.data.available && page.data.available.length > 0 && <div>
+                            <p className="mb-2 text-muted-foreground">Available For:</p>
+                            <div className="flex flex-wrap items-center gap-4 text-xs">
+                                <Pills items={page.data.available.map((c: string) => { return { text: c } })} />
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div>
                         <p className="mb-1 text-muted-foreground">Website:</p>
                         <a href={page.data.website} target="_blank" rel="noreferrer noopener">
