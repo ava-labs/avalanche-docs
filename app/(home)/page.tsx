@@ -55,7 +55,7 @@ function Highlights(): React.ReactElement {
       <Highlight icon={SquareGanttChart} heading="Smart Contracts" link="/dapps">
         Your one stop shop to deploy smart contracts on the Avalanche C-Chain.
       </Highlight>
-      <Highlight icon={Layers} heading="Avalanche L1s" link="/subnets">
+      <Highlight icon={Layers} heading="Avalanche L1s" link="/avalanche-l1s">
         Utilize the Avalanche tech stack to build your own L1 blockchain.
       </Highlight>
       <Highlight icon={IndentDecrease} heading="Virtual Machines" link="/virtual-machines">
