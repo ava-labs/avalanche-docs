@@ -1,9 +1,9 @@
 ---
 title: Teleporter on Local Network
-description: This how-to guide focuses on deploying Teleporter-enabled Subnets to a local Avalanche network.
+description: This how-to guide focuses on deploying Teleporter-enabled Avalanche L1s to a local Avalanche network.
 ---
 
-After this tutorial, you would have created and deployed two Subnets to the local network and have enabled them to cross-communicate with each other and with the local C-Chain (through Teleporter and the underlying Warp technology.)
+After this tutorial, you would have created and deployed two Avalanche L1s to the local network and have enabled them to cross-communicate with each other and with the local C-Chain (through Teleporter and the underlying Warp technology.)
 
 For more information on cross chain messaging through Teleporter and Warp, check:
 
@@ -15,10 +15,10 @@ Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) an
 
 - [Avalanche-CLI installed](/tooling/guides/get-avalanche-cli)
 
-Create Subnet Configurations[​](#create-subnet-configurations "Direct link to heading")
+Create Avalanche L1 Configurations[​](#create-avalanche-l1-configurations "Direct link to heading")
 ---------------------------------------------------------------------------------------
 
-Let's create a Subnet called `<chain1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name, and with default Subnet-EVM parameters (more information regarding Subnet creation can be found [here](/subnets/build-first-subnet#create-your-subnet-configuration)):
+Let's create a Avalanche L1 called `<chain1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name, and with default Subnet-EVM parameters (more information regarding Avalanche L1 creation can be found [here](/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration)):
 
 ```bash
 avalanche blockchain create <chain1> --evm --latest\
@@ -34,11 +34,11 @@ using latest teleporter version (v1.0.0)
 
 Notice that by default, Teleporter is enabled and a stored key is created to fund Teleporter related operations (that is deploy Teleporter smart contracts, fund Teleporter Relayer).
 
-To disable Teleporter in your Subnet, use the flag `--teleporter=false` when creating the Subnet.
+To disable Teleporter in your Avalanche L1, use the flag `--teleporter=false` when creating the Avalanche L1.
 
-To disable Relayer in your Subnet, use the flag `--relayer=false` when creating the Subnet.
+To disable Relayer in your Avalanche L1, use the flag `--relayer=false` when creating the Avalanche L1.
 
-Now let's create a second Subnet called `<chain2>`, with similar settings:
+Now let's create a second Avalanche L1 called `<chain2>`, with similar settings:
 
 ```bash
 avalanche blockchain create <chain2> --evm --latest\
@@ -52,7 +52,7 @@ using latest teleporter version (v1.0.0)
 ✓ Successfully created subnet configuration
 ```
 
-Deploy the Subnets to Local Network[​](#deploy-the-subnets-to-local-network "Direct link to heading")
+Deploy the Avalanche L1s to Local Network[​](#deploy-the-avalanche-l1s-to-local-network "Direct link to heading")
 -----------------------------------------------------------------------------------------------------
 
 Let's deploy `<chain1>`:
@@ -103,13 +103,13 @@ Currency Symbol:  TOKEN1
 
 Notice some details here:
 
-- Two smart contracts are deployed to each Subnet: Teleporter Messenger and Teleporter Registry
+- Two smart contracts are deployed to each Avalanche L1: Teleporter Messenger and Teleporter Registry
 - Both Teleporter smart contracts are also deployed to `C-Chain` in the Local Network
-- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer [listens](/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
+- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed, configured and executed in background (A Relayer [listens](/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Avalanche L1 and sends them to the destination Avalanche L1.)
 
-CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add more Subnets, the Relayer will be automatically reconfigured.
+CLI configures the Relayer to enable every Avalanche L1 to send messages to all other Avalanche L1s. If you add more Avalanche L1s, the Relayer will be automatically reconfigured.
 
-When deploying Subnet `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
+When deploying Avalanche L1 `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Avalanche L1.
 
 ```bash
 avalanche blockchain deploy <chain2> --local
@@ -187,9 +187,9 @@ Relayer related logs can be found at `~/.avalanche-cli/runs/awm-relayer.log`, an
 Obtaining Information on Teleporter Deploys[​](#obtaining-information-on-teleporter-deploys "Direct link to heading")
 ---------------------------------------------------------------------------------------------------------------------
 
-### Obtaining Subnet Information[​](#obtaining-subnet-information "Direct link to heading")
+### Obtaining Avalanche L1 Information[​](#obtaining-avalanche-l1-information "Direct link to heading")
 
-By executing `blockchain describe` on a Teleporter enabled Subnet, the following relevant information can be found:
+By executing `blockchain describe` on a Teleporter enabled Avalanche L1, the following relevant information can be found:
 
 - Blockchain RPC URL
 - Blockchain ID in cb58 format
@@ -284,7 +284,7 @@ avalanche primary describe --local
 Controlling Relayer Execution[​](#controlling-relayer-execution "Direct link to heading")
 -----------------------------------------------------------------------------------------
 
-Besides having the option to not use a Relayer at Subnet creation time, the Relayer can be stopped and restarted on used request.
+Besides having the option to not use a Relayer at Avalanche L1 creation time, the Relayer can be stopped and restarted on used request.
 
 To stop the Relayer:
 

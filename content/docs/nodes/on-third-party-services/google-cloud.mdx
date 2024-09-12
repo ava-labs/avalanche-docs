@@ -48,7 +48,7 @@ We will deploy a single `Compute Network` object. This unit is where we will dep
 
 Avalanche requires that a validator communicate outbound on the same public IP address that it advertises for other peers to connect to it on. Within GCP this precludes the possibility of us using a Cloud NAT Router for the outbound communications and requires us to bind the public IP that we provision to the interface of the machine. We will provision a single `EXTERNAL` static IPv4 `Compute Address`.
 
-#### Subnets[​](#subnets "Direct link to heading")
+#### Avalanche L1s[​](#avalanche-l1s "Direct link to heading")
 
 For the purposes of this documentation we will deploy a single `Compute Subnetwork` in the US-EAST1 `Region` with a /24 address range giving us 254 IP addresses (not all usable but for the sake of generalized documentation).
 

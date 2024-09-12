@@ -733,22 +733,22 @@ Let's make an unsigned add validator TX that uses the inputs and outputs from th
 ]
 ```
 
-## Unsigned Remove Subnet Validator TX
+## Unsigned Remove Avalanche L1 Validator TX
 
-### What Unsigned Remove Subnet Validator TX Contains
+### What Unsigned Remove Avalanche L1 Validator TX Contains
 
-An unsigned remove Subnet validator TX contains a `BaseTx`, `NodeID`,
+An unsigned remove Avalanche L1 validator TX contains a `BaseTx`, `NodeID`,
 `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is 23 or `0x00000017`.
 
 - **`BaseTx`**
 - **`NodeID`** is the 20 byte node ID of the validator.
-- **`SubnetID`** is the 32 byte Subnet ID that the validator is being removed from.
+- **`SubnetID`** is the 32 byte Avalanche L1 ID that the validator is being removed from.
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
   `SigIndices` is a list of unique ints that define the addresses signing the
   control signature which proves that the issuer has the right to remove the
-  node from the Subnet. The array must be sorted low to high.
+  node from the Avalanche L1. The array must be sorted low to high.
 
-### Gantt Unsigned Remove Subnet Validator TX Specification
+### Gantt Unsigned Remove Avalanche L1 Validator TX Specification
 
 ```text
 +---------------+----------------------+------------------------------------------------+
@@ -764,7 +764,7 @@ An unsigned remove Subnet validator TX contains a `BaseTx`, `NodeID`,
 +---------------------------------------------------------------------------------------+
 ```
 
-### Proto Unsigned Remove Subnet Validator TX Specification
+### Proto Unsigned Remove Avalanche L1 Validator TX Specification
 
 ```text
 message RemoveSubnetValidatorTx {
@@ -775,9 +775,9 @@ message RemoveSubnetValidatorTx {
 }
 ```
 
-### Unsigned Remove Subnet Validator TX Example
+### Unsigned Remove Avalanche L1 Validator TX Example
 
-Let's make an unsigned remove Subnet validator TX that uses the inputs and
+Let's make an unsigned remove Avalanche L1 validator TX that uses the inputs and
 outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 17"`
@@ -836,7 +836,7 @@ An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`,
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this validator will validate.
+- **`SubnetID`** is the 32 byte Avalanche L1 ID of the Avalanche L1 this validator will validate.
 - **`Signer`** If the [SubnetID] is the primary network, [Signer] is the type ID
   28 (`0x1C`) followed by a [Proof of Possession](#proof-of-possession). If the
   [SubnetID] is not the primary network, this value is the empty signer, whose
@@ -1041,7 +1041,7 @@ is 26 or `0x0000001a`.
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Subnet ID of the Subnet this delegation is on.
+- **`SubnetID`** is the 32 byte Avalanche L1 ID of the Avalanche L1 this delegation is on.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
 
@@ -1165,13 +1165,13 @@ outputs from the previous examples:
 ]
 ```
 
-## Unsigned Transform Subnet TX
+## Unsigned Transform Avalanche L1 TX
 
-Transforms a permissioned Subnet into a permissionless Subnet. Must be signed by the Subnet owner.
+Transforms a permissioned Avalanche L1 into a permissionless Avalanche L1. Must be signed by the Avalanche L1 owner.
 
-### What Unsigned Transform Subnet TX Contains
+### What Unsigned Transform Avalanche L1 TX Contains
 
-An unsigned transform Subnet TX contains a `BaseTx`, `SubnetID`, `AssetID`,
+An unsigned transform Avalanche L1 TX contains a `BaseTx`, `SubnetID`, `AssetID`,
 `InitialSupply`, `MaximumSupply`, `MinConsumptionRate`, `MaxConsumptionRate`,
 `MinValidatorStake`, `MaxValidatorStake`, `MinStakeDuration`,
 `MaxStakeDuration`, `MinDelegationFee`, `MinDelegatorStake`,
@@ -1179,8 +1179,8 @@ An unsigned transform Subnet TX contains a `BaseTx`, `SubnetID`, `AssetID`,
 for this type is 24 or `0x00000018`.
 
 - **`BaseTx`**
-- **`SubnetID`** a 32-byte Subnet ID of the Subnet to transform.
-- **`AssetID`** is a 32-byte array that defines which asset to use when staking on the Subnet.
+- **`SubnetID`** a 32-byte Avalanche L1 ID of the Avalanche L1 to transform.
+- **`AssetID`** is a 32-byte array that defines which asset to use when staking on the Avalanche L1.
   - Restrictions
     - Must not be the Empty ID
     - Must not be the AVAX ID
@@ -1234,7 +1234,7 @@ for this type is 24 or `0x00000018`.
   control signature to authorizes this transformation. The array must be sorted
   low to high.
 
-### Gantt Unsigned Transform Subnet TX Specification
+### Gantt Unsigned Transform Avalanche L1 TX Specification
 
 ```text
 +----------------------+------------------+----------------------------------+
@@ -1274,7 +1274,7 @@ for this type is 24 or `0x00000018`.
 +----------------------------------------------------------------------------+
 ```
 
-### Proto Unsigned Transform Subnet TX Specification
+### Proto Unsigned Transform Avalanche L1 TX Specification
 
 ```text
 message TransformSubnetTx {
@@ -1297,9 +1297,9 @@ message TransformSubnetTx {
 }
 ```
 
-### Unsigned Transform Subnet TX Example
+### Unsigned Transform Avalanche L1 TX Example
 
-Let's make an unsigned transform Subnet TX that uses the inputs and outputs from the previous examples:
+Let's make an unsigned transform Avalanche L1 TX that uses the inputs and outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 18"`
 - **`SubnetID`**: `0x5fa29ed4356903dac2364713c60f57d8472c7dda4a5e08d88a88ad8ea71aed60`
@@ -1423,11 +1423,11 @@ Let's make an unsigned transform Subnet TX that uses the inputs and outputs from
 ]
 ```
 
-## Unsigned Add Subnet Validator TX
+## Unsigned Add Avalanche L1 Validator TX
 
-### What Unsigned Add Subnet Validator TX Contains
+### What Unsigned Add Avalanche L1 Validator TX Contains
 
-An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
+An unsigned add Avalanche L1 validator TX contains a `BaseTx`, `Validator`,
 `SubnetID`, and `SubnetAuth`. The `TypeID` for this type is `0x0000000d`.
 
 - **`BaseTx`**
@@ -1436,13 +1436,13 @@ An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Subnet ID to add the validator to.
+- **`SubnetID`** is the 32 byte Avalanche L1 ID to add the validator to.
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
   `SigIndices` is a list of unique ints that define the addresses signing the
-  control signature to add a validator to a Subnet. The array must be sorted low
+  control signature to add a validator to a Avalanche L1. The array must be sorted low
   to high.
 
-### Gantt Unsigned Add Subnet Validator TX Specification
+### Gantt Unsigned Add Avalanche L1 Validator TX Specification
 
 ```text
 +---------------+----------------------+-----------------------------------------+
@@ -1458,7 +1458,7 @@ An unsigned add Subnet validator TX contains a `BaseTx`, `Validator`,
                                    +---------------------------------------------+
 ```
 
-### Proto Unsigned Add Subnet Validator TX Specification
+### Proto Unsigned Add Avalanche L1 Validator TX Specification
 
 ```text
 message AddSubnetValidatorTx {
@@ -1469,9 +1469,9 @@ message AddSubnetValidatorTx {
 }
 ```
 
-### Unsigned Add Subnet Validator TX Example
+### Unsigned Add Avalanche L1 Validator TX Example
 
-Let's make an unsigned add Subnet validator TX that uses the inputs and outputs from the previous examples:
+Let's make an unsigned add Avalanche L1 validator TX that uses the inputs and outputs from the previous examples:
 
 - **`BaseTx`**: `"Example BaseTx as defined above with ID set to 0d"`
 - **`NodeID`**: `0xe9094f73698002fd52c90819b457b9fbc866ab80`
@@ -1695,12 +1695,12 @@ An unsigned create chain TX contains a `BaseTx`, `SubnetID`, `ChainName`,
 `0x0000000f`.
 
 - **`BaseTx`**
-- **`SubnetID`** ID of the Subnet that validates this blockchain
+- **`SubnetID`** ID of the Avalanche L1 that validates this blockchain
 - **`ChainName`** A human readable name for the chain; need not be unique
 - **`VMID`** ID of the VM running on the new chain
 - **`FxIDs`** IDs of the feature extensions running on the new chain
 - **`GenesisData`** Byte representation of genesis state of the new chain
-- **`SubnetAuth`** Authorizes this blockchain to be added to this Subnet
+- **`SubnetAuth`** Authorizes this blockchain to be added to this Avalanche L1
 
 ### Gantt Unsigned Create Chain TX Specification
 
@@ -1845,16 +1845,16 @@ Let's make an unsigned create chain TX that uses the inputs and outputs from the
 ]
 ```
 
-## Unsigned Create Subnet TX
+## Unsigned Create Avalanche L1 TX
 
-### What Unsigned Create Subnet TX Contains
+### What Unsigned Create Avalanche L1 TX Contains
 
-An unsigned create Subnet TX contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
+An unsigned create Avalanche L1 TX contains a `BaseTx`, and `RewardsOwner`. The `TypeID` for this type is `0x00000010`.
 
 - **`BaseTx`**
 - **`RewardsOwner`** A `SECP256K1OutputOwners`
 
-### Gantt Unsigned Create Subnet TX Specification
+### Gantt Unsigned Create Avalanche L1 TX Specification
 
 ```text
 +-----------------+-----------------------|---------------------------------+
@@ -1866,7 +1866,7 @@ An unsigned create Subnet TX contains a `BaseTx`, and `RewardsOwner`. The `TypeI
                                 +-------------------------------------------+
 ```
 
-### Proto Unsigned Create Subnet TX Specification
+### Proto Unsigned Create Avalanche L1 TX Specification
 
 ```text
 message CreateSubnetTx {
@@ -1875,9 +1875,9 @@ message CreateSubnetTx {
 }
 ```
 
-### Unsigned Create Subnet TX Example
+### Unsigned Create Avalanche L1 TX Example
 
-Let's make an unsigned create Subnet TX that uses the inputs from the previous examples:
+Let's make an unsigned create Avalanche L1 TX that uses the inputs from the previous examples:
 
 - **`BaseTx`**: "Example BaseTx as defined above but with TypeID set to 16"
 - **`RewardsOwner`**:
@@ -2575,20 +2575,20 @@ Let's make a stakeablelockout with:
 ]
 ```
 
-## Subnet Auth
+## Avalanche L1 Auth
 
-### What Subnet Auth Contains
+### What Avalanche L1 Auth Contains
 
 Specifies the addresses whose signatures will be provided to demonstrate that
-the owners of a Subnet approve something.
+the owners of a Avalanche L1 approve something.
 
 - **`TypeID`** is the ID for this type. It is `0x0000000a`.
 - **`AddressIndices`** defines which addresses' signatures will be attached to
-  this transaction. AddressIndices[i] is the index in a Subnet owner list that
+  this transaction. AddressIndices[i] is the index in a Avalanche L1 owner list that
   corresponds to the signature at index i in the signature list. Must be sorted
   low to high and not have duplicates.
 
-### Gantt Subnet Auth Specification
+### Gantt Avalanche L1 Auth Specification
 
 ```text
 +-----------------+------------------+-------------------------------------+
@@ -2600,7 +2600,7 @@ the owners of a Subnet approve something.
 +-----------------+--------------------------------------------------------+
 ```
 
-### Proto Subnet Auth Specification
+### Proto Avalanche L1 Auth Specification
 
 ```text
 message SubnetAuth {
@@ -2609,9 +2609,9 @@ message SubnetAuth {
 }
 ```
 
-### Subnet Auth Example
+### Avalanche L1 Auth Example
 
-Let's make a Subnet auth:
+Let's make a Avalanche L1 auth:
 
 - **`TypeID`**: `10`
 - **`AddressIndices`**: [`0`]

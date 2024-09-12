@@ -7,9 +7,9 @@ description: The Avalanche Network Runner (ANR) allows a user to define, create 
 
 Developing P2P systems is hard, and blockchains are no different. A developer can't just focus on the functionality of a node, but needs to consider the dynamics of the network, the interaction of nodes and emergent system properties. A lot of testing can't be addressed by unit testing, but needs a special kind of integration testing, where the code runs in interaction with other nodes, attempting to simulate real network scenarios.
 
-In the context of Avalanche, **[Subnets](/learn/subnets)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem.
+In the context of Avalanche, **[Avalanche L1s](/learn/avalanche-l1s)** are a special focus which requires new tooling and support for playing, working and testing with this unique feature of the Avalanche ecosystem.
 
-The ANR aims at being a tool for developers and system integrators alike, offering functionality to run networks of AvalancheGo nodes with support for custom node, Subnet and network configurations, allowing to locally test code before deploying to Mainnet or even public testnets like `fuji`.
+The ANR aims at being a tool for developers and system integrators alike, offering functionality to run networks of AvalancheGo nodes with support for custom node, Avalanche L1 and network configurations, allowing to locally test code before deploying to Mainnet or even public testnets like `fuji`.
 
 You can also use the [Avalanche Network Runner Postman collection](https://github.com/ava-labs/avalanche-network-runner-postman-collection).
 
@@ -50,7 +50,7 @@ There are two main ways to use the network-runner:
     This allows for custom network scenarios and high flexibility, but requires more code to be written.
     
 
-Running the binary, the user can send requests to the RPC server in order to start a network, create Subnets, add nodes to the network, remove nodes from the network, restart nodes, etc. You can make requests through the `avalanche-network-runner` command or by making API calls. Requests are "translated" into gRPC and sent to the server.
+Running the binary, the user can send requests to the RPC server in order to start a network, create Avalanche L1s, add nodes to the network, remove nodes from the network, restart nodes, etc. You can make requests through the `avalanche-network-runner` command or by making API calls. Requests are "translated" into gRPC and sent to the server.
 
 Each node can then also be reached via [API](https://github.com/ava-labs/avalanche-network-runner/tree/main/api) endpoints which each node exposes.
 
@@ -119,7 +119,7 @@ Additional optional parameters which can be passed to the start command:
 	--custom-node-configs" '{"node1":{"log-level":"debug","api-admin-enabled":false},"node2":{...},...}'
 ```
 
-`--plugin-dir` and `--blockchain-specs` are parameters relevant to Subnet operation.
+`--plugin-dir` and `--blockchain-specs` are parameters relevant to Avalanche L1 operation.
 
 `--plugin-dir` can be used to indicate to ANR where it will find plugin binaries for your own VMs. It is optional. If not set, ANR will assume a default location which is relative to the `avalanchego-path` given.
 
@@ -130,7 +130,7 @@ Additional optional parameters which can be passed to the start command:
    "genesis": path to a file containing the genesis for your blockchain (must be a valid path)
 ```
 
-See the [Avalanche-CLI documentation](/subnets/deploy-a-subnet/local-network) for details about how to create and run Subnets with our _Avalanche-CLI_ tool.
+See the [Avalanche-CLI documentation](/avalanche-l1s/deploy-a-avalanche-l1/local-network) for details about how to create and run Avalanche L1s with our _Avalanche-CLI_ tool.
 
 The network-runner supports AvalancheGo node configuration at different levels.
 
@@ -297,7 +297,7 @@ It's also possible to provide individual node config parameters:
 
 **Note**: The following parameters will be _ignored_ if set in `--node-config`, because the network runner needs to set its own in order to function properly: `--log-dir` `--db-dir`
 
-**Note**: The following Subnet parameters will be set from the global network configuration to this node: `--track-subnets` `--plugin-dir`
+**Note**: The following Avalanche L1 parameters will be set from the global network configuration to this node: `--track-subnets` `--plugin-dir`
 
 #### Terminate the Cluster
 
@@ -315,13 +315,13 @@ avalanche-network-runner control stop \
 --endpoint="0.0.0.0:8080"
 ```
 
-## Subnets
+## Avalanche L1s
 
-For general Subnet documentation, please refer to [Subnets](/learn/subnets). ANR can be a great helper working with Subnets, and can be used to develop and test new Subnets before deploying them in public networks. However, for a smooth and guided experience, we recommend using [Avalanche-CLI](/subnets/deploy-a-subnet/local-network). These examples expect a basic understanding of what Subnets are and their usage.
+For general Avalanche L1 documentation, please refer to [Avalanche L1s](/learn/avalanche-l1s). ANR can be a great helper working with Avalanche L1s, and can be used to develop and test new Avalanche L1s before deploying them in public networks. However, for a smooth and guided experience, we recommend using [Avalanche-CLI](/avalanche-l1s/deploy-a-avalanche-l1/local-network). These examples expect a basic understanding of what Avalanche L1s are and their usage.
 
 ### RPC Server Subnet-EVM Example
 
-The Subnet-EVM is a simplified version of Coreth VM (C-Chain). This chain implements the Ethereum Virtual Machine and supports Solidity smart-contracts as well as most other Ethereum client functionality. It can be used to create your own fully Ethereum-compatible Subnet running on Avalanche. This means you can run your Ethereum-compatible dApps in custom Subnets, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [Subnet-EVM](https://github.com/ava-labs/subnet-evm) for further information.
+The Subnet-EVM is a simplified version of Coreth VM (C-Chain). This chain implements the Ethereum Virtual Machine and supports Solidity smart-contracts as well as most other Ethereum client functionality. It can be used to create your own fully Ethereum-compatible Avalanche L1 running on Avalanche. This means you can run your Ethereum-compatible dApps in custom Avalanche L1s, defining your own gas limits and fees, and deploying solidity smart-contracts while taking advantage of Avalanche's validator network, fast finality, consensus mechanism and other features. Essentially, think of it as your own Ethereum where you can concentrate on your business case rather than the infrastructure. See [Subnet-EVM](https://github.com/ava-labs/subnet-evm) for further information.
 
 ## Using Avalanche Network as a Library
 

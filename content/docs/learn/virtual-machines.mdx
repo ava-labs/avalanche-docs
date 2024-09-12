@@ -22,34 +22,34 @@ With Avalanche,
 
 VMs communicate with Avalanche over a language agnostic request-response protocol known as [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call). This allows the VM framework to open a world of endless possibilities, as developers can implement their Dapps using the languages, frameworks, and libraries of their choice.
 
-To get started, create a VM out-of-the-box with the [Subnet-EVM](/subnets/c-chain-or-subnet) in Solidity, or design a custom VM with languages like Golang, Rust, and many more.
+To get started, create a VM out-of-the-box with the [Subnet-EVM](/avalanche-l1s/c-chain-or-avalanche-l1) in Solidity, or design a custom VM with languages like Golang, Rust, and many more.
 
 ## Running a VM
 
 All Avalanche validators as members of the Avalanche Primary Network are required to run three VMs:
 
 - **Coreth**: Defines the Contract Chain (C-Chain); supports smart contract functionality and is EVM-compatible.
-- **Platform VM**: Defines the Platform Chain (P-Chain); supports operations on staking and Subnets.
+- **Platform VM**: Defines the Platform Chain (P-Chain); supports operations on staking and Avalanche L1s.
 - **Avalanche VM**: Defines the Exchange Chain (X-Chain); supports operations on Avalanche Native Tokens.
 
 All three can easily be run on any computer with [AvalancheGo](/nodes/quick-links).
 
-Validators can install additional VMs on their node to validate additional [Subnets](/learn/subnets) in the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of a reward token determined by the Subnets.
+Validators can install additional VMs on their node to validate additional [Avalanche L1s](/learn/avalanche-l1s) in the Avalanche ecosystem. In exchange, validators receive staking rewards in the form of a reward token determined by the Avalanche L1s.
 
 ## Solidity
 
 Avalanche natively supports the execution of Ethereum smart contracts written in solidity.
 
-Ethereum developers have the option of deploying their smart contracts on the C-Chain's implementation of the Ethereum Virtual Machine ([Coreth](https://github.com/ava-labs/coreth)), or on their own Subnet using the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) for advanced use cases that require more customization.
+Ethereum developers have the option of deploying their smart contracts on the C-Chain's implementation of the Ethereum Virtual Machine ([Coreth](https://github.com/ava-labs/coreth)), or on their own Avalanche L1 using the [Subnet-EVM](https://github.com/ava-labs/subnet-evm) for advanced use cases that require more customization.
 
 Both C-Chain and the Subnet-EVM are compatible with Ethereum tooling like Remix, Core, MetaMask, ThirdWeb, and more. To learn more about smart contract support, click [here](/dapps/end-to-end/launch-ethereum-dapp).
 
 ## Golang
 
 - [**Coreth**](https://github.com/ava-labs/coreth): An implementation of the EVM that powers the Avalanche C-Chain that supports Solidity smart contracts.
-- [**Subnet-EVM**](https://github.com/ava-labs/subnet-evm): An implementation of the EVM that can be deployed to a custom Subnet to support Solidity smart contracts
+- [**Subnet-EVM**](https://github.com/ava-labs/subnet-evm): An implementation of the EVM that can be deployed to a custom Avalanche L1 to support Solidity smart contracts
 - [**TimestampVM**](https://github.com/ava-labs/timestampvm): A decentralized timestamp server
-- [**XSVM**](https://github.com/ava-labs/xsvm): An example of Avalanche Warp Messaging that implements Cross-Subnet asset transfers
+- [**XSVM**](https://github.com/ava-labs/xsvm): An example of Avalanche Warp Messaging that implements Cross-Avalanche L1 asset transfers
 
 See here for a tutorial on [How to Build a Simple Golang VM](/virtual-machines/golang-vms/simple-golang-vm).
 

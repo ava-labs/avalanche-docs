@@ -1,36 +1,37 @@
 ---
 title: Integration with EVM
+description: Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Subnets.
 ---
+
 
 Avalanche Warp Messaging offers a basic primitive to enable Cross-Subnet communication on the Avalanche Network.
 
 It is intended to allow communication between arbitrary Custom Virtual Machines (including, but not limited to Subnet-EVM and Coreth).
 
-How does Avalanche Warp Messaging Work?[​](#how-does-avalanche-warp-messaging-work "Direct link to heading")
-------------------------------------------------------------------------------------------------------------
+## How does Avalanche Warp Messaging Work?
 
 Avalanche Warp Messaging uses BLS Multi-Signatures with Public-Key Aggregation where every Avalanche validator registers a public key alongside its NodeID on the Avalanche P-Chain.
 
 Every node tracking a Subnet has read access to the Avalanche P-Chain. This provides weighted sets of BLS Public Keys that correspond to the validator sets of each Subnet on the Avalanche Network. Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Subnets: the receiving network can verify whether an aggregation of signatures from a set of source Subnet validators represents a threshold of stake large enough for the receiving network to process the message.
 
-For more details on Avalanche Warp Messaging, see the AvalancheGo [Warp README](/cross-chain/avalanche-warp-messaging/deep-dive).
+For more details on Avalanche Warp Messaging, see the AvalancheGo [Warp README](https://docs.avax.network/build/cross-chain/awm/deep-dive).
 
-### Flow of Sending / Receiving a Warp Message within the EVM[​](#flow-of-sending--receiving-a-warp-message-within-the-evm "Direct link to heading")
+### Flow of Sending / Receiving a Warp Message within the EVM
 
 The Avalanche Warp Precompile enables this flow to send a message from blockchain A to blockchain B:
 
-1.  Call the Warp Precompile `sendWarpMessage` function with the arguments for the `UnsignedMessage`
-2.  Warp Precompile emits an event / log containing the `UnsignedMessage` specified by the caller of `sendWarpMessage`
-3.  Network accepts the block containing the `UnsignedMessage` in the log, so that validators are willing to sign the message
-4.  An off-chain relayer queries the validators for their signatures of the message and aggregates the signatures to create a `SignedMessage`
-5.  The off-chain relayer encodes the `SignedMessage` as the [predicate](#predicate-encoding) in the AccessList of a transaction to deliver on blockchain B
-6.  The transaction is delivered on blockchain B, the signature is verified prior to executing the block, and the message is accessible via the Warp Precompile's `getVerifiedWarpMessage` during the execution of that transaction
+1. Call the Warp Precompile `sendWarpMessage` function with the arguments for the `UnsignedMessage`
+2. Warp Precompile emits an event / log containing the `UnsignedMessage` specified by the caller of `sendWarpMessage`
+3. Network accepts the block containing the `UnsignedMessage` in the log, so that validators are willing to sign the message
+4. An off-chain relayer queries the validators for their signatures of the message and aggregates the signatures to create a `SignedMessage`
+5. The off-chain relayer encodes the `SignedMessage` as the [predicate](#predicate-encoding) in the AccessList of a transaction to deliver on blockchain B
+6. The transaction is delivered on blockchain B, the signature is verified prior to executing the block, and the message is accessible via the Warp Precompile's `getVerifiedWarpMessage` during the execution of that transaction
 
-### Warp Precompile[​](#warp-precompile "Direct link to heading")
+### Warp Precompile
 
 The Warp Precompile is broken down into three functions defined in the Solidity interface file [here](https://github.com/ava-labs/coreth/blob/master/contracts/contracts/interfaces/IWarpMessenger.sol).
 
-#### sendWarpMessage[​](#sendwarpmessage "Direct link to heading")
+#### sendWarpMessage
 
 `sendWarpMessage` is used to send a verifiable message. Calling this function results in sending a message with the following contents:
 
@@ -49,7 +50,7 @@ Additionally, the `SourceChainID` is excluded because anyone parsing the chain c
 
 The actual `message` is the entire [Avalanche Warp Unsigned Message](https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/warp/unsigned_message.go#L14) including an [AddressedCall](https://github.com/ava-labs/avalanchego/tree/master/vms/platformvm/warp/payload#readme). The unsigned message is emitted as the unindexed data in the log.
 
-#### getVerifiedMessage[​](#getverifiedmessage "Direct link to heading")
+#### getVerifiedMessage
 
 `getVerifiedMessage` is used to read the contents of the delivered Avalanche Warp Message into the expected format.
 
@@ -59,20 +60,20 @@ To use this function, the transaction must include the signed Avalanche Warp Mes
 
 This leads to the following advantages:
 
-1.  The EVM execution does not need to verify the Warp Message at runtime (no signature verification or external calls to the P-Chain)
-2.  The EVM can deterministically re-execute and re-verify blocks assuming the predicate was verified by the network (eg., in bootstrapping)
+1. The EVM execution does not need to verify the Warp Message at runtime (no signature verification or external calls to the P-Chain)
+2. The EVM can deterministically re-execute and re-verify blocks assuming the predicate was verified by the network (eg., in bootstrapping)
 
 This pre-verification is performed using the ProposerVM Block header during [block verification](https://github.com/ava-labs/coreth/blob/master/plugin/evm/block.go#L220) and [block building](https://github.com/ava-labs/coreth/blob/master/miner/worker.go#L200).
 
-#### getBlockchainID[​](#getblockchainid "Direct link to heading")
+#### getBlockchainID
 
 `getBlockchainID` returns the blockchainID of the blockchain that the VM is running on.
 
 This is different from the conventional Ethereum ChainID registered to [ChainList](https://chainlist.org/).
 
-The `blockchainID` in Avalanche refers to the txID that created the blockchain on the Avalanche P-Chain ([docs](/api-reference/p-chain/txn-format#unsigned-create-chain-tx)).
+The `blockchainID` in Avalanche refers to the txID that created the blockchain on the Avalanche P-Chain ([docs](https://docs.avax.network/specs/platform-transaction-serialization#unsigned-create-chain-tx)).
 
-### Predicate Encoding[​](#predicate-encoding "Direct link to heading")
+### Predicate Encoding
 
 Avalanche Warp Messages are encoded as a signed Avalanche [Warp Message](https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/warp/message.go) where the [UnsignedMessage](https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/warp/unsigned_message.go)'s payload includes an [AddressedPayload](https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/warp/payload/payload.go).
 
@@ -80,12 +81,12 @@ Since the predicate is encoded into the [Transaction Access List](https://eips.e
 
 Therefore, we use the [Predicate Utils](https://github.com/ava-labs/coreth/blob/master/predicate/Predicate.md) package to encode the actual byte slice of size N into the access list.
 
-### Performance Optimization: C-Chain to Subnet[​](#performance-optimization-c-chain-to-subnet "Direct link to heading")
+### Performance Optimization: C-Chain to Subnet
 
 To support C-Chain to Subnet communication, or more generally Primary Network to Subnet communication, we special case the C-Chain for two reasons:
 
-1.  Every Subnet validator validates the C-Chain
-2.  The Primary Network has the largest possible number of validators
+1. Every Subnet validator validates the C-Chain
+2. The Primary Network has the largest possible number of validators
 
 Since the Primary Network has the largest possible number of validators for any Subnet on Avalanche, it would also be the most expensive Subnet to receive and verify Avalanche Warp Messages from as it reaching a threshold of stake on the primary network would require many signatures. Luckily, we can do something much smarter.
 
@@ -93,10 +94,10 @@ When a Subnet receives a message from a blockchain on the Primary Network, we us
 
 However, when Subnet B receives a message from the C-Chain, it changes the semantics to the following:
 
-1.  Read the SourceChainID of the signed message (C-Chain)
-2.  Look up the SubnetID that validates C-Chain: Primary Network
-3.  Look up the validator set of Subnet B (instead of the Primary Network) and the registered BLS Public Keys of Subnet B at the P-Chain height specified by the ProposerVM header
-4.  Continue Warp Message verification using the validator set of Subnet B instead of the Primary Network
+1. Read the SourceChainID of the signed message (C-Chain)
+2. Look up the SubnetID that validates C-Chain: Primary Network
+3. Look up the validator set of Subnet B (instead of the Primary Network) and the registered BLS Public Keys of Subnet B at the P-Chain height specified by the ProposerVM header
+4. Continue Warp Message verification using the validator set of Subnet B instead of the Primary Network
 
 This means that C-Chain to Subnet communication only requires a threshold of stake on the receiving subnet to sign the message instead of a threshold of stake for the entire Primary Network.
 
@@ -104,10 +105,9 @@ This assumes that the security of Subnet B already depends on the validators of 
 
 Note: this special case is ONLY applied during Warp Message verification. The message sent by the Primary Network will still contain the Avalanche C-Chain's blockchainID as the sourceChainID and signatures will be served by querying the C-Chain directly.
 
-Design Considerations[​](#design-considerations "Direct link to heading")
--------------------------------------------------------------------------
+## Design Considerations
 
-### Re-Processing Historical Blocks[​](#re-processing-historical-blocks "Direct link to heading")
+### Re-Processing Historical Blocks
 
 Avalanche Warp Messaging depends on the Avalanche P-Chain state at the P-Chain height specified by the ProposerVM block header.
 
@@ -123,8 +123,8 @@ As a result, we require that the block itself provides a deterministic hint whic
 
 To provide that hint, we've explored two designs:
 
-1.  Include a predicate in the transaction to ensure any referenced message is valid
-2.  Append the results of checking whether a Warp Message is valid/invalid to the block data itself
+1. Include a predicate in the transaction to ensure any referenced message is valid
+2. Append the results of checking whether a Warp Message is valid/invalid to the block data itself
 
 The current implementation uses option (1).
 
@@ -136,9 +136,9 @@ Therefore, a transaction specified predicate is required to implement the shared
 
 In contrast, Avalanche Warp Messages are validated within the context of an exact P-Chain height. Therefore, if a block producer attempted to lie about the validity of such a message, the network would interpret that block as invalid.
 
-### Guarantees Offered by Warp Precompile vs. Built on Top[​](#guarantees-offered-by-warp-precompile-vs-built-on-top "Direct link to heading")
+### Guarantees Offered by Warp Precompile vs. Built on Top
 
-#### Guarantees Offered by Warp Precompile[​](#guarantees-offered-by-warp-precompile "Direct link to heading")
+#### Guarantees Offered by Warp Precompile
 
 The Warp Precompile was designed with the intention of minimizing the trusted computing base for the VM as much as possible. Therefore, it makes several tradeoffs which encourage users to use protocols built ON TOP of the Warp Precompile itself as opposed to directly using the Warp Precompile.
 
@@ -146,7 +146,7 @@ The Warp Precompile itself provides ONLY the following ability:
 
 - Emit a verifiable message from (Address A, Blockchain A) to (Address B, Blockchain B) that can be verified by the destination chain
 
-#### Explicitly Not Provided / Built on Top[​](#explicitly-not-provided--built-on-top "Direct link to heading")
+#### Explicitly Not Provided / Built on Top
 
 The Warp Precompile itself does not provide any guarantees of:
 

@@ -455,7 +455,7 @@ platform.getBlockchains() ->
 - `blockchains` is all of the blockchains that exists on the Avalanche network.
 - `name` is the human-readable name of this blockchain.
 - `id` is the blockchain's ID.
-- `subnetID` is the ID of the Subnet that validates this blockchain.
+- `subnetID` is the ID of the Avalanche L1 that validates this blockchain.
 - `vmID` is the ID of the Virtual Machine the blockchain runs.
 
 **Example Call:**
@@ -575,7 +575,7 @@ curl -X POST --data '{
 
 ### `platform.getCurrentSupply`
 
-Returns an upper bound on amount of tokens that exist that can stake the requested Subnet. This is
+Returns an upper bound on amount of tokens that exist that can stake the requested Avalanche L1. This is
 an upper bound because it does not account for burnt tokens, including transaction fees.
 
 **Signature:**
@@ -617,7 +617,7 @@ The response in this example indicates that AVAX's supply is at most 365.865 mil
 
 ### `platform.getCurrentValidators`
 
-List the current validators of the given Subnet.
+List the current validators of the given Avalanche L1.
 
 **Signature:**
 
@@ -670,41 +670,41 @@ platform.getCurrentValidators({
 }
 ```
 
-- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
+- `subnetID` is the Avalanche L1 whose current validators are returned. If omitted, returns the current
   validators of the Primary Network.
 - `nodeIDs` is a list of the NodeIDs of current validators to request. If omitted, all current
   validators are returned. If a specified NodeID is not in the set of current validators, it will
   not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
-  - `startTime` is the Unix time when the validator starts validating the Subnet.
-  - `endTime` is the Unix time when the validator stops validating the Subnet.
+  - `startTime` is the Unix time when the validator starts validating the Avalanche L1.
+  - `endTime` is the Unix time when the validator stops validating the Avalanche L1.
   - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS
-    Subnet.
+    Avalanche L1.
   - `nodeID` is the validator's node ID.
   - `weight` is the validator's weight when sampling validators. Omitted if `subnetID` is a PoS
-    Subnet.
+    Avalanche L1.
   - `validationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and
     array of `addresses`. Specifies the owner of the potential reward earned from staking. Omitted
-    if `subnetID` is not a PoS Subnet.
+    if `subnetID` is not a PoS Avalanche L1.
   - `delegationRewardOwner` is an `OutputOwners` output which includes `locktime`, `threshold` and
     array of `addresses`. Specifies the owner of the potential reward earned from delegations.
-    Omitted if `subnetID` is not a PoS Subnet.
+    Omitted if `subnetID` is not a PoS Avalanche L1.
   - `potentialReward` is the potential reward earned from staking. Omitted if `subnetID` is not a
-    PoS Subnet.
+    PoS Avalanche L1.
   - `delegationFeeRate` is the percent fee this validator charges when others delegate stake to
-    them. Omitted if `subnetID` is not a PoS Subnet.
+    them. Omitted if `subnetID` is not a PoS Avalanche L1.
   - `uptime` is the % of time the queried node has reported the peer as online and validating the
-    Subnet. Omitted if `subnetID` is not a PoS Subnet.
-  - `connected` is if the node is connected and tracks the Subnet.
+    Avalanche L1. Omitted if `subnetID` is not a PoS Avalanche L1.
+  - `connected` is if the node is connected and tracks the Avalanche L1.
   - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't
     have a BLS public key.
   - `delegatorCount` is the number of delegators on this validator.
-    Omitted if `subnetID` is not a PoS Subnet.
+    Omitted if `subnetID` is not a PoS Avalanche L1.
   - `delegatorWeight` is total weight of delegators on this validator.
-    Omitted if `subnetID` is not a PoS Subnet.
+    Omitted if `subnetID` is not a PoS Avalanche L1.
   - `delegators` is the list of delegators to this validator.
-    Omitted if `subnetID` is not a PoS Subnet.
+    Omitted if `subnetID` is not a PoS Avalanche L1.
     Omitted unless `nodeIDs` specifies a single NodeID.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
@@ -841,7 +841,7 @@ platform.getMaxStakeAmount(
 }
 ```
 
-- `subnetID` is a Buffer or cb58 string representing Subnet
+- `subnetID` is a Buffer or cb58 string representing Avalanche L1
 - `nodeID` is a string representing ID of the node whose stake amount is required during the given
   duration
 - `startTime` is a big number denoting start time of the duration during which stake amount of the
@@ -879,7 +879,7 @@ curl -X POST --data '{
 
 ### `platform.getMinStake`
 
-Get the minimum amount of tokens required to validate the requested Subnet and the minimum amount of
+Get the minimum amount of tokens required to validate the requested Avalanche L1 and the minimum amount of
 tokens that can be delegated.
 
 **Signature:**
@@ -922,8 +922,8 @@ curl -X POST --data '{
 
 ### `platform.getPendingValidators`
 
-List the validators in the pending validator set of the specified Subnet. Each validator is not
-currently validating the Subnet but will in the future.
+List the validators in the pending validator set of the specified Avalanche L1. Each validator is not
+currently validating the Avalanche L1 but will in the future.
 
 **Signature:**
 
@@ -956,23 +956,23 @@ platform.getPendingValidators({
 }
 ```
 
-- `subnetID` is the Subnet whose current validators are returned. If omitted, returns the current
+- `subnetID` is the Avalanche L1 whose current validators are returned. If omitted, returns the current
   validators of the Primary Network.
 - `nodeIDs` is a list of the NodeIDs of pending validators to request. If omitted, all pending
   validators are returned. If a specified NodeID is not in the set of pending validators, it will
   not be included in the response.
 - `validators`:
   - `txID` is the validator transaction.
-  - `startTime` is the Unix time when the validator starts validating the Subnet.
-  - `endTime` is the Unix time when the validator stops validating the Subnet.
+  - `startTime` is the Unix time when the validator starts validating the Avalanche L1.
+  - `endTime` is the Unix time when the validator stops validating the Avalanche L1.
   - `stakeAmount` is the amount of tokens this validator staked. Omitted if `subnetID` is not a PoS
-    Subnet.
+    Avalanche L1.
   - `nodeID` is the validator's node ID.
-  - `connected` if the node is connected and tracks the Subnet.
+  - `connected` if the node is connected and tracks the Avalanche L1.
   - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't
     have a BLS public key.
   - `weight` is the validator's weight when sampling validators. Omitted if `subnetID` is a PoS
-    Subnet.
+    Avalanche L1.
 - `delegators`:
   - `txID` is the delegator transaction.
   - `startTime` is the Unix time when the delegator starts.
@@ -1151,7 +1151,7 @@ curl -X POST --data '{
 
 ### `platform.getStakingAssetID`
 
-Retrieve an assetID for a Subnet's staking asset.
+Retrieve an assetID for a Avalanche L1's staking asset.
 
 **Signature:**
 
@@ -1163,8 +1163,8 @@ platform.getStakingAssetID({
 }
 ```
 
-- `subnetID` is the Subnet whose assetID is requested.
-- `assetID` is the assetID for a Subnet's staking asset.
+- `subnetID` is the Avalanche L1 whose assetID is requested.
+- `assetID` is the assetID for a Avalanche L1's staking asset.
 
 **Example Call:**
 
@@ -1203,7 +1203,7 @@ Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
 
 ### `platform.getSubnet`
 
-Get owners and elastic info about the Subnet.
+Get owners and elastic info about the Avalanche L1.
 
 **Signature:**
 
@@ -1220,12 +1220,12 @@ platform.getSubnet({
 }
 ```
 
-- `subnetID` is the ID of the Subnet to get information about. If omitted, fails.
+- `subnetID` is the ID of the Avalanche L1 to get information about. If omitted, fails.
 - `threshold` signatures from addresses in `controlKeys` are needed to make changes to 
-  a permissioned subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys`
+  a permissioned avalanche-l1. If the Avalanche L1 is a PoS Avalanche L1, then `threshold` will be `0` and `controlKeys`
   will be empty.
-- changes can not be made into the subnet until `locktime` is in the past.
-- `subnetTransformationTxID` is the ID of the transaction that changed the subnet into a elastic one, 
+- changes can not be made into the avalanche-l1 until `locktime` is in the past.
+- `subnetTransformationTxID` is the ID of the transaction that changed the avalanche-l1 into a elastic one, 
   for when this change was performed.
 
 **Example Call:**
@@ -1263,7 +1263,7 @@ Deprecated as of [**v1.9.12**](https://github.com/ava-labs/avalanchego/releases/
 
 </Callout>
 
-Get info about the Subnets.
+Get info about the Avalanche L1s.
 
 **Signature:**
 
@@ -1280,15 +1280,15 @@ platform.getSubnets({
 }
 ```
 
-- `ids` are the IDs of the Subnets to get information about. If omitted, gets information about all
-  Subnets.
-- `id` is the Subnet's ID.
+- `ids` are the IDs of the Avalanche L1s to get information about. If omitted, gets information about all
+  Avalanche L1s.
+- `id` is the Avalanche L1's ID.
 - `threshold` signatures from addresses in `controlKeys` are needed to add a validator to the
-  Subnet. If the Subnet is a PoS Subnet, then `threshold` will be `0` and `controlKeys` will be
+  Avalanche L1. If the Avalanche L1 is a PoS Avalanche L1, then `threshold` will be `0` and `controlKeys` will be
   empty.
 
 See [here](/nodes/validate/node-validator) for information on adding a validator to a
-Subnet.
+Avalanche L1.
 
 **Example Call:**
 
@@ -1358,7 +1358,7 @@ curl -X POST --data '{
 
 ### `platform.getTotalStake`
 
-Get the total amount of tokens staked on the requested Subnet.
+Get the total amount of tokens staked on the requested Avalanche L1.
 
 **Signature:**
 
@@ -1400,7 +1400,7 @@ curl -X POST --data '{
 }
 ```
 
-#### Subnet Example
+#### Avalanche L1 Example
 
 **Example Call:**
 
@@ -1755,7 +1755,7 @@ This gives response:
 
 ### `platform.getValidatorsAt`
 
-Get the validators and their weights of a Subnet or the Primary Network at a given P-Chain height.
+Get the validators and their weights of a Avalanche L1 or the Primary Network at a given P-Chain height.
 
 **Signature:**
 
@@ -1769,7 +1769,7 @@ platform.getValidatorsAt(
 ```
 
 - `height` is the P-Chain height to get the validator set at.
-- `subnetID` is the Subnet ID to get the validator set of. If not given, gets validator set of the
+- `subnetID` is the Avalanche L1 ID to get the validator set of. If not given, gets validator set of the
   Primary Network.
 
 **Example Call:**
@@ -1900,7 +1900,7 @@ curl -X POST --data '{
 
 ### `platform.sampleValidators`
 
-Sample validators from the specified Subnet.
+Sample validators from the specified Avalanche L1.
 
 **Signature:**
 
@@ -1917,7 +1917,7 @@ platform.sampleValidators(
 ```
 
 - `size` is the number of validators to sample.
-- `subnetID` is the Subnet to sampled from. If omitted, defaults to the Primary Network.
+- `subnetID` is the Avalanche L1 to sampled from. If omitted, defaults to the Primary Network.
 - Each element of `validators` is the ID of a validator.
 
 **Example Call:**
@@ -1950,7 +1950,7 @@ curl -X POST --data '{
 
 ### `platform.validatedBy`
 
-Get the Subnet that validates a given blockchain.
+Get the Avalanche L1 that validates a given blockchain.
 
 **Signature:**
 
@@ -1963,7 +1963,7 @@ platform.validatedBy(
 ```
 
 - `blockchainID` is the blockchain's ID.
-- `subnetID` is the ID of the Subnet that validates the blockchain.
+- `subnetID` is the ID of the Avalanche L1 that validates the blockchain.
 
 **Example Call:**
 
@@ -1992,7 +1992,7 @@ curl -X POST --data '{
 
 ### `platform.validates`
 
-Get the IDs of the blockchains a Subnet validates.
+Get the IDs of the blockchains a Avalanche L1 validates.
 
 **Signature:**
 
@@ -2004,8 +2004,8 @@ platform.validates(
 ) -> {blockchainIDs: []string}
 ```
 
-- `subnetID` is the Subnet's ID.
-- Each element of `blockchainIDs` is the ID of a blockchain the Subnet validates.
+- `subnetID` is the Avalanche L1's ID.
+- Each element of `blockchainIDs` is the ID of a blockchain the Avalanche L1 validates.
 
 **Example Call:**
 

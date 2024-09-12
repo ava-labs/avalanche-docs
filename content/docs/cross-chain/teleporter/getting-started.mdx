@@ -323,13 +323,13 @@ And finally, change `receiveTeleporterMessage` to `_receiveTeleporterMessage`, m
 Step 6: Testing[​](#step-6-testing "Direct link to heading")
 ------------------------------------------------------------
 
-For testing, `scripts/local/e2e_test.sh` sets up a local test environment consisting of three subnets deployed with Teleporter, and a lightweight inline relayer implementation to facilitate cross chain message delivery. An end-to-end test for `ExampleCrossChainMessenger` is included in `tests/flows/example_messenger.go`, which performs the following:
+For testing, `scripts/local/e2e_test.sh` sets up a local test environment consisting of three avalanche-l1s deployed with Teleporter, and a lightweight inline relayer implementation to facilitate cross chain message delivery. An end-to-end test for `ExampleCrossChainMessenger` is included in `tests/flows/example_messenger.go`, which performs the following:
 
-1.  Deploys the [ExampleERC20](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/@mocks/ExampleERC20.sol) token to subnet A.
-2.  Deploys `ExampleCrossChainMessenger` to both subnets A and B.
-3.  Approves the cross-chain messenger on subnet A to spend ERC20 tokens from the default address.
-4.  Sends `"Hello, world!"` from subnet A to subnet B's cross-chain messenger to receive.
-5.  Calls `getCurrentMessage` on subnet B to make sure the right message and sender are received.
+1.  Deploys the [ExampleERC20](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/@mocks/ExampleERC20.sol) token to avalanche-l1 A.
+2.  Deploys `ExampleCrossChainMessenger` to both avalanche-l1s A and B.
+3.  Approves the cross-chain messenger on avalanche-l1 A to spend ERC20 tokens from the default address.
+4.  Sends `"Hello, world!"` from avalanche-l1 A to avalanche-l1 B's cross-chain messenger to receive.
+5.  Calls `getCurrentMessage` on avalanche-l1 B to make sure the right message and sender are received.
 
 To run this test against the newly created `MyExampleCrossChainMessenger`, first generate the ABI Go bindings by running `./scripts/abi_bindings.sh --contract MyExampleCrossChainMessenger` from the root of this repository. Then, add to the generated Go package the `SendMessageRequiredGas` constant, which is required by the tests, in a new file `abi-bindings/go/CrossChainApplications/MyExampleCrossChainMessenger/MyExampleCrossChainMessenger/constants.go`:
 

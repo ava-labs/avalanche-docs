@@ -5,7 +5,7 @@ description: In this section, we will go over how to be able to execute the test
 
 ## Adding the Test Genesis File
 
-To run our e2e contract tests, we will need to create a Subnet that has the `Hello World` precompile activated, so we will copy and paste the below genesis file into: `/tests/precompile/genesis/hello_world.json`.
+To run our e2e contract tests, we will need to create a Avalanche L1 that has the `Hello World` precompile activated, so we will copy and paste the below genesis file into: `/tests/precompile/genesis/hello_world.json`.
 
 Note: it's important that this has the same name as the HardHat test file we created previously.
 
@@ -90,7 +90,7 @@ ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPreco
 */
 ```
 
-`runDefaultHardhatTests` will run the default Hardhat test command and use the default genesis path. If you want to use a different test command and genesis path than the defaults, you can use the `utils.CreateSubnet` and `utils.RunTestCMD`. See how they were used with default params [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/tests/utils/subnet.go#L113)
+`runDefaultHardhatTests` will run the default Hardhat test command and use the default genesis path. If you want to use a different test command and genesis path than the defaults, you can use the `utils.CreateSubnet` and `utils.RunTestCMD`. See how they were used with default params [here](https://github.com/ava-labs/subnet-evm/blob/helloworld-official-tutorial-v2/tests/utils/avalanche-l1.go#L113)
 
 You should copy and paste the ginkgo `It` node and update from `{your_precompile}` to `hello_world`. The string passed in to `utils.RunDefaultHardhatTests(ctx, "your_precompile")` will be used to find both the HardHat test file to execute and the genesis file, which is why you need to use the same name for both.
 

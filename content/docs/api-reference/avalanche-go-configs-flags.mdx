@@ -153,7 +153,7 @@ The chain configs are passed in from the location `chain-config-dir`/`blockchain
 
 Full reference for all configuration options for some standard chains can be found in a separate [chain config flags](/nodes/configure/configs-flags) document.
 
-Full reference for `subnet-evm` upgrade configuration can be found in a separate [Customize a Subnet](/subnets/upgrade/customize-subnet) document.
+Full reference for `subnet-evm` upgrade configuration can be found in a separate [Customize a Avalanche L1](/avalanche-l1s/upgrade/customize-avalanche-l1) document.
 
 #### `--chain-config-content` (string)[​](#--chain-config-content-string "Direct link to heading")
 
@@ -177,7 +177,7 @@ Path to JSON file that defines aliases for Blockchain IDs. Defaults to `~/.avala
 }
 ```
 
-The above example aliases the Blockchain whose ID is `"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` to `"DFK"`. Chain aliases are added after adding primary network aliases and before any changes to the aliases via the admin API. This means that the first alias included for a Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the full blockchainID. The Primary Alias is used in all metrics and logs.
+The above example aliases the Blockchain whose ID is `"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` to `"DFK"`. Chain aliases are added after adding primary network aliases and before any changes to the aliases via the admin API. This means that the first alias included for a Blockchain on a Avalanche L1 will be treated as the `"Primary Alias"` instead of the full blockchainID. The Primary Alias is used in all metrics and logs.
 
 #### `--chain-aliases-file-content` (string)[​](#--chain-aliases-file-content-string "Direct link to heading")
 
@@ -566,26 +566,26 @@ Avalanche uses two-way authenticated TLS connections to securely connect nodes. 
 
 As an alternative to `--staking-tls-key-file`, it allows specifying base64 encoded content of the TLS private key used by the node. Note that full private key content, with the leading and trailing header, must be base64 encoded.
 
-Subnets[​](#subnets "Direct link to heading")
+Avalanche L1s[​](#avalanche-l1s "Direct link to heading")
 ---------------------------------------------
 
-### Subnet Tracking[​](#subnet-tracking "Direct link to heading")
+### Avalanche L1 Tracking[​](#avalanche-l1-tracking "Direct link to heading")
 
-#### `--track-subnets` (string)[​](#--track-subnets-string "Direct link to heading")
+#### `--track-subnets` (string)[​](#--track-avalanche-l1s-string "Direct link to heading")
 
-Comma separated list of Subnet IDs that this node would track if added to. Defaults to empty (will only validate the Primary Network).
+Comma separated list of Avalanche L1 IDs that this node would track if added to. Defaults to empty (will only validate the Primary Network).
 
-### Subnet Configs[​](#subnet-configs "Direct link to heading")
+### Avalanche L1 Configs[​](#avalanche-l1-configs "Direct link to heading")
 
-It is possible to provide parameters for Subnets. Parameters here apply to all chains in the specified Subnets. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for Subnets specified in `--track-subnets` parameter.
+It is possible to provide parameters for Avalanche L1s. Parameters here apply to all chains in the specified Avalanche L1s. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for Avalanche L1s specified in `--track-subnets` parameter.
 
-Full reference for all configuration options for a Subnet can be found in a separate [Subnet Configs](/nodes/configure/subnet-configs) document.
+Full reference for all configuration options for a Avalanche L1 can be found in a separate [Avalanche L1 Configs](/nodes/configure/avalanche-l1-configs) document.
 
-#### `--subnet-config-dir` (`string`)[​](#--subnet-config-dir-string "Direct link to heading")
+#### `--subnet-config-dir` (`string`)[​](#--avalanche-l1-config-dir-string "Direct link to heading")
 
-Specifies the directory that contains Subnet configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
+Specifies the directory that contains Avalanche L1 configs, as described above. Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--subnet-config-content` is specified.
 
-Example: Let's say we have a Subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
+Example: Let's say we have a Avalanche L1 with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file under the default `subnet-config-dir` at `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`. An example config file is:
 
 ```
 {
@@ -601,9 +601,9 @@ Example: Let's say we have a Subnet with ID `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuK
 <Callout title="Tip" icon = {<BadgeCheck className="size-5 text-card" fill="green" />} >
 By default, none of these directories and/or files exist. You would need to create them manually if needed.
 </Callout>
-#### `--subnet-config-content` (string)[​](#--subnet-config-content-string "Direct link to heading")
+#### `--subnet-config-content` (string)[​](#--avalanche-l1-config-content-string "Direct link to heading")
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Subnet.
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Avalanche L1.
 
 Version[​](#version "Direct link to heading")
 ---------------------------------------------
@@ -676,17 +676,17 @@ Timeout before killing an unresponsive chain. Defaults to `5s`.
 
 Transaction fee, in nAVAX, for transactions that create new assets. Defaults to `10000000` nAVAX (.01 AVAX) per transaction. This can only be changed on a local network.
 
-#### `--create-subnet-tx-fee` (int)[​](#--create-subnet-tx-fee-int "Direct link to heading")
+#### `--create-subnet-tx-fee` (int)[​](#--create-avalanche-l1-tx-fee-int "Direct link to heading")
 
-Transaction fee, in nAVAX, for transactions that create new Subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that create new Avalanche L1s. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--create-blockchain-tx-fee` (int)[​](#--create-blockchain-tx-fee-int "Direct link to heading")
 
 Transaction fee, in nAVAX, for transactions that create new blockchains. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
-#### `--transform-subnet-tx-fee` (int)[​](#--transform-subnet-tx-fee-int "Direct link to heading")
+#### `--transform-subnet-tx-fee` (int)[​](#--transform-avalanche-l1-tx-fee-int "Direct link to heading")
 
-Transaction fee, in nAVAX, for transactions that transform Subnets. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
+Transaction fee, in nAVAX, for transactions that transform Avalanche L1s. Defaults to `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--add-primary-network-validator-fee` (int)[​](#--add-primary-network-validator-fee-int "Direct link to heading")
 
@@ -696,13 +696,13 @@ Transaction fee, in nAVAX, for transactions that add new primary network validat
 
 Transaction fee, in nAVAX, for transactions that add new primary network delegators. Defaults to 0. This can only be changed on a local network.
 
-#### `--add-subnet-validator-fee` (int)[​](#--add-subnet-validator-fee-int "Direct link to heading")
+#### `--add-subnet-validator-fee` (int)[​](#--add-avalanche-l1-validator-fee-int "Direct link to heading")
 
-Transaction fee, in nAVAX, for transactions that add new Subnet validators. Defaults to `10000000` nAVAX (.01 AVAX).
+Transaction fee, in nAVAX, for transactions that add new Avalanche L1 validators. Defaults to `10000000` nAVAX (.01 AVAX).
 
-#### `--add-subnet-delegator-fee` (int)[​](#--add-subnet-delegator-fee-int "Direct link to heading")
+#### `--add-subnet-delegator-fee` (int)[​](#--add-avalanche-l1-delegator-fee-int "Direct link to heading")
 
-Transaction fee, in nAVAX, for transactions that add new Subnet delegators. Defaults to `10000000` nAVAX (.01 AVAX).
+Transaction fee, in nAVAX, for transactions that add new Avalanche L1 delegators. Defaults to `10000000` nAVAX (.01 AVAX).
 
 #### `--min-delegator-stake` (int)[​](#--min-delegator-stake-int "Direct link to heading")
 

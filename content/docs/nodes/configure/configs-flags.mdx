@@ -216,7 +216,7 @@ Full reference for all configuration options for some standard chains can be
 found in a separate [chain config flags](/nodes/configure/configs-flags) document.
 
 Full reference for `subnet-evm` upgrade configuration can be found in a separate
-[Customize a Subnet](/subnets/upgrade/customize-subnet) document.
+[Customize a Avalanche L1](/avalanche-l1s/upgrade/customize-avalanche-l1) document.
 
 #### `--chain-config-content` (string)
 
@@ -248,7 +248,7 @@ The above example aliases the Blockchain whose ID is
 `"q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi"` to `"DFK"`. Chain
 aliases are added after adding primary network aliases and before any changes to
 the aliases via the admin API. This means that the first alias included for a
-Blockchain on a Subnet will be treated as the `"Primary Alias"` instead of the
+Blockchain on a Avalanche L1 will be treated as the `"Primary Alias"` instead of the
 full blockchainID. The Primary Alias is used in all metrics and logs.
 
 #### `--chain-aliases-file-content` (string)
@@ -711,34 +711,34 @@ As an alternative to `--staking-tls-key-file`, it allows specifying base64
 encoded content of the TLS private key used by the node. Note that full private
 key content, with the leading and trailing header, must be base64 encoded.
 
-## Subnets
+## Avalanche L1s
 
-### Subnet Tracking
+### Avalanche L1 Tracking
 
 #### `--track-subnets` (string)
 
-Comma separated list of Subnet IDs that this node would track if added to.
+Comma separated list of Avalanche L1 IDs that this node would track if added to.
 Defaults to empty (will only validate the Primary Network).
 
-### Subnet Configs
+### Avalanche L1 Configs
 
-It is possible to provide parameters for Subnets. Parameters here apply to all
-chains in the specified Subnets. Parameters must be specified with a
+It is possible to provide parameters for Avalanche L1s. Parameters here apply to all
+chains in the specified Avalanche L1s. Parameters must be specified with a
 `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads
-configs for Subnets specified in
+configs for Avalanche L1s specified in
 `--track-subnets` parameter.
 
-Full reference for all configuration options for a Subnet can be found in a
-separate [Subnet Configs](./subnet-configs) document.
+Full reference for all configuration options for a Avalanche L1 can be found in a
+separate [Avalanche L1 Configs](./avalanche-l1-configs) document.
 
 #### `--subnet-config-dir` (`string`)
 
-Specifies the directory that contains Subnet configs, as described above.
+Specifies the directory that contains Avalanche L1 configs, as described above.
 Defaults to `$HOME/.avalanchego/configs/subnets`. If the flag is set explicitly,
 the specified folder must exist, or AvalancheGo will exit with an error. This
 flag is ignored if `--subnet-config-content` is specified.
 
-Example: Let's say we have a Subnet with ID
+Example: Let's say we have a Avalanche L1 with ID
 `p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6`. We can create a config file
 under the default `subnet-config-dir` at
 `$HOME/.avalanchego/configs/subnets/p4jUwqZsA2LuSftroCd3zb4ytH8W99oXKuKVZdsty7eQ3rXD6.json`.
@@ -760,7 +760,7 @@ By default, none of these directories and/or files exist. You would need to crea
 
 #### `--subnet-config-content` (string)
 
-As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Subnet.
+As an alternative to `--subnet-config-dir`, it allows specifying base64 encoded parameters for a Avalanche L1.
 
 ## Version
 
@@ -836,7 +836,7 @@ network.
 
 #### `--create-subnet-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that create new Subnets. Defaults to
+Transaction fee, in nAVAX, for transactions that create new Avalanche L1s. Defaults to
 `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local
 network.
 
@@ -848,7 +848,7 @@ changed on a local network.
 
 #### `--transform-subnet-tx-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that transform Subnets. Defaults to
+Transaction fee, in nAVAX, for transactions that transform Avalanche L1s. Defaults to
 `1000000000` nAVAX (1 AVAX) per transaction. This can only be changed on a local network.
 
 #### `--add-primary-network-validator-fee` (int)
@@ -863,12 +863,12 @@ This can only be changed on a local network.
 
 #### `--add-subnet-validator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new Subnet validators.
+Transaction fee, in nAVAX, for transactions that add new Avalanche L1 validators.
 Defaults to `10000000` nAVAX (.01 AVAX).
 
 #### `--add-subnet-delegator-fee` (int)
 
-Transaction fee, in nAVAX, for transactions that add new Subnet delegators.
+Transaction fee, in nAVAX, for transactions that add new Avalanche L1 delegators.
 Defaults to `10000000` nAVAX (.01 AVAX).
 
 #### `--min-delegator-stake` (int)

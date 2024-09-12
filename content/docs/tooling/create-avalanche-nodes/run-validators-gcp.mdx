@@ -72,7 +72,7 @@ The separate monitoring GCP instance will have similar specs to the default GCP 
 
 Please note that setting up monitoring on a separate GCP instance will incur additional cost of setting up an additional GCP cloud server.
 
-The command will then ask which Avalanche Go version you would like to install in the cloud server. You can choose `default` (which will install the latest version) or you can enter the name of a Subnet created with CLI that you plan to be validated by this node (we will get the latest version that is compatible with the deployed Subnet's RPC version).
+The command will then ask which Avalanche Go version you would like to install in the cloud server. You can choose `default` (which will install the latest version) or you can enter the name of a Avalanche L1 created with CLI that you plan to be validated by this node (we will get the latest version that is compatible with the deployed Avalanche L1's RPC version).
 
 Once the command has successfully completed, Avalanche-CLI outputs all the created cloud server node IDs as well as the public IP that each node can be reached at.
 
@@ -97,4 +97,4 @@ Check Bootstrap Status[​](#check-bootstrap-status "Direct link to heading")
 Ignore for Devnet
 </Callout>
 
-Please note that you will have to wait until the nodes have finished bootstrapping before the nodes can be Primary Network or Subnet Validators. To check whether all the nodes in a cluster have finished bootstrapping, run `avalanche node status <clusterName>`.
+Please note that you will have to wait until the nodes have finished bootstrapping before the nodes can be Primary Network or Avalanche L1 Validators. To check whether all the nodes in a cluster have finished bootstrapping, run `avalanche node status <clusterName>`.

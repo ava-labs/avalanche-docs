@@ -1,9 +1,9 @@
 ---
 title: Teleporter on Devnet
-description: This how-to guide focuses on deploying Teleporter-enabled Subnets to a Devnet.
+description: This how-to guide focuses on deploying Teleporter-enabled Avalanche L1s to a Devnet.
 ---
 
-After this tutorial, you would have created a Devnet and deployed two Subnets in it, and have enabled them to cross-communicate with each other and with the C-Chain through Teleporter and the underlying Warp technology.
+After this tutorial, you would have created a Devnet and deployed two Avalanche L1s in it, and have enabled them to cross-communicate with each other and with the C-Chain through Teleporter and the underlying Warp technology.
 
 For more information on cross chain messaging through Teleporter and Warp, check:
 
@@ -19,12 +19,12 @@ Before we begin, you will need to have:
 
 Note: the tutorial uses AWS hosts, but Devnets can also be created and operated in other supported cloud providers, such as GCP.
 
-Create Subnets Configurations[​](#create-subnets-configurations "Direct link to heading")
+Create Avalanche L1s Configurations[​](#create-avalanche-l1s-configurations "Direct link to heading")
 -----------------------------------------------------------------------------------------
 
-For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-subnets-configurations), to create two Teleporter-enabled Subnets, `<chain1>` and `<chain2>`.
+For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-avalanche-l1s-configurations), to create two Teleporter-enabled Avalanche L1s, `<chain1>` and `<chain2>`.
 
-Create a Devnet and Deploy a Subnet in It[​](#create-a-devnet-and-deploy-a-subnet-in-it "Direct link to heading")
+Create a Devnet and Deploy a Avalanche L1 in It[​](#create-a-devnet-and-deploy-a-avalanche-l1-in-it "Direct link to heading")
 -----------------------------------------------------------------------------------------------------------------
 
 Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<chain1>` in it.
@@ -68,11 +68,11 @@ Subnet <chain1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJ
 
 Notice some details here:
 
-- Two smart contracts are deployed to the Subnet: Teleporter Messenger and Teleporter Registry
+- Two smart contracts are deployed to the Avalanche L1: Teleporter Messenger and Teleporter Registry
 - Both Teleporter smart contracts are also deployed to `C-Chain`
-- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed and configured as a service into one of the nodes (A Relayer [listens](/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
+- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed and configured as a service into one of the nodes (A Relayer [listens](/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Avalanche L1 and sends them to the destination Avalanche L1.)
 
-CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add more Subnets to the Devnet, the Relayer will be automatically reconfigured.
+CLI configures the Relayer to enable every Avalanche L1 to send messages to all other Avalanche L1s. If you add more Avalanche L1s to the Devnet, the Relayer will be automatically reconfigured.
 
 Checking Devnet Configuration and Relayer Logs[​](#checking-devnet-configuration-and-relayer-logs "Direct link to heading")
 ---------------------------------------------------------------------------------------------------------------------------
@@ -124,12 +124,12 @@ Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":
 Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.180Z","logger":"awm-relayer","caller":"main/main.go:295","msg":"Relayer initialized. Listening for messages to relay.","originBlockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p"}
 ```
 
-Deploying the Second Subnet[​](#deploying-the-second-subnet "Direct link to heading")
+Deploying the Second Avalanche L1[​](#deploying-the-second-avalanche-l1 "Direct link to heading")
 -------------------------------------------------------------------------------------
 
 Let's use the `devnet wiz` command again to deploy `<chain2>`.
 
-When deploying Subnet `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
+When deploying Avalanche L1 `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Avalanche L1.
 
 ```bash
 avalanche node devnet wiz <devnetName> <chain2> --default-validator-params 
@@ -189,9 +189,9 @@ You have Teleport-ed your first message in the Devnet!
 Obtaining Information on Teleporter Deploys[​](#obtaining-information-on-teleporter-deploys "Direct link to heading")
 ---------------------------------------------------------------------------------------------------------------------
 
-### Obtaining Subnet Information[​](#obtaining-subnet-information "Direct link to heading")
+### Obtaining Avalanche L1 Information[​](#obtaining-avalanche-l1-information "Direct link to heading")
 
-By executing `blockchain describe` on a Teleporter enabled Subnet, the following relevant information can be found:
+By executing `blockchain describe` on a Teleporter enabled Avalanche L1, the following relevant information can be found:
 
 - Blockchain RPC URL
 - Blockchain ID in cb58 format

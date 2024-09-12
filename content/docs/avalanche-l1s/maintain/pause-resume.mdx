@@ -1,0 +1,96 @@
+---
+title: Pause and Resume
+description: If you've deployed a Avalanche L1 locally, you can preserve and restore the state of your deployed Avalanche L1s.
+---
+
+Stopping the Local Network[​](#stopping-the-local-network "Direct link to heading")
+-----------------------------------------------------------------------------------
+
+To gracefully stop a running local network while preserving state, run:
+
+```bash
+avalanche network stop
+
+# output
+Network stopped successfully.
+```
+
+When restarted, all of your deployed Avalanche L1s resume where they left off.
+
+### Resuming the Local Network[​](#resuming-the-local-network "Direct link to heading")
+
+To resume a stopped network, run:
+
+```bash
+avalanche network start
+
+# output
+Starting previously deployed and stopped snapshot
+Booting Network. Wait until healthy...
+...............
+Network ready to use. Local network node endpoints:
++-------+----------+------------------------------------------------------------------------------------+
+| NODE  |    VM    |                                        URL                                         |
++-------+----------+------------------------------------------------------------------------------------+
+| node5 | myblockchain | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node1 | myblockchain | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node2 | myblockchain | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node3 | myblockchain | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node4 | myblockchain | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+```
+
+The network resumes with the same state it paused with.
+
+Checking Network Status[​](#checking-network-status "Direct link to heading")
+-----------------------------------------------------------------------------
+
+If you'd like to determine whether or not a local Avalanche network is running on your machine, run:
+
+```bash
+avalanche network status
+```
+
+### Example Call[​](#example-call "Direct link to heading")
+
+If the local network is running, the command prints something like
+
+```bash
+Requesting network status...
+Network is Up. Network information:
+==================================================================================================
+Healthy: true
+Custom VMs healthy: true
+Number of nodes: 5
+Number of custom VMs: 1
+======================================== Node information ========================================
+node5 has ID NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 and endpoint http://127.0.0.1:9658:
+node1 has ID NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg and endpoint http://127.0.0.1:9650:
+node2 has ID NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ and endpoint http://127.0.0.1:9652:
+node3 has ID NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN and endpoint http://127.0.0.1:9654:
+node4 has ID NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu and endpoint http://127.0.0.1:9656:
+==================================== Custom VM information =======================================
+Endpoint at node4 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Endpoint at node5 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Endpoint at node1 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Endpoint at node2 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Endpoint at node3 for blockchain "SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz": http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+```
+
+If the network isn't running, the command instead prints:
+
+```bash
+Requesting network status...
+No local network running
+```
+
+or
+
+```bash
+Requesting network status...
+Error: timed out trying to contact backend controller, it is most probably not running
+```

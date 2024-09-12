@@ -33,7 +33,7 @@ Each API's documentation specifies what endpoint path a user should make calls t
 
 In general, they are formatted like:
 
-So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is `/ext/info` and so on. Note that some APIs have additional path components, most notably the chain RPC endpoints which includes the Subnet chain RPCs. We'll go over those in detail in the next section.
+So for the Admin API, the endpoint path is `/ext/admin`, for the Info API it is `/ext/info` and so on. Note that some APIs have additional path components, most notably the chain RPC endpoints which includes the Avalanche L1 chain RPCs. We'll go over those in detail in the next section.
 
 So, in combining the base URL and the endpoint path we get the complete URL for making RPC calls. For example, to make a local RPC call on the Info API, the full URL would be:
 
@@ -41,10 +41,10 @@ So, in combining the base URL and the endpoint path we get the complete URL for 
 http://127.0.0.1:9650/ext/info
 ```
 
-Primary Network and Subnet RPC calls[​](#primary-network-and-subnet-rpc-calls "Direct link to heading")
+Primary Network and Avalanche L1 RPC calls[​](#primary-network-and-avalanche-l1-rpc-calls "Direct link to heading")
 -------------------------------------------------------------------------------------------------------
 
-Besides the APIs that are local to the node, like Admin or Metrics APIs, nodes also expose endpoints for talking to particular chains that are either part of the Primary Network (the X, P and C chains), or part of any Subnets the node might be syncing or validating.
+Besides the APIs that are local to the node, like Admin or Metrics APIs, nodes also expose endpoints for talking to particular chains that are either part of the Primary Network (the X, P and C chains), or part of any Avalanche L1s the node might be syncing or validating.
 
 In general, chain endpoints are formatted as:
 
@@ -54,25 +54,25 @@ The Primary Network consists of three chains: X, P and C chain. As those chains 
 
 ### C-Chain and Subnet-EVM Endpoints[​](#c-chain-and-subnet-evm-endpoints "Direct link to heading")
 
-C-Chain and many Subnets run a version of the EthereumVM (EVM). EVM exposes its own endpoints, which are also accessible on the node: JSON-RPC, and Websocket.
+C-Chain and many Avalanche L1s run a version of the EthereumVM (EVM). EVM exposes its own endpoints, which are also accessible on the node: JSON-RPC, and Websocket.
 
 #### JSON-RPC EVM Endpoints[​](#json-rpc-evm-endpoints "Direct link to heading")
 
 To interact with C-Chain EVM via the JSON-RPC use the endpoint:
 
-To interact with Subnet instances of the EVM via the JSON-RPC endpoint:
+To interact with Avalanche L1 instances of the EVM via the JSON-RPC endpoint:
 
 ```
 /ext/bc/[blockchainID]/rpc
 ```
 
-where `blockchainID` is the ID of the blockchain running the EVM. So for example, the RPC URL for the DFK Network (a Subnet that runs the DeFi Kingdoms:Crystalvale game) running on a local node would be:
+where `blockchainID` is the ID of the blockchain running the EVM. So for example, the RPC URL for the DFK Network (a Avalanche L1 that runs the DeFi Kingdoms:Crystalvale game) running on a local node would be:
 
 ```
 http://127.0.0.1/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc
 ```
 
-Or for the WAGMI Subnet on the Fuji testnet:
+Or for the WAGMI Avalanche L1 on the Fuji testnet:
 
 ```
 http://127.0.0.1/ext/bc/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/rpc
