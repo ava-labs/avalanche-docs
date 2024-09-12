@@ -13,7 +13,7 @@ The document [Upgrade a Avalanche L1](/avalanche-l1s/upgrade/considerations) des
 It's very important that you have read and understood the previously linked document. Failing to do so can potentially grind your network to a halt.
 </Callout>
 
-This tutorial assumes that you have already [installed](/tooling/guides/get-avalanche-cli) Avalanche-CLI. It assumes you have already created and deployed a Avalanche L1 called `testSubnet`.
+This tutorial assumes that you have already [installed](/tooling/guides/get-avalanche-cli) Avalanche-CLI. It assumes you have already created and deployed an Avalanche L1 called `testblockchain`.
 
 Generate the Upgrade File[​](#generate-the-upgrade-file "Direct link to heading")
 ---------------------------------------------------------------------------------
@@ -23,14 +23,14 @@ The [Precompiles](/avalanche-l1s/upgrade/customize-avalanche-l1#network-upgrades
 To generate a valid `upgrade.json` file, run:
 
 ```bash
-avalanche blockchain upgrade generate testSubnet
+avalanche blockchain upgrade generate testblockchain
 ```
 
-If you didn't create `testSubnet` yet, you would see this result:
+If you didn't create `testblockchain` yet, you would see this result:
 
 ```bash
-avalanche blockchain upgrade generate testSubnet
-The provided subnet name "testSubnet" does not exist
+avalanche blockchain upgrade generate testblockchain
+The provided Avalanche L1 name "testblockchain" does not exist
 ```
 
 Again, it makes no sense to try the upgrade command if the Avalanche L1 doesn't exist. If that's the case, please go ahead and [create](/avalanche-l1s/build-first-avalanche-l1) the Avalanche L1 first.
@@ -38,7 +38,7 @@ Again, it makes no sense to try the upgrade command if the Avalanche L1 doesn't 
 If the Avalanche L1 definition exists, the tool launches a wizard. It may feel a bit redundant, but you first see some warnings, to draw focus to the dangers involved:
 
 ```bash
-avalanche blockchain upgrade generate testSubnet
+avalanche blockchain upgrade generate testblockchain
 Performing a network upgrade requires coordinating the upgrade network-wide.
 A network upgrade changes the rule set used to process and verify blocks, such that any node that
 upgrades incorrectly or fails to upgrade by the time that upgrade goes into effect may become
@@ -229,20 +229,20 @@ If the preceding requirements aren't met, the network upgrade command fails.
 Therefore, to apply your generated or imported upgrade configuration:
 
 ```bash
-avalanche blockchain upgrade apply testSubnet
+avalanche blockchain upgrade apply testblockchain
 ```
 
 A number of checks run. For example, if you created the Avalanche L1 but didn't deploy it locally:
 
 ```bash
-avalanche blockchain upgrade apply testSubnet
+avalanche blockchain upgrade apply testblockchain
 Error: no deployment target available
 Usage:
-  avalanche blockchain upgrade apply [subnetName] [flags]
+  avalanche blockchain upgrade apply [blockchainName] [flags]
 
 Flags:
       --avalanchego-chain-config-dir string   avalanchego's chain config file directory (default "/home/fabio/.avalanchego/chains")
-      --config                                create upgrade config for future subnet deployments (same as generate)
+      --config                                create upgrade config for future Avalanche L1 deployments (same as generate)
       --fuji fuji                             apply upgrade existing fuji deployment (alias for `testnet`)
   -h, --help                                  help for apply
       --local local                           apply upgrade existing local deployment
@@ -259,7 +259,7 @@ Go ahead and [deploy](/avalanche-l1s/deploy-a-avalanche-l1/local-network) first 
 If you already had deployed the Avalanche L1 instead, you see something like this:
 
 ```bash
-avalanche blockchain upgrade apply testSubnet
+avalanche blockchain upgrade apply testblockchain
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? What deployment would you like to upgrade:
   ▸ Existing local deployment
@@ -277,15 +277,15 @@ The next upgrade will go into effect 2023-03-31 09:00:00
 +-------+------------+-----------------------------------------------------------------------------------+
 | NODE  |     VM     |                                        URL                                        |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node1 | testSubnet | http://0.0.0.0:9650/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| node1 | testAvalanche L1 | http://0.0.0.0:9650/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node2 | testSubnet | http://0.0.0.0:9652/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| node2 | testblockchain | http://0.0.0.0:9652/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node3 | testSubnet | http://0.0.0.0:9654/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| node3 | testAvalanche L1 | http://0.0.0.0:9654/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node4 | testSubnet | http://0.0.0.0:9656/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| node4 | testblockchain | http://0.0.0.0:9656/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
-| node5 | testSubnet | http://0.0.0.0:9658/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
+| node5 | testAvalanche L1 | http://0.0.0.0:9658/ext/bc/2YTRV2roEhgvwJz7D7vr33hUZscpaZgcYgUTjeMK9KH99NFnsH/rpc |
 +-------+------------+-----------------------------------------------------------------------------------+
 ```
 
@@ -299,7 +299,7 @@ For this scenario to work, you should also have deployed the Avalanche L1 to the
 Assuming the Avalanche L1 has been already deployed to Fuji, when running the `apply` command, the tool notices the deployment:
 
 ```bash
-avalanche blockchain upgrade apply testSubnet
+avalanche blockchain upgrade apply testblockchain
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? What deployment would you like to upgrade:
     Existing local deployment
@@ -317,7 +317,7 @@ If this is the case, the tool tries to install the upgrade file at the expected 
 If you are _not_ using default paths, you can configure the path by providing the flag `--avalanchego-chain-config-dir` to the tool. For example:
 
 ```bash
-avalanche blockchain upgrade apply testSubnet --avalanchego-chain-config-dir /path/to/your/chains
+avalanche blockchain upgrade apply testblockchain --avalanchego-chain-config-dir /path/to/your/chains
 ```
 
 Make sure to identify correctly where your chain config dir is, or the node might fail to find it.
@@ -325,7 +325,7 @@ Make sure to identify correctly where your chain config dir is, or the node migh
 If all is correct, the file gets installed:
 
 ```bash
-avalanche blockchain upgrade apply testSubnet
+avalanche blockchain upgrade apply testblockchain
 ✔ Fuji
 The chain config dir avalanchego uses is set at /home/fabio/.avalanchego/chains
 Trying to install the upgrade files at the provided /home/fabio/.avalanchego/chains path
@@ -337,7 +337,7 @@ If however the node is _not_ running on this same machine where you are executin
 To see the instructions about how to go about this, add the `--print` flag:
 
 ```bash
-avalanche blockchain upgrade apply testSubnet --print
+avalanche blockchain upgrade apply testblockchain --print
 ✔ Fuji
 To install the upgrade file on your validator:
 
@@ -377,16 +377,16 @@ Export the Upgrade File[​](#export-the-upgrade-file "Direct link to heading")
 If you have generated the upgrade file, you can export it:
 
 ```bash
-avalanche blockchain upgrade export testSubnet
-✔ Provide a path where we should export the file to: /tmp/testSubnet-upgrade.json
+avalanche blockchain upgrade export testblockchain
+✔ Provide a path where we should export the file to: /tmp/testblockchain-upgrade.json
 ```
 
 Just provide a valid path to the prompt, and the tool exports the file there.
 
 ```bash
-avalanche blockchain upgrade export testSubnet
-Provide a path where we should export the file to: /tmp/testSubnet-upgrade.json
-Writing the upgrade bytes file to "/tmp/testSubnet-upgrade.json"...
+avalanche blockchain upgrade export testblockchain
+Provide a path where we should export the file to: /tmp/testblockchain-upgrade.json
+Writing the upgrade bytes file to "/tmp/testblockchain-upgrade.json"...
 File written successfully.
 ```
 
@@ -400,8 +400,8 @@ You or someone else might have generated the file elsewhere, or on another machi
 You can import the file:
 
 ```bash
-avalanche blockchain upgrade import testSubnet
-Provide the path to the upgrade file to import: /tmp/testSubnet-upgrade.json
+avalanche blockchain upgrade import testblockchain
+Provide the path to the upgrade file to import: /tmp/testblockchain-upgrade.json
 ```
 
 An existing file with the same path and filename would be overwritten.

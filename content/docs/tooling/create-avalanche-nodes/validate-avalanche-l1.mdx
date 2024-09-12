@@ -23,20 +23,20 @@ Sync with Avalanche L1[​](#sync-with-avalanche-l1 "Direct link to heading")
 
 Before the nodes can be Avalanche L1 Validators, the nodes need to first sync with the Avalanche L1.
 
-To have all nodes in cluster `clusterName` sync with Avalanche L1 `subnetName`, run:
+To have all nodes in cluster `clusterName` sync with Avalanche L1 `blockchainName`, run:
 
 ```bash
 avalanche node sync <clusterName> <blockchainName>
 ```
 
-All the nodes in cluster `clusterName` will now be syncing to Avalanche L1 `subnetName`.
+All the nodes in cluster `clusterName` will now be syncing to Avalanche L1 `blockchainName`.
 
 Wait until nodes are successfully `Syncing` with the Avalanche L1 before running the next commands.
 
 To check sync status, run `avalanche node status <clusterName> --subnet <blockchainName>`. Once the node is finished syncing, the response will be:
 
 ```bash
-All nodes in cluster `clusterName` are synced to Subnet `subnetName`
+All nodes in cluster `clusterName` are synced to Subnet `blockchainName`
 ```
 
 Be a Avalanche L1 Validator[​](#be-a-avalanche-l1-validator "Direct link to heading")
@@ -99,5 +99,5 @@ Once the start time that you chose for the node to be a Avalanche L1 Validator h
 You should see:
 
 ```bash
-All nodes in cluster `clusterName` are validators to Subnet `subnetName`
+All nodes in cluster `clusterName` are validators to Subnet `blockchainName`
 ```

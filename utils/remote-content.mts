@@ -88,7 +88,7 @@ async function main(): Promise<void> {
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/platformvm/warp/README.md",
       outputPath: "content/docs/cross-chain/avalanche-warp-messaging/deep-dive.mdx",
       title: "Deep Dive into AWM",
-      description: "Learn about Avalanche Warp Messaging, a cross-subnet communication protocol on Avalanche.",
+      description: "Learn about Avalanche Warp Messaging, a cross-Avalanche L1 communication protocol on Avalanche.",
       contentUrl: "https://github.com/ava-labs/avalanchego/tree/master/vms/platformvm/warp/",
     },
     { 
@@ -109,7 +109,7 @@ async function main(): Promise<void> {
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/teleporter/main/README.md",
       outputPath: "content/docs/cross-chain/teleporter/deep-dive.mdx",
       title: "Deep Dive into Teleporter",
-      description: "Teleporter is an EVM compatible cross-subnet communication protocol built on top of Avalanche Warp Messaging (AWM), and implemented as a Solidity smart contract.",
+      description: "Teleporter is an EVM compatible cross-Avalanche L1 communication protocol built on top of Avalanche Warp Messaging (AWM), and implemented as a Solidity smart contract.",
       contentUrl: "https://github.com/ava-labs/teleporter/blob/main/",
     },
     { 
@@ -130,7 +130,7 @@ async function main(): Promise<void> {
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/coreth/master/precompile/contracts/warp/README.md",
       outputPath: "content/docs/cross-chain/avalanche-warp-messaging/evm-integration.mdx",
       title: "Integration with EVM",
-      description: "Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Subnets.",
+      description: "Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Avalanche L1s.",
       contentUrl: "https://github.com/ava-labs/coreth/blob/master/precompile/contracts/warp/",
     },
   ];

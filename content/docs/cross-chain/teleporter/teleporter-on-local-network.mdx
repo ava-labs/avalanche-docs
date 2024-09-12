@@ -15,7 +15,7 @@ Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) an
 Create Avalanche L1 Configurations[​](#create-avalanche-l1-configurations "Direct link to heading")
 ---------------------------------------------------------------------------------------
 
-Let's create a Avalanche L1 called `<chain1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name, and with default Subnet-EVM parameters (more information regarding Avalanche L1 creation can be found [here](/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration)):
+Let's create an Avalanche L1 called `<chain1>` with the latest Subnet-EVM version, a chain ID of 1, TOKEN1 as the token name, and with default Subnet-EVM parameters (more information regarding Avalanche L1 creation can be found [here](/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration)):
 
 ```
 avalanche blockchain create <chain1> --evm --latest\
@@ -26,7 +26,7 @@ configuring airdrop to stored key "subnet_<chain1>_airdrop" with address 0x0EF81
 loading stored key "cli-teleporter-deployer" for teleporter deploys
   (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
 using latest teleporter version (v1.0.0)
-✓ Successfully created subnet configuration
+✓ Successfully created Avalanche L1 configuration
 ```
 
 Notice that by default, Teleporter is enabled and a stored key is created to fund Teleporter related operations (that is deploy Teleporter smart contracts, fund Teleporter Relayer).
@@ -45,7 +45,7 @@ configuring airdrop to stored key "subnet_<chain2>_airdrop" with address 0x0EF81
 loading stored key "cli-teleporter-deployer" for teleporter deploys
   (evm address, genesis balance) = (0xE932784f56774879e03F3624fbeC6261154ec711, 600000000000000000000)
 using latest teleporter version (v1.0.0)
-✓ Successfully created subnet configuration
+✓ Successfully created Avalanche L1 configuration
 ```
 
 Deploy the Avalanche L1s to Local Network[​](#deploy-the-avalanche-l1s-to-local-network "Direct link to heading")
@@ -164,16 +164,16 @@ To verify that Teleporter is successfully, let's send a couple of cross messages
 ```
 avalanche teleporter msg C-Chain chain1 "Hello World" --local
 
-Delivering message "this is a message" to source subnet "C-Chain"
-Waiting for message to be received at destination subnet subnet "chain1"
+Delivering message "this is a message" to source Avalanche L1 "C-Chain"
+Waiting for message to be received at destination Avalanche L1 Avalanche L1 "chain1"
 Message successfully Teleported!
 ```
 
 ```
 avalanche teleporter msg chain2 chain1 "Hello World" --local
 
-Delivering message "this is a message" to source subnet "chain2"
-Waiting for message to be received at destination subnet subnet "chain1"
+Delivering message "this is a message" to source Avalanche L1 "chain2"
+Waiting for message to be received at destination Avalanche L1 Avalanche L1 "chain1"
 Message successfully Teleported!
 ```
 
@@ -208,7 +208,7 @@ avalanche blockchain describe <chain1>
 +--------------------------------+-------------------------------------------------------------------------------------+
 |           PARAMETER            |                               VALUE                                                 |
 +--------------------------------+-------------------------------------------------------------------------------------+
-| Subnet Name                    | chain1                                                                             |
+| Avalanche L1 Name                    | chain1                                                                             |
 +--------------------------------+-------------------------------------------------------------------------------------+
 | ChainID                        | 1                                                                                   |
 +--------------------------------+-------------------------------------------------------------------------------------+
@@ -301,3 +301,4 @@ Executing AWM-Relayer...
 Logs can be found at ~/.avalanche-cli/runs/awm-relayer.log
 
 ```
+

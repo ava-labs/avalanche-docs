@@ -499,7 +499,7 @@ echo
 echo "Your node should now be bootstrapping."
 echo "Node configuration file is $HOME/.avalanchego/configs/node.json"
 echo "C-Chain configuration file is $HOME/.avalanchego/configs/chains/C/config.json"
-echo "Plugin directory, for storing subnet VM binaries, is $HOME/.avalanchego/plugins"
+echo "Plugin directory, for storing L1 VM binaries, is $HOME/.avalanchego/plugins"
 echo "To check that the service is running use the following command (q to exit):"
 echo "sudo systemctl status avalanchego"
 echo "To follow the log use (ctrl-c to stop):"

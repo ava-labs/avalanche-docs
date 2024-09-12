@@ -21,7 +21,7 @@ Teleporter-enabled Avalanche L1s and between C-Chain and a Teleporter-enabled Av
 ## Prerequisites
 
 For our example, you will first need to create and deploy a Teleporter-enabled Avalanche L1 in Local
-Network. We will name our Avalanche L1 `testSubnet`.
+Network. We will name our Avalanche L1 `testblockchain`.
 
 - To create a Teleporter-enabled Avalanche L1 configuration, [visit here](/tooling/cli-cross-chain/teleporter-on-local-networks.md#create-avalanche-l1-configurations)
 - To deploy a Teleporter-enabled Avalanche L1, [visit here](/tooling/cli-cross-chain/teleporter-on-local-networks.md#deploy-the-avalanche-l1s-to-local-network)
@@ -71,7 +71,7 @@ avalanche teleporter bridge deploy
 ✔ Deploy a new Home for the token
 ✔ An ERC-20 token
 Enter the address of the ERC-20 Token: 0x5DB9A7629912EBF95876228C24A848de0bfB43A9
-✔ Subnet testSubnet
+✔ Subnet testblockchain
 Downloading Bridge Contracts
 Compiling Bridge
 
@@ -87,18 +87,18 @@ list` command to check our initial balances in C-Chain and Avalanche L1.
 
 We will inquire the balances of our ERC-20 Token TOK both in C-Chain and our Avalanche L1, which has the 
 address of `0x5DB9A7629912EBF95876228C24A848de0bfB43A9` in the C-Chain and address of
-`0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0` in our Avalanche L1 `testSubnet`.
+`0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0` in our Avalanche L1 `testblockchain`.
 
 ```bash
-`avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,testSubnet --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0`
+`avalanche key list --local --keys ewoq,blockchain_airdrop --subnets c,testblockchain --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0`
 +--------+--------------------+------------+--------------------------------------------+---------------+-----------------+---------------+
 |  KIND  |        NAME        | SUBNET     |                  ADDRESS                   |     TOKEN     |     BALANCE     |    NETWORK    |
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
-| stored | ewoq               | testSubnet | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x7DD1.) |               0 | Local Network |
+| stored | ewoq               | testblockchain | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x7DD1.) |               0 | Local Network |
 +        +                    +---------+--------------------------------------------+---------------+-----------------+---------------+
 |        |                    | C-Chain    | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x5DB9.) | 100000.000000000| Local Network |
 +        +--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
-|        | subnet_testSubnet  | testSubnet | 0x5a4601D594Aa3848cA5EE0770b7883d3DBC666f6 | TOK (0x7DD1.) |               0 | Local Network |
+|        | blockchain  | testblockchain | 0x5a4601D594Aa3848cA5EE0770b7883d3DBC666f6 | TOK (0x7DD1.) |               0 | Local Network |
 +        + _airdrop           +---------+--------------------------------------------+---------------+-----------------+---------------+
 |        |                    | C-Chain    | 0x5a4601D594Aa3848cA5EE0770b7883d3DBC666f6 | TOK (0x5DB9.) |               0 | Local Network |
 +--------+--------------------+------------+--------------------------------------------+---------------+-----------------+---------------+
@@ -106,20 +106,20 @@ address of `0x5DB9A7629912EBF95876228C24A848de0bfB43A9` in the C-Chain and addre
 
 ## Transfer the Token from C-Chain to Our Avalanche L1
 
-Now we will transfer 100 TOK tokens from our `ewoq` address in C-Chain to subnet_testSubnet_airdrop
-address in our Avalanche L1 `testSubnet`. Note that we will be using the Home contract address `0x4Ac1d98D9cEF99EC6546dEd4Bd550b0b287aaD6D`
+Now we will transfer 100 TOK tokens from our `ewoq` address in C-Chain to blockchain_airdrop
+address in our Avalanche L1 `testblockchain`. Note that we will be using the Home contract address `0x4Ac1d98D9cEF99EC6546dEd4Bd550b0b287aaD6D`
 and Remote contract address `0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0`.
 
 ```bash
 avalanche key transfer
 ✔ Local Network
 ✔ C-Chain
-✔ Subnet testSubnet
+✔ Subnet testblockchain
 Enter the address of the Bridge on c-chain: 0x4Ac1d98D9cEF99EC6546dEd4Bd550b0b287aaD6D
-Enter the address of the Bridge on testSubnet: 0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0
+Enter the address of the Bridge on testblockchain: 0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0
 ✔ ewoq
 ✔ Key
-✔ subnet_testSubnet_airdrop
+✔ blockchain_airdrop
 Amount to send (TOKEN units): 100
 ```
 
@@ -127,19 +127,19 @@ Amount to send (TOKEN units): 100
 
 We will call `avalanche key list` command again to verify that the transfer is successful.
 
-`subnet_testSubnet_airdrop` should now have 100 TOK tokens in our Avalanche L1 `testSubnet` and our EWOQ
+`blockchain_airdrop` should now have 100 TOK tokens in our Avalanche L1 `testblockchain` and our EWOQ
 account now has 99900 TOK tokens in C-Chain.
 
 ```bash
-avalanche key list --local --keys ewoq,subnet_testSubnet_airdrop --subnets c,testSubnet --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0
+avalanche key list --local --keys ewoq,blockchain_airdrop --subnets c,testblockchain --tokens 0x5DB9A7629912EBF95876228C24A848de0bfB43A9,0x7DD1190e6F6CE8eE13C08F007FdAEE2f881B45D0
 +--------+--------------------+------------+--------------------------------------------+---------------+-----------------+---------------+
 |  KIND  |        NAME        | SUBNET     |                  ADDRESS                   |     TOKEN     |     BALANCE     |    NETWORK    |
 +--------+--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
-| stored | ewoq               | testSubnet | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x7DD1.) |               0 | Local Network |
+| stored | ewoq               | testblockchain | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x7DD1.) |               0 | Local Network |
 +        +                    +---------+--------------------------------------------+---------------+-----------------+---------------+
 |        |                    | C-Chain    | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x5DB9.) | 99900.000000000 | Local Network |
 +        +--------------------+---------+--------------------------------------------+---------------+-----------------+---------------+
-|        | subnet_testSubnet  | testSubnet | 0x5a4601D594Aa3848cA5EE0770b7883d3DBC666f6 | TOK (0x7DD1.) |   100.000000000 | Local Network |
+|        | blockchain  | testblockchain | 0x5a4601D594Aa3848cA5EE0770b7883d3DBC666f6 | TOK (0x7DD1.) |   100.000000000 | Local Network |
 +        + _airdrop           +---------+--------------------------------------------+---------------+-----------------+---------------+
 |        |                    | C-Chain    | 0x5a4601D594Aa3848cA5EE0770b7883d3DBC666f6 | TOK (0x5DB9.) |               0 | Local Network |
 +--------+--------------------+------------+--------------------------------------------+---------------+-----------------+---------------+

@@ -5,7 +5,7 @@ description: Learn about Avalanche CLI and its different commands for Avalanche 
 
 Avalanche-CLI is a command-line tool that gives developers access to everything Avalanche. This release specializes in helping developers build and test Avalanche L1s.
 
-To get started, look at the documentation for the subcommands or jump right in with `avalanche blockchain create myNewSubnet`.
+To get started, look at the documentation for the subcommands or jump right in with `avalanche blockchain create myblockchain`.
 
 [Install Avalanche CLI](/tooling/guides/get-avalanche-cli)
 
@@ -49,7 +49,7 @@ avalanche primary addValidator [flags]
 Avalanche L1[​](#avalanche-l1 "Direct link to heading")
 -------------------------------------------
 
-The `subnet` command suite provides a collection of tools for developing and deploying Avalanche L1s.
+The `blockchain` command suite provides a collection of tools for developing and deploying Avalanche L1s.
 
 To get started, use the `blockchain create` command wizard to walk through the configuration of your very first Avalanche L1. Then, go ahead and deploy it with the `blockchain deploy` command. You can use the rest of the commands to manage your Avalanche L1 configurations and live deployments.
 
@@ -57,36 +57,36 @@ To get started, use the `blockchain create` command wizard to walk through the c
 
 The `blockchain addValidator` command whitelists a primary network validator to validate the provided deployed Avalanche L1.
 
-To add the validator to the Avalanche L1's allow list, you first need to provide the subnetName and the validator's unique NodeID. The command then prompts for the validation start time, duration, and stake weight. You can bypass these prompts by providing the values with flags.
+To add the validator to the Avalanche L1's allow list, you first need to provide the blockchainName and the validator's unique NodeID. The command then prompts for the validation start time, duration, and stake weight. You can bypass these prompts by providing the values with flags.
 
 This command currently only works on Avalanche L1s deployed to either the Fuji Testnet or Mainnet.
 
 **Usage**:
 
 ```bash
-avalanche blockchain addValidator [subnetName] [flags]
+avalanche blockchain addValidator [blockchainName] [flags]
 ```
 
 **Flags**:
 
 ```bash
-    --default-validator-params   use default weight/start/duration params for subnet validator
-    --devnet devnet              add subnet validator on devnet
+    --default-validator-params   use default weight/start/duration params for Avalanche L1 validator
+    --devnet devnet              add Avalanche L1 validator on devnet
     --endpoint string            use the given endpoint for network operations
 -e, --ewoq                       use ewoq key [fuji/devnet only]
-    --fuji fuji                  add subnet validator on fuji (alias for `testnet`)
+    --fuji fuji                  add Avalanche L1 validator on fuji (alias for `testnet`)
 -h, --help                       help for addValidator
 -k, --key string                 select the key to use [fuji/devnet only]
 -g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
     --ledger-addrs strings       use the given ledger addresses
-    --local local                add subnet validator on local
-    --mainnet mainnet            add subnet validator on mainnet
+    --local local                add Avalanche L1 validator on local
+    --mainnet mainnet            add Avalanche L1 validator on mainnet
     --nodeID string              set the NodeID of the validator to add
     --output-tx-path string      file path of the add validator tx
     --staking-period duration    how long this validator will be staking
     --start-time string          UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
     --subnet-auth-keys strings   control keys that will be used to authenticate add validator tx
-    --testnet testnet            add subnet validator on testnet (alias for `fuji`)
+    --testnet testnet            add Avalanche L1 validator on testnet (alias for `fuji`)
     --weight uint                set the staking weight of the validator to add
 ```
 
@@ -97,7 +97,7 @@ This command removes a node as a validator in a Avalanche L1.
 **Usage**:
 
 ```bash
-avalanche blockchain removeValidator [subnetName] [flags]
+avalanche blockchain removeValidator [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -109,7 +109,7 @@ avalanche blockchain removeValidator [subnetName] [flags]
     --ledger-addrs      strings             use the given ledger addresses
     --local                                 remove validator in existing local deployment
     --mainnet                               remove validator in existing mainnet deployment
-    --nodeID            string              node id of node to be added as validator in elastic subnet
+    --nodeID            string              node id of node to be added as validator in elastic Avalanche L1
     --output-tx-path    string              file path of the removeValidator tx
     --subnet-auth-keys  strings             control keys that will be used to authenticate removeValidator tx
     --testnet                               remove validator in existing testnet deployment (alias for `fuji`)
@@ -122,28 +122,28 @@ The `blockchain changeOwner` changes the owner of the deployed Avalanche L1. Thi
 **Usage**:
 
 ```bash
-avalanche blockchain changeOwner [subnetName] [flags]
+avalanche blockchain changeOwner [blockchainName] [flags]
 ```
 
 **Flags**:
 
 ```bash
-    --control-keys strings       addresses that may make subnet changes
-    --devnet devnet              change subnet owner on devnet
+    --control-keys strings       addresses that may make Avalanche L1 changes
+    --devnet devnet              change Avalanche L1 owner on devnet
     --endpoint string            use the given endpoint for network operations
 -e, --ewoq                       use ewoq key [fuji/devnet]
-    --fuji fuji                  change subnet owner on fuji (alias for `testnet`)
+    --fuji fuji                  change Avalanche L1 owner on fuji (alias for `testnet`)
 -h, --help                       help for changeOwner
 -k, --key string                 select the key to use [fuji/devnet]
 -g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
     --ledger-addrs strings       use the given ledger addresses
-    --local local                change subnet owner on local
-    --mainnet mainnet            change subnet owner on mainnet
-    --output-tx-path string      file path of the transfer subnet ownership tx
+    --local local                change Avalanche L1 owner on local
+    --mainnet mainnet            change Avalanche L1 owner on mainnet
+    --output-tx-path string      file path of the transfer Avalanche L1 ownership tx
 -s, --same-control-key           use the fee-paying key as control key
-    --subnet-auth-keys strings   control keys that will be used to authenticate transfer subnet ownership tx
-    --testnet testnet            change subnet owner on testnet (alias for `fuji`)
-    --threshold uint32           required number of control key signatures to make subnet changes
+    --subnet-auth-keys strings   control keys that will be used to authenticate transfer Avalanche L1 ownership tx
+    --testnet testnet            change Avalanche L1 owner on testnet (alias for `fuji`)
+    --threshold uint32           required number of control key signatures to make Avalanche L1 changes
 ```
 
 ### Avalanche L1 Configure[​](#avalanche-l1-configure "Direct link to heading")
@@ -153,7 +153,7 @@ AvalancheGo nodes support several different configuration files. Avalanche L1s h
 **Usage**:
 
 ```bash
-avalanche blockchain configure [subnetName] [flags]
+avalanche blockchain configure [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -162,7 +162,7 @@ avalanche blockchain configure [subnetName] [flags]
     --chain-config string            path to the chain configuration
 -h, --help                           help for configure
     --per-node-chain-config string   path to per node chain configuration for local network
-    --subnet-config string           path to the subnet configuration
+    --subnet-config string           path to the Avalanche L1 configuration
 ```
 
 ### Avalanche L1 Create[​](#avalanche-l1-create "Direct link to heading")
@@ -171,12 +171,12 @@ The `blockchain create` command builds a new genesis file to configure your Aval
 
 The tool supports deploying Subnet-EVM and custom VMs. You can create a custom, user-generated genesis with a custom VM by providing the path to your genesis and VM binaries with the `--genesis` and `--vm` flags.
 
-By default, running the command with a `subnetName` that already exists causes the command to fail. If you'd like to overwrite an existing configuration, pass the `-f` flag.
+By default, running the command with a `blockchainName` that already exists causes the command to fail. If you'd like to overwrite an existing configuration, pass the `-f` flag.
 
 **Usage**:
 
 ```bash
-avalanche blockchain create [subnetName] [flags]
+avalanche blockchain create [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -229,7 +229,7 @@ Avalanche-CLI only supports deploying an individual Avalanche L1 once per networ
 **Usage**:
 
 ```bash
-avalanche blockchain deploy [subnetName] [flags]
+avalanche blockchain deploy [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -237,7 +237,7 @@ avalanche blockchain deploy [subnetName] [flags]
 ```bash
     --avalanchego-path string      use this avalanchego binary path
     --avalanchego-version string   use this version of avalanchego (ex: v1.17.12) (default "latest")
-    --control-keys strings         addresses that may make subnet changes
+    --control-keys strings         addresses that may make Avalanche L1 changes
     --devnet                       deploy to a devnet network
     --endpoint string              use the given endpoint for network operations
 -e, --ewoq                         use ewoq key [fuji/devnet deploy only]
@@ -254,7 +254,7 @@ avalanche blockchain deploy [subnetName] [flags]
     --subnet-auth-keys strings     control keys that will be used to authenticate chain creation
 -u, --subnet-id string             deploy into given subnet id
 -t, --testnet fuji                 deploy to testnet (alias to fuji)
-    --threshold uint32             required number of control key signatures to make subnet changes
+    --threshold uint32             required number of control key signatures to make Avalanche L1 changes
 ```
 
 ### Avalanche L1 Describe[​](#avalanche-l1-describe "Direct link to heading")
@@ -264,7 +264,7 @@ The `blockchain describe` command prints the details of a Avalanche L1 configura
 **Usage**:
 
 ```bash
-avalanche blockchain describe [subnetName] [flags]
+avalanche blockchain describe [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -281,7 +281,7 @@ The `blockchain export` command write the details of an existing Avalanche L1 de
 **Usage**:
 
 ```bash
-avalanche blockchain export [subnetName] [flags]
+avalanche blockchain export [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -314,7 +314,7 @@ avalanche blockchain import file [subnetPath] [flags]
 -f, --force           overwrite the existing configuration if one exists
 -h, --help            help for import
     --repo string     the repo to import (ex: ava-labs/avalanche-plugins-core) or url to download the repo from
-    --subnet string   the subnet configuration to import from the provided repo
+    --subnet string   the Avalanche L1 configuration to import from the provided repo
 ```
 
 #### Import from a Public Network[​](#import-from-a-public-network "Direct link to heading")
@@ -339,7 +339,7 @@ avalanche blockchain import public [subnetPath] [flags]
     --genesis-file-path string   path to the genesis file
 -h, --help                       help for public
     --mainnet mainnet            import from mainnet
-    --node-url string            [optional] URL of an already running subnet validator
+    --node-url string            [optional] URL of an already running Avalanche L1 validator
     --subnet-id string           the subnet ID
     --testnet testnet            import from testnet (alias for `fuji`)
 
@@ -358,7 +358,7 @@ This command currently only supports Avalanche L1s deployed on the Fuji Testnet 
 **Usage**:
 
 ```bash
-avalanche blockchain join [subnetName] [flags]
+avalanche blockchain join [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -402,14 +402,14 @@ The `blockchain publish` command publishes the Avalanche L1's VM to a repository
 **Usage**:
 
 ```bash
-avalanche blockchain publish [subnetName] [flags]
+avalanche blockchain publish [blockchainName] [flags]
 ```
 
 **Flags**:
 
 ```bash
     --alias string              We publish to a remote repo, but identify the repo locally under a user-provided alias (e.g. myrepo).
-    --force                     If true, ignores if the subnet has been published in the past, and attempts a forced publish.
+    --force                     If true, ignores if the Avalanche L1 has been published in the past, and attempts a forced publish.
 -h, --help                      help for publish
     --no-repo-path string       Do not let the tool manage file publishing, but have it only generate the files and put them in the location given by this flag.
     --repo-url string           The URL of the repo where we are publishing
@@ -424,7 +424,7 @@ The `blockchain stats` command prints validator statistics for the given Avalanc
 **Usage**:
 
 ```bash
-avalanche blockchain stats [subnetName] [flags]
+avalanche blockchain stats [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -443,7 +443,7 @@ The `blockchain vmid` command prints the virtual machine ID (VMID) for the given
 **Usage**:
 
 ```bash
-avalanche blockchain vmid [subnetName]
+avalanche blockchain vmid [blockchainName]
 ```
 
 Elastic Avalanche L1[​](#elastic-avalanche-l1 "Direct link to heading")
@@ -456,27 +456,27 @@ This command transforms your permissioned Avalanche L1 into an Elastic Avalanche
 **Usage**:
 
 ```bash
-avalanche blockchain elastic [subnetName] [flags]
+avalanche blockchain elastic [blockchainName] [flags]
 ```
 
 **Flags**:
 
 ```bash
-    --default                               If true, use default elastic subnet config values
+    --default                               If true, use default elastic Avalanche L1 config values
     --denonimation      int                 specify the token denomination (for Fuji and Mainnet only)
-    --force                                 If true, override transform into elastic subnet warning
-    --fuji                                  elastic subnet transform existing fuji deployment (alias for `testnet`)
+    --force                                 If true, override transform into elastic Avalanche L1 warning
+    --fuji                                  elastic Avalanche L1 transform existing fuji deployment (alias for `testnet`)
 -k, --key               string              select the key to use [fuji only]
 -g, --ledger                                use ledger instead of key (always true on mainnet, defaults to false on fuji)
     --ledger-addrs      strings             use the given ledger addresses
-    --local                                 elastic subnet transform existing local deployment
-    --mainnet                               elastic subnet transform existing mainnet deployment
+    --local                                 elastic Avalanche L1 transform existing local deployment
+    --mainnet                               elastic Avalanche L1 transform existing mainnet deployment
     --output-tx-path    string              file path of the transformSubnet tx
     --stake-amount      int                 amount of tokens to stake on validator
     --staking-period    string              how long validator validates for after start time
     --start-time        string              when validator starts validating (format as "2006-01-02 15:00:00")
     --subnet-auth-keys  strings             control keys that will be used to authenticate transformSubnet tx
-    --testnet                               elastic subnet transform existing testnet deployment (alias for `fuji`)
+    --testnet                               elastic Avalanche L1 transform existing testnet deployment (alias for `fuji`)
     --tokenName         string              specify the token name
     --tokenSymbol       string              specify the token symbol
     --transform-validators                  If true, transform validators to permissionless validators after elastic transform
@@ -489,7 +489,7 @@ This command adds a node as a permissionless validator in an Elastic Avalanche L
 **Usage**:
 
 ```bash
-avalanche blockchain join [subnetName] --elastic [flags]
+avalanche blockchain join [blockchainName] --elastic [flags]
 ```
 
 **Flags**:
@@ -501,7 +501,7 @@ avalanche blockchain join [subnetName] --elastic [flags]
     --ledger-addrs      strings             use the given ledger addresses
     --local                                 add permissionless validator in existing local deployment
     --mainnet                               add permissionless validator in existing mainnet deployment
-    --nodeID            string              node id of node to be added as validator in elastic subnet
+    --nodeID            string              node id of node to be added as validator in elastic Avalanche L1
     --stake-amount      int                 amount of tokens to stake on validator
     --staking-period    string              how long validator validates for after start time
     --start-time        string              when validator starts validating (format as "2006-01-02 15:00:00")
@@ -515,7 +515,7 @@ This command delegates stake to a permissionless validator in an Elastic Avalanc
 **Usage**:
 
 ```bash
-avalanche blockchain addPermissionlessDelegator [subnetName] [flags]
+avalanche blockchain addPermissionlessDelegator [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -527,7 +527,7 @@ avalanche blockchain addPermissionlessDelegator [subnetName] [flags]
     --ledger-addrs      strings             use the given ledger addresses
     --local                                 add permissionless delegator in existing local deployment
     --mainnet                               add permissionless delegator in existing mainnet deployment
-    --nodeID            string              node id of node to be added as validator in elastic subnet
+    --nodeID            string              node id of node to be added as validator in elastic Avalanche L1
     --stake-amount      int                 amount of tokens to delegate to validator
     --staking-period    string              how long to delegate for after start time
     --start-time        string              when to starts delegating (format as "2006-01-02 15:00:00")
@@ -550,14 +550,14 @@ After you update your validator's configuration, you need to restart your valida
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade apply [subnetName] [flags]
+avalanche blockchain upgrade apply [blockchainName] [flags]
 ```
 
 **Flags**:
 
 ```bash
     --avalanchego-chain-config-dir string   avalanchego's chain config file directory (default "/Users/connor/.avalanchego/chains")
-    --config                                create upgrade config for future subnet deployments (same as generate)
+    --config                                create upgrade config for future Avalanche L1 deployments (same as generate)
     --force                                 If true, don't prompt for confirmation of timestamps in the past
     --fuji fuji                             apply upgrade existing fuji deployment (alias for `testnet`)
 -h, --help                                  help for apply
@@ -574,7 +574,7 @@ Export the upgrade bytes file to a location of choice on disk.
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -592,7 +592,7 @@ The `blockchain upgrade generate` command builds a new upgrade.json file to cust
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade generate [subnetName] [flags]
+avalanche blockchain upgrade generate [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -608,7 +608,7 @@ Import the upgrade bytes file into the local environment.
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade import [subnetName] [flags]
+avalanche blockchain upgrade import [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -625,7 +625,7 @@ Print the upgrade.json file content.
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade print [subnetName] [flags]
+avalanche blockchain upgrade print [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -643,7 +643,7 @@ The command walks the user through an interactive wizard. The user can skip the 
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -681,7 +681,7 @@ avalanche node create [clusterName] [flags]
 ```bash
     --alternative-key-pair-name string         key pair name to use if default one generates conflicts
     --authorize-access                         authorize CLI to create cloud resources
-    --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given subnet, on node/s
+    --avalanchego-version-from-subnet string   install latest avalanchego version, that is compatible with the given Avalanche L1, on node/s
     --aws                                      create node/s in AWS cloud
     --aws-profile string                       aws profile to use (default "default")
     --custom-avalanchego-version string        install given avalanchego version on node/s
@@ -720,7 +720,7 @@ The `node devnet deploy` command deploys a Avalanche L1 into a devnet cluster, c
 **Usage**:
 
 ```bash
-avalanche node devnet deploy [clusterName] [subnetName] [flags]
+avalanche node devnet deploy [clusterName] [Avalanche L1 Name] [flags]
 ```
 
 **Flags**:
@@ -736,7 +736,7 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 **Usage**:
 
 ```bash
-avalanche node devnet wiz [clusterName] [subnetName] [flags]
+avalanche node devnet wiz [clusterName] [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -747,19 +747,19 @@ avalanche node devnet wiz [clusterName] [subnetName] [flags]
     --avalanchego-version string               install given avalanchego version on node/s
     --aws                                      create node/s in AWS cloud
     --aws-profile string                       aws profile to use (default "default")
-    --chain-config string                      path to the chain configuration for subnet
-    --custom-subnet                            use a custom VM as the subnet virtual machine
+    --chain-config string                      path to the chain configuration for Avalanche L1
+    --custom-subnet                            use a custom VM as the Avalanche L1 virtual machine
     --custom-vm-branch string                  custom vm branch
     --custom-vm-build-script string            custom vm build-script
     --custom-vm-repo-url string                custom vm repository url
-    --default-validator-params                 use default weight/start/duration params for subnet validator
+    --default-validator-params                 use default weight/start/duration params for Avalanche L1 validator
     --devnet-api-nodes int                     number of API nodes(nodes without stake) to create in the new Devnet
     --evm-chain-id uint                        chain ID to use with Subnet-EVM
     --evm-defaults                             use default settings for fees/airdrop/precompiles with Subnet-EVM
-    --evm-subnet                               use Subnet-EVM as the subnet virtual machine
+    --evm-subnet                               use Subnet-EVM as the Avalanche L1 virtual machine
     --evm-token string                         token name to use with Subnet-EVM
     --evm-version string                       version of Subnet-EVM to use
-    --force-subnet-create                      overwrite the existing subnet configuration if one exists
+    --force-subnet-create                      overwrite the existing Avalanche L1 configuration if one exists
     --gcp                                      create node/s in GCP cloud
     --gcp-credentials string                   use given GCP credentials
     --gcp-project string                       use given GCP project
@@ -768,7 +768,7 @@ avalanche node devnet wiz [clusterName] [subnetName] [flags]
     --latest-avalanchego-version               install latest avalanchego release version on node/s
     --latest-evm-version                       use latest Subnet-EVM released version
     --latest-pre-released-evm-version          use latest Subnet-EVM pre-released version
-    --node-config string                       path to avalanchego node configuration for subnet
+    --node-config string                       path to avalanchego node configuration for Avalanche L1
     --node-type string                         cloud instance type. Use 'default' to use recommended default instance type
     --num-nodes ints                           number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
     --region strings                           create node/s in given region(s). Use comma to separate multiple regions
@@ -776,11 +776,11 @@ avalanche node devnet wiz [clusterName] [subnetName] [flags]
     --separate-monitoring-instance             host monitoring for all cloud servers on a separate instance
     --skip-monitoring                          don't set up monitoring in created nodes
     --ssh-agent-identity string                use given ssh identity(only for ssh agent). If not set, default will be used.
-    --subnet-config string                     path to the subnet configuration for subnet
+    --subnet-config string                     path to the subnet configuration for Avalanche L1
     --subnet-genesis string                    file path of the subnet genesis
     --use-ssh-agent                            use ssh agent for ssh
     --use-static-ip                            attach static Public IP on cloud servers (default true)
-    --validators strings                       deploy subnet into given comma separated list of validators. defaults to all cluster nodes
+    --validators strings                       deploy blockchain into given comma separated list of validators. defaults to all cluster nodes
 ```
 
 ### Node List[​](#node-list "Direct link to heading")
@@ -831,7 +831,7 @@ avalanche node ssh [clusterName] [flags]
 
 The `node status` command gets the bootstrap status of all nodes in a cluster with the Primary Network. If no cluster is given, defaults to node list behaviour.
 
-To get the bootstrap status of a node with a Avalanche L1, use the `--subnet` flag.
+To get the bootstrap status of a node with an Avalanche L1, use the `--subnet` flag.
 
 **Usage**:
 
@@ -843,7 +843,7 @@ avalanche node status [clusterName] [flags]
 
 ```bash
 -h, --help            help for status
-      --subnet string   specify the subnet the node is syncing with
+      --subnet string   specify the Avalanche L1 the node is syncing with
 ```
 
 ### Node Stop[​](#node-stop "Direct link to heading")
@@ -874,12 +874,12 @@ avalanche node stop [clusterName] [flags]
 (ALPHA Warning) This command is currently in experimental mode.
 </Callout>
 
-The `node sync` command enables all nodes in a cluster to be bootstrapped to a Avalanche L1. You can check the Avalanche L1 bootstrap status by calling avalanche `node status <clusterName> --subnet <blockchainName>`
+The `node sync` command enables all nodes in a cluster to be bootstrapped to an Avalanche L1. You can check the Avalanche L1 bootstrap status by calling avalanche `node status <clusterName> --subnet <blockchainName>`
 
 **Usage**:
 
 ```bash
-avalanche node sync [clusterName] [subnetName] [flags]
+avalanche node sync [clusterName] [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -907,13 +907,13 @@ The `node update subnet` command updates all nodes in a cluster with latest Aval
 **Usage**:
 
 ```bash
-avalanche node update subnet [clusterName] [subnetName] [flags]
+avalanche node update Avalanche L1 [clusterName] [blockchainName] [flags]
 ```
 
 **Flags**:
 
 ```bash
--h, --help   help for subnet
+-h, --help   help for Avalanche L1
 ```
 
 ### Node Validate[​](#node-validate "Direct link to heading")
@@ -958,23 +958,23 @@ avalanche node validate primary [clusterName] [flags]
 (ALPHA Warning) This command is currently in experimental mode.
 </Callout>
 
-The `node validate subnet` command enables all nodes in a cluster to be validators of a Avalanche L1. If the command is run before the nodes are Primary Network validators, the command will first make the nodes Primary Network validators before making them Avalanche L1 validators. If The command is run before the nodes are bootstrapped on the Primary Network, the command will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`. If The command is run before the nodes are synced to the Avalanche L1, the command will fail. You can check the Avalanche L1 sync status by calling `avalanche node status <clusterName> --subnet <blockchainName>`.
+The `node validate subnet` command enables all nodes in a cluster to be validators of an Avalanche L1. If the command is run before the nodes are Primary Network validators, the command will first make the nodes Primary Network validators before making them Avalanche L1 validators. If the command is run before the nodes are bootstrapped on the Primary Network, the command will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`. If the command is run before the nodes are synced to the Avalanche L1, the command will fail. You can check the Avalanche L1 sync status by calling `avalanche node status <clusterName> --subnet <blockchainName>`.
 
 **Usage**:
 
 ```bash
-avalanche node validate subnet [clusterName] [subnetName] [flags]
+avalanche node validate Avalanche L1 [clusterName] [blockchainName] [flags]
 ```
 
 **Flags**:
 
 ```bash
-    --default-validator-params   use default weight/start/duration params for subnet validator
+    --default-validator-params   use default weight/start/duration params for Avalanche L1 validator
 -d, --devnet                     set up validator in devnet
     --endpoint string            use the given endpoint for network operations
 -e, --ewoq                       use ewoq key [fuji/devnet only]
 -f, --fuji testnet               set up validator in fuji (alias to testnet
--h, --help                       help for subnet
+-h, --help                       help for Avalanche L1
 -k, --key string                 select the key to use [fuji/devnet only]
 -g, --ledger                     use ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
     --ledger-addrs strings       use the given ledger addresses
@@ -1173,7 +1173,7 @@ The `transaction commit` command commits a transaction by submitting it to the P
 **Usage**:
 
 ```bash
-avalanche transaction commit [subnetName] [flags]
+avalanche transaction commit [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -1190,7 +1190,7 @@ The `transaction sign` command signs a multisig transaction.
 **Usage**:
 
 ```bash
-avalanche transaction sign [subnetName] [flags]
+avalanche transaction sign [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -1291,7 +1291,7 @@ avalanche key list [flags]
 -l, --local           list local network addresses
 -m, --mainnet         list mainnet network addresses
     --pchain          list P-Chain addresses (default true)
-    --subnet string   provide balance information for the given subnet (Subnet-Evm based only)
+    --subnet string   provide balance information for the given Avalanche L1 (Subnet-Evm based only)
 -t, --testnet         list testnet (fuji) network addresses
 -n, --use-nano-avax   use nano Avax for balances
     --xchain          list X-Chain addresses (default true)
@@ -1326,3 +1326,4 @@ avalanche key transfer [options] [flags]
 -a, --target-addr string           receiver address
 -t, --testnet                      transfer between testnet (fuji) addresses
 ```
+

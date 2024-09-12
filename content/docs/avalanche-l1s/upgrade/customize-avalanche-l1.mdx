@@ -7,7 +7,7 @@ All Avalanche L1s can be customized by utilizing [`Subnet Configs`](#avalanche-l
 
 A Avalanche L1 can have one or more blockchains. For example, the Primary Network, which is a Avalanche L1, a special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific configuration file. See [here](/nodes/configure/configs-flags) for detailed explanation.
 
-A blockchain created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following methods:
+An Avalanche L1 created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following methods:
 
 - [Genesis](#genesis)
 - [Precompile](#precompiles)
@@ -668,7 +668,7 @@ If `allowFeeRecipients` and `rewardAddress` are both specified in the `initialRe
 
 ### Avalanche Warp Messaging[​](#avalanche-warp-messaging "Direct link to heading")
 
-Warp Precompile enabled cross-avalanche-l1 communication between other Avalanche L1s and primary-network (C-Chain). In order to use Warp messaging, Subnet-EVM chains must activate their Warp precompiles. Warp can be activated with the following lines in upgrade.json:
+Warp Precompile enabled cross-blockchain communication between other Layer 1s and primary-network (C-Chain). In order to use Warp messaging, Subnet-EVM chains must activate their Warp precompiles. Warp can be activated with the following lines in upgrade.json:
 
 ```json
 {
@@ -792,7 +792,7 @@ Constantinople: 0 Petersburg: 0 Istanbul: 0, Muir Glacier: 0, Subnet EVM: 0, Fee
 {\“gasLimit\“:20000000,\“targetBlockRate\“:2,\“minBaseFee\“:1000000000,\“targetGas\
 “:100000000,\“baseFeeChangeDenominator\“:48,\“minBlockGasCost\“:0,\“maxBlockGasCost\
 “:10000000,\“blockGasCostStep\“:500000}, AllowFeeRecipients: false, NetworkUpgrades: {\
-“subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\"precompileUpgrades\":[{\"feeManagerConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668950000}},{\"txAllowListConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668960000}},{\"feeManagerConfig\":{\"adminAddresses\":null,\"enabledAddresses\":null,\"blockTimestamp\":1668970000,\"disable\":true}}]}, Engine: Dummy Consensus Engine}"”
+“subnetEVMTimestamp\“:0}, PrecompileUpgrade: {}, UpgradeConfig: {\"precompileUpgrades\":[{\"feeManagerConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668950000}},{\"txAllowListConfig\":{\"adminAddresses\":[\"0x8db97c7cece249c2b98bdc0226cc4c2a57bf52fc\"],\"enabledAddresses\":null,\"blockTimestamp\":1668960000}},{\"feeManagerConfig\":{\"adminAddresses\":null,\"enabledAddresses\":null,\"blockTimestamp\":1668970000,\"disable\":true}}]}, Engine: Dummy Consensus Engine}"
 ```
 
 Notice that `precompileUpgrades` entry correctly reflects the changes. You can also check the activated precompiles at a timestamp with the [`eth_getActivePrecompilesAt`](/api-reference/subnet-evm-api#eth_getactiveprecompilesat) RPC method. The [`eth_getChainConfig`](/api-reference/subnet-evm-api#eth_getchainconfig) RPC method will also return the configured upgrades in the response.
@@ -996,3 +996,4 @@ Nodes running non-compatible version (running pre-Durango version after Durango 
 
 All of network nodes, even ones correctly upgraded to Durango and running the correct version since Durango activation, should be restarted with the new upgrade.json to reschedule the Durango activation. This is a network-wide operation and should be coordinated with all network nodes.
 </Callout>
+

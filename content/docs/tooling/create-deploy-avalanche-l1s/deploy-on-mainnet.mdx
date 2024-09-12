@@ -105,7 +105,7 @@ Deploy the Avalanche L1[​](#deploy-the-avalanche-l1 "Direct link to heading")
 With your Ledger unlocked and running the Avalanche app, run
 
 ```bash
-avalanche blockchain deploy testsubnet
+avalanche blockchain deploy testblockchain
 ```
 
 This is going to start a new prompt series.
@@ -122,7 +122,7 @@ This tutorial is about deploying to `Mainnet`, so navigate with the arrow keys t
 
 ```bash
 ✔ Mainnet
-Deploying [testsubnet] to Mainnet
+Deploying [testblockchain] to Mainnet
 ```
 
 After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
@@ -188,7 +188,7 @@ After that, CLI creates the blockchain within the Avalanche L1, and a summary wi
 +--------------------+------------------------------------------------------------------------------------+
 | DEPLOYMENT RESULTS |                                                                                    |
 +--------------------+------------------------------------------------------------------------------------+
-| Chain Name         | testsubnet                                                                         |
+| Chain Name         | testblockchain                                                                         |
 +--------------------+------------------------------------------------------------------------------------+
 | Subnet ID          | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
 +--------------------+------------------------------------------------------------------------------------+
@@ -218,7 +218,7 @@ See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) o
 First, request permission to validate by running the `join` command along with the Avalanche L1 name:
 
 ```bash
-avalanche blockchain join testsubnet
+avalanche blockchain join testblockchain
 ```
 
 Note: Running `join` does not guarantee that your node is a validator of the Avalanche L1! The owner of the Avalanche L1 must approve your node to be a validator afterwards by calling `addValidator` as described in the next section.
@@ -335,7 +335,7 @@ Now that the node has joined the Avalanche L1, a Avalanche L1 control key holder
 To whitelist a node as a recognized validator on the Avalanche L1, run:
 
 ```bash
-avalanche blockchain addValidator testsubnet
+avalanche blockchain addValidator testblockchain
 ```
 
 You need to repeat this process for every validator you add to the network.
@@ -489,8 +489,8 @@ Avalanche L1 Export[​](#avalanche-l1-export "Direct link to heading")
 Because you need to setup multiple validators on multiple different machines, you need to export your Avalanche L1's configuration and import it on each validator.
 
 ```bash
-avalanche blockchain export testsubnet
-✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
+avalanche blockchain export testblockchain
+✔ Enter file path to write export data to: /tmp/testblockchain-export.dat
 ```
 
 The file is in text format and you shouldn't change it. You can use it to import the configuration on a different machine.
@@ -501,7 +501,7 @@ Avalanche L1 Import[​](#avalanche-l1-import "Direct link to heading")
 To import a VM configuration, move the file you exported in the previous section to your desired machine and issue the `import` command with the path to the file.
 
 ```bash
-avalanche blockchain import /tmp/testsubnet-export.dat
+avalanche blockchain import /tmp/testblockchain-export.dat
 Subnet imported successfully
 ```
 
@@ -512,7 +512,7 @@ avalanche blockchain list
 +---------------+---------------+----------+-----------+----------+
 |    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
 +---------------+---------------+----------+-----------+----------+
-| testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
+| testblockchain    | testblockchain    |     3333 | SubnetEVM | No       |
 +---------------+---------------+----------+-----------+----------+
 ```
 

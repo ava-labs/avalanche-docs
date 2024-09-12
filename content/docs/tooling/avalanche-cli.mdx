@@ -3,7 +3,7 @@ title: Introduction
 description: Avalanche-CLI is a command-line tool that gives developers access to everything Avalanche.
 ---
 
-To get started, look at the documentation for the subcommands or jump right in with `avalanche blockchain create myNewSubnet`.
+To get started, look at the documentation for the subcommands or jump right in with `avalanche blockchain create myblockchain`.
 
 [Install Avalanche CLI](/tooling/guides/get-avalanche-cli)
 
@@ -55,14 +55,14 @@ To get started, use the `blockchain create` command wizard to walk through the c
 
 The `blockchain addValidator` command whitelists a primary network validator to validate the provided deployed Avalanche L1.
 
-To add the validator to the Avalanche L1's allow list, you first need to provide the subnetName and the validator's unique NodeID. The command then prompts for the validation start time, duration, and stake weight. You can bypass these prompts by providing the values with flags.
+To add the validator to the Avalanche L1's allow list, you first need to provide the blockchainName and the validator's unique NodeID. The command then prompts for the validation start time, duration, and stake weight. You can bypass these prompts by providing the values with flags.
 
 This command currently only works on Avalanche L1s deployed to either the Fuji Testnet or Mainnet.
 
 **Usage**:
 
 ```bash
-avalanche blockchain addValidator [subnetName] [flags]
+avalanche blockchain addValidator [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -95,7 +95,7 @@ This command removes a node as a validator in a Avalanche L1.
 **Usage**:
 
 ```bash
-avalanche blockchain removeValidator [subnetName] [flags]
+avalanche blockchain removeValidator [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -122,7 +122,7 @@ This command currently only works on Avalanche L1s deployed to Devnet, Fuji or M
 **Usage**:
 
 ```bash
-avalanche blockchain changeOwner [subnetName] [flags]
+avalanche blockchain changeOwner [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -153,7 +153,7 @@ AvalancheGo nodes support several different configuration files. Avalanche L1s h
 **Usage**:
 
 ```bash
-avalanche blockchain configure [subnetName] [flags]
+avalanche blockchain configure [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -171,12 +171,12 @@ The `blockchain create` command builds a new genesis file to configure your Aval
 
 The tool supports deploying Subnet-EVM and custom VMs. You can create a custom, user-generated genesis with a custom VM by providing the path to your genesis and VM binaries with the `--genesis` and `--vm` flags.
 
-By default, running the command with a `subnetName` that already exists causes the command to fail. If you'd like to overwrite an existing configuration, pass the `-f` flag.
+By default, running the command with a `blockchainName` that already exists causes the command to fail. If you'd like to overwrite an existing configuration, pass the `-f` flag.
 
 **Usage**:
 
 ```bash
-avalanche blockchain create [subnetName] [flags]
+avalanche blockchain create [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -231,7 +231,7 @@ Avalanche-CLI only supports deploying an individual Avalanche L1 once per networ
 **Usage**:
 
 ```bash
-avalanche blockchain deploy [subnetName] [flags]
+avalanche blockchain deploy [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -266,7 +266,7 @@ The `blockchain describe` command prints the details of a Avalanche L1 configura
 **Usage**:
 
 ```bash
-avalanche blockchain describe [subnetName] [flags]
+avalanche blockchain describe [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -285,7 +285,7 @@ The command prompts for an output path. You can also provide one with the `--out
 **Usage**:
 
 ```bash
-avalanche blockchain export [subnetName] [flags]
+avalanche blockchain export [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -362,7 +362,7 @@ This command currently only supports Avalanche L1s deployed on the Fuji Testnet 
 **Usage**:
 
 ```bash
-avalanche blockchain join [subnetName] [flags]
+avalanche blockchain join [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -406,7 +406,7 @@ The `blockchain publish` command publishes the Avalanche L1's VM to a repository
 **Usage**:
 
 ```bash
-avalanche blockchain publish [subnetName] [flags]
+avalanche blockchain publish [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -428,7 +428,7 @@ The `blockchain stats` command prints validator statistics for the given Avalanc
 **Usage**:
 
 ```bash
-avalanche blockchain stats [subnetName] [flags]
+avalanche blockchain stats [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -447,7 +447,7 @@ The `blockchain vmid` command prints the virtual machine ID (VMID) for the given
 **Usage**:
 
 ```bash
-avalanche blockchain vmid [subnetName]
+avalanche blockchain vmid [blockchainName]
 ```
 
 Elastic Avalanche L1[​](#elastic-avalanche-l1 "Direct link to heading")
@@ -460,7 +460,7 @@ This command transforms your permissioned Avalanche L1 into an Elastic Avalanche
 **Usage**:
 
 ```bash
-avalanche blockchain elastic [subnetName] [flags]
+avalanche blockchain elastic [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -493,7 +493,7 @@ This command adds a node as a permissionless validator in an Elastic Avalanche L
 **Usage**:
 
 ```bash
-avalanche blockchain join [subnetName] --elastic [flags]
+avalanche blockchain join [blockchainName] --elastic [flags]
 ```
 
 **Flags**:
@@ -519,7 +519,7 @@ This command delegates stake to a permissionless validator in an Elastic Avalanc
 **Usage**:
 
 ```bash
-avalanche blockchain addPermissionlessDelegator [subnetName] [flags]
+avalanche blockchain addPermissionlessDelegator [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -554,7 +554,7 @@ After you update your validator's configuration, you need to restart your valida
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade apply [subnetName] [flags]
+avalanche blockchain upgrade apply [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -578,7 +578,7 @@ Export the upgrade bytes file to a location of choice on disk.
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -596,7 +596,7 @@ The `blockchain upgrade generate` command builds a new upgrade.json file to cust
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade generate [subnetName] [flags]
+avalanche blockchain upgrade generate [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -612,7 +612,7 @@ Import the upgrade bytes file into the local environment.
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade import [subnetName] [flags]
+avalanche blockchain upgrade import [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -629,7 +629,7 @@ Print the upgrade.json file content.
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade print [subnetName] [flags]
+avalanche blockchain upgrade print [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -643,7 +643,7 @@ The command walks the user through an interactive wizard. The user can skip the 
 **Usage**:
 
 ```bash
-avalanche blockchain upgrade export [subnetName] [flags]
+avalanche blockchain upgrade export [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -720,7 +720,7 @@ The `node devnet deploy` command deploys a Avalanche L1 into a devnet cluster, c
 **Usage**:
 
 ```bash
-avalanche node devnet deploy [clusterName] [subnetName] [flags]
+avalanche node devnet deploy [clusterName] [blockchainName] [flags]
 ```
 
 ### Node Devnet Wiz
@@ -730,7 +730,7 @@ The `node devnet wiz` command creates a devnet and deploys, sync and validate a 
 **Usage**:
 
 ```bash
-avalanche node devnet wiz [clusterName] [subnetName] [flags]
+avalanche node devnet wiz [clusterName] [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -869,7 +869,7 @@ The `node sync` command enables all nodes in a cluster to be bootstrapped to a A
 **Usage**:
 
 ```bash
-avalanche node sync [clusterName] [subnetName] [flags]
+avalanche node sync [clusterName] [blockchainName] [flags]
 ```
 
 ### Node Update
@@ -891,7 +891,7 @@ The `node update subnet` command updates all nodes in a cluster with latest Aval
 **Usage**:
 
 ```bash
-avalanche node update subnet [clusterName] [subnetName] [flags]
+avalanche node update subnet [clusterName] [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -949,7 +949,7 @@ The `node validate subnet` command enables all nodes in a cluster to be validato
 **Usage**:
 
 ```bash
-avalanche node validate subnet [clusterName] [subnetName] [flags]
+avalanche node validate subnet [clusterName] [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -1164,7 +1164,7 @@ The `transaction commit` command commits a transaction by submitting it to the P
 **Usage**:
 
 ```bash
-avalanche transaction commit [subnetName] [flags]
+avalanche transaction commit [blockchainName] [flags]
 ```
 
 **Flags**:
@@ -1181,7 +1181,7 @@ The `transaction sign` command signs a multisig transaction.
 **Usage**:
 
 ```bash
-avalanche transaction sign [subnetName] [flags]
+avalanche transaction sign [blockchainName] [flags]
 ```
 
 **Flags**:

@@ -181,7 +181,7 @@ Creating a Avalanche L1 with `Avalanche-CLI` for `Fuji` works the same way as wi
 To create an EVM Avalanche L1, run the `blockchain create` command with a name of your choice:
 
 ```bash
-avalanche blockchain create testsubnet
+avalanche blockchain create testblockchain
 ```
 
 This is going to start a series of prompts to customize your EVM Avalanche L1 to your needs. Most prompts have some validation to reduce issues due to invalid input. The first prompt asks for the type of the virtual machine (see [Virtual Machine](#virtual-machine)).
@@ -197,7 +197,7 @@ As you want to create an EVM Avalanche L1, just accept the default `Subnet-EVM`.
 
 ```bash
 ✔ Subnet-EVM
-creating subnet testsubnet
+creating subnet testblockchain
 Enter your subnet's ChainId. It can be any positive integer.
 ChainId: 3333
 ```
@@ -261,7 +261,7 @@ At this point, CLI creates the specification of the new Avalanche L1 on disk, bu
 Print the specification to disk by running the `describe` command:
 
 ```bash
-avalanche blockchain describe testsubnet
+avalanche blockchain describe testblockchain
  _____       _        _ _
 |  __ \     | |      (_) |
 | |  | | ___| |_ __ _ _| |___
@@ -271,7 +271,7 @@ avalanche blockchain describe testsubnet
 +----------------------------+----------------------------------------------------+
 |         PARAMETER          |                       VALUE                        |
 +----------------------------+----------------------------------------------------+
-| Subnet Name                | testsubnet                                         |
+| Subnet Name                | testblockchain                                         |
 +----------------------------+----------------------------------------------------+
 | ChainID                    | 3333                                               |
 +----------------------------+----------------------------------------------------+
@@ -350,7 +350,7 @@ go run main.go subnet list
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 |   SUBNET    |    CHAIN    | CHAIN ID |                       VM ID                       |    TYPE    | FROM REPO |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
-| testsubnet  | testsubnet  |     3333 | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Subnet-EVM | false     |
+| testblockchain  | testblockchain  |     3333 | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Subnet-EVM | false     |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 ```
 
@@ -362,7 +362,7 @@ go run main.go subnet list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 |   SUBNET    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
-| testsubnet  | testsubnet  | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Yes           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
+| testblockchain  | testblockchain  | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Yes           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
 +             +             +                                                   +               +-----------------------------------------------------------------+---------+
 |             |             |                                                   |               | BlockchainID: 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR | No      |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
@@ -375,7 +375,7 @@ Deploy the Avalanche L1[​](#deploy-the-avalanche-l1 "Direct link to heading")
 To deploy the new Avalanche L1, run
 
 ```bash
-avalanche blockchain deploy testsubnet
+avalanche blockchain deploy testblockchain
 ```
 
 This is going to start a new prompt series.
@@ -394,7 +394,7 @@ Also, this tutorial assumes that a node is up running, fully bootstrapped on `Fu
 
 ```bash
 ✔ Fuji
-Deploying [testsubnet] to Fuji
+Deploying [testblockchain] to Fuji
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? Which private key should be used to issue the transaction?:
     test
@@ -472,7 +472,7 @@ See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) o
 First, request permission to validate by running the `join` command along with the Avalanche L1 name:
 
 ```bash
-avalanche blockchain join testsubnet
+avalanche blockchain join testblockchain
 ```
 
 Note: Running `join` does not guarantee that your node is a validator of the Avalanche L1! The owner of the Avalanche L1 must approve your node to be a validator afterwards by calling `addValidator` as described in the next section.
@@ -574,7 +574,7 @@ Now that the node has joined the Avalanche L1, a Avalanche L1 control key holder
 To whitelist a node as a recognized validator on the Avalanche L1, run:
 
 ```bash
-avalanche blockchain addValidator testsubnet
+avalanche blockchain addValidator testblockchain
 ```
 
 As this operation involves a new transaction, you will need to specify which private key to use:
@@ -676,8 +676,8 @@ Avalanche L1 Export[​](#avalanche-l1-export "Direct link to heading")
 This tool is most useful on the machine where a validator is or is going to be running. In order to allow a VM to run on a different machine, you can export the configuration. Just need to provide a path to where to export the data:
 
 ```bash
-avalanche blockchain export testsubnet
-✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
+avalanche blockchain export testblockchain
+✔ Enter file path to write export data to: /tmp/testblockchain-export.dat
 ```
 
 The file is in text format and you shouldn't change it. You can then use it to import the configuration on a different machine.
@@ -688,7 +688,7 @@ Avalanche L1 Import[​](#avalanche-l1-import "Direct link to heading")
 To import a VM specification exported in the previous section, just issue the `import` command with the path to the file after having copied the file over:
 
 ```bash
-avalanche blockchain import /tmp/testsubnet-export.dat
+avalanche blockchain import /tmp/testblockchain-export.dat
 Subnet imported successfully
 ```
 
@@ -699,7 +699,7 @@ avalanche blockchain list
 +---------------+---------------+----------+-----------+----------+
 |    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
 +---------------+---------------+----------+-----------+----------+
-| testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
+| testblockchain    | testblockchain    |     3333 | SubnetEVM | No       |
 +---------------+---------------+----------+-----------+----------+
 ```
 
@@ -711,7 +711,7 @@ Appendix[​](#appendix "Direct link to heading")
 To connect Core (or MetaMask) with your blockchain on the new Avalanche L1 running on your local computer, you can add a new network on your Core wallet with the following values:
 
 ```bash
-- Network Name: testsubnet
+- Network Name: testblockchain
 - RPC URL: [http://127.0.0.1:9650/ext/bc/2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh/rpc]
 - Chain ID: 3333
 - Symbol: TST

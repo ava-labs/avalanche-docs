@@ -111,7 +111,7 @@ For a node to join a Avalanche L1, there are two prerequisites:
 
 Primary Network validation means that a node cannot join a Avalanche L1 as a validator before becoming a validator on the Primary Network itself. So, after you add the node to the validator set on the Primary Network, node can join a Avalanche L1. Of course, this is valid only for Avalanche L1 validators, if you need a non-validating Avalanche L1 node, then the node doesn't need to be a validator at all.
 
-To have a node start syncing the Avalanche L1, you need to add the `--track-subnets` command line option, or `track-subnets` key to the node config file (found at `.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync multiple Avalanche L1s, so you can add them as a comma-separated list of Avalanche L1 IDs.
+To have a node start syncing the Avalanche L1, you need to add the `--track-subnets` command line option, or `track-subnets` key to the node config file (found at `.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync multiple Layer 1s, so you can add them as a comma-separated list of Avalanche L1 IDs.
 
 An example of a node config syncing two Avalanche L1s:
 

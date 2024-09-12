@@ -700,11 +700,11 @@ platform.getCurrentValidators({
   - `signer` is the node's BLS public key and proof of possession. Omitted if the validator doesn't
     have a BLS public key.
   - `delegatorCount` is the number of delegators on this validator.
-    Omitted if `subnetID` is not a PoS Avalanche L1.
+Omitted if `subnetID` is not a PoS Avalanche L1.
   - `delegatorWeight` is total weight of delegators on this validator.
     Omitted if `subnetID` is not a PoS Avalanche L1.
   - `delegators` is the list of delegators to this validator.
-    Omitted if `subnetID` is not a PoS Avalanche L1.
+Omitted if `subnetID` is not a PoS Avalanche L1.
     Omitted unless `nodeIDs` specifies a single NodeID.
     - `txID` is the delegator transaction.
     - `startTime` is the Unix time when the delegator started.
@@ -1225,7 +1225,7 @@ platform.getSubnet({
   a permissioned avalanche-l1. If the Avalanche L1 is a PoS Avalanche L1, then `threshold` will be `0` and `controlKeys`
   will be empty.
 - changes can not be made into the avalanche-l1 until `locktime` is in the past.
-- `subnetTransformationTxID` is the ID of the transaction that changed the avalanche-l1 into a elastic one, 
+- `subnetTransformationTxID` is the ID of the transaction that changed the Avalanche L1 into an elastic one,
   for when this change was performed.
 
 **Example Call:**
@@ -1272,7 +1272,7 @@ platform.getSubnets({
     ids: []string
 }) ->
 {
-    subnets: []{
+    subnets: []
         id: string,
         controlKeys: []string,
         threshold: string

@@ -104,7 +104,7 @@ Deploy the Avalanche L1[​](#deploy-the-avalanche-l1 "Direct link to heading")
 With your Ledger unlocked and running the Avalanche app, run
 
 ```bash
-avalanche blockchain deploy testsubnet
+avalanche blockchain deploy testAvalanche L1
 ```
 
 This is going to start a new prompt series.
@@ -121,7 +121,7 @@ This tutorial is about deploying to `Mainnet`, so navigate with the arrow keys t
 
 ```bash
 ✔ Mainnet
-Deploying [testsubnet] to Mainnet
+Deploying [testblockchain] to Mainnet
 ```
 
 After that, CLI shows the `Mainnet` Ledger address used to fund the deployment:
@@ -141,9 +141,9 @@ For instructions on controlling your Avalanche L1 with a multisig, see the [Mult
 </Callout>
 
 ```bash
-Configure which addresses may make changes to the subnet.
+Configure which addresses may make changes to the Avalanche L1.
 These addresses are known as your control keys. You are going to also
-set how many control keys are required to make a subnet change (the threshold).
+set how many control keys are required to make an Avalanche L1 change (the threshold).
 Use the arrow keys to navigate: ↓ ↑ → ←
 ? How would you like to set your control keys?:
   ▸ Use ledger address
@@ -153,14 +153,14 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 For this tutorial, opt to use the first Ledger address, so enter at `Use ledger address`. Only this address is going to be able to add or remove validators, or create blockchains on the Avalanche L1.
 
 ```bash
-Your Subnet's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
-Your subnet auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Your Avalanche L1's control keys: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Your Avalanche L1 auth keys for chain creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
 Next, the CLI generates a TX for creating the SubnetID and asks the user to sign it by using the Ledger.
 
 ```bash
-*** Please sign subnet creation hash on the ledger device ***
+*** Please sign Avalanche L1 creation hash on the ledger device ***
 ```
 
 This activates a `Please review` window on the Ledger. Navigate to the Ledger's `APPROVE` window by using the Ledger's right button, and then authorize the request by pressing both left and right buttons.
@@ -168,14 +168,14 @@ This activates a `Please review` window on the Ledger. Navigate to the Ledger's 
 If the Ledger doesn't have enough funds, the user may see an error message:
 
 ```bash
-*** Please sign subnet creation hash on the ledger device ***
+*** Please sign Avalanche L1 creation hash on the ledger device ***
 Error: insufficient funds: provided UTXOs need 1000000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
 If successful, the CLI next asks you to sign a chain creation TX.
 
 ```bash
-Subnet has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
+Avalanche L1 has been created with ID: 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db. Now creating blockchain...
 *** Please sign blockchain creation hash on the ledger device ***
 ```
 
@@ -187,7 +187,7 @@ After that, CLI creates the blockchain within the Avalanche L1, and a summary wi
 +--------------------+------------------------------------------------------------------------------------+
 | DEPLOYMENT RESULTS |                                                                                    |
 +--------------------+------------------------------------------------------------------------------------+
-| Chain Name         | testsubnet                                                                         |
+| Chain Name         | testblockchain                                                                         |
 +--------------------+------------------------------------------------------------------------------------+
 | Subnet ID          | 2UUCLbdGqawRDND7kHjwq3zXXMPdiycG2bkyuRzYMnuTSDr6db                                 |
 +--------------------+------------------------------------------------------------------------------------+
@@ -217,7 +217,7 @@ See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) o
 First, request permission to validate by running the `join` command along with the Avalanche L1 name:
 
 ```bash
-avalanche blockchain join testsubnet
+avalanche blockchain join testblockchain
 ```
 
 Note: Running `join` does not guarantee that your node is a validator of the Avalanche L1! The owner of the Avalanche L1 must approve your node to be a validator afterwards by calling `addValidator` as described in the next section.
@@ -295,7 +295,7 @@ By choosing "Manual" instead, the tool prints _instructions_. The user is going 
 To setup your node, you must do two things:
 
 1. Add your VM binary to your node's plugin directory
-2. Update your node config to start validating the subnet
+2. Update your node config to start validating the Avalanche L1
 
 To add the VM to your plugin directory, copy or scp from /tmp/tGBrMADESojmu5Et9CpbGCrmVf9fiAJtZM5ZJ3YVDj5JTu2qw
 
@@ -334,7 +334,7 @@ Now that the node has joined the Avalanche L1, a Avalanche L1 control key holder
 To whitelist a node as a recognized validator on the Avalanche L1, run:
 
 ```bash
-avalanche blockchain addValidator testsubnet
+avalanche blockchain addValidator testblockchain
 ```
 
 You need to repeat this process for every validator you add to the network.
@@ -355,7 +355,7 @@ Use the arrow keys to navigate: ↓ ↑ → ←
 Because this operation issues a new transaction, the CLI needs the control keys to sign the operation. Because this tutorial only uses one control key in the Avalanche L1, the process looks slightly different if you use multiple controls keys. The address needs to pay a TX fee of 0.001 AVAX.
 
 ```bash
-Your subnet auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
+Your Avalanche L1 auth keys for add validator tx creation: [P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j]
 ```
 
 ### Set NodeID[​](#set-nodeid "Direct link to heading")
@@ -453,14 +453,14 @@ Ledger address: P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j
 At this point, if the Ledger address isn't the control key for the Avalanche L1, the user receives an error:
 
 ```bash
-Error: wallet doesn't contain subnet auth keys
+Error: wallet doesn't contain Avalanche L1 auth keys
 exit status 1
 ```
 
 If the Ledger doesn't have enough funds, the following error message appears:
 
 ```bash
-*** Please sign subnet creation hash on the ledger device ***
+*** Please sign Avalanche L1 creation hash on the ledger device ***
 Error: insufficient funds: provided UTXOs need 1000000 more units of asset "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 ```
 
@@ -488,8 +488,8 @@ Avalanche L1 Export[​](#avalanche-l1-export "Direct link to heading")
 Because you need to setup multiple validators on multiple different machines, you need to export your Avalanche L1's configuration and import it on each validator.
 
 ```bash
-avalanche blockchain export testsubnet
-✔ Enter file path to write export data to: /tmp/testsubnet-export.dat
+avalanche blockchain export test Avalanche L1
+✔ Enter file path to write export data to: /tmp/testblockchain-export.dat
 ```
 
 The file is in text format and you shouldn't change it. You can use it to import the configuration on a different machine.
@@ -500,8 +500,8 @@ Avalanche L1 Import[​](#avalanche-l1-import "Direct link to heading")
 To import a VM configuration, move the file you exported in the previous section to your desired machine and issue the `import` command with the path to the file.
 
 ```bash
-avalanche blockchain import /tmp/testsubnet-export.dat
-Subnet imported successfully
+avalanche blockchain import /tmp/testblockchain-export.dat
+Avalanche L1 imported successfully
 ```
 
 After this the whole Avalanche L1 configuration should be available on the target machine:
@@ -509,9 +509,9 @@ After this the whole Avalanche L1 configuration should be available on the targe
 ```bash
 avalanche blockchain list
 +---------------+---------------+----------+-----------+----------+
-|    SUBNET     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
+|    Avalanche L1     |     CHAIN     | CHAIN ID |   TYPE    | DEPLOYED |
 +---------------+---------------+----------+-----------+----------+
-| testsubnet    | testsubnet    |     3333 | SubnetEVM | No       |
+| testblockchain    | testblockchain    |     3333 | SubnetEVM | No       |
 +---------------+---------------+----------+-----------+----------+
 ```
 
