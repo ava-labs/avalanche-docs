@@ -17,7 +17,7 @@ Bootstrapping is all about downloading all previously accepted containers _secur
 
 What's the most reliable source of information in the Avalanche ecosystem? It's a _large enough_ majority of validators. Therefore, the first step of bootstrapping is finding a sufficient amount of validators to download containers from.
 
-The P-Chain is responsible for all platform-level operations, including staking events that modify a Avalanche L1's validator set. Whenever any chain (aside from the P-Chain itself) bootstraps, it requests an up-to-date validator set for that Avalanche L1 (Primary Network is a Avalanche L1 too). Once the Avalanche L1's current validator set is known, the node can securely download containers from these validators to bootstrap the chain.
+The P-Chain is responsible for all platform-level operations, including staking events that modify an Avalanche L1's validator set. Whenever any chain (aside from the P-Chain itself) bootstraps, it requests an up-to-date validator set for that Avalanche L1 (Primary Network is an Avalanche L1 too). Once the Avalanche L1's current validator set is known, the node can securely download containers from these validators to bootstrap the chain.
 
 There is a caveat here: the validator set must be _up-to-date_. If a bootstrapping node's validator set is stale, the node may incorrectly believe that some nodes are still validators when their validation period has already expired. A node might unknowingly end up requesting blocks from non-validators which respond with malicious blocks that aren't safe to download.
 
@@ -69,11 +69,11 @@ You've seen how [bootstrap works](#bootstrapping-the-blockchain) for a single ch
 
 The P-chain is always the first to bootstrap before any other chain. Once the P-Chain has finished, all other chains start bootstrapping in parallel, connecting to their own validators independently of one another.
 
-A node completes bootstrapping a Avalanche L1 once all of its corresponding chains have completed bootstrapping. Because the Primary Network is a special case of Avalanche L1 that includes the entire network, this applies to it as well as any other manually tracked Avalanche L1s.
+A node completes bootstrapping an Avalanche L1 once all of its corresponding chains have completed bootstrapping. Because the Primary Network is a special case of Avalanche L1 that includes the entire network, this applies to it as well as any other manually tracked Avalanche L1s.
 
 Note that Avalanche L1s bootstrap is independently of one another - so even if one Avalanche L1 has bootstrapped and is validating new transactions and adding new containers, other Avalanche L1s may still be bootstrapping in parallel.
 
-Within a single Avalanche L1 however, a Avalanche L1 isn't done bootstrapping until the last chain completes bootstrapping. It's possible for a single chain to effectively stall a node from finishing the bootstrap for a single Avalanche L1, if it has a sufficiently long history or each operation is complex and time consuming. Even worse, other Avalanche L1 validators are continuously accepting new transactions and adding new containers on top of the previously known frontier, so a node that's slow to bootstrap can continuously fall behind the rest of the network.
+Within a single Avalanche L1 however, an Avalanche L1 isn't done bootstrapping until the last chain completes bootstrapping. It's possible for a single chain to effectively stall a node from finishing the bootstrap for a single Avalanche L1, if it has a sufficiently long history or each operation is complex and time consuming. Even worse, other Avalanche L1 validators are continuously accepting new transactions and adding new containers on top of the previously known frontier, so a node that's slow to bootstrap can continuously fall behind the rest of the network.
 
 Nodes mitigate this by restarting bootstrap for any chains which is blocked waiting for the remaining Avalanche L1 chains to finish bootstrapping. These chains repeat the frontier retrieval and container downloading phases to stay up-to-date with the Avalanche L1's ever moving current frontier until the slowest chain has completed bootstrapping.
 
@@ -116,7 +116,7 @@ Similar logs are emitted for X and C chains and any chain in explicitly tracked 
 
 ### Why Chain Bootstrap ETA Keeps On Changing?[​](#why-chain-bootstrap-eta-keeps-on-changing "Direct link to heading")
 
-As you saw in the [bootstrap completion section](#when-does-bootstrapping-finish), a Avalanche L1 like the Primary Network completes once all of its chains finish bootstrapping. Some Avalanche L1 chains may have to wait for the slowest to finish. They'll restart bootstrapping in the meantime, to make sure they won't fall back too much with respect to the network accepted frontier.
+As you saw in the [bootstrap completion section](#when-does-bootstrapping-finish), an Avalanche L1 like the Primary Network completes once all of its chains finish bootstrapping. Some Avalanche L1 chains may have to wait for the slowest to finish. They'll restart bootstrapping in the meantime, to make sure they won't fall back too much with respect to the network accepted frontier.
 
 What Order Do The Chains Bootstrap?[​](#what-order-do-the-chains-bootstrap "Direct link to heading")
 ----------------------------------------------------------------------------------------------------

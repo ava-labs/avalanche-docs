@@ -1,19 +1,19 @@
 ---
 title: Deploy on Mainnet
-description: CLI commands for deploying a Avalanche L1 on Mainnet.
+description: CLI commands for deploying an Avalanche L1 on Mainnet.
 ---
 
 <Callout type="warn">
-Deploying a Avalanche L1 to Mainnet has many risks. Doing so safely requires a laser focus on security. This tutorial does its best to point out common pitfalls, but there may be other risks not discussed here.
+Deploying an Avalanche L1 to Mainnet has many risks. Doing so safely requires a laser focus on security. This tutorial does its best to point out common pitfalls, but there may be other risks not discussed here.
 
 This tutorial is an educational resource and provides no guarantees that following it results in a secure deployment. Additionally, this tutorial takes some shortcuts that aid the understanding of the deployment process at the expense of security. The text highlights these shortcuts and they shouldn't be used for a production deployment.
 </Callout>
 
-After managing a successful Avalanche L1 deployment on the `Fuji Testnet`, you're ready to deploy your Avalanche L1 on Mainnet. If you haven't done so, first [Deploy a Avalanche L1 on Testnet](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet).
+After managing a successful Avalanche L1 deployment on the `Fuji Testnet`, you're ready to deploy your Avalanche L1 on Mainnet. If you haven't done so, first [Deploy an Avalanche L1 on Testnet](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet).
 
 This tutorial shows how to do the following on `Mainnet`.
 
-- Create a Avalanche L1.
+- Create an Avalanche L1.
 - Deploy a virtual machine based on Subnet-EVM.
 - Join a node to the newly created Avalanche L1.
 - Add a node as a validator to the Avalanche L1.
@@ -27,10 +27,10 @@ All IDs in this article are for illustration purposes only. They are guaranteed 
 - 5+ nodes running and [fully bootstrapped](/nodes/quick-links) on `Mainnet`
 - [Avalanche-CLI is installed](/tooling/guides/get-avalanche-cli) on each validator node's box
 - A [Ledger](https://www.ledger.com/) device
-- You've [created a Avalanche L1 configuration](/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration) and fully tested a [Fuji Testnet Avalanche L1 deployment](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet)
+- You've [created an Avalanche L1 configuration](/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration) and fully tested a [Fuji Testnet Avalanche L1 deployment](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet)
 
 <Callout type="warn">
-Although only one validator is strictly required to run a Avalanche L1, running with less than five validators is extremely dangerous and guarantees network downtime. Plan to support at least five validators in your production network.
+Although only one validator is strictly required to run an Avalanche L1, running with less than five validators is extremely dangerous and guarantees network downtime. Plan to support at least five validators in your production network.
 </Callout>
 
 ### Getting Your Mainnet NodeIDs[​](#getting-your-mainnet-nodeids "Direct link to heading")
@@ -204,14 +204,14 @@ After that, CLI creates the blockchain within the Avalanche L1, and a summary wi
 
 Well done. You have just created your own Avalanche L1 running on `Mainnet`. Now it's time to add your validators.
 
-Request to Join a Avalanche L1 as a Validator[​](#request-to-join-a-avalanche-l1-as-a-validator "Direct link to heading")
+Request to Join an Avalanche L1 as a Validator[​](#request-to-join-a-avalanche-l1-as-a-validator "Direct link to heading")
 -------------------------------------------------------------------------------------------------------------
 
-The new Avalanche L1 created in the previous steps doesn't have any dedicated validators yet. To request permission to validate a Avalanche L1, the following steps are required:
+The new Avalanche L1 created in the previous steps doesn't have any dedicated validators yet. To request permission to validate an Avalanche L1, the following steps are required:
 
 <Callout title="Note">
 
-Adding a validator on a Avalanche L1 requires that the node is already a validator on the primary network, which means that your node has **fully bootstrapped**.
+Adding a validator on an Avalanche L1 requires that the node is already a validator on the primary network, which means that your node has **fully bootstrapped**.
 
 See [here](/nodes/validate/node-validator#add-a-validator-with-core-extension) on how to become a validator.
 </Callout>
@@ -330,7 +330,7 @@ Add a Validator[​](#add-a-validator "Direct link to heading")
 If the `join` command isn't successfully completed before `addValidator` is completed, the Avalanche L1 could experience degraded performance or even halt.
 </Callout>
 
-Now that the node has joined the Avalanche L1, a Avalanche L1 control key holder must call `addValidator` to grant the node permission to be a validator in your Avalanche L1.
+Now that the node has joined the Avalanche L1, an Avalanche L1 control key holder must call `addValidator` to grant the node permission to be a validator in your Avalanche L1.
 
 To whitelist a node as a recognized validator on the Avalanche L1, run:
 
@@ -479,7 +479,7 @@ This might take a couple of seconds. After, it prints:
 Transaction successful, transaction ID: r3tJ4Wr2CWA8AaticmFrKdKgAs5AhW2wwWTaQHRBZKwJhsXzb
 ```
 
-This means the node is now a validator on the given Avalanche L1 on `Mainnet`! However, your work isn't complete. You **must** finish the [Request to Join a Avalanche L1 as a Validator](#request-to-join-a-avalanche-l1-as-a-validator) section otherwise your Avalanche L1 risks downtime.
+This means the node is now a validator on the given Avalanche L1 on `Mainnet`! However, your work isn't complete. You **must** finish the [Request to Join an Avalanche L1 as a Validator](#request-to-join-a-avalanche-l1-as-a-validator) section otherwise your Avalanche L1 risks downtime.
 
 You can get the P-Chain TX id information on [Avalanche Explorer](https://subnets.avax.network/)
 

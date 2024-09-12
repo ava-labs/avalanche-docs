@@ -1,9 +1,9 @@
 ---
-title: Validate a Avalanche L1
+title: Validate an Avalanche L1
 description: This page demonstrates how to configure nodes to validate an Avalanche L1.
 ---
 
-This page demonstrates how to configure nodes to validate an Avalanche L1. Avalanche L1 Validation via Avalanche-CLI is currently only supported on Fuji and Devnet.
+This page demonstrates how to configure nodes to validate an Avalanche L1. Avalanche L1 Validation vian Avalanche-CLI is currently only supported on Fuji and Devnet.
 
 <Callout type="warn">
 ALPHA WARNING: This command is currently in experimental mode. Proceed at your own risk.
@@ -15,7 +15,7 @@ Before we begin, you will need to have:
 
 - Created a Cloud Server node as described for [AWS](/tooling/create-avalanche-nodes/run-validators-aws) or [GCP](/tooling/create-avalanche-nodes/run-validators-gcp)
 - A node bootstrapped to the Primary Network (run `avalanche node status <clusterName>` to check bootstrap status) (Ignore for Devnet)
-- Deployed a Avalanche L1 on [Fuji](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet) or Devnet
+- Deployed an Avalanche L1 on [Fuji](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet) or Devnet
 - Stored key / Ledger with AVAX to pay for gas fess associated with adding node as Primary Network and Avalanche L1 Validator transactions. Instructions on how to fund stored key on Fuji can be found [here](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet#funding-the-key) (Ignore for Devnet)
 
 Sync with Avalanche L1[​](#sync-with-avalanche-l1 "Direct link to heading")
@@ -39,7 +39,7 @@ To check sync status, run `avalanche node status <clusterName> --subnet <blockch
 All nodes in cluster `clusterName` are synced to Subnet `blockchainName`
 ```
 
-Be a Avalanche L1 Validator[​](#be-a-avalanche-l1-validator "Direct link to heading")
+Be an Avalanche L1 Validator[​](#be-a-avalanche-l1-validator "Direct link to heading")
 -------------------------------------------------------------------------
 
 Once the nodes have synced, we can now have the nodes be Avalanche L1 Validators.
@@ -80,7 +80,7 @@ Once all the inputs are completed you will see a transaction ID indicating that 
 
 Note: if you see an error indicating that the transaction is not committed, run `avalanche node validate subnet <clusterName> <blockchainName>` again as it could be due to the validator start time having elapsed.
 
-We will then proceed with adding the node as a Avalanche L1 Validator. Similar to adding the node as a Primary Network Validator, the wizard will ask you for how you would like to pay for the transaction fee.
+We will then proceed with adding the node as an Avalanche L1 Validator. Similar to adding the node as a Primary Network Validator, the wizard will ask you for how you would like to pay for the transaction fee.
 
 Once that is completed, you will be asked what stake you would like to assign the Avalanche L1 Validator:
 
@@ -92,9 +92,9 @@ Once that is completed, you will be asked what stake you would like to assign th
 
 Note that for this part, you are not staking actual AVAX in the validator. This is an arbitrary weight that you are assigning to the validator. Next, enter the start and end time for the node to validate the Avalanche L1.
 
-Once all input is completed, you will another transaction ID indicating that the node is now scheduled to be a Avalanche L1 Validator.
+Once all input is completed, you will another transaction ID indicating that the node is now scheduled to be an Avalanche L1 Validator.
 
-Once the start time that you chose for the node to be a Avalanche L1 Validator has elapsed, verify that the node is a Avalanche L1 validator by running `avalanche node status <clusterName> --subnet <blockchainName>`.
+Once the start time that you chose for the node to be an Avalanche L1 Validator has elapsed, verify that the node is an Avalanche L1 validator by running `avalanche node status <clusterName> --subnet <blockchainName>`.
 
 You should see:
 

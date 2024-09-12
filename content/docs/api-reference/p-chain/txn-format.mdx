@@ -1441,7 +1441,7 @@ An unsigned add Avalanche L1 validator TX contains a `BaseTx`, `Validator`,
 - **`SubnetID`** is the 32 byte Avalanche L1 ID to add the validator to.
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
   `SigIndices` is a list of unique ints that define the addresses signing the
-  control signature to add a validator to a Avalanche L1. The array must be sorted low
+  control signature to add a validator to an Avalanche L1. The array must be sorted low
   to high.
 
 ### Gantt Unsigned Add Avalanche L1 Validator TX Specification
@@ -2582,11 +2582,11 @@ Let's make a stakeablelockout with:
 ### What Avalanche L1 Auth Contains
 
 Specifies the addresses whose signatures will be provided to demonstrate that
-the owners of a Avalanche L1 approve something.
+the owners of an Avalanche L1 approve something.
 
 - **`TypeID`** is the ID for this type. It is `0x0000000a`.
 - **`AddressIndices`** defines which addresses' signatures will be attached to
-  this transaction. AddressIndices[i] is the index in a Avalanche L1 owner list that
+  this transaction. AddressIndices[i] is the index in an Avalanche L1 owner list that
   corresponds to the signature at index i in the signature list. Must be sorted
   low to high and not have duplicates.
 
@@ -2613,7 +2613,7 @@ message SubnetAuth {
 
 ### Avalanche L1 Auth Example
 
-Let's make a Avalanche L1 auth:
+Let's make an Avalanche L1 auth:
 
 - **`TypeID`**: `10`
 - **`AddressIndices`**: [`0`]

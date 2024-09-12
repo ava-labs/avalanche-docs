@@ -47,7 +47,7 @@ avalanche primary addValidator [flags]
 Avalanche L1[​](#avalanche-l1 "Direct link to heading")
 -------------------------------------------
 
-The `subnet` command suite provides a collection of tools for developing and deploying Avalanche L1s.
+The `blockchain` command suite provides a collection of tools for developing and deploying Avalanche L1s.
 
 To get started, use the `blockchain create` command wizard to walk through the configuration of your very first Avalanche L1. Then, go ahead and deploy it with the `blockchain deploy` command. You can use the rest of the commands to manage your Avalanche L1 configurations and live deployments.
 
@@ -88,9 +88,9 @@ avalanche blockchain addValidator [blockchainName] [flags]
     --weight uint                set the staking weight of the validator to add
 ```
 
-### Remove Validator in a Avalanche L1
+### Remove Validator in an Avalanche L1
 
-This command removes a node as a validator in a Avalanche L1.
+This command removes a node as a validator in an Avalanche L1.
 
 **Usage**:
 
@@ -226,7 +226,7 @@ The `blockchain deploy` command deploys your Avalanche L1 configuration locally,
 
 At the end of the call, the command prints the RPC URL you can use to interact with the Avalanche L1.
 
-Avalanche-CLI only supports deploying an individual Avalanche L1 once per network. Subsequent attempts to deploy the same Avalanche L1 to the same network (local, Fuji, Mainnet) aren't allowed. If you'd like to redeploy a Avalanche L1 locally for testing, you must first call [avalanche network clean](#network-clean) to reset all deployed chain state. Subsequent local deploys redeploy the chain with fresh state. You can deploy the same Avalanche L1 to multiple networks, so you can take your locally tested Avalanche L1 and deploy it on Fuji or Mainnet.
+Avalanche-CLI only supports deploying an individual Avalanche L1 once per network. Subsequent attempts to deploy the same Avalanche L1 to the same network (local, Fuji, Mainnet) aren't allowed. If you'd like to redeploy an Avalanche L1 locally for testing, you must first call [avalanche network clean](#network-clean) to reset all deployed chain state. Subsequent local deploys redeploy the chain with fresh state. You can deploy the same Avalanche L1 to multiple networks, so you can take your locally tested Avalanche L1 and deploy it on Fuji or Mainnet.
 
 **Usage**:
 
@@ -261,7 +261,7 @@ avalanche blockchain deploy [blockchainName] [flags]
 
 ### Avalanche L1 Describe
 
-The `blockchain describe` command prints the details of a Avalanche L1 configuration to the console. By default, the command prints a summary of the configuration. By providing the `--genesis` flag, the command instead prints out the raw genesis file.
+The `blockchain describe` command prints the details of an Avalanche L1 configuration to the console. By default, the command prints a summary of the configuration. By providing the `--genesis` flag, the command instead prints out the raw genesis file.
 
 **Usage**:
 
@@ -299,7 +299,7 @@ avalanche blockchain export [blockchainName] [flags]
 
 The `blockchain import` command imports configurations into Avalanche-CLI.
 
-This command supports importing from a file created on another computer, or importing from Avalanche L1s running public networks (for example, created manually or with the deprecated Avalanche L1-CLI)
+This command supports importing from a file created on another computer, or importing from Avalanche L1s running public networks (for example, created manually or with the deprecated Avalanche-CLI)
 
 #### Import from a File
 
@@ -308,7 +308,7 @@ To import from a file, you can optionally provide the path as a command-line arg
 **Usage**:
 
 ```bash
-avalanche blockchain import file [subnetPath] [flags]
+avalanche blockchain import file [blockchainPath] [flags]
 ```
 
 **Flags**:
@@ -323,14 +323,14 @@ avalanche blockchain import file [subnetPath] [flags]
 
 #### Import from a Public Network
 
-The `blockchain import public` command imports a Avalanche L1 configuration from a running network.
+The `blockchain import public` command imports an Avalanche L1 configuration from a running network.
 
 The genesis file should be available from the disk for this to work. By default, an imported Avalanche L1 doesn't overwrite an existing Avalanche L1 with the same name. To allow overwrites, provide the `--force` flag.
 
 **Usage**:
 
 ```bash
-avalanche blockchain import public [subnetPath] [flags]
+avalanche blockchain import public [blockchainPath] [flags]
 ```
 
 **Flags**:
@@ -658,7 +658,7 @@ Node[​](#node "Direct link to heading")
 
 The `node` command suite provides a collection of tools for creating and maintaining validators on the Avalanche Network.
 
-To get started, use the node create command wizard to walk through the configuration to make your node a primary validator on Avalanche public network. You can use the rest of the commands to maintain your node and make your node a Avalanche L1 Validator.
+To get started, use the node create command wizard to walk through the configuration to make your node a primary validator on Avalanche public network. You can use the rest of the commands to maintain your node and make your node an Avalanche L1 Validator.
 
 ### Node Create
 
@@ -666,7 +666,7 @@ To get started, use the node create command wizard to walk through the configura
 (ALPHA Warning) This command is currently in experimental mode.
 </Callout>
 
-The `node create` command sets up a validator on a cloud server of your choice. The validator will be validating the Avalanche Primary Network and Avalanche L1 of your choice. By default, the command runs an interactive wizard. It walks you through all the steps you need to set up a validator. Validators can be deployed in multiple regions/zones simultaneously. Once this command is run, you will have to wait for the validator to finish bootstrapping on the primary network before running further commands on it, for example validating a Avalanche L1. You can check the bootstrapping status by running `avalanche node status`.
+The `node create` command sets up a validator on a cloud server of your choice. The validator will be validating the Avalanche Primary Network and Avalanche L1 of your choice. By default, the command runs an interactive wizard. It walks you through all the steps you need to set up a validator. Validators can be deployed in multiple regions/zones simultaneously. Once this command is run, you will have to wait for the validator to finish bootstrapping on the primary network before running further commands on it, for example validating an Avalanche L1. You can check the bootstrapping status by running `avalanche node status`.
 
 The created node will be part of group of validators called `<clusterName>` and users can call node commands with `<clusterName>` so that the command will apply to all nodes in the cluster.
 
@@ -715,7 +715,7 @@ The `node devnet` command suite provides a collection of commands related to dev
 
 ### Node Devnet Deploy
 
-The `node devnet deploy` command deploys a Avalanche L1 into a devnet cluster, creating Avalanche L1 and blockchain TXs for it. It saves the deploy info both locally and remotely.
+The `node devnet deploy` command deploys an Avalanche L1 into a devnet cluster, creating Avalanche L1 and blockchain TXs for it. It saves the deploy info both locally and remotely.
 
 **Usage**:
 
@@ -725,7 +725,7 @@ avalanche node devnet deploy [clusterName] [blockchainName] [flags]
 
 ### Node Devnet Wiz
 
-The `node devnet wiz` command creates a devnet and deploys, sync and validate a Avalanche L1 into it. It creates the Avalanche L1 if so needed.
+The `node devnet wiz` command creates a devnet and deploys, sync and validate an Avalanche L1 into it. It creates the Avalanche L1 if so needed.
 
 **Usage**:
 
@@ -819,7 +819,7 @@ avalanche node ssh [clusterName] [flags]
 
 The `node status` command gets the bootstrap status of all nodes in a cluster with the Primary Network. If no cluster is given, defaults to node list behaviour.
 
-To get the bootstrap status of a node with a Avalanche L1, use the `--subnet` flag.
+To get the bootstrap status of a node with an Avalanche L1, use the `--subnet` flag.
 
 **Usage**:
 
@@ -864,7 +864,7 @@ avalanche node stop [clusterName] [flags]
 (ALPHA Warning) This command is currently in experimental mode.
 </Callout>
 
-The `node sync` command enables all nodes in a cluster to be bootstrapped to a Avalanche L1. You can check the Avalanche L1 bootstrap status by calling avalanche `node status <clusterName> --subnet <blockchainName>`
+The `node sync` command enables all nodes in a cluster to be bootstrapped to an Avalanche L1. You can check the Avalanche L1 bootstrap status by calling avalanche `node status <clusterName> --subnet <blockchainName>`
 
 **Usage**:
 
@@ -944,7 +944,7 @@ avalanche node validate primary [clusterName] [flags]
 (ALPHA Warning) This command is currently in experimental mode.
 </Callout>
 
-The `node validate subnet` command enables all nodes in a cluster to be validators of a Avalanche L1. If the command is run before the nodes are Primary Network validators, the command will first make the nodes Primary Network validators before making them Avalanche L1 validators. If The command is run before the nodes are bootstrapped on the Primary Network, the command will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`. If The command is run before the nodes are synced to the Avalanche L1, the command will fail. You can check the Avalanche L1 sync status by calling `avalanche node status <clusterName> --subnet <blockchainName>`.
+The `node validate subnet` command enables all nodes in a cluster to be validators of an Avalanche L1. If the command is run before the nodes are Primary Network validators, the command will first make the nodes Primary Network validators before making them Avalanche L1 validators. If The command is run before the nodes are bootstrapped on the Primary Network, the command will fail. You can check the bootstrap status by calling `avalanche node status <clusterName>`. If The command is run before the nodes are synced to the Avalanche L1, the command will fail. You can check the Avalanche L1 sync status by calling `avalanche node status <clusterName> --subnet <blockchainName>`.
 
 **Usage**:
 
@@ -1075,7 +1075,7 @@ Network[​](#network "Direct link to heading")
 
 The `network` command suite provides a collection of tools for managing local Avalanche L1 deployments.
 
-When you deploy a Avalanche L1 locally, it runs on a local, multi-node Avalanche network. The `blockchain deploy` command starts this network in the background. This command suite allows you to shutdown, restart, and clear that network.
+When you deploy an Avalanche L1 locally, it runs on a local, multi-node Avalanche network. The `blockchain deploy` command starts this network in the background. This command suite allows you to shutdown, restart, and clear that network.
 
 This network currently supports multiple, concurrently deployed Avalanche L1s.
 

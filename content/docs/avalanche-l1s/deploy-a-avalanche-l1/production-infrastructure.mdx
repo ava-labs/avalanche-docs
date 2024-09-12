@@ -1,11 +1,11 @@
 ---
 title: On Production Infrastructure
-descdescription: Learn how to deploy a Avalanche L1 on production infrastructure.
+descdescription: Learn how to deploy an Avalanche L1 on production infrastructure.
 ---
 
 After architecting your Avalanche L1 environment on the [local machine](/avalanche-l1s/deploy-a-avalanche-l1/local-network), proving the design and testing it out on [the Fuji Testnet](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet), eventually you will need to deploy your Avalanche L1 to production environment.
 
-Running a Avalanche L1 in production is much more involved than local and Testnet deploys, as your Avalanche L1 will have to take care of real world usage, maintaining uptime, upgrades and all of that in a potentially adversarial environment. The purpose of this document is to point out a set of general considerations and propose potential solutions to them.
+Running an Avalanche L1 in production is much more involved than local and Testnet deploys, as your Avalanche L1 will have to take care of real world usage, maintaining uptime, upgrades and all of that in a potentially adversarial environment. The purpose of this document is to point out a set of general considerations and propose potential solutions to them.
 
 The architecture of the environment your particular Avalanche L1 will use will be greatly influenced by the type of load and activity your Avalanche L1 is designed to support so your solution will most likely differ from what we propose here. Still, it might be useful to follow along, to build up the intuition for the type of questions you will need to consider.
 
@@ -56,7 +56,7 @@ Once you decide on a provider (or providers), if they offer instances in multipl
 
 ### Number of Validators[​](#number-of-validators "Direct link to heading")
 
-Number of validators on a Avalanche L1 is a crucial decision you need to make. For stability and decentralization, you should strive to have as many validators as possible.
+Number of validators on an Avalanche L1 is a crucial decision you need to make. For stability and decentralization, you should strive to have as many validators as possible.
 
 For stability reasons our recommendation is to have **at least** 5 full validators on your Avalanche L1. If you have less than 5 validators your Avalanche L1 liveness will be at risk whenever a single validator goes offline, and if you have less than 4 even one offline node will halt your Avalanche L1.
 
@@ -93,7 +93,7 @@ General instruction on how to use a Ledger device with Avalanche can be found [h
 
 ### Genesis File[​](#genesis-file "Direct link to heading")
 
-The structure that defines the most important parameters in a Avalanche L1 is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Avalanche L1 to production you probably have it mapped out already.
+The structure that defines the most important parameters in an Avalanche L1 is found in the genesis file, which is a `json` formatted, human-readable file. Describing the contents and the options available in the genesis file is beyond the scope of this document, and if you're ready to deploy your Avalanche L1 to production you probably have it mapped out already.
 
 If you want to review, we have a description of the genesis file in our document on [customizing EVM Avalanche L1s](/avalanche-l1s/upgrade/customize-avalanche-l1).
 
@@ -102,14 +102,14 @@ Validator Configuration[​](#validator-configuration "Direct link to heading")
 
 Running nodes as Avalanche L1 validators warrants some additional considerations, above those when running a regular node or a Primary Network-only validator.
 
-### Joining a Avalanche L1[​](#joining-a-avalanche-l1 "Direct link to heading")
+### Joining an Avalanche L1[​](#joining-a-avalanche-l1 "Direct link to heading")
 
-For a node to join a Avalanche L1, there are two prerequisites:
+For a node to join an Avalanche L1, there are two prerequisites:
 
 - Primary Network validation
 - Avalanche L1 tracking
 
-Primary Network validation means that a node cannot join a Avalanche L1 as a validator before becoming a validator on the Primary Network itself. So, after you add the node to the validator set on the Primary Network, node can join a Avalanche L1. Of course, this is valid only for Avalanche L1 validators, if you need a non-validating Avalanche L1 node, then the node doesn't need to be a validator at all.
+Primary Network validation means that a node cannot join an Avalanche L1 as a validator before becoming a validator on the Primary Network itself. So, after you add the node to the validator set on the Primary Network, node can join an Avalanche L1. Of course, this is valid only for Avalanche L1 validators, if you need a non-validating Avalanche L1 node, then the node doesn't need to be a validator at all.
 
 To have a node start syncing the Avalanche L1, you need to add the `--track-subnets` command line option, or `track-subnets` key to the node config file (found at `.avalanchego/configs/node.json` for installer-script created nodes). A single node can sync multiple Layer 1s, so you can add them as a comma-separated list of Avalanche L1 IDs.
 
@@ -164,6 +164,6 @@ Conclusion[​](#conclusion "Direct link to heading")
 
 Hopefully, by reading this document you have a better picture of the requirements and considerations you need to make when deploying your Avalanche L1 to production and you are now better prepared to launch your Avalanche L1 successfully.
 
-Keep in mind, running a Avalanche L1 in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. And as with any real time service, you should have a robust logging, monitoring and alerting systems to constantly check the nodes and Avalanche L1 health and alert you if anything out of the ordinary happens.
+Keep in mind, running an Avalanche L1 in production is not a one-and-done kind of situation, it is in fact running a fleet of servers 24/7. And as with any real time service, you should have a robust logging, monitoring and alerting systems to constantly check the nodes and Avalanche L1 health and alert you if anything out of the ordinary happens.
 
 If you have any questions, doubts or would like to chat, please check out our [Discord server](https://chat.avax.network/), where we host a dedicated `#subnet-chat` channel dedicated to talking about all things Avalanche L1.

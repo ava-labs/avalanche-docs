@@ -12,7 +12,7 @@ Besides the upgrades due to new releases, you also may want to change the config
 <Callout type="warn">
 Network Upgrades Permanently Change the Rules of Your Avalanche L1. Procedural mistakes or a botched upgrade can halt your Avalanche L1 or lead to data loss!
 
-When performing a Avalanche L1 upgrade, every single validator on the Avalanche L1 will need to perform the identical upgrade.
+When performing an Avalanche L1 upgrade, every single validator on the Avalanche L1 will need to perform the identical upgrade.
 
 If you are coordinating a network upgrade, you must schedule advance notice to every Avalanche L1 validator so that they have time to perform the upgrade prior to activation. Make sure you have direct line of communication to all your validators!
 </Callout>
@@ -22,11 +22,11 @@ This tutorial will guide you through the process of doing various Avalanche L1 u
 General Upgrade Considerations[​](#general-upgrade-considerations "Direct link to heading")
 -------------------------------------------------------------------------------------------
 
-When operating a Avalanche L1, you should always keep in mind that Proof of Stake networks like Avalanche can only make progress if sufficient amount of validating nodes are connected and processing transactions. Each validator on a Avalanche L1 is assigned a certain `weight`, which is a numerical value representing the significance of the node in consensus decisions. On the Primary Network, weight is equal to the amount of AVAX staked on the node. On Avalanche L1s, weight is currently assigned by the Avalanche L1 owners when they issue the transaction adding a validator to the Avalanche L1.
+When operating an Avalanche L1, you should always keep in mind that Proof of Stake networks like Avalanche can only make progress if sufficient amount of validating nodes are connected and processing transactions. Each validator on an Avalanche L1 is assigned a certain `weight`, which is a numerical value representing the significance of the node in consensus decisions. On the Primary Network, weight is equal to the amount of AVAX staked on the node. On Avalanche L1s, weight is currently assigned by the Avalanche L1 owners when they issue the transaction adding a validator to the Avalanche L1.
 
 Avalanche L1s can operate normally only if validators representing 80% or more of the cumulative validator weight is connected. If the amount of connected stake falls close to or below 80%, Avalanche L1 performance (time to finality) will suffer, and ultimately the Avalanche L1 will halt (stop processing transactions).
 
-You as a Avalanche L1 operator need to ensure that whatever you do, at least 80% of the validators' cumulative weight is connected and working at all times.
+You as an Avalanche L1 operator need to ensure that whatever you do, at least 80% of the validators' cumulative weight is connected and working at all times.
 
 <Callout title="Note">
 It is mandatory that the cumulative weight of all validators in the Avalanche L1 must be at least the value of [`snow-sample-size`](/nodes/configure/configs-flags#--snow-sample-size-int) (default 20). For example, if there is only one validator in the Avalanche L1, its weight must be at least `snow-sample-size` . Hence, when assigning weight to the nodes, always use values greater than 20. Recall that a validator's weight can't be changed while it is validating, so take care to use an appropriate value.
@@ -111,7 +111,7 @@ Sometimes you need to do a network upgrade to change the configured rules in the
 - Mint Native Coins
 - Configure Dynamic Fees
 
-Please refer to [Customize a Avalanche L1](/avalanche-l1s/upgrade/customize-avalanche-l1#network-upgrades-enabledisable-precompiles) for a detailed discussion of possible precompile upgrade parameters.
+Please refer to [Customize an Avalanche L1](/avalanche-l1s/upgrade/customize-avalanche-l1#network-upgrades-enabledisable-precompiles) for a detailed discussion of possible precompile upgrade parameters.
 
 Summary[​](#summary "Direct link to heading")
 ---------------------------------------------

@@ -1,17 +1,17 @@
 ---
 title: On Fuji Testnet
-description: Learn how to deploy a Avalanche L1 on the Fuji Testnet.
+description: Learn how to deploy an Avalanche L1 on the Fuji Testnet.
 ---
 
 <Callout title="Note">
-This document describes how to use the new Avalanche-CLI to deploy a Avalanche L1 on `Fuji`.
+This document describes how to use the new Avalanche-CLI to deploy an Avalanche L1 on `Fuji`.
 </Callout>
 
-After trying out a Avalanche L1 on a local box by following [this tutorial](/avalanche-l1s/deploy-a-avalanche-l1/local-network), next step is to try it out on `Fuji` Testnet.
+After trying out an Avalanche L1 on a local box by following [this tutorial](/avalanche-l1s/deploy-a-avalanche-l1/local-network), next step is to try it out on `Fuji` Testnet.
 
 In this article, it's shown how to do the following on `Fuji` Testnet.
 
-- Create a Avalanche L1.
+- Create an Avalanche L1.
 - Deploy a virtual machine based on Subnet-EVM.
 - Join a node to the newly created Avalanche L1.
 - Add a node as a validator to the Avalanche L1.
@@ -176,7 +176,7 @@ After following these 3 steps, your test key should now have a balance on the P-
 Create an EVM Avalanche L1[​](#create-an-evm-avalanche-l1 "Direct link to heading")
 -----------------------------------------------------------------------
 
-Creating a Avalanche L1 with `Avalanche-CLI` for `Fuji` works the same way as with a local network. In fact, the `create` commands only creates a specification of your Avalanche L1 on the local file system. Afterwards the Avalanche L1 needs to be _deployed_. This allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` - and eventually to `Mainnet`.
+Creating an Avalanche L1 with `Avalanche-CLI` for `Fuji` works the same way as with a local network. In fact, the `create` commands only creates a specification of your Avalanche L1 on the local file system. Afterwards the Avalanche L1 needs to be _deployed_. This allows to reuse configs, by creating the config with the `create` command, then first deploying to a local network and successively to `Fuji` - and eventually to `Mainnet`.
 
 To create an EVM Avalanche L1, run the `blockchain create` command with a name of your choice:
 
@@ -271,7 +271,7 @@ avalanche blockchain describe testblockchain
 +----------------------------+----------------------------------------------------+
 |         PARAMETER          |                       VALUE                        |
 +----------------------------+----------------------------------------------------+
-| Subnet Name                | testblockchain                                         |
+| Blockchain Name                | testblockchain                                         |
 +----------------------------+----------------------------------------------------+
 | ChainID                    | 3333                                               |
 +----------------------------+----------------------------------------------------+
@@ -462,13 +462,13 @@ Well done. You have just created your own Avalanche L1 with your own Subnet-EVM 
 
 To get your new Avalanche L1 information, visit the [Avalanche L1 Explorer](https://subnets-test.avax.network/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
 
-Request to Join a Avalanche L1 as a Validator[​](#request-to-join-a-avalanche-l1-as-a-validator "Direct link to heading")
+Request to Join an Avalanche L1 as a Validator[​](#request-to-join-a-avalanche-l1-as-a-validator "Direct link to heading")
 -------------------------------------------------------------------------------------------------------------
 
-The new Avalanche L1 created in the previous steps doesn't have any dedicated validators yet. To request permission to validate a Avalanche L1, the following steps are required:
+The new Avalanche L1 created in the previous steps doesn't have any dedicated validators yet. To request permission to validate an Avalanche L1, the following steps are required:
 
 <Callout title="Note">
-Before a node can be a validator on a Avalanche L1, the node is required to already be a validator on the primary network, which means that your node has **fully bootstrapped**.
+Before a node can be a validator on an Avalanche L1, the node is required to already be a validator on the primary network, which means that your node has **fully bootstrapped**.
 
 If the validator is within 24 hours of expiring on the primary network, it can't be added to the Avalanche L1.
 
@@ -575,7 +575,7 @@ Add a Validator[​](#add-a-validator "Direct link to heading")
 If the `join` command isn't successfully completed before `addValidator` is completed, the Avalanche L1 could experience degraded performance or even halt.
 </Callout>
 
-Now that the node has joined the Avalanche L1, a Avalanche L1 control key holder must call `addValidator` to grant the node permission to be a validator in your Avalanche L1.
+Now that the node has joined the Avalanche L1, an Avalanche L1 control key holder must call `addValidator` to grant the node permission to be a validator in your Avalanche L1.
 
 To whitelist a node as a recognized validator on the Avalanche L1, run:
 
@@ -607,7 +607,7 @@ Now use the **NodeID** of the new validator defined at the beginning of this tut
 What is the NodeID of the validator you'd like to whitelist?: NodeID-BFa1paAAAAAAAAAAAAAAAAAAAAQGjPhUy
 ```
 
-This ID is intentionally modified. The next question requires a bit of thinking. A validator has a weight, which defines how often consensus selects it for decision making. You should think ahead of how many validators you want initially to identify a good value here. The range is 1 to 100, but the minimum for a Avalanche L1 without any validators yet is 20.
+This ID is intentionally modified. The next question requires a bit of thinking. A validator has a weight, which defines how often consensus selects it for decision making. You should think ahead of how many validators you want initially to identify a good value here. The range is 1 to 100, but the minimum for an Avalanche L1 without any validators yet is 20.
 
 Just select 30 for this one:
 
