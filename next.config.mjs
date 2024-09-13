@@ -86,6 +86,11 @@ const config = {
         permanent: true,
       },
       {
+        source: '/subnets/create-a-fuji-subnet',
+        destination: '/subnets/deploy-a-subnet/fuji-testnet',
+        permanent: true,
+      },
+      {
         source: '/build/subnet/upgrade/upgrade-subnet-vm',
         destination: '/subnets/upgrade/subnet-virtual-machine',
         permanent: true,
