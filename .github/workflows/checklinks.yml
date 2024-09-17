@@ -5,7 +5,7 @@ on:
     paths:
       - '**/*.mdx'
     branches: [master]
-    
+
 jobs:
   check-links:
     runs-on: ubuntu-latest
