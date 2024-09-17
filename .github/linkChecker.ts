@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { load } from 'cheerio';
 import { sync as globSync } from 'glob';
 
-const baseUrl = 'https://docs.avax.network';
+const baseUrl = 'http://localhost:3000'; // base url of the website
 
 const whitelist = ["crates.io"] // some websites return 404 for head requests, so we need to whitelist them, (fix: pass header -H 'Accept: text/html' and parse text/html)
                                 // see https://github.com/rust-lang/crates.io/issues/788
@@ -34,7 +34,7 @@ function isValidURLOrPath(url: string): boolean {
 async function checkLink(url: string): Promise<boolean> {
   try {
     const response = await get(url, {
-      timeout: 10000, // timeout to 10 seconds
+      timeout: 20000, // timeout to 20 seconds
       maxRedirects: 5, // handle up to 5 redirects
       validateStatus: function (status) {
         return status >= 200 && status < 400; // resolve only if the status code is less than 400
