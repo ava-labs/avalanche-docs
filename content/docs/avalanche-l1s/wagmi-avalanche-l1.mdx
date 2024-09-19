@@ -120,7 +120,7 @@ For the second upgrade on February 23, 2024, the same process was followed. The 
 
 The owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D` can now configure the fees on the Avalanche L1 as they see fit. To do that, all that's needed is access to the network, the private key for the newly set manager address and making calls on the precompiled contract.
 
-We will use [Remix](https://remix.ethereum.org/) online Solidity IDE and the [Core Browser Extension](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension). Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add WAGMI](/avalanche-l1s/wagmi-case-study#adding-wagmi-to-core) yourself.
+We will use [Remix](https://remix.ethereum.org/) online Solidity IDE and the [Core Browser Extension](https://support.avax.network/en/articles/6066879-core-extension-how-do-i-add-the-core-extension). Core comes with WAGMI network built-in. MetaMask will do as well but you will need to [add WAGMI](/avalanche-l1s/wagmi-avalanche-l1) yourself.
 
 First using Core, we open the account as the owner `0x6f0f6DA1852857d7789f68a28bba866671f3880D`.
 
@@ -139,7 +139,7 @@ We then switch to WAGMI in the networks dropdown. We are ready to move on to Rem
 Good, we're talking to WAGMI Avalanche L1. Next we need to load the contracts into Remix. Using 'load from GitHub' option from the Remix home screen we load two contracts:
 
 - [IAllowList.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IAllowList.sol)
-- and [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contract/contracts/interfaces/IFeeManager.sol).
+- and [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/master/contracts/contracts/interfaces/IFeeManager.sol).
 
 IFeeManager is our precompile, but it references the IAllowList, so we need that one as well. We compile IFeeManager.sol and use deployed contract at the precompile address `0x0200000000000000000000000000000000000003` used on the [Avalanche L1](https://github.com/ava-labs/subnet-evm/blob/master/precompile/contracts/feemanager/module.go#L21).
 

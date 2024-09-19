@@ -31,7 +31,7 @@ Note: on Fuji Testnet, the URL is `wss://api.avax-test.network/ext/bc/C/ws`.
 
 The public API server supports all the API endpoints that make sense to be available on a public-facing service, including APIs for the [X-Chain](/api-reference/x-chain/api), [P-Chain](/api-reference/p-chain/api), [C-Chain](/api-reference/c-chain/api), and full archival for the Primary Network. However, it doesn't support [Index APIs](/api-reference/index-api), which includes the X-Chain API's `getAddressTxs` method.
 
-For a full list of available APIs see [here](/api-reference/quicklinks).
+For a full list of available APIs see [here](/api-reference/p-chain/api).
 
 #### Limitations[​](#limitations "Direct link to heading")
 
@@ -39,7 +39,7 @@ The public API only supports C-Chain WebSocket API calls for API methods that do
 
 For batched C-Chain requests on the public API node, the maximum number of items is 40. We're working on to support a larger batch size.
 
-The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/nodes/configure/chain-configs/c-chain#api-max-blocks-per-request).
+The maximum number of blocks to serve per `getLogs` request is 2048, which is set by [`api-max-blocks-per-request`](/nodes/chain-configs/c-chain#api-max-blocks-per-request).
 
 #### Sticky Sessions[​](#sticky-sessions "Direct link to heading")
 
@@ -115,10 +115,6 @@ Note: soft limited to 1 million daily requests per IP or referring domain. Batch
 ##### Websockets[​](#websockets-1 "Direct link to heading")
 
 - For C-Chain WSS Endpoint, the URL is `wss://ava-testnet.public.blastapi.io/ext/bc/C/ws`
-
-### BlockSpaces[​](#blockspaces "Direct link to heading")
-
-[BlockSpaces](https://www.blockspaces.com/web3-infrastructure) supports the C-Chain.
 
 #### HTTP[​](#http-3 "Direct link to heading")
 
@@ -198,7 +194,7 @@ Note: on Fuji Testnet, the URL is `wss://avax.getblock.io/api_key/testnet/ext/bc
 
 ### Infura[​](#infura "Direct link to heading")
 
-[Infura](https://docs.infura.io/infura/networks/avalanche-c-chain/how-to/choose-a-network) currently only supports the C-Chain.
+[Infura](https://docs.infura.io/api/networks/avalanche-c-chain) currently only supports the C-Chain.
 
 #### HTTP[​](#http-7 "Direct link to heading")
 

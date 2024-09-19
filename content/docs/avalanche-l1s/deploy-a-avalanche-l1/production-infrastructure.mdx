@@ -12,7 +12,7 @@ The architecture of the environment your particular Avalanche L1 will use will b
 Node Setup[​](#node-setup "Direct link to heading")
 ---------------------------------------------------
 
-Avalanche nodes are essential elements for running your Avalanche L1 in production. At a minimum, your Avalanche L1 will need validator nodes, potentially also nodes that act as RPC servers, indexers or explorers. Running a node is basically running an instance of [AvalancheGo](/nodes/quick-links) on a server.
+Avalanche nodes are essential elements for running your Avalanche L1 in production. At a minimum, your Avalanche L1 will need validator nodes, potentially also nodes that act as RPC servers, indexers or explorers. Running a node is basically running an instance of [AvalancheGo](/nodes) on a server.
 
 ### Server OS[​](#server-os "Direct link to heading")
 
@@ -46,9 +46,9 @@ When installing the AvalancheGo node on the machines, unless you have a dedicate
 
 There are a number of different cloud providers. We have documents that show how to set up a node on the most popular ones:
 
-- [Amazon Web Services](/nodes/run-a-node/on-third-party-services/amazon-web-services)
-- [Azure](/nodes/run-a-node/on-third-party-services/microsoft-azure)
-- [Google Cloud Platform](/nodes/run-a-node/on-third-party-services/google-cloud)
+- [Amazon Web Services](/nodes/on-third-party-services/amazon-web-services)
+- [Azure](/nodes/on-third-party-services/microsoft-azure)
+- [Google Cloud Platform](/nodes/on-third-party-services/google-cloud)
 
 There is a whole range of other cloud providers that may offer lower prices or better deals for your particular needs, so it makes sense to shop around.
 
@@ -70,7 +70,7 @@ Once you set up the server and install AvalancheGo on them, nodes will need to b
 
 #### State Sync[​](#state-sync "Direct link to heading")
 
-If the nodes you will be running as validators don't need to have the full transaction history, then you can use [state sync](/nodes/configure/chain-configs/c-chain#state-sync-enabled). With this flag enabled, instead of replaying the whole history to get to the current state, nodes simply download only the current state from other network peers, shortening the bootstrap process from multiple days to a couple of hours. If the nodes will be used for Avalanche L1 validation exclusively, you can use the state sync without any issues. Currently, state sync is only available for the C-Chain, but since the bulk of the transactions on the platform happen there it still has a significant impact on the speed of bootstrapping.
+If the nodes you will be running as validators don't need to have the full transaction history, then you can use [state sync](/nodes/chain-configs/c-chain#state-sync-enabled). With this flag enabled, instead of replaying the whole history to get to the current state, nodes simply download only the current state from other network peers, shortening the bootstrap process from multiple days to a couple of hours. If the nodes will be used for Avalanche L1 validation exclusively, you can use the state sync without any issues. Currently, state sync is only available for the C-Chain, but since the bulk of the transactions on the platform happen there it still has a significant impact on the speed of bootstrapping.
 
 #### Database Copy[​](#database-copy "Direct link to heading")
 

@@ -258,7 +258,7 @@ Next, add a function to the contract called `getCurrentMessage` that allows user
 Step 5: Upgrade Support[​](#step-5-upgrade-support "Direct link to heading")
 ----------------------------------------------------------------------------
 
-At this point, the contract is now fully usable, and can be used to send arbitrary string data between chains. However, there are a few more modifications that need to be made to support upgrades to `TeleporterMessenger`. For a more in-depth explanation of how to support upgrades, see the Upgrades README [here](https://github.com/ava-labs/teleporter/blob/main/contracts/src/Teleporter/upgrades/README.md).
+At this point, the contract is now fully usable, and can be used to send arbitrary string data between chains. However, there are a few more modifications that need to be made to support upgrades to `TeleporterMessenger`. For a more in-depth explanation of how to support upgrades, see the Upgrades README [here](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/registry/UPGRADING.md).
 
 The first change to make is to inherit from `TeleporterOwnerUpgradeable` instead of `ITeleporterReceiver`. `TeleporterOwnerUpgradeable` integrates with the `TeleporterRegistry` via `TeleporterUpgradeable` to easily utilize the latest `TeleporterMessenger` implementation. `TeleporterOwnerUpgradeable` also ensures that only an admin address for managing Teleporter versions, specified by the constructor argument `teleporterManager`, is able to upgrade the `TeleporterMessenger` implementation used by the contract.
 
@@ -325,7 +325,7 @@ Step 6: Testing[​](#step-6-testing "Direct link to heading")
 
 For testing, `scripts/local/e2e_test.sh` sets up a local test environment consisting of three avalanche-l1s deployed with Teleporter, and a lightweight inline relayer implementation to facilitate cross chain message delivery. An end-to-end test for `ExampleCrossChainMessenger` is included in `tests/flows/example_messenger.go`, which performs the following:
 
-1.  Deploys the [ExampleERC20](https://github.com/ava-labs/teleporter/blob/main/contracts/src/CrossChainApplications/@mocks/ExampleERC20.sol) token to avalanche-l1 A.
+1.  Deploys the [ExampleERC20](https://github.com/ava-labs/teleporter/blob/main/contracts/mocks/ExampleERC20.sol) token to avalanche-l1 A.
 2.  Deploys `ExampleCrossChainMessenger` to both avalanche-l1s A and B.
 3.  Approves the cross-chain messenger on avalanche-l1 A to spend ERC20 tokens from the default address.
 4.  Sends `"Hello, world!"` from avalanche-l1 A to avalanche-l1 B's cross-chain messenger to receive.

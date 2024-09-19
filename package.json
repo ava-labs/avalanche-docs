@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "build:remote": "tsx ./utils/remote-content.mts",
-    "start": "pnpm build:remote && next build && next start"
+    "start": "pnpm build:remote && next build && next start",
+    "check-links": "tsx .github/linkChecker.ts" 
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",

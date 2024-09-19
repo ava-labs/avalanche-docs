@@ -142,11 +142,9 @@ It's really that simple!
 
 We've only added a button to trigger `login` function, and Privy handles the rest.
 
-{/* ![](/guide-images/use-privy-on-l1/1.png) */}
 
 When we click on the `Login via Privy` button, this modal appears.
 
-{/* ![](/guide-images/use-privy-on-l1/2.png) */}
 
 You can choose any login method to log in. We’ve already defined these options in the `PrivyProvider` when we wrapped our content.
 
@@ -154,7 +152,6 @@ You can choose any login method to log in. We’ve already defined these options
 
 After checking whether the user is authenticated or not, we display the following information to the user who has logged in.
 
-{/* ![](/guide-images/use-privy-on-l1/3.png) */}
 
 As you can see, Privy has generated an embedded wallet for our user. We’ve displayed the following properties on the screen: Privy ID, embedded wallet address, and embedded wallet balance.
 
@@ -188,12 +185,9 @@ const { logout } = useLogout();
 ### Fund the New Wallet Using the Faucet
 
 We’ve funded the new wallet that was generated for our user with some ECH tokens from the [Echo AWM Testnet Faucet](https://test.core.app/tools/testnet-faucet/?avalanche-l1=echo&token=echo).
-{/* 
-![](/guide-images/use-privy-on-l1/4.png) */}
 
 After the ECH tokens were sent, our balance updated accordingly.
 
-{/* ![](/guide-images/use-privy-on-l1/5.png) */}
 
 ### Send Test Transfer via Privy
 
@@ -230,8 +224,6 @@ const transfer = () => {
 
 When we click on the `Send Test Transfer via Privy` button, this modal appears. Users can see the following details related to the transaction.
 
-{/* ![](/guide-images/use-privy-on-l1/6.png) */}
-{/* ![](/guide-images/use-privy-on-l1/7.png) */}
 
 ## Conclusion
 

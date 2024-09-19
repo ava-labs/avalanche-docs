@@ -10,7 +10,7 @@ This tutorial is for demo purpose on how to build a cross-chain bridge. It is no
 Introduction[​](#introduction "Direct link to heading")
 -------------------------------------------------------
 
-In this tutorial, we will be building a bridge between **[WAGMI](/avalanche-l1s/wagmi-case-study)** and **[Fuji](/learn/networks/fuji-testnet)**. This bridge will help us to transfer native **WGM** coin wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you can deploy a bridge between any EVM-based chains for any ERC20 tokens.
+In this tutorial, we will be building a bridge between **[WAGMI](/avalanche-l1s/wagmi-avalanche-l1)** and **[Fuji](/learn/networks/fuji-testnet)**. This bridge will help us to transfer native **WGM** coin wrapped into **wWGM** back and forth from the WAGMI chain to the Fuji chain. Using this guide, you can deploy a bridge between any EVM-based chains for any ERC20 tokens.
 
 The wrapped version of a native coin is its pegged ERC20 representation. Wrapping it with the ERC20 standard makes certain processes like delegated transactions much easier. You can easily get wrapped tokens by sending the native coin to the wrapped token contract address.
 
@@ -43,7 +43,7 @@ Requirements[​](#requirements "Direct link to heading")
 
 These are the requirement to follow this tutorial:
 
-- Set up [WAGMI](/avalanche-l1s/wagmi-case-study#adding-wagmi-to-core) and [Fuji](/dapps/end-to-end/fuji-workflow#set-up-fuji-network-on-core-optional) on Core
+- Set up [WAGMI](/avalanche-l1s/wagmi-avalanche-l1) and [Fuji](/dapps/end-to-end/fuji-workflow#set-up-fuji-network-on-core-optional) on Core
 - Import `wWGM` token (asset) on the WAGMI network (Core). Here is the address - `0x3Ee7094DADda15810F191DD6AcF7E4FFa37571e4`
 - `WGM` coins on the WAGMI chain. Drip `1 WGM` from the [WAGMI Faucet](https://faucet.trywagmi.xyz/).
 - `AVAX` coins on the Fuji chain. Drip `10 AVAX` from the [Fuji Faucet](https://core.app/tools/testnet-faucet//). If you already have an AVAX balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, please request a faucet coupon on [Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6) can provide testnet AVAX if developers are unable to obtain it from the other two options.

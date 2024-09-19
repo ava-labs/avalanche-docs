@@ -684,7 +684,7 @@ Warp Precompile enabled cross-blockchain communication between other Layer 1s an
 If you want to use Warp messaging in an existing Subnet-EVM chain, you should coordinate an upgrade with `upgrade.json`. See [Network Upgrades: Enable/Disable Precompiles](#network-upgrades-enabledisable-precompiles) for more information.
 
 <Callout type="warn">
-Currently Warp Precompile can only be activated in Mainnet after Durango occurs. Durango in Mainnet is set at 11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Mainnet you should upgrade to `[[email protected]](https://docs.avax.network/cdn-cgi/l/email-protection)` or later and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after `1709740800`, Durango date (11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024).
+Currently Warp Precompile can only be activated in Mainnet after Durango occurs. Durango in Mainnet is set at 11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024. If you plan to use Warp messaging in your own Subnet-EVM chain in Mainnet you should upgrade to AvalancheGo 1.11.11 or later and coordinate your precompile upgrade. Warp Config's "blockTimestamp" must be set after `1709740800`, Durango date (11 AM ET (4 PM UTC) on Wednesday, March 6th, 2024).
 </Callout>
 
 Contract Examples[​](#contract-examples "Direct link to heading")
@@ -859,7 +859,7 @@ AvalancheGo Chain Configs[​](#avalanchego-chain-configs "Direct link to headin
 
 As described in [this doc](/nodes/configure/configs-flags#avalanche-l1-chain-configs), each blockchain of Avalanche L1s can have its own custom configuration. If an Avalanche L1's ChainID is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
-For blockchains created by or forked from Subnet-EVM, most [C-Chain configs](/nodes/configure/chain-configs/c-chain) are applicable except [Avalanche Specific APIs](/nodes/configure/chain-configs/c-chain#enabling-avalanche-specific-apis).
+For blockchains created by or forked from Subnet-EVM, most [C-Chain configs](/nodes/chain-configs/c-chain) are applicable except [Avalanche Specific APIs](/nodes/chain-configs/c-chain#enabling-avalanche-specific-apis).
 
 ### Priority Regossip[​](#priority-regossip "Direct link to heading")
 

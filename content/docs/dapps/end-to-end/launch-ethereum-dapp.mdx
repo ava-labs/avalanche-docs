@@ -29,7 +29,7 @@ bridges, and NFTs in one seamless, high-performance browser experience. Putting
 in another way, Core is more than a wallet. It is a curated web3 operating
 system combining Wallet, Explorer, Bridge, Avalanche L1s, dApps, and more.
 
-In your application's web interface, follow [this to add Avalanche programmatically](/dapps/advanced/add-avalanche-programmatically.md#core).
+In your application's web interface, follow [this to add Avalanche programmatically](/dapps/advanced-tutorials/add-network-programmatically#core).
 
 ### Through MetaMask
 
@@ -40,7 +40,7 @@ Avalanche is as follows.
 #### **Avalanche Mainnet Settings:**
 
 - **Network Name**: Avalanche Mainnet C-Chain
-- **New RPC URL**: [https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+- **New RPC URL**: `https://api.avax.network/ext/bc/C/rpc`
 - **ChainID**: `43114`
 - **Symbol**: `AVAX`
 - **Explorer**: [https://snowtrace.io/](https://snowtrace.io/)
@@ -48,13 +48,13 @@ Avalanche is as follows.
 #### **Fuji Testnet Settings:**
 
 - **Network Name**: Avalanche Fuji C-Chain
-- **New RPC URL**: [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+- **New RPC URL**: `https://api.avax-test.network/ext/bc/C/rpc`
 - **ChainID**: `43113`
 - **Symbol**: `AVAX`
 - **Explorer**: [https://testnet.snowtrace.io/](https://testnet.snowtrace.io/)
 
 In your application's web interface, you can
-[add Avalanche programmatically](/dapps/advanced/add-avalanche-programmatically.md#metamask)
+[add Avalanche programmatically](/dapps/advanced-tutorials/add-network-programmatically#metamask)
 so your users don't have to enter the network data manually.
 
 ### Using the Public API Nodes or RPC Endpoints
@@ -63,9 +63,9 @@ Instead of proxying network operations through MetaMask, you can use the public
 API, which consists of a number of AvalancheGo nodes behind a load balancer.
 
 The C-Chain API endpoint is
-[https://api.avax.network/ext/bc/C/rpc](https://api.avax.network/ext/bc/C/rpc)
+`https://api.avax.network/ext/bc/C/rpc`
 for the Mainnet and
-[https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)
+`https://api.avax-test.network/ext/bc/C/rpc`
 for the testnet.
 
 For more information, see [documentation](/tooling/rpc-providers).
@@ -89,7 +89,7 @@ prebuilt binary, available on
 [GitHub](https://github.com/ava-labs/avalanchego/releases).
 
 If you're going to run a node on a Linux machine, you can use the
-[installer script](/nodes/run/using-install-script/installing-avalanche-go) to install the node as a
+[installer script](/nodes/using-install-script/installing-avalanche-go) to install the node as a
 `systemd` service. Script also handles node upgrading.
 
 If you want to run a node in a docker container, there are [build
@@ -182,13 +182,13 @@ C-Chain.
 ### Remix
 
 There is a
-[tutorial](/dapps/smart-contracts/remix-deploy)
+[tutorial](/dapps/smart-contract-dev/deploy-with-remix-ide)
 for using Remix to deploy smart contracts on Avalanche. It relies on Core
 for access to the Avalanche network.
 
 ### thirdweb
 
-You can also use thirdweb to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](/dapps/smart-contracts/toolchains/thirdweb).
+You can also use thirdweb to test and deploy smart contracts on Avalanche. Find out how in this [tutorial](/dapps/toolchains/thirdweb).
 
 ### Hardhat
 
@@ -196,7 +196,7 @@ Hardhat is the newest development and testing environment for Solidity smart
 contracts, and the one our developers use the most. Due to its superb testing
 support, it is the recommended way of developing for Avalanche.
 
-For more information see [this doc](/dapps/smart-contracts/toolchains/hardhat).
+For more information see [this doc](/dapps/toolchains/hardhat).
 
 ## Avalanche Explorer
 
@@ -237,7 +237,7 @@ signal that your users can trust your contracts, and it is strongly recommended
 for all production contracts.
 
 See
-[this](/dapps/smart-contracts/verification/verify-hardhat)
+[this](/dapps/verify-contract/hardhat)
 for a detailed tutorial with Hardhat.
 
 ## Contract Security Checks
