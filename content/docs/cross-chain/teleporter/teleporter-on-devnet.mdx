@@ -56,10 +56,10 @@ Teleporter Registry successfully deployed to c-chain (0x5DB9A7629912EBF95876228C
 
 Starting AWM Relayer Service
 
-setting AWM Relayer on host i-0f1815c016b555fcc to relay Avalanche L1 subnet1
+setting AWM Relayer on host i-0f1815c016b555fcc to relay L1 chain1
 updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-Devnet <devnetName> is successfully created and is now validating blockchain subnet1!
+Devnet <devnetName> is successfully created and is now validating blockchain chain1!
 
 Avalanche L1 <chain1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
  
@@ -137,7 +137,7 @@ avalanche node devnet wiz <devnetName> <chain2> --default-validator-params
 Adding Avalanche L1 into existing devnet <devnetName>...
 ...
 
-Deploying [subnet2] to Cluster <devnetName>
+Deploying [chain2] to Cluster <devnetName>
 ...
 
 Stopping AWM Relayer Service
@@ -153,10 +153,10 @@ Teleporter Messenger has already been deployed to c-chain
 
 Starting AWM Relayer Service
 
-setting AWM Relayer on host i-0f1815c016b555fcc to relay Avalanche L1 subnet2
+setting AWM Relayer on host i-0f1815c016b555fcc to relay L1 chain2
 updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-Devnet <devnetName> is now validating Avalanche L1 subnet2
+Devnet <devnetName> is now validating Avalanche L1 chain2
 
 Avalanche L1 <chain2> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
 
@@ -169,18 +169,18 @@ Verify Teleporter Is Successfully Set Up[​](#verify-teleporter-is-successfully
 To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```
-avalanche teleporter msg C-Chain Avalanche L1 "Hello World" --cluster <devnetName>
+avalanche teleporter msg C-Chain chain1 "Hello World" --cluster <devnetName>
 
 Delivering message "this is a message" to source Avalanche L1 "C-Chain" (2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6)
-Waiting for message to be received at destination Avalanche L1 subnet "subnet1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
+Waiting for message to be received at destination Avalanche L1 "chain1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
 ```
-avalanche teleporter msg Avalanche L1 Avalanche L1 "Hello World" --cluster <devnetName>
+avalanche teleporter msg chain2 chain1 "Hello World" --cluster <devnetName>
 
-Delivering message "this is a message" to source Avalanche L1 "subnet2" (29WP91AG7MqPUFEW2YwtKnsnzVrRsqcWUpoaoSV1Q9DboXGf4q)
-Waiting for message to be received at destination Avalanche L1 subnet "subnet1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
+Delivering message "this is a message" to source Avalanche L1 "chain2" (29WP91AG7MqPUFEW2YwtKnsnzVrRsqcWUpoaoSV1Q9DboXGf4q)
+Waiting for message to be received at destination Avalanche L1 "chain1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
