@@ -20,7 +20,7 @@ In the following commands, make sure to substitute the name of your Avalanche L1
 To transform your permissioned Avalanche L1 into an Elastic Avalanche L1 (NOTE: this action is irreversible), run:
 
 ```bash
-avalanche Avalanche L1 elastic <blockchainName>
+avalanche blockchain elastic <blockchainName>
 ```
 
 and, select the network that you want to transform the Avalanche L1 on. Alternatively, you can bypass this prompt by providing the `--local`, `--fuji`, or `--mainnet` flag.
@@ -55,7 +55,7 @@ If you are running this command on local network, you will need to first remove 
 To add permissionless validators to an Elastic Avalanche L1, run:
 
 ```bash
-avalanche Avalanche L1 join <blockchainName> --elastic
+avalanche blockchain join <blockchainName> --elastic
 ```
 
 You will be prompted with which node you would like to add as a permissionless validator. You can skip this prompt by using `--nodeID` flag.
@@ -70,7 +70,7 @@ Adding Permissionless Delegator to a Permissionless Validator in Elastic Avalanc
 To add permissionless delegators, run:
 
 ```bash
-avalanche Avalanche L1 addPermissionlessDelegator <blockchainName>
+avalanche blockchain addPermissionlessDelegator <blockchainName>
 ```
 
 You will be prompted with which Avalanche L1 validator you would like to delegate to. You can skip this prompt by using `--nodeID` flag.
