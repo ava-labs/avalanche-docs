@@ -22,6 +22,8 @@
     "evm-customization/defining-your-precompile",
     "evm-customization/writing-test-cases",
     "evm-customization/executing-test-cases",
-    "evm-customization/deploying-precompile"
+    "evm-customization/deploying-precompile",
+    "evm-customization/precompile-overview"
+
   ]
 }
