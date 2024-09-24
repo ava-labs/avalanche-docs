@@ -80,7 +80,7 @@ avalanche-network-runner control add-node node-name [options] [flags]
 - `--chain-configs string` \[optional\] JSON string of map from chain id to its config file contents
 - `--node-config string` node config as string
 - `--plugin-dir string` \[optional\] plugin directory
-- `--subnet-configs string` \[optional\] JSON string of map from Avalanche L1 id to its config file contents
+- `--subnet-configs string` \[optional\] JSON string of map from Avalanche L1 id (SubnetID) to its config file contents
 - `--upgrade-configs string` \[optional\] JSON string of map from chain id to its upgrade file contents
 
 #### Example[​](#example-2 "Direct link to heading")
@@ -356,7 +356,7 @@ curl --location --request POST 'http://localhost:8081/v1/control/listrpcs'
 
 ### `list-subnets`[​](#list-avalanche-l1s "Direct link to heading")
 
-Lists all Avalanche L1 IDs of the network.
+Lists all Avalanche L1 IDs (SubnetID) of the network.
 
 ```bash
 avalanche-network-runner control list-subnets [flags]
@@ -510,7 +510,7 @@ avalanche-network-runner control restart-node node-name [options] [flags]
 - `--avalanchego-path string` AvalancheGo binary path
 - `--chain-configs string` \[optional\] JSON string of map from chain id to its config file contents
 - `--plugin-dir string` \[optional\] plugin directory
-- `--subnet-configs string` \[optional\] JSON string of map from Avalanche L1 id to its config file contents
+- `--subnet-configs string` \[optional\] JSON string of map from Avalanche L1 id (SubnetID) to its config file contents
 - `--upgrade-configs string` \[optional\] JSON string of map from chain id to its upgrade file contents
 - `--whitelisted-subnets string` \[optional\] whitelisted Avalanche L1s (comma-separated)
 
@@ -645,7 +645,7 @@ avalanche-network-runner control start [options] [flags]
 - `--plugin-dir string` \[optional\] plugin directory
 - `--reassign-ports-if-used` true to reassign default/given ports if already taken
 - `--root-data-dir string` \[optional\] root data directory to store logs and configurations
-- `--subnet-configs string` \[optional\] JSON string of map from Avalanche L1 id to its config file contents
+- `--subnet-configs string` \[optional\] JSON string of map from Avalanche L1 id (SubnetID) to its config file contents
 - `--upgrade-configs string` \[optional\] JSON string of map from chain id to its upgrade file contents
 - `--whitelisted-subnets string` \[optional\] whitelisted Avalanche L1s (comma-separated)
 

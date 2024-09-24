@@ -181,7 +181,7 @@ Creating an Avalanche L1 with `Avalanche-CLI` for `Fuji` works the same way as w
 To create an EVM Avalanche L1, run the `blockchain create` command with a name of your choice:
 
 ```bash
-avalanche blockchain create testAvalanche L1
+avalanche blockchain create testblockchain
 ```
 
 This is going to start a series of prompts to customize your EVM Avalanche L1 to your needs. Most prompts have some validation to reduce issues due to invalid input. The first prompt asks for the type of the virtual machine (see [Virtual Machine](#virtual-machine)).
@@ -197,7 +197,7 @@ As you want to create an EVM Avalanche L1, just accept the default `Subnet-EVM`.
 
 ```bash
 ✔ Subnet-EVM
-creating Avalanche L1 testblockchain
+creating Avalanche L1 test blockchain
 Enter your Avalanche L1's ChainId. It can be any positive integer.
 ChainId: 3333
 ```
@@ -379,7 +379,7 @@ To deploy the Avalanche L1, you will need some testnet AVAX on the P-chain.
 To deploy the new Avalanche L1, run:
 
 ```bash
-avalanche blockchain deploy testAvalanche L1
+avalanche blockchain deploy testblockchain
 ```
 
 This is going to start a new prompt series.

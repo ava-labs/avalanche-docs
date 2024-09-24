@@ -742,7 +742,7 @@ An unsigned remove Avalanche L1 validator TX contains a `BaseTx`, `NodeID`,
 
 - **`BaseTx`**
 - **`NodeID`** is the 20 byte node ID of the validator.
-- **`SubnetID`** is the 32 byte Avalanche L1 ID that the validator is being removed from.
+- **`SubnetID`** is the 32 byte Avalanche L1 ID (SubnetID) that the validator is being removed from.
 - **`SubnetAuth`** contains `SigIndices` and has a type id of `0x0000000a`.
   `SigIndices` is a list of unique ints that define the addresses signing the
   control signature which proves that the issuer has the right to remove the
@@ -836,7 +836,7 @@ An unsigned add permissionless validator TX contains a `BaseTx`, `Validator`,
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Avalanche L1 ID of the Avalanche L1 this validator will validate.
+- **`SubnetID`** is the 32 byte Avalanche L1 ID (SubnetID) of the Avalanche L1 this validator will validate.
 - **`Signer`** If the [SubnetID] is the primary network, [Signer] is the type ID
   28 (`0x1C`) followed by a [Proof of Possession](#proof-of-possession). If the
   [SubnetID] is not the primary network, this value is the empty signer, whose
@@ -1041,7 +1041,7 @@ is 26 or `0x0000001a`.
   - **`StartTime`** is a long which is the Unix time when the validator starts validating.
   - **`EndTime`** is a long which is the Unix time when the validator stops validating.
   - **`Weight`** is a long which is the amount the validator stakes
-- **`SubnetID`** is the 32 byte Avalanche L1 ID of the Avalanche L1 this delegation is on.
+- **`SubnetID`** is the 32 byte Avalanche L1 ID (SubnetID) of the Avalanche L1 this delegation is on.
 - **`StakeOuts`** An array of Transferable Outputs. Where to send staked tokens when done validating.
 - **`DelegatorRewardsOwner`** Where to send staking rewards when done validating.
 

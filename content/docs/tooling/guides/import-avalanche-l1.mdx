@@ -66,7 +66,7 @@ If nodes already have been deployed, the wizard attempts to query such a node fo
 
 For this to work, a node API URL is requested from the user, which is used for the query. This requires that the node's API IP and port are accessible from the machine running Avalanche-CLI, or the node is obviously not reachable, and thus the query times out and fails, and the tool exits. The node should also be validating the given Avalanche L1 for the import to be meaningful, otherwise, the import fails with missing information.
 
-If the query succeeded, the wizard jumps to prompt for the Avalanche L1 ID.
+If the query succeeded, the wizard jumps to prompt for the Avalanche L1 ID (SubnetID).
 
 ```
 Please provide an API URL of such a node so we can query its VM version (e.g. http://111.22.33.44:5555): http://154.42.240.119:9650
@@ -83,7 +83,7 @@ You can't know for sure what Avalanche L1 VM versions the validators are running
 
 Thus, at this point the wizard requests the Avalanche L1's ID, without which it can't know what to import. Remember the ID is different on different networks.
 
-From the [Testnet Avalanche L1 Explorer](https://subnets-test.avax.network/WAGMI) you can see that WAGMI's Avalanche L1 ID is `28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY`:
+From the [Testnet Avalanche L1 Explorer](https://subnets-test.avax.network/WAGMI) you can see that WAGMI's Avalanche L1 ID (SubnetID) is `28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY`:
 
 ```
 ✔ What is the ID of the subnet?: 28nrH5T2BMvNrWecFcV3mfccjs6axM1TVyqe79MCv2Mhs8kxiY
