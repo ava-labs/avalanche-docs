@@ -1,11 +1,11 @@
 ---
 title: Run Load Test
-description: This page demonstrates how to run load test on a Subnet deployed on a cluster of cloud-based validators using Avalanche-CLI.
+description: This page demonstrates how to run load test on an Avalanche L1 deployed on a cluster of cloud-based validators using Avalanche-CLI.
 ---
 
 # Run Load Test With Avalanche-CLI
 
-This page demonstrates how to run load test on a Subnet deployed on a cluster of cloud-based validators using Avalanche-CLI.
+This page demonstrates how to run load test on an Avalanche L1 deployed on a cluster of cloud-based validators using Avalanche-CLI.
 
 ## Prerequisites
 
@@ -13,8 +13,8 @@ Before we begin, you will need to have:
 
 - Created an AWS account and have an updated AWS `credentials` file in home directory with [default] profile or set up your GCP account according to [here](/tooling/create-avalanche-nodes/run-validators-gcp)
 - Created a cluster of cloud servers with monitoring enabled
-- Deployed a Subnet into the cluster
-- Added the cloud servers as validator nodes in the Subnet
+- Deployed an Avalanche L1 into the cluster
+- Added the cloud servers as validator nodes in the Avalanche L1
 
 ## Run Load Test
 
@@ -31,7 +31,7 @@ avalanche node loadtest start <loadtestName> <clusterName> <blockchainName>
 Next, you will need to provide the load test Git repository URL, load test Git Branch, the command 
 to build the load test binary and the command to run the load test binary.
 
-We will use an example of running load test on a Subnet running custom VM MorpheusVM built with 
+We will use an example of running load test on an Avalanche L1 running custom VM MorpheusVM built with 
 [HyperSDK](https://github.com/ava-labs/hypersdk/tree/main/examples/morpheusvm).
 
 The following settings will be used:

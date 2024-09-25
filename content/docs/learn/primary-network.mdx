@@ -5,14 +5,14 @@ description: Learn about the Avalanche Primary Network and its three blockchains
 
 Avalanche is a heterogeneous network of blockchains. As opposed to homogeneous networks, where all applications reside in the same chain, heterogeneous networks allow separate chains to be created for different applications.
 
-The Primary Network is a special [Subnet](/learn/subnets) that runs three blockchains:
+The Primary Network is a special [Avalanche L1](/learn/avalanche-l1s) that runs three blockchains:
 
 - The Contract Chain [(C-Chain)](/learn/primary-network#c-chain)
 - The Platform Chain [(P-Chain)](/learn/primary-network#p-chain)
 - The Exchange Chain [(X-Chain)](/learn/primary-network#x-chain)
 
 <Callout title="Note">
-[Avalanche Mainnet](/learn/networks/mainnet) is comprised of the Primary Network and all deployed Subnets.
+[Avalanche Mainnet](/learn/networks/mainnet) is comprised of the Primary Network and all deployed Avalanche L1s.
 </Callout>
 
 A node can become a validator for the Primary Network by staking at least **2,000 AVAX**.
@@ -31,7 +31,7 @@ The C-Chain is an instance of the [Coreth](https://github.com/ava-labs/coreth) V
 
 ### P-Chain
 
-The **P-Chain** is responsible for all validator and Subnet-level operations. The [P-Chain API](/api-reference/p-chain/api) supports the creation of new blockchains and Subnets, the addition of validators to Subnets, staking operations, and other platform-level operations.
+The **P-Chain** is responsible for all validator and Avalanche L1-level operations. The [P-Chain API](/api-reference/p-chain/api) supports the creation of new blockchains and Avalanche L1s, the addition of validators to Avalanche L1s, staking operations, and other platform-level operations.
 
 The P-Chain is an instance of the Platform Virtual Machine.
 

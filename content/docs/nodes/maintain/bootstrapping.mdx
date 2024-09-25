@@ -6,7 +6,7 @@ Node Bootstrap is the process where a node _securely_ downloads linear chain blo
 
 Bootstrap must guarantee that the local state of a node is in sync with the state of other valid nodes. Once bootstrap is completed, a node has the latest state of the chain and can verify new incoming transactions and reach consensus with other nodes, collectively moving forward the chains.
 
-Bootstrapping a node is a multi-step process which requires downloading the chains required by the Primary Network (that is, the C-Chain, P-Chain, and X-Chain), as well as the chains required by any additional Subnets that the node explicitly tracks.
+Bootstrapping a node is a multi-step process which requires downloading the chains required by the Primary Network (that is, the C-Chain, P-Chain, and X-Chain), as well as the chains required by any additional Avalanche L1s that the node explicitly tracks.
 
 This document covers the high-level technical details of how bootstrapping works. This document glosses over some specifics, but the [AvalancheGo](https://github.com/ava-labs/avalanchego) codebase is open-source and is available for curious-minded readers to learn more.
 
@@ -17,11 +17,11 @@ Bootstrapping is all about downloading all previously accepted containers _secur
 
 What's the most reliable source of information in the Avalanche ecosystem? It's a _large enough_ majority of validators. Therefore, the first step of bootstrapping is finding a sufficient amount of validators to download containers from.
 
-The P-Chain is responsible for all platform-level operations, including staking events that modify a Subnet's validator set. Whenever any chain (aside from the P-Chain itself) bootstraps, it requests an up-to-date validator set for that Subnet (Primary Network is a Subnet too). Once the Subnet's current validator set is known, the node can securely download containers from these validators to bootstrap the chain.
+The P-Chain is responsible for all platform-level operations, including staking events that modify an Avalanche L1's validator set. Whenever any chain (aside from the P-Chain itself) bootstraps, it requests an up-to-date validator set for that Avalanche L1 (Primary Network is an Avalanche L1 too). Once the Avalanche L1's current validator set is known, the node can securely download containers from these validators to bootstrap the chain.
 
 There is a caveat here: the validator set must be _up-to-date_. If a bootstrapping node's validator set is stale, the node may incorrectly believe that some nodes are still validators when their validation period has already expired. A node might unknowingly end up requesting blocks from non-validators which respond with malicious blocks that aren't safe to download.
 
-**For this reason, every Avalanche node must fully bootstrap the P-chain first before moving on to the other Primary Network chains and other Subnets to guarantee that their validator sets are up-to-date**.
+**For this reason, every Avalanche node must fully bootstrap the P-chain first before moving on to the other Primary Network chains and other Avalanche L1s to guarantee that their validator sets are up-to-date**.
 
 What about the P-chain? The P-chain can't ever have an up-to-date validator set before completing its bootstrap. To solve this chicken-and-egg situation the Avalanche Foundation maintains a trusted default set of validators called beacons (but users are free to configure their own). Beacon Node-IDs and IP addresses are listed in the [AvalancheGo codebase](https://github.com/ava-labs/avalanchego/blob/master/genesis/bootstrappers.json). Every node has the beacon list available from the start and can reach out to them as soon as it starts.
 
@@ -65,17 +65,17 @@ A node first just fetches and parses containers. Once the chain is complete, the
 When Does Bootstrapping Finish?[​](#when-does-bootstrapping-finish "Direct link to heading")
 --------------------------------------------------------------------------------------------
 
-You've seen how [bootstrap works](#bootstrapping-the-blockchain) for a single chain. However, a node must bootstrap the chains in the Primary Network as well as the chains in each Subnet it tracks. This begs the questions - when are these chains bootstrapped? When is a node done bootstrapping?
+You've seen how [bootstrap works](#bootstrapping-the-blockchain) for a single chain. However, a node must bootstrap the chains in the Primary Network as well as the chains in each Avalanche L1 it tracks. This begs the questions - when are these chains bootstrapped? When is a node done bootstrapping?
 
 The P-chain is always the first to bootstrap before any other chain. Once the P-Chain has finished, all other chains start bootstrapping in parallel, connecting to their own validators independently of one another.
 
-A node completes bootstrapping a Subnet once all of its corresponding chains have completed bootstrapping. Because the Primary Network is a special case of Subnet that includes the entire network, this applies to it as well as any other manually tracked Subnets.
+A node completes bootstrapping an Avalanche L1 once all of its corresponding chains have completed bootstrapping. Because the Primary Network is a special case of Avalanche L1 that includes the entire network, this applies to it as well as any other manually tracked Avalanche L1s.
 
-Note that Subnets bootstrap is independently of one another - so even if one Subnet has bootstrapped and is validating new transactions and adding new containers, other Subnets may still be bootstrapping in parallel.
+Note that Avalanche L1s bootstrap is independently of one another - so even if one Avalanche L1 has bootstrapped and is validating new transactions and adding new containers, other Avalanche L1s may still be bootstrapping in parallel.
 
-Within a single Subnet however, a Subnet isn't done bootstrapping until the last chain completes bootstrapping. It's possible for a single chain to effectively stall a node from finishing the bootstrap for a single Subnet, if it has a sufficiently long history or each operation is complex and time consuming. Even worse, other Subnet validators are continuously accepting new transactions and adding new containers on top of the previously known frontier, so a node that's slow to bootstrap can continuously fall behind the rest of the network.
+Within a single Avalanche L1 however, an Avalanche L1 isn't done bootstrapping until the last chain completes bootstrapping. It's possible for a single chain to effectively stall a node from finishing the bootstrap for a single Avalanche L1, if it has a sufficiently long history or each operation is complex and time consuming. Even worse, other Avalanche L1 validators are continuously accepting new transactions and adding new containers on top of the previously known frontier, so a node that's slow to bootstrap can continuously fall behind the rest of the network.
 
-Nodes mitigate this by restarting bootstrap for any chains which is blocked waiting for the remaining Subnet chains to finish bootstrapping. These chains repeat the frontier retrieval and container downloading phases to stay up-to-date with the Subnet's ever moving current frontier until the slowest chain has completed bootstrapping.
+Nodes mitigate this by restarting bootstrap for any chains which is blocked waiting for the remaining Avalanche L1 chains to finish bootstrapping. These chains repeat the frontier retrieval and container downloading phases to stay up-to-date with the Avalanche L1's ever moving current frontier until the slowest chain has completed bootstrapping.
 
 Once this is complete, a node is finally ready to validate the network.
 
@@ -86,7 +86,7 @@ The full node bootstrap process is long, and gets longer and longer over time as
 
 Starting from [AvalancheGo version 1.7.11](https://github.com/ava-labs/avalanchego/releases/tag/v1.7.11), nodes can use state sync to drastically cut down bootstrapping time on the C-Chain. Instead of executing each block, state sync uses cryptographic techniques to download and verify just the state associated with the current frontier. State synced nodes can't serve every C-chain block ever historically accepted, but they can safely retrieve the full C-chain state needed to validate in a much shorter time. State sync will fetch the previous 256 blocks prior to support the previous block hash operation code.
 
-State sync is currently only available for the C-chain. The P-chain and X-chain currently bootstrap by downloading all blocks. Note that irrespective of the bootstrap method used (including state sync), each chain is still blocked on all other chains in its Subnet completing their bootstrap before continuing into normal operation.
+State sync is currently only available for the C-chain. The P-chain and X-chain currently bootstrap by downloading all blocks. Note that irrespective of the bootstrap method used (including state sync), each chain is still blocked on all other chains in its Avalanche L1 completing their bootstrap before continuing into normal operation.
 
 <Callout title="Note">
 There are no configs to state sync an archival node. If you need all the historical state then you must not use state sync and setup the config of the node for an archival node.
@@ -112,11 +112,11 @@ Logs provide information about both container downloading and their execution fo
 [02-16|17:37:52.468] INFO <P Chain> queue/jobs.go:203 executing operations {"numExecuted": 52713, "numToExecute": 101357, "eta": "1m23s"}
 ```
 
-Similar logs are emitted for X and C chains and any chain in explicitly tracked Subnets.
+Similar logs are emitted for X and C chains and any chain in explicitly tracked Avalanche L1s.
 
 ### Why Chain Bootstrap ETA Keeps On Changing?[​](#why-chain-bootstrap-eta-keeps-on-changing "Direct link to heading")
 
-As you saw in the [bootstrap completion section](#when-does-bootstrapping-finish), a Subnet like the Primary Network completes once all of its chains finish bootstrapping. Some Subnet chains may have to wait for the slowest to finish. They'll restart bootstrapping in the meantime, to make sure they won't fall back too much with respect to the network accepted frontier.
+As you saw in the [bootstrap completion section](#when-does-bootstrapping-finish), an Avalanche L1 like the Primary Network completes once all of its chains finish bootstrapping. Some Avalanche L1 chains may have to wait for the slowest to finish. They'll restart bootstrapping in the meantime, to make sure they won't fall back too much with respect to the network accepted frontier.
 
 What Order Do The Chains Bootstrap?[​](#what-order-do-the-chains-bootstrap "Direct link to heading")
 ----------------------------------------------------------------------------------------------------
@@ -125,4 +125,4 @@ The 3 chains will bootstrap in the following order: P-chain, X-chain, C-chain.
 
 ### Why Are AvalancheGo APIs Disabled During Bootstrapping?[​](#why-are-avalanchego-apis-disabled-during-bootstrapping "Direct link to heading")
 
-AvalancheGo APIs are [explicitly disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379) during bootstrapping. The reason is that if the node has not fully rebuilt its Subnets state, it can't provide accurate information. AvalancheGo APIs are activated once bootstrap completes and node transition into its normal operating mode, accepting and validating transactions.
+AvalancheGo APIs are [explicitly disabled](https://github.com/ava-labs/avalanchego/blob/master/api/server/server.go#L367:L379) during bootstrapping. The reason is that if the node has not fully rebuilt its Avalanche L1s state, it can't provide accurate information. AvalancheGo APIs are activated once bootstrap completes and node transition into its normal operating mode, accepting and validating transactions.

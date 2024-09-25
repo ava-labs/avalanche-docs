@@ -52,7 +52,7 @@ export const docsOptions: DocsLayoutProps = {
             title: 'Avalanche L1s',
             description: 'Build Your L1 Blockchain',
             icon: <Layers />,
-            url: '/subnets',
+            url: '/avalanche-l1s',
           },
           {
             title: 'Virtual Machines',

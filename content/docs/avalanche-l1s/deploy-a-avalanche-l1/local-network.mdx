@@ -1,0 +1,92 @@
+---
+title: On a Local Network
+description: This guide focuses on taking an already created Avalanche L1 configuration and deploying it on a local Avalanche network.
+---
+
+## Prerequisites
+
+* [Avalanche-CLI installed](/tooling/guides/get-avalanche-cli)
+* You have [created an Avalanche L1 configuration](/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration)
+
+## Deploying Avalanche L1s Locally
+
+In the following commands, make sure to substitute the name of your Avalanche L1 configuration for `<blockchainName>`.
+
+To deploy your Avalanche L1, run
+
+```bash
+avalanche blockchain deploy <blockchainName>
+```
+
+and, select `Local Network` to deploy on. Alternatively, you can bypass this prompt by providing the `--local` flag. For example:
+
+```bash
+avalanche blockchain deploy <blockchainName> --local
+```
+
+The command may take a couple minutes to run.
+
+<Callout title="Note">
+If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on Mac, you will require Rosetta 2 to be able to deploy Avalanche L1s locally. You can download Rosetta 2 using `softwareupdate --install-rosetta` .
+</Callout>
+
+### Results
+
+If all works as expected, the command output should look something like this:
+
+```bash
+> avalanche blockchain deploy myblockchain
+
+✔ Local Network
+Deploying [myblockchain] to Local Network
+Installing subnet-evm-v0.4.3...
+subnet-evm-v0.4.3 installation successful
+Backend controller started, pid: 93928, output at: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
+Installing avalanchego-v1.9.3...
+avalanchego-v1.9.3 installation successful
+VMs ready.
+Starting network...
+..................
+Blockchain has been deployed. Wait until network acknowledges...
+......
+Network ready to use. Local network node endpoints:
++-------+----------+------------------------------------------------------------------------------------+
+| NODE  |    VM    |                                        URL                                         |
++-------+----------+------------------------------------------------------------------------------------+
+| node2 | myblockchain | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node3 | myblockchain | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node4 | myblockchain | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node5 | myblockchain | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node1 | myblockchain | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+
+Browser Extension connection details (any node URL from above works):
+RPC URL:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
+Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Network name:     myblockchain
+Chain ID:         54325
+Currency Symbol:  TUTORIAL
+```
+
+You can use the deployment details to connect to and interact with your Avalanche L1.
+
+To manage the newly deployed local Avalanche network, see [the `avalanche network` command tree](/tooling/avalanche-cli#network).
+
+### Deploying Multiple Avalanche L1s
+
+You may deploy multiple Avalanche L1s concurrently, but you can't deploy the same Avalanche L1 multiple times without resetting all deployed Avalanche L1 state.
+
+### Redeploying the Avalanche L1
+
+To redeploy the Avalanche L1, you first need to wipe the Avalanche L1 state. This permanently deletes all data from all locally deployed Avalanche L1s. To do so, run: ```avalanche network clean```
+
+You are now free to redeploy your Avalanche L1 with:
+
+```bash
+avalanche blockchain deploy <blockchainName> --local
+```
+

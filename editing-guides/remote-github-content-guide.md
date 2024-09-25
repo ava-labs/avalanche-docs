@@ -70,9 +70,9 @@ Each of the arrays within this object will look like the following (based on the
           return {
             filename: "deep-dive.md",
             content: `---
-tags: [Avalanche Warp Messaging, AWM, Cross-Subnet Communication, Cross-Chain Communication]
-description: Avalanche Warp Messaging (AWM) provides a primitive for cross-subnet communication on the Avalanche Network.
-keywords: [ docs, documentation, avalanche, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+tags: [Avalanche Warp Messaging, AWM, cross-Avalanche L1 Communication, Cross-Chain Communication]
+description: Avalanche Warp Messaging (AWM) provides a primitive for cross-Avalanche L1 communication on the Avalanche Network.
+keywords: [ docs, documentation, avalanche, awm, cross-Avalanche L1 communication, cross-chain, cross-chain communication ]
 sidebar_label: Deep Dive
 ---
 
@@ -143,9 +143,9 @@ modifyContent(filename, content) {
           return {
             filename: "deep-dive.md",
             content: `---
-tags: [Avalanche Warp Messaging, AWM, Cross-Subnet Communication, Cross-Chain Communication]
-description: Avalanche Warp Messaging (AWM) provides a primitive for cross-subnet communication on the Avalanche Network.
-keywords: [ docs, documentation, avalanche, awm, cross-subnet communication, cross-chain, cross-chain communication ]
+tags: [Avalanche Warp Messaging, AWM, cross-Avalanche L1 Communication, Cross-Chain Communication]
+description: Avalanche Warp Messaging (AWM) provides a primitive for cross-Avalanche L1 communication on the Avalanche Network.
+keywords: [ docs, documentation, avalanche, awm, cross-Avalanche L1 communication, cross-chain, cross-chain communication ]
 sidebar_label: Deep Dive
 sidebar_position: 1
 ---

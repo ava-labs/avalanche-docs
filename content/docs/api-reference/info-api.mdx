@@ -413,13 +413,13 @@ info.getTxFee() ->
 
 - `txFee` is the default fee for making transactions.
 - `createAssetTxFee` is the fee for creating a new asset.
-- `createSubnetTxFee` is the fee for creating a new Subnet.
-- `transformSubnetTxFee` is the fee for converting a PoA Subnet into a PoS Subnet.
+- `createSubnetTxFee` is the fee for creating a new Avalanche L1.
+- `transformSubnetTxFee` is the fee for converting a PoA Avalanche L1 into a PoS Avalanche L1.
 - `createBlockchainTxFee` is the fee for creating a new blockchain.
 - `addPrimaryNetworkValidatorFee` is the fee for adding a new primary network validator.
 - `addPrimaryNetworkDelegatorFee` is the fee for adding a new primary network delegator.
-- `addSubnetValidatorFee` is the fee for adding a new Subnet validator.
-- `addSubnetDelegatorFee` is the fee for adding a new Subnet delegator.
+- `addSubnetValidatorFee` is the fee for adding a new Avalanche L1 validator.
+- `addSubnetDelegatorFee` is the fee for adding a new Avalanche L1 delegator.
 
 All fees are denominated in nAVAX.
 
@@ -534,7 +534,7 @@ info.peers({
 - `lastReceived` is the timestamp of last message received from the peer.
 - `benched` shows chain IDs that the peer is being benched.
 - `observedUptime` is this node's primary network uptime, observed by the peer.
-- `observedSubnetUptime` is a map of Subnet IDs to this node's Subnet uptimes, observed by the peer.
+- `observedSubnetUptime` is a map of Avalanche L1 IDs (SubnetIDs) to this node's Avalanche L1 uptimes, observed by the peer.
 
 **Example Call**:
 
@@ -622,7 +622,7 @@ info.uptime({
 }
 ```
 
-- `subnetID` is the Subnet to get the uptime of. If not provided, returns the uptime of the node on the primary network.   
+- `subnetID` is the Avalanche L1 to get the uptime of. If not provided, returns the uptime of the node on the primary network.
 - `rewardingStakePercentage` is the percent of stake which thinks this node is above the uptime requirement.
 - `weightedAveragePercentage` is the stake-weighted average of all observed uptimes for this node.
     
@@ -649,7 +649,7 @@ curl -X POST --data '{
 }
 ```
 
-#### Example Subnet Call
+#### Example Avalanche L1 Call
 
 ```
 curl -X POST --data '{
@@ -662,7 +662,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
 
-#### Example Subnet Response
+#### Example Avalanche L1 Response
 
 ```
 {
@@ -674,3 +674,4 @@ curl -X POST --data '{
   }
 }
 ```
+

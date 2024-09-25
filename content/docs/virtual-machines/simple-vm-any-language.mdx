@@ -89,7 +89,7 @@ AvalancheGo starts/stops your process multiple times before launching the real i
     - Param: a [SetStateRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateRequest) with the `NormalOp` value
     - Set your blockchain's state to `NormalOp`
     - Return: a [SetStateResponse](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.SetStateResponse) built from the genesis block.
-11. [VM.Connected](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Connected) (for every other node validating this Subnet in the network)
+11. [VM.Connected](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Connected) (for every other node validating this Avalanche L1 in the network)
     - Param: a [ConnectedRequest](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.ConnectedRequest) with the NodeID and the version of AvalancheGo.
     - Return: Empty
 12. [VM.Health](https://buf.build/ava-labs/avalanche/docs/main:vm#vm.VM.Health)

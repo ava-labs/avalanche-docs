@@ -34,7 +34,7 @@ yarn install
 <Callout title="Note">
 The repository cloning method used is HTTPS, but SSH can be used too:
 
-`git clone [[email protected]](https://docs.avax.network/cdn-cgi/l/email-protection):ava-labs/avalanche-smart-contract-quickstart.git`
+`git clone git@github.com:ava-labs/avalanche-smart-contract-quickstart.git`
 
 You can find more about SSH and how to use it [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
 </Callout>
@@ -234,7 +234,7 @@ task(
 });
 ```
 
-This will return the result in wei. If you want to know the exact amount of token with its token name then you need to divide it with its decimal. `erc20.abi.json` can be [found here](https://docs.avax.network/assets/files/erc20.abi-a562e36ad30a4d751911073568ea0546.json).
+This will return the result in wei. If you want to know the exact amount of token with its token name then you need to divide it with its decimal. `erc20.abi.json` can be [found here](https://gist.github.com/veox/8800debbf56e24718f9f483e1e40c35c).
 
 The example uses the [C-Chain Public API](/api-reference/c-chain/api#endpoints) for the provider. For a local Avalanche network use `http://127.0.0.1:9650/ext/bc/C/rpc` and for Fuji Testnet use `https://api.avax-test.network/ext/bc/C/rpc`.
 
@@ -481,7 +481,7 @@ BigNumber { _hex: '0x00', _isBigNumber: true }
 '0'
 ```
 
-`account[0]` has a balance because `account[0]` is the default account. The contract is deployed with this account. The constructor of [ERC20.sol](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/ERC20.sol) mints `TOTAL_SUPPLY` of 123456789 token to the deployer of the contract.
+`account[0]` has a balance because `account[0]` is the default account. The contract is deployed with this account. The constructor of [ERC20.sol](https://github.com/ava-labs/avalanche-smart-contract-quickstart/blob/main/contracts/ExampleERC20.sol) mints `TOTAL_SUPPLY` of 123456789 token to the deployer of the contract.
 
 `accounts[1]` currently has no balance. Send some tokens to `accounts[1]`, which is `0x9632a79656af553F58738B0FB750320158495942`.
 

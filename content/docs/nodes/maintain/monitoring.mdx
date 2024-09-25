@@ -112,7 +112,7 @@ Nov 12 11:38:33 ip-172-31-36-200 prometheus[548]: ts=2021-11-12T11:38:33.773Z ca
 Note the `active (running)` status (press `q` to exit). You can also check Prometheus web interface, available on `http://your-node-host-ip:9090/`
 
 <Callout type="warn">
-You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](/nodes/run-a-node/on-third-party-services/amazon-web-services#create-a-security-group). If on public internet, make sure to only allow your IP to connect!
+You may need to do `sudo ufw allow 9090/tcp` if the firewall is on, and/or adjust the security settings to allow connections to port 9090 if the node is running on a cloud instance. For AWS, you can look it up [here](/nodes/on-third-party-services/amazon-web-services#create-a-security-group). If on public internet, make sure to only allow your IP to connect!
 </Callout>
 
 If everything is OK, let's move on.
@@ -259,17 +259,17 @@ Step 5: Additional Dashboards (Optional)[​](#step-5-additional-dashboards-opti
 
 Step 4 installs the basic set of dashboards that make sense to have on any node. Step 5 is for installing additional dashboards that may not be useful for every installation.
 
-Currently, there is only one additional dashboard: Subnets. If your node is running any Subnets, you may want to add this as well. Do:
+Currently, there is only one additional dashboard: Avalanche L1s. If your node is running any Avalanche L1s, you may want to add this as well. Do:
 
 ```bash
 ./monitoring-installer.sh --5
 ```
 
-This will add the Subnets dashboard. It allows you to monitor operational data for any Subnet that is synced on the node. There is a Subnet switcher that allows you to switch between different Subnets. As there are many Subnets and not every node will have all of them, by default, it comes populated only with Spaces and WAGMI Subnets that exist on Fuji testnet:
+This will add the Avalanche L1s dashboard. It allows you to monitor operational data for any Avalanche L1 that is synced on the node. There is an Avalanche L1 switcher that allows you to switch between different Avalanche L1s. As there are many Avalanche L1s and not every node will have all of them, by default, it comes populated only with Spaces and WAGMI Avalanche L1s that exist on Fuji testnet:
 
-![Subnets switcher](/images/monitoring3.png)
+![Avalanche L1s switcher](/images/monitoring3.png)
 
-To configure the dashboard and add any Subnets that your node is syncing, you will need to edit the dashboard. Select the `dashboard settings` icon (image of a cog) in the upper right corner of the dashboard display and switch to `Variables` section and select the `subnet` variable. It should look something like this:
+To configure the dashboard and add any Layer 1s that your node is syncing, you will need to edit the dashboard. Select the `dashboard settings` icon (image of a cog) in the upper right corner of the dashboard display and switch to `Variables` section and select the `subnet` variable. It should look something like this:
 
 ![Variables screen](/images/monitoring4.png)
 
@@ -285,7 +285,7 @@ and the separator between entries is a comma. Entries for Spaces and WAGMI look 
 Spaces (Fuji) : 2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt, WAGMI (Fuji) : 2AM3vsuLoJdGBGqX2ibE8RGEq4Lg7g4bot6BT1Z7B9dH5corUD
 ```
 
-After editing the values, press `Update` and then click `Save dashboard` button and confirm. Press the back arrow in the upper left corner to return to the dashboard. New values should now be selectable from the dropdown and data for the selected Subnet will be shown in the panels.
+After editing the values, press `Update` and then click `Save dashboard` button and confirm. Press the back arrow in the upper left corner to return to the dashboard. New values should now be selectable from the dropdown and data for the selected Avalanche L1 will be shown in the panels.
 
 Updating[​](#updating "Direct link to heading")
 -----------------------------------------------

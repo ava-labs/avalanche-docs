@@ -316,7 +316,7 @@ Let's walk through an example on how to issue a `SetTx` transaction to the BlobV
 
 The [mempool](https://github.com/ava-labs/blobvm/blob/master/mempool/mempool.go) is a buffer of volatile memory that stores pending transactions. Transactions are stored in the mempool whenever a node learns about a new transaction either through gossip with other nodes or through an API call issued by a user.
 
-The mempool is implemented as a min-max [heap](https://en.wikipedia.org/wiki/Heap_(data_structure)) ordered by each transaction's gas price. The mempool is created during the [initialization](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L151) of VM.
+The mempool is implemented as a min-max [heap](https://en.wikipedia.org/wiki/Heap_data_structure) ordered by each transaction's gas price. The mempool is created during the [initialization](https://github.com/ava-labs/blobvm/blob/master/vm/vm.go#L151) of VM.
 
 ```go
 vm.mempool = mempool.New(vm.genesis, vm.config.MempoolSize)
