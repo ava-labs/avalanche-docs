@@ -796,8 +796,8 @@ const config = {
         permanent: true,
       },
       {
-        source: '/subnets/index',
-        destination: '/avalanche-l1s/index',
+        source: '/subnets',
+        destination: '/avalanche-l1s',
         permanent: true,
       },
       {
