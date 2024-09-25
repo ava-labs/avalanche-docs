@@ -8,962 +8,977 @@
 
 <url>
   <loc>https://docs.avax.network/</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://docs.avax.network/integrations</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://docs.avax.network/learn</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-cli</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/c-chain/api</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/p-chain/api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/x-chain/api</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/admin-api</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/subnet-evm-api</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/avalanche-consensus</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/avax-token</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/learn/subnets</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/learn/avalanche-l1s</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/primary-network</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/learn/rewards-formula</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/virtual-machines</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/networks/mainnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/networks/fuji-testnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/avalanche-community-proposals</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/learn/disclaimer</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/chain-settings</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/block-explorers</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/smart-contract-dev/get-test-funds</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/smart-contract-dev/deploy-with-remix-ide</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/smart-contract-dev/erc-20-token</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/deploy-nft-collection</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/verify-contract</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/toolchains</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/smart-contract-dev/interact-golang-app</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/advanced-tutorials/add-network-programmatically</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/advanced-tutorials/dynamic-gas-fees</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/advanced-tutorials/exchange-integration</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/advanced-tutorials/manually-adjust-gas-price</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/end-to-end/fuji-workflow</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/end-to-end/launch-ethereum-dapp</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/c-chain-or-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/c-chain-or-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/build-first-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/build-first-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/subnet-nodes</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/avalanche-l1-nodes</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/deploy-a-subnet/local-network</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/deploy-a-avalanche-l1/local-network</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/deploy-a-subnet/fuji-testnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/deploy-a-subnet/avalanche-mainnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/deploy-a-avalanche-l1/avalanche-mainnet</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/deploy-a-subnet/production-infrastructure</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/deploy-a-avalanche-l1/production-infrastructure</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/deploy-a-subnet/multisig-auth</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/deploy-a-avalanche-l1/multisig-auth</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/deploy-a-subnet/custom-virtual-machine</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/deploy-a-avalanche-l1/custom-virtual-machine</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/elastic-subnets/make-subnet-permissionless</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/elastic-avalanche-l1s/make-avalanche-l1-permissionless</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/elastic-subnets/parameters</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/elastic-avalanche-l1s/parameters</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/maintain/view-subnets</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/maintain/view-avalanche-l1s</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/maintain/pause-resume</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/maintain/pause-resume</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/maintain/delete-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/maintain/delete-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/maintain/transfer-pchain-funds</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/maintain/transfer-pchain-funds</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/add-utility/deploy-smart-contract</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/add-utility/deploy-smart-contract</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/add-utility/testnet-faucet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/add-utility/testnet-faucet</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/add-utility/cross-chain-bridge</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/add-utility/cross-chain-bridge</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/upgrade/considerations</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/upgrade/avalanche-l1-precompile-config</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/upgrade/customize-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/upgrade/avalanche-l1-virtual-machine</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/upgrade/durango-upgrade</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/upgrade/considerations</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/upgrade/subnet-precompile-config</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/upgrade/customize-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/upgrade/subnet-virtual-machine</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/upgrade/durango-upgrade</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/wagmi-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/wagmi-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/subnets/troubleshooting</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/c-chain/api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/avalanche-l1s/troubleshooting</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/golang-vms/simple-golang-vm</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/timestamp-vm/introduction</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/simple-vm-any-language</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/manage-vm-binaries</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/golang-vms/complex-golang-vm</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/rust-vms/intro-avalanche-rs</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/rust-vms/setting-up-environment</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/rust-vms/installing-vm</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/evm-customization/introduction</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/evm-customization/background-requirements</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/evm-customization/generating-your-precompile</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/evm-customization/writing-test-cases</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/evm-customization/executing-test-cases</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/evm-customization/deploying-precompile</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/virtual-machines/evm-customization/precompile-overview</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/configure/configs-flags</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/run-a-node/manually</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/nodes/run-a-node/subnet-nodes</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/nodes/run-a-node/avalanche-l1-nodes</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/run-a-node/common-errors</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/nodes/configure/subnet-configs</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/nodes/configure/avalanche-l1-configs</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/validate/what-is-staking</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/validate/validate-vs-delegate</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/validate/how-to-stake</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/validate/node-validator</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/maintain/backup-restore</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/maintain/bootstrapping</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/maintain/enroll-in-avalanche-notify</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/maintain/monitoring</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/maintain/reduce-disk-usage</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/maintain/run-as-background-service</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/maintain/upgrade</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/avalanche-warp-messaging/overview</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/avalanche-warp-messaging/deep-dive</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/avalanche-warp-messaging/evm-integration</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/avalanche-warp-messaging/run-relayer</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/teleporter/overview</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/teleporter/deep-dive</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/teleporter/cli</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/teleporter/upgradeability</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/teleporter/getting-started</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/teleporter/teleporter-on-local-network</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/cross-chain/teleporter/teleporter-on-devnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/guides</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/tooling/create-deploy-subnets</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/tooling/create-deploy-avalanche-l1s</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/cross-chain</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/transfer-p-chain-funds</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-js</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/glacier-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/metrics-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-postman</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-network-runner/introduction</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-network-runner/anr-commands</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-go-installer</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-plugin-manager</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-ops</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/rpc-providers</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/indexers</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/guides/get-avalanche-cli</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/standards/guides/banff-changes</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/p-chain/txn-format</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/info-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/api-reference/p-chain/configs</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/api-reference/c-chain/txn-format</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/api-reference/admin-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/api-reference/c-chain/configs</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/health-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/index-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/keystore-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/metrics-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/avalanche-go-configs-flags</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/subnet-evm-api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/rpc-providers</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/install-script</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/api-reference/x-chain/api</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
+  <loc>https://docs.avax.network/api-reference/standards/guides/txn-fees</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/nodes/chain-configs/c-chain</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/x-chain/configs</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/p-chain/configs</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/x-chain/txn-format</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/standards/guides/issuing-api-calls</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/api-reference/standards/avalanche-network-protocol</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/deploy-nft-collection/deploy-erc-721</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/deploy-nft-collection/prep-nft-files</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/verify-contract/hardhat</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/verify-contract/snowtrace</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/toolchains/foundry</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/toolchains/hardhat</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/dapps/toolchains/thirdweb</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/nodes/chain-configs/c-chain</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/standards/guides/txn-fees</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/using-install-script/installing-avalanche-go</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/nodes/on-third-party-services/amazon-web-services</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/nodes/on-third-party-services/microsoft-azure</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/nodes/on-third-party-services/google-cloud</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/evm-customization/defining-precompile</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/c-chain/txn-format</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/c-chain/configs</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/x-chain/configs</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/timestamp-vm/state</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/timestamp-vm/blocks</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/timestamp-vm/apis</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/virtual-machines/timestamp-vm/defining-vm-itself</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/chain-configs/overview</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/using-install-script/preparing-environment</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/using-install-script/node-config-maintenance</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/on-third-party-services/alibaba</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/on-third-party-services/tencent</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-postman/add-postman-collection</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/standards/cryptographic-primitives</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/cross-chain/teleporter-local-network</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/tooling/guides/import-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/tooling/guides/import-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/guides/run-with-docker</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/tooling/create-deploy-subnets/create-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/tooling/create-deploy-avalanche-l1s/create-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/tooling/create-deploy-subnets/deploy-locally</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/tooling/create-deploy-avalanche-l1s/deploy-locally</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/tooling/create-deploy-subnets/deploy-on-fuji-testnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/tooling/create-deploy-avalanche-l1s/deploy-on-fuji-testnet</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/tooling/create-deploy-subnets/deploy-on-mainnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/tooling/create-deploy-avalanche-l1s/deploy-on-mainnet</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/tooling/create-deploy-subnets/view-subnets</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <loc>https://docs.avax.network/tooling/create-deploy-avalanche-l1s/view-avalanche-l1s</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/deploy-custom-vm</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/execute-ssh-commands</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/run-loadtest</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/run-validators-aws</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/run-validators-gcp</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/setup-devnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/stop-node</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://docs.avax.network/tooling/create-avalanche-nodes/validate-avalanche-l1</loc>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/create-avalanche-nodes/validate-primary-network</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/tooling/create-avalanche-nodes/validate-subnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/cross-chain/teleporter-devnet</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/cross-chain/teleporter-token-bridge</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-postman/data-visualization</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-postman/making-api-calls</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/tooling/avalanche-postman/variables</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/standards/guides/issuing-api-calls</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/api-reference/standards/avalanche-network-protocol</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/standards/guides/blockchain-flow</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/standards/guides/x-chain-migration</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/api-reference/standards/serialization-primitives</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>https://docs.avax.network/api-reference/x-chain/txn-format</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.41</priority>
-</url>
-<url>
   <loc>https://docs.avax.network/nodes/chain-configs/p-chain</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.41</priority>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/chain-configs/x-chain</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.41</priority>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
+  <priority>0.51</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/using-install-script/managing-avalanche-go</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.41</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/nodes/on-third-party-services/amazon-web-services</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.41</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/on-third-party-services/aws-marketplace</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.41</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/nodes/on-third-party-services/google-cloud</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.41</priority>
 </url>
 <url>
   <loc>https://docs.avax.network/nodes/on-third-party-services/latitude</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
-  <priority>0.41</priority>
-</url>
-<url>
-  <loc>https://docs.avax.network/nodes/on-third-party-services/microsoft-azure</loc>
-  <lastmod>2024-08-19T16:47:33+00:00</lastmod>
+  <lastmod>2024-09-25T14:51:47+00:00</lastmod>
   <priority>0.41</priority>
 </url>
 

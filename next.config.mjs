@@ -750,6 +750,126 @@ const config = {
         destination: '/cross-chain/avalanche-warp-messaging/overview',
         permanent: true,
       },
+      {
+        source: '/learn/subnets',
+        destination: '/learn/avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/fuji-testnet',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/subnet-virtual-machine',
+        destination: '/avalanche-l1s/upgrade/avalanche-l1-virtual-machine',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/customize-subnet',
+        destination: '/avalanche-l1s/upgrade/customize-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/subnets/elastic-subnets/make-subnet-permissionless',
+        destination: '/avalanche-l1s/elastic-avalanche-l1s/make-avalanche-l1-permissionless',
+        permanent: true,
+      },
+      {
+        source: '/subnets/elastic-subnets/parameters',
+        destination: '/avalanche-l1s/elastic-avalanche-l1s/parameters',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/avalanche-mainnet',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/avalanche-mainnet',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/local-network',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/local-network',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/custom-virtual-machine',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/custom-virtual-machine',
+        permanent: true,
+      },
+      {
+        source: '/subnets/index',
+        destination: '/avalanche-l1s/index',
+        permanent: true,
+      },
+      {
+        source: '/subnets/troubleshooting',
+        destination: '/avalanche-l1s/troubleshooting',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/view-subnets',
+        destination: '/avalanche-l1s/maintain/view-avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/pause-resume',
+        destination: '/avalanche-l1s/maintain/pause-resume',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/delete-subnet',
+        destination: '/avalanche-l1s/maintain/delete-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/subnets/c-chain-or-subnet',
+        destination: '/avalanche-l1s/c-chain-or-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/subnets/add-utility/testnet-faucet',
+        destination: '/avalanche-l1s/add-utility/testnet-faucet',
+        permanent: true,
+      },
+      {
+        source: '/subnets/build-first-subnet',
+        destination: '/avalanche-l1s/build-first-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run-a-node/subnet-nodes',
+        destination: '/nodes/run-a-node/avalanche-l1-nodes',
+        permanent: true,
+      },
+      {
+        source: '/subnets/subnet-nodes',
+        destination: '/avalanche-l1s/avalanche-l1-nodes',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/deploy-on-fuji-testnet',
+        destination: '/tooling/create-deploy-avalanche-l1s/deploy-on-fuji-testnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/create-subnet',
+        destination: '/tooling/create-deploy-avalanche-l1s/create-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/view-subnets',
+        destination: '/tooling/create-deploy-avalanche-l1s/view-avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/deploy-on-mainnet',
+        destination: '/tooling/create-deploy-avalanche-l1s/deploy-on-mainnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/deploy-locally',
+        destination: '/tooling/create-deploy-avalanche-l1s/deploy-locally',
+        permanent: true,
+      },
     ]
   },
 };
