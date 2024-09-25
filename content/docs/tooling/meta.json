@@ -2,6 +2,7 @@
   "title": "Toolings",
   "root": true,
   "pages": [
+    "index",
     "---Avalanche CLI---",
     "avalanche-cli",
     "guides",

@@ -2,6 +2,7 @@
   "title": "api-reference",
   "root": true,
   "pages": [
+    "index",
     "---AvalancheGo---",
     "p-chain",
     "x-chain",
