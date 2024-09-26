@@ -13,6 +13,7 @@
     "teleporter/deep-dive",
     "teleporter/cli",
     "teleporter/upgradeability",
+    "teleporter/addresses",
     "---Examples---",
     "teleporter/getting-started",
     "teleporter/teleporter-on-local-network",
