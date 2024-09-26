@@ -8,8 +8,11 @@ export default function HomeLayout({
 }: {
   children: ReactNode;
 }): React.ReactElement {
-  return <Layout {...baseOptions}>
+
+  return (
+    <Layout {...baseOptions}>
     {children}
     <Footer />
-    </Layout>;
+    </Layout>
+  )
 }

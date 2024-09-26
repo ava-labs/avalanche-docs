@@ -10,6 +10,7 @@
     "check-links": "tsx .github/linkChecker.ts"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.8",
     "@heroicons/react": "^2.1.5",
     "@icons-pack/react-simple-icons": "^10.0.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
