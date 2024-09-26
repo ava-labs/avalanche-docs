@@ -21,9 +21,6 @@ export default function HomePage(): React.ReactElement {
     <>
       <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
         <div style={{ background: 'repeating-linear-gradient(to bottom, transparent, hsl(var(--secondary)/.2) 500px, transparent 1000px)' }}>
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-20">
-            <HamburgerMenu />
-            </div>
             <div className="relative">
             <span className="absolute -left-2 -top-2 z-10 xl:scale-[300%] text-red-500">🔻</span>
             <span className="absolute -bottom-2 -right-2 z-10 xl:scale-[300%] text-red-500">🔺</span>
@@ -90,13 +87,23 @@ function Highlight({
 function Hero(): React.ReactElement {
   return (
     <div className="container relative z-[2] flex flex-col items-center overflow-hidden border-x border-t bg-fd-background px-6 pt-12 text-center md:py-16" style={{
-    backgroundImage: "radial-gradient(ellipse at top, transparent 60%, hsl(var(--primary) / 0.2)), linear-gradient(to bottom, transparent 30%, hsl(var(--primary) / 0.2)), linear-gradient(to bottom, hsl(var(--background)) 40%, transparent)"
+      backgroundImage: "radial-gradient(ellipse at top, transparent 60%, hsl(var(--primary) / 0.2)), linear-gradient(to bottom, transparent 30%, hsl(var(--primary) / 0.2)), linear-gradient(to bottom, hsl(var(--background)) 40%, transparent)"
     }}>
-      <h1 className="mb-6 text-center text-4xl font-semibold md:text-5xl">
-        Avalanche Docs
-      </h1>
+      <div className="flex items-center justify-center mb-6">
+        <img
+          src="/logo-black.png"
+          alt="Avalanche Docs Logo"
+          className="h-16 md:h-20 dark:hidden"
+        />
+        <img
+          src="/logo-white.png"
+          alt="Avalanche Docs Logo"
+          className="h-16 md:h-20 hidden dark:block"
+        />
+        {/* <span className="ml-2 text-5xl font-extrabold text-foreground" style={{ fontFamily: 'Roboto, sans-serif', marginTop: '2.5rem' }}>docs</span> */}
+      </div>
       <p className="mb-6 h-fit text-center p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl">
-      Avalanche provides the tech stack for building <b className="text-foreground font-medium">decentralized Layer 1s with blazing-fast Avalanche Consensus</b> while also supporting the deployment of <u>EVM-compatible smart contracts</u> on the C-Chain.
+        Avalanche provides the tech stack for building <b className="text-foreground font-medium">decentralized Layer 1s with blazing-fast Avalanche Consensus</b> while also supporting the deployment of <u>EVM-compatible smart contracts</u> on the C-Chain.
       </p>
     </div>
   );

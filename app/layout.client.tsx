@@ -1,5 +1,6 @@
 'use client';
 import type { ReactNode } from 'react';
+import { HamburgerMenu } from './(home)/page.client';
 
 export function Title(): React.ReactElement {
 
@@ -8,7 +9,10 @@ export function Title(): React.ReactElement {
   return (
     <>
       <img width="80" height="80" src={`data:image/svg+xml;utf8,${encodeURIComponent(svgCode)}`} className="size-7" alt="logo" />
-      <span style={{fontSize: "larger"}}>Documentation</span>
+      <span style={{fontSize: "medium"}}>Documentation</span>
+      <div style={{ paddingLeft: '12px' }}>
+        <HamburgerMenu />
+      </div>
     </>
   );
 }
@@ -18,5 +22,9 @@ export function Body({
 }: {
   children: ReactNode;
 }): React.ReactElement {
-  return <div>{children}</div>;
+  return (
+  <div>
+    {children}
+    </div>
+);
 }

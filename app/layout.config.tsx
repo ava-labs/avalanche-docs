@@ -23,7 +23,7 @@ export const baseOptions: BaseLayoutProps = {
     {
       text: 'Integrations',
       url: '/integrations',
-    }
+    },
   ],
 };
 
