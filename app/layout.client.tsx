@@ -60,13 +60,13 @@ z"/>
 </svg>`
 export function HomeTitle(): React.ReactElement {
 return (
-  <>
-    <img width="80" height="80" src={`data:image/svg+xml;utf8,${encodeURIComponent(svgCode)}`} className="size-7" alt="logo" />
-    <span style={{fontSize: "large"}}>Documentation</span>
-    <div className="pl-5">
-      <HamburgerMenu />
-    </div>
-  </>
+<>
+	<img width="80" height="80" src={`data:image/svg+xml;utf8,${encodeURIComponent(svgCode)}`} className="size-7" alt="logo" />
+	<span style={{fontSize: "large"}}>Documentation</span>
+	<div className="pl-4">
+		<HamburgerMenu />
+	</div>
+</>
 );
 }
 

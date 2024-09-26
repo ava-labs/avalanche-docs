@@ -132,7 +132,7 @@ function Introduction(): React.ReactElement {
               <Link href="/avalanche-l1s/build-first-avalanche-l1#enter-your-avalanche-l1s-chainid">
               <File icon={<Globe />} name="Chain ID" />
               </Link>
-              <Link href="http://localhost:3000/avalanche-l1s/build-first-avalanche-l1#token-symbol">
+              <Link href="/avalanche-l1s/build-first-avalanche-l1#token-symbol">
               <File icon={<BadgeDollarSign />} name="Token Name & Symbol" />
               </Link>
             </Folder>

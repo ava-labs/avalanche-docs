@@ -106,8 +106,9 @@ export function HamburgerMenu(): React.ReactElement {
       {
         title: 'Home',
         description: '',
-        icon: <HomeIcon />,
+        icon: <></>,
         url: '/',
+
       },
       {
         title: 'Avalanche Protocol',
