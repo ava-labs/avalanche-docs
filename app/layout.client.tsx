@@ -9,7 +9,7 @@ export function HomeTitle(): React.ReactElement {
 return (
   <>
     <img width="80" height="80" src={`data:image/svg+xml;utf8,${encodeURIComponent(svgCode)}`} className="size-7" alt="logo" />
-    <span style={{fontSize: "medium"}}>Documentation</span>
+    <span style={{fontSize: "large"}}>Documentation</span>
     <div className="pl-5">
       <HamburgerMenu />
     </div>
@@ -21,7 +21,7 @@ export function Title(): React.ReactElement {
   return (
     <>
       <img width="80" height="80" src={`data:image/svg+xml;utf8,${encodeURIComponent(svgCode)}`} className="size-7" alt="logo" />
-      <span style={{fontSize: "medium"}}>Documentation</span>
+      <span style={{fontSize: "large"}}>Documentation</span>
     </>
   );
 }
