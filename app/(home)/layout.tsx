@@ -1,7 +1,7 @@
 import { Layout } from 'fumadocs-ui/layout';
 import type { ReactNode } from 'react';
 import { Footer } from '@/components/footer';
-import { baseOptions } from '@/app/layout.config';
+import { homebaseOptions } from '@/app/layout.config';
 
 export default function HomeLayout({
   children,
@@ -10,7 +10,7 @@ export default function HomeLayout({
 }): React.ReactElement {
 
   return (
-    <Layout {...baseOptions}>
+    <Layout {...homebaseOptions}>
     {children}
     <Footer />
     </Layout>

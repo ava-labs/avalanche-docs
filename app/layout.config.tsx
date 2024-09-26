@@ -1,8 +1,31 @@
 import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
-import { Title } from '@/app/layout.client';
+import { Title, HomeTitle } from '@/app/layout.client';
 import { docsPageTree } from '@/utils/docs-loader';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook } from 'lucide-react';
+
+// home page configuration (HomeTitle includes hamburger menu)
+export const homebaseOptions: BaseLayoutProps = {
+  githubUrl: 'https://github.com/ava-labs/avalanche-docs',
+  nav: {
+    title: <HomeTitle />,
+    transparentMode: 'top',
+  },
+  links: [
+    {
+      text: 'Academy',
+      url: 'https://academy.avax.network',
+    },
+    {
+      text: 'Guides',
+      url: 'https://academy.avax.network/guide',
+    },
+    {
+      text: 'Integrations',
+      url: '/integrations',
+    },
+  ],
+};
 
 // shared configuration
 export const baseOptions: BaseLayoutProps = {

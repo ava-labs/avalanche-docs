@@ -22,8 +22,8 @@ export default function HomePage(): React.ReactElement {
       <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
         <div style={{ background: 'repeating-linear-gradient(to bottom, transparent, hsl(var(--secondary)/.2) 500px, transparent 1000px)' }}>
             <div className="relative">
-            <span className="absolute -left-2 -top-2 z-10 xl:scale-[300%] text-red-500">🔻</span>
-            <span className="absolute -bottom-2 -right-2 z-10 xl:scale-[300%] text-red-500">🔺</span>
+            {/* <span className="absolute -left-2 -top-2 z-10 xl:scale-[300%] text-red-500">🔻</span>
+            <span className="absolute -bottom-2 -right-2 z-10 xl:scale-[300%] text-red-500">🔺</span> */}
             <Hero />
             </div>
           <Introduction />
