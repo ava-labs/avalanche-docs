@@ -1,117 +1,94 @@
+import Link from 'next/link'
+import { ExternalLink } from 'lucide-react'
+
 export function Footer() {
   return (
     <footer className="mt-auto border-t bg-card py-12 text-secondary-foreground">
-      <div className="container flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="mb-1 text-sm font-semibold">Avalanche Docs</p>
-          <p className="text-xs">
-            Crafted with ❤️ by Ava Labs DevRel team.
-          </p>
-        </div>
-          <div className="grid grid-cols-2 gap-8 mt-12 text-sm font-medium text-gray-500 lg:grid-cols-3 lg:mt-0 xl:col-span-2">
-            <div>
-              <h3 className="text-lg text-neutral-800 dark:text-neutral-100">
-                Avalanche
-              </h3>
-              <ul role="list" className="mt-4 space-y-2">
-                <li>
-                  <a
-                    href="https://www.avax.network/get-started"
-                    target="_blank"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Get Started
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://subnets.avax.network/"
-                    target="_blank"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Explorer
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://stats.avax.network/dashboard/overview/"
-                    target="_blank"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Statistics
-                  </a>
-                </li>
-                
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg text-neutral-800 dark:text-neutral-100">
-                Community
-              </h3>
-              <ul role="list" className="mt-4 space-y-2">
-                <li>
-                  <a
-                    href="https://github.com/ava-labs"
-                    target="_blank"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://medium.com/@avaxdevelopers"
-                    target="_blank"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Medium Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://twitter.com/AvaxDevelopers"
-                    target="_blank"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Twitter
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="mt-12 md:mt-0">
-              <h3 className="text-lg text-neutral-800 dark:text-neutral-100">
-                More Links
-              </h3>
-              <ul role="list" className="mt-4 space-y-2">
-                <li>
-                  <a
-                    href="https://status.avax.network/"
-                    target="_blank"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Network Status
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://core.app/"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Core Wallet
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.avax.network/legal"
-                    className="relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-500 after:transition-transform after:duration-200 after:ease-&lsqb;cubic-bezier(0.65_0.05_0.36_1)&rsqb; hover:after:origin-bottom-left hover:after:scale-x-100 p-0.5 rounded-md transition duration-300 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-neutral-800 dark:focus:ring-neutral-600 focus:ring-neutral-100"
-                  >
-                    Legal
-                  </a>
-                </li>
-              </ul>
-            </div>
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+            <FooterSection title="Avalanche">
+              <FooterLink href="https://www.avax.network/get-started" external>
+                Get Started
+              </FooterLink>
+              <FooterLink href="https://subnets.avax.network/" external>
+                Explorer
+              </FooterLink>
+              <FooterLink href="https://stats.avax.network/dashboard/overview/" external>
+                Statistics
+              </FooterLink>
+            </FooterSection>
+            
+            <FooterSection title="Community" className="md:items-center">
+              
+              <FooterLink href="https://github.com/ava-labs" external>
+                GitHub
+              </FooterLink>
+              <FooterLink href="https://medium.com/@avaxdevelopers" external>
+                Medium Blog
+              </FooterLink>
+              <FooterLink href="https://twitter.com/AvaxDevelopers" external>
+                Twitter
+              </FooterLink>
+            </FooterSection>
+            
+            <FooterSection title="More Links" className="md:items-end">
+              <FooterLink href="https://status.avax.network/" external>
+              Network Status
+              </FooterLink>
+              <FooterLink href="https://core.app/" external>
+              Core Wallet
+              </FooterLink>
+              <FooterLink href="https://www.avax.network/legal" external>
+              Legal
+              </FooterLink>
+            </FooterSection>
           </div>
+          <div className="mt-12 text-xs text-center text-secondary-foreground/70">
+            Crafted with ❤️ by Ava Labs DevRel team.
+          </div>
+        </div>
       </div>
     </footer>
+  )
+}
+
+interface FooterSectionProps {
+  title: string
+  children: React.ReactNode
+  className?: string
+}
+
+function FooterSection({ title, children, className = "" }: FooterSectionProps) {
+  return (
+    <div className={`col-span-1 flex flex-col items-start ${className}`}>
+      <h3 className="text-lg font-semibold mb-4">{title}</h3>
+      <ul className="space-y-2">
+        {children}
+      </ul>
+    </div>
+  )
+}
+
+interface FooterLinkProps {
+  href: string
+  children: React.ReactNode
+  external?: boolean
+}
+
+function FooterLink({ href, children, external = false }: FooterLinkProps) {
+  const linkProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {}
+  
+  return (
+    <li>
+      <Link
+        href={href}
+        className="text-sm text-secondary-foreground hover:text-primary transition-colors duration-200 inline-flex items-center"
+        {...linkProps}
+      >
+        {children}
+        {external && <ExternalLink className="ml-1 h-3 w-4" />}
+      </Link>
+    </li>
   )
 }

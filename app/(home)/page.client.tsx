@@ -1,15 +1,16 @@
 'use client';
-import {
+import React, {
   useEffect,
   useState,
   Fragment,
   type ReactElement,
 } from 'react';
-import { TerminalIcon } from 'lucide-react';
+import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link } from 'lucide-react';
+import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 
 export function DeployBlockchainAnimation(): React.ReactElement {
-  const installCmd = 'avalanche blockchain deploy MyBlockchain';
-  const tickTime = 100;
+  const installCmd = 'avalanche blockchain deploy myblockchain';
+  const tickTime = 50;
   const timeCommandEnter = installCmd.length;
   const timeCommandRun = timeCommandEnter + 3;
   const timeCommandEnd = timeCommandRun + 3;
@@ -31,7 +32,7 @@ export function DeployBlockchainAnimation(): React.ReactElement {
   const lines: ReactElement[] = [];
 
   lines.push(
-    <span key="command_type">
+    <span key="command_type text-xl">
       {installCmd.substring(0, tick)}
       {tick < timeCommandEnter && (
         <div className="inline-block h-3 w-1 animate-pulse bg-white" />
@@ -46,10 +47,12 @@ export function DeployBlockchainAnimation(): React.ReactElement {
   if (tick > timeCommandRun)
     lines.push(
       <Fragment key="command_response">
-        <span className="font-bold">Choose a network for the operation:</span>
+        <span className="font-bold">
+          <span className="text-purple-500">?</span> Choose a network for the operation:
+        </span>
         {tick > timeCommandRun + 1 && (
           <>
-            <span>▸ Local Network</span>
+            <span>▸ <u>Local Network</u></span>
             <span>  Devnet</span>
             <span>  Fuji Testnet</span>
             <span>  Mainnet</span>
@@ -58,7 +61,7 @@ export function DeployBlockchainAnimation(): React.ReactElement {
         {tick > timeCommandRun + 2 && (
           <>
             <br/>
-            <span>Deploying <i className="font-bold">[MyBlockchain]</i> to Local Network...</span>
+            <span>Deploying <i className="font-bold">[myblockchain]</i> to Local Network...</span>
           </>
         )}
         {tick > timeCommandRun + 3 && (
@@ -92,4 +95,70 @@ export function DeployBlockchainAnimation(): React.ReactElement {
       </pre>
     </div>
   );
+}
+
+
+export function HamburgerMenu(): React.ReactElement {
+
+  return (
+    <RootToggle
+    options={[
+      {
+        title: 'Home',
+        description: '',
+        icon: <></>,
+        url: '/',
+
+      },
+      {
+        title: 'Avalanche Protocol',
+        description: 'Learn about Avalanche',
+        icon: <SproutIcon />,
+        url: '/learn',
+      },
+      {
+        title: 'Smart Contracts',
+        description: 'Build Apps on Avalanche',
+        icon: <SquareGanttChart />,
+        url: '/dapps',
+      },
+      {
+        title: 'Avalanche L1s',
+        description: 'Build Your L1 Blockchain',
+        icon: <Layers />,
+        url: '/avalanche-l1s',
+      },
+      {
+        title: 'Virtual Machines',
+        description: 'Customize Your Execution Layer',
+        icon: <IndentDecrease />,
+        url: '/virtual-machines',
+      },
+      {
+        title: 'Nodes & Validators',
+        description: 'Participate in the Network',
+        icon: <MonitorCheck />,
+        url: '/nodes',
+      },
+      {
+        title: 'Interoperability',
+        description: 'AWM and Teleporter',
+        icon: <MailIcon />,
+        url: '/cross-chain',
+      },
+      {
+        title: 'Tooling',
+        description: 'CLI, Scripts, and More',
+        icon: <Settings />,
+        url: '/tooling',
+      },
+      {
+        title: 'API Docs',
+        description: 'Avalanche API References',
+        icon: <Webhook />,
+        url: '/api-reference',
+      }
+    ]}
+  />
+  )
 }
