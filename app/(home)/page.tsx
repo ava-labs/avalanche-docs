@@ -10,7 +10,7 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/utils/cn';
 import { CodeBlock } from '@/components/code-block';
 import { File, Files, Folder } from 'fumadocs-ui/components/files';
-import { DeployBlockchainAnimation, HamburgerMenu } from './page.client';
+import { DeployBlockchainAnimation } from './page.client';
 
 const badgeVariants = cva(
   'mb-2 inline-flex size-7 items-center justify-center rounded-full bg-fd-primary font-medium text-fd-primary-foreground',
@@ -20,7 +20,8 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
-        <div style={{ background: 'repeating-linear-gradient(to bottom, transparent, hsl(var(--secondary)/.2) 500px, transparent 1000px)' }}>
+        <div>
+        {/* <div style={{ background: 'repeating-linear-gradient(to bottom, transparent, hsl(var(--secondary)/.2) 500px, transparent 1000px)' }}> */}
             <div className="relative">
             {/* <span className="absolute -left-2 -top-2 z-10 xl:scale-[300%] text-red-500">🔻</span>
             <span className="absolute -bottom-2 -right-2 z-10 xl:scale-[300%] text-red-500">🔺</span> */}
@@ -86,7 +87,7 @@ function Highlight({
 
 function Hero(): React.ReactElement {
   return (
-    <div className="container relative z-[2] flex flex-col items-center overflow-hidden border-x border-t bg-fd-background px-6 pt-12 text-center md:py-16" style={{
+    <div className="container relative z-[2] flex flex-col items-center overflow-hidden bg-fd-background px-6 pt-12 text-center md:py-16" style={{
       // backgroundImage: "radial-gradient(ellipse at top, transparent 60%, hsl(0, 100%, 50%, 0.2)), linear-gradient(to bottom, transparent 30%, hsl(0, 100%, 50%, 0.2)), linear-gradient(to bottom, hsl(var(--background)) 40%, transparent)"
     }}>
       <div className="flex items-center justify-center mb-6">
@@ -102,9 +103,9 @@ function Hero(): React.ReactElement {
         />
         {/* <span className="ml-2 text-5xl font-extrabold text-foreground" style={{ fontFamily: 'Roboto, sans-serif', marginTop: '2.5rem' }}>docs</span> */}
       </div>
-      <p className="mb-6 h-fit p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl" style={{ lineHeight: '2' }}>
+      {/* <p className="mb-6 h-fit p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl" style={{ lineHeight: '2' }}>
         Avalanche provides the tech stack for building <Link href="/avalanche-l1s"><b className="text-foreground font-medium underline">Layer 1 blockchains</b></Link> with <b className="text-foreground font-bold text-red-500"><i>blazing-fast</i></b> <Link href="/learn/avalanche-consensus"><b className="text-foreground font-medium underline">Avalanche Consensus</b></Link> while supporting the deployment of <Link href="/dapps"><b className="text-foreground font-medium underline">EVM-compatible smart contracts</b></Link> on the C-Chain.
-      </p>
+      </p> */}
     </div>
   );
 }
@@ -113,7 +114,7 @@ function Introduction(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-r md:grid-cols-2">
       <div className="flex flex-col border-l border-t px-6 py-12 md:py-16">
-        <div className={cn(badgeVariants(), 'bg-[#EB4A50]', 'text-white')}>1</div>
+        <div className={cn(badgeVariants(), 'bg-red-500', 'text-white')}>1</div>
         <h3 className="text-xl font-bold">Configure.</h3>
         <p className="mb-8 text-fd-muted-foreground">
           Configure your blockchain using Avalanche CLI.
@@ -149,10 +150,10 @@ function Introduction(): React.ReactElement {
         </div>
       </div>
       <div className="flex flex-col border-l border-t px-6 py-12 md:py-16">
-        <div className={cn(badgeVariants(), 'bg-[#EB4A50]', 'text-white')}>2</div>
-        <h3 className="text-xl font-bold">Launch Your Avalanche L1.</h3>
+        <div className={cn(badgeVariants(), 'bg-red-500', 'text-white')}>2</div>
+        <h3 className="text-xl font-bold">Deploy.</h3>
         <p className="mb-8 text-fd-muted-foreground">
-          Launch an interoperable blockchain with a single command.
+          Deploy an interoperable layer 1 with a single command.
         </p>
         <DeployBlockchainAnimation />
       </div>
@@ -183,6 +184,13 @@ function Features(): React.ReactElement {
           <p className="text-sm text-fd-muted-foreground">
             Quickstart your journey into Avalanche with our Starter Kit.
           </p>
+        </Link>
+        <Link href="https://github.com/ava-labs/hypersdk" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+            <IndentDecrease />
+            <h3 className="font-semibold">HyperSDK</h3>
+            <p className="text-sm text-fd-muted-foreground">
+              High performance, customizable framework for building blockchains.
+            </p>
         </Link>
         </div>
       </Feature>
