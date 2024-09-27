@@ -36,10 +36,10 @@ export function Footer() {
               <FooterLink href="https://status.avax.network/" external>
               Network Status
               </FooterLink>
-              <FooterLink href="https://core.app/">
+              <FooterLink href="https://core.app/" external>
               Core Wallet
               </FooterLink>
-              <FooterLink href="https://www.avax.network/legal">
+              <FooterLink href="https://www.avax.network/legal" external>
               Legal
               </FooterLink>
             </FooterSection>
@@ -83,7 +83,7 @@ function FooterLink({ href, children, external = false }: FooterLinkProps) {
     <li>
       <Link
         href={href}
-        className="text-sm text-secondary-foreground hover:text-primary transition-colors duration-200 inline-flex items-left"
+        className="text-sm text-secondary-foreground hover:text-primary transition-colors duration-200 inline-flex items-center"
         {...linkProps}
       >
         {children}

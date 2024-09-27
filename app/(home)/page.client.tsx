@@ -32,7 +32,7 @@ export function DeployBlockchainAnimation(): React.ReactElement {
   const lines: ReactElement[] = [];
 
   lines.push(
-    <span key="command_type">
+    <span key="command_type text-xl">
       {installCmd.substring(0, tick)}
       {tick < timeCommandEnter && (
         <div className="inline-block h-3 w-1 animate-pulse bg-white" />
