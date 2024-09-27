@@ -103,7 +103,7 @@ function Hero(): React.ReactElement {
         {/* <span className="ml-2 text-5xl font-extrabold text-foreground" style={{ fontFamily: 'Roboto, sans-serif', marginTop: '2.5rem' }}>docs</span> */}
       </div>
       <p className="mb-6 h-fit p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl" style={{ lineHeight: '2' }}>
-        Avalanche provides the tech stack for building <Link href="/avalanche-l1s"><b className="text-foreground font-medium underline">Layer 1 blockchains</b></Link> with <b className="text-foreground font-bold text-[#EB4A50]"><i>blazing-fast</i></b> <Link href="/learn/avalanche-consensus"><b className="text-foreground font-medium underline">Avalanche Consensus</b></Link> while supporting the deployment of <Link href="/dapps"><b className="text-foreground font-medium underline">EVM-compatible smart contracts</b></Link> on the C-Chain.
+        Avalanche provides the tech stack for building <Link href="/avalanche-l1s"><b className="text-foreground font-medium underline">Layer 1 blockchains</b></Link> with <b className="text-foreground font-bold text-red-500"><i>blazing-fast</i></b> <Link href="/learn/avalanche-consensus"><b className="text-foreground font-medium underline">Avalanche Consensus</b></Link> while supporting the deployment of <Link href="/dapps"><b className="text-foreground font-medium underline">EVM-compatible smart contracts</b></Link> on the C-Chain.
       </p>
     </div>
   );
