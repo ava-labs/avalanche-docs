@@ -5,7 +5,7 @@ import {
   Fragment,
   type ReactElement,
 } from 'react';
-import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon } from 'lucide-react';
+import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link } from 'lucide-react';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 
 export function DeployBlockchainAnimation(): React.ReactElement {

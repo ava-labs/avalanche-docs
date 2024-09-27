@@ -9,7 +9,7 @@ export function Footer() {
             Crafted with ❤️ by Ava Labs DevRel team.
           </p>
         </div>
-        <ContributorCounter repoOwner="ava-labs" repoName="avalanche-docs" displayCount={10} />
+        <ContributorCounter repoOwner="ava-labs" repoName="avalanche-docs" displayCount={15} />
           <div className="grid grid-cols-2 gap-8 mt-12 text-sm font-medium text-gray-500 lg:grid-cols-3 lg:mt-0 xl:col-span-2">
             <div>
               <h3 className="text-lg text-neutral-800 dark:text-neutral-100">
