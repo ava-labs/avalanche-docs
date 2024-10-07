@@ -31,26 +31,13 @@ Network. We will name our Avalanche L1 `testblockchain`.
 First, let's create an ERC-20 Token and deploy it to C-Chain. For our example, it will be called 
 TOK. 
 
-Sample script to deploy the ERC-20 Token can be found [here](https://github.com/ava-labs/avalanche-cli/tree/add-deploy-script/deploy_erc20). 
-Note that you will need to modify the script [here](https://github.com/ava-labs/avalanche-cli/blob/add-deploy-script/deploy_erc20/deploy_erc20.sh#L17)
-based on where you place the deploy script directory in your environment.
+Sample script to deploy the ERC-20 Token can be found [here](https://github.com/ava-labs/avalanche-cli/blob/main/cmd/contractcmd/deploy_erc20.go). 
 
-Prior to executing the script, you will first need to [install Foundry](https://book.getfoundry.sh/getting-started/installation) 
-in your environment.
 
 To deploy the ERC-20 Token to C-Chain, we will call: 
 
 ```bash
-./deploy_erc20/deploy_erc20.sh c-chain
-
-Deploying to http://127.0.0.1:9650/ext/bc/C/rpc
-Compiling...
-Compiling 5 files with Solc 0.8.18
-Solc 0.8.18 finished in 750.65ms
-Compiler run successful!
-Deployer: 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
-Deployed to: 0x5DB9A7629912EBF95876228C24A848de0bfB43A9
-Transaction hash: 0xfc5f58885634d42648cde4eed415b2bcb3e56e571d7412d4e98e03ed3e155b7c
+avalanche contract deploy erc20
 ```
 
 When the command is run, our EWOQ address `0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC` would have 
