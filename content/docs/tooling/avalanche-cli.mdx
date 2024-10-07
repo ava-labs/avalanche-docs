@@ -44,14 +44,14 @@ avalanche primary addValidator [flags]
     --delegation-fee uint           set the delegation fee (20 000 is equivalent to 2%)
 ```
 
-Avalanche L1[​](#avalanche-l1 "Direct link to heading")
+Avalanche Blockchain[​](#avalanche-blockchain "Direct link to heading")
 -------------------------------------------
 
 The `blockchain` command suite provides a collection of tools for developing and deploying Avalanche L1s.
 
 To get started, use the `blockchain create` command wizard to walk through the configuration of your very first Avalanche L1. Then, go ahead and deploy it with the `blockchain deploy` command. You can use the rest of the commands to manage your Avalanche L1 configurations and live deployments.
 
-### Avalanche L1 AddValidator
+### Blockchain Add Validator
 
 The `blockchain addValidator` command whitelists a primary network validator to validate the provided deployed Avalanche L1.
 
@@ -88,7 +88,7 @@ avalanche blockchain addValidator [blockchainName] [flags]
     --weight uint                set the staking weight of the validator to add
 ```
 
-### Remove Validator in an Avalanche L1
+### Blockchain Remove Validator
 
 This command removes a node as a validator in an Avalanche L1.
 
@@ -113,7 +113,7 @@ avalanche blockchain removeValidator [blockchainName] [flags]
     --testnet                               remove validator in existing testnet deployment (alias for `fuji`)
 ```
 
-### Avalanche L1 Change Owner
+### Blockchain Change Owner
 
 The `blockchain changeOwner` changes the owner of the deployed Avalanche L1.
 
@@ -146,7 +146,7 @@ avalanche blockchain changeOwner [blockchainName] [flags]
     --threshold uint32           required number of control key signatures to make subnet changes
 ```
 
-### Avalanche L1 Configure
+### Blockchain Configure
 
 AvalancheGo nodes support several different configuration files. Avalanche L1s have their own Avalanche L1 config which applies to all chains/VMs in the Avalanche L1. Each chain within the Avalanche L1 can have its own chain config. This command allows you to set both config files.
 
@@ -165,8 +165,7 @@ avalanche blockchain configure [blockchainName] [flags]
     --subnet-config string           path to the subnet configuration
 ```
 
-### Avalanche L1 Create
-
+### Blockchain Create
 The `blockchain create` command builds a new genesis file to configure your Avalanche L1. By default, the command runs an interactive wizard. It walks you through all the steps you need to create your first Avalanche L1.
 
 The tool supports deploying Subnet-EVM and custom VMs. You can create a custom, user-generated genesis with a custom VM by providing the path to your genesis and VM binaries with the `--genesis` and `--vm` flags.
@@ -204,7 +203,7 @@ avalanche blockchain create [blockchainName] [flags]
     --warp                            generate a vm with warp support (needed for teleporter)
 ```
 
-### Avalanche L1 Delete
+### Blockchain Delete
 
 The `blockchain delete` command deletes an existing Avalanche L1 configuration.
 
@@ -220,7 +219,7 @@ avalanche blockchain delete [flags]
 -h, --help help for delete
 ```
 
-### Avalanche L1 Deploy
+### Blockchain Deploy
 
 The `blockchain deploy` command deploys your Avalanche L1 configuration locally, to Fuji Testnet, or to Mainnet.
 
@@ -259,7 +258,7 @@ avalanche blockchain deploy [blockchainName] [flags]
     --threshold uint32             required number of control key signatures to make subnet changes
 ```
 
-### Avalanche L1 Describe
+### Blockchain Describe
 
 The `blockchain describe` command prints the details of an Avalanche L1 configuration to the console. By default, the command prints a summary of the configuration. By providing the `--genesis` flag, the command instead prints out the raw genesis file.
 
@@ -276,7 +275,7 @@ avalanche blockchain describe [blockchainName] [flags]
 -h, --help      help for describe
 ```
 
-### Avalanche L1 Export
+### Blockchain Export
 
 The `blockchain export` command write the details of an existing Avalanche L1 deploy to a file.
 
@@ -295,7 +294,7 @@ avalanche blockchain export [blockchainName] [flags]
 -o, --output string   write the export data to the provided file path
 ```
 
-### Avalanche L1 Import
+### Blockchain Import
 
 The `blockchain import` command imports configurations into Avalanche-CLI.
 
@@ -349,7 +348,7 @@ avalanche blockchain import public [blockchainPath] [flags]
 
 ```
 
-### Avalanche L1 Join
+### Blockchain Join
 
 The `blockchain join` command configures your validator node to begin validating a new Avalanche L1.
 
@@ -382,7 +381,7 @@ avalanche blockchain join [blockchainName] [flags]
     --testnet testnet             join on testnet (alias for `fuji`)
 ```
 
-### Avalanche L1 List
+### Blockchain List
 
 The `blockchain list` command prints the names of all created Avalanche L1 configurations. Without any flags, it prints some general, static information about the Avalanche L1. With the `--deployed` flag, the command shows additional information including the VMID, BlockchainID and SubnetID.
 
@@ -399,7 +398,7 @@ avalanche blockchain list [flags]
 -h, --help       help for list
 ```
 
-### Avalanche L1 Publish
+### Blockchain Publish
 
 The `blockchain publish` command publishes the Avalanche L1's VM to a repository.
 
@@ -421,7 +420,7 @@ avalanche blockchain publish [blockchainName] [flags]
     --vm-file-path string       Path to the VM description file. If not given, a prompting sequence will be initiated.
 ```
 
-### Avalanche L1 Stats
+### Blockchain Stats
 
 The `blockchain stats` command prints validator statistics for the given Avalanche L1.
 
@@ -440,7 +439,7 @@ avalanche blockchain stats [blockchainName] [flags]
     --testnet testnet   print stats on testnet (alias for `fuji`)
 ```
 
-### Avalanche L1 VMID
+### Blockchain VMID
 
 The `blockchain vmid` command prints the virtual machine ID (VMID) for the given Avalanche L1.
 
@@ -450,10 +449,10 @@ The `blockchain vmid` command prints the virtual machine ID (VMID) for the given
 avalanche blockchain vmid [blockchainName]
 ```
 
-Elastic Avalanche L1[​](#elastic-avalanche-l1 "Direct link to heading")
+Elastic L1s[​](#elastic-avalanche-l1 "Direct link to heading")
 -----------------------------------------------------------
 
-### Transforms permissioned Avalanche L1 into Elastic Avalanche L1
+### Transforms permissioned L1 into Elastic L1
 
 This command transforms your permissioned Avalanche L1 into an Elastic Avalanche L1 (NOTE: this action is irreversible).
 
@@ -486,7 +485,7 @@ avalanche blockchain elastic [blockchainName] [flags]
     --transform-validators                  If true, transform validators to permissionless validators after elastic transform
 ```
 
-### Add Permissionless Validator in an Elastic Avalanche L1
+### Add Permissionless Validator in an Elastic L1
 
 This command adds a node as a permissionless validator in an Elastic Avalanche L1.
 
@@ -512,7 +511,7 @@ avalanche blockchain join [blockchainName] --elastic [flags]
     --testnet                               add permissionless validator in existing testnet deployment (alias for `fuji`)
 ```
 
-### Add Permissionless Delegator in an Elastic Avalanche L1
+### Add Permissionless Delegator in an Elastic L1
 
 This command delegates stake to a permissionless validator in an Elastic Avalanche L1.
 
@@ -538,12 +537,12 @@ avalanche blockchain addPermissionlessDelegator [blockchainName] [flags]
     --testnet                               add permissionless delegator in existing testnet deployment (alias for `fuji`)
 ```
 
-Avalanche L1 Upgrade[​](#avalanche-l1-upgrade "Direct link to heading")
+Avalanche Blockchain Upgrade[​](#avalanche-blockchain-upgrade "Direct link to heading")
 -----------------------------------------------------------
 
 The `blockchain upgrade` command suite provides a collection of tools for updating your developmental and deployed Avalanche L1s.
 
-### Avalanche L1 Upgrade Apply
+### Upgrade Apply
 
 Apply generated upgrade bytes to running Avalanche L1 nodes to trigger a network upgrade.
 
@@ -571,7 +570,7 @@ avalanche blockchain upgrade apply [blockchainName] [flags]
     --testnet testnet                       apply upgrade existing testnet deployment (alias for `fuji`)
 ```
 
-### Avalanche L1 Upgrade Export
+### Upgrade Export
 
 Export the upgrade bytes file to a location of choice on disk.
 
@@ -589,7 +588,7 @@ avalanche blockchain upgrade export [blockchainName] [flags]
     --upgrade-filepath string   Export upgrade bytes file to location of choice on disk
 ```
 
-### Avalanche L1 Upgrade Generate
+### Upgrade Generate
 
 The `blockchain upgrade generate` command builds a new upgrade.json file to customize your Avalanche L1. It guides the user through the process using an interactive wizard.
 
@@ -605,7 +604,7 @@ avalanche blockchain upgrade generate [blockchainName] [flags]
 -h, --help   help for generate
 ```
 
-### Avalanche L1 Upgrade Import
+### Upgrade Import
 
 Import the upgrade bytes file into the local environment.
 
@@ -622,7 +621,7 @@ avalanche blockchain upgrade import [blockchainName] [flags]
     --upgrade-filepath string   Import upgrade bytes file into local environment
 ```
 
-### Avalanche L1 Upgrade Print
+### Upgrade Print
 
 Print the upgrade.json file content.
 
@@ -634,7 +633,7 @@ avalanche blockchain upgrade print [blockchainName] [flags]
 
 **Flags**:
 
-### Avalanche L1 Upgrade VM
+### Upgrade VM
 
 The `blockchain upgrade vm` command enables the user to upgrade their Avalanche L1's VM binary. The command can upgrade both local Avalanche L1s and publicly deployed Avalanche L1s on Fuji and Mainnet.
 
