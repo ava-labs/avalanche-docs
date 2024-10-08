@@ -596,6 +596,11 @@ const config = {
         permanent: true,
       },
       {
+        source: '/tooling/transfer-p-chain-funds',
+        destination: '/tooling/transactions/ledger-p-chain-transfer',
+        permanent: true,
+      },
+      {
         source: '/tooling/avalanchego-postman-collection/data-visualization',
         destination: '/tooling/avalanche-postman/data-visualization',
         permanent: true,
