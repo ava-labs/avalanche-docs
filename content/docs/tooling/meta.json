@@ -10,6 +10,7 @@
     "create-avalanche-nodes",
     "cross-chain",
     "transfer-p-chain-funds",
+    "transactions",
     "---Scripts & APIs---",
     "avalanche-js",
     "glacier-api",
