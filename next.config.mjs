@@ -875,8 +875,15 @@ const config = {
         destination: '/tooling/create-deploy-avalanche-l1s/deploy-locally',
         permanent: true,
       },
+      {
+        source: '/cross-chain/awm/overview',
+        destination: '/cross-chain',
+        permanent: true,
+      },
     ]
   },
 };
+
+
 
 export default withMDX(config);
