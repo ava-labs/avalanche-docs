@@ -5,7 +5,7 @@ import React, {
   Fragment,
   type ReactElement,
 } from 'react';
-import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link } from 'lucide-react';
+import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle } from 'lucide-react';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 
 export function DeployBlockchainAnimation(): React.ReactElement {
@@ -157,6 +157,77 @@ export function HamburgerMenu(): React.ReactElement {
         description: 'Avalanche API References',
         icon: <Webhook />,
         url: '/api-reference',
+      }
+    ]}
+  />
+  )
+}
+
+export function AcademyHamburger(): React.ReactElement {
+
+  return (
+    <RootToggle
+    options={[
+      {
+        title: 'Academy',
+        description: '',
+        icon: <></>,
+        url: '/',
+
+      },
+      {
+        title: 'Blockchain Fundamentals',
+        description: "Gain a comprehensive understanding of fundamental blockchain concepts, including how they work, and key components",
+        icon: <SquareIcon />,
+        url: 'https://academy.avax.network/course/blockchain-fundamentals',
+      },
+      {
+        title: 'Avalanche Fundamentals',
+        description: "Get a high level overview of Avalanche Consensus, L1s and VMs",
+        icon: <Triangle />,
+        url: 'https://academy.avax.network/course/avalanche-fundamentals',
+      },
+      {
+        title: "Multi-Chain Architecture",
+        description: "Dive deeper into the Multi-Chain Architecture and deploy your own Blockchain",
+        icon: <SquareStackIcon />,
+        url: 'https://academy.avax.network/course/multi-chain-architecture',
+      },
+      {
+        title:"Interchain Messaging",
+        description:"Utilize Avalanche Interchain Messaging to build cross-chain dApps in the Avalanche network",
+        icon: <MailIcon />,
+        url: 'https://academy.avax.network/course/interchain-messaging',
+      },
+      {
+        title:"Interchain Token Transfer",
+        description:"Deploy Avalanche Interchain Token Transfer to transfer assets between Avalanche blockchains",
+        icon: <ArrowLeftRight />,
+        url: 'https://academy.avax.network/course/interchain-token-transfer',
+      },
+      {
+        title:"Customizing the EVM",
+        description:"Learn how to customize the EVM and add your own custom precompiles",
+        icon: <SquareCode />,
+        url: 'https://academy.avax.network/course/customizing-evm',
+      },
+      {
+        title:"Layer 1 Tokenomics",
+        description:"Learn how to design and deploy tokenomics for your Avalanche L1",
+        icon: <Coins />,
+        url: 'https://academy.avax.network/course/l1-tokenomics',
+      },
+      {
+        title:"AvaCloud APIs",
+        description:"Learn how to leverage AvaCloud APIs to build web apps on Avalanche",
+        icon: <Webhook />,
+        url: 'https://academy.avax.network/course/avacloudapis',
+      },
+      {
+        title:"HyperSDK",
+        description:"Learn how to build a high-performance blockchain using HyperSDK",
+        icon: <TerminalIcon />,
+        url: 'https://academy.avax.network/course/hypersdk',
       }
     ]}
   />
