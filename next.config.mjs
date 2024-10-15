@@ -776,16 +776,6 @@ const config = {
         permanent: true,
       },
       {
-        source: '/subnets/elastic-subnets/make-subnet-permissionless',
-        destination: '/avalanche-l1s/elastic-avalanche-l1s/make-avalanche-l1-permissionless',
-        permanent: true,
-      },
-      {
-        source: '/subnets/elastic-subnets/parameters',
-        destination: '/avalanche-l1s/elastic-avalanche-l1s/parameters',
-        permanent: true,
-      },
-      {
         source: '/subnets/deploy-a-subnet/avalanche-mainnet',
         destination: '/avalanche-l1s/deploy-a-avalanche-l1/avalanche-mainnet',
         permanent: true,
