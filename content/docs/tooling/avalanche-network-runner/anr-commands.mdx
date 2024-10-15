@@ -97,68 +97,6 @@ curl --location 'http://localhost:8081/v1/control/addnode' \
 }'
 ```
 
-### `add-permissionless-delegator`[​](#add-permissionless-delegator "Direct link to heading")
-
-Delegates to a permissionless validator in an Elastic Subnet.
-
-```bash
-avalanche-network-runner control add-permissionless-delegator permissionlessValidatorSpecs [options] [flags]
-```
-
-#### Example[​](#example-3 "Direct link to heading")
-
-```bash
-avalanche-network-runner control add-permissionless-delegator '{"validatorSpec":[{"subnet_id":"p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz","node_name":"node5","asset_id":"U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK","staked_token_amount":2000,"start_time":"2023-09-25 21:00:00","stake_duration":336}]}'
-```
-
-```bash
-curl --location 'http://localhost:8081/v1/control/addpermissionlessdelegator' \
---header 'Content-Type: application/json' \
---data '{
-    "validatorSpec": [
-        {
-          "subnet_id": "p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz",
-          "node_name": "node5",
-          "asset_id": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK",
-          "staked_token_amount": 2000,
-          "start_time": "2023-09-25 21:00:00",
-          "stake_duration": 336
-        }
-    ]
-    
-}'
-```
-
-### `add-permissionless-validator`[​](#add-permissionless-validator "Direct link to heading")
-
-Adds a permissionless validator to Elastic Subnets.
-
-```bash
-avalanche-network-runner control add-permissionless-validator permissionlessValidatorSpecs [options] [flags]
-```
-
-#### Example[​](#example-4 "Direct link to heading")
-
-```bash
-avalanche-network-runner control add-permissionless-validator '[{"subnet_id":"p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz","node_name":"node5","staked_token_amount":2000,"asset_id":"U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK","start_time":"2023-09-25 21:00:00","stake_duration":336}]'
-```
-
-```bash
-curl --location 'http://localhost:8081/v1/control/addpermissionlessvalidator' \
---header 'Content-Type: application/json' \
---data '{
-  "validatorSpec": [
-    {
-      "subnetId":"p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz",
-      "nodeName":"node1", 
-      "stakedTokenAmount": 2000, 
-      "assetId": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK", 
-      "startTime": "2023-05-25 21:00:00", 
-      "stakeDuration": 336
-    }
-]}'
-```
-
 ### `add-subnet-validators`[​](#add-subnet-validators "Direct link to heading")
 
 Adds Subnet validators.
@@ -256,28 +194,6 @@ curl --location 'http://localhost:8081/v1/control/createsubnets' \
         "node5"
     ]
 }'
-```
-
-### `elastic-subnets`[​](#elastic-subnets "Direct link to heading")
-
-Transforms Subnets to Elastic Subnets.
-
-```bash
-avalanche-network-runner control elastic-subnets elastic_subnets_specs [options] [flags]
-```
-
-#### Example[​](#example-9 "Direct link to heading")
-
-```bash
-avalanche-network-runner control elastic-subnets '[{"subnet_id":"p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz", "asset_name":"Avalanche", 
-"asset_symbol":"AVAX", "initial_supply": 240000000, "max_supply": 720000000, "min_consumption_rate": 100000, 
-"max_consumption_rate": 120000, "min_validator_stake": 2000, "max_validator_stake": 3000000, "min_stake_duration": 336, 
-"max_stake_duration": 8760, "min_delegation_fee": 20000, "min_delegator_stake": 25, "max_validator_weight_factor": 5, 
-"uptime_requirement": 800000}]'
-```
-
-```bash
-curl -X POST -k http://localhost:8081/v1/control/transformelasticsubnets -d '{"elasticSubnetSpec": [{"subnetId":"p433wpuXyJiDhyazPYyZMJeaoPSW76CBZ2x7wrVPLgvokotXz","assetName":"Avalanche", "assetSymbol":"AVAX", "initialSupply": 240000000, "maxSupply": 720000000, "minConsumption_rate": 100000, "maxConsumption_rate": 120000, "minValidatorStake": 2000, "maxValidatorStake": 3000000, "minStakeDuration": 336, "maxStakeDuration": 8760, "minDelegationFee": 20000, "minDelegatorStake": 25, "maxValidatorWeightFactor": 5, "uptimeRequirement": 800000}]}'
 ```
 
 ### `get-snapshot-names`[​](#get-snapshot-names "Direct link to heading")
