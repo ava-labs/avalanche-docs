@@ -875,6 +875,125 @@ const config = {
         destination: '/tooling/create-deploy-avalanche-l1s/deploy-locally',
         permanent: true,
       },
+      {
+        source: '/tooling/guides/import-subnet',
+        destination: '/tooling/guides/import-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-avalanche-nodes/validate-subnet',
+        destination: '/tooling/create-avalanche-nodes/validate-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-avalanche-nodes/execute-ssh-commander',
+        destination: '/tooling/create-avalanche-nodes/execute-ssh-commands',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets',
+        destination: '/tooling/create-deploy-avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/nodes/configure/subnet-configs',
+        destination: '/nodes/configure/avalanche-l1-configs',
+      },
+      {
+        source: '/api-reference/p-chain/transaction-format',
+        destination: '/api-reference/p-chain/txn-format/',
+        permanent: true,
+      }, 
+      {
+        source: '/api-reference/c-chain/transaction-format',
+        destination: '/api-reference/c-chain/txn-format',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/x-chain/transaction-format',
+        destination: '/api-reference/x-chain/txn-format',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/serialization',
+        destination: '/api-reference/standards/serialization-primitives',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/cryptography',
+        destination: '/api-reference/standards/cryptographic-primitives',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/guides/flow-single-blockchain',
+        destination: '/api-reference/standards/guides/blockchain-flow',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/guides/api-calls',
+        destination: '/api-reference/standards/guides/issuing-api-calls',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/network-protocol',
+        destination: '/api-reference/standards/avalanche-network-protocol',
+        permanent: true,
+      },
+      {
+        source: '/dapps/smart-contract-dev/interact-golang-map',
+        destination: '/dapps/smart-contract-dev/interact-golang-app',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/considerations',
+        destination: '/avalanche-l1s/upgrade/considerations',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/durango-upgrade',
+        destination: '/avalanche-l1s/upgrade/durango-upgrade',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/subnet-precompfile-config',
+        destination: '/avalanche-l1s/upgrade/avalanche-l1-precompile-config',
+        permanent: true,
+      },
+      {
+        source: '/subnets/avalanche-cli-subnets',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/local-network',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/production-infrastructure',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/production-infrastructure',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/multisig-auth',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/multisig-auth',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/transfer-pchain-funds',
+        destination: '/avalanche-l1s/maintain/transfer-pchain-funds',
+        permanent: true,
+      },
+      {
+        source: '/subnets/add-utility/cross-chain-bridge',
+        destination: '/avalanche-l1s/add-utility/cross-chain-bridge',
+        permanent: true,
+      },
+      {
+        source: '/subnets/add-utility/deploy-smart-contract',
+        destination: '/avalanche-l1s/add-utility/deploy-smart-contract',
+        permanent: true,
+      },
+      {
+        source: '/subnets/wagmi-subnet',
+        destination: '/avalanche-l1s/wagmi-avalanche-l1',
+        permanent: true,
+      },
     ]
   },
 };
