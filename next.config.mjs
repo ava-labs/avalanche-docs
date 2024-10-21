@@ -898,6 +898,7 @@ const config = {
       {
         source: '/nodes/configure/subnet-configs',
         destination: '/nodes/configure/avalanche-l1-configs',
+        permanent: true,
       },
       {
         source: '/api-reference/p-chain/transaction-format',
@@ -993,7 +994,7 @@ const config = {
         source: '/subnets/wagmi-subnet',
         destination: '/avalanche-l1s/wagmi-avalanche-l1',
         permanent: true,
-      },
+      }
     ]
   },
 };
