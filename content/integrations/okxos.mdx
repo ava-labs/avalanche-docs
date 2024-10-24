@@ -49,6 +49,9 @@ To use the OKX OS Wallet API on the Avalanche Primary Network, you can follow th
 
 3. **Generate API Keys**: Once your project is created, click the `Manage` and then `Create API key` buttons to create a new API key. Fill in the required details and click `Create`. You will receive an `API Key` and `API Secret`. Keep your `API Key`, `API Secret`, adn `Passphrase` for future use.
 
+__Note__: Please keep your Project ID, API Key, API Secret, and Passphrase secure. It is recommended to store them in a secure location and use environment variables for better security.
+
+
 #### Project Setup
 
 1. **Install Node.js**: If you haven't already, download and install Node.js from the [official website](https://nodejs.org/). This will also install npm (Node Package Manager) which is required for managing project dependencies.
@@ -81,7 +84,7 @@ touch getAssets.js
 Open the `createAccount.js` file in your preferred code editor and use the following JavaScript code to create a new wallet account:
    
 ```javascript
-import CryptoJS from "crypto-js";
+const CryptoJS = require("crypto-js");
 
 const createWallet = async () => {
     // Generate timestamp in ISO format
@@ -154,7 +157,7 @@ Success: { code: '0', message: 'success', data: { accountId : 'Y7489xxxx-xxxx-xx
 7. **Open the `getAssets.js` file** and use the following JavaScript code to get the assets of a wallet account:
 
 ```javascript
-    import CryptoJS from "crypto-js";
+const CryptoJS = require("crypto-js");
 
     const getRequestUrl = (baseUrl, path, params = null) => {
         const url = new URL(baseUrl + path);
