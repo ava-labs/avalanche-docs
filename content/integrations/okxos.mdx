@@ -230,7 +230,8 @@ const CryptoJS = require("crypto-js");
 
 If you decide to uncomment the second address in the `createAccount.js` file, this will return a large response and you will need to handle the response data accordingly in the `getAssets.js` file.
 
-For example,
+The following code snippet shows how to organize tokens by `chainIndex` and display the balances of the first 10 tokens for each chain:
+
 ```javascript
 getAssetsData()
     .then(({ data }) => {
