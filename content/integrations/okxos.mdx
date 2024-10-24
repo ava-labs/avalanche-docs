@@ -228,6 +228,46 @@ const CryptoJS = require("crypto-js");
         .catch((error) => console.error("Error:", error));
 ```
 
+5. **Get Wallet Assets**:
+
+To get the assets of a wallet account, replace the mock variables with your actual data and run the following command in your terminal:
+
+```bash
+node getAssets.js
+```
+
+You should see the assets of the wallet account if the request is successful.
+
+For example,
+```bash
+=== Wallet Assets ===
+
+Last Updated: 10/24/2024, 7:23:20 PM
+
+Token Assets:
+
+Token: AVAX
+Chain: 43114
+Balance: 882338.9729422927
+-----------------------------
+
+Token: Sword
+Chain: 43114
+Balance: 100000
+-----------------------------
+
+Token: ERGC
+Chain: 43114
+Balance: 100000
+-----------------------------
+
+
+Token: MILO
+Chain: 43114
+Balance: 500000
+-----------------------------
+```
+
 If you decide to uncomment the second address in the `createAccount.js` file, this will return a large response and you will need to handle the response data accordingly in the `getAssets.js` file.
 
 The following code snippet shows how to organize tokens by `chainIndex` and display the balances of the first 10 tokens for each chain:
@@ -272,44 +312,124 @@ getAssetsData()
     .catch(error => console.error('Error:', error));
 ```
 
-5. **Get Wallet Assets**:
+Which will output:
 
-To get the assets of a wallet account, replace the mock variables with your actual data and run the following command in your terminal:
-
-```bash
-node getAssets.js
-```
-
-You should see the assets of the wallet account if the request is successful.
-
-For example,
 ```bash
 === Wallet Assets ===
 
-Last Updated: 10/24/2024, 7:23:20 PM
 
-Token Assets:
-
-Token: AVAX
-Chain: 43114
-Balance: 882338.9729422927
------------------------------
-
-Token: Sword
-Chain: 43114
-Balance: 100000
------------------------------
-
-Token: ERGC
-Chain: 43114
-Balance: 100000
------------------------------
+=== Chain 1 Assets ===
+Last Updated: 10/24/2024, 1:03:57 PM
 
 
-Token: MILO
-Chain: 43114
-Balance: 500000
------------------------------
+    [1/10] Token: CULT
+    Chain: 1
+    Balance: 10000000
+    -----------------------------
+
+    [2/10] Token: oDoge
+    Chain: 1
+    Balance: 1
+    -----------------------------
+
+    [3/10] Token: SHIB
+    Chain: 1
+    Balance: 6460463889.43272
+    -----------------------------
+
+    [4/10] Token: SCAM
+    Chain: 1
+    Balance: 34710000
+    -----------------------------
+
+    [5/10] Token: ALPHA
+    Chain: 1
+    Balance: 13450302459.982306
+    -----------------------------
+
+    [6/10] Token: $HIPPO
+    Chain: 1
+    Balance: 30000000
+    -----------------------------
+
+    [7/10] Token: Martians
+    Chain: 1
+    Balance: 21034500000
+    -----------------------------
+
+    [8/10] Token: PPBLZ
+    Chain: 1
+    Balance: 0.0001
+    -----------------------------
+
+    [9/10] Token: BNBC
+    Chain: 1
+    Balance: 30000000
+    -----------------------------
+
+    [10/10] Token: INUINU
+    Chain: 1
+    Balance: 3000000000
+    -----------------------------
+
+... and 3879 more tokens for Chain 1
+
+
+=== Chain 43114 Assets ===
+Last Updated: 10/24/2024, 1:03:57 PM
+
+
+    [1/10] Token: WOA
+    Chain: 43114
+    Balance: 10000
+    -----------------------------
+
+    [2/10] Token: Sword
+    Chain: 43114
+    Balance: 1000000
+    -----------------------------
+
+    [3/10] Token: CHIKN
+    Chain: 43114
+    Balance: 10000
+    -----------------------------
+
+    [4/10] Token: MILO
+    Chain: 43114
+    Balance: 500000
+    -----------------------------
+
+    [5/10] Token: ticket
+    Chain: 43114
+    Balance: 1
+    -----------------------------
+
+    [6/10] Token: AVAX
+    Chain: 43114
+    Balance: 851853.972156465
+    -----------------------------
+
+    [7/10] Token: WAGMI
+    Chain: 43114
+    Balance: 100000
+    -----------------------------
+
+    [8/10] Token: DUCK
+    Chain: 43114
+    Balance: 25000
+    -----------------------------
+
+    [9/10] Token: Sword
+    Chain: 43114
+    Balance: 100000
+    -----------------------------
+
+    [10/10] Token: ERGC
+    Chain: 43114
+    Balance: 100000
+    -----------------------------
+
+... and 4 more tokens for Chain 43114
 ```
 
 ## Conclusion
