@@ -37,9 +37,9 @@ For detailed documentation and guides, please visit the [OKX OS Documentation](h
 - Developing blockchain games with in-game asset management across 100+ chains.
 - Accessing comprehensive onchain data APIs for actionable insights.
 
-### Create a Mulit-Chain Asset Tracker on Avalanche Primary Network
+### Create a On-Chain Data Dashboard on Avalanche Primary Network
 
-To create a mulit-chain asset tracker on the Avalanche Primary Network, you can follow the steps below:
+To create a on-chain data dashboard on the Avalanche Primary Network, you can follow the steps below:
 
 #### API Key Setup
 
@@ -78,6 +78,7 @@ Create two new JavaScript files in your project directory. For example, create t
 ```bash
 touch createAccount.js
 touch getAssets.js
+touch getTx.js
 ```
 
 2. **Write Your Scripts**:
@@ -268,7 +269,7 @@ Balance: 500000
 -----------------------------
 ```
 
-If you decide to uncomment the second address in the `createAccount.js` file, this will return a large response and you will need to handle the response data accordingly in the `getAssets.js` file.
+When dealing with large data responses, such as when you uncomment the second address in the `createAccount.js` file, it is important to handle the response data efficiently in the `getAssets.js` file.
 
 The following code snippet shows how to organize tokens by `chainIndex` and display the balances of the first 10 tokens for each chain:
 
@@ -431,6 +432,144 @@ Last Updated: 10/24/2024, 1:03:57 PM
 
 ... and 4 more tokens for Chain 43114
 ```
+
+
+4. **Open the `getTx.js` file** and use the following JavaScript code to get the data of a transaction:
+
+```javascript
+const CryptoJS = require("crypto-js");
+
+const getRequestUrl = (baseUrl, path, params = null) => {
+    const url = new URL(baseUrl + path);
+    if (params) {
+        Object.keys(params).forEach((key) =>
+            url.searchParams.append(key, params[key]),
+        );
+    }
+    return url.toString();
+};
+
+const apiBaseUrl = "https://www.okx.com";
+const params = {
+    txHash: '0xaf54d1cb2c21bed094095bc503ec76128f80c815db8631fd74c6e49781b94bd1', // Changed from txhash to txHash
+    chainIndex: '43114'
+};
+
+const timestamp = new Date().toISOString();
+const method = "GET";
+const path = '/api/v5/wallet/post-transaction/transaction-detail-by-txhash';
+const queryString = `?txHash=${params.txHash}&chainIndex=${params.chainIndex}`; // Changed from txhash to txHash
+
+const signString = timestamp + method + path + queryString;
+const signature = CryptoJS.enc.Base64.stringify(
+    CryptoJS.HmacSHA256(signString, "YOUR API SECRET"),
+);
+
+const headersParams = {
+    "Content-Type": "application/json",
+    "OK-ACCESS-PROJECT": "YOUR PROJECT ID",
+    "OK-ACCESS-KEY": "YOUR API KEY",
+    "OK-ACCESS-SIGN": signature,
+    "OK-ACCESS-PASSPHRASE": "YOUR API PASSPHRASE",
+    "OK-ACCESS-TIMESTAMP": timestamp,
+};
+
+const getTransactionDetailData = async () => {
+    const apiRequestUrl = getRequestUrl(apiBaseUrl, path, params);
+
+    const response = await fetch(apiRequestUrl, {
+        method: "GET",
+        headers: headersParams,
+    });
+
+    return response.json();
+};
+
+const formatDate = (timestamp) => {
+    return new Date(parseInt(timestamp)).toLocaleString();
+};
+
+const formatGas = (gas) => {
+    return parseFloat(gas).toLocaleString();
+};
+
+getTransactionDetailData()
+    .then((response) => {
+        console.log('\n=== Transaction Details ===\n');
+
+        if (response.code === "0" && response.data && response.data.length > 0) {
+            const tx = response.data[0];
+
+            // Transaction Basic Info
+            console.log('📝 Basic Information');
+            console.log('------------------');
+            console.log(`Hash: ${tx.txhash}`);
+            console.log(`Status: ${tx.txStatus.toUpperCase()}`);
+            console.log(`Block: ${formatGas(tx.height)}`);
+            console.log(`Time: ${formatDate(tx.txTime)}`);
+            console.log(`Method ID: ${tx.methodId}`);
+            console.log(`Chain: ${tx.chainIndex} (${tx.symbol})`);
+
+            // Gas Info
+            console.log('\n⛽ Gas Information');
+            console.log('----------------');
+            console.log(`Gas Limit: ${formatGas(tx.gasLimit)}`);
+            console.log(`Gas Used: ${formatGas(tx.gasUsed)}`);
+            console.log(`Gas Price: ${formatGas(tx.gasPrice)} Wei`);
+            console.log(`Nonce: ${tx.nonce}`);
+
+            // From Address
+            console.log('\n📤 From Address');
+            console.log('-------------');
+            tx.fromDetails.forEach(from => {
+                console.log(`Address: ${from.address}`);
+                console.log(`Type: ${from.isContract ? 'Contract' : 'Wallet'}`);
+            });
+
+            // To Address
+            console.log('\n📥 To Address');
+            console.log('-----------');
+            tx.toDetails.forEach(to => {
+                console.log(`Address: ${to.address}`);
+                console.log(`Type: ${to.isContract ? 'Contract' : 'Wallet'}`);
+            });
+
+            // Token Transfers
+            if (tx.tokenTransferDetails && tx.tokenTransferDetails.length > 0) {
+                console.log('\n🔄 Token Transfers');
+                console.log('---------------');
+                tx.tokenTransferDetails.forEach((transfer, index) => {
+                    console.log(`\nTransfer #${index + 1}:`);
+                    console.log(`Token: ${transfer.symbol}`);
+                    console.log(`Amount: ${transfer.amount}`);
+                    console.log(`From: ${transfer.from} ${transfer.isFromContract ? '(Contract)' : '(Wallet)'}`);
+                    console.log(`To: ${transfer.to} ${transfer.isToContract ? '(Contract)' : '(Wallet)'}`);
+                    console.log(`Contract: ${transfer.tokenContractAddress}`);
+                });
+            }
+
+            // Internal Transactions (if any)
+            if (tx.internalTransactionDetails && tx.internalTransactionDetails.length > 0) {
+                console.log('\n💱 Internal Transactions');
+                console.log('--------------------');
+                tx.internalTransactionDetails.forEach((internal, index) => {
+                    console.log(`\nInternal Transfer #${index + 1}:`);
+                    console.log(`From: ${internal.from}`);
+                    console.log(`To: ${internal.to}`);
+                    console.log(`Amount: ${internal.amount} ${tx.symbol}`);
+                    console.log(`Status: ${internal.state}`);
+                });
+            }
+
+        } else {
+            console.log('Status:', response.code);
+            console.log('Message:', response.msg);
+            console.log('Data:', response.data);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+```
+
 
 ## Conclusion
 
