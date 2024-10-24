@@ -150,7 +150,7 @@ Success: { code: '0', message: 'success', data: { accountId : 'Y7489xxxx-xxxx-xx
 
 7. **Open the `getAssets.js` file** and use the following JavaScript code to get the assets of a wallet account:
 
-   ```javascript
+```javascript
     import CryptoJS from "crypto-js";
 
     const getRequestUrl = (baseUrl, path, params = null) => {
@@ -220,14 +220,15 @@ Success: { code: '0', message: 'success', data: { accountId : 'Y7489xxxx-xxxx-xx
             });
         })
         .catch((error) => console.error("Error:", error));
-
 ```
 
 8. **Get Wallet Assets**:
-    To get the assets of a wallet account, run the following command in your terminal:
-   ```bash
-   node getAssets.js
-   ```
+
+To get the assets of a wallet account, run the following command in your terminal:
+
+```bash
+node getAssets.js
+```
 
 You should see the assets of the wallet account if the request is successful.
 
