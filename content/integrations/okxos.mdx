@@ -37,6 +37,230 @@ For detailed documentation and guides, please visit the [OKX OS Documentation](h
 - Developing blockchain games with in-game asset management across 100+ chains.
 - Accessing comprehensive onchain data APIs for actionable insights.
 
+### Use The OKX OS Wallet API on Avalanche Primary Network
+
+To use the OKX OS Wallet API on the Avalanche Primary Network, you can follow the steps below:
+
+#### API Key Setup
+
+1. **Log in to the Developer Portal**: Sign up for an account on the [OKX Developer Portal](https://www.okx.com/web3/build/dev-portal).
+
+2. **Create a New Project**: Click on the `Create new project` button and fill in the required details. Once the project is created, you will recieve a `Project ID`. Keep it for future reference.
+
+3. **Generate API Keys**: Once your project is created, click the `Manage` and then `Create API key` buttons to create a new API key. Fill in the required details and click `Create`. You will receive an `API Key` and `API Secret`. Keep your `API Key`, `API Secret`, adn `Passphrase` for future use.
+
+#### Project Setup
+
+#### Create a New Node.js Project
+
+1. **Install Node.js**: If you haven't already, download and install Node.js from the [official website](https://nodejs.org/). This will also install npm (Node Package Manager) which is required for managing project dependencies.
+
+2. **Initialize a New Project**:
+   Open your terminal and navigate to the directory where you want to create your project. Run the following command to initialize a new Node.js project:
+   ```bash
+   npm init -y
+   ```
+   This will create a `package.json` file with default settings.
+
+3. **Install Required Dependencies**:
+    Install the `crypto-js` package for generating signatures.
+    Run:
+   ```bash
+   npm install crypto-js
+   ```
+
+4. **Create Your JavaScript Scripts**:
+   Create two new JavaScript files in your project directory. For example, create the files named `createAccount.js` and `getAsstes.js`:
+   ```bash
+    touch createAccount.js
+    touch getAssets.js
+   ```
+
+5. **Write Your Script**:
+   Open the `createAccount.js` file in your preferred code editor and use the following JavaScript code to create a new wallet account:
+   ```javascript
+   import CryptoJS from "crypto-js";
+
+   const createWallet = async () => {
+       // Generate timestamp in ISO format
+       const timestamp = new Date().toISOString();
+       const method = "POST";
+       const path = "/api/v5/wallet/account/create-wallet-account";
+
+       // Prepare the body first as we need it for signature
+       const body = {
+           addresses: [
+               {
+                   chainIndex: "43114",
+                   address: "0x2eFB50e952580f4ff32D8d2122853432bbF2E204",
+               },
+               // You can add more addresses here
+               // {
+               //     chainIndex: "1",
+               //     address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+               // },
+           ],
+       };
+
+       // Generate signature
+       // timestamp + method + path + body
+       const signString = timestamp + method + path + JSON.stringify(body);
+       const signature = CryptoJS.enc.Base64.stringify(
+           CryptoJS.HmacSHA256(signString, "YOUR API SECRET KEY"),
+       );
+
+       const response = await fetch(
+           "https://www.okx.com/api/v5/wallet/account/create-wallet-account",
+           {
+               method: "POST",
+               headers: {
+                   "Content-Type": "application/json",
+                   "OK-ACCESS-PROJECT": "YOUR PROJECT ID",
+                   "OK-ACCESS-KEY": "YOUR API KEY",
+                   "OK-ACCESS-SIGN": signature,
+                   "OK-ACCESS-PASSPHRASE": "YOUR API PASSPHRASE",
+                   "OK-ACCESS-TIMESTAMP": timestamp,
+               },
+               body: JSON.stringify(body),
+           },
+       );
+
+       const data = await response.json();
+       return data;
+   };
+
+   // Example usage:
+   createWallet()
+       .then((response) => console.log("Success:", response))
+       .catch((error) => console.error("Error:", error));
+   ```
+
+6. **Create an Account**:
+    To create a new wallet account, run the following command in your terminal:
+   ```bash
+   node createAccount.js
+   ```
+
+You should see a success message with the response data if the account is created successfully.
+
+For example,
+```bash
+Success: { code: '0', message: 'success', data: { accountId : 'Y7489xxxx-xxxx-xxxx-xxxx-xxxxxxaa652c' } }
+```
+
+7. **Open the `getAssets.js` file** and use the following JavaScript code to get the assets of a wallet account:
+
+   ```javascript
+    import CryptoJS from "crypto-js";
+
+    const getRequestUrl = (baseUrl, path, params = null) => {
+        const url = new URL(baseUrl + path);
+        if (params) {
+            Object.keys(params).forEach((key) =>
+                url.searchParams.append(key, params[key]),
+            );
+        }
+        return url.toString();
+    };
+
+    const apiBaseUrl = "https://www.okx.com";
+    const getAssetsParams = {
+        accountId: "ACCOUNT ID FROM PREVIOUS STEP", // Replace with your accountId
+    };
+
+    const timestamp = new Date().toISOString();
+    const method = "GET";
+    const path = "/api/v5/wallet/asset/wallet-all-token-balances";
+    const queryString = `?accountId=${getAssetsParams.accountId}`;
+
+    // Generate signature
+    const signString = timestamp + method + path + queryString;
+    const signature = CryptoJS.enc.Base64.stringify(
+        CryptoJS.HmacSHA256(signString, "YOUR API SECRET KEY"),
+    );
+
+    const headersParams = {
+        "Content-Type": "application/json",
+        "OK-ACCESS-PROJECT": "YOUR PROJECT ID",
+        "OK-ACCESS-KEY": "YOUR API KEY",
+        "OK-ACCESS-SIGN": signature,
+        "OK-ACCESS-PASSPHRASE": "YOUR API PASSPHRASE",
+        "OK-ACCESS-TIMESTAMP": timestamp,
+    };
+
+    const getAssetsData = async () => {
+        const apiRequestUrl = getRequestUrl(apiBaseUrl, path, getAssetsParams);
+
+        const response = await fetch(apiRequestUrl, {
+            method: "GET",
+            headers: headersParams,
+        });
+
+        return response.json();
+    };
+
+    // Use it
+    getAssetsData()
+        .then(({ data }) => {
+            console.log("\n=== Wallet Assets ===\n");
+
+            data.forEach((wallet) => {
+                // Convert timestamp to readable date
+                const date = new Date(parseInt(wallet.timeStamp));
+                console.log(`Last Updated: ${date.toLocaleString()}\n`);
+
+                console.log("Token Assets:");
+                wallet.tokenAssets.forEach((token) => {
+                    console.log(`
+    Token: ${token.symbol}
+    Chain: ${token.chainIndex}
+    Balance: ${token.balance}
+    -----------------------------`);
+                });
+            });
+        })
+        .catch((error) => console.error("Error:", error));
+
+```
+
+8. **Get Wallet Assets**:
+    To get the assets of a wallet account, run the following command in your terminal:
+   ```bash
+   node getAssets.js
+   ```
+
+You should see the assets of the wallet account if the request is successful.
+
+For example,
+```bash
+=== Wallet Assets ===
+
+Last Updated: 10/24/2024, 7:23:20 PM
+
+Token Assets:
+
+Token: AVAX
+Chain: 43114
+Balance: 882338.9729422927
+-----------------------------
+
+Token: Sword
+Chain: 43114
+Balance: 100000
+-----------------------------
+
+Token: ERGC
+Chain: 43114
+Balance: 100000
+-----------------------------
+
+
+Token: MILO
+Chain: 43114
+Balance: 500000
+-----------------------------
+```
+
 ## Conclusion
 
 OKX OS is a powerful infrastructure suite that empowers developers to build and scale innovative onchain applications quickly and efficiently. With its extensive tools, multi-chain support, and proven scalability, it opens up new possibilities for developers to create seamless experiences across the blockchain ecosystem.
