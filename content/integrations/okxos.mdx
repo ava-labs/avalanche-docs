@@ -37,9 +37,9 @@ For detailed documentation and guides, please visit the [OKX OS Documentation](h
 - Developing blockchain games with in-game asset management across 100+ chains.
 - Accessing comprehensive onchain data APIs for actionable insights.
 
-### Use The OKX OS Wallet API on Avalanche Primary Network
+### Create a Mulit-Chain Asset Tracker on Avalanche Primary Network
 
-To use the OKX OS Wallet API on the Avalanche Primary Network, you can follow the steps below:
+To create a mulit-chain asset tracker on the Avalanche Primary Network, you can follow the steps below:
 
 #### API Key Setup
 
@@ -49,8 +49,7 @@ To use the OKX OS Wallet API on the Avalanche Primary Network, you can follow th
 
 3. **Generate API Keys**: Once your project is created, click the `Manage` and then `Create API key` buttons to create a new API key. Fill in the required details and click `Create`. You will receive an `API Key` and `API Secret`. Keep your `API Key`, `API Secret`, adn `Passphrase` for future use.
 
-__Note__: Please keep your Project ID, API Key, API Secret, and Passphrase secure and do not share them publicly. It is recommended to use environment variables or secure storage for these values when integrating them into your applications.
-
+> **Note**: Keep your Project ID, API Key, Secret, and Passphrase secure by storing them in environment variables or a secure storage solution. It is recommended to never share these credentials publicly or commit them to your codebase.
 
 #### Project Setup
 
@@ -71,8 +70,9 @@ Run:
 ```bash
 npm install crypto-js
 ```
+#### Create a Wallet Account and Get Assets
 
-4. **Create Your JavaScript Scripts**:
+1. **Create Your JavaScript Scripts**:
 Create two new JavaScript files in your project directory. For example, create the files named `createAccount.js` and `getAsstes.js`:
 
 ```bash
@@ -80,7 +80,7 @@ touch createAccount.js
 touch getAssets.js
 ```
 
-5. **Write Your Scripts**:
+2. **Write Your Scripts**:
 Open the `createAccount.js` file in your preferred code editor and use the following JavaScript code to create a new wallet account:
    
 ```javascript
@@ -140,8 +140,8 @@ createWallet()
     .catch((error) => console.error("Error:", error));
 ```
 
-6. **Create an Account**:
-To create a new wallet account, run the following command in your terminal:
+3. **Create an Account**:
+To create a new wallet account, replace the mock variables with your actual data and run the following command in your terminal:
 
 ```bash
 node createAccount.js
@@ -154,7 +154,7 @@ For example,
 Success: { code: '0', message: 'success', data: { accountId : 'Y7489xxxx-xxxx-xxxx-xxxx-xxxxxxaa652c' } }
 ```
 
-7. **Open the `getAssets.js` file** and use the following JavaScript code to get the assets of a wallet account:
+4. **Open the `getAssets.js` file** and use the following JavaScript code to get the assets of a wallet account:
 
 ```javascript
 const CryptoJS = require("crypto-js");
@@ -228,9 +228,52 @@ const CryptoJS = require("crypto-js");
         .catch((error) => console.error("Error:", error));
 ```
 
-8. **Get Wallet Assets**:
+If you decide to uncomment the second address in the `createAccount.js` file, this will return a large response and you will need to handle the response data accordingly in the `getAssets.js` file.
 
-To get the assets of a wallet account, run the following command in your terminal:
+For example,
+```javascript
+getAssetsData()
+    .then(({ data }) => {
+        console.log('\n=== Wallet Assets ===\n');
+
+        data.forEach((wallet, walletIndex) => {
+            const date = new Date(parseInt(wallet.timeStamp));
+
+            // Group tokens by chainIndex
+            const tokensByChain = wallet.tokenAssets.reduce((acc, token) => {
+                if (!acc[token.chainIndex]) {
+                    acc[token.chainIndex] = [];
+                }
+                acc[token.chainIndex].push(token);
+                return acc;
+            }, {});
+
+            // Display tokens for each chain
+            Object.entries(tokensByChain).forEach(([chainIndex, tokens]) => {
+                console.log(`\n=== Chain ${chainIndex} Assets ===`);
+                console.log(`Last Updated: ${date.toLocaleString()}\n`);
+
+                tokens.slice(0, 10).forEach((token, index) => {
+                    console.log(`
+    [${index + 1}/10] Token: ${token.symbol}
+    Chain: ${token.chainIndex}
+    Balance: ${token.balance}
+    -----------------------------`);
+                });
+
+                const remainingTokens = tokens.length - 10;
+                if (remainingTokens > 0) {
+                    console.log(`\n... and ${remainingTokens} more tokens for Chain ${chainIndex}\n`);
+                }
+            });
+        });
+    })
+    .catch(error => console.error('Error:', error));
+```
+
+5. **Get Wallet Assets**:
+
+To get the assets of a wallet account, replace the mock variables with your actual data and run the following command in your terminal:
 
 ```bash
 node getAssets.js
