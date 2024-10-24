@@ -37,11 +37,16 @@ For detailed documentation and guides, please visit the [OKX OS Documentation](h
 - Developing blockchain games with in-game asset management across 100+ chains.
 - Accessing comprehensive onchain data APIs for actionable insights.
 
-### Create a On-Chain Data Dashboard on Avalanche Primary Network
+### Building an On-Chain Data Dashboard for Avalanche C-Chain
 
-To create a on-chain data dashboard on the Avalanche Primary Network, you can follow the steps below:
+This guide walks you through setting up a dashboard to track wallet assets and transactions on the Avalanche C-Chain. You'll use OKX OS's Wallet API to fetch and display this data.
 
-#### API Key Setup
+#### Prerequisites
+- [Node.js](https://nodejs.org/) installed on your system
+- Basic understanding of JavaScript and async/await
+- An OKX Developer account
+
+#### Setting Up Your Development Environment
 
 1. **Log in to the Developer Portal**: Sign up for an account on the [OKX Developer Portal](https://www.okx.com/web3/build/dev-portal).
 
@@ -51,38 +56,26 @@ To create a on-chain data dashboard on the Avalanche Primary Network, you can fo
 
 > **Note**: Keep your Project ID, API Key, Secret, and Passphrase secure by storing them in environment variables or a secure storage solution. It is recommended to never share these credentials publicly or commit them to your codebase.
 
-#### Project Setup
-
-1. **Install Node.js**: If you haven't already, download and install Node.js from the [official website](https://nodejs.org/). This will also install npm (Node Package Manager) which is required for managing project dependencies.
-
-2. **Initialize a New Project**:
-Open your terminal and navigate to the directory where you want to create your project. Run the following command to initialize a new Node.js project:
+4. **Initialize a New Project**:
+Run the following commands to create a new directory and initialize a Node.js project with default settings and required dependencies:
 
 ```bash
+mkdir avalanche-dashboard
+cd avalanche-dashboard
 npm init -y
-```
-This will create a `package.json` file with default settings.
-
-3. **Install Required Dependencies**:
-Install the `crypto-js` package for generating signatures.
-
-Run:
-```bash
 npm install crypto-js
 ```
-#### Create a Wallet Account and Get Assets
 
-1. **Create Your JavaScript Scripts**:
-Create two new JavaScript files in your project directory. For example, create the files named `createAccount.js` and `getAsstes.js`:
-
+Create three script files:
 ```bash
-touch createAccount.js
-touch getAssets.js
-touch getTx.js
+touch createAccount.js getAssets.js getTx.js
 ```
 
-2. **Write Your Scripts**:
-Open the `createAccount.js` file in your preferred code editor and use the following JavaScript code to create a new wallet account:
+## Create Wallet Account
+
+You'll start by creating an account to track your Avalanche addresses with a simple Node.js script that interacts with the OKX Wallet API.
+
+In the `createAccount.js` file:
    
 ```javascript
 const CryptoJS = require("crypto-js");
@@ -100,9 +93,13 @@ const createWallet = async () => {
                 chainIndex: "43114",
                 address: "0x2eFB50e952580f4ff32D8d2122853432bbF2E204",
             },
-            // You can add more addresses here
+            // You can add more addresses and chain indexes 
             // {
             //     chainIndex: "1",
+            //     address: "0x2eFB50e952580f4ff32D8d2122853432bbF2E204",
+            // },
+            // {
+            //     chainIndex: "43114",
             //     address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
             // },
         ],
@@ -141,9 +138,15 @@ createWallet()
     .catch((error) => console.error("Error:", error));
 ```
 
-3. **Create an Account**:
-To create a new wallet account, replace the mock variables with your actual data and run the following command in your terminal:
+Before running the script, replace these placeholder values with your actual credentials:
+```javascript
+"YOUR API SECRET KEY" → Your API Secret
+"YOUR PROJECT ID" → Your Project ID
+"YOUR API KEY" → Your API Key
+"YOUR API PASSPHRASE" → Your Passphrase
+```
 
+Run your script:
 ```bash
 node createAccount.js
 ```
@@ -155,7 +158,13 @@ For example,
 Success: { code: '0', message: 'success', data: { accountId : 'Y7489xxxx-xxxx-xxxx-xxxx-xxxxxxaa652c' } }
 ```
 
-4. **Open the `getAssets.js` file** and use the following JavaScript code to get the assets of a wallet account:
+## Check Wallet Assets
+
+Now that we have an account, you can fetch the token balances. This script will show you all tokens held by your tracked addresses.
+
+In your `getAssets.js` file:
+
+1. Copy this code to `getAssets.js`:
 
 ```javascript
 const CryptoJS = require("crypto-js");
@@ -229,10 +238,11 @@ const CryptoJS = require("crypto-js");
         .catch((error) => console.error("Error:", error));
 ```
 
-5. **Get Wallet Assets**:
+Make sure to:
+- Update the accountId with the one you received in Step 1
+- Replace the API credentials with yours
 
-To get the assets of a wallet account, replace the mock variables with your actual data and run the following command in your terminal:
-
+Run the asset checker:
 ```bash
 node getAssets.js
 ```
@@ -269,172 +279,13 @@ Balance: 500000
 -----------------------------
 ```
 
-When dealing with large data responses, such as when you uncomment the second address in the `createAccount.js` file, it is important to handle the response data efficiently in the `getAssets.js` file.
 
-The following code snippet shows how to organize tokens by `chainIndex` and display the balances of the first 10 tokens for each chain:
+## View Transaction Details
 
-```javascript
-getAssetsData()
-    .then(({ data }) => {
-        console.log('\n=== Wallet Assets ===\n');
+Finally, you can set up transaction viewing. This script provides detailed information about any transaction on the Avalanche C-Chain.
 
-        data.forEach((wallet, walletIndex) => {
-            const date = new Date(parseInt(wallet.timeStamp));
+In your `getTx.js` file:
 
-            // Group tokens by chainIndex
-            const tokensByChain = wallet.tokenAssets.reduce((acc, token) => {
-                if (!acc[token.chainIndex]) {
-                    acc[token.chainIndex] = [];
-                }
-                acc[token.chainIndex].push(token);
-                return acc;
-            }, {});
-
-            // Display tokens for each chain
-            Object.entries(tokensByChain).forEach(([chainIndex, tokens]) => {
-                console.log(`\n=== Chain ${chainIndex} Assets ===`);
-                console.log(`Last Updated: ${date.toLocaleString()}\n`);
-
-                tokens.slice(0, 10).forEach((token, index) => {
-                    console.log(`
-    [${index + 1}/10] Token: ${token.symbol}
-    Chain: ${token.chainIndex}
-    Balance: ${token.balance}
-    -----------------------------`);
-                });
-
-                const remainingTokens = tokens.length - 10;
-                if (remainingTokens > 0) {
-                    console.log(`\n... and ${remainingTokens} more tokens for Chain ${chainIndex}\n`);
-                }
-            });
-        });
-    })
-    .catch(error => console.error('Error:', error));
-```
-
-Which will output:
-
-```bash
-=== Wallet Assets ===
-
-
-=== Chain 1 Assets ===
-Last Updated: 10/24/2024, 1:03:57 PM
-
-
-    [1/10] Token: CULT
-    Chain: 1
-    Balance: 10000000
-    -----------------------------
-
-    [2/10] Token: oDoge
-    Chain: 1
-    Balance: 1
-    -----------------------------
-
-    [3/10] Token: SHIB
-    Chain: 1
-    Balance: 6460463889.43272
-    -----------------------------
-
-    [4/10] Token: SCAM
-    Chain: 1
-    Balance: 34710000
-    -----------------------------
-
-    [5/10] Token: ALPHA
-    Chain: 1
-    Balance: 13450302459.982306
-    -----------------------------
-
-    [6/10] Token: $HIPPO
-    Chain: 1
-    Balance: 30000000
-    -----------------------------
-
-    [7/10] Token: Martians
-    Chain: 1
-    Balance: 21034500000
-    -----------------------------
-
-    [8/10] Token: PPBLZ
-    Chain: 1
-    Balance: 0.0001
-    -----------------------------
-
-    [9/10] Token: BNBC
-    Chain: 1
-    Balance: 30000000
-    -----------------------------
-
-    [10/10] Token: INUINU
-    Chain: 1
-    Balance: 3000000000
-    -----------------------------
-
-... and 3879 more tokens for Chain 1
-
-
-=== Chain 43114 Assets ===
-Last Updated: 10/24/2024, 1:03:57 PM
-
-
-    [1/10] Token: WOA
-    Chain: 43114
-    Balance: 10000
-    -----------------------------
-
-    [2/10] Token: Sword
-    Chain: 43114
-    Balance: 1000000
-    -----------------------------
-
-    [3/10] Token: CHIKN
-    Chain: 43114
-    Balance: 10000
-    -----------------------------
-
-    [4/10] Token: MILO
-    Chain: 43114
-    Balance: 500000
-    -----------------------------
-
-    [5/10] Token: ticket
-    Chain: 43114
-    Balance: 1
-    -----------------------------
-
-    [6/10] Token: AVAX
-    Chain: 43114
-    Balance: 851853.972156465
-    -----------------------------
-
-    [7/10] Token: WAGMI
-    Chain: 43114
-    Balance: 100000
-    -----------------------------
-
-    [8/10] Token: DUCK
-    Chain: 43114
-    Balance: 25000
-    -----------------------------
-
-    [9/10] Token: Sword
-    Chain: 43114
-    Balance: 100000
-    -----------------------------
-
-    [10/10] Token: ERGC
-    Chain: 43114
-    Balance: 100000
-    -----------------------------
-
-... and 4 more tokens for Chain 43114
-```
-
-
-4. **Open the `getTx.js` file** and use the following JavaScript code to get the data of a transaction:
 
 ```javascript
 const CryptoJS = require("crypto-js");
@@ -570,6 +421,16 @@ getTransactionDetailData()
     .catch(error => console.error('Error:', error));
 ```
 
+Update the script with:
+- Your API credentials
+- Any transaction hash you want to investigate
+
+You'll see a detailed breakdown including:
+- Transaction basics
+- Gas info
+- Addresses involved
+- Token transfers
+- Internal transactions
 
 ## Conclusion
 
