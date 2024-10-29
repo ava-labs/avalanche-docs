@@ -5,8 +5,10 @@ import React, {
   Fragment,
   type ReactElement,
 } from 'react';
-import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link } from 'lucide-react';
+import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle, ChevronDownIcon } from 'lucide-react';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
+import { Menu, Transition } from '@headlessui/react'
+
 
 export function DeployBlockchainAnimation(): React.ReactElement {
   const installCmd = 'avalanche blockchain deploy myblockchain';
@@ -160,5 +162,85 @@ export function HamburgerMenu(): React.ReactElement {
       }
     ]}
   />
+  )
+}
+
+interface Option {
+  title: string
+  description: string
+  icon: React.ReactNode
+  url: string
+}
+
+interface AcademyDropdownProps {
+  width?: string
+}
+
+const options: Option[] = [
+  {
+    title: 'Academy',
+    description: '',
+    icon: <></>,
+    url: '/',
+  },
+  {
+    title: 'Blockchain Fundamentals',
+    description: 'Understand fundamental blockchain concepts.',
+    icon: <SquareIcon className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/blockchain-fundamentals',
+  },
+  {
+    title: 'Avalanche Fundamentals',
+    description: 'Overview of Avalanche Consensus, L1s, and VMs.',
+    icon: <Triangle className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/avalanche-fundamentals',
+  },
+  {
+    title: "Multi-Chain Architecture",
+    description: 'Deploy your own blockchain with multi-chain architecture.',
+    icon: <SquareStackIcon className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/multi-chain-architecture',
+  },
+  {
+    title: "Interchain Messaging",
+    description: 'Build cross-chain dApps on Avalanche.',
+    icon: <MailIcon className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/interchain-messaging',
+  },
+  {
+    title: "Interchain Token Transfer",
+    description: 'Transfer assets between Avalanche blockchains.',
+    icon: <ArrowLeftRight className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/interchain-token-transfer',
+  },
+  {
+    title: "Customizing the EVM",
+    description: 'Add custom precompiles to the EVM.',
+    icon: <SquareCode className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/customizing-evm',
+  },
+  {
+    title: "Layer 1 Tokenomics",
+    description: 'Design tokenomics for your Avalanche L1.',
+    icon: <Coins className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/l1-tokenomics',
+  },
+  {
+    title: "AvaCloud APIs",
+    description: 'Use AvaCloud APIs to build web apps.',
+    icon: <Webhook className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/avacloudapis',
+  },
+  {
+    title: "HyperSDK",
+    description: 'Build high-performance blockchains with HyperSDK.',
+    icon: <TerminalIcon className="w-5 h-5" />,
+    url: 'https://academy.avax.network/course/hypersdk',
+  }
+]
+
+export function AcademyDropdown({ width = 'w-72' }: AcademyDropdownProps) {
+  return (
+    <RootToggle options={options} />
   )
 }
