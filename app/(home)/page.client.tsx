@@ -5,7 +5,7 @@ import React, {
   Fragment,
   type ReactElement,
 } from 'react';
-import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle, ChevronDownIcon } from 'lucide-react';
+import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, FolderCode, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle, ChevronDownIcon } from 'lucide-react';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 import { Menu, Transition } from '@headlessui/react'
 
