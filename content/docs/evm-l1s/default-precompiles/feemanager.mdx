@@ -1,0 +1,115 @@
+---
+title: FeeManager Precompile
+description: Learn how to use the FeeManager Precompile on your Avalanche L1 blockchain.
+---
+
+You can configure the parameters of the dynamic fee algorithm on chain using the `FeeConfigManager`. In order to activate this feature, you will need to provide the `FeeConfigManager` in the genesis:
+
+```json
+{
+  "config": {
+    "feeManagerConfig": {
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+    }
+  }
+}
+```
+
+The precompile implements the `FeeManager` interface which includes the same `AllowList` interface used by ContractNativeMinter, TxAllowList, etc. For an example of the `AllowList` interface, see the [TxAllowList](#allowlist-interface) above.
+
+The `Stateful Precompile` contract powering the `FeeConfigManager` adheres to the following Solidity interface at `0x0200000000000000000000000000000000000003` (you can load this interface and interact directly in Remix). It can be also found in [IFeeManager.sol](https://github.com/ava-labs/subnet-evm/blob/5faabfeaa021a64c2616380ed2d6ec0a96c8f96d/contract-examples/contracts/IFeeManager.sol):
+
+```solidity
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./IAllowList.sol";
+
+interface IFeeManager is IAllowList {
+  struct FeeConfig {
+    uint256 gasLimit;
+    uint256 targetBlockRate;
+    uint256 minBaseFee;
+    uint256 targetGas;
+    uint256 baseFeeChangeDenominator;
+    uint256 minBlockGasCost;
+    uint256 maxBlockGasCost;
+    uint256 blockGasCostStep;
+  }
+  event FeeConfigChanged(
+    address indexed sender,
+    FeeConfig oldFeeConfig,
+    FeeConfig newFeeConfig
+  );
+
+  // Set fee config fields to contract storage
+  function setFeeConfig(
+    uint256 gasLimit,
+    uint256 targetBlockRate,
+    uint256 minBaseFee,
+    uint256 targetGas,
+    uint256 baseFeeChangeDenominator,
+    uint256 minBlockGasCost,
+    uint256 maxBlockGasCost,
+    uint256 blockGasCostStep
+  ) external;
+
+  // Get fee config from the contract storage
+  function getFeeConfig()
+    external
+    view
+    returns (
+      uint256 gasLimit,
+      uint256 targetBlockRate,
+      uint256 minBaseFee,
+      uint256 targetGas,
+      uint256 baseFeeChangeDenominator,
+      uint256 minBlockGasCost,
+      uint256 maxBlockGasCost,
+      uint256 blockGasCostStep
+    );
+
+  // Get the last block number changed the fee config from the contract storage
+  function getFeeConfigLastChangedAt()
+    external
+    view
+    returns (uint256 blockNumber);
+}
+```
+
+FeeConfigManager precompile uses `IAllowList` interface directly, meaning that it uses the same `AllowList` interface functions like `readAllowList` and `setAdmin`, `setManager`, `setEnabled`, `setNone`. For more information see [AllowList Solidity interface](#allowlist-interface).
+
+In addition to the `AllowList` interface, the FeeConfigManager adds the following capabilities:
+
+- `getFeeConfig`: retrieves the current dynamic fee config
+- `getFeeConfigLastChangedAt`: retrieves the timestamp of the last block where the fee config was updated
+- `setFeeConfig`: sets the dynamic fee config on chain (see [here](#fee-config) for details on the fee config parameters). This function can only be called by an `Admin`, `Manager` or `Enabled` address.
+- `FeeConfigChanged`: an event that is emitted when the fee config is updated. Topics include the sender, the old fee config, and the new fee config.
+
+You can also get the fee configuration at a block with the `eth_feeConfig` RPC method. For more information see [here](/api-reference/subnet-evm-api#eth_feeconfig).
+
+#### Initial Fee Config Configuration[​](#initial-fee-config-configuration "Direct link to heading")
+
+It's possible to enable this precompile with an initial configuration to activate its effect on activation timestamp. This provides a way to define your fee structure to take effect at the activation.
+
+To use the initial configuration, you need to specify the fee config in `initialFeeConfig` field in your genesis or upgrade file:
+
+```json
+{
+  "feeManagerConfig": {
+    "blockTimestamp": 0,
+    "initialFeeConfig": {
+      "gasLimit": 20000000,
+      "targetBlockRate": 2,
+      "minBaseFee": 1000000000,
+      "targetGas": 100000000,
+      "baseFeeChangeDenominator": 48,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 10000000,
+      "blockGasCostStep": 500000
+    }
+  }
+}
+```
+
+This will set the fee config to the values specified in the `initialFeeConfig` field. For further information about precompile initial configurations see [Initial Precompile Configurations](#initial-precompile-configurations).

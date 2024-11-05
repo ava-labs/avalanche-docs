@@ -72,13 +72,19 @@ export const docsOptions: DocsLayoutProps = {
             url: '/dapps',
           },
           {
-            title: 'Avalanche L1s',
+            title: 'Avalanche CLI',
             description: 'Build Your L1 Blockchain',
             icon: <Layers />,
             url: '/avalanche-l1s',
           },
           {
-            title: 'Virtual Machines',
+            title: 'EVM L1s',
+            description: 'Customize the Ethereum VM',
+            icon: <IndentDecrease />,
+            url: '/evm-l1s',
+          },
+          {
+            title: 'Custom Virtual Machines',
             description: 'Customize Your Execution Layer',
             icon: <IndentDecrease />,
             url: '/virtual-machines',
