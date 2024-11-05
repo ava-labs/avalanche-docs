@@ -17,6 +17,12 @@
       "custom-precompiles/defining-your-precompile",
       "custom-precompiles/writing-test-cases",
       "custom-precompiles/executing-test-cases",
-      "custom-precompiles/deploying-precompile"
+      "custom-precompiles/deploying-precompile",
+      "---Validator Manager---",
+      "validator-manager/contract",
+      "validator-manager/add-validator",
+      "validator-manager/remove-validator",
+      "validator-manager/upgrade",
+      "validator-manager/custom-validator-manager"
     ]
   }

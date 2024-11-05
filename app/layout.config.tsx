@@ -2,7 +2,7 @@ import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { Title, HomeTitle } from '@/app/layout.client';
 import { docsPageTree } from '@/utils/docs-loader';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
-import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook } from 'lucide-react';
+import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook, Server, FolderCode } from 'lucide-react';
 
 // home page configuration (HomeTitle includes hamburger menu)
 export const homebaseOptions: BaseLayoutProps = {
@@ -80,7 +80,7 @@ export const docsOptions: DocsLayoutProps = {
           {
             title: 'EVM L1s',
             description: 'Customize the Ethereum VM',
-            icon: <IndentDecrease />,
+            icon: <FolderCode />,
             url: '/evm-l1s',
           },
           {

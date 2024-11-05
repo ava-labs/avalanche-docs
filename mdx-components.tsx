@@ -17,6 +17,11 @@ import YouTube from "@/components/youtube";
 import Gallery from "@/components/gallery";
 import { cn } from "./utils/cn";
 import { BadgeCheck } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const Mermaid = dynamic(() => import("@/components/mermaid"), {
+  ssr: false,
+});
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -42,6 +47,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Accordions,
     YouTube,
     Gallery,
+    Mermaid,
     InstallTabs: ({
       items,
       children,
