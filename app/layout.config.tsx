@@ -13,10 +13,6 @@ export const homebaseOptions: BaseLayoutProps = {
   },
   links: [
     {
-      text: 'Academy',
-      url: 'https://academy.avax.network',
-    },
-    {
       text: 'Guides',
       url: 'https://academy.avax.network/guide',
     },
