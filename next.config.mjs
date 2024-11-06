@@ -994,6 +994,26 @@ const config = {
         source: '/subnets/wagmi-subnet',
         destination: '/avalanche-l1s/wagmi-avalanche-l1',
         permanent: true,
+      },
+      {
+        source: '/learn/:path*',
+        destination: '/protocol/:path*',
+        permanent: true,
+      },
+      {
+        source: '/avalanche-l1s/upgrade/customize-avalanche-l1',
+        destination: '/evm-l1s/custom-precompiles/introduction',
+        permanent: true,
+      },
+      {
+        source: '/virtual-machines/evm-customization/:path*',
+        destination: '/evm-l1s/custom-precompiles/:path*',
+        permanent: true,
+      },
+      {
+        source: '/avalanche-l1s/c-chain-or-avalanche-l1',
+        destination: '/dapps/c-chain-or-avalanche-l1',
+        permanent: true,
       }
     ]
   },

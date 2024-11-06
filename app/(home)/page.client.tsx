@@ -5,7 +5,7 @@ import React, {
   Fragment,
   type ReactElement,
 } from 'react';
-import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle, ChevronDownIcon } from 'lucide-react';
+import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, FolderCode, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle, ChevronDownIcon } from 'lucide-react';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
 import { Menu, Transition } from '@headlessui/react'
 
@@ -125,13 +125,19 @@ export function HamburgerMenu(): React.ReactElement {
         url: '/dapps',
       },
       {
-        title: 'Avalanche L1s',
+        title: 'Avalanche CLI',
         description: 'Build Your L1 Blockchain',
         icon: <Layers />,
         url: '/avalanche-l1s',
       },
       {
-        title: 'Virtual Machines',
+        title: 'EVM L1s',
+        description: 'Customize the Ethereum VM',
+        icon: <FolderCode />,
+        url: '/evm-l1s',
+      },
+      {
+        title: 'Custom Virtual Machines',
         description: 'Customize Your Execution Layer',
         icon: <IndentDecrease />,
         url: '/virtual-machines',

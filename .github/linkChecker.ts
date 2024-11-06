@@ -5,7 +5,7 @@ import { sync as globSync } from 'glob';
 
 const baseUrl = 'http://localhost:3000'; // base url of the website
 
-const whitelist = ["crates.io", "softwaretestinghelp.com", "coinbase.com", "assets.website-files.com", "moralis.io"] // some websites return 404 for head requests, so we need to whitelist them, (fix: pass header -H 'Accept: text/html' and parse text/html)
+const whitelist = ["crates.io", "softwaretestinghelp.com", "coinbase.com", "assets.website-files.com", "moralis.io", "1rpc.io"] // some websites return 404 for head requests, so we need to whitelist them, (fix: pass header -H 'Accept: text/html' and parse text/html)
                                 // see https://github.com/rust-lang/crates.io/issues/788
 
 interface LinkCheckResult {
