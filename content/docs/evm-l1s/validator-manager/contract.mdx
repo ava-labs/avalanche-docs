@@ -40,7 +40,7 @@ PoSValidatorManager <|-- NativeTokenStakingManager
 
 ## Deploying
 
-Three concrete `ValidatorManager` contracts are provided - `PoAValidatorManager`, `NativeTokenStakingManager`, and `ERC20TokenStakingManager`. `NativeTokenStakingManager` and `ERC20TokenStakingManager` implement `PoSValidatorManager`, which itself implements `ValidatorManager`. These are implemented as [upgradeable](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/main/contracts/proxy/utils/Initializable.sol#L56) contracts. There are numerous [guides](https://blog.chain.link/upgradable-smart-contracts/) for deploying upgradeable smart contracts, but the general steps are as follows:
+Three concrete `ValidatorManager` contracts are provided - `PoAValidatorManager`, `NativeTokenStakingManager`, and `ERC20TokenStakingManager`. `NativeTokenStakingManager` and `ERC20TokenStakingManager` implement `PoSValidatorManager`, which itself implements `ValidatorManager`. These are implemented as [upgradeable](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/utils/Initializable.sol) contracts. There are numerous [guides](https://blog.chain.link/upgradable-smart-contracts/) for deploying upgradeable smart contracts, but the general steps are as follows:
 
 <Steps>
 <Step>
@@ -69,7 +69,7 @@ Proof-of-Authority validator management is provided via `PoAValidatorManager`, w
 
 ### PoSValidatorManager
 
-Proof-of-Stake validator management is provided by the abstract contract `PoSValidatorManager`, which has two concrete implementations: `NativeTokenStakingManager` and `ERC20TokenStakingManager`. In addition to basic validator management provided in `ValidatorManager`, `PoSValidatorManager` supports uptime-based validation rewards, as well as delegation to a chosen validator. This [state transition diagram](./StateTransition.md) illustrates the relationship between validators and delegators.
+Proof-of-Stake validator management is provided by the abstract contract `PoSValidatorManager`, which has two concrete implementations: `NativeTokenStakingManager` and `ERC20TokenStakingManager`. In addition to basic validator management provided in `ValidatorManager`, `PoSValidatorManager` supports uptime-based validation rewards, as well as delegation to a chosen validator. This [state transition diagram](https://github.com/ava-labs/teleporter/blob/main/contracts/validator-manager/StateTransition.md) illustrates the relationship between validators and delegators.
 <Callout>
 The `weightToValueFactor` fields of the `PoSValidatorManagerSettings` passed to `PoSValidatorManager`'s `initialize` function sets the factor used to convert between the weight that the validator is registered with on the P-Chain, and the value transferred to the contract as stake. This involves integer division, which may result in loss of precision. When selecting `weightToValueFactor`, it's important to make the following considerations:
 

@@ -3,6 +3,12 @@
     "root": true,
     "pages": [
       "index",
+      "---Validator Manager---",
+      "validator-manager/contract",
+      "validator-manager/add-validator",
+      "validator-manager/remove-validator",
+      "validator-manager/upgrade",
+      "validator-manager/custom-validator-manager",
       "---Default Precompiles---",
       "default-precompiles/overview",
       "default-precompiles/allowlist",
@@ -17,12 +23,6 @@
       "custom-precompiles/defining-your-precompile",
       "custom-precompiles/writing-test-cases",
       "custom-precompiles/executing-test-cases",
-      "custom-precompiles/deploying-precompile",
-      "---Validator Manager---",
-      "validator-manager/contract",
-      "validator-manager/add-validator",
-      "validator-manager/remove-validator",
-      "validator-manager/upgrade",
-      "validator-manager/custom-validator-manager"
+      "custom-precompiles/deploying-precompile"
     ]
   }

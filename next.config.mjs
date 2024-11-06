@@ -1009,6 +1009,11 @@ const config = {
         source: '/virtual-machines/evm-customization/:path*',
         destination: '/evm-l1s/custom-precompiles/:path*',
         permanent: true,
+      },
+      {
+        source: '/avalanche-l1s/c-chain-or-avalanche-l1',
+        destination: '/dapps/c-chain-or-avalanche-l1',
+        permanent: true,
       }
     ]
   },
