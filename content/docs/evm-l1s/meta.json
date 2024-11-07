@@ -2,7 +2,6 @@
     "title": "evm-l1s",
     "root": true,
     "pages": [
-      "index",
       "---Validator Manager---",
       "validator-manager/contract",
       "validator-manager/add-validator",
