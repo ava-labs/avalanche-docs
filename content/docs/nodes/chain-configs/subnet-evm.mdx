@@ -194,7 +194,7 @@ For the AvalancheGo node configuration options, see the [AvalancheGo Configurati
 
 | Option                     | Type      | Description                               | Default        |
 |----------------------------|-----------|-------------------------------------------|----------------|
-| `use-standalone-database`  | `*PBool`  | Use a standalone database.                | `false`        |
+| `use-standalone-database`  | `*PBool`  | Use a standalone database. By default Subnet-EVM uses a standalone database if no block was accepted.                 | `nil`        |
 | `database-config`          | `string`  | Content of the database configuration.    | `""` (empty)   |
 | `database-config-file`     | `string`  | Path to the database configuration file.  | `""` (empty)   |
 | `database-type`            | `string`  | Type of database to use.                  | `"pebbledb"`   |
