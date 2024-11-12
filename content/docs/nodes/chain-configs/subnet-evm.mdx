@@ -81,11 +81,6 @@ For the AvalancheGo node configuration options, see the [AvalancheGo Configurati
 |----------------------------|--------|----------------------------------------------------------------------|---------|
 | `metrics-expensive-enabled` | `bool` | Enables debug-level metrics that may impact performance.             | `true`  |
 
-## API Settings
-
-| Option              | Type   | Description                 | Default |
-|---------------------|--------|-----------------------------|---------|
-| `local-txs-enabled` | `bool` | Enables local transactions. | `false` |
 
 ### Transaction Pool Settings
 
@@ -98,6 +93,8 @@ For the AvalancheGo node configuration options, see the [AvalancheGo Configurati
 | `tx-pool-account-queue`    | `uint64`  | Max non-executable transaction slots per account.                  | From `legacypool.DefaultConfig.AccountQueue`        |
 | `tx-pool-global-queue`     | `uint64`  | Max non-executable transaction slots for all accounts.             | 1024    |
 | `tx-pool-lifetime`         | `Duration`| Maximum time a transaction can remain in the pool.                 |  10 Minutes     |
+| `local-txs-enabled` | `bool` | Enables local transactions. | `false` |
+
 
 ### API Resource Limiting Settings
 
