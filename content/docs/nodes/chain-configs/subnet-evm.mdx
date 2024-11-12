@@ -92,7 +92,7 @@ For the AvalancheGo node configuration options, see the [AvalancheGo Configurati
 | Option                     | Type      | Description                                                        | Default                                             |
 |----------------------------|-----------|--------------------------------------------------------------------|-----------------------------------------------------|
 | `tx-pool-price-limit`      | `uint64`  | Minimum gas price (in wei) for the transaction pool.               |  1         |
-| `tx-pool-price-bump`       | `uint64`  | Minimum price bump percentage to replace an existing transaction.  | From `legacypool.DefaultConfig.PriceBump`           |
+| `tx-pool-price-bump`       | `uint64`  | Minimum price bump percentage to replace an existing transaction.  | 10         |
 | `tx-pool-account-slots`    | `uint64`  | Max executable transaction slots per account.                      | 16    |
 | `tx-pool-global-slots`     | `uint64`  | Max executable transaction slots for all accounts.                 | From `legacypool.DefaultConfig.GlobalSlots`         |
 | `tx-pool-account-queue`    | `uint64`  | Max non-executable transaction slots per account.                  | From `legacypool.DefaultConfig.AccountQueue`        |
