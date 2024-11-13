@@ -2,7 +2,7 @@ import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { Title, HomeTitle } from '@/app/layout.client';
 import { docsPageTree } from '@/utils/docs-loader';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
-import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook, Server, FolderCode } from 'lucide-react';
+import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook, Pyramid } from 'lucide-react';
 
 // home page configuration (HomeTitle includes hamburger menu)
 export const homebaseOptions: BaseLayoutProps = {
@@ -68,15 +68,15 @@ export const docsOptions: DocsLayoutProps = {
             url: '/dapps',
           },
           {
-            title: 'Avalanche CLI',
+            title: 'Avalanche L1s',
             description: 'Build Your L1 Blockchain',
             icon: <Layers />,
             url: '/avalanche-l1s',
           },
           {
-            title: 'EVM L1s',
+            title: 'EVM Customization',
             description: 'Customize the Ethereum VM',
-            icon: <FolderCode />,
+            icon: <Pyramid />,
             url: '/evm-l1s',
           },
           {
