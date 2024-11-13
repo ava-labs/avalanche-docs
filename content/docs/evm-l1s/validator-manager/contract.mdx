@@ -38,6 +38,16 @@ PoSValidatorManager <|-- ERC20TokenStakingManager
 PoSValidatorManager <|-- NativeTokenStakingManager
 `} />
 
+
+<Callout>
+The contracts for ValidatorManager can be found in the Teleporter repository [here](https://github.com/ava-labs/teleporter/tree/main/contracts/validator-manager)
+</Callout>
+
+## Overview
+The `ValidatorManager` contract is used to create and operate a soverign L1. When converting to a soverign L1, the address of the `ValidatorManager` contract is specified in the `ConvertSubnetToL1Tx` transaction to the P-Chain. The `ValidatorManager` contract is then initialized with the initial validator set, and the subnet is converted to an L1 with the initial validators registered to the P-Chain.
+
+All operations to adding and removing validators after `ConvertSubnetToL1Tx` must be processed through the `ValidatorManager` contract. If the `ValidatorManager` contract is upgradeable, and can be replaced with a new implementation contract if necessary.
+
 ## Deploying
 
 Three concrete `ValidatorManager` contracts are provided - `PoAValidatorManager`, `NativeTokenStakingManager`, and `ERC20TokenStakingManager`. `NativeTokenStakingManager` and `ERC20TokenStakingManager` implement `PoSValidatorManager`, which itself implements `ValidatorManager`. These are implemented as [upgradeable](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/proxy/utils/Initializable.sol) contracts. There are numerous [guides](https://blog.chain.link/upgradable-smart-contracts/) for deploying upgradeable smart contracts, but the general steps are as follows:
