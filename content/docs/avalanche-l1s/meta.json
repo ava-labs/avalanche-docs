@@ -19,14 +19,9 @@
     "maintain/pause-resume",
     "maintain/delete-avalanche-l1",
     "maintain/transfer-pchain-funds",
-    "---Add Utility on an Avalanche L1---",
-    "add-utility/deploy-smart-contract",
-    "add-utility/testnet-faucet",
-    "add-utility/cross-chain-bridge",
     "---Upgrade an Avalanche L1---",
     "...upgrade",
     "---Miscellaneous---",
-    "wagmi-avalanche-l1",
     "troubleshooting"
   ]
 }

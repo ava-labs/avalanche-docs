@@ -10,6 +10,7 @@
     "primary-network",
     "rewards-formula",
     "virtual-machines",
+    "c-chain-or-avalanche-l1",
     "---Networks---",
     "networks/mainnet",
     "networks/fuji-testnet",

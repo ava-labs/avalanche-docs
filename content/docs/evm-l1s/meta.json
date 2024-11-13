@@ -1,0 +1,28 @@
+{
+    "title": "evm-l1s",
+    "root": true,
+    "pages": [
+      "index",
+      "---Validator Manager---",
+      "validator-manager/contract",
+      "validator-manager/add-validator",
+      "validator-manager/remove-validator",
+      "validator-manager/upgrade",
+      "validator-manager/custom-validator-manager",
+      "---Default Precompiles---",
+      "default-precompiles/overview",
+      "default-precompiles/allowlist",
+      "default-precompiles/rewardmanager",
+      "default-precompiles/feemanager",
+      "default-precompiles/nativeminter",
+      "default-precompiles/warpmessenger",
+      "---Custom Precompiles---",
+      "custom-precompiles/introduction",
+      "custom-precompiles/background-requirements",
+      "custom-precompiles/generating-your-precompile",
+      "custom-precompiles/defining-your-precompile",
+      "custom-precompiles/writing-test-cases",
+      "custom-precompiles/executing-test-cases",
+      "custom-precompiles/deploying-precompile"
+    ]
+  }
