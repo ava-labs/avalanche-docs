@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
   CpuIcon,
   BadgeDollarSign,
-  Globe, MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Terminal, Cable, Webhook, ArrowUpRight, Command
+  Globe, MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Terminal, Cable, Webhook, ArrowUpRight, Command,
 } from 'lucide-react';
 import Link from 'next/link';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -11,6 +11,7 @@ import { cn } from '@/utils/cn';
 import { CodeBlock } from '@/components/code-block';
 import { File, Files, Folder } from 'fumadocs-ui/components/files';
 import { DeployBlockchainAnimation } from './page.client';
+
 
 const badgeVariants = cva(
   'mb-2 inline-flex size-7 items-center justify-center rounded-full bg-fd-primary font-medium text-fd-primary-foreground',
@@ -268,4 +269,11 @@ function Feature({
       {props.children}
     </div>
   );
+}
+
+interface Option {
+  title: string
+  description: string
+  icon: React.ReactNode
+  url: string
 }
