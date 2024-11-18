@@ -2,23 +2,34 @@ import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { Title, HomeTitle } from '@/app/layout.client';
 import { docsPageTree } from '@/utils/docs-loader';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
-import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook, Server, FolderCode, Pyramid } from 'lucide-react';
-
+import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook, Server, FolderCode, Pyramid, Folder } from 'lucide-react';
 // home page configuration (HomeTitle includes hamburger menu)
 export const homebaseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
     title: <HomeTitle />,
     transparentMode: 'top',
+    url: '/',
   },
   links: [
     {
       text: 'Guides',
       url: 'https://academy.avax.network/guide',
     },
+  ],
+};
+
+export const integrationPageOptions: BaseLayoutProps = {
+  githubUrl: 'https://github.com/ava-labs/avalanche-docs',
+  nav: {
+    title: <HomeTitle />,
+    transparentMode: 'top',
+    url: '/integrations',
+  },
+  links: [
     {
-      text: 'Integrations',
-      url: '/integrations',
+      text: 'Guides',
+      url: 'https://academy.avax.network/guide',
     },
   ],
 };
@@ -70,13 +81,13 @@ export const docsOptions: DocsLayoutProps = {
           {
             title: 'Avalanche L1s',
             description: 'Build Your L1 Blockchain',
-            icon: <Pyramid />,
+            icon: <Layers />,
             url: '/avalanche-l1s',
           },
           {
             title: 'EVM Customization',
             description: 'Customize the Ethereum VM',
-            icon: <FolderCode />,
+            icon: <Pyramid />,
             url: '/evm-l1s',
           },
           {

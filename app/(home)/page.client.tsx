@@ -5,9 +5,8 @@ import React, {
   Fragment,
   type ReactElement,
 } from 'react';
-import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, FolderCode, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle, ChevronDownIcon, Pyramid } from 'lucide-react';
+import { IndentDecrease, Layers, MailIcon, MonitorCheck, Settings, SproutIcon, SquareGanttChart, TerminalIcon, Webhook, HomeIcon, FolderCode, BadgeDollarSign, CpuIcon, Files, Folder, Globe, Link, SquareIcon, ArrowLeftRight, Coins, SquareCode, SquareStackIcon, Triangle, ChevronDownIcon, Pyramid, HandCoins, Server, Code, TrendingUp, ScanFace, Telescope, LayoutTemplate, Building2, BookOpen, Podcast, Wallet } from 'lucide-react';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
-import { Menu, Transition } from '@headlessui/react'
 
 
 export function DeployBlockchainAnimation(): React.ReactElement {
@@ -106,11 +105,10 @@ export function HamburgerMenu(): React.ReactElement {
     <RootToggle
     options={[
       {
-        title: 'Home',
+        title: 'Docs',
         description: '',
         icon: <></>,
-        url: '/',
-
+        url: '',
       },
       {
         title: 'Avalanche Protocol',
@@ -182,70 +180,168 @@ interface AcademyDropdownProps {
   width?: string
 }
 
-const options: Option[] = [
-  {
-    title: 'Academy',
-    description: '',
-    icon: <></>,
-    url: '/',
-  },
-  {
-    title: 'Blockchain Fundamentals',
-    description: 'Understand fundamental blockchain concepts.',
-    icon: <SquareIcon className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/blockchain-fundamentals',
-  },
-  {
-    title: 'Avalanche Fundamentals',
-    description: 'Overview of Avalanche Consensus, L1s, and VMs.',
-    icon: <Triangle className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/avalanche-fundamentals',
-  },
-  {
-    title: "Multi-Chain Architecture",
-    description: 'Deploy your own blockchain with multi-chain architecture.',
-    icon: <SquareStackIcon className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/multi-chain-architecture',
-  },
-  {
-    title: "Interchain Messaging",
-    description: 'Build cross-chain dApps on Avalanche.',
-    icon: <MailIcon className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/interchain-messaging',
-  },
-  {
-    title: "Interchain Token Transfer",
-    description: 'Transfer assets between Avalanche blockchains.',
-    icon: <ArrowLeftRight className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/interchain-token-transfer',
-  },
-  {
-    title: "Customizing the EVM",
-    description: 'Add custom precompiles to the EVM.',
-    icon: <SquareCode className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/customizing-evm',
-  },
-  {
-    title: "Layer 1 Tokenomics",
-    description: 'Design tokenomics for your Avalanche L1.',
-    icon: <Coins className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/l1-tokenomics',
-  },
-  {
-    title: "AvaCloud APIs",
-    description: 'Use AvaCloud APIs to build web apps.',
-    icon: <Webhook className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/avacloudapis',
-  },
-  {
-    title: "HyperSDK",
-    description: 'Build high-performance blockchains with HyperSDK.',
-    icon: <TerminalIcon className="w-5 h-5" />,
-    url: 'https://academy.avax.network/course/hypersdk',
-  }
-]
-
 export function AcademyDropdown({ width = 'w-72' }: AcademyDropdownProps) {
+  const options: Option[] = [
+    {
+      title: 'Courses',
+      description: '',
+      icon: <></>,
+      url: '',
+    },
+    {
+      title: 'Blockchain Fundamentals',
+      description: 'Understand fundamental blockchain concepts.',
+      icon: <SquareIcon className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/blockchain-fundamentals',
+    },
+    {
+      title: 'Avalanche Fundamentals',
+      description: 'Overview of Avalanche Consensus, L1s, and VMs.',
+      icon: <Triangle className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/avalanche-fundamentals',
+    },
+    {
+      title: "Multi-Chain Architecture",
+      description: 'Deploy your own blockchain with multi-chain architecture.',
+      icon: <SquareStackIcon className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/multi-chain-architecture',
+    },
+    {
+      title: "Interchain Messaging",
+      description: 'Build cross-chain dApps on Avalanche.',
+      icon: <MailIcon className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/interchain-messaging',
+    },
+    {
+      title: "Interchain Token Transfer",
+      description: 'Transfer assets between Avalanche blockchains.',
+      icon: <ArrowLeftRight className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/interchain-token-transfer',
+    },
+    {
+      title: "Customizing the EVM",
+      description: 'Add custom precompiles to the EVM.',
+      icon: <SquareCode className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/customizing-evm',
+    },
+    {
+      title: "Layer 1 Tokenomics",
+      description: 'Design tokenomics for your Avalanche L1.',
+      icon: <Coins className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/l1-tokenomics',
+    },
+    {
+      title: "AvaCloud APIs",
+      description: 'Use AvaCloud APIs to build web apps.',
+      icon: <Webhook className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/avacloudapis',
+    },
+    {
+      title: "HyperSDK",
+      description: 'Build high-performance blockchains with HyperSDK.',
+      icon: <TerminalIcon className="w-5 h-5" />,
+      url: 'https://academy.avax.network/course/hypersdk',
+    }
+  ];
+  return (
+    <RootToggle options={options} />
+  )
+}
+
+
+
+export function GrantsDropdown() {
+  const options: Option[] = [
+    {
+      title: 'Grants & Programs',
+      description: '',
+      icon: <></>,
+      url: '',
+    },
+    {
+      title: 'Retro9000',
+      description: 'Build publicly and get rewarded.',
+      icon: <HandCoins className="w-5 h-5" />,
+      url: 'https://www.avax.network/retro9000',
+    },
+    {
+      title: 'infraBUIDL()',
+      description: 'Infrastructure projects that enhance user and developer experience',
+      icon: <Server className="w-5 h-5" />,
+      url: 'https://www.avax.network/infrabuidl-program',
+    },
+    {
+      title: 'Codebase',
+      description: 'Transforming ambitious builders into extraordinary founders',
+      icon: <Code className="w-5 h-5" />,
+      url: 'https://codebase.avax.network/',
+    },
+    {
+      title: 'Blizzard Fund',
+      description: 'VC fund investing in innovative entrepreneurs driving growth on Avalanche',
+      icon: <TrendingUp className="w-5 h-5" />,
+      url: 'https://www.blizzard.fund/',
+    },
+   
+  ];
+  return (
+    <RootToggle options={options} />
+  )
+}
+
+
+export function IntegrationsDropdown() {
+  const options: Option[] = [
+    {
+      title: 'Integrations',
+      description: '',
+      icon: <></>,
+      url: '/integrations',
+    },
+    {
+      title: 'Account Abstraction',
+      description: "",
+      icon: <ScanFace className="w-5 h-5" />,
+      url: '/integrations#Account%20Abstraction',
+    },
+    {
+      title: 'Block Explorers',
+      description: "",
+      icon: <Telescope className="w-5 h-5" />,
+      url: '/integrations#Block%20Explorers',
+    },
+    {
+      title: 'Blockchain as a Service',
+      description: "",
+      icon: <LayoutTemplate className="w-5 h-5" />,
+      url: '/integrations#Blockchain%20as%20a%20Service',
+    },
+    {
+      title: 'Enterprise Solutions',
+      description: "",
+      icon: <Building2 className="w-5 h-5" />,
+      url: '/integrations#Enterprise%20Solutions',
+    },
+    {
+      title: 'Indexers',
+      description: "",
+      icon: <BookOpen className="w-5 h-5" />,
+      url: '/integrations#Indexers',
+    },
+    {
+      title: 'Oracles',
+      description: "",
+      icon: <Podcast className="w-5 h-5" />,
+      url: '/integrations#Oracles',
+    },
+    {
+      title: 'Wallets',
+      description: "",
+      icon: <Wallet className="w-5 h-5" />,
+      url: '/integrations#Wallet%20SDKs',
+    },
+   
+  ];
   return (
     <RootToggle options={options} />
   )
