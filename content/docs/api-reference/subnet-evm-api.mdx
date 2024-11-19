@@ -256,3 +256,65 @@ curl -X POST --data '{
   }
 }
 ```
+
+## `validators_getCurrentValidators`
+
+This API retrieves the list of current validators for the Subnet/L1. It provides detailed information about each validator, including their ID, status, weight, connection, and uptime.
+
+URL: `http://<server-uri>/ext/bc/<blockchainID>/validators`
+
+**Signature:**
+
+```bash
+validators_getCurrentValidators([nodeIDs]) -> {validators: []Validator}
+```
+
+**Example Call:**
+
+```bash
+{
+    "jsonrpc": "2.0",
+    "method": "validators.getCurrentValidators",
+    "params": {
+        "nodeIDs": []
+    },
+    "id": 1
+}
+```
+
+- `nodeIDs` is an optional parameter that specifies the node IDs of the validators to retrieve. If omitted, all validators are returned.
+
+**Example Response:**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "validators": [
+      {
+        "validationID": "nESqWkcNXihfdZESS2idWbFETMzatmkoTCktjxG1qryaQXfS6",
+        "nodeID": "NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5",
+        "weight": 20,
+        "startTimestamp": 1732025492,
+        "isActive": true,
+        "isL1Validator": false,
+        "isConnected": true,
+        "uptimeSeconds": 36
+        "uptimePercentage": 100,
+      }
+    ]
+  },
+  "id": 1
+}
+```
+
+- validationID: (string) Unique identifier for the validation. This returns validation ID for L1s, AddSubnetValidator txID for Subnets.
+- nodeID: (string) Node identifier for the validator.
+- weight: (integer) The weight of the validator, often representing stake.
+- startTimestamp: (integer) UNIX timestamp for when validation started.
+- isActive: (boolean) Indicates if the validator is active. This returns true if this is L1 validator and has enough continuous subnet staking fees in P-Chain.
+  It always return true for subnet validators.
+- isL1Validator: (boolean) Indicates if the validator is a L1 validator or a subnet validator.
+- isConnected: (boolean) Indicates if the validator node is currently connected to the callee node.
+- uptimeSeconds: (integer) The number of seconds the validator has been online.
+- uptimePercentage: (float) The percentage of time the validator has been online.
