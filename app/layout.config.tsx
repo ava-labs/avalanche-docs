@@ -2,27 +2,34 @@ import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
 import { Title, HomeTitle } from '@/app/layout.client';
 import { docsPageTree } from '@/utils/docs-loader';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
-import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook } from 'lucide-react';
-
+import { MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Webhook, Server, FolderCode, Pyramid, Folder } from 'lucide-react';
 // home page configuration (HomeTitle includes hamburger menu)
 export const homebaseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
     title: <HomeTitle />,
     transparentMode: 'top',
+    url: '/',
   },
   links: [
-    {
-      text: 'Academy',
-      url: 'https://academy.avax.network',
-    },
     {
       text: 'Guides',
       url: 'https://academy.avax.network/guide',
     },
+  ],
+};
+
+export const integrationPageOptions: BaseLayoutProps = {
+  githubUrl: 'https://github.com/ava-labs/avalanche-docs',
+  nav: {
+    title: <HomeTitle />,
+    transparentMode: 'top',
+    url: '/integrations',
+  },
+  links: [
     {
-      text: 'Integrations',
-      url: '/integrations',
+      text: 'Guides',
+      url: 'https://academy.avax.network/guide',
     },
   ],
 };
@@ -78,7 +85,13 @@ export const docsOptions: DocsLayoutProps = {
             url: '/avalanche-l1s',
           },
           {
-            title: 'Virtual Machines',
+            title: 'EVM Customization',
+            description: 'Customize the Ethereum VM',
+            icon: <Pyramid />,
+            url: '/evm-l1s',
+          },
+          {
+            title: 'Custom Virtual Machines',
             description: 'Customize Your Execution Layer',
             icon: <IndentDecrease />,
             url: '/virtual-machines',

@@ -1,6 +1,6 @@
 'use client';
 import type { ReactNode } from 'react';
-import { HamburgerMenu } from './(home)/page.client';
+import { AcademyDropdown, HamburgerMenu, GrantsDropdown, IntegrationsDropdown } from './(home)/page.client';
 
  const svgCode = `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" viewBox="0 0 220 190" enable-background="new 0 0 220 190" xml:space="preserve">
@@ -62,9 +62,12 @@ export function HomeTitle(): React.ReactElement {
 return (
 <>
 	<img width="80" height="80" src={`data:image/svg+xml;utf8,${encodeURIComponent(svgCode)}`} className="size-7" alt="logo" />
-	<span style={{fontSize: "large"}}>Documentation</span>
-	<div className="pl-4">
+	<span style={{fontSize: "large"}}>Developer Hub</span>
+	<div className="flex items-center pl-4 space-x-3">
 		<HamburgerMenu />
+		<AcademyDropdown />
+		<GrantsDropdown />
+		<IntegrationsDropdown />
 	</div>
 </>
 );
@@ -74,7 +77,7 @@ export function Title(): React.ReactElement {
   return (
     <>
       <img width="80" height="80" src={`data:image/svg+xml;utf8,${encodeURIComponent(svgCode)}`} className="size-7" alt="logo" />
-      <span style={{fontSize: "large"}}>Documentation</span>
+      <span style={{fontSize: "large"}}>Developer Hub</span>
     </>
   );
 }
