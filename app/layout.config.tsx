@@ -10,7 +10,7 @@ export const baseOptions: BaseLayoutProps = {
   links: [
     {
       text: 'Docs',
-      url: '/',
+      url: '/protocol',
     },
     {
       text: 'Courses',
@@ -45,7 +45,6 @@ export const integrationPageOptions: BaseLayoutProps = {
     title: <NavbarTitle/>,
     children: <DropDownBar/>,
     transparentMode: 'top',
-    url: '/integrations',
   }
 };
 
