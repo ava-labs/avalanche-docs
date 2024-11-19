@@ -45,7 +45,6 @@ export const integrationPageOptions: BaseLayoutProps = {
     title: <NavbarTitle/>,
     children: <DropDownBar/>,
     transparentMode: 'top',
-    url: '/integrations',
   }
 };
 
