@@ -6,10 +6,10 @@ import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 
 export function NavbarTitle(): React.ReactElement {
 	return (
-	  <>
+	  <div className='flex gap-2.5 shrink-0'>
 		<AvalancheLogo />
 		<span style={{ fontSize: "large" }}>Developer Hub</span>
-	  </>
+	  </div>
 	);
   }
 
