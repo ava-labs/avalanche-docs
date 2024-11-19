@@ -10,7 +10,7 @@ export const baseOptions: BaseLayoutProps = {
   links: [
     {
       text: 'Docs',
-      url: '/',
+      url: '/protocol',
     },
     {
       text: 'Courses',
