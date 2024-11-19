@@ -80,3 +80,7 @@ h2.text-sm.font-medium {
   --tw-bg-opacity: 1;
   background-color: hsl(212.99deg 45.23% 89.66%);
 }
+
+nav a:not(:first-child) {
+  display: none;
+}
