@@ -272,14 +272,14 @@ validators_getCurrentValidators([nodeIDs]) -> {validators: []Validator}
 **Example Call:**
 
 ```bash
-{
+curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "validators.getCurrentValidators",
     "params": {
         "nodeIDs": []
     },
     "id": 1
-}
+}'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C49rHzk3vLr1w9Z8sY7scrZ69TU4WcD2pRS6ZyzaSn9xA2U9F/validators
 ```
 
 - `nodeIDs` is an optional parameter that specifies the node IDs of the validators to retrieve. If omitted, all validators are returned.
