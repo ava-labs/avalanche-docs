@@ -32,7 +32,11 @@ There is one implementation of Proof of Authority based on the `ValidatorManager
 In the `PoAValidatorManager` implementation, the owner of the contract can add and remove validators from the set. The owner can also set the weight of the validator.
 The owner can either be a smart contract or an EOA.
 
+### Rewards
+
 By default, no rewards are distributed to validators in the `PoAValidatorManager` implementation. However, rewards can be distributed to validators by extending the `PoAValidatorManager` contract and adding the desired functionality.   
+
+### Parameters
 
 The `PoAValidatorManager` has a couple of parameters that it can be initialized with to fit the needs of the network. These parameters include:
 - `ChurnPeriodSeconds`: The time period in seconds that a validator must wait before being removed from the set.
@@ -47,13 +51,19 @@ There are two implmentations offered of Proof of Stake based on the `PoSValidato
 
 These are both permissionless implementations, meaning that anyone can stake tokens and become a validator. 
 
+<Callout>
+The `PoSValidatorManager` asbtract also comes with a notion of `delegation`. Delegators can delegate their tokens to a validator. This will increase the validator's weight and the delegator will receive a portion of the rewards.
+</Callout>
+
+### Rewards
+
 Rewards are calculated using a `RewardCalculator` contract. The `PoSValidatorManager` will distribute rewards to the validator based off their node's liveliness in consensus and after the validator is removed from the set.
 
 In the `NativeTokenStakingManager` implmentation, rewards are minted through use of the `NativeMinter` precompile. Which the address of `NativeTokenStakingManager` is enabled on.
 
 In the `ERC20TokenStakingManager` implementation, rewards are minted through calling the ERC20 token's `mint` function.
 
-
+### Parameters
 
 The `PoSValidatorManager` has a number of parameters that it can be initialized with to fit the needs of the network. These parameters include:
 
@@ -65,9 +75,6 @@ The `PoSValidatorManager` has a number of parameters that it can be initialized 
 - `WeightToValueFactor`: The factor used to convert a validator's weight to a value.
 - `RewardCalculator`: The address of the reward calculator contract.
 
-<Callout>
-The `PoSValidatorManager` asbtract also comes with a notion of `delegation`. Delegators can delegate their tokens to a validator. This will increase the validator's weight and the delegator will receive a portion of the rewards.
-</Callout>
 
 
 ## Customization
