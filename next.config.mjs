@@ -990,11 +990,11 @@ const config = {
         destination: '/protocol/:path*',
         permanent: true,
       },
-      {
-        source: '/avalanche-l1s/upgrade/customize-avalanche-l1',
-        destination: '/evm-l1s/custom-precompiles/introduction',
-        permanent: true,
-      },
+      // {
+      //   source: '/avalanche-l1s/upgrade/customize-avalanche-l1',
+      //   destination: '/evm-l1s/custom-precompiles/introduction',
+      //   permanent: true,
+      // },
       {
         source: '/virtual-machines/evm-customization/:path*',
         destination: '/evm-l1s/custom-precompiles/:path*',

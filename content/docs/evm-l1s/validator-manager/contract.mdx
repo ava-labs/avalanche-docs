@@ -44,7 +44,7 @@ The contracts for ValidatorManager can be found in the Teleporter repository [he
 </Callout>
 
 ## Overview
-The `ValidatorManager` contract is used to create and operate a soverign L1. When converting to a soverign L1, the address of the `ValidatorManager` contract is specified in the `ConvertSubnetToL1Tx` transaction to the P-Chain. The `ValidatorManager` contract is then initialized with the initial validator set, and the subnet is converted to an L1 with the initial validators registered to the P-Chain.
+The `ValidatorManager` contract is used to create and operate a sovereign L1. When converting to a sovereign L1, the address of the `ValidatorManager` contract is specified in the `ConvertSubnetToL1Tx` transaction to the P-Chain. The `ValidatorManager` contract is then initialized with the initial validator set, and the subnet is converted to an L1 with the initial validators registered to the P-Chain.
 
 All operations to adding and removing validators after `ConvertSubnetToL1Tx` must be processed through the `ValidatorManager` contract. If the `ValidatorManager` contract is upgradeable, and can be replaced with a new implementation contract if necessary.
 
