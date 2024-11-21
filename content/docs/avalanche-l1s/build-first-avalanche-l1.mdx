@@ -43,7 +43,7 @@ avalanche blockchain create myblockchain
 
 The following sections walk through each question in the wizard.
 
-### Choose Your VM[​](#choose-your-vm "Direct link to heading")
+### Choose Your VM[​](#choose-your-vm)
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -53,9 +53,9 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Explain the difference
 ```
 
-Select `SubnetEVM`.
+Select `Subnet-EVM`.
 
-### Choose Your Validator Manager Contract[​](#choose-your-validator-management "Direct link to heading")
+### Choose Your Validator Manager Contract[​](#choose-your-validator-management)
 Choose either Proof of Authority (PoA) or Proof of Stake (PoS) as your consensus mechanism.
 
 ```bash
@@ -66,10 +66,10 @@ Choose either Proof of Authority (PoA) or Proof of Stake (PoS) as your consensus
 ```
 For this tutorial, select `Proof of Authority (PoA)`.
 
-For more info, reference the [Validator Management Contracts](/evm-l1s/validator-manager/contract).
+For more info, reference the [Validator Manager Contracts](/evm-l1s/validator-manager/contract).
 
 
-### Enter Owner Address for Validator Manager Contract[](#choose-validator-manager-address "Direct link to heading")
+### Enter Owner Address for Validator Manager Contract[](#choose-validator-manager-address)
 
 This address will be able to add and remove validators from your Avalanche L1. You can either use an existing key or create a new one.
 ```bash
@@ -79,7 +79,7 @@ Which address do you want to enable as controller of ValidatorManager contract?:
 ```
 In addition to being the PoA owner, this address will also be the owner of the `ProxyAdmin` contract of the Validator Manager's `TransparentUpgradeableProxy`. This address will be able to upgrade the Validator Manager implementation through upgrading the proxy.
 
-### Enter EVM Configuration[​](#enter-evm-configuration "Direct link to heading")
+### Enter EVM Configuration[​](#enter-evm-configuration)
 The CLI provides some default values to help you get started. You can choose to use these defaults or customize them.
 These values include things such as airdrop amount, gas fees, and gas limits.
 
@@ -94,7 +94,7 @@ These values include things such as airdrop amount, gas fees, and gas limits.
 For this tutorial, select `I want to use defaults for a test environment`.
 
 
-### Enter Your Avalanche L1's ChainID[​](#enter-your-avalanche-l1s-chainid "Direct link to heading")
+### Enter Your Avalanche L1's ChainID[​](#enter-your-avalanche-l1s-chainid)
 
 ```bash
 ✗ Chain ID: 
@@ -103,7 +103,7 @@ Choose a positive integer for your EVM-style ChainID.
 
 In production environments, this ChainID needs to be unique and not shared with any other chain. You can visit [chainlist](https://chainlist.org/) to verify that your selection is unique. Because this is a development Avalanche L1, feel free to pick any number. Stay away from well-known ChainIDs such as 1 (Ethereum) or 43114 (Avalanche C-Chain) as those may cause issues with other tools.
 
-### Token Symbol[​](#token-symbol "Direct link to heading")
+### Token Symbol[​](#token-symbol)
 
 ```bash
 ✗ Token Symbol: 
@@ -111,7 +111,7 @@ In production environments, this ChainID needs to be unique and not shared with 
 
 Enter a string to name your Avalanche L1's native token. The token symbol doesn't necessarily need to be unique. Example token symbols are AVAX, JOE, and BTC.
 
-### Wrapping Up[​](#wrapping-up "Direct link to heading")
+### Wrapping Up[​](#wrapping-up)
 
 If all worked successfully, the command prints:
 ```bash
@@ -120,7 +120,7 @@ If all worked successfully, the command prints:
 
 You've successfully created your first Avalanche L1 configuration. Now it's time to deploy it.
 
-Deploying Avalanche L1s Locally[​](#deploying-avalanche-l1s-locally "Direct link to heading")
+Deploying Avalanche L1s Locally[​](#deploying-avalanche-l1s-locally)
 ---------------------------------------------------------------------------------
 
 To deploy your Avalanche L1, run:
@@ -264,7 +264,7 @@ Blockchain ready to use
 
 You can use the deployment details to connect to and interact with your Avalanche L1. Now it's time to interact with it.
 
-Interacting with Your Avalanche L1[​](#interacting-with-your-avalanche-l1 "Direct link to heading")
+Interacting with Your Avalanche L1[​](#interacting-with-your-avalanche-l1)
 ---------------------------------------------------------------------------------------
 
 You can use the value provided by `Browser Extension connection details` to connect to your Avalanche L1 with Core, MetaMask, or any other wallet.
@@ -284,7 +284,7 @@ Currency Symbol:  TUTORIAL
 
 This tutorial uses Core.
 
-### Importing the Test Private Key[​](#importing-the-test-private-key "Direct link to heading")
+### Importing the Test Private Key[​](#importing-the-test-private-key)
 
 <Callout type="warn">
 This address derives from a well-known private key. Anyone can steal funds sent to this address. Only use it on development networks that only you have access to. If you send production funds to this address, attackers may steal them instantly.
@@ -306,7 +306,7 @@ Next, rename the Core account to prevent confusion. On the `Imported` tab, click
 
 ![Rename Account](/images/deploy-subnet4.png)
 
-### Connect to the Avalanche L1[​](#connect-to-the-avalanche-l1 "Direct link to heading")
+### Connect to the Avalanche L1[​](#connect-to-the-avalanche-l1)
 
 Next, you need to add your Avalanche L1 to Core's networks.
 
@@ -329,7 +329,7 @@ After you feel comfortable with this deployment flow, try deploying smart contra
 
 Once you've developed a stable Avalanche L1 you like, see [Create an EVM Avalanche L1 on Fuji Testnet](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet) to take your Avalanche L1 one step closer to production.
 
-FAQ[​](#faq "Direct link to heading")
+FAQ[​](#faq)
 -------------------------------------
 
 **How is the Avalanche L1 ID (SubnetID) determined upon creation?**
