@@ -14,6 +14,8 @@
     "deploy-a-avalanche-l1/multisig-auth",
     "deploy-a-avalanche-l1/custom-virtual-machine",
     "---Maintain an Avalanche L1---",
+    "maintain/add-validator-l1",
+    "maintain/remove-validator-l1",
     "maintain/view-avalanche-l1s",
     "maintain/delete-avalanche-l1",
     "maintain/transfer-pchain-funds",
