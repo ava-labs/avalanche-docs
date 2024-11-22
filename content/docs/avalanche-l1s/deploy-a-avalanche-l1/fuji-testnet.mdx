@@ -193,7 +193,30 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Custom
 ```
 
-As you want to create an EVM Avalanche L1, just accept the default `Subnet-EVM`. Next, CLI asks for the ChainID. You should provide your own ID. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
+As you want to create an EVM Avalanche L1, just accept the default `Subnet-EVM`.
+
+Choose either Proof of Authority (PoA) or Proof of Stake (PoS) as your consensus mechanism.
+
+```bash
+? Which validator management type would you like to use in your blockchain?: 
+  ▸ Proof Of Authority
+    Proof Of Stake
+    Explain the difference
+```
+For this tutorial, select `Proof of Authority (PoA)`.
+
+For more info, reference the [Validator Management Contracts](/evm-l1s/validator-manager/contract).
+
+```bash
+Which address do you want to enable as controller of ValidatorManager contract?: 
+  ▸ Get address from an existing stored key (created from avalanche key create or avalanche key import)
+    Custom
+```
+This address will be able to add and remove validators from your Avalanche L1. You can either use an existing key or create a new one.
+In addition to being the PoA owner, this address will also be the owner of the `ProxyAdmin` contract of the Validator Manager's `TransparentUpgradeableProxy`. This address will be able to upgrade (PoA -> PoS) the Validator Manager implementation through updating the proxy.
+
+
+ Next, CLI asks for the ChainID. You should provide your own ID. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
 
 ```bash
 ✔ Subnet-EVM
@@ -262,84 +285,57 @@ Print the specification to disk by running the `describe` command:
 
 ```bash
 avalanche blockchain describe testblockchain
- _____       _        _ _
-|  __ \     | |      (_) |
-| |  | | ___| |_ __ _ _| |___
-| |  | |/ _ \ __/ _  | | / __|
-| |__| |  __/ || (_| | | \__ \
-|_____/ \___|\__\__,_|_|_|___/
-+----------------------------+----------------------------------------------------+
-|         PARAMETER          |                       VALUE                        |
-+----------------------------+----------------------------------------------------+
-| Blockchain Name                | testblockchain                                         |
-+----------------------------+----------------------------------------------------+
-| ChainID                    | 3333                                               |
-+----------------------------+----------------------------------------------------+
-| Token Name                 | TST                                               |
-+----------------------------+----------------------------------------------------+
-| VM ID                      | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu  |
-+----------------------------+----------------------------------------------------+
-| Fuji SubnetID              | XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt  |
-+----------------------------+----------------------------------------------------+
-| Fuji BlockchainID          | 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR  |
-+----------------------------+----------------------------------------------------+
-| Local Network SubnetID     | 2CZP2ndbQnZxTzGuZjPrJAm5b4s2K2Bcjh8NqWoymi8NZMLYQk |
-+----------------------------+----------------------------------------------------+
-| Local Network BlockchainID | oaCmwvn8FDuv8QjeTozGpHeczk1Kv2651j2jhm6sR1nraGwVW  |
-+----------------------------+----------------------------------------------------+
+```
+```bash
++------------------------------------------------------------------+
+|                          TESTBLOCKCHAIN                          |
++------------+-----------------------------------------------------+
+| Name       | testblockchain                                      |
++------------+-----------------------------------------------------+
+| VM ID      | tGBrM94jbkesczgqsL1UaxjrdxRQQobs3MZTNQ4GrfhzvpiE8   |
++------------+-----------------------------------------------------+
+| VM Version | v0.6.12                                             |
++------------+-----------------------------------------------------+
+| Validation | Proof Of Authority                                  |
++------------+-----------------------------------------------------+
 
-  _____              _____             __ _
- / ____|            / ____|           / _(_)
-| |  __  __ _ ___  | |     ___  _ __ | |_ _  __ _
-| | |_ |/ _  / __| | |    / _ \| '_ \|  _| |/ _  |
-| |__| | (_| \__ \ | |___| (_) | | | | | | | (_| |
- \_____|\__,_|___/  \_____\___/|_| |_|_| |_|\__, |
-                                             __/ |
-                                            |___/
-+--------------------------+-------------+
-|      GAS PARAMETER       |    VALUE    |
-+--------------------------+-------------+
-| GasLimit                 |     15000000 |
-+--------------------------+-------------+
-| MinBaseFee               | 25000000000 |
-+--------------------------+-------------+
-| TargetGas (per 10s)      |    20000000 |
-+--------------------------+-------------+
-| BaseFeeChangeDenominator |          36 |
-+--------------------------+-------------+
-| MinBlockGasCost          |           0 |
-+--------------------------+-------------+
-| MaxBlockGasCost          |     1000000 |
-+--------------------------+-------------+
-| TargetBlockRate          |           2 |
-+--------------------------+-------------+
-| BlockGasCostStep         |      200000 |
-+--------------------------+-------------+
++--------------------------+
+|           TOKEN          |
++--------------+-----------+
+| Token Name   | TST Token |
++--------------+-----------+
+| Token Symbol | TST       |
++--------------+-----------+
 
-          _         _
-    /\   (_)       | |
-   /  \   _ _ __ __| |_ __ ___  _ __
-  / /\ \ | | '__/ _  | '__/ _ \| '_ \
- / ____ \| | | | (_| | | | (_) | |_) |
-/_/    \_\_|_|  \__,_|_|  \___/| .__/
-                               | |
-                               |_|
-+--------------------------------------------+------------------------+---------------------------+
-|                  ADDRESS                   | AIRDROP AMOUNT (10^18) |   AIRDROP AMOUNT (WEI)    |
-+--------------------------------------------+------------------------+---------------------------+
-| 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |                1000000 | 1000000000000000000000000 |
-+--------------------------------------------+------------------------+---------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------+
+|                                                      INITIAL TOKEN ALLOCATION                                                     |
++---------------------+------------------------------------------------------------------+--------------+---------------------------+
+| DESCRIPTION         | ADDRESS AND PRIVATE KEY                                          | AMOUNT (TST) | AMOUNT (WEI)              |
++---------------------+------------------------------------------------------------------+--------------+---------------------------+
+| Main funded account | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC                       | 1000000      | 1000000000000000000000000 |
+| ewoq                | 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027 |              |                           |
++---------------------+------------------------------------------------------------------+--------------+---------------------------+
 
++-----------------------------------------------------------------------------------------------------------------+
+|                                                 SMART CONTRACTS                                                 |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| DESCRIPTION           | ADDRESS                                    | DEPLOYER                                   |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| Proxy Admin           | 0xC0fFEE1234567890aBCdeF1234567890abcDef34 | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| PoA Validator Manager | 0x0C0DEbA5E0000000000000000000000000000000 |                                            |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| Transparent Proxy     | 0x0Feedc0de0000000000000000000000000000000 |                                            |
++-----------------------+--------------------------------------------+--------------------------------------------+
 
-  _____                                    _ _
- |  __ \                                  (_) |
- | |__) | __ ___  ___ ___  _ __ ___  _ __  _| | ___  ___
- |  ___/ '__/ _ \/ __/ _ \| '_   _ \| '_ \| | |/ _ \/ __|
- | |   | | |  __/ (_| (_) | | | | | | |_) | | |  __/\__ \
- |_|   |_|  \___|\___\___/|_| |_| |_| .__/|_|_|\___||___/
-                                    | |
-                                    |_|
-No precompiles set
++----------------------------------------------------------------------+
+|                      INITIAL PRECOMPILE CONFIGS                      |
++------------+-----------------+-------------------+-------------------+
+| PRECOMPILE | ADMIN ADDRESSES | MANAGER ADDRESSES | ENABLED ADDRESSES |
++------------+-----------------+-------------------+-------------------+
+| Warp       | n/a             | n/a               | n/a               |
++------------+-----------------+-------------------+-------------------+
+
 ```
 
 Also you can list the available Avalanche L1s:
@@ -350,7 +346,7 @@ go run main.go subnet list
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 |   Avalanche L1    |    CHAIN    | CHAIN ID |                       VM ID                       |    TYPE    | FROM REPO |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
-| testblockchain  | testblockchain  |     3333 | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Subnet-EVM | false     |
+| testblockchain  | testblockchain  |     3333 | tGBrM94jbkesczgqsL1UaxjrdxRQQobs3MZTNQ4GrfhzvpiE8 | Subnet-EVM | false     |
 +-------------+-------------+----------+---------------------------------------------------+------------+-----------+
 ```
 
@@ -362,7 +358,7 @@ go run main.go subnet list --deployed
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
 |   Avalanche L1    |    CHAIN    |                       VM ID                       | LOCAL NETWORK |                          FUJI (TESTNET)                         | MAINNET |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
-| testblockchain  | testblockchain  | tGBrM2SXkAdNsqzb3SaFZZWMNdzjjFEUKteheTa4dhUwnfQyu | Yes           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
+| testblockchain  | testblockchain  | tGBrM94jbkesczgqsL1UaxjrdxRQQobs3MZTNQ4GrfhzvpiE8 | Yes           | SubnetID: XTK7AM2Pw5A4cCtQ3rTugqbeLCU9mVixML3YwwLYUJ4WXN2Kt     | No      |
 +             +             +                                                   +               +-----------------------------------------------------------------+---------+
 |             |             |                                                   |               | BlockchainID: 5ce2WhnyeMELzg9UtfpCDGNwRa2AzMzRhBWfTqmFuiXPWE4TR | No      |
 +-------------+-------------+---------------------------------------------------+---------------+-----------------------------------------------------------------+---------+
@@ -462,13 +458,13 @@ Well done. You have just created your own Avalanche L1 with your own Subnet-EVM 
 
 To get your new Avalanche L1 information, visit the [Avalanche L1 Explorer](https://subnets-test.avax.network/). The search best works by blockchain ID, so in this example, enter `2XDnKyAEr1RhhWpTpMXqrjeejN23vETmDykVzkb4PrU1fQjewh` into the search box and you should see your shiny new blockchain information.
 
-Request to Join an Avalanche L1 as a Validator[​](#request-to-join-a-avalanche-l1-as-a-validator "Direct link to heading")
+Join an Avalanche L1 as a Validator (LEGACY)[​](#request-to-join-a-avalanche-l1-as-a-validator "Direct link to heading")
 -------------------------------------------------------------------------------------------------------------
 
 The new Avalanche L1 created in the previous steps doesn't have any dedicated validators yet. To request permission to validate an Avalanche L1, the following steps are required:
 
 <Callout title="Note">
-Before a node can be a validator on an Avalanche L1, the node is required to already be a validator on the primary network, which means that your node has **fully bootstrapped**.
+Before a node can be a validator on an Avalanche L1, the node is required to already be tracking the P-Chain.
 
 If the validator is within 24 hours of expiring on the primary network, it can't be added to the Avalanche L1.
 
