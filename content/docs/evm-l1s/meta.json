@@ -4,6 +4,7 @@
     "pages": [
       "index",
       "---Validator Manager---",
+      "validator-manager/poa-vs-pos",
       "validator-manager/contract",
       "validator-manager/add-validator",
       "validator-manager/remove-validator",
