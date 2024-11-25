@@ -7,6 +7,7 @@ import { useCallback } from 'react'
 import Particles from "react-particles"
 import { loadSlim } from "tsparticles-slim"
 import type { Engine } from "tsparticles-engine"
+import { useTheme } from 'next-themes'
 import Link from 'next/link'
 
 interface ProgramCardProps {
@@ -47,6 +48,9 @@ export default function Page() {
     await loadSlim(engine)
   }, [])
 
+  const { theme, setTheme } = useTheme()
+  const opacity = theme === "dark" ? .1 : .5
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
@@ -65,10 +69,6 @@ export default function Page() {
         interactivity: {
         events: {
           onClick: {
-          enable: true,
-          mode: "push",
-          },
-          onHover: {
           enable: true,
           mode: "repulse",
           },
@@ -92,7 +92,7 @@ export default function Page() {
           color: "#ffffff",
           distance: 150,
           enable: true,
-          opacity: 0.5,
+          opacity: opacity,
           width: 1,
         },
         move: {
@@ -113,7 +113,7 @@ export default function Page() {
           value: 80,
         },
         opacity: {
-          value: 0.5,
+          value: opacity,
         },
         shape: {
           type: "circle",
