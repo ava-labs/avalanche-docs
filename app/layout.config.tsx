@@ -21,6 +21,10 @@ export const baseOptions: BaseLayoutProps = {
       url: '/integrations',
     },
     {
+      text: 'Grants & Programs',
+      url: '/grants',
+    },
+    {
       text: 'Guides',
       url: 'https://academy.avax.network/guide',
     }
