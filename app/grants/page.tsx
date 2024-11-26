@@ -14,30 +14,34 @@ interface ProgramCardProps {
   title: string;
   description: string;
   icon: React.ReactNode;
-  color: 'red' | 'blue' | 'green' | 'pink';
+  color: 'red' | 'blue' | 'green' | 'pink' | 'grey';
+  arrowColor: 'white' | 'black';
 }
 
-function ProgramCard({ title, description, icon, color }: ProgramCardProps) {
+function ProgramCard({ title, description, icon, color, arrowColor }: ProgramCardProps) {
   const gradients: Record<ProgramCardProps['color'], string> = {
-    red: "from-red-500 to-orange-500",
+    red: "from-red-500 to-red-500",
     blue: "from-blue-500 to-cyan-500",
     green: "from-green-500 to-emerald-500",
-    pink: "from-pink-500 to-rose-500",
+    pink: "from-pink-500 to-pink-500",
+    grey: "from-gray-500 to-gray-500",
   }
 
   return (
     <div className="group relative overflow-hidden rounded-3xl transition-all duration-300 hover:shadow-2xl">
       <div className={`absolute inset-0 bg-gradient-to-br ${gradients[color]} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
       <div className="relative p-6 space-y-4 bg-card border border-border rounded-3xl transition-all duration-300 group-hover:bg-card/50 group-hover:backdrop-blur-sm">
+      <div className="flex justify-between items-start">
         <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${gradients[color]} flex items-center justify-center text-white`}>
-          {icon}
+        {icon}
         </div>
-        <h3 className="text-2xl font-bold">{title}</h3>
-        <p className="text-muted-foreground">{description}</p>
         <Button variant="ghost" className="group/button">
-          Learn more{" "}
-          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/button:translate-x-1" />
+        {/* Learn more{" "} */}
+        <ArrowRight color={arrowColor} className="ml-2 h-4 w-4 transition-transform group-hover/button:translate-x-1" />
         </Button>
+      </div>
+      <h3 className="text-2xl font-bold">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
       </div>
     </div>
   )
@@ -50,11 +54,12 @@ export default function Page() {
 
   const { theme, setTheme } = useTheme()
   const opacity = theme === "dark" ? .1 : .5
+  const arrowColor = theme === "dark" ? "white" : "black"
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-      <div className="absolute top-0 left-0 right-0 h-[32rem] bg-gradient-to-br from-red-500 to-orange-500 opacity-20 blur-3xl" />
+      <div className="absolute top-0 left-0 right-0 h-[32rem] bg-gradient-to-br from-red-500 to-red-500 opacity-20 blur-3xl dark:hidden" />
       
       <Particles
       id="tsparticles"
@@ -90,10 +95,10 @@ export default function Page() {
         },
         links: {
           color: "#ffffff",
-          distance: 150,
+          distance: 215,
           enable: true,
           opacity: opacity,
-          width: 1,
+          width: 5,
         },
         move: {
           direction: "none",
@@ -119,7 +124,7 @@ export default function Page() {
           type: "circle",
         },
         size: {
-          value: { min: 3, max: 9 },
+          value: { min: 5, max: 18 },
         },
         },
         detectRetina: true,
@@ -147,16 +152,16 @@ export default function Page() {
         </div>
         <h1 className="text-4xl md:text-7xl font-bold tracking-tighter">
         Grants & Programs
-        <span className="block bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent pb-1">
+        <span className="block pb-1 text-[#EB4C50]">
           Building the Future
         </span>
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-        Empowering innovators to revolutionize blockchain technology and create scalable solutions for real-world challenges.
+        Empowering innovators to revolutionize blockchain technology with scalablable and sustainable solutions for real-world challenges.
         </p>
         <Link href="#programs">
-            <Button className="mt-6 rounded-full text-lg px-8 py-6 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl">
-            Apply Now <ArrowRight className="ml-2 h-5 w-5 text-black dark:text-white" />
+            <Button className="mt-6 rounded-full text-lg px-8 py-6 bg-red-500 hover:bg-red-600 transition-all duration-300 shadow-lg hover:shadow-xl text-white dark:text-white">
+            Apply Now <ArrowRight color="white" className="ml-2 h-5 w-5" />
             </Button>
         </Link>
       </section>
@@ -176,9 +181,6 @@ export default function Page() {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Fueling innovation across all programs based on project impact and potential.
             </p>
-            {/* <Button className="mt-4 rounded-full text-lg px-8 py-6 bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 shadow-lg hover:shadow-xl text-white">
-              Learn More About Funding <ArrowRight className="ml-2 h-5 w-5" />
-            </Button> */}
           </div>
         </section>
 
@@ -189,33 +191,37 @@ export default function Page() {
           <a href="https://retro9000.avax.network/" target="_blank" rel="noopener noreferrer">
             <ProgramCard
             title="Retro9000"
-            description="Reviving classic blockchain concepts with modern technology. For visionaries who see the future in the past."
-            icon={<Zap className="w-8 h-8" />}
+            description="Build innovative projects on Avalanche. Get rewarded for your creativity."
+            icon={<Zap className="w-8 h-8" color='white'/>}
             color="red"
+            arrowColor={arrowColor}
             />
           </a>
           <a href="https://www.avax.network/infrabuidl-program" target="_blank" rel="noopener noreferrer">
             <ProgramCard
             title="InfraBUIDL()"
-            description="Strengthening Avalanche's infrastructure. Build the foundation for next-gen Web3 applications."
-            icon={<Cpu className="w-8 h-8" />}
-            color="blue"
+            description="Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications."
+            icon={<Cpu className="w-8 h-8" color='white'/>}
+            color="grey"
+            arrowColor={arrowColor}
             />
           </a>
           <a href="https://codebase.avax.network/" target="_blank" rel="noopener noreferrer">
             <ProgramCard
             title="Codebase"
             description="Empowering developers to create innovative solutions. Turn your blockchain vision into reality."
-            icon={<Code className="w-8 h-8" />}
-            color="green"
+            icon={<Code className="w-8 h-8" color='white'/>}
+            color="blue"
+            arrowColor={arrowColor}
             />
           </a>
           <a href="https://www.blizzard.fund/" target="_blank" rel="noopener noreferrer">
             <ProgramCard
             title="Blizzard Fund"
             description="A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support."
-            icon={<Coins className="w-8 h-8" />}
+            icon={<Coins className="w-8 h-8" color='white'/>}
             color="pink"
+            arrowColor={arrowColor}
             />
           </a>
           </div>
@@ -230,8 +236,8 @@ export default function Page() {
               Join Avalanche's ecosystem of innovators and shape the future of blockchain technology.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="rounded-full px-8 py-6 bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl text-white">
-                Apply for Grants <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="rounded-full px-8 py-6 bg-red-500 transition-all duration-300 shadow-lg hover:shadow-xl text-white">
+                Apply for Grants <ArrowRight className="ml-2 h-5 w-5" color='white' />
               </Button>
               <Button size="lg" variant="outline" className="rounded-full px-8 py-6 border-2 hover:bg-red-500/10 transition-all duration-300">
                 Learn More
