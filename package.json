@@ -32,10 +32,13 @@
     "posthog-js": "^1.166.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-particles": "^2.12.2",
     "rehype-katex": "^7.0.0",
     "remark-math": "^6.0.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "tsparticles": "^3.7.1",
+    "tsparticles-slim": "^2.12.0",
     "tsx": "^4.19.0"
   },
   "devDependencies": {

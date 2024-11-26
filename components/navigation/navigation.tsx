@@ -156,7 +156,7 @@ export function GrantsDropdown() {
       title: 'Grants & Programs',
       description: '',
       icon: <></>,
-      url: '',
+      url: '/grants',
     },
     {
       title: 'Retro9000',
