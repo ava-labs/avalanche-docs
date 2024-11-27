@@ -48,13 +48,12 @@ function ProgramCard({ title, description, icon, color, arrowColor }: ProgramCar
 }
 
 export default function Page() {
+  const { resolvedTheme } = useTheme()
+  const opacity = resolvedTheme === "dark" ? .1 : .5
+  const arrowColor = resolvedTheme === "dark" ? "white" : "black"
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine)
   }, [])
-
-  const { theme, setTheme } = useTheme()
-  const opacity = theme === "dark" ? .1 : .5
-  const arrowColor = theme === "dark" ? "white" : "black"
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
