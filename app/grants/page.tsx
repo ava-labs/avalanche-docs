@@ -51,6 +51,7 @@ export default function Page() {
   const { resolvedTheme } = useTheme()
   const opacity = resolvedTheme === "dark" ? .1 : .5
   const arrowColor = resolvedTheme === "dark" ? "white" : "black"
+
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine)
   }, [])
