@@ -193,14 +193,14 @@ The default values for production environment:
 
 - Use latest Subnet-EVM release
 - Allocate 1 million tokens to:
-   - a newly created key (production) - name of this key will be in the format of subnet_blockchainName_airdrop
-   - ewoq - 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC (test)
+    1. **a newly created key (production)**: name of this key will be in the format of `subnet_blockchainName_airdrop`
+    2. **ewoq address (test)**: 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 - Supply of the native token will be hard-capped
-- Set gas fee config as low throughput (12 mil gas per block)
+- Set gas fee config as low throughput (12 million gas per block)
 - Use constant gas prices
 - Disable further adjustments in transaction fee configuration
 - Transaction fees are burned
-- Enable interoperation with other blockchains
+- Enable interoperability with other blockchains
 - Allow any user to deploy smart contracts, send transactions, and interact with your blockchain.
 
 Next, CLI asks for the ChainID. You should provide your own ID. Check [chainlist.org](https://chainlist.org/) to see if the value you'd like is already in use.
@@ -228,6 +228,7 @@ Print the specification to disk by running the `describe` command:
 ```bash
 avalanche blockchain describe testblockchain
 ```
+
 ```bash
 +------------------------------------------------------------------+
 |                          TESTBLOCKCHAIN                          |
