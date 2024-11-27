@@ -98,7 +98,7 @@ export default function Page() {
           distance: 215,
           enable: true,
           opacity: opacity,
-          width: 5,
+          width: 3,
         },
         move: {
           direction: "none",
@@ -107,13 +107,13 @@ export default function Page() {
           default: "bounce",
           },
           random: false,
-          speed: 1,
+          speed: 0.5,
           straight: false,
         },
         number: {
           density: {
           enable: true,
-          area: 800,
+          area: 900,
           },
           value: 80,
         },
@@ -124,7 +124,7 @@ export default function Page() {
           type: "circle",
         },
         size: {
-          value: { min: 5, max: 18 },
+          value: { min: 8, max: 18 },
         },
         },
         detectRetina: true,
