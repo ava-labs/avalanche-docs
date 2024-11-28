@@ -356,9 +356,9 @@ To get your new Avalanche L1 information, visit the [Avalanche L1 Explorer](http
 Add a Validator[​](#add-a-validator "Direct link to heading")
 -------------------------------------------------------------
 
-Before proceeding to add a validator to our Avalanche L1, we will need to have the validator's NodeID, BLS public key and proof of possession. These can be obtained by ssh into the node itself and run the `getNodeID` API specified [here](https://docs.avax.network/api-reference/info-api#infogetnodeid)
+Before proceeding to add a validator to our Avalanche L1, we will need to have the validator's NodeID, BLS public key and proof of possession. These can be obtained by ssh into the node itself and run the `getNodeID` API specified [here](/api-reference/info-api#infogetnodeid).
 
-To add a validator to an Avalanche L1, the owner of the key that acts as the controller of ValidatorManager contract specified in `avalanche blockchain create` command above run:
+To add a validator to an Avalanche L1, the owner of the key that acts as the controller of `ValidatorManager` contract specified in `avalanche blockchain create` command above run:
 
 ```bash
 avalanche blockchain addValidator testblockchain
@@ -415,7 +415,7 @@ Next, select a key that can remove the validator:
   ▸ mytestkey
 ```
 
-By the end of the command, you would have successfully added a new validator on the given Avalanche L1 on `Fuji`!
+By the end of the command, you would have successfully added a new validator to the Avalanche L1 on Fuji Testnet!
 
 Appendix[​](#appendix "Direct link to heading")
 -----------------------------------------------
