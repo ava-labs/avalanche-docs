@@ -1,5 +1,7 @@
 {
-    "title": "evm-l1s",
+    "title": "EVM Customization",
+    "description": "Customize the Ethereum VM",
+    "icon": "Pyramid",
     "root": true,
     "pages": [
       "index",

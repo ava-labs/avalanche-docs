@@ -1,5 +1,7 @@
 {
-  "title": "cross-chain",
+  "title": "Interoperability",
+  "description": "AWM and Teleporter",
+  "icon": "Mail",
   "root": true,
   "pages": [
     "index",

@@ -1,5 +1,7 @@
 {
-  "title": "Nodes",
+  "title": "Nodes & Validators",
+  "description": "Participate in the Network",
+  "icon": "MonitorCheck",
   "root": true,
   "pages": [
     "index",

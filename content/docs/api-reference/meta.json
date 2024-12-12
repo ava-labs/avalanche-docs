@@ -1,5 +1,7 @@
 {
-  "title": "api-reference",
+  "title": "API References",
+  "description": "Avalanche API References",
+  "icon": "Webhook",
   "root": true,
   "pages": [
     "index",

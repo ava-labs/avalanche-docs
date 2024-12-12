@@ -1,5 +1,7 @@
 {
-  "title": "dapps",
+  "title": "Smart Contracts",
+  "description": "Build Apps on Avalanche",
+  "icon": "SquareChartGantt",
   "root": true,
   "pages": [
     "---dApps on Avalanche---",
