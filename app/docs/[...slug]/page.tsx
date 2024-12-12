@@ -7,6 +7,7 @@ import {
   DocsCategory
 } from 'fumadocs-ui/page';
 import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Popup, PopupContent, PopupTrigger } from 'fumadocs-twoslash/ui';
 import { notFound } from 'next/navigation';
 import { createMetadata } from '@/utils/metadata';
 import { getDocsPage, getDocsPages, type Page, loaderOutput } from '@/utils/docs-loader';
@@ -15,6 +16,10 @@ import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { TypeTable } from "fumadocs-ui/components/type-table";
+import { AutoTypeTable } from '@/components/type-table';
+import { Heading } from 'fumadocs-ui/components/heading';
+import YouTube from "@/components/youtube";
+import Gallery from "@/components/gallery";
 import { cn } from "@/utils/cn";
 import {
   CodeBlock,
@@ -55,7 +60,12 @@ export default async function Page(props: {
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody className="text-fd-foreground/80">
-        <MDX components={{BadgeCheck, Cards, Card, Accordion, Accordions, Mermaid, Step, Steps, Callout, Tab, Tabs, TypeTable,
+        <MDX components={{    h1: (props) => <Heading as="h1" {...props} />,
+    h2: (props) => <Heading as="h2" {...props} />,
+    h3: (props) => <Heading as="h3" {...props} />,
+    h4: (props) => <Heading as="h4" {...props} />,
+    h5: (props) => <Heading as="h5" {...props} />,
+    h6: (props) => <Heading as="h6" {...props} />, BadgeCheck, Cards, Card, Callout, Accordion, Accordions, AutoTypeTable, Gallery, Mermaid, Popup, PopupContent, PopupTrigger, Step, Steps, Tab, Tabs, TypeTable, YouTube, 
               pre: ({ title, className, icon, allowCopy, ...props }: CodeBlockProps) => (
                 <CodeBlock title={title} icon={icon} allowCopy={allowCopy}>
                   <Pre className={cn("max-h-[1200px]", className)} {...props} />

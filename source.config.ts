@@ -5,7 +5,7 @@ import {
   frontmatterSchema,
   metaSchema,
 } from 'fumadocs-mdx/config';
-import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
+import { rehypeCodeDefaultOptions, remarkImage } from 'fumadocs-core/mdx-plugins';
 import { transformerTwoslash } from 'fumadocs-twoslash';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -74,7 +74,7 @@ export default defineConfig({
         },
       ],
     },
-    remarkPlugins: [ remarkMath, remarkHeading ],
+    remarkPlugins: [ remarkMath, remarkHeading, [remarkImage, { useImport: false }] ],
     rehypePlugins: (v) => [rehypeKatex, ...v],
     jsx: false,
   },
