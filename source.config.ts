@@ -9,6 +9,7 @@ import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
 import { transformerTwoslash } from 'fumadocs-twoslash';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { remarkHeading } from 'fumadocs-core/mdx-plugins';
 import { z } from 'zod';
 
 export const { docs, meta } = defineDocs({
@@ -72,9 +73,8 @@ export default defineConfig({
         },
       ],
     },
-    remarkPlugins: [
-      remarkMath,
-    ],
+    remarkPlugins: [ remarkMath, remarkHeading ],
     rehypePlugins: (v) => [rehypeKatex, ...v],
+    jsx: false,
   },
 });
