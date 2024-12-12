@@ -29,6 +29,7 @@ export const { docs, meta } = defineDocs({
 });
 
 export const integrations = defineCollections({
+  async: true,
   dir: 'content/integrations',
   schema: frontmatterSchema.extend({
     category: z.string(),

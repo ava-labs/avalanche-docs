@@ -15,6 +15,7 @@ export default async function Page(props: {
     const page = getIntegrationPage([params.slug]);
     if (!page) notFound();
 
+    const { body: MDX } = await page.data.load();
     const path = `content/integrations/${page.file.path}`;
 
     return (
@@ -51,6 +52,7 @@ export default async function Page(props: {
             </div>
             <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
                 <div className="prose p-4">
+                    <MDX components={defaultMdxComponents}/>
                 </div>
                 <div className="flex flex-col gap-4 border-l p-4 text-sm">
                     <div>

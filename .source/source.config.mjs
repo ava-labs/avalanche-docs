@@ -28,6 +28,7 @@ var { docs, meta } = defineDocs({
   }
 });
 var integrations = defineCollections({
+  async: true,
   dir: "content/integrations",
   schema: frontmatterSchema.extend({
     category: z.string(),

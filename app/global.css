@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.prose {
-  font-size: 16px;
-} 
-
 .prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
   color: #E84142;
 }
