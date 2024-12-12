@@ -86,7 +86,6 @@ export default async function Page(props: {
                         </a>
                     </div>
 
-
                     <a
                         href={`https://github.com/ava-labs/avalanche-academy/blob/dev/${path}`}
                         target="_blank"
