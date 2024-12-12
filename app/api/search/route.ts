@@ -1,14 +1,18 @@
-import { getDocsPages } from '@/utils/docs-loader';
-import { getIntegrationPages } from '@/utils/integrations-loader';
-import { createSearchAPI } from 'fumadocs-core/search/server';
-import { structure } from 'fumadocs-core/mdx-plugins';
+import { getDocsPages } from '@/utils/docs-loader'
+import { getIntegrationPages } from '@/utils/integrations-loader'
+import { createSearchAPI } from 'fumadocs-core/search/server'
 
 export const { GET } = createSearchAPI('advanced', {
-  indexes: getDocsPages().map((page) => ({
-    title: page.data.title,
-    description: page.data.description,
-    url: page.url,
-    id: page.url,
-    structuredData: structure(page.data.preview ?? ''),
-  })),
-});
+  indexes: await Promise.all(
+    getDocsPages().map(async (page) => {
+      const loadedData = await page.data.load()
+      return {
+        title: page.data.title,
+        description: page.data.description,
+        url: page.url,
+        id: page.url,
+        structuredData: loadedData.structuredData
+      }
+    })
+  )
+})
