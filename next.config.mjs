@@ -1,4 +1,4 @@
-import createMDX from 'fumadocs-mdx/config';
+import { createMDX } from 'fumadocs-mdx/next';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
  

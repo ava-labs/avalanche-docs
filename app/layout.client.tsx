@@ -2,8 +2,6 @@
 import type { ReactNode } from 'react';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 
-
-
 export function NavbarTitle(): React.ReactElement {
 	return (
 	  <div className='flex gap-2.5 shrink-0'>

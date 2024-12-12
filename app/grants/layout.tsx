@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { integrationPageOptions } from '@/app/layout.config';
 import { Footer } from '@/components/footer';
-import { Layout } from 'fumadocs-ui/layout';
+import { HomeLayout } from 'fumadocs-ui/layouts/home';
 
 export const metadata: Metadata = {
   title: "Avalanche Grants & Programs",
@@ -14,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <Layout {...integrationPageOptions}>
+    <HomeLayout {...integrationPageOptions}>
     {children}
     <Footer />
-    </Layout>
+    </HomeLayout>
   )
 }
 

@@ -4,20 +4,40 @@ description: Teleporter is a messaging protocol built on top of Avalanche Warp M
 ---
 
 
+- [Overview](#overview)
+- [Data Flow](#data-flow)
+- [Properties](#properties)
+- [Fees](#fees)
+- [Message Receipts and Fee Redemption](#message-receipts-and-fee-redemption)
+- [Required Interface](#required-interface)
+- [Message Delivery and Execution](#message-delivery-and-execution)
+- [Resending a Message](#resending-a-message)
+- [TeleporterMessenger Contract Deployment](#teleportermessenger-contract-deployment)
+- [Deployed Addresses](#deployed-addresses)
+- [A Note on Versioning](#a-note-on-versioning)
+- [Upgradability](#upgradability)
+- [Deploy TeleporterMessenger to an L1](#deploy-teleportermessenger-to-an-avalanche-l1)
+- [Deploy TeleporterRegistry to an L1](#deploy-teleporterregistry-to-an-avalanche-l1)
+- [Verify a Deployment of TeleporterMessenger](#verify-a-deployment-of-teleporterMessenger)
+
 ## Overview
 
-Teleporter is a messaging protocol built on top of [Avalanche Warp Messaging (AWM)](/cross-chain/avalanche-warp-messaging/overview) that provides a developer-friendly interface for sending and receiving cross-chain messages from within the EVM.
+`TeleporterMessenger` is a smart contract that serves as the interface for ICM contracts to [Avalanche Interchain Messaging (ICM)](https://academy.avax.network/course/interchain-messaging/04-icm-basics/01-icm-basics). It provides a mechanism to asynchronously invoke smart contract functions on other EVM L1s within Avalanche. `TeleporterMessenger` provides a handful of useful features to ICM, such as specifying relayer incentives for message delivery, replay protection, message delivery and execution retries, and a standard interface for sending and receiving messages within a dApp deployed across multiple Avalanche L1s.
+
+The `TeleporterMessenger` contract is a user-friendly interface to ICM, aimed at dApp developers. All of the message signing and verification is abstracted away from developers. Instead, developers simply call `sendCrossChainMessage` on the `TeleporterMessenger` contract to send a message invoking a smart contract on another Avalanche L1, and implement the `ITeleporterReceiver` interface to receive messages on the destination Avalanche L1. `TeleporterMessenger` handles all of the ICM message construction and sending, as well as the message delivery and execution.
+
+To get started with using `TeleporterMessenger`, see [How to Deploy ICM Enabled Avalanche L1s on a Local Network](https://docs.avax.network/tooling/cli-cross-chain/teleporter-on-local-networks)
 
 The `ITeleporterMessenger` interface provides two primary methods:
 
 - `sendCrossChainMessage`: called by contracts on the origin chain to initiate the sending of a message to a contract on another EVM instance.
 - `receiveCrossChainMessage`: called by cross-chain relayers on the destination chain to deliver signed messages to the destination EVM instance.
 
-The `ITeleporterReceiver` interface provides a single method. All contracts that wish to receive Teleporter messages on the destination chain must implement this interface:
+The `ITeleporterReceiver` interface provides a single method. All contracts that wish to receive ICM messages on the destination chain must implement this interface:
 
-- `receiveTeleporterMessage`: called by the Teleporter contract on the destination chain to deliver a message to the destination contract.
+- `receiveTeleporterMessage`: called by `TeleporterMessenger` on the destination chain to deliver a message to the destination contract.
 
-> Note: If a contract does not implement `ITeleporterReceiver`, but instead implements [fallback](https://docs.soliditylang.org/en/latest/contracts.html#fallback-function), the fallback function will be called when Teleporter attempts to perform message execution. The message execution is marked as failed if the fallback function reverts, otherwise it is marked as successfully executed.
+> Note: If a contract does not implement `ITeleporterReceiver`, but instead implements [fallback](https://docs.soliditylang.org/en/latest/contracts.html#fallback-function), the fallback function will be called when `TeleporterMessenger` attempts to perform message execution. The message execution is marked as failed if the fallback function reverts, otherwise it is marked as successfully executed.
 
 ## Data Flow
 
@@ -27,53 +47,53 @@ The `ITeleporterReceiver` interface provides a single method. All contracts that
 
 ## Properties
 
-Teleporter provides a handful of useful properties to cross-chain applications that Avalanche Warp Messages do not provide by default. These include:
+TeleporterMessenger provides a handful of useful properties to cross-chain applications that ICM messages do not provide by default. These include:
 
-1. Replay protection: Teleporter ensures that a cross-chain message is not delivered multiple times.
-2. Retries: In certain edge cases when there is significant validator churn, it is possible for an Avalanche Warp Message to be dropped before a valid aggregate signature is created for it. Teleporter ensures that messages can still be delivered even in this event by allowing for retries of previously submitted messages.
-3. Relay incentivization: Teleporter provides a mechanism for messages to optionally incentivize relayers to perform the necessary signature aggregation and pay the transaction fee to broadcast the signed message on the destination chain.
-4. Allowed relayers: Teleporter allows users to specify a list of `allowedRelayerAddresses`, where only the specified addresses can relay and deliver the Teleporter message. Leaving this list empty allows all relayers to deliver.
-5. Message execution: Teleporter enables cross-chain messages to have direct effect on their destination chain by using `evm.Call()` to invoke the `receiveTeleporterMessage` function of destination contracts that implement the `ITeleporterReceiver` interface.
+1. Replay protection: `TeleporterMessenger` ensures that a cross-chain message is not delivered multiple times.
+2. Retries: In certain edge cases when there is significant validator churn, it is possible for an ICM Message to be dropped before a valid aggregate signature is created for it. `TeleporterMessenger` ensures that messages can still be delivered even in this event by allowing for retries of previously submitted messages.
+3. Relay incentivization: `TeleporterMessenger` provides a mechanism for messages to optionally incentivize relayers to perform the necessary signature aggregation and pay the transaction fee to broadcast the signed message on the destination chain.
+4. Allowed relayers: `TeleporterMessenger` allows users to specify a list of `allowedRelayerAddresses`, where only the specified addresses can relay and deliver the `TeleporterMessenger` message. Leaving this list empty allows all relayers to deliver.
+5. Message execution: `TeleporterMessenger` enables cross-chain messages to have direct effect on their destination chain by using `evm.Call()` to invoke the `receiveTeleporterMessage` function of destination contracts that implement the `ITeleporterReceiver` interface.
 
 ## Fees
 
-Fees can be paid on a per message basis by specifing the ERC20 asset and amount to be used to incentivize a relayer to deliver the message in the call to `sendCrossChainMessage`. The fee amount is transferred into the control of the Teleporter contract (i.e. locked) before the Warp message is sent. The Teleporter contract tracks the fee amount for each message ID it creates. When it subsequently receives a message back from the destination chain of the original message, the new message will have a list of receipts identifying the relayer that delivered the given message ID. At this point, the fee amount originally locked by Teleporter for the given message will be redeemable by the relayer identified in the receipt. If the initial fee amount was not sufficient to incentivize a relayer, it can be added to by using `addFeeAmount`.
+Fees can be paid on a per message basis by specifing the ERC20 asset and amount to be used to incentivize a relayer to deliver the message in the call to `sendCrossChainMessage`. The fee amount is transferred into the control of `TeleporterMessenger` (i.e. locked) before the ICM message is sent. `TeleporterMessenger` tracks the fee amount for each message ID it creates. When it subsequently receives a message back from the destination chain of the original message, the new message will have a list of receipts identifying the relayer that delivered the given message ID. At this point, the fee amount originally locked by `TeleporterMessenger` for the given message will be redeemable by the relayer identified in the receipt. If the initial fee amount was not sufficient to incentivize a relayer, it can be added to by using `addFeeAmount`.
 
 ### Message Receipts and Fee Redemption
 
-In order to confirm delivery of a Teleporter message from a source chain to a destination chain, a receipt is included in the next Teleporter message sent in the opposite direction, from the destination chain back to the source chain. This receipt contains the message ID of the original message, as well as the reward address that the delivering relayer specified. That reward address is then able to redeem the corresponding reward on the original chain by calling `redeemRelayerRewards`. The following example illustrates this flow:
+In order to confirm delivery of a `TeleporterMessenger` message from a source chain to a destination chain, a receipt is included in the next `TeleporterMessenger` message sent in the opposite direction, from the destination chain back to the source chain. This receipt contains the message ID of the original message, as well as the reward address that the delivering relayer specified. That reward address is then able to redeem the corresponding reward on the original chain by calling `redeemRelayerRewards`. The following example illustrates this flow:
 
-- A Teleporter message is sent from Chain A to Chain B, with a relayer incentive of `10` `USDC`. This message is assigned the ID `1` by the Teleporter contract on Chain A.
+- A `TeleporterMessenger` message is sent from Chain A to Chain B, with a relayer incentive of `10` `USDC`. This message is assigned the ID `1` by the `TeleporterMessenger` contract on Chain A.
   - On Chain A, this is done by calling `sendCrossChainMessage`, and providing the `USDC` contract address and amount in the function call.
 - A relayer delivers the message on Chain B by calling `receiveCrossChainMessage` and providing its address, `0x123...`
-- The Teleporter contract on Chain B stores the relayer address in a receipt for the message ID.
-- Some time later, a separate Teleporter message is sent from Chain B to Chain A. The Teleporter contract on Chain B includes the receipt for the original message in this new message.
-- When this new message is delivered on Chain A, the Teleporter contract on Chain A reads the receipt and attributes the rewards for delivering the original message (message ID `1`) to the address `0x123...`.
+- The `TeleporterMessenger` contract on Chain B stores the relayer address in a receipt for the message ID.
+- Some time later, a separate `TeleporterMessenger` message is sent from Chain B to Chain A. The `TeleporterMessenger` contract on Chain B includes the receipt for the original message in this new message.
+- When this new message is delivered on Chain A, the `TeleporterMessenger` contract on Chain A reads the receipt and attributes the rewards for delivering the original message (message ID `1`) to the address `0x123...`.
 - Address `0x123...` may now call `redeemRelayerRewards` on Chain A, which transfers the `10` `USDC` to its address. If it tries to do this before the receipt is received on Chain A, the call will fail.
 
-It is possible for receipts to get "stuck" on the destination chain in the event that Teleporter traffic between two chains is skewed in one direction. In such a scenario, incoming messages on one chain may cause the rate at which receipts are generated to outpace the rate at which they are sent back to the other chain. To mitigate this, the method `sendSpecifiedReceipts` can be called to immediately send the receipts associated with the given message IDs back to the original chain.
+It is possible for receipts to get "stuck" on the destination chain in the event that `TeleporterMessenger` traffic between two chains is skewed in one direction. In such a scenario, incoming messages on one chain may cause the rate at which receipts are generated to outpace the rate at which they are sent back to the other chain. To mitigate this, the method `sendSpecifiedReceipts` can be called to immediately send the receipts associated with the given message IDs back to the original chain.
 
 ## Required Interface
 
-Teleporter messages are delivered by calling the `receiveTeleporterMessage` function defined by the `ITeleporterReceiver` interface. Contracts must implement this interface in order to be able to receive messages. The first two parameters of `receiveTeleporterMessage` identify the original sender of the given message on the origin chain and are set by the `TeleporterMessenger`. The third parameter to `receiveTeleporterMessage`, is the raw message payload. Applications using Teleporter are responsible for defining the exact format of this payload in a way that can be decoded on the receiving end. For example, applications may encode an action enum value along with the target method parameters on the sending side, then decode this data and route to the target method within `receiveTeleporterMessage`. See `ERC20Bridge.sol` for an example of this approach.
+`TeleporterMessenger` messages are delivered by calling the `receiveTeleporterMessage` function defined by the `ITeleporterReceiver` interface. Contracts must implement this interface in order to be able to receive messages. The first two parameters of `receiveTeleporterMessage` identify the original sender of the given message on the origin chain and are set by the `TeleporterMessenger`. The third parameter to `receiveTeleporterMessage`, is the raw message payload. Applications using `TeleporterMessenger` are responsible for defining the exact format of this payload in a way that can be decoded on the receiving end. For example, applications may encode an action enum value along with the target method parameters on the sending side, then decode this data and route to the target method within `receiveTeleporterMessage`. See `ERC20Bridge.sol` for an example of this approach.
 
 ## Message Delivery and Execution
 
-Teleporter is able to ensure that messages are considered delivered even if their execution fails (i.e. reverts) by using `evm.Call()` with a pre-defined gas limit to execute the message payload. This gas limit is specified by each message in the call to `sendCrossChainMessage`. Relayers must provide at least enough gas for the sub-call in addition to the standard gas used by a call to `receiveCrossChainMessage`. In the event that a message execution runs out of gas or reverts for any other reason, the hash of the message payload is stored by the receiving Teleporter contract instance. This allows for the message execution to be retried in the future, with possibly a higher gas limit by calling `retryMessageExecution`. Importantly, a message is still considered delivered on its destination chain even if its execution fails. This allows the relayer of the message to redeem their reward for deliverying the message, because they have no control on whether or not its execution will succeed or not so long as they provide sufficient gas to meet the specified `requiredGasLimit`.
+`TeleporterMessenger` is able to ensure that messages are considered delivered even if their execution fails (i.e. reverts) by using `evm.Call()` with a pre-defined gas limit to execute the message payload. This gas limit is specified by each message in the call to `sendCrossChainMessage`. Relayers must provide at least enough gas for the sub-call in addition to the standard gas used by a call to `receiveCrossChainMessage`. In the event that a message execution runs out of gas or reverts for any other reason, the hash of the message payload is stored by the receiving `TeleporterMessenger` contract instance. This allows for the message execution to be retried in the future, with possibly a higher gas limit by calling `retryMessageExecution`. Importantly, a message is still considered delivered on its destination chain even if its execution fails. This allows the relayer of the message to redeem their reward for deliverying the message, because they have no control on whether or not its execution will succeed or not so long as they provide sufficient gas to meet the specified `requiredGasLimit`.
 
-Note that due to [EIP-150](https://eips.ethereum.org/EIPS/eip-150), the lesser of 63/64<sup>ths</sup> of the remaining gas and the `requiredGasLimit` will be provided to the code executed using `evm.Call()`. This creates an edge case where sufficient gas is provided by the relayer at time of the `requiredGasLimit` check, but less than the `requiredGasLimit` is provided for the message execution. In such a case, the message execution may fail due to having less than the `requiredGasLimit` available, but the message would still be considered received. Such a case is only possible if the remaining 1/64<sup>th</sup> of the `requiredGasLimit` is sufficient for executing the remaining logic of `receiveCrossChainMessage` so that the top level transaction does not also revert. Based on the current implementation, a message must have a `requiredGasLimit` of over 1,200,000 gas for this to be possible. In order to avoid this case entirely, it is recommended for applications sending Teleporter messages to add a buffer to the `requiredGasLimit` such that 63/64<sup>ths</sup> of the value passed is sufficient for the message execution.
+Note that due to [EIP-150](https://eips.ethereum.org/EIPS/eip-150), the lesser of 63/64<sup>ths</sup> of the remaining gas and the `requiredGasLimit` will be provided to the code executed using `evm.Call()`. This creates an edge case where sufficient gas is provided by the relayer at time of the `requiredGasLimit` check, but less than the `requiredGasLimit` is provided for the message execution. In such a case, the message execution may fail due to having less than the `requiredGasLimit` available, but the message would still be considered received. Such a case is only possible if the remaining 1/64<sup>th</sup> of the `requiredGasLimit` is sufficient for executing the remaining logic of `receiveCrossChainMessage` so that the top level transaction does not also revert. Based on the current implementation, a message must have a `requiredGasLimit` of over 1,200,000 gas for this to be possible. In order to avoid this case entirely, it is recommended for applications sending `TeleporterMessenger` messages to add a buffer to the `requiredGasLimit` such that 63/64<sup>ths</sup> of the value passed is sufficient for the message execution.
 
 ## Resending a Message
 
-If the sending Avalanche L1's validator set changes, then it's possible for the receiving Avalanche L1 to reject the underlying Warp message due to insufficient signing stake. For example, suppose Avalanche L1 A has 5 validators with equal stake weight who all sign a Teleporter message sent to Avalanche L1 B. 100% of Avalanche L1 A's stake has signed the message. Also suppose Avalanche L1 B requires 67% of the sending Avalanche L1's stake to have signed a given Warp message in order for it to be accepted. Before the message can be delivered, however, 5 _more_ validators are added to Avalanche L1 A's validator set (all with the same stake weight as the original validators), meaning that the Teleporter message was signed by _only 50%_ of Avalanche L1 A's stake. Avalanche L1 B will reject this message.
+If the sending Avalanche L1's validator set changes, then it's possible for the receiving Avalanche L1 to reject the underlying ICM message due to insufficient signing stake. For example, suppose L1 A has 5 validators with equal stake weight who all sign a `TeleporterMessenger` message sent to L1 B. 100% of L1 A's stake has signed the message. Also suppose L1 B requires 67% of the sending L1's stake to have signed a given ICM message in order for it to be accepted. Before the message can be delivered, however, 5 _more_ validators are added to L1 A's validator set (all with the same stake weight as the original validators), meaning that the `TeleporterMessenger` message was signed by _only 50%_ of L1 A's stake. L1 B will reject this message.
 
-Once sent on chain, Warp messages cannot be re-signed by a new validator set in such a scenario. Teleporter, however, does support re-signing via the function `retrySendCrossChainMessage`, which can be called for any message that has not been acknowledged as delivered to its destination. Under the hood, this packages the Teleporter message into a brand new Warp message that is re-signed by the current validator set. 
+Once sent on chain, ICM messages cannot be re-signed by a new validator set in such a scenario. Teleporter, however, does support re-signing via the function `retrySendCrossChainMessage`, which can be called for any message that has not been acknowledged as delivered to its destination. Under the hood, this packages the `TeleporterMessenger` message into a brand new ICM message that is re-signed by the current validator set. 
 
-## Teleporter Messenger Contract Deployment
+## TeleporterMessenger Contract Deployment
 
-**Do not deploy the `TeleporterMessenger` contract using `forge create`**. The `TeleporterMessenger` contract must be deployed to the same contract address on every chain. To achieve this, the contract can be deployed using a static transaction that uses Nick's method as documented in [this guide](https://github.com/ava-labs/teleporter/blob/main//utils/contract-deployment/README.md). Alternatively, if creating a new Avalanche L1, the contract can be pre-allocated with the proper address and state in the new chain's [genesis file](https://docs.avax.network/build/subnet/upgrade/customize-a-subnet#setting-the-genesis-allocation).
+**Do not deploy the `TeleporterMessenger` contract using `forge create`**. The `TeleporterMessenger` contract must be deployed to the same contract address on every chain. To achieve this, the contract can be deployed using a static transaction that uses Nick's method as documented in [this guide](https://github.com/ava-labs/teleporter/blob/main//utils/contract-deployment/README.md). Alternatively, if creating a new L1, the contract can be pre-allocated with the proper address and state in the new chain's [genesis file](https://docs.avax.network/build/subnet/upgrade/customize-a-subnet#setting-the-genesis-allocation).
 
-As an example, to include `TeleporterMessenger` `v1.0.0` in the genesis file, include the following values in the `alloc` settings, as documented at the link above. The `storage` values included below correspond to the two contract values that are initialized as part of the default constructor of `TeleporterMessenger`. These are the `ReentrancyGuard` values set in this [abstract contract](https://github.com/ava-labs/teleporter/blob/main/contracts/utilities/ReentrancyGuards.sol). Future versions of `TeleporterMessenger` may require different storage value intializations.
+As an example, to include `TeleporterMessenger` `v1.0.0` in the genesis file, include the following values in the `alloc` settings, as documented at the link above. The `storage` values included below correspond to the two contract values that are initialized as part of the default constructor of `TeleporterMessenger`. These are the `ReentrancyGuard` values set in this [abstract contract](https://github.com/ava-labs/teleporter/blob/main/contracts/utilities/ReentrancyGuards.sol). Future versions of `TeleporterMessenger` may require different storage value initializations.
 ```json
 "alloc": {
     "0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf": {
@@ -92,5 +112,85 @@ As an example, to include `TeleporterMessenger` `v1.0.0` in the genesis file, in
 }
 ```
 
-The values above are taken from the `v1.0.0` [release artifacts](https://github.com/ava-labs/teleporter/releases/tag/v1.0.0). The contract address, deployed bytecode, and deployer address are unique per major release. All of the other values should remain the same.
+The values above are taken from the `v1.0.0` [release artifacts](https://github.com/ava-labs/icm-contracts/releases/tag/v1.0.0). The contract address, deployed bytecode, and deployer address are unique per major release. All of the other values should remain the same.
 
+## Deployed Addresses
+
+| Contract              | Address                                        | Chain                    |
+| --------------------- | ---------------------------------------------- | ------------------------ |
+| `TeleporterMessenger` | **0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf** | All chains, all networks |
+| `TeleporterRegistry`  | **0x7C43605E14F391720e1b37E49C78C4b03A488d98** | Mainnet C-Chain          |
+| `TeleporterRegistry`  | **0xF86Cb19Ad8405AEFa7d09C778215D2Cb6eBfB228** | Fuji C-Chain             |
+
+- Using [Nick's method](https://yamenmerhi.medium.com/nicks-method-ethereum-keyless-execution-168a6659479c#), `TeleporterMessenger` deploys at a universal address across all chains, varying with each `teleporter` Major release. **Compatibility exists only between same-version `TeleporterMessenger` instances.** See [TeleporterMessenger Contract Deployment](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/utils/contract-deployment/README.md) and [Deploy TeleporterMessenger to an Avalanche L1](#deploy-teleportermessenger-to-an-avalanche-l1) for more details.
+
+- `TeleporterRegistry` can be deployed to any address. See [Deploy TeleporterRegistry to an Avalanche L1](#deploy-teleporterregistry-to-an-avalanche-l1) for details. The table above enumerates the canonical registry addresses on the Mainnet and Fuji C-Chains.
+
+## A Note on Versioning
+
+Release versions follow the [semver](https://semver.org/) convention of incompatible Major releases. A new Major version is released whenever the `TeleporterMessenger` bytecode is changed, and a new version of `TeleporterMessenger` is meant to be deployed. Due to the use of Nick's method to deploy the contract to the same address on all chains (see [TeleporterMessenger Contract Deployment](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/utils/contract-deployment/README.md) for details), this also means that new release versions would result in different `TeleporterMessenger` contract addresses. Minor and Patch versions may pertain to contract changes that do not change the `TeleporterMessenger` bytecode, or to changes in the test frameworks, and will only be included in tags.
+
+## Upgradability
+
+`TeleporterMessenger` is a non-upgradeable contract and can not be changed once it is deployed. This provides immutability to the contracts, and ensures that the contract's behavior at each address is unchanging. However, to allow for new features and potential bug fixes, new versions of `TeleporterMessenger` can be deployed to different addresses. The [TeleporterRegistry](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/contracts/teleporter/TeleporterRegistry.sol) is used to keep track of the deployed versions of Teleporter, and to provide a standard interface for dApps to interact with the different `TeleporterMessenger` versions.
+
+`TeleporterRegistry` **is not mandatory** for dApps built on top of ICM, but dApp's are recommended to leverage the registry to ensure they use the latest `TeleporterMessenger` version available. Another recommendation standard is to have a single canonical `TeleporterRegistry` for each Avalanche L1, and unlike the `TeleporterMessenger` contract, the registry does not need to be deployed to the same address on every chain. This means the registry does not need a Nick's method deployment, and can be at different contract addresses on different chains.
+
+For more information on the registry and how to integrate with ICM contracts, see the [Upgradability doc](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/contracts/teleporter/registry/README.md).
+
+## Deploy TeleporterMessenger to an Avalanche L1
+
+From the root of the repo, the TeleporterMessenger contract can be deployed by calling
+
+```bash
+./scripts/deploy_teleporter.sh --version <version> --rpc-url <url> [OPTIONS]
+```
+
+Required arguments:
+
+- `--version <version>` Specify the release version to deploy. These will all be of the form `v1.X.0`. Each `TeleporterMessenger` version can only send and receive messages from the **same** `TeleporterMessenger` version on another chain. You can see a list of released versions at https://github.com/ava-labs/icm-contracts/releases.
+- `--rpc-url <url>` Specify the rpc url of the node to use.
+
+Options:
+
+- `--private-key <private_key>` Funds the deployer address with the account held by `<private_key>`
+
+To ensure that `TeleporterMessenger` can be deployed to the same address on every EVM based chain, it uses [Nick's Method](https://yamenmerhi.medium.com/nicks-method-ethereum-keyless-execution-168a6659479c) to deploy from a static deployer address. Teleporter costs exactly `10eth` in the Avalanche L1's native gas token to deploy, which must be sent to the deployer address.
+
+`deploy_teleporter.sh` will send the necessary native tokens to the deployer address if it is provided with a private key for an account with sufficient funds. Alternatively, the deployer address can be funded externally. The deployer address for each version can be found by looking up the appropriate version at https://github.com/ava-labs/icm-contracts/releases and downloading `TeleporterMessenger_Deployer_Address_<VERSION>.txt`.
+
+Alternatively for new Avalanche L1s, the `TeleporterMessenger` contract can be directly included in the genesis file as documented [here](https://github.com/ava-labs/teleporter/blob/main/contracts/teleporter/contracts/teleporter/README.md#teleporter-messenger-contract-deployment).
+
+## Deploy TeleporterRegistry to an Avalanche L1
+
+There should only be one canonical `TeleporterRegistry` deployed for each chain, but if one does not exist, it is recommended to deploy the registry so ICM contracts can always use the most recent `TeleporterMessenger` version available. The registry does not need to be deployed to the same address on every chain, and therefore does not need a Nick's method transaction. To deploy, run the following command from the root of the repository:
+
+```bash
+./scripts/deploy_registry.sh --version <version> --rpc-url <url> --private-key <private_key> [OPTIONS]
+```
+
+Required arguments:
+
+- `--version <version>` Specify the release version to deploy. These will all be of the form `v1.X.0`.
+- `--rpc-url <url>` Specify the rpc url of the node to use.
+- `--private-key <private_key>` Funds the deployer address with the account held by `<private_key>`
+
+`deploy_registry.sh` will deploy a new `TeleporterRegistry` contract for the intended release version, and will also have the corresponding `TeleporterMessenger` contract registered as the initial protocol version.
+
+## Verify a Deployment of TeleporterMessenger
+
+`TeleporterMessenger` can be verified on L1s using sourcify. `v1.0.0` of this repository must be checked out in order to match the source code properly.
+
+```bash
+git checkout v1.0.0
+git submodule update --init --recursive
+cd contracts
+
+forge verify-contract 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf \
+ src/teleporter/TeleporterMessenger.sol:TeleporterMessenger \
+ --chain-id <YOUR_CHAIN_ID> \
+ --rpc-url <YOUR_RPC_URL>    \
+ --verifier sourcify \
+ --compiler-version v0.8.18+commit.87f61d96 \
+ --num-of-optimizations 200 \
+```

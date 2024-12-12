@@ -1,4 +1,5 @@
-import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
+import { type DocsLayoutProps } from 'fumadocs-ui/layouts/docs';
+import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { NavbarTitle } from '@/app/layout.client';
 import { docsPageTree } from '@/utils/docs-loader';
 import { AcademyDropdown, DocsDropdown, DropDownBar, GrantsDropdown, IntegrationsDropdown } from '@/components/navigation/navigation';

@@ -12,7 +12,8 @@ import {
   Pre,
 } from "fumadocs-ui/components/codeblock";
 import type { ReactNode } from "react";
-import { Popup, PopupContent, PopupTrigger } from "fumadocs-ui/twoslash/popup";
+import 'fumadocs-twoslash/twoslash.css';
+import { Popup, PopupContent, PopupTrigger } from "fumadocs-twoslash/ui";
 import YouTube from "@/components/youtube";
 import Gallery from "@/components/gallery";
 import { cn } from "./utils/cn";
