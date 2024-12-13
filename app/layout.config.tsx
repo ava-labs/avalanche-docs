@@ -1,6 +1,6 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import { NavbarTitle } from '@/app/layout.client';
+import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import { AlbumIcon, Sprout, Layers, MonitorCheck, Mail, Webhook } from 'lucide-react';
 
 export const linkItems: LinkItemType[] = [
@@ -15,7 +15,12 @@ export const linkItems: LinkItemType[] = [
 export const baseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
-    title: <NavbarTitle/>,
+    title: (
+      <>
+        { <AvalancheLogo className="size-7" fill="currentColor"/> }
+        <span style={{ fontSize: "large" }}>Developer Hub</span>
+      </>
+    ),
     transparentMode: 'top',
   },
   links: [
@@ -75,7 +80,12 @@ export const baseOptions: BaseLayoutProps = {
 export const integrationPageOptions: BaseLayoutProps = {
   ...baseOptions,
   nav: {
-    title: <NavbarTitle/>,
+    title: (
+      <>
+        { <AvalancheLogo className="size-7" fill="currentColor"/> }
+        <span style={{ fontSize: "large" }}>Developer Hub</span>
+      </>
+    ),
     transparentMode: 'top',
   }
 };

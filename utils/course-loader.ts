@@ -2,16 +2,16 @@ import { createMDXSource } from 'fumadocs-mdx';
 import type { InferMetaType, InferPageType } from 'fumadocs-core/source';
 import { loader } from 'fumadocs-core/source';
 import { icons } from 'lucide-react';
-import { course, courseMeta } from '@/.source';
+import { academy, academyMeta } from '@/.source';
 import { create } from '@/components/ui/icon';
 
 export const loaderOutput = loader({
-  baseUrl: '/course',
+  baseUrl: '/academy',
   icon(icon) {
     if (icon && icon in icons)
       return create({ icon: icons[icon as keyof typeof icons] });
   },
-  source: createMDXSource(course, courseMeta),
+  source: createMDXSource(academy, academyMeta),
 });
 
 export type Page = InferPageType<typeof loaderOutput>;

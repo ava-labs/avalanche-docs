@@ -5,7 +5,6 @@ import {
   DocsTitle,
   DocsDescription,
 } from 'fumadocs-ui/page';
-import { ArrowUpRightIcon, MessagesSquare } from 'lucide-react';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { notFound } from 'next/navigation';
 import { getCoursePage, getCoursePages, type Page } from '@/utils/course-loader';
@@ -35,15 +34,6 @@ import {
 import Mermaid from "@/components/mermaid";
 
 export const dynamicParams = false;
-
-function formatDate(date: Date) {
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  return formatter.format(date); // 1 January 2021
-}
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;

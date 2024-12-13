@@ -28,10 +28,10 @@ export const { docs, meta } = defineDocs({
   },
 });
 
-export const course = defineCollections({
+export const academy = defineCollections({
   type: 'doc',
   async: true,
-  dir: 'content/course',
+  dir: 'content/academy',
   schema: frontmatterSchema.extend({
     preview: z.string().optional(),
     toc: z.boolean().default(true),
@@ -49,9 +49,9 @@ export const course = defineCollections({
   }),
 });
 
-export const courseMeta = defineCollections({
+export const academyMeta = defineCollections({
   type: 'meta',
-  dir: 'content/course',
+  dir: 'content/academy',
   schema: metaSchema.extend({
     description: z.string().optional(),
   }),

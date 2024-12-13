@@ -3,9 +3,19 @@ import type { ReactNode } from 'react';
 import { baseOptions, linkItems } from '@/app/layout.config';
 import { docsPageTree } from '@/utils/docs-loader';
 import 'fumadocs-twoslash/twoslash.css';
+import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 
 const docsOptions: DocsLayoutProps = {
   ...baseOptions,
+  nav: {
+    title: (
+      <>
+        { <AvalancheLogo className="size-7" fill="currentColor"/> }
+        <span style={{ fontSize: "large" }}>Documentation</span>
+      </>
+    ),
+    transparentMode: 'top',
+  },
   tree: docsPageTree,
   links: [linkItems[linkItems.length - 1]],
 };
