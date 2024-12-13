@@ -16,9 +16,9 @@ export const { docs, meta } = defineDocs({
   docs: {
     async: true,
     schema: frontmatterSchema.extend({
-        preview: z.string().optional(),
-        toc: z.boolean().default(true),
-        index: z.boolean().default(false),
+      preview: z.string().optional(),
+      toc: z.boolean().default(true),
+      index: z.boolean().default(false),
     }),
   },
   meta: {
@@ -28,7 +28,37 @@ export const { docs, meta } = defineDocs({
   },
 });
 
+export const course = defineCollections({
+  type: 'doc',
+  async: true,
+  dir: 'content/course',
+  schema: frontmatterSchema.extend({
+    preview: z.string().optional(),
+    toc: z.boolean().default(true),
+    index: z.boolean().default(false),
+    updated: z.string().or(z.date()).transform((value, context) => {
+        try {
+          return new Date(value);
+        } catch {
+          context.addIssue({ code: z.ZodIssueCode.custom, message: "Invalid date" });
+          return z.NEVER;
+        }
+      }),
+    authors: z.array(z.string()),
+    comments: z.boolean().default(false),
+  }),
+});
+
+export const courseMeta = defineCollections({
+  type: 'meta',
+  dir: 'content/course',
+  schema: metaSchema.extend({
+    description: z.string().optional(),
+  }),
+});
+
 export const integrations = defineCollections({
+  type: 'doc',
   async: true,
   dir: 'content/integrations',
   schema: frontmatterSchema.extend({
@@ -40,7 +70,6 @@ export const integrations = defineCollections({
     documentation: z.string().optional(),
     featured: z.boolean().default(false).optional()
   }),
-  type: 'doc',
 });
 
 export default defineConfig({

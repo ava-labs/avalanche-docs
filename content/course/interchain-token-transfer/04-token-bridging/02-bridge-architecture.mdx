@@ -1,0 +1,37 @@
+---
+title: Bridge Architecture
+description: Get familiar with different bridge mechanisms
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+Asset bridging refers to the mechanism that allows assets, such as cryptocurrencies or tokens, to move from one blockchain to another. This is particularly important in ecosystems where multiple blockchains are used for different purposes, and users want to leverage assets across these chains. Bridging effectively extends the usability of assets beyond their native blockchain, facilitating greater liquidity and integration across various platforms.
+
+## Bridge Mechanisms
+
+### Lock & Mint
+
+Locking: The asset is locked in a smart contract on the source blockchain. For example, if you want to bridge AVAX from Avalanche's C-chain to Ethereum, you would lock your AVAX in a smart contract on Avalanche.
+Minting: Simultaneously, some event notifies Ethereum that an equivalent amount of a wrapped token (e.g., Wrapped AVAX) must be minted on the target blockchain and sent to the user’s address.
+
+### Burn & Mint
+
+Burning: When transferring assets back to the source blockchain, the wrapped tokens are burned or destroyed on the target blockchain.
+Releasing: The original assets are then released from the smart contract on the source blockchain back to the user's address.
+
+### Custodians
+
+Some bridges use a custodian or a centralized party to manage the assets. This party locks the asset on one blockchain and releases it on another, relying on trust and security measures.
+
+### Cross-Chain Communication
+
+Advanced bridges such as Avalanche Interchain Token Transfer utilize native cross-chain communication protocols to facilitate transactions between blockchains without requiring intermediaries. These protocols ensure that the asset's state and ownership are synchronized across different chains.
+
+## Why Bridging
+
+- Enhanced Liquidity: Bridging increases the liquidity of assets by allowing them to be used across different DeFi platforms and blockchain networks. This enhances trading opportunities and financial activities.
+- Interoperability: It fosters interoperability between different blockchains, enabling users to access a broader range of services and applications.
+- Flexibility: Users can move assets to chains with lower fees, faster transaction times, or better functionalities, optimizing their experience and strategies.
+
+<Quiz quizId="123" />

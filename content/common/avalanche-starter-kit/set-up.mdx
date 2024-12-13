@@ -1,0 +1,79 @@
+import Link from 'next/link';
+import { cn } from '@/utils/cn';
+import { buttonVariants } from '@/components/ui/button.tsx'
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+The Avalanche Starter Kit contains everything you need to get started quickly with Avalanche. Among other tools it contains Avalanche CLI. With that you can set up a local network, create a Avalanche L1, customize the Avalanche L1/VM configuration, and so on. 
+
+In this course we will run the Avalanche Starter Kit in a hosted environment on Github. This is the most quick way to get started.
+
+<Steps>
+<Step>
+
+### Open the Avalanche Starter Kit Github Repository:
+
+<Link
+    href="https://github.com/ava-labs/avalanche-starter-kit"
+    className={cn(
+    buttonVariants({ variant: 'default', className: 'mt-4' }),
+    )}
+    target='_blank'
+>Open Avalanche Starter Kit</Link>
+
+</Step>
+<Step>
+
+### Create a Codespace
+- Click the green **Code** button
+- Switch to the **Codespaces** tab
+- Click **Create Codespace on main** or if you already have a Codespace click the plus (**+**) button
+
+The Codespace will open in a new tab. Wait a few minutes until it's fully built.
+
+</Step>
+<Step>
+
+### Verify everything is working correctly
+
+Open the terminal with `` Ctrl + ` `` or by opening it through the menu:
+
+![](/common-images/avalanche-starter-kit/new-terminal.png)
+
+Now enter avalanche -h to verify everything is working:
+
+```bash
+avalanche -h
+```
+
+As a result you should see the help of Avalanche CLI:
+
+```
+Avalanche-CLI is a command-line tool that gives developers access to
+everything Avalanche. This release specializes in helping developers
+build and test Avalanche L1s.
+
+To get started, look at the documentation for the subcommands or jump right
+in with avalanche blockchain create myNewAvalanche L1.
+
+Usage:
+  avalanche [command]
+
+Available Commands:
+  config                Modify configuration for Avalanche-CLI
+  help                  Help about any command
+  key                   Create and manage testnet signing keys
+```
+
+</Step>
+<Step>
+
+### Optional: Open Codespace locally in Visual Studio Code
+
+You can switch any time from the browser IDE to Visual Studio Code:
+
+![](/course-images/codespaces/open-locally.png)
+
+The first time you switch, you will be asked to install the [Codespaces extension](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces) and connect VS Code to you GitHub account, if it is not already connceted.
+
+</Step>
+</Steps>

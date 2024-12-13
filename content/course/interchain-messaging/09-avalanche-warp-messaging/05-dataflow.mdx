@@ -1,0 +1,65 @@
+---
+title: Dataflow
+description: Learn the complete flow of a Cross-Chain message.
+updated: 2024-05-31
+authors: [martineckardt]
+icon: BookOpen
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Looking at the bigger picture, the data flow of an interchain message can be described as follows:
+
+ 
+<Steps>
+<Step>
+ 
+### Message Initialization
+Cross-Chain dApp initiating the message calls the Interchain Messaging Contract on the source Avalanche L1
+ 
+</Step>
+ 
+<Step>
+ 
+### Warp Precompile
+The Interchain Messaging contracts interacts with the AWM precompile of the EVM
+ 
+</Step>
+
+<Step>
+ 
+### Message Relaying
+An AWM Relayer relays the message to the destination Chain. It periodically checks the source Avalanche L1 for outgoing messages and delivers these by calling the Interchain Messaging contract on the destination Avalanche L1.
+ 
+</Step>
+
+<Step>
+ 
+### Signature Verification
+The Interchain Messaging contract on the destination chain interacts with AWM to verify the signature of the message and whether it has been signed by a sufficiently large stake share of the source Avalanche L1's validator set.
+ 
+</Step>
+
+<Step>
+ 
+### Destination Contract Call
+The Interchain Messaging contract then calls the destination dApp contract 
+
+</Step>
+
+<Step>
+ 
+### Message Processing
+The dApp decodes the message payload and processes it accordingly.
+
+</Step>
+</Steps>
+
+As you noticed in the `Teleporter Basics` chapter most of the cross-chain communication has been abstracted away from the dApp developer. The only interfaces for them are:
+
+- **Sending a message:** Simply calling the Interchain Messaging contract on the source chain
+- **Receiving a message:** Being able to be called by the Interchain Messaging on the destination chain
+
+To start, we will assume there is always an AWM Relayer to deliver our messages without any incentives. Let's dive deeper into the sending and receiving of messages in the next sections.
+
+<Quiz quizId="312"/>

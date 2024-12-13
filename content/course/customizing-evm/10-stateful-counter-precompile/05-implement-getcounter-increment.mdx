@@ -1,0 +1,95 @@
+---
+title: Implementing getCounter & increment
+description: Learn how to implement getCounter and increment.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Having seen how to retrieve strings from the EVM state with the StoreString precompile, we are now ready to implement `getCounter`. Also, now that we are familiar with reading and writing to the EVM state, we can implement increment, which requires both read and write operations.
+
+## Implementing getCounter
+
+For `getCounter`, the following thought process is helpful:
+
+- Create a helper function `GetCounterValue`, which takes in the current StateDB and returns the integer stored at the `storageKeyHash`
+- In `getCounter`, get the current StateDB and pass it to `GetCounterValue`
+
+<Accordions>
+<Accordion title="Solution">
+
+```go
+// GetCounterValue gets the value of the storage key in the contract storage.
+func GetCounterValue(stateDB contract.StateDB) *big.Int {
+	// Get the value
+	value := stateDB.GetState(ContractAddress, storageKeyHash)
+
+	// Convert bytes to uint
+	return new(big.Int).SetBytes(value.Bytes())
+}
+
+func getCounter(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, GetCounterGasCost); err != nil {
+		return nil, 0, err
+	}
+	// no input provided for this function
+
+	// Get the current state
+	currentState := accessibleState.GetStateDB()
+	// Get the value set at recipient
+	value := GetCounterValue(currentState)
+
+	packedOutput, err := PackGetCounterOutput(value)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// Return the packed output and the remaining gas
+	return packedOutput, remainingGas, nil
+}
+```
+
+</Accordion>
+</Accordions>
+
+## Implementing increment
+
+For increment, the following thought process is helpful:
+
+- Get the current StateDB and pass it to GetCounterValue
+- Once you have the current counter, increment it by one
+- Store the new counter with StoreCounterValue
+
+<Accordions>
+<Accordion title="Solution">
+
+```go
+func incrementCounter(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, IncrementCounterGasCost); err != nil {
+		return nil, 0, err
+	}
+	if readOnly {
+		return nil, remainingGas, vmerrs.ErrWriteProtection
+	}
+	// no input provided for this function
+
+	// CUSTOM CODE STARTS HERE
+	// Get the current state
+	currentState := accessibleState.GetStateDB()
+
+	// Get the value of the counter
+	value := GetCounterValue(currentState)
+
+	// Set the value
+	StoreCounterValue(currentState, value.Add(value, big.NewInt(1)))
+
+	// this function does not return an output, leave this one as is
+	packedOutput := []byte{}
+
+	// Return the packed output and the remaining gas
+	return packedOutput, remainingGas, nil
+}
+```
+
+</Accordion>
+</Accordions>

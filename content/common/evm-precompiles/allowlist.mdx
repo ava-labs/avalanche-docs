@@ -1,0 +1,50 @@
+The AllowList allows a precompile to enforce permissions on addresses. The AllowList is not a contract itself, but a helper structure providing a control mechanism for wrapping contracts. It provides an AllowListConfig to the precompile so that it can take an initial configuration from genesis/upgrade.
+
+Precompiles using an Allow List have two roles: Admin, Manager and Enabled. For each role, a list of addresses can be defined.  
+
+![](/common-images/evm-precompiles/allowlist-roles.png)
+
+- Enabled addresses can perform the permissioned behavior (issuing transactions, deploying contracts, etc.), but cannot modify other roles.
+- Manager addresses can use the precompile, and can change enabled addresses
+- Admin addresses have the same rights, but can also add/remove other Admin, Manager and Enabled addresses.
+
+These addresses are not necessarily owned by a single entity, but can also be managed by a multi-sig or DAO.
+
+AllowList adds adminAddresses and enabledAddresses fields to precompile contract configurations. For instance, txAllowList precompile contract configuration looks like this:
+
+```json
+"txAllowListConfig": {
+  "blockTimestamp": 0,
+  "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC","0x0000...", "... and more"],
+  "enabledAddresses": ["... and even more"]
+}
+```
+
+AllowList configuration affects only the related precompile. For instance, the admin address in txAllowList does not affect admin addresses in other activated precompiles.
+
+## Interacting with the AllowList from Solidity
+
+The AllowList Solidity interface is defined below. AllowList is not an actual contract but just an interface. It's not callable by itself. This is used by other precompiles.
+
+```solidity
+pragma solidity ^0.8.0;
+
+interface IAllowList {
+  // Set [addr] to have the admin role over the precompile contract.
+  function setAdmin(address addr) external;
+  
+  // Set [addr] to be enabled on the precompile contract.
+  function setEnabled(address addr) external;
+
+  // Set [addr] to have the manager role over the precompile contract.
+  function setManager(address addr) external;
+
+  // Set [addr] to have no role for the precompile contract.
+  function setNone(address addr) external;
+  
+  // Read the status of [addr].
+  function readAllowList(address addr) external view returns (uint256 role);
+}
+```
+
+`readAllowList(addr)` will return a `uint256` with a value of `0`, `1`, `2` or `3`, corresponding to the roles None, Enabled, Admin and Manager respectively.

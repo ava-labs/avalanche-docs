@@ -1,0 +1,44 @@
+---
+title: Consensus Mechanisms
+description: Learn how blockchains arrive at consensus using different mechanisms.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+Consensus plays a crucial role in [blockchain networks](/guide/what-is-a-blockchain) by resolving conflicts and ensuring that all validators agree on the current state of the distributed ledger. The main objective of a consensus mechanism is to create a single version of truth that is universally accepted by network participants.
+
+Validators can reach a consensus by following a set of steps called a consensus protocol. This way, they collectively decide on the state of the system and all state changes. Different consensus mechanisms have different approaches. All aim to ensure that validators reach a majority agreement on network state. 
+
+## Ordering through Consensus
+
+Consensus is needed to agree on the order of state changes in a blockchain. This allows the validators to decide between two conflicting states.
+
+![](/course-images/avalanche-fundamentals/1.png)
+
+<Quiz quizId="102"/>
+
+## Double Spending Attack
+
+A Double Spending Attack is when a user attempts to spend more crypto that they own by creating multiple transactions that reference the same funds.
+
+Let's look at an Example: Alice owns 5 AVAX
+
+![](/course-images/avalanche-fundamentals/2.png)
+
+Now Alice issues two transactions at the same time to different validators:
+
+1. Send 5 AVAX to Bob
+2. Send 5 AVAX to Charly
+
+It is important that there is only a limited notion of time in blockchain systems. Even if Alice does not issue these transactions at the exact same time, validators cannot identify which was issued first.
+
+![](/course-images/avalanche-fundamentals/3.png)
+
+Each of the transaction in itself is valid. Alice owns 5 AVAX and should be able to send them to whomever she wants. However, she should only be able to send the amount she actually owns.
+
+![](/course-images/avalanche-fundamentals/4.png)
+
+Therefore, validators have to collectively come to consensus on which of the two conflicting transactions will be included in the blockchain first, and therefore be accepted by all validators as the next state. To illustrate, we will color the validators preferring Charlie yellow and the validators preferring Bob blue.
+
+<Quiz quizId="103"/>

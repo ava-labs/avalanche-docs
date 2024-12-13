@@ -1,0 +1,80 @@
+---
+title: Adding Fuzz Tests
+description: Learn how to add Fuzz tests.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Units tests are useful when comparing the outcome of a predetermined input with the expected outcome. If we wanted to check that our function works as expected for all given inputs, the only way to show this would be to test every possible input.
+
+However, this is not possible for types such as uint256, as it would require us to test for 2^256 possible inputs. Even if we tested 1 input per second (or 2, 3, 4, 1000, etc.), this process would outlast the universe itself.
+
+Rather than testing every possible output, we can strengthen our confidence of the expected behavior of a function by testing a random sample of inputs. By testing randomly, we can test for inputs that we wouldn't have originally thought of and are able to see how our function behaves over a range of values.
+
+However, given that generating random inputs is not deterministic, we cannot use the tests variable itself. Rather, we will need to leverage the `TestCalculatorRun` function:
+
+```go
+// TestCalculatorEmptyRun tests the Run function of the precompile contract.
+func TestCalculatorRun(t *testing.T) {
+    // Run tests.
+    for name, test := range tests {
+        t.Run(name, func(t *testing.T) {
+            test.Run(t, Module, state.NewTestStateDB(t))
+        })
+    }
+}
+```
+
+The `TestCalculatorRun` function, by default, iterates through each unit test defined in the tests variable on runs said tests. However, we are not limited to just using `TestCalculatorRun` for the unit tests in tests. We can expand the functionality of `TestCalculatorRun` by adding our fuzz tests.
+
+In particular, we can define the following logic for `TestCalculatorRun`:
+
+- Iterate N number of times
+- For each iteration, pick two numbers in the range from 0 to n
+- After picking two random numbers, create a unit test with the two random numbers as inputs and execute said unit test
+
+With this logic in mind, below is the code for how we would go about implementing fuzzing in `TestCalculatorRun`:
+
+```go
+// TestCalculatorRun tests the Run function of the precompile contract.
+func TestCalculatorRun(t *testing.T) {
+    // Run tests.
+    for name, test := range tests {
+        t.Run(name, func(t *testing.T) {
+            test.Run(t, Module, state.NewTestStateDB(t))
+        })
+    }
+    // Defining own test cases here
+    N := 1_000
+    n := new(big.Int).Exp(big.NewInt(2), big.NewInt(int64(128)), nil)
+
+    // Fuzzing N times
+    for i := 0; i < N; i++ {
+        // Adding randomization test here
+        randomInt1, err := rand.Int(rand.Reader, n)
+        randomInt2, err := rand.Int(rand.Reader, n)
+        // Expected outcome
+        expectedRandOutcome := common.LeftPadBytes(big.NewInt(0).Add(randomInt1, randomInt2).Bytes(), common.HashLength)
+
+        // Pack add input
+        randTestInput := AddInput{randomInt1, randomInt2}
+        randInput, err := PackAdd(randTestInput)
+        require.NoError(t, err)
+
+        randTest := testutils.PrecompileTest{
+            Caller:      common.Address{1},
+            Input:       randInput,
+            SuppliedGas: AddGasCost,
+            ReadOnly:    true,
+            ExpectedRes: expectedRandOutcome,
+        }
+
+        t.Run("Testing random sum!", func(t *testing.T) {
+            randTest.Run(t, Module, state.NewTestStateDB(t))
+        })
+
+    }
+
+}
+```
