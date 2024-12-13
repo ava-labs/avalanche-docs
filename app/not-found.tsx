@@ -54,7 +54,7 @@ export default function HomePage(): React.ReactElement {
                         Gotcha. We let Emin know.
                       </AlertDialogTitle>
                       <AlertDialogDescription>
-                        He should understand the circustances that led to this
+                        He should understand the circumstances that led to this
                         decision.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
