@@ -33,12 +33,12 @@ function Courses(props: { title: string, description: string, courses: any[] }):
             {props.description}
           </p>
         </div>
-        <Link href="/course/blockchain-fundamentals" className="block max-w-xl p-4 mx-auto mt-8 text-sm rounded-lg bg-muted border border-b " role="alert">
+        <Link href="/academy/blockchain-fundamentals" className="block max-w-xl p-4 mx-auto mt-8 text-sm rounded-lg bg-muted border border-b " role="alert">
           <span className="font-medium">Are you new to Blockchain?</span> Start with out Blockchain Fundamentals course <span className='underline'>here</span>.
         </Link>
         <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-gray-200 pt-7 sm:mt-12 sm:pt-0 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {props.courses.map((course) => (
-            <Link href={`/course/${course.slug}`} key={course.slug} className="flex max-w-xl flex-col items-start space-y-2">
+            <Link href={`/academy/${course.slug}`} key={course.slug} className="flex max-w-xl flex-col items-start space-y-2">
               <img src={`/course-banner/${course.slug}.jpg`} alt="" className="w-full aspect-[3/2] object-cover rounded-lg mb-5" />
               <div className="flex flex-wrap items-center gap-4 text-xs">
                 <span className="text-gray-500">

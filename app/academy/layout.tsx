@@ -1,8 +1,9 @@
 import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
-import { baseOptions, linkItems } from '@/app/layout.config';
+import { baseOptions } from '@/app/layout.config';
 import { coursePageTree } from '@/utils/course-loader';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
+import { ArrowUpRight } from 'lucide-react';
 
 const docsOptions: DocsLayoutProps = {
   ...baseOptions,
@@ -16,10 +17,23 @@ const docsOptions: DocsLayoutProps = {
     transparentMode: 'top',
   },
   tree: coursePageTree,
-  sidebar: {
-    defaultOpenLevel: 0,
-  },
-  links: [linkItems[linkItems.length - 1]],
+  links: [
+    {
+      text: 'Documentation',
+      url: '/docs',
+      icon: <ArrowUpRight />
+    },
+    {
+      text: 'Integrations',
+      url: '/integrations',
+      icon: <ArrowUpRight />
+    },
+    {
+      text: 'Grants',
+      url: '/grants',
+      icon: <ArrowUpRight />
+    },
+  ],
 };
 
 export default function Layout({ children }: { children: ReactNode }) {

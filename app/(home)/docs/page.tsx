@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
   CpuIcon,
   BadgeDollarSign,
-  Globe, MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Terminal, Cable, Webhook, ArrowUpRight, Command,
+  Globe, MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Terminal, Cable, Webhook
 } from 'lucide-react';
 import Link from 'next/link';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -37,22 +37,22 @@ export default function HomePage(): React.ReactElement {
 function Highlights(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-r md:grid-cols-2 lg:grid-cols-3">
-      <Highlight icon={SproutIcon} heading="Avalanche Protocol" link="/learn">
+      <Highlight icon={SproutIcon} heading="Avalanche Protocol" link="/docs/learn">
         Learn about Avalanche Protocol and it's groundbreaking consensus algorithm.
       </Highlight>
-      <Highlight icon={SquareGanttChart} heading="Smart Contracts" link="/dapps">
+      <Highlight icon={SquareGanttChart} heading="Smart Contracts" link="/docs/dapps">
         Your one stop shop to deploy smart contracts on the Avalanche C-Chain.
       </Highlight>
-      <Highlight icon={Layers} heading="Avalanche L1s" link="/avalanche-l1s">
+      <Highlight icon={Layers} heading="Avalanche L1s" link="/docs/avalanche-l1s">
         Utilize the Avalanche tech stack to build your own layer 1 blockchain.
       </Highlight>
-      <Highlight icon={IndentDecrease} heading="Virtual Machines" link="/virtual-machines">
+      <Highlight icon={IndentDecrease} heading="Virtual Machines" link="/docs/virtual-machines">
         Learn how to customize the EVM or build new virtual machines from scratch.
       </Highlight>
-      <Highlight icon={MonitorCheck} heading="Nodes & Validators" link="/nodes">
+      <Highlight icon={MonitorCheck} heading="Nodes & Validators" link="/docs/nodes">
         Become an active participant in the network by running a node or validator.
       </Highlight>
-      <Highlight icon={MailIcon} heading="Interoperability" link="/cross-chain">
+      <Highlight icon={MailIcon} heading="Interoperability" link="/docs/cross-chain">
         Advanced interoperability protocols to communicate with other blockchains.
       </Highlight>
     </div>
@@ -133,13 +133,13 @@ function Introduction(): React.ReactElement {
             </Link>
             <Files className="z-[2] shadow-xl hide-icons relative dark:text-white group transition-all duration-300 ease-in-out [&[open]]:open [&:not([open])]:closed">
               <Folder name="Using the above command, you can configure your:" defaultOpen>
-              <Link href="/virtual-machines">
+              <Link href="/docs/virtual-machines">
               <File icon={<CpuIcon />} name="Virtual Machine" />
               </Link>
-              <Link href="/avalanche-l1s/build-first-avalanche-l1#enter-your-avalanche-l1s-chainid">
+              <Link href="/docs/avalanche-l1s/build-first-avalanche-l1#enter-your-avalanche-l1s-chainid">
               <File icon={<Globe />} name="Chain ID" />
               </Link>
-              <Link href="/avalanche-l1s/build-first-avalanche-l1#token-symbol">
+              <Link href="/docs/avalanche-l1s/build-first-avalanche-l1#token-symbol">
               <File icon={<BadgeDollarSign />} name="Token Name & Symbol" />
               </Link>
               </Folder>
@@ -169,7 +169,7 @@ function Features(): React.ReactElement {
         description="We provide a suite of tools to make your development experience as smooth as possible."
       >
       <div className="mt-8 flex flex-col gap-4">
-        <Link href="/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+        <Link href="/docs/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
             <Terminal />
             <h3 className="font-semibold">Avalanche CLI</h3>
             <p className="text-sm text-fd-muted-foreground">
@@ -199,31 +199,31 @@ function Features(): React.ReactElement {
         description="Well documented APIs for the Avalanche Network."
       >
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Link href="/api-reference/c-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/c-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
             <h3 className="font-semibold">C-Chain API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for the Contract Chain.
             </p>
           </Link>
-          <Link href="/api-reference/p-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/p-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
             <h3 className="font-semibold">P-Chain API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for the Platform Chain.
             </p>
           </Link>
-          <Link href="/api-reference/x-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/x-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
             <h3 className="font-semibold">X-Chain API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for the Exchange Chain.
             </p>
           </Link>
-          <Link href="/api-reference/admin-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/admin-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
             <h3 className="font-semibold">AvalancheGo API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for AvalancheGo.
             </p>
           </Link>
-          <Link href="/api-reference/subnet-evm-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/subnet-evm-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
             <h3 className="font-semibold">Subnet-EVM API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for Subnet-EVM.
@@ -269,11 +269,4 @@ function Feature({
       {props.children}
     </div>
   );
-}
-
-interface Option {
-  title: string
-  description: string
-  icon: React.ReactNode
-  url: string
 }
