@@ -10,6 +10,24 @@ export const linkItems: LinkItemType[] = [
     url: '/academy',
     active: 'nested-url',
   },
+  {
+    icon: <AlbumIcon />,
+    text: 'Grants',
+    url: '/grants',
+    active: 'nested-url',
+  },
+  {
+    icon: <AlbumIcon />,
+    text: 'Integrations',
+    url: '/integrations',
+    active: 'nested-url',
+  },
+  {
+    icon: <AlbumIcon />,
+    text: 'Guides',
+    url: '/guides',
+    active: 'nested-url',
+  },
 ];
 
 export const baseOptions: BaseLayoutProps = {

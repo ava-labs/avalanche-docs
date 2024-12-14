@@ -37,7 +37,7 @@ export default function HomePage(): React.ReactElement {
 function Highlights(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-r md:grid-cols-2 lg:grid-cols-3">
-      <Highlight icon={SproutIcon} heading="Avalanche Protocol" link="/docs/learn">
+      <Highlight icon={SproutIcon} heading="Avalanche Protocol" link="/docs/protocol">
         Learn about Avalanche Protocol and it's groundbreaking consensus algorithm.
       </Highlight>
       <Highlight icon={SquareGanttChart} heading="Smart Contracts" link="/docs/dapps">
