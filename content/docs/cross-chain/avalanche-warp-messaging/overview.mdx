@@ -1,15 +1,15 @@
 ---
-title: What is AWM?
-description: Learn about Avalanche Warp Messaging, a protocol for cross-chain communication.
+title: What is ICM?
+description: Learn about Avalanche Interchain Messaging, a protocol for cross-chain communication.
 ---
 
-Avalanche Warp Messaging (AWM) enables native cross-Avalanche L1 communication and allows [Virtual Machine (VM)](/learn/virtual-machines) developers to implement arbitrary communication protocols between any two Avalanche L1s.
+Avalanche Interchain Messaging (ICM) enables native cross-Avalanche L1 communication and allows [Virtual Machine (VM)](/learn/virtual-machines) developers to implement arbitrary communication protocols between any two Avalanche L1s.
 
 ## Use Cases
 
-Use cases for AWM may include but is not limited to:
+Use cases for ICM may include but is not limited to:
 
-- Oracle Networks: Connecting an Avalanche L1 to an oracle network is a costly process. AWM makes it easy for oracle networks to broadcast their data from their origin chain to other Avalanche L1s.
+- Oracle Networks: Connecting an Avalanche L1 to an oracle network is a costly process. ICM makes it easy for oracle networks to broadcast their data from their origin chain to other Avalanche L1s.
 - Token transfers between Avalanche L1s
 - State Sharding between multiple Avalanche L1s
 
@@ -22,7 +22,7 @@ The communication consists of the following four steps:
 
 ### Signing Messages on the Origin Avalanche L1[​](#signing-messages-on-the-origin-avalanche-l1 "Direct link to heading")
 
-AWM is a low-level messaging protocol. Any type of data encoded in an array of bytes can be included in the message sent to another Avalanche L1. AWM uses the [BLS signature scheme](https://crypto.stanford.edu/~dabo/pubs/papers/BLSmultisig.html), which allows message recipients to verify the authenticity of these messages. Therefore, every validator on the Avalanche network holds a BLS key pair, consisting of a private key for signing messages and a public key that others can use to verify the signature.
+ICM is a low-level messaging protocol. Any type of data encoded in an array of bytes can be included in the message sent to another Avalanche L1. ICM uses the [BLS signature scheme](https://crypto.stanford.edu/~dabo/pubs/papers/BLSmultisig.html), which allows message recipients to verify the authenticity of these messages. Therefore, every validator on the Avalanche network holds a BLS key pair, consisting of a private key for signing messages and a public key that others can use to verify the signature.
 
 ### Signature Aggregation on the Origin Avalanche L1[​](#signature-aggregation-on-the-origin-avalanche-l1 "Direct link to heading")
 
@@ -40,9 +40,9 @@ When an Avalanche L1 wants to process another Avalanche L1's message, it will lo
 
 The combined weight of the validators that must be part of the BLS multi-signature to be considered valid can be set according to the individual requirements of each Avalanche L1-to-Avalanche L1 communication. Avalanche L1 A may accept messages from Avalanche L1 B that are signed by at least 70% of stake. Messages from Avalanche L1 C are only accepted if they have been signed by validators that account for 90% of the stake.
 
-Since both the public keys and stake weights of all validators are recorded on the primary network's P-chain, they are readily accessible to any virtual machine run by the validators. Therefore, the Avalanche L1s do not need to communicate with each other about changes in their respective sets of validators, but can simply rely on the latest information on the P-Chain. Therefore, AWM introduces no additional trust assumption other than that the validators of the origin Avalanche L1 are participating honestly.
+Since both the public keys and stake weights of all validators are recorded on the primary network's P-chain, they are readily accessible to any virtual machine run by the validators. Therefore, the Avalanche L1s do not need to communicate with each other about changes in their respective sets of validators, but can simply rely on the latest information on the P-Chain. Therefore, ICM introduces no additional trust assumption other than that the validators of the origin Avalanche L1 are participating honestly.
 
 Reference Implementation[​](#reference-implementation "Direct link to heading")
 -------------------------------------------------------------------------------
 
-A Proof-of-Concept VM called [XSVM](https://github.com/ava-labs/xsvm) was created to demonstrate the power of AWM. XSVM enables simple AWM transfers between any two Avalanche L1s if run out-of-the-box.
+A Proof-of-Concept VM called [XSVM](https://github.com/ava-labs/xsvm) was created to demonstrate the power of ICM. XSVM enables simple ICM transfers between any two Avalanche L1s if run out-of-the-box.
