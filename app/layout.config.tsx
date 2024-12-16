@@ -2,6 +2,8 @@ import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import { AlbumIcon, Sprout, Layers, MonitorCheck, Mail, Webhook } from 'lucide-react';
+import Image from 'next/image';
+import Preview from '@/public/9000-logo.png';
 
 export const linkItems: LinkItemType[] = [
   {
@@ -39,7 +41,6 @@ export const baseOptions: BaseLayoutProps = {
         <span style={{ fontSize: "large" }}>Developer Hub</span>
       </>
     ),
-    transparentMode: 'top',
   },
   links: [
     {
@@ -47,7 +48,23 @@ export const baseOptions: BaseLayoutProps = {
       text: 'Documentation',
       url: '/docs',
       items: [
-        {
+       {
+          menu: {
+            banner: (
+              <div className="-mx-3 -mt-3">
+                <Image
+                  src={Preview}
+                  alt="Perview"
+                  className="rounded-t-lg object-cover"
+                  style={{
+                    maskImage:
+                      'linear-gradient(to bottom,white 60%,transparent)',
+                  }}
+                />
+              </div>
+            ),
+            className: 'md:row-span-2',
+          },
           icon: <Sprout />,
           text: 'Avalanche Protocol',
           description: 'Learn about the Avalanche Protocol',
