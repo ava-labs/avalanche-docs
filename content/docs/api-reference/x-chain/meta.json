@@ -1,8 +1,4 @@
 {
-  "title": "Exchange Chain",
-  "pages": [
-    "api",
-    "txn-format",
-    "configs"
-  ]
+  "title": "X-Chain",
+  "pages": ["api", "txn-format", "configs"]
 }
