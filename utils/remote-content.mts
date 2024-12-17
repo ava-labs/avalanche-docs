@@ -178,7 +178,7 @@ async function main(): Promise<void> {
     { 
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/platformvm/service.md",
       outputPath: "content/docs/api-reference/p-chain/api.mdx",
-      title: "API",
+      title: "P-Chain API",
       description: "This page is an overview of the P-Chain API associated with AvalancheGo.",
       contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/",
     },
