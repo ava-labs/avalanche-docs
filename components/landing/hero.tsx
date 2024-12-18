@@ -9,6 +9,7 @@ import clsx from "clsx";
 import { useTheme } from "next-themes";
 import { Highlight, themes } from "prism-react-renderer";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
+import { Sponsors } from '@/components/landing/globe';
 
 const tabs: { name: "configure" | "deploy"; code: string }[] = [
 	{
@@ -70,18 +71,8 @@ export default function Hero() {
 						<div className="relative">
 							<div className="flex flex-col items-start gap-2">
 								<div className="flex items-center gap-1 mt-2">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="0.8em"
-										height="0.8em"
-										viewBox="0 0 24 24"
-									>
-										<path
-											fill="currentColor"
-											d="M13 4V2c4.66.5 8.33 4.19 8.85 8.85c.6 5.49-3.35 10.43-8.85 11.03v-2c3.64-.45 6.5-3.32 6.96-6.96A7.994 7.994 0 0 0 13 4m-7.33.2A9.8 9.8 0 0 1 11 2v2.06c-1.43.2-2.78.78-3.9 1.68zM2.05 11a9.8 9.8 0 0 1 2.21-5.33L5.69 7.1A8 8 0 0 0 4.05 11zm2.22 7.33A10.04 10.04 0 0 1 2.06 13h2c.18 1.42.75 2.77 1.63 3.9zm1.4 1.41l1.39-1.37h.04c1.13.88 2.48 1.45 3.9 1.63v2c-1.96-.21-3.82-1-5.33-2.26M12 17l1.56-3.42L17 12l-3.44-1.56L12 7l-1.57 3.44L7 12l3.43 1.58z"
-										></path>
-									</svg>
-									<span className="text-xs text-opacity-75">Scale Without Limits</span>
+									<svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide-infinity"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
+									<span className="text-sm text-opacity-75">Scale Without Limits</span>
 								</div>
 							</div>
 
@@ -137,12 +128,21 @@ export default function Hero() {
 								<>
 									<div className="mt-8 flex w-fit flex-col gap-4 font-sans md:flex-row md:justify-center lg:justify-start items-center">
 										<Link
-											href="/docs"
+											href="/docs/avalanche-l1s"
 											className="hover:shadow-sm dark:border-stone-100 dark:hover:shadow-sm border-2 border-black bg-white px-4 py-1.5 text-sm uppercase text-black shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,0,0),5px_5px_0px_0px_rgba(0,0,0)] transition duration-200 md:px-8 dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,255),3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)]"
 										>
 											Get Started
 										</Link>
-                                        <button className="bg-stone-950 no-underline group cursor-pointer relative  p-px text-xs font-semibold leading-6  text-white md:inline-block hidden" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:Rkcivadb:" data-state="closed"><span className="absolute inset-0 overflow-hidden rounded-sm"><span className="absolute inset-0 rounded-sm bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span></span><div className="relative flex space-x-2 items-center z-10 rounded-none bg-zinc-950 py-2 px-4 ring-1 ring-white/10 "><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-plus"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg><span>Create Sign in Box</span></div><span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-stone-800/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span></button>
+                                        <button className="bg-stone-950 no-underline group cursor-pointer relative  p-px text-xs font-semibold leading-6  text-white md:inline-block hidden" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:Rkcivadb:" data-state="closed">
+											<span className="absolute inset-0 overflow-hidden rounded-sm">
+												<span className="absolute inset-0 rounded-sm bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+											</span>
+											<div className="relative flex space-x-2 items-center z-10 rounded-none bg-zinc-950 py-2 px-4 ring-1 ring-white/10 ">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+												<span>Learn With Academy</span>
+											</div>
+											<span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-stone-800/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+										</button>
 									</div>
 								</>
 							}
@@ -151,155 +151,14 @@ export default function Hero() {
 
 					<div className="relative hidden md:block lg:static xl:pl-10">
 						<div className="relative">
-							<div className="from-sky-300 via-sky-300/70 to-blue-300 absolute inset-0 rounded-none bg-gradient-to-tr opacity-5 blur-lg" />
-							<div className="from-stone-300 via-stone-300/70 to-blue-300 absolute inset-0 rounded-none bg-gradient-to-tr opacity-5" />
-							<CodePreview />
+							<div className="absolute inset-0 rounded-none bg-gradient-to-tr opacity-5 blur-lg" />
+							<div className="absolute inset-0 rounded-none bg-gradient-to-tr opacity-5" />
+							<Sponsors />
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-	);
-}
-
-function CodePreview() {
-	const [currentTab, setCurrentTab] = useState<"configure" | "deploy">(
-		"configure",
-	);
-
-	const theme = useTheme();
-
-	const code = tabs.find((tab) => tab.name === currentTab)?.code ?? "";
-	const [ref, { height }] = useMeasure();
-	const [codeTheme, setCodeTheme] = useState(themes.synthwave84);
-
-	useEffect(() => {
-		setCodeTheme(
-			theme.resolvedTheme === "light" ? themes.oneLight : themes.synthwave84,
-		);
-	}, [theme.resolvedTheme]);
-
-	return (
-		<AnimatePresence initial={false}>
-			<MotionConfig transition={{ duration: 0.5, type: "spring", bounce: 0 }}>
-				<motion.div
-					animate={{ height: height > 0 ? height : undefined }}
-					className="from-stone-100 to-stone-200 dark:to-black/90 dark:via-stone-950/10 dark:from-stone-950/90 relative overflow-hidden rounded-sm bg-gradient-to-tr ring-1 ring-white/10 backdrop-blur-lg"
-				>
-					<div ref={ref}>
-						<div className="absolute -top-px left-0 right-0 h-px" />
-						<div className="absolute -bottom-px left-11 right-20 h-px" />
-						<div className="pl-4 pt-4">
-							<TrafficLightsIcon className="stroke-slate-500/30 h-2.5 w-auto" />
-
-							<div className="mt-4 flex space-x-2 text-xs">
-								{tabs.map((tab) => (
-									<button
-										key={tab.name}
-										onClick={() => setCurrentTab(tab.name)}
-										className={clsx(
-											"relative isolate flex h-6 cursor-pointer items-center justify-center rounded-full px-2.5",
-											currentTab === tab.name
-												? "text-stone-300"
-												: "text-slate-500",
-										)}
-									>
-										{tab.name}
-										{tab.name === currentTab && (
-											<motion.div
-												layoutId="tab-code-preview"
-												className="bg-stone-800 absolute inset-0 -z-10 rounded-full"
-											/>
-										)}
-									</button>
-								))}
-							</div>
-
-							<div className="mt-6 flex flex-col items-start px-1 text-sm">
-								<motion.div layout className="absolute top-5 right-1">
-									<Link
-										href="https://demo.better-auth.com"
-										target="_blank"
-										className="shadow-md  border shadow-primary-foreground mb-4 ml-auto mr-4 mt-auto flex cursor-pointer items-center gap-2 px-3 py-1 transition-all ease-in-out hover:opacity-70"
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="1em"
-											height="1em"
-											viewBox="0 0 24 24"
-										>
-											<path
-												fill="currentColor"
-												d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"
-											></path>
-										</svg>
-										<p className="text-sm">Watch Demo</p>
-									</Link>
-								</motion.div>
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									transition={{ duration: 0.5 }}
-									key={currentTab}
-									className="relative flex items-start px-1 text-sm"
-								>
-									<div
-										aria-hidden="true"
-										className="border-slate-300/5 text-slate-600 select-none border-r pr-4 font-mono"
-									>
-										{Array.from({
-											length: code.split("\n").length,
-										}).map((_, index) => (
-											<Fragment key={index}>
-												{(index + 1).toString().padStart(2, "0")}
-												<br />
-											</Fragment>
-										))}
-									</div>
-									<Highlight
-										key={theme.resolvedTheme}
-										code={code}
-										language={"javascript"}
-										theme={{
-											...codeTheme,
-											plain: {
-												backgroundColor: "transparent",
-											},
-										}}
-									>
-										{({
-											className,
-											style,
-											tokens,
-											getLineProps,
-											getTokenProps,
-										}) => (
-											<pre
-												className={clsx(className, "flex overflow-x-auto pb-6")}
-												style={style}
-											>
-												<code className="px-4">
-													{tokens.map((line, lineIndex) => (
-														<div key={lineIndex} {...getLineProps({ line })}>
-															{line.map((token, tokenIndex) => (
-																<span
-																	key={tokenIndex}
-																	{...getTokenProps({ token })}
-																/>
-															))}
-														</div>
-													))}
-												</code>
-											</pre>
-										)}
-									</Highlight>
-								</motion.div>
-							</div>
-						</div>
-					</div>
-				</motion.div>
-			</MotionConfig>
-		</AnimatePresence>
 	);
 }
 

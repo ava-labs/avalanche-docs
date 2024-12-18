@@ -73,7 +73,7 @@ export const baseOptions: BaseLayoutProps = {
         {
           icon: <Layers />,
           text: 'Avalanche L1s',
-          description: 'Start building your own Layer 1 blockchain',
+          description: "Build your own sovereign Layer 1 blockchain using Avalanche's battle-tested infrastructure and tooling.",
           url: '/docs/avalanche-l1s',
           menu: {
             className: 'lg:col-start-2',
@@ -82,7 +82,7 @@ export const baseOptions: BaseLayoutProps = {
         {
           icon: <MonitorCheck />,
           text: 'Nodes & Validators',
-          description: 'Participate in the Network and earn rewards',
+          description: 'Learn about hardware requirements, staking mechanisms, rewards, and best practices for securing and maintaining validator infra for Avalanche ecosystem.',
           url: '/docs/nodes',
           menu: {
             className: 'lg:col-start-2',
@@ -91,7 +91,7 @@ export const baseOptions: BaseLayoutProps = {
         {
           icon: <Mail />,
           text: 'Interoperability',
-          description: 'Learn the art of cross-chain communications in Avalanche ecosystem',
+          description: "Explore Avalanche's native cross-chain protocols that enable seamless asset and data transfer across different Avalanche L1s.",
           url: '/docs/cross-chain',
           menu: {
             className: 'lg:col-start-3 lg:row-start-1',
@@ -100,7 +100,7 @@ export const baseOptions: BaseLayoutProps = {
         {
           icon: <Webhook />,
           text: 'API Docs',
-          description: 'Avalanche API References',
+          description: "Comprehensive API documentation for interacting with the Primary Network and various Avalanche L1s.",
           url: '/docs/api-reference',
           menu: {
             className: 'lg:col-start-3',

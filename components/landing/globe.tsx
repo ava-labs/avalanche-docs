@@ -1,10 +1,33 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
+
+export const Sponsors = () => {
+	return (
+		<div className="mt-20 flex flex-col justify-center gap-y-10 w-full ">
+			<div className="relative flex h-[700px] w-full flex-col items-center justify-center overflow-hidden bg-background">
+				<TooltipProvider delayDuration={100}>
+					<Tooltip>
+						<TooltipTrigger className="z-50 m-0 p-0">
+							<Link href={"https://www.avax.network/"} target="_blank">
+								<AvalancheLogo className="size-10" fill="currentColor"/>
+							</Link>
+						</TooltipTrigger>
+						<TooltipContent className="bg-black rounded-lg border-0 text-center z-[200] text-white font-semibold">
+							Avalanche
+						</TooltipContent>
+					</Tooltip>
+				</TooltipProvider>
+				<Ripple />
+			</div>
+		</div>
+	);
+};
 
 interface RippleProps {
   mainCircleSize?: number;
@@ -340,5 +363,3 @@ const Ripple = React.memo(function Ripple({
 Avatar.displayName = AvatarPrimitive.Root.displayName;
 AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 Ripple.displayName = "Ripple";
-
-export default Ripple;

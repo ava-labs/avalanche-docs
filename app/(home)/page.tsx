@@ -13,7 +13,6 @@ import { File, Files, Folder } from 'fumadocs-ui/components/files';
 import { DeployBlockchainAnimation } from './page.client';
 import Hero from '@/components/landing/hero';
 import Features from '@/components/landing/features';
-import Ripple from '@/components/landing/ripple';
 
 const badgeVariants = cva(
   'mb-2 inline-flex size-7 items-center justify-center rounded-full bg-fd-primary font-medium text-fd-primary-foreground',

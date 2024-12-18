@@ -75,3 +75,22 @@ h2.text-sm.font-medium {
 nav a:not(:first-child) {
   display: none;
 }
+
+@keyframes ripple {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.9); }
+  50% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.animate-ripple {
+  animation: ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite;
+  animation-delay: calc(var(--i) * 0.5s);
+}
+
+.bg-foreground\/25 {
+  background-color: #4bccff96;
+}
+
+.bg-zinc-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229);
+}
