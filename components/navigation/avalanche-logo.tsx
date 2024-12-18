@@ -6,7 +6,7 @@ export function AvalancheLogo(
       width="80"
       height="80"
       viewBox="0 0 220 190"
-	  enable-background="new 0 0 220 190"
+	  enableBackground="new 0 0 220 190"
 	  xmlSpace="preserve"
 	  id="Layer_1"
       {...props}

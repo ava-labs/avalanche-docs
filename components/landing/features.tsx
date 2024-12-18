@@ -72,7 +72,7 @@ const features = [
 
 export default function Features() {
   return (
-    <div className="flex flex-col justify-center items-center px-4">
+    <div className="flex flex-col justify-center items-center px-4 mb-16">
       <h2 className="font-display text-3xl tracking-tight sm:text-5xl text-center">
         Resources for Developers
       </h2>

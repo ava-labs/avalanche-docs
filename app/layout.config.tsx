@@ -27,7 +27,7 @@ export const linkItems: LinkItemType[] = [
   {
     icon: <AlbumIcon />,
     text: 'Guides',
-    url: '/guides',
+    url: '/guide',
     active: 'nested-url',
   },
 ];

@@ -1,0 +1,237 @@
+---
+title: Use Privy on Avalanche L1
+description: This guide shows how to use Social Login and Embedded Wallets with Privy on Avalanche L1.
+date: 2024-08-23
+authors: [satatocom]
+topics: [Avalanche L1, Avalanche Starter Kit, Magic Link, Social Login, Embedded Wallets]
+---
+
+In this guide, you will learn how to use Privy to easily onboard your users and create transactions without the need for any Web3 wallet.
+
+## What is Privy?
+
+Privy is a simple tool to easily onboard all your users to web3, regardless of whether they already have a wallet, across mobile and desktop.
+
+## Terminology
+
+Before we dive into the guide, let's first understand the terminology.
+
+| Term | Meaning |
+| -------- | ------- |
+| Social Login | Social Login is a form of single sign-on (SSO) that allows users to log into a third-party website or app using their existing credentials from a social media platform, such as Google, X (formerly Twitter), or Apple. Instead of creating a new username and password, users can authenticate themselves through their social media accounts, streamlining the login process. |
+| Magic Link | A Magic Link is a form of passwordless authentication where users can log into an application or website by clicking a unique, time-sensitive link sent to their email address. This method eliminates the need for a traditional username and password combination, making the login process simpler and more user-friendly. |
+| Next.js  | Next.js’ Pages Router is a full-stack React framework. It’s versatile and lets you create React apps of any size—from a mostly static blog to a complex dynamic application. |
+
+## Prerequisites and Recommended Knowledge
+
+- Privy account
+- Basic understanding of EVM, and transaction data
+- Basic understanding of frontend development
+
+## Preparation
+
+### Create Application and Retrieve API Keys
+
+- Log in to [Privy Dashboard](https://dashboard.privy.io/)
+- Click on `New App` on the Applications page.
+- Click on the Settings button on the left pane. Under the Basic tab, you'll find the API keys.
+
+### Start a New React Project with Next.js
+
+To create a new Next.js project, run in your terminal:
+
+```bash
+npx create-next-app@latest
+```
+
+### Install Dependencies
+
+After the React project is created, we need to install some dependencies: to use Privy (its own package), to add a custom chain, to create and use an HTTP client (viem), and to include utilities (ethers).
+
+```bash
+npm install @privy-io/react-auth@latest
+npm i viem@latest
+npm i ethers@latest
+```
+
+### Define Your Avalanche L1
+
+In this guide, we are using the `Echo L1` as an example Avalanche L1. However, you can use any Avalanche L1 that has a public RPC URL. If the L1 has an explorer page, you can see better what is happening, but it is not required.
+
+```typescript
+export const echo = defineChain({
+  id: 173750,
+  name: 'Echo L1',
+  network: 'echo',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Ech',
+    symbol: 'ECH',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://subnets.avax.network/echo/testnet/rpc']
+    },
+  },
+  blockExplorers: {
+    default: {name: 'Explorer', url: 'https://subnets-test.avax.network/echo'},
+  },
+});
+```
+
+### Import Privy into Your App 
+
+After the React project is created, navigate to `page.tsx`. Inside the `Home` function, wrap your content with `PrivyProvider`.
+
+```typescript title="page.tsx"
+export default function Home() {
+
+  return (
+    <PrivyProvider
+      appId="your-privy-app-id"
+      config={{
+        appearance: {
+          theme: 'dark',
+          accentColor: '#e84242',
+          logo: 'https://your-logo-url',
+        },
+        embeddedWallets: {
+          createOnLogin: 'users-without-wallets',
+        },
+        defaultChain: echo,
+        supportedChains: [echo],
+        loginMethods: ['email', 'wallet', 'google', 'apple']
+      }}
+    >
+      { content }
+    </PrivyProvider>
+  );
+
+}
+```
+
+## Walkthrough
+
+So far in the guide, we have installed the necessary dependencies, created our Privy application, and obtained our API key. Now, we are ready to use Privy.
+
+Here is our walkthrough:
+
+- We will create a simple login flow.
+- We will create a welcome page for users who have logged in, showing their embedded wallet address and balance.
+- We will trigger a test transfer of the `ECH` token via Privy.
+
+### Login Flow
+
+To onboard your users into your application, you just need to know the following hooks:
+
+```typescript
+const { ready, authenticated } = usePrivy();
+const { login } = useLogin();
+```
+
+It's really that simple!
+
+- `ready`: Checks whether the `PrivyProvider` is `ready` to be used.
+- `authenticated`: Returns `true` if the user is `authenticated`, `false` otherwise.
+- `login`: Opens the Privy login modal and prompts the user to log in.
+
+```typescript
+<button onClick={login}>Login via Privy</button>
+```
+
+We've only added a button to trigger `login` function, and Privy handles the rest.
+
+![](/guide-images/use-privy-on-l1/1.png)
+
+When we click on the `Login via Privy` button, this modal appears.
+
+![](/guide-images/use-privy-on-l1/2.png)
+
+You can choose any login method to log in. We’ve already defined these options in the `PrivyProvider` when we wrapped our content.
+
+### Welcome Page
+
+After checking whether the user is authenticated or not, we display the following information to the user who has logged in.
+
+![](/guide-images/use-privy-on-l1/3.png)
+
+As you can see, Privy has generated an embedded wallet for our user. We’ve displayed the following properties on the screen: Privy ID, embedded wallet address, and embedded wallet balance.
+
+```typescript
+<span>{user.id}</span>
+<span>{user.wallet.address}</span>
+<span>{balance} ECH</span>
+```
+
+We’ve used the user object of Privy to retrieve the user ID and wallet address. To fetch the user’s balance, we need to create an HTTP client for our Avalanche L1, which we’ve already defined earlier.
+
+```typescript
+const client = createPublicClient({
+    chain: echo,
+    transport: http(),
+});
+// get native asset balance
+client.getBalance({
+    address: address,
+}).then(balance => {
+    setBalance(ethers.formatEther(balance));
+});
+```
+
+We can allow users to log out using the following hook:
+
+```typescript
+const { logout } = useLogout();
+```
+
+### Fund the New Wallet Using the Faucet
+
+We’ve funded the new wallet that was generated for our user with some ECH tokens from the [Echo AWM Testnet Faucet](https://test.core.app/tools/testnet-faucet/?subnet=echo&token=echo).
+
+![](/guide-images/use-privy-on-l1/4.png)
+
+After the ECH tokens were sent, our balance updated accordingly.
+
+![](/guide-images/use-privy-on-l1/5.png)
+
+### Send Test Transfer via Privy
+
+Now that we have a balance, we can send some ECH tokens to another recipient via Privy to test Privy's `sendTransaction` flow. Privy provides the following hook for this:
+
+```typescript
+const { sendTransaction } = useSendTransaction();
+```
+
+We’ve already added the following button to trigger the `transfer` function, which will, in turn, trigger the `sendTransaction` function provided by Privy.
+
+```typescript
+<button onClick={transfer}>Send Test Transfer via Privy</button>
+```
+
+We have built a simple transaction that sends some ECH tokens to another recipient.
+
+
+```typescript
+const transfer = () => {
+    if (authenticated === false || address === undefined) {
+        return;
+    }
+    let receiver = "0x..."; // receiver address
+    sendTransaction({
+        "value": ethers.parseUnits("0.01", "ether"),
+        "to": receiver, // destination address
+        "from": address, // logged in user's embedded wallet address
+    }).catch(() => {
+        // handle err 
+    });
+}
+```
+
+When we click on the `Send Test Transfer via Privy` button, this modal appears. Users can see the following details related to the transaction.
+
+![](/guide-images/use-privy-on-l1/6.png)
+![](/guide-images/use-privy-on-l1/7.png)
+
+## Conclusion
+
+What we achieved is the creation of a simple React project that integrates Privy. Our application can now easily onboard new users to our Web3 application without needing them to install a Web3 wallet extension, regardless of which chain they are on.

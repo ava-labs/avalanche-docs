@@ -72,6 +72,18 @@ export const integrations = defineCollections({
   }),
 });
 
+export const guide = defineCollections({
+  type: 'doc',
+  async: true,
+  dir: 'content/guide',
+  schema: frontmatterSchema.extend({
+    authors: z.array(z.string()),
+    topics: z.array(z.string()),
+    date: z.string().date().or(z.date()).optional(),
+    comments: z.boolean().default(false),
+  }),
+});
+
 export default defineConfig({
   lastModifiedTime: 'git',
   mdxOptions: {
