@@ -59,7 +59,7 @@ export default function Hero() {
                 <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                     <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(82, 82, 91, 0.3)" strokeWidth="0.5"/>
+                        <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(155, 122, 122, 0.3)" strokeWidth="0.5"/>
                     </pattern>
                     </defs>
                     <rect width="100%" height="100%" fill="url(#grid)" />
@@ -133,7 +133,7 @@ export default function Hero() {
 										>
 											Get Started
 										</Link>
-                                        <button className="bg-stone-950 no-underline group cursor-pointer relative  p-px text-xs font-semibold leading-6  text-white md:inline-block hidden" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:Rkcivadb:" data-state="closed">
+                                        <Link href="/academy" className="bg-stone-950 no-underline group cursor-pointer relative  p-px text-xs font-semibold leading-6  text-white md:inline-block hidden" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:Rkcivadb:" data-state="closed">
 											<span className="absolute inset-0 overflow-hidden rounded-sm">
 												<span className="absolute inset-0 rounded-sm bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
 											</span>
@@ -142,7 +142,7 @@ export default function Hero() {
 												<span>Learn With Academy</span>
 											</div>
 											<span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-stone-800/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
-										</button>
+										</Link>
 									</div>
 								</>
 							}
