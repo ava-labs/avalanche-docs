@@ -226,7 +226,7 @@ const Ripple = React.memo(function Ripple({
                           <Tooltip>
                             <TooltipTrigger>
                               <Link href={item.link} target="_blank">
-                                <Avatar className="border border-sky-400 border-solid hover:border-dotted">
+                                <Avatar className="border border-red-400 border-solid hover:border-dotted">
                                   <AvatarImage src={item.image} alt={item.name} />
                                 </Avatar>
                               </Link>
@@ -263,7 +263,7 @@ const Ripple = React.memo(function Ripple({
                           <Tooltip>
                             <TooltipTrigger>
                               <Link href={item.link} target="_blank">
-                                <Avatar className="border border-sky-400 border-solid hover:border-dotted">
+                                <Avatar className="border border-red-400 border-solid hover:border-dotted">
                                   <AvatarImage src={item.image} alt={item.name} />
                                 </Avatar>
                               </Link>
@@ -300,7 +300,7 @@ const Ripple = React.memo(function Ripple({
                           <Tooltip>
                             <TooltipTrigger>
                               <Link href={item.link} target="_blank">
-                                <Avatar className="border border-sky-400 border-solid hover:border-dotted">
+                                <Avatar className="border border-red-400 border-solid hover:border-dotted">
                                   <AvatarImage src={item.image} alt={item.name} />
                                 </Avatar>
                               </Link>
@@ -337,7 +337,7 @@ const Ripple = React.memo(function Ripple({
                           <Tooltip>
                             <TooltipTrigger>
                               <Link href={item.link} target="_blank">
-                                <Avatar className="border border-sky-400 border-solid hover:border-dotted">
+                                <Avatar className="border border-red-400 border-solid hover:border-dotted">
                                   <AvatarImage src={item.image} alt={item.name} />
                                 </Avatar>
                               </Link>

@@ -2,55 +2,8 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Fragment, useEffect, useId, useRef, useState } from "react";
-import useMeasure from "react-use-measure";
 import Link from "next/link";
-import clsx from "clsx";
-import { useTheme } from "next-themes";
-import { Highlight, themes } from "prism-react-renderer";
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { Sponsors } from '@/components/landing/globe';
-
-const tabs: { name: "configure" | "deploy"; code: string }[] = [
-	{
-		name: "configure",
-		code: `avalanche blockchain deploy myblockchain
- 
-? Choose a network for the operation:
-▸ Local Network
-  Devnet
-  Fuji Testnet
-  Mainnet
-
-Deploying [myblockchain] to Local Network...
-
-Blockchain ready to use`,
-	},
-	{
-		name: "deploy",
-		code: `avalanche blockchain deploy myblockchain
- 
-? Choose a network for the operation:
-▸ Local Network
-  Devnet
-  Fuji Testnet
-  Mainnet
-
-Deploying [myblockchain] to Local Network...
-
-Blockchain ready to use`,
-	},
-];
-
-function TrafficLightsIcon(props: React.ComponentPropsWithoutRef<"svg">) {
-	return (
-		<svg aria-hidden="true" viewBox="0 0 42 10" fill="none" {...props}>
-			<circle cx="5" cy="5" r="4.5" />
-			<circle cx="21" cy="5" r="4.5" />
-			<circle cx="37" cy="5" r="4.5" />
-		</svg>
-	);
-}
 
 export default function Hero() {
 	return (
