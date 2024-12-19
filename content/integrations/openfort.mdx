@@ -1,0 +1,122 @@
+---
+title: Openfort
+category: Wallet SDKs, Account Abstraction
+available: ["C-Chain", "All EVM L1s"]
+description: "Create secure embedded wallets with seamless authentication flows and gas sponsorship capabilities."
+logo: /images/openfort.png
+developer: Openfort
+website: https://openfort.xyz
+documentation: https://www.openfort.xyz/docs
+---
+
+## Overview
+Openfort is a comprehensive Web3 development platform that enables developers to create embedded wallet experiences with advanced authentication flows. It provides secure key management, transaction handling, and gas sponsorship capabilities while maintaining compatibility with EVM chains including Avalanche.
+
+## Features
+- Multi-chain embedded wallet creation and management
+- Multiple authentication methods (email/password, social login, Web3)
+- EIP-1193 provider compatibility for seamless dApp integration
+- Programmable transaction policies and gas sponsorship
+- Session key management for temporary authorized access
+- Server-side and client-side SDKs
+- Smart contract interaction utilities
+
+## Getting Started
+
+### 1. Installation
+
+```bash
+# Install dependencies
+npm install @openfort/openfort-js @openfort/openfort-node
+npm install ethers viem
+```
+
+### 2. Configuration
+
+```typescript
+// Initialize Openfort with client and server configurations
+// Client side
+const openfortClient = new Openfort({
+  baseConfiguration: {
+    publishableKey: "YOUR_OPENFORT_PUBLISHABLE_KEY",
+  },
+  shieldConfiguration: {
+    shieldPublishableKey: "YOUR_SHIELD_PUBLISHABLE_KEY",
+  },
+});
+
+// Server side
+const openfortServer = new Openfort("YOUR_SECRET_KEY");
+```
+
+### 3. Basic Implementation
+
+```typescript
+// Authentication
+const authResponse = await openfort.logInWithEmailPassword({
+  email: "user@example.com",
+  password: "password123"
+});
+
+// Initialize Provider
+const provider = await openfort.getProvider();
+await provider.request({ 
+  method: 'wallet_switchEthereumChain',
+  params: [{ chainId: `0x${avalancheChain.id.toString(16)}` }]
+});
+
+// Create a gas sponsorship policy (server-side)
+const policy = await openfortServer.policies.create({
+  chainId: 43114, // Avalanche C-Chain
+  name: "Gas Sponsorship Policy",
+  strategy: {
+    sponsorSchema: "pay_for_user"
+  }
+});
+
+// Create transaction intent with sponsorship (server-side)
+const transactionIntent = await openfortServer.transactionIntents.create({
+  player: "PLAYER_ID",
+  chainId: 43114,
+  optimistic: true,
+  policy: policy.id,
+  interactions: [{
+    contract: "CONTRACT_ADDRESS",
+    functionName: "transfer",
+    functionArgs: [recipientAddress, amount]
+  }]
+});
+
+// Sign and send the sponsored transaction (client-side)
+const response = await openfortClient.sendSignatureTransactionIntentRequest(
+  transactionIntent.id,
+  transactionIntent.nextAction.payload.userOperationHash
+);
+```
+
+## Documentation
+For detailed implementation guides and API references, visit [Openfort Documentation](https://www.openfort.xyz/docs)
+
+## Use Cases
+- **Gaming Applications**
+  - Implement player wallets for in-game assets
+  - Sponsor gas fees for player transactions
+  - Manage session-based access for temporary game actions
+
+- **NFT Platforms**
+  - Create embedded wallets for NFT collectors
+  - Streamline minting and trading processes
+  - Implement gasless transactions for better UX
+
+- **DeFi Applications**
+  - Secure wallet management for DeFi users
+  - Programmatic transaction policies
+  - Multi-chain wallet support
+
+- **Web3 Social Platforms**
+  - Social login integration with wallet creation
+  - Simplified onboarding for non-crypto users
+  - Transaction sponsorship for engagement actions
+
+## Conclusion
+Openfort provides a robust solution for implementing embedded wallets and authentication in Web3 applications. Its support for Avalanche and other EVM chains, combined with features like gas sponsorship and session keys, makes it an excellent choice for developers looking to create user-friendly blockchain applications. The platform's focus on security, combined with its flexible authentication options and EIP-1193 compatibility, enables developers to build sophisticated Web3 applications while maintaining a seamless user experience.
