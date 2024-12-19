@@ -134,7 +134,7 @@ export async function generateMetadata(props: {
 
   const image = {
     alt: 'Banner',
-    url: `/api/og/course/${params.slug[0]}?${imageParams.toString()}`,
+    url: `/api/og/academy/${params.slug[0]}?${imageParams.toString()}`,
     width: 1200,
     height: 630,
   };
