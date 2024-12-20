@@ -83,71 +83,13 @@ number of items is 40. We are working on to support a larger batch size.
 
 ### Avalanche - Ethereum APIs
 
-In addition to the standard Ethereum APIs, Avalanche offers `eth_getAssetBalance`, `eth_baseFee`,
+In addition to the standard Ethereum APIs, Avalanche offers `eth_baseFee`,
 `eth_maxPriorityFeePerGas`, and `eth_getChainConfig`.
 
 They use the same endpoint as standard Ethereum APIs:
 
 ```sh
 /ext/bc/C/rpc
-```
-
-#### `eth_getAssetBalance`
-
-Retrieves the balance of first class Avalanche Native Tokens on the C-Chain (excluding AVAX,
-which must be fetched with `eth_getBalance`).
-
-<Callout title="Note">
-
-The AssetID for AVAX differs depending on the network you are on.
-
-Mainnet: FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z
-
-Testnet: U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK
-
-For finding the `assetID` of other assets, please note that
-`avax.getUTXOs` and `avax.getAtomicTx` return the `assetID` in
-their output.
-
-</Callout>
-
-**Signature:**
-
-```sh
-eth_getAssetBalance({
-    address: string,
-    blk: BlkNrOrHash,
-    assetID: string,
-}) -> {balance: int}
-```
-
-- `address` owner of the asset
-- `blk` is the block number or hash at which to retrieve the balance
-- `assetID` id of the asset for which the balance is requested
-
-**Example Call:**
-
-```sh
-curl -X POST --data '{
-    "jsonrpc": "2.0",
-    "method": "eth_getAssetBalance",
-    "params": [
-        "0x8723e5773847A4Eb5FeEDabD9320802c5c812F46",
-        "latest",
-        "3RvKBAmQnfYionFXMfW5P8TDZgZiogKbHjM8cjpu16LKAgF5T"
-    ],
-    "id": 1
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
-```
-
-**Example Response:**
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": "0x1388"
-}
 ```
 
 #### `eth_baseFee`
