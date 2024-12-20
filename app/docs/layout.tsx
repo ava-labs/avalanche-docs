@@ -25,13 +25,13 @@ const docsOptions: DocsLayoutProps = {
       icon: <ArrowUpRight />
     },
     {
-      text: 'Integrations',
-      url: '/integrations',
+      text: 'Guides',
+      url: '/guides',
       icon: <ArrowUpRight />
     },
     {
-      text: 'Grants',
-      url: '/grants',
+      text: 'Integrations',
+      url: '/integrations',
       icon: <ArrowUpRight />
     },
   ],

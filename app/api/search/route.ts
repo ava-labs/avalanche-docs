@@ -1,6 +1,7 @@
 import { getDocsPages } from '@/utils/docs-loader'
 import { createSearchAPI } from 'fumadocs-core/search/server'
 import { getCoursePages } from '@/utils/course-loader';
+import { getIntegrationPages } from '@/utils/integrations-loader';
 
 export const { GET } = createSearchAPI('advanced', {
   indexes: await Promise.all([
@@ -21,6 +22,15 @@ export const { GET } = createSearchAPI('advanced', {
         id: page.url,
         structuredData: loadedData.structuredData
       }
-    })   
+    }),
+    ...getIntegrationPages().map(async (page) => {
+      const loadedData = await page.data.load()
+      return {
+        title: page.data.title,
+        url: page.url,
+        id: page.url,
+        structuredData: loadedData.structuredData
+      }
+    })
   ])
 })
