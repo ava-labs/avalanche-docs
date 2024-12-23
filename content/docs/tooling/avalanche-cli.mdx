@@ -26,7 +26,7 @@ avalanche blockchain [subcommand] [flags]
 
 ```bash
 -h, --help help             for blockchain
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -172,7 +172,7 @@ avalanche blockchain addValidator [subcommand] [flags]
 -t, --testnet fuji                        operate on testnet (alias to fuji)
 --wait-for-tx-acceptance                  (for Subnets, not L1s) just issue the add validator tx, without waiting for its acceptance (default true)
 --weight uint                             set the staking weight of the validator to add (default 20)
---config string                           config file (default is $HOME/.cli/config.json)
+--config string                           config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                        log level for the application (default "ERROR")
 --skip-update-check skip                  check for new versions
 ```
@@ -206,7 +206,7 @@ avalanche blockchain changeOwner [subcommand] [flags]
 --subnet-auth-keys strings    control keys that will be used to authenticate transfer subnet ownership tx
 -t, --testnet fuji            operate on testnet (alias to fuji)
 --threshold uint32            required number of control key signatures to make subnet changes
---config string               config file (default is $HOME/.cli/config.json)
+--config string               config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string            log level for the application (default "ERROR")
 --skip-update-check skip      check for new versions
 ```
@@ -240,7 +240,7 @@ avalanche blockchain changeWeight [subcommand] [flags]
 --node-id string            node-id of the validator
 -t, --testnet fuji          operate on testnet (alias to fuji)
 --weight uint               set the new staking weight of the validator (default 20)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -265,7 +265,7 @@ avalanche blockchain configure [subcommand] [flags]
 --node-config string              path to avalanchego node configuration
 --per-node-chain-config string    path to per node chain configuration for local network
 --subnet-config string            path to the subnet configuration
---config string                   config file (default is $HOME/.cli/config.json)
+--config string                   config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                log level for the application (default "ERROR")
 --skip-update-check skip          check for new versions
 ```
@@ -323,7 +323,7 @@ avalanche blockchain create [subcommand] [flags]
 --vm string                         file path of custom vm to use. alias to custom-vm-path
 --vm-version string                 version of Subnet-EVM template to use
 --warp generate                     a vm with warp support (needed for ICM) (default true)
---config string                     config file (default is $HOME/.cli/config.json)
+--config string                     config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                  log level for the application (default "ERROR")
 --skip-update-check skip            check for new versions
 ```
@@ -341,7 +341,7 @@ avalanche blockchain delete [subcommand] [flags]
 
 ```bash
 -h, --help help             for delete
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -433,7 +433,7 @@ avalanche blockchain deploy [subcommand] [flags]
 -t, --testnet fuji                                     operate on testnet (alias to fuji)
 --threshold uint32                                     required number of control key signatures to make subnet changes
 --use-local-machine use                                local machine as a blockchain validator
---config string                                        config file (default is $HOME/.cli/config.json)
+--config string                                        config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                                     log level for the application (default "ERROR")
 --skip-update-check skip                               check for new versions
 ```
@@ -454,7 +454,7 @@ avalanche blockchain describe [subcommand] [flags]
 ```bash
 -g, --genesis Print         the genesis to the console directly instead of the summary
 -h, --help help             for describe
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -479,7 +479,7 @@ avalanche blockchain export [subcommand] [flags]
 --custom-vm-repo-url string        custom vm repository url
 -h, --help help                    for export
 -o, --output string                write the export data to the provided file path
---config string                    config file (default is $HOME/.cli/config.json)
+--config string                    config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                 log level for the application (default "ERROR")
 --skip-update-check skip           check for new versions
 ```
@@ -501,7 +501,7 @@ avalanche blockchain import [subcommand] [flags]
 
 ```bash
 -h, --help help             for import
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -544,7 +544,7 @@ avalanche blockchain import file [subcommand] [flags]
 -h, --help help             for file
 --repo string               the repo to import (ex: ava-labs/plugins-core) or url to download the repo from
 --subnet string             the subnet configuration to import from the provided repo
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -578,7 +578,7 @@ avalanche blockchain import public [subcommand] [flags]
 -m, --mainnet operate       on mainnet
 --node-url string           [optional] URL of an already running subnet validator
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -628,7 +628,7 @@ avalanche blockchain join [subcommand] [flags]
 --staking-period duration      how long validator validates for after start time
 --start-time string            start time that validator starts validating
 -t, --testnet fuji             operate on testnet (alias to fuji)
---config string                config file (default is $HOME/.cli/config.json)
+--config string                config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string             log level for the application (default "ERROR")
 --skip-update-check skip       check for new versions
 ```
@@ -649,7 +649,7 @@ avalanche blockchain list [subcommand] [flags]
 ```bash
 --deployed show             additional deploy information
 -h, --help help             for list
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -673,7 +673,7 @@ avalanche blockchain publish [subcommand] [flags]
 --repo-url string            The URL of the repo where we are publishing
 --subnet-file-path string    Path to the Subnet description file. If not given, a prompting sequence will be initiated.
 --vm-file-path string        Path to the VM description file. If not given, a prompting sequence will be initiated.
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -719,7 +719,7 @@ avalanche blockchain removeValidator [subcommand] [flags]
 --subnet-auth-keys strings                (for non-SOV blockchain only) control keys that will be used to authenticate the removeValidator tx
 -t, --testnet fuji                        operate on testnet (alias to fuji)
 --uptime uint                             validator's uptime in seconds. If not provided, it will be automatically calculated
---config string                           config file (default is $HOME/.cli/config.json)
+--config string                           config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                        log level for the application (default "ERROR")
 --skip-update-check skip                  check for new versions
 ```
@@ -744,7 +744,7 @@ avalanche blockchain stats [subcommand] [flags]
 -l, --local operate         on a local network
 -m, --mainnet operate       on mainnet
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -763,7 +763,7 @@ avalanche blockchain upgrade [subcommand] [flags]
 
 ```bash
 -h, --help help             for upgrade
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -842,7 +842,7 @@ avalanche blockchain upgrade export [subcommand] [flags]
 --force If                   true, overwrite a possibly existing file without prompting
 -h, --help help              for export
 --upgrade-filepath string    Export upgrade bytes file to location of choice on disk
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -861,7 +861,7 @@ avalanche blockchain upgrade generate [subcommand] [flags]
 
 ```bash
 -h, --help help             for generate
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -880,7 +880,7 @@ avalanche blockchain upgrade import [subcommand] [flags]
 ```bash
 -h, --help help              for import
 --upgrade-filepath string    Import upgrade bytes file into local environment
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -898,7 +898,7 @@ avalanche blockchain upgrade print [subcommand] [flags]
 
 ```bash
 -h, --help help             for print
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -955,7 +955,7 @@ avalanche blockchain validators [subcommand] [flags]
 -l, --local operate         on a local network
 -m, --mainnet operate       on mainnet
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -973,7 +973,7 @@ avalanche blockchain vmid [subcommand] [flags]
 
 ```bash
 -h, --help help             for vmid
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -991,7 +991,7 @@ avalanche config [subcommand] [flags]
 
 ```bash
 -h, --help help             for config
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1000,7 +1000,7 @@ avalanche config [subcommand] [flags]
 
 - [`authorize-cloud-access`](#authorize-cloud-access): set preferences to authorize access to cloud resources
 - [`metrics`](#metrics): set user metrics collection preferences
-- [`migrate`](#migrate): migrate command migrates old ~/.cli.json and ~/.cli/config to /.cli/config.json..
+- [`migrate`](#migrate): migrate command migrates old ~/.avalanche-cli.json and ~/.avalanche-cli/config to /.avalanche-cli/config.json..
 - [`snapshotsAutoSave`](#snapshotsautosave): set user preference between auto saving local network snapshots or not
 - [`update`](#update): set user preference between update check or not
 
@@ -1017,7 +1017,7 @@ avalanche config authorize-cloud-access [subcommand] [flags]
 
 ```bash
 -h, --help help             for authorize-cloud-access
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1035,14 +1035,14 @@ avalanche config metrics [subcommand] [flags]
 
 ```bash
 -h, --help help             for metrics
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
 
 ### migrate
 
-migrate command migrates old ~/.cli.json and ~/.cli/config to /.cli/config.json..
+migrate command migrates old ~/.avalanche-cli.json and ~/.avalanche-cli/config to /.avalanche-cli/config.json..
 
 **Usage:** 
 ```bash
@@ -1053,7 +1053,7 @@ avalanche config migrate [subcommand] [flags]
 
 ```bash
 -h, --help help             for migrate
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1071,7 +1071,7 @@ avalanche config snapshotsAutoSave [subcommand] [flags]
 
 ```bash
 -h, --help help             for snapshotsAutoSave
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1089,7 +1089,7 @@ avalanche config update [subcommand] [flags]
 
 ```bash
 -h, --help help             for update
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1108,7 +1108,7 @@ avalanche contract [subcommand] [flags]
 
 ```bash
 -h, --help help             for contract
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1133,7 +1133,7 @@ avalanche contract deploy [subcommand] [flags]
 
 ```bash
 -h, --help help             for deploy
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1171,7 +1171,7 @@ avalanche contract deploy erc20 [subcommand] [flags]
 --supply uint               set the token supply
 --symbol string             set the token symbol
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1211,7 +1211,7 @@ avalanche contract initValidatorManager [subcommand] [flags]
 --private-key string                      private key to use as contract deployer
 --rpc string                              deploy the contract into the given rpc endpoint
 -t, --testnet fuji                        operate on testnet (alias to fuji)
---config string                           config file (default is $HOME/.cli/config.json)
+--config string                           config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                        log level for the application (default "ERROR")
 --skip-update-check skip                  check for new versions
 ```
@@ -1230,7 +1230,7 @@ avalanche help [subcommand] [flags]
 
 ```bash
 -h, --help help             for help
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1249,7 +1249,7 @@ avalanche icm [subcommand] [flags]
 
 ```bash
 -h, --help help             for icm
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1295,7 +1295,7 @@ avalanche icm deploy [subcommand] [flags]
 --rpc-url string                            use the given RPC URL to connect to the subnet
 -t, --testnet fuji                          operate on testnet (alias to fuji)
 --version string                            version to deploy (default "latest")
---config string                             config file (default is $HOME/.cli/config.json)
+--config string                             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                          log level for the application (default "ERROR")
 --skip-update-check skip                    check for new versions
 ```
@@ -1327,7 +1327,7 @@ avalanche icm sendMsg [subcommand] [flags]
 --private-key string            private key to use as message originator and to pay source blockchain fees
 --source-rpc string             use the given source blockchain rpc endpoint
 -t, --testnet fuji              operate on testnet (alias to fuji)
---config string                 config file (default is $HOME/.cli/config.json)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
 --skip-update-check skip        check for new versions
 ```
@@ -1345,7 +1345,7 @@ avalanche ictt [subcommand] [flags]
 
 ```bash
 -h, --help help             for ictt
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1392,7 +1392,7 @@ avalanche ictt deploy [subcommand] [flags]
 -t, --testnet fuji               operate on testnet (alias to fuji)
 --use-home string                use the given Transferrer's Home Address
 --version string                 tag/branch/commit of Avalanche Interchain Token Transfer (ICTT) to be used (defaults to main branch)
---config string                  config file (default is $HOME/.cli/config.json)
+--config string                  config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string               log level for the application (default "ERROR")
 --skip-update-check skip         check for new versions
 ```
@@ -1411,7 +1411,7 @@ avalanche interchain [subcommand] [flags]
 
 ```bash
 -h, --help help             for interchain
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1438,7 +1438,7 @@ avalanche interchain messenger [subcommand] [flags]
 
 ```bash
 -h, --help help             for messenger
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1484,7 +1484,7 @@ avalanche interchain messenger deploy [subcommand] [flags]
 --rpc-url string                            use the given RPC URL to connect to the subnet
 -t, --testnet fuji                          operate on testnet (alias to fuji)
 --version string                            version to deploy (default "latest")
---config string                             config file (default is $HOME/.cli/config.json)
+--config string                             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                          log level for the application (default "ERROR")
 --skip-update-check skip                    check for new versions
 ```
@@ -1516,7 +1516,7 @@ avalanche interchain messenger sendMsg [subcommand] [flags]
 --private-key string            private key to use as message originator and to pay source blockchain fees
 --source-rpc string             use the given source blockchain rpc endpoint
 -t, --testnet fuji              operate on testnet (alias to fuji)
---config string                 config file (default is $HOME/.cli/config.json)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
 --skip-update-check skip        check for new versions
 ```
@@ -1535,7 +1535,7 @@ avalanche interchain relayer [subcommand] [flags]
 
 ```bash
 -h, --help help             for relayer
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1577,7 +1577,7 @@ avalanche interchain relayer deploy [subcommand] [flags]
 --log-level string                 log level to use for relayer logs
 -t, --testnet fuji                 operate on testnet (alias to fuji)
 --version string                   version to deploy (default "latest-prerelease")
---config string                    config file (default is $HOME/.cli/config.json)
+--config string                    config file (default is $HOME/.avalanche-cli/config.json)
 --skip-update-check skip           check for new versions
 ```
 
@@ -1602,7 +1602,7 @@ avalanche interchain relayer logs [subcommand] [flags]
 -l, --local operate         on a local network
 --raw raw                   logs output
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1628,7 +1628,7 @@ avalanche interchain relayer start [subcommand] [flags]
 -l, --local operate         on a local network
 -t, --testnet fuji          operate on testnet (alias to fuji)
 --version string            version to use (default "latest-prerelease")
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1652,7 +1652,7 @@ avalanche interchain relayer stop [subcommand] [flags]
 -h, --help help             for stop
 -l, --local operate         on a local network
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1670,7 +1670,7 @@ avalanche interchain tokenTransferrer [subcommand] [flags]
 
 ```bash
 -h, --help help             for tokenTransferrer
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1717,7 +1717,7 @@ avalanche interchain tokenTransferrer deploy [subcommand] [flags]
 -t, --testnet fuji               operate on testnet (alias to fuji)
 --use-home string                use the given Transferrer's Home Address
 --version string                 tag/branch/commit of Avalanche Interchain Token Transfer (ICTT) to be used (defaults to main branch)
---config string                  config file (default is $HOME/.cli/config.json)
+--config string                  config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string               log level for the application (default "ERROR")
 --skip-update-check skip         check for new versions
 ```
@@ -1740,7 +1740,7 @@ avalanche key [subcommand] [flags]
 
 ```bash
 -h, --help help             for key
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1793,7 +1793,7 @@ avalanche key create [subcommand] [flags]
 -f, --force overwrite       an existing key with the same name
 -h, --help help             for create
 --skip-balances do          not query public network balances for an imported key
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1815,7 +1815,7 @@ avalanche key delete [subcommand] [flags]
 ```bash
 -f, --force delete          the key without confirmation
 -h, --help help             for delete
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1838,7 +1838,7 @@ avalanche key export [subcommand] [flags]
 ```bash
 -h, --help help             for export
 -o, --output string         write the key to the provided file path
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1876,7 +1876,7 @@ avalanche key list [subcommand] [flags]
 --use-gwei use              gwei for EVM balances
 -n, --use-nano-avax use     nano Avax for balances
 --xchain list               X-Chain addresses (default true)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1921,7 +1921,7 @@ avalanche key transfer [subcommand] [flags]
 -t, --testnet fuji                          operate on testnet (alias to fuji)
 --x-chain-receiver receive                  at X-Chain
 --x-chain-sender send                       from X-Chain
---config string                             config file (default is $HOME/.cli/config.json)
+--config string                             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                          log level for the application (default "ERROR")
 --skip-update-check skip                    check for new versions
 ```
@@ -1946,7 +1946,7 @@ avalanche network [subcommand] [flags]
 
 ```bash
 -h, --help help             for network
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -1987,7 +1987,7 @@ avalanche network clean [subcommand] [flags]
 ```bash
 --hard Also                 clean downloaded avalanchego and plugin binaries
 -h, --help help             for clean
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2015,7 +2015,7 @@ avalanche network start [subcommand] [flags]
 --relayer-path string           use this relayer binary path
 --relayer-version string        use this relayer version (default "latest-prerelease")
 --snapshot-name string          name of snapshot to use to start the network from (default "default-1654102509")
---config string                 config file (default is $HOME/.cli/config.json)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
 --skip-update-check skip        check for new versions
 ```
@@ -2034,7 +2034,7 @@ avalanche network status [subcommand] [flags]
 
 ```bash
 -h, --help help             for status
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2060,7 +2060,7 @@ avalanche network stop [subcommand] [flags]
 --dont-save do              not save snapshot, just stop the network
 -h, --help help             for stop
 --snapshot-name string      name of snapshot to use to save network state into (default "default-1654102509")
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2083,7 +2083,7 @@ avalanche node [subcommand] [flags]
 
 ```bash
 -h, --help help             for node
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2220,7 +2220,7 @@ avalanche node addDashboard [subcommand] [flags]
 --add-grafana-dashboard string    path to additional grafana dashboard json file
 -h, --help help                   for addDashboard
 --subnet string                   subnet that the dasbhoard is intended for (if any)
---config string                   config file (default is $HOME/.cli/config.json)
+--config string                   config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                log level for the application (default "ERROR")
 --skip-update-check skip          check for new versions
 ```
@@ -2290,7 +2290,7 @@ avalanche node create [subcommand] [flags]
 --upgrade string                                    path to upgrade file
 --use-ssh-agent use                                 ssh agent(ex: Yubikey) for ssh auth
 --use-static-ip attach                              static Public IP on cloud servers (default true)
---config string                                     config file (default is $HOME/.cli/config.json)
+--config string                                     config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                                  log level for the application (default "ERROR")
 --skip-update-check skip                            check for new versions
 ```
@@ -2317,7 +2317,7 @@ avalanche node destroy [subcommand] [flags]
 --authorize-remove authorize     CLI to remove all local files related to cloud nodes
 --aws-profile string             aws profile to use (default "default")
 -h, --help help                  for destroy
---config string                  config file (default is $HOME/.cli/config.json)
+--config string                  config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string               log level for the application (default "ERROR")
 --skip-update-check skip         check for new versions
 ```
@@ -2338,7 +2338,7 @@ avalanche node devnet [subcommand] [flags]
 
 ```bash
 -h, --help help             for devnet
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2372,7 +2372,7 @@ avalanche node devnet deploy [subcommand] [flags]
 --no-checks do              not check for healthy status or rpc compatibility of nodes against subnet
 --subnet-aliases strings    additional subnet aliases to be used for RPC calls in addition to subnet blockchain name
 --subnet-only only          create a subnet
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2456,7 +2456,7 @@ avalanche node devnet wiz [subcommand] [flags]
 --use-ssh-agent use                                    ssh agent for ssh
 --use-static-ip attach                                 static Public IP on cloud servers (default true)
 --validators strings                                   deploy subnet into given comma separated list of validators. defaults to all cluster nodes
---config string                                        config file (default is $HOME/.cli/config.json)
+--config string                                        config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                                     log level for the application (default "ERROR")
 --skip-update-check skip                               check for new versions
 ```
@@ -2485,7 +2485,7 @@ avalanche node export [subcommand] [flags]
 --force overwrite            the file if it exists
 -h, --help help              for export
 --include-secrets include    keys in the export
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -2513,7 +2513,7 @@ avalanche node import [subcommand] [flags]
 ```bash
 --file string               specify the file to export the cluster configuration to
 -h, --help help             for import
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2533,7 +2533,7 @@ avalanche node list [subcommand] [flags]
 
 ```bash
 -h, --help help             for list
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2553,7 +2553,7 @@ avalanche node loadtest [subcommand] [flags]
 
 ```bash
 -h, --help help             for loadtest
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2603,7 +2603,7 @@ avalanche node loadtest start [subcommand] [flags]
 --region string                 create load test node in a given region
 --ssh-agent-identity string     use given ssh identity(only for ssh agent). If not set, default will be used
 --use-ssh-agent use             ssh agent(ex: Yubikey) for ssh auth
---config string                 config file (default is $HOME/.cli/config.json)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
 --skip-update-check skip        check for new versions
 ```
@@ -2625,7 +2625,7 @@ avalanche node loadtest stop [subcommand] [flags]
 ```bash
 -h, --help help             for stop
 --load-test strings         stop specified load test node(s). Use comma to separate multiple load test instance names
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2645,7 +2645,7 @@ avalanche node local [subcommand] [flags]
 
 ```bash
 -h, --help help             for local
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2680,7 +2680,7 @@ avalanche node local destroy [subcommand] [flags]
 
 ```bash
 -h, --help help             for destroy
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2729,7 +2729,7 @@ avalanche node local start [subcommand] [flags]
 --staking-tls-key-path string                       path to provided staking tls key for node
 -t, --testnet fuji                                  operate on testnet (alias to fuji)
 --upgrade string                                    path to upgrade file
---config string                                     config file (default is $HOME/.cli/config.json)
+--config string                                     config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                                  log level for the application (default "ERROR")
 --skip-update-check skip                            check for new versions
 ```
@@ -2749,7 +2749,7 @@ avalanche node local status [subcommand] [flags]
 --blockchain string         specify the blockchain the node is syncing with
 -h, --help help             for status
 --subnet string             specify the blockchain the node is syncing with
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2767,7 +2767,7 @@ avalanche node local stop [subcommand] [flags]
 
 ```bash
 -h, --help help             for stop
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2789,7 +2789,7 @@ avalanche node local track [subcommand] [flags]
 -h, --help help                                     for track
 --latest-avalanchego-pre-release-version install    latest avalanchego pre-release version on node/s (default true)
 --latest-avalanchego-version install                latest avalanchego release version on node/s
---config string                                     config file (default is $HOME/.cli/config.json)
+--config string                                     config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                                  log level for the application (default "ERROR")
 --skip-update-check skip                            check for new versions
 ```
@@ -2811,7 +2811,7 @@ avalanche node refresh-ips [subcommand] [flags]
 ```bash
 --aws-profile string        aws profile to use (default "default")
 -h, --help help             for refresh-ips
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2834,7 +2834,7 @@ avalanche node resize [subcommand] [flags]
 --disk-size string          Disk size to resize in Gb (e.g. 1000Gb)
 -h, --help help             for resize
 --node-type string          Node type to resize (e.g. t3.2xlarge)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2865,7 +2865,7 @@ avalanche node scp [subcommand] [flags]
 --recursive copy            directories recursively
 --with-loadtest include     loadtest node for scp cluster operations
 --with-monitor include      monitoring node for scp cluster operations
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2891,7 +2891,7 @@ avalanche node ssh [subcommand] [flags]
 --parallel run              ssh command on all nodes in parallel
 --with-loadtest include     loadtest node for ssh cluster operations
 --with-monitor include      monitoring node for ssh cluster operations
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2916,7 +2916,7 @@ avalanche node status [subcommand] [flags]
 --blockchain string         specify the blockchain the node is syncing with
 -h, --help help             for status
 --subnet string             specify the blockchain the node is syncing with
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2940,7 +2940,7 @@ avalanche node sync [subcommand] [flags]
 --no-checks do              not check for bootstrapped/healthy status or rpc compatibility of nodes against subnet
 --subnet-aliases strings    subnet alias to be used for RPC calls. defaults to subnet blockchain ID
 --validators strings        sync subnet into given comma separated list of validators. defaults to all cluster nodes
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2963,7 +2963,7 @@ avalanche node update [subcommand] [flags]
 
 ```bash
 -h, --help help             for update
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -2991,7 +2991,7 @@ avalanche node update subnet [subcommand] [flags]
 
 ```bash
 -h, --help help             for subnet
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3014,7 +3014,7 @@ avalanche node upgrade [subcommand] [flags]
 
 ```bash
 -h, --help help             for upgrade
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3037,7 +3037,7 @@ avalanche node validate [subcommand] [flags]
 
 ```bash
 -h, --help help             for validate
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3081,7 +3081,7 @@ avalanche node validate primary [subcommand] [flags]
 --stake-amount uint          how many AVAX to stake in the validator
 --staking-period duration    how long validator validates for after start time
 --start-time string          UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -3118,7 +3118,7 @@ avalanche node validate subnet [subcommand] [flags]
 --staking-period duration         how long validator validates for after start time
 --start-time string               UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
 --validators strings              validate subnet for the given comma separated list of validators. defaults to all cluster nodes
---config string                   config file (default is $HOME/.cli/config.json)
+--config string                   config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                log level for the application (default "ERROR")
 --skip-update-check skip          check for new versions
 ```
@@ -3143,7 +3143,7 @@ avalanche node whitelist [subcommand] [flags]
 -h, --help help               for whitelist
 --ip string                   ip address to whitelist
 --ssh string                  ssh public key to whitelist
---config string               config file (default is $HOME/.cli/config.json)
+--config string               config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string            log level for the application (default "ERROR")
 --skip-update-check skip      check for new versions
 ```
@@ -3162,7 +3162,7 @@ avalanche primary [subcommand] [flags]
 
 ```bash
 -h, --help help             for primary
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3203,7 +3203,7 @@ avalanche primary addValidator [subcommand] [flags]
 --start-time string             UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
 -t, --testnet fuji              operate on testnet (alias to fuji)
 --weight uint                   set the staking weight of the validator to add
---config string                 config file (default is $HOME/.cli/config.json)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
 --skip-update-check skip        check for new versions
 ```
@@ -3223,7 +3223,7 @@ avalanche primary describe [subcommand] [flags]
 --cluster string            operate on the given cluster
 -h, --help help             for describe
 -l, --local operate         on a local network
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3249,7 +3249,7 @@ avalanche subnet [subcommand] [flags]
 
 ```bash
 -h, --help help             for subnet
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3395,7 +3395,7 @@ avalanche subnet addValidator [subcommand] [flags]
 -t, --testnet fuji                        operate on testnet (alias to fuji)
 --wait-for-tx-acceptance                  (for Subnets, not L1s) just issue the add validator tx, without waiting for its acceptance (default true)
 --weight uint                             set the staking weight of the validator to add (default 20)
---config string                           config file (default is $HOME/.cli/config.json)
+--config string                           config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                        log level for the application (default "ERROR")
 --skip-update-check skip                  check for new versions
 ```
@@ -3429,7 +3429,7 @@ avalanche subnet changeOwner [subcommand] [flags]
 --subnet-auth-keys strings    control keys that will be used to authenticate transfer subnet ownership tx
 -t, --testnet fuji            operate on testnet (alias to fuji)
 --threshold uint32            required number of control key signatures to make subnet changes
---config string               config file (default is $HOME/.cli/config.json)
+--config string               config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string            log level for the application (default "ERROR")
 --skip-update-check skip      check for new versions
 ```
@@ -3463,7 +3463,7 @@ avalanche subnet changeWeight [subcommand] [flags]
 --node-id string            node-id of the validator
 -t, --testnet fuji          operate on testnet (alias to fuji)
 --weight uint               set the new staking weight of the validator (default 20)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3488,7 +3488,7 @@ avalanche subnet configure [subcommand] [flags]
 --node-config string              path to avalanchego node configuration
 --per-node-chain-config string    path to per node chain configuration for local network
 --subnet-config string            path to the subnet configuration
---config string                   config file (default is $HOME/.cli/config.json)
+--config string                   config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                log level for the application (default "ERROR")
 --skip-update-check skip          check for new versions
 ```
@@ -3546,7 +3546,7 @@ avalanche subnet create [subcommand] [flags]
 --vm string                         file path of custom vm to use. alias to custom-vm-path
 --vm-version string                 version of Subnet-EVM template to use
 --warp generate                     a vm with warp support (needed for ICM) (default true)
---config string                     config file (default is $HOME/.cli/config.json)
+--config string                     config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                  log level for the application (default "ERROR")
 --skip-update-check skip            check for new versions
 ```
@@ -3564,7 +3564,7 @@ avalanche subnet delete [subcommand] [flags]
 
 ```bash
 -h, --help help             for delete
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3656,7 +3656,7 @@ avalanche subnet deploy [subcommand] [flags]
 -t, --testnet fuji                                     operate on testnet (alias to fuji)
 --threshold uint32                                     required number of control key signatures to make subnet changes
 --use-local-machine use                                local machine as a blockchain validator
---config string                                        config file (default is $HOME/.cli/config.json)
+--config string                                        config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                                     log level for the application (default "ERROR")
 --skip-update-check skip                               check for new versions
 ```
@@ -3677,7 +3677,7 @@ avalanche subnet describe [subcommand] [flags]
 ```bash
 -g, --genesis Print         the genesis to the console directly instead of the summary
 -h, --help help             for describe
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3702,7 +3702,7 @@ avalanche subnet export [subcommand] [flags]
 --custom-vm-repo-url string        custom vm repository url
 -h, --help help                    for export
 -o, --output string                write the export data to the provided file path
---config string                    config file (default is $HOME/.cli/config.json)
+--config string                    config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                 log level for the application (default "ERROR")
 --skip-update-check skip           check for new versions
 ```
@@ -3724,7 +3724,7 @@ avalanche subnet import [subcommand] [flags]
 
 ```bash
 -h, --help help             for import
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3767,7 +3767,7 @@ avalanche subnet import file [subcommand] [flags]
 -h, --help help             for file
 --repo string               the repo to import (ex: ava-labs/plugins-core) or url to download the repo from
 --subnet string             the subnet configuration to import from the provided repo
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3801,7 +3801,7 @@ avalanche subnet import public [subcommand] [flags]
 -m, --mainnet operate       on mainnet
 --node-url string           [optional] URL of an already running subnet validator
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3851,7 +3851,7 @@ avalanche subnet join [subcommand] [flags]
 --staking-period duration      how long validator validates for after start time
 --start-time string            start time that validator starts validating
 -t, --testnet fuji             operate on testnet (alias to fuji)
---config string                config file (default is $HOME/.cli/config.json)
+--config string                config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string             log level for the application (default "ERROR")
 --skip-update-check skip       check for new versions
 ```
@@ -3872,7 +3872,7 @@ avalanche subnet list [subcommand] [flags]
 ```bash
 --deployed show             additional deploy information
 -h, --help help             for list
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3896,7 +3896,7 @@ avalanche subnet publish [subcommand] [flags]
 --repo-url string            The URL of the repo where we are publishing
 --subnet-file-path string    Path to the Subnet description file. If not given, a prompting sequence will be initiated.
 --vm-file-path string        Path to the VM description file. If not given, a prompting sequence will be initiated.
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -3942,7 +3942,7 @@ avalanche subnet removeValidator [subcommand] [flags]
 --subnet-auth-keys strings                (for non-SOV blockchain only) control keys that will be used to authenticate the removeValidator tx
 -t, --testnet fuji                        operate on testnet (alias to fuji)
 --uptime uint                             validator's uptime in seconds. If not provided, it will be automatically calculated
---config string                           config file (default is $HOME/.cli/config.json)
+--config string                           config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                        log level for the application (default "ERROR")
 --skip-update-check skip                  check for new versions
 ```
@@ -3967,7 +3967,7 @@ avalanche subnet stats [subcommand] [flags]
 -l, --local operate         on a local network
 -m, --mainnet operate       on mainnet
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -3986,7 +3986,7 @@ avalanche subnet upgrade [subcommand] [flags]
 
 ```bash
 -h, --help help             for upgrade
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4065,7 +4065,7 @@ avalanche subnet upgrade export [subcommand] [flags]
 --force If                   true, overwrite a possibly existing file without prompting
 -h, --help help              for export
 --upgrade-filepath string    Export upgrade bytes file to location of choice on disk
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -4084,7 +4084,7 @@ avalanche subnet upgrade generate [subcommand] [flags]
 
 ```bash
 -h, --help help             for generate
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4103,7 +4103,7 @@ avalanche subnet upgrade import [subcommand] [flags]
 ```bash
 -h, --help help              for import
 --upgrade-filepath string    Import upgrade bytes file into local environment
---config string              config file (default is $HOME/.cli/config.json)
+--config string              config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string           log level for the application (default "ERROR")
 --skip-update-check skip     check for new versions
 ```
@@ -4121,7 +4121,7 @@ avalanche subnet upgrade print [subcommand] [flags]
 
 ```bash
 -h, --help help             for print
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4178,7 +4178,7 @@ avalanche subnet validators [subcommand] [flags]
 -l, --local operate         on a local network
 -m, --mainnet operate       on mainnet
 -t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4196,7 +4196,7 @@ avalanche subnet vmid [subcommand] [flags]
 
 ```bash
 -h, --help help             for vmid
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4215,7 +4215,7 @@ avalanche teleporter [subcommand] [flags]
 
 ```bash
 -h, --help help             for teleporter
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4261,7 +4261,7 @@ avalanche teleporter deploy [subcommand] [flags]
 --rpc-url string                            use the given RPC URL to connect to the subnet
 -t, --testnet fuji                          operate on testnet (alias to fuji)
 --version string                            version to deploy (default "latest")
---config string                             config file (default is $HOME/.cli/config.json)
+--config string                             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                          log level for the application (default "ERROR")
 --skip-update-check skip                    check for new versions
 ```
@@ -4293,7 +4293,7 @@ avalanche teleporter sendMsg [subcommand] [flags]
 --private-key string            private key to use as message originator and to pay source blockchain fees
 --source-rpc string             use the given source blockchain rpc endpoint
 -t, --testnet fuji              operate on testnet (alias to fuji)
---config string                 config file (default is $HOME/.cli/config.json)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
 --skip-update-check skip        check for new versions
 ```
@@ -4311,7 +4311,7 @@ avalanche transaction [subcommand] [flags]
 
 ```bash
 -h, --help help             for transaction
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4335,7 +4335,7 @@ avalanche transaction commit [subcommand] [flags]
 ```bash
 -h, --help help               for commit
 --input-tx-filepath string    Path to the transaction signed by all signatories
---config string               config file (default is $HOME/.cli/config.json)
+--config string               config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string            log level for the application (default "ERROR")
 --skip-update-check skip      check for new versions
 ```
@@ -4357,7 +4357,7 @@ avalanche transaction sign [subcommand] [flags]
 -k, --key string              select the key to use [fuji only]
 -g, --ledger use              ledger instead of key (always true on mainnet, defaults to false on fuji)
 --ledger-addrs strings        use the given ledger addresses
---config string               config file (default is $HOME/.cli/config.json)
+--config string               config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string            log level for the application (default "ERROR")
 --skip-update-check skip      check for new versions
 ```
@@ -4377,7 +4377,7 @@ avalanche update [subcommand] [flags]
 -c, --confirm Assume        yes for installation
 -h, --help help             for update
 -v, --version version       for update
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4399,7 +4399,7 @@ avalanche validator [subcommand] [flags]
 
 ```bash
 -h, --help help             for validator
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4434,7 +4434,7 @@ avalanche validator getBalance [subcommand] [flags]
 -m, --mainnet operate       on mainnet
 -t, --testnet fuji          operate on testnet (alias to fuji)
 --validation-id string      validationIDStr of the validator
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
@@ -4464,7 +4464,7 @@ avalanche validator increaseBalance [subcommand] [flags]
 -m, --mainnet operate       on mainnet
 -t, --testnet fuji          operate on testnet (alias to fuji)
 --validation-id string      validationIDStr of the validator
---config string             config file (default is $HOME/.cli/config.json)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
 ```
