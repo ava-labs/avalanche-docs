@@ -1,0 +1,67 @@
+---
+title: Transfer Native Tokens
+description: Interact with native tokens 
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+In this exercise, you will learn how to transfer native tokens on your own L1 in the Avalanche network using Foundry, a powerful toolkit for EVM application development. We will use the blockchain you have create in the last chapter.
+
+<Steps>
+<Step>
+
+## Create account
+```bash
+avalanche key create myAddress
+```
+
+</Step>
+<Step>
+
+### Save the Key to an Environment Variable
+
+Retrieve the new address with and store it in an environment variable to match the following commands.
+ 
+```bash
+avalanche key list -l --blockchains myblockchain --keys myAddress
+```
+
+```bash
+export MYADDRESS=0x...
+```
+
+</Step>
+<Step>
+
+### Check the Balance
+
+Now we are checking the balance of that key on your L1. Make sure to replace the `--rpc-url` flag with appropriate name of your L1.
+
+```bash
+cast balance $MYADDRESS --rpc-url myblockchain
+```
+
+</Step>
+<Step>
+
+### Transfer funds
+
+```bash
+cast send $MYADDRESS --value 200000  --private-key $PK --rpc-url myblockchain
+```
+
+</Step>
+<Step>
+
+### Check balances to confirm transfer
+
+```bash
+cast balance $MYADDRESS --rpc-url myblockchain
+```
+
+</Step>
+</Steps>
+
+As you saw, funds were transfered from one count to another within the same chain (myblockchain)

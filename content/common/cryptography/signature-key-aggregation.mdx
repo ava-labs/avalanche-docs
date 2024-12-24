@@ -1,0 +1,29 @@
+Signature and public key aggregation combines multiple signatures of the same message into a single short signature, which makes transportation and verification much more efficient.
+
+Let's look at an example. We want to sign the following message:
+
+```bash title="Message"
+Per consensum ad astra
+```
+
+Using a private key we create the following signature:
+
+```bash
+a9c400aaf55071eedd5d151932d5cfe847ab3a5ad544521f9a3810ebb59b27c9913c86449405d3dff86c54fcc62ec48a19b182c7c87008619e88e281048f7c58b5c2cb07a1dfcf1a0e43a3678fb9efa04c218140fe5ec02d92c8eb9fbbdf312b
+```
+
+Looks good so far, but let's now think about a message signed by a large portion of the Primary Network validators on Avalanche Mainnet. That would result in hundreds if not thousands of signatures attached to a small message.
+
+- Short message = 64 bytes
+- 1 Signature = 96 Bytes
+- 1000 signatures = 96,000 Bytes
+
+This large data size would quickly become a bottleneck in the transport of the message. However, we can use the Signature Aggregation feature of BLS Multi-Signatures:
+
+![](/common-images/cryptography/signature-aggregation.png)
+
+This more compact aggregated signature makes it much easier to send the message to a large group of validators on the destination chain to verify the authenticity of messages.
+
+We must do the same for the public keys of the signers. In our verify method we input the aggregated public key with the aggregated signature. Let's try this in the next activity.
+
+![](/common-images/cryptography/multi-signature-schemes-methods.png)

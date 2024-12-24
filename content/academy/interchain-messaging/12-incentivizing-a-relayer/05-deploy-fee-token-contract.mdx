@@ -1,0 +1,59 @@
+---
+title: Deploy Fee Token Contract
+description: Deploy an ERC20 to work as the Fee Token for incentives.
+updated: 2024-06-09
+authors: [andyvargtz]
+icon: Terminal
+---
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+
+
+To add incentives for a relayer we need to specify the ERC20 contract we will be incentivizing with. Since we are working with an almost clean network deployed locally, we will need to first deploy this contract to later use it as the incentive token. 
+
+Incentives are set with ERC20 tokens deployed on the Source chain, in this case our local C-Chain. While this token can be a wrapped version of the native token, for this example we will be using just a simple ERC20 included as demo in the Avalanche-CLI. Let's deploy and mint some of these FEE tokens to later be used to incentivize the relayer.
+
+
+<Steps>
+<Step>
+
+### Deploy your Fee Token Contract
+
+```bash
+avalanche contract deploy erc20
+```
+This command will deploy a demo ERC20. Add the following configuration
+
+```bash
+✔ Local Network
+✔ C-Chain
+
+A private key is needed to pay for the contract deploy fees.
+It will also be considered the owner address of the contract, beign able to call
+the contract methods only available to owners.
+
+✔ Use the private key of the Genesis Allocated address 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+
+Which is the token symbol?
+Token symbol: FEE
+Which is the total token supply?
+Token supply: 100000
+Which address should receive the supply?
+
+✔ Use the Genesis Allocated address 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+
+Token Address: 0x768AF58E63775354938e9F3FEdB764F601c038b4
+
+ERC20 Contract Successfully Deployed!
+```
+
+</Step>
+<Step>
+
+### Save the ERC20 Address
+
+```bash
+export ERC20_fee_address=0x768AF58E63775354938e9F3FEdB764F601c038b4
+```
+
+</Step>
+</Steps>

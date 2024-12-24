@@ -1,0 +1,7 @@
+The Contract Deployer Allowlist allows an Avalanche L1 to restrict who can deploy smart contracts to the chain. This is useful for preventing unwanted behavior. If an address is not on the allowlist, the chain will reject any contract deployment from that address.
+
+> This is different than the Transaction Allowlist. The Transaction Allowlist restricts who can issue transactions to the chain, while the Contract Deployer Allowlist restricts who can deploy smart contracts to the chain.
+
+This can be used to implement a permissioned chain, where only certain addresses are allowed to deploy smart contracts. This can be useful for enterprise use cases, where only certain entities are allowed to deploy smart contracts or usecases that require every service provider to go through a KYB-process before offering services on the blockchain.
+
+This also allows for an Avalanche L1 to make sure that no other blockchain application just deploys on the L1 and it can be exclusively for a specific use case.

@@ -1,0 +1,44 @@
+---
+title: What is a State Machine?
+description: Learn about the State Machines in blockchain systems.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+A virtual machine in the context of a blockchain system is like a decentralized computer that can execute a program in a controlled environment. A Virtual Machine (VM) defines the application-level logic of a blockchain. In technical terms, it specifies the blockchain’s state, state transition function, transactions, and the API through which users can interact with the blockchain.
+
+When you write a VM, you don't need to concern yourself with lower-level logic like networking, consensus, and blockchain structure. Avalanche does this behind the scenes, so you can focus on building.
+
+The most popular VM in blockchain is the Ethereum Virtual Machine (EVM) used in the Ethereum blockchain and others. It enables the creation and execution of smart contracts. However, blockchain systems are not limited to the EVM and many blockchains operate with different virtual machines today. For instance, Solana and Cardano use completely different Virtual Machines.
+
+## Soda Dispenser: A Simple Machine
+
+To better comprehend Virtual Machines, take this analogy of a simple, everyday machine: a soda dispenser. 
+
+For optimal functionality, this machine must **consistently monitor its state**. In this instance, the state may represent the current balance, total revenue, and the number of cans available per brand.
+
+![](/course-images/avalanche-fundamentals/28.png)
+
+<Quiz quizId="109"/>
+
+This dispenser permits several **operations**, such as:
+- Inserting coins
+- Selecting a soda flavor
+
+User operations trigger **state transitions**. For example, when a user inserts a coin, the balance increases. Selecting a soda brand leads to a decrease of the balance by the soda's price and reduces the quantity of that specific brand by one. 
+
+<Quiz quizId="110"/>
+
+Additionally, certain logic might be incorporated to dictate various operational outcomes based on the current state. For example, the machine checks if the balance is sufficient when a user chooses a soda brand. As a result, the outcome could be different in cases where the balance is adequate compared to instances where it isn't.
+
+
+## Advantages of VMs
+
+Implementing state machines comes with several advantages:
+
+**Clear Interface:** The range of operations provides clarity on how to interact with it. Once familiarized with the interface, you can interact with all soda machines (following the same blueprint) in the same manner.
+
+**Reproducibility:** With a Virtual Machine blueprint, one can create multiple identical instances. These behave consistently, implying that if you conduct the same operations in the same sequence on two different machines, the state will remain identical.
+
+<Quiz quizId="111"/>

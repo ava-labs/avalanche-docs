@@ -1,0 +1,57 @@
+---
+title: Subnet & L1 Validators, What's the Difference?
+description: This guide defines the difference between Subnet and L1 validators, differentiating the roles and responsibilities of each.
+date: 2024-12-04
+authors: [meagfitzgerald]
+topics: [Avalanche Network Upgrade, Etna Upgrade, Validators, Layer 1, L1, L1 Validators, Subnet Validators]
+comments: true
+---
+
+The Etna Upgrade introduced L1s to the Avalanche network, providing an enhanced sovereign network design to the original Subnet model. 
+
+**L1 Validators**, introduced with ACP-77, represent a departure from this model, enabling the creation of sovereign L1 networks with minimal dependency on the Primary Network. 
+Unlike Subnet validators, L1 validators do not stake AVAX but instead pay a dynamic monthly fee, initially set at approximately 1.3 AVAX. 
+They are exempt from validating the Primary Network, reducing their resource requirements and making L1 validation more accessible. 
+This approach fosters economic inclusivity and sovereignty, allowing developers to define custom validation logic via smart contracts and operate independent networks without staking the Primary Network.  
+
+## Primary Network Validators
+
+Primary Network validators are responsible for processing transactions, securing the network, and participating in consensus and governance decisions. They must stake a minimum of 2,000 AVAX and validate all three primary network chains: the X, P, and C-Chain. 
+These validators earn rewards in exchange for enhancing the security of the network. Their role is crucial for the seamless operation of the broader Avalanche ecosystem. 
+
+As far as it relates to ACP-77 and the Etna Upgrade, the requirements for Primary Network validation **are not changing** with the Etna Upgrade. 
+
+## Subnet Validators
+
+Subnet validators are essentially Primary Network validators with additional permissions. They must:
+
+- Stake 2,000 AVAX on the Primary Network
+- Specify an "end time" for their validation period
+- Sync and validate the Primary Network (X, P, and C-Chains)
+- Sync and validate a specific Subnet 
+
+For context, the creation of a Subnet involves issuing a `CreateSubnetTx` on the P-Chain, assigning an Owner Key to manage its validator set. 
+After this, the holder(s) of the Owner Key can add and remove validators from the Subnet's validator set using the P-Chain transactions `AddSubnetValidatorTx` and `RemoveSubnetValidatorTx`. 
+These transactions were created pre-Etna for Subnet management and are still valid post-Etna.
+
+## L1 Validators
+
+L1 validators are a new addition to the Avalanche ecosystem, introduced with ACP-77 and the Etna Upgrade. A Subnet can be converted 
+by the Owner to a sovereign L1 with `ConvertSubnetToL1Tx`, a new P-Chain transaction introduced in this upgrade. This transaction revokes the authority to add and remove Subnet validators from the original Owner Key, and sets the validator
+set management to the `address` specified. After a successful `ConvertSubnetToL1Tx`, `AddSubnetValidatorTx` is permanently disabled, and any validator set additions must be coordinated through a `RegisterL1ValidatorTx` (also introduced in ACP-77) which can only add **L1 validators**. 
+
+L1 validators are required to:
+- Pay a continuous dynamic fee, initially set at approximately 1.33 AVAX per month
+- Sync and validate a specific L1
+- Sync the latest P-Chain state
+
+Syncing the P-Chain state is required for basic L1 functionality. It enables the L1 to track its validator weights so that it can perform consensus and validate ICM messages from other L1s, including the P-Chain.
+
+L1 validators do not need to:
+- Stake 2,000 AVAX
+- Validate or participate in consensus on the Primary Network (X, P, and C-Chains)
+
+Unless removed by the Owner Key, any Subnet validator added to the network before `ConvertSubnetToL1Tx` will continue to validate the network until its "end time" is reached.
+
+Once a Subnet has been converted to an L1, Subnet validators can no longer be added. After a previous Subnet validator is removed or its "end time" is reached, a validator with
+the name NodeID can be added as an L1 validator to the network with `RegisterL1ValidatorTx`, the same as any other L1 validator who wishes to join the network.

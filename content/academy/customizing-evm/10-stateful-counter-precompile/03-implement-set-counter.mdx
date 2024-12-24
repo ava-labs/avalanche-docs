@@ -1,0 +1,64 @@
+---
+title: Implementing setCounter
+description: Learn how to implement the setCounter method.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Having seen how strings are stored in `StringStore`, its time for us to store integers with Counter. The thought process for this section can be defined as follows:
+
+- Define the storage hash for our counter
+- Implement `StoreCounterValue`, a helper function which acts like `StoreString` in the previous
+- Implement `setCounter`
+
+<Accordions>
+<Accordion title="Solution">
+
+```go title="contract.go"
+// storageKeyHash
+storageKeyHash = common.BytesToHash([]byte("counterValue"))
+
+// StoreGreeting sets the value of the storage key in the contract storage.
+func StoreCounterValue(stateDB contract.StateDB, value *big.Int) {
+	// Convert uint to left padded bytes
+	inputPadded := common.LeftPadBytes(value.Bytes(), 32)
+	inputHash := common.BytesToHash(inputPadded)
+
+	stateDB.SetState(ContractAddress, storageKeyHash, inputHash)
+}
+
+//setCounter sets the counter value in the contract storage.
+func setCounter(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, SetCounterGasCost); err != nil {
+		return nil, 0, err
+	}
+	if readOnly {
+		return nil, remainingGas, vmerrs.ErrWriteProtection
+	}
+	// attempts to unpack [input] into the arguments to the SetCounterInput.
+	// Assumes that [input] does not include selector
+	// You can use unpacked [inputStruct] variable in your code
+	inputStruct, err := UnpackSetCounterInput(input)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// CUSTOM CODE STARTS HERE
+
+	// Get the current state
+	currentState := accessibleState.GetStateDB()
+
+	// Set the value
+	StoreCounterValue(currentState, inputStruct)
+
+	// this function does not return an output, leave this one as is
+	packedOutput := []byte{}
+
+	// Return the packed output and the remaining gas
+	return packedOutput, remainingGas, nil
+}
+```
+
+</Accordion>
+</Accordions>

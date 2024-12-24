@@ -1,5 +1,7 @@
 {
   "title": "Toolings",
+  "description": "CLI, Scripts, and More",
+  "icon": "Settings",
   "root": true,
   "pages": [
     "index",

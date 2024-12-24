@@ -1,0 +1,100 @@
+---
+title: Create an MD5 Solidity Interface
+description: Learn how to create an MD5 Solidity Interface
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+The first step is defining the interface that will wrap the precompile implementation and that other contracts and users will interact with. In addition to declaring the way users can interact with our MD5 precompile, defining the MD5 interface will also allow us to utilize a generator script. A precompile consists of many files, and generating boilerplate Go files will make implementing the precompile much easier.
+
+## SHA-256 Precompile Interface
+
+Before defining the MD5 interface, we will first look at the interface of the very similar SHA-256 precompile. This reference implementation is included in the repository we have created earlier.
+
+```solidity title="contracts/contracts/interfaces/ISHA256.sol"
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+
+interface ISHA256 {
+    /// Compute the hash of value
+    /// @param value the value to be hashed
+    /// @return hash the hash of the value
+    function hashWithSHA256(string memory value) external view returns(bytes32 hash);
+    }
+```
+
+ISHA256 contains a single function `hashWithSHA256`. `hashWithSHA256` takes in a value of type string, which is the value which is to be hashed, and outputs a 32-byte hash.
+
+## Creating the Solidity Interface For The MD5 Precompile
+
+Now it's your turn to define a precompile interface!
+
+Create the interface for the MD5 hash function. Start by going into the same directory where `ISHA256.sol` lives (`contracts/contracts/interfaces/`) and create a new file named `IMD5.sol`. Note that:
+
+&rarr; MD5 returns a 16-byte hash instead of a 32-byte hash
+
+&rarr; Make sure to name all parameters and return values
+
+<Accordions>
+<Accordion title="Solution">
+
+```solidity title="contracts/contracts/interfaces/IMD5.sol"
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+
+interface IMD5 {
+    function hashWithMD5(string memory value) external view returns (bytes16 hash);
+}
+```
+
+</Accordion>
+</Accordions>
+
+## Generate the ABI
+
+Now that we have an interface of our precompile, let's create an ABI of our Solidity interface. Open the integrated VS Code terminal (control + \`), and change to the `/contracts` directory.
+
+```bash
+cd contracts
+```
+
+Run the command to compile the solidity interface to the ABI:
+
+```bash
+npx solc@latest --abi ./contracts/interfaces/IMD5.sol -o ./abis --base-path . --include-path ./node_modules
+```
+
+Rename the file:
+
+```bash
+mv ./abis/contracts_interfaces_IMD5_sol_IMD5.abi ./abis/IMD5.abi
+```
+
+Now, you should have a file called `IMD5.abi` in the folder `/contracts/abis` with the following content:
+
+```json
+[
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "value",
+                "type": "string"
+            }
+        ],
+        "name": "hashWithMD5",
+        "outputs": [
+            {
+                "internalType": "bytes16",
+                "name": "hash",
+                "type": "bytes16"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
+```

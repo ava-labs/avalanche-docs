@@ -1,5 +1,7 @@
 {
-  "title": "virtual-machines",
+  "title": "Custom Virtual Machines",
+  "description": "Customize Your Execution Layer",
+  "icon": "IndentDecrease",
   "root": true,
   "pages": [
     "---Virtual Machines---",

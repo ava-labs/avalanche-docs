@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Layout } from "fumadocs-ui/layout";
+import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { baseOptions } from "@/app/layout.config";
 import {
   AlertDialog,
@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 
 export default function HomePage(): React.ReactElement {
   return (
-    <Layout {...baseOptions}>
+    <HomeLayout {...baseOptions}>
       <div className="relative z-10 container p-10 mx-auto">
         <div className="flex flex-wrap items-center -mx-4">
           <div className="column w-full md:w-1/2 px-4 mb-16 md:mb-0">
@@ -101,6 +101,6 @@ export default function HomePage(): React.ReactElement {
           </div>
         </div>
       </div>
-    </Layout>
+    </HomeLayout>
   );
 }

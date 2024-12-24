@@ -1,5 +1,7 @@
 {
-  "title": "learn",
+  "title": "Avalanche Protocol",
+  "description": "Learn about Avalanche",
+  "icon": "Sprout",
   "root": true,
   "pages": [
     "index",

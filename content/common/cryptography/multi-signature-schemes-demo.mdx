@@ -1,0 +1,77 @@
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { GenerateKeysButton, SignMessageButton, VerifySignatureButton, AggregateSignaturesButton, AggregatePublicKeysButton, VerifyAggregateSignatureButton } from '@/components/signatureSchemes'
+
+Let's explore the use of a Multi-Signature Scheme. We'll take the following steps:
+
+- **Generate Two Key Pairs**: We will generate two key pairs.
+- **Sign Message**: We create two Signatures of the same Message with the two Secret Keys.
+- **Aggregate Signatures**: We aggregate the two Signatures to a single Signature.
+- **Aggregate Public Keys**: We aggregate the two Public Keys to a single Public Key.
+- **Verify aggregated Signature**: We verify the Signature with the aggregated Public Key.
+
+<Steps>
+<Step>
+
+### Generate First Key
+Start by generating a Key Pair consisting of a Public and Secret Key.
+
+<GenerateKeysButton />
+
+</Step>
+
+<Step>
+
+### Sign the Messages
+Now use the generated Secret Key to sign a Message.
+
+<SignMessageButton />
+
+</Step>
+<Step>
+
+### Generate Second Key
+ In a real-world setting these key pairs would be created by independent actors, but for the sake of the exercise we will play multiple actors here.
+    
+<GenerateKeysButton />
+
+
+</Step>
+<Step>
+
+### Sign the Message with the second Key
+
+Make sure to pick exactly the same Message for both Signatures, e.g. "Per consensum ad astra".
+
+<SignMessageButton />
+
+</Step>
+<Step>
+
+### Aggregate Signatures
+
+We can now utilize the signature aggregation to create an aggregated Signature. In this exercise we are only aggregating two signatures, but we could do this with hundreds or thousands. Side fact: It does not matter in which order the signatures are aggrated.
+
+<AggregateSignaturesButton />
+
+</Step>
+<Step>
+
+### Aggregate Public Keys
+To verify an aggregated Signature, we also need to aggregate the Public Keys that correspond to the Private Keys that were used to sign the message. Analogous to the signatures we can aggregate many more than just two Public Keys and also here the order does not matter.
+
+<AggregatePublicKeysButton />
+
+</Step>
+<Step>
+
+### Verify the Aggregated Signature
+
+Anyone, that has access to the aggregated Public Key can now verify the Signature of the Message. Therefore, the Authenticity, Non-Repudiation and Integrity of the Message can be trusted in an efficient way for a large number of signers.
+
+<VerifySignatureButton aggregated={true} />
+
+</Step>
+</Steps>
+
+Congrats on going through the exercise and experiencing hands-on how we can utilize Signature Aggregation. You will see in the next chapter about Avalanche Warp Messaging; how Mutli-Signature schemes can enable secure and efficient cross-L1 communication.
+

@@ -1,0 +1,66 @@
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/utils/cn';
+
+Signature schemes are cryptographic schemes, that allow us to sign some piece of data, and someone else can verify our signature. Think of signature schemes as a very modern version of signing for example a contract, which does not rely on your unique hand movement, but on math. There are many different signature schemes. They vary in efficiency and security. 
+
+The main goal of signature schemes is to ensure the authenticity, non-repudiation, and integrity of digital messages.
+
+- **Authenticity:** Authenticity ensures that the signature authenticates the origin of the message and verifies that it was indeed created by the claimed sender. A valid signature on a message proves that the signer owns the private key associated with the public key used for the signature.
+
+- **Non-Repudiation:** Non-repudiation ensures that the signer cannot deny their involvement in the transaction. In other words, they cannot later claim that they didn't authorize or sign the message. Therefore, signing the message is a binding commitment.
+
+- **Integrity:** Integrity ensures that the message has not been tampered with or modified during transmission. Validating a changed message, no matter how small the difference, with the signature will not be successful. 
+
+## Public and Private Key
+
+These signatures are generated using a private key known only to the sender. They can be verified by anyone who possesses the corresponding public key associated with the sender. This dual-key structure, consisting of a private key for signing and a public key for verification, forms the basis of asymmetric or public-key cryptography.
+
+## Methods of Signature Schemes:
+
+Signature schemes consist of three methods:
+
+![](/common-images/cryptography/signature-scheme-methods.png)
+
+- **Generate Key Pair() => Private Key, Public Key:** This algorithm is used to generate a pair of keys for the user. One key is the private key, which is kept secret, and the other is the public key, which is made available to others. The private key is used for signing messages, while the public key is used to verify the signatures. 
+- **Sign(Message, Private Key) => Signature:** This algorithm is used by the owner of the private key to create a digital signature for a message. The signature is generated based on the private key and the content of the message. The signature is typically appended to the message before transmission.
+- **Verify(Message, Signature, Public Key) => Valid/Invalid:** This algorithm is used to verify the authenticity of a received message with the public key of the sender and its associated signature. The result is that the signature is either valid or invalid for the given private key.
+
+In some signature schemes, there may also be a "recover" algorithm:
+
+- **Recover(Message, Signature) => Public Key:** This algorithm can be used to recover the public key corresponding to the private key that has been used to create the signature for a message.
+
+The signature can be verified by comparing the public key returned by the recover algorithm with the public key of the message's sender. If there is an exact match, the signature is valid.
+
+In the following activity, you can interact with a signature scheme to learn more.
+
+## Formats of Keys and Signatures
+
+Using these methods we can create keys and signatures. But what does that mean? At the end of the day, signatures and keys are just (very long) series of bits (0 and 1s) that can be interpreted as numbers and represented as [hexadecimal strings](https://www.youtube.com/watch?v=WGN4NWICTpQ).
+
+```bash title="Example Private Key"
+0c29dd3d37fc2f1f26609d4088023b25618cdded6fc7b4eb75d75898aba2cd3a
+```
+
+```bash title="Example Public Key"
+b470edf87dc8decad6a39ed105a6a6411b88275c6a0ac06c0dea3144980eaf0635fabda79ceda360583acd0802adb27e
+```
+
+```bash title="Example Signature"
+8efb19ca904a1d061a84070d5bad61ce1ea44d0e1d9c0a2ecced89692a5546ea39bb02ff1563186767d0903901d5304c126c2ad97dc2efe97c2d528039aff266e9337646498e90b089a4ebfa624e2f353aceca545b7f14b7c2707f3340bd6827
+```
+
+## Interactive Demo
+
+Before you start, understand the inputs (blue), the algorithms (red), and outputs (green). Follow the lines to see how they are connected. Then follow these steps:
+
+- Generate a new Key Pair and check out Private Key and the Public Key / Address.
+- Sign a message and view the signature. See that the signature is valid.
+- Change the message and see what values change and if the signature is valid.
+
+<a
+    href="https://sandbox.eth.build/wofCrGxhc3Rfbm9kZV9pZMONASvEgcSDxIVsaW5rxItkw4zDusKlxIfEiXPCnMKLwqLEjMOMw73CpHR5cGXCrElucHV0L0LEr3RvbsKjcG9zwpI8w4zCoMKkc2l6ZcKSw4zDpFTCpWbEgmdzwoHCqWNvbMSCcHNlZMOCwqVvcsSJcgHCpG3EiGUAwqbElcSudHPCkcKDwqRuYW1lxL7Ep8Spw7_CpMSUxJbDgMKnb8SvxaXEusWpxavFrcWvxKhlw7_CpcW0a8Wnw4zDmsW8xazFrsSmxoDCrm51bWJlcixib8WQZWFuxoPElcaFw4DCqnByb8SpcnRpZXPCg8KldmFsdWXCtUdlbsaTYXRlIE5ldyBLZXkgUGFpcsKlxqZ0bGXCpsSydMS0xpvFj3VudB3CpXNoYcSpBMKKxKLEmcO8xozEqcKvQ3LEqMS0L8a-x4DHgseExLfEucKSxI5exL3Ev8WBZcKCwqEwxI4VwqExS8WIxYpzwoDFmMWaxpMDxZ7FoMWixaTEr8W7xarGisKtW8ahacasxrcga8a_Xcefx4rEhHLElWfFs8adw4DGicWtwqhnxrPGtca3yJbFssaExofFt8W5yIjCk8ifZcKryI7IkMa4yJN5yJbCpsiYyJrGnMSWxLrDjMOuw4zDtciuxqB1YsSUY8iSxr_Itsi4bmfIusaFwpDIrsKnYWRkcsaoc8mJdMiZyYvJjci8w6_DjMOyxqDGosakxqbGqMKByaHIj8a2Zcenw5lCMHg4Nzg0ZTgwZjJhODVmZGIzYjA0Y2NiZDI5NTEyMGUwYzcyZTJjOTQ3NTgyxpLKgDPJtMqXyoIxNTlkN2XKomM4x5vEjMSOFMiWwrBEaXNwxIJ5L1RleHRByZVhx6vEusONAsK8UMexxYLHrQFcyYzFiWHFi8e_xZnFmwXIhMSJyIbErciIxajIisW-yZjJmsibyKjDtciqdMW6y5bFvcaLxbDIl8mZyLnGhHPGn8ahxqPGk8mkxYzHhmnHiMivUMiZyLLGvca_yqrEjQEHyJbCrseix6RvL1JlxY92xpPKvsuGfMuAwrzLhMezx7XDikMhMzPHuS7HvMuLx77IgMWbCMuRxaHFo8uUxabCksiuwqlbxa1zc8uLZciVy6TIt8umyYvInMSWw4zDqciuwqtbxYBnxat0dcmVzKvGgMyty5rMsGvEmsuey6DJkMmSyZTJlsuZy6fGnci8w6fDjMOzyaHLrMalxqdzwoLCp8ymzKjIosK2VGjKsSDNnmEgzZjMqSDGt8SEwqnMt8y5zLtlwoDLucSOD8iWxKvMoMSxxLPEtcyIMsuATsyNxYTDnVzMl8WLxY3Fj8WRx5jFlMWWzJrGkwDMncuTzYXLl8ujxoDIp8idzYTIiMyizo3Fv8WxyZzCkcOMw6zIrs6WZcaOxpDGksaUxpbGmMaayZzLqsmiy63NlMaqxqzGrsSqU2nMuCBNyZbMqcuwy7LHi821x4_FuMeSEM2uARXKrsqwyrLKtMq2yrjKusq8zIjMi8SOw4LNu8SOy4jNv8yZy47Gk8u8xZ_LksyfzozLos6dzL_Ims2Bw4zDts6SxabLocaKz5rJismMy6jOmcO6zZHJo82UwoHOtseJwqnOr8y4xrbNq86-AsiWwq_PgsqzYcq1QcmTyZXMp8-JAsOGxI4Oz40BVk_PkMuNyIFyBs6Kz5fLlc6cyJbOiciow6_PrmXCqlDJg8mFy7d5z6rOqcaowoTCq8mEb2NrxqfOr8WCMsiwxIJjZWjFkMWbwqDQl8Kp0JrJhGnJhsa-xqvGrcavw5kqya4zybg5ZTkxOWNmyplk0Yg4ZDUwMsmzMWUxMGE1yb8wMzU10YRlNGZiwonHnMSOC8-3z7nPhM-9zYjQgMS4yr_LgcuAwqjQhkBQ0IrOh3IJ0I_Ih8-h0JLLpNCUxp3DjMOn0J_Nk9Ch0KNs0KXQp2XQqcqS0Kxh0K7QsGzQstCXwqfRqs-_c9C7zq3QvtGA0YLRhNGG0Ywy0YvRidGO0ZDRktGU0ZbRmMqc0ZzRntGgYs6-EsiWwrFDxLXJmcWQL9KxbmTLsWnNttGtx60CYsONA1zMjce0MMOMx7QxzJbLisuM0bYK0bnMoMiJy6LCoUHIlsKtz6Usxo_GkcaTz53DssiuwqFC05TTltOYzqHPncOzz6DTkMaKxKZyxq_IlsKnzqPHic6lz6fDjMO0yK7CpWXMhseSyKbOptKCy67Cg9OS0pl4N2HRmtGHODbEicqY0YfKjMm8yqPKhcqHZtGFZDNhNmU2NDHKqMmTN9Oe0780MtGJYsqCybY2MTbJu8qP0Y02YtSqMNStYmPJudSlNmFlxpnKlMqXwqJPUMKiPT3EocqrARPTlNGoz7svV8a2Y2jPiQMC04BS0IYXR9G1z5Jy0abPlcye0brFp8KEzpXQk8-dw7TGg2HGkmzCoNOmwpHVm8-Z0JPOptWg1aLQs8eHx4nCpVbGrcSM07vPrNCXwq_Psc2qyZUg1bHElGTUv8u6yIPLpMKry79wx6XVuM-JAWjEjsKQ04PHtcOMw63HuXbVk9CMBNOOxbrClMiuwqzIjcu1yanItMy9xKnPm8yvyKjDrsmB1ptvdsSMxpPWn8ulzYDGhMiezo3MpM2jyKLWq9ahy5vRv8OhyK7Hscy4yKbPncOs06bWmM6NyZHPvs2JzKzPpc6myZDWsmXNismby6jWr8uizajOsNW514rXhcyuz6bNjM6Zw7bIrsi315HFldO5143Ql8Ks1bjOss60yKLVtMaowoXNl9ekZc2bzZ1zzZ_Xrs2h14nNpcaodMmnyLLJq8mteDYyyp3Rj2YzOMqFNzfUj8mw1Jg4MWRm0Yk20Zo2M9SUYsqZyqjUmDY3NDNkyozYgdiP1KQy0ZxkONGF2KI21IXCqMur1qjFm8K6aMeNxZM6Ly9hdcSEyJrImdiLy7FoLsWPbdeQz7LMusmVw4DCqNiyxLTVuMOCzr7WlcukwqrErMWlz4XKucyIKMSOwqTNu8SkNNaTxZvPttWXzovQkdWc0b3NgcW2xbjLn9mb1ajXlMuayZzFhMOhzLLXpnPQotCk0KbQqMey0KvPutKO0LHGk8KvxrPGt3LXs8q5IGjGk2XSks6zzKfOtc6sxq_XrM2ezaDNoteq17PEhMmcwp3ClsaHxKQAw4zDvAHDv9qPw6HEjgQAxI7VjNa12o_Dp8SOB9qbAQsAANqPw6namdqj2qLans6aza_aowMD2pbIvdqT2rDFos-l2o_JnsO81Y0BAtqm2o_DstqT2rwSANOV15XTl86gxpPaj8Oz2qHaoxIB24bLmtuI05ly2o_DtMSO24TEjhPav8i_2rXKrNq315Xaj8O22pzavBXboMua2o_Duse32qsB1rXCpmfGonXFk8KQwqbFj25mzrDCgMKnzIZyxYDEtcOLP8OZwpncg9yDwpo"
+    target='_blank'
+    className={cn(buttonVariants({ size: 'lg' }))}
+>
+    Open the Demo
+</a>

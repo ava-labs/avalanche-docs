@@ -1,0 +1,37 @@
+import { GenerateKeysButton, SignMessageButton, VerifySignatureButton } from '@/components/signatureSchemes'
+import { Steps, Step } from 'fumadocs-ui/components/steps'
+
+Let's get our hands dirty and use a signature scheme. We'll take the following steps:
+
+- **Generate Key Pair**: We will generate a key pair consisting of a Public and a Secret Key.
+- **Sign Message**: We create a Signature by signing the Message with the Secret Key.
+- **Verify Signature**: We verify the Signature of a Message with the Public Key.
+
+<Steps>
+<Step>
+
+### Generate Keys
+Start by generating a Key Pair consisting of a Public and a Secret Key.
+
+<GenerateKeysButton />
+
+</Step>
+<Step>
+
+### Sign a Message
+
+Now use the generated Secret Key to sign a Message. Pick any message you want to sign, e.g. "Per consensum ad astra".
+
+<SignMessageButton />
+
+</Step>
+<Step>
+
+### Verify the Signature
+
+Anyone, that has access to your Public Key corresponding to the Private Key used for signing the message can now verify the signature of the Message. Therefore, the Authenticity, Non-Repudiation and Integrity of the Message can be trusted.
+
+<VerifySignatureButton />
+
+</Step>
+</Steps>

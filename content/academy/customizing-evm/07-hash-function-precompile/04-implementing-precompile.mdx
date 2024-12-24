@@ -1,0 +1,112 @@
+---
+title: Implement the Precompile
+description: Learn how to implement the Precompile.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Now, we'll implement the logic of the precompile in Go. We'll hash our string using the MD5 algorithm.
+
+## SHA-256 Precompile Implementation
+
+Before defining the logic of our MD5 precompile, let's look at the logic of the function `hashWithSHA256` (located in `sha256/contract.go`), which computes the SHA-256 hash of a string:
+
+```go title="sha256/contract.go"
+import (
+    "crypto/sha256"
+    //...
+)
+
+// ...
+
+func hashWithSHA256(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+    if remainingGas, err = contract.DeductGas(suppliedGas, HashWithSHA256GasCost); err != nil {
+        return nil, 0, err
+    }
+    // attempts to unpack [input] into the arguments to the HashWithSHA256Input.
+    // Assumes that [input] does not include selector
+    // You can use unpacked [inputStruct] variable in your code
+    inputStruct, err := UnpackHashWithSHA256Input(input)
+    if err != nil {
+        return nil, remainingGas, err
+    }
+
+    // CUSTOM CODE STARTS HERE
+    _ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+
+    var output [32]byte // CUSTOM CODE FOR AN OUTPUT
+
+    output = sha256.Sum256([]byte(inputStruct))
+    
+    packedOutput, err := PackHashWithSHA256Output(output)
+    if err != nil {
+        return nil, remainingGas, err
+    }
+
+    // Return the packed output and the remaining gas
+    return packedOutput, remainingGas, nil
+}
+```
+
+As you can see, we're performing the following steps:
+
+- Line 1: Importing the sha256 function from the crypto library (at the top of the Go file)
+- Line 15: Unpacking the input to the variable inputStruct. It doesn't make sense that the variable has Struct in its name, but you will see why it is done like this when we have multiple inputs in a later example
+- Line 24: Calling the sha256 function and assign its result to the output variable
+- Line 26: Packing the output into a byte array
+- Line 32: Returning the packed output, the remaining gas and nil, since no error has occurred
+
+## Implementing the MD5 Precompile in `contract.go`
+
+Go ahead and implement the `md5/contract.go` for the MD5 precompile. You should only have to write a few lines of code. If you're unsure which function to use, the following documentation might help: [Go Documentation Crypto/md5](https://pkg.go.dev/crypto/md5#Sum)
+
+<Accordions>
+<Accordion title="Solution">
+
+```go title="md5/contract.go"
+import (
+	"crypto/md5"
+	// ...
+)
+
+// ...
+
+func hashWithMD5(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {func hashWithMD5(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+	if remainingGas, err = contract.DeductGas(suppliedGas, HashWithMD5GasCost); err != nil {
+		return nil, 0, err
+	}
+	// attempts to unpack [input] into the arguments to the HashWithMD5Input.
+	// Assumes that [input] does not include selector
+	// You can use unpacked [inputStruct] variable in your code
+	inputStruct, err := UnpackHashWithMD5Input(input)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// CUSTOM CODE STARTS HERE
+	_ = inputStruct // CUSTOM CODE OPERATES ON INPUT
+
+	var output [16]byte // CUSTOM CODE FOR AN OUTPUT
+	output = md5.Sum([]byte(inputStruct))
+
+	packedOutput, err := PackHashWithMD5Output(output)
+	if err != nil {
+		return nil, remainingGas, err
+	}
+
+	// Return the packed output and the remaining gas
+	return packedOutput, remainingGas, nil
+}
+```
+
+To solve this task, we did the following things:
+
+- Import the md5 function from the crypto library
+- Unpack the input to a variable inputStruct (It does not make sense that the variable has Struct in its name, but you will see why it is done like this when we have multiple inputs in a later example)
+- Call the md5 function and assign it's result to the output variable
+- Pack the output into a byte array
+- Return the packed output, the remaining gas and nil, since no error has occurred
+
+</Accordion>
+</Accordions>

@@ -6,23 +6,16 @@ import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { Pill, Pills } from '@/components/ui/pills';
-// import { Control } from '@/app/(home)/blog/[slug]/page.client';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
 
-interface Param {
-    slug: string;
-}
-
-export const dynamicParams = false;
-
-export default function Page({
-    params,
-}: {
-    params: Param;
-}): React.ReactElement {
+export default async function Page(props: {
+  params: Promise<{ slug: string }>;
+}) {
+    const params = await props.params;
     const page = getIntegrationPage([params.slug]);
-
     if (!page) notFound();
 
+    const { body: MDX } = await page.data.load();
     const path = `content/integrations/${page.file.path}`;
 
     return (
@@ -59,7 +52,7 @@ export default function Page({
             </div>
             <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
                 <div className="prose p-4">
-                    <page.data.exports.default />
+                    <MDX components={defaultMdxComponents}/>
                 </div>
                 <div className="flex flex-col gap-4 border-l p-4 text-sm">
                     <div>
@@ -93,7 +86,6 @@ export default function Page({
                         </a>
                     </div>
 
-
                     <a
                         href={`https://github.com/ava-labs/avalanche-academy/blob/dev/${path}`}
                         target="_blank"
@@ -110,21 +102,21 @@ export default function Page({
     );
 }
 
-export function generateMetadata({ params }: { params: Param }): Metadata {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const params = await props.params;
     const page = getIntegrationPage([params.slug]);
-
     if (!page) notFound();
 
-    const description =
-        page.data.description ?? 'Learn how to build on Avalanche blockchain with Academy';
-
+    const description = page.data.description ?? 'Learn how to build on Avalanche blockchain with Academy';
     const imageParams = new URLSearchParams();
     imageParams.set('title', page.data.title);
     imageParams.set('description', description);
 
     const image = {
         alt: 'Banner',
-        url: `/api/og/guide/${params.slug[0]}?${imageParams.toString()}`,
+        url: `/api/og/guide/${params.slug}?${imageParams.toString()}`,
         width: 1200,
         height: 630,
     };
@@ -143,8 +135,8 @@ export function generateMetadata({ params }: { params: Param }): Metadata {
 }
 
 
-export function generateStaticParams(): Param[] {
-    return getIntegrationPages().map<Param>((page) => ({
+export function generateStaticParams(): { slug: string }[] {
+    return getIntegrationPages().map((page) => ({
         slug: page.slugs[0],
     }));
 }

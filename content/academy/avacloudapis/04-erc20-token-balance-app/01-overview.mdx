@@ -1,0 +1,15 @@
+---
+title: Overview
+description: Use the AvaCloud Data API to create a simple web app that displays a user's ERC-20 token balances.
+updated: 2024-09-13
+authors: [owenwahlgren]
+icon: Book
+---
+
+In this section we will use the Data API to create a simple web app that displays a user's ERC-20 token portfolio. This app will allow users to input their Avalanche C-Chain address and view a list of their ERC-20 token balances.
+
+![](/course-images/avacloudsdk/balance-app.png)
+We will use two endpoints from the Data API to accomplish this:
+
+- [`data.evm.blocks.getLatestBlocks`](https://developers.avacloud.io/data-api/evm-blocks/list-latest-blocks)
+- [`data.evm.balances.listErc20Balances`](https://developers.avacloud.io/data-api/evm-balances/list-erc-20-balances)

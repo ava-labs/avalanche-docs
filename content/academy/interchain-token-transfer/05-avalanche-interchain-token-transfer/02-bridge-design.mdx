@@ -1,0 +1,28 @@
+---
+title: Interchain Token Transfer Design
+description: Get familiar with the ICTT design
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+Each token transferrer instance consists of one "home" contract and at least one but possibly many "remote" contracts. Each home contract instance manages one asset to be transferred out to `TokenRemote` instances. The home contract lives on the Avalanche L1 where the asset to be transferred exists.
+
+A transfer involves locking the asset as collateral on the home Avalanche L1 and minting a representation of the asset on the remote Avalanche L1. The remote contracts, each with a single specified home contract, live on other Avalanche L1s that want to import the asset transferred by their specified home.
+
+The token transferrers are designed to be permissionless: anyone can register compatible `TokenRemote` instances to transfer tokens from the `TokenHome` instance to that new `TokenRemote` instance.
+
+The home contract keeps track of token balances transferred to each `TokenRemote` instance and handles returning the original tokens to the user when assets are transferred back to the `TokenHome` instance.
+
+`TokenRemote` instances are registered with their home contract via a Interchain Messaging message upon creation.
+
+Home contract instances specify the asset to be transferred as either an ERC20 token or the native token, and they allow for transferring the token to any registered `TokenRemote` instances. The token representation on the remote chain can also either be an ERC20 or native token, allowing users to have any combination of ERC20 and native tokens between home and remote chains:
+
+- `ERC20` -> `ERC20`
+- `ERC20` -> `Native`
+- `Native` -> `ERC20`
+- `Native` -> `Native`
+
+The remote tokens are designed to have compatibility with the token transferrer on the home chain by default, and they allow custom logic to be implemented in addition. For example, developers can inherit and extend the `ERC20TokenRemote` contract to add additional functionality, such as a custom minting, burning, or transfer logic.
+
+<Quiz quizId="125" />
