@@ -1,8 +1,4 @@
 {
-  "title": "Platform Chain",
-  "pages": [
-    "api",
-    "txn-format",
-    "configs"
-  ]
+  "title": "P-Chain",
+  "pages": ["api", "txn-format", "configs"]
 }
