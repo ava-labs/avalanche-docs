@@ -1,9 +1,8 @@
 ---
-title: Introduction
+title: CLI Commands
 description: Avalanche-CLI is a command-line tool that gives developers access to everything Avalanche.
 ---
 To get started, look at the documentation for the subcommands or jump right in with 
-
 ```bash
 avalanche blockchain create myblockchain
 ```
@@ -34,13 +33,11 @@ avalanche blockchain [subcommand] [flags]
 
 **Subcommands:**
 
-- [`addValidator`](#addvalidator): The blockchain addValidator command whitelists a primary network validator to
-validate the subnet of the provided deployed Blockchain.
-
-To add the validator to the Subnet's allow list, you first need to provide
-the blockchainName and the validator's unique NodeID. The command then prompts
-for the validation start time, duration, and stake weight. You can bypass
-these prompts by providing the values with flags.
+- [`addValidator`](#addvalidator): The blockchain addValidator command adds a node as a validator to
+an L1 of the user provided deployed network. If the network is proof of 
+authority, the owner of the validator manager contract must sign the 
+transaction. If the network is proof of stake, the node must stake the L1's
+staking token. Both processes will issue a RegisterL1ValidatorTx on the P-Chain.
 
 This command currently only works on Blockchains deployed to either the Fuji
 Testnet or Mainnet.
@@ -81,7 +78,7 @@ flag, the command instead prints out the raw genesis file.
 
 The command prompts for an output path. You can also provide one with
 the --output flag.
-- [`import`](#import): Import blockchain configurations into avalanche-cli.
+- [`import`](#import): Import blockchain configurations into cli.
 
 This command suite supports importing from a file created on another computer,
 or importing from blockchains running public networks
@@ -89,7 +86,7 @@ or importing from blockchains running public networks
 - [`join`](#join): The subnet join command configures your validator node to begin validating a new Blockchain.
 
 To complete this process, you must have access to the machine running your validator. If the
-CLI is running on the same machine as your validator, it can generate or update your node's
+Avalanche-CLI is running on the same machine as your validator, it can generate or update your node's
 config file automatically. Alternatively, the command can print the necessary instructions
 to update your node manually. To complete the validation process, the Subnet's admins must add
 the NodeID of your validator to the Subnet's allow list by calling addValidator with your
@@ -118,13 +115,11 @@ several statistics about them.
 
 ### addValidator
 
-The blockchain addValidator command whitelists a primary network validator to
-validate the subnet of the provided deployed Blockchain.
-
-To add the validator to the Subnet's allow list, you first need to provide
-the blockchainName and the validator's unique NodeID. The command then prompts
-for the validation start time, duration, and stake weight. You can bypass
-these prompts by providing the values with flags.
+The blockchain addValidator command adds a node as a validator to
+an L1 of the user provided deployed network. If the network is proof of 
+authority, the owner of the validator manager contract must sign the 
+transaction. If the network is proof of stake, the node must stake the L1's
+staking token. Both processes will issue a RegisterL1ValidatorTx on the P-Chain.
 
 This command currently only works on Blockchains deployed to either the Fuji
 Testnet or Mainnet.
@@ -137,45 +132,49 @@ avalanche blockchain addValidator [subcommand] [flags]
 **Flags:**
 
 ```bash
---aggregator-extra-endpoints strings    endpoints for extra nodes that are needed in signature aggregation
---aggregator-log-level string           log level to use with signature aggregator (default "Off")
---balance uint                          set the AVAX balance of the validator that will be used for continuous fee to P-Chain
---blockchain-genesis-key use            genesis allocated key to pay fees for completing the validator's registration (blockchain gas token)
---blockchain-key string                 CLI stored key to use to pay fees for completing the validator's registration (blockchain gas token)
---blockchain-private-key string         private key to use to pay fees for completing the validator's registration (blockchain gas token)
---bls-proof-of-possession string        set the BLS proof of possession of the validator to add
---bls-public-key string                 set the BLS public key of the validator to add
---cluster string                        operate on the given cluster
---default-duration                      (for non sovereign blockchain) set duration so as to validate until primary validator ends its period
---default-start-time                    (for non sovereign blockchain) use default start time for subnet validator (5 minutes later for fuji & mainnet, 30 seconds later for devnet)
---default-validator-params              (for non sovereign blockchain) use default weight/start/duration params for subnet validator
---delegation-fee uint16                 (PoS only) delegation fee (in bips) (default 100)
---devnet operate                        on a devnet network
---disable-owner string                  P-Chain address that will able to disable the validator with a P-Chain transaction
---endpoint string                       use the given endpoint for network operations
--e, --ewoq use                          ewoq key [fuji/devnet only]
--f, --fuji testnet                      operate on fuji (alias to testnet
--h, --help help                         for addValidator
--k, --key string                        select the key to use [fuji/devnet only]
--g, --ledger use                        ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
---ledger-addrs strings                  use the given ledger addresses
--l, --local operate                     on a local network
--m, --mainnet operate                   on mainnet
---node-endpoint string                  gather node id/bls from publicly available avalanchego apis on the given endpoint
---node-id string                        node-id of the validator to add
---output-tx-path string                 (for non sovereign blockchain) file path of the add validator tx
---remaining-balance-owner string        P-Chain address that will receive any leftover AVAX from the validator when it is removed from Subnet
---rpc string                            connect to validator manager at the given rpc endpoint
---stake-amount uint                     (PoS only) amount of tokens to stake
---staking-period duration               how long this validator will be staking
---start-time string                     (for non sovereign blockchain) UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
---subnet-auth-keys strings              (for non sovereign blockchain) control keys that will be used to authenticate add validator tx
--t, --testnet fuji                      operate on testnet (alias to fuji)
---wait-for-tx-acceptance                (for non sovereign blockchain) just issue the add validator tx, without waiting for its acceptance (default true)
---weight uint                           set the staking weight of the validator to add (default 20)
---config string                         config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                      log level for the application (default "ERROR")
---skip-update-check skip                check for new versions
+--aggregator-allow-private-peers allow    the signature aggregator to connect to peers with private IP (default true)
+--aggregator-extra-endpoints strings      endpoints for extra nodes that are needed in signature aggregation
+--aggregator-log-level string             log level to use with signature aggregator (default "Off")
+--balance uint                            set the AVAX balance of the validator that will be used for continuous fee on P-Chain
+--blockchain-genesis-key use              genesis allocated key to pay fees for completing the validator's registration (blockchain gas token)
+--blockchain-key string                   CLI stored key to use to pay fees for completing the validator's registration (blockchain gas token)
+--blockchain-private-key string           private key to use to pay fees for completing the validator's registration (blockchain gas token)
+--bls-proof-of-possession string          set the BLS proof of possession of the validator to add
+--bls-public-key string                   set the BLS public key of the validator to add
+--cluster string                          operate on the given cluster
+--create-local-validator create           additional local validator and add it to existing running local node
+--default-duration                        (for Subnets, not L1s) set duration so as to validate until primary validator ends its period
+--default-start-time                      (for Subnets, not L1s) use default start time for subnet validator (5 minutes later for fuji & mainnet, 30 seconds later for devnet)
+--default-validator-params                (for Subnets, not L1s) use default weight/start/duration params for subnet validator
+--delegation-fee uint16                   (PoS only) delegation fee (in bips) (default 100)
+--devnet operate                          on a devnet network
+--disable-owner string                    P-Chain address that will able to disable the validator with a P-Chain transaction
+--endpoint string                         use the given endpoint for network operations
+--etna-devnet operate                     on an etna devnet network
+-e, --ewoq use                            ewoq key [fuji/devnet only]
+-f, --fuji testnet                        operate on fuji (alias to testnet
+-h, --help help                           for addValidator
+-k, --key string                          select the key to use [fuji/devnet only]
+-g, --ledger use                          ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
+--ledger-addrs strings                    use the given ledger addresses
+-l, --local operate                       on a local network
+-m, --mainnet operate                     on mainnet
+--node-endpoint string                    gather node id/bls from publicly available avalanchego apis on the given endpoint
+--node-id string                          node-id of the validator to add
+--output-tx-path string                   (for Subnets, not L1s) file path of the add validator tx
+--partial-sync set                        primary network partial sync for new validators (default true)
+--remaining-balance-owner string          P-Chain address that will receive any leftover AVAX from the validator when it is removed from Subnet
+--rpc string                              connect to validator manager at the given rpc endpoint
+--stake-amount uint                       (PoS only) amount of tokens to stake
+--staking-period duration                 how long this validator will be staking
+--start-time string                       (for Subnets, not L1s) UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
+--subnet-auth-keys strings                (for Subnets, not L1s) control keys that will be used to authenticate add validator tx
+-t, --testnet fuji                        operate on testnet (alias to fuji)
+--wait-for-tx-acceptance                  (for Subnets, not L1s) just issue the add validator tx, without waiting for its acceptance (default true)
+--weight uint                             set the staking weight of the validator to add (default 20)
+--config string                           config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string                        log level for the application (default "ERROR")
+--skip-update-check skip                  check for new versions
 ```
 
 ### changeOwner
@@ -229,6 +228,7 @@ avalanche blockchain changeWeight [subcommand] [flags]
 --cluster string            operate on the given cluster
 --devnet operate            on a devnet network
 --endpoint string           use the given endpoint for network operations
+--etna-devnet operate       on an etna devnet network
 -e, --ewoq use              ewoq key [fuji/devnet only]
 -f, --fuji testnet          operate on fuji (alias to testnet
 -h, --help help             for changeWeight
@@ -307,6 +307,7 @@ avalanche blockchain create [subcommand] [flags]
 --from-github-repo generate         custom VM binary from github repository
 --genesis string                    file path of genesis to use
 -h, --help help                     for create
+--icm interoperate                  with other blockchains using ICM
 --icm-registry-at-genesis setup     ICM registry smart contract on genesis [experimental]
 --latest use                        latest Subnet-EVM released version, takes precedence over --vm-version
 --pre-release use                   latest Subnet-EVM pre-released version, takes precedence over --vm-version
@@ -316,12 +317,12 @@ avalanche blockchain create [subcommand] [flags]
 --proxy-contract-owner string       EVM address that controls ProxyAdmin for TransparentProxy of ValidatorManager contract
 --reward-basis-points uint          (PoS only) reward basis points for PoS Reward Calculator (default 100)
 --sovereign set                     to false if creating non-sovereign blockchain (default true)
---teleporter interoperate           with other blockchains using teleporter
+--teleporter interoperate           with other blockchains using ICM
 --test-defaults use                 default test settings for your blockchain
 --validator-manager-owner string    EVM address that controls Validator Manager Owner
 --vm string                         file path of custom vm to use. alias to custom-vm-path
 --vm-version string                 version of Subnet-EVM template to use
---warp generate                     a vm with warp support (needed for teleporter) (default true)
+--warp generate                     a vm with warp support (needed for ICM) (default true)
 --config string                     config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string                  log level for the application (default "ERROR")
 --skip-update-check skip            check for new versions
@@ -366,15 +367,19 @@ avalanche blockchain deploy [subcommand] [flags]
 **Flags:**
 
 ```bash
+--aggregator-allow-private-peers allow                 the signature aggregator to connect to peers with private IP (default true)
 --aggregator-extra-endpoints strings                   endpoints for extra nodes that are needed in signature aggregation
 --aggregator-log-level string                          log level to use with signature aggregator (default "Off")
 --avalanchego-path string                              use this avalanchego binary path
---avalanchego-version string                           use this version of avalanchego (ex: v1.17.12) (default "latest")
+--avalanchego-version string                           use this version of avalanchego (ex: v1.17.12) (default "latest-prerelease")
+--balance float                                        set the AVAX balance of each bootstrap validator that will be used for continuous fee on P-Chain (default 0.1)
 --blockchain-genesis-key use                           genesis allocated key to fund validator manager initialization
 --blockchain-key string                                CLI stored key to use to fund validator manager initialization
 --blockchain-private-key string                        private key to use to fund validator manager initialization
 --bootstrap-endpoints strings                          take validator node info from the given endpoints
 --bootstrap-filepath string                            JSON file path that provides details about bootstrap validators, leave Node-ID and BLS values empty if using --generate-node-id=true
+--cchain-funding-key string                            key to be used to fund relayer account on cchain
+--cchain-icm-key string                                key to be used to pay for ICM deploys on C-Chain
 --change-owner-address string                          address that will receive change if node is no longer L1 validator
 --cluster string                                       operate on the given cluster
 --control-keys strings                                 addresses that may make subnet changes
@@ -386,6 +391,8 @@ avalanche blockchain deploy [subcommand] [flags]
 -f, --fuji testnet                                     operate on fuji (alias to testnet
 --generate-node-id whether                             to create new node id for bootstrap validators (Node-ID and BLS values in bootstrap JSON file will be overridden if --bootstrap-filepath flag is used)
 -h, --help help                                        for deploy
+--icm-key string                                       key to be used to pay for ICM deploys (default "cli-teleporter-deployer")
+--icm-version string                                   ICM version to deploy (default "latest")
 -k, --key string                                       select the key to use [fuji/devnet deploy only]
 -g, --ledger use                                       ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
 --ledger-addrs strings                                 use the given ledger addresses
@@ -393,7 +400,8 @@ avalanche blockchain deploy [subcommand] [flags]
 -m, --mainnet operate                                  on mainnet
 --mainnet-chain-id uint32                              use different ChainID for mainnet deployment
 --num-bootstrap-validators int                         (only if --generate-node-id is true) number of bootstrap validators to set up in sovereign L1 validator)
---num-local-nodes int                                  number of nodes to be created on local machine (default 5)
+--num-local-nodes int                                  number of nodes to be created on local machine
+--num-nodes uint32                                     number of nodes to be created on local network deploy (default 2)
 --output-tx-path string                                file path of the blockchain creation tx
 --partial-sync set                                     primary network partial sync for new validators (default true)
 --pos-maximum-stake-amount uint                        maximum stake amount (default 1000)
@@ -402,19 +410,26 @@ avalanche blockchain deploy [subcommand] [flags]
 --pos-minimum-stake-amount uint                        minimum stake amount (default 1)
 --pos-minimum-stake-duration uint                      minimum stake duration (default 100)
 --pos-weight-to-value-factor uint                      weight to value factor (default 1)
---relayer-version string                               relayer version to deploy (default "latest")
+--relay-cchain relay                                   C-Chain as source and destination (default true)
+--relayer-allow-private-ips allow                      relayer to connec to private ips (default true)
+--relayer-amount float                                 automatically fund relayer fee payments with the given amount
+--relayer-key string                                   key to be used by default both for rewards and to pay fees
+--relayer-log-level string                             log level to be used for relayer logs (default "info")
+--relayer-path string                                  relayer binary to use
+--relayer-version string                               relayer version to deploy (default "latest-prerelease")
 -s, --same-control-key use                             the fee-paying key as control key
---skip-local-teleporter skip                           automatic teleporter deploy on local networks [to be deprecated]
+--skip-icm-deploy skip                                 automatic ICM deploy
+--skip-local-teleporter skip                           automatic ICM deploy on local networks [to be deprecated]
 --skip-relayer skip                                    relayer deploy
---skip-teleporter-deploy skip                          automatic teleporter deploy
+--skip-teleporter-deploy skip                          automatic ICM deploy
 --subnet-auth-keys strings                             control keys that will be used to authenticate chain creation
 -u, --subnet-id string                                 do not create a subnet, deploy the blockchain into the given subnet id
 --subnet-only only                                     create a subnet
---teleporter-messenger-contract-address-path string    path to an interchain messenger contract address file
---teleporter-messenger-deployer-address-path string    path to an interchain messenger deployer address file
---teleporter-messenger-deployer-tx-path string         path to an interchain messenger deployer tx file
---teleporter-registry-bytecode-path string             path to an interchain messenger registry bytecode file
---teleporter-version string                            teleporter version to deploy (default "latest")
+--teleporter-messenger-contract-address-path string    path to an ICM Messenger contract address file
+--teleporter-messenger-deployer-address-path string    path to an ICM Messenger deployer address file
+--teleporter-messenger-deployer-tx-path string         path to an ICM Messenger deployer tx file
+--teleporter-registry-bytecode-path string             path to an ICM Registry bytecode file
+--teleporter-version string                            ICM version to deploy (default "latest")
 -t, --testnet fuji                                     operate on testnet (alias to fuji)
 --threshold uint32                                     required number of control key signatures to make subnet changes
 --use-local-machine use                                local machine as a blockchain validator
@@ -471,7 +486,7 @@ avalanche blockchain export [subcommand] [flags]
 
 ### import
 
-Import blockchain configurations into avalanche-cli.
+Import blockchain configurations into cli.
 
 This command suite supports importing from a file created on another computer,
 or importing from blockchains running public networks
@@ -527,7 +542,7 @@ avalanche blockchain import file [subcommand] [flags]
 --branch string             the repo branch to use if downloading a new repo
 -f, --force overwrite       the existing configuration if one exists
 -h, --help help             for file
---repo string               the repo to import (ex: ava-labs/avalanche-plugins-core) or url to download the repo from
+--repo string               the repo to import (ex: ava-labs/plugins-core) or url to download the repo from
 --subnet string             the subnet configuration to import from the provided repo
 --config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
@@ -573,7 +588,7 @@ avalanche blockchain import public [subcommand] [flags]
 The subnet join command configures your validator node to begin validating a new Blockchain.
 
 To complete this process, you must have access to the machine running your validator. If the
-CLI is running on the same machine as your validator, it can generate or update your node's
+Avalanche-CLI is running on the same machine as your validator, it can generate or update your node's
 config file automatically. Alternatively, the command can print the necessary instructions
 to update your node manually. To complete the validation process, the Subnet's admins must add
 the NodeID of your validator to the Subnet's allow list by calling addValidator with your
@@ -679,30 +694,34 @@ avalanche blockchain removeValidator [subcommand] [flags]
 **Flags:**
 
 ```bash
---aggregator-extra-endpoints strings    endpoints for extra nodes that are needed in signature aggregation
---aggregator-log-level string           log level to use with signature aggregator (default "Off")
---blockchain-genesis-key use            genesis allocated key to pay fees for completing the validator's removal (blockchain gas token)
---blockchain-key string                 CLI stored key to use to pay fees for completing the validator's removal (blockchain gas token)
---blockchain-private-key string         private key to use to pay fees for completing the validator's removal (blockchain gas token)
---cluster string                        operate on the given cluster
---devnet operate                        on a devnet network
---endpoint string                       use the given endpoint for network operations
--f, --fuji testnet                      operate on fuji (alias to testnet
--h, --help help                         for removeValidator
--k, --key string                        select the key to use [fuji deploy only]
--g, --ledger use                        ledger instead of key (always true on mainnet, defaults to false on fuji)
---ledger-addrs strings                  use the given ledger addresses
--l, --local operate                     on a local network
--m, --mainnet operate                   on mainnet
---node-endpoint string                  remove validator that responds to the given endpoint
---node-id string                        node-id of the validator
---output-tx-path string                 (for non-SOV blockchain only) file path of the removeValidator tx
---rpc string                            connect to validator manager at the given rpc endpoint
---subnet-auth-keys strings              (for non-SOV blockchain only) control keys that will be used to authenticate the removeValidator tx
--t, --testnet fuji                      operate on testnet (alias to fuji)
---config string                         config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                      log level for the application (default "ERROR")
---skip-update-check skip                check for new versions
+--aggregator-allow-private-peers allow    the signature aggregator to connect to peers with private IP (default true)
+--aggregator-extra-endpoints strings      endpoints for extra nodes that are needed in signature aggregation
+--aggregator-log-level string             log level to use with signature aggregator (default "Off")
+--blockchain-genesis-key use              genesis allocated key to pay fees for completing the validator's removal (blockchain gas token)
+--blockchain-key string                   CLI stored key to use to pay fees for completing the validator's removal (blockchain gas token)
+--blockchain-private-key string           private key to use to pay fees for completing the validator's removal (blockchain gas token)
+--cluster string                          operate on the given cluster
+--devnet operate                          on a devnet network
+--endpoint string                         use the given endpoint for network operations
+--etna-devnet operate                     on an etna devnet network
+--force force                             validator removal even if it's not getting rewarded
+-f, --fuji testnet                        operate on fuji (alias to testnet
+-h, --help help                           for removeValidator
+-k, --key string                          select the key to use [fuji deploy only]
+-g, --ledger use                          ledger instead of key (always true on mainnet, defaults to false on fuji)
+--ledger-addrs strings                    use the given ledger addresses
+-l, --local operate                       on a local network
+-m, --mainnet operate                     on mainnet
+--node-endpoint string                    remove validator that responds to the given endpoint
+--node-id string                          node-id of the validator
+--output-tx-path string                   (for non-SOV blockchain only) file path of the removeValidator tx
+--rpc string                              connect to validator manager at the given rpc endpoint
+--subnet-auth-keys strings                (for non-SOV blockchain only) control keys that will be used to authenticate the removeValidator tx
+-t, --testnet fuji                        operate on testnet (alias to fuji)
+--uptime uint                             validator's uptime in seconds. If not provided, it will be automatically calculated
+--config string                           config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string                        log level for the application (default "ERROR")
+--skip-update-check skip                  check for new versions
 ```
 
 ### stats
@@ -795,7 +814,7 @@ avalanche blockchain upgrade apply [subcommand] [flags]
 **Flags:**
 
 ```bash
---avalanchego-chain-config-dir string    avalanchego's chain config file directory (default "/Users/owen.wahlgren/.avalanchego/chains")
+--avalanchego-chain-config-dir string    avalanchego's chain config file directory (default "/Users/l1-dev/.avalanchego/chains")
 --config create                          upgrade config for future subnet deployments (same as generate)
 --force If                               true, don't prompt for confirmation of timestamps in the past
 --fuji fuji                              apply upgrade existing fuji deployment (alias for `testnet`)
@@ -961,7 +980,7 @@ avalanche blockchain vmid [subcommand] [flags]
 
 ## avalanche config
 
-Customize configuration for Avalanche-CLI
+Customize the configuration for Avalanche-CLI.
 
 **Usage:** 
 ```bash
@@ -982,8 +1001,8 @@ avalanche config [subcommand] [flags]
 - [`authorize-cloud-access`](#authorize-cloud-access): set preferences to authorize access to cloud resources
 - [`metrics`](#metrics): set user metrics collection preferences
 - [`migrate`](#migrate): migrate command migrates old ~/.avalanche-cli.json and ~/.avalanche-cli/config to /.avalanche-cli/config.json..
-- [`singleNode`](#singlenode): set user preference between single node and five nodes local network
 - [`snapshotsAutoSave`](#snapshotsautosave): set user preference between auto saving local network snapshots or not
+- [`update`](#update): set user preference between update check or not
 
 ### authorize-cloud-access
 
@@ -1039,24 +1058,6 @@ avalanche config migrate [subcommand] [flags]
 --skip-update-check skip    check for new versions
 ```
 
-### singleNode
-
-set user preference between single node and five nodes local network
-
-**Usage:** 
-```bash
-avalanche config singleNode [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for singleNode
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
 ### snapshotsAutoSave
 
 set user preference between auto saving local network snapshots or not
@@ -1070,6 +1071,24 @@ avalanche config snapshotsAutoSave [subcommand] [flags]
 
 ```bash
 -h, --help help             for snapshotsAutoSave
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+### update
+
+set user preference between update check or not
+
+**Usage:** 
+```bash
+avalanche config update [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+-h, --help help             for update
 --config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
@@ -1098,7 +1117,7 @@ avalanche contract [subcommand] [flags]
 
 - [`deploy`](#deploy): The contract command suite provides a collection of tools for deploying
 smart contracts.
-- [`initValidatorManager`](#initvalidatormanager): Initializes Proof of Authority(PoA) or Proof of Stake(PoS)Validator Manager contract on a Blockchain and sets up initial validator set on the Blockchain. For more info on Validator Manager, please head to https://github.com/ava-labs/teleporter/tree/staking-contract/contracts/validator-manager
+- [`initValidatorManager`](#initvalidatormanager): Initializes Proof of Authority(PoA) or Proof of Stake(PoS)Validator Manager contract on a Blockchain and sets up initial validator set on the Blockchain. For more info on Validator Manager, please head to https://github.com/ava-labs/icm-contracts/tree/main/contracts/validator-manager
 
 ### deploy
 
@@ -1159,7 +1178,7 @@ avalanche contract deploy erc20 [subcommand] [flags]
 
 ### initValidatorManager
 
-Initializes Proof of Authority(PoA) or Proof of Stake(PoS)Validator Manager contract on a Blockchain and sets up initial validator set on the Blockchain. For more info on Validator Manager, please head to https://github.com/ava-labs/teleporter/tree/staking-contract/contracts/validator-manager
+Initializes Proof of Authority(PoA) or Proof of Stake(PoS)Validator Manager contract on a Blockchain and sets up initial validator set on the Blockchain. For more info on Validator Manager, please head to https://github.com/ava-labs/icm-contracts/tree/main/contracts/validator-manager
 
 **Usage:** 
 ```bash
@@ -1169,6 +1188,7 @@ avalanche contract initValidatorManager [subcommand] [flags]
 **Flags:**
 
 ```bash
+--aggregator-allow-private-peers allow    the signature aggregator to connect to peers with private IP (default true)
 --aggregator-extra-endpoints strings      endpoints for extra nodes that are needed in signature aggregation
 --aggregator-log-level string             log level to use with signature aggregator (default "Off")
 --cluster string                          operate on the given cluster
@@ -1180,6 +1200,7 @@ avalanche contract initValidatorManager [subcommand] [flags]
 -h, --help help                           for initValidatorManager
 --key string                              CLI stored key to use as contract deployer
 -l, --local operate                       on a local network
+-m, --mainnet operate                     on mainnet
 --pos-maximum-stake-amount uint           (PoS only) maximum stake amount (default 1000)
 --pos-maximum-stake-multiplier uint8      (PoS only )maximum stake multiplier (default 1)
 --pos-minimum-delegation-fee uint16       (PoS only) minimum delegation fee (default 1)
@@ -1212,6 +1233,103 @@ avalanche help [subcommand] [flags]
 --config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
+```
+
+## avalanche icm
+
+The messenger command suite provides a collection of tools for interacting
+with ICM messenger contracts.
+
+**Usage:** 
+```bash
+avalanche icm [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+-h, --help help             for icm
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+**Subcommands:**
+
+- [`deploy`](#deploy): Deploys ICM Messenger and Registry into a given L1.
+- [`sendMsg`](#sendmsg): Sends and wait reception for a ICM msg between two subnets.
+
+### deploy
+
+Deploys ICM Messenger and Registry into a given L1.
+
+**Usage:** 
+```bash
+avalanche icm deploy [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--blockchain string                         deploy ICM into the given CLI blockchain
+--blockchain-id string                      deploy ICM into the given blockchain ID/Alias
+--c-chain deploy                            ICM into C-Chain
+--cchain-key string                         key to be used to pay fees to deploy ICM to C-Chain
+--cluster string                            operate on the given cluster
+--deploy-messenger deploy                   ICM Messenger (default true)
+--deploy-registry deploy                    ICM Registry (default true)
+--devnet operate                            on a devnet network
+--endpoint string                           use the given endpoint for network operations
+--force-registry-deploy deploy              ICM Registry even if Messenger has already been deployed
+-f, --fuji testnet                          operate on fuji (alias to testnet
+--genesis-key use                           genesis allocated key to fund ICM deploy
+-h, --help help                             for deploy
+--include-cchain deploy                     ICM also to C-Chain
+--key string                                CLI stored key to use to fund ICM deploy
+-l, --local operate                         on a local network
+--messenger-contract-address-path string    path to a messenger contract address file
+--messenger-deployer-address-path string    path to a messenger deployer address file
+--messenger-deployer-tx-path string         path to a messenger deployer tx file
+--private-key string                        private key to use to fund ICM deploy
+--registry-bytecode-path string             path to a registry bytecode file
+--rpc-url string                            use the given RPC URL to connect to the subnet
+-t, --testnet fuji                          operate on testnet (alias to fuji)
+--version string                            version to deploy (default "latest")
+--config string                             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string                          log level for the application (default "ERROR")
+--skip-update-check skip                    check for new versions
+```
+
+### sendMsg
+
+Sends and wait reception for a ICM msg between two subnets.
+
+**Usage:** 
+```bash
+avalanche icm sendMsg [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--cluster string                operate on the given cluster
+--dest-rpc string               use the given destination blockchain rpc endpoint
+--destination-address string    deliver the message to the given contract destination address
+--devnet operate                on a devnet network
+--endpoint string               use the given endpoint for network operations
+--etna-devnet operate           on an etna devnet network
+-f, --fuji testnet              operate on fuji (alias to testnet
+--genesis-key use               genesis allocated key as message originator and to pay source blockchain fees
+-h, --help help                 for sendMsg
+--hex-encoded given             message is hex encoded
+--key string                    CLI stored key to use as message originator and to pay source blockchain fees
+-l, --local operate             on a local network
+--private-key string            private key to use as message originator and to pay source blockchain fees
+--source-rpc string             use the given source blockchain rpc endpoint
+-t, --testnet fuji              operate on testnet (alias to fuji)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string              log level for the application (default "ERROR")
+--skip-update-check skip        check for new versions
 ```
 
 ## avalanche ictt
@@ -1300,7 +1418,244 @@ avalanche interchain [subcommand] [flags]
 
 **Subcommands:**
 
+- [`messenger`](#messenger): The messenger command suite provides a collection of tools for interacting
+with ICM messenger contracts.
+- [`relayer`](#relayer): The relayer command suite provides a collection of tools for deploying
+and configuring an ICM relayers.
 - [`tokenTransferrer`](#tokentransferrer): The tokenTransfer command suite provides tools to deploy and manage Token Transferrers.
+
+### messenger
+
+The messenger command suite provides a collection of tools for interacting
+with ICM messenger contracts.
+
+**Usage:** 
+```bash
+avalanche interchain messenger [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+-h, --help help             for messenger
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+**Subcommands:**
+
+- [`deploy`](#messenger-deploy): Deploys ICM Messenger and Registry into a given L1.
+- [`sendMsg`](#messenger-sendmsg): Sends and wait reception for a ICM msg between two subnets.
+
+#### messenger deploy
+
+Deploys ICM Messenger and Registry into a given L1.
+
+**Usage:** 
+```bash
+avalanche interchain messenger deploy [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--blockchain string                         deploy ICM into the given CLI blockchain
+--blockchain-id string                      deploy ICM into the given blockchain ID/Alias
+--c-chain deploy                            ICM into C-Chain
+--cchain-key string                         key to be used to pay fees to deploy ICM to C-Chain
+--cluster string                            operate on the given cluster
+--deploy-messenger deploy                   ICM Messenger (default true)
+--deploy-registry deploy                    ICM Registry (default true)
+--devnet operate                            on a devnet network
+--endpoint string                           use the given endpoint for network operations
+--force-registry-deploy deploy              ICM Registry even if Messenger has already been deployed
+-f, --fuji testnet                          operate on fuji (alias to testnet
+--genesis-key use                           genesis allocated key to fund ICM deploy
+-h, --help help                             for deploy
+--include-cchain deploy                     ICM also to C-Chain
+--key string                                CLI stored key to use to fund ICM deploy
+-l, --local operate                         on a local network
+--messenger-contract-address-path string    path to a messenger contract address file
+--messenger-deployer-address-path string    path to a messenger deployer address file
+--messenger-deployer-tx-path string         path to a messenger deployer tx file
+--private-key string                        private key to use to fund ICM deploy
+--registry-bytecode-path string             path to a registry bytecode file
+--rpc-url string                            use the given RPC URL to connect to the subnet
+-t, --testnet fuji                          operate on testnet (alias to fuji)
+--version string                            version to deploy (default "latest")
+--config string                             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string                          log level for the application (default "ERROR")
+--skip-update-check skip                    check for new versions
+```
+
+#### messenger sendMsg
+
+Sends and wait reception for a ICM msg between two subnets.
+
+**Usage:** 
+```bash
+avalanche interchain messenger sendMsg [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--cluster string                operate on the given cluster
+--dest-rpc string               use the given destination blockchain rpc endpoint
+--destination-address string    deliver the message to the given contract destination address
+--devnet operate                on a devnet network
+--endpoint string               use the given endpoint for network operations
+--etna-devnet operate           on an etna devnet network
+-f, --fuji testnet              operate on fuji (alias to testnet
+--genesis-key use               genesis allocated key as message originator and to pay source blockchain fees
+-h, --help help                 for sendMsg
+--hex-encoded given             message is hex encoded
+--key string                    CLI stored key to use as message originator and to pay source blockchain fees
+-l, --local operate             on a local network
+--private-key string            private key to use as message originator and to pay source blockchain fees
+--source-rpc string             use the given source blockchain rpc endpoint
+-t, --testnet fuji              operate on testnet (alias to fuji)
+--config string                 config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string              log level for the application (default "ERROR")
+--skip-update-check skip        check for new versions
+```
+
+### relayer
+
+The relayer command suite provides a collection of tools for deploying
+and configuring an ICM relayers.
+
+**Usage:** 
+```bash
+avalanche interchain relayer [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+-h, --help help             for relayer
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+**Subcommands:**
+
+- [`deploy`](#relayer-deploy): Deploys an ICM Relayer for the given Network.
+- [`logs`](#relayer-logs): Shows pretty formatted AWM relayer logs
+- [`start`](#relayer-start): Starts AWM relayer on the specified network (Currently only for local network).
+- [`stop`](#relayer-stop): Stops AWM relayer on the specified network (Currently only for local network, cluster).
+
+#### relayer deploy
+
+Deploys an ICM Relayer for the given Network.
+
+**Usage:** 
+```bash
+avalanche interchain relayer deploy [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--allow-private-ips allow          relayer to connec to private ips (default true)
+--amount float                     automatically fund fee payments with the given amount
+--bin-path string                  use the given relayer binary
+--blockchain-funding-key string    key to be used to fund relayer account on all l1s
+--blockchains strings              blockchains to relay as source and destination
+--cchain relay                     C-Chain as source and destination
+--cchain-funding-key string        key to be used to fund relayer account on cchain
+--cluster string                   operate on the given cluster
+--devnet operate                   on a devnet network
+--endpoint string                  use the given endpoint for network operations
+--etna-devnet operate              on an etna devnet network
+-f, --fuji testnet                 operate on fuji (alias to testnet
+-h, --help help                    for deploy
+--key string                       key to be used by default both for rewards and to pay fees
+-l, --local operate                on a local network
+--log-level string                 log level to use for relayer logs
+-t, --testnet fuji                 operate on testnet (alias to fuji)
+--version string                   version to deploy (default "latest-prerelease")
+--config string                    config file (default is $HOME/.avalanche-cli/config.json)
+--skip-update-check skip           check for new versions
+```
+
+#### relayer logs
+
+Shows pretty formatted AWM relayer logs
+
+**Usage:** 
+```bash
+avalanche interchain relayer logs [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--endpoint string           use the given endpoint for network operations
+--etna-devnet operate       on an etna devnet network
+--first uint                output first N log lines
+-f, --fuji testnet          operate on fuji (alias to testnet
+-h, --help help             for logs
+--last uint                 output last N log lines
+-l, --local operate         on a local network
+--raw raw                   logs output
+-t, --testnet fuji          operate on testnet (alias to fuji)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+#### relayer start
+
+Starts AWM relayer on the specified network (Currently only for local network).
+
+**Usage:** 
+```bash
+avalanche interchain relayer start [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--bin-path string           use the given relayer binary
+--cluster string            operate on the given cluster
+--endpoint string           use the given endpoint for network operations
+--etna-devnet operate       on an etna devnet network
+-f, --fuji testnet          operate on fuji (alias to testnet
+-h, --help help             for start
+-l, --local operate         on a local network
+-t, --testnet fuji          operate on testnet (alias to fuji)
+--version string            version to use (default "latest-prerelease")
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+#### relayer stop
+
+Stops AWM relayer on the specified network (Currently only for local network, cluster).
+
+**Usage:** 
+```bash
+avalanche interchain relayer stop [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--cluster string            operate on the given cluster
+--endpoint string           use the given endpoint for network operations
+--etna-devnet operate       on an etna devnet network
+-f, --fuji testnet          operate on fuji (alias to testnet
+-h, --help help             for stop
+-l, --local operate         on a local network
+-t, --testnet fuji          operate on testnet (alias to fuji)
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
 
 ### tokenTransferrer
 
@@ -1406,7 +1761,7 @@ If you'd like to import an existing key instead of generating one from scratch, 
 To delete a key, provide the keyName. The command prompts for confirmation
 before deleting the key. To skip the confirmation, provide the --force flag.
 - [`export`](#export): The key export command exports a created signing key. You can use an exported key in other
-applications or import it into another instance of Avalanche-CLI.
+applications or import it into another instance of the Avalanche-CLI.
 
 By default, the tool writes the hex encoded key to stdout. If you provide the --output
 flag, the command writes the key to a file of your choosing.
@@ -1468,7 +1823,7 @@ avalanche key delete [subcommand] [flags]
 ### export
 
 The key export command exports a created signing key. You can use an exported key in other
-applications or import it into another instance of Avalanche-CLI.
+applications or import it into another instance of the Avalanche-CLI.
 
 By default, the tool writes the hex encoded key to stdout. If you provide the --output
 flag, the command writes the key to a file of your choosing.
@@ -1507,6 +1862,7 @@ avalanche key list [subcommand] [flags]
 --cluster string            operate on the given cluster
 --devnet operate            on a devnet network
 --endpoint string           use the given endpoint for network operations
+--etna-devnet operate       on an etna devnet network
 -f, --fuji testnet          operate on fuji (alias to testnet
 -h, --help help             for list
 --keys strings              list addresses for the given keys
@@ -1547,6 +1903,7 @@ avalanche key transfer [subcommand] [flags]
 --destination-transferrer-address string    token transferrer address at the destination subnet (token transferrer experimental)
 --devnet operate                            on a devnet network
 --endpoint string                           use the given endpoint for network operations
+--etna-devnet operate                       on an etna devnet network
 -f, --fuji testnet                          operate on fuji (alias to testnet
 -h, --help help                             for transfer
 -k, --key string                            key associated to the sender or receiver address
@@ -1652,8 +2009,11 @@ avalanche network start [subcommand] [flags]
 
 ```bash
 --avalanchego-path string       use this avalanchego binary path
---avalanchego-version string    use this version of avalanchego (ex: v1.17.12) (default "latest")
+--avalanchego-version string    use this version of avalanchego (ex: v1.17.12) (default "latest-prerelease")
 -h, --help help                 for start
+--num-nodes uint32              number of nodes to be created on local network (default 2)
+--relayer-path string           use this relayer binary path
+--relayer-version string        use this relayer version (default "latest-prerelease")
 --snapshot-name string          name of snapshot to use to start the network from (default "default-1654102509")
 --config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
@@ -1772,9 +2132,9 @@ The node import command imports cluster configuration and its nodes configuratio
 created from the node export command.
 
 Prior to calling this command, call node whitelist command to have your SSH public key and IP whitelisted by
-the cluster owner. This will enable you to use avalanche-cli commands to manage the imported cluster.
+the cluster owner. This will enable you to use cli commands to manage the imported cluster.
 
-Please note, that this imported cluster will be considered as EXTERNAL by avalanche-cli, so some commands
+Please note, that this imported cluster will be considered as EXTERNAL by cli, so some commands
 affecting cloud nodes like node create or node destroy will be not applicable to it.
 - [`list`](#list): (ALPHA Warning) This command is currently in experimental mode.
 
@@ -1788,7 +2148,7 @@ The node local command suite provides a collection of commands related to local 
 - [`refresh-ips`](#refresh-ips): (ALPHA Warning) This command is currently in experimental mode.
 
 The node refresh-ips command obtains the current IP for all nodes with dynamic IPs in the cluster,
-and updates the local node information used by CLI commands.
+and updates the local node information used by the Avalanche-CLI commands.
 - [`resize`](#resize): (ALPHA Warning) This command is currently in experimental mode.
 
 The node resize command can change the amount of CPU, memory and disk space available for the cluster nodes.
@@ -1918,6 +2278,7 @@ avalanche node create [subcommand] [flags]
 -h, --help help                                     for create
 --latest-avalanchego-pre-release-version install    latest avalanchego pre-release version on node/s
 --latest-avalanchego-version install                latest avalanchego release version on node/s
+-m, --mainnet operate                               on mainnet
 --node-type string                                  cloud instance type. Use 'default' to use recommended default instance type
 --num-apis ints                                     number of API nodes(nodes without stake) to create in the new Devnet
 --num-validators ints                               number of nodes to create per region(s). Use comma to separate multiple numbers for each region in the same order as --region flag
@@ -1950,7 +2311,7 @@ avalanche node destroy [subcommand] [flags]
 **Flags:**
 
 ```bash
---all destroy                    all existing clusters created by Avalanche CLI
+--all destroy                    all existing clusters created by the Avalanche-CLI
 --authorize-access authorize     CLI to release cloud resources
 -y, --authorize-all authorize    all CLI requests
 --authorize-remove authorize     CLI to remove all local files related to cloud nodes
@@ -2047,6 +2408,8 @@ avalanche node devnet wiz [subcommand] [flags]
 --custom-vm-build-script string                        custom vm build-script
 --custom-vm-repo-url string                            custom vm repository url
 --default-validator-params use                         default weight/start/duration params for subnet validator
+--deploy-icm-messenger deploy                          Interchain Messenger (default true)
+--deploy-icm-registry deploy                           Interchain Registry (default true)
 --deploy-teleporter-messenger deploy                   Interchain Messenger (default true)
 --deploy-teleporter-registry deploy                    Interchain Registry (default true)
 --enable-monitoring set                                up Prometheus monitoring for created nodes. Please note that this option creates a separate monitoring instance and incures additional cost
@@ -2063,6 +2426,12 @@ avalanche node devnet wiz [subcommand] [flags]
 --gcp-project string                                   use given GCP project
 --grafana-pkg string                                   use grafana pkg instead of apt repo(by default), for example https://dl.grafana.com/oss/release/grafana_10.4.1_amd64.deb
 -h, --help help                                        for wiz
+--icm generate                                         an icm-ready vm
+--icm-messenger-contract-address-path string           path to an icm messenger contract address file
+--icm-messenger-deployer-address-path string           path to an icm messenger deployer address file
+--icm-messenger-deployer-tx-path string                path to an icm messenger deployer tx file
+--icm-registry-bytecode-path string                    path to an icm registry bytecode file
+--icm-version string                                   icm version to deploy (default "latest")
 --latest-avalanchego-pre-release-version install       latest avalanchego pre-release version on node/s
 --latest-avalanchego-version install                   latest avalanchego release version on node/s
 --latest-evm-version use                               latest Subnet-EVM released version
@@ -2078,12 +2447,12 @@ avalanche node devnet wiz [subcommand] [flags]
 --subnet-aliases strings                               additional subnet aliases to be used for RPC calls in addition to subnet blockchain name
 --subnet-config string                                 path to the subnet configuration for subnet
 --subnet-genesis string                                file path of the subnet genesis
---teleporter generate                                  a teleporter-ready vm
---teleporter-messenger-contract-address-path string    path to a teleporter messenger contract address file
---teleporter-messenger-deployer-address-path string    path to a teleporter messenger deployer address file
---teleporter-messenger-deployer-tx-path string         path to a teleporter messenger deployer tx file
---teleporter-registry-bytecode-path string             path to a teleporter registry bytecode file
---teleporter-version string                            teleporter version to deploy (default "latest")
+--teleporter generate                                  an icm-ready vm
+--teleporter-messenger-contract-address-path string    path to an icm messenger contract address file
+--teleporter-messenger-deployer-address-path string    path to an icm messenger deployer address file
+--teleporter-messenger-deployer-tx-path string         path to an icm messenger deployer tx file
+--teleporter-registry-bytecode-path string             path to an icm registry bytecode file
+--teleporter-version string                            icm version to deploy (default "latest")
 --use-ssh-agent use                                    ssh agent for ssh
 --use-static-ip attach                                 static Public IP on cloud servers (default true)
 --validators strings                                   deploy subnet into given comma separated list of validators. defaults to all cluster nodes
@@ -2129,9 +2498,9 @@ The node import command imports cluster configuration and its nodes configuratio
 created from the node export command.
 
 Prior to calling this command, call node whitelist command to have your SSH public key and IP whitelisted by
-the cluster owner. This will enable you to use avalanche-cli commands to manage the imported cluster.
+the cluster owner. This will enable you to use cli commands to manage the imported cluster.
 
-Please note, that this imported cluster will be considered as EXTERNAL by avalanche-cli, so some commands
+Please note, that this imported cluster will be considered as EXTERNAL by cli, so some commands
 affecting cloud nodes like node create or node destroy will be not applicable to it.
 
 **Usage:** 
@@ -2348,8 +2717,10 @@ avalanche node local start [subcommand] [flags]
 -f, --fuji testnet                                  operate on fuji (alias to testnet
 --genesis string                                    path to genesis file
 -h, --help help                                     for start
---latest-avalanchego-pre-release-version install    latest avalanchego pre-release version on node/s
+--latest-avalanchego-pre-release-version install    latest avalanchego pre-release version on node/s (default true)
 --latest-avalanchego-version install                latest avalanchego release version on node/s
+-l, --local operate                                 on a local network
+-m, --mainnet operate                               on mainnet
 --node-config string                                path to common avalanchego config settings for all nodes
 --num-nodes uint32                                  number of nodes to start (default 1)
 --partial-sync primary                              network partial sync (default true)
@@ -2413,11 +2784,14 @@ avalanche node local track [subcommand] [flags]
 **Flags:**
 
 ```bash
---avalanchego-path string    use this avalanchego binary path
--h, --help help              for track
---config string              config file (default is $HOME/.avalanche-cli/config.json)
---log-level string           log level for the application (default "ERROR")
---skip-update-check skip     check for new versions
+--avalanchego-path string                           use this avalanchego binary path
+--custom-avalanchego-version string                 install given avalanchego version on node/s
+-h, --help help                                     for track
+--latest-avalanchego-pre-release-version install    latest avalanchego pre-release version on node/s (default true)
+--latest-avalanchego-version install                latest avalanchego release version on node/s
+--config string                                     config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string                                  log level for the application (default "ERROR")
+--skip-update-check skip                            check for new versions
 ```
 
 ### refresh-ips
@@ -2425,7 +2799,7 @@ avalanche node local track [subcommand] [flags]
 (ALPHA Warning) This command is currently in experimental mode.
 
 The node refresh-ips command obtains the current IP for all nodes with dynamic IPs in the cluster,
-and updates the local node information used by CLI commands.
+and updates the local node information used by the Avalanche-CLI commands.
 
 **Usage:** 
 ```bash
@@ -2854,963 +3228,10 @@ avalanche primary describe [subcommand] [flags]
 --skip-update-check skip    check for new versions
 ```
 
-## avalanche subnet
-
-The subnet command suite provides a collection of tools for developing
-and deploying Blockchains.
-
-To get started, use the subnet create command wizard to walk through the
-configuration of your very first Blockchain. Then, go ahead and deploy it
-with the subnet deploy command. You can use the rest of the commands to
-manage your Blockchain configurations and live deployments.
-
-Deprecation notice: use 'avalanche blockchain'
-
-**Usage:** 
-```bash
-avalanche subnet [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for subnet
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-**Subcommands:**
-
-- [`addValidator`](#addvalidator): The blockchain addValidator command whitelists a primary network validator to
-validate the subnet of the provided deployed Blockchain.
-
-To add the validator to the Subnet's allow list, you first need to provide
-the blockchainName and the validator's unique NodeID. The command then prompts
-for the validation start time, duration, and stake weight. You can bypass
-these prompts by providing the values with flags.
-
-This command currently only works on Blockchains deployed to either the Fuji
-Testnet or Mainnet.
-- [`changeOwner`](#changeowner): The blockchain changeOwner changes the owner of the subnet of the deployed Blockchain.
-- [`changeWeight`](#changeweight): The blockchain changeWeight command changes the weight of a Subnet Validator.
-
-The Subnet has to be a Proof of Authority Subnet-Only Validator Subnet.
-- [`configure`](#configure): AvalancheGo nodes support several different configuration files. Subnets have their own
-Subnet config which applies to all chains/VMs in the Subnet. Each chain within the Subnet
-can have its own chain config. A chain can also have special requirements for the AvalancheGo node 
-configuration itself. This command allows you to set all those files.
-- [`create`](#create): The blockchain create command builds a new genesis file to configure your Blockchain.
-By default, the command runs an interactive wizard. It walks you through
-all the steps you need to create your first Blockchain.
-
-The tool supports deploying Subnet-EVM, and custom VMs. You
-can create a custom, user-generated genesis with a custom VM by providing
-the path to your genesis and VM binaries with the --genesis and --vm flags.
-
-By default, running the command with a blockchainName that already exists
-causes the command to fail. If you'd like to overwrite an existing
-configuration, pass the -f flag.
-- [`delete`](#delete): The blockchain delete command deletes an existing blockchain configuration.
-- [`deploy`](#deploy): The blockchain deploy command deploys your Blockchain configuration locally, to Fuji Testnet, or to Mainnet.
-
-At the end of the call, the command prints the RPC URL you can use to interact with the Subnet.
-
-Avalanche-CLI only supports deploying an individual Blockchain once per network. Subsequent
-attempts to deploy the same Blockchain to the same network (local, Fuji, Mainnet) aren't
-allowed. If you'd like to redeploy a Blockchain locally for testing, you must first call
-avalanche network clean to reset all deployed chain state. Subsequent local deploys
-redeploy the chain with fresh state. You can deploy the same Blockchain to multiple networks,
-so you can take your locally tested Subnet and deploy it on Fuji or Mainnet.
-- [`describe`](#describe): The blockchain describe command prints the details of a Blockchain configuration to the console.
-By default, the command prints a summary of the configuration. By providing the --genesis
-flag, the command instead prints out the raw genesis file.
-- [`export`](#export): The blockchain export command write the details of an existing Blockchain deploy to a file.
-
-The command prompts for an output path. You can also provide one with
-the --output flag.
-- [`import`](#import): Import blockchain configurations into avalanche-cli.
-
-This command suite supports importing from a file created on another computer,
-or importing from blockchains running public networks
-(e.g. created manually or with the deprecated subnet-cli)
-- [`join`](#join): The subnet join command configures your validator node to begin validating a new Blockchain.
-
-To complete this process, you must have access to the machine running your validator. If the
-CLI is running on the same machine as your validator, it can generate or update your node's
-config file automatically. Alternatively, the command can print the necessary instructions
-to update your node manually. To complete the validation process, the Subnet's admins must add
-the NodeID of your validator to the Subnet's allow list by calling addValidator with your
-NodeID.
-
-After you update your validator's config, you need to restart your validator manually. If
-you provide the --avalanchego-config flag, this command attempts to edit the config file
-at that path.
-
-This command currently only supports Blockchains deployed on the Fuji Testnet and Mainnet.
-- [`list`](#list): The blockchain list command prints the names of all created Blockchain configurations. Without any flags,
-it prints some general, static information about the Blockchain. With the --deployed flag, the command
-shows additional information including the VMID, BlockchainID and SubnetID.
-- [`publish`](#publish): The blockchain publish command publishes the Blockchain's VM to a repository.
-- [`removeValidator`](#removevalidator): The blockchain removeValidator command stops a whitelisted, subnet network validator from
-validating your deployed Blockchain.
-
-To remove the validator from the Subnet's allow list, provide the validator's unique NodeID. You can bypass
-these prompts by providing the values with flags.
-- [`stats`](#stats): The blockchain stats command prints validator statistics for the given Blockchain.
-- [`upgrade`](#upgrade): The blockchain upgrade command suite provides a collection of tools for
-updating your developmental and deployed Blockchains.
-- [`validators`](#validators): The blockchain validators command lists the validators of a blockchain's subnet and provides
-several statistics about them.
-- [`vmid`](#vmid): The blockchain vmid command prints the virtual machine ID (VMID) for the given Blockchain.
-
-### addValidator
-
-The blockchain addValidator command whitelists a primary network validator to
-validate the subnet of the provided deployed Blockchain.
-
-To add the validator to the Subnet's allow list, you first need to provide
-the blockchainName and the validator's unique NodeID. The command then prompts
-for the validation start time, duration, and stake weight. You can bypass
-these prompts by providing the values with flags.
-
-This command currently only works on Blockchains deployed to either the Fuji
-Testnet or Mainnet.
-
-**Usage:** 
-```bash
-avalanche subnet addValidator [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---aggregator-extra-endpoints strings    endpoints for extra nodes that are needed in signature aggregation
---aggregator-log-level string           log level to use with signature aggregator (default "Off")
---balance uint                          set the AVAX balance of the validator that will be used for continuous fee to P-Chain
---blockchain-genesis-key use            genesis allocated key to pay fees for completing the validator's registration (blockchain gas token)
---blockchain-key string                 CLI stored key to use to pay fees for completing the validator's registration (blockchain gas token)
---blockchain-private-key string         private key to use to pay fees for completing the validator's registration (blockchain gas token)
---bls-proof-of-possession string        set the BLS proof of possession of the validator to add
---bls-public-key string                 set the BLS public key of the validator to add
---cluster string                        operate on the given cluster
---default-duration                      (for non sovereign blockchain) set duration so as to validate until primary validator ends its period
---default-start-time                    (for non sovereign blockchain) use default start time for subnet validator (5 minutes later for fuji & mainnet, 30 seconds later for devnet)
---default-validator-params              (for non sovereign blockchain) use default weight/start/duration params for subnet validator
---delegation-fee uint16                 (PoS only) delegation fee (in bips) (default 100)
---devnet operate                        on a devnet network
---disable-owner string                  P-Chain address that will able to disable the validator with a P-Chain transaction
---endpoint string                       use the given endpoint for network operations
--e, --ewoq use                          ewoq key [fuji/devnet only]
--f, --fuji testnet                      operate on fuji (alias to testnet
--h, --help help                         for addValidator
--k, --key string                        select the key to use [fuji/devnet only]
--g, --ledger use                        ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
---ledger-addrs strings                  use the given ledger addresses
--l, --local operate                     on a local network
--m, --mainnet operate                   on mainnet
---node-endpoint string                  gather node id/bls from publicly available avalanchego apis on the given endpoint
---node-id string                        node-id of the validator to add
---output-tx-path string                 (for non sovereign blockchain) file path of the add validator tx
---remaining-balance-owner string        P-Chain address that will receive any leftover AVAX from the validator when it is removed from Subnet
---rpc string                            connect to validator manager at the given rpc endpoint
---stake-amount uint                     (PoS only) amount of tokens to stake
---staking-period duration               how long this validator will be staking
---start-time string                     (for non sovereign blockchain) UTC start time when this validator starts validating, in 'YYYY-MM-DD HH:MM:SS' format
---subnet-auth-keys strings              (for non sovereign blockchain) control keys that will be used to authenticate add validator tx
--t, --testnet fuji                      operate on testnet (alias to fuji)
---wait-for-tx-acceptance                (for non sovereign blockchain) just issue the add validator tx, without waiting for its acceptance (default true)
---weight uint                           set the staking weight of the validator to add (default 20)
---config string                         config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                      log level for the application (default "ERROR")
---skip-update-check skip                check for new versions
-```
-
-### changeOwner
-
-The blockchain changeOwner changes the owner of the subnet of the deployed Blockchain.
-
-**Usage:** 
-```bash
-avalanche subnet changeOwner [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---cluster string              operate on the given cluster
---control-keys strings        addresses that may make subnet changes
---devnet operate              on a devnet network
---endpoint string             use the given endpoint for network operations
--e, --ewoq use                ewoq key [fuji/devnet]
--f, --fuji testnet            operate on fuji (alias to testnet
--h, --help help               for changeOwner
--k, --key string              select the key to use [fuji/devnet]
--g, --ledger use              ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
---ledger-addrs strings        use the given ledger addresses
--l, --local operate           on a local network
--m, --mainnet operate         on mainnet
---output-tx-path string       file path of the transfer subnet ownership tx
--s, --same-control-key use    the fee-paying key as control key
---subnet-auth-keys strings    control keys that will be used to authenticate transfer subnet ownership tx
--t, --testnet fuji            operate on testnet (alias to fuji)
---threshold uint32            required number of control key signatures to make subnet changes
---config string               config file (default is $HOME/.avalanche-cli/config.json)
---log-level string            log level for the application (default "ERROR")
---skip-update-check skip      check for new versions
-```
-
-### changeWeight
-
-The blockchain changeWeight command changes the weight of a Subnet Validator.
-
-The Subnet has to be a Proof of Authority Subnet-Only Validator Subnet.
-
-**Usage:** 
-```bash
-avalanche subnet changeWeight [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---cluster string            operate on the given cluster
---devnet operate            on a devnet network
---endpoint string           use the given endpoint for network operations
--e, --ewoq use              ewoq key [fuji/devnet only]
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for changeWeight
--k, --key string            select the key to use [fuji/devnet only]
--g, --ledger use            ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
---ledger-addrs strings      use the given ledger addresses
--l, --local operate         on a local network
--m, --mainnet operate       on mainnet
---node-id string            node-id of the validator
--t, --testnet fuji          operate on testnet (alias to fuji)
---weight uint               set the new staking weight of the validator (default 20)
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### configure
-
-AvalancheGo nodes support several different configuration files. Subnets have their own
-Subnet config which applies to all chains/VMs in the Subnet. Each chain within the Subnet
-can have its own chain config. A chain can also have special requirements for the AvalancheGo node 
-configuration itself. This command allows you to set all those files.
-
-**Usage:** 
-```bash
-avalanche subnet configure [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---chain-config string             path to the chain configuration
--h, --help help                   for configure
---node-config string              path to avalanchego node configuration
---per-node-chain-config string    path to per node chain configuration for local network
---subnet-config string            path to the subnet configuration
---config string                   config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                log level for the application (default "ERROR")
---skip-update-check skip          check for new versions
-```
-
-### create
-
-The blockchain create command builds a new genesis file to configure your Blockchain.
-By default, the command runs an interactive wizard. It walks you through
-all the steps you need to create your first Blockchain.
-
-The tool supports deploying Subnet-EVM, and custom VMs. You
-can create a custom, user-generated genesis with a custom VM by providing
-the path to your genesis and VM binaries with the --genesis and --vm flags.
-
-By default, running the command with a blockchainName that already exists
-causes the command to fail. If you'd like to overwrite an existing
-configuration, pass the -f flag.
-
-**Usage:** 
-```bash
-avalanche subnet create [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---custom use                        a custom VM template
---custom-vm-branch string           custom vm branch or commit
---custom-vm-build-script string     custom vm build-script
---custom-vm-path string             file path of custom vm to use
---custom-vm-repo-url string         custom vm repository url
---debug enable                      blockchain debugging (default true)
---evm use                           the Subnet-EVM as the base template
---evm-chain-id uint                 chain ID to use with Subnet-EVM
---evm-defaults deprecation          notice: use '--production-defaults'
---evm-token string                  token symbol to use with Subnet-EVM
---external-gas-token use            a gas token from another blockchain
--f, --force overwrite               the existing configuration if one exists
---from-github-repo generate         custom VM binary from github repository
---genesis string                    file path of genesis to use
--h, --help help                     for create
---icm-registry-at-genesis setup     ICM registry smart contract on genesis [experimental]
---latest use                        latest Subnet-EVM released version, takes precedence over --vm-version
---pre-release use                   latest Subnet-EVM pre-released version, takes precedence over --vm-version
---production-defaults use           default production settings for your blockchain
---proof-of-authority use            proof of authority(PoA) for validator management
---proof-of-stake use                proof of stake(PoS) for validator management
---proxy-contract-owner string       EVM address that controls ProxyAdmin for TransparentProxy of ValidatorManager contract
---reward-basis-points uint          (PoS only) reward basis points for PoS Reward Calculator (default 100)
---sovereign set                     to false if creating non-sovereign blockchain (default true)
---teleporter interoperate           with other blockchains using teleporter
---test-defaults use                 default test settings for your blockchain
---validator-manager-owner string    EVM address that controls Validator Manager Owner
---vm string                         file path of custom vm to use. alias to custom-vm-path
---vm-version string                 version of Subnet-EVM template to use
---warp generate                     a vm with warp support (needed for teleporter) (default true)
---config string                     config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                  log level for the application (default "ERROR")
---skip-update-check skip            check for new versions
-```
-
-### delete
-
-The blockchain delete command deletes an existing blockchain configuration.
-
-**Usage:** 
-```bash
-avalanche subnet delete [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for delete
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### deploy
-
-The blockchain deploy command deploys your Blockchain configuration locally, to Fuji Testnet, or to Mainnet.
-
-At the end of the call, the command prints the RPC URL you can use to interact with the Subnet.
-
-Avalanche-CLI only supports deploying an individual Blockchain once per network. Subsequent
-attempts to deploy the same Blockchain to the same network (local, Fuji, Mainnet) aren't
-allowed. If you'd like to redeploy a Blockchain locally for testing, you must first call
-avalanche network clean to reset all deployed chain state. Subsequent local deploys
-redeploy the chain with fresh state. You can deploy the same Blockchain to multiple networks,
-so you can take your locally tested Subnet and deploy it on Fuji or Mainnet.
-
-**Usage:** 
-```bash
-avalanche subnet deploy [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---aggregator-extra-endpoints strings                   endpoints for extra nodes that are needed in signature aggregation
---aggregator-log-level string                          log level to use with signature aggregator (default "Off")
---avalanchego-path string                              use this avalanchego binary path
---avalanchego-version string                           use this version of avalanchego (ex: v1.17.12) (default "latest")
---blockchain-genesis-key use                           genesis allocated key to fund validator manager initialization
---blockchain-key string                                CLI stored key to use to fund validator manager initialization
---blockchain-private-key string                        private key to use to fund validator manager initialization
---bootstrap-endpoints strings                          take validator node info from the given endpoints
---bootstrap-filepath string                            JSON file path that provides details about bootstrap validators, leave Node-ID and BLS values empty if using --generate-node-id=true
---change-owner-address string                          address that will receive change if node is no longer L1 validator
---cluster string                                       operate on the given cluster
---control-keys strings                                 addresses that may make subnet changes
---convert-only avoid                                   node track, restart and poa manager setup
---devnet operate                                       on a devnet network
---endpoint string                                      use the given endpoint for network operations
---etna-devnet operate                                  on an etna devnet network
--e, --ewoq use                                         ewoq key [fuji/devnet deploy only]
--f, --fuji testnet                                     operate on fuji (alias to testnet
---generate-node-id whether                             to create new node id for bootstrap validators (Node-ID and BLS values in bootstrap JSON file will be overridden if --bootstrap-filepath flag is used)
--h, --help help                                        for deploy
--k, --key string                                       select the key to use [fuji/devnet deploy only]
--g, --ledger use                                       ledger instead of key (always true on mainnet, defaults to false on fuji/devnet)
---ledger-addrs strings                                 use the given ledger addresses
--l, --local operate                                    on a local network
--m, --mainnet operate                                  on mainnet
---mainnet-chain-id uint32                              use different ChainID for mainnet deployment
---num-bootstrap-validators int                         (only if --generate-node-id is true) number of bootstrap validators to set up in sovereign L1 validator)
---num-local-nodes int                                  number of nodes to be created on local machine (default 5)
---output-tx-path string                                file path of the blockchain creation tx
---partial-sync set                                     primary network partial sync for new validators (default true)
---pos-maximum-stake-amount uint                        maximum stake amount (default 1000)
---pos-maximum-stake-multiplier uint8                   maximum stake multiplier (default 1)
---pos-minimum-delegation-fee uint16                    minimum delegation fee (default 1)
---pos-minimum-stake-amount uint                        minimum stake amount (default 1)
---pos-minimum-stake-duration uint                      minimum stake duration (default 100)
---pos-weight-to-value-factor uint                      weight to value factor (default 1)
---relayer-version string                               relayer version to deploy (default "latest")
--s, --same-control-key use                             the fee-paying key as control key
---skip-local-teleporter skip                           automatic teleporter deploy on local networks [to be deprecated]
---skip-relayer skip                                    relayer deploy
---skip-teleporter-deploy skip                          automatic teleporter deploy
---subnet-auth-keys strings                             control keys that will be used to authenticate chain creation
--u, --subnet-id string                                 do not create a subnet, deploy the blockchain into the given subnet id
---subnet-only only                                     create a subnet
---teleporter-messenger-contract-address-path string    path to an interchain messenger contract address file
---teleporter-messenger-deployer-address-path string    path to an interchain messenger deployer address file
---teleporter-messenger-deployer-tx-path string         path to an interchain messenger deployer tx file
---teleporter-registry-bytecode-path string             path to an interchain messenger registry bytecode file
---teleporter-version string                            teleporter version to deploy (default "latest")
--t, --testnet fuji                                     operate on testnet (alias to fuji)
---threshold uint32                                     required number of control key signatures to make subnet changes
---use-local-machine use                                local machine as a blockchain validator
---config string                                        config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                                     log level for the application (default "ERROR")
---skip-update-check skip                               check for new versions
-```
-
-### describe
-
-The blockchain describe command prints the details of a Blockchain configuration to the console.
-By default, the command prints a summary of the configuration. By providing the --genesis
-flag, the command instead prints out the raw genesis file.
-
-**Usage:** 
-```bash
-avalanche subnet describe [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--g, --genesis Print         the genesis to the console directly instead of the summary
--h, --help help             for describe
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### export
-
-The blockchain export command write the details of an existing Blockchain deploy to a file.
-
-The command prompts for an output path. You can also provide one with
-the --output flag.
-
-**Usage:** 
-```bash
-avalanche subnet export [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---custom-vm-branch string          custom vm branch
---custom-vm-build-script string    custom vm build-script
---custom-vm-repo-url string        custom vm repository url
--h, --help help                    for export
--o, --output string                write the export data to the provided file path
---config string                    config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                 log level for the application (default "ERROR")
---skip-update-check skip           check for new versions
-```
-
-### import
-
-Import blockchain configurations into avalanche-cli.
-
-This command suite supports importing from a file created on another computer,
-or importing from blockchains running public networks
-(e.g. created manually or with the deprecated subnet-cli)
-
-**Usage:** 
-```bash
-avalanche subnet import [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for import
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-**Subcommands:**
-
-- [`file`](#import-file): The blockchain import command will import a blockchain configuration from a file or a git repository.
-
-To import from a file, you can optionally provide the path as a command-line argument.
-Alternatively, running the command without any arguments triggers an interactive wizard.
-To import from a repository, go through the wizard. By default, an imported Blockchain doesn't 
-overwrite an existing Blockchain with the same name. To allow overwrites, provide the --force
-flag.
-- [`public`](#import-public): The blockchain import public command imports a Blockchain configuration from a running network.
-
-By default, an imported Blockchain
-doesn't overwrite an existing Blockchain with the same name. To allow overwrites, provide the --force
-flag.
-
-#### import file
-
-The blockchain import command will import a blockchain configuration from a file or a git repository.
-
-To import from a file, you can optionally provide the path as a command-line argument.
-Alternatively, running the command without any arguments triggers an interactive wizard.
-To import from a repository, go through the wizard. By default, an imported Blockchain doesn't 
-overwrite an existing Blockchain with the same name. To allow overwrites, provide the --force
-flag.
-
-**Usage:** 
-```bash
-avalanche subnet import file [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---branch string             the repo branch to use if downloading a new repo
--f, --force overwrite       the existing configuration if one exists
--h, --help help             for file
---repo string               the repo to import (ex: ava-labs/avalanche-plugins-core) or url to download the repo from
---subnet string             the subnet configuration to import from the provided repo
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-#### import public
-
-The blockchain import public command imports a Blockchain configuration from a running network.
-
-By default, an imported Blockchain
-doesn't overwrite an existing Blockchain with the same name. To allow overwrites, provide the --force
-flag.
-
-**Usage:** 
-```bash
-avalanche subnet import public [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---blockchain-id string      the blockchain ID
---cluster string            operate on the given cluster
---custom use                a custom VM template
---devnet operate            on a devnet network
---endpoint string           use the given endpoint for network operations
---evm import                a subnet-evm
---force overwrite           the existing configuration if one exists
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for public
--l, --local operate         on a local network
--m, --mainnet operate       on mainnet
---node-url string           [optional] URL of an already running subnet validator
--t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### join
-
-The subnet join command configures your validator node to begin validating a new Blockchain.
-
-To complete this process, you must have access to the machine running your validator. If the
-CLI is running on the same machine as your validator, it can generate or update your node's
-config file automatically. Alternatively, the command can print the necessary instructions
-to update your node manually. To complete the validation process, the Subnet's admins must add
-the NodeID of your validator to the Subnet's allow list by calling addValidator with your
-NodeID.
-
-After you update your validator's config, you need to restart your validator manually. If
-you provide the --avalanchego-config flag, this command attempts to edit the config file
-at that path.
-
-This command currently only supports Blockchains deployed on the Fuji Testnet and Mainnet.
-
-**Usage:** 
-```bash
-avalanche subnet join [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---avalanchego-config string    file path of the avalanchego config file
---cluster string               operate on the given cluster
---data-dir string              path of avalanchego's data dir directory
---devnet operate               on a devnet network
---endpoint string              use the given endpoint for network operations
---force-write if               true, skip to prompt to overwrite the config file
--f, --fuji testnet             operate on fuji (alias to testnet
--h, --help help                for join
--k, --key string               select the key to use [fuji only]
--g, --ledger use               ledger instead of key (always true on mainnet, defaults to false on fuji)
---ledger-addrs strings         use the given ledger addresses
--l, --local operate            on a local network
--m, --mainnet operate          on mainnet
---node-id string               set the NodeID of the validator to check
---plugin-dir string            file path of avalanchego's plugin directory
---print if                     true, print the manual config without prompting
---stake-amount uint            amount of tokens to stake on validator
---staking-period duration      how long validator validates for after start time
---start-time string            start time that validator starts validating
--t, --testnet fuji             operate on testnet (alias to fuji)
---config string                config file (default is $HOME/.avalanche-cli/config.json)
---log-level string             log level for the application (default "ERROR")
---skip-update-check skip       check for new versions
-```
-
-### list
-
-The blockchain list command prints the names of all created Blockchain configurations. Without any flags,
-it prints some general, static information about the Blockchain. With the --deployed flag, the command
-shows additional information including the VMID, BlockchainID and SubnetID.
-
-**Usage:** 
-```bash
-avalanche subnet list [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---deployed show             additional deploy information
--h, --help help             for list
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### publish
-
-The blockchain publish command publishes the Blockchain's VM to a repository.
-
-**Usage:** 
-```bash
-avalanche subnet publish [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---alias string               We publish to a remote repo, but identify the repo locally under a user-provided alias (e.g. myrepo).
---force If                   true, ignores if the subnet has been published in the past, and attempts a forced publish.
--h, --help help              for publish
---no-repo-path string        Do not let the tool manage file publishing, but have it only generate the files and put them in the location given by this flag.
---repo-url string            The URL of the repo where we are publishing
---subnet-file-path string    Path to the Subnet description file. If not given, a prompting sequence will be initiated.
---vm-file-path string        Path to the VM description file. If not given, a prompting sequence will be initiated.
---config string              config file (default is $HOME/.avalanche-cli/config.json)
---log-level string           log level for the application (default "ERROR")
---skip-update-check skip     check for new versions
-```
-
-### removeValidator
-
-The blockchain removeValidator command stops a whitelisted, subnet network validator from
-validating your deployed Blockchain.
-
-To remove the validator from the Subnet's allow list, provide the validator's unique NodeID. You can bypass
-these prompts by providing the values with flags.
-
-**Usage:** 
-```bash
-avalanche subnet removeValidator [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---aggregator-extra-endpoints strings    endpoints for extra nodes that are needed in signature aggregation
---aggregator-log-level string           log level to use with signature aggregator (default "Off")
---blockchain-genesis-key use            genesis allocated key to pay fees for completing the validator's removal (blockchain gas token)
---blockchain-key string                 CLI stored key to use to pay fees for completing the validator's removal (blockchain gas token)
---blockchain-private-key string         private key to use to pay fees for completing the validator's removal (blockchain gas token)
---cluster string                        operate on the given cluster
---devnet operate                        on a devnet network
---endpoint string                       use the given endpoint for network operations
--f, --fuji testnet                      operate on fuji (alias to testnet
--h, --help help                         for removeValidator
--k, --key string                        select the key to use [fuji deploy only]
--g, --ledger use                        ledger instead of key (always true on mainnet, defaults to false on fuji)
---ledger-addrs strings                  use the given ledger addresses
--l, --local operate                     on a local network
--m, --mainnet operate                   on mainnet
---node-endpoint string                  remove validator that responds to the given endpoint
---node-id string                        node-id of the validator
---output-tx-path string                 (for non-SOV blockchain only) file path of the removeValidator tx
---rpc string                            connect to validator manager at the given rpc endpoint
---subnet-auth-keys strings              (for non-SOV blockchain only) control keys that will be used to authenticate the removeValidator tx
--t, --testnet fuji                      operate on testnet (alias to fuji)
---config string                         config file (default is $HOME/.avalanche-cli/config.json)
---log-level string                      log level for the application (default "ERROR")
---skip-update-check skip                check for new versions
-```
-
-### stats
-
-The blockchain stats command prints validator statistics for the given Blockchain.
-
-**Usage:** 
-```bash
-avalanche subnet stats [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---cluster string            operate on the given cluster
---devnet operate            on a devnet network
---endpoint string           use the given endpoint for network operations
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for stats
--l, --local operate         on a local network
--m, --mainnet operate       on mainnet
--t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### upgrade
-
-The blockchain upgrade command suite provides a collection of tools for
-updating your developmental and deployed Blockchains.
-
-**Usage:** 
-```bash
-avalanche subnet upgrade [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for upgrade
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-**Subcommands:**
-
-- [`apply`](#upgrade-apply): Apply generated upgrade bytes to running Blockchain nodes to trigger a network upgrade.
-
-For public networks (Fuji Testnet or Mainnet), to complete this process,
-you must have access to the machine running your validator.
-If the CLI is running on the same machine as your validator, it can manipulate your node's
-configuration automatically. Alternatively, the command can print the necessary instructions
-to upgrade your node manually.
-
-After you update your validator's configuration, you need to restart your validator manually.
-If you provide the --avalanchego-chain-config-dir flag, this command attempts to write the upgrade file at that path.
-Refer to https://docs.avax.network/nodes/maintain/chain-config-flags#subnet-chain-configs for related documentation.
-- [`export`](#upgrade-export): Export the upgrade bytes file to a location of choice on disk
-- [`generate`](#upgrade-generate): The blockchain upgrade generate command builds a new upgrade.json file to customize your Blockchain. It
-guides the user through the process using an interactive wizard.
-- [`import`](#upgrade-import): Import the upgrade bytes file into the local environment
-- [`print`](#upgrade-print): Print the upgrade.json file content
-- [`vm`](#upgrade-vm): The blockchain upgrade vm command enables the user to upgrade their Blockchain's VM binary. The command
-can upgrade both local Blockchains and publicly deployed Blockchains on Fuji and Mainnet.
-
-The command walks the user through an interactive wizard. The user can skip the wizard by providing
-command line flags.
-
-#### upgrade apply
-
-Apply generated upgrade bytes to running Blockchain nodes to trigger a network upgrade.
-
-For public networks (Fuji Testnet or Mainnet), to complete this process,
-you must have access to the machine running your validator.
-If the CLI is running on the same machine as your validator, it can manipulate your node's
-configuration automatically. Alternatively, the command can print the necessary instructions
-to upgrade your node manually.
-
-After you update your validator's configuration, you need to restart your validator manually.
-If you provide the --avalanchego-chain-config-dir flag, this command attempts to write the upgrade file at that path.
-Refer to https://docs.avax.network/nodes/maintain/chain-config-flags#subnet-chain-configs for related documentation.
-
-**Usage:** 
-```bash
-avalanche subnet upgrade apply [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---avalanchego-chain-config-dir string    avalanchego's chain config file directory (default "/Users/owen.wahlgren/.avalanchego/chains")
---config create                          upgrade config for future subnet deployments (same as generate)
---force If                               true, don't prompt for confirmation of timestamps in the past
---fuji fuji                              apply upgrade existing fuji deployment (alias for `testnet`)
--h, --help help                          for apply
---local local                            apply upgrade existing local deployment
---mainnet mainnet                        apply upgrade existing mainnet deployment
---print if                               true, print the manual config without prompting (for public networks only)
---testnet testnet                        apply upgrade existing testnet deployment (alias for `fuji`)
---log-level string                       log level for the application (default "ERROR")
---skip-update-check skip                 check for new versions
-```
-
-#### upgrade export
-
-Export the upgrade bytes file to a location of choice on disk
-
-**Usage:** 
-```bash
-avalanche subnet upgrade export [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---force If                   true, overwrite a possibly existing file without prompting
--h, --help help              for export
---upgrade-filepath string    Export upgrade bytes file to location of choice on disk
---config string              config file (default is $HOME/.avalanche-cli/config.json)
---log-level string           log level for the application (default "ERROR")
---skip-update-check skip     check for new versions
-```
-
-#### upgrade generate
-
-The blockchain upgrade generate command builds a new upgrade.json file to customize your Blockchain. It
-guides the user through the process using an interactive wizard.
-
-**Usage:** 
-```bash
-avalanche subnet upgrade generate [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for generate
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-#### upgrade import
-
-Import the upgrade bytes file into the local environment
-
-**Usage:** 
-```bash
-avalanche subnet upgrade import [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help              for import
---upgrade-filepath string    Import upgrade bytes file into local environment
---config string              config file (default is $HOME/.avalanche-cli/config.json)
---log-level string           log level for the application (default "ERROR")
---skip-update-check skip     check for new versions
-```
-
-#### upgrade print
-
-Print the upgrade.json file content
-
-**Usage:** 
-```bash
-avalanche subnet upgrade print [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for print
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-#### upgrade vm
-
-The blockchain upgrade vm command enables the user to upgrade their Blockchain's VM binary. The command
-can upgrade both local Blockchains and publicly deployed Blockchains on Fuji and Mainnet.
-
-The command walks the user through an interactive wizard. The user can skip the wizard by providing
-command line flags.
-
-**Usage:** 
-```bash
-avalanche subnet upgrade vm [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---binary string             Upgrade to custom binary
---config upgrade            config for future subnet deployments
---fuji fuji                 upgrade existing fuji deployment (alias for `testnet`)
--h, --help help             for vm
---latest upgrade            to latest version
---local local               upgrade existing local deployment
---mainnet mainnet           upgrade existing mainnet deployment
---plugin-dir string         plugin directory to automatically upgrade VM
---print print               instructions for upgrading
---testnet testnet           upgrade existing testnet deployment (alias for `fuji`)
---version string            Upgrade to custom version
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### validators
-
-The blockchain validators command lists the validators of a blockchain's subnet and provides
-several statistics about them.
-
-**Usage:** 
-```bash
-avalanche subnet validators [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---cluster string            operate on the given cluster
---devnet operate            on a devnet network
---endpoint string           use the given endpoint for network operations
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for validators
--l, --local operate         on a local network
--m, --mainnet operate       on mainnet
--t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-### vmid
-
-The blockchain vmid command prints the virtual machine ID (VMID) for the given Blockchain.
-
-**Usage:** 
-```bash
-avalanche subnet vmid [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for vmid
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
 ## avalanche teleporter
 
-The teleporter command suite provides a collection of tools for interacting
-with Teleporter-Enabled Subnets.
+The messenger command suite provides a collection of tools for interacting
+with ICM messenger contracts.
 
 **Usage:** 
 ```bash
@@ -3828,88 +3249,12 @@ avalanche teleporter [subcommand] [flags]
 
 **Subcommands:**
 
-- [`bridge`](#bridge): The bridge command suite provides tools to deploy and manage Teleporter Bridges.
-
-Deprecation notice: use avalanche interchain tokenTransferrer' instead
-- [`deploy`](#deploy): Deploys Teleporter into a given Network and Subnet.
-- [`msg`](#msg): Sends and wait reception for a teleporter msg between two subnets (Currently only for local network).
-- [`relayer`](#relayer): The relayer command suite provides a collection of tools for deploying
-and configuring an ICM relayers.
-
-### bridge
-
-The bridge command suite provides tools to deploy and manage Teleporter Bridges.
-
-Deprecation notice: use avalanche interchain tokenTransferrer' instead
-
-**Usage:** 
-```bash
-avalanche teleporter bridge [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for bridge
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-**Subcommands:**
-
-- [`deploy`](#bridge-deploy): Deploys Token Bridge into a given Network and Subnets
-
-Deprecation notice: use 'avalanche interchain tokenTransferrer deploy
-
-#### bridge deploy
-
-Deploys Token Bridge into a given Network and Subnets
-
-Deprecation notice: use 'avalanche interchain tokenTransferrer deploy
-
-**Usage:** 
-```bash
-avalanche teleporter bridge deploy [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---c-chain-home set               the Transferrer's Home Chain into C-Chain
---c-chain-remote set             the Transferrer's Remote Chain into C-Chain
---cluster string                 operate on the given cluster
---deploy-erc20-home string       deploy a Transferrer Home for the given Chain's ERC20 Token
---deploy-native-home deploy      a Transferrer Home for the Chain's Native Token
---deploy-native-remote deploy    a Transferrer Remote for the Chain's Native Token
---devnet operate                 on a devnet network
---endpoint string                use the given endpoint for network operations
--f, --fuji testnet               operate on fuji (alias to testnet
--h, --help help                  for deploy
---home-blockchain string         set the Transferrer's Home Chain into the given CLI blockchain
---home-genesis-key use           genesis allocated key to deploy Transferrer Home
---home-key string                CLI stored key to use to deploy Transferrer Home
---home-private-key string        private key to use to deploy Transferrer Home
---home-rpc string                use the given RPC URL to connect to the home blockchain
--l, --local operate              on a local network
---remote-blockchain string       set the Transferrer's Remote Chain into the given CLI blockchain
---remote-genesis-key use         genesis allocated key to deploy Transferrer Remote
---remote-key string              CLI stored key to use to deploy Transferrer Remote
---remote-private-key string      private key to use to deploy Transferrer Remote
---remote-rpc string              use the given RPC URL to connect to the remote blockchain
---remote-token-decimals uint8    use the given number of token decimals for the Transferrer Remote [defaults to token home's decimals (18 for a new wrapped native home token)]
---remove-minter-admin remove     the native minter precompile admin found on remote blockchain genesis
--t, --testnet fuji               operate on testnet (alias to fuji)
---use-home string                use the given Transferrer's Home Address
---version string                 tag/branch/commit of Avalanche Interchain Token Transfer (ICTT) to be used (defaults to main branch)
---config string                  config file (default is $HOME/.avalanche-cli/config.json)
---log-level string               log level for the application (default "ERROR")
---skip-update-check skip         check for new versions
-```
+- [`deploy`](#deploy): Deploys ICM Messenger and Registry into a given L1.
+- [`sendMsg`](#sendmsg): Sends and wait reception for a ICM msg between two subnets.
 
 ### deploy
 
-Deploys Teleporter into a given Network and Subnet.
+Deploys ICM Messenger and Registry into a given L1.
 
 **Usage:** 
 ```bash
@@ -3922,15 +3267,17 @@ avalanche teleporter deploy [subcommand] [flags]
 --blockchain string                         deploy ICM into the given CLI blockchain
 --blockchain-id string                      deploy ICM into the given blockchain ID/Alias
 --c-chain deploy                            ICM into C-Chain
+--cchain-key string                         key to be used to pay fees to deploy ICM to C-Chain
 --cluster string                            operate on the given cluster
---deploy-messenger deploy                   Teleporter Messenger (default true)
---deploy-registry deploy                    Teleporter Registry (default true)
+--deploy-messenger deploy                   ICM Messenger (default true)
+--deploy-registry deploy                    ICM Registry (default true)
 --devnet operate                            on a devnet network
 --endpoint string                           use the given endpoint for network operations
---force-registry-deploy deploy              Teleporter Registry even if Messenger has already been deployed
+--force-registry-deploy deploy              ICM Registry even if Messenger has already been deployed
 -f, --fuji testnet                          operate on fuji (alias to testnet
 --genesis-key use                           genesis allocated key to fund ICM deploy
 -h, --help help                             for deploy
+--include-cchain deploy                     ICM also to C-Chain
 --key string                                CLI stored key to use to fund ICM deploy
 -l, --local operate                         on a local network
 --messenger-contract-address-path string    path to a messenger contract address file
@@ -3946,13 +3293,13 @@ avalanche teleporter deploy [subcommand] [flags]
 --skip-update-check skip                    check for new versions
 ```
 
-### msg
+### sendMsg
 
-Sends and wait reception for a teleporter msg between two subnets (Currently only for local network).
+Sends and wait reception for a ICM msg between two subnets.
 
 **Usage:** 
 ```bash
-avalanche teleporter msg [subcommand] [flags]
+avalanche teleporter sendMsg [subcommand] [flags]
 ```
 
 **Flags:**
@@ -3963,9 +3310,10 @@ avalanche teleporter msg [subcommand] [flags]
 --destination-address string    deliver the message to the given contract destination address
 --devnet operate                on a devnet network
 --endpoint string               use the given endpoint for network operations
+--etna-devnet operate           on an etna devnet network
 -f, --fuji testnet              operate on fuji (alias to testnet
 --genesis-key use               genesis allocated key as message originator and to pay source blockchain fees
--h, --help help                 for msg
+-h, --help help                 for sendMsg
 --hex-encoded given             message is hex encoded
 --key string                    CLI stored key to use as message originator and to pay source blockchain fees
 -l, --local operate             on a local network
@@ -3975,128 +3323,6 @@ avalanche teleporter msg [subcommand] [flags]
 --config string                 config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string              log level for the application (default "ERROR")
 --skip-update-check skip        check for new versions
-```
-
-### relayer
-
-The relayer command suite provides a collection of tools for deploying
-and configuring an ICM relayers.
-
-**Usage:** 
-```bash
-avalanche teleporter relayer [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
--h, --help help             for relayer
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-**Subcommands:**
-
-- [`deploy`](#relayer-deploy): Deploys an ICM Relayer for the given Network.
-- [`logs`](#relayer-logs): Shows pretty formatted AWM relayer logs
-- [`start`](#relayer-start): Starts AWM relayer on the specified network (Currently only for local network).
-- [`stop`](#relayer-stop): Stops AWM relayer on the specified network (Currently only for local network, cluster).
-
-#### relayer deploy
-
-Deploys an ICM Relayer for the given Network.
-
-**Usage:** 
-```bash
-avalanche teleporter relayer deploy [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---cluster string            operate on the given cluster
---devnet operate            on a devnet network
---endpoint string           use the given endpoint for network operations
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for deploy
--l, --local operate         on a local network
--t, --testnet fuji          operate on testnet (alias to fuji)
---version string            version to deploy (default "latest")
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-#### relayer logs
-
-Shows pretty formatted AWM relayer logs
-
-**Usage:** 
-```bash
-avalanche teleporter relayer logs [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---endpoint string           use the given endpoint for network operations
---first uint                output first N log lines
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for logs
---last uint                 output last N log lines
--l, --local operate         on a local network
---raw raw                   logs output
--t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-#### relayer start
-
-Starts AWM relayer on the specified network (Currently only for local network).
-
-**Usage:** 
-```bash
-avalanche teleporter relayer start [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---cluster string            operate on the given cluster
---endpoint string           use the given endpoint for network operations
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for start
--l, --local operate         on a local network
--t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
-```
-
-#### relayer stop
-
-Stops AWM relayer on the specified network (Currently only for local network, cluster).
-
-**Usage:** 
-```bash
-avalanche teleporter relayer stop [subcommand] [flags]
-```
-
-**Flags:**
-
-```bash
---cluster string            operate on the given cluster
---endpoint string           use the given endpoint for network operations
--f, --fuji testnet          operate on fuji (alias to testnet
--h, --help help             for stop
--l, --local operate         on a local network
--t, --testnet fuji          operate on testnet (alias to fuji)
---config string             config file (default is $HOME/.avalanche-cli/config.json)
---log-level string          log level for the application (default "ERROR")
---skip-update-check skip    check for new versions
 ```
 
 ## avalanche transaction
@@ -4178,6 +3404,93 @@ avalanche update [subcommand] [flags]
 -c, --confirm Assume        yes for installation
 -h, --help help             for update
 -v, --version version       for update
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+## avalanche validator
+
+The validator command suite provides a collection of tools for managing validator
+balance on P-Chain.
+
+Validator's balance is used to pay for continuous fee to the P-Chain. When this Balance reaches 0, 
+the validator will be considered inactive and will no longer participate in validating the L1
+
+**Usage:** 
+```bash
+avalanche validator [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+-h, --help help             for validator
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+**Subcommands:**
+
+- [`getBalance`](#getbalance): This command gets the remaining validator P-Chain balance that is available to pay
+P-Chain continuous fee
+- [`increaseBalance`](#increasebalance): This command increases the validator P-Chain balance
+
+### getBalance
+
+This command gets the remaining validator P-Chain balance that is available to pay
+P-Chain continuous fee
+
+**Usage:** 
+```bash
+avalanche validator getBalance [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--cluster string            operate on the given cluster
+--devnet operate            on a devnet network
+--endpoint string           use the given endpoint for network operations
+--etna-devnet operate       on an etna devnet network
+-f, --fuji testnet          operate on fuji (alias to testnet
+-h, --help help             for getBalance
+--l1 string                 name of L1 (required to get balance of bootstrap validators)
+-l, --local operate         on a local network
+-m, --mainnet operate       on mainnet
+-t, --testnet fuji          operate on testnet (alias to fuji)
+--validation-id string      validationIDStr of the validator
+--config string             config file (default is $HOME/.avalanche-cli/config.json)
+--log-level string          log level for the application (default "ERROR")
+--skip-update-check skip    check for new versions
+```
+
+### increaseBalance
+
+This command increases the validator P-Chain balance
+
+**Usage:** 
+```bash
+avalanche validator increaseBalance [subcommand] [flags]
+```
+
+**Flags:**
+
+```bash
+--balance float             amount of AVAX to increase validator's balance by
+--cluster string            operate on the given cluster
+--devnet operate            on a devnet network
+--endpoint string           use the given endpoint for network operations
+--etna-devnet operate       on an etna devnet network
+-f, --fuji testnet          operate on fuji (alias to testnet
+-h, --help help             for increaseBalance
+-k, --key string            select the key to use [fuji/devnet deploy only]
+--l1 string                 name of L1 (to increase balance of bootstrap validators only)
+-l, --local operate         on a local network
+-m, --mainnet operate       on mainnet
+-t, --testnet fuji          operate on testnet (alias to fuji)
+--validation-id string      validationIDStr of the validator
 --config string             config file (default is $HOME/.avalanche-cli/config.json)
 --log-level string          log level for the application (default "ERROR")
 --skip-update-check skip    check for new versions
