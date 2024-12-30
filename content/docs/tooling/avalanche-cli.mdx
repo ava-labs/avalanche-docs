@@ -1,6 +1,6 @@
 ---
 title: CLI Commands
-description: CLI is a command-line tool that gives developers access to everything Avalanche.
+description: Avalanche-CLI is a command-line tool that gives developers access to everything Avalanche.
 ---
 To get started, look at the documentation for the subcommands or jump right in with 
 ```bash
@@ -65,7 +65,7 @@ configuration, pass the -f flag.
 
 At the end of the call, the command prints the RPC URL you can use to interact with the Subnet.
 
-CLI only supports deploying an individual Blockchain once per network. Subsequent
+Avalanche-CLI only supports deploying an individual Blockchain once per network. Subsequent
 attempts to deploy the same Blockchain to the same network (local, Fuji, Mainnet) aren't
 allowed. If you'd like to redeploy a Blockchain locally for testing, you must first call
 avalanche network clean to reset all deployed chain state. Subsequent local deploys
@@ -86,7 +86,7 @@ or importing from blockchains running public networks
 - [`join`](#join): The subnet join command configures your validator node to begin validating a new Blockchain.
 
 To complete this process, you must have access to the machine running your validator. If the
-CLI is running on the same machine as your validator, it can generate or update your node's
+Avalanche-CLI is running on the same machine as your validator, it can generate or update your node's
 config file automatically. Alternatively, the command can print the necessary instructions
 to update your node manually. To complete the validation process, the Subnet's admins must add
 the NodeID of your validator to the Subnet's allow list by calling addValidator with your
@@ -352,7 +352,7 @@ The blockchain deploy command deploys your Blockchain configuration locally, to 
 
 At the end of the call, the command prints the RPC URL you can use to interact with the Subnet.
 
-CLI only supports deploying an individual Blockchain once per network. Subsequent
+Avalanche-CLI only supports deploying an individual Blockchain once per network. Subsequent
 attempts to deploy the same Blockchain to the same network (local, Fuji, Mainnet) aren't
 allowed. If you'd like to redeploy a Blockchain locally for testing, you must first call
 avalanche network clean to reset all deployed chain state. Subsequent local deploys
@@ -588,7 +588,7 @@ avalanche blockchain import public [subcommand] [flags]
 The subnet join command configures your validator node to begin validating a new Blockchain.
 
 To complete this process, you must have access to the machine running your validator. If the
-CLI is running on the same machine as your validator, it can generate or update your node's
+Avalanche-CLI is running on the same machine as your validator, it can generate or update your node's
 config file automatically. Alternatively, the command can print the necessary instructions
 to update your node manually. To complete the validation process, the Subnet's admins must add
 the NodeID of your validator to the Subnet's allow list by calling addValidator with your
@@ -980,7 +980,7 @@ avalanche blockchain vmid [subcommand] [flags]
 
 ## avalanche config
 
-Customize configuration for CLI
+Customize the configuration for Avalanche-CLI.
 
 **Usage:** 
 ```bash
@@ -1761,7 +1761,7 @@ If you'd like to import an existing key instead of generating one from scratch, 
 To delete a key, provide the keyName. The command prompts for confirmation
 before deleting the key. To skip the confirmation, provide the --force flag.
 - [`export`](#export): The key export command exports a created signing key. You can use an exported key in other
-applications or import it into another instance of CLI.
+applications or import it into another instance of the Avalanche-CLI.
 
 By default, the tool writes the hex encoded key to stdout. If you provide the --output
 flag, the command writes the key to a file of your choosing.
@@ -1823,7 +1823,7 @@ avalanche key delete [subcommand] [flags]
 ### export
 
 The key export command exports a created signing key. You can use an exported key in other
-applications or import it into another instance of CLI.
+applications or import it into another instance of the Avalanche-CLI.
 
 By default, the tool writes the hex encoded key to stdout. If you provide the --output
 flag, the command writes the key to a file of your choosing.
@@ -2148,7 +2148,7 @@ The node local command suite provides a collection of commands related to local 
 - [`refresh-ips`](#refresh-ips): (ALPHA Warning) This command is currently in experimental mode.
 
 The node refresh-ips command obtains the current IP for all nodes with dynamic IPs in the cluster,
-and updates the local node information used by CLI commands.
+and updates the local node information used by the Avalanche-CLI commands.
 - [`resize`](#resize): (ALPHA Warning) This command is currently in experimental mode.
 
 The node resize command can change the amount of CPU, memory and disk space available for the cluster nodes.
@@ -2311,7 +2311,7 @@ avalanche node destroy [subcommand] [flags]
 **Flags:**
 
 ```bash
---all destroy                    all existing clusters created by Avalanche CLI
+--all destroy                    all existing clusters created by the Avalanche-CLI
 --authorize-access authorize     CLI to release cloud resources
 -y, --authorize-all authorize    all CLI requests
 --authorize-remove authorize     CLI to remove all local files related to cloud nodes
@@ -2799,7 +2799,7 @@ avalanche node local track [subcommand] [flags]
 (ALPHA Warning) This command is currently in experimental mode.
 
 The node refresh-ips command obtains the current IP for all nodes with dynamic IPs in the cluster,
-and updates the local node information used by CLI commands.
+and updates the local node information used by the Avalanche-CLI commands.
 
 **Usage:** 
 ```bash
