@@ -13,10 +13,10 @@ import Chatbot from "@/components/chatbot"
 
 export const metadata = createMetadata({
   title: {
-    template: '%s | Avalanche Docs',
-    default: 'Avalanche Docs',
+    template: '%s | Avalanche Developers',
+    default: 'Avalanche for Developers',
   },
-  description: 'Developer documentation for everything related to the Avalanche ecosystem.',
+  description: 'Build your Fast & Interoperable Layer 1 Blockchain with Avalanche.',
   metadataBase: baseUrl,
 });
 

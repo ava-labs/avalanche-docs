@@ -75,7 +75,7 @@ export const integrations = defineCollections({
 export const guide = defineCollections({
   type: 'doc',
   async: true,
-  dir: 'content/guide',
+  dir: 'content/guides',
   schema: frontmatterSchema.extend({
     authors: z.array(z.string()),
     topics: z.array(z.string()),

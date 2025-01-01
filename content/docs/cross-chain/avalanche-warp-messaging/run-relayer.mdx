@@ -1,6 +1,6 @@
 ---
 title: Run a Relayer
-description: Reference relayer implementation for cross-chain Avalanche Warp Message delivery.
+description: Reference relayer implementation for cross-chain Avalanche Interchain Message delivery.
 ---
 
 
@@ -8,9 +8,9 @@ This repository contains off-chain services that help support Avalanche Intercha
 
 Currently implemented applications are 
 
-1. [ICM Relayer](https://github.com/ava-labs/awm-relayer/blob/main/relayer/README.md)
+1. [ICM Relayer](https://github.com/ava-labs/icm-services/blob/main/relayer/README.md)
     - Full-service cross-chain message delivery application that is configurable to listen to specific source and destination chain pairs and relay messages according to its configured rules.
-2. [Signature Aggregator](https://github.com/ava-labs/awm-relayer/blob/main/signature-aggregator/README.md)
+2. [Signature Aggregator](https://github.com/ava-labs/icm-services/blob/main/signature-aggregator/README.md)
     - Lightweight API that requests and aggregates signatures from validators for any ICM message, and returns a valid signed message that the user can then self-deliver to the intended destination chain.
 
 ## Updating dependencies and E2E testing

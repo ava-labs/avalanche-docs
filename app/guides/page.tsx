@@ -20,7 +20,7 @@ export default function Page(): React.ReactElement {
                     </p>
                     <p className="m-12 text-center ">
                         <Link
-                            href="https://github.com/ava-labs/avalanche-academy/tree/dev/content/guide"
+                            href="https://github.com/ava-labs/avalanche-academy/tree/dev/content/guides"
                             target='_blank'
                             className={buttonVariants({ size: 'lg', variant: 'default' })}
                         >
@@ -50,7 +50,7 @@ export default function Page(): React.ReactElement {
                             <div className="flex flex-wrap items-center gap-4 text-xs">
                                 {guide.data.topics.map(topic => (
                                     <span key={topic}
-                                        className="relative z-10 rounded-full bg-accent px-3 py-1.5 font-medium text-muted-foreground"
+                                        className="relative z-10 rounded-full bg-fd-accent px-3 py-1.5 font-medium text-muted-foreground"
                                     >
                                         {topic}
                                     </span>

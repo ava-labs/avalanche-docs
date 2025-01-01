@@ -138,7 +138,7 @@ export default function Integrations({ list }: { list: any[] }) {
     return (
         <div>
             <div className='w-100 flex flex-col justify-center items-center'>
-                <div className="my-6 inline-flex items-center gap-2 rounded-full border bg-secondary/50 p-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground w-1/2 mb-4">
+                <div className="my-6 inline-flex items-center gap-2 rounded-full border bg-secondary/50 p-1.5 text-sm transition-colors hover:bg-fd-accent hover:text-accent-foreground w-1/2 mb-4">
                     <div className='ms-1 text-muted-foreground '>
                         <SearchIcon size={"16"} strokeWidth={2} />
                     </div>

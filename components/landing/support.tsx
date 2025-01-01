@@ -18,14 +18,14 @@ const support = [
     title: "<strong>Twitter</strong>.",
     description:
       "Follow the official Avalanche Developers handle on Twitter for latest news and development updates.",
-    href: "/docs/avalanche-l1s"
+    href: "https://x.com/AvaxDevelopers"
   },
   {
     id: 3,
     title: "Avalanche <strong>Support</strong>.",
     description:
       "Get direct answers and support for everything related to Avalanche: Network Basics, Wallets, Explorers, Staking, etc.",
-    href: "https://support.avax.network/en/"
+    href: "https://support.avax.network/"
   }
 ];
 
@@ -43,7 +43,7 @@ export default function Support() {
                 key={support.id}
                 href={support.href}
                 className={cn(
-                  "group block border-l-[1.2px] md:min-h-[200px] border-t-[1.2px] md:border-t-0 transform-gpu hover:bg-[#dfe3e8] dark:hover:bg-[#1c1c1c]",
+                  "group block border-l-[1.2px] border-r-[1.2px] md:border-r-0 md:min-h-[200px] border-t-[1.2px] md:border-t-0 transform-gpu hover:bg-[#dfe3e8] dark:hover:bg-[#1c1c1c]",
                   "transition-all duration-300 ease-in-out relative overflow-hidden"
                 )}
               >

@@ -4,7 +4,7 @@ import { loader } from 'fumadocs-core/source';
 import { guide } from '@/.source';
 
 export const loaderOutput = loader({
-  baseUrl: '/guide',
+  baseUrl: '/guides',
   source: createMDXSource(guide, []),
 });
 

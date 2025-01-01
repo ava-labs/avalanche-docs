@@ -35,7 +35,7 @@ export default async function Page(props: {
     if (!page) notFound();
 
     const { body: MDX } = await page.data.load();
-    const path = `content/guide/${page.file.path}`;
+    const path = `content/guides/${page.file.path}`;
 
     return (
         <>
@@ -56,7 +56,7 @@ export default async function Page(props: {
                 </h1>
                 <p className="mb-4 text-white/80">{page.data.description}</p>
                 <Link
-                    href="/guide"
+                    href="/guides"
                     className={buttonVariants({ size: 'sm', variant: 'secondary' })}
                 >
                     Back
@@ -111,7 +111,7 @@ export default async function Page(props: {
                         <div className="flex flex-wrap items-center gap-4 text-xs">
                             {page.data.topics.map((item: string) => (
                                 <span key={item}
-                                    className="relative z-10 rounded-full bg-accent px-3 py-1.5 font-medium text-muted-foreground"
+                                    className="relative z-10 rounded-full bg-fd-accent px-3 py-1.5 font-medium text-muted-foreground"
                                 >
                                     {item}
                                 </span>
@@ -150,7 +150,7 @@ export async function generateMetadata(props: {
 
   const image = {
     alt: 'Banner',
-    url: `/api/og/guide/${params.slug[0]}?${imageParams.toString()}`,
+    url: `/api/og/guides/${params.slug[0]}?${imageParams.toString()}`,
     width: 1200,
     height: 630,
   };

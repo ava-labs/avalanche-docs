@@ -71,7 +71,7 @@ function Highlight({
 }): React.ReactElement {
   return (
   <a href={link}>
-    <div className="border-l border-t px-6 py-12 hover:bg-accent">
+    <div className="border-l border-t px-6 py-12 hover:bg-fd-accent">
       <div className="mb-4 flex flex-row items-center gap-2 text-fd-muted-foreground">
         <Icon className="size-4" />
         <h2 className="text-sm font-medium">{heading}</h2>
@@ -84,25 +84,13 @@ function Highlight({
 
 function Hero(): React.ReactElement {
   return (
-    <div className="container relative z-[2] flex flex-col items-center overflow-hidden bg-fd-background px-6 pt-12 text-center md:py-16" style={{
-      // backgroundImage: "radial-gradient(ellipse at top, transparent 60%, hsl(0, 100%, 50%, 0.2)), linear-gradient(to bottom, transparent 30%, hsl(0, 100%, 50%, 0.2)), linear-gradient(to bottom, hsl(var(--background)) 40%, transparent)"
-    }}>
-      <div className="flex items-center justify-center mb-6">
-        <img
-          src="/logo-black.png"
-          alt="Avalanche Docs Logo"
-          className="h-16 md:h-20 dark:hidden"
-        />
-        <img
-          src="/logo-white.png"
-          alt="Avalanche Docs Logo"
-          className="h-16 md:h-20 hidden dark:block"
-        />
-        {/* <span className="ml-2 text-5xl font-extrabold text-foreground" style={{ fontFamily: 'Roboto, sans-serif', marginTop: '2.5rem' }}>docs</span> */}
-      </div>
-      {/* <p className="mb-6 h-fit p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl" style={{ lineHeight: '2' }}>
-        Avalanche provides the tech stack for building <Link href="/avalanche-l1s"><b className="text-foreground font-medium underline">Layer 1 blockchains</b></Link> with <b className="text-foreground font-bold text-red-500"><i>blazing-fast</i></b> <Link href="/learn/avalanche-consensus"><b className="text-foreground font-medium underline">Avalanche Consensus</b></Link> while supporting the deployment of <Link href="/dapps"><b className="text-foreground font-medium underline">EVM-compatible smart contracts</b></Link> on the C-Chain.
-      </p> */}
+    <div className="flex flex-col justify-center items-center px-4 mb-16">
+      <h2 className="font-display text-3xl tracking-tight sm:text-5xl text-center">
+        Avalanche Docs
+      </h2>
+      <p className="mt-4 text-lg tracking-tight text-zinc-400 text-center">
+        Full-Stack Avalanche Development, All in One Place
+      </p>
     </div>
   );
 }
@@ -123,7 +111,7 @@ function Introduction(): React.ReactElement {
             code="avalanche blockchain create myblockchain"
           />
             <div className="relative mt-20">
-            <Link href="https://academy.avax.network">
+            <Link href="https://developers.avax.network/academy">
               <img 
               src="/wolfie.png" 
               alt="Avalanche Logo" 
@@ -168,21 +156,21 @@ function Features(): React.ReactElement {
         description="We provide a suite of tools to make your development experience as smooth as possible."
       >
       <div className="mt-8 flex flex-col gap-4">
-        <Link href="/docs/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+        <Link href="/docs/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <Terminal />
             <h3 className="font-semibold">Avalanche CLI</h3>
             <p className="text-sm text-fd-muted-foreground">
               Command line interface for everything Avalanche.
             </p>
         </Link>
-        <Link href="https://github.com/ava-labs/avalanche-starter-kit" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+        <Link href="https://github.com/ava-labs/avalanche-starter-kit" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
           <Cable />
           <h3 className="font-semibold">Avalanche Starter Kit</h3>
           <p className="text-sm text-fd-muted-foreground">
             Quickstart your journey into Avalanche with our Starter Kit.
           </p>
         </Link>
-        <Link href="https://github.com/ava-labs/hypersdk" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+        <Link href="https://github.com/ava-labs/hypersdk" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <IndentDecrease />
             <h3 className="font-semibold">HyperSDK</h3>
             <p className="text-sm text-fd-muted-foreground">
@@ -198,37 +186,37 @@ function Features(): React.ReactElement {
         description="Well documented APIs for the Avalanche Network."
       >
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Link href="/docs/api-reference/c-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/c-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <h3 className="font-semibold">C-Chain API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for the Contract Chain.
             </p>
           </Link>
-          <Link href="/docs/api-reference/p-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/p-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <h3 className="font-semibold">P-Chain API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for the Platform Chain.
             </p>
           </Link>
-          <Link href="/docs/api-reference/x-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/x-chain/api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <h3 className="font-semibold">X-Chain API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for the Exchange Chain.
             </p>
           </Link>
-          <Link href="/docs/api-reference/admin-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/admin-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <h3 className="font-semibold">AvalancheGo API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for AvalancheGo.
             </p>
           </Link>
-          <Link href="/docs/api-reference/subnet-evm-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="/docs/api-reference/subnet-evm-api" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <h3 className="font-semibold">Subnet-EVM API</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for Subnet-EVM.
             </p>
           </Link>
-          <Link href="https://developers.avacloud.io/introduction" target="_blank" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-accent">
+          <Link href="https://developers.avacloud.io/introduction" target="_blank" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <h3 className="font-semibold">AvaCloud APIs</h3>
             <p className="text-sm text-fd-muted-foreground">
               API reference for AvaCloud.

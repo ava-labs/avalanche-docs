@@ -52,12 +52,12 @@ const features = [
   },
   {
     id: 5,
-    label: "Inspire",
-    title: "Share Your <strong>Journey</strong>.",
+    label: "Contribute",
+    title: "Create <strong>Builder Guides</strong>.",
     description:
-      "Build in public: share your learnings, showcase certificates, and connect with fellow Avalanche developers.",
+      "Blogs and Tutorials: share your insights, best practices, and lessons learned while building on Avalanche.",
     icon: Users,
-    href: "/share"
+    href: "/guides"
   },
   {
     id: 6,
@@ -91,7 +91,7 @@ export default function Features() {
                 key={feature.id}
                 href={feature.href}
                 className={cn(
-                  "group block border-l-[1.2px] md:min-h-[240px] border-t-[1.2px] md:border-t-0 transform-gpu hover:bg-[#dfe3e8] dark:hover:bg-[#1c1c1c]",
+                  "group block border-l-[1.2px] border-r-[1.2px] md:border-r-0 md:min-h-[240px] border-t-[1.2px] md:border-t-0 transform-gpu hover:bg-[#dfe3e8] dark:hover:bg-[#1c1c1c]",
                   index >= 3 && "md:border-t-[1.2px]",
                   "transition-all duration-300 ease-in-out"
                 )}

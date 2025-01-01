@@ -15,10 +15,10 @@ const ecosystem = [
   },
   {
     id: 2,
-    title: "Organize <strong>Events</strong>.",
+    title: "Check our <strong>Events</strong>.",
     description:
-      "Organize technical workshops and community meetups with support from Team1 DAO and our DevRel team.",
-    href: "/docs/avalanche-l1s"
+      "Connect with our team at Summit, participate in sponsored hackathons, and organize workshops and meetups.",
+    href: "https://www.avalanchesummitemea.com/"
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const ecosystem = [
 
 export default function Ecosystem() {
   return (
-    <div className="flex flex-col justify-center items-center px-4 mb-16">
+    <div className="flex flex-col justify-center items-center px-4 mb-16" id="ecosystem">
       <h2 className="font-display text-3xl tracking-tight sm:text-5xl text-center flex items-center gap-3">
         <AudioLines className="w-8 h-8 sm:w-10 sm:h-10" /> Ecosystem
       </h2>
@@ -43,7 +43,7 @@ export default function Ecosystem() {
                 key={ecosystem.id}
                 href={ecosystem.href}
                 className={cn(
-                  "group block border-l-[1.2px] md:min-h-[200px] border-t-[1.2px] md:border-t-0 transform-gpu hover:bg-[#dfe3e8] dark:hover:bg-[#1c1c1c]",
+                  "group block border-l-[1.2px] border-r-[1.2px] md:border-r-0 md:min-h-[200px] border-t-[1.2px] md:border-t-0 transform-gpu hover:bg-[#dfe3e8] dark:hover:bg-[#1c1c1c]",
                   "transition-all duration-300 ease-in-out relative overflow-hidden"
                 )}
               >

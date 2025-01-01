@@ -1,5 +1,5 @@
 
-import { ArrowLeftRight, Coins, MailIcon, SquareCode, SquareIcon, SquareStackIcon, TerminalIcon, Triangle } from 'lucide-react';
+import { ArrowLeftRight, Coins, MailIcon, SquareCode, SquareIcon, SquareStackIcon, TerminalIcon, Triangle, HexagonIcon } from 'lucide-react';
 
 export type Course = {
     name: string;
@@ -112,6 +112,17 @@ const officialCourses: Course[] = [
         tools: ["HyperSDK"],
         languages: ["Go", "Typescript"],
         instructors: ["Aaron Buchwald", "Ilya", "Rodrigo Villar", "Martin Eckardt", "Owen Wahlgren"]
+    },
+    {
+        name:"Chainlink on your L1 via ICM",
+        description:"Utilize Interchain Messaging to make Chainlink services available on any blockchain in the Avalanche Network",
+        slug:"icm-chainlink",
+        icon: <HexagonIcon />,
+        status: "featured",
+        duration: "2.5 hours",
+        tools: ["ICM", "Chainlink VRF"],
+        languages: ["Solidity"],
+        instructors: ["Martin Eckardt", "Andrea Vargas", "Ash"]
     }
     /*{
         name:"Chainlink VRF with Interchain Messaging ",

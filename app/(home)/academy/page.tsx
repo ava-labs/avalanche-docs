@@ -28,7 +28,7 @@ function Courses(props: { title: string, description: string, courses: any[] }):
     <div className="py-12 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto w-full lg:mx-0">
-          <h2 className="text-center text-5xl font-bold tracking-tight sm:text-10xl">{props.title}</h2>
+          <h2 className="font-display text-3xl tracking-tight sm:text-5xl text-center">{props.title}</h2>
           <p className="mt-12 text-center text-lg leading-8 text-muted-foreground">
             {props.description}
           </p>
@@ -46,7 +46,7 @@ function Courses(props: { title: string, description: string, courses: any[] }):
                 </span>
                 {[...course.tools, ...course.languages].map((item) => (
                   <span key={item}
-                    className="relative z-10 rounded-full bg-accent px-3 py-1.5 font-medium text-muted-foreground"
+                    className="relative z-10 rounded-full bg-fd-accent px-3 py-1.5 font-medium text-muted-foreground"
                   >
                     {item}
                   </span>
