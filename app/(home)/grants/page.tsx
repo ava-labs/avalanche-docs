@@ -3,10 +3,6 @@
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Zap, Cpu, Code, Coins } from 'lucide-react'
-import { useCallback } from 'react'
-import Particles from "react-particles"
-import { loadSlim } from "tsparticles-slim"
-import type { Engine } from "tsparticles-engine"
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 
@@ -49,87 +45,10 @@ function ProgramCard({ title, description, icon, color, arrowColor }: ProgramCar
 
 export default function Page() {
   const { resolvedTheme } = useTheme()
-  const opacity = resolvedTheme === "dark" ? .1 : .5
   const arrowColor = resolvedTheme === "dark" ? "white" : "black"
-
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine)
-  }, [])
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-      <div className="absolute top-0 left-0 right-0 h-[32rem] bg-gradient-to-br from-red-500 to-red-500 opacity-20 blur-3xl dark:hidden" />
-      
-      <Particles
-      id="tsparticles"
-      init={particlesInit}
-      options={{
-        background: {
-        color: {
-          value: "transparent",
-        },
-        },
-        fpsLimit: 120,
-        interactivity: {
-        events: {
-          onClick: {
-          enable: true,
-          mode: "repulse",
-          },
-          resize: true,
-        },
-        modes: {
-          push: {
-          quantity: 4,
-          },
-          repulse: {
-          distance: 200,
-          duration: 0.4,
-          },
-        },
-        },
-        particles: {
-        color: {
-          value: "#ffffff",
-        },
-        links: {
-          color: "#ffffff",
-          distance: 215,
-          enable: true,
-          opacity: opacity,
-          width: 3,
-        },
-        move: {
-          direction: "none",
-          enable: true,
-          outModes: {
-          default: "bounce",
-          },
-          random: false,
-          speed: 0.5,
-          straight: false,
-        },
-        number: {
-          density: {
-          enable: true,
-          area: 900,
-          },
-          value: 80,
-        },
-        opacity: {
-          value: opacity,
-        },
-        shape: {
-          type: "circle",
-        },
-        size: {
-          value: { min: 8, max: 18 },
-        },
-        },
-        detectRetina: true,
-      }}
-      />
       
       <main className="relative container mx-auto px-4 py-12 space-y-24">
       {/* Hero Section */}

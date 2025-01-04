@@ -16,7 +16,6 @@ export default function RootLayout({
   return (
     <HomeLayout {...integrationPageOptions}>
     {children}
-    <Footer />
     </HomeLayout>
   )
 }
