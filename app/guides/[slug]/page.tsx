@@ -13,10 +13,10 @@ import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { TypeTable } from "fumadocs-ui/components/type-table";
-import { AutoTypeTable } from '@/components/type-table';
+import { AutoTypeTable } from '@/components/content-design/type-table';
 import { Heading } from 'fumadocs-ui/components/heading';
-import YouTube from "@/components/youtube";
-import Gallery from "@/components/gallery";
+import YouTube from "@/components/content-design/youtube";
+import Gallery from "@/components/content-design/gallery";
 import { cn } from "@/utils/cn";
 import {
   CodeBlock,
@@ -24,8 +24,8 @@ import {
   Pre,
 } from "fumadocs-ui/components/codeblock";
 import { BadgeCheck } from "lucide-react";
-import Mermaid from "@/components/mermaid";
-import Comments from '@/components/comments';
+import Mermaid from "@/components/content-design/mermaid";
+import Comments from '@/components/ui/comments';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;

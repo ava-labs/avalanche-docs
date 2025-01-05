@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { integrationPageOptions } from '@/app/layout.config';
-import { Footer } from '@/components/footer';
+import { Footer } from '@/components/navigation/footer';
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
 
 export const metadata: Metadata = {

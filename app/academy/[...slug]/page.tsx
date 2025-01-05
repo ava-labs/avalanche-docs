@@ -21,17 +21,17 @@ import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { TypeTable } from "fumadocs-ui/components/type-table";
-import { AutoTypeTable } from '@/components/type-table';
+import { AutoTypeTable } from '@/components/content-design/type-table';
 import { Heading } from 'fumadocs-ui/components/heading';
 import Quiz from '@/components/quizzes/quiz';
-import YouTube from "@/components/youtube";
-import Gallery from "@/components/gallery";
+import YouTube from "@/components/content-design/youtube";
+import Gallery from "@/components/content-design/gallery";
 import {
   CodeBlock,
   type CodeBlockProps,
   Pre,
 } from "fumadocs-ui/components/codeblock";
-import Mermaid from "@/components/mermaid";
+import Mermaid from "@/components/content-design/mermaid";
 
 export const dynamicParams = false;
 

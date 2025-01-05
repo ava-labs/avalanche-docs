@@ -9,7 +9,7 @@ import type { ReactNode } from 'react';
 import { baseUrl, createMetadata } from '@/utils/metadata';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import Chatbot from "@/components/chatbot"
+import Chatbot from "@/components/ui/chatbot"
 
 export const metadata = createMetadata({
   title: {

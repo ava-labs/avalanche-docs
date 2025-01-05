@@ -8,7 +8,7 @@ import {
 import Link from 'next/link';
 import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/utils/cn';
-import { CodeBlock } from '@/components/code-block';
+import { CodeBlock } from '@/components/content-design/code-block';
 import { File, Files, Folder } from 'fumadocs-ui/components/files';
 import { DeployBlockchainAnimation } from '@/app/(home)/page.client';
 
