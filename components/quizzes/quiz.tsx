@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { saveQuizResponse, getQuizResponse, resetQuizResponse } from '@/utils/indexedDB';
+import { saveQuizResponse, getQuizResponse, resetQuizResponse } from '@/utils/quizzes/indexedDB';
 import Image from 'next/image';
 import { cn } from '@/utils/cn';
 import { buttonVariants } from '@/components/ui/button';

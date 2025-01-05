@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { getQuizResponse } from '@/utils/indexedDB';
+import { getQuizResponse } from '@/utils/quizzes/indexedDB';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/utils/cn';
 import quizDataImport from '@/components/quizzes/quizData.json';

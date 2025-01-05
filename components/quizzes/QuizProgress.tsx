@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { getQuizResponse } from '@/utils/indexedDB';
+import { getQuizResponse } from '@/utils/quizzes/indexedDB';
 import quizData from './quizData.json';
 
 const QuizProgress: React.FC = () => {
