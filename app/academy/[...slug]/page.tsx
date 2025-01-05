@@ -11,7 +11,7 @@ import { getCoursePage, getCoursePages, type Page } from '@/utils/course-loader'
 import { createMetadata } from '@/utils/metadata';
 import IndexedDBComponent from '@/components/tracker'
 import { Callout } from 'fumadocs-ui/components/callout';
-import Instructors from '@/components/instructor';
+import Instructors from '@/components/content-design/instructor';
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/utils/cn';

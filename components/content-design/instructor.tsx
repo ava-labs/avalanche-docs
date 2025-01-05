@@ -2,19 +2,6 @@ import {getInstructorsByNames} from '@/content/common/intro/instructors'
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 
-function Instructor ({ id } : { id : string }){
-    return (
-      <div>
-        <iframe
-          className="aspect-video w-full"
-          src={"https://www.youtube.com/embed/" + id}
-          title="YouTube Video Player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        ></iframe>
-      </div>
-    );
-  };
-
 export default function Instructors ({ names } : { names : string[] }) {
     return (
         <div className="flex flex-col space-y-4">
