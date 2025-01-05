@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import * as AvatarPrimitive from "@radix-ui/react-avatar";

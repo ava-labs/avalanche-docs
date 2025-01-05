@@ -16,7 +16,7 @@ import 'fumadocs-twoslash/twoslash.css';
 import { Popup, PopupContent, PopupTrigger } from "fumadocs-twoslash/ui";
 import YouTube from "@/components/content-design/youtube";
 import Gallery from "@/components/content-design/gallery";
-import { cn } from "./utils/cn";
+import { cn } from "@/utils/cn";
 import { BadgeCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 

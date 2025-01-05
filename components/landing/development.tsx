@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Plus, ArrowUpRight, GitPullRequest } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import Link from "next/link";
 
 const development = [

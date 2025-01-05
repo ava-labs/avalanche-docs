@@ -2,7 +2,7 @@
 
 import React from "react";
 import { BadgeHelp, ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import Link from "next/link";
 
 const support = [
