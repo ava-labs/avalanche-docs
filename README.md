@@ -1,4 +1,4 @@
-# Avalanche Developer Docs
+# Avalanche Builder Hub
 
 <div align="center">
   <img src="public/logo.png?raw=true">
@@ -6,12 +6,12 @@
 
 ## Overview
 
-This repository contains the contents for the Avalanche Developer Docs
-deployed at [https://docs.avax.network](https://docs.avax.network).
+This repository contains the contents for the Avalanche Builder Hub. It hosts the Docs, the
+Avalanche Academy and the integrations directory and is deployed at [https://docs.avax.network](https://docs.avax.network).
 
 ## Contributing
 
-Contributing to the docs site is a great way to get involved with the Avalanche dev community!
+Contributing to the Avalanche Builder Hub is a great way to get involved with the Avalanche dev community!
 Here's how to get started:
 
 ### Quick Fixes
