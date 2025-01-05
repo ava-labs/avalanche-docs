@@ -1,18 +1,13 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { AlbumIcon, Workflow, BadgeDollarSign, Sprout, Layers, MonitorCheck, Mail, Webhook } from 'lucide-react';
+import { AlbumIcon, Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote } from 'lucide-react';
 import Image from 'next/image';
-import Preview9000 from '@/public/9000-logo.png';
-import CoursePreview from '@/public/course-preview.png';
+import Preview9000 from '@/public/nav-banner/9000-logo.png';
+import CoursePreview from '@/public/nav-banner/course-preview.png';
+import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
 
 export const linkItems: LinkItemType[] = [
-  {
-    icon: <BadgeDollarSign />,
-    text: 'Grants',
-    url: '/grants',
-    active: 'nested-url',
-  },
   {
     icon: <AlbumIcon />,
     text: 'Guides',
@@ -167,6 +162,71 @@ export const baseOptions: BaseLayoutProps = {
           },
         },
       ],
+    },
+    {
+      type: 'menu',
+      text: 'Grants',
+      url: '/grants',
+      items: [
+        {
+           menu: {
+             banner: (
+               <div className="-mx-3 -mt-3">
+                 <Image
+                   src={CodebaseBanner}
+                   alt="Preview"
+                   className="rounded-t-lg object-cover"
+                   style={{
+                     maskImage:
+                       'linear-gradient(to bottom,white 60%,transparent)',
+                   }}
+                 />
+               </div>
+             ),
+             className: 'md:row-span-2',
+           },
+           icon: <BriefcaseBusiness />,
+           text: 'Codebase',
+           description: 'We help transform good ideas into great web3 companies & ambitious builders into extraordinary founders.',
+           url: 'https://codebase.avax.network/',
+         },
+         {
+           icon: <Cpu />,
+           text: 'InfraBuidl',
+           description: "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
+           url: 'https://www.avax.network/infrabuidl-program',
+           menu: {
+             className: 'lg:col-start-2',
+           },
+         },
+         {
+           icon: <Bot />,
+           text: 'InfraBuidl(AI)',
+           description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure',
+           url: 'https://www.avax.network/infrabuidl-ai-program',
+           menu: {
+             className: 'lg:col-start-2',
+           },
+         },
+         {
+           icon: <MessageSquareQuote />,
+           text: 'Retro9000',
+           description: "Build innovative projects on Avalanche. Get rewarded for your creativity.",
+           url: 'https://retro9000.avax.network/',
+           menu: {
+             className: 'lg:col-start-3 lg:row-start-1',
+           },
+         },
+         {
+           icon: <Snowflake />,
+           text: 'Blizzard Fund',
+           description: "A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support.",
+           url: 'https://www.blizzard.fund/',
+           menu: {
+             className: 'lg:col-start-3',
+           },
+         },
+       ],
     },
     ...linkItems,
   ],
