@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getIntegrationPage, getIntegrationPages } from '@/utils/integrations-loader';
+import { getIntegrationPage, getIntegrationPages } from '@/utils/content-loader/integrations-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';

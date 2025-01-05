@@ -1,7 +1,7 @@
-import { getDocsPages } from '@/utils/docs-loader'
+import { getDocsPages } from '@/utils/content-loader/docs-loader'
 import { createSearchAPI } from 'fumadocs-core/search/server'
-import { getCoursePages } from '@/utils/course-loader';
-import { getIntegrationPages } from '@/utils/integrations-loader';
+import { getCoursePages } from '@/utils/content-loader/course-loader';
+import { getIntegrationPages } from '@/utils/content-loader/integrations-loader';
 
 export const { GET } = createSearchAPI('advanced', {
   indexes: await Promise.all([

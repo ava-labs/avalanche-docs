@@ -1,7 +1,7 @@
 import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
-import { docsPageTree } from '@/utils/docs-loader';
+import { docsPageTree } from '@/utils/content-loader/docs-loader';
 import 'fumadocs-twoslash/twoslash.css';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import { ArrowUpRight } from 'lucide-react';

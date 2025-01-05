@@ -1,7 +1,7 @@
 import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
-import { coursePageTree } from '@/utils/course-loader';
+import { coursePageTree } from '@/utils/content-loader/course-loader';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import { ArrowUpRight } from 'lucide-react';
 

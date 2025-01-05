@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getGuidePage, getGuidePages } from '@/utils/guide-loader';
+import { getGuidePage, getGuidePages } from '@/utils/content-loader/guide-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon, MessagesSquare } from 'lucide-react';

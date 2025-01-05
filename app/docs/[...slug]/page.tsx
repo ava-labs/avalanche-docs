@@ -10,7 +10,7 @@ import { Card, Cards } from 'fumadocs-ui/components/card';
 import { Popup, PopupContent, PopupTrigger } from 'fumadocs-twoslash/ui';
 import { notFound } from 'next/navigation';
 import { createMetadata } from '@/utils/metadata';
-import { getDocsPage, getDocsPages, type Page, loaderOutput } from '@/utils/docs-loader';
+import { getDocsPage, getDocsPages, type Page, loaderOutput } from '@/utils/content-loader/docs-loader';
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Callout } from "fumadocs-ui/components/callout";

@@ -1,6 +1,6 @@
 "use client"
 
-import { getIntegrationPages } from '@/utils/integrations-loader';
+import { getIntegrationPages } from '@/utils/content-loader/integrations-loader';
 import Link from 'next/link';
 import { cn } from '@/utils/cn';
 import { buttonVariants } from '@/components/ui/button';

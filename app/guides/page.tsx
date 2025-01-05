@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getGuidePages } from '@/utils/guide-loader';
+import { getGuidePages } from '@/utils/content-loader/guide-loader';
 import { buttonVariants } from '@/components/ui/button';
 import { SiX } from '@icons-pack/react-simple-icons';
 

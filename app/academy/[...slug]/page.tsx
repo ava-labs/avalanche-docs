@@ -7,7 +7,7 @@ import {
 } from 'fumadocs-ui/page';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { notFound } from 'next/navigation';
-import { getCoursePage, getCoursePages, type Page } from '@/utils/course-loader';
+import { getCoursePage, getCoursePages, type Page } from '@/utils/content-loader/course-loader';
 import { createMetadata } from '@/utils/metadata';
 import IndexedDBComponent from '@/components/tracker'
 import { Callout } from 'fumadocs-ui/components/callout';
