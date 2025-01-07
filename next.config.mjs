@@ -987,7 +987,7 @@ const config = {
       },
       {
         source: '/learn/:path*',
-        destination: '/protocol/:path*',
+        destination: '/quick-start/:path*',
         permanent: true,
       },
       // {
