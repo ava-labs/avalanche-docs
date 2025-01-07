@@ -202,6 +202,8 @@ const staticRedirects: RedirectMap = {
   '/subnets/wagmi-subnet': '/avalanche-l1s/wagmi-avalanche-l1',
   '/avalanche-l1s/upgrade/customize-avalanche-l1': '/evm-l1s/custom-precompiles/introduction',
   '/avalanche-l1s/c-chain-or-avalanche-l1': '/dapps/c-chain-or-avalanche-l1',
+  '/dapps/chain-settings': '/dapps',
+  '/dapps/block-explorers': '/integrations',
 };
 
 const wildcardRedirects = [
