@@ -18,7 +18,7 @@ This allows you to specify a config to be passed into the X-Chain. The default v
 
 Default values are overridden only if explicitly specified in the config.
 
-Enables AVM transaction indexing if set to `true`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](/api-reference/x-chain/api#avmgetaddresstxs).
+Enables AVM transaction indexing if set to `true`. When set to `true`, AVM transactions are indexed against the `address` and `assetID` involved. This data is available via `avm.getAddressTxs` [API](/docs/api-reference/x-chain/api#avmgetaddresstxs).
 
 <Callout title="Note">
 If `index-transactions` is set to true, it must always be set to true for the node's lifetime. If set to `false` after having been set to `true`, the node will refuse to start unless `index-allow-incomplete` is also set to `true` (see below).

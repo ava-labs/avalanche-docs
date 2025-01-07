@@ -159,7 +159,7 @@ curl -X POST --data '{
 ```
 
 For more information on dynamic fees see the [C-Chain section of the transaction fee
-documentation](/api-reference/standards/guides/txn-fees#c-chain-fees).
+documentation](/docs/api-reference/standards/guides/txn-fees#c-chain-fees).
 
 #### `eth_getChainConfig`
 
@@ -229,11 +229,11 @@ To interact with other instances of the EVM AVAX endpoints:
 ### `avax.export`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api).
 </Callout>
 
 Export an asset from the C-Chain to X-Chain or P-Chain. If exporting to the X-Chain, you must call the
-X-Chain's [`avm.import`](/api-reference/x-chain/api#avmimport).
+X-Chain's [`avm.import`](/docs/api-reference/x-chain/api#avmimport).
 
 **Signature:**
 
@@ -288,13 +288,13 @@ curl -X POST --data '{
 ### `avax.exportAVAX`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api).
 </Callout>
 
-**DEPRECATED—instead use** [`avax.export`](/api-reference/c-chain/api#avaxexport).
+**DEPRECATED—instead use** [`avax.export`](/docs/api-reference/c-chain/api#avaxexport).
 
 Send AVAX from the C-Chain to X-Chain or P-Chain. If exporting to the X-Chain, you must call the
-X-Chain's [`avm.import`](/api-reference/x-chain/api#avmimport) with assetID `AVAX`
+X-Chain's [`avm.import`](/docs/api-reference/x-chain/api#avmimport) with assetID `AVAX`
 on the X-Chain to complete the transfer.
 
 **Signature:**
@@ -355,7 +355,7 @@ curl -X POST --data '{
 ### `avax.exportKey`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api).
 </Callout>
 
 Get the private key that controls a given address. The returned private key can be added to a user
@@ -604,7 +604,7 @@ This gives response:
 ### `avax.import`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api).
 </Callout>
 
 Finalize the transfer of a non-AVAX or AVAX from X-Chain or P-Chain to the C-Chain.
@@ -667,10 +667,10 @@ curl -X POST --data '{
 ### `avax.importAVAX`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api).
 </Callout>
 
-**DEPRECATED—instead use** [`avax.import`](/api-reference/c-chain/api#avaximport)
+**DEPRECATED—instead use** [`avax.import`](/docs/api-reference/c-chain/api#avaximport)
 
 Finalize a transfer of AVAX from the X-Chain or P-Chain to the C-Chain.
 
@@ -731,7 +731,7 @@ curl -X POST --data '{
 ### `avax.importKey`
 
 <Callout title="Warning" type="warn">
-Not recommended for use on Mainnet. See warning notice in [Keystore API](/api-reference/keystore-api).
+Not recommended for use on Mainnet. See warning notice in [Keystore API](/docs/api-reference/keystore-api).
 </Callout>
 
 Give a user control over an address by providing the private key that controls the address.

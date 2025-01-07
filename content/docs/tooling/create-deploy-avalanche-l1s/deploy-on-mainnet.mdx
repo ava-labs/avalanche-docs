@@ -37,7 +37,7 @@ Although only one validator is strictly required to run an Avalanche L1, running
 
 You need to collect the NodeIDs for each of your validators. This tutorial uses these NodeIDs in several commands.
 
-To get the NodeID of a `Mainnet` node, call the [info.getNodeID](/api-reference/info-api#infogetnodeid) endpoint. For example:
+To get the NodeID of a `Mainnet` node, call the [info.getNodeID](/docs/api-reference/info-api#infogetnodeid) endpoint. For example:
 
 ```bash
 curl -X POST --data '{
@@ -85,7 +85,7 @@ avalanche key list --ledger 0 --mainnet
 +--------+---------+-------------------------+-----------------------------------------------+---------+---------+
 ```
 
-The command prints the P-Chain address for `Mainnet`, `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, and its balance. You should fund this address with at least 2.5 AVAX to cover TX fees. the TX fee for creating your Avalanche L1 costs 2 AVAX. Adding validators costs 0.001 AVAX each. For more details, see [Fees](/api-reference/standards/guides/txn-fees)
+The command prints the P-Chain address for `Mainnet`, `P-avax1ucykh6ls8thqpuwhg3vp8vvu6spg5e8tp8a25j`, and its balance. You should fund this address with at least 2.5 AVAX to cover TX fees. the TX fee for creating your Avalanche L1 costs 2 AVAX. Adding validators costs 0.001 AVAX each. For more details, see [Fees](/docs/api-reference/standards/guides/txn-fees)
 
 <Callout title="Note">
 You can use the `key list` command to get any Ledger address in the derivation sequence by changing the index parameter from `0` to the one desired, or to a list of them (for example: `2`, or `0,4,7`). Also, you can ask for addresses on `Fuji` with the `--fuji` parameter, and local networks with the `--local` parameter.
