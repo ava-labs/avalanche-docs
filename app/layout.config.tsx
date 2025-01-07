@@ -58,7 +58,7 @@ export const baseOptions: BaseLayoutProps = {
           icon: <Sprout />,
           text: 'Avalanche Protocol',
           description: 'Learn about the Avalanche Protocol',
-          url: '/docs/protocol',
+          url: '/docs/quick-start',
         },
         {
           icon: <Layers />,

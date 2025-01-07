@@ -45,7 +45,7 @@ The maximum number of blocks to serve per `getLogs` request is 2048, which is se
 
 Requests to the public API server API are distributed by a load balancer to an individual node. As a result, consecutive requests may go to different nodes. That can cause issues for some use cases. For example, one node may think a given transaction is accepted, while for another node the transaction is still processing. To work around this, you can use 'sticky sessions', as documented [here](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials). This allows consecutive API calls to be routed to the same node.
 
-If you're using [AvalancheJS](/tooling/avalanche-js) to access the public API, simply set the following in your code:
+If you're using [AvalancheJS](/docs/tooling/avalanche-js) to access the public API, simply set the following in your code:
 
 ```
 avalanche.setRequestConfig("withCredentials", true);
