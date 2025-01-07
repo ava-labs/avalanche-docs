@@ -63,7 +63,7 @@ On a default Linux installation, the path to them will be `/home/USERNAME/.avala
 
 `scp` is a 'secure copy' command line program, available built-in on Linux and MacOS computers. There is also a Windows version, `pscp`, as part of the [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) package. If using `pscp`, in the following commands replace each usage of `scp` with `pscp -scp`.
 
-To copy the files from the node, you will need to be able to remotely log into the machine. You can use account password, but the secure and recommended way is to use the SSH keys. The procedure for acquiring and setting up SSH keys is highly dependent on your cloud provider and machine configuration. You can refer to our [Amazon Web Services](/nodes/on-third-party-services/amazon-web-services) and [Microsoft Azure](/nodes/on-third-party-services/microsoft-azure) setup guides for those providers. Other providers will have similar procedures.
+To copy the files from the node, you will need to be able to remotely log into the machine. You can use account password, but the secure and recommended way is to use the SSH keys. The procedure for acquiring and setting up SSH keys is highly dependent on your cloud provider and machine configuration. You can refer to our [Amazon Web Services](/docs/nodes/on-third-party-services/amazon-web-services) and [Microsoft Azure](/docs/nodes/on-third-party-services/microsoft-azure) setup guides for those providers. Other providers will have similar procedures.
 
 When you have means of remote login into the machine, you can copy the files over with the following command:
 
@@ -83,7 +83,7 @@ Once executed, this command will create `avalanche_backup` directory and place t
 
 To restore your node from a backup, we need to do the reverse: restore `staker.key`, `staker.crt` and `signer.key` from the backup to the working directory of the new node.
 
-First, we need to do the usual [installation](/nodes/using-install-script/installing-avalanche-go) of the node. This will create a new NodeID, a new BLS key and a new BLS signature, which we need to replace. When the node is installed correctly, log into the machine where the node is running and stop it:
+First, we need to do the usual [installation](/docs/nodes/using-install-script/installing-avalanche-go) of the node. This will create a new NodeID, a new BLS key and a new BLS signature, which we need to replace. When the node is installed correctly, log into the machine where the node is running and stop it:
 
 ```bash
 sudo systemctl stop avalanchego
@@ -176,7 +176,7 @@ Once executed, this command will create `avalanche_db_backup.zip` directory in y
 
 _This tutorial assumes you have already completed "Database Backup" and have a backup at ~/avalanche\_db\_backup.zip._
 
-First, we need to do the usual [installation](/nodes/using-install-script/installing-avalanche-go) of the node. When the node is installed correctly, log into the machine where the node is running and stop it:
+First, we need to do the usual [installation](/docs/nodes/using-install-script/installing-avalanche-go) of the node. When the node is installed correctly, log into the machine where the node is running and stop it:
 
 ```bash
 sudo systemctl stop avalanchego

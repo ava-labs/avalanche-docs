@@ -5,7 +5,7 @@ description: Learn how to customize your EVM-powered Avalanche L1.
 
 All Avalanche L1s can be customized by utilizing [`L1s Configs`](#avalanche-l1-configs).
 
-an Avalanche L1 can have one or more blockchains. For example, the Primary Network, which is an Avalanche L1, a special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific configuration file. See [here](/nodes/configure/configs-flags) for detailed explanation.
+an Avalanche L1 can have one or more blockchains. For example, the Primary Network, which is an Avalanche L1, a special one nonetheless, has 3 blockchains. Each chain can be further customized using chain specific configuration file. See [here](/docs/nodes/configure/configs-flags) for detailed explanation.
 
 An Avalanche L1 created by or forked from [Subnet-EVM](https://github.com/ava-labs/subnet-evm) can be customized by utilizing one or more of the following methods:
 
@@ -19,11 +19,11 @@ Avalanche L1 Configs[​](#avalanche-l1-configs "Direct link to heading")
 
 an Avalanche L1 can customized by setting parameters for the following:
 
-- [Validator-only communication to create a private Avalanche L1](/nodes/configure/avalanche-l1-configs#validatoronly-bool)
-- [Consensus](/nodes/configure/avalanche-l1-configs#consensus-parameters)
-- [Gossip](/nodes/configure/avalanche-l1-configs#gossip-configs)
+- [Validator-only communication to create a private Avalanche L1](/docs/nodes/configure/avalanche-l1-configs#validatoronly-bool)
+- [Consensus](/docs/nodes/configure/avalanche-l1-configs#consensus-parameters)
+- [Gossip](/docs/nodes/configure/avalanche-l1-configs#gossip-configs)
 
-See [here](/nodes/configure/avalanche-l1-configs) for more info.
+See [here](/docs/nodes/configure/avalanche-l1-configs) for more info.
 
 Genesis[​](#genesis "Direct link to heading")
 ---------------------------------------------
@@ -715,15 +715,15 @@ See every precompile initial configuration in their relevant `Initial Configurat
 AvalancheGo Chain Configs[​](#avalanchego-chain-configs "Direct link to heading")
 ---------------------------------------------------------------------------------
 
-As described in [this doc](/nodes/configure/configs-flags#avalanche-l1-chain-configs), each blockchain of Avalanche L1s can have its own custom configuration. If an Avalanche L1's ChainID is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
+As described in [this doc](/docs/nodes/configure/configs-flags#avalanche-l1-chain-configs), each blockchain of Avalanche L1s can have its own custom configuration. If an Avalanche L1's ChainID is `2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt`, the config file for this chain is located at `{chain-config-dir}/2ebCneCbwthjQ1rYT41nhd7M76Hc6YmosMAQrTFhBq8qeqh6tt/config.json`.
 
-For blockchains created by or forked from Subnet-EVM, most [C-Chain configs](/nodes/chain-configs/c-chain) are applicable except [Avalanche Specific APIs](/nodes/chain-configs/c-chain#enabling-avalanche-specific-apis).
+For blockchains created by or forked from Subnet-EVM, most [C-Chain configs](/docs/nodes/chain-configs/c-chain) are applicable except [Avalanche Specific APIs](/docs/nodes/chain-configs/c-chain#enabling-avalanche-specific-apis).
 
 ### Priority Regossip[​](#priority-regossip "Direct link to heading")
 
 A transaction is "regossiped" when the node does not find the transaction in a block after `priority-regossip-frequency` (defaults to `1m`). By default, up to 16 transactions (max 1 per address) are regossiped to validators per minute.
 
-Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of important addresses (like bridge relayers). To do so, you'll need to update your [chain config](/nodes/configure/configs-flags#avalanche-l1-chain-configs) with the following:
+Operators can use "priority regossip" to more aggressively "regossip" transactions for a set of important addresses (like bridge relayers). To do so, you'll need to update your [chain config](/docs/nodes/configure/configs-flags#avalanche-l1-chain-configs) with the following:
 
 ```json
 {

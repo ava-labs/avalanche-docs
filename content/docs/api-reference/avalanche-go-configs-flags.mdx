@@ -27,7 +27,7 @@ Example JSON config file:
 #### `--config-file-content` (string)[​](#--config-file-content-string "Direct link to heading")
 
 <Callout title="Tip" icon = {<BadgeCheck className="size-5 text-card" fill="green" />} >
-    [Install Script](/nodes/using-install-script/installing-avalanche-go) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if[ AvalancheGo is built from source](/nodes/run-a-node/manually), you would need to create it manually if needed.
+    [Install Script](/docs/nodes/using-install-script/installing-avalanche-go) creates the node config file at `~/.avalanchego/configs/node.json`. No default file is created if[ AvalancheGo is built from source](/docs/nodes/run-a-node/manually), you would need to create it manually if needed.
 </Callout>
 
 As an alternative to `--config-file`, it allows specifying base64 encoded config content.
@@ -139,7 +139,7 @@ Some blockchains allow the node operator to provide custom configurations for in
 
 #### `--chain-config-dir` (string)[​](#--chain-config-dir-string "Direct link to heading")
 
-Specifies the directory that contains chain configs, as described [here](/nodes/configure/configs-flags). Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--chain-config-content` is specified.
+Specifies the directory that contains chain configs, as described [here](/docs/nodes/configure/configs-flags). Defaults to `$HOME/.avalanchego/configs/chains`. If this flag is not provided and the default directory does not exist, AvalancheGo will not exit since custom configs are optional. However, if the flag is set, the specified folder must exist, or AvalancheGo will exit with an error. This flag is ignored if `--chain-config-content` is specified.
 
 <Callout title="Note">
 	Please replace `chain-config-dir` and `blockchainID` with their actual values.
@@ -151,7 +151,7 @@ Network upgrades are passed in from the location: `chain-config-dir`/`blockchain
 
 The chain configs are passed in from the location `chain-config-dir`/`blockchainID`/`config.*`. Upgrade files are typically json encoded and therefore named `upgrade.json`. However, the format of the file is VM dependent. This configuration is used by the VM to handle optional configuration flags such as enabling/disabling APIs, updating log level, etc. The chain configuration is intended to provide optional configuration parameters and the VM will use default values if nothing is passed in.
 
-Full reference for all configuration options for some standard chains can be found in a separate [chain config flags](/nodes/configure/configs-flags) document.
+Full reference for all configuration options for some standard chains can be found in a separate [chain config flags](/docs/nodes/configure/configs-flags) document.
 
 Full reference for `subnet-evm` upgrade configuration can be found in a separate [Customize an Avalanche L1](/avalanche-l1s/upgrade/customize-avalanche-l1) document.
 
@@ -579,7 +579,7 @@ Comma separated list of Avalanche L1 `SubnetID`s that this node would track if a
 
 It is possible to provide parameters for Avalanche L1s. Parameters here apply to all chains in the specified Avalanche L1s. Parameters must be specified with a `{subnetID}.json` config file under `--subnet-config-dir`. AvalancheGo loads configs for Avalanche L1s specified in `--track-subnets` parameter.
 
-Full reference for all configuration options for an Avalanche L1 can be found in a separate [Avalanche L1 Configs](/nodes/configure/avalanche-l1-configs) document.
+Full reference for all configuration options for an Avalanche L1 can be found in a separate [Avalanche L1 Configs](/docs/nodes/configure/avalanche-l1-configs) document.
 
 #### `--subnet-config-dir` (`string`)[​](#--avalanche-l1-config-dir-string "Direct link to heading")
 

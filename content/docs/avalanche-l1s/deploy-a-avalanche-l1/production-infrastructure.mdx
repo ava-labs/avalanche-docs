@@ -12,7 +12,7 @@ The architecture of the environment your particular Avalanche L1 will use will b
 Node Setup[​](#node-setup "Direct link to heading")
 ---------------------------------------------------
 
-Avalanche nodes are essential elements for running your Avalanche L1 in production. At a minimum, your Avalanche L1 will need validator nodes, potentially also nodes that act as RPC servers, indexers or explorers. Running a node is basically running an instance of [AvalancheGo](/nodes) on a server.
+Avalanche nodes are essential elements for running your Avalanche L1 in production. At a minimum, your Avalanche L1 will need validator nodes, potentially also nodes that act as RPC servers, indexers or explorers. Running a node is basically running an instance of [AvalancheGo](/docs/nodes) on a server.
 
 ### Server OS[​](#server-os "Direct link to heading")
 
@@ -40,15 +40,15 @@ You can run a node on a physical computer that you own and run, or on a cloud in
 
 If you plan on running nodes on your own hardware, make sure they satisfy the minimum HW specification as outlined earlier. Pay close attention to proper networking setup, making sure the p2p port (9651) is accessible and public IP properly configured on the node. Make sure the node is connected to the network physically (not over Wi-Fi), and that the router is powerful enough to handle a couple of thousands of persistent TCP connections and that network bandwidth can accommodate at least 5Mbps of steady upstream and downstream network traffic.
 
-When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that will take care of node setup and configuration, we recommend using the [installer script](/nodes/using-install-script/installing-avalanche-go) to set up the nodes. It will abstract most of the setup process for you, set up the node as a system service and will enable easy node upgrades.
+When installing the AvalancheGo node on the machines, unless you have a dedicated DevOps staff that will take care of node setup and configuration, we recommend using the [installer script](/docs/nodes/using-install-script/installing-avalanche-go) to set up the nodes. It will abstract most of the setup process for you, set up the node as a system service and will enable easy node upgrades.
 
 #### Cloud Providers[​](#cloud-providers "Direct link to heading")
 
 There are a number of different cloud providers. We have documents that show how to set up a node on the most popular ones:
 
-- [Amazon Web Services](/nodes/on-third-party-services/amazon-web-services)
-- [Azure](/nodes/on-third-party-services/microsoft-azure)
-- [Google Cloud Platform](/nodes/on-third-party-services/google-cloud)
+- [Amazon Web Services](/docs/nodes/on-third-party-services/amazon-web-services)
+- [Azure](/docs/nodes/on-third-party-services/microsoft-azure)
+- [Google Cloud Platform](/docs/nodes/on-third-party-services/google-cloud)
 
 There is a whole range of other cloud providers that may offer lower prices or better deals for your particular needs, so it makes sense to shop around.
 
@@ -70,13 +70,13 @@ Once you set up the server and install AvalancheGo on them, nodes will need to b
 
 #### State Sync[​](#state-sync "Direct link to heading")
 
-If the nodes you will be running as validators don't need to have the full transaction history, then you can use [state sync](/nodes/chain-configs/c-chain#state-sync-enabled). With this flag enabled, instead of replaying the whole history to get to the current state, nodes simply download only the current state from other network peers, shortening the bootstrap process from multiple days to a couple of hours. If the nodes will be used for Avalanche L1 validation exclusively, you can use the state sync without any issues. Currently, state sync is only available for the C-Chain, but since the bulk of the transactions on the platform happen there it still has a significant impact on the speed of bootstrapping.
+If the nodes you will be running as validators don't need to have the full transaction history, then you can use [state sync](/docs/nodes/chain-configs/c-chain#state-sync-enabled). With this flag enabled, instead of replaying the whole history to get to the current state, nodes simply download only the current state from other network peers, shortening the bootstrap process from multiple days to a couple of hours. If the nodes will be used for Avalanche L1 validation exclusively, you can use the state sync without any issues. Currently, state sync is only available for the C-Chain, but since the bulk of the transactions on the platform happen there it still has a significant impact on the speed of bootstrapping.
 
 #### Database Copy[​](#database-copy "Direct link to heading")
 
-Good way to cut down on bootstrap times on multiple nodes is database copy. Database is identical across nodes, and as such can safely be copied from one node to another. Just make sure to that the node is not running during the copy process, as that can result in a corrupted database. Database copy procedure is explained in detail [here](/nodes/maintain/backup-restore#database).
+Good way to cut down on bootstrap times on multiple nodes is database copy. Database is identical across nodes, and as such can safely be copied from one node to another. Just make sure to that the node is not running during the copy process, as that can result in a corrupted database. Database copy procedure is explained in detail [here](/docs/nodes/maintain/backup-restore#database).
 
-Please make sure you don't reuse any node's NodeID by accident, especially don't restore another node's ID, see [here](/nodes/maintain/backup-restore#nodeid) for details. Each node must has its own unique NodeID, otherwise, the nodes sharing the same ID will not behave correctly, which will impact your validator's uptime, thus staking rewards, and the stability of your Avalanche L1.
+Please make sure you don't reuse any node's NodeID by accident, especially don't restore another node's ID, see [here](/docs/nodes/maintain/backup-restore#nodeid) for details. Each node must has its own unique NodeID, otherwise, the nodes sharing the same ID will not behave correctly, which will impact your validator's uptime, thus staking rewards, and the stability of your Avalanche L1.
 
 Avalanche L1 Deploy[​](#avalanche-l1-deploy "Direct link to heading")
 ---------------------------------------------------------
@@ -151,7 +151,7 @@ If you want to inspect the process of Avalanche L1 syncing, you can use the RPC 
 
 For a more in-depth look into Avalanche L1 operation, check out the blockchain log. By default, the log can be found in `~/.avalanchego/logs/ChainID.log` where you replace the `ChainID` with the actual ID of the blockchain in your Avalanche L1.
 
-For an even more thorough (and pretty!) insight into how the node and the Avalanche L1 is behaving, you can install the Prometheus+Grafana monitoring system with the custom dashboards for the regular node operation, as well as a dedicated dashboard for Avalanche L1 data. Check out the [tutorial](/nodes/maintain/monitoring) for information on how to set it up.
+For an even more thorough (and pretty!) insight into how the node and the Avalanche L1 is behaving, you can install the Prometheus+Grafana monitoring system with the custom dashboards for the regular node operation, as well as a dedicated dashboard for Avalanche L1 data. Check out the [tutorial](/docs/nodes/maintain/monitoring) for information on how to set it up.
 
 ### Managing Validation[​](#managing-validation "Direct link to heading")
 
