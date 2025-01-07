@@ -207,8 +207,13 @@ const staticRedirects: RedirectMap = {
 const wildcardRedirects = [
   {
     source: '/learn/',
-    destination: '/protocol/',
+    destination: '/quick-start/',
     pattern: /^\/learn\/(.*)/
+  },
+  {
+    source: '/protocol/',
+    destination: '/quick-start/',
+    pattern: /^\/protocol\/(.*)/
   },
   {
     source: '/virtual-machines/evm-customization/',
