@@ -9,7 +9,7 @@ Deploying an Avalanche L1 to Mainnet has many risks. Doing so safely requires a 
 This tutorial is an educational resource and provides no guarantees that following it results in a secure deployment. Additionally, this tutorial takes some shortcuts that aid the understanding of the deployment process at the expense of security. The text highlights these shortcuts and they shouldn't be used for a production deployment.
 </Callout>
 
-After managing a successful Avalanche L1 deployment on the `Fuji Testnet`, you're ready to deploy your Avalanche L1 on Mainnet. If you haven't done so, first [Deploy an Avalanche L1 on Testnet](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet).
+After managing a successful Avalanche L1 deployment on the `Fuji Testnet`, you're ready to deploy your Avalanche L1 on Mainnet. If you haven't done so, first [Deploy an Avalanche L1 on Testnet](/docs/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet).
 
 This tutorial shows how to do the following on `Mainnet`.
 
@@ -27,7 +27,7 @@ All IDs in this article are for illustration purposes only. They are guaranteed 
 - 5+ nodes running and [fully bootstrapped](/docs/nodes) on `Mainnet`
 - [Avalanche-CLI is installed](/docs/tooling/guides/get-avalanche-cli) on each validator node's box
 - A [Ledger](https://www.ledger.com/) device
-- You've [created an Avalanche L1 configuration](/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration) and fully tested a [Fuji Testnet Avalanche L1 deployment](/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet)
+- You've [created an Avalanche L1 configuration](/docs/avalanche-l1s/build-first-avalanche-l1#create-your-avalanche-l1-configuration) and fully tested a [Fuji Testnet Avalanche L1 deployment](/docs/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet)
 
 <Callout type="warn">
 Although only one validator is strictly required to run an Avalanche L1, running with less than five validators is extremely dangerous and guarantees network downtime. Plan to support at least five validators in your production network.
@@ -138,7 +138,7 @@ This tutorial creates a permissioned Avalanche L1. As such, you must specify whi
 <Callout type="warn">
 In production Avalanche L1s, you should always use multiple control keys running in a multisig configuration. This tutorial uses a single control key for illustrative purposes only.
 
-For instructions on controlling your Avalanche L1 with a multisig, see the [Multisig Deployment Tutorial](/avalanche-l1s/deploy-a-avalanche-l1/multisig-auth).
+For instructions on controlling your Avalanche L1 with a multisig, see the [Multisig Deployment Tutorial](/docs/avalanche-l1s/deploy-a-avalanche-l1/multisig-auth).
 </Callout>
 
 ```bash
