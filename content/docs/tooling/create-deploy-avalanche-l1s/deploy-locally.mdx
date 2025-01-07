@@ -1,5 +1,5 @@
 ---
-title: Deploy on Local Network
+title: On Local Network
 description: This guide shows you how to deploy an Avalanche L1 to a local Avalanche network.
 ---
 
@@ -75,14 +75,214 @@ Currency Symbol:  TUTORIAL
 
 You can use the deployment details to connect to and interact with your Avalanche L1.
 
+Deploying Avalanche L1s Locally[​](#deploying-avalanche-l1s-locally)
+---------------------------------------------------------------------------------
+
+To deploy your Avalanche L1, run:
+
+```bash
+avalanche blockchain deploy myblockchain
+```
+
+Make sure to substitute the name of your Avalanche L1 if you used a different one than `myblockchain`.
+
+```bash
+? Choose a network for the operation: 
+  ▸ Local Network
+    Devnet
+    Etna Devnet
+    Fuji Testnet
+    Mainnet
+```
+
+Next, select `Local Network`.
+
+This command boots a five node Avalanche network on your machine. It needs to download the latest versions of AvalancheGo and Subnet-EVM. The command may take a couple minutes to run.
+
+Note: If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on Mac, you will require Rosetta 2 to be able to deploy Avalanche L1s locally. You can download Rosetta 2 using `softwareupdate --install-rosetta` .
+
+If all works as expected, the command output should look something like this:
+
+```bash
+avalanche blockchain deploy myblockchain
+
+# output
+✔ Local Network
+Deploying [myblockchain] to Local Network
+Backend controller started, pid: 53868, output at: /Users/l1-developer/.avalanche-cli/runs/server_20241120_183019/avalanche-cli-backend.log
+
+Booting Network. Wait until healthy...
+Node logs directory: /Users/l1-developer/.avalanche-cli/runs/network_20241120_183020/node<i>/logs
+Network ready to use.
+
+Deploying Blockchain. Wait until network acknowledges...
+
+Blockchain ready to use
+
++--------------------------------------------------------------------------------------------------------------------------------+
+|                                                          MYBLOCKCHAIN                                                          |
++---------------+----------------------------------------------------------------------------------------------------------------+
+| Name          | myblockchain                                                                                                   |
++---------------+----------------------------------------------------------------------------------------------------------------+
+| VM ID         | qDNV9vtxZYYNqm7TN1mYBuaaknLdefDbFK8bFmMLTJQJKaWjV                                                              |
++---------------+----------------------------------------------------------------------------------------------------------------+
+| VM Version    | v0.6.12                                                                                                        |
++---------------+----------------------------------------------------------------------------------------------------------------+
+| Validation    | Proof Of Authority                                                                                             |
++---------------+--------------------------+-------------------------------------------------------------------------------------+
+| Local Network | ChainID                  | 888                                                                                 |
+|               +--------------------------+-------------------------------------------------------------------------------------+
+|               | SubnetID                 | 26eqgD4Kt1MvTKXC9BDjEwBAfhcBcHCKj2EXjR2UuFpSWoAHhw                                  |
+|               +--------------------------+-------------------------------------------------------------------------------------+
+|               | Owners (Threhold=1)      | P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p                                     |
+|               +--------------------------+-------------------------------------------------------------------------------------+
+|               | BlockchainID (CB58)      | 2BK8CKA4Vfvi69TBTc5GW94JQ9nPiL8xPpPNeeckb9UFSPYedD                                  |
+|               +--------------------------+-------------------------------------------------------------------------------------+
+|               | BlockchainID (HEX)       | 0x9b1ca24503853edd6b6ac083f78adc8c36df74a85027e1b30535cc1032287805                  |
+|               +--------------------------+-------------------------------------------------------------------------------------+
+|               | RPC Endpoint             | http://127.0.0.1:9650/ext/bc/2BK8CKA4Vfvi69TBTc5GW94JQ9nPiL8xPpPNeeckb9UFSPYedD/rpc |
++---------------+--------------------------+-------------------------------------------------------------------------------------+
+
++---------------------------+
+|           TOKEN           |
++--------------+------------+
+| Token Name   | TST Token |
++--------------+------------+
+| Token Symbol | TST       |
++--------------+------------+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+|                                                      INITIAL TOKEN ALLOCATION                                                      |
++---------------------+------------------------------------------------------------------+---------------+---------------------------+
+| DESCRIPTION         | ADDRESS AND PRIVATE KEY                                          | AMOUNT (OWEN) | AMOUNT (WEI)              |
++---------------------+------------------------------------------------------------------+---------------+---------------------------+
+| Main funded account | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC                       | 1000000       | 1000000000000000000000000 |
+| ewoq                | 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027 |               |                           |
++---------------------+------------------------------------------------------------------+---------------+---------------------------+
+
++-----------------------------------------------------------------------------------------------------------------+
+|                                                 SMART CONTRACTS                                                 |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| DESCRIPTION           | ADDRESS                                    | DEPLOYER                                   |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| PoA Validator Manager | 0x0C0DEbA5E0000000000000000000000000000000 |                                            |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| Transparent Proxy     | 0x0Feedc0de0000000000000000000000000000000 |                                            |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| Proxy Admin           | 0xC0fFEE1234567890aBCdeF1234567890abcDef34 | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |
++-----------------------+--------------------------------------------+--------------------------------------------+
+
++----------------------------------------------------------------------+
+|                      INITIAL PRECOMPILE CONFIGS                      |
++------------+-----------------+-------------------+-------------------+
+| PRECOMPILE | ADMIN ADDRESSES | MANAGER ADDRESSES | ENABLED ADDRESSES |
++------------+-----------------+-------------------+-------------------+
+| Warp       | n/a             | n/a               | n/a               |
++------------+-----------------+-------------------+-------------------+
+
++-------------------------------------------------------------------------------------------------+
+|                                      MYBLOCKCHAIN RPC URLS                                      |
++-----------+-------------------------------------------------------------------------------------+
+| Localhost | http://127.0.0.1:9650/ext/bc/2BK8CKA4Vfvi69TBTc5GW94JQ9nPiL8xPpPNeeckb9UFSPYedD/rpc |
++-----------+-------------------------------------------------------------------------------------+
+
++--------------------------------------------------------------------------+
+|                                   NODES                                  |
++-------+------------------------------------------+-----------------------+
+| NAME  | NODE ID                                  | LOCALHOST ENDPOINT    |
++-------+------------------------------------------+-----------------------+
+| node1 | NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg | http://127.0.0.1:9650 |
++-------+------------------------------------------+-----------------------+
+| node2 | NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ | http://127.0.0.1:9652 |
++-------+------------------------------------------+-----------------------+
+| node3 | NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN | http://127.0.0.1:9654 |
++-------+------------------------------------------+-----------------------+
+| node4 | NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu | http://127.0.0.1:9656 |
++-------+------------------------------------------+-----------------------+
+| node5 | NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 | http://127.0.0.1:9658 |
++-------+------------------------------------------+-----------------------+
+
++-------------------------------------------------------------------------------------------------------+
+|                                           WALLET CONNECTION                                           |
++-----------------+-------------------------------------------------------------------------------------+
+| Network RPC URL | http://127.0.0.1:9650/ext/bc/2BK8CKA4Vfvi69TBTc5GW94JQ9nPiL8xPpPNeeckb9UFSPYedD/rpc |
++-----------------+-------------------------------------------------------------------------------------+
+| Network Name    | myblockchain                                                                        |
++-----------------+-------------------------------------------------------------------------------------+
+| Chain ID        | 888                                                                                 |
++-----------------+-------------------------------------------------------------------------------------+
+| Token Symbol    | TST                                                                                |
++-----------------+-------------------------------------------------------------------------------------+
+| Token Name      | TST Token                                                                          |
++-----------------+-------------------------------------------------------------------------------------+
+```
+
 To manage the newly deployed local Avalanche network, see [the `avalanche network` command tree](/docs/tooling/avalanche-cli#network).
 
-### Deploying Multiple Avalanche L1s[​](#deploying-multiple-avalanche-l1s "Direct link to heading")
+You can use the deployment details to connect to and interact with your Avalanche L1. Now it's time to interact with it.
+
+## Interacting with Your Avalanche L1
+
+You can use the value provided by `Browser Extension connection details` to connect to your Avalanche L1 with Core, MetaMask, or any other wallet.
+
+<Callout title="Note">
+To allow API calls from other machines, use `--http-host=0.0.0.0` in the config.
+</Callout>
+
+```bash
+Browser Extension connection details (any node URL from above works):
+RPC URL:          http://127.0.0.1:9650/ext/bc/2BK8CKA4Vfvi69TBTc5GW94JQ9nPiL8xPpPNeeckb9UFSPYedD/rpc
+Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
+Network name:     myblockchain
+Chain ID:         888
+Currency Symbol:  TUTORIAL
+```
+
+This tutorial uses Core.
+
+### Importing the Test Private Key[​](#importing-the-test-private-key)
+
+<Callout type="warn">
+This address derives from a well-known private key. Anyone can steal funds sent to this address. Only use it on development networks that only you have access to. If you send production funds to this address, attackers may steal them instantly.
+</Callout>
+
+First, you need to import your airdrop private key into Core.
+
+In the Accounts screen, select the `Imported` tab. Click on `Import private key`.
+
+![](/images/deploy-subnet1.png)
+
+Here, enter the private key. Import the well-known private key `0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027`.
+
+![](/images/deploy-subnet2.png)
+
+Next, rename the Core account to prevent confusion. On the `Imported` tab, click on the pen icon next to your account. Rename the account `DO NOT USE -- Public test key` to prevent confusion with any personal wallets.
+
+![Rename Account](/images/deploy-subnet3.png)
+
+![Rename Account](/images/deploy-subnet4.png)
+
+### Connect to the Avalanche L1[​](#connect-to-the-avalanche-l1)
+
+Next, you need to add your Avalanche L1 to Core's networks.
+
+In the Core Extension click, `See All Networks` and then select the `+` icon in the top right.
+
+![Add network](/images/deploy-subnet5.png)
+
+Enter your Avalanche L1's details, found in the output of your `avalanche blockchain deploy` [command](#deploying-avalanche-l1s-locally), into the form and click `Save`.
+
+![Add network 2](/images/deploy-subnet6.png)
+
+If all worked as expected, your balance should read 1 million tokens. Your Avalanche L1 is ready for action. You might want to try to [Deploy a Smart Contract on Your Subnet-EVM Using Remix and Core](/docs/avalanche-l1s/add-utility/deploy-smart-contract).
+
+![Avalanche L1 in Core](/images/deploy-subnet7.png)
+
+## Deploying Multiple Avalanche L1s[​](#deploying-multiple-avalanche-l1s "Direct link to heading")
 
 You may deploy multiple Avalanche L1s concurrently, but you can't deploy the same Avalanche L1 multiple times without resetting all deployed Avalanche L1 state.
 
-Redeploying the Avalanche L1[​](#redeploying-the-avalanche-l1 "Direct link to heading")
----------------------------------------------------------------------------
+## Redeploying the Avalanche L1
 
 To redeploy the Avalanche L1, you first need to wipe the Avalanche L1 state. This permanently deletes all data from all locally deployed Avalanche L1s. To do so, run
 
@@ -91,3 +291,57 @@ You are now free to redeploy your Avalanche L1 with
 ```bash
 avalanche blockchain deploy <blockchainName> --local
 ```
+
+## Stopping the Local Network
+
+To gracefully stop a running local network while preserving state, run:
+
+```bash
+avalanche network stop
+
+# output
+Network stopped successfully.
+```
+
+When restarted, all of your deployed Avalanche L1s resume where they left off.
+
+### Resuming the Local Network
+
+To resume a stopped network, run:
+
+```bash
+avalanche network start
+
+# output
+Starting previously deployed and stopped snapshot
+Booting Network. Wait until healthy...
+...............
+Network ready to use. Local network node endpoints:
++-------+----------+------------------------------------------------------------------------------------+
+| NODE  |    VM    |                                        URL                                         |
++-------+----------+------------------------------------------------------------------------------------+
+| node5 | myblockchain | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node1 | myblockchain | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node2 | myblockchain | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node3 | myblockchain | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+| node4 | myblockchain | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
++-------+----------+------------------------------------------------------------------------------------+
+```
+
+The network resumes with the same state it paused with.
+
+## Next Steps
+
+After you feel comfortable with this deployment flow, try deploying smart contracts on your chain with [Remix](https://remix.ethereum.org/), [Hardhat](https://hardhat.org/), or [Foundry](https://github.com/foundry-rs/foundry). You can also experiment with customizing your Avalanche L1 by addingprecompiles or adjusting the airdrop.
+
+Once you've developed a stable Avalanche L1 you like, see [Create an EVM Avalanche L1 on Fuji Testnet](/docs/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet) to take your Avalanche L1 one step closer to production.
+
+## FAQ
+
+**How is the Avalanche L1 ID (SubnetID) determined upon creation?**
+
+The Avalanche L1 ID (SubnetID) is the hash of the transaction that created the Avalanche L1.

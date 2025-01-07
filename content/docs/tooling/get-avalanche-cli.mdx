@@ -1,15 +1,13 @@
 ---
-title: Install Avalanche-CLI
-description: Instructions for setting up Avalanche-CLI.
+title: Installation
+description: Instructions for installing and setting up the Avalanche-CLI.
 ---
 
-Compatibility[​](#compatibility "Direct link to heading")
----------------------------------------------------------
+## Compatibility
 
 Avalanche-CLI runs on Linux and Mac. Windows is currently not supported.
 
-Instructions[​](#instructions "Direct link to heading")
--------------------------------------------------------
+## Instructions
 
 To download a binary for the latest release, run:
 
@@ -19,8 +17,7 @@ curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts
 
 The script installs the binary inside the `~/bin` directory. If the directory doesn't exist, it will be created.
 
-Adding Avalanche-CLI to Your PATH[​](#adding-avalanche-cli-to-your-path "Direct link to heading")
--------------------------------------------------------------------------------------------------
+## Adding Avalanche-CLI to Your PATH
 
 To call the `avalanche` binary from anywhere, you'll need to add it to your system path. If you installed the binary into the default location, you can run the following snippet to add it to your path.
 
@@ -32,18 +29,15 @@ For example:
 export PATH=~/bin:$PATH >> .bashrc
 ```
 
-Checking Your Installation[​](#checking-your-installation "Direct link to heading")
------------------------------------------------------------------------------------
+## Checking Your Installation
 
 You can test your installation by running `avalanche --version`. The tool should print the running version.
 
-Updating[​](#updating "Direct link to heading")
------------------------------------------------
+## Updating
 
 To update your installation, you need to delete your current binary and download the latest version using the preceding steps.
 
-Building from Source[​](#building-from-source "Direct link to heading")
------------------------------------------------------------------------
+## Building from Source
 
 The source code is available in this [GitHub repository](https://github.com/ava-labs/avalanche-cli).
 

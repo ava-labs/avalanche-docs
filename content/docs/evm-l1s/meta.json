@@ -5,13 +5,6 @@
     "root": true,
     "pages": [
       "index",
-      "---Validator Manager---",
-      "validator-manager/poa-vs-pos",
-      "validator-manager/contract",
-      "validator-manager/add-validator",
-      "validator-manager/remove-validator",
-      "validator-manager/upgrade",
-      "validator-manager/custom-validator-manager",
       "---Default Precompiles---",
       "default-precompiles/overview",
       "default-precompiles/allowlist",
