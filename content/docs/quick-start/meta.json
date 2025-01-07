@@ -1,5 +1,5 @@
 {
-  "title": "Avalanche Protocol",
+  "title": "Quick Start",
   "description": "Learn about Avalanche",
   "icon": "Sprout",
   "root": true,
@@ -13,7 +13,6 @@
     "primary-network",
     "rewards-formula",
     "virtual-machines",
-    "c-chain-or-avalanche-l1",
     "---Networks---",
     "networks/mainnet",
     "networks/fuji-testnet",

@@ -42,12 +42,12 @@ svg.lucide {
     color: #fff;
 }
 
-.text-primary {
+.text-fd-primary {
     --tw-text-opacity: 1;
     color: #1f66f4;
 }
 
-.bg-primary\/10 {
+.bg-fd-primary\/10 {
     background-color: #1f66f41a;
 }
 
@@ -86,7 +86,7 @@ nav a:not(:first-child) {
   animation-delay: calc(var(--i) * 0.5s);
 }
 
-.bg-foreground\/25 {
+.bg-fd-foreground\/25 {
   background-color: #4bccff96;
 }
 
