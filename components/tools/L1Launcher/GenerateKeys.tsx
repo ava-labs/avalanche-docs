@@ -20,6 +20,8 @@ import { useState } from 'react';
 import { CONTAINER_VERSION } from './constants';
 import { useWizardStore } from './store';
 import NextPrev from './ui/NextPrev';
+import Pre from './ui/Pre';
+import TextArea from './ui/TextArea';
 
 const validateNodePop = (json: string): boolean => {
     try {
@@ -77,14 +79,14 @@ export default function GenerateKeys() {
         </p>
 
         <h3 className="mb-4 font-medium">Run this on {nodesCount === 1 ? "the" : "every"} node:</h3>
-        <pre className="bg-gray-100 p-4 rounded-md mb-4">{dockerCommand}</pre>
+        <Pre>{dockerCommand}</Pre>
         <p className="mb-4">
             This runs an avalanchego node in docker. The node, while starting, generates its own keys if they are not present.
             You can find them at <code>~/.avalanchego/staking/</code> in your local system.
         </p>
 
         <h3 className="mb-4 font-medium">Request node credentials:</h3>
-        <pre className="bg-gray-100 p-4 rounded-md mb-4">{popRequest}</pre>
+        <Pre>{popRequest}</Pre>
 
         <p className="mb-4">The response will contain fields <code>nodeID</code> and <code>nodePOP</code> (proof of possession). We will need them to convert the Subnet to an L1.</p>
 
@@ -95,11 +97,8 @@ export default function GenerateKeys() {
                     Node {index + 1} Credentials:
                 </label>
                 <div className="relative">
-                    <textarea
-                        className={`w-full p-2 border rounded-md font-mono ${nodePopJsons[index] && !errors[index]
-                            ? 'bg-green-50 border-green-200'
-                            : 'bg-gray-100'
-                            }`}
+                    <TextArea
+                        isValid={!!nodePopJsons[index] && !errors[index]}
                         rows={8}
                         value={nodePopJsons[index] || ''}
                         onChange={(e) => handleNodePopChange(index, e.target.value)}
@@ -123,7 +122,7 @@ export default function GenerateKeys() {
         <p className="mb-4">
             Run this command on every node:
         </p>
-        <pre className="bg-gray-100 p-4 rounded-md mb-4">{stopScript}</pre>
+        <Pre>{stopScript}</Pre>
 
         <div className="mb-4">
             <div className="flex items-center">

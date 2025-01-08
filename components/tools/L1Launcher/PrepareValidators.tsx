@@ -79,7 +79,7 @@ export default function PrepareValidators() {
 
 
 
-        <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 ">
+        <div className="text-sm font-medium text-center text-gray-500 dark:text-gray-400 ">
             <ul className="flex flex-wrap -mb-px">
                 {Object.keys(dockerInstallInstructions).map((os) => (
                     <li key={os} className="me-2">
@@ -101,7 +101,7 @@ export default function PrepareValidators() {
             </ul>
         </div>
 
-        <pre className="bg-gray-100 p-4 rounded-md mb-4">
+        <pre className="bg-gray-50 dark:bg-gray-900 p-4 rounded-md mb-4 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700">
             {dockerInstallInstructions[activeOs]}
         </pre>
 
@@ -109,11 +109,11 @@ export default function PrepareValidators() {
             If you do not want to use Docker, you can follow the instructions <a href="https://github.com/ava-labs/avalanchego?tab=readme-ov-file#installation" target="_blank">here</a>.
         </p>
 
-        <h3 className="mb-4 font-medium">How many nodes do you want to run?</h3>
-        <ul className="mb-4 items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex">
+        <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">How many nodes do you want to run?</h3>
+        <ul className="mb-4 items-center w-full text-sm font-medium text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg sm:flex">
             {Object.entries(nodeConfigurations).map(([count, config]) => {
                 return (
-                    <li key={count} className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r last:border-r-0 ">
+                    <li key={count} className="w-full border-b border-gray-200 dark:border-gray-700 sm:border-b-0 sm:border-r last:border-r-0">
                         <div className="flex items-center ps-3">
                             <input
                                 id={`nodes-${count}`}
@@ -122,12 +122,12 @@ export default function PrepareValidators() {
                                 onChange={() => setNodesCount(Number(count))}
                                 name="nodes-count"
                                 disabled={isLocked}
-                                className={`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 
+                                className={`w-4 h-4 text-blue-600 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-0 
                                     ${isLocked ? 'cursor-not-allowed opacity-50' : ''}`}
                             />
                             <label
                                 htmlFor={`nodes-${count}`}
-                                className={`w-full py-3 ms-2 text-sm font-medium text-gray-900 
+                                className={`w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-100 
                                     ${isLocked ? 'cursor-not-allowed' : ''}`}
                             >
                                 {count} {count === '1' ? 'Node' : 'Nodes'}

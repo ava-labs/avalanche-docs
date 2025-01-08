@@ -177,7 +177,7 @@ export default function CreateChain() {
                     <div className="flex flex-col mb-4">
                         <div className="flex items-center gap-3">
                             {renderStepIcon(subnetStatus.status)}
-                            <span className="text-gray-700">Create a Subnet</span>
+                            <span className="text-gray-700 dark:text-gray-300">Create a Subnet</span>
                         </div>
                         {subnetStatus.error && (
                             <p className="ml-8 mt-1 text-red-500 text-sm">
@@ -194,7 +194,7 @@ export default function CreateChain() {
                     <div className="flex flex-col mb-4">
                         <div className="flex items-center gap-3">
                             {renderStepIcon(createChainStatus.status)}
-                            <span className="text-gray-700">Create a Chain</span>
+                            <span className="text-gray-700 dark:text-gray-300">Create a Chain</span>
                         </div>
                         {createChainStatus.error && (
                             <p className="ml-8 mt-1 text-red-500 text-sm">
@@ -211,7 +211,7 @@ export default function CreateChain() {
                     <div className="flex flex-col mb-4">
                         <div className="flex items-center gap-3">
                             {renderStepIcon(convertToL1Status.status)}
-                            <span className="text-gray-700">Convert to L1</span>
+                            <span className="text-gray-700 dark:text-gray-300">Convert to L1</span>
                         </div>
                         {convertToL1Status.error && (
                             <p className="ml-8 mt-1 text-red-500 text-sm">

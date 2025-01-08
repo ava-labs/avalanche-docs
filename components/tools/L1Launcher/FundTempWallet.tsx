@@ -164,45 +164,45 @@ export default function FundTempWallet() {
             <h1 className="text-2xl font-medium mb-6">Fund Temporary Wallet</h1>
             <SwitchChain chainConfig={fujiConfig}>
                 <div className="space-y-4 mb-4">
-                    <div className="bg-gray-50 p-4 rounded">
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between items-center mb-1">
-                            <div className="text-sm text-gray-600">C-Chain Address:</div>
-                            <div className="text-sm text-gray-600">Balance: {formatEther(cChainBalance)} AVAX</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">C-Chain Address:</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">Balance: {formatEther(cChainBalance)} AVAX</div>
                         </div>
-                        <div className="font-mono text-sm break-all mb-3">{addresses?.C}</div>
+                        <div className="font-mono text-sm break-all mb-3 text-gray-900 dark:text-gray-100">{addresses?.C}</div>
                         {(nodesCount + 0.5 - (Number(formatEther(cChainBalance)) + Number(pChainBalance) / 1e9)) > 0 && (
                             <button
                                 onClick={handleTransfer}
                                 disabled={transferring}
                                 className={`w-full px-4 py-2 rounded text-white ${transferring
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-blue-500 hover:bg-blue-600'
+                                    ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
+                                    : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
                                     }`}
                             >
                                 {transferring ? 'Transferring...' : `Transfer ${(nodesCount + 0.5 + Number(formatEther(changeAllowance)) - (Number(formatEther(cChainBalance)) + Number(pChainBalance) / 1e9)).toFixed(2)} AVAX`}
                             </button>
                         )}
                     </div>
-                    <div className="bg-gray-50 p-4 rounded">
+                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between items-center mb-1">
-                            <div className="text-sm text-gray-600">P-Chain Address:</div>
-                            <div className="text-sm text-gray-600">Balance: {Number(pChainBalance) / 1e9} AVAX</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">P-Chain Address:</div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">Balance: {Number(pChainBalance) / 1e9} AVAX</div>
                         </div>
-                        <div className="font-mono text-sm break-all mb-3">{addresses?.P}</div>
+                        <div className="font-mono text-sm break-all mb-3 text-gray-900 dark:text-gray-100">{addresses?.P}</div>
                         {needsPChainFunds() && (
                             <>
                                 <button
                                     onClick={handleCToPTransfer}
                                     disabled={transferring}
                                     className={`w-full px-4 py-2 rounded text-white ${transferring
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-blue-500 hover:bg-blue-600'
+                                        ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
+                                        : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
                                         }`}
                                 >
                                     {transferring ? 'Transferring...' : `Transfer ${(nodesCount + 0.5 - Number(pChainBalance) / 1e9).toFixed(2)} AVAX to P-Chain`}
                                 </button>
                                 {transferError && (
-                                    <p className="mt-2 text-sm text-red-600">
+                                    <p className="mt-2 text-sm text-red-600 dark:text-red-400">
                                         {transferError}
                                     </p>
                                 )}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useWizardStore } from './store';
 import NextPrev from './ui/NextPrev';
 import Note from './ui/Note';
+import Pre from './ui/Pre';
 import { CONTAINER_VERSION } from './constants';
 
 const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
@@ -30,35 +31,34 @@ export default function LaunchRpcNode() {
             <h1 className="text-2xl font-medium mb-6">Launch RPC Node</h1>
 
             <h3 className="mb-4 font-medium">Run this command on your RPC node:</h3>
-            <pre className="bg-gray-100 p-4 rounded-md mb-4">{dockerCommand(subnetId, chainId)}</pre>
-
+            <Pre>{dockerCommand(subnetId, chainId)}</Pre>
 
             <p className="mb-4">
                 This command launches an AvalancheGo node configured as an RPC node. It changes the RPC port to <code>8080</code> and the P2P port to <code>9653</code> to avoid conflicts with your validator node. You can run this on the same machine as one of your validator nodes or even on your local computer for easier access from a wallet.
             </p>
 
             <h3 className="mb-4 font-medium">Verify the RPC node is running:</h3>
-            <pre className="bg-gray-100 p-4 rounded-md mb-4">
+            <Pre>
                 {`curl -X POST --data '{ 
   "jsonrpc":"2.0", "method":"eth_chainId", "params":[], "id":1 
 }' -H 'content-type:application/json;' \\
 http://127.0.0.1:8080/ext/bc/${chainId}/rpc`}
-            </pre>
+            </Pre>
 
             <Note>
-                Replace <code className="font-mono bg-blue-100 px-1 py-0.5 rounded">127.0.0.1</code> with your RPC node's IP address if you're checking from a different machine.
+                Replace <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">127.0.0.1</code> with your RPC node's IP address if you're checking from a different machine.
             </Note>
 
             <p className="mb-4">
                 You should receive a response similar to:
             </p>
 
-            <pre className="bg-gray-100 p-4 rounded-md mb-4">
+            <Pre>
                 {`{"jsonrpc":"2.0","id":1,"result":"0x${evmChainId.toString(16)}"}`}
-            </pre>
+            </Pre>
 
             <Note>
-                <code className="font-mono bg-blue-100 px-1 py-0.5 rounded">0x{evmChainId.toString(16)}</code> is the hex representation of your EVM chain ID <code>{evmChainId}</code>. Also check that port 8080 is open on your RPC node.
+                <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">0x{evmChainId.toString(16)}</code> is the hex representation of your EVM chain ID <code>{evmChainId}</code>. Also check that port 8080 is open on your RPC node.
             </Note>
 
             <div className="mb-4">
