@@ -132,12 +132,12 @@ export default function Steps() {
                         <div key={groupKey} className="">
                             {/* Group header */}
                             <div className="flex items-center mb-3 relative">
-                                <div className={`w-10 h-10 flex items-center justify-center rounded-full relative z-10 bg-gray-100 dark:bg-gray-800`}>
+                                <div className={`w-10 h-10 flex items-center justify-center rounded-full relative z-10 bg-gray-200 dark:bg-gray-800`}>
                                     <div className={'text-gray-600 dark:text-gray-300'}>
                                         {group.icon}
                                     </div>
                                 </div>
-                                <h2 className="font-medium text-xl text-gray-900 dark:text-gray-100 ml-3">{group.title}</h2>
+                                <h2 className="font-medium text-xl text-gray-900 dark:text-gray-200 ml-3">{group.title}</h2>
                             </div>
 
                             {/* Steps in this group */}
@@ -161,11 +161,11 @@ export default function Steps() {
                                                 {isPassed ? (
                                                     <div className="w-2.5 h-2.5 rounded-full bg-blue-500 relative z-10" />
                                                 ) : (
-                                                    <div className={`w-2.5 h-2.5 rounded-full ${isActive ? 'ring-4 ring-blue-100 dark:ring-blue-900 bg-blue-500' : 'bg-gray-200 dark:bg-gray-700'
+                                                    <div className={`w-2.5 h-2.5 rounded-full ${isActive ? 'ring-4 ring-blue-200 dark:ring-blue-900 bg-blue-500' : 'bg-gray-300 dark:bg-gray-700'
                                                         } relative z-10`} />
                                                 )}
                                             </div>
-                                            <h3 className={`text-base leading-tight ${isActive ? 'text-black dark:text-white font-medium' : isPassed ? 'text-gray-900 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400'
+                                            <h3 className={`text-base leading-tight ${isActive ? 'text-black dark:text-white font-medium' : isPassed ? 'text-gray-900 dark:text-gray-200' : 'text-gray-500 dark:text-gray-400'
                                                 }`}>
                                                 {step.title}
                                             </h3>
