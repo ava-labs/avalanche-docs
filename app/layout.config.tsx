@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { AlbumIcon, Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, CirclePlay, Waypoints } from 'lucide-react';
+import { AlbumIcon, Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, CirclePlay, Waypoints, HandCoins } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -192,12 +192,21 @@ const toolsMenu: LinkItemType = {
       },
     },
     {
+      icon: <HandCoins />,
+      text: 'Testnet Faucet',
+      description: 'Claim Fuji AVAX tokens from the testnet faucet to test your dApps.',
+      url: 'https://core.app/tools/testnet-faucet/?subnet=c&token=c',
+      menu: {
+        className: 'lg:col-start-2',
+      },
+    },
+    {
       icon: <Waypoints />,
       text: 'ICM Deployment (Coming soon)',
       description: 'Deploy the Interchain Messaging contracts and the ICM Registry to connect your L1 to the Avalanche network.',
       url: '',
       menu: {
-        className: 'lg:col-start-2',
+        className: 'lg:col-start-3 lg:row-start-1',
       },
     },
     {
@@ -206,9 +215,10 @@ const toolsMenu: LinkItemType = {
       description: 'Deploy a bridge between two L1s to transfer fungible tokens between them.',
       url: '',
       menu: {
-        className: 'lg:col-start-3 lg:row-start-1',
+        className: 'lg:col-start-3',
       },
     },
+
   ],
 };
 
