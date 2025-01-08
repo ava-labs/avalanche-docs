@@ -12,29 +12,29 @@ import DeployContracts from "../DeployContracts/DeployContracts";
 import CreateChain from "../CreateChain/CreateChain";
 import InitializeValidatorManager from "../InitializeValidatorManager/InitializeValidatorManager";
 import WhatsNext from "../WhatsNext";
-import { BookOpen, BeakerIcon, RocketIcon, Terminal, Flag } from 'lucide-react'
+import { BookOpen, RocketIcon, Terminal, Flag, Settings, Server } from 'lucide-react'
 
 
 const groups = {
     "welcome": {
         title: "Welcome",
-        icon: <BookOpen className="size-6" />
+        icon: <BookOpen className="size-5" />
     },
     "prepare": {
         title: "Prepare",
-        icon: <BeakerIcon className="size-6" />
+        icon: <Settings className="size-5" />
     },
     "launch-l1": {
         title: "Launch your L1",
-        icon: <RocketIcon className="size-6" />
+        icon: <Server className="size-5" />
     },
     "initialize": {
         title: "Initialize",
-        icon: <Terminal className="size-6" />
+        icon: <Terminal className="size-5" />
     },
     "whats-next": {
         title: "What's next?",
-        icon: <Flag className="size-6" />
+        icon: <Flag className="size-5" />
     },
 }
 
@@ -60,15 +60,15 @@ export const stepList: Record<string, StepType> = {
         component: <PrepareValidators />,
         group: "prepare",
     },
-    "fund-temp-wallet": {
-        title: "Fund temp wallet",
-        component: <FundTempWallet />,
-        group: "prepare",
-    },
     "generate-keys": {
         title: "Generate keys",
         component: <GenerateKeys />,
         group: "prepare",
+    },
+    "fund-temp-wallet": {
+        title: "Fund temp wallet",
+        component: <FundTempWallet />,
+        group: "launch-l1",
     },
     "create-chain": {
         title: "Create chain",

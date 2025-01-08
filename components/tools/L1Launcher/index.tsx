@@ -18,9 +18,9 @@ import WhatsNext from "./WhatsNext";
 const stepComponents: Record<keyof typeof stepList, React.ReactNode> = {
     'welcome': <Welcome />,
     'genesis': <Genesis />,
-    'fund-temp-wallet': <FundTempWallet />,
     'prepare-validators': <PrepareValidators />,
     'generate-keys': <GenerateKeys />,
+    'fund-temp-wallet': <FundTempWallet />,
     'create-chain': <CreateChain />,
     "launch-validators": <LaunchValidators />,
     "launch-rpc-node": <LaunchRpcNode />,

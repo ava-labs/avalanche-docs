@@ -1,11 +1,12 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { AlbumIcon, Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote } from 'lucide-react';
+import { AlbumIcon, Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, CirclePlay, Waypoints } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
 import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
+import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 
 export const linkItems: LinkItemType[] = [
   {
@@ -159,6 +160,61 @@ export const baseOptions: BaseLayoutProps = {
           url: '/academy/customizing-evm',
           menu: {
             className: 'lg:col-start-3',
+          },
+        },
+      ],
+    },
+    {
+      text: 'Tools',
+      url: '/tools',
+      items: [
+       {
+          menu: {
+            banner: (
+              <div className="-mx-3 -mt-3">
+                <Image
+                  src={L1LauncherPreview}
+                  alt="L1 Launcher Preview"
+                  className="rounded-t-lg object-cover"
+                  style={{
+                    maskImage:
+                      'linear-gradient(to bottom,white 60%,transparent)',
+                  }}
+                />
+              </div>
+            ),
+            className: 'md:row-span-2',
+          },
+          icon: <Server />,
+          text: 'L1 Launcher',
+          description: 'Launch your Testnet or Mainnet L1 on your own infrastructure.',
+          url: '/tools/l1-launcher',
+        },
+        {
+          icon: <CirclePlay />,
+          text: 'Avalanche Starter Kit',
+          description: "Spin up short-lived test environments for building dApps using interoperability features like ICM and ICTT.",
+          url: 'https://github.com/ava-labs/avalanche-starter-kit',
+          menu: {
+            className: 'lg:col-start-2',
+          },
+        },
+        {
+          icon: <Waypoints />,
+          text: 'ICM Deployment (Coming soon)',
+          description: 'Deploy the Interchain Messaging contracts and the ICM Registry to connect your L1 to the Avalanche network.',
+          url: '',
+          menu: {
+            className: 'lg:col-start-2',
+          },
+        },
+        {
+          icon: <Waypoints />,
+          text: 'ICTT Deployment (Coming soon)',
+          description: 'Deploy a bridge between two L1s to transfer fungible tokens between them.',
+          url: '',
+          menu: {
+            className: 'lg:col-start-3 lg:row-start-1',
           },
         },
       ],
