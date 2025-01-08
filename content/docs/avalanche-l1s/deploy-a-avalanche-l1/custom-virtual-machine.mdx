@@ -162,7 +162,7 @@ Create the Avalanche L1 Configuration[​](#create-the-avalanche-l1-configuratio
 Now that you have your binary, it's time to create the Avalanche L1 configuration. This tutorial uses `myblockchain` as it's Avalanche L1 name. Invoke the Avalanche L1 Creation Wizard with this command:
 
 ```bash
-avalanche blockchain create myblockchain --sovereign=false
+avalanche blockchain create myblockchain
 ```
 
 ### Choose Your VM[​](#choose-your-vm "Direct link to heading")
@@ -175,6 +175,24 @@ Use the arrow keys to navigate: ↓ ↑ → ←
     Subnet-EVM
   ▸ Custom
 ```
+
+### Select Validator Manager type
+```bash
+Which validator management type would you like to use in your blockchain?:
+  ▸ Proof Of Authority
+    Proof Of Stake
+    Explain the difference
+```
+Select the Validator manager that matches the `deployedBytecode` in your genesis. This tutorial is using Proof Of Authority.
+
+Next, select the key that will be used to controller the PoA ValidatorManager contract:
+
+```bash
+Which address do you want to enable as controller of ValidatorManager contract?:
+  ▸ Get address from an existing stored key (created from avalanche key create or avalanche key import)
+    Custom
+```
+This key can add, remove and change weight of the validator set.
 
 ### Enter the Path to Your Genesis[​](#enter-the-path-to-your-genesis "Direct link to heading")
 
