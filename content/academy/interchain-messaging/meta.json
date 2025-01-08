@@ -1,6 +1,6 @@
 {
   "title": "Interchain Messaging",
-  "icon": "Mail",
+  "icon": "SendHorizontal",
   "root": true,
   "pages": [
     "index",

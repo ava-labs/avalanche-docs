@@ -1,6 +1,6 @@
 {
   "title": "Customizing the EVM",
-  "icon": "SquareCode",
+  "icon": "Cpu",
   "root": true,
   "pages": [
     "index",

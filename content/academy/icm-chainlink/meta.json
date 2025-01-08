@@ -1,5 +1,6 @@
 {
   "title": "Chainlink ICM",
+  "icon": "Hexagon",
   "root": true,
   "pages": [
     "index",
