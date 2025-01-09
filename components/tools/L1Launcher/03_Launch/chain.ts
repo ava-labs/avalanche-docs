@@ -1,4 +1,4 @@
-import { utils, pvm, Context } from "@avalabs/avalanchejs";
+import { utils, pvm, Context, UnsignedTx } from "@avalabs/avalanchejs";
 import { RPC_ENDPOINT } from "../utxo";
 import { getAddresses } from "../wallet";
 import { secp256k1 } from "@avalabs/avalanchejs";
@@ -14,6 +14,21 @@ async function addTxSignatures(tx: any, privateKeyHex: string) {
         tx.addSignature(signature);
     }
 }
+
+const addSigToAllCreds = async (
+    unsignedTx: UnsignedTx,
+    privateKey: Uint8Array,
+) => {
+    const unsignedBytes = unsignedTx.toBytes();
+    const publicKey = secp256k1.getPublicKey(privateKey);
+    if (!unsignedTx.hasPubkey(publicKey)) {
+        return;
+    }
+    const signature = await secp256k1.sign(unsignedBytes, privateKey);
+    for (let i = 0; i < unsignedTx.getCredentials().length; i++) {
+        unsignedTx.addSignatureAt(signature, i, 0);
+    }
+};
 
 export async function createSubnet(privateKeyHex: string): Promise<string> {
     if (!privateKeyHex) {
@@ -87,7 +102,7 @@ export async function createChain(params: CreateChainParams): Promise<string> {
         context,
     );
 
-    await addTxSignatures(tx, params.privateKeyHex);
+    await addSigToAllCreds(tx, utils.hexToBuffer(params.privateKeyHex));
 
     const response = await pvmApi.issueSignedTx(tx.getSignedTx());
 
