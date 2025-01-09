@@ -1,121 +1,10 @@
 import { useWizardStore, resetStore } from "../store";
-import Welcome from "../01_Welcome/Welcome";
-import Genesis from "../02_Prepare/Genesis";
-import FundTempWallet from "../03_Launch/FundTempWallet";
-import PrepareValidators from "../02_Prepare/PrepareValidators";
-import GenerateKeys from "../02_Prepare/GenerateKeys";
-import LaunchValidators from "../03_Launch/LaunchValidators";
-import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
-import OpenRPCPort from "../03_Launch/OpenRPCPort";
-import AddToWallet from "../AddToWallet";
-import DeployContracts from "../DeployContracts/DeployContracts";
-import CreateChain from "../03_Launch/CreateChain"
-import InitializeValidatorManager from "../InitializeValidatorManager/InitializeValidatorManager";
-import WhatsNext from "../WhatsNext";
-import { BookOpen, RocketIcon, Terminal, Flag, Settings, Server } from 'lucide-react'
+import { stepList, stepGroups } from "../stepList";
 
-
-const groups = {
-    "welcome": {
-        title: "Welcome",
-        icon: <BookOpen className="size-5" />
-    },
-    "prepare": {
-        title: "Prepare",
-        icon: <Settings className="size-5" />
-    },
-    "launch-l1": {
-        title: "Launch your L1",
-        icon: <Server className="size-5" />
-    },
-    "initialize": {
-        title: "Initialize",
-        icon: <Terminal className="size-5" />
-    },
-    "whats-next": {
-        title: "What's next?",
-        icon: <Flag className="size-5" />
-    },
-}
-
-type StepType = {
-    title: string;
-    component: React.ReactNode;
-    group: keyof typeof groups;
-}
-
-export const stepList: Record<string, StepType> = {
-    "welcome": {
-        title: "Welcome",
-        component: <Welcome />,
-        group: "welcome",
-    },
-    "genesis": {
-        title: "Create genesis",
-        component: <Genesis />,
-        group: "prepare",
-    },
-    "prepare-validators": {
-        title: "Prepare Validators",
-        component: <PrepareValidators />,
-        group: "prepare",
-    },
-    "generate-keys": {
-        title: "Generate keys",
-        component: <GenerateKeys />,
-        group: "prepare",
-    },
-    "fund-temp-wallet": {
-        title: "Fund temp wallet",
-        component: <FundTempWallet />,
-        group: "launch-l1",
-    },
-    "create-chain": {
-        title: "Create chain",
-        component: <CreateChain />,
-        group: "launch-l1",
-    },
-    "launch-validators": {
-        title: "Launch validators",
-        component: <LaunchValidators />,
-        group: "launch-l1",
-    },
-    "launch-rpc-node": {
-        title: "Launch an RPC node",
-        component: <LaunchRpcNode />,
-        group: "launch-l1",
-    },
-    "open-rpc-port": {
-        title: "Open RPC port",
-        component: <OpenRPCPort />,
-        group: "launch-l1",
-    },
-    "add-to-wallet": {
-        title: "Add to wallet",
-        component: <AddToWallet />,
-        group: "initialize",
-    },
-    "deploy-contracts": {
-        title: "Deploy contracts",
-        component: <DeployContracts />,
-        group: "initialize",
-    },
-    "initialize-validator-manager": {
-        title: "Initialize validator manager",
-        component: <InitializeValidatorManager />,
-        group: "initialize",
-    },
-    "whats-next": {
-        title: "What's next?",
-        component: <WhatsNext />,
-        group: "whats-next",
-    }
-}
-
-const stepsGroupped = Object.entries(stepList).reduce<Record<keyof typeof groups, string[]>>((acc, [key, step]) => {
+const stepsGroupped = Object.entries(stepList).reduce<Record<keyof typeof stepGroups, string[]>>((acc, [key, step]) => {
     acc[step.group] = [...(acc[step.group] || []), key];
     return acc;
-}, {} as Record<keyof typeof groups, string[]>);
+}, {} as Record<keyof typeof stepGroups, string[]>);
 
 
 export default function Steps() {
@@ -127,7 +16,7 @@ export default function Steps() {
                 {/* Main vertical line that spans entire height */}
                 <div className="absolute left-5 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
 
-                {Object.entries(groups).map(([groupKey, group]) => {
+                {Object.entries(stepGroups).map(([groupKey, group]) => {
                     return (
                         <div key={groupKey} className="">
                             {/* Group header */}
@@ -142,7 +31,7 @@ export default function Steps() {
 
                             {/* Steps in this group */}
                             <div className="ml-5 pl-4">
-                                {stepsGroupped[groupKey as keyof typeof groups]?.map((stepKey) => {
+                                {stepsGroupped[groupKey as keyof typeof stepGroups]?.map((stepKey) => {
                                     const step = stepList[stepKey];
                                     const isActive = stepKey === currentStep;
                                     const isPassed = Object.keys(stepList).indexOf(stepKey) <=

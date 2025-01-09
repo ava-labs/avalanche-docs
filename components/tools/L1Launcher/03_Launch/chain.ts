@@ -61,26 +61,38 @@ export async function createChain(params: CreateChainParams): Promise<string> {
         throw new Error("Private key required");
     }
 
-    const response = await fetch(await apiHostPromise + '/temporaryDevAPI/createChain', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            privateKeyHex: params.privateKeyHex,
-            subnetID: params.subnetId,
-            chainName: params.chainName,
-            genesisString: params.genesisData,
-        }),
+    const pvmApi = new pvm.PVMApi(RPC_ENDPOINT);
+    const feeState = await pvmApi.getFeeState();
+    const context = await Context.getContextFromURI(RPC_ENDPOINT);
+
+    const { P: pAddress } = await getAddresses(params.privateKeyHex);
+    const addressBytes = utils.bech32ToBytes(pAddress);
+
+    const { utxos } = await pvmApi.getUTXOs({
+        addresses: [pAddress]
     });
 
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to create chain: ${errorText}`);
-    }
+    const tx = pvm.e.newCreateChainTx(
+        {
+            feeState,
+            fromAddressesBytes: [addressBytes],
+            utxos,
+            chainName: params.chainName,
+            subnetAuth: [0],
+            subnetId: params.subnetId,
+            vmId: SUBNET_EVM_ID,
+            fxIds: [],
+            genesisData: JSON.parse(params.genesisData),
+        },
+        context,
+    );
 
-    const result = await response.json();
-    return result.chainID;
+    await addTxSignatures(tx, params.privateKeyHex);
+
+    const response = await pvmApi.issueSignedTx(tx.getSignedTx());
+
+    console.log('chain created via avalanchejs', response.txID);
+    return response.txID;
 }
 
 export async function convertToL1(params: {

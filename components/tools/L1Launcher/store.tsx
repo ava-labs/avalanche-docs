@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { getAddresses, newPrivateKey } from './wallet';
-import { stepList } from './ui/Steps';
+import { stepList } from './stepList';
 import { generateGenesis } from './02_Prepare/genGenesis';
 
 interface WizardState {
@@ -50,7 +50,6 @@ interface WizardState {
 
 
 import generateName from 'boring-name-generator'
-import { apiHostPromise } from './config';
 
 const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
     ownerEthAddress: "",

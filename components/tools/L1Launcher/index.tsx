@@ -1,7 +1,7 @@
 'use client'
-import Steps, { stepList } from "./ui/Steps";
+import Steps from "./ui/Steps";
 import { useWizardStore } from "./store";
-
+import { stepList } from "./stepList";
 
 
 export default function L1Wizard() {
