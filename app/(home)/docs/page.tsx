@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
   CpuIcon,
   BadgeDollarSign,
-  Globe, SproutIcon, SquareGanttChart, MonitorCog, Atom, Layers, MonitorCheck, Settings, Terminal, Cable, Webhook, Command
+  Globe, SproutIcon, SquareGanttChart, MonitorCog, Atom, Logs, MonitorCheck, Settings, Terminal, Cable, Webhook, Github
 } from 'lucide-react';
 import Link from 'next/link';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -42,7 +42,7 @@ function Highlights(): React.ReactElement {
       <Highlight icon={SquareGanttChart} heading="Build Applications" link="/docs/dapps">
         Your one stop shop to deploy smart contracts on the Avalanche C-Chain.
       </Highlight>
-      <Highlight icon={Layers} heading="Avalanche L1s" link="/docs/avalanche-l1s">
+      <Highlight icon={Logs} heading="Avalanche L1s" link="/docs/avalanche-l1s">
         Utilize the Avalanche tech stack to build your own layer 1 blockchain.
       </Highlight>
       <Highlight icon={MonitorCog} heading="Virtual Machines" link="/docs/virtual-machines">
@@ -164,7 +164,7 @@ function Features(): React.ReactElement {
             </p>
         </Link>
         <Link href="https://github.com/ava-labs/avalanche-starter-kit" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
-          <Command />
+          <Github />
           <h3 className="font-semibold">Avalanche Starter Kit</h3>
           <p className="text-sm text-fd-muted-foreground">
             Quickstart your journey into Avalanche with our Starter Kit.

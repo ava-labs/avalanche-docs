@@ -1,7 +1,7 @@
 {
   "title": "Avalanche L1s",
   "description": "Build Your L1 Blockchain",
-  "icon": "Layers",
+  "icon": "Logs",
   "root": true,
   "pages": [
     "---Avalanche L1s---",
