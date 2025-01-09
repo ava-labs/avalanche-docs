@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
   CpuIcon,
   BadgeDollarSign,
-  Globe, MailIcon, SproutIcon, SquareGanttChart, IndentDecrease, Layers, MonitorCheck, Settings, Terminal, Cable, Webhook
+  Globe, SproutIcon, SquareGanttChart, MonitorCog, Atom, Logs, MonitorCheck, Settings, Terminal, Cable, Webhook, Github
 } from 'lucide-react';
 import Link from 'next/link';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -36,22 +36,22 @@ export default function HomePage(): React.ReactElement {
 function Highlights(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-r md:grid-cols-2 lg:grid-cols-3">
-      <Highlight icon={SproutIcon} heading="Avalanche Protocol" link="/docs/quick-start">
-        Learn about Avalanche Protocol and it's groundbreaking consensus algorithm.
+      <Highlight icon={SproutIcon} heading="Quick Start" link="/docs/quick-start">
+        Learn about the Avalanche Protocol and it's groundbreaking consensus algorithm.
       </Highlight>
-      <Highlight icon={SquareGanttChart} heading="Smart Contracts" link="/docs/dapps">
+      <Highlight icon={SquareGanttChart} heading="Build Applications" link="/docs/dapps">
         Your one stop shop to deploy smart contracts on the Avalanche C-Chain.
       </Highlight>
-      <Highlight icon={Layers} heading="Avalanche L1s" link="/docs/avalanche-l1s">
+      <Highlight icon={Logs} heading="Avalanche L1s" link="/docs/avalanche-l1s">
         Utilize the Avalanche tech stack to build your own layer 1 blockchain.
       </Highlight>
-      <Highlight icon={IndentDecrease} heading="Virtual Machines" link="/docs/virtual-machines">
+      <Highlight icon={MonitorCog} heading="Virtual Machines" link="/docs/virtual-machines">
         Learn how to customize the EVM or build new virtual machines from scratch.
       </Highlight>
       <Highlight icon={MonitorCheck} heading="Nodes & Validators" link="/docs/nodes">
         Become an active participant in the network by running a node or validator.
       </Highlight>
-      <Highlight icon={MailIcon} heading="Interoperability" link="/docs/cross-chain">
+      <Highlight icon={Cable} heading="Interoperability" link="/docs/cross-chain">
         Advanced interoperability protocols to communicate with other blockchains.
       </Highlight>
     </div>
@@ -164,14 +164,14 @@ function Features(): React.ReactElement {
             </p>
         </Link>
         <Link href="https://github.com/ava-labs/avalanche-starter-kit" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
-          <Cable />
+          <Github />
           <h3 className="font-semibold">Avalanche Starter Kit</h3>
           <p className="text-sm text-fd-muted-foreground">
             Quickstart your journey into Avalanche with our Starter Kit.
           </p>
         </Link>
         <Link href="https://github.com/ava-labs/hypersdk" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
-            <IndentDecrease />
+            <Atom />
             <h3 className="font-semibold">HyperSDK</h3>
             <p className="text-sm text-fd-muted-foreground">
               High performance, customizable framework for building blockchains.

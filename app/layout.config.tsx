@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { AlbumIcon, Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, CirclePlay, Waypoints } from 'lucide-react';
+import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -9,12 +9,6 @@ import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
 import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 
 export const linkItems: LinkItemType[] = [
-  {
-    icon: <AlbumIcon />,
-    text: 'Guides',
-    url: '/guides',
-    active: 'nested-url',
-  },
   {
     icon: <Workflow />,
     text: 'Integrations',
@@ -51,7 +45,7 @@ const docsMenu: LinkItemType = {
       url: '/docs/quick-start',
     },
     {
-      icon: <Layers />,
+      icon: <Logs />,
       text: 'Avalanche L1s',
       description: "Build your own sovereign Layer 1 blockchain using Avalanche's battle-tested infrastructure and tooling.",
       url: '/docs/avalanche-l1s',
@@ -62,14 +56,14 @@ const docsMenu: LinkItemType = {
     {
       icon: <MonitorCheck />,
       text: 'Nodes & Validators',
-      description: 'Learn about hardware requirements, staking mechanisms, rewards, and best practices for securing and maintaining validator infra for Avalanche ecosystem.',
+      description: 'Learn about hardware requirements, staking mechanisms, rewards, and best practices for running validator infra on Avalanche.',
       url: '/docs/nodes',
       menu: {
         className: 'lg:col-start-2',
       },
     },
     {
-      icon: <Mail />,
+      icon: <Cable />,
       text: 'Interoperability',
       description: "Explore Avalanche's native cross-chain protocols that enable seamless asset and data transfer across different Avalanche L1s.",
       url: '/docs/cross-chain',
@@ -78,10 +72,10 @@ const docsMenu: LinkItemType = {
       },
     },
     {
-      icon: <Webhook />,
-      text: 'API Docs',
-      description: "Comprehensive API documentation for interacting with the Primary Network and various Avalanche L1s.",
-      url: '/docs/api-reference',
+      icon: <ArrowUpRight />,
+      text: 'Browse All Docs',
+      description: "Explore our in-depth documentation, guides, and resources to bring your ideas to life.",
+      url: '/docs',
       menu: {
         className: 'lg:col-start-3',
       },
@@ -117,7 +111,7 @@ const academyMenu: LinkItemType = {
       url: '/academy/avalanche-fundamentals',
     },
     {
-      icon: <Layers />,
+      icon: <Logs />,
       text: 'Multi-Chain Architecture',
       description: "Dive deeper into Avalanche's multi-chain architecture and deploy your own Blockchain.",
       url: '/academy/multi-chain-architecture',
@@ -126,16 +120,16 @@ const academyMenu: LinkItemType = {
       },
     },
     {
-      icon: <MonitorCheck />,
-      text: 'Interchain Token Transfer',
-      description: 'Deploy Avalanche Interchain Token Transfer to transfer assets between different Avalanche L1s.',
-      url: '/academy/interchain-token-transfer',
+      icon: <Cpu />,
+      text: 'Customizing the EVM',
+      description: "Learn how to customize the Ethereum Virtual Machine and add your own custom precompiles.",
+      url: '/academy/customizing-evm',
       menu: {
         className: 'lg:col-start-2',
       },
     },
     {
-      icon: <Mail />,
+      icon: <SendHorizontal />,
       text: 'Avalanche Interchain Messaging',
       description: "Utilize Avalanche Interchain Messaging to build cross-chain dApps in the Avalanche ecosystem.",
       url: '/academy/interchain-messaging',
@@ -144,10 +138,10 @@ const academyMenu: LinkItemType = {
       },
     },
     {
-      icon: <Webhook />,
-      text: 'Customizing the EVM',
-      description: "Learn how to customize the Ethereum Virtual Machine and add your own custom precompiles.",
-      url: '/academy/customizing-evm',
+      icon: <ArrowUpRight />,
+      text: 'Check All Courses',
+      description: "Supercharge your learning journey with expert-curated courses offered by Avalanche Academy and earn certificates.",
+      url: '/academy',
       menu: {
         className: 'lg:col-start-3',
       },
@@ -183,10 +177,19 @@ const toolsMenu: LinkItemType = {
       url: '/tools/l1-launcher',
     },
     {
-      icon: <CirclePlay />,
+      icon: <Github />,
       text: 'Avalanche Starter Kit',
       description: "Spin up short-lived test environments for building dApps using interoperability features like ICM and ICTT.",
       url: 'https://github.com/ava-labs/avalanche-starter-kit',
+      menu: {
+        className: 'lg:col-start-2',
+      },
+    },
+    {
+      icon: <HandCoins />,
+      text: 'Testnet Faucet',
+      description: 'Claim Fuji AVAX tokens from the testnet faucet to test your dApps.',
+      url: 'https://core.app/tools/testnet-faucet/?subnet=c&token=c',
       menu: {
         className: 'lg:col-start-2',
       },
@@ -197,18 +200,19 @@ const toolsMenu: LinkItemType = {
       description: 'Deploy the Interchain Messaging contracts and the ICM Registry to connect your L1 to the Avalanche network.',
       url: '',
       menu: {
-        className: 'lg:col-start-2',
+        className: 'lg:col-start-3 lg:row-start-1',
       },
     },
     {
       icon: <Waypoints />,
       text: 'ICTT Deployment (Coming soon)',
-      description: 'Deploy a bridge between two L1s to transfer fungible tokens between them.',
+      description: 'Deploy a bridge between two L1s to transfer fungible tokens.',
       url: '',
       menu: {
-        className: 'lg:col-start-3 lg:row-start-1',
+        className: 'lg:col-start-3',
       },
     },
+
   ],
 };
 
@@ -241,7 +245,7 @@ const grantsMenu: LinkItemType = {
      },
      {
        icon: <Cpu />,
-       text: 'InfraBuidl',
+       text: 'InfraBUIDL',
        description: "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
        url: 'https://www.avax.network/infrabuidl-program',
        menu: {
@@ -250,8 +254,8 @@ const grantsMenu: LinkItemType = {
      },
      {
        icon: <Bot />,
-       text: 'InfraBuidl(AI)',
-       description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure',
+       text: 'InfraBUIDL (AI)',
+       description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure.',
        url: 'https://www.avax.network/infrabuidl-ai-program',
        menu: {
          className: 'lg:col-start-2',

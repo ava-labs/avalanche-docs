@@ -1,6 +1,6 @@
 {
-  "title": "Smart Contracts",
-  "description": "Build Apps on Avalanche",
+  "title": "Build Applications",
+  "description": "dApps on Avalanche",
   "icon": "SquareChartGantt",
   "root": true,
   "pages": [
@@ -13,9 +13,11 @@
     "smart-contract-dev/deploy-with-remix-ide",
     "smart-contract-dev/erc-20-token",
     "deploy-nft-collection",
-    "verify-contract",
     "toolchains",
-    "smart-contract-dev/interact-golang-app",
+    "---Contract Verification---",
+    "verify-contract/explorer",
+    "verify-contract/snowtrace",
+    "verify-contract/hardhat",
     "---Advanced Tutorials---",
     "...advanced-tutorials",
     "---End-to-End Walkthroughs---",

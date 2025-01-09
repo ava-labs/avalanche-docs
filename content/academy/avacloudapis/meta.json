@@ -1,6 +1,6 @@
 {
   "title": "AvaCloud APIs",
-  "icon": "SquareCode",
+  "icon": "Webhook",
   "root": true,
   "pages": [
     "index",

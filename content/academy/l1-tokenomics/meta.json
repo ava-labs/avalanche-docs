@@ -1,6 +1,6 @@
 {
   "title": "Layer 1 Tokenomics",
-  "icon": "Coins",
+  "icon": "HandCoins",
   "root": true,
   "pages": [
     "index",
