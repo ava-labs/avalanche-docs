@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { AlbumIcon, Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, CirclePlay, Waypoints, HandCoins } from 'lucide-react';
+import { Workflow, Sprout, Layers, MonitorCheck, Mail, Webhook, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, CirclePlay, Waypoints, HandCoins } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -9,12 +9,6 @@ import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
 import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 
 export const linkItems: LinkItemType[] = [
-  {
-    icon: <AlbumIcon />,
-    text: 'Guides',
-    url: '/guides',
-    active: 'nested-url',
-  },
   {
     icon: <Workflow />,
     text: 'Integrations',
