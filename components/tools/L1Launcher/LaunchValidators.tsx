@@ -6,16 +6,17 @@ import Pre from './ui/Pre';
 import { CONTAINER_VERSION } from './constants';
 
 const dockerCommand = (subnetID: string) => `docker run -it -d \\
-  --name avalanchego \\
+  --name avago \\
   --network host \\
   -v ~/.avalanchego:/home/avalanche/.avalanchego \\
-  -e AVALANCHEGO_NETWORK_ID=fuji \\
-  -e AVALANCHEGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
-  -e AVALANCHEGO_TRACK_SUBNETS=${subnetID} \\
-  -e AVALANCHEGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \\
+  -e AVAGO_NETWORK_ID=fuji \\
+  -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
+  -e AVAGO_TRACK_SUBNETS=${subnetID} \\
+  -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \\
+  -e AVAGO_PLUGIN_DIR=/avalanchego/build/plugins/ \\
   -e HOME=/home/avalanche \\
   --user $(id -u):$(id -g) \\
-  containerman17/easy-avalanchego:${CONTAINER_VERSION}`
+  avaplatform/subnet-evm:${CONTAINER_VERSION}`
 
 
 export default function LaunchValidators() {
@@ -61,7 +62,7 @@ export default function LaunchValidators() {
       <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
         You can check the node logs by running:
       </h3>
-      <Pre>docker logs -f avalanchego</Pre>
+      <Pre>docker logs -f avago</Pre>
 
       <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
         To test if the node bootstrapped successfully, run:

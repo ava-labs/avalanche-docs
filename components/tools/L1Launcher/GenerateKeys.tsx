@@ -1,12 +1,12 @@
 const dockerCommand = `mkdir -p ~/.avalanchego/staking; docker run -it -d \\
-  --name avalanchego \\
+  --name avago \\
   --network host \\
   -v ~/.avalanchego:/home/avalanche/.avalanchego \\
-  -e AVALANCHEGO_NETWORK_ID=fuji \\
-  -e AVALANCHEGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
+  -e AVAGO_NETWORK_ID=fuji \\
+  -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
   -e HOME=/home/avalanche \\
   --user $(id -u):$(id -g) \\
-  containerman17/easy-avalanchego:${CONTAINER_VERSION}`
+  avaplatform/subnet-evm:${CONTAINER_VERSION}`
 
 const popRequest = `curl -X POST --data '{ 
     "jsonrpc":"2.0", 
@@ -14,7 +14,7 @@ const popRequest = `curl -X POST --data '{
     "method" :"info.getNodeID" 
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info`
 
-const stopScript = `docker stop avalanchego; docker rm avalanchego`
+const stopScript = `docker stop avago; docker rm avago`
 
 import { useState } from 'react';
 import { CONTAINER_VERSION } from './constants';

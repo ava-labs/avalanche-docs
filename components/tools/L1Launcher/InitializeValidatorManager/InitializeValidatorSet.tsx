@@ -215,10 +215,10 @@ export default function InitializeContract() {
 
     return (
         <>
-            <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status.status]} mb-4`}>
+            <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status.status]} mb-4 dark:bg-gray-800`}>
                 <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium">Call initializeValidatorSet in PoA Validator Manager</h3>
-                    <span className={status.status === 'error' ? 'text-red-600' : ''}>
+                    <h3 className="font-medium dark:text-white">Call initializeValidatorSet in PoA Validator Manager</h3>
+                    <span className={`${status.status === 'error' ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}`}>
                         {status.status === 'not_started' ? 'Not started' :
                             status.status === 'in_progress' ? 'In progress...' :
                                 status.status === 'error' ? 'Failed' : 'Success'}
@@ -226,14 +226,14 @@ export default function InitializeContract() {
                 </div>
 
                 {error && (
-                    <div className="text-sm text-red-600 mb-2">{error}</div>
+                    <div className="text-sm text-red-600 dark:text-red-400 mb-2">{error}</div>
                 )}
 
                 {status.status === 'success' && status.data && (
                     <div className="mb-2">
-                        <div className="text-sm text-gray-500 mb-1">Transaction Hash:</div>
-                        <div className="bg-white rounded p-2 border border-gray-100">
-                            <pre className="font-mono text-sm whitespace-pre-wrap break-all">{status.data}</pre>
+                        <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Transaction Hash:</div>
+                        <div className="bg-white dark:bg-gray-900 rounded p-2 border border-gray-100 dark:border-gray-700">
+                            <pre className="font-mono text-sm whitespace-pre-wrap break-all dark:text-gray-300">{status.data}</pre>
                         </div>
                     </div>
                 )}
@@ -243,8 +243,8 @@ export default function InitializeContract() {
                         onClick={onInitialize}
                         disabled={!convertL1SignedWarpMessage}
                         className={`mt-2 w-full p-2 mb-2 rounded ${!convertL1SignedWarpMessage
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-600'
+                            ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                            : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
                             }`}
                     >
                         Initialize

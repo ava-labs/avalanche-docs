@@ -1,1 +1,1 @@
-export const CONTAINER_VERSION = 'v1.12.1_v0.7.0';
+export const CONTAINER_VERSION = 'v0.7.1-rc.0';

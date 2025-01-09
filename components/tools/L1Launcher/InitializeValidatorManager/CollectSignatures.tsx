@@ -84,23 +84,23 @@ export default function CollectSignatures() {
     };
 
     return (
-        <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status]} mb-4`}>
+        <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status]} mb-4 dark:bg-gray-800`}>
             <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium">Collect L1 Conversion WARP Signatures</h3>
-                <span className={error ? 'text-red-600' : ''}>
+                <h3 className="font-medium dark:text-white">Collect L1 Conversion WARP Signatures</h3>
+                <span className={`${error ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}`}>
                     {error ? 'Failed' : 'Success'}
                 </span>
             </div>
 
             {error && (
-                <div className="text-sm text-red-600 mb-2">{error}</div>
+                <div className="text-sm text-red-600 dark:text-red-400 mb-2">{error}</div>
             )}
 
             {convertL1SignedWarpMessage && (
                 <div className="mb-2">
-                    <div className="text-sm text-gray-500 mb-1">Signature:</div>
-                    <div className="bg-white rounded p-2 border border-gray-100">
-                        <pre className="font-mono text-sm whitespace-pre-wrap break-all">{convertL1SignedWarpMessage}</pre>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Signature:</div>
+                    <div className="bg-white dark:bg-gray-900 rounded p-2 border border-gray-100 dark:border-gray-700">
+                        <pre className="font-mono text-sm whitespace-pre-wrap break-all dark:text-gray-300">{convertL1SignedWarpMessage}</pre>
                     </div>
                 </div>
             )}
@@ -108,7 +108,7 @@ export default function CollectSignatures() {
             {convertL1SignedWarpMessage === null && (
                 <button
                     onClick={onCollect}
-                    className="mt-2 w-full p-2 mb-2 rounded bg-blue-500 text-white hover:bg-blue-600"
+                    className="mt-2 w-full p-2 mb-2 rounded bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
                 >
                     Collect Signatures
                 </button>

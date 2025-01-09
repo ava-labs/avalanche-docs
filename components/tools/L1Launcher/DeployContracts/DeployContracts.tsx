@@ -106,33 +106,33 @@ function ContractCard({
     const handleCopy = (text: string) => navigator.clipboard.writeText(text).catch(console.error);
 
     const statusColors = {
-        not_started: 'bg-gray-50 border-gray-200',
-        in_progress: 'bg-blue-50 border-blue-200',
-        error: 'bg-red-50 border-red-200',
-        success: 'bg-green-50 border-green-200',
-        loading: 'bg-gray-50 border-gray-200'
+        not_started: 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700',
+        in_progress: 'bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-800',
+        error: 'bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-800',
+        success: 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800',
+        loading: 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700'
     };
 
     return (
         <div className={`p-4 rounded-lg border ${statusColors[status.status]} mb-4`}>
             <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium">{title}</h3>
-                <span className={status.status === 'error' ? 'text-red-600' : ''}>
+                <h3 className="font-medium dark:text-gray-200">{title}</h3>
+                <span className={status.status === 'error' ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}>
                     {status.status === 'not_started' ? 'Not deployed' :
                         status.status === 'in_progress' ? 'Deploying...' :
                             status.status === 'error' ? 'Failed' : 'Deployed'}
                 </span>
             </div>
 
-            {status.error && <div className="text-sm text-red-600 mb-2">{status.error}</div>}
+            {status.error && <div className="text-sm text-red-600 dark:text-red-400 mb-2">{status.error}</div>}
 
             {status.address && (
                 <div className="mb-2">
-                    <div className="text-sm text-gray-500 mb-1">Contract Address:</div>
-                    <div className="flex items-center bg-white rounded p-2 border border-gray-100">
-                        <code className="font-mono text-sm flex-1 break-all">{status.address}</code>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Contract Address:</div>
+                    <div className="flex items-center bg-white dark:bg-gray-800 rounded p-2 border border-gray-100 dark:border-gray-700">
+                        <code className="font-mono text-sm flex-1 break-all dark:text-gray-300">{status.address}</code>
                         <button onClick={() => handleCopy(status.address!)}
-                            className="ml-2 px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded">
+                            className="ml-2 px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded dark:text-gray-300">
                             Copy
                         </button>
                     </div>
@@ -141,11 +141,11 @@ function ContractCard({
 
             {status.txHash && (
                 <div>
-                    <div className="text-sm text-gray-500 mb-1">Transaction Hash:</div>
-                    <div className="flex items-center bg-white rounded p-2 border border-gray-100">
-                        <code className="font-mono text-sm flex-1 break-all">{status.txHash}</code>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Transaction Hash:</div>
+                    <div className="flex items-center bg-white dark:bg-gray-800 rounded p-2 border border-gray-100 dark:border-gray-700">
+                        <code className="font-mono text-sm flex-1 break-all dark:text-gray-300">{status.txHash}</code>
                         <button onClick={() => handleCopy(status.txHash!)}
-                            className="ml-2 px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded">
+                            className="ml-2 px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded dark:text-gray-300">
                             Copy
                         </button>
                     </div>
@@ -154,11 +154,11 @@ function ContractCard({
 
             {status.predictedDeployer && (
                 <div>
-                    <div className="text-sm text-gray-500 mb-1">Predicted Deployer:</div>
-                    <div className="flex items-center bg-white rounded p-2 border border-gray-100">
-                        <code className="font-mono text-sm flex-1 break-all">{status.predictedDeployer}</code>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Predicted Deployer:</div>
+                    <div className="flex items-center bg-white dark:bg-gray-800 rounded p-2 border border-gray-100 dark:border-gray-700">
+                        <code className="font-mono text-sm flex-1 break-all dark:text-gray-300">{status.predictedDeployer}</code>
                         <button onClick={() => handleCopy(status.predictedDeployer!)}
-                            className="ml-2 px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded">
+                            className="ml-2 px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded dark:text-gray-300">
                             Copy
                         </button>
                     </div>
@@ -170,8 +170,8 @@ function ContractCard({
                     onClick={onDeploy}
                     disabled={disabled}
                     className={`mt-2 w-full p-2 rounded ${disabled
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-blue-500 text-white hover:bg-blue-600'
+                        ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                        : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
                         }`}
                 >
                     Deploy
@@ -363,29 +363,29 @@ function QuickDeploymentTest({ onTestComplete }: { onTestComplete: (success: boo
     };
 
     const statusColors = {
-        not_started: 'bg-gray-50 border-gray-200',
-        testing: 'bg-blue-50 border-blue-200',
-        error: 'bg-red-50 border-red-200',
-        success: 'bg-green-50 border-green-200'
+        not_started: 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700',
+        testing: 'bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-800',
+        error: 'bg-red-50 dark:bg-red-900/30 border-red-200 dark:border-red-800',
+        success: 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800'
     };
 
     return (
         <div className={`p-4 rounded-lg border ${statusColors[status]} mb-4`}>
             <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium">Proxy Test</h3>
-                <span className={status === 'error' ? 'text-red-600' : ''}>
+                <h3 className="font-medium dark:text-gray-200">Proxy Test</h3>
+                <span className={status === 'error' ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}>
                     {status === 'not_started' ? 'Not tested' :
                         status === 'testing' ? 'Testing...' :
                             status === 'error' ? 'Failed' : 'Passed'}
                 </span>
             </div>
 
-            {error && <div className="text-sm text-red-600 mb-2">{error}</div>}
+            {error && <div className="text-sm text-red-600 dark:text-red-400 mb-2">{error}</div>}
 
             {status === 'not_started' && (
                 <button
                     onClick={testContracts}
-                    className="mt-2 w-full p-2 rounded bg-blue-500 text-white hover:bg-blue-600"
+                    className="mt-2 w-full p-2 rounded bg-blue-500 dark:bg-blue-600 text-white hover:bg-blue-600 dark:hover:bg-blue-700"
                 >
                     Test
                 </button>
@@ -424,7 +424,7 @@ export default function DeployContracts() {
 
     return (
         <div className="max-w-3xl mx-auto">
-            <h1 className="text-2xl font-medium mb-6">Deploy Contracts</h1>
+            <h1 className="text-2xl font-medium mb-6 dark:text-gray-200">Deploy Contracts</h1>
 
             <ContractDeployer
                 name="ValidatorMessages"

@@ -165,10 +165,10 @@ export default function InitializeSettings() {
     };
 
     return (
-        <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status]} mb-4`}>
+        <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status]} mb-4 dark:bg-gray-800`}>
             <div className="flex items-center justify-between mb-2">
-                <h3 className="font-medium">Call initialize in PoA Validator Manager</h3>
-                <span className={status === 'error' ? 'text-red-600' : ''}>
+                <h3 className="font-medium dark:text-white">Call initialize in PoA Validator Manager</h3>
+                <span className={`${status === 'error' ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}`}>
                     {status === 'not_started' ? 'Not started' :
                         status === 'in_progress' ? 'In progress...' :
                             status === 'error' ? 'Failed' : 'Success'}
@@ -180,8 +180,8 @@ export default function InitializeSettings() {
                     onClick={onInitialize}
                     disabled={!convertL1SignedWarpMessage}
                     className={`mt-2 w-full p-2 mb-2 rounded ${!convertL1SignedWarpMessage
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-blue-500 text-white hover:bg-blue-600'
+                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                        : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
                         }`}
                 >
                     Call initialize function

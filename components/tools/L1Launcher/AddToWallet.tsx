@@ -116,8 +116,8 @@ export default function AddToWallet() {
 
     return (
         <SwitchChain chainConfig={chainConfig}>
-            <h1 className="text-2xl font-medium mb-6">Add to Wallet</h1>
-            <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+            <h1 className="text-2xl font-medium mb-6 text-gray-900 dark:text-gray-100">Add to Wallet</h1>
+            <div className="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-400 dark:border-blue-600 p-4 mb-6">
                 <div className="space-y-4">
                     <div>
                         <div className="font-medium">Chain Name:</div>
@@ -139,8 +139,8 @@ export default function AddToWallet() {
                     onClick={handleAddToWallet}
                     disabled={isAdded}
                     className={`w-full p-3 rounded-md ${isAdded
-                        ? 'bg-green-100 text-green-700 cursor-not-allowed'
-                        : 'bg-blue-500 text-white hover:bg-blue-600'
+                        ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 cursor-not-allowed'
+                        : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-700 dark:text-white dark:hover:bg-blue-800'
                         }`}
                 >
                     {isAdded ? 'Added to Wallet ✓' : 'Add to Wallet'}
@@ -155,9 +155,9 @@ export default function AddToWallet() {
             )}
 
             {isAdded && balanceInfo && (
-                <div className="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
-                    <h3 className="font-medium mb-2">Wallet Added Successfully</h3>
-                    <p>
+                <div className="bg-green-50 dark:bg-green-900 border-l-4 border-green-400 dark:border-green-600 p-4 mb-6">
+                    <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">Wallet Added Successfully</h3>
+                    <p className="text-gray-800 dark:text-gray-200">
                         Balance of account <span className="font-mono">{balanceInfo.address}</span> is{' '}
                         <span className="font-bold">{balanceInfo.balance.toFixed(4)} {tokenSymbol}</span>.
                     </p>
