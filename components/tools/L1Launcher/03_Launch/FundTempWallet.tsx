@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import SwitchChain, { fujiConfig } from './ui/SwitchChain';
-import { useWizardStore } from './store';
+import SwitchChain, { fujiConfig } from '../ui/SwitchChain';
+import { useWizardStore } from '../store';
 import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
 import { avalancheFuji } from 'viem/chains';
-import { newPrivateKey, getAddresses } from './wallet';
-import { transferCToP, getPChainBalance, importExistingUTXOs } from './utxo';
-import NextPrev from './ui/NextPrev';
+import { newPrivateKey, getAddresses } from '../wallet';
+import { transferCToP, getPChainBalance, importExistingUTXOs } from '../utxo';
+import NextPrev from '../ui/NextPrev';
 
 const changeAllowance = parseEther('0.1');
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
@@ -199,7 +199,7 @@ export default function FundTempWallet() {
                                         : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
                                         }`}
                                 >
-                                    {transferring ? 'Transferring...' : `Transfer ${(nodesCount + 0.5 - Number(pChainBalance) / 1e9).toFixed(2)} AVAX to P-Chain`}
+                                    {transferring ? 'Importing...' : `Import ${(nodesCount + 0.5 - Number(pChainBalance) / 1e9).toFixed(2)} AVAX to P-Chain`}
                                 </button>
                                 {transferError && (
                                     <p className="mt-2 text-sm text-red-600 dark:text-red-400">

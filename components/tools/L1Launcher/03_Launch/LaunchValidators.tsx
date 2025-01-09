@@ -1,9 +1,9 @@
-import { useWizardStore } from './store';
-import NextPrev from './ui/NextPrev';
+import { useWizardStore } from '../store';
+import NextPrev from '../ui/NextPrev';
 import { useState } from 'react';
-import Note from './ui/Note';
-import Pre from './ui/Pre';
-import { CONTAINER_VERSION } from './constants';
+import Note from '../ui/Note';
+import Pre from '../ui/Pre';
+import { CONTAINER_VERSION } from '../constants';
 
 const dockerCommand = (subnetID: string) => `docker run -it -d \\
   --name avago \\

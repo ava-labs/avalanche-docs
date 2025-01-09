@@ -1,7 +1,7 @@
-import { useWizardStore } from './store';
-import NextPrev from './ui/NextPrev';
-import Note from './ui/Note';
-import Pre from './ui/Pre';
+import { useWizardStore } from '../store';
+import NextPrev from '../ui/NextPrev';
+import Note from '../ui/Note';
+import Pre from '../ui/Pre';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 

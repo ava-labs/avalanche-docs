@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useWizardStore } from './store';
-import NextPrev from './ui/NextPrev';
-import Note from './ui/Note';
-import Pre from './ui/Pre';
-import { CONTAINER_VERSION } from './constants';
+import { useWizardStore } from '../store';
+import NextPrev from '../ui/NextPrev';
+import Note from '../ui/Note';
+import Pre from '../ui/Pre';
+import { CONTAINER_VERSION } from '../constants';
 
 const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
   --name rpc \\

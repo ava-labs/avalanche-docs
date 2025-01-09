@@ -1,15 +1,15 @@
 import { useWizardStore, resetStore } from "../store";
 import Welcome from "../01_Welcome/Welcome";
 import Genesis from "../02_Prepare/Genesis";
-import FundTempWallet from "../FundTempWallet";
+import FundTempWallet from "../03_Launch/FundTempWallet";
 import PrepareValidators from "../02_Prepare/PrepareValidators";
 import GenerateKeys from "../02_Prepare/GenerateKeys";
-import LaunchValidators from "../LaunchValidators";
-import LaunchRpcNode from "../LaunchRpcNode";
-import OpenRPCPort from "../OpenRPCPort";
+import LaunchValidators from "../03_Launch/LaunchValidators";
+import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
+import OpenRPCPort from "../03_Launch/OpenRPCPort";
 import AddToWallet from "../AddToWallet";
 import DeployContracts from "../DeployContracts/DeployContracts";
-import CreateChain from "../CreateChain/CreateChain";
+import CreateChain from "../03_Launch/CreateChain"
 import InitializeValidatorManager from "../InitializeValidatorManager/InitializeValidatorManager";
 import WhatsNext from "../WhatsNext";
 import { BookOpen, RocketIcon, Terminal, Flag, Settings, Server } from 'lucide-react'

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useWizardStore } from '../store';
-import NextPrev from "../ui/NextPrev";
+import NextPrev from '../ui/NextPrev';
 import { createSubnet, createChain, convertToL1 } from './chain';
 import { calculateContractAddress } from '../wallet';
 
