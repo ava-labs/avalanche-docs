@@ -1,4 +1,4 @@
-import NextPrev from "./ui/NextPrev";
+import NextPrev from "../ui/NextPrev";
 
 export default function Welcome() {
     return <>

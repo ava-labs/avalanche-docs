@@ -1,8 +1,8 @@
-import { useWizardStore } from './store';
-import NextPrev from './ui/NextPrev';
-import Note from './ui/Note';
+import { useWizardStore } from '../store';
+import NextPrev from '../ui/NextPrev';
+import Note from '../ui/Note';
 import { useState } from 'react';
-import { stepList } from './ui/Steps';
+import { stepList } from '../ui/Steps';
 
 const dockerInstallInstructions: Record<string, string> = {
     'Ubuntu/Debian': `sudo apt-get update && \\

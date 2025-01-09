@@ -1,9 +1,9 @@
 'use client'
-import Welcome from "./Welcome";
-import Genesis from "./02_Genesis/Genesis";
+import Welcome from "./01_Welcome/Welcome";
+import Genesis from "./02_Prepare/Genesis";
 import FundTempWallet from "./FundTempWallet";
-import PrepareValidators from "./PrepareValidators";
-import GenerateKeys from "./GenerateKeys";
+import PrepareValidators from "./02_Prepare/PrepareValidators";
+import GenerateKeys from "./02_Prepare/GenerateKeys";
 import LaunchValidators from "./LaunchValidators";
 import LaunchRpcNode from "./LaunchRpcNode";
 import OpenRPCPort from "./OpenRPCPort";

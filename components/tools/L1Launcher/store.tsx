@@ -3,7 +3,7 @@ import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { getAddresses, newPrivateKey } from './wallet';
 import { stepList } from './ui/Steps';
-import { generateGenesis } from './02_Genesis/genGenesis';
+import { generateGenesis } from './02_Prepare/genGenesis';
 
 interface WizardState {
     ownerEthAddress: string;

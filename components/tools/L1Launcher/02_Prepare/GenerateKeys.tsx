@@ -17,11 +17,11 @@ const popRequest = `curl -X POST --data '{
 const stopScript = `docker stop avago; docker rm avago`
 
 import { useState } from 'react';
-import { CONTAINER_VERSION } from './constants';
-import { useWizardStore } from './store';
-import NextPrev from './ui/NextPrev';
-import Pre from './ui/Pre';
-import TextArea from './ui/TextArea';
+import { CONTAINER_VERSION } from '../constants';
+import { useWizardStore } from '../store';
+import NextPrev from '../ui/NextPrev';
+import Pre from '../ui/Pre';
+import TextArea from '../ui/TextArea';
 
 const validateNodePop = (json: string): boolean => {
     try {
