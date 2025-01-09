@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { getWalletAddress } from './wallet';
-import { useWizardStore } from './store';
-import NextPrev from './ui/NextPrev';
+import { getWalletAddress } from '../wallet';
+import { useWizardStore } from '../store';
+import NextPrev from '../ui/NextPrev';
 import { Button } from '@/components/ui/button';
 
 function isValidL1Name(name: string): boolean {

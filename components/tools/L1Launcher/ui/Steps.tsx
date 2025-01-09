@@ -1,6 +1,6 @@
 import { useWizardStore, resetStore } from "../store";
 import Welcome from "../Welcome";
-import Genesis from "../Genesis";
+import Genesis from "../02_Genesis/Genesis";
 import FundTempWallet from "../FundTempWallet";
 import PrepareValidators from "../PrepareValidators";
 import GenerateKeys from "../GenerateKeys";

@@ -3,6 +3,7 @@ import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { getAddresses, newPrivateKey } from './wallet';
 import { stepList } from './ui/Steps';
+import { generateGenesis } from './02_Genesis/genGenesis';
 
 interface WizardState {
     ownerEthAddress: string;
@@ -82,27 +83,17 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
     genesisString: "",
     regenerateGenesis: async () => {
         const { ownerEthAddress, evmChainId, tempPrivateKeyHex } = get();
-
         const { C: initialContractDeployer } = getAddresses(tempPrivateKeyHex);
 
-        const params = new URLSearchParams({
-            ownerEthAddressString: ownerEthAddress,
-            evmChainId: evmChainId.toString(),
-            initialContractDeployer,
+        const genesis = generateGenesis({
+            evmChainId,
+            initialBalances: {
+                [ownerEthAddress]: "1000000000.00",
+                [initialContractDeployer]: "1.00",
+            },
         });
 
-        const response = await fetch(await apiHostPromise + `/api/genesis?${params}`);
-        if (!response.ok) {
-            let errorMessage = response.statusText;
-            try {
-                errorMessage = await response.text();
-            } catch (e) {
-                console.error(e);
-            }
-            throw new Error('Failed to generate genesis: ' + errorMessage);
-        }
-        const genesis = await response.text();
-        set({ genesisString: genesis });
+        set({ genesisString: JSON.stringify(genesis, null, 2) });
     },
 
     nodePopJsons: ["", "", "", "", "", "", "", "", "", ""],
