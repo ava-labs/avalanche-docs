@@ -7,9 +7,7 @@ import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorMa
 import { statusColors, StepState } from './colors';
 import { privateKeyToAccount } from 'viem/accounts';
 
-
-
-export default function InitializeSettings() {
+export default function ContractInitialize() {
     const [status, setStatus] = useState<StepState>('not_started');
     const [initialCheckHasRun, setInitialCheckHasRun] = useState(false);
     const {

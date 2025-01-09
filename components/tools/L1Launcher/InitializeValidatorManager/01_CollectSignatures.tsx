@@ -4,6 +4,51 @@ import { useWizardStore } from '../store';
 import { calculateContractAddress } from '../wallet';
 import { statusColors, StepState } from './colors';
 
+async function rpcRequest(rpcUrl: string, method: string, params: any) {
+    const response = await fetch(`${rpcUrl}/ext/info`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params })
+    });
+    const responseData = await response.json();
+    if (responseData.error) {
+        throw new Error(responseData.error.message);
+    }
+    return responseData.result;
+}
+
+async function collectPeers(rpcUrl: string) {
+    try {
+        let peers = [];
+
+        const peersData = await rpcRequest(rpcUrl, "info.peers", { nodeIDs: [] });
+
+        peers = peersData.peers;
+
+        try {
+            const [nodeIPData, nodeIDData] = await Promise.all([
+                rpcRequest(rpcUrl, "info.getNodeIP", {}),
+                rpcRequest(rpcUrl, "info.getNodeID", {})
+            ]);
+
+            peers.push({
+                "ip": nodeIPData.ip,
+                "publicIP": nodeIPData.ip,
+                "nodeID": nodeIDData.nodeID,
+            });
+
+            console.log('Successfully added node to peers', peers);
+        } catch (e) {
+            console.warn('Failed to get node IP or ID', e);
+        }
+
+        return peers;
+    } catch (error) {
+        console.error('Error collecting peers:', error);
+    }
+}
 
 export default function CollectSignatures() {
     const {
@@ -12,13 +57,14 @@ export default function CollectSignatures() {
         subnetId,
         nodePopJsons,
         nodesCount,
-        getRpcEndpoint,
         convertL1SignedWarpMessage,
-        setConvertL1SignedWarpMessage
+        setConvertL1SignedWarpMessage,
+        getRpcEndpoint
     } = useWizardStore();
 
     const [error, setError] = useState<string | null>(null);
     const [status, setStatus] = useState<StepState>('not_started');
+    const [collectedPeers, setCollectedPeers] = useState<string[]>([]);
 
     useEffect(() => {
         if (convertL1SignedWarpMessage) {
@@ -54,6 +100,10 @@ export default function CollectSignatures() {
 
             const { message, justification } = await packResponse.json();
 
+
+            const peers = await collectPeers(await getRpcEndpoint());
+            console.log('Peers:', peers);
+
             // Then sign the message
             const signResponse = await fetch(`${apiHost}/temporaryDevAPI/signMessage`, {
                 method: 'POST',
@@ -64,7 +114,7 @@ export default function CollectSignatures() {
                     message,
                     justification,
                     signingSubnetID: subnetId,
-                    extraPeerRPCURLs: [getRpcEndpoint()]
+                    extraPeers: peers,
                 })
             });
 
@@ -102,6 +152,12 @@ export default function CollectSignatures() {
                     <div className="bg-white dark:bg-gray-900 rounded p-2 border border-gray-100 dark:border-gray-700">
                         <pre className="font-mono text-sm whitespace-pre-wrap break-all dark:text-gray-300">{convertL1SignedWarpMessage}</pre>
                     </div>
+                    <button
+                        onClick={() => setConvertL1SignedWarpMessage(null)}
+                        className="text-sm text-gray-500 dark:text-gray-400 mb-1"
+                    >
+                        Reset
+                    </button>
                 </div>
             )}
 

@@ -15,7 +15,7 @@ interface StatusState {
     data?: string;
 }
 
-export default function InitializeContract() {
+export default function ContractInitializeValidatorSet() {
     const [status, setStatus] = useState<StatusState>({ status: 'not_started' });
     const [error, setError] = useState<string | null>(null);
     const {

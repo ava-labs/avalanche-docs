@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useWizardStore } from '../store';
 import NextPrev from '../ui/NextPrev';
 import SwitchChain from '../ui/SwitchChain';
-import CheckContractLogs from './CheckContractLogs';
-import CollectSignatures from './CollectSignatures';
-import InitializeSettings from './Initialize';
-import InitializeContract from './InitializeValidatorSet';
+import CheckContractLogs from './04_CheckContractLogs';
+import CollectSignatures from './01_CollectSignatures';
+import ContractInitialize from './02_ContractInitialize';
+import ContractInitializeValidatorSet from './03_ContractInitializeValidatorSet';
 
-export default function Initialize() {
+export default function InitializeValidatorManager() {
     const [isInitialized, setIsInitialized] = useState(false);
     const {
         evmChainId,
@@ -39,8 +39,8 @@ export default function Initialize() {
                 </p>
 
                 <CollectSignatures />
-                <InitializeSettings />
-                <InitializeContract />
+                <ContractInitialize />
+                <ContractInitializeValidatorSet />
                 <CheckContractLogs onSuccess={() => setIsInitialized(true)} />
 
                 <NextPrev
