@@ -42,9 +42,9 @@ export default function PrepareValidators() {
     const isLocked = stepKeys.indexOf(maxAdvancedStep) > stepKeys.indexOf('prepare-validators');
 
     const nodeConfigurations = {
-        1: { colorClass: 'bg-red-100 text-red-800', badge: 'Dev' },
-        3: { colorClass: 'bg-green-100 text-green-800', badge: 'Testnet' },
-        5: { colorClass: 'bg-blue-100 text-blue-800', badge: 'Mainnet' },
+        1: { colorClass: 'bg-red-100 text-red-800', badge: 'For development' },
+        3: { colorClass: 'bg-green-100 text-green-800', badge: 'For testing' },
+        5: { colorClass: 'bg-blue-100 text-blue-800', badge: 'For production' },
     };
 
     return <>
