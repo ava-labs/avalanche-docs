@@ -111,7 +111,7 @@ export default function Genesis() {
                             value={ownerEthAddress}
                             onChange={(e) => handleInputChange('ownerEthAddress', e.target.value)}
                             onBlur={() => handleInputChange('ownerEthAddress', ownerEthAddress)}
-                            placeholder="Wallet Address"
+                            placeholder="Wallet Address in 0x format"
                             disabled={!isCurrentMaxAdvancedStep}
                             className={`w-full p-2 border border-gray-200 dark:border-gray-700 rounded-md text-gray-900 dark:text-gray-100 ${!isCurrentMaxAdvancedStep ? 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 cursor-not-allowed' : 'bg-white dark:bg-gray-900'}`}
                         />
