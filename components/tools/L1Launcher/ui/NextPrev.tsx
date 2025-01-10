@@ -1,5 +1,5 @@
+import { stepList } from "../stepList";
 import { useWizardStore } from "../store";
-import { stepList } from "./Steps";
 import { Button } from "@/components/ui/button";
 
 interface NextPrevProps {
