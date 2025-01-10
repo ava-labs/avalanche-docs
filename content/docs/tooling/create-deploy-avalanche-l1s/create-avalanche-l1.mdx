@@ -22,18 +22,30 @@ You can run all of the commands in this tutorial by calling `~/bin/avalanche`.
 
 You can also add the command to your system path by running
 
-If you add it to your path, you should be able to call the program anywhere with just `avalanche`. To add it to your path permanently, add an export command to your shell initialization script (ex: .bashrc or .zshrc).
+```bash
+export PATH=~/bin:$PATH
+```
+To make this change permanent, add this line to your shell’s initialization file (e.g., `~/.bashrc` or `~/.zshrc`). For example:
+```bash
+echo 'export PATH=~/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Once you add it to your path, you should be able to call the program anywhere with just:
+```bash
+avalanche
+```
 
 For more detailed installation instructions, see [Avalanche-CLI Installation](/tooling/guides/get-avalanche-cli)
 
 Create Your Avalanche L1 Configuration[​](#create-your-avalanche-l1-configuration "Direct link to heading")
 -----------------------------------------------------------------------------------------------
 
-This tutorials teaches you how to create an Ethereum Virtual Machine (EVM) based Avalanche L1. To do so, you use Subnet-EVM, Avalanche's Avalanche L1 fork of the EVM. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, take a look at [Subnet-EVM](https://github.com/ava-labs/subnet-evm). The goal of your first command is to create a Subnet-EVM configuration.
+This tutorial teaches you how to create an Ethereum Virtual Machine (EVM) based Avalanche L1. To do so, you use Subnet-EVM, Avalanche's maintained version of the EVM. It supports airdrops, custom fee tokens, configurable gas parameters, and multiple stateful precompiles. To learn more, take a look at [Subnet-EVM](https://github.com/ava-labs/subnet-evm).
 
-The Avalanche L1 command suite provides a collection of tools for developing and deploying Avalanche L1s.
+The `avalanche-cli` command suite provides a collection of tools for developing and deploying Avalanche L1s.
 
-The Avalanche L1 Creation Wizard walks you through the process of creating your Avalanche L1. To get started, first pick a name for your Avalanche L1. This tutorial uses `myblockchain`, but feel free to substitute that with any name you like. Once you've picked your name, run:
+The Creation Wizard walks you through the process of creating your Avalanche L1. To get started, first pick a name for your Avalanche L1. This tutorial uses `myblockchain`, but feel free to substitute that with any name you like. Once you've picked your name, run:
 
 ```bash
 avalanche blockchain create myblockchain
@@ -43,48 +55,77 @@ The following sections walk through each question in the wizard.
 
 ### Choose Your VM[​](#choose-your-vm "Direct link to heading")
 
-Select `SubnetEVM`.
+```bash
+? Which Virtual Machine would you like to use?: 
+  ▸ Subnet-EVM
+    Custom VM
+    Explain the difference
+```
+Select `Subnet-EVM`.
+
+### Choose Validator Manager[​](#choose-validator-manager "Direct link to heading")
+
+```text
+? Which validator management type would you like to use in your blockchain?: 
+  ▸ Proof Of Authority
+    Proof Of Stake
+    Explain the difference
+```
+Select `Proof Of Authority`.
+
+```text
+? Which address do you want to enable as controller of ValidatorManager contract?: 
+  ▸ Get address from an existing stored key (created from avalanche key create or avalanche key import)
+    Custom
+```
+Select `Get address from an existing stored key`.
+
+```text
+? Which stored key should be used enable as controller of ValidatorManager contract?: 
+  ▸ ewoq
+    cli-awm-relayer
+    cli-teleporter-deployer
+```
+Select `ewoq`.
+
+This key is used to manage (add/remove) the validator set.
+<Callout>
+Do not use EWOQ key in a testnet or production setup. The EWOQ private key is publicly exposed.
+</Callout>
+
+To learn more about different validator management types, see [PoA vs PoS](/evm-l1s/validator-manager/poa-vs-pos).
+
+### Choose Blockchain Configuration
+```text
+? Do you want to use default values for the Blockchain configuration?: 
+  ▸ I want to use defaults for a test environment
+    I want to use defaults for a production environment
+    I don't want to use default values
+    Explain the difference
+```
+
+Select `I want to use defaults for a test environment`.
+This will automatically setup the configuration for a test environment, including an airdrop to the EWOQ key and Avalanche ICM.
 
 ### Enter Your Avalanche L1's ChainID[​](#enter-your-avalanche-l1s-chainid "Direct link to heading")
 
+```text
+✗ Chain ID: 
+```
 Choose a positive integer for your EVM-style ChainID.
 
 In production environments, this ChainID needs to be unique and not shared with any other chain. You can visit [chainlist](https://chainlist.org/) to verify that your selection is unique. Because this is a development Avalanche L1, feel free to pick any number. Stay away from well-known ChainIDs such as 1 (Ethereum) or 43114 (Avalanche C-Chain) as those may cause issues with other tools.
 
 ### Token Symbol[​](#token-symbol "Direct link to heading")
+```text
+✗ Token Symbol: 
+```
 
 Enter a string to name your Avalanche L1's native token. The token symbol doesn't necessarily need to be unique. Example token symbols are AVAX, JOE, and BTC.
 
-### Subnet-EVM Version[​](#subnet-evm-version "Direct link to heading")
-
-Select `Use latest version`.
-
-### Gas Fee Configuration[​](#gas-fee-configuration "Direct link to heading")
-
-This question determines how to set gas fees on your Avalanche L1.
-
-Select `Low disk use / Low Throughput 1.5 mil gas/s (C-Chain's setting)`.
-
-### Airdrop[​](#airdrop "Direct link to heading")
-
-Select `Airdrop 1 million tokens to the default address (do not use in production)`.
-
-This address's private key is well-known, so DO NOT send any production funds to it. Attackers would likely drain the funds instantly.
-
-When you are ready to start more mature testing, select `Customize your airdrop` to distribute funds to additional addresses.
-
-### Precompiles[​](#precompiles "Direct link to heading")
-
-Precompiles are Avalanche's way of customizing the behavior of your Avalanche L1. They're strictly an advanced feature, so you can safely select `No` for now.
-
-### Wrapping up[​](#wrapping-up "Direct link to heading")
-
-If all worked successfully, the command prints `Successfully created subnet configuration`.
-
-You've successfully created your first Avalanche L1 configuration. Now it's time to deploy it.
-
-Deploying Avalanche L1s Locally[​](#deploying-avalanche-l1s-locally "Direct link to heading")
 ---------------------------------------------------------------------------------
+
+## Deploy Your Avalanche L1
 
 To deploy your Avalanche L1, run:
 
@@ -94,9 +135,17 @@ avalanche blockchain deploy myblockchain
 
 Make sure to substitute the name of your Avalanche L1 if you used a different one than `myblockchain`.
 
+```text
+? Choose a network for the operation: 
+  ▸ Local Network
+    Devnet
+    Etna Devnet
+    Fuji Testnet
+    Mainnet
+```
 Next, select `Local Network`.
 
-This command boots a five node Avalanche network on your machine. It needs to download the latest versions of AvalancheGo and Subnet-EVM. The command may take a couple minutes to run.
+This command boots a two nodes Avalanche network on your machine. It needs to download the latest versions of AvalancheGo and Subnet-EVM.
 
 Note: If you run `bash` on your shell and are running Avalanche-CLI on ARM64 on Mac, you will require Rosetta 2 to be able to deploy Avalanche L1s locally. You can download Rosetta 2 using `softwareupdate --install-rosetta` .
 
@@ -107,62 +156,168 @@ If all works as expected, the command output should look something like this:
 
 ✔ Local Network
 Deploying [myblockchain] to Local Network
-Installing subnet-evm-v0.4.3...
-subnet-evm-v0.4.3 installation successful
-Backend controller started, pid: 93928, output at: /Users/subnet-developer/.avalanche-cli/runs/server_20221122_173138/avalanche-cli-backend
-Installing avalanchego-v1.9.3...
-avalanchego-v1.9.3 installation successful
-VMs ready.
-Starting network...
-..................
-Blockchain has been deployed. Wait until network acknowledges...
-......
-Network ready to use. Local network node endpoints:
-+-------+----------+------------------------------------------------------------------------------------+
-| NODE  |    VM    |                                        URL                                         |
-+-------+----------+------------------------------------------------------------------------------------+
-| node2 | myblockchain | http://127.0.0.1:9652/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node3 | myblockchain | http://127.0.0.1:9654/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node4 | myblockchain | http://127.0.0.1:9656/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node5 | myblockchain | http://127.0.0.1:9658/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
-| node1 | myblockchain | http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc |
-+-------+----------+------------------------------------------------------------------------------------+
 
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     myblockchain
-Chain ID:         54325
-Currency Symbol:  TUTORIAL
+Network has already been booted.
+Using [P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p] to be set as a change owner for leftover AVAX
+Installing avalanchego-v1.12.1...
+avalanchego-v1.12.1 installation successful
+Backend controller started, pid: 33210, output at: /Users/l1-developer/.avalanche-cli/local/myblockchain-local-node-local-network/server.log
+
+AvalancheGo path: /Users/l1-developer/.avalanche-cli/bin/avalanchego/avalanchego-v1.12.1/avalanchego
+
+✓ Local cluster myblockchain-local-node-local-network not found. Creating...
+Starting local avalanchego node using root: /Users/l1-developer/.avalanche-cli/local/myblockchain-local-node-local-network ...
+✓ Booting Network. Wait until healthy...
+Waiting for P-Chain to be bootstrapped
+✓ Avalanchego started and ready to use from /Users/l1-developer/.avalanche-cli/local/myblockchain-local-node-local-network
+
+Node logs directory: /Users/l1-developer/.avalanche-cli/local/myblockchain-local-node-local-network/node1/logs
+
+Network ready to use.
+
+URI: http://127.0.0.1:60538
+NodeID: NodeID-ABuKofpRtHhFwAm4FXQNSpCR9jqtXWUwa
+
+Your blockchain control keys: [P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p]
+Your subnet auth keys for chain creation: [P-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p]
+CreateSubnetTx fee: 0.000010278 AVAX
+Subnet has been created with ID: fvx83jt2BWyibBRL4SRMa6WzjWp7GSFUeUUeoeBe1AqJ5Ey5w
+Now creating blockchain...
+CreateChainTx fee: 0.000095680 AVAX
++--------------------+----------------------------------------------------+
+| DEPLOYMENT RESULTS |                                                    |
++--------------------+----------------------------------------------------+
+| Chain Name         | myblockchain                                       |
++--------------------+----------------------------------------------------+
+| Subnet ID          | fvx83jt2BWyibBRL4SRMa6WzjWp7GSFUeUUeoeBe1AqJ5Ey5w  |
++--------------------+----------------------------------------------------+
+| VM ID              | qDNV9vtxZYYNqm7TN1mYBuaaknLdefDbFK8bFmMLTJQJKaWjV  |
++--------------------+----------------------------------------------------+
+| Blockchain ID      | 2QGB9GbEhsFJLSRVii2mKs8dxugHzmK98G5391P2bvXSCb4sED |
++--------------------+                                                    +
+| P-Chain TXID       |                                                    |
++--------------------+----------------------------------------------------+
+Now calling ConvertSubnetToL1Tx...
+ConvertSubnetToL1Tx fee: 0.000036992 AVAX
+ConvertSubnetToL1Tx ID: 2n6L5gfEFayPEWhc7XcpumfwHeqjyZLrcrFjvU5EugcXZ2xAAW
+Waiting for L1 to be converted into sovereign blockchain ... 100% [===============]           
+
+Restarting node node1 to track subnet
+Waiting for blockchain myblockchain to be bootstrapped
+Waiting for rpc http://127.0.0.1:60538/ext/bc/2QGB9GbEhsFJLSRVii2mKs8dxugHzmK98G5391P2bvXSCb4sED/rpc to be available
+✓ myblockchain-local-node-local-network successfully tracking myblockchain
+✓ Checking if node is healthy...
+✓ Node is healthy after 0 seconds
+Initializing Proof of Authority Validator Manager contract on blockchain myblockchain ...
+✓ Proof of Authority Validator Manager contract successfully initialized on blockchain myblockchain
+
+RPC Endpoint: http://127.0.0.1:60538/ext/bc/2QGB9GbEhsFJLSRVii2mKs8dxugHzmK98G5391P2bvXSCb4sED/rpc
+ICM Messenger successfully deployed to myblockchain (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+ICM Registry successfully deployed to myblockchain (0x695Ea5FbeBBdc99cA679F5fD7768f179d2281d74)
+ICM Messenger has already been deployed to c-chain
+Relayer is not deployed due to there is already a local relayer deployed for Local Network
+To deploy relayer, call `avalanche interchain relayer deploy`
+✓ L1 is successfully deployed on Local Network
+
++---------------------------------------------------------------------------------------------------------------------------------+
+|                                                           MYBLOCKCHAIN                                                          |
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| Name          | myblockchain                                                                                                    |
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| VM ID         | qDNV9vtxZYYNqm7TN1mYBuaaknLdefDbFK8bFmMLTJQJKaWjV                                                               |
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| VM Version    | v0.7.0                                                                                                          |
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| Validation    | Proof Of Authority                                                                                              |
++---------------+--------------------------+--------------------------------------------------------------------------------------+
+| Local Network | ChainID                  | 111                                                                                  |
+|               +--------------------------+--------------------------------------------------------------------------------------+
+|               | SubnetID                 | fvx83jt2BWyibBRL4SRMa6WzjWp7GSFUeUUeoeBe1AqJ5Ey5w                                    |
+|               +--------------------------+--------------------------------------------------------------------------------------+
+|               | BlockchainID (CB58)      | 2QGB9GbEhsFJLSRVii2mKs8dxugHzmK98G5391P2bvXSCb4sED                                   |
+|               +--------------------------+--------------------------------------------------------------------------------------+
+|               | BlockchainID (HEX)       | 0xb883b54815c84a3f0903dbccd289ed5563395dd61c189db626e2d2680546b990                   |
+|               +--------------------------+--------------------------------------------------------------------------------------+
+|               | RPC Endpoint             | http://127.0.0.1:60538/ext/bc/2QGB9GbEhsFJLSRVii2mKs8dxugHzmK98G5391P2bvXSCb4sED/rpc |
++---------------+--------------------------+--------------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------------+
+|                                         ICM                                        |
++---------------+-----------------------+--------------------------------------------+
+| Local Network | ICM Messenger Address | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf |
+|               +-----------------------+--------------------------------------------+
+|               | ICM Registry Address  | 0x695Ea5FbeBBdc99cA679F5fD7768f179d2281d74 |
++---------------+-----------------------+--------------------------------------------+
+
++---------------------------+
+|           TOKEN           |
++--------------+------------+
+| Token Name   | NAT Token |
++--------------+------------+
+| Token Symbol | NAT       |
++--------------+------------+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+|                                                        INITIAL TOKEN ALLOCATION                                                        |
++-------------------------+------------------------------------------------------------------+---------------+---------------------------+
+| DESCRIPTION             | ADDRESS AND PRIVATE KEY                                          | AMOUNT (NAT) | AMOUNT (WEI)              |
++-------------------------+------------------------------------------------------------------+---------------+---------------------------+
+| Used by ICM             | 0x001CBe3650FAD190d9ccBd57b289124F5131AA57                       | 600           | 600000000000000000000     |
+| cli-teleporter-deployer | d00b93e1526d05a30b681911a3e0f5e5528add205880c1cafa4f84cdb2746b00 |               |                           |
++-------------------------+------------------------------------------------------------------+---------------+---------------------------+
+| Main funded account     | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC                       | 1000000       | 1000000000000000000000000 |
+| ewoq                    | 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027 |               |                           |
++-------------------------+------------------------------------------------------------------+---------------+---------------------------+
+
++-----------------------------------------------------------------------------------------------------------------+
+|                                                 SMART CONTRACTS                                                 |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| DESCRIPTION           | ADDRESS                                    | DEPLOYER                                   |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| Proxy Admin           | 0xC0fFEE1234567890aBCdeF1234567890abcDef34 | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| PoA Validator Manager | 0x0C0DEbA5E0000000000000000000000000000000 |                                            |
++-----------------------+--------------------------------------------+--------------------------------------------+
+| Transparent Proxy     | 0x0Feedc0de0000000000000000000000000000000 |                                            |
++-----------------------+--------------------------------------------+--------------------------------------------+
+
++----------------------------------------------------------------------+
+|                      INITIAL PRECOMPILE CONFIGS                      |
++------------+-----------------+-------------------+-------------------+
+| PRECOMPILE | ADMIN ADDRESSES | MANAGER ADDRESSES | ENABLED ADDRESSES |
++------------+-----------------+-------------------+-------------------+
+| Warp       | n/a             | n/a               | n/a               |
++------------+-----------------+-------------------+-------------------+
+
++--------------------------------------------------------------------------+
+|                                   NODES                                  |
++-------+------------------------------------------+-----------------------+
+| NAME  | NODE ID                                  | LOCALHOST ENDPOINT    |
++-------+------------------------------------------+-----------------------+
+| node1 | NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg | http://127.0.0.1:9650 |
++-------+------------------------------------------+-----------------------+
+| node2 | NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ | http://127.0.0.1:9652 |
++-------+------------------------------------------+-----------------------+
+
++--------------------------------------------------------------------------------------------------------+
+|                                            WALLET CONNECTION                                           |
++-----------------+--------------------------------------------------------------------------------------+
+| Network RPC URL | http://127.0.0.1:60538/ext/bc/2QGB9GbEhsFJLSRVii2mKs8dxugHzmK98G5391P2bvXSCb4sED/rpc |
++-----------------+--------------------------------------------------------------------------------------+
+| Network Name    | myblockchain                                                                         |
++-----------------+--------------------------------------------------------------------------------------+
+| Chain ID        | 111                                                                                  |
++-----------------+--------------------------------------------------------------------------------------+
+| Token Symbol    | NAT                                                                                 |
++-----------------+--------------------------------------------------------------------------------------+
+| Token Name      | NAT Token                                                                           |
++-----------------+--------------------------------------------------------------------------------------+
+
 ```
-
-You can use the deployment details to connect to and interact with your Avalanche L1. Now it's time to interact with it.
-
-Interacting with Your Avalanche L1[​](#interacting-with-your-avalanche-l1 "Direct link to heading")
----------------------------------------------------------------------------------------
-
-You can use the value provided by `Browser Extension connection details` to connect to your Avalanche L1 with Core, MetaMask, or any other wallet.
-
-<Callout title="Note">
-To allow API calls from other machines, use `--http-host=0.0.0.0` in the config.
-</Callout>
-
-```bash
-Browser Extension connection details (any node URL from above works):
-RPC URL:          http://127.0.0.1:9650/ext/bc/SPqou41AALqxDquEycNYuTJmRvZYbfoV9DYApDJVXKXuwVFPz/rpc
-Funded address:   0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC with 1000000 (10^18) - private key: 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027
-Network name:     myblockchain
-Chain ID:         54325
-Currency Symbol:  TUTORIAL
-```
-
-This tutorial uses Core.
 
 ### Importing the Test Private Key[​](#importing-the-test-private-key "Direct link to heading")
+
+This tutorial uses Core.
 
 <Callout type="warn">
 This address derives from a well-known private key. Anyone can steal funds sent to this address. Only use it on development networks that only you have access to. If you send production funds to this address, attackers may steal them instantly.
