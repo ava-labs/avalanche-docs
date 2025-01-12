@@ -1,15 +1,22 @@
-export const Input: React.FC<{id: string, label?: string , description?: string , placeholder?: string , onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }> = ({ id, label, description, placeholder, onChange }) => {
-  return (
-    <div className="mb-8">
-        {label && <label className="block text-sm font-medium">{label}</label>}
-        {description && <p className="text-sm mb-0 mt-1">{description}</p>}
-        <input 
-            type="text" 
-            id="first_name" 
-            placeholder={placeholder}
-            onChange={onChange}
-            className="mt-2 block w-full p-2.5 bg-muted border border-b text-sm rounded-lg focus:ring-[#2a3f85] focus:border-[#2a3f85]  dark:focus:ring-[#2a3f85] dark:focus:border-[#2a3f85]"/>
-    </div>
+import * as React from "react"
 
-  )
-}
+import { cn } from "@/utils/cn"
+
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }

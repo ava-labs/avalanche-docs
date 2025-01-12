@@ -1,6 +1,7 @@
 import { BookOpen, Terminal, Flag, Settings, Server } from 'lucide-react'
 import Welcome from "./01_Welcome/Welcome";
 import Genesis from "./02_Prepare/Genesis";
+import Permissions from "./02_Prepare/Permissions";
 import FundTempWallet from "./03_Launch/FundTempWallet";
 import PrepareValidators from "./02_Prepare/PrepareValidators";
 import GenerateKeys from "./02_Prepare/GenerateKeys";
@@ -51,6 +52,11 @@ export const stepList: Record<string, StepType> = {
     "genesis": {
         title: "Create genesis",
         component: <Genesis />,
+        group: "prepare",
+    },
+    "permissions": {
+        title: "Permissions",
+        component: <Permissions />,
         group: "prepare",
     },
     "prepare-validators": {
