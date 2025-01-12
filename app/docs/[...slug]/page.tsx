@@ -20,6 +20,7 @@ import { AutoTypeTable } from '@/components/content-design/type-table';
 import { Heading } from 'fumadocs-ui/components/heading';
 import YouTube from "@/components/content-design/youtube";
 import Gallery from "@/components/content-design/gallery";
+import { BackToTop } from '@/components/ui/back-to-top';
 import { cn } from "@/utils/cn";
 import {
   CodeBlock,
@@ -47,6 +48,9 @@ export default async function Page(props: {
       tableOfContent={{
         style: 'clerk',
         single: false,
+        footer: (
+          <BackToTop />
+        ),
       }}
       editOnGithub={{
         repo: 'avalanche-docs',
