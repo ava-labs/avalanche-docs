@@ -105,21 +105,7 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
     nodesCount: 1,
     setNodesCount: (count: number) => set(() => ({ nodesCount: count })),
 
-    genesisString: "",
-    regenerateGenesis: async () => {
-        const { ownerEthAddress, evmChainId, tempPrivateKeyHex } = get();
-        const { C: initialContractDeployer } = getAddresses(tempPrivateKeyHex);
-
-        const genesis = generateGenesis({
-            evmChainId,
-            initialBalances: {
-                [ownerEthAddress]: "1000000000.00",
-                [initialContractDeployer]: "1.00",
-            },
-        });
-
-        set({ genesisString: JSON.stringify(genesis, null, 2) });
-    },
+    
 
     nodePopJsons: ["", "", "", "", "", "", "", "", "", ""],
     setNodePopJsons: (nodePopJsons: string[]) => set(() => ({ nodePopJsons: nodePopJsons })),
@@ -167,6 +153,25 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
         activated: true
       } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
+
+    genesisString: "",
+    regenerateGenesis: async () => {
+        const { ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig } = get();
+        const { C: initialContractDeployer } = getAddresses(tempPrivateKeyHex);
+        
+
+        const genesis = generateGenesis({
+            evmChainId,
+            initialBalances: {
+                [ownerEthAddress]: "1000000000.00",
+                [initialContractDeployer]: "1.00",
+            },
+            txAllowlistConfig,
+            contractDeployerAllowlistConfig
+        });
+
+        set({ genesisString: JSON.stringify(genesis, null, 2) });
+    },
 
     rpcLocationType: 'local',
     setRpcLocationType: (type) => set(() => ({ rpcLocationType: type })),
