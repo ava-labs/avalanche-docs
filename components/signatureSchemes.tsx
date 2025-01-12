@@ -3,7 +3,7 @@ const bls = require("@noble/bls12-381");
 import React, { useState } from "react";
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 import { buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/inputWithLabel";
 
 const bufferToHex = (buffer: ArrayBufferLike): string => {
   return [...new Uint8Array(buffer)]
