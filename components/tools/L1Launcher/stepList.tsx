@@ -19,8 +19,8 @@ export const stepGroups = {
         title: "Welcome",
         icon: <BookOpen className="size-5" />
     },
-    "prepare": {
-        title: "Prepare",
+    "configure": {
+        title: "Configure",
         icon: <Settings className="size-5" />
     },
     "launch-l1": {
@@ -49,25 +49,25 @@ export const stepList: Record<string, StepType> = {
         component: <Welcome />,
         group: "welcome",
     },
-    "genesis": {
-        title: "Create genesis",
-        component: <Genesis />,
-        group: "prepare",
-    },
     "permissions": {
         title: "Permissions",
         component: <Permissions />,
-        group: "prepare",
+        group: "configure",
     },
-    "prepare-validators": {
+    "genesis": {
+        title: "Create genesis",
+        component: <Genesis />,
+        group: "configure",
+    },
+    "configure-validators": {
         title: "Prepare Validators",
         component: <PrepareValidators />,
-        group: "prepare",
+        group: "configure",
     },
     "generate-keys": {
         title: "Generate keys",
         component: <GenerateKeys />,
-        group: "prepare",
+        group: "configure",
     },
     "fund-temp-wallet": {
         title: "Fund temp wallet",
