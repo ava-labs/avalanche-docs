@@ -9,24 +9,17 @@ function calculateChecksum(data: Uint8Array): Uint8Array {
     return sha256(data).slice(0, CHECKSUM_LENGTH);
 }
 
-export function cb58ToHex(cb58: string, include0x: boolean = true): string {
+export function cb58ToBytes(cb58: string): Uint8Array {
     const decodedBytes = base58.decode(cb58);
     if (decodedBytes.length < CHECKSUM_LENGTH) {
         throw new Error('Input string is smaller than the checksum size');
     }
 
-    const rawBytes = decodedBytes.slice(0, -CHECKSUM_LENGTH);
-    // const checksum = decodedBytes.slice(-CHECKSUM_LENGTH);
+    return decodedBytes.slice(0, -CHECKSUM_LENGTH);
+}
 
-    console.warn("TODO: CHECKSUM cb58ToHex")
-    // const calculatedChecksum = calculateChecksum(rawBytes);
-    // console.log('calculatedChecksum', calculatedChecksum);
-    // console.log('checksum', checksum);
-    // if (!checksum.every((b, i) => b === calculatedChecksum[i])) {
-    //     throw new Error('Invalid checksum');
-    // }
-
-
+export function cb58ToHex(cb58: string, include0x: boolean = true): string {
+    const rawBytes = cb58ToBytes(cb58);
     return (include0x ? '0x' : '') + bytesToHex(rawBytes);
 }
 
