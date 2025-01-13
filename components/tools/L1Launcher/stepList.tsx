@@ -1,10 +1,12 @@
 import { BookOpen, Terminal, Flag, Settings, Server } from 'lucide-react'
 import Welcome from "./01_Welcome/Welcome";
-import Genesis from "./02_Configure/Genesis";
+import ChainParameters from './02_Configure/ChainParameters';
+import Tokenomics from './02_Configure/Tokenomics';
 import Permissions from "./02_Configure/Permissions";
+import Genesis from "./02_Configure/Genesis";
 import FundTempWallet from "./03_Launch/FundTempWallet";
-import PrepareValidators from "./02_Configure/PrepareValidators";
-import GenerateKeys from "./02_Configure/GenerateKeys";
+import PrepareValidators from "./03_Launch/PrepareValidators";
+import GenerateKeys from "./03_Launch/GenerateKeys";
 import LaunchValidators from "./03_Launch/LaunchValidators";
 import LaunchRpcNode from "./03_Launch/LaunchRpcNode";
 import OpenRPCPort from "./03_Launch/OpenRPCPort";
@@ -13,8 +15,6 @@ import DeployContracts from "./DeployContracts/DeployContracts";
 import CreateChain from "./03_Launch/CreateChain"
 import InitializeValidatorManager from "./InitializeValidatorManager/InitializeValidatorManager";
 import WhatsNext from "./WhatsNext";
-import Tokenomics from './02_Configure/Tokenomics';
-import ChainParameters from './02_Configure/ChainParameters';
 
 export const stepGroups = {
     "welcome": {

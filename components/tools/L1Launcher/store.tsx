@@ -205,7 +205,7 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
           Manager: [],
           Enabled: []
         },
-        activated: true} as AllowlistPrecompileConfig,
+        activated: false} as AllowlistPrecompileConfig,
     setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
 
     genesisString: "",

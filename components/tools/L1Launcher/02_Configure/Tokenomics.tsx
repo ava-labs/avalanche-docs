@@ -6,6 +6,7 @@ import TokenAllocationList from '../../common/token-allocation-list/token-alloca
 import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-configurator/allowlist-precompile-configurator';
 import { useEffect } from 'react';
 import { newPrivateKey } from '../wallet';
+import { isAllowlistPrecompileConfigValid } from '../../common/utils';
 
 export default function Permissions() {
     const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex } = useWizardStore();
@@ -48,7 +49,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want to be able to mint additional tokens (recommended for production)."
             />
 
-            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 2} currentStepName="tokenomics" />
+            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 2 || !isAllowlistPrecompileConfigValid(nativeMinterAllowlistConfig)} currentStepName="tokenomics" />
         </div>
     );
 }
