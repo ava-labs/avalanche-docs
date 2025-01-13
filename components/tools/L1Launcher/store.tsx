@@ -5,6 +5,7 @@ import { getAddresses, newPrivateKey } from './wallet';
 import { stepList } from './stepList';
 import { generateGenesis } from './utils/genGenesis';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
+import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 
 
 
@@ -28,6 +29,9 @@ interface WizardState {
 
     contractDeployerAllowlistConfig: AllowlistPrecompileConfig;
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => void;
+
+    nativeMinterAllowlistConfig: AllowlistPrecompileConfig;
+    setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => void;
 
     genesisString: string;
     regenerateGenesis: () => Promise<void>;
@@ -61,6 +65,9 @@ interface WizardState {
 
     tokenSymbol: string;
     setTokenSymbol: (symbol: string) => void;
+
+    tokenAllocations: AllocationEntry[];
+    setTokenAllocations: (allocations: AllocationEntry[]) => void;
 
     tempPrivateKeyHex: string;
     setTempPrivateKeyHex: (key: string) => void;
@@ -104,8 +111,6 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
     nodesCount: 1,
     setNodesCount: (count: number) => set(() => ({ nodesCount: count })),
-
-    
 
     nodePopJsons: ["", "", "", "", "", "", "", "", "", ""],
     setNodePopJsons: (nodePopJsons: string[]) => set(() => ({ nodePopJsons: nodePopJsons })),
@@ -154,9 +159,24 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
       } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 
+    tokenSymbol: "TEST",
+    setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
+
+    tokenAllocations: [] as AllocationEntry[],
+    setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
+
+    nativeMinterAllowlistConfig: {
+        addresses: {
+          Admin: [],
+          Manager: [],
+          Enabled: []
+        },
+        activated: true} as AllowlistPrecompileConfig,
+    setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
+
     genesisString: "",
     regenerateGenesis: async () => {
-        const { ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig } = get();
+        const { ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig } = get();
         const { C: initialContractDeployer } = getAddresses(tempPrivateKeyHex);
         
 
@@ -167,7 +187,8 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
                 [initialContractDeployer]: "1.00",
             },
             txAllowlistConfig,
-            contractDeployerAllowlistConfig
+            contractDeployerAllowlistConfig,
+            nativeMinterAllowlistConfig
         });
 
         set({ genesisString: JSON.stringify(genesis, null, 2) });
@@ -184,9 +205,6 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
     rpcVerified: false,
     setRpcVerified: (verified) => set(() => ({ rpcVerified: verified })),
-
-    tokenSymbol: "TEST",
-    setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
 
     tempPrivateKeyHex: newPrivateKey(),
     setTempPrivateKeyHex: (key: string) => set(() => ({ tempPrivateKeyHex: key })),

@@ -1,0 +1,7 @@
+export interface AllocationEntry {
+  id: string;
+  address: string;
+  amount: number;
+  error?: string;
+}
+

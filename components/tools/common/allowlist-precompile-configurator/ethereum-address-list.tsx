@@ -13,7 +13,6 @@ interface EthereumAddressListProps {
   addresses: AddressEntry[];
   onAddAddresses: (newAddresses: string[]) => void;
   onDeleteAddress: (id: string) => void;
-  isAddressInvalid: (address: string) => string | undefined;
   precompileAction: string;
 }
 
@@ -40,7 +39,6 @@ export default function EthereumAddressList({
   addresses,
   onAddAddresses,
   onDeleteAddress,
-  isAddressInvalid,
   precompileAction
 }: EthereumAddressListProps) {
   const [newAddress, setNewAddress] = useState('')

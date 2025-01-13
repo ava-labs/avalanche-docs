@@ -57,7 +57,7 @@ export default function AllowlistPrecompileConfigurator({
         </div>
       </RadioGroup>
 
-      <div className={`transition-all duration-500 ${config.activated ? 'h-auto opacity-100' : 'h-0 opacity-0 overflow-hidden'}`}>
+      <div className={`transition-all duration-1000 ${config.activated ? 'h-auto opacity-100' : 'h-0 opacity-0 overflow-hidden'}`}>
         <Allowlist
           addresses={config.addresses}
           onUpdateAllowlist={handleUpdateAllowlist}

@@ -15,7 +15,7 @@ export default function Permissions() {
                 description="This precompile restricts which addresses may submit transactions on this blockchain."
                 precompileAction="issue transactions"
                 config={txAllowlistConfig}
-                onUpdateConfig={(newConfig: AllowlistPrecompileConfig) => setTxAllowlistConfig(newConfig)}
+                onUpdateConfig={setTxAllowlistConfig}
                 radioOptionFalseLabel="I want anyone to be able to submit transactions on this blockchain."
                 radioOptionTrueLabel="I want only approved addresses to be able to submit transactions on this blockchain."
             />
@@ -25,7 +25,7 @@ export default function Permissions() {
                 description="This precompile restricts which addresses may deploy smart contracts on this blockchain."
                 precompileAction="issue transactions"
                 config={contractDeployerAllowlistConfig}
-                onUpdateConfig={(newConfig: AllowlistPrecompileConfig) => setContractDeployerAllowlistConfig(newConfig)}
+                onUpdateConfig={setContractDeployerAllowlistConfig}
                 radioOptionFalseLabel="I want anyone to be able to deploy contracts on this blockchain."
                 radioOptionTrueLabel="I want only approved addresses to be able to deploy contracts on this blockchain."
             />
