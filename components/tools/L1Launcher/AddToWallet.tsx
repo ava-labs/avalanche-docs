@@ -9,6 +9,7 @@ export default function AddToWallet() {
     const { evmChainId, l1Name, tokenSymbol, getCChainRpcEndpoint } = useWizardStore();
     const [isAdded, setIsAdded] = useState(false);
     const [balanceError, setBalanceError] = useState<string | null>(null);
+    const [walletError, setWalletError] = useState<string | null>(null);
     const [balanceInfo, setBalanceInfo] = useState<{ address: string; balance: number } | null>(null);
 
     const checkAccountBalance = async (): Promise<{ address: string; balance: number } | null> => {
@@ -47,6 +48,7 @@ export default function AddToWallet() {
 
     const handleAddToWallet = async () => {
         try {
+            setWalletError(null); // Clear any previous wallet errors
             if (!window.ethereum) {
                 throw new Error('No wallet detected');
             }
@@ -65,14 +67,15 @@ export default function AddToWallet() {
                 }],
             });
 
-            const balanceInfo = await checkAccountBalance(); // Check balance after adding the wallet
+            const balanceInfo = await checkAccountBalance();
             if (balanceInfo) {
-                setIsAdded(true); // Only set as added if balance check succeeds
-                setBalanceInfo(balanceInfo); // Store balance info in state
+                setIsAdded(true);
+                setBalanceInfo(balanceInfo);
             }
         } catch (error: any) {
             console.error('Failed to add to wallet:', error);
-            alert(error.message);
+            setWalletError(error.message);
+            setIsAdded(false);
         }
     };
 
@@ -147,10 +150,17 @@ export default function AddToWallet() {
                 </button>
             </div>
 
+            {walletError && (
+                <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-400 dark:border-red-600 p-4 mb-6">
+                    <h3 className="font-medium mb-2 text-red-700 dark:text-red-400">Wallet Error</h3>
+                    <p className="text-red-600 dark:text-red-400">{walletError}</p>
+                </div>
+            )}
+
             {balanceError && (
-                <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
-                    <h3 className="font-medium mb-2">Error</h3>
-                    <p>{balanceError}</p>
+                <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-400 dark:border-red-600 p-4 mb-6">
+                    <h3 className="font-medium mb-2 text-red-700 dark:text-red-400">Balance Error</h3>
+                    <p className="text-red-600 dark:text-red-400">{balanceError}</p>
                 </div>
             )}
 
