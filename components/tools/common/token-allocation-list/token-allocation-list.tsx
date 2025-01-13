@@ -186,6 +186,9 @@ export default function TokenAllocationList({
           </TableBody>
         </Table>
       </TooltipProvider>
+      {allocations.length === 1 && (<p className="mt-2 text-sm text-red-500">
+          Please add at least one address that holds some tokens.
+      </p>)}
     </div>
   )
 }

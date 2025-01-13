@@ -5,7 +5,7 @@ import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-c
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { isValidEthereumAddress } from '../../common/utils';
+import { isAllowlistPrecompileConfigValid, isValidEthereumAddress } from '../../common/utils';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { getWalletAddress } from '../wallet';
@@ -51,7 +51,7 @@ export default function Permissions() {
                         <RadioGroupItem value="mainnet" id={`validator-option-pos`} disabled={true} />
                         <Label htmlFor={`validator-option-pos`}>Proof-of-Stake: Anyone holding the staking token (Coming soon)</Label>
                     </div>
-                </RadioGroup>`
+                </RadioGroup>
             </div>
 
             <div>
@@ -97,7 +97,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want only approved addresses to be able to deploy contracts on this blockchain."
             />
 
-            <NextPrev nextDisabled={!isValidEthereumAddress(poaOwnerAddress)} currentStepName="permissions" />
+            <NextPrev nextDisabled={!isValidEthereumAddress(poaOwnerAddress) || !isAllowlistPrecompileConfigValid(txAllowlistConfig) || !isAllowlistPrecompileConfigValid(contractDeployerAllowlistConfig)} currentStepName="permissions" />
         </div>
     );
 }

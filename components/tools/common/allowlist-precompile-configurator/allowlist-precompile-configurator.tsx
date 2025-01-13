@@ -33,8 +33,6 @@ export default function AllowlistPrecompileConfigurator({
     onUpdateConfig({ ...config, activated: value === 'true' })
   }
 
-  const isValid = isAllowlistPrecompileConfigValid(config)
-
   return (
     <div className="space-y-6">
       <div>
@@ -65,8 +63,8 @@ export default function AllowlistPrecompileConfigurator({
         />
       </div>
 
-      {!isValid && (
-        <p className="text-red-500">There are errors in the allowlist configuration.</p>
+      {!isAllowlistPrecompileConfigValid(config) && (
+        <p className="text-red-500">There are errors in the allowlist configuration. Add at least one address to at least one role (required addresses do not count). The same address can only be added to a single role.</p>
       )}
     </div>
   )
