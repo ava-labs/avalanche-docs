@@ -14,7 +14,7 @@ function isValidL1Name(name: string): boolean {
 }
 
 export default function Genesis() {
-    const { ownerEthAddress, setOwnerEthAddress, evmChainId, setEvmChainId, genesisString, regenerateGenesis, l1Name, setL1Name, tokenSymbol, setTokenSymbol, currentStep, maxAdvancedStep } = useWizardStore();
+    const { ownerEthAddress, setOwnerEthAddress, evmChainId, setEvmChainId, genesisString, regenerateGenesis, l1Name, setL1Name, maxAdvancedStep } = useWizardStore();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [isRegenerating, setIsRegenerating] = useState(false);
@@ -131,14 +131,7 @@ export default function Genesis() {
             </div>
 
             <div className="mb-6">
-                <input
-                    type="text"
-                    value={tokenSymbol}
-                    onChange={(e) => setTokenSymbol(e.target.value)}
-                    placeholder="Token Symbol"
-                    disabled={!isCurrentMaxAdvancedStep}
-                    className={`w-full p-2 border border-gray-200 dark:border-gray-700 rounded-md text-gray-900 dark:text-gray-100 ${!isCurrentMaxAdvancedStep ? 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 cursor-not-allowed' : 'bg-white dark:bg-gray-900'}`}
-                />
+                
                 <p className="mt-2 text-sm text-gray-500">
                     The symbol (ticker) of your blockchain's native token (e.g., AAA, TEST). Do not use existing tickers like AVAX, ETH, etc.
                 </p>

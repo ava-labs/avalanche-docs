@@ -16,14 +16,16 @@ export default function Allowlist({
   onUpdateAllowlist,
   precompileAction
 }: AllowlistProps) {
-  const isAddressInvalid = useCallback((address: string, currentRole: Role): string | undefined => {
+  const isAddressInvalid = useCallback((address: string, currentRole: Role, currentId?: string, currentAddresses = addresses): string | undefined => {
     if (!isValidEthereumAddress(address)) {
       return 'Invalid Ethereum address format'
     }
 
     const roles: Role[] = ['Admin', 'Manager', 'Enabled']
     for (const role of roles) {
-      const duplicateEntry = addresses[role].find(entry => entry.address.toLowerCase() === address.toLowerCase())
+      const duplicateEntry = currentAddresses[role].find(
+        entry => entry.address.toLowerCase() === address.toLowerCase() && entry.id !== currentId
+      )
       if (duplicateEntry) {
         return 'Duplicate address'
       }
@@ -36,7 +38,6 @@ export default function Allowlist({
     const newEntries = newAddresses.map(addr => ({
       id: Math.random().toString(36).substr(2, 9),
       address: addr,
-      error: isAddressInvalid(addr, role)
     }))
 
     const updatedAddresses = {
@@ -47,18 +48,37 @@ export default function Allowlist({
       ]
     }
 
-    onUpdateAllowlist(updatedAddresses)
+    // Validate all addresses, including the new ones
+    const validatedAddresses = Object.fromEntries(
+      Object.entries(updatedAddresses).map(([role, entries]) => [
+        role,
+        entries.map(entry => ({
+          ...entry,
+          error: isAddressInvalid(entry.address, role as Role, entry.id, updatedAddresses)
+        }))
+      ])
+    ) as unknown as AddressRoles
+
+    onUpdateAllowlist(validatedAddresses)
   }, [addresses, isAddressInvalid, onUpdateAllowlist])
 
   const deleteAddress = useCallback((role: Role, id: string) => {
     const updatedAddresses = { ...addresses }
-    updatedAddresses[role] = updatedAddresses[role].filter(entry => {
-      // Keep the entry if it's not the one we're deleting or if it has a requiredReason
-      return entry.id !== id || entry.requiredReason
-    })
+    updatedAddresses[role] = updatedAddresses[role].filter(entry => entry.id !== id || entry.requiredReason)
 
-    onUpdateAllowlist(updatedAddresses)
-  }, [addresses, onUpdateAllowlist])
+    // Re-validate all remaining addresses
+    const validatedAddresses = Object.fromEntries(
+      Object.entries(updatedAddresses).map(([currentRole, entries]) => [
+        currentRole,
+        entries.map(entry => ({
+          ...entry,
+          error: isAddressInvalid(entry.address, currentRole as Role, entry.id, updatedAddresses)
+        }))
+      ])
+    ) as unknown as AddressRoles
+
+    onUpdateAllowlist(validatedAddresses)
+  }, [addresses, isAddressInvalid, onUpdateAllowlist])
 
   return (
     <div className="space-y-2">
@@ -69,7 +89,6 @@ export default function Allowlist({
           addresses={addresses[role]}
           onAddAddresses={(newAddresses) => addAddresses(role, newAddresses)}
           onDeleteAddress={(id) => deleteAddress(role, id)}
-          isAddressInvalid={(address) => isAddressInvalid(address, role)}
           precompileAction={precompileAction}
         />
       ))}

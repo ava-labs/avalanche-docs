@@ -7,9 +7,25 @@ type GenerateGenesisArgs = {
     initialBalances?: Record<string, string>; // address to amount in decimal format (e.g. "10.000")
     txAllowlistConfig: AllowlistPrecompileConfig,
     contractDeployerAllowlistConfig: AllowlistPrecompileConfig,
+    nativeMinterAllowlistConfig: AllowlistPrecompileConfig
 }
 
-export function generateGenesis({ evmChainId, initialBalances = {}, txAllowlistConfig, contractDeployerAllowlistConfig }: GenerateGenesisArgs) {
+function generateAllowListConfig(config: AllowlistPrecompileConfig) {
+    return {
+        "blockTimestamp": 0,
+        ...(config.addresses.Admin.length > 0 && {
+            "adminAddresses": addressEntryArrayToAddressArray(config.addresses.Admin),
+        }),
+        ...(config.addresses.Manager.length > 0 && {
+            "managerAddresses": addressEntryArrayToAddressArray(config.addresses.Manager),
+        }),
+        ...(config.addresses.Enabled.length > 0 && {
+            "enabledAddresses": addressEntryArrayToAddressArray(config.addresses.Enabled),
+        }),
+    };
+}
+
+export function generateGenesis({ evmChainId, initialBalances = {}, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig }: GenerateGenesisArgs) {
     const currentTimestamp = Math.floor(Date.now() / 1000);
 
     // Convert balances to wei
@@ -58,34 +74,14 @@ export function generateGenesis({ evmChainId, initialBalances = {}, txAllowlistC
                 "requirePrimaryNetworkSigners": true
             },
             ...(txAllowlistConfig.activated && {
-                "txAllowListConfig": {
-                    "blockTimestamp": 0,
-                    ...(txAllowlistConfig.addresses.Admin.length > 0 && {
-                        "adminAddresses": addressEntryArrayToAddressArray(txAllowlistConfig.addresses.Admin),
-                    }),
-                    ...(txAllowlistConfig.addresses.Manager.length > 0 && {
-                        "managerAddresses": addressEntryArrayToAddressArray(txAllowlistConfig.addresses.Manager),
-                    }),
-                    ...(txAllowlistConfig.addresses.Enabled.length > 0 && {
-                        "enabledAddresses": addressEntryArrayToAddressArray(txAllowlistConfig.addresses.Enabled),
-                    }),
-                }
+                "txAllowListConfig": generateAllowListConfig(txAllowlistConfig),
             }),
             ...(contractDeployerAllowlistConfig.activated && {
-                "contractDeployerAllowListConfig": {
-                    "blockTimestamp": 0,
-                    ...(contractDeployerAllowlistConfig.addresses.Admin.length > 0 && {
-                        "adminAddresses": addressEntryArrayToAddressArray(contractDeployerAllowlistConfig.addresses.Admin),
-                    }),
-                    ...(contractDeployerAllowlistConfig.addresses.Manager.length > 0 && {
-                        "managerAddresses": addressEntryArrayToAddressArray(contractDeployerAllowlistConfig.addresses.Manager),
-                    }),
-                    ...(contractDeployerAllowlistConfig.addresses.Enabled.length > 0 && {
-                        "enabledAddresses": addressEntryArrayToAddressArray(contractDeployerAllowlistConfig.addresses.Enabled),
-                    }),
-                }
+                "contractDeployerAllowListConfig": generateAllowListConfig(contractDeployerAllowlistConfig),
+            }),
+            ...(nativeMinterAllowlistConfig.activated && {
+                "nativeMinterConfig": generateAllowListConfig(nativeMinterAllowlistConfig),
             })
-
         },
         "difficulty": "0x0",
         "excessBlobGas": null,

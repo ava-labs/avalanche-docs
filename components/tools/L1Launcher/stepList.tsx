@@ -13,6 +13,7 @@ import DeployContracts from "./DeployContracts/DeployContracts";
 import CreateChain from "./03_Launch/CreateChain"
 import InitializeValidatorManager from "./InitializeValidatorManager/InitializeValidatorManager";
 import WhatsNext from "./WhatsNext";
+import Tokenomics from './02_Prepare/Tokenomics';
 
 export const stepGroups = {
     "welcome": {
@@ -48,6 +49,11 @@ export const stepList: Record<string, StepType> = {
         title: "Welcome",
         component: <Welcome />,
         group: "welcome",
+    },
+    "tokenomics": {
+        title: "Tokenomics",
+        component: <Tokenomics />,
+        group: "configure",
     },
     "permissions": {
         title: "Permissions",
