@@ -2,6 +2,7 @@
 // Please don't copy this code to other projects!
 import { sha256 } from '@noble/hashes/sha256';
 import { cb58ToBytes } from "../utils/cb58";
+import { pvmSerial, } from '@avalabs/avalanchejs';
 
 export interface MarshalSubnetToL1ConversionDataArgs {
     subnetId: string;
@@ -109,6 +110,30 @@ export const addressCallBytes = (sourceAddress: Uint8Array, conversionID: Uint8A
     parts.push(sourceAddress);
     parts.push(encodeInt32(conversionID.length));
     parts.push(conversionID);
+
+    return concatenateUint8Arrays(...parts);
+}
+
+
+export function PackL1ConversionMessage(args: MarshalSubnetToL1ConversionDataArgs, networkID: number): Uint8Array {
+    throw new Error("Not implemented");
+}
+
+export function packWarpMessage(networkID: number, sourceChainID: string, message: Uint8Array): Uint8Array {
+    const parts: Uint8Array[] = [];
+
+    // Add codec version (uint16)
+    parts.push(encodeUint16(codecVersion));
+
+    // Add networkID (uint32)
+    parts.push(encodeInt32(networkID));
+
+    // Add sourceChainID
+    parts.push(cb58ToBytes(sourceChainID));
+
+    // Add message length and message
+    parts.push(encodeInt32(message.length));
+    parts.push(message);
 
     return concatenateUint8Arrays(...parts);
 }
