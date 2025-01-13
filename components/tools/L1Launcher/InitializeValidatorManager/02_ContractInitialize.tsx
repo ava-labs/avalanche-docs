@@ -9,6 +9,7 @@ import { privateKeyToAccount } from 'viem/accounts';
 
 export default function ContractInitialize() {
     const [status, setStatus] = useState<StepState>('not_started');
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [initialCheckHasRun, setInitialCheckHasRun] = useState(false);
     const {
         evmChainId,
@@ -66,9 +67,7 @@ export default function ContractInitialize() {
             } catch (err) {
                 console.error('Error fetching logs:', err);
                 setStatus('error');
-                // Show error to user if it's a string or has a message property
-                const errorMessage = err instanceof Error ? err.message : String(err);
-                alert(`Failed to check contract initialization: ${errorMessage}`);
+                setErrorMessage(err instanceof Error ? err.message : String(err));
             }
         };
 
@@ -78,10 +77,12 @@ export default function ContractInitialize() {
     const onInitialize = async () => {
         if (!window.ethereum) {
             setStatus('error');
+            setErrorMessage('MetaMask is not installed');
             return;
         }
 
         setStatus('in_progress');
+        setErrorMessage(null);
         try {
             const customChain = {
                 id: evmChainId,
@@ -157,8 +158,7 @@ export default function ContractInitialize() {
         } catch (err) {
             setStatus('error');
             console.error('Error:', err);
-            // Show error message to user
-            alert(err instanceof Error ? err.message : 'An error occurred');
+            setErrorMessage(err instanceof Error ? err.message : 'An error occurred');
         }
     };
 
@@ -172,6 +172,12 @@ export default function ContractInitialize() {
                             status === 'error' ? 'Failed' : 'Success'}
                 </span>
             </div>
+
+            {errorMessage && (
+                <div className="mb-4 p-3 rounded bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm">
+                    {errorMessage}
+                </div>
+            )}
 
             {status === 'not_started' && (
                 <button
