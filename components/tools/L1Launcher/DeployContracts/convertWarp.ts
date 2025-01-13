@@ -2,63 +2,40 @@
 // Please don't copy this code to other projects!
 import { sha256 } from '@noble/hashes/sha256';
 import { cb58ToBytes } from "../utils/cb58";
-import { pvmSerial, } from '@avalabs/avalanchejs';
-import { bytesToHex } from 'viem';
+import { bytesToHex, hexToBytes } from 'viem';
 
-export interface MarshalSubnetToL1ConversionDataArgs {
+export interface PackL1ConversionMessageArgs {
     subnetId: string;
     managerChainID: string;
     managerAddress: `0x${string}`;
     nonePopJsons: string[];
 }
 
-interface NodePOP {
+interface SubnetToL1ConversionValidatorData {
     nodeID: string;
     nodePOP: {
-        publicKey: string;
-        proofOfPossession: string;
+        publicKey: `0x${string}`;
+        proofOfPossession: `0x${string}`;
     };
 }
 
 const BootstrapValidatorWeight = 100n;
 const codecVersion = 0;
 
-function encodeUint16(num: number): Uint8Array {
-    const arr = new Uint8Array(2);
-    arr[0] = (num >> 8) & 0xff;
-    arr[1] = num & 0xff;
-    return arr;
-}
+function encodeNumber(num: number | bigint, numberBytes: number): Uint8Array {
+    const arr = new Uint8Array(numberBytes);
+    const isBigInt = typeof num === 'bigint';
+    let value = isBigInt ? num : BigInt(num);
 
-function encodeInt32(num: number): Uint8Array {
-    const arr = new Uint8Array(4);
-    arr[0] = (num >> 24) & 0xff;
-    arr[1] = (num >> 16) & 0xff;
-    arr[2] = (num >> 8) & 0xff;
-    arr[3] = num & 0xff;
-    return arr;
-}
-
-function encodeInt64(num: bigint): Uint8Array {
-    const arr = new Uint8Array(8);
-    for (let i = 7; i >= 0; i--) {
-        arr[i] = Number(num & 0xffn);
-        num = num >> 8n;
+    for (let i = numberBytes - 1; i >= 0; i--) {
+        arr[i] = Number(value & 0xffn);
+        value = value >> 8n;
     }
     return arr;
-}
-
-function hexToBytes(hex: string): Uint8Array {
-    hex = hex.replace(/^0x/, '');
-    const bytes = new Uint8Array(hex.length / 2);
-    for (let i = 0; i < hex.length; i += 2) {
-        bytes[i / 2] = parseInt(hex.slice(i, i + 2), 16);
-    }
-    return bytes;
 }
 
 function encodeVarBytes(bytes: Uint8Array): Uint8Array {
-    const lengthBytes = encodeInt32(bytes.length);
+    const lengthBytes = encodeNumber(bytes.length, 4);
     const result = new Uint8Array(lengthBytes.length + bytes.length);
     result.set(lengthBytes);
     result.set(bytes, lengthBytes.length);
@@ -76,51 +53,50 @@ function concatenateUint8Arrays(...arrays: Uint8Array[]): Uint8Array {
     return result;
 }
 
-export function MarshalSubnetToL1ConversionData(args: MarshalSubnetToL1ConversionDataArgs): Uint8Array {
+export function marshalSubnetToL1ConversionData(args: PackL1ConversionMessageArgs): Uint8Array {
     const parts: Uint8Array[] = [];
 
-    parts.push(encodeUint16(codecVersion));
+    parts.push(encodeNumber(codecVersion, 2));
     parts.push(cb58ToBytes(args.subnetId));
     parts.push(cb58ToBytes(args.managerChainID));
     parts.push(encodeVarBytes(hexToBytes(args.managerAddress)));
-    parts.push(encodeInt32(args.nonePopJsons.length));
+    parts.push(encodeNumber(args.nonePopJsons.length, 4));
 
     for (const popJson of args.nonePopJsons) {
-        const { nodeID, nodePOP } = JSON.parse(popJson) as NodePOP;
+        const { nodeID, nodePOP } = JSON.parse(popJson) as SubnetToL1ConversionValidatorData;
         parts.push(encodeVarBytes(cb58ToBytes(nodeID.split("-")[1])));
         parts.push(hexToBytes(nodePOP.publicKey));
-        parts.push(encodeInt64(BootstrapValidatorWeight));
+        parts.push(encodeNumber(BootstrapValidatorWeight, 8));
     }
 
     const result = concatenateUint8Arrays(...parts);
     return result;
 }
 
-
-export const SubnetToL1ConversionID = (args: MarshalSubnetToL1ConversionDataArgs): Uint8Array => {
-    const data = MarshalSubnetToL1ConversionData(args);
+export function subnetToL1ConversionID(args: PackL1ConversionMessageArgs): Uint8Array {
+    const data = marshalSubnetToL1ConversionData(args);
     return sha256(data);
 }
 
-export const getAddressCallBytes = (sourceAddress: Uint8Array, conversionID: Uint8Array): Uint8Array => {
+export function newAddressedCall(sourceAddress: Uint8Array, payload: Uint8Array): Uint8Array {
     const parts: Uint8Array[] = [];
 
-    parts.push(encodeUint16(codecVersion));
-    parts.push(encodeInt32(1));//FIXME: I have zero idea what this is, but every time it is "00000001"
+    parts.push(encodeNumber(codecVersion, 2));
+    parts.push(encodeNumber(1, 4));//FIXME: I have zero idea what this is, but every time it is "00000001"
     parts.push(encodeVarBytes(sourceAddress));
-    parts.push(encodeVarBytes(conversionID));
+    parts.push(encodeVarBytes(payload));
 
     return concatenateUint8Arrays(...parts);
 }
 
-export function addressedCallPayloadFromL1ConversionID(subnetConversionID: Uint8Array): Uint8Array {
+export function newSubnetToL1Conversion(subnetConversionID: Uint8Array): Uint8Array {
     const parts: Uint8Array[] = [];
 
     // Add codec version (uint16)
-    parts.push(encodeUint16(codecVersion));
+    parts.push(encodeNumber(codecVersion, 2));
 
     // Add empty source address length (uint32)
-    parts.push(encodeInt32(0));
+    parts.push(encodeNumber(0, 4));
 
     // Add subnetConversionID
     parts.push(subnetConversionID);
@@ -128,34 +104,35 @@ export function addressedCallPayloadFromL1ConversionID(subnetConversionID: Uint8
     return concatenateUint8Arrays(...parts);
 }
 
-export function PackL1ConversionMessage(args: MarshalSubnetToL1ConversionDataArgs, networkID: number, sourceChainID: string): Uint8Array {
-    const subnetConversionID = SubnetToL1ConversionID(args);
-
-    console.log("subnetConversionID: ", bytesToHex(subnetConversionID))
-    const addressedCallPayload = addressedCallPayloadFromL1ConversionID(subnetConversionID)
-    console.log("addressedCallPayload: ", bytesToHex(addressedCallPayload))
-
-    const subnetConversionAddressedCall = getAddressCallBytes(new Uint8Array([]), addressedCallPayload)
-    console.log("subnetConversionAddressedCall: ", bytesToHex(subnetConversionAddressedCall))
-
-    return packWarpMessage(networkID, sourceChainID, subnetConversionAddressedCall);
-}
-
-export function packWarpMessage(networkID: number, sourceChainID: string, message: Uint8Array): Uint8Array {
+export function newUnsignedMessage(networkID: number, sourceChainID: string, message: Uint8Array): Uint8Array {
     const parts: Uint8Array[] = [];
 
     // Add codec version (uint16)
-    parts.push(encodeUint16(codecVersion));
+    parts.push(encodeNumber(codecVersion, 2));
 
     // Add networkID (uint32)
-    parts.push(encodeInt32(networkID));
+    parts.push(encodeNumber(networkID, 4));
 
     // Add sourceChainID
     parts.push(cb58ToBytes(sourceChainID));
 
     // Add message length and message
-    parts.push(encodeInt32(message.length));
+    parts.push(encodeNumber(message.length, 4));
     parts.push(message);
 
     return concatenateUint8Arrays(...parts);
+}
+
+export function packL1ConversionMessage(args: PackL1ConversionMessageArgs, networkID: number, sourceChainID: string): [Uint8Array, Uint8Array] {
+    const subnetConversionID = subnetToL1ConversionID(args);
+
+    console.log("subnetConversionID: ", bytesToHex(subnetConversionID))
+    const addressedCallPayload = newSubnetToL1Conversion(subnetConversionID)
+    console.log("addressedCallPayload: ", bytesToHex(addressedCallPayload))
+
+    const subnetConversionAddressedCall = newAddressedCall(new Uint8Array([]), addressedCallPayload)
+    console.log("subnetConversionAddressedCall: ", bytesToHex(subnetConversionAddressedCall))
+
+    const unsignedMessage = newUnsignedMessage(networkID, sourceChainID, subnetConversionAddressedCall);
+    return [unsignedMessage, cb58ToBytes(args.subnetId)];
 }
