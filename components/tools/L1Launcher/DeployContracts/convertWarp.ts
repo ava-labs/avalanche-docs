@@ -99,3 +99,16 @@ export const SubnetToL1ConversionID = (args: MarshalSubnetToL1ConversionDataArgs
     const data = MarshalSubnetToL1ConversionData(args);
     return sha256(data);
 }
+
+export const addressCallBytes = (sourceAddress: Uint8Array, conversionID: Uint8Array): Uint8Array => {
+    const parts: Uint8Array[] = [];
+
+    parts.push(encodeUint16(codecVersion));
+    parts.push(encodeInt32(1));//FIXME: I have zero idea what this is, but every time it is "00000001"
+    parts.push(encodeInt32(sourceAddress.length));
+    parts.push(sourceAddress);
+    parts.push(encodeInt32(conversionID.length));
+    parts.push(conversionID);
+
+    return concatenateUint8Arrays(...parts);
+}
