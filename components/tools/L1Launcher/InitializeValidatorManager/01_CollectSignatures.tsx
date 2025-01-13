@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useWizardStore } from '../store';
 import { calculateContractAddress } from '../wallet';
 import { statusColors, StepState } from './colors';
+import { packL1ConversionMessage } from './convertWarp';
+import { bytesToHex } from 'viem';
 
 async function rpcRequest(rpcUrl: string, method: string, params: any) {
     const response = await fetch(`${rpcUrl}/ext/info`, {
@@ -80,42 +82,28 @@ export default function CollectSignatures() {
         try {
             const apiHost = await apiHostPromise;
 
-            // First pack the message
-            const packResponse = await fetch(`${apiHost}/temporaryDevAPI/packL1ConversionMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chainId,
-                    subnetId,
-                    managerAddress: calculateContractAddress(tempPrivateKeyHex, 3),
-                    nodes: nodePopJsons
-                        .slice(0, nodesCount)
-                        .map(json => JSON.parse(json).result),
-                })
-            });
+            const pChainChainID = '11111111111111111111111111111111LpoYY'//TODO: unhardcode
 
-            if (!packResponse.ok) {
-                const errorText = await packResponse.text();
-                throw new Error(errorText || `HTTP error! status: ${packResponse.status}`);
-            }
-
-            const { message, justification } = await packResponse.json();
-
+            // Pack the message locally using packL1ConversionMessage
+            const [message, justification] = packL1ConversionMessage({
+                subnetId,
+                managerChainID: chainId,
+                managerAddress: calculateContractAddress(tempPrivateKeyHex, 3),
+                validators: nodePopJsons.slice(0, nodesCount).map(json => JSON.parse(json).result)
+            }, 5, pChainChainID); // Using networkID 5 for Fuji as seen in the test
 
             const peers = await collectPeers(await getRpcEndpoint());
             console.log('Collected ' + peers.length + ' peers');
 
             // Then sign the message
-            const signResponse = await fetch(`${apiHost}/temporaryDevAPI/signMessage`, {
+            const signResponse = await fetch(`${apiHost}/signMessage`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    message,
-                    justification,
+                    message: bytesToHex(message),
+                    justification: bytesToHex(justification),
                     signingSubnetID: subnetId,
                     extraPeers: peers,
                 })

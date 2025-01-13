@@ -8,7 +8,7 @@ export interface PackL1ConversionMessageArgs {
     subnetId: string;
     managerChainID: string;
     managerAddress: `0x${string}`;
-    nonePopJsons: string[];
+    validators: SubnetToL1ConversionValidatorData[];
 }
 
 interface SubnetToL1ConversionValidatorData {
@@ -21,6 +21,11 @@ interface SubnetToL1ConversionValidatorData {
 
 const BootstrapValidatorWeight = 100n;
 const codecVersion = 0;
+
+const encodeUint16 = (num: number): Uint8Array => encodeNumber(num, 2);
+const encodeUint32 = (num: number): Uint8Array => encodeNumber(num, 4);
+const encodeUint64 = (num: bigint): Uint8Array => encodeNumber(num, 8);
+
 
 function encodeNumber(num: number | bigint, numberBytes: number): Uint8Array {
     const arr = new Uint8Array(numberBytes);
@@ -35,7 +40,7 @@ function encodeNumber(num: number | bigint, numberBytes: number): Uint8Array {
 }
 
 function encodeVarBytes(bytes: Uint8Array): Uint8Array {
-    const lengthBytes = encodeNumber(bytes.length, 4);
+    const lengthBytes = encodeUint32(bytes.length);
     const result = new Uint8Array(lengthBytes.length + bytes.length);
     result.set(lengthBytes);
     result.set(bytes, lengthBytes.length);
@@ -56,17 +61,19 @@ function concatenateUint8Arrays(...arrays: Uint8Array[]): Uint8Array {
 export function marshalSubnetToL1ConversionData(args: PackL1ConversionMessageArgs): Uint8Array {
     const parts: Uint8Array[] = [];
 
-    parts.push(encodeNumber(codecVersion, 2));
+    parts.push(encodeUint16(codecVersion));
     parts.push(cb58ToBytes(args.subnetId));
     parts.push(cb58ToBytes(args.managerChainID));
     parts.push(encodeVarBytes(hexToBytes(args.managerAddress)));
-    parts.push(encodeNumber(args.nonePopJsons.length, 4));
+    parts.push(encodeUint32(args.validators.length));
 
-    for (const popJson of args.nonePopJsons) {
-        const { nodeID, nodePOP } = JSON.parse(popJson) as SubnetToL1ConversionValidatorData;
-        parts.push(encodeVarBytes(cb58ToBytes(nodeID.split("-")[1])));
-        parts.push(hexToBytes(nodePOP.publicKey));
-        parts.push(encodeNumber(BootstrapValidatorWeight, 8));
+    for (const validator of args.validators) {
+        if (!validator.nodeID || !validator.nodePOP) {
+            throw new Error(`Invalid validator data: ${JSON.stringify(validator)}`);
+        }
+        parts.push(encodeVarBytes(cb58ToBytes(validator.nodeID.split("-")[1])));
+        parts.push(hexToBytes(validator.nodePOP.publicKey));
+        parts.push(encodeUint64(BootstrapValidatorWeight));
     }
 
     const result = concatenateUint8Arrays(...parts);
@@ -81,8 +88,8 @@ export function subnetToL1ConversionID(args: PackL1ConversionMessageArgs): Uint8
 export function newAddressedCall(sourceAddress: Uint8Array, payload: Uint8Array): Uint8Array {
     const parts: Uint8Array[] = [];
 
-    parts.push(encodeNumber(codecVersion, 2));
-    parts.push(encodeNumber(1, 4));//FIXME: I have zero idea what this is, but every time it is "00000001"
+    parts.push(encodeUint16(codecVersion));
+    parts.push(encodeUint32(1));//FIXME: I have zero idea what this is, but every time it is "00000001"
     parts.push(encodeVarBytes(sourceAddress));
     parts.push(encodeVarBytes(payload));
 
@@ -93,10 +100,10 @@ export function newSubnetToL1Conversion(subnetConversionID: Uint8Array): Uint8Ar
     const parts: Uint8Array[] = [];
 
     // Add codec version (uint16)
-    parts.push(encodeNumber(codecVersion, 2));
+    parts.push(encodeUint16(codecVersion));
 
     // Add empty source address length (uint32)
-    parts.push(encodeNumber(0, 4));
+    parts.push(encodeUint32(0));
 
     // Add subnetConversionID
     parts.push(subnetConversionID);
@@ -108,16 +115,16 @@ export function newUnsignedMessage(networkID: number, sourceChainID: string, mes
     const parts: Uint8Array[] = [];
 
     // Add codec version (uint16)
-    parts.push(encodeNumber(codecVersion, 2));
+    parts.push(encodeUint16(codecVersion));
 
     // Add networkID (uint32)
-    parts.push(encodeNumber(networkID, 4));
+    parts.push(encodeUint32(networkID));
 
     // Add sourceChainID
     parts.push(cb58ToBytes(sourceChainID));
 
     // Add message length and message
-    parts.push(encodeNumber(message.length, 4));
+    parts.push(encodeUint32(message.length));
     parts.push(message);
 
     return concatenateUint8Arrays(...parts);
@@ -126,12 +133,9 @@ export function newUnsignedMessage(networkID: number, sourceChainID: string, mes
 export function packL1ConversionMessage(args: PackL1ConversionMessageArgs, networkID: number, sourceChainID: string): [Uint8Array, Uint8Array] {
     const subnetConversionID = subnetToL1ConversionID(args);
 
-    console.log("subnetConversionID: ", bytesToHex(subnetConversionID))
     const addressedCallPayload = newSubnetToL1Conversion(subnetConversionID)
-    console.log("addressedCallPayload: ", bytesToHex(addressedCallPayload))
 
     const subnetConversionAddressedCall = newAddressedCall(new Uint8Array([]), addressedCallPayload)
-    console.log("subnetConversionAddressedCall: ", bytesToHex(subnetConversionAddressedCall))
 
     const unsignedMessage = newUnsignedMessage(networkID, sourceChainID, subnetConversionAddressedCall);
     return [unsignedMessage, cb58ToBytes(args.subnetId)];
