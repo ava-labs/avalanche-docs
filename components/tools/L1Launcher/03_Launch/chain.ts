@@ -3,7 +3,7 @@ import { RPC_ENDPOINT } from "../utxo";
 import { getAddresses } from "../wallet";
 import { secp256k1 } from "@avalabs/avalanchejs";
 import { apiHostPromise } from "../config";
-import { bytesToHex } from "viem";
+import { bytesToHex, hexToBytes } from "viem";
 
 async function addTxSignatures(tx: any, privateKeyHex: string) {
     const unsignedBytes = tx.toBytes();
@@ -115,7 +115,7 @@ export async function convertToL1(params: {
     privateKeyHex: string;
     subnetId: string;
     chainId: string;
-    managerAddress: string;
+    managerAddress: `0x${string}`;
     nodePopJsons: string[];
 }): Promise<string> {
     if (!params.privateKeyHex) {
@@ -154,6 +154,7 @@ export async function convertToL1(params: {
         );
     });
 
+    const managerAddressBytes = hexToBytes(params.managerAddress);
 
     const tx = pvm.e.newConvertSubnetToL1Tx(
         {
@@ -164,16 +165,13 @@ export async function convertToL1(params: {
             chainId: params.chainId,
             validators,
             subnetAuth: [0],
-            address: addressBytes,
+            address: managerAddressBytes,
         },
         context,
     );
 
-    console.log('tx before signing', bytesToHex(tx.toBytes()));
     await addSigToAllCreds(tx, utils.hexToBuffer(params.privateKeyHex));
-    console.log('tx after signing', bytesToHex(tx.getSignedTx().toBytes()));
 
-    throw new Error('TODO: remove me after debug finished');
 
     const response = await pvmApi.issueSignedTx(tx.getSignedTx());
     return response.txID;
