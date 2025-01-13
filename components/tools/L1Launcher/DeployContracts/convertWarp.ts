@@ -1,9 +1,9 @@
 // FIXME: this is a quick hack solution untill AvalancheJS supports this
 // Please don't copy this code to other projects!
-
+import { sha256 } from '@noble/hashes/sha256';
 import { cb58ToBytes } from "../utils/cb58";
 
-interface MarshalSubnetToL1ConversionDataArgs {
+export interface MarshalSubnetToL1ConversionDataArgs {
     subnetId: string;
     managerChainID: string;
     managerAddress: `0x${string}`;
@@ -74,7 +74,7 @@ function concatenateUint8Arrays(...arrays: Uint8Array[]): Uint8Array {
     return result;
 }
 
-export function MarshalSubnetToL1ConversionData(args: MarshalSubnetToL1ConversionDataArgs): string {
+export function MarshalSubnetToL1ConversionData(args: MarshalSubnetToL1ConversionDataArgs): Uint8Array {
     const parts: Uint8Array[] = [];
 
     parts.push(encodeUint16(codecVersion));
@@ -91,5 +91,11 @@ export function MarshalSubnetToL1ConversionData(args: MarshalSubnetToL1Conversio
     }
 
     const result = concatenateUint8Arrays(...parts);
-    return Buffer.from(result).toString('hex');
+    return result;
+}
+
+
+export const SubnetToL1ConversionID = (args: MarshalSubnetToL1ConversionDataArgs): Uint8Array => {
+    const data = MarshalSubnetToL1ConversionData(args);
+    return sha256(data);
 }
