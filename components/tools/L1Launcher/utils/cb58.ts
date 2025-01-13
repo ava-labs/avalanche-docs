@@ -18,6 +18,7 @@ export function cb58ToBytes(cb58: string): Uint8Array {
     return decodedBytes.slice(0, -CHECKSUM_LENGTH);
 }
 
+
 export function cb58ToHex(cb58: string, include0x: boolean = true): string {
     const rawBytes = cb58ToBytes(cb58);
     return (include0x ? '0x' : '') + bytesToHex(rawBytes);
@@ -34,3 +35,4 @@ export function hexToCB58(hex: string): string {
 
     return base58.encode(combined);
 }
+
