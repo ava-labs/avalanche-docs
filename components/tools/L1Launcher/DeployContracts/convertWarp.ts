@@ -3,6 +3,7 @@
 import { sha256 } from '@noble/hashes/sha256';
 import { cb58ToBytes } from "../utils/cb58";
 import { pvmSerial, } from '@avalabs/avalanchejs';
+import { bytesToHex } from 'viem';
 
 export interface MarshalSubnetToL1ConversionDataArgs {
     subnetId: string;
@@ -101,22 +102,43 @@ export const SubnetToL1ConversionID = (args: MarshalSubnetToL1ConversionDataArgs
     return sha256(data);
 }
 
-export const addressCallBytes = (sourceAddress: Uint8Array, conversionID: Uint8Array): Uint8Array => {
+export const getAddressCallBytes = (sourceAddress: Uint8Array, conversionID: Uint8Array): Uint8Array => {
     const parts: Uint8Array[] = [];
 
     parts.push(encodeUint16(codecVersion));
     parts.push(encodeInt32(1));//FIXME: I have zero idea what this is, but every time it is "00000001"
-    parts.push(encodeInt32(sourceAddress.length));
-    parts.push(sourceAddress);
-    parts.push(encodeInt32(conversionID.length));
-    parts.push(conversionID);
+    parts.push(encodeVarBytes(sourceAddress));
+    parts.push(encodeVarBytes(conversionID));
 
     return concatenateUint8Arrays(...parts);
 }
 
+export function addressedCallPayloadFromL1ConversionID(subnetConversionID: Uint8Array): Uint8Array {
+    const parts: Uint8Array[] = [];
 
-export function PackL1ConversionMessage(args: MarshalSubnetToL1ConversionDataArgs, networkID: number): Uint8Array {
-    throw new Error("Not implemented");
+    // Add codec version (uint16)
+    parts.push(encodeUint16(codecVersion));
+
+    // Add empty source address length (uint32)
+    parts.push(encodeInt32(0));
+
+    // Add subnetConversionID
+    parts.push(subnetConversionID);
+
+    return concatenateUint8Arrays(...parts);
+}
+
+export function PackL1ConversionMessage(args: MarshalSubnetToL1ConversionDataArgs, networkID: number, sourceChainID: string): Uint8Array {
+    const subnetConversionID = SubnetToL1ConversionID(args);
+
+    console.log("subnetConversionID: ", bytesToHex(subnetConversionID))
+    const addressedCallPayload = addressedCallPayloadFromL1ConversionID(subnetConversionID)
+    console.log("addressedCallPayload: ", bytesToHex(addressedCallPayload))
+
+    const subnetConversionAddressedCall = getAddressCallBytes(new Uint8Array([]), addressedCallPayload)
+    console.log("subnetConversionAddressedCall: ", bytesToHex(subnetConversionAddressedCall))
+
+    return packWarpMessage(networkID, sourceChainID, subnetConversionAddressedCall);
 }
 
 export function packWarpMessage(networkID: number, sourceChainID: string, message: Uint8Array): Uint8Array {
