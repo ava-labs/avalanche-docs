@@ -3,47 +3,73 @@ import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { getAddresses, newPrivateKey } from './wallet';
 import { stepList } from './stepList';
-import { generateGenesis } from './02_Prepare/genGenesis';
+import { generateGenesis } from './utils/genGenesis';
+import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
+
+
 
 interface WizardState {
     ownerEthAddress: string;
     setOwnerEthAddress: (address: string) => void;
+
     currentStep: keyof typeof stepList;
     advanceFrom: (givenStep: keyof typeof stepList, direction?: "up" | "down") => void;
+    maxAdvancedStep: keyof typeof stepList;
+    advanceTo: (targetStep: keyof typeof stepList) => void;
+
     nodesCount: number;
     setNodesCount: (count: number) => void;
+    
     evmChainId: number;
     setEvmChainId: (chainId: number) => void;
+
+    txAllowlistConfig: AllowlistPrecompileConfig;
+    setTxAllowlistConfig: (config: AllowlistPrecompileConfig) => void;
+
+    contractDeployerAllowlistConfig: AllowlistPrecompileConfig;
+    setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => void;
+
     genesisString: string;
     regenerateGenesis: () => Promise<void>;
+
     nodePopJsons: string[];
     setNodePopJsons: (nodePopJsons: string[]) => void;
+
     l1Name: string;
     setL1Name: (l1Name: string) => void;
+
     chainId: string;
     setChainId: (chainId: string) => void;
+
     subnetId: string;
     setSubnetId: (subnetId: string) => void;
+
     conversionId: string;
     setConversionId: (conversionId: string) => void;
+
     rpcLocationType: 'local' | 'remote';
     setRpcLocationType: (type: 'local' | 'remote') => void;
+
     rpcDomainType: 'has-domain' | 'no-domain' | 'manual-ssl';
     setRpcDomainType: (type: 'has-domain' | 'no-domain' | 'manual-ssl') => void;
+
     rpcAddress: string;
     setRpcAddress: (address: string) => void;
+
     rpcVerified: boolean;
     setRpcVerified: (verified: boolean) => void;
+
     tokenSymbol: string;
     setTokenSymbol: (symbol: string) => void;
+
     tempPrivateKeyHex: string;
     setTempPrivateKeyHex: (key: string) => void;
+
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
     getCChainRpcEndpoint: () => string;
     getRpcEndpoint: () => string;
-    maxAdvancedStep: keyof typeof stepList;
-    advanceTo: (targetStep: keyof typeof stepList) => void;
+
     convertL1SignedWarpMessage: `0x${string}` | null;
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => void;
 }
@@ -79,21 +105,7 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
     nodesCount: 1,
     setNodesCount: (count: number) => set(() => ({ nodesCount: count })),
 
-    genesisString: "",
-    regenerateGenesis: async () => {
-        const { ownerEthAddress, evmChainId, tempPrivateKeyHex } = get();
-        const { C: initialContractDeployer } = getAddresses(tempPrivateKeyHex);
-
-        const genesis = generateGenesis({
-            evmChainId,
-            initialBalances: {
-                [ownerEthAddress]: "1000000000.00",
-                [initialContractDeployer]: "1.00",
-            },
-        });
-
-        set({ genesisString: JSON.stringify(genesis, null, 2) });
-    },
+    
 
     nodePopJsons: ["", "", "", "", "", "", "", "", "", ""],
     setNodePopJsons: (nodePopJsons: string[]) => set(() => ({ nodePopJsons: nodePopJsons })),
@@ -115,6 +127,51 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
         evmChainId: chainId,
         genesisString: ""
     })),
+
+    txAllowlistConfig: {
+        addresses: {
+          Admin: [
+            {
+              id: '1',
+              address: '0xf6687Cd56AeC1a0FAABA12FEB6781398aB47fb21',
+              requiredReason: 'Dev Wallet'
+            }
+          ],
+          Manager: [],
+          Enabled: []
+        },
+        activated: false
+      } as AllowlistPrecompileConfig,
+    setTxAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ txAllowlistConfig: config })),
+
+    contractDeployerAllowlistConfig: {
+        addresses: {
+          Admin: [],
+          Manager: [],
+          Enabled: []
+        },
+        activated: true
+      } as AllowlistPrecompileConfig,
+    setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
+
+    genesisString: "",
+    regenerateGenesis: async () => {
+        const { ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig } = get();
+        const { C: initialContractDeployer } = getAddresses(tempPrivateKeyHex);
+        
+
+        const genesis = generateGenesis({
+            evmChainId,
+            initialBalances: {
+                [ownerEthAddress]: "1000000000.00",
+                [initialContractDeployer]: "1.00",
+            },
+            txAllowlistConfig,
+            contractDeployerAllowlistConfig
+        });
+
+        set({ genesisString: JSON.stringify(genesis, null, 2) });
+    },
 
     rpcLocationType: 'local',
     setRpcLocationType: (type) => set(() => ({ rpcLocationType: type })),

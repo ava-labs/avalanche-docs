@@ -1,11 +1,15 @@
 import { parseEther } from 'viem'
+import { AllowlistPrecompileConfig } from '../../common/allowlist-precompile-configurator/types';
+import { addressEntryArrayToAddressArray } from '../../common/utils';
 
 type GenerateGenesisArgs = {
     evmChainId: number;
     initialBalances?: Record<string, string>; // address to amount in decimal format (e.g. "10.000")
+    txAllowlistConfig: AllowlistPrecompileConfig,
+    contractDeployerAllowlistConfig: AllowlistPrecompileConfig,
 }
 
-export function generateGenesis({ evmChainId, initialBalances = {} }: GenerateGenesisArgs) {
+export function generateGenesis({ evmChainId, initialBalances = {}, txAllowlistConfig, contractDeployerAllowlistConfig }: GenerateGenesisArgs) {
     const currentTimestamp = Math.floor(Date.now() / 1000);
 
     // Convert balances to wei
@@ -52,7 +56,36 @@ export function generateGenesis({ evmChainId, initialBalances = {} }: GenerateGe
                 "blockTimestamp": currentTimestamp,
                 "quorumNumerator": 67,
                 "requirePrimaryNetworkSigners": true
-            }
+            },
+            ...(txAllowlistConfig.activated && {
+                "txAllowListConfig": {
+                    "blockTimestamp": 0,
+                    ...(txAllowlistConfig.addresses.Admin.length > 0 && {
+                        "adminAddresses": addressEntryArrayToAddressArray(txAllowlistConfig.addresses.Admin),
+                    }),
+                    ...(txAllowlistConfig.addresses.Manager.length > 0 && {
+                        "managerAddresses": addressEntryArrayToAddressArray(txAllowlistConfig.addresses.Manager),
+                    }),
+                    ...(txAllowlistConfig.addresses.Enabled.length > 0 && {
+                        "enabledAddresses": addressEntryArrayToAddressArray(txAllowlistConfig.addresses.Enabled),
+                    }),
+                }
+            }),
+            ...(contractDeployerAllowlistConfig.activated && {
+                "contractDeployerAllowListConfig": {
+                    "blockTimestamp": 0,
+                    ...(contractDeployerAllowlistConfig.addresses.Admin.length > 0 && {
+                        "adminAddresses": addressEntryArrayToAddressArray(contractDeployerAllowlistConfig.addresses.Admin),
+                    }),
+                    ...(contractDeployerAllowlistConfig.addresses.Manager.length > 0 && {
+                        "managerAddresses": addressEntryArrayToAddressArray(contractDeployerAllowlistConfig.addresses.Manager),
+                    }),
+                    ...(contractDeployerAllowlistConfig.addresses.Enabled.length > 0 && {
+                        "enabledAddresses": addressEntryArrayToAddressArray(contractDeployerAllowlistConfig.addresses.Enabled),
+                    }),
+                }
+            })
+
         },
         "difficulty": "0x0",
         "excessBlobGas": null,

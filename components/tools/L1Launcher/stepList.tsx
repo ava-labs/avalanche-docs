@@ -1,6 +1,7 @@
 import { BookOpen, Terminal, Flag, Settings, Server } from 'lucide-react'
 import Welcome from "./01_Welcome/Welcome";
 import Genesis from "./02_Prepare/Genesis";
+import Permissions from "./02_Prepare/Permissions";
 import FundTempWallet from "./03_Launch/FundTempWallet";
 import PrepareValidators from "./02_Prepare/PrepareValidators";
 import GenerateKeys from "./02_Prepare/GenerateKeys";
@@ -18,8 +19,8 @@ export const stepGroups = {
         title: "Welcome",
         icon: <BookOpen className="size-5" />
     },
-    "prepare": {
-        title: "Prepare",
+    "configure": {
+        title: "Configure",
         icon: <Settings className="size-5" />
     },
     "launch-l1": {
@@ -48,20 +49,25 @@ export const stepList: Record<string, StepType> = {
         component: <Welcome />,
         group: "welcome",
     },
+    "permissions": {
+        title: "Permissions",
+        component: <Permissions />,
+        group: "configure",
+    },
     "genesis": {
         title: "Create genesis",
         component: <Genesis />,
-        group: "prepare",
+        group: "configure",
     },
-    "prepare-validators": {
+    "configure-validators": {
         title: "Prepare Validators",
         component: <PrepareValidators />,
-        group: "prepare",
+        group: "configure",
     },
     "generate-keys": {
         title: "Generate keys",
         component: <GenerateKeys />,
-        group: "prepare",
+        group: "configure",
     },
     "fund-temp-wallet": {
         title: "Fund temp wallet",

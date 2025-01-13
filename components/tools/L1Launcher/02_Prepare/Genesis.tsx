@@ -3,6 +3,7 @@ import { getWalletAddress } from '../wallet';
 import { useWizardStore } from '../store';
 import NextPrev from '../ui/NextPrev';
 import { Button } from '@/components/ui/button';
+import { isValidEthereumAddress } from '@/components/tools/common/utils'
 
 function isValidL1Name(name: string): boolean {
     return name.split('').every(char => {
@@ -169,8 +170,4 @@ export default function Genesis() {
 
         </div>
     );
-}
-
-function isValidEthereumAddress(address: string) {
-    return /^0x[a-fA-F0-9]{40}$/.test(address);
 }
