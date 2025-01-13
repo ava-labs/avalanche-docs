@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { MarshalSubnetToL1ConversionData, MarshalSubnetToL1ConversionDataArgs, SubnetToL1ConversionID } from './convertWarp';
-import { bytesToHex } from 'viem';
+import { addressCallBytes, MarshalSubnetToL1ConversionData, MarshalSubnetToL1ConversionDataArgs, subnetConversionAddressedCallBytes, SubnetToL1ConversionID } from './convertWarp';
+import { bytesToHex, hexToBytes } from 'viem';
 
 describe('MarshalSubnetToL1ConversionData', () => {
     it('should correctly marshal subnet to L1 conversion data', () => {
@@ -19,5 +19,29 @@ describe('MarshalSubnetToL1ConversionData', () => {
 
         const conversionID = SubnetToL1ConversionID(args);
         expect(bytesToHex(conversionID)).toBe("0xae4984e3c1f0b73c2e160b899295e4a2d44b2229f23bdb7b8eccbbbcb0ba7d93");
+    });
+
+    describe('addressCallBytes', () => {
+        const cases = [
+            {
+                name: "subnet conversion with empty sourceAddress",
+                sourceAddress: hexToBytes("0x"),
+                payload: hexToBytes("0x11223344"),
+                expected: "0x" + "0000" + "00000001" + "00000000" + "" + "00000004" + "11223344"
+            },
+            {
+                name: "subnet conversion with non-empty sourceAddress",
+                sourceAddress: hexToBytes("0x77777777"),
+                payload: hexToBytes("0x111111"),
+                expected: "0x" + "0000" + "00000001" + "00000004" + "77777777" + "00000003" + "111111"
+            }
+        ];
+
+        cases.forEach(({ name, sourceAddress, payload, expected }) => {
+            it(name, () => {
+                const result = addressCallBytes(sourceAddress, payload);
+                expect(bytesToHex(result)).toBe(expected);
+            });
+        });
     });
 });
