@@ -39,7 +39,7 @@ async function collectPeers(rpcUrl: string) {
                 "nodeID": nodeIDData.nodeID,
             });
 
-            console.log('Successfully added node to peers', peers);
+            console.log('Successfully added node to peers', peers[peers.length - 1]);
         } catch (e) {
             console.warn('Failed to get node IP or ID', e);
         }
@@ -64,6 +64,7 @@ export default function CollectSignatures() {
 
     const [error, setError] = useState<string | null>(null);
     const [status, setStatus] = useState<StepState>('not_started');
+    const [isLoading, setIsLoading] = useState(false);
     const [collectedPeers, setCollectedPeers] = useState<string[]>([]);
 
     useEffect(() => {
@@ -74,6 +75,8 @@ export default function CollectSignatures() {
 
     const onCollect = async () => {
         setStatus('in_progress');
+        setIsLoading(true);
+        setError(null);
         try {
             const apiHost = await apiHostPromise;
 
@@ -102,7 +105,7 @@ export default function CollectSignatures() {
 
 
             const peers = await collectPeers(await getRpcEndpoint());
-            console.log('Peers:', peers);
+            console.log('Collected ' + peers.length + ' peers');
 
             // Then sign the message
             const signResponse = await fetch(`${apiHost}/temporaryDevAPI/signMessage`, {
@@ -130,6 +133,8 @@ export default function CollectSignatures() {
             setError(err instanceof Error ? err.message : 'An error occurred');
             console.error('Error:', err);
             setStatus('error');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -164,9 +169,13 @@ export default function CollectSignatures() {
             {convertL1SignedWarpMessage === null && (
                 <button
                     onClick={onCollect}
-                    className="mt-2 w-full p-2 mb-2 rounded bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+                    disabled={isLoading}
+                    className={`mt-2 w-full p-2 mb-2 rounded text-white ${isLoading
+                        ? 'bg-blue-400 cursor-not-allowed dark:bg-blue-500'
+                        : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+                        }`}
                 >
-                    Collect Signatures
+                    {isLoading ? 'Collecting Signatures...' : 'Collect Signatures'}
                 </button>
             )}
         </div>
