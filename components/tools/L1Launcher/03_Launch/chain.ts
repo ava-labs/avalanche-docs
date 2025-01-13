@@ -1,8 +1,9 @@
-import { utils, pvm, Context, UnsignedTx } from "@avalabs/avalanchejs";
+import { utils, pvm, Context, UnsignedTx, L1Validator, BigIntPr, pvmSerial, PChainOwner, Int, Bytes, Address } from "@avalabs/avalanchejs";
 import { RPC_ENDPOINT } from "../utxo";
 import { getAddresses } from "../wallet";
 import { secp256k1 } from "@avalabs/avalanchejs";
 import { apiHostPromise } from "../config";
+import { bytesToHex } from "viem";
 
 async function addTxSignatures(tx: any, privateKeyHex: string) {
     const unsignedBytes = tx.toBytes();
@@ -116,31 +117,64 @@ export async function convertToL1(params: {
     chainId: string;
     managerAddress: string;
     nodePopJsons: string[];
-}
-): Promise<string> {
+}): Promise<string> {
     if (!params.privateKeyHex) {
         throw new Error("Private key required");
     }
 
-    const response = await fetch(await apiHostPromise + '/temporaryDevAPI/convertToL1', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            privateKeyHex: params.privateKeyHex,
-            subnetID: params.subnetId,
-            chainID: params.chainId,
-            managerAddress: params.managerAddress,
-            nodes: params.nodePopJsons.map((nodePopJson) => JSON.parse(nodePopJson).result),
-        }),
+    const pvmApi = new pvm.PVMApi(RPC_ENDPOINT);
+    const feeState = await pvmApi.getFeeState();
+    const context = await Context.getContextFromURI(RPC_ENDPOINT);
+
+    const { P: pAddress } = await getAddresses(params.privateKeyHex);
+    const addressBytes = utils.bech32ToBytes(pAddress);
+
+    const { utxos } = await pvmApi.getUTXOs({
+        addresses: [pAddress]
     });
 
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to convert to L1: ${errorText}`);
-    }
+    // Parse node proof of possession data
+    const validators = params.nodePopJsons.map(nodePopJson => {
+        const { nodeID, nodePOP } = JSON.parse(nodePopJson).result;
+        const publicKey = utils.hexToBuffer(nodePOP.publicKey);
+        const signature = utils.hexToBuffer(nodePOP.proofOfPossession);
 
-    const result = await response.json();
-    return result.conversionID;
+        const { P: pAddress } = getAddresses(params.privateKeyHex);
+        const pAddrBytes = utils.bech32ToBytes(pAddress);
+        const pChainOwner = PChainOwner.fromNative([pAddrBytes], 1);
+
+
+        return L1Validator.fromNative(
+            nodeID,
+            BigInt(100), // weight - 1 AVAX
+            BigInt(1000000000), // balance - 1 AVAX
+            new pvmSerial.ProofOfPossession(publicKey, signature),
+            pChainOwner, // TODO: this is a temporary key, not amazing
+            pChainOwner // TODO: this is a temporary key, not amazing
+        );
+    });
+
+
+    const tx = pvm.e.newConvertSubnetToL1Tx(
+        {
+            feeState,
+            fromAddressesBytes: [addressBytes],
+            subnetId: params.subnetId,
+            utxos,
+            chainId: params.chainId,
+            validators,
+            subnetAuth: [0],
+            address: addressBytes,
+        },
+        context,
+    );
+
+    console.log('tx before signing', bytesToHex(tx.toBytes()));
+    await addSigToAllCreds(tx, utils.hexToBuffer(params.privateKeyHex));
+    console.log('tx after signing', bytesToHex(tx.getSignedTx().toBytes()));
+
+    throw new Error('TODO: remove me after debug finished');
+
+    const response = await pvmApi.issueSignedTx(tx.getSignedTx());
+    return response.txID;
 }

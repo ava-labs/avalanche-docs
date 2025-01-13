@@ -139,6 +139,7 @@ export default function CreateChain() {
                     });
                     setConversionId(conversionId);
                 } catch (error: any) {
+                    console.error('Failed to convert to L1', error);
                     setConvertToL1Status({
                         status: 'error',
                         error: error.message || 'Failed to convert to L1'
