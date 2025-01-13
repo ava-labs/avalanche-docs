@@ -86,6 +86,11 @@ const config = {
         permanent: true,
       },
       {
+        source: '/subnets/create-a-fuji-subnet',
+        destination: '/subnets/deploy-a-subnet/fuji-testnet',
+        permanent: true,
+      },
+      {
         source: '/build/subnet/upgrade/upgrade-subnet-vm',
         destination: '/subnets/upgrade/subnet-virtual-machine',
         permanent: true,
@@ -591,6 +596,11 @@ const config = {
         permanent: true,
       },
       {
+        source: '/tooling/transfer-p-chain-funds',
+        destination: '/tooling/transactions/ledger-p-chain-transfer',
+        permanent: true,
+      },
+      {
         source: '/tooling/avalanchego-postman-collection/data-visualization',
         destination: '/tooling/avalanche-postman/data-visualization',
         permanent: true,
@@ -745,6 +755,256 @@ const config = {
         destination: '/cross-chain/avalanche-warp-messaging/overview',
         permanent: true,
       },
+      {
+        source: '/learn/subnets',
+        destination: '/learn/avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/fuji-testnet',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/fuji-testnet',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/subnet-virtual-machine',
+        destination: '/avalanche-l1s/upgrade/avalanche-l1-virtual-machine',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/customize-subnet',
+        destination: '/avalanche-l1s/upgrade/customize-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/avalanche-mainnet',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/avalanche-mainnet',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/local-network',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/local-network',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/custom-virtual-machine',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/custom-virtual-machine',
+        permanent: true,
+      },
+      {
+        source: '/subnets',
+        destination: '/avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/subnets/troubleshooting',
+        destination: '/avalanche-l1s/troubleshooting',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/view-subnets',
+        destination: '/avalanche-l1s/maintain/view-avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/pause-resume',
+        destination: '/avalanche-l1s/maintain/pause-resume',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/delete-subnet',
+        destination: '/avalanche-l1s/maintain/delete-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/subnets/c-chain-or-subnet',
+        destination: '/avalanche-l1s/c-chain-or-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/subnets/add-utility/testnet-faucet',
+        destination: '/avalanche-l1s/add-utility/testnet-faucet',
+        permanent: true,
+      },
+      {
+        source: '/subnets/build-first-subnet',
+        destination: '/avalanche-l1s/build-first-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/nodes/run-a-node/subnet-nodes',
+        destination: '/nodes/run-a-node/avalanche-l1-nodes',
+        permanent: true,
+      },
+      {
+        source: '/subnets/subnet-nodes',
+        destination: '/avalanche-l1s/avalanche-l1-nodes',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/deploy-on-fuji-testnet',
+        destination: '/tooling/create-deploy-avalanche-l1s/deploy-on-fuji-testnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/create-subnet',
+        destination: '/tooling/create-deploy-avalanche-l1s/create-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/view-subnets',
+        destination: '/tooling/create-deploy-avalanche-l1s/view-avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/deploy-on-mainnet',
+        destination: '/tooling/create-deploy-avalanche-l1s/deploy-on-mainnet',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets/deploy-locally',
+        destination: '/tooling/create-deploy-avalanche-l1s/deploy-locally',
+        permanent: true,
+      },
+      {
+        source: '/tooling/guides/import-subnet',
+        destination: '/tooling/guides/import-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-avalanche-nodes/validate-subnet',
+        destination: '/tooling/create-avalanche-nodes/validate-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-avalanche-nodes/execute-ssh-commander',
+        destination: '/tooling/create-avalanche-nodes/execute-ssh-commands',
+        permanent: true,
+      },
+      {
+        source: '/tooling/create-deploy-subnets',
+        destination: '/tooling/create-deploy-avalanche-l1s',
+        permanent: true,
+      },
+      {
+        source: '/nodes/configure/subnet-configs',
+        destination: '/nodes/configure/avalanche-l1-configs',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/p-chain/transaction-format',
+        destination: '/api-reference/p-chain/txn-format/',
+        permanent: true,
+      }, 
+      {
+        source: '/api-reference/c-chain/transaction-format',
+        destination: '/api-reference/c-chain/txn-format',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/x-chain/transaction-format',
+        destination: '/api-reference/x-chain/txn-format',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/serialization',
+        destination: '/api-reference/standards/serialization-primitives',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/cryptography',
+        destination: '/api-reference/standards/cryptographic-primitives',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/guides/flow-single-blockchain',
+        destination: '/api-reference/standards/guides/blockchain-flow',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/guides/api-calls',
+        destination: '/api-reference/standards/guides/issuing-api-calls',
+        permanent: true,
+      },
+      {
+        source: '/api-reference/standards/network-protocol',
+        destination: '/api-reference/standards/avalanche-network-protocol',
+        permanent: true,
+      },
+      {
+        source: '/dapps/smart-contract-dev/interact-golang-map',
+        destination: '/dapps/smart-contract-dev/interact-golang-app',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/considerations',
+        destination: '/avalanche-l1s/upgrade/considerations',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/durango-upgrade',
+        destination: '/avalanche-l1s/upgrade/durango-upgrade',
+        permanent: true,
+      },
+      {
+        source: '/subnets/upgrade/subnet-precompfile-config',
+        destination: '/avalanche-l1s/upgrade/avalanche-l1-precompile-config',
+        permanent: true,
+      },
+      {
+        source: '/subnets/avalanche-cli-subnets',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/local-network',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/production-infrastructure',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/production-infrastructure',
+        permanent: true,
+      },
+      {
+        source: '/subnets/deploy-a-subnet/multisig-auth',
+        destination: '/avalanche-l1s/deploy-a-avalanche-l1/multisig-auth',
+        permanent: true,
+      },
+      {
+        source: '/subnets/maintain/transfer-pchain-funds',
+        destination: '/avalanche-l1s/maintain/transfer-pchain-funds',
+        permanent: true,
+      },
+      {
+        source: '/subnets/add-utility/cross-chain-bridge',
+        destination: '/avalanche-l1s/add-utility/cross-chain-bridge',
+        permanent: true,
+      },
+      {
+        source: '/subnets/add-utility/deploy-smart-contract',
+        destination: '/avalanche-l1s/add-utility/deploy-smart-contract',
+        permanent: true,
+      },
+      {
+        source: '/subnets/wagmi-subnet',
+        destination: '/avalanche-l1s/wagmi-avalanche-l1',
+        permanent: true,
+      },
+      {
+        source: '/learn/:path*',
+        destination: '/protocol/:path*',
+        permanent: true,
+      },
+      // {
+      //   source: '/avalanche-l1s/upgrade/customize-avalanche-l1',
+      //   destination: '/evm-l1s/custom-precompiles/introduction',
+      //   permanent: true,
+      // },
+      {
+        source: '/virtual-machines/evm-customization/:path*',
+        destination: '/evm-l1s/custom-precompiles/:path*',
+        permanent: true,
+      },
+      {
+        source: '/avalanche-l1s/c-chain-or-avalanche-l1',
+        destination: '/dapps/c-chain-or-avalanche-l1',
+        permanent: true,
+      }
     ]
   },
 };

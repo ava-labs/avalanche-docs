@@ -14,14 +14,6 @@
     "rust-vms/intro-avalanche-rs",
     "rust-vms/setting-up-environment",
     "rust-vms/installing-vm",
-    "timestamp-vm",
-    "---EVM Customization---",
-    "evm-customization/introduction",
-    "evm-customization/background-requirements",
-    "evm-customization/generating-your-precompile",
-    "evm-customization/defining-your-precompile",
-    "evm-customization/writing-test-cases",
-    "evm-customization/executing-test-cases",
-    "evm-customization/deploying-precompile"
+    "timestamp-vm"
   ]
 }

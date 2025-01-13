@@ -1,13 +1,13 @@
 ---
-title: Teleporter Subnets on Devnet
-description: This how-to guide focuses on deploying Teleporter-enabled Subnets to a Devnet.
+title: Teleporter Avalanche L1s on Devnet
+description: This how-to guide focuses on deploying Teleporter-enabled Avalanche L1s to a Devnet.
 ---
 
-After this tutorial, you would have created a Devnet and deployed two Subnets in it, and have enabled them to cross-communicate with each other and with the C-Chain through Teleporter and the underlying Warp technology.
+After this tutorial, you would have created a Devnet and deployed two Avalanche L1s in it, and have enabled them to cross-communicate with each other and with the C-Chain through Teleporter and the underlying Warp technology.
 
 For more information on cross chain messaging through Teleporter and Warp, check:
 
-- [Cross Chain References](/cross-chain/quicklinks)
+- [Cross Chain References](/cross-chain)
 
 Note that currently only [Subnet-EVM](https://github.com/ava-labs/subnet-evm) and [Subnet-EVM-Based](/virtual-machines/evm-customization/introduction) virtual machines support Teleporter.
 
@@ -19,12 +19,12 @@ Before we begin, you will need to have:
 
 Note: the tutorial uses AWS hosts, but Devnets can also be created and operated in other supported cloud providers, such as GCP.
 
-Create Subnets Configurations[​](#create-subnets-configurations "Direct link to heading")
+Create Avalanche L1s Configurations[​](#create-avalanche-l1s-configurations "Direct link to heading")
 -----------------------------------------------------------------------------------------
 
-For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-subnets-configurations), to create two Teleporter-enabled Subnets, `<chain1>` and `<chain2>`.
+For this section we will follow this [steps](/tooling/cross-chain/teleporter-local-network#create-avalanche-l1s-configurations), to create two Teleporter-enabled Avalanche L1s, `<chain1>` and `<chain2>`.
 
-Create a Devnet and Deploy a Subnet in It[​](#create-a-devnet-and-deploy-a-subnet-in-it "Direct link to heading")
+Create a Devnet and Deploy an Avalanche L1 in It[​](#create-a-devnet-and-deploy-a-avalanche-l1-in-it "Direct link to heading")
 -----------------------------------------------------------------------------------------------------------------
 
 Let's use the `devnet wiz` command to create a devnet `<devnetName>` and deploy `<chain1>` in it.
@@ -39,40 +39,40 @@ Creating the devnet...
 Creating new EC2 instance(s) on AWS...
 ...
 
-Deploying [subnet1] to Cluster <devnetName>
+Deploying [Avalanche L1] to Cluster <devnetName>
 ...
 
 configuring AWM RElayer on host i-0f1815c016b555fcc
 
-Setting the nodes as subnet trackers
+Setting the nodes as Avalanche L1 trackers
 ...
 
-Setting up teleporter on subnet
+Setting up teleporter on Avalanche L1
 
-Teleporter Messenger successfully deployed to subnet1 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
-Teleporter Registry successfully deployed to subnet1 (0xb623C4495220C603D0A939D32478F55891a61750)
+Teleporter Messenger successfully deployed to Avalanche L1 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+Teleporter Registry successfully deployed to Avalanche L1 (0xb623C4495220C603D0A939D32478F55891a61750)
 Teleporter Messenger successfully deployed to c-chain (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
 Teleporter Registry successfully deployed to c-chain (0x5DB9A7629912EBF95876228C24A848de0bfB43A9)
 
 Starting AWM Relayer Service
 
-setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet subnet1
+setting AWM Relayer on host i-0f1815c016b555fcc to relay L1 chain1
 updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-Devnet <devnetName> is successfully created and is now validating subnet subnet1!
+Devnet <devnetName> is successfully created and is now validating blockchain chain1!
 
-Subnet <chain1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
+Avalanche L1 <chain1> RPC URL: http://67.202.23.231:9650/ext/bc/fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p/rpc
  
 ✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
 
 Notice some details here:
 
-- Two smart contracts are deployed to the Subnet: Teleporter Messenger and Teleporter Registry
+- Two smart contracts are deployed to the Avalanche L1: Teleporter Messenger and Teleporter Registry
 - Both Teleporter smart contracts are also deployed to `C-Chain`
-- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed and configured as a service into one of the nodes (A Relayer [listens](/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Subnet and sends them to the destination Subnet.)
+- [AWM Teleporter Relayer](https://github.com/ava-labs/awm-relayer) is installed and configured as a service into one of the nodes (A Relayer [listens](/cross-chain/teleporter/overview#data-flow) for new messages being generated on a source Avalanche L1 and sends them to the destination Avalanche L1.)
 
-CLI configures the Relayer to enable every Subnet to send messages to all other Subnets. If you add more Subnets to the Devnet, the Relayer will be automatically reconfigured.
+CLI configures the Relayer to enable every Avalanche L1 to send messages to all other Avalanche L1s. If you add more Avalanche L1s to the Devnet, the Relayer will be automatically reconfigured.
 
 Checking Devnet Configuration and Relayer Logs[​](#checking-devnet-configuration-and-relayer-logs "Direct link to heading")
 ---------------------------------------------------------------------------------------------------------------------------
@@ -124,41 +124,41 @@ Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":
 Apr 05 14:15:08 ip-172-31-47-187 awm-relayer[6886]: {"level":"info","timestamp":"2024-04-05T14:15:08.180Z","logger":"awm-relayer","caller":"main/main.go:295","msg":"Relayer initialized. Listening for messages to relay.","originBlockchainID":"fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p"}
 ```
 
-Deploying the Second Subnet[​](#deploying-the-second-subnet "Direct link to heading")
+Deploying the Second Avalanche L1[​](#deploying-the-second-avalanche-l1 "Direct link to heading")
 -------------------------------------------------------------------------------------
 
 Let's use the `devnet wiz` command again to deploy `<chain2>`.
 
-When deploying Subnet `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Subnet.
+When deploying Avalanche L1 `<chain2>`, the two Teleporter contracts will not be deployed to C-Chain in Local Network as they have already been deployed when we deployed the first Avalanche L1.
 
 ```
 avalanche node devnet wiz <devnetName> <chain2> --default-validator-params 
 
-Adding subnet into existing devnet <devnetName>...
+Adding Avalanche L1 into existing devnet <devnetName>...
 ...
 
-Deploying [subnet2] to Cluster <devnetName>
+Deploying [chain2] to Cluster <devnetName>
 ...
 
 Stopping AWM Relayer Service
 
-Setting the nodes as subnet trackers
+Setting the nodes as Avalanche L1 trackers
 ...
 
-Setting up teleporter on subnet
+Setting up teleporter on Avalanche L1
 
-Teleporter Messenger successfully deployed to subnet2 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
-Teleporter Registry successfully deployed to subnet2 (0xb623C4495220C603D0A939D32478F55891a61750)
+Teleporter Messenger successfully deployed to Avalanche L1 (0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf)
+Teleporter Registry successfully deployed to Avalanche L1 (0xb623C4495220C603D0A939D32478F55891a61750)
 Teleporter Messenger has already been deployed to c-chain
 
 Starting AWM Relayer Service
 
-setting AWM Relayer on host i-0f1815c016b555fcc to relay subnet subnet2
+setting AWM Relayer on host i-0f1815c016b555fcc to relay L1 chain2
 updating configuration file ~/.avalanche-cli/nodes/i-0f1815c016b555fcc/services/awm-relayer/awm-relayer-config.json
 
-Devnet <devnetName> is now validating subnet subnet2
+Devnet <devnetName> is now validating Avalanche L1 chain2
 
-Subnet <chain2> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
+Avalanche L1 <chain2> RPC URL: http://67.202.23.231:9650/ext/bc/7gKt6evRnkA2uVHRfmk9WrH3dYZH9gEVVxDAknwtjvtaV3XuQ/rpc
 
 ✓ Cluster information YAML file can be found at ~/.avalanche-cli/nodes/inventories/<devnetName>/clusterInfo.yaml at local host
 ```
@@ -169,18 +169,18 @@ Verify Teleporter Is Successfully Set Up[​](#verify-teleporter-is-successfully
 To verify that Teleporter is successfully, let's send a couple of cross messages:
 
 ```
-avalanche teleporter msg C-Chain subnet1 "Hello World" --cluster <devnetName>
+avalanche teleporter msg C-Chain chain1 "Hello World" --cluster <devnetName>
 
-Delivering message "this is a message" to source subnet "C-Chain" (2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6)
-Waiting for message to be received at destination subnet subnet "subnet1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
+Delivering message "this is a message" to source Avalanche L1 "C-Chain" (2EfJg86if9Ka5Ag73JRfoqWz4EGuFwtemaNf4XiBBpUW4YngS6)
+Waiting for message to be received at destination Avalanche L1 "chain1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
 ```
-avalanche teleporter msg subnet2 subnet1 "Hello World" --cluster <devnetName>
+avalanche teleporter msg chain2 chain1 "Hello World" --cluster <devnetName>
 
-Delivering message "this is a message" to source subnet "subnet2" (29WP91AG7MqPUFEW2YwtKnsnzVrRsqcWUpoaoSV1Q9DboXGf4q)
-Waiting for message to be received at destination subnet subnet "subnet1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
+Delivering message "this is a message" to source Avalanche L1 "chain2" (29WP91AG7MqPUFEW2YwtKnsnzVrRsqcWUpoaoSV1Q9DboXGf4q)
+Waiting for message to be received at destination Avalanche L1 "chain1" (fqcM24LNb3kTV7KD1mAvUJXYy5XunwP8mrE44YuNwPjgZHY6p)
 Message successfully Teleported!
 ```
 
@@ -189,9 +189,9 @@ You have Teleport-ed your first message in the Devnet!
 Obtaining Information on Teleporter Deploys[​](#obtaining-information-on-teleporter-deploys "Direct link to heading")
 ---------------------------------------------------------------------------------------------------------------------
 
-### Obtaining Subnet Information[​](#obtaining-subnet-information "Direct link to heading")
+### Obtaining Avalanche L1 Information[​](#obtaining-avalanche-l1-information "Direct link to heading")
 
-By executing `blockchain describe` on a Teleporter enabled Subnet, the following relevant information can be found:
+By executing `blockchain describe` on a Teleporter enabled Avalanche L1, the following relevant information can be found:
 
 - Blockchain RPC URL
 - Blockchain ID in cb58 format
@@ -214,7 +214,7 @@ avalanche blockchain describe <chain1>
 +--------------------------------+----------------------------------------------------------------------------------------+
 |           PARAMETER            |                               VALUE                                                    |
 +--------------------------------+----------------------------------------------------------------------------------------+
-| Subnet Name                    | subnet1                                                                                |
+| Blockchain Name                    | Avalanche L1                                                                            |
 +--------------------------------+----------------------------------------------------------------------------------------+
 | ChainID                        | 1                                                                                      |
 +--------------------------------+----------------------------------------------------------------------------------------+
@@ -300,3 +300,4 @@ avalanche teleporter relayer start --cluster <devnetName>
 ✓ Remote AWM Relayer on i-0f1815c016b555fcc successfully started
 
 ```
+

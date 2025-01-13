@@ -1,0 +1,22 @@
+{
+  "title": "learn",
+  "root": true,
+  "pages": [
+    "index",
+    "avalanche-consensus",
+    "avax-token",
+    "---Multi-chain Architecture---",
+    "avalanche-l1s",
+    "validator-manager",
+    "primary-network",
+    "rewards-formula",
+    "virtual-machines",
+    "c-chain-or-avalanche-l1",
+    "---Networks---",
+    "networks/mainnet",
+    "networks/fuji-testnet",
+    "---Extras---",
+    "avalanche-community-proposals",
+    "disclaimer"
+  ]
+}

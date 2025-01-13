@@ -17,7 +17,7 @@ In order to specify a configuration for the PlatformVM, you need to define a `Co
   "UptimeLockedCalculator": null,
   "SybilProtectionEnabled": false,
   "PartialSyncPrimaryNetwork": false,
-  "TrackedSubnets": [],
+"TrackedSubnets": [],
   "TxFee": 0,
   "CreateAssetTxFee": 0,
   "CreateSubnetTxFee": 0,
@@ -57,7 +57,7 @@ The node's chain manager
 
 ### `Validators`
 
-Node's validator set maps SubnetID to validators of the Subnet
+Node's validator set maps SubnetID to validators of the Avalanche L1
 
 - The primary network's validator set should have been added to the manager before calling VM.Initialize.
 - The primary network's validator set should be empty before calling VM.Initialize.
@@ -80,7 +80,7 @@ If true, only the P-chain will be instantiated on the primary network.
 
 ### `TrackedSubnets`
 
-Set of Subnets that this node is validating
+Set of Avalanche L1s that this node is validating
 
 ### `TxFee`
 
@@ -98,13 +98,13 @@ Fee that must be burned by every state creating transaction before AP3
 
 _Uint64_
 
-Fee that must be burned by every Subnet creating transaction after AP3
+Fee that must be burned by every Avalanche L1 creating transaction after AP3
 
 ### `TransformSubnetTxFee`
 
 _Uint64_
 
-Fee that must be burned by every transform Subnet transaction
+Fee that must be burned by every transform Avalanche L1 transaction
 
 ### `CreateBlockchainTxFee`
 
@@ -128,13 +128,13 @@ Transaction fee for adding a primary network delegator
 
 _Uint64_
 
-Transaction fee for adding a Subnet validator
+Transaction fee for adding an Avalanche L1 validator
 
 ### `AddSubnetDelegatorFee`
 
 _Uint64_
 
-Transaction fee for adding a Subnet delegator
+Transaction fee for adding an Avalanche L1 delegator
 
 ### `MinValidatorStake`
 
@@ -222,4 +222,4 @@ Time of the E network upgrade
 
 _Boolean_
 
-UseCurrentHeight forces `GetMinimumHeight` to return the current height of the P-Chain instead of the oldest block in the `recentlyAccepted` window. This config is particularly useful for triggering proposervm activation on recently created Subnets (without this, users need to wait for `recentlyAcceptedWindowTTL` to pass for activation to occur).
+UseCurrentHeight forces `GetMinimumHeight` to return the current height of the P-Chain instead of the oldest block in the `recentlyAccepted` window. This config is particularly useful for triggering proposervm activation on recently created Avalanche L1s (without this, users need to wait for `recentlyAcceptedWindowTTL` to pass for activation to occur).

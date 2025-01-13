@@ -48,7 +48,7 @@ We will deploy a single `Compute Network` object. This unit is where we will dep
 
 Avalanche requires that a validator communicate outbound on the same public IP address that it advertises for other peers to connect to it on. Within GCP this precludes the possibility of us using a Cloud NAT Router for the outbound communications and requires us to bind the public IP that we provision to the interface of the machine. We will provision a single `EXTERNAL` static IPv4 `Compute Address`.
 
-#### Subnets[​](#subnets "Direct link to heading")
+#### Avalanche L1s[​](#avalanche-l1s "Direct link to heading")
 
 For the purposes of this documentation we will deploy a single `Compute Subnetwork` in the US-EAST1 `Region` with a /24 address range giving us 254 IP addresses (not all usable but for the sake of generalized documentation).
 
@@ -111,7 +111,7 @@ Depending upon how you intend to execute your terraform operations you may or ma
 
 ### Clone GitHub Repository[​](#clone-github-repository "Direct link to heading")
 
-I have provided a rudimentary terraform construct to provision a node on which to run Avalanche which can be found [here](https://github.com/ava-labs/avalanche-docs/tree/master/static/scripts/terraform-gcp/projects/my-avax-project). Documentation below assumes you are using this repository but if you have another terraform skeleton similar steps will apply.
+I have provided a rudimentary terraform construct to provision a node on which to run Avalanche which can be found [here](https://github.com/meaghanfitzgerald/deprecated-avalanche-docs/tree/master/static/scripts). Documentation below assumes you are using this repository but if you have another terraform skeleton similar steps will apply.
 
 ### Terraform Configuration[​](#terraform-configuration "Direct link to heading")
 
