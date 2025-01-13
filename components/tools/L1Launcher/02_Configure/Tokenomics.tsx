@@ -4,9 +4,18 @@ import NextPrev from '../ui/NextPrev';
 import { Label } from '@radix-ui/react-label';
 import TokenAllocationList from '../../common/token-allocation-list/token-allocation-list';
 import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-configurator/allowlist-precompile-configurator';
+import { useEffect } from 'react';
+import { newPrivateKey } from '../wallet';
 
 export default function Permissions() {
-    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig } = useWizardStore();
+    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex } = useWizardStore();
+
+    // Initialize temporary private key if not exists
+    useEffect(() => {
+        if (!tempPrivateKeyHex) {
+            setTempPrivateKeyHex(newPrivateKey());
+        }
+    }, [tempPrivateKeyHex, setTempPrivateKeyHex]);
 
     return (
         <div className="space-y-12">
@@ -39,7 +48,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want to be able to mint additional tokens (recommended for production)."
             />
 
-            <NextPrev nextDisabled={false} currentStepName="permissions" />
+            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 2} currentStepName="tokenomics" />
         </div>
     );
 }
