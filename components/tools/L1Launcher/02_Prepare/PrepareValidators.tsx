@@ -39,7 +39,7 @@ export default function PrepareValidators() {
 
     // Check if user has advanced beyond this step
     const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-    const isLocked = stepKeys.indexOf(maxAdvancedStep) > stepKeys.indexOf('prepare-validators');
+    const isLocked = stepKeys.indexOf(maxAdvancedStep) > stepKeys.indexOf('configure-validators');
 
     const nodeConfigurations = {
         1: { colorClass: 'bg-red-100 text-red-800', badge: 'For development' },
@@ -148,6 +148,6 @@ export default function PrepareValidators() {
             </p>
         </Note>
 
-        <NextPrev nextDisabled={!nodesCount} currentStepName="prepare-validators" />
+        <NextPrev nextDisabled={!nodesCount} currentStepName="configure-validators" />
     </>
 }
