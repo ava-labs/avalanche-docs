@@ -9,7 +9,7 @@ function calculateChecksum(data: Uint8Array): Uint8Array {
     return sha256(data).slice(0, CHECKSUM_LENGTH);
 }
 
-export function cb58ToHex(cb58: string): string {
+export function cb58ToHex(cb58: string, include0x: boolean = true): string {
     const decodedBytes = base58.decode(cb58);
     if (decodedBytes.length < CHECKSUM_LENGTH) {
         throw new Error('Input string is smaller than the checksum size');
@@ -26,7 +26,8 @@ export function cb58ToHex(cb58: string): string {
     //     throw new Error('Invalid checksum');
     // }
 
-    return '0x' + bytesToHex(rawBytes);
+
+    return (include0x ? '0x' : '') + bytesToHex(rawBytes);
 }
 
 export function hexToCB58(hex: string): string {
