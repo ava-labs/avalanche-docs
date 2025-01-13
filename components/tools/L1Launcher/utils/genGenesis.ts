@@ -1,10 +1,11 @@
 import { parseEther } from 'viem'
 import { AllowlistPrecompileConfig } from '../../common/allowlist-precompile-configurator/types';
 import { addressEntryArrayToAddressArray } from '../../common/utils';
+import { AllocationEntry } from '../../common/token-allocation-list/types';
 
 type GenerateGenesisArgs = {
     evmChainId: number;
-    initialBalances?: Record<string, string>; // address to amount in decimal format (e.g. "10.000")
+    tokenAllocations: AllocationEntry[];
     txAllowlistConfig: AllowlistPrecompileConfig,
     contractDeployerAllowlistConfig: AllowlistPrecompileConfig,
     nativeMinterAllowlistConfig: AllowlistPrecompileConfig
@@ -25,14 +26,14 @@ function generateAllowListConfig(config: AllowlistPrecompileConfig) {
     };
 }
 
-export function generateGenesis({ evmChainId, initialBalances = {}, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig }: GenerateGenesisArgs) {
+export function generateGenesis({ evmChainId, tokenAllocations, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig }: GenerateGenesisArgs) {
     const currentTimestamp = Math.floor(Date.now() / 1000);
 
     // Convert balances to wei
     const allocations: Record<string, { balance: string }> = {};
-    Object.entries(initialBalances).forEach(([address, amount]) => {
-        allocations[address.toLowerCase().replace('0x', '')] = {
-            balance: "0x" + parseEther(amount).toString(16)
+    tokenAllocations.forEach((allocation) => {
+        allocations[allocation.address.toLowerCase().replace('0x', '')] = {
+            balance: "0x" + parseEther(allocation.amount.toString()).toString(16)
         };
     });
 

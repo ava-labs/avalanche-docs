@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { Trash2, AlertCircle, Plus } from 'lucide-react'
+import { Trash2, AlertCircle, Plus, Lock } from 'lucide-react'
 import { AllocationEntry } from './types'
 import { isValidEthereumAddress } from '@/components/tools/common/utils'
 
@@ -138,7 +138,7 @@ export default function TokenAllocationList({
                       </span>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>{entry.error || 'Valid address'}</p>
+                      <p>{entry.error || entry.requiredReason || 'Valid address'}</p>
                     </TooltipContent>
                   </Tooltip>
                 </TableCell>
@@ -146,6 +146,7 @@ export default function TokenAllocationList({
                   <Input
                     type="number"
                     value={entry.amount}
+                    disabled={entry.requiredReason !== undefined}
                     onChange={(e) => handleAmountChange(entry.id, e.target.value)}
                     min="0"
                     step="0.000000000000000001"
@@ -153,13 +154,16 @@ export default function TokenAllocationList({
                   />
                 </TableCell>
                 <TableCell>
-                  <button 
-                    onClick={() => handleDeleteAllocation(entry.id)} 
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
-                    aria-label="Delete allocation"
-                  >
-                    <Trash2 className="h-4 w-4 text-gray-500" />
-                  </button>
+                  {entry.requiredReason && <Lock className="m-2 h-4 w-4 text-gray-500" />}
+                    {!entry.requiredReason && (
+                      <button 
+                        onClick={() => handleDeleteAllocation(entry.id)} 
+                        className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
+                        aria-label="Delete allocation"
+                      >
+                        <Trash2 className="h-4 w-4 text-gray-500" />
+                      </button>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

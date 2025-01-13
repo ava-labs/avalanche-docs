@@ -10,8 +10,8 @@ import { AllocationEntry } from '@/components/tools/common/token-allocation-list
 
 
 interface WizardState {
-    ownerEthAddress: string;
-    setOwnerEthAddress: (address: string) => void;
+    poaOwnerAddress: string;
+    setPoaOwnerAddress: (address: string) => void;
 
     currentStep: keyof typeof stepList;
     advanceFrom: (givenStep: keyof typeof stepList, direction?: "up" | "down") => void;
@@ -83,11 +83,12 @@ interface WizardState {
 
 
 import generateName from 'boring-name-generator'
+import { addressEntryArrayToAddressArray } from '../common/utils';
 
 const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
-    ownerEthAddress: "",
-    setOwnerEthAddress: (address: string) => set(() => ({
-        ownerEthAddress: address,
+    poaOwnerAddress: "",
+    setPoaOwnerAddress: (address: string) => set(() => ({
+        poaOwnerAddress: address,
         genesisString: "",
     })),
 
@@ -135,13 +136,7 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
     txAllowlistConfig: {
         addresses: {
-          Admin: [
-            {
-              id: '1',
-              address: '0xf6687Cd56AeC1a0FAABA12FEB6781398aB47fb21',
-              requiredReason: 'Dev Wallet'
-            }
-          ],
+          Admin: [],
           Manager: [],
           Enabled: []
         },
@@ -162,7 +157,46 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
 
-    tokenAllocations: [] as AllocationEntry[],
+    tempPrivateKeyHex: "",
+    setTempPrivateKeyHex: (key: string) => set(() => ({ 
+        tempPrivateKeyHex: key, 
+        tokenAllocations: [
+            { id:"Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
+            ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
+        ],
+        txAllowlistConfig : {
+            addresses: {
+                Admin: get().txAllowlistConfig.addresses.Admin,
+                Manager: get().txAllowlistConfig.addresses.Manager,
+                Enabled: [
+                    {
+                        id: '1',
+                        address: getAddresses(key).C,
+                        requiredReason: 'Initial Contract Deployer'
+                    },
+                    ...get().txAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
+                ]
+            },
+            activated: get().txAllowlistConfig.activated
+        },
+        contractDeployerAllowlistConfig : {
+            addresses: {
+                Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
+                Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
+                Enabled: [
+                    {
+                        id: '1',
+                        address: getAddresses(key).C,
+                        requiredReason: 'Initial Contract Deployer'
+                    },
+                    ...get().contractDeployerAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
+                ]
+            },
+            activated: get().txAllowlistConfig.activated
+        } 
+    })),
+
+    tokenAllocations: [ ] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
 
     nativeMinterAllowlistConfig: {
@@ -176,16 +210,11 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
     genesisString: "",
     regenerateGenesis: async () => {
-        const { ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig } = get();
-        const { C: initialContractDeployer } = getAddresses(tempPrivateKeyHex);
+        const { poaOwnerAddress: ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
         
-
         const genesis = generateGenesis({
             evmChainId,
-            initialBalances: {
-                [ownerEthAddress]: "1000000000.00",
-                [initialContractDeployer]: "1.00",
-            },
+            tokenAllocations,
             txAllowlistConfig,
             contractDeployerAllowlistConfig,
             nativeMinterAllowlistConfig
@@ -205,9 +234,6 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
     rpcVerified: false,
     setRpcVerified: (verified) => set(() => ({ rpcVerified: verified })),
-
-    tempPrivateKeyHex: newPrivateKey(),
-    setTempPrivateKeyHex: (key: string) => set(() => ({ tempPrivateKeyHex: key })),
 
     pChainBalance: "0",
     setPChainBalance: (balance: string) => set(() => ({ pChainBalance: balance })),
@@ -276,7 +302,7 @@ export const resetStore = () => {
 if (typeof window !== 'undefined') {
     const savedPrivateKey = localStorage.getItem('temp-private-key');
     if (savedPrivateKey) {
-        useWizardStore.setState({ tempPrivateKeyHex: savedPrivateKey });
+        useWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
         localStorage.removeItem('temp-private-key');
     }
 }
