@@ -243,7 +243,11 @@ const staticRedirects: RedirectMap = {
   '/evm-l1s/custom-precompiles/deploying-precompile': '/virtual-machines/custom-precompiles/precompile-deployment',
   '/nodes/chain-configs/overview': '/nodes/chain-configs',
   '/nodes/run-a-node/manually': '/nodes/run-a-node/from-source',
-  '/api-reference/install-script': '/nodes/using-install-script/installing-avalanche-go'
+  '/api-reference/install-script': '/nodes/using-install-script/installing-avalanche-go',
+  '/api-reference/avalanche-go-configs-flags': '/nodes/configure/configs-flags',
+  '/api-reference/p-chain/configs': '/nodes/chain-configs/p-chain',
+  '/api-reference/x-chain/configs': '/nodes/chain-configs/x-chain',
+  '/api-reference/c-chain/configs': '/nodes/chain-configs/c-chain',
 };
 
 const wildcardRedirects = [
