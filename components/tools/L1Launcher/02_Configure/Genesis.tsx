@@ -34,7 +34,7 @@ export default function Genesis() {
     };
 
     return (
-        <div className="">
+        <div className="space-y-12">
             <h1 className="text-2xl font-medium mb-6">Genesis Settings</h1>
             
             {error && (
@@ -43,7 +43,7 @@ export default function Genesis() {
                 </div>
             )}
 
-            <div className="mb-6 flex justify-between">
+            <div className="flex justify-between">
                 <Button
                     onClick={handleGenerateGenesis}
                     disabled={!evmChainId || isRegenerating || !isCurrentMaxAdvancedStep}
@@ -53,7 +53,7 @@ export default function Genesis() {
                 </Button>
             </div>
 
-            {genesisString && <div className="mb-6">
+            {genesisString && <div className="space-y-6">
                 <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">
                     Genesis JSON:
                 </label>
@@ -62,7 +62,11 @@ export default function Genesis() {
                         {genesisString}
                     </pre>
                 </div>
+                <h3 className="mb-4 font-medium">Test to Genesis locally (optional)</h3>
+                <p className="mb-4 text-gray-600">Coming soon</p>
             </div>}
+
+
 
             <NextPrev nextDisabled={!genesisString} currentStepName="genesis" />
 
