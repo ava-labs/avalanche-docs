@@ -37,7 +37,7 @@ export default function AllowlistPrecompileConfigurator({
     <div className="space-y-6">
       <div>
         <h3 className="mb-4 font-medium">{title}</h3>
-        <p className="text-gray-600">{description}</p>
+        <p className="text-gray-600">{description} These addresses can be controlled by an EOR or a smart contract.</p>
       </div>
       
       <RadioGroup
