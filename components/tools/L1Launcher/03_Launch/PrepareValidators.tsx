@@ -3,6 +3,7 @@ import { useWizardStore } from '../store';
 import NextPrev from '../ui/NextPrev';
 import Note from '../ui/Note';
 import { useState } from 'react';
+import Pre from '../ui/Pre';
 
 const dockerInstallInstructions: Record<string, string> = {
     'Ubuntu/Debian': `sudo apt-get update && \\
@@ -101,9 +102,9 @@ export default function PrepareValidators() {
             </ul>
         </div>
 
-        <pre className="bg-gray-50 dark:bg-gray-900 p-4 rounded-md mb-4 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700">
+        <Pre>
             {dockerInstallInstructions[activeOs]}
-        </pre>
+        </Pre>
 
         <p className="mb-4">
             If you do not want to use Docker, you can follow the instructions <a href="https://github.com/ava-labs/avalanchego?tab=readme-ov-file#installation" target="_blank">here</a>.

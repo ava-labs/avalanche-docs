@@ -4,6 +4,7 @@ import { useWizardStore } from '../store';
 import NextPrev from '../ui/NextPrev';
 import { Button } from '@/components/ui/button';
 import { isValidEthereumAddress } from '@/components/tools/common/utils'
+import Pre from '../ui/Pre';
 
 function isValidL1Name(name: string): boolean {
     return name.split('').every(char => {
@@ -57,11 +58,7 @@ export default function Genesis() {
                 <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">
                     Genesis JSON:
                 </label>
-                <div className="bg-gray-50 dark:bg-gray-900 overflow-x-auto text-sm font-mono border border-gray-200 dark:border-gray-700 rounded-md">
-                    <pre className="w-full p-3 break-words overflow-auto text-gray-900 dark:text-gray-100">
-                        {genesisString}
-                    </pre>
-                </div>
+                <Pre>{genesisString}</Pre>
                 <h3 className="mb-4 font-medium">Test to Genesis locally (optional)</h3>
                 <p className="mb-4 text-gray-600">Coming soon</p>
             </div>}
