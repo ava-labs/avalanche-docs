@@ -71,7 +71,7 @@ services:
 - `txpool_`
 - `debug_` (note: this is turned off on the public API node.)
 
-You can interact with these services the same exact way you'd interact with Geth. See the
+You can interact with these services the same exact way you'd interact with Geth (see exceptions below). See the
 [Ethereum Wiki's JSON-RPC Documentation](https://ethereum.org/en/developers/docs/apis/json-rpc/)
 and [Geth's JSON-RPC Documentation](https://geth.ethereum.org/docs/rpc/server)
 for a full description of this API.
@@ -81,10 +81,12 @@ For batched requests on the [public API node](/docs/tooling/rpc-providers) , the
 number of items is 40. We are working on to support a larger batch size.
 </Callout>
 
-Note the `eth_getProof` is acting differently from release v0.14.1:
+#### Exceptions
 
-- On archive nodes (`"pruning-enabled": false`): queries for historical proofs for state older than approximately 24 hours preceding the last accepted block will be rejected by default. This can be adjusted with the new option `historical-proof-query-window` which defines the number of blocks before the last accepted block which should be accepted for state proof queries, or set to `0` to accept any block number state query.
-- On `pruning` nodes: queries for proofs past the tip buffer (32 blocks) will be rejected
+- `eth_getProof` behaves differently than geth, from release v0.14.1, with the following differences:
+  - On archive nodes (`"pruning-enabled": false`), queries for proofs for state older than approximately 24 hours preceeding the last accepted block will be rejected by default.
+    This can be adjusted with the option `historical-proof-query-window` which defines the number of blocks before the last accepted block which should be accepted for state proof queries, or set it to `0` to accept any block number state query.
+  - On pruning nodes (`"pruning-enabled": true`), queries for proofs past the tip buffer of 32 blocks are always rejected
 
 
 ### Avalanche - Ethereum APIs
