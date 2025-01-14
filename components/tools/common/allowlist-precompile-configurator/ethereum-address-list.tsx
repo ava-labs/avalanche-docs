@@ -24,9 +24,9 @@ const isValidInput = (input: string): boolean => {
 const getRoleDescription = (role: Role, precompileAction: string) => {
   switch (role) {
     case 'Admin':
-      return `Can ${precompileAction} and have full control over the allowlist, including the ability to add or remove Admins, Managers, and Enabled addresses.`;
+      return `Can ${precompileAction} and have full control over the allowlist, including the ability to add or remove Admins, Managers, and Enabled addresses via contract calls to the precompile.`;
     case 'Manager':
-      return `Can ${precompileAction}, add or remove Enabled addresses but cannot modify Admins or Managers.`;
+      return `Can ${precompileAction}, add or remove Enabled addresses via contract calls to the precompile but cannot modify Admins or Managers.`;
     case 'Enabled':
       return `Can ${precompileAction} but cannot modify the allow list.`;
     default:
