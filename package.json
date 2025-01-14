@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build:remote": "tsx ./utils/content-loader/remote-content.mts",
+    "build:remote": "",
     "build": "next build",
     "dev": "next dev",
     "start": "next build && next start"
