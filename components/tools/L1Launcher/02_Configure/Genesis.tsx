@@ -66,9 +66,10 @@ export default function Genesis() {
                 <ol className="list-decimal list-outside ml-6 space-y-4">
                     <li className="pl-2">Open a Codespace from the main branch in <a className="underline" href="https://github.com/ava-labs/avalanche-starter-kit">Avalanche Starter Kit</a> repository.</li>
                     <li className="pl-2">Create <code className="px-1 py-1 bg-gray-50 dark:bg-gray-900 rounded">genesis.json</code> in the GitHub codespace, paste L1 launcher genesis code, and copy the file's full path.</li>
-                    <li className="pl-2">Run <code className="px-1 py-1 bg-gray-50 dark:bg-gray-900 rounded">avalanche blockchain create &lt;blockchain_name&gt; --genesis &lt;file_path&gt;</code> and enter the requested details (ChainID, etc.).</li>
+                    <li className="pl-2">Run <code className="px-1 py-1 bg-gray-50 dark:bg-gray-900 rounded">avalanche blockchain create &lt;blockchain_name&gt; --genesis &lt;file_path&gt; --sovereign=false</code> and enter the requested details (Token Symbol, etc.).</li>
                     <li className="pl-2">Wait for blockchain configuration generation based on your inputs and genesis file parameters.</li>
                     <li className="pl-2">Verify setup by running <code className="px-1 py-1 bg-gray-50 dark:bg-gray-900 rounded">avalanche blockchain describe &lt;blockchain_name&gt;</code> and check the configuration.</li>
+                    <li className="pl-2">(Optional) You can also deploy the blockchain by running <code className="px-1 py-1 bg-gray-50 dark:bg-gray-900 rounded">avalanche blockchain deploy &lt;blockchain_name&gt;</code>.</li>
                 </ol>
             </div>}
 
