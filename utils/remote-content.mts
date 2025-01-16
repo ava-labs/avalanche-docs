@@ -182,13 +182,13 @@ async function main(): Promise<void> {
       description: "This page is an overview of the P-Chain API associated with AvalancheGo.",
       contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/",
     },
-    // { 
-    //   sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/service.md",
-    //   outputPath: "content/docs/api-reference/x-chain/api.mdx",
-    //   title: "X-Chain API",
-    //   description: "This page is an overview of the X-Chain API associated with AvalancheGo.",
-    //   contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/",
-    // }
+    { 
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/service.md",
+      outputPath: "content/docs/api-reference/x-chain/api.mdx",
+      title: "X-Chain API",
+      description: "This page is an overview of the X-Chain API associated with AvalancheGo.",
+      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/",
+    }
   ];
 
   for (const fileConfig of fileConfigs) {
