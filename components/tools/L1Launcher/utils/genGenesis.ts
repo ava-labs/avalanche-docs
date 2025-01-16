@@ -15,6 +15,7 @@ type GenerateGenesisArgs = {
 
 function generateAllowListConfig(config: AllowlistPrecompileConfig) {
     return {
+        "blockTimestamp": currentTimestamp,
         ...(config.addresses.Admin.length > 0 && {
             "adminAddresses": addressEntryArrayToAddressArray(config.addresses.Admin),
         }),
@@ -23,8 +24,7 @@ function generateAllowListConfig(config: AllowlistPrecompileConfig) {
         }),
         ...(config.addresses.Enabled.length > 0 && {
             "enabledAddresses": addressEntryArrayToAddressArray(config.addresses.Enabled),
-        }),
-        "blockTimestamp": currentTimestamp,
+        })
     };
 }
 
