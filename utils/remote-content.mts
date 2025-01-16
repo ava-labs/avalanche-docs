@@ -105,13 +105,13 @@ async function main(): Promise<void> {
       description: "ICM Contracts is a messaging protocol built on top of Avalanche Interchain Messaging that provides a developer-friendly interface for sending and receiving cross-chain messages from the EVM.",
       contentUrl: "https://github.com/ava-labs/icm-contracts/blob/main/contracts/teleporter/",
     },
-    // { 
-    //   sourceUrl: "https://raw.githubusercontent.com/ava-labs/icm-contracts/main/README.md",
-    //   outputPath: "content/docs/cross-chain/teleporter/deep-dive.mdx",
-    //   title: "Deep Dive into ICM Contracts",
-    //   description: "ICM Contracts is an EVM compatible cross-Avalanche L1 communication protocol built on top of Avalanche Interchain Messaging (ICM), and implemented as a Solidity smart contract.",
-    //   contentUrl: "https://github.com/ava-labs/teleporter/blob/main/",
-    // },
+    { 
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/icm-contracts/main/README.md",
+      outputPath: "content/docs/cross-chain/teleporter/deep-dive.mdx",
+      title: "Deep Dive into ICM Contracts",
+      description: "ICM Contracts is an EVM compatible cross-Avalanche L1 communication protocol built on top of Avalanche Interchain Messaging (ICM), and implemented as a Solidity smart contract.",
+      contentUrl: "https://github.com/ava-labs/teleporter/blob/main/",
+    },
     { 
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/teleporter/main/cmd/teleporter-cli/README.md",
       outputPath: "content/docs/cross-chain/teleporter/cli.mdx",
@@ -182,13 +182,13 @@ async function main(): Promise<void> {
       description: "This page is an overview of the P-Chain API associated with AvalancheGo.",
       contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/",
     },
-    { 
-      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/service.md",
-      outputPath: "content/docs/api-reference/x-chain/api.mdx",
-      title: "X-Chain API",
-      description: "This page is an overview of the X-Chain API associated with AvalancheGo.",
-      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/",
-    }
+    // { 
+    //   sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/service.md",
+    //   outputPath: "content/docs/api-reference/x-chain/api.mdx",
+    //   title: "X-Chain API",
+    //   description: "This page is an overview of the X-Chain API associated with AvalancheGo.",
+    //   contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/",
+    // }
   ];
 
   for (const fileConfig of fileConfigs) {
