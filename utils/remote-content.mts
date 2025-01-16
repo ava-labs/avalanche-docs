@@ -183,7 +183,7 @@ async function main(): Promise<void> {
       contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/",
     },
     { 
-      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/refs/heads/master/vms/avm/service.md",
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/service.md",
       outputPath: "content/docs/api-reference/x-chain/api.mdx",
       title: "X-Chain API",
       description: "This page is an overview of the X-Chain API associated with AvalancheGo.",
