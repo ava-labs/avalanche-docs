@@ -42,7 +42,7 @@ export default async function Page(props: {
   const page = getCoursePage(params.slug);
   if (!page) notFound();
 
-  const path = `content/course/${page.file.path}`;
+  const path = `content/academy/${page.file.path}`;
   const { body: MDX, toc, lastModified } = await page.data.load();
   const course = COURSES.official.find(c => c.slug === page.slugs[0]);
 
