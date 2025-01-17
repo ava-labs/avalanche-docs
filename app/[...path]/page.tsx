@@ -270,19 +270,19 @@ const wildcardRedirects = [
 
 function getDestinationUrl(currentPath: string): string {
   if (currentPath in staticRedirects) {
-    return `https://developers.avax.network/docs${staticRedirects[currentPath]}`;
+    return `https://build.avax.network/docs${staticRedirects[currentPath]}`;
   }
   
   for (const { pattern, destination } of wildcardRedirects) {
     const match = currentPath.match(pattern);
     if (match) {
       const wildCardPart = match[1];
-      return `https://developers.avax.network/docs${destination}${wildCardPart}`;
+      return `https://build.avax.network/docs${destination}${wildCardPart}`;
     }
   }
   
   const cleanPath = currentPath.startsWith('/') ? currentPath.slice(1) : currentPath;
-  return `https://developers.avax.network/docs/${cleanPath}`;
+  return `https://build.avax.network/docs/${cleanPath}`;
 }
 
 export async function generateMetadata({ 
