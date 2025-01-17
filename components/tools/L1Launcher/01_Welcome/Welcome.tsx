@@ -12,6 +12,17 @@ export default function Welcome() {
             If you're looking for a full-service solution that includes hosting, monitoring, maintenance and support of the L1's validators for you and offers many additional features check out <a href="https://avacloud.io/" target="_blank" className="text-blue-500 hover:text-blue-700 underline">AvaCloud</a>. If you're looking to spin up short-lived test environments, check out the <a href="https://github.com/ava-labs/avalanche-starter-kit" target="_blank" className="text-blue-500 hover:text-blue-700 underline">Avalanche Starter Kit</a>.
         </p>
 
+        <div className="mx-auto my-6">
+            <div className="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-md shadow">
+                
+                <div className="ml-3">
+                    <p className="text-sm font-medium text-blue-700">
+                    Please note that this tool is in Beta and you may experience errors.
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <NextPrev nextDisabled={false} currentStepName="welcome" />
     </>;
 }
