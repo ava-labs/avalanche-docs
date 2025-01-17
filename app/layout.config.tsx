@@ -316,7 +316,7 @@ const hackathonMenu: LinkItemType = {
       description: "Get familiar with the tracks, and everything you need to know about the hackathon",
       url: '/hackathon',
       menu: {
-        className: 'lg:col-start-3 lg:row-start-1',
+        className: 'lg:col-start-2 lg:row-start-1',
       },
     },
     {
