@@ -5,6 +5,12 @@ type RedirectMap = {
   [key: string]: string;
 };
 
+interface WildcardRedirect {
+  source: string;
+  destination: string;
+  pattern: RegExp;
+}
+
 const staticRedirects: RedirectMap = {
   '/reference/avalanchego/p-chain/txn-format': '/api-reference/p-chain/txn-format',
   '/reference/avalanchego/c-chain/api': '/api-reference/c-chain/api',
@@ -250,21 +256,16 @@ const staticRedirects: RedirectMap = {
   '/api-reference/c-chain/configs': '/nodes/chain-configs/c-chain'
 };
 
-const wildcardRedirects = [
+const wildcardRedirects: WildcardRedirect[] = [
   {
     source: '/learn/',
-    destination: '/quick-start/',
-    pattern: /^\/learn\/(.*)/
+    destination: '/quick-start',
+    pattern: /^\/learn(?:\/(.*))?$/ 
   },
   {
     source: '/protocol/',
-    destination: '/quick-start/',
-    pattern: /^\/protocol\/(.*)/
-  },
-  {
-    source: '/virtual-machines/evm-customization/',
-    destination: '/evm-l1s/custom-precompiles/',
-    pattern: /^\/virtual-machines\/evm-customization\/(.*)/
+    destination: '/quick-start',
+    pattern: /^\/protocol(?:\/(.*))?$/
   }
 ];
 
@@ -273,16 +274,19 @@ function getDestinationUrl(currentPath: string): string {
     return `https://build.avax.network/docs${staticRedirects[currentPath]}`;
   }
   
+  const cleanPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+
   for (const { pattern, destination } of wildcardRedirects) {
-    const match = currentPath.match(pattern);
+    const match = cleanPath.match(pattern);
     if (match) {
-      const wildCardPart = match[1];
-      return `https://build.avax.network/docs${destination}${wildCardPart}`;
+      const wildcardPart = match[1] || '';
+      const separator = wildcardPart ? '/' : '';
+      return `https://build.avax.network/docs${destination}${separator}${wildcardPart}`;
     }
   }
   
-  const cleanPath = currentPath.startsWith('/') ? currentPath.slice(1) : currentPath;
-  return `https://build.avax.network/docs/${cleanPath}`;
+  const finalPath = cleanPath.startsWith('/') ? cleanPath.slice(1) : cleanPath;
+  return `https://build.avax.network/docs/${finalPath}`;
 }
 
 export async function generateMetadata({ 
