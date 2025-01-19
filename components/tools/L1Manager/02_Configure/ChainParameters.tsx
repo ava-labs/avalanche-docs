@@ -1,6 +1,6 @@
 import { Label } from '@radix-ui/react-label';
 import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Input } from '@/components/ui/input';
 import { useState, useEffect } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';

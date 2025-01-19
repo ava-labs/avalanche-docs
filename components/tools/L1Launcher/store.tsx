@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { getAddresses, newPrivateKey } from './wallet';
-import { stepList } from './stepList';
-import { generateGenesis } from './utils/genGenesis';
+import { getAddresses } from '../common/utils/wallet';
+import { stepList } from './config/stepList';
+import { generateGenesis } from '../common/utils/genGenesis';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 
@@ -14,8 +14,10 @@ interface WizardState {
     setPoaOwnerAddress: (address: string) => void;
 
     currentStep: keyof typeof stepList;
-    advanceFrom: (givenStep: keyof typeof stepList, direction?: "up" | "down") => void;
+    goToNextStep: () => void;
+    goToPreviousStep: () => void;
     maxAdvancedStep: keyof typeof stepList;
+    userHasAdvancedBeyondStep: (step: keyof typeof stepList) => boolean;
     advanceTo: (targetStep: keyof typeof stepList) => void;
 
     nodesCount: number;
@@ -92,22 +94,45 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
     })),
 
     currentStep: Object.keys(stepList)[0] as keyof typeof stepList,
-    advanceFrom: (givenStep, direction: "up" | "down" = "up") => set((state) => {
+    maxAdvancedStep: Object.keys(stepList)[0] as keyof typeof stepList,
+    goToNextStep: () => set((state) => {
         const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-        const currentIndex = stepKeys.indexOf(givenStep);
-
-        if (direction === "up" && currentIndex < stepKeys.length - 1) {
-            const nextStep = stepKeys[currentIndex + 1];
-            return {
-                currentStep: nextStep,
-                maxAdvancedStep: nextStep // Update maxAdvancedStep when moving forward
-            };
+        const nextStepIndex = stepKeys.indexOf(state.currentStep) + 1;
+        const maxAdvancedIndex = stepKeys.indexOf(state.maxAdvancedStep);
+        if (nextStepIndex <= stepKeys.length - 1) {
+            if (nextStepIndex > maxAdvancedIndex) {
+                return { currentStep: stepKeys[nextStepIndex], maxAdvancedStep: stepKeys[nextStepIndex] };
+            }
+            return { currentStep: stepKeys[nextStepIndex] };
         }
-        if (direction === "down" && currentIndex > 0) {
+        return state;
+    }),
+    goToPreviousStep: () => set((state) => {
+        const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
+        const currentIndex = stepKeys.indexOf(state.currentStep);
+        if (currentIndex > 0) {
             return { currentStep: stepKeys[currentIndex - 1] };
         }
         return state;
     }),
+    advanceTo: (targetStep) => set((state) => {
+        const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
+        const targetIndex = stepKeys.indexOf(targetStep);
+        const maxAdvancedIndex = stepKeys.indexOf(state.maxAdvancedStep);
+
+        // Only allow navigation to steps that have been reached before
+        if (targetIndex <= maxAdvancedIndex) {
+            return { currentStep: targetStep };
+        }
+        return state;
+    }),
+    userHasAdvancedBeyondStep: (step) => {
+        const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
+        const stepIndex = stepKeys.indexOf(step);
+        const maxAdvancedIndex = stepKeys.indexOf(get().maxAdvancedStep);
+        return stepIndex < maxAdvancedIndex;
+    },
+
 
     nodesCount: 1,
     setNodesCount: (count: number) => set(() => ({ nodesCount: count })),
@@ -253,20 +278,6 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
         const baseEndpoint = get().getRpcEndpoint();
         return `${baseEndpoint}/ext/bc/${state.chainId}/rpc`;
     },
-
-    maxAdvancedStep: Object.keys(stepList)[0] as keyof typeof stepList,
-
-    advanceTo: (targetStep) => set((state) => {
-        const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-        const targetIndex = stepKeys.indexOf(targetStep);
-        const maxAdvancedIndex = stepKeys.indexOf(state.maxAdvancedStep);
-
-        // Only allow navigation to steps that have been reached before
-        if (targetIndex <= maxAdvancedIndex) {
-            return { currentStep: targetStep };
-        }
-        return state;
-    }),
 
     convertL1SignedWarpMessage: null,
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => set(() => ({ convertL1SignedWarpMessage: message })),

@@ -4,11 +4,10 @@ import { Context, evm, utils } from '@avalabs/avalanchejs'
 import { addSignature, getAddresses } from "./wallet";
 import { createPublicClient, http, parseEther } from 'viem'
 import { avalancheFuji } from 'viem/chains'
-import { useWizardStore } from './store';
 
 export const RPC_ENDPOINT = "https://api.avax-test.network"
 
-export async function transferCToP(amount: string, privateKeyHex: string) {
+export async function transferCToP(amount: string, privateKeyHex: string, setNewPChainBalance: (balance: string) => void) {
     const publicClient = createPublicClient({
         chain: avalancheFuji,
         transport: http(RPC_ENDPOINT + '/ext/bc/C/rpc')
@@ -42,7 +41,7 @@ export async function transferCToP(amount: string, privateKeyHex: string) {
 
     // Update P-chain balance after transfer
     const newBalance = await getPChainBalance(address.P);
-    useWizardStore.getState().setPChainBalance(newBalance);
+    setNewPChainBalance(newBalance);
 }
 
 export async function importExistingUTXOs(privateKeyHex: string): Promise<boolean> {

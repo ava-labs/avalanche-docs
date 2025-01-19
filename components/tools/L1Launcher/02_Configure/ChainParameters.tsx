@@ -1,6 +1,6 @@
 import { Label } from '@radix-ui/react-label';
 import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -8,7 +8,7 @@ import { isValidL1Name } from '../../common/utils/validation';
 
 
 export default function ChainParameters() {
-    const { l1Name, setL1Name, evmChainId, setEvmChainId } = useWizardStore();
+    const { l1Name, setL1Name, evmChainId, setEvmChainId, goToNextStep, goToPreviousStep } = useWizardStore();
 
     return (
         <div className="space-y-12">
@@ -58,7 +58,7 @@ export default function ChainParameters() {
                 </RadioGroup>`
             </div>
 
-            <NextPrev nextDisabled={!isValidL1Name(l1Name) || !evmChainId} currentStepName="chain-parameters" />
+            <NextPrev nextDisabled={!isValidL1Name(l1Name) || !evmChainId} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 }

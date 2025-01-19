@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Button } from '@/components/ui/button';
-import Pre from '../ui/Pre';
+import Pre from '@/components/tools/common/ui/Pre';
 
 export default function Genesis() {
-    const { evmChainId, genesisString, regenerateGenesis, l1Name, maxAdvancedStep } = useWizardStore();
+    const { evmChainId, genesisString, regenerateGenesis, maxAdvancedStep, goToNextStep, goToPreviousStep } = useWizardStore();
     const [error, setError] = useState('');
     const [isRegenerating, setIsRegenerating] = useState(false);
 
@@ -63,7 +63,7 @@ export default function Genesis() {
 
 
 
-            <NextPrev nextDisabled={!genesisString} currentStepName="genesis" />
+            <NextPrev nextDisabled={!genesisString} onNext={goToNextStep} onPrev={goToPreviousStep} />
 
 
         </div>

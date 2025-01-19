@@ -1,4 +1,4 @@
-import NextPrev from "../ui/NextPrev";
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 
 export default function Welcome() {
     return <>

@@ -1,5 +1,5 @@
 import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-configurator/allowlist-precompile-configurator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -7,11 +7,11 @@ import { Input } from '@/components/ui/input';
 import { isValidAllowlistPrecompileConfig } from '../../common/utils/validation';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { getWalletAddress } from '../wallet';
+import { getWalletAddress } from '../../common/utils/wallet';
 import { isAddress } from 'viem';
 
 export default function Permissions() {
-    const { poaOwnerAddress, setPoaOwnerAddress, txAllowlistConfig, setTxAllowlistConfig, contractDeployerAllowlistConfig, setContractDeployerAllowlistConfig } = useWizardStore();
+    const { poaOwnerAddress, setPoaOwnerAddress, txAllowlistConfig, setTxAllowlistConfig, contractDeployerAllowlistConfig, setContractDeployerAllowlistConfig, goToNextStep, goToPreviousStep } = useWizardStore();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -102,7 +102,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want only approved addresses to be able to deploy contracts on this blockchain."
             />
 
-            <NextPrev nextDisabled={!isAddress(poaOwnerAddress, {strict: false}) || !isValidAllowlistPrecompileConfig(txAllowlistConfig) || !isValidAllowlistPrecompileConfig(contractDeployerAllowlistConfig)} currentStepName="permissions" />
+            <NextPrev nextDisabled={!isAddress(poaOwnerAddress, {strict: false}) || !isValidAllowlistPrecompileConfig(txAllowlistConfig) || !isValidAllowlistPrecompileConfig(contractDeployerAllowlistConfig)} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 }

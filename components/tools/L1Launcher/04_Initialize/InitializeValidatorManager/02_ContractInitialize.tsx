@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { createWalletClient, createPublicClient, custom, http, AbiEvent } from 'viem';
-import { useWizardStore } from '../store';
-import { calculateContractAddress } from '../wallet';
-import { cb58ToHex } from '../utils/cb58';
+import { useWizardStore } from '../../store';
+import { calculateContractAddress } from '../../../common/utils/wallet';
+import { cb58ToHex } from '@/components/tools/common/utils/cb58';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
 import { privateKeyToAccount } from 'viem/accounts';

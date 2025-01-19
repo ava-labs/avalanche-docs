@@ -1,9 +1,9 @@
-import { apiHostPromise } from '../config';
+import { apiHostPromise } from '../../../common/utils/config';
 import { useEffect, useState } from 'react';
-import { useWizardStore } from '../store';
-import { calculateContractAddress } from '../wallet';
+import { useWizardStore } from '../../store';
+import { calculateContractAddress } from '../../../common/utils/wallet';
 import { statusColors, StepState } from './colors';
-import { packL1ConversionMessage } from './convertWarp';
+import { packL1ConversionMessage } from '@/components/tools/common/utils/convertWarp';
 import { bytesToHex } from 'viem';
 
 async function rpcRequest(rpcUrl: string, method: string, params: any) {

@@ -1,7 +1,7 @@
 // FIXME: this is a quick hack solution untill AvalancheJS supports this
 // Please don't copy this code to other projects!
 import { sha256 } from '@noble/hashes/sha256';
-import { cb58ToBytes } from "../utils/cb58";
+import { cb58ToBytes } from "../../common/utils/cb58";
 import { bytesToHex, hexToBytes } from 'viem';
 
 export interface PackL1ConversionMessageArgs {

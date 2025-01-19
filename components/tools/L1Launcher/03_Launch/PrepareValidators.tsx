@@ -1,9 +1,8 @@
-import { stepList } from '../stepList';
 import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import Note from '../ui/Note';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import Note from '@/components/tools/common/ui/Note';
 import { useState } from 'react';
-import Pre from '../ui/Pre';
+import Pre from '@/components/tools/common/ui/Pre';
 
 const dockerInstallInstructions: Record<string, string> = {
     'Ubuntu/Debian': `sudo apt-get update && \\
@@ -35,12 +34,11 @@ docker run -it --rm hello-world
 }
 
 export default function PrepareValidators() {
-    const { nodesCount, setNodesCount, maxAdvancedStep } = useWizardStore();
+    const { nodesCount, setNodesCount, userHasAdvancedBeyondStep, goToNextStep, goToPreviousStep } = useWizardStore();
     const [activeOs, setActiveOs] = useState(Object.keys(dockerInstallInstructions)[0]);
 
     // Check if user has advanced beyond this step
-    const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-    const isLocked = stepKeys.indexOf(maxAdvancedStep) > stepKeys.indexOf('configure-validators');
+    const isLocked = userHasAdvancedBeyondStep('generate-validator-keys');
 
     const nodeConfigurations = {
         1: { colorClass: 'bg-red-100 text-red-800', badge: 'For development' },
@@ -149,6 +147,6 @@ export default function PrepareValidators() {
             </p>
         </Note>
 
-        <NextPrev nextDisabled={!nodesCount} currentStepName="configure-validators" />
+        <NextPrev nextDisabled={!nodesCount} onNext={goToNextStep} onPrev={goToPreviousStep} />
     </>
 }

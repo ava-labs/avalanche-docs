@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
-import SwitchChain, { fujiConfig } from '../ui/SwitchChain';
+import SwitchChain, { fujiConfig } from '@/components/tools/common/ui/SwitchChain';
 import { useWizardStore } from '../store';
 import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
 import { avalancheFuji } from 'viem/chains';
-import { newPrivateKey, getAddresses } from '../wallet';
-import { transferCToP, getPChainBalance, importExistingUTXOs } from '../utxo';
-import NextPrev from '../ui/NextPrev';
+import { newPrivateKey, getAddresses } from '../../common/utils/wallet';
+import { transferCToP, getPChainBalance, importExistingUTXOs } from '../../common/utils/utxo';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 
 const changeAllowance = parseEther('0.1');
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
 
 export default function FundTempWallet() {
-    const { nodesCount, setNodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance } = useWizardStore();
+    const { nodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useWizardStore();
     const [cChainBalance, setCChainBalance] = useState<bigint>(BigInt(0));
     const [transferring, setTransferring] = useState(false);
     const nodeCounts = [1, 3, 5];
@@ -111,7 +111,7 @@ export default function FundTempWallet() {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             // Transfer only the required amount to P chain (without change allowance)
-            await transferCToP(transferAmount.toFixed(2), tempPrivateKeyHex!);
+            await transferCToP(transferAmount.toFixed(2), tempPrivateKeyHex!, setPChainBalance);
 
         } catch (error: any) {
             console.error('Transfer failed:', error);
@@ -135,7 +135,7 @@ export default function FundTempWallet() {
 
         setTransferring(true);
         try {
-            await transferCToP(neededInP.toFixed(2), tempPrivateKeyHex);
+            await transferCToP(neededInP.toFixed(2), tempPrivateKeyHex, setPChainBalance);
         } catch (error: any) {
             console.error('C to P transfer failed:', error);
             setTransferError(error.message || 'Failed to transfer to P-Chain');
@@ -213,7 +213,8 @@ export default function FundTempWallet() {
 
                 <NextPrev
                     nextDisabled={!hasEnoughFunds()}
-                    currentStepName="fund-temp-wallet"
+                    onNext={goToNextStep} 
+                    onPrev={goToPreviousStep}
                 />
             </SwitchChain>
         </div >

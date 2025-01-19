@@ -1,25 +1,23 @@
-import { stepList } from "../stepList";
-import { useWizardStore } from "../store";
 import { Button } from "@/components/ui/button";
 
 interface NextPrevProps {
     nextDisabled: boolean;
-    currentStepName: keyof typeof stepList;
+    onNext: () => void;
+    onPrev: () => void;
 }
 
-export default function NextPrev({ nextDisabled, currentStepName }: NextPrevProps) {
-    const { advanceFrom } = useWizardStore();
+export default function NextPrev({ nextDisabled, onNext, onPrev }: NextPrevProps) {
 
     return (
         <div className="flex justify-between">
             <Button
-                onClick={() => advanceFrom(currentStepName, 'down')}
+                onClick={onPrev}
                 variant="secondary"
             >
                 Back
             </Button>
             <Button
-                onClick={() => advanceFrom(currentStepName, 'up')}
+                onClick={onNext}
                 disabled={nextDisabled}
                 variant="default"
             >

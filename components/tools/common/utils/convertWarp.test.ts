@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { newAddressedCall, marshalSubnetToL1ConversionData, PackL1ConversionMessageArgs, packL1ConversionMessage, subnetToL1ConversionID, newUnsignedMessage, newSubnetToL1Conversion } from './convertWarp';
 import { bytesToHex, hexToBytes } from 'viem';
-import { cb58ToBytes } from '../utils/cb58';
+import { cb58ToBytes } from '../../common/utils/cb58';
 
 const node1Validator = {
     nodeID: "NodeID-FTbzbUVtjSpKC4nFFFM9Gb8iAqJKZpzMQ",

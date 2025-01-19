@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useWizardStore } from '../store';
-import { createPublicClient, createWalletClient, custom, http, defineChain, keccak256, BaseError, ContractFunctionRevertedError } from 'viem';
-import NextPrev from '../ui/NextPrev';
-import PoAValidatorManager from "../contract_compiler/compiled/PoAValidatorManager.json"
-import ValidatorMessages from "../contract_compiler/compiled/ValidatorMessages.json"
-import { calculateContractAddress, getAddresses } from '../wallet';
+import { useWizardStore } from '../../store';
+import { createPublicClient, createWalletClient, http, defineChain, keccak256, } from 'viem';
+import NextPrev from '@/components/tools/common/ui/NextPrev';
+import { calculateContractAddress, getAddresses } from '../../../common/utils/wallet';
 import ProxyAdmin from "../contract_compiler/compiled/ProxyAdmin.json";
 import { privateKeyToAccount } from 'viem/accounts';
+
+import PoAValidatorManager from "../contract_compiler/compiled/PoAValidatorManager.json"
+import ValidatorMessages from "../contract_compiler/compiled/ValidatorMessages.json"
 import TransparentUpgradeableProxy from "../contract_compiler/compiled/TransparentUpgradeableProxy.json"
 
 type Status = 'not_started' | 'in_progress' | 'error' | 'success' | 'loading';
@@ -396,7 +397,7 @@ function QuickDeploymentTest({ onTestComplete }: { onTestComplete: (success: boo
 
 // Main Component
 export default function DeployContracts() {
-    const { tempPrivateKeyHex } = useWizardStore();
+    const { tempPrivateKeyHex, goToNextStep, goToPreviousStep } = useWizardStore();
     const [validatorMessagesDeployed, setValidatorMessagesDeployed] = useState(false);
     const [validatorManagerDeployed, setValidatorManagerDeployed] = useState(false);
     const [proxyAdminDeployed, setProxyAdminDeployed] = useState(false);
@@ -480,7 +481,8 @@ export default function DeployContracts() {
 
             <NextPrev
                 nextDisabled={!proxyTestPassed}
-                currentStepName="deploy-contracts"
+                onNext={goToNextStep}
+                onPrev={goToPreviousStep}
             />
         </div>
     );

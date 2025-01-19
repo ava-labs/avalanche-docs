@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 
-import { useWizardStore } from '../store';
-import { calculateContractAddress } from '../wallet';
-import { cb58ToHex } from '../utils/cb58';
-import { packWarpIntoAccessList } from '../utils/packWarp';
+import { useWizardStore } from '../../store';
+import { calculateContractAddress } from '../../../common/utils/wallet';
+import { cb58ToHex } from '../../../common/utils/cb58';
+import { packWarpIntoAccessList } from '../../../common/utils/packWarp';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import SwitchChain from '../ui/SwitchChain';
+import { useWizardStore } from '../../store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import SwitchChain from '@/components/tools/common/ui/SwitchChain';
 import CheckContractLogs from './04_CheckContractLogs';
 import CollectSignatures from './01_CollectSignatures';
 import ContractInitialize from './02_ContractInitialize';
@@ -14,6 +14,8 @@ export default function InitializeValidatorManager() {
         l1Name,
         tokenSymbol,
         getCChainRpcEndpoint,
+        goToNextStep,
+        goToPreviousStep
     } = useWizardStore();
 
     // Create chain config object
@@ -44,8 +46,9 @@ export default function InitializeValidatorManager() {
                 <CheckContractLogs onSuccess={() => setIsInitialized(true)} />
 
                 <NextPrev
-                    currentStepName="initialize-validator-manager"
                     nextDisabled={!isInitialized}
+                    onNext={goToNextStep}
+                    onPrev={goToPreviousStep}
                 />
             </div>
         </SwitchChain>

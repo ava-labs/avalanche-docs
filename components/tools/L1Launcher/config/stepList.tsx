@@ -1,51 +1,49 @@
 import { BookOpen, Terminal, Flag, Settings, Server } from 'lucide-react'
-import Welcome from "./01_Welcome/Welcome";
-import ChainParameters from './02_Configure/ChainParameters';
-import Tokenomics from './02_Configure/Tokenomics';
-import Permissions from "./02_Configure/Permissions";
-import Genesis from "./02_Configure/Genesis";
-import FundTempWallet from "./03_Launch/FundTempWallet";
-import PrepareValidators from "./03_Launch/PrepareValidators";
-import GenerateKeys from "./03_Launch/GenerateKeys";
-import LaunchValidators from "./03_Launch/LaunchValidators";
-import LaunchRpcNode from "./03_Launch/LaunchRpcNode";
-import OpenRPCPort from "./03_Launch/OpenRPCPort";
-import AddToWallet from "./AddToWallet";
-import DeployContracts from "./DeployContracts/DeployContracts";
-import CreateChain from "./03_Launch/CreateChain"
-import InitializeValidatorManager from "./InitializeValidatorManager/InitializeValidatorManager";
-import WhatsNext from "./WhatsNext";
+import Welcome from "../01_Welcome/Welcome";
+import ChainParameters from '../02_Configure/ChainParameters';
+import Tokenomics from '../02_Configure/Tokenomics';
+import Permissions from "../02_Configure/Permissions";
+import Genesis from "../02_Configure/Genesis";
 
-export const stepGroups = {
+import PrepareValidators from "../03_Launch/PrepareValidators";
+import GenerateKeys from "../03_Launch/GenerateKeys";
+import FundTempWallet from "../03_Launch/FundTempWallet";
+import CreateChain from "../03_Launch/CreateChain"
+import LaunchValidators from "../03_Launch/LaunchValidators";
+import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
+import OpenRPCPort from "../03_Launch/OpenRPCPort";
+
+import AddToWallet from "../04_Initialize/AddToWallet";
+import DeployContracts from "../04_Initialize/DeployContracts/DeployContracts";
+import InitializeValidatorManager from "../04_Initialize/InitializeValidatorManager/InitializeValidatorManager";
+
+import WhatsNext from "../05_WhatsNext/WhatsNext";
+import { StepGroupListType, StepListType } from '../../common/ui/types';
+
+export const stepGroups : StepGroupListType = {
     "welcome": {
         title: "Welcome",
-        icon: <BookOpen className="size-5" />
+        icon: BookOpen
     },
     "configure": {
         title: "Configure",
-        icon: <Settings className="size-5" />
+        icon: Settings
     },
     "launch-l1": {
         title: "Launch your L1",
-        icon: <Server className="size-5" />
+        icon: Server
     },
     "initialize": {
         title: "Initialize",
-        icon: <Terminal className="size-5" />
+        icon: Terminal
     },
     "whats-next": {
         title: "What's next?",
-        icon: <Flag className="size-5" />
+        icon: Flag
     },
 }
 
-export type StepType = {
-    title: string;
-    component: React.ReactNode;
-    group: keyof typeof stepGroups;
-}
-
-export const stepList: Record<string, StepType> = {
+export const stepList: StepListType = {
     "welcome": {
         title: "Welcome",
         component: <Welcome />,
@@ -71,12 +69,12 @@ export const stepList: Record<string, StepType> = {
         component: <Genesis />,
         group: "configure",
     },
-    "configure-validators": {
+    "prepare-validators": {
         title: "Prepare Validators",
         component: <PrepareValidators />,
         group: "launch-l1",
     },
-    "generate-keys": {
+    "generate-validator-keys": {
         title: "Generate keys",
         component: <GenerateKeys />,
         group: "launch-l1",

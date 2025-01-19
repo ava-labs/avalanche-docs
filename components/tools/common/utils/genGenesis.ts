@@ -1,7 +1,7 @@
 import { parseEther } from 'viem'
-import { AllowlistPrecompileConfig } from '../../common/allowlist-precompile-configurator/types';
-import { addressEntryArrayToAddressArray } from '../../common/utils/conversion';
-import { AllocationEntry } from '../../common/token-allocation-list/types';
+import { AllowlistPrecompileConfig } from '../allowlist-precompile-configurator/types';
+import { addressEntryArrayToAddressArray } from './conversion';
+import { AllocationEntry } from '../token-allocation-list/types';
 
 const currentTimestamp = Math.floor(Date.now() / 1000);
 

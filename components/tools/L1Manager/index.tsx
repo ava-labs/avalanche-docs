@@ -1,5 +1,5 @@
 'use client'
-import Steps from "./ui/Steps";
+import Steps from "@/components/tools/common/ui/Steps";
 import { useWizardStore } from "./store";
 import { stepList } from "./stepList";
 

@@ -1,8 +1,8 @@
 import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { useState } from 'react';
-import Note from '../ui/Note';
-import Pre from '../ui/Pre';
+import Note from '@/components/tools/common/ui/Note';
+import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
 
 const dockerCommand = (subnetID: string) => `docker run -it -d \\
@@ -20,7 +20,7 @@ const dockerCommand = (subnetID: string) => `docker run -it -d \\
 
 
 export default function LaunchValidators() {
-  const { subnetId, chainId, evmChainId, nodesCount } = useWizardStore();
+  const { subnetId, chainId, evmChainId, nodesCount, goToNextStep, goToPreviousStep } = useWizardStore();
   const [isBootstrapped, setIsBootstrapped] = useState(false);
 
 
@@ -114,7 +114,7 @@ export default function LaunchValidators() {
       </div>
 
 
-      <NextPrev nextDisabled={!isBootstrapped} currentStepName="launch-validators" />
+      <NextPrev nextDisabled={!isBootstrapped} onNext={goToNextStep} onPrev={goToPreviousStep} />
     </>
   );
 }

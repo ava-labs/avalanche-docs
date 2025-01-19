@@ -1,11 +1,12 @@
 'use client'
-import Steps from "./ui/Steps";
-import { useWizardStore } from "./store";
-import { stepList } from "./stepList";
+import Steps from "@/components/tools/common/ui/Steps";
+import { useWizardStore, resetStore } from "./store";
+import { stepList, stepGroups } from "./config/stepList";
+import { StepListType } from "../common/ui/types";
 
 
 export default function L1Wizard() {
-    const { currentStep } = useWizardStore()
+    const { currentStep, maxAdvancedStep, advanceTo,  } = useWizardStore()
 
     return (
         <>
@@ -13,11 +14,11 @@ export default function L1Wizard() {
                 <h1 className="md:text-3xl lg:text-5xl pb-5">L1 Launcher</h1>
                 <div className="flex flex-col lg:flex-row">
                     <div className="w-full lg:w-80 mb-8">
-                        <Steps />
+                        <Steps stepGroups={stepGroups} stepList={stepList} currentStep={currentStep as keyof StepListType} maxAdvancedStep={maxAdvancedStep as keyof StepListType} advanceTo={advanceTo} onReset={resetStore} />
                     </div>
                     <div className="flex-1 min-w-0">
                         <div className="h-full">
-                            {stepList[currentStep].component}
+                            {stepList[currentStep]?.component}
                         </div>
                     </div>
                 </div>

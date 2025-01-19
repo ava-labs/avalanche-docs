@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useWizardStore } from './store';
-import NextPrev from './ui/NextPrev';
-import Note from './ui/Note';
-import { getWalletAddress } from './wallet';
-import SwitchChain from './ui/SwitchChain';
+import { useWizardStore } from '../store';
+import NextPrev from '@/components/tools/common/ui/NextPrev';
+import Note from '@/components/tools/common/ui/Note';
+import { getWalletAddress } from '../../common/utils/wallet';
+import SwitchChain from '@/components/tools/common/ui/SwitchChain';
 
 export default function AddToWallet() {
-    const { evmChainId, l1Name, tokenSymbol, getCChainRpcEndpoint } = useWizardStore();
+    const { evmChainId, l1Name, tokenSymbol, getCChainRpcEndpoint, goToNextStep, goToPreviousStep } = useWizardStore();
     const [isAdded, setIsAdded] = useState(false);
     const [balanceError, setBalanceError] = useState<string | null>(null);
     const [walletError, setWalletError] = useState<string | null>(null);
@@ -112,7 +112,7 @@ export default function AddToWallet() {
                     </a>
                 </div>
 
-                <NextPrev currentStepName="add-to-wallet" nextDisabled={true} />
+                <NextPrev nextDisabled={true} onNext={goToNextStep} onPrev={goToPreviousStep} />
             </SwitchChain>
         );
     }
@@ -180,7 +180,7 @@ export default function AddToWallet() {
                 </Note>
             )}
 
-            <NextPrev currentStepName="add-to-wallet" nextDisabled={!isAdded || !!balanceError} />
+            <NextPrev nextDisabled={!isAdded || !!balanceError} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </SwitchChain>
     );
 };

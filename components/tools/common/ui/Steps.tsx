@@ -1,14 +1,23 @@
-import { useWizardStore, resetStore } from "../store";
-import { stepList, stepGroups } from "../stepList";
+import React from "react";
+import { StepGroupListType, StepListType } from "./types";
 
-const stepsGroupped = Object.entries(stepList).reduce<Record<keyof typeof stepGroups, string[]>>((acc, [key, step]) => {
-    acc[step.group] = [...(acc[step.group] || []), key];
-    return acc;
-}, {} as Record<keyof typeof stepGroups, string[]>);
+type StepsProps = {
+    stepGroups: StepGroupListType;
+    stepList: StepListType;
 
+    currentStep: keyof StepListType;
+    maxAdvancedStep: keyof StepListType;
+    advanceTo: (step: keyof StepListType) => void;
 
-export default function Steps() {
-    const { currentStep, maxAdvancedStep, advanceTo } = useWizardStore();
+    onReset: () => void;
+};
+
+export default function Steps({ stepGroups, stepList, currentStep, maxAdvancedStep, advanceTo, onReset }: StepsProps) {
+
+    const stepsGroupped = Object.entries(stepList).reduce<Record<keyof typeof stepGroups, string[]>>((acc, [key, step]) => {
+        acc[step.group] = [...(acc[step.group] || []), key];
+        return acc;
+    }, {} as Record<keyof typeof stepGroups, string[]>);
 
     return (
         <>
@@ -23,7 +32,7 @@ export default function Steps() {
                             <div className="flex items-center mb-3 relative">
                                 <div className={`w-10 h-10 flex items-center justify-center rounded-full relative z-10 bg-gray-200 dark:bg-gray-800`}>
                                     <div className={'text-gray-600 dark:text-gray-300'}>
-                                        {group.icon}
+                                        {React.createElement(group.icon)}
                                     </div>
                                 </div>
                                 <h2 className="font-medium text-xl text-gray-900 dark:text-gray-200 ml-3">{group.title}</h2>
@@ -70,7 +79,7 @@ export default function Steps() {
             {/* Reset button */}
             <div className="mt-8 -ml-4 w-full">
                 <button
-                    onClick={() => resetStore()}
+                    onClick={onReset}
                     className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-950/50 rounded-lg hover:bg-red-100 dark:hover:bg-red-950 border border-red-100 dark:border-red-900/50"
                 >
                     <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">

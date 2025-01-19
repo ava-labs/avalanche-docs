@@ -19,9 +19,9 @@ const stopScript = `docker stop avago; docker rm avago`
 import { useState } from 'react';
 import { CONTAINER_VERSION } from '../constants';
 import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import Pre from '../ui/Pre';
-import TextArea from '../ui/TextArea';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import Pre from '@/components/tools/common/ui/Pre';
+import TextArea from '@/components/tools/common/ui/TextArea';
 
 const validateNodePop = (json: string): boolean => {
     try {
@@ -49,7 +49,7 @@ const validateNodePop = (json: string): boolean => {
 };
 
 export default function GenerateKeys() {
-    const { nodePopJsons, setNodePopJsons, nodesCount } = useWizardStore();
+    const { nodePopJsons, setNodePopJsons, nodesCount, goToNextStep, goToPreviousStep } = useWizardStore();
     const [errors, setErrors] = useState<string[]>(Array(nodesCount).fill(''));
     const [nodesRemovedAfterKeyGeneration, setNodesRemovedAfterKeyGeneration] = useState(false);
 
@@ -142,7 +142,7 @@ export default function GenerateKeys() {
 
         <NextPrev
             nextDisabled={nodePopJsons.length < nodesCount || nodePopJsons.slice(0, nodesCount).some(json => !json) || errors.slice(0, nodesCount).some(error => error) || !nodesRemovedAfterKeyGeneration}
-            currentStepName="generate-keys"
+            onNext={goToNextStep} onPrev={goToPreviousStep}
         />
     </>
 }
