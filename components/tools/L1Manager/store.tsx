@@ -118,10 +118,6 @@ interface WizardState {
     setChainInfo: (info: ChainInfo) => void;
 }
 
-
-import generateName from 'boring-name-generator'
-import { addressEntryArrayToAddressArray } from '../common/utils';
-
 const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
     poaOwnerAddress: "",
     setPoaOwnerAddress: (address: string) => set(() => ({

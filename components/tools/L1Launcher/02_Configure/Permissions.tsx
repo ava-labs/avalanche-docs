@@ -4,7 +4,7 @@ import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-c
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { isValidAllowlistPrecompileConfig } from '../../common/utils';
+import { isValidAllowlistPrecompileConfig } from '../../common/utils/validation';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { getWalletAddress } from '../wallet';

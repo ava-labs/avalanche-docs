@@ -6,7 +6,7 @@ import TokenAllocationList from '../../common/token-allocation-list/token-alloca
 import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-configurator/allowlist-precompile-configurator';
 import { useEffect } from 'react';
 import { newPrivateKey } from '../wallet';
-import { isValidAllowlistPrecompileConfig } from '../../common/utils';
+import { isValidAllowlistPrecompileConfig } from '../../common/utils/validation';
 
 export default function Permissions() {
     const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex } = useWizardStore();

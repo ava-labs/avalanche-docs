@@ -4,7 +4,7 @@ import NextPrev from '../ui/NextPrev';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { isValidL1Name } from '../../common/utils';
+import { isValidL1Name } from '../../common/utils/validation';
 
 
 export default function ChainParameters() {

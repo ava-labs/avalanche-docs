@@ -1,4 +1,4 @@
-import { AllowlistPrecompileConfig, AddressEntry, Role } from '@/components/tools/common/allowlist-precompile-configurator/types'
+import { AllowlistPrecompileConfig, AddressEntry } from '@/components/tools/common/allowlist-precompile-configurator/types'
 
 export function isValidL1Name(name: string): boolean {
     return name.split('').every(char => {
@@ -24,6 +24,3 @@ export const isValidAllowlistPrecompileConfig = (config: AllowlistPrecompileConf
   return !Object.values(config.addresses).some(entries => hasErrors(entries as AddressEntry[]));
 }
 
-export const addressEntryArrayToAddressArray = (entries: AddressEntry[]): string[] => {
-  return entries.map(entry => entry.address);
-}
