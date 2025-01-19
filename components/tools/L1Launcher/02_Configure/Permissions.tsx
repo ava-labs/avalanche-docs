@@ -1,14 +1,14 @@
 import { useWizardStore } from '../store';
 import NextPrev from '../ui/NextPrev';
-import { AllowlistPrecompileConfig } from '../../common/allowlist-precompile-configurator/types';
 import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-configurator/allowlist-precompile-configurator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { isAllowlistPrecompileConfigValid, isValidEthereumAddress } from '../../common/utils';
+import { isValidAllowlistPrecompileConfig } from '../../common/utils';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { getWalletAddress } from '../wallet';
+import { isAddress } from 'viem';
 
 export default function Permissions() {
     const { poaOwnerAddress, setPoaOwnerAddress, txAllowlistConfig, setTxAllowlistConfig, contractDeployerAllowlistConfig, setContractDeployerAllowlistConfig } = useWizardStore();
@@ -65,9 +65,14 @@ export default function Permissions() {
                         {isLoading ? 'Loading...' : 'Fill from Wallet'}
                     </Button>}
                 </div>
-                {poaOwnerAddress && !isValidEthereumAddress(poaOwnerAddress) && (
+                {poaOwnerAddress && !isAddress(poaOwnerAddress, {strict: false}) && (
                     <p className="mt-2 text-sm text-red-500">
                         Please paste a valid Ethereum address in 0x format.
+                    </p>
+                )}
+                {error && (
+                    <p className="mt-2 text-sm text-red-500">
+                        {error}
                     </p>
                 )}
                 <p className="mt-2 text-sm text-gray-500">
@@ -97,7 +102,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want only approved addresses to be able to deploy contracts on this blockchain."
             />
 
-            <NextPrev nextDisabled={!isValidEthereumAddress(poaOwnerAddress) || !isAllowlistPrecompileConfigValid(txAllowlistConfig) || !isAllowlistPrecompileConfigValid(contractDeployerAllowlistConfig)} currentStepName="permissions" />
+            <NextPrev nextDisabled={!isAddress(poaOwnerAddress, {strict: false}) || !isValidAllowlistPrecompileConfig(txAllowlistConfig) || !isValidAllowlistPrecompileConfig(contractDeployerAllowlistConfig)} currentStepName="permissions" />
         </div>
     );
 }

@@ -2,8 +2,8 @@
 
 import { useCallback } from 'react'
 import EthereumAddressList from './ethereum-address-list'
-import { Role, AddressRoles, AddressEntry } from './types'
-import { isValidEthereumAddress } from '@/components/tools/common/utils'
+import { Role, AddressRoles } from './types'
+import { isAddress } from 'viem'
 
 interface AllowlistProps {
   addresses: AddressRoles
@@ -17,7 +17,7 @@ export default function Allowlist({
   precompileAction
 }: AllowlistProps) {
   const isAddressInvalid = useCallback((address: string, currentRole: Role, currentId?: string, currentAddresses = addresses): string | undefined => {
-    if (!isValidEthereumAddress(address)) {
+    if (!isAddress(address, { strict: false })) {
       return 'Invalid Ethereum address format'
     }
 

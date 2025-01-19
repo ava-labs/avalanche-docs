@@ -4,7 +4,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import Allowlist from './allowlist'
 import { AllowlistPrecompileConfig } from './types'
-import { isAllowlistPrecompileConfigValid } from '@/components/tools/common/utils'
+import { isValidAllowlistPrecompileConfig } from '@/components/tools/common/utils'
 
 interface AllowlistPrecompileConfiguratorProps {
   title: string
@@ -63,7 +63,7 @@ export default function AllowlistPrecompileConfigurator({
         />
       </div>
 
-      {!isAllowlistPrecompileConfigValid(config) && (
+      {!isValidAllowlistPrecompileConfig(config) && (
         <p className="text-red-500">There are errors in the allowlist configuration. Add at least one address to at least one role (required addresses do not count). The same address can only be added to a single role.</p>
       )}
     </div>

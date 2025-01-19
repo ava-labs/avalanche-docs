@@ -4,14 +4,7 @@ import NextPrev from '../ui/NextPrev';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-
-function isValidL1Name(name: string): boolean {
-    return name.split('').every(char => {
-        const code = char.charCodeAt(0);
-        return code <= 127 && // MaxASCII check
-            (char.match(/[a-zA-Z0-9 ]/) !== null); // only letters, numbers, spaces
-    });
-}
+import { isValidL1Name } from '../../common/utils';
 
 
 export default function ChainParameters() {

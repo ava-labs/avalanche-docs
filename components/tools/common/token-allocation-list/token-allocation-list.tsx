@@ -6,7 +6,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Trash2, AlertCircle, Plus, Lock } from 'lucide-react'
 import { AllocationEntry } from './types'
-import { isValidEthereumAddress } from '@/components/tools/common/utils'
+import { isAddress } from 'viem'
+
 
 export interface TokenAllocationListProps {
   allocations: AllocationEntry[];
@@ -21,7 +22,7 @@ export default function TokenAllocationList({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const isAddressInvalid = (address: string, currentId?: string, currentAllocations = allocations): string | undefined => {
-    if (!isValidEthereumAddress(address)) {
+    if (!isAddress(address, { strict: false })) {
       return 'Invalid Ethereum address format'
     }
     const occurrences = currentAllocations.filter(
@@ -106,7 +107,7 @@ export default function TokenAllocationList({
 
   const isValidInput = (input: string): boolean => {
     const addresses = input.split(/[\s,]+/).filter(addr => addr.trim() !== '');
-    return addresses.length > 0 && addresses.every(isValidEthereumAddress);
+    return addresses.length > 0 && addresses.every(address => isAddress(address, { strict: false }));
   }
 
   useEffect(() => {

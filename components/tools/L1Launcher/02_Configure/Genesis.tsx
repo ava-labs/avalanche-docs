@@ -1,18 +1,8 @@
 import { useState } from 'react';
-import { getWalletAddress } from '../wallet';
 import { useWizardStore } from '../store';
 import NextPrev from '../ui/NextPrev';
 import { Button } from '@/components/ui/button';
-import { isValidEthereumAddress } from '@/components/tools/common/utils'
 import Pre from '../ui/Pre';
-
-function isValidL1Name(name: string): boolean {
-    return name.split('').every(char => {
-        const code = char.charCodeAt(0);
-        return code <= 127 && // MaxASCII check
-            (char.match(/[a-zA-Z0-9 ]/) !== null); // only letters, numbers, spaces
-    });
-}
 
 export default function Genesis() {
     const { evmChainId, genesisString, regenerateGenesis, l1Name, maxAdvancedStep } = useWizardStore();
