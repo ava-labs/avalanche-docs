@@ -2,35 +2,29 @@ import { BookOpen, Flag, Settings, Server } from 'lucide-react'
 import Welcome from "./01_Welcome/Welcome";
 import ChainParameters from './02_Configure/ChainParameters';
 import LaunchValidators from "./03_Dashboard/ValidatorDashboard";
-import AddToWallet from "./AddToWallet";
-import WhatsNext from "./WhatsNext";
+import WhatsNext from "./04_WhatsNext/WhatsNext";
+import { StepGroupListType, StepListType } from '../common/ui/types';
 
-export const stepGroups = {
+export const stepGroups : StepGroupListType = {
     "welcome": {
         title: "Welcome",
-        icon: <BookOpen className="size-5" />
+        icon: BookOpen
     },
     "configure": {
         title: "Configure",
-        icon: <Settings className="size-5" />
+        icon: Settings
     },
     "manage-l1": {
         title: "Manage Validators",
-        icon: <Server className="size-5" />
+        icon: Server
     },
     "whats-next": {
         title: "What's next?",
-        icon: <Flag className="size-5" />
+        icon: Flag
     },
 }
 
-export type StepType = {
-    title: string;
-    component: React.ReactNode;
-    group: keyof typeof stepGroups;
-}
-
-export const stepList: Record<string, StepType> = {
+export const stepList: StepListType = {
     "welcome": {
         title: "Welcome",
         component: <Welcome />,

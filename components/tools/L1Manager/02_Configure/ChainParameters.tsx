@@ -4,7 +4,7 @@ import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Input } from '@/components/ui/input';
 import { useState, useEffect } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
-import { getWalletAddress } from '../wallet';
+import { getWalletAddress } from '@/components/tools/common/utils/wallet';
 
 const DEFAULT_PROXY_ADDRESS = "0x0feedc0de0000000000000000000000000000000";
 
@@ -130,6 +130,8 @@ export default function ChainParameters() {
         l1Name,
         setL1Name,
         setPoaOwnerAddress,
+        goToNextStep,
+        goToPreviousStep
     } = useWizardStore();
 
     useEffect(() => {
@@ -569,7 +571,7 @@ export default function ChainParameters() {
                     !isWalletAdded || 
                     !!walletError
                 } 
-                currentStepName="chain-parameters"
+                onNext={goToNextStep} onPrev={goToPreviousStep}
             />
         </div>
     );

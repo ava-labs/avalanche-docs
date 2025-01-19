@@ -11,9 +11,7 @@ import { useWizardStore } from '../store'
 import { utils } from '@avalabs/avalanchejs'
 import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, parseEther, defineChain, custom } from 'viem'
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
-import { useAccount } from 'wagmi'
-import { apiHostPromise } from '../config';
-import { Label } from "@/components/ui/label"
+import { apiHostPromise } from '@/components/tools/common/utils/config';
 
 interface Validator {
   id: string
