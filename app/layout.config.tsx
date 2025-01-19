@@ -171,8 +171,8 @@ const toolsMenu: LinkItemType = {
         className: 'md:row-span-2 lg:col-span-1',
       },
       icon: <Server />,
-      text: 'L1 Launcher',
-      description: 'Launch your Testnet or Mainnet L1 on your own infrastructure.',
+      text: 'L1 Launcher (Beta)',
+      description: 'Launch your self-hosted Testnet or Mainnet L1 on your own infrastructure.',
       url: '/tools/l1-launcher',
     },
     {

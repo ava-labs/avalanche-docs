@@ -16,12 +16,10 @@
     "info-api",
     "keystore-api",
     "metrics-api",
-    "avalanche-go-configs-flags",
     "---Avalanche L1s---",
     "subnet-evm-api",
     "---Miscellaneous---",
     "standards",
-    "rpc-providers",
-    "install-script"
+    "guides"
   ]
 }

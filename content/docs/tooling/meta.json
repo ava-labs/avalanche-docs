@@ -1,6 +1,6 @@
 {
   "title": "Toolings",
-  "description": "CLI, Scripts, and More",
+  "description": "CLI, Scripts, and APIs",
   "icon": "Settings",
   "root": true,
   "pages": [
@@ -19,14 +19,12 @@
     "guides",
     "---Scripts & APIs---",
     "avalanche-js",
-    "glacier-api",
-    "metrics-api",
-    "avalanche-postman",
-    "---Miscellaneous---",
-    "avalanche-go-installer",
-    "avalanche-plugin-manager",
-    "avalanche-ops",
-    "rpc-providers",
-    "indexers"
+    "[Glacier API](https://developers.avacloud.io/data-api)",
+    "[Metrics API](https://developers.avacloud.io/metrics-api)",
+    "---Avalanche Postman Collection---",
+    "avalanche-postman/add-postman-collection",
+    "avalanche-postman/making-api-calls",
+    "avalanche-postman/variables",
+    "avalanche-postman/data-visualization"
   ]
 }

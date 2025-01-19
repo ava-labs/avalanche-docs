@@ -150,17 +150,21 @@ export default function Page() {
         <section className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-orange-500/10 dark:from-red-500/5 dark:to-orange-500/5 rounded-3xl" />
           <div className="relative px-6 py-12 md:py-20 text-center space-y-6 rounded-3xl border border-red-500/20 backdrop-blur-sm">
-            <h2 className="text-3xl md:text-5xl font-bold">Ready to Build the Future?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Join Avalanche's ecosystem of innovators and shape the future of blockchain technology.
+            <h2 className="text-2xl md:text-5xl font-bold">Avalanche Network [Security] Challenge</h2>
+            <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+              Shape the future of blockchain security and earn massive rewards. Elite security researchers who identify critical vulnerabilities on Avalanche can claim bounties up to <strong>$100,000 USD</strong>.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="rounded-full px-8 py-6 bg-red-500 transition-all duration-300 shadow-lg hover:shadow-xl text-white">
-                Apply for Grants <ArrowRight className="ml-2 h-5 w-5" color='white' />
-              </Button>
-              <Button size="lg" variant="outline" className="rounded-full px-8 py-6 border-2 hover:bg-red-500/10 transition-all duration-300">
-                Learn More
-              </Button>
+              <Link href="https://immunefi.com/bug-bounty/avalanche/information/">
+                <Button size="lg" className="rounded-full px-8 py-6 bg-red-500 transition-all duration-300 shadow-lg hover:shadow-xl text-white">
+                  Submit a Bug <ArrowRight className="ml-2 h-5 w-5" color='white' />
+                </Button>
+              </Link>
+              <Link href="https://immunefi.com/bug-bounty/avalanche/scope/#top">
+                <Button size="lg" variant="outline" className="rounded-full px-8 py-6 border-2 hover:bg-red-500/10 transition-all duration-300">
+                  Bug Bounty Scope
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -168,4 +172,3 @@ export default function Page() {
     </div>
   )
 }
-

@@ -111,7 +111,7 @@ function Introduction(): React.ReactElement {
             code="avalanche blockchain create myblockchain"
           />
             <div className="relative mt-20">
-            <Link href="https://developers.avax.network/academy">
+            <Link href="https://build.avax.network/academy">
               <img 
               src="/wolfie.png" 
               alt="Avalanche Logo" 

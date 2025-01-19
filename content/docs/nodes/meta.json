@@ -14,7 +14,7 @@
     "run-a-node/avalanche-l1-nodes",
     "on-third-party-services",
     "run-a-node/common-errors",
-    "---Configure---",
+    "---Configure Node---",
     "configure/configs-flags",
     "chain-configs",
     "configure/avalanche-l1-configs",

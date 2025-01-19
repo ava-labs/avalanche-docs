@@ -9,13 +9,13 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 To create an Avalanche L1 configuration run the following command:
 
 ```bash
-avalanche blockchain create <name>
+avalanche blockchain create <name> --sovereign=false
 ```
 
 For example:
 
 ```bash
-avalanche blockchain create myblockchain
+avalanche blockchain create myblockchain --sovereign=false
 ```
  
 </Step>
@@ -25,7 +25,7 @@ avalanche blockchain create myblockchain
 ### Select Virtual Machine
 You will be prompted a wizard to configure your Avalanche L1. In the first question, select `Subnet-EVM`:
 
-```
+```bash
 ? Which Virtual Machine would you like to use?: 
   ▸ Subnet-EVM
     Custom VM
@@ -222,6 +222,23 @@ Blockchain ready to use
 +-----------------+-------------------------------------------------------------------------------------+
 ```
 
+</Step>
+
+<Step>
+
+### Update foundry Configuration (custom blockchain name only)
+
+If you chose a different name then `myblockchain` head to the `foundry.toml` file and add the rpc endpoint:
+
+```toml
+// [!code word:yourblockchainname]
+[rpc_endpoints]
+local-c = "http://localhost:9650/ext/bc/C/rpc"
+myblockchain = "http://localhost:9650/ext/bc/myblockchain/rpc"
+yourblockchainname = "http://localhost:9650/ext/bc/yourblockchainname/rpc" 
+fuji-c = "https://api.avax-test.network/ext/bc/C/rpc"
+
+```
 </Step>
 
 <Step>

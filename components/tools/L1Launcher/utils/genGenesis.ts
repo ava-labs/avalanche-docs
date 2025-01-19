@@ -3,6 +3,8 @@ import { AllowlistPrecompileConfig } from '../../common/allowlist-precompile-con
 import { addressEntryArrayToAddressArray } from '../../common/utils';
 import { AllocationEntry } from '../../common/token-allocation-list/types';
 
+const currentTimestamp = Math.floor(Date.now() / 1000);
+
 type GenerateGenesisArgs = {
     evmChainId: number;
     tokenAllocations: AllocationEntry[];
@@ -13,7 +15,7 @@ type GenerateGenesisArgs = {
 
 function generateAllowListConfig(config: AllowlistPrecompileConfig) {
     return {
-        "blockTimestamp": 0,
+        "blockTimestamp": currentTimestamp,
         ...(config.addresses.Admin.length > 0 && {
             "adminAddresses": addressEntryArrayToAddressArray(config.addresses.Admin),
         }),
@@ -22,13 +24,11 @@ function generateAllowListConfig(config: AllowlistPrecompileConfig) {
         }),
         ...(config.addresses.Enabled.length > 0 && {
             "enabledAddresses": addressEntryArrayToAddressArray(config.addresses.Enabled),
-        }),
+        })
     };
 }
 
 export function generateGenesis({ evmChainId, tokenAllocations, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig }: GenerateGenesisArgs) {
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-
     // Convert balances to wei
     const allocations: Record<string, { balance: string }> = {};
     tokenAllocations.forEach((allocation) => {
@@ -81,7 +81,7 @@ export function generateGenesis({ evmChainId, tokenAllocations, txAllowlistConfi
                 "contractDeployerAllowListConfig": generateAllowListConfig(contractDeployerAllowlistConfig),
             }),
             ...(nativeMinterAllowlistConfig.activated && {
-                "nativeMinterConfig": generateAllowListConfig(nativeMinterAllowlistConfig),
+                "contractNativeMinterConfig": generateAllowListConfig(nativeMinterAllowlistConfig),
             })
         },
         "difficulty": "0x0",
