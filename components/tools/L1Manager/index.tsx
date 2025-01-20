@@ -2,6 +2,7 @@
 import Steps from "@/components/tools/common/ui/Steps";
 import { useL1ManagerWizardStore, resetL1ManagerWizardStore } from "./config/store";
 import { stepList, stepGroups } from "./config/stepList";
+import ToolHeader from "../common/ui/ToolHeader";
 
 export default function L1Wizard() {
     const { currentStep, maxAdvancedStep, advanceTo } = useL1ManagerWizardStore()
@@ -17,6 +18,11 @@ export default function L1Wizard() {
     return (
         <>
             <div className="container mx-auto max-w-6xl p-8 ">
+                <ToolHeader
+                    title="L1 Manager"
+                    duration="30 min"
+                    description="Manage the validator set of your L1"
+                />
                 <div className="flex flex-col lg:flex-row">
                     <div className="w-full lg:w-80 mb-8">
                         <Steps currentStep={currentStep} maxAdvancedStep={maxAdvancedStep} advanceTo={advanceTo} stepList={stepList} stepGroups={stepGroups} onReset={resetL1ManagerWizardStore}/>
