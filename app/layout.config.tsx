@@ -175,7 +175,7 @@ const toolsMenu: LinkItemType = {
       description: 'Launch your self-hosted Testnet or Mainnet L1 on your own infrastructure.',
       url: '/tools/l1-launcher',
     },
-    {
+    /** {
       icon: <HardDrive />,
       text: 'L1 Manager',
       description: "Manage your L1 validator set from the web.",
@@ -183,14 +183,14 @@ const toolsMenu: LinkItemType = {
       menu: {
         className: 'lg:col-start-2 lg:row-start-1',
       },
-    },
+    }, */
     {
       icon: <Github />,
       text: 'Avalanche Starter Kit',
       description: "Spin up short-lived test environments for building dApps using interoperability features like ICM and ICTT.",
       url: 'https://github.com/ava-labs/avalanche-starter-kit',
       menu: {
-        className: 'lg:col-start-2 lg:row-start-2',
+        className: 'lg:col-start-2 lg:row-start-1',
       },
     },
     {
@@ -199,7 +199,7 @@ const toolsMenu: LinkItemType = {
       description: 'Claim Fuji AVAX tokens from the testnet faucet to test your dApps.',
       url: 'https://core.app/tools/testnet-faucet/?subnet=c&token=c',
       menu: {
-        className: 'lg:col-start-2 lg:row-start-3',
+        className: 'lg:col-start-2 lg:row-start-2',
       },
     },
     {

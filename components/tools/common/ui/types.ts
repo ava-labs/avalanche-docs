@@ -15,7 +15,7 @@ export type StepType<StepGroupListType> = {
     group: keyof StepGroupListType;
 }
 
-export type StepListType = Record<string, StepType<StepGroupListType>;
+export type StepListType = Record<string, StepType<StepGroupListType>>;
 
 export interface StepGroupType {
     title: string;
