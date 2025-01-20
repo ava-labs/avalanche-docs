@@ -289,6 +289,32 @@ const grantsMenu: LinkItemType = {
    ],
 };
 
+const hackathonsMenu: LinkItemType = {
+  type: 'menu',
+  text: 'Hackathons',
+  url: '/hackathons',
+  items: [
+    {
+      icon: <BriefcaseBusiness />,
+      text: 'Avalanche-X',
+      description: 'Avalanche-X is a series of hackathons that bring together developers, entrepreneurs, and creatives to build innovative projects on Avalanche.',
+      url: '/hackathons/avalanche-x',
+    },
+    {
+      icon: <BriefcaseBusiness />,
+      text: 'Avalanche-X: Retro9000',
+      description: 'Retro9000 is a hackathon that rewards developers for building innovative projects on Avalanche.',
+      url: '/hackathons/retro9000',
+    },
+    {
+      icon: <BriefcaseBusiness />,
+      text: 'Avalanche-X: InfraBUIDL',
+      description: 'InfraBUIDL is a hackathon that rewards developers for building infrastructure projects on Avalanche.',
+      url: '/hackathons/infrabuidl',
+    },
+  ],
+}
+
 export const baseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
@@ -304,6 +330,7 @@ export const baseOptions: BaseLayoutProps = {
     academyMenu,
     toolsMenu,
     grantsMenu,
+    hackathonsMenu,
     ...linkItems,
   ],
 };
