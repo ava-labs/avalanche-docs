@@ -26,6 +26,6 @@ export default function Welcome() {
             </div>
         </div>
 
-        <NextPrev nextDisabled={false} onNext={goToNextStep} onPrev={goToPreviousStep} />
+        <NextPrev nextDisabled={false} prevHidden={true} onNext={goToNextStep} onPrev={goToPreviousStep} />
     </>;
 }
