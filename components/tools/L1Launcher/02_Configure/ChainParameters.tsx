@@ -1,5 +1,5 @@
 import { Label } from '@radix-ui/react-label';
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { isValidL1Name } from '../../common/utils/validation';
 
 
 export default function ChainParameters() {
-    const { l1Name, setL1Name, evmChainId, setEvmChainId, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { l1Name, setL1Name, evmChainId, setEvmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
 
     return (
         <div className="space-y-12">

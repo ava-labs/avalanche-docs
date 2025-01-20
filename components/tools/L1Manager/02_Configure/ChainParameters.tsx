@@ -1,5 +1,5 @@
 import { Label } from '@radix-ui/react-label';
-import { useWizardStore } from '../store';
+import { useL1ManagerWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Input } from '@/components/ui/input';
 import { useState, useEffect } from 'react';
@@ -132,7 +132,7 @@ export default function ChainParameters() {
         setPoaOwnerAddress,
         goToNextStep,
         goToPreviousStep
-    } = useWizardStore();
+    } = useL1ManagerWizardStore();
 
     useEffect(() => {
         if (!transparentProxyAddress) {

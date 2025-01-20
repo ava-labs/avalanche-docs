@@ -1,4 +1,4 @@
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import Note from '@/components/tools/common/ui/Note';
 import { useState } from 'react';
@@ -34,7 +34,7 @@ docker run -it --rm hello-world
 }
 
 export default function PrepareValidators() {
-    const { nodesCount, setNodesCount, userHasAdvancedBeyondStep, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { nodesCount, setNodesCount, userHasAdvancedBeyondStep, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [activeOs, setActiveOs] = useState(Object.keys(dockerInstallInstructions)[0]);
 
     // Check if user has advanced beyond this step

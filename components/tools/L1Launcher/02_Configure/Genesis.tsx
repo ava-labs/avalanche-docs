@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Button } from '@/components/ui/button';
 import Pre from '@/components/tools/common/ui/Pre';
 
 export default function Genesis() {
-    const { evmChainId, genesisString, regenerateGenesis, maxAdvancedStep, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { evmChainId, genesisString, regenerateGenesis, maxAdvancedStep, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [error, setError] = useState('');
     const [isRegenerating, setIsRegenerating] = useState(false);
 

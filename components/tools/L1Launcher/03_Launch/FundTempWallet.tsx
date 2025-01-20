@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import SwitchChain, { fujiConfig } from '@/components/tools/common/ui/SwitchChain';
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
 import { avalancheFuji } from 'viem/chains';
 import { newPrivateKey, getAddresses } from '../../common/utils/wallet';
@@ -11,7 +11,7 @@ const changeAllowance = parseEther('0.1');
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
 
 export default function FundTempWallet() {
-    const { nodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { nodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [cChainBalance, setCChainBalance] = useState<bigint>(BigInt(0));
     const [transferring, setTransferring] = useState(false);
     const nodeCounts = [1, 3, 5];

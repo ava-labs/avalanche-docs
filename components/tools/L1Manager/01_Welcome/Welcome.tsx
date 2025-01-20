@@ -1,8 +1,8 @@
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import { useWizardStore } from "../store";
+import { useL1ManagerWizardStore } from "../config/store";
 
 export default function Welcome() {
-    const { goToNextStep, goToPreviousStep } = useWizardStore();
+    const { goToNextStep, goToPreviousStep } = useL1ManagerWizardStore();
 
     return <>
         <h1 className="text-2xl font-medium mb-6">Welcome</h1>

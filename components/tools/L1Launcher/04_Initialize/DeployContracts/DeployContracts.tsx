@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useWizardStore } from '../../store';
+import { useL1LauncherWizardStore } from '../../config/store';
 import { createPublicClient, createWalletClient, http, defineChain, keccak256, } from 'viem';
 import NextPrev from '@/components/tools/common/ui/NextPrev';
 import { calculateContractAddress, getAddresses } from '../../../common/utils/wallet';
@@ -203,7 +203,7 @@ function ContractDeployer({
     onDeployComplete,
 }: ContractDeployerProps) {
     const [status, setStatus] = useState<DeploymentStatus>({ status: 'loading' });
-    const { evmChainId, chainId, getCChainRpcEndpoint, tempPrivateKeyHex, l1Name, tokenSymbol } = useWizardStore();
+    const { evmChainId, chainId, getCChainRpcEndpoint, tempPrivateKeyHex, l1Name, tokenSymbol } = useL1LauncherWizardStore();
 
     useEffect(() => {
         let mounted = true;
@@ -308,7 +308,7 @@ function ContractDeployer({
 function QuickDeploymentTest({ onTestComplete }: { onTestComplete: (success: boolean) => void }) {
     const [status, setStatus] = useState<'not_started' | 'testing' | 'success' | 'error'>('not_started');
     const [error, setError] = useState<string | null>(null);
-    const { tempPrivateKeyHex, evmChainId, chainId, getCChainRpcEndpoint } = useWizardStore();
+    const { tempPrivateKeyHex, evmChainId, chainId, getCChainRpcEndpoint } = useL1LauncherWizardStore();
 
     const testContracts = async () => {
         setStatus('testing');
@@ -397,7 +397,7 @@ function QuickDeploymentTest({ onTestComplete }: { onTestComplete: (success: boo
 
 // Main Component
 export default function DeployContracts() {
-    const { tempPrivateKeyHex, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { tempPrivateKeyHex, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [validatorMessagesDeployed, setValidatorMessagesDeployed] = useState(false);
     const [validatorManagerDeployed, setValidatorManagerDeployed] = useState(false);
     const [proxyAdminDeployed, setProxyAdminDeployed] = useState(false);

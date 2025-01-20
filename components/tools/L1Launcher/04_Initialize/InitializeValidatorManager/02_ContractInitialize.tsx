@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createWalletClient, createPublicClient, custom, http, AbiEvent } from 'viem';
-import { useWizardStore } from '../../store';
+import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '@/components/tools/common/utils/cb58';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
@@ -19,7 +19,7 @@ export default function ContractInitialize() {
         tempPrivateKeyHex,
         subnetId,
         convertL1SignedWarpMessage
-    } = useWizardStore();
+    } = useL1LauncherWizardStore();
 
     useEffect(() => {
         if (initialCheckHasRun) return;

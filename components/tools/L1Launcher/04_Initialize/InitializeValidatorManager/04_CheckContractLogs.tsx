@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createPublicClient, http, AbiEvent, Log, decodeEventLog } from 'viem';
-import { useWizardStore } from '../../store';
+import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
 
@@ -37,7 +37,7 @@ export default function CheckContractLogs({ onSuccess }: { onSuccess: () => void
         tokenSymbol,
         getCChainRpcEndpoint,
         tempPrivateKeyHex,
-    } = useWizardStore();
+    } = useL1LauncherWizardStore();
 
     const fetchLogs = async () => {
         setIsLoading(true);

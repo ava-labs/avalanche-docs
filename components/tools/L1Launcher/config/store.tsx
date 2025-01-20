@@ -1,14 +1,14 @@
 import { create } from 'zustand'
 import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { getAddresses } from '../common/utils/wallet';
-import { stepList } from './config/stepList';
-import { generateGenesis } from '../common/utils/genGenesis';
+import { getAddresses } from '../../common/utils/wallet';
+import { stepList } from './stepList';
+import { generateGenesis } from '../../common/utils/genGenesis';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 import { StepWizardState } from '@/components/tools/common/ui/types';
 
-interface WizardState extends StepWizardState {
+interface L1LauncherWizardState extends StepWizardState {
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
 
@@ -77,9 +77,9 @@ interface WizardState extends StepWizardState {
 
 
 import generateName from 'boring-name-generator'
-import { createStepWizardStore } from '../common/ui/StepWizardStoreCreator';
+import { createStepWizardStore } from '../../common/ui/StepWizardStoreCreator';
 
-const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
+const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get) => ({
     ...createStepWizardStore({set, get, stepList}),
 
     poaOwnerAddress: "",
@@ -240,24 +240,24 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
 const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
 
-export const useWizardStore = shouldPersist
-    ? create<WizardState>()(
+export const useL1LauncherWizardStore = shouldPersist
+    ? create<L1LauncherWizardState>()(
         persist(
-            wizardStoreFunc,
+            L1LauncherWizardStoreFunc,
             {
-                name: 'wizard-storage',
+                name: 'l1-launcher-wizard-storage',
                 storage: createJSONStorage(() => localStorage),
             }
         )
     )
-    : create<WizardState>()(wizardStoreFunc);
+    : create<L1LauncherWizardState>()(L1LauncherWizardStoreFunc);
 
-export const resetStore = () => {
+export const resetL1ManagerWizardStore = () => {
     if (confirm('Are you sure you want to start over? This will reset all progress while preserving your temporary wallet.')) {
-        const currentStore = useWizardStore.getState();
+        const currentStore = useL1LauncherWizardStore.getState();
         const savedPrivateKey = currentStore.tempPrivateKeyHex;
         localStorage.setItem('temp-private-key', savedPrivateKey);
-        localStorage.removeItem('wizard-storage');
+        localStorage.removeItem('l1-launcher-wizard-storage');
         window.location.reload();
     }
 };
@@ -266,7 +266,7 @@ export const resetStore = () => {
 if (typeof window !== 'undefined') {
     const savedPrivateKey = localStorage.getItem('temp-private-key');
     if (savedPrivateKey) {
-        useWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
+        useL1LauncherWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
         localStorage.removeItem('temp-private-key');
     }
 }

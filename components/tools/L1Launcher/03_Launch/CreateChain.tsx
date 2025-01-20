@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { createSubnet, createChain, convertToL1 } from './chain';
 import { calculateContractAddress } from '../../common/utils/wallet';
@@ -27,7 +27,7 @@ export default function CreateChain() {
         nodesCount,
         goToNextStep,
         goToPreviousStep
-    } = useWizardStore();
+    } = useL1LauncherWizardStore();
 
     const [subnetStatus, setSubnetStatus] = useState<StepStatus>(() => ({
         status: existingSubnetId ? 'success' : 'not_started',

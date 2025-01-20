@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 
-import { useWizardStore } from '../../store';
+import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '../../../common/utils/cb58';
 import { packWarpIntoAccessList } from '../../../common/utils/packWarp';
@@ -29,7 +29,7 @@ export default function ContractInitializeValidatorSet() {
         tokenSymbol,
         getCChainRpcEndpoint,
         convertL1SignedWarpMessage
-    } = useWizardStore();
+    } = useL1LauncherWizardStore();
 
     const [initialCheckHasRun, setInitialCheckHasRun] = useState(false);
 

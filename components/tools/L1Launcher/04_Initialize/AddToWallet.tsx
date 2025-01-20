@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from '@/components/tools/common/ui/NextPrev';
 import Note from '@/components/tools/common/ui/Note';
 import { getWalletAddress } from '../../common/utils/wallet';
 import SwitchChain from '@/components/tools/common/ui/SwitchChain';
 
 export default function AddToWallet() {
-    const { evmChainId, l1Name, tokenSymbol, getCChainRpcEndpoint, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { evmChainId, l1Name, tokenSymbol, getCChainRpcEndpoint, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [isAdded, setIsAdded] = useState(false);
     const [balanceError, setBalanceError] = useState<string | null>(null);
     const [walletError, setWalletError] = useState<string | null>(null);

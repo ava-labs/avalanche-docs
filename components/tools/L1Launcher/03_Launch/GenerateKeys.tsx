@@ -18,7 +18,7 @@ const stopScript = `docker stop avago; docker rm avago`
 
 import { useState } from 'react';
 import { CONTAINER_VERSION } from '../constants';
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import Pre from '@/components/tools/common/ui/Pre';
 import TextArea from '@/components/tools/common/ui/TextArea';
@@ -49,7 +49,7 @@ const validateNodePop = (json: string): boolean => {
 };
 
 export default function GenerateKeys() {
-    const { nodePopJsons, setNodePopJsons, nodesCount, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { nodePopJsons, setNodePopJsons, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [errors, setErrors] = useState<string[]>(Array(nodesCount).fill(''));
     const [nodesRemovedAfterKeyGeneration, setNodesRemovedAfterKeyGeneration] = useState(false);
 

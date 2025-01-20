@@ -40,7 +40,7 @@ interface ChainInfo {
     enabledFeatures: string[];
 }
 
-interface WizardState extends StepWizardState {
+interface L1ManagerWizardState extends StepWizardState {
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
 
@@ -113,7 +113,7 @@ interface WizardState extends StepWizardState {
     setChainInfo: (info: ChainInfo) => void;
 }
 
-const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
+const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) => ({
     ...createStepWizardStore({set, get, stepList}),
     
     poaOwnerAddress: "",
@@ -266,24 +266,24 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
 const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
 
-export const useWizardStore = shouldPersist
-    ? create<WizardState>()(
+export const useL1ManagerWizardStore = shouldPersist
+    ? create<L1ManagerWizardState>()(
         persist(
-            wizardStoreFunc,
+            L1ManagerWizardStoreFunc,
             {
-                name: 'wizard-storage',
+                name: 'l1-manager-wizard-storage',
                 storage: createJSONStorage(() => localStorage),
             }
         )
     )
-    : create<WizardState>()(wizardStoreFunc);
+    : create<L1ManagerWizardState>()(L1ManagerWizardStoreFunc);
 
-export const resetStore = () => {
+export const resetL1ManagerWizardStore = () => {
     if (confirm('Are you sure you want to start over? This will reset all progress while preserving your temporary wallet.')) {
-        const currentStore = useWizardStore.getState();
+        const currentStore = useL1ManagerWizardStore.getState();
         const savedPrivateKey = currentStore.tempPrivateKeyHex;
         localStorage.setItem('temp-private-key', savedPrivateKey);
-        localStorage.removeItem('wizard-storage');
+        localStorage.removeItem('l1-manager-wizard-storage');
         window.location.reload();
     }
 };
@@ -292,7 +292,7 @@ export const resetStore = () => {
 if (typeof window !== 'undefined') {
     const savedPrivateKey = localStorage.getItem('temp-private-key');
     if (savedPrivateKey) {
-        useWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
+        useL1ManagerWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
         localStorage.removeItem('temp-private-key');
     }
 }

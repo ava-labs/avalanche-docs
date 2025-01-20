@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { AlertCircle, Plus, Trash2 } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { useWizardStore } from '../store'
+import { useL1ManagerWizardStore } from '../config/store'
 import { utils } from '@avalabs/avalanchejs'
 import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, parseEther, defineChain, custom } from 'viem'
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
@@ -87,7 +87,7 @@ export default function LaunchValidators() {
     poaOwnerAddress, 
     subnetId,
     setSubnetId,
-  } = useWizardStore()
+  } = useL1ManagerWizardStore()
   const [validators, setValidators] = useState<Validator[]>([])
   const [newNodeID, setNewNodeID] = useState('')
   const [newBlsPublicKey, setNewBlsPublicKey] = useState('')

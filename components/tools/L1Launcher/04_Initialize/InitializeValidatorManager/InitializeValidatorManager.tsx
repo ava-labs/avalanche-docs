@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useWizardStore } from '../../store';
+import { useL1LauncherWizardStore } from '../../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import SwitchChain from '@/components/tools/common/ui/SwitchChain';
 import CheckContractLogs from './04_CheckContractLogs';
@@ -16,7 +16,7 @@ export default function InitializeValidatorManager() {
         getCChainRpcEndpoint,
         goToNextStep,
         goToPreviousStep
-    } = useWizardStore();
+    } = useL1LauncherWizardStore();
 
     // Create chain config object
     const chainConfig = {

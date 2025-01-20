@@ -1,6 +1,6 @@
 import { apiHostPromise } from '../../../common/utils/config';
 import { useEffect, useState } from 'react';
-import { useWizardStore } from '../../store';
+import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
 import { statusColors, StepState } from './colors';
 import { packL1ConversionMessage } from '@/components/tools/common/utils/convertWarp';
@@ -62,7 +62,7 @@ export default function CollectSignatures() {
         convertL1SignedWarpMessage,
         setConvertL1SignedWarpMessage,
         getRpcEndpoint
-    } = useWizardStore();
+    } = useL1LauncherWizardStore();
 
     const [error, setError] = useState<string | null>(null);
     const [status, setStatus] = useState<StepState>('not_started');

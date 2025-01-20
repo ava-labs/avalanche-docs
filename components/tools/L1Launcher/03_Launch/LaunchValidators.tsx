@@ -1,4 +1,4 @@
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { useState } from 'react';
 import Note from '@/components/tools/common/ui/Note';
@@ -20,7 +20,7 @@ const dockerCommand = (subnetID: string) => `docker run -it -d \\
 
 
 export default function LaunchValidators() {
-  const { subnetId, chainId, evmChainId, nodesCount, goToNextStep, goToPreviousStep } = useWizardStore();
+  const { subnetId, chainId, evmChainId, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
   const [isBootstrapped, setIsBootstrapped] = useState(false);
 
 

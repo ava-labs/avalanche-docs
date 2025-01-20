@@ -1,5 +1,5 @@
 import { Input } from '@/components/ui/input';
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Label } from '@radix-ui/react-label';
 import TokenAllocationList from '../../common/token-allocation-list/token-allocation-list';
@@ -9,7 +9,7 @@ import { newPrivateKey } from '../../common/utils/wallet';
 import { isValidAllowlistPrecompileConfig } from '../../common/utils/validation';
 
 export default function Permissions() {
-    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex, goToNextStep, goToPreviousStep } = useWizardStore();
+    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
 
     // Initialize temporary private key if not exists
     useEffect(() => {

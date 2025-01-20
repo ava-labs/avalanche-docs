@@ -1,4 +1,4 @@
-import { useWizardStore } from '../store';
+import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import Note from '@/components/tools/common/ui/Note';
 import Pre from '@/components/tools/common/ui/Pre';
@@ -236,7 +236,7 @@ export default function OpenRPCPort() {
         evmChainId,
         goToNextStep,
         goToPreviousStep
-    } = useWizardStore();
+    } = useL1LauncherWizardStore();
 
 
     const isAddressValid = () => {

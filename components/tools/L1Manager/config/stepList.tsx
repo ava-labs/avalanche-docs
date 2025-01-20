@@ -1,9 +1,9 @@
 import { BookOpen, Flag, Settings, Server } from 'lucide-react'
-import Welcome from "./01_Welcome/Welcome";
-import ChainParameters from './02_Configure/ChainParameters';
-import LaunchValidators from "./03_Dashboard/ValidatorDashboard";
-import WhatsNext from "./04_WhatsNext/WhatsNext";
-import { StepGroupListType, StepListType } from '../common/ui/types';
+import Welcome from "../01_Welcome/Welcome";
+import ChainParameters from '../02_Configure/ChainParameters';
+import LaunchValidators from "../03_Dashboard/ValidatorDashboard";
+import WhatsNext from "../04_WhatsNext/WhatsNext";
+import { StepGroupListType, StepListType } from '../../common/ui/types';
 
 export const stepGroups : StepGroupListType = {
     "welcome": {
