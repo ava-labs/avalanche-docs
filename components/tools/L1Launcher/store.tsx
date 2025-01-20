@@ -20,7 +20,7 @@ interface WizardState {
 
     nodesCount: number;
     setNodesCount: (count: number) => void;
-    
+
     evmChainId: number;
     setEvmChainId: (chainId: number) => void;
 
@@ -136,35 +136,35 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
 
     txAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: false
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setTxAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ txAllowlistConfig: config })),
 
     contractDeployerAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: true
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
 
     tempPrivateKeyHex: "",
-    setTempPrivateKeyHex: (key: string) => set(() => ({ 
-        tempPrivateKeyHex: key, 
+    setTempPrivateKeyHex: (key: string) => set(() => ({
+        tempPrivateKeyHex: key,
         tokenAllocations: [
-            { id:"Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
+            { id: "Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
             ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
         ],
-        txAllowlistConfig : {
+        txAllowlistConfig: {
             addresses: {
                 Admin: get().txAllowlistConfig.addresses.Admin,
                 Manager: get().txAllowlistConfig.addresses.Manager,
@@ -179,7 +179,7 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
             },
             activated: get().txAllowlistConfig.activated
         },
-        contractDeployerAllowlistConfig : {
+        contractDeployerAllowlistConfig: {
             addresses: {
                 Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
                 Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
@@ -193,31 +193,33 @@ const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
                 ]
             },
             activated: get().txAllowlistConfig.activated
-        } 
+        }
     })),
 
-    tokenAllocations: [ ] as AllocationEntry[],
+    tokenAllocations: [] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
 
     nativeMinterAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
-        activated: false} as AllowlistPrecompileConfig,
+        activated: false
+    } as AllowlistPrecompileConfig,
     setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
 
     genesisString: "",
     regenerateGenesis: async () => {
-        const { poaOwnerAddress: ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
-        
+        const { poaOwnerAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
+
         const genesis = generateGenesis({
             evmChainId,
             tokenAllocations,
             txAllowlistConfig,
             contractDeployerAllowlistConfig,
-            nativeMinterAllowlistConfig
+            nativeMinterAllowlistConfig,
+            poaOwnerAddress
         });
 
         set({ genesisString: JSON.stringify(genesis, null, 2) });

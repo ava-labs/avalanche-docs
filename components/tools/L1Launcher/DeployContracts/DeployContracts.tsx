@@ -5,9 +5,11 @@ import NextPrev from '../ui/NextPrev';
 import PoAValidatorManager from "../contract_compiler/compiled/PoAValidatorManager.json"
 import ValidatorMessages from "../contract_compiler/compiled/ValidatorMessages.json"
 import { calculateContractAddress, getAddresses } from '../wallet';
-import ProxyAdmin from "../contract_compiler/compiled/ProxyAdmin.json";
+import ProxyAdmin from "../contract_compiler/compiled-4.9/ProxyAdmin.json";
 import { privateKeyToAccount } from 'viem/accounts';
-import TransparentUpgradeableProxy from "../contract_compiler/compiled/TransparentUpgradeableProxy.json"
+import TransparentUpgradeableProxy from "../contract_compiler/compiled-4.9/TransparentUpgradeableProxy.json"
+import { UpgradeProxyUI } from './UpgradeProxy';
+import { PROXY_ADDRESS } from '../utils/genGenesis';
 
 type Status = 'not_started' | 'in_progress' | 'error' | 'success' | 'loading';
 
@@ -320,7 +322,7 @@ function QuickDeploymentTest({ onTestComplete }: { onTestComplete: (success: boo
             });
 
             const implAddress = calculateContractAddress(tempPrivateKeyHex, 1);
-            const proxyAddress = calculateContractAddress(tempPrivateKeyHex, 3);
+            const proxyAddress = PROXY_ADDRESS;
 
             console.log('Testing contract calls:', {
                 implementation: implAddress,
@@ -399,8 +401,6 @@ export default function DeployContracts() {
     const { tempPrivateKeyHex } = useWizardStore();
     const [validatorMessagesDeployed, setValidatorMessagesDeployed] = useState(false);
     const [validatorManagerDeployed, setValidatorManagerDeployed] = useState(false);
-    const [proxyAdminDeployed, setProxyAdminDeployed] = useState(false);
-    const [proxyDeployed, setProxyDeployed] = useState(false);
     const [proxyTestPassed, setProxyTestPassed] = useState(false);
 
     // Pre-link the ValidatorManager bytecode
@@ -446,37 +446,11 @@ export default function DeployContracts() {
                 onDeployComplete={() => setValidatorManagerDeployed(true)}
             />
 
-            <ContractDeployer
-                name="ProxyAdmin"
-                nonce={2}
-                abi={ProxyAdmin.abi}
-                bytecode={ProxyAdmin.bytecode.object as `0x${string}`}
-                args={[(getAddresses(tempPrivateKeyHex)).C]}
-                isEnabled={validatorManagerDeployed}
-                onDeployComplete={() => {
-                    setProxyAdminDeployed(true);
-                }}
+            <QuickDeploymentTest
+                onTestComplete={setProxyTestPassed}
             />
 
-            <ContractDeployer
-                name="TransparentUpgradeableProxy"
-                nonce={3}
-                abi={TransparentUpgradeableProxy.abi}
-                bytecode={TransparentUpgradeableProxy.bytecode.object as `0x${string}`}
-                args={[
-                    calculateContractAddress(tempPrivateKeyHex, 1),
-                    calculateContractAddress(tempPrivateKeyHex, 2),
-                    "0x" as `0x${string}`
-                ]}
-                isEnabled={proxyAdminDeployed}
-                onDeployComplete={() => setProxyDeployed(true)}
-            />
-
-            {proxyDeployed && (
-                <QuickDeploymentTest
-                    onTestComplete={setProxyTestPassed}
-                />
-            )}
+            <UpgradeProxyUI />
 
             <NextPrev
                 nextDisabled={!proxyTestPassed}
