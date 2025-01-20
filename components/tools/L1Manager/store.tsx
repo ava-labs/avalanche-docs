@@ -5,6 +5,8 @@ import { getAddresses } from '@/components/tools/common/utils/wallet';
 import { stepList } from './stepList';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
+import { StepWizardState } from '@/components/tools/common/ui/types';
+import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
 
 interface NetworkToken {
     name: string;
@@ -38,16 +40,9 @@ interface ChainInfo {
     enabledFeatures: string[];
 }
 
-interface WizardState {
+interface WizardState extends StepWizardState {
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
-
-    currentStep: keyof typeof stepList;
-    goToNextStep: () => void;
-    goToPreviousStep: () => void;
-    maxAdvancedStep: keyof typeof stepList;
-    userHasAdvancedBeyondStep: (step: keyof typeof stepList) => boolean;
-    advanceTo: (targetStep: keyof typeof stepList) => void;
 
     nodesCount: number;
     setNodesCount: (count: number) => void;
@@ -119,50 +114,12 @@ interface WizardState {
 }
 
 const wizardStoreFunc: StateCreator<WizardState> = (set, get) => ({
+    ...createStepWizardStore({set, get, stepList}),
+    
     poaOwnerAddress: "",
     setPoaOwnerAddress: (address: string) => set(() => ({
         poaOwnerAddress: address
     })),
-
-    currentStep: Object.keys(stepList)[0] as keyof typeof stepList,
-        maxAdvancedStep: Object.keys(stepList)[0] as keyof typeof stepList,
-        goToNextStep: () => set((state) => {
-            const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-            const nextStepIndex = stepKeys.indexOf(state.currentStep) + 1;
-            const maxAdvancedIndex = stepKeys.indexOf(state.maxAdvancedStep);
-            if (nextStepIndex <= stepKeys.length - 1) {
-                if (nextStepIndex > maxAdvancedIndex) {
-                    return { currentStep: stepKeys[nextStepIndex], maxAdvancedStep: stepKeys[nextStepIndex] };
-                }
-                return { currentStep: stepKeys[nextStepIndex] };
-            }
-            return state;
-        }),
-        goToPreviousStep: () => set((state) => {
-            const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-            const currentIndex = stepKeys.indexOf(state.currentStep);
-            if (currentIndex > 0) {
-                return { currentStep: stepKeys[currentIndex - 1] };
-            }
-            return state;
-        }),
-        advanceTo: (targetStep) => set((state) => {
-            const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-            const targetIndex = stepKeys.indexOf(targetStep);
-            const maxAdvancedIndex = stepKeys.indexOf(state.maxAdvancedStep);
-    
-            // Only allow navigation to steps that have been reached before
-            if (targetIndex <= maxAdvancedIndex) {
-                return { currentStep: targetStep };
-            }
-            return state;
-        }),
-        userHasAdvancedBeyondStep: (step) => {
-            const stepKeys = Object.keys(stepList) as (keyof typeof stepList)[];
-            const stepIndex = stepKeys.indexOf(step);
-            const maxAdvancedIndex = stepKeys.indexOf(get().maxAdvancedStep);
-            return stepIndex < maxAdvancedIndex;
-        },
 
     nodesCount: 1,
     setNodesCount: (count: number) => set(() => ({ nodesCount: count })),
