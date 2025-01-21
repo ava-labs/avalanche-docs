@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, ReactNode } from "react";
 import Link from 'next/link';
-import { ArrowUpRight, Code, Link as Zap, Link2, Lightbulb, X, Book, Users, SquareTerminal, Box, Mail } from 'lucide-react';
+import { ArrowUpRight, Code, Link as Zap, Link2, Lightbulb, X, Book, Users, SquareTerminal, Box, Mail, Network } from 'lucide-react';
 import PartnerTracks from './partners';
 import { buttonVariants } from '@/components/ui/button';
 
@@ -195,56 +195,57 @@ export default function HackathonPage() {
       ]
     },
     {
-        id: 'cross-chain-dapps',
-        title: 'Cross-Chain Decentralized Applications (dApps)',
-        description: "Develop cross-chain decentralized applications on your own customizable L1 that seamlessly interacts with multiple blockchain networks using ICM and ICTT.",
-        difficulty: 'Intermediate',
-        color: 'border-green-500 text-green-700',
-        icon: <Zap size={24} className="text-green-500" />,
-        examples: [
-          'Create DeFi, SocialFi, or Gaming dApps that operate across multiple Avalanche L1s and other blockchains.',
-          'Develop applications utilizing staking, governance, or NFTs with cross-chain functionality.',
-          'Integrate seamless user experiences with multi-network infrastructures.'
-        ],
-        resources: [
-          { name: 'InterChain Messaging', url: 'https://academy.avax.network/course/interchain-messaging' },
-          { name: 'InterChain Token Transfer', url: 'https://academy.avax.network/course/interchain-token-transfer' },
-          { name: 'Cross-Chain Communication', url: 'https://docs.avax.network/build/avalanchego/cross-chain' }
-        ]
-      },
-      {
-        id: 'tooling',
-        title: 'Developer Tooling',
-        description: "Leverage Avalanche's technology by creating developer tools that simplify building and deploying applications on Avalanche.",
-        difficulty: 'Intermediate',
-        color: 'border-purple-500 text-purple-700',
-        icon: <Code size={24} className="text-purple-500" />,
-        examples: [
-          'Develop SDKs or APIs to improve developer experience.',
+      id: 'cross-chain-dapps',
+      title: 'Cross-Chain Decentralized Applications (dApps)',
+      description: "Develop cross-chain decentralized applications on your own customizable L1 that seamlessly interacts with multiple blockchain networks using ICM and ICTT.",
+      difficulty: 'Intermediate',
+      color: 'border-green-500 text-green-700',
+      icon: <Zap size={24} className="text-green-500" />,
+      examples: [
+        'Create DeFi, SocialFi, or Gaming dApps that operate across multiple Avalanche L1s and other blockchains.',
+        'Develop applications utilizing staking, governance, or NFTs with cross-chain functionality.',
+        'Integrate seamless user experiences with multi-network infrastructures.'
+      ],
+      resources: [
+        { name: 'InterChain Messaging', url: 'https://academy.avax.network/course/interchain-messaging' },
+        { name: 'InterChain Token Transfer', url: 'https://academy.avax.network/course/interchain-token-transfer' },
+        { name: 'Cross-Chain Communication', url: 'https://docs.avax.network/build/avalanchego/cross-chain' }
+      ]
+    },
+    {
+      id: 'tooling',
+      title: 'Developer Tooling',
+      description: "Leverage Avalanche's technology by creating developer tools that simplify building and deploying applications on Avalanche.",
+      difficulty: 'Intermediate',
+      color: 'border-purple-500 text-purple-700',
+      icon: <Code size={24} className="text-purple-500" />,
+      examples: [
+        'Develop SDKs or APIs to improve developer experience.',
           'Build tools for smart contract deployment and testing.',
-          'Create dashboards for network monitoring and analytics.'
-        ],
-        resources: [
-          { name: 'Avalanche SDK', url: 'https://github.com/ava-labs/avalanchejs' },
-          { name: 'Developer Tools', url: 'https://docs.avax.network/tools' }
+        'Create dashboards for network monitoring and analytics.'
+      ],
+      resources: [
+        { name: 'Avalanche SDK', url: 'https://github.com/ava-labs/avalanchejs' },
+        { name: 'Developer Tools', url: 'https://docs.avax.network/tools' }
         ]
-      },
-      {
-        id: 'ai-agent',
-        title: 'AI Agents',
-        description: "Leverage Avalanche's technology by creating developer tools that simplify building and deploying applications on Avalanche.",
-        difficulty: 'Intermediate',
-        color: 'border-purple-500 text-purple-700',
-        icon: <Code size={24} className="text-purple-500" />,
-        examples: [
-          'Develop SDKs or APIs to improve developer experience.',
-          'Build tools for smart contract deployment and testing.',
-          'Create dashboards for network monitoring and analytics.'
-        ],
-        resources: [
-          { name: 'Avalanche SDK', url: 'https://github.com/ava-labs/avalanchejs' },
-        ]
-      },  
+    },
+    {
+      id: 'ai-agents-avalanche',
+      title: 'AI Agents for Avalanche',
+      description: "Develop intelligent AI agents that interact with the Avalanche blockchain to automate tasks, analyze data, and enhance user experiences within decentralized ecosystems.",
+      difficulty: 'Advanced',
+      color: 'border-red-500 text-red-700',
+      icon: <Network size={24} className="text-red-500" />,
+      examples: [
+        'Create an agent that monitors Avalanche smart contracts and alerts users to significant events.',
+        'Build an AI agent that analyzes transaction data for trends and insights.',
+        'Develop agents that assist with wallet management and automate staking or bridging processes.'
+      ],
+      resources: [
+        { name: 'AvalancheJS', url: 'https://github.com/ava-labs/avalanchejs' },
+        { name: 'Avalanche Developer Documentation', url: 'https://docs.avax.network/' }
+      ]
+    },
   ];
 
   return (
@@ -325,11 +326,11 @@ export default function HackathonPage() {
             
             <p className="text-lg text-gray-600 dark:text-gray-400">
               Are you a project looking for developers to test your product and enhace the Avalanche Ecosystem?{" "}
-              <Link href="mailto:brittany.gilliam@avalabs.org" passHref>
+              <Link href="https://share.hsforms.com/1kflciOGOQuCDSGGMWdpWSw4h8ew" passHref>
                 <strong className="text-yellow-500 hover:underline">
-                Contact us
+                Apply as Sponsor
                 </strong>
-              </Link>, and become a partner
+              </Link>, and get your own hackathon track!
             </p>
         </div>
       </div>

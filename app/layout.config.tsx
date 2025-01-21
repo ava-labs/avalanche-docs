@@ -322,8 +322,8 @@ const hackathonMenu: LinkItemType = {
     {
       icon: <Handshake />,
       text: 'Partners',
-      description: "Want to be a partner of the Hackathon? Contact Us!",
-      url: 'mailto:brittany.gilliam@avalabs.org',
+      description: "Want to become a sponsor of the Hackathon? Contact Us!",
+      url: 'https://share.hsforms.com/1kflciOGOQuCDSGGMWdpWSw4h8ew',
       menu: {
         className: 'lg:col-start-3 lg:row-start-1',
       },
