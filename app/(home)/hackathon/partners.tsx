@@ -179,7 +179,7 @@ const PartnerTracks: React.FC = () => {
 
   return (
     <div className="mb-12">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">Partner Tracks</h2>
+      <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">Partners and Sponsors</h2>
       <div className="grid gap-6 md:grid-cols-2">
         {partnerTracks.map((track) => (
           <PartnerTrackCard key={track.id} track={track} />

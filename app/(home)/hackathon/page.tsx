@@ -252,13 +252,20 @@ export default function HackathonPage() {
     <main className="container relative py-6">
       <div className="py-12 sm:py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto w-full lg:mx-0">
-            <h2 className="text-center text-5xl font-bold tracking-tight sm:text-10xl">Summit London Hackathon</h2>
-            <p className="mt-12 text-center text-lg leading-8 text-muted-foreground">
-              At Avalanche, we believe in the power of technology to transform industries and solve real-world problems.
-              This hackathon aims to harness the potential of Avalanche's robust technology stack to address pressing issues and create scalable, practical solutions. 
+        <div className="mx-auto w-full lg:mx-0">
+          <img src="/hackathon-images/AvalancheSummit_London_HackathonLogo_Blue.png" alt="Summit London Logo" className="mx-auto h-32 w-auto" />
+         <p className="mt-12 text-center text-lg leading-8 text-muted-foreground">
+            At Avalanche, we believe in the power of technology to transform industries and solve real-world problems.
+            This hackathon aims to harness the potential of Avalanche's robust technology stack to address pressing issues and create scalable, practical solutions. 
+          </p>
+          <div className="mt-8 text-center">
+            <p className="text-lg font-semibold">Date: May 23-25, 2025</p>
+            <p className="text-lg font-semibold">
+              Location: <a href="https://www.google.com/maps/search/?api=1&query=Second%20Home%20Spitalfields&query_place_id=ChIJrWaBB7YcdkgRw6Fv--wBXIU" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Second Home Spitalfields
+              London, England 🇬🇧</a>
             </p>
           </div>
+        </div>
           <div className="flex items-center max-w-xl p-4 mx-auto mt-4 text-sm rounded-lg group" style={{ justifyContent: "center" }}>
             <Link href="https://lu.ma/avalanchesummitlondonhackathon" className={buttonVariants({ size: 'lg', variant: 'default' })}>
               Register Here! →
@@ -322,10 +329,10 @@ export default function HackathonPage() {
       
       <div className="py-12 sm:py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">Partner Tracks</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">Partner and Sponsors</h2>
             
             <p className="text-lg text-gray-600 dark:text-gray-400">
-              Are you a project looking for developers to test your product and enhace the Avalanche Ecosystem?{" "}
+              Are you a project looking for developers to test your product and enhance the Avalanche Ecosystem?{" "}
               <Link href="https://share.hsforms.com/1kflciOGOQuCDSGGMWdpWSw4h8ew" passHref>
                 <strong className="text-yellow-500 hover:underline">
                 Apply as Sponsor
