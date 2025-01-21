@@ -98,9 +98,9 @@ const Ripple = React.memo(function Ripple({
 
   const circle2: AvatarItem[] = [
     {
-      name: "Meld",
-      image: "https://images.ctfassets.net/gcj8jwzm6086/181nlCtlNqCsTSncb3Z7Xe/f1054944d8af31636bd27e35430082ba/meld_logo_sm.png",
-      link: "https://www.meld.com/",
+      name: "Quboid",
+      image: "https://images.ctfassets.net/gcj8jwzm6086/5jRNt6keCaCe0Z35ZQbwtL/94f81aa95f9d9229111693aa6a705437/Quboid_Logo.jpg",
+      link: "https://qubo.id/",
     },
     {
       name: "UPTN",
