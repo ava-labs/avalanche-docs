@@ -4,6 +4,7 @@ import NextPrev from "@/components/tools/common/ui/NextPrev";
 import Note from '@/components/tools/common/ui/Note';
 import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
+import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
 const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
   --name rpc \\
@@ -22,9 +23,12 @@ const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalan
   --user $(id -u):$(id -g) \\
   avaplatform/subnet-evm:${CONTAINER_VERSION}`;
 
+const operatingSystems = ['Linux', 'macOS'];
+
 export default function LaunchRpcNode() {
     const { subnetId, chainId, evmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [isRpcLaunched, setIsRpcLaunched] = useState(false);
+    const [activeOs, setActiveOs] = useState("Linux");
 
     return (
         <div className="space-y-12">
@@ -58,6 +62,16 @@ export default function LaunchRpcNode() {
                 <p className="mb-4">
                     This command launches an AvalancheGo node configured as an RPC node. It changes the RPC port to <code>8080</code> and the P2P port to <code>9653</code> to avoid conflicts with your validator node. You can run this on the same machine as one of your validator nodes or even on your local computer for easier access from a wallet.
                 </p>
+
+                <OSSelectionTabs 
+                operatingSystems={operatingSystems} 
+                activeOS={activeOs} 
+                setActiveOS={setActiveOs} 
+                    />
+
+                {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
+                Please note that --network host does not work on macOS, so you have to map the ports manually.
+                </p>)}
                 <Pre>{dockerCommand(subnetId, chainId)}</Pre>
             </div>
 

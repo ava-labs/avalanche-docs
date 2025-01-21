@@ -3,9 +3,10 @@ import NextPrev from "@/components/tools/common/ui/NextPrev";
 import Note from '@/components/tools/common/ui/Note';
 import { useState } from 'react';
 import Pre from '@/components/tools/common/ui/Pre';
+import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
 const dockerInstallInstructions: Record<string, string> = {
-    'Ubuntu/Debian': `sudo apt-get update && \\
+'Ubuntu/Debian': `sudo apt-get update && \\
     sudo apt-get install -y docker.io && \\
     sudo usermod -aG docker $USER && \\
     newgrp docker
@@ -13,7 +14,7 @@ const dockerInstallInstructions: Record<string, string> = {
 # Test docker installation
 docker run -it --rm hello-world
 `,
-    'Amazon Linux 2023+': `sudo yum update -y && \\
+'Amazon Linux 2023+': `sudo yum update -y && \\
     sudo yum install -y docker && \\
     sudo service docker start && \\
     sudo usermod -a -G docker $USER && \\
@@ -22,7 +23,7 @@ docker run -it --rm hello-world
 # Test docker installation
 docker run -it --rm hello-world
 `,
-    'Fedora': `sudo dnf update -y && \\
+'Fedora': `sudo dnf update -y && \\
     sudo dnf -y install docker && \\
     sudo systemctl start docker && \\
     sudo usermod -a -G docker $USER && \\
@@ -73,27 +74,12 @@ export default function PrepareValidators() {
             <p className="mb-4">
                 We will retrieve the binary images of <a href='https://github.com/ava-labs/avalanchego' target='_blank'>AvalancheGo</a> from the Docker Hub. Make sure you have Docker installed on your system. To install Docker on an AWS machine, run the following commands:
             </p>
-            <div className="text-sm font-medium text-center text-gray-500 dark:text-gray-400 ">
-                <ul className="flex flex-wrap -mb-px">
-                    {Object.keys(dockerInstallInstructions).map((os) => (
-                        <li key={os} className="me-2">
-                            <a
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setActiveOs(os);
-                                }}
-                                className={`inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 ${activeOs === os
-                                    ? 'text-blue-600 border-blue-600'
-                                    : 'border-transparent'
-                                    }`}
-                            >
-                                {os}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+
+            <OSSelectionTabs 
+                operatingSystems={Object.keys(dockerInstallInstructions)} 
+                activeOS={activeOs} 
+                setActiveOS={setActiveOs} 
+            />
 
             <Pre>
                 {dockerInstallInstructions[activeOs]}

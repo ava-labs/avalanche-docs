@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Note from '@/components/tools/common/ui/Note';
 import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
+import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
 const dockerCommand = (subnetID: string) => `docker run -it -d \\
   --name avago \\
@@ -18,11 +19,13 @@ const dockerCommand = (subnetID: string) => `docker run -it -d \\
   --user $(id -u):$(id -g) \\
   avaplatform/subnet-evm:${CONTAINER_VERSION}`
 
+const operatingSystems = ['Linux', 'macOS'];
+
 
 export default function LaunchValidators() {
   const { subnetId, chainId, evmChainId, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
   const [isBootstrapped, setIsBootstrapped] = useState(false);
-
+  const [activeOs, setActiveOs] = useState("Linux");
 
   return (
     <div className="space-y-12">
@@ -35,6 +38,15 @@ export default function LaunchValidators() {
         <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
           {nodesCount > 1 ? 'Launch this on each of your ' + nodesCount + ' validator nodes' + ':' : 'Launch this on your validator node:'}
         </h3>
+        <OSSelectionTabs 
+                operatingSystems={operatingSystems} 
+                activeOS={activeOs} 
+                setActiveOS={setActiveOs} 
+            />
+
+        {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
+          Please note that --network host does not work on macOS, so you have to map the ports manually.
+        </p>)}
         <Pre>{dockerCommand(subnetId)}</Pre>
         <Note>
           <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{subnetId}</code> is the subnet ID
@@ -63,8 +75,6 @@ export default function LaunchValidators() {
           <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{chainId}</code> is the chain ID
         </Note>
         <p className="mb-4 text-gray-800 dark:text-gray-200">At first, it will return <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">404 page not found</code> as the node is not bootstrapped yet.</p>
-
-
 
         <p className="mb-4 text-gray-800 dark:text-gray-200">
           If your node has bootstrapped successfully, you should see this response:
