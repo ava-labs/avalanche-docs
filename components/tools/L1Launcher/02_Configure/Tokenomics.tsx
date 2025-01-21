@@ -20,7 +20,11 @@ export default function Permissions() {
 
     return (
         <div className="space-y-12">
-            <h1 className="text-2xl font-medium mb-6">Tokenomics</h1>
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Tokenomics</h1>
+                <p>Configure the tokenomics of your L1. You can pick a token symbol and the initial allocation. Futhermore, you can configure if the native token used for transaction fees should be mintable. You can configure the staking token in the next step.</p>
+            </div>
+
             <div>
                 <Label>Token Symbol</Label>
                 <Input type='text' value={tokenSymbol} onChange={(e) => setTokenSymbol(e.target.value)} />
@@ -31,7 +35,7 @@ export default function Permissions() {
 
             <div>
                 <h3 className="mb-4 font-medium">Initial Token Allocation</h3>
-                <p className="text-gray-600">Define which addresses should hold how many tokens at the start of the blockchain.</p>
+                <p className="text-gray-600">Define which addresses should hold how many tokens at the start (genesis) of the blockchain. The <span className="italic">Initial Contract Deployer</span> address is required for deploying the validator manager contracts later.</p>
             </div>
             
             <TokenAllocationList

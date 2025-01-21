@@ -118,8 +118,14 @@ export default function AddToWallet() {
     }
 
     return (
-        <SwitchChain chainConfig={chainConfig}>
-            <h1 className="text-2xl font-medium mb-6 text-gray-900 dark:text-gray-100">Add to Wallet</h1>
+        <div className="space-y-12">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Add to Wallet</h1>
+                <p>Now that we have an RPC node set up, it is time to connect our wallet to the L1 so we can deploy the contracts.</p>
+            </div>
+            <SwitchChain chainConfig={chainConfig}>
+                <p>Success</p>
+            </SwitchChain>
             <div className="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-400 dark:border-blue-600 p-4 mb-6">
                 <div className="space-y-4">
                     <div>
@@ -181,6 +187,6 @@ export default function AddToWallet() {
             )}
 
             <NextPrev nextDisabled={!isAdded || !!balanceError} onNext={goToNextStep} onPrev={goToPreviousStep} />
-        </SwitchChain>
+        </div>
     );
 };

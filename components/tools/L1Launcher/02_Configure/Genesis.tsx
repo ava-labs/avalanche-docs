@@ -26,7 +26,10 @@ export default function Genesis() {
 
     return (
         <div className="space-y-12">
-            <h1 className="text-2xl font-medium mb-6">Genesis Settings</h1>
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Genesis Generation</h1>
+                <p>Based on your configurations in the steps before, you can now generate your EVM genesis. Please check this carefully before proceeding.</p>
+            </div>
             
             {error && (
                 <div className="mb-4 p-3 text-sm text-red-500 bg-red-50 rounded-md">

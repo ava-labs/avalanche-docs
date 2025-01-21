@@ -25,71 +25,60 @@ export default function LaunchValidators() {
 
 
   return (
-    <>
-      <h1 className="text-2xl font-medium mb-6 text-gray-900 dark:text-gray-100">Launch L1 Validators</h1>
-
-      <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
-        {nodesCount > 1 ? 'Launch this on each of your ' + nodesCount + ' validator node' + (nodesCount > 1 ? 's' : '') + ':' : 'Launch this on your validator node:'}
-      </h3>
-      <Pre>{dockerCommand(subnetId)}</Pre>
-
-      <Note>
-        <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{subnetId}</code> is the subnet ID
-      </Note>
-
-
-      <div className="mb-4">
-        <strong className="text-gray-900 dark:text-gray-100">Requirements for validator nodes:</strong>
-        <ul className="list-disc list-inside ml-4 text-gray-800 dark:text-gray-200">
-          <li>16GB RAM (you might try with 8GB)</li>
-          <li>8 cores CPU (you might try 4 cores)</li>
-          <li>
-            At least 100GB of any disk space (EBS or SSD), except for HDD
-          </li>
-          <li>
-            <strong className="text-gray-900 dark:text-gray-100">⚠️ Important:</strong> make sure port 9651 is open on your node!
-          </li>
-        </ul>
+    <div className="space-y-12">
+      <div>
+        <h1 className="text-2xl font-medium mb-4">Launch L1 Validators</h1>
+        <p>In this step we will launch the actual validator nodes using Docker. </p>
       </div>
 
+      <div>
+        <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
+          {nodesCount > 1 ? 'Launch this on each of your ' + nodesCount + ' validator nodes' + ':' : 'Launch this on your validator node:'}
+        </h3>
+        <Pre>{dockerCommand(subnetId)}</Pre>
+        <Note>
+          <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{subnetId}</code> is the subnet ID
+        </Note>
+        <p className="mb-4 text-gray-800 dark:text-gray-200">
+          It will take approximately 3 to 10 minutes to bootstrap as it needs to sync the P-Chain, which is quick. Note that these nodes are not archival; you should read how to set up archival nodes if needed.
+        </p>
+      </div>
 
-      <p className="mb-4 text-gray-800 dark:text-gray-200">
-        It will take approximately 3 to 10 minutes to bootstrap as it needs to
-        sync the P-Chain, which is quick. Note that these nodes are not
-        archival; you should read how to set up archival nodes if needed.
-      </p>
+      <div>
+        <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
+          You can check the node logs by running:
+        </h3>
+        <Pre>docker logs -f avago</Pre>
+      </div>
 
-      <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
-        You can check the node logs by running:
-      </h3>
-      <Pre>docker logs -f avago</Pre>
-
-      <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
-        To test if the node bootstrapped successfully, run:
-      </h3>
-      <Pre>{`curl -X POST --data '{ 
+      <div>
+        <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
+          To test if the node bootstrapped successfully, run:
+        </h3>
+        <Pre>{`curl -X POST --data '{ 
 "jsonrpc":"2.0", "method":"eth_chainId", "params":[], "id":1 
 }' -H 'content-type:application/json;' \\
 127.0.0.1:9650/ext/bc/${chainId}/rpc`}</Pre>
-
-      <Note>
-        <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{chainId}</code> is the chain ID
-      </Note>
-
-      <p className="mb-4 text-gray-800 dark:text-gray-200">At first, it will return <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">404 page not found</code> as the node is not bootstrapped yet.</p>
+        <Note>
+          <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{chainId}</code> is the chain ID
+        </Note>
+        <p className="mb-4 text-gray-800 dark:text-gray-200">At first, it will return <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">404 page not found</code> as the node is not bootstrapped yet.</p>
 
 
 
-      <p className="mb-4 text-gray-800 dark:text-gray-200">
-        If your node has bootstrapped successfully, you should see this response:
-      </p>
+        <p className="mb-4 text-gray-800 dark:text-gray-200">
+          If your node has bootstrapped successfully, you should see this response:
+        </p>
 
-      <Pre>{`{"jsonrpc":"2.0","id":1,"result":"0x${evmChainId.toString(16)}"}`}</Pre>
+        <Pre>{`{"jsonrpc":"2.0","id":1,"result":"0x${evmChainId.toString(16)}"}`}</Pre>
 
 
-      <Note>
-        <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">0x{evmChainId.toString(16)}</code> is the hex representation of the chain ID {evmChainId}
-      </Note>
+        <Note>
+          <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">0x{evmChainId.toString(16)}</code> is the hex representation of the chain ID {evmChainId}
+        </Note>
+      </div>
+
+
 
       <p className="mb-8 text-gray-800 dark:text-gray-200">
         Once the validator
@@ -115,6 +104,6 @@ export default function LaunchValidators() {
 
 
       <NextPrev nextDisabled={!isBootstrapped} onNext={goToNextStep} onPrev={goToPreviousStep} />
-    </>
+    </div>
   );
 }

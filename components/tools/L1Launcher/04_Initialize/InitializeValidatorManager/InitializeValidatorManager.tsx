@@ -32,25 +32,26 @@ export default function InitializeValidatorManager() {
     };
 
     return (
-        <SwitchChain chainConfig={chainConfig}>
-            <div className="max-w-3xl mx-auto">
-                <h1 className="text-2xl font-medium mb-6">Initialize Validator Manager</h1>
+        <div className="space-y-12">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Initialize Validator Manager</h1>
+                <p>This step will initialize your validator manager contract with the required signatures.</p>
+            </div>
 
-                <p className="mb-4">
-                    This step will initialize your validator manager contract with the required signatures.
-                </p>
-
+            <SwitchChain chainConfig={chainConfig}>
                 <CollectSignatures />
                 <ContractInitialize />
                 <ContractInitializeValidatorSet />
                 <CheckContractLogs onSuccess={() => setIsInitialized(true)} />
+            </SwitchChain>
 
-                <NextPrev
-                    nextDisabled={!isInitialized}
-                    onNext={goToNextStep}
-                    onPrev={goToPreviousStep}
-                />
-            </div>
-        </SwitchChain>
+            <NextPrev
+                nextDisabled={!isInitialized}
+                onNext={goToNextStep}
+                onPrev={goToPreviousStep}
+            />
+                
+        </div>
+        
     );
 }
