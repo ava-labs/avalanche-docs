@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import SwitchChain, { fujiConfig } from '@/components/tools/common/ui/SwitchChain';
+import RequireWalletConnection, { fujiConfig } from '@/components/tools/common/ui/RequireWalletConnection';
 import { useL1LauncherWizardStore } from '../config/store';
 import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
 import { avalancheFuji } from 'viem/chains';
@@ -165,7 +165,7 @@ export default function FundTempWallet() {
                 <p>We will use a temporary wallet generated in your browser for issuing the transactions to set up your L1. After you've funded it on the Avalanche C-Chain it will transfer some of the funds to the P-Chain. After the set up of the L1 the address will no longer hold any power.</p>
                 <p className='mt-4 italic'>Private Key: {tempPrivateKeyHex}</p>
             </div>
-            <SwitchChain chainConfig={fujiConfig}>
+            <RequireWalletConnection chainConfig={fujiConfig}>
                 <div className="space-y-4 mb-4">
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between items-center mb-1">
@@ -215,7 +215,7 @@ export default function FundTempWallet() {
                 </div>
 
 
-            </SwitchChain>
+            </RequireWalletConnection>
             <NextPrev
                 nextDisabled={!hasEnoughFunds()}
                 onNext={goToNextStep}
