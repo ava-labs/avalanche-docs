@@ -6,9 +6,9 @@ import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
 import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
-const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
+const dockerCommand = (activeOS:string, subnetID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
   --name rpc \\
-  --network host \\
+  ${activeOS === "macOS" ? "-p 8080:8080 -p 9653:9653" : "--network host" } \\
   -v ~/.avalanchego_rpc/:/home/avalanche/.avalanchego \\
   -e AVAGO_NETWORK_ID=fuji \\
   -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
@@ -28,7 +28,7 @@ const operatingSystems = ['Linux', 'macOS'];
 export default function LaunchRpcNode() {
     const { subnetId, chainId, evmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [isRpcLaunched, setIsRpcLaunched] = useState(false);
-    const [activeOs, setActiveOs] = useState("Linux");
+    const [activeOS, setActiveOS] = useState("Linux");
 
     return (
         <div className="space-y-12">
@@ -65,15 +65,15 @@ export default function LaunchRpcNode() {
 
                 <OSSelectionTabs
                     operatingSystems={operatingSystems}
-                    activeOS={activeOs}
-                    setActiveOS={setActiveOs}
+                    activeOS={activeOS}
+                    setActiveOS={setActiveOS}
                 />
 
-                {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
+                {activeOS === 'macOS' && (<p className="mt-2 text-sm text-red-500">
                     Please note that --network host does not work on macOS, so you have to map the ports manually.
                 </p>)}
 
-                <Pre>{dockerCommand(subnetId, chainId)}</Pre>
+                <Pre>{dockerCommand(activeOS, subnetId)}</Pre>
             </div>
 
             <div>

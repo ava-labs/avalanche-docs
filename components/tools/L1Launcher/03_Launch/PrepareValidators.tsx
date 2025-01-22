@@ -36,7 +36,7 @@ docker run -it --rm hello-world
 
 export default function PrepareValidators() {
     const { nodesCount, setNodesCount, userHasAdvancedBeyondStep, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
-    const [activeOs, setActiveOs] = useState(Object.keys(dockerInstallInstructions)[0]);
+    const [activeOS, setActiveOS] = useState(Object.keys(dockerInstallInstructions)[0]);
 
     // Check if user has advanced beyond this step
     const isLocked = userHasAdvancedBeyondStep('generate-validator-keys');
@@ -77,12 +77,12 @@ export default function PrepareValidators() {
 
             <OSSelectionTabs 
                 operatingSystems={Object.keys(dockerInstallInstructions)} 
-                activeOS={activeOs} 
-                setActiveOS={setActiveOs} 
+                activeOS={activeOS} 
+                setActiveOS={setActiveOS} 
             />
 
             <Pre>
-                {dockerInstallInstructions[activeOs]}
+                {dockerInstallInstructions[activeOS]}
             </Pre>
 
             <p className="mb-4">
