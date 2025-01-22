@@ -1,0 +1,43 @@
+---
+title: Deploy an ERC-20 
+description: Deploy the asset to transfer
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
+
+### Deploy an ERC-20 Token
+
+To transfer an ERC20 token from C-chain to your own blockchain, the first thing we will need is the ERC20 token to bridge. You will find a contract in the Starter-Kit under `contracts/interchain-token-transfer/MyToken.sol:TOK` 
+
+```bash 
+forge create --rpc-url local-c --private-key $PK contracts/interchain-token-transfer/MyToken.sol:TOK
+```
+
+</Step>
+<Step>
+
+### Save the ERC-20 Address 
+
+```bash
+export ERC20_C_CHAIN=<"Deployed to" address>
+```
+
+</Step>
+<Step>
+
+### Check the Balance
+
+If you deployed the above example contract, you should see a balance of 100,000 tokens when you run the below command:
+
+```bash
+cast call --rpc-url local-c --private-key $PK $ERC20_C_CHAIN "balanceOf(address)(uint)" $FUNDED_ADDRESS
+```
+
+</Step>
+</Steps>

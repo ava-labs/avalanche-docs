@@ -1,0 +1,60 @@
+---
+title: Message Pickup
+description: Learn about the role of the Relayer when picking up the message.
+updated: 2024-05-31
+authors: [martineckardt]
+icon: BookOpen
+---
+
+When the AWM Relayer detects a new message, it collects the signatures of that message from the validators of the source Avalanche L1. The validator uses the BLS private key corresponding to their  BLS public key (registered on the P-Chain) to create a signature for the unsigned warp message we've learned about earlier (in the Warp Message Format).
+
+![](/common-images/awm/relayer-pickup.png)
+
+The AWM Relayer does not necessarily need to collect the signature of all validators. It only needs to ensure that the validators of the collected signatures represent a sufficiently large share of the total stake of the Avalanche L1. It is up to the receiving Avalanche L1 to determine what the threshold is.
+
+## New Outgoing Messages
+
+How does a AWM Relayer learn about new messages? The AWM Relayer has two options to check for outgoing warp message on the source Avalanche L1:
+
+- **Polling:** The AWM Relayer periodically checks the source chain for new outgoing messages. 
+- **Notification:** The AWM Relayer is triggered whenever a new outgoing message is detected by a node. 
+
+## AWM Relayer Source Avalanche L1 Configuration
+
+For the source Avalanche L1s, the AWM Relayer offers the following configuration:
+
+```json
+"source-blockchains": [
+    {
+      "subnet-id": "11111111111111111111111111111111LpoYY",
+      "blockchain-id": "yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp",
+      "vm": "evm",
+      "rpc-endpoint": {
+        "base-url": "https://api.avax-test.network/ext/bc/C/rpc"
+      },
+      "ws-endpoint": {
+        "base-url": "wss://api.avax-test.network/ext/bc/C/ws"
+      },
+      "message-contracts": {
+        "0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf": {
+          "message-format": "teleporter",
+          "settings": {
+            "reward-address": "0x5072..."
+          }
+        }
+      }
+    }
+  ],
+```
+
+- **subnet-id:** The id of the source Avalanche L1
+- **blockchain-id:** The chainId of the source Avalanche L1's blockchain that should be checked for outgoing messages
+- **vm:** A string specifying the virtual machine of the source Avalanche L1's blockchain. Currently, only the evm is supported, but this field has been added in anticipation of communication between blockchains powered by different virtual machines in the future.
+- **rpc-endpoint:** The host of a node that can be queried for outgoing messages 
+- **rpc-endpoint:** The websocket endpoint of a node that can be queried for outgoing messages 
+- **message-contracts:** A map with the address of the Interchain Messaging contract as key and the following config parameters as values:
+    - **message-format:** A string specifying the format. Currently, only the format "teleporter" exists, but this field has been added in anticipation of multiple formats in the future
+    - **settings:** A dictionary with settings for this Interchain Messaging contract 
+    - **reward-address:** The address rewards are paid out to
+
+<Quiz quizId="313"/>

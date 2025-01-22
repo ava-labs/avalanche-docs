@@ -1,0 +1,69 @@
+---
+title: AWM Relayer
+description: Learn the basic AWM role and configuration.
+updated: 2024-05-31
+authors: [martineckardt]
+icon: BookOpen
+---
+
+The AWM Relayer is an application run independently of the blockchain clients. Anyone can run their own AWM Relayer to create a communication channel between two Avalanche L1s, and there can be multiple relayers for the same communication channel. There is an open source implementation anyone can use [here](https://github.com/ava-labs/awm-relayer). 
+
+[AvaCloud](https://www.avacloud.io) also offers their own hosted relayers.
+
+![AWM Relayer data flow](/course-images/teleporter/teleporter-source-destination-with-relayer.png)
+
+The AWM Relayers are responsible for picking up the messages at the source Avalanche L1, aggregating the BLS signatures from a sufficiently large share of the source Avalanche L1's validators and submitting a transaction on the destination Avalanche L1.
+
+It is up to the cross-chain application to decide if they allow any relayer to be part of the delivery process, or whether to restrict participation to certain Relayers.
+
+## AWM Relayer Config
+
+The AWM Relayer can be configured so that it is reusable for different networks (Mainnet, Fuji Testnet, Local) and communication channels between Avalanche L1s. The following configurations are available:
+
+```json title="https://github.com/ava-labs/awm-relayer/blob/main/sample-relayer-config.json"
+{
+  "info-api": {
+    "base-url": "https://api.avax-test.network"
+  },
+  "p-chain-api": {
+    "base-url": "https://api.avax-test.network"
+  },
+  "source-blockchains": [
+    {
+      "subnet-id": "11111111111111111111111111111111LpoYY",
+      "blockchain-id": "yH8D7ThNJkxmtkuv2jgBa4P1Rn3Qpr4pPr7QYNfcdoS6k6HWp",
+      "vm": "evm",
+      "rpc-endpoint": {
+        "base-url": "https://api.avax-test.network/ext/bc/C/rpc"
+      },
+      "ws-endpoint": {
+        "base-url": "wss://api.avax-test.network/ext/bc/C/ws"
+      },
+      "message-contracts": {
+        "0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf": {
+          "message-format": "teleporter",
+          "settings": {
+            "reward-address": "0x5072..."
+          }
+        }
+      }
+    }
+  ],
+  "destination-blockchains": [
+    {
+      "subnet-id": "7WtoAMPhrmh5KosDUsFL9yTcvw7YSxiKHPpdfs4JsgW47oZT5",
+      "blockchain-id": "2D8RG4UpSXbPbvPCAWppNJyqTG2i2CAXSkTgmTBBvs7GKNZjsY",
+      "vm": "evm",
+      "rpc-endpoint": {
+        "base-url": "https://subnets.avax.network/dispatch/testnet/rpc"
+      },
+      "account-private-key": "0x7493..."
+    }
+  ]
+}
+```
+
+- **Info API URL:** An RPC endpoint where the AWM Relayer can access the Info API to retrieve the information about the network
+- **P-Chain API URL:** An RPC endpoint where the AWM Relayer can access the P-Chain to retrieve the validators of the source Avalanche L1
+- **Source Avalanche L1 Configs:** An array of configurations for the source Avalanche L1s where the messages are picked up from
+- **Destination Avalanche L1 Configs:** An array of configurations for the destination Avalanche L1s where the messages are delivered to

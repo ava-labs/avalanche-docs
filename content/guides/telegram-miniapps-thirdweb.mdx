@@ -1,0 +1,200 @@
+---
+title: Create a Telegram Mini-App using ThirdWeb SDK
+description: This guide shows how to build a Telegram Mini-App using the ThirdWeb SDK on the Avalanche Fuji Network.
+date: 2024-09-04
+authors: [owenwahlgren]
+topics: [solidity, typescript, Telegram, ThirdWeb]
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+Telegram Mini-Apps are a new way to build and deploy applications and games embedded in the Telegram platform. They are built using ThirdWeb, a platform that allows developers to connect and utilize both external and in-app wallets on the Avalanche network.
+
+Learn more about [ThirdWeb](https://thirdweb.com/).
+## Recommended Knowledge
+
+- Basic understanding of Solidity and Typescript.
+- Basic understanding of Telegram Bots and the Telegram API.
+- Basic understanding of the Avalanche Fuji Testnet.
+
+## Getting started
+
+<Steps>
+<Step>
+Create a template from the [ThirdWeb Telegram Mini-App Starter Kit](https://github.com/ava-labs/telegram-webapp-avalanche) by clicking the `Use this template` button on the top right.
+
+![](/guide-images/telegram-miniapp/use-template.png)
+
+**IMPORTANT!!** mark "Include all branches", otherwise Github pages deployment will not work.
+
+![](/guide-images/telegram-miniapp/include-branches.png)
+
+</Step>
+<Step>
+Clone the new repository & install the dependencies
+```bash
+git clone <new-repo-url>
+cd <new repo>
+yarn install
+```
+</Step>
+
+<Step>
+Get the `clientID` from a ThirdWeb account on the [ThirdWeb Dashboard](https://thirdweb.com/dashboard)
+</Step>
+
+<Step>
+Create a `.env` file in the root of the project and add the `clientID` from the previous step:
+```bash
+VITE_THIRDWEB_CLIENT_ID=...
+```
+</Step>
+
+<Step>
+Run the project in development mode
+```bash
+yarn dev
+```
+</Step>
+</Steps>
+
+On `git push` to the `main` branch, the project will be automatically deployed to Github Pages.
+
+Follow the section below to link a Telegram Bot to the webapp.
+
+## Integrating with Telegram Bots
+<Steps>
+<Step>
+Create a new Telegram Bot using [BotFather](https://t.me/botfather)
+<Steps>
+    <Step>
+    Type `/newbot`
+    </Step>
+    <Step>
+    Choose a name for the bot, e.g. `My Avalanche TWA`
+    </Step>
+    <Step>
+    Choose a username for the bot, e.g. `my_avalanche_twa_482765_bot`
+    </Step>
+    <Step>
+    Take note of the access token, e.g. `5712441624:AAHmiHvwrrju1F3h29rlVOZLRLnv-B8ZZZ`
+    </Step>
+    </Steps>
+</Step>
+ <Step>
+    Run `yarn configbot` then follow the dialogue to link the Telegram bot with the webapp
+    </Step>
+</Steps>
+
+
+## Points of Interest
+
+
+<Accordions>
+<Accordion title="src/main.tsx">
+This is where the app is wrapped with the ThirdWeb provider
+```tsx
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <ThirdwebProvider>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </ThirdwebProvider>
+);
+```
+</Accordion>
+<Accordion title="src/App.tsx">
+This is where the ThirdWeb SDK gets initialized with the `clientID` from the `.env` file and also defines the list of acceptable wallets / authorizations.
+```tsx
+export const client = createThirdwebClient({ clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID });
+
+const wallets = [
+  inAppWallet({
+    auth: {
+      options: [
+        "email",
+        "phone",
+      ],
+    },
+  }),
+  createWallet("app.core"),
+  createWallet("walletConnect")
+];
+```
+
+```tsx
+function App() {
+
+  return (
+    <StyledApp>
+      <AppContainer>
+        <FlexBoxCol>
+          <FlexBoxRow>
+            <ConnectButton client={client} wallets={wallets} chain={avalancheFuji} showAllWallets={false} />
+          </FlexBoxRow>
+          <TransferAvax />
+          <Counter />
+        </FlexBoxCol>
+      </AppContainer>
+    </StyledApp>
+  );
+}
+```
+
+</Accordion>
+<Accordion title="src/components/TransferAvax.tsx">
+The Thirdweb `TransferButton` component is used here to compose a new transfer of native tokens.
+```tsx
+ <TransactionButton
+    transaction={() => {
+        const transaction = prepareTransaction({
+        to: avaxRecipient,
+        chain: avalancheFuji,
+        client: client,
+        value: toWei(avaxAmount),
+    });
+    return transaction;
+    }}
+    onTransactionConfirmed={() => { console.log("Transaction confirmed") }}
+    onError={() => { console.log("Transaction error") }}
+    >
+    Confirm Transaction
+</TransactionButton>
+
+```
+</Accordion>
+<Accordion title="src/components/Counter.tsx">
+The `TransferButton` component is used again here to facilitate contract interaction.
+```tsx
+ <TransactionButton
+    transaction={() => {
+        const transaction = prepareContractCall({
+        contract,
+        method: "function increase()",
+        params: [],
+        });
+    return transaction;
+    }}
+    onTransactionConfirmed={() => { console.log("Transaction confirmed") }}
+    onError={() => { console.log("Transaction error") }}
+    >
+    Increase Count
+</TransactionButton>
+
+<TransactionButton
+    transaction={() => {
+        const transaction = prepareContractCall({
+        contract,
+        method: "function decrease()",
+        params: [],
+        });
+    return transaction;
+    }}
+    onTransactionConfirmed={() => { console.log("Transaction confirmed") }}
+    onError={() => { console.log("Transaction error") }}
+    >
+    Decrease Count
+</TransactionButton>
+```
+The hardcoded contract address is `0x7Ff5ca07a5FC4AA062c29E6E32d2691B48598577` which is a [simple counter contract deployed on Fuji.](https://testnet.snowtrace.io/address/0x7Ff5ca07a5FC4AA062c29E6E32d2691B48598577/contract/43113/code)
+</Accordion>
+</Accordions>

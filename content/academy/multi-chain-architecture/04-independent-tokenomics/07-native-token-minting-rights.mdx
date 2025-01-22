@@ -1,0 +1,21 @@
+---
+title: Native Token Minting Rights
+description: Learn how to manage the native token minting rights.
+updated: 2024-06-28
+authors: [usmaneth]
+icon: BookOpen
+---
+
+Many chains have a hard-capped supply for their gas token. The Avalanche C-Chain uses AVAX as their gas token and there will only ever be 720m AVAX. This may not be optimal for enterprise use cases, especially if they want to **create an experience with a valueless gas token**.
+
+Therefore, they have the option to mint more native tokens at any time. This can be done through the **Native Minter Precompile**. If a community running an Avalanche L1 wants to hard-cap the native token, that is perfectly doable as well. They just keep the native minter capabilities deactivated (which is the default).
+
+import NativeMinter from "@/content/common/evm-precompiles/native-minter.mdx";
+
+import defaultMdxComponents from "fumadocs-ui/mdx";
+
+<NativeMinter components={defaultMdxComponents}/>
+
+In the upcoming chapter, we will only use an admin address in order to keep the exercise simple.
+
+<Quiz quizId="410"/>

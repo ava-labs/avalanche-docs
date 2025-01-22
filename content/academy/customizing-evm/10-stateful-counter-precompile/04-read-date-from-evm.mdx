@@ -1,0 +1,51 @@
+---
+title: Read Data From EVM State
+description: Learn how to read the data from EVM state.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+In the section about storing data in the EVM, we learned about how to store our string in the EVM State. An equally important skill is how to read data from the EVM state.
+
+In this section, we'll learn about how to retrieve our string from the EVM state.
+
+## Defining Helper Function
+
+Just like with setting the string in the EVM state, there are some conversions we'll have to perform to our string. In particular, we'll need to unhash the value stored in StateDB to get our original string. Thus, our helper function can be defined as follows:
+
+```go
+// GetString returns the value of the storage key "storageKey" in the contract storage,
+// with leading zeroes trimmed.
+func GetString(stateDB contract.StateDB) string {
+    // Get the value set at recipient
+    value := stateDB.GetState(ContractAddress, storageKeyHash)
+    return string(common.TrimLeftZeroes(value.Bytes()))
+}
+```
+
+With our helper function defined, we can implement the logic for `getString`. This will consists of retrieving the underlying key-value mapping and then passing it to `GetString`.
+
+```go
+func getString(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+    if remainingGas, err = contract.DeductGas(suppliedGas, GetStringGasCost); err != nil {
+        return nil, 0, err
+    }
+    // no input provided for this function
+
+    // CUSTOM CODE STARTS HERE
+
+    var output string // CUSTOM CODE FOR AN OUTPUT
+
+    currentState := accessibleState.GetStateDB()
+    output = GetString(currentState)
+
+    packedOutput, err := PackGetStringOutput(output)
+    if err != nil {
+        return nil, remainingGas, err
+    }
+
+    // Return the packed output and the remaining gas
+    return packedOutput, remainingGas, nil
+}
+```

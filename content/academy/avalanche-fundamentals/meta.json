@@ -1,0 +1,20 @@
+{
+  "title": "Avalanche Fundamentals",
+  "icon": "Snowflake",
+  "root": true,
+  "pages": [
+    "index",
+    "---Primer on Avalanche Consensus---",
+    "...02-avalanche-consensus-intro",
+    "---Multi-Chain Architecture---",
+    "...03-multi-chain-architecture-intro",
+    "---Creating a Blockchain---",
+    "...04-creating-a-blockchain",
+    "---Virtual Machines & Blockchains---",
+    "...05-vms-and-blockchains",
+    "---Virtual Machine Customization---",
+    "...06-vm-customization",
+    "---Course Completion---",
+    "get-certificate"
+  ]
+}

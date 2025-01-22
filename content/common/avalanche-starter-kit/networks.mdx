@@ -1,0 +1,27 @@
+## Networks
+We can deploy an Avalanche L1 to a network of validators. This means we either run these validators on our own or we convince a subset of the existing validators of the Avalanche network to validate our Avalanche L1.
+
+These validators validate the Avalanche L1 according to our rules and will get compensated with transaction fees. A validator can validate as many Avalanche L1s as they like. However, in practice hardware usually limits it to around 5 Avalanche L1s per Validator.
+
+Depending on our use case, we can choose a network to deploy on:
+
+### Mainnet
+
+When our Avalanche L1 goes into production, we want to run it on mainnet. To run a validator on mainnet, we have to stake 2,000 AVAX on each.
+
+### Testnet (Fuji)
+
+When we want to test our Avalanche L1, we can deploy it to the Fuji Testnet. The easiest way to do this is to run a Fuji Node. On Testnet, it only costs 1 AVAX to run a node. That AVAX can be obtained for free from the Testnet Faucet we used in the Avalanche Fundamentals course. All tokens on the Testnet are valueless.
+
+When deploying the Avalanche L1 to Fuji, anyone can interact with it, so long as at least one validator is online. This is great for more intense testing with multiple parties. Further, the Avalanche L1 can interact with other Avalanche L1s deployed in Fuji to test more complex behavior.
+
+
+### Local Network
+
+For our purposes, it is sufficient to run a small local network of 5 nodes on our machine exclusive to us. This has advantages:
+
+- It is very fast to set up
+- We have full control over all tokens of the network and can arbitrarily create testnet tokens for our testing
+- We can work offline, if needed
+
+By selecting “Local Network” during your deployment earlier, you have deployed your first Avalanche L1 on the local network.

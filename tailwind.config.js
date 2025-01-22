@@ -17,8 +17,8 @@ export default {
         ...presets.default,
         dark: {
           ...presets.default.dark,
-          background: '0 0% 2%',
-          foreground: '0 0% 98%',
+          background: '0 0% 0%',
+          foreground: '0 0% 95%',
           popover: '0 0% 4%',
           card: '0 0% 4%',
           muted: '0 0% 8%',

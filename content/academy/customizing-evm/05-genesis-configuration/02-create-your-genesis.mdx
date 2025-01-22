@@ -1,0 +1,72 @@
+---
+title: Create Your Genesis File
+description: Learn how to create your own genesis file.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Create File
+
+In your Precompile-EVM project, create a file called `evm-configuration-genesis.json` in the directory `tests/precompile/genesis/` and open it. You can use the command below as a shortcut to open the file in VSCode:
+
+```bash
+code ./tests/precompile/genesis/evm-configuration-genesis.json
+```
+
+## Fill with template
+
+Paste the following template in the new file:
+
+```json
+{
+    "config": {
+      "chainId":  <your-chain-id>,
+      "homesteadBlock": 0,
+      "eip150Block": 0,
+      "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+      "eip155Block": 0,
+      "eip158Block": 0,
+      "byzantiumBlock": 0,
+      "constantinopleBlock": 0,
+      "petersburgBlock": 0,
+      "istanbulBlock": 0,
+      "muirGlacierBlock": 0,
+      "subnetEVMTimestamp": 0,
+      "feeConfig": {
+        "gasLimit": <your-gas-limit>,
+        "minBaseFee": <your-min-base-fee>,
+        "targetGas": <your-target-gas>,
+        "baseFeeChangeDenominator": 36,
+        "minBlockGasCost": <your-min-block-gas-cost>,
+        "maxBlockGasCost": <your-max-block-gas-cost>,
+        "targetBlockRate": <your-target-block-rate>,
+        "blockGasCostStep": <your-block-gas-cost-step>
+      },
+      "allowFeeRecipients": false
+    },
+    "alloc": {
+      "<your-test-wallet-address>": {
+        "balance": "<your-initial-balance-converted-to-hex>"
+      }
+    },
+    "nonce": "0x0",
+    "timestamp": "0x0",
+    "extraData": "0x00",
+    "gasLimit": <your-gas-limit>,
+    "difficulty": "0x0",
+    "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "number": "0x0",
+    "gasUsed": "0x0",
+    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  }
+```
+
+<Callout title="Warning about gasLimit" type="warn">
+If you do decide to set your own gasLimit, please set all gasLimit keys equal to the same value! 
+
+If you set the 'gasLimit' keys to different values, you will still be able to deploy a blockchain, but it will halt during initialization!
+</Callout>

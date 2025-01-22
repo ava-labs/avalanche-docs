@@ -1,0 +1,247 @@
+---
+title: Testing Your Precompile
+description: Learn how to test your precompile using Hardhat.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+Just like with the Calculator precompile, we want to test the functionality of our precompile to make sure it behaves as intended.
+
+Although we can write tests in Go, this is not the only way we can test our precompile. We can leverage Hardhat, a popular smart contract testing framework, for testing.
+
+In this section, we'll cover writing the smart contract component of our tests and setting up our testing environment so that precompile-evm can execute these tests for us.
+
+## Structure of Testing with Hardhat
+
+For `StringStore`, we'll need to complete the following tasks in order to leverage Hardhat:
+
+1. Define the Genesis JSON file we want to use for testing
+2. Tell precompile-evm what Hardhat script to use to test `StringStore` 
+3. Write the smart contract that will hold the test cases for us
+4. Write the actual script that will execute the Hardhat tests for us
+
+## Defining the Genesis JSON
+
+The easiest part of this tutorial, we will need to define the genesis state of our testing environment. For all intents and purposes, you can copy the genesis JSON that you used in the Defining Default Values section and paste it in `precompile-evm/tests/precompile/genesis`, naming it `StringStore.json` (it is important that you name the genesis file the name of your precompile).
+
+## Telling Precompile-EVM What To Test
+
+The next step is to modify `suites.go` and update the file so that precompile-evm can call the Hardhat tests for StringStore. Go to `precompile-evm/tests/precompile/solidity` and find `suites.go`. Currently, your file should look like the following:
+
+```go title="suites.go"
+// Copyright (C) 2019-2023, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+// Implements solidity tests.
+package solidity
+
+import (
+    "context"
+    "time"
+
+    "github.com/ava-labs/subnet-evm/tests/utils"
+    ginkgo "github.com/onsi/ginkgo/v2"
+)
+
+var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
+    utils.RegisterPingTest()
+    // Each ginkgo It node specifies the name of the genesis file (in ./tests/precompile/genesis/)
+    // to use to launch the subnet and the name of the TS test file to run on the subnet (in ./contract-examples/tests/)
+
+    // ADD YOUR PRECOMPILE HERE
+    /*
+        ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
+            ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+            defer cancel()
+​
+            // Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
+            // and the test file in ./contracts/tests/{your_precompile}.ts
+            // If you want to use a different test command and genesis path than the defaults, you can
+            // use the utils.RunTestCMD. See utils.RunDefaultHardhatTests for an example.
+            utils.RunDefaultHardhatTests(ctx, "your_precompile")
+        })
+    */
+})
+```
+
+If you view the comments generated, you will already see a general structure for how we can declare our tests for precompiles. Let's take this template and use it to declare the tests for StringStore!
+
+```go title="suites.go"
+// Copyright (C) 2019-2023, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+// Implements solidity tests.
+package solidity
+
+import (
+    "context"
+    "time"
+
+    "github.com/ava-labs/subnet-evm/tests/utils"
+    ginkgo "github.com/onsi/ginkgo/v2"
+)
+
+var _ = ginkgo.Describe("[Precompiles]", ginkgo.Ordered, func() {
+    utils.RegisterPingTest()
+    // Each ginkgo It node specifies the name of the genesis file (in ./tests/precompile/genesis/)
+    // to use to launch the subnet and the name of the TS test file to run on the subnet (in ./contract-examples/tests/)
+
+    // ADD YOUR PRECOMPILE HERE
+    /*
+        ginkgo.It("your precompile", ginkgo.Label("Precompile"), ginkgo.Label("YourPrecompile"), func() {
+            ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+            defer cancel()
+​
+            // Specify the name shared by the genesis file in ./tests/precompile/genesis/{your_precompile}.json
+            // and the test file in ./contracts/tests/{your_precompile}.ts
+            // If you want to use a different test command and genesis path than the defaults, you can
+            // use the utils.RunTestCMD. See utils.RunDefaultHardhatTests for an example.
+            utils.RunDefaultHardhatTests(ctx, "your_precompile")
+        })
+    */
+
+    ginkgo.It("StringStore", ginkgo.Label("Precompile"), ginkgo.Label("StringStore"), func() {
+        ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+        defer cancel()
+
+        utils.RunDefaultHardhatTests(ctx, "StringStore")
+    })
+})
+```
+
+Again, the naming conventions are important. We recommend you use the same name as your precompile whenever possible.
+
+## Defining Test Contract
+
+In contrast to using just Go, Hardhat allows us to test our precompiles using Solidity.
+
+To start, create a new file called `StringStoreTest.sol` in `precompile-evm/contract/contracts`. We can start defining our file by including the following:
+
+```solidity title="StringStoreTest.sol"
+// SPDX-License-Identifier: MIT
+pragma solidity >= 0.8.0;
+
+import "ds-test/src/test.sol"; 
+import {IStringStore} from "../contracts/interfaces/IStringStore.sol";
+```
+
+As of right now, there are two important things to note.
+
+We are first importing `test.sol`, a testing file that includes a range of assertion functions to assert that our outputs are as expected. In particular, these assertion functions are methods of the DSTest contract.
+
+Next, we are importing the interface of the StringStore precompile that we want to test.
+
+With this in mind, let's fill in the rest of our test file:
+
+```solidity title="StringStoreTest.sol"
+contract StringStoreTest is DSTest {
+
+    IStringStore stringStore = IStringStore(0x0300000000000000000000000000000000000005);
+
+    function step_getString() public {
+        assertEq(stringStore.getString(), "Cornell");
+    }
+
+    function step_getSet() public {
+        string memory newStr = "Apple";
+        stringStore.setString(newStr);
+        assertEq(stringStore.getString(), newStr);
+    }
+}
+```
+
+In the contract `StringStoreTest`, we are inheriting the DSTest contract so that we can leverage the provided assertion functions. Afterward, we are declaring the variable stringStore so that we can directly call the StringStore precompile. Next, we have the two testing functions.
+
+Briefly looking at the logic of each test function:
+
+- `step_getString`: We are testing that the getString function returns the default string defined in the genesis JSON (in this example, the default string is set to "Cornell")
+- `step_getSet`: We are assigning a new string to our precompile and making sure that setString does so correctly
+
+We now want to note the following two details regarding Solidity test functions in Hardhat:
+
+- Any test functions that you want to be called must start with the prefix "step"
+- The assertion function you use to check your outputs is `assertEq`
+
+With our Solidity test contract defined, let's write actual Hardhat script! 
+
+## Writing Your Hardhat Script
+
+To start, go to `precompile-evm/contracts/test` and create a new file called `StringStore.ts`. It is important to name your TypeScript file the same name as your precompile. Here are the steps to take when defining our Hardhat script:
+
+1. Specify the address at which our precompile is located
+2. Deploy our testing contract so that we can call the test functions
+3. Tell Hardhat to execute said test functions
+
+To make our lives even easier, Avalanche L1-EVM (a library that Precompile-EVM leverages) has helper functions to call our test functions simply by specifying the names of the test functions. You can find the helper functions here: https://github.com/ava-labs/subnet-evm/blob/master/contracts/test/utils.ts.
+
+In the end, our testing file will look as follows:
+
+```ts title="StringStore.ts"
+// (c) 2019-2022, Ava Labs, Inc. All rights reserved.
+// See the file LICENSE for licensing terms.
+
+import { ethers } from "hardhat"
+import { test } from "@avalabs/subnet-evm-contracts"
+import { factory } from "typescript"
+
+const STRINGSTORE_ADDRESS = "0x0300000000000000000000000000000000000005"
+
+describe("StringStoreTest", function() {
+    this.timeout("30s")
+
+    beforeEach("Setup DS-Test", async function () {
+        const stringStorePromise = ethers.getContractAt("IStringStore", STRINGSTORE_ADDRESS)
+
+        return ethers.getContractFactory("StringStoreTest").then(factory => factory.deploy())
+        .then(contract => {
+          this.testContract = contract
+          return contract.deployed().then(() => contract)
+        })
+    })
+
+    test("Testing get function", "step_getString")
+
+    test("Testing get and set function", "step_getSet")
+})
+```
+
+## Running Your Hardhat Test
+
+To run your HardHat tests, first change to the root directory of precompile-evm and run the following command:
+
+```bash
+./scripts/build.sh
+```
+
+Afterward, run the following command:
+
+```bash
+GINKGO_LABEL_FILTER=StringStore ./scripts/run_ginkgo.sh
+```
+
+The variable `GINKGO_LABEL_FILTER` simply tells precompile-evm which tests suite from `suites.go` to execute. Execute the `StringStore` test suite.
+
+However, if you have multiple precompiles to test, set `GINKGO_LABEL_FILTER` equal to "Precompile." You should see something like the following:
+
+```bash title="Combined output"
+  StringStoreTest
+    ✓ Testing get function (4126ms)
+    ✓ Testing get and set function (4070ms)
+
+  2 passing (12s)
+
+  < Exit [It] StringStore - /Users/Rodrigo.Villar/go/src/github.com/ava-labs/precompile-evm/tests/precompile/solidity/suites.go:40 @ 07/19/23 15:37:03.574 (16.134s)
+• [16.134 seconds]
+------------------------------
+[AfterSuite] 
+/Users/Rodrigo.Villar/go/pkg/mod/github.com/ava-labs/subnet-evm@v0.5.2/tests/utils/command.go:85
+  > Enter [AfterSuite] TOP-LEVEL - /Users/Rodrigo.Villar/go/pkg/mod/github.com/ava-labs/subnet-evm@v0.5.2/tests/utils/command.go:85 @ 07/19/23 15:37:03.575
+  < Exit [AfterSuite] TOP-LEVEL - /Users/Rodrigo.Villar/go/pkg/mod/github.com/ava-labs/subnet-evm@v0.5.2/tests/utils/command.go:85 @ 07/19/23 15:37:03.575 (0s)
+[AfterSuite] PASSED [0.000 seconds]
+------------------------------
+
+Ran 2 of 3 Specs in 50.822 seconds
+SUCCESS! -- 2 Passed | 0 Failed | 0 Pending | 1 Skipped
+PASS
+```
+
+Congrats, you can now write Hardhat tests for your stateful precompiles!

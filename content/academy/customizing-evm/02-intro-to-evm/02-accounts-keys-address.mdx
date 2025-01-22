@@ -1,0 +1,37 @@
+---
+title: Accounts, Keys, and Addresses
+description: Learn about Accounts, Keys, and Addresses in EVM.
+updated: 2024-09-27
+authors: [ashucoder9, owenwahlgrne]
+icon: BookOpen
+---
+
+## Accounts
+
+In the EVM, there are two types of accounts:
+
+1. **Externally Owned Accounts (EOAs)**: These accounts are controlled by private keys and do not have associated code. They can send transactions by creating and signing them with their private keys. If you're an end user of Ethereum, you're likely using an EOA.
+
+2. **Contract Accounts**: These accounts have associated code (smart contracts). Contract accounts can't initiate transactions on their own; instead, they only perform actions when instructed by an EOA. This could be as simple as a token transfer or a function call within a smart contract.
+
+## Public and Private Keys
+
+In Ethereum, as in many blockchain platforms, the **Elliptic Curve Digital Signature Algorithm (ECDSA)** is used to generate a pair of keys: a public key and a private key.
+
+- The **private key** is a 32-byte number generated randomly.
+- The **public key** is derived from the private key using elliptic curve cryptography. It is 64 bytes long, made up of two concatenated 32-byte coordinates.
+
+## Addresses
+
+An EVM address is derived from the public key through the following steps:
+
+1. **Keccak-256 Hashing**: The public key is first passed through the Keccak-256 hashing function (the version of SHA-3 used by Ethereum). Keccak-256 outputs a 64-byte string, for example:
+   `025ad33e2479a53b02dc0be66eb0ce272fc0f4358c57a8f0a442410c3d831a`
+
+2. **Rightmost 20 bytes**: The resulting string is truncated to keep only the last 20 bytes. In hexadecimal, this means retaining the rightmost 40 hex digits (since two hex digits represent one byte), like so:
+   `e66eb0ce272fc0f4358c57a8f0a442410c3d831a`
+
+3. **Adding '0x'**: Finally, "0x" is prefixed to the address for a total of 42 characters. The "0x" indicates that the following characters represent a hexadecimal number, a common convention in Ethereum:
+   `0xe66eb0ce272fc0f4358c57a8f0a442410c3d831a`
+
+This process ensures that each Ethereum address uniquely corresponds to a public key. Since the address is a truncated hash of the public key, it's impossible to reverse-engineer the public key from the address.

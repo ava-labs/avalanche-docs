@@ -1,0 +1,25 @@
+---
+title: Avalanche Warp Messaging
+description: Learn about Avalanche Warp Messaging, the Cross-Chain communication primitives on Avalanche.
+updated: 2024-05-31
+authors: [martineckardt]
+icon: Book
+---
+
+<YouTube id="95KB-JhQS2Y" />
+
+Avalanche Warp Messaging (AWM) was developed to make all Avalanche blockchains natively interoperable. Ideally, this solution would introduce as few trust assumptions as possible, meaning the blockchains would not depend on a third-party or intermediary that could risk centralization or single-point failures. 
+
+AWM allows Avalanche L1s to communicate with one another via authenticated messages by providing signing and verification primitives in AvalancheGo. These are used by the blockchain VMs to sign outgoing messages and verify incoming messages. Any Virtual Machine (VM) on Avalanche can integrate AWM to send and receive messages across Avalanche Avalanche L1s. 
+
+Therefore, AWM is not EVM specific, but rather a general cross-Avalanche L1 communication protocol.
+
+## What you will learn
+
+In this section, you will go through the following topics:
+
+- **P-Chain:** What is the role of the P-Chain in Avalanche Warp Messaging?
+- **Warp Message Format:** What does a Warp message consist of?
+- **Warp Message Signing:** How does AWM utilize the mutli-signature scheme BLS to create aggregated signatures?
+- **Warp Message Signature Verification:** How are the signatures of warp messages verified?
+- **Trust Assumptions:** What trust assumptions does AWM introduce?

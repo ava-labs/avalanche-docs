@@ -1,0 +1,9 @@
+Since the Avalanche Network is running in a Github Codespace the localhost (127.0.0.1) will only be accessible from inside the Codespace. Connecting your wallet using the localhost RPC URL will not work, since your wallet will be running on your computer, and not the local environment where the network is running (the Codespace cloud). 
+
+Therefore, we need to make the RPC-Endpoint publicly accessible. Click on the little antenna icon in the bottom bar of the Codespace:
+
+![](/common-images/codespaces/ports-open.png)
+
+There select the row with the port 9650 and right-click to open the port:
+
+![](/common-images/codespaces/ports-publish.png)

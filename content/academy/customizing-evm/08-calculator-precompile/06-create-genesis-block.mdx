@@ -1,0 +1,72 @@
+---
+title: Creating Genesis Block with precompileConfig
+description: Learn how to create a genesis block with precompileConfig.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+In order to create a new Blockchain from our customized EVM, we have to define a Genesis block just as we did in out section earlier.
+
+To incorporate the CalculatorPlus precompile as part of the genesis block, we need to create a new genesis file and include a key for the CalculatorPlus precompile in the configuration JSON. This key, in particular, is the `configKey` that we specified in the `module.go` file of the Calculator precompile in the previous section.
+
+Copy over `Calculator.json` into a new file called `CalculatorPlus.json` and add the necessary key-pair value to the config.
+
+<Accordions>
+<Accordion title="Solution">
+
+```json title="CalculatorPlus.json"
+{
+  "config": {
+    "chainId": 99999,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "subnetEVMTimestamp": 0,
+    "feeConfig": {
+      "gasLimit": 20000000,
+      "minBaseFee": 1000000000,
+      "targetGas": 100000000,
+      "baseFeeChangeDenominator": 48,
+      "minBlockGasCost": 0,
+      "maxBlockGasCost": 10000000,
+      "targetBlockRate": 2,
+      "blockGasCostStep": 500000
+    },
+    "sha256Config": {
+      "blockTimestamp": 0
+    },
+    "calculatorConfig": {
+      "blockTimestamp": 0
+    },
+    "calculatorplusConfig" : {
+        "blockTimestamp": 0
+    }
+  },
+  "alloc": {
+    "8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC": {
+      "balance": "0x52B7D2DCC80CD2E4000000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x00",
+  "gasLimit": "0x1312D00",
+  "difficulty": "0x0",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
+
+</Accordion>
+</Accordions>

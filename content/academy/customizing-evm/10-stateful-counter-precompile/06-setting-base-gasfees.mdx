@@ -1,0 +1,29 @@
+---
+title: Setting Base Gas Fees of Your Precompile
+description: Learn how to set the base gas fees of your precompile.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Gas is used for spam prevention. If our precompile is accessible to everyone on our Avalanche L1, it is important to set the gas cost in a way that lets users economically utilize it in their apps, yet prevents spammers from spamming our blockchain with calls to the precompile.
+
+In this section, we'll modify the default values of the gas costs of our Calculator precompile. By default, all user-defined functions have a gas cost of 1. While this is good news for the average user, allowing users to call computationally expensive functions can leave our blockchain vulnerable to Denial-of-Service (DoS) attacks. 
+
+We can find the default gas cost values for our functions in calculator/contract.go. Following the import statements, you should see:
+
+```go title-"calculator/contract.go"
+const (
+    // Gas costs for each function. These are set to 1 by default.
+    // You should set a gas cost for each function in your contract.
+    // Generally, you should not set gas costs very low as this may cause your network to be vulnerable to DoS attacks.
+    // There are some predefined gas costs in contract/utils.go that you can use.
+    AddGasCost     uint64 = 1 /* SET A GAS COST HERE */
+    NextTwoGasCost uint64 = 1 /* SET A GAS COST HERE */
+    RepeatGasCost  uint64 = 1 /* SET A GAS COST HERE */
+)
+```
+
+The variables `AddGasCost`, `NextTwoGasCost`, and `RepeatGasCost` are the gas costs of the `add`, `nextTwo`, and `repeat` functions, respectively. As you can see, they are currently set to 1.
+
+However, changing the gas cost is as easy as changing the values themselves. As an example, change the gas costs to 7.

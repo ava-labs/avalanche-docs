@@ -1,0 +1,17 @@
+---
+title: Load Considerations
+description: Learn which chains experience a load increase when sending a Cross-Chain message.
+updated: 2024-05-31
+authors: [martineckardt]
+icon: BookOpen
+---
+
+Let's take a moment and determine where AWM takes up load:
+
+- **Source Avalanche L1**: Validators sign the message
+- **Relayer**: Signature aggregation
+- **Destination Avalanche L1**: Validators verify the message using the BLS Public Key registry on the P-Chain
+
+There is no record of the network communication, the signatures, or the message itself on the P-Chain. It solely functions as a registry of the BLS public keys where the destination Avalanche L1 validators read from. Since they each already validate the primary network, they are already tracking the P-Chain.
+
+Thus, sending messages from one Avalanche L1 to another does not put any load on the P-Chain or another part of the Primary Network. This is a crucial feature, as there is no bottleneck or dependencies between Avalanche L1s for cross-chain communication. 

@@ -1,0 +1,18 @@
+---
+title: Native to ERC-20 Token Bridge Overview
+description: Learn how to transfer native Avalanche L1 tokens to the C-Chain as ERC-20 tokens.
+updated: 2024-09-09
+authors: [owenwahlgren]
+icon: Book
+---
+
+ICTT is also capable of bridging native tokens from Avalanche L1s to the C-Chain as ERC-20 tokens. This process involves deploying a `NativeTokenHome` contract on the Avalanche L1, and a `ERC20TokenRemote` contract on the C-Chain. The `NativeTokenHome` contract will be used to bridge the native token to the C-Chain as an ERC-20 token.
+
+This example will cover native to ERC-20 token bridging between `myblockchain` and the C-Chain, but the process can be adapted to bridge the C-Chain's native asset, `AVAX`, to any L1 as an ERC-20 token.
+
+### What we will do
+1. Deploy a Wrapped Native Token to `myblockchain`
+2. Deploy the `NativeTokenHome` contract on `myblockchain`
+3. Deploy the `ERC20TokenRemote` contract on the C-Chain
+4. Register `ERC20TokenRemote` on C-Chain with `NativeTokenHome` on `myblockchain`
+4. Perform a transfer of the native token on `myblockchain` to the C-Chain as an ERC-20 token

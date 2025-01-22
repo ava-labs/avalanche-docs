@@ -1,0 +1,74 @@
+---
+title: Interacting with StringStore Precompile
+description: Learn how to interact with StringStore Stateful precompile.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Rather than understanding the statefulness of precompiles only in theory, we can also play around with an example of a stateful precompile to learn how they work in practice.
+
+In this section, we'll interact with the **StringStore** precompile, a precompiled smart contract that stores a string.
+
+## Checking the Genesis JSON
+
+As part of all Avalanche Academy branches, your Precompile-EVM should include the **StringStore/** folder along with all other relevant files for StringStore to be recognized by Precompile-EVM. This includes a genesis JSON for StringStore.
+
+Go to `tests/precompile/genesis/` and double-check that you have a `StringStore.json` folder in said directory. This JSON files will instantiate both the **SHA256** precompile and **StringStore**.
+
+```json title="StringStore.json"
+{
+    "config": {
+      "chainId": 99999,
+      // ...
+      "stringStoreConfig" : {
+        "blockTimestamp": 0,
+        "defaultString": "Cornell"
+     }
+    },
+    // ...
+}
+```
+
+## Building the EVM with StringStore Precompile
+
+The **avalanche-academy-start** branch already contains the StringStore and SHA256 precompile. If you are working from that branch, you can simply use the built binary from your latest exercise without making any changes.
+
+To verify, check if the **stringstore** directory is in your workspace and if the precompile is noted in the `plugin/main.go` file. If not, switch to the **avalanche-academy-start** branch and build the VM there.
+
+## Start the Avalanche Network
+
+Use the Avalanche-CLI to start the server and the network. Use the provided genesis file `stringstore.json` mentioned above when you start the network.
+
+If all goes well, you will have successfully deployed a blockchain containing both the StringStore and SHA256 precompile.
+
+## Connecting Core
+
+Similar to previous chapters, navigate to the **Add Network** section in the Core Wallet. You can find the RPC URL in the Avalanche-CLI logs or by executing the command: `avalanche blockchain list --deployed`
+
+Note: Make sure the RPC URL ends with **/rpc**. The RPC URL should look something like this: http://127.0.0.1:9650/ext/bc/P9nKPGPoAfFGkdvD3Ac6YxZieaG8ahpbR9xZosrWNPbJCzByu/rpc
+
+Once you have added the blockchain network, switch Core Wallet to your blockchain.
+
+## Interact through Remix
+
+We will now load in the Solidity interface letting us interact with the **StringStore** precompile. To do this, open the link below, which will open a Remix workspace containing the StringStore precompile: [Workspace](https://remix.ethereum.org/#url=https://github.com/ava-labs/precompile-evm/blob/avalanche-academy-start/contracts/contracts/interfaces/IStringStore.sol&lang=en&optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.26+commit.8a97fa7a.js)
+
+As usual, we will need to compile our Solidity interface.
+
+1. Click the **Solidity** logo on the left sidebar.
+2. In the new page, you will see a **Compile IStringStore.sol** button. After clicking the button, a green checkmark should appear next to the Solidity logo.
+3. Next, go to the **Environment** tab and select the **Injected Provider** option. If successful, a text saying **Custom [99999] Network** will appear below. If not, change your network.
+4. Enter the precompile address (find it in `precompile/stringstore/module.go`) and click **At Address**.
+
+First, we will call the `getString` function. By default, `getString` will return whatever was specified in the genesis JSON. Since we set our StringStore precompile to store the string **Cornell**, it'll return this value.
+
+![](/course-images/customizing-evm/48.png)
+
+As you might have noticed, we can also set the string that **StringStore** stores. For example, if we wanted to change the string to Avalanche, we would type Avalanche in the box next to `setString` method, press the `setString` button, and then you would see in the Remix terminal a message displaying the success of your transaction.
+
+If we call `getString` again, you will see that the string has been changed to Avalanche.
+
+Congrats, you've just interacted with the stateful **StringStore** precompile 🎉
+
+<Callout type="info">In contrast to the precompiles we have built earlier, the StringStore precompile has access to the EVM state. This way we can utilize precompile not only to perform calculations, but also persist something to the EVM state. This allows us to move even larger portions of our dApp from the solidity smart contract layer to the precompile layer. </Callout>

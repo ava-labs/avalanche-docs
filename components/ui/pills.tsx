@@ -1,6 +1,6 @@
 "use client"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { cva } from "class-variance-authority";
 import { CheckIcon } from "lucide-react";
 
@@ -19,8 +19,8 @@ export const Pill: React.FC<{ item: { text: string, selected?: boolean }, select
             variants: {
                 variant: {
                     "default": "bg-secondary/50",
-                    "selectable": "cursor-pointer hover:bg-accent",
-                    "selected": "cursor-pointer bg-accent"
+                    "selectable": "cursor-pointer hover:bg-fd-accent",
+                    "selected": "cursor-pointer bg-fd-accent"
                 }
             }
         }

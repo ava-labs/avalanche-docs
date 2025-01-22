@@ -1,5 +1,7 @@
 {
-  "title": "virtual-machines",
+  "title": "Custom VMs",
+  "description": "Customize Execution Layer",
+  "icon": "MonitorCog",
   "root": true,
   "pages": [
     "---Virtual Machines---",
@@ -7,6 +9,10 @@
     "introduction-vms",
     "simple-vm-any-language",
     "manage-vm-binaries",
+    "---Subnet-EVM Customization---",
+    "evm-l1-customization",
+    "default-precompiles",
+    "custom-precompiles",
     "---Golang VMs---",
     "golang-vms/simple-golang-vm",
     "golang-vms/complex-golang-vm",

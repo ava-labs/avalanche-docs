@@ -1,0 +1,158 @@
+---
+title: Create Solidity Interface
+description: Learn how to create the Solidity interface for your calculator precompile.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Just like in the MD5 section, we will start off by first demonstrating the Solidity interface for the Calculator precompile before guiding you on how to build the **CalculatorPlus** precompile. To start, let's take a look at the Calculator Solidity interface:
+
+```solidity title="solidity/interfaces/ICalculator.sol"
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+
+interface ICalculator {
+    function add(uint value1, uint value2) external view returns(uint result);
+
+    function nextTwo(uint value1) external view returns(uint result1, uint result2);
+
+    function repeat(uint times, string memory text) external view returns(string memory result);
+}
+```
+
+With this in mind, let's define the CalculatorPlus Solidity interface. Your interface should have the following three functions:
+
+1. `powOfThree`: takes in an unsigned integer base, and returns three unsigned integers named secondPow, thirdPow, fourthPow . 
+2. `moduloPlus`: takes in unsigned integers dividend and divisor as input, and returns two unsigned integers named multiple and remainder .
+3. `simplFrac`: takes in unsigned integers named numerator and denominator, and returns two unsigned integers named simplNum and simplDenom
+
+<Accordions>
+<Accordion title="Solution">
+
+```solidity title="solidity/interfaces/ICalculatorPlus.sol"
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+
+interface ICalculatorPlus {
+    function powOfThree(uint256 base) external view returns(uint256 secondPow, uint256 thirdPow, uint256 fourthPow);
+
+    function moduloPlus(uint256 dividend, uint256 divisor) external view returns(uint256 multiple, uint256 remainder);
+
+    function simplFrac(uint256 numerator, uint256 denominator) external view returns(uint256 simplNum, uint256 simplDenom);
+}
+```
+
+</Accordion>
+</Accordions>
+
+## Generate the ABI
+
+Now that we have an interface of our precompile, let's create an ABI of our Solidity interface. Open the terminal (control + \`), change to the `/contracts` directory and run the following command to compile the solidity interface to the ABI:
+
+```bash
+# Go to the upper contracts directory of your project
+cd contracts
+
+# Compile ICalculatorPlus.sol to ABI
+npx solc@latest --abi ./contracts/interfaces/ICalculatorPlus.sol -o ./abis --base-path . --include-path ./node_modules
+
+# Rename using this script or manually
+mv ./abis/contracts_interfaces_ICalculatorPlus_sol_ICalculatorPlus.abi ./abis/ICalculatorPlus.abi
+```
+
+Now you should have a file called `ICalculatorPlus.abi` in the folder `/contracts/abis` with the following content:
+
+```json title="/contracts/abis/ICalculatorPlus.abi"
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "dividend",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "divisor",
+        "type": "uint256"
+      }
+    ],
+    "name": "moduloPlus",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "multiple",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "remainder",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "base",
+        "type": "uint256"
+      }
+    ],
+    "name": "powOfThree",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "secondPow",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "thirdPow",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fourthPow",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "numerator",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "denominator",
+        "type": "uint256"
+      }
+    ],
+    "name": "simplFrac",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "simplNum",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "simplDenom",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
+```
