@@ -13,6 +13,12 @@ import { Address, createWalletClient, createPublicClient, http, fromBytes, bytes
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { apiHostPromise } from '@/components/tools/common/utils/config';
 
+declare global {
+  interface Window {
+    avalanche?: any;
+  }
+}
+
 interface Validator {
   id: string
   nodeID: string
@@ -220,6 +226,19 @@ export default function LaunchValidators() {
       return;
     };
 
+    // try {
+    //   window.avalanche.request({
+    //     method: 'avalanche_getAccounts',
+    //     params: []
+    //   }).then((response: any) => {
+    //     const activeAccountIndex = response.findIndex((account: any) => account.active === true);
+    //     console.log('P-Chain Address: ', response[activeAccountIndex].addressPVM)
+      
+    //   })
+    // } catch (error) {
+    //   console.error('Error fetching avalanche accounts, is Core wallet installed?:', error)
+    // }
+
     try {
       // get account
       const [account] = await walletClient.getAddresses()
@@ -231,67 +250,67 @@ export default function LaunchValidators() {
       const nodeIDHexTrimmed = nodeIDHex.slice(0, -8); //remove checksum of the node ID (last 8 characters)
   
       // Process P-Chain Address
-      const pAddressID = fromBytes(utils.bech32ToBytes(newPChainAddress), 'hex')
-
+      const pChainAddressBytes = utils.bech32ToBytes(newPChainAddress)
+      const pChainAddressHex = fromBytes(pChainAddressBytes, 'hex')
       // Set expiry to 24 hours from now (86400 seconds)
       const expiry = BigInt(Math.floor(Date.now() / 1000) + 86400)
 
 
-      const mockTx = await publicClient.simulateContract({
-        abi: validatorManagerAbi.abi,
-        address: transparentProxyAddress as Address,
-        functionName: 'initializeValidatorRegistration',
-        args: [
-          {
-            nodeID: nodeIDHexTrimmed as Address,
-            blsPublicKey: newBlsPublicKey,
-            registrationExpiry: expiry,
-            remainingBalanceOwner: {
-              threshold: 1,
-              addresses: [pAddressID as Address]
-            },
-            disableOwner: {
-              threshold: 1,
-              addresses: [pAddressID as Address]
-            }
-          },
-          BigInt(newWeight), // weight as uint64
-        ],
-        account,
-        gas: BigInt(2500000),
-        nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
-      })
-      console.log('Mock transaction:', mockTx)
+      // const mockTx = await publicClient.simulateContract({
+      //   abi: validatorManagerAbi.abi,
+      //   address: transparentProxyAddress as Address,
+      //   functionName: 'initializeValidatorRegistration',
+      //   args: [
+      //     {
+      //       nodeID: nodeIDHexTrimmed as Address,
+      //       blsPublicKey: newBlsPublicKey,
+      //       registrationExpiry: expiry,
+      //       remainingBalanceOwner: {
+      //         threshold: 1,
+      //         addresses: [pChainAddressHex as Address]
+      //       },
+      //       disableOwner: {
+      //         threshold: 1,
+      //         addresses: [pChainAddressHex as Address]
+      //       }
+      //     },
+      //     BigInt(newWeight), // weight as uint64
+      //   ],
+      //   account,
+      //   gas: BigInt(2500000),
+      //   nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
+      // })
+      // console.log('Mock transaction:', mockTx)
 
 
 
-      const tx = await walletClient.writeContract({
-        abi: validatorManagerAbi.abi,
-        address: transparentProxyAddress as Address,
-        functionName: 'initializeValidatorRegistration',
-        args: [
-          {
-            nodeID: nodeIDHexTrimmed as Address,
-            blsPublicKey: newBlsPublicKey,
-            registrationExpiry: expiry,
-            remainingBalanceOwner: {
-              threshold: 1,
-              addresses: [pAddressID as Address]
-            },
-            disableOwner: {
-              threshold: 1,
-              addresses: [pAddressID as Address]
-            }
-          },
-          BigInt(newWeight), // weight as uint64
-        ],
-        account,
-        gas: BigInt(2500000),
-        nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
-      })
+      // const tx = await walletClient.writeContract({
+      //   abi: validatorManagerAbi.abi,
+      //   address: transparentProxyAddress as Address,
+      //   functionName: 'initializeValidatorRegistration',
+      //   args: [
+      //     {
+      //       nodeID: nodeIDHexTrimmed as Address,
+      //       blsPublicKey: newBlsPublicKey,
+      //       registrationExpiry: expiry,
+      //       remainingBalanceOwner: {
+      //         threshold: 1,
+      //         addresses: [pChainAddressHex as Address]
+      //       },
+      //       disableOwner: {
+      //         threshold: 1,
+      //         addresses: [pChainAddressHex as Address]
+      //       }
+      //     },
+      //     BigInt(newWeight), // weight as uint64
+      //   ],
+      //   account,
+      //   gas: BigInt(2500000),
+      //   nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
+      // })
 
       // Wait for transaction receipt
-      const receipt = await publicClient.waitForTransactionReceipt({ hash: tx })
+      const receipt = await publicClient.waitForTransactionReceipt({ hash: "0xce66933fbcb0a044ef840ad7935b6839c9e5a008ba02818ce8609a91b3e491ce" })
       console.log('Transaction receipt:', receipt)
 
       const RegisterL1ValidatorUnsignedWarpMsg = receipt.logs[0].data
@@ -300,7 +319,7 @@ export default function LaunchValidators() {
         return;
       }
       console.log('RegisterL1ValidatorUnsignedWarpMsg: ', RegisterL1ValidatorUnsignedWarpMsg)
-      const validationID =receipt.logs[1]?.topics[1];
+      const validationID =receipt.logs[1].topics[1];
       if (!validationID) {
         console.error('validationID is undefined');
         return;
@@ -311,28 +330,27 @@ export default function LaunchValidators() {
       const apiHost = await apiHostPromise;
       const peers = await collectPeers(rpcUrl);
 
-    //   const signResponse = await fetch(`${apiHost}/signMessage`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //         message: RegisterL1ValidatorUnsignedWarpMsg,
-    //         justification: "0x0000000000000000000000000000000000000000", // justification should be  "" but the wrapped service we are using does not support it
-    //         signingSubnetID: subnetId,
-    //         extraPeers: peers,
-    //     })
-    // });
+      const signResponse = await fetch(`${apiHost}/signMessage`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            message: RegisterL1ValidatorUnsignedWarpMsg.slice(2),
+            signingSubnetID: subnetId,
+            extraPeers: peers,
+        })
+    });
 
 
-    // if (!signResponse.ok) {
-    //     const errorText = await signResponse.text();
-    //     throw new Error(errorText || `HTTP error! status: ${signResponse.status}`);
-    // }
+    if (!signResponse.ok) {
+        const errorText = await signResponse.text();
+        throw new Error(errorText || `HTTP error! status: ${signResponse.status}`);
+    }
 
-    // const { signedMessage } = await signResponse.json();
+    const { signedMessage } = await signResponse.json();
 
-    // console.log('signedMessage: ', signedMessage)
+    console.log('signedMessage: ', signedMessage)
 
       // Update UI
       setValidators([...validators, {
