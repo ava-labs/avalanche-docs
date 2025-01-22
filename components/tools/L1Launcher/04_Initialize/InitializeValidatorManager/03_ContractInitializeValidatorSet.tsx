@@ -3,7 +3,8 @@ import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeEr
 import { privateKeyToAccount } from 'viem/accounts';
 
 import { useL1LauncherWizardStore } from '../../config/store';
-import { calculateContractAddress } from '../../../common/utils/wallet';
+import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
+
 import { cb58ToHex } from '../../../common/utils/cb58';
 import { packWarpIntoAccessList } from '../../../common/utils/packWarp';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
@@ -60,7 +61,7 @@ export default function ContractInitializeValidatorSet() {
                     transport: http()
                 });
 
-                const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
+                const managerAddress = PROXY_ADDRESS;
 
                 // Find the InitialValidatorCreated event in ABI
                 const initialValidatorEvent = PoAValidatorManagerABI.abi.find(
@@ -123,7 +124,7 @@ export default function ContractInitializeValidatorSet() {
             // Pack the WARP message into access list format
             const accessList = packWarpIntoAccessList(signatureBytes);
 
-            const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
+            const managerAddress = PROXY_ADDRESS;
 
             const args = [{
                 l1ID: cb58ToHex(subnetId),

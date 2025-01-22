@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { createWalletClient, createPublicClient, custom, http, AbiEvent } from 'viem';
 import { useL1LauncherWizardStore } from '../../config/store';
-import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '@/components/tools/common/utils/cb58';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
 import { privateKeyToAccount } from 'viem/accounts';
+import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
 
 export default function ContractInitialize() {
     const [status, setStatus] = useState<StepState>('not_started');
@@ -47,7 +47,7 @@ export default function ContractInitialize() {
                     transport: http()
                 });
 
-                const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
+                const managerAddress = PROXY_ADDRESS
 
                 const initializedEventABI = PoAValidatorManagerABI.abi.find(item => item.type === 'event' && item.name === 'Initialized') as AbiEvent;
 
@@ -126,7 +126,7 @@ export default function ContractInitialize() {
                 account
             });
 
-            const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
+            const managerAddress = PROXY_ADDRESS
 
             const settings = {
                 l1ID: cb58ToHex(subnetId),

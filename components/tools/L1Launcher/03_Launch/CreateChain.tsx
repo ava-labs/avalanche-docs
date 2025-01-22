@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { createSubnet, createChain, convertToL1 } from './chain';
-import { calculateContractAddress } from '../../common/utils/wallet';
+import { PROXY_ADDRESS } from '../../common/utils/genGenesis';
 
 type Status = 'not_started' | 'in_progress' | 'error' | 'success';
 
@@ -132,7 +132,7 @@ export default function CreateChain() {
                         privateKeyHex: tempPrivateKeyHex,
                         subnetId: subnetTxId || subnetStatus.data,
                         chainId: chainTxId || createChainStatus.data,
-                        managerAddress: calculateContractAddress(tempPrivateKeyHex, 3),
+                        managerAddress: PROXY_ADDRESS,
                         nodePopJsons: nodePopJsons.slice(0, nodesCount),
                     });
                     setConvertToL1Status({

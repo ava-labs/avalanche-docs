@@ -1,7 +1,7 @@
 import { apiHostPromise } from '../../../common/utils/config';
 import { useEffect, useState } from 'react';
 import { useL1LauncherWizardStore } from '../../config/store';
-import { calculateContractAddress } from '../../../common/utils/wallet';
+import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
 import { statusColors, StepState } from './colors';
 import { packL1ConversionMessage } from '@/components/tools/common/utils/convertWarp';
 import { bytesToHex } from 'viem';
@@ -88,7 +88,7 @@ export default function CollectSignatures() {
             const [message, justification] = packL1ConversionMessage({
                 subnetId,
                 managerChainID: chainId,
-                managerAddress: calculateContractAddress(tempPrivateKeyHex, 3),
+                managerAddress: PROXY_ADDRESS,
                 validators: nodePopJsons.slice(0, nodesCount).map(json => JSON.parse(json).result)
             }, 5, pChainChainID); // Using networkID 5 for Fuji as seen in the test
 

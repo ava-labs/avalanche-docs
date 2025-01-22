@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createPublicClient, http, AbiEvent, Log, decodeEventLog } from 'viem';
 import { useL1LauncherWizardStore } from '../../config/store';
-import { calculateContractAddress } from '../../../common/utils/wallet';
+import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
 
 const serializeBigInt = (obj: any): any => {
@@ -63,7 +63,7 @@ export default function CheckContractLogs({ onSuccess }: { onSuccess: () => void
                 transport: http()
             });
 
-            const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
+            const managerAddress = PROXY_ADDRESS;
 
             // Get all events from ABI
             const eventAbis = PoAValidatorManagerABI.abi.filter(
