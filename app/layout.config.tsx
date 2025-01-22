@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins } from 'lucide-react';
+import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, HardDrive } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -154,7 +154,7 @@ const toolsMenu: LinkItemType = {
   text: 'Tools',
   url: '/tools',
   items: [
-   {
+    {
       menu: {
         banner: (
           <div className="-mx-3 -mt-3">
@@ -163,26 +163,34 @@ const toolsMenu: LinkItemType = {
               alt="L1 Launcher Preview"
               className="rounded-t-lg object-cover"
               style={{
-                maskImage:
-                  'linear-gradient(to bottom,white 60%,transparent)',
+                maskImage: 'linear-gradient(to bottom,white 60%,transparent)',
               }}
             />
           </div>
         ),
-        className: 'md:row-span-2',
+        className: 'md:row-span-2 lg:col-span-1',
       },
       icon: <Server />,
       text: 'L1 Launcher (Beta)',
       description: 'Launch your self-hosted Testnet or Mainnet L1 on your own infrastructure.',
       url: '/tools/l1-launcher',
     },
+    /** {
+      icon: <HardDrive />,
+      text: 'L1 Manager',
+      description: "Manage your L1 validator set from the web.",
+      url: '/tools/l1-manager',
+      menu: {
+        className: 'lg:col-start-2 lg:row-start-1',
+      },
+    }, */
     {
       icon: <Github />,
       text: 'Avalanche Starter Kit',
       description: "Spin up short-lived test environments for building dApps using interoperability features like ICM and ICTT.",
       url: 'https://github.com/ava-labs/avalanche-starter-kit',
       menu: {
-        className: 'lg:col-start-2',
+        className: 'lg:col-start-2 lg:row-start-1',
       },
     },
     {
@@ -191,7 +199,7 @@ const toolsMenu: LinkItemType = {
       description: 'Claim Fuji AVAX tokens from the testnet faucet to test your dApps.',
       url: 'https://core.app/tools/testnet-faucet/?subnet=c&token=c',
       menu: {
-        className: 'lg:col-start-2',
+        className: 'lg:col-start-2 lg:row-start-2',
       },
     },
     {
@@ -209,10 +217,9 @@ const toolsMenu: LinkItemType = {
       description: 'Deploy a bridge between two L1s to transfer fungible tokens.',
       url: '',
       menu: {
-        className: 'lg:col-start-3',
+        className: 'lg:col-start-3 lg:row-start-2',
       },
     },
-
   ],
 };
 

@@ -1,7 +1,7 @@
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import Note from '../ui/Note';
-import Pre from '../ui/Pre';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import Note from '@/components/tools/common/ui/Note';
+import Pre from '@/components/tools/common/ui/Pre';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
@@ -233,8 +233,10 @@ export default function OpenRPCPort() {
         rpcVerified,
         setRpcVerified,
         getCChainRpcEndpoint,
-        evmChainId
-    } = useWizardStore();
+        evmChainId,
+        goToNextStep,
+        goToPreviousStep
+    } = useL1LauncherWizardStore();
 
 
     const isAddressValid = () => {
@@ -365,7 +367,7 @@ export default function OpenRPCPort() {
 
             <NextPrev
                 nextDisabled={rpcLocationType === 'remote' && (!isAddressValid() || !rpcVerified)}
-                currentStepName="open-rpc-port"
+                onNext={goToNextStep} onPrev={goToPreviousStep}
             />
         </>
     );

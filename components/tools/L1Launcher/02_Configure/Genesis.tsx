@@ -1,21 +1,11 @@
 import { useState } from 'react';
-import { getWalletAddress } from '../wallet';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Button } from '@/components/ui/button';
-import { isValidEthereumAddress } from '@/components/tools/common/utils'
-import Pre from '../ui/Pre';
-
-function isValidL1Name(name: string): boolean {
-    return name.split('').every(char => {
-        const code = char.charCodeAt(0);
-        return code <= 127 && // MaxASCII check
-            (char.match(/[a-zA-Z0-9 ]/) !== null); // only letters, numbers, spaces
-    });
-}
+import Pre from '@/components/tools/common/ui/Pre';
 
 export default function Genesis() {
-    const { evmChainId, genesisString, regenerateGenesis, l1Name, maxAdvancedStep } = useWizardStore();
+    const { evmChainId, genesisString, regenerateGenesis, maxAdvancedStep, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [error, setError] = useState('');
     const [isRegenerating, setIsRegenerating] = useState(false);
 
@@ -73,7 +63,7 @@ export default function Genesis() {
 
 
 
-            <NextPrev nextDisabled={!genesisString} currentStepName="genesis" />
+            <NextPrev nextDisabled={!genesisString} onNext={goToNextStep} onPrev={goToPreviousStep} />
 
 
         </div>

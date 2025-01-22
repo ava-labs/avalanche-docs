@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { createSubnet, createChain, convertToL1 } from './chain';
-import { calculateContractAddress } from '../wallet';
+import { calculateContractAddress } from '../../common/utils/wallet';
 
 type Status = 'not_started' | 'in_progress' | 'error' | 'success';
 
@@ -25,7 +25,9 @@ export default function CreateChain() {
         conversionId: existingConversionId,
         nodePopJsons,
         nodesCount,
-    } = useWizardStore();
+        goToNextStep,
+        goToPreviousStep
+    } = useL1LauncherWizardStore();
 
     const [subnetStatus, setSubnetStatus] = useState<StepStatus>(() => ({
         status: existingSubnetId ? 'success' : 'not_started',
@@ -249,7 +251,8 @@ export default function CreateChain() {
 
             <NextPrev
                 nextDisabled={createChainStatus.status !== 'success'}
-                currentStepName="create-chain"
+                onNext={goToNextStep} 
+                onPrev={goToPreviousStep}
             />
         </div>
     );

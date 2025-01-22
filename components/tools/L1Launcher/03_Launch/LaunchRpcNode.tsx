@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import Note from '../ui/Note';
-import Pre from '../ui/Pre';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import Note from '@/components/tools/common/ui/Note';
+import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
 
 const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
@@ -23,7 +23,7 @@ const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalan
   avaplatform/subnet-evm:${CONTAINER_VERSION}`;
 
 export default function LaunchRpcNode() {
-    const { subnetId, chainId, evmChainId } = useWizardStore();
+    const { subnetId, chainId, evmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [isRpcLaunched, setIsRpcLaunched] = useState(false);
 
     return (
@@ -83,13 +83,13 @@ http://127.0.0.1:8080/ext/bc/${chainId}/rpc`}
             </div>
 
 
-            <NextPrev nextDisabled={!isRpcLaunched} currentStepName="launch-rpc-node" />
+            <NextPrev nextDisabled={!isRpcLaunched} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </>
     );
 }
 
 function EnableDebug() {
-    const { chainId } = useWizardStore();
+    const { chainId } = useL1LauncherWizardStore();
 
     return <>
 

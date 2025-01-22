@@ -1,15 +1,15 @@
 import { Input } from '@/components/ui/input';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Label } from '@radix-ui/react-label';
 import TokenAllocationList from '../../common/token-allocation-list/token-allocation-list';
 import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-configurator/allowlist-precompile-configurator';
 import { useEffect } from 'react';
-import { newPrivateKey } from '../wallet';
-import { isAllowlistPrecompileConfigValid } from '../../common/utils';
+import { newPrivateKey } from '../../common/utils/wallet';
+import { isValidAllowlistPrecompileConfig } from '../../common/utils/validation';
 
 export default function Permissions() {
-    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex } = useWizardStore();
+    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
 
     // Initialize temporary private key if not exists
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want to be able to mint additional tokens (recommended for production)."
             />
 
-            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 2 || !isAllowlistPrecompileConfigValid(nativeMinterAllowlistConfig)} currentStepName="tokenomics" />
+            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 2 || !isValidAllowlistPrecompileConfig(nativeMinterAllowlistConfig)} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 }

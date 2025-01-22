@@ -1,8 +1,8 @@
 import { utils, pvm, Context, UnsignedTx, L1Validator, BigIntPr, pvmSerial, PChainOwner, Int, Bytes, Address } from "@avalabs/avalanchejs";
-import { RPC_ENDPOINT } from "../utxo";
-import { getAddresses } from "../wallet";
+import { RPC_ENDPOINT } from "../../common/utils/utxo";
+import { getAddresses } from "../../common/utils/wallet";
 import { secp256k1 } from "@avalabs/avalanchejs";
-import { apiHostPromise } from "../config";
+import { apiHostPromise } from "../../common/utils/config";
 import { bytesToHex, hexToBytes } from "viem";
 
 async function addTxSignatures(tx: any, privateKeyHex: string) {
@@ -60,6 +60,10 @@ export async function createSubnet(privateKeyHex: string): Promise<string> {
     await addTxSignatures(tx, privateKeyHex);
 
     const response = await pvmApi.issueSignedTx(tx.getSignedTx());
+
+    // Sleep for 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
     return response.txID;
 }
 
@@ -106,6 +110,9 @@ export async function createChain(params: CreateChainParams): Promise<string> {
     await addSigToAllCreds(tx, utils.hexToBuffer(params.privateKeyHex));
 
     const response = await pvmApi.issueSignedTx(tx.getSignedTx());
+
+    // Sleep for 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     console.log('chain created via avalanchejs', response.txID);
     return response.txID;
@@ -172,7 +179,10 @@ export async function convertToL1(params: {
 
     await addSigToAllCreds(tx, utils.hexToBuffer(params.privateKeyHex));
 
-
     const response = await pvmApi.issueSignedTx(tx.getSignedTx());
+
+    // Sleep for 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
     return response.txID;
 }

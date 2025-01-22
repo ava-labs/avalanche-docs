@@ -1,6 +1,9 @@
-import NextPrev from "../ui/NextPrev";
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import { useL1LauncherWizardStore } from "../config/store";
 
 export default function Welcome() {
+    const { goToNextStep, goToPreviousStep } = useL1LauncherWizardStore()
+
     return <>
         <h1 className="text-2xl font-medium mb-6">Welcome</h1>
 
@@ -23,6 +26,6 @@ export default function Welcome() {
             </div>
         </div>
 
-        <NextPrev nextDisabled={false} currentStepName="welcome" />
+        <NextPrev nextDisabled={false} prevHidden={true} onNext={goToNextStep} onPrev={goToPreviousStep} />
     </>;
 }

@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Trash2, AlertCircle, Plus, CircleHelp, Lock } from 'lucide-react'
 import { AddressEntry, Role } from './types'
-import { isValidEthereumAddress } from '@/components/tools/common/utils'
+import { isAddress } from 'viem'
 
 interface EthereumAddressListProps {
   role: Role;
@@ -18,7 +18,7 @@ interface EthereumAddressListProps {
 
 const isValidInput = (input: string): boolean => {
   const addresses = input.split(/[\s,]+/).filter(addr => addr.trim() !== '');
-  return addresses.length > 0 && addresses.every(isValidEthereumAddress);
+  return addresses.length > 0 && addresses.every(address => isAddress(address, { strict: false }));
 }
 
 const getRoleDescription = (role: Role, precompileAction: string) => {
