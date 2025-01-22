@@ -253,7 +253,8 @@ const staticRedirects: RedirectMap = {
   '/api-reference/avalanche-go-configs-flags': '/nodes/configure/configs-flags',
   '/api-reference/p-chain/configs': '/nodes/chain-configs/p-chain',
   '/api-reference/x-chain/configs': '/nodes/chain-configs/x-chain',
-  '/api-reference/c-chain/configs': '/nodes/chain-configs/c-chain'
+  '/api-reference/c-chain/configs': '/nodes/chain-configs/c-chain',
+  '/tooling/guides/get-avalanche-cli': '/tooling/get-avalanche-cli',
 };
 
 const wildcardRedirects: WildcardRedirect[] = [
