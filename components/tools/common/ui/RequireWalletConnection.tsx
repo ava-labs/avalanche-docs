@@ -53,41 +53,33 @@ export default function RequireWalletConnection({ children, chainConfig, require
 
     // Check if user is connected and on the right chain
     const checkConnection = async () => {
-        if (!window.ethereum) {
-            setConnectionStatus('no_wallet_installed');
-            return;
-        }
-
         try {
-            // Request account access
-            const accounts = await window.ethereum.request({
-                method: 'eth_requestAccounts'
-            });
+            // reset errors
+            setError(null);
 
+            // Check if wallet is installed
+            setConnectionStatus('no_wallet_installed');
+            if (!window.ethereum) return;
+
+            // Check if connected to the correct chain
+            setConnectionStatus('wrong_chain');
+            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            if (chainId !== chainConfig.EVMChainId) return;
+
+            // Check if account can be accessed
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             if (!accounts || accounts.length === 0) {
                 setError('No account detected');
                 return;
             }
-            
             const account = accounts[0];
             setAccount(account);
-
-            // Check chain
-            const chainId = await window.ethereum.request({
-                method: 'eth_chainId'
-            });
-
-            if (chainId !== chainConfig.EVMChainId) {
-                setError(null);
-                setConnectionStatus('wrong_chain');
-                return;
-            }
             
+            // Optional balance check
             if (requiredBalance && requiredBalance > 0) {
-                setError(null);
+                
+                // Check if account has sufficient balance
                 setConnectionStatus('insufficient_balance');
-
-                // Check balance
                 const response = await fetch(chainConfig.rpcUrls[0], {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -108,14 +100,11 @@ export default function RequireWalletConnection({ children, chainConfig, require
                 const balance = parseInt(data.result, 16) / 1e18; // Convert balance from wei to ether
                 setAccountBalance(balance);
 
-                if (balance < requiredBalance) {
-                    return;
-                }
+                if (balance < requiredBalance) return;
             }
-
-            setError(null);
+            
+            // Set status to connected if every check passed and call onConnection callback
             setConnectionStatus('correct_chain_connected');
-
             onConnection && onConnection();
 
         } catch (error) {
@@ -148,10 +137,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
         }
 
         try {
-            await window.ethereum.request({
-                method: 'wallet_switchEthereumChain',
-                params: [{ chainId: chainConfig.EVMChainId }],
-            });
+            await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: chainConfig.EVMChainId }] });
         } catch (error: any) {
             // If the chain hasn't been added to the wallet, add it
             if (error.code === 4902) {
@@ -237,7 +223,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
             case 'correct_chain_connected':
                 return <>
                     {children ? children : `Succesful connected to ${chainConfig.chainName}!`}
-                    </>;
+                </>;
             default:
                 return <p>An Unexpected error occured</p>
         }
