@@ -266,10 +266,24 @@ const wildcardRedirects: WildcardRedirect[] = [
     source: '/protocol/',
     destination: '/quick-start',
     pattern: /^\/protocol(?:\/(.*))?$/
-  }
+  },
+  {
+    source: '/integrations/',
+    destination: '/integrations',
+    pattern: /^\/integrations(?:\/(.*))?$/
+  },
 ];
 
 function getDestinationUrl(currentPath: string): string {
+  if (currentPath.startsWith('/integrations')) {
+    const match = currentPath.match(/^\/integrations(?:\/(.*))?$/);
+    if (match) {
+      const wildcardPart = match[1] || '';
+      const separator = wildcardPart ? '/' : '';
+      return `https://build.avax.network/integrations${separator}${wildcardPart}`;
+    }
+  }
+
   if (currentPath in staticRedirects) {
     return `https://build.avax.network/docs${staticRedirects[currentPath]}`;
   }
