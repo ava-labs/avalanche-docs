@@ -49,7 +49,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want to be able to mint additional tokens (recommended for production)."
             />
 
-            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 2 || !isValidAllowlistPrecompileConfig(nativeMinterAllowlistConfig)} onNext={goToNextStep} onPrev={goToPreviousStep} />
+            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length <1 || !isValidAllowlistPrecompileConfig(nativeMinterAllowlistConfig)} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 }
