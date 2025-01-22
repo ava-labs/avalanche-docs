@@ -1,12 +1,11 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, HardDrive, Ticket, Handshake } from 'lucide-react';
+import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
 import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
-import HackathonBanner from '@/public/nav-banner/hackathon-banner.png';
 import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 
 export const linkItems: LinkItemType[] = [
@@ -16,6 +15,12 @@ export const linkItems: LinkItemType[] = [
     url: '/integrations',
     active: 'nested-url',
   },
+  {
+    icon: <Cog />,
+    text: 'Hackathon',
+    url: '/hackathon',
+    active: 'nested-url',
+  }
 ];
 
 const docsMenu: LinkItemType = {
@@ -290,54 +295,6 @@ const grantsMenu: LinkItemType = {
    ],
 };
 
-const hackathonMenu: LinkItemType = {
-  type: 'menu',
-  text: 'Hackathon',
-  url: '/hackathon',
-  items: [
-    {
-      menu: {
-        banner: (
-          <div className="-mx-3 -mt-3">
-            <Image
-              src={HackathonBanner}
-              alt="Preview"
-              className="rounded-t-lg object-cover"
-              style={{
-                maskImage:
-                  'linear-gradient(to bottom,white 60%,transparent)',
-              }}
-            />
-          </div>
-        ),
-        className: 'md:row-span-2',
-      },
-      icon: <Ticket />,
-      text: 'Registration',
-      description: 'Join us at London for the Avalanche Summit Hackathon',
-      url: 'https://lu.ma/avalanchesummitlondonhackathon',
-    },
-    {
-      icon: <Cable />,
-      text: 'Tracks',
-      description: "Get familiar with the tracks, and everything you need to know about the hackathon",
-      url: '/hackathon',
-      menu: {
-        className: 'lg:col-start-2 lg:row-start-1',
-      },
-    },
-    {
-      icon: <Handshake />,
-      text: 'Partners',
-      description: "Want to become a sponsor of the Hackathon? Contact Us!",
-      url: 'https://share.hsforms.com/1kflciOGOQuCDSGGMWdpWSw4h8ew',
-      menu: {
-        className: 'lg:col-start-3 lg:row-start-1',
-      },
-    },
-   ],
-};
-
 export const baseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
@@ -353,7 +310,6 @@ export const baseOptions: BaseLayoutProps = {
     academyMenu,
     toolsMenu,
     grantsMenu,
-    hackathonMenu,
     ...linkItems,
   ],
 };
