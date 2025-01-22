@@ -63,15 +63,16 @@ export default function LaunchRpcNode() {
                     This command launches an AvalancheGo node configured as an RPC node. It changes the RPC port to <code>8080</code> and the P2P port to <code>9653</code> to avoid conflicts with your validator node. You can run this on the same machine as one of your validator nodes or even on your local computer for easier access from a wallet.
                 </p>
 
-                <OSSelectionTabs 
-                operatingSystems={operatingSystems} 
-                activeOS={activeOs} 
-                setActiveOS={setActiveOs} 
-                    />
+                <OSSelectionTabs
+                    operatingSystems={operatingSystems}
+                    activeOS={activeOs}
+                    setActiveOS={setActiveOs}
+                />
 
                 {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
-                Please note that --network host does not work on macOS, so you have to map the ports manually.
+                    Please note that --network host does not work on macOS, so you have to map the ports manually.
                 </p>)}
+
                 <Pre>{dockerCommand(subnetId, chainId)}</Pre>
             </div>
 

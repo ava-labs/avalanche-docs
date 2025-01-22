@@ -22,6 +22,7 @@ import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import Pre from '@/components/tools/common/ui/Pre';
 import TextArea from '@/components/tools/common/ui/TextArea';
+import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
 const validateNodePop = (json: string): boolean => {
     try {
@@ -48,17 +49,20 @@ const validateNodePop = (json: string): boolean => {
     }
 };
 
+const operatingSystems = ['Linux', 'macOS'];
+
 export default function GenerateKeys() {
     const { nodePopJsons, setNodePopJsons, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [errors, setErrors] = useState<string[]>(Array(nodesCount).fill(''));
     const [nodesRemovedAfterKeyGeneration, setNodesRemovedAfterKeyGeneration] = useState(false);
+    const [activeOs, setActiveOs] = useState("Linux");
 
     const handleNodePopChange = (index: number, value: string) => {
-        if (value === "dummy") { 
+        if (value === "dummy") {
             // Dummy value for testing
             value = `{"jsonrpc":"2.0","result":{"nodeID":"NodeID-ER5LW4zsBcGXZWdZYT9QYYqGhX4MRyoNP","nodePOP":{"publicKey":"0x8fbe33ad3cdaa7b774f62099be7ffc73a8fc92456fa1321d3315321605c2b97fdd65cdf12e420a857ed393ed39757e37","proofOfPossession":"0xadd544bdf2cb5d75d2daf03f69e0b0b2d378713996e6ebf612dac0b3a613137dfbc2bf327adab734587fc2b4c0cc8b10084461760f7c472de0e4685ed50e0c1103507a22e71306d6a9ea3cb1ceeb390f2e2ccf838239bc6c27881d087867c4b2"}},"id":1}`;
         }
-        
+
         const newJsons = [...nodePopJsons];
         newJsons[index] = value;
         setNodePopJsons(newJsons);
@@ -83,7 +87,16 @@ export default function GenerateKeys() {
         </div>
         <div>
             <h3 className="mb-4 font-medium">Run this on {nodesCount === 1 ? "the" : "every"} node:</h3>
+            <OSSelectionTabs
+                operatingSystems={operatingSystems}
+                activeOS={activeOs}
+                setActiveOS={setActiveOs}
+            />
+            {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
+                Please note that --network host does not work on macOS, so you have to map the ports manually.
+            </p>)}
             <Pre>{dockerCommand}</Pre>
+            
             <p>
                 This runs an AvalancheGo node in docker. The node, while starting, generates its own keys if they are not present.
                 You can find them at <code>~/.avalanchego/staking/</code> in your local system.
