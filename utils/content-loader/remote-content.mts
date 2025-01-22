@@ -155,13 +155,6 @@ async function main(): Promise<void> {
       contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/api/info/",
     },
     { 
-      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/api/keystore/service.md",
-      outputPath: "content/docs/api-reference/keystore-api.mdx",
-      title: "Keystore API",
-      description: "This page is an overview of the Keystore API associated with AvalancheGo.",
-      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/api/keystore/",
-    },
-    { 
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/api/metrics/service.md",
       outputPath: "content/docs/api-reference/metrics-api.mdx",
       title: "Metrics API",
