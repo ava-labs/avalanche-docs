@@ -1,4 +1,3 @@
-import { on } from 'events';
 import { useState, useEffect, ReactNode } from 'react';
 
 export interface ChainConfig {
@@ -34,18 +33,22 @@ export const fujiConfig: ChainConfig = {
 interface RequireWalletConnectionProps {
     children?: ReactNode;
     chainConfig: ChainConfig;
+    requiredBalance?: number;
     onConnection?: () => void;
 }
 
-type Status = 'no_wallet_installed' | 'wrong_chain' | 'success';
+type Status = 'no_wallet_installed' | 'wrong_chain' | 'insufficient_balance' | 'correct_chain_connected';
 
 /**
  * Component that checks if the user has a wallet installed and is connected to the right chain. If
  * not, the user will be prompted to install a wallet and connect to the chain. If the connection
  * is correctly established, the children elements will be shown.
  */
-export default function RequireWalletConnection({ children, chainConfig, onConnection }: RequireWalletConnectionProps) {
+export default function RequireWalletConnection({ children, chainConfig, requiredBalance, onConnection }: RequireWalletConnectionProps) {
     const [connectionStatus, setConnectionStatus] = useState<Status>('no_wallet_installed');
+    const [account, setAccount] = useState<string | null>(null);
+    const [accountBalance, setAccountBalance] = useState<number | null>(null);
+
     const [error, setError] = useState<string | null>(null);
 
     // Check if user is connected and on the right chain
@@ -65,6 +68,9 @@ export default function RequireWalletConnection({ children, chainConfig, onConne
                 setError('No account detected');
                 return;
             }
+            
+            const account = accounts[0];
+            setAccount(account);
 
             // Check chain
             const chainId = await window.ethereum.request({
@@ -72,12 +78,44 @@ export default function RequireWalletConnection({ children, chainConfig, onConne
             });
 
             if (chainId !== chainConfig.EVMChainId) {
+                setError(null);
                 setConnectionStatus('wrong_chain');
                 return;
             }
+            
+            if (requiredBalance && requiredBalance > 0) {
+                setError(null);
+                setConnectionStatus('insufficient_balance');
+
+                // Check balance
+                const response = await fetch(chainConfig.rpcUrls[0], {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        jsonrpc: '2.0',
+                        method: 'eth_getBalance',
+                        params: [account, 'latest'],
+                        id: 1,
+                    }),
+                });
+
+                const data = await response.json();
+                if (data.error) {
+                    setError(`Error requesting balance ${data.error.message}`);
+                    return;
+                }
+
+                const balance = parseInt(data.result, 16) / 1e18; // Convert balance from wei to ether
+                setAccountBalance(balance);
+
+                if (balance < requiredBalance) {
+                    return;
+                }
+            }
 
             setError(null);
-            setConnectionStatus('success');
+            setConnectionStatus('correct_chain_connected');
+
             onConnection && onConnection();
 
         } catch (error) {
@@ -185,11 +223,21 @@ export default function RequireWalletConnection({ children, chainConfig, onConne
                             Check Wallet Connection
                         </button>
                     </div>
-
-                   
                 </div>;
-            case 'success':
-                return <>{children ? children : `Succesful connected to ${chainConfig.chainName}!`}</>;
+            case "insufficient_balance":
+                return <>
+                    <p>The balance of the account {account} is {accountBalance?.toFixed(4)} {chainConfig.nativeCurrency.symbol}. That is lower than the required balance of {requiredBalance} {chainConfig.nativeCurrency.symbol}. Please fund your account to proceed.</p>
+                    <button
+                        onClick={checkConnection}
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
+                    >
+                        Check Again
+                    </button>
+                </>;
+            case 'correct_chain_connected':
+                return <>
+                    {children ? children : `Succesful connected to ${chainConfig.chainName}!`}
+                    </>;
             default:
                 return <p>An Unexpected error occured</p>
         }
