@@ -6,9 +6,9 @@ import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
 import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
-const dockerCommand = (subnetID: string) => `docker run -it -d \\
+const dockerCommand = (activeOS: string, subnetID: string) => `docker run -it -d \\
   --name avago \\
-  --network host \\
+  ${activeOS === "macOS" ? "-p 9650:9650 -p 9651:9651" : "--network host" } \\
   -v ~/.avalanchego:/home/avalanche/.avalanchego \\
   -e AVAGO_NETWORK_ID=fuji \\
   -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
@@ -25,7 +25,7 @@ const operatingSystems = ['Linux', 'macOS'];
 export default function LaunchValidators() {
   const { subnetId, chainId, evmChainId, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
   const [isBootstrapped, setIsBootstrapped] = useState(false);
-  const [activeOs, setActiveOs] = useState("Linux");
+  const [activeOS, setActiveOS] = useState("Linux");
 
   return (
     <div className="space-y-12">
@@ -40,14 +40,14 @@ export default function LaunchValidators() {
         </h3>
         <OSSelectionTabs 
                 operatingSystems={operatingSystems} 
-                activeOS={activeOs} 
-                setActiveOS={setActiveOs} 
+                activeOS={activeOS} 
+                setActiveOS={setActiveOS} 
             />
 
-        {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
+        {activeOS === 'macOS' && (<p className="mt-2 text-sm text-red-500">
           Please note that --network host does not work on macOS, so you have to map the ports manually.
         </p>)}
-        <Pre>{dockerCommand(subnetId)}</Pre>
+        <Pre>{dockerCommand(activeOS, subnetId)}</Pre>
         <Note>
           <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{subnetId}</code> is the subnet ID
         </Note>

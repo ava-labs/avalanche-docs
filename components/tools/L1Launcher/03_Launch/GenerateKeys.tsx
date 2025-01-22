@@ -1,6 +1,6 @@
-const dockerCommand = `mkdir -p ~/.avalanchego/staking; docker run -it -d \\
+const dockerCommand = (activeOS: string) => `mkdir -p ~/.avalanchego/staking; docker run -it -d \\
   --name avago \\
-  --network host \\
+  ${activeOS === "macOS" ? "-p 9650:9650 -p 9651:9651" : "--network host" } \\
   -v ~/.avalanchego:/home/avalanche/.avalanchego \\
   -e AVAGO_NETWORK_ID=fuji \\
   -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
@@ -55,7 +55,7 @@ export default function GenerateKeys() {
     const { nodePopJsons, setNodePopJsons, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [errors, setErrors] = useState<string[]>(Array(nodesCount).fill(''));
     const [nodesRemovedAfterKeyGeneration, setNodesRemovedAfterKeyGeneration] = useState(false);
-    const [activeOs, setActiveOs] = useState("Linux");
+    const [activeOS, setActiveOS] = useState("Linux");
 
     const handleNodePopChange = (index: number, value: string) => {
         if (value === "dummy") {
@@ -89,13 +89,13 @@ export default function GenerateKeys() {
             <h3 className="mb-4 font-medium">Run this on {nodesCount === 1 ? "the" : "every"} node:</h3>
             <OSSelectionTabs
                 operatingSystems={operatingSystems}
-                activeOS={activeOs}
-                setActiveOS={setActiveOs}
+                activeOS={activeOS}
+                setActiveOS={setActiveOS}
             />
-            {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
+            {activeOS === 'macOS' && (<p className="mt-2 text-sm text-red-500">
                 Please note that --network host does not work on macOS, so you have to map the ports manually.
             </p>)}
-            <Pre>{dockerCommand}</Pre>
+            <Pre>{dockerCommand(activeOS)}</Pre>
             
             <p>
                 This runs an AvalancheGo node in docker. The node, while starting, generates its own keys if they are not present.
