@@ -1,25 +1,21 @@
 import { Label } from '@radix-ui/react-label';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-
-function isValidL1Name(name: string): boolean {
-    return name.split('').every(char => {
-        const code = char.charCodeAt(0);
-        return code <= 127 && // MaxASCII check
-            (char.match(/[a-zA-Z0-9 ]/) !== null); // only letters, numbers, spaces
-    });
-}
+import { isValidL1Name } from '../../common/utils/validation';
 
 
 export default function ChainParameters() {
-    const { l1Name, setL1Name, evmChainId, setEvmChainId } = useWizardStore();
+    const { l1Name, setL1Name, evmChainId, setEvmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
 
     return (
-        <div className="space-y-12">
-            <h1 className="text-2xl font-medium mb-6">Permissions</h1>
+        <div className="space-y-8">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Chain Parameters</h1>
+                <p>Enter the basic parameters of your L1, such as it's name, it's EVM chain ID, and the network you want to deploy it on.</p>
+            </div>
 
             <div>
                 <Label>L1 Name</Label>
@@ -65,7 +61,7 @@ export default function ChainParameters() {
                 </RadioGroup>`
             </div>
 
-            <NextPrev nextDisabled={!isValidL1Name(l1Name) || !evmChainId} currentStepName="chain-parameters" />
+            <NextPrev nextDisabled={!isValidL1Name(l1Name) || !evmChainId} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 }

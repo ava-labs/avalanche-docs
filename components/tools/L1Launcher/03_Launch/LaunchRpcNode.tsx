@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import Note from '../ui/Note';
-import Pre from '../ui/Pre';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import Note from '@/components/tools/common/ui/Note';
+import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
+import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
 const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
   --name rpc \\
@@ -22,51 +23,93 @@ const dockerCommand = (subnetID: string, chainID: string) => `mkdir -p ~/.avalan
   --user $(id -u):$(id -g) \\
   avaplatform/subnet-evm:${CONTAINER_VERSION}`;
 
+const operatingSystems = ['Linux', 'macOS'];
+
 export default function LaunchRpcNode() {
-    const { subnetId, chainId, evmChainId } = useWizardStore();
+    const { subnetId, chainId, evmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [isRpcLaunched, setIsRpcLaunched] = useState(false);
+    const [activeOs, setActiveOs] = useState("Linux");
 
     return (
-        <>
-            <h1 className="text-2xl font-medium mb-6">Launch RPC Node</h1>
+        <div className="space-y-12">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Launch L1 RPC Node</h1>
+                <p>In this step we will launch the RPC nodes using Docker. </p>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-950/50 border-l-4 border-blue-400 dark:border-blue-500 p-4 mb-6">
+                <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">About RPC Nodes</h3>
+                <p className="mb-2 text-gray-800 dark:text-gray-200">
+                    RPC (Remote Procedure Call) nodes allow users to access your blockchain data and send transactions. You have two main options:
+                </p>
+                <ul className="list-disc ml-6 mb-2 text-gray-800 dark:text-gray-200">
+                    <li className="mb-1">
+                        <span className="font-medium text-gray-900 dark:text-gray-100">Local access:</span> Running on localhost:8080 without SSL. Simple for quick testing, but only you can access the chain.
+                    </li>
+                    <li className="mb-1">
+                        <span className="font-medium text-gray-900 dark:text-gray-100">Public access:</span> Running on a domain with SSL certificates. Required for most wallets to connect.
+                    </li>
+                </ul>
+                <p className="text-sm text-blue-600 dark:text-blue-300">
+                    Important: Don't use your validator node as an RPC node. Your RPC node from the previous step exposes port 8080 for API access.
+                </p>
+            </div>
 
             <EnableDebug />
 
-            <h3 className="mb-4 font-medium">Run this command on your RPC node:</h3>
-            <Pre>{dockerCommand(subnetId, chainId)}</Pre>
+            <div>
+                <h3 className="mb-4 font-medium">Run this command on your RPC node:</h3>
+                <p className="mb-4">
+                    This command launches an AvalancheGo node configured as an RPC node. It changes the RPC port to <code>8080</code> and the P2P port to <code>9653</code> to avoid conflicts with your validator node. You can run this on the same machine as one of your validator nodes or even on your local computer for easier access from a wallet.
+                </p>
 
-            <p className="mb-4">
-                This command launches an AvalancheGo node configured as an RPC node. It changes the RPC port to <code>8080</code> and the P2P port to <code>9653</code> to avoid conflicts with your validator node. You can run this on the same machine as one of your validator nodes or even on your local computer for easier access from a wallet.
-            </p>
+                <OSSelectionTabs 
+                operatingSystems={operatingSystems} 
+                activeOS={activeOs} 
+                setActiveOS={setActiveOs} 
+                    />
 
-            <h3 className="mb-4 font-medium">Verify the RPC node is running:</h3>
-            <Pre>
-                {`curl -X POST --data '{ 
+                {activeOs === 'macOS' && (<p className="mt-2 text-sm text-red-500">
+                Please note that --network host does not work on macOS, so you have to map the ports manually.
+                </p>)}
+                <Pre>{dockerCommand(subnetId, chainId)}</Pre>
+            </div>
+
+            <div>
+                <h3 className="mb-4 font-medium">View RPC node logs:</h3>
+                <p className="mb-4">
+                    You can follow the logs of your RPC node to see if it's running correctly.
+                </p>
+                <Pre>docker logs -f rpc</Pre>
+            </div>
+
+            <div>
+                <h3 className="mb-4 font-medium">Verify the RPC node is running:</h3>
+                <Pre>
+                    {`curl -X POST --data '{ 
   "jsonrpc":"2.0", "method":"eth_chainId", "params":[], "id":1 
 }' -H 'content-type:application/json;' \\
 http://127.0.0.1:8080/ext/bc/${chainId}/rpc`}
-            </Pre>
+                </Pre>
 
-            <Note>
-                Replace <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">127.0.0.1</code> with your RPC node's IP address if you're checking from a different machine.
-            </Note>
+                <Note>
+                    Replace <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">127.0.0.1</code> with your RPC node's IP address if you're checking from a different machine.
+                </Note>
 
-            <p className="mb-4">
-                You should receive a response similar to:
-            </p>
+                <p className="mb-4">
+                    You should receive a response similar to:
+                </p>
 
-            <Pre>
-                {`{"jsonrpc":"2.0","id":1,"result":"0x${evmChainId.toString(16)}"}`}
-            </Pre>
+                <Pre>
+                    {`{"jsonrpc":"2.0","id":1,"result":"0x${evmChainId.toString(16)}"}`}
+                </Pre>
 
-            <Note>
-                <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">0x{evmChainId.toString(16)}</code> is the hex representation of your EVM chain ID <code>{evmChainId}</code>. Also check that port 8080 is open on your RPC node.
-            </Note>
+                <Note>
+                    <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">0x{evmChainId.toString(16)}</code> is the hex representation of your EVM chain ID <code>{evmChainId}</code>. Also check that port 8080 is open on your RPC node.
+                </Note>
+            </div>
 
-            <h3 className="mb-4 font-medium">View RPC node logs:</h3>
-            <Pre>docker logs -f rpc</Pre>
-
-            <div className="mb-4">
+            <div>
                 <div className="flex items-center">
                     <input
                         type="checkbox"
@@ -83,13 +126,13 @@ http://127.0.0.1:8080/ext/bc/${chainId}/rpc`}
             </div>
 
 
-            <NextPrev nextDisabled={!isRpcLaunched} currentStepName="launch-rpc-node" />
-        </>
+            <NextPrev nextDisabled={!isRpcLaunched} onNext={goToNextStep} onPrev={goToPreviousStep} />
+        </div>
     );
 }
 
 function EnableDebug() {
-    const { chainId } = useWizardStore();
+    const { chainId } = useL1LauncherWizardStore();
 
     return <>
 

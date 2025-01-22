@@ -18,10 +18,10 @@ const stopScript = `docker stop avago; docker rm avago`
 
 import { useState } from 'react';
 import { CONTAINER_VERSION } from '../constants';
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import Pre from '../ui/Pre';
-import TextArea from '../ui/TextArea';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import Pre from '@/components/tools/common/ui/Pre';
+import TextArea from '@/components/tools/common/ui/TextArea';
 
 const validateNodePop = (json: string): boolean => {
     try {
@@ -49,11 +49,16 @@ const validateNodePop = (json: string): boolean => {
 };
 
 export default function GenerateKeys() {
-    const { nodePopJsons, setNodePopJsons, nodesCount } = useWizardStore();
+    const { nodePopJsons, setNodePopJsons, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [errors, setErrors] = useState<string[]>(Array(nodesCount).fill(''));
     const [nodesRemovedAfterKeyGeneration, setNodesRemovedAfterKeyGeneration] = useState(false);
 
     const handleNodePopChange = (index: number, value: string) => {
+        if (value === "dummy") { 
+            // Dummy value for testing
+            value = `{"jsonrpc":"2.0","result":{"nodeID":"NodeID-ER5LW4zsBcGXZWdZYT9QYYqGhX4MRyoNP","nodePOP":{"publicKey":"0x8fbe33ad3cdaa7b774f62099be7ffc73a8fc92456fa1321d3315321605c2b97fdd65cdf12e420a857ed393ed39757e37","proofOfPossession":"0xadd544bdf2cb5d75d2daf03f69e0b0b2d378713996e6ebf612dac0b3a613137dfbc2bf327adab734587fc2b4c0cc8b10084461760f7c472de0e4685ed50e0c1103507a22e71306d6a9ea3cb1ceeb390f2e2ccf838239bc6c27881d087867c4b2"}},"id":1}`;
+        }
+        
         const newJsons = [...nodePopJsons];
         newJsons[index] = value;
         setNodePopJsons(newJsons);
@@ -71,60 +76,64 @@ export default function GenerateKeys() {
         setErrors(newErrors);
     };
 
-    return <>
-        <h1 className="text-2xl font-medium mb-6">Generate Keys</h1>
+    return <div className="space-y-12">
+        <div>
+            <h1 className="text-2xl font-medium mb-4">Generate Validator Keys</h1>
+            <p>For creating the L1, we need to know the node IDs, the BLS public keys and the proof of possession (POP) of the nodes. To generate the keys for the nodes, we will briefly start the nodes and request the keys from them. Afterwards, we will immediately stop the nodes.</p>
+        </div>
+        <div>
+            <h3 className="mb-4 font-medium">Run this on {nodesCount === 1 ? "the" : "every"} node:</h3>
+            <Pre>{dockerCommand}</Pre>
+            <p>
+                This runs an AvalancheGo node in docker. The node, while starting, generates its own keys if they are not present.
+                You can find them at <code>~/.avalanchego/staking/</code> in your local system.
+            </p>
+        </div>
 
-        <p className="mb-4">
-            For creating the L1, we need to know the node IDs, the BLS public keys and the proof of possession (POP) of the nodes. To generate the keys for the nodes, we will briefly start the nodes and request the keys from them. Afterwards, we will immediately stop the nodes.
-        </p>
+        <div>
+            <h3 className="mb-4 font-medium">Request node credentials:</h3>
+            <Pre>{popRequest}</Pre>
 
-        <h3 className="mb-4 font-medium">Run this on {nodesCount === 1 ? "the" : "every"} node:</h3>
-        <Pre>{dockerCommand}</Pre>
-        <p className="mb-4">
-            This runs an avalanchego node in docker. The node, while starting, generates its own keys if they are not present.
-            You can find them at <code>~/.avalanchego/staking/</code> in your local system.
-        </p>
-
-        <h3 className="mb-4 font-medium">Request node credentials:</h3>
-        <Pre>{popRequest}</Pre>
-
-        <p className="mb-4">The response will contain fields <code>nodeID</code> and <code>nodePOP</code> (proof of possession). We will need them to convert the Subnet to an L1.</p>
-
-        <h3 className="mb-4 font-medium">Paste the node credentials for each node:</h3>
-        {Array.from({ length: nodesCount }).map((_, index) => (
-            <div key={index} className="mb-4">
-                <label className="block mb-2">
-                    Node {index + 1} Credentials:
-                </label>
-                <div className="relative">
-                    <TextArea
-                        isValid={!!nodePopJsons[index] && !errors[index]}
-                        rows={8}
-                        value={nodePopJsons[index] || ''}
-                        onChange={(e) => handleNodePopChange(index, e.target.value)}
-                        placeholder={`{"jsonrpc":"2.0","result":{"nodeID":"NodeID-....","nodePOP":{"publicKey":"0x...","proofOfPossession":"0x..."}},"id":1}`}
-                    />
-                    {nodePopJsons[index] && !errors[index] && (
-                        <div className="absolute right-2 top-2 text-green-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
+            <p className="mb-4">The response will contain fields <code>nodeID</code> and <code>nodePOP</code> (proof of possession). We will need them to convert the Subnet to an L1.</p>
+        </div>
+        <div>
+            <h3 className="mb-4 font-medium">Paste the node credentials for each node:</h3>
+            {Array.from({ length: nodesCount }).map((_, index) => (
+                <div key={index} className="mb-4">
+                    <label className="block mb-2">
+                        Node {index + 1} Credentials:
+                    </label>
+                    <div className="relative">
+                        <TextArea
+                            isValid={!!nodePopJsons[index] && !errors[index]}
+                            rows={8}
+                            value={nodePopJsons[index] || ''}
+                            onChange={(e) => handleNodePopChange(index, e.target.value)}
+                            placeholder={`{"jsonrpc":"2.0","result":{"nodeID":"NodeID-....","nodePOP":{"publicKey":"0x...","proofOfPossession":"0x..."}},"id":1}`}
+                        />
+                        {nodePopJsons[index] && !errors[index] && (
+                            <div className="absolute right-2 top-2 text-green-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                        )}
+                    </div>
+                    {errors[index] && (
+                        <p className="text-red-500 text-sm mt-1">{errors[index]}</p>
                     )}
                 </div>
-                {errors[index] && (
-                    <p className="text-red-500 text-sm mt-1">{errors[index]}</p>
-                )}
-            </div>
-        ))}
+            ))}
+        </div>
+        <div>
+            <h3 className="mb-4 font-medium">Stop and remove the nodes:</h3>
+            <p className="mb-4">
+                Run this command on every node:
+            </p>
+            <Pre>{stopScript}</Pre>
+        </div>
 
-        <h3 className="mb-4 font-medium">Stop and remove the nodes:</h3>
-        <p className="mb-4">
-            Run this command on every node:
-        </p>
-        <Pre>{stopScript}</Pre>
-
-        <div className="mb-4">
+        <div>
             <div className="flex items-center">
                 <input
                     type="checkbox"
@@ -142,7 +151,7 @@ export default function GenerateKeys() {
 
         <NextPrev
             nextDisabled={nodePopJsons.length < nodesCount || nodePopJsons.slice(0, nodesCount).some(json => !json) || errors.slice(0, nodesCount).some(error => error) || !nodesRemovedAfterKeyGeneration}
-            currentStepName="generate-keys"
+            onNext={goToNextStep} onPrev={goToPreviousStep}
         />
-    </>
+    </div>
 }

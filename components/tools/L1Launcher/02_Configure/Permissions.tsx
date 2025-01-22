@@ -1,17 +1,17 @@
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import { AllowlistPrecompileConfig } from '../../common/allowlist-precompile-configurator/types';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 import AllowlistPrecompileConfigurator from '../../common/allowlist-precompile-configurator/allowlist-precompile-configurator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { isAllowlistPrecompileConfigValid, isValidEthereumAddress } from '../../common/utils';
+import { isValidAllowlistPrecompileConfig } from '../../common/utils/validation';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { getWalletAddress } from '../wallet';
+import { getWalletAddress } from '../../common/utils/wallet';
+import { isAddress } from 'viem';
 
 export default function Permissions() {
-    const { poaOwnerAddress, setPoaOwnerAddress, txAllowlistConfig, setTxAllowlistConfig, contractDeployerAllowlistConfig, setContractDeployerAllowlistConfig } = useWizardStore();
+    const { poaOwnerAddress, setPoaOwnerAddress, txAllowlistConfig, setTxAllowlistConfig, contractDeployerAllowlistConfig, setContractDeployerAllowlistConfig, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -30,7 +30,10 @@ export default function Permissions() {
 
     return (
         <div className="space-y-12">
-            <h1 className="text-2xl font-medium mb-6">Permissions</h1>
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Permissions</h1>
+                <p>You can optionally enable different kinds of permissions on your L1. You can configure who can validate the L1, who can deploy contracts and who can issue transactions. You can pick any combination or make your L1 completely permissionless.</p>
+            </div>
 
             <div>
                 <div>
@@ -65,9 +68,14 @@ export default function Permissions() {
                         {isLoading ? 'Loading...' : 'Fill from Wallet'}
                     </Button>}
                 </div>
-                {poaOwnerAddress && !isValidEthereumAddress(poaOwnerAddress) && (
+                {poaOwnerAddress && !isAddress(poaOwnerAddress, {strict: false}) && (
                     <p className="mt-2 text-sm text-red-500">
                         Please paste a valid Ethereum address in 0x format.
+                    </p>
+                )}
+                {error && (
+                    <p className="mt-2 text-sm text-red-500">
+                        {error}
                     </p>
                 )}
                 <p className="mt-2 text-sm text-gray-500">
@@ -97,7 +105,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want only approved addresses to be able to deploy contracts on this blockchain."
             />
 
-            <NextPrev nextDisabled={!isValidEthereumAddress(poaOwnerAddress) || !isAllowlistPrecompileConfigValid(txAllowlistConfig) || !isAllowlistPrecompileConfigValid(contractDeployerAllowlistConfig)} currentStepName="permissions" />
+            <NextPrev nextDisabled={!isAddress(poaOwnerAddress, {strict: false}) || !isValidAllowlistPrecompileConfig(txAllowlistConfig) || !isValidAllowlistPrecompileConfig(contractDeployerAllowlistConfig)} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 }

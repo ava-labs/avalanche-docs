@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react';
-import SwitchChain, { fujiConfig } from '../ui/SwitchChain';
-import { useWizardStore } from '../store';
+import RequireWalletConnection, { fujiConfig } from '@/components/tools/common/ui/RequireWalletConnection';
+import { useL1LauncherWizardStore } from '../config/store';
 import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
 import { avalancheFuji } from 'viem/chains';
-import { newPrivateKey, getAddresses } from '../wallet';
-import { transferCToP, getPChainBalance, importExistingUTXOs } from '../utxo';
-import NextPrev from '../ui/NextPrev';
+import { newPrivateKey, getAddresses } from '../../common/utils/wallet';
+import { transferCToP, getPChainBalance, importExistingUTXOs } from '../../common/utils/utxo';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
 
 const changeAllowance = parseEther('0.1');
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
 
 export default function FundTempWallet() {
-    const { nodesCount, setNodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance } = useWizardStore();
+    const { nodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [cChainBalance, setCChainBalance] = useState<bigint>(BigInt(0));
     const [transferring, setTransferring] = useState(false);
-    const nodeCounts = [1, 3, 5];
     const [transferError, setTransferError] = useState<string | null>(null);
 
     // Initialize temporary private key if not exists
@@ -111,7 +110,7 @@ export default function FundTempWallet() {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             // Transfer only the required amount to P chain (without change allowance)
-            await transferCToP(transferAmount.toFixed(2), tempPrivateKeyHex!);
+            await transferCToP(transferAmount.toFixed(2), tempPrivateKeyHex!, setPChainBalance);
 
         } catch (error: any) {
             console.error('Transfer failed:', error);
@@ -135,7 +134,7 @@ export default function FundTempWallet() {
 
         setTransferring(true);
         try {
-            await transferCToP(neededInP.toFixed(2), tempPrivateKeyHex);
+            await transferCToP(neededInP.toFixed(2), tempPrivateKeyHex, setPChainBalance);
         } catch (error: any) {
             console.error('C to P transfer failed:', error);
             setTransferError(error.message || 'Failed to transfer to P-Chain');
@@ -160,9 +159,14 @@ export default function FundTempWallet() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto">
-            <h1 className="text-2xl font-medium mb-6">Fund Temporary Wallet</h1>
-            <SwitchChain chainConfig={fujiConfig}>
+        <div className="space-y-12">
+            <div className='space-y-4'>
+                <h1 className="text-2xl font-medium">Fund Temporary Wallet</h1>
+                <p>We will use a temporary wallet generated in your browser for issuing the transactions to set up your L1. After you've funded it on the Avalanche C-Chain it will transfer some of the funds to the P-Chain. After the set up of the L1 the address will no longer hold any power.</p>
+                <p className='italic'>Private Key: {tempPrivateKeyHex}</p>
+                <p>You can claim Fuji AVAX at the <a href='https://core.app/tools/testnet-faucet/?subnet=c&token=c' target='_blank' className="underline">Faucet</a>. Use the coupon code <span className='italic'>l1-launcher</span>.</p>
+            </div>
+            <RequireWalletConnection chainConfig={fujiConfig}>
                 <div className="space-y-4 mb-4">
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between items-center mb-1">
@@ -210,12 +214,12 @@ export default function FundTempWallet() {
                         )}
                     </div>
                 </div>
-
-                <NextPrev
-                    nextDisabled={!hasEnoughFunds()}
-                    currentStepName="fund-temp-wallet"
-                />
-            </SwitchChain>
+            </RequireWalletConnection>
+            <NextPrev
+                nextDisabled={!hasEnoughFunds()}
+                onNext={goToNextStep}
+                onPrev={goToPreviousStep}
+            />
         </div >
     );
 }

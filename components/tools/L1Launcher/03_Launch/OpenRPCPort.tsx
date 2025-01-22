@@ -1,7 +1,7 @@
-import { useWizardStore } from '../store';
-import NextPrev from '../ui/NextPrev';
-import Note from '../ui/Note';
-import Pre from '../ui/Pre';
+import { useL1LauncherWizardStore } from '../config/store';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import Note from '@/components/tools/common/ui/Note';
+import Pre from '@/components/tools/common/ui/Pre';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
@@ -233,8 +233,10 @@ export default function OpenRPCPort() {
         rpcVerified,
         setRpcVerified,
         getCChainRpcEndpoint,
-        evmChainId
-    } = useWizardStore();
+        evmChainId,
+        goToNextStep,
+        goToPreviousStep
+    } = useL1LauncherWizardStore();
 
 
     const isAddressValid = () => {
@@ -245,26 +247,13 @@ export default function OpenRPCPort() {
     };
 
     return (
-        <>
-            <h1 className="text-2xl font-medium mb-6">Configure RPC Access</h1>
-
-            <div className="bg-blue-50 dark:bg-blue-950/50 border-l-4 border-blue-400 dark:border-blue-500 p-4 mb-6">
-                <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">About RPC Nodes</h3>
-                <p className="mb-2 text-gray-800 dark:text-gray-200">
-                    RPC (Remote Procedure Call) nodes allow users to access your blockchain data and send transactions. You have two main options:
-                </p>
-                <ul className="list-disc ml-6 mb-2 text-gray-800 dark:text-gray-200">
-                    <li className="mb-1">
-                        <span className="font-medium text-gray-900 dark:text-gray-100">Local access:</span> Running on localhost:8080 without SSL. Simple but only you can access the chain.
-                    </li>
-                    <li className="mb-1">
-                        <span className="font-medium text-gray-900 dark:text-gray-100">Public access:</span> Running on a domain with SSL certificates. Required for most wallets to connect.
-                    </li>
-                </ul>
-                <p className="text-sm text-blue-600 dark:text-blue-300">
-                    Important: Don't use your validator node as an RPC node. Your RPC node from the previous step exposes port 8080 for API access.
-                </p>
+        <div className="space-y-12">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Configure Access to your RPC Node</h1>
+                <p>In this step we will configure the access to the RPC nodes. If necessary, we will launch a reverse proxy using Docker.</p>
             </div>
+
+            
 
             <div className="mb-6">
                 <h3 className="mb-4 font-medium">Where is your RPC node running?</h3>
@@ -365,8 +354,8 @@ export default function OpenRPCPort() {
 
             <NextPrev
                 nextDisabled={rpcLocationType === 'remote' && (!isAddressValid() || !rpcVerified)}
-                currentStepName="open-rpc-port"
+                onNext={goToNextStep} onPrev={goToPreviousStep}
             />
-        </>
+        </div>
     );
 }
