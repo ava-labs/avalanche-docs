@@ -1,0 +1,74 @@
+---
+title: Create Solidity Interface
+description: Learn how to create a solidity interface for your counter precompile.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+Now, we'll create a Solidity interface for our Stateful Precompile.
+
+## StringStore Solidity Interface
+
+To start, let's look at the interface of the **StringStore** precompile:
+
+```solidity title="contracts/contracts/interfaces/IStringStore.sol"
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+
+interface IStringStore {
+    function getString() external view returns (string memory value);
+    function setString(string memory value) external;
+}
+```
+
+As seen above, we have the following two functions defined:
+
+1. `getString`: retreives the string from the stateful precompile
+2. `setString`: sets a string in the stateful precompile
+
+## Create Solidity Interface for Counter
+
+Create an interface for the counter in the same directory called `ICounter.sol`. Your interface should have the following three functions declared:
+
+1. `getCounter`: returns the counter value from the stateful precompile
+2. `incrementCounter`: when called, this function increments the current counter
+3. `setCounter`: takes in a value, and sets it as the counter of the stateful precompile
+
+For any argument/return value, make sure it is named as `value`.
+
+<Accordions>
+<Accordion title="Solution">
+
+```solidity
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.8.0;
+
+interface ICounter {
+
+    function getCounter() external view returns (uint value);
+    function incrementCounter() external;
+    function setCounter(uint value) external;
+
+}
+```
+
+</Accordion>
+</Accordions>
+
+## Generate the ABI
+
+Now that we have an interface of our precompile, let's create an ABI of our Solidity interface. Open the terminal (control + \`), change to the `/contracts` directory, and run the command to compile the solidity interface to ABI:
+
+```bash
+# Move to contracts directory
+cd contracts
+
+# Compile ICounter.sol to ABI
+npx solc@latest --abi ./contracts/interfaces/ICounter.sol -o ./abis --base-path . --include-path ./node_modules
+
+# Rename 
+mv ./abis/contracts_interfaces_ICounter_sol_ICounter.abi ./abis/ICounter.abi
+```

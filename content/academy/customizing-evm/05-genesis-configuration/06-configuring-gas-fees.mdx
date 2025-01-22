@@ -1,0 +1,54 @@
+---
+title: Configure Gas Fees
+description: Learn how to configure gas fees in your EVM blockchain.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+## Benchmarks
+
+You can take these numbers below as a benchmark:
+
+```json
+"feeConfig": {
+        "gasLimit": 15000000,
+        "minBaseFee": 25000000000,
+        "targetGas": 15000000,
+        "baseFeeChangeDenominator": 36,
+        "minBlockGasCost": 0,
+        "maxBlockGasCost": 1000000,
+        "targetBlockRate": 2,
+        "blockGasCostStep": 200000
+      },
+        
+"gasLimit": 0xe4e1c0,
+```
+
+## Choose Your Own Values
+
+### `gasLimit`
+
+As previously discussed, the `gasLimit` acts as a restriction on the amount of computation that can be executed in a single block, and hence caps the maximum transaction size, as the entire transaction needs to be processed within the same block.
+
+Your choice of `gasLimit` values should depend on the specific use case and computational demands of your application. Here are some considerations:
+
+**High Throughput:** If your application requires a high volume of transactions, you might want to allow for more transactions (i.e., more computation) to be packed into a single block. This increases the block capacity and enables handling a higher transaction load.
+
+**Heavy Transactions:** Transactions that involve deploying large contracts or executing complex operations tend to consume more gas. If your application involves such operations, ensure that your `gasLimit` accommodates the full execution of these heavy transactions or contract deployments.
+
+Be cautious with setting excessively high `gasLimit` values. Larger computational allowances per block can translate to increased hardware requirements for your blockchain. Therefore, align the `gasLimit` with your use case and infrastructure requirements for validators. Avoid setting an unusually large value "just in case." For reference, consider that a typical native token transaction costs around 21,000 gas units, and the C-Chain `gasLimit` is set to 15,000,000.
+
+### Gas Price Parameters
+
+The following parameters affect the gas pricing and dynamic adjustments in your network:
+
+- **`minBaseFee`**: Sets the minimum base fee per unit of gas, establishing the lower bound for transaction costs in a block.
+- **`targetGas`**: Defines the target amount of gas to be consumed within a rolling 10-second window. Adjust this based on the expected network activity under normal conditions.
+- **`baseFeeChangeDenominator`**: Controls how quickly the base fee adjusts in response to fluctuations in gas usage. A smaller denominator allows for faster adjustments.
+- **`minBlockGasCost`**: Specifies the minimum gas cost for producing a block.
+- **`maxBlockGasCost`**: Sets the maximum gas cost for producing a block.
+- **`targetBlockRate`**: Determines the desired block production rate in seconds. Choose this based on your expected block issuance frequency.
+- **`blockGasCostStep`**: Adjusts the block gas cost based on the deviation from the target block rate. A higher step value increases the block gas cost more rapidly with deviations.
+
+These parameters should be selected based on the stability of gas usage in your network. Since gas fees are crucial for protecting against spam and abuse, carefully consider how these parameters will adapt to changes in network activity. The goal is to dynamically adjust transaction costs during irregular activity periods while maintaining stability under normal conditions.

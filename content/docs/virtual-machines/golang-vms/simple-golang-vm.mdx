@@ -576,7 +576,7 @@ func (vm *VM) initGenesis(genesisData []byte) error {
 
 #### CreateHandlers
 
-Registered handlers defined in `Service`. See [below](/virtual-machines/golang-vms/simple-golang-vm#api) for more on APIs.
+Registered handlers defined in `Service`. See [below](/docs/virtual-machines/golang-vms/simple-golang-vm#api) for more on APIs.
 
 ```go title="timestampvm/vm.go"
 // CreateHandlers returns a map where:
@@ -605,7 +605,7 @@ func (vm *VM) CreateHandlers() (map[string]*common.HTTPHandler, error) {
 
 #### CreateStaticHandlers
 
-Registers static handlers defined in `StaticService`. See [below](/virtual-machines/golang-vms/simple-golang-vm#static-api) for more on static APIs.
+Registers static handlers defined in `StaticService`. See [below](/docs/virtual-machines/golang-vms/simple-golang-vm#static-api) for more on static APIs.
 
 ```go title="timestampvm/vm.go"
 // CreateStaticHandlers returns a map where:
@@ -1182,7 +1182,7 @@ The name of the VM binary is also its static ID and should not be changed manual
 
 ### Installing a VM
 
-AvalancheGo searches for and registers plugins under the `plugins` [directory](/nodes/configure/configs-flags#--plugin-dir-string).
+AvalancheGo searches for and registers plugins under the `plugins` [directory](/docs/nodes/configure/configs-flags#--plugin-dir-string).
 
 To install the virtual machine onto your node, you need to move the built virtual machine binary under this directory. Virtual machine executable names must be either a full virtual machine ID (encoded in CB58), or a VM alias.
 
@@ -1227,7 +1227,7 @@ Confirm the response of `loadVMs` contains the newly installed virtual machine `
 }
 ```
 
-Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`. For more details about VM configs, see [here](/nodes/configure/configs-flags#virtual-machine-vm-configs).
+Now, this VM's static API can be accessed at endpoints `/ext/vm/timestampvm` and `/ext/vm/timestamp`. For more details about VM configs, see [here](/docs/nodes/configure/configs-flags#virtual-machine-vm-configs).
 
 In this tutorial, we used the VM's ID as the executable name to simplify the process. However, AvalancheGo would also accept `timestampvm` or `timestamp` since those are registered aliases in previous step.
 

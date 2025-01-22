@@ -1,0 +1,27 @@
+---
+title: Account Balances & Transfers
+description: Learn about account balances, which reflect the current amount of money or assets in an account after credits and debits. Discover how transfers work by moving funds between accounts, ensuring balance integrity across financial systems.
+updated: 2024-09-01
+authors: [martineckardt]
+icon: BookOpen
+---
+
+## Account Balances
+
+Account Balances refer to the current amount of money or assets held in a specific account at a given time. This number reflects the total value after all credits (additions) and debits (subtractions) have been accounted for, indicating how much the account holder has available to use or withdraw. For example, in a bank account, the balance represents the amount of money that the account holder can access, whether for spending, saving, or transferring.
+
+<div className="max-w-96 mx-auto">
+    ![](/common-images/blockchain-basics/payments/account-balances.png)
+</div>
+
+## Transfers
+
+A Transfer is the process of moving money or assets from one account to another. During a transfer, the balance of the sending account is reduced by the amount being transferred, while the balance of the receiving account is increased by the same amount. This operation ensures that the total value across all accounts remains constant, maintaining the integrity of the overall financial system. 
+
+![](/common-images/blockchain-basics/payments/transfer.png)
+
+## Invalid Transfers
+
+An invalid transfer occurs when a transaction request exceeds the available balance in the sending account. In such cases, the transfer cannot be executed, and the system will reject the transaction to prevent overdrafts. As a result, both the sending and receiving account balances remain unchanged, preserving the integrity of the financial records. This safeguard ensures that accounts do not inadvertently fall into negative balances and maintains accurate and reliable financial tracking.
+
+![](/common-images/blockchain-basics/payments/transfer-invalid.png)

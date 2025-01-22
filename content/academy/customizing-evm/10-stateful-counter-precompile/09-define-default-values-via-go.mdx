@@ -1,0 +1,51 @@
+---
+title: Defining Default Values via Golang
+description: Learn how to set the default values of precompiled contracts using Go.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+In this section, we'll cover defining default values of precompiled contracts using Go. We'll refer to StringStore for this section.
+
+## Configure Function
+
+To start, go to `StringStore/module.go` and scroll to the end of the file. There, you will find the Configure function:
+
+```go
+// Configure configures [state] with the given [cfg] precompileconfig.
+// This function is called by the EVM once per precompile contract activation.
+// You can use this function to set up your precompile contract's initial state,
+// by using the [cfg] config and [state] stateDB.
+func (*configurator) Configure(chainConfig precompileconfig.ChainConfig, cfg precompileconfig.Config, state contract.StateDB, blockContext contract.ConfigurationBlockContext) error {
+    config, ok := cfg.(*Config)
+    if !ok {
+        return fmt.Errorf("incorrect config %T: %v", config, config)
+    }
+    // CUSTOM CODE STARTS HERE
+    return nil
+}
+```
+
+Configure handles the initialization of a precompiled contract. We want to use Configure to define the default value for the string we are storing. 
+
+But how? Configure gives us access to the StateDB (as one of the function parameters) and also lets us call any functions defined in `contract.go`. For example, if we wanted the default string to be "EGS," then we would just have to write one line of code:
+
+```go
+// Configure configures [state] with the given [cfg] precompileconfig.
+// This function is called by the EVM once per precompile contract activation.
+// You can use this function to set up your precompile contract's initial state,
+// by using the [cfg] config and [state] stateDB.
+func (*configurator) Configure(chainConfig precompileconfig.ChainConfig, cfg precompileconfig.Config, state contract.StateDB, blockContext contract.ConfigurationBlockContext) error {
+    config, ok := cfg.(*Config)
+    if !ok {
+        return fmt.Errorf("incorrect config %T: %v", config, config)
+    }
+    // CUSTOM CODE STARTS HERE
+    StoreString(state, "EGS")
+
+    return nil
+}
+```
+
+We have just set a default value for our precompiled contract.

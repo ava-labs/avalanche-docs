@@ -9,14 +9,14 @@ import type { ReactNode } from 'react';
 import { baseUrl, createMetadata } from '@/utils/metadata';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import Chatbot from "@/components/chatbot"
+import Chatbot from "@/components/ui/chatbot"
 
 export const metadata = createMetadata({
   title: {
-    template: '%s | Avalanche Docs',
-    default: 'Avalanche Docs',
+    template: '%s | Avalanche Developers',
+    default: 'Avalanche for Developers',
   },
-  description: 'Developer documentation for everything related to the Avalanche ecosystem.',
+  description: 'Build your Fast & Interoperable Layer 1 Blockchain with Avalanche.',
   metadataBase: baseUrl,
 });
 

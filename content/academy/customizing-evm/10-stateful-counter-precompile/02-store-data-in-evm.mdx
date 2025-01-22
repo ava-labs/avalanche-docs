@@ -1,0 +1,142 @@
+---
+title: Store Data in EVM State
+description: Learn how to store data in the EVM state.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+Like all stateful machines, the EVM provides us with a way to save data. In particular, the EVM exposes a key-value mapping we can leverage to create stateful precompiles. The specifics of this mapping are as follows:
+
+- Key: a tuple consisting of an address and the storage key of the type Hash
+- Value: any data encoded in a Hash, also called a word in the EVM
+
+## Storage Slots
+
+Each storage slot is uniquely identified by the combination of an address and a storage key. To keep things organized, smart contracts and precompiles use their own address and a storage key to store data related to them. 
+
+Look at the reference implementation `StringStore`. The storage key is defined in the second variable group in `contract.go`:
+
+```go
+// Singleton StatefulPrecompiledContract and signatures.
+var (
+
+    // StringStoreRawABI contains the raw ABI of StringStore contract.
+    //go:embed contract.abi
+    StringStoreRawABI string
+
+    StringStoreABI = contract.ParseABI(StringStoreRawABI)
+
+    StringStorePrecompile = createStringStorePrecompile()
+
+    // Key that defines where our string will be stored
+    storageKeyHash = common.BytesToHash([]byte("storageKey"))
+)
+```
+
+We can use any string as our storage key. Then we convert it to a byte array and convert it to the hex representation.
+
+> The common.BytesToHash is not hashing the string, but converting it to a 32 byte array in hex representation.
+
+If we store multiple variables in the EVM state, we will define multiple keys here. Since we only use a single storage slot in this example, we can just call it `storageKey`.
+
+At this point, we are not restricted in what state we can access from the precompile. We have access to the entire `stateDB` and can modify the entire EVM state including data other precompiles saved to state or balances of accounts. **This is very powerful, but also potentially dangerous**.
+
+## Converting the Value to Hash Type
+
+Since the StateDB only stores data of the type *Hash*, we need to convert all values to the type *Hash* before passing it to the **stateDB**.
+
+### Converting Numbers
+
+To convert numbers of type `big.Int`, we can utilize a function from the common package:
+
+```go
+valueHash := common.BigToHash(value)
+```
+
+Since the `big.Int` data structure already is 32-bytes long, the conversion is straightforward.
+
+```go
+// BigToHash sets byte representation of b to hash.
+// If b is larger than len(h), b will be cropped from the left.
+func BigToHash(b *big.Int) Hash { return BytesToHash(b.Bytes()) }
+```
+
+### Converting Strings
+
+Converting strings is more challenging, since they are variable in length. Let's see an example:
+
+```go
+input := "Hello World"
+```
+
+To start, let's convert input into type bytes:
+
+```go
+inputAsBytes := []byte(input) 
+// [72 101 108 108 111 32 87 111 114 108 100]
+```
+
+This is how you would convert input to type bytes in Go. Notice that the comment in the code snippet is the byte-representation of input, where each integer represents a byte. Right now, inputAsBytes is of length 11. We want it to be of length 32. Therefore, we pad `inputAsBytes`, adding however many zeros to the front until `inputAsBytes` has 32 integers:
+
+```go
+inputPadded := common.LeftPadBytes(inputAsBytes, common.HashLength) 
+// [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 72 101 108 108 111 32 87 111 114 108 100]
+```
+
+In Go, we would do that using the function common.LeftPadBytes, which takes the byte array to be padded and the desired length. The desired length is supplied with the common.HashLength variable, which has the value 32. As seen in the comment, inputPadded is now of length 32. 
+
+In the next step, we convert the bytes to a Hash with the function `common.BytesToHash`:
+
+```go
+inputHash := common.BytesToHash(inputPadded) 
+// 0x00000000000000000000000000000000000000000048656c6c6f20576f726c64
+```
+
+## Helper Functions
+
+To make the code reusable and keep the precompile function clean, it makes sense to create helper functions for converting and storing the data. The first one we'll see is StoreString:
+
+```go
+// StoreString sets the value of the storage key "storageKey" in the contract storage.
+func StoreString(stateDB contract.StateDB, newValue string) {
+    newValuePadded := common.LeftPadBytes([]byte(newValue), common.HashLength)
+    newValueHash := common.BytesToHash(newValuePadded)
+    stateDB.SetState(ContractAddress, storageKeyHash, newValueHash)
+}
+```
+
+`StoreString` takes in the underlying key-value mapping, known as **StateDB**, and the new value, and updates the current string stored to be the new one. `StoreString` takes care of any type conversions and state management for us. Focusing now on `setString`, defining the logic is relatively easy. All we need to do is pass in **StateDB** and our string to `StoreString`.
+
+Thus, we have the following:
+
+```go
+func setString(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+    if remainingGas, err = contract.DeductGas(suppliedGas, SetStringGasCost); err != nil {
+        return nil, 0, err
+    }
+    if readOnly {
+        return nil, remainingGas, vmerrs.ErrWriteProtection
+    }
+    // attempts to unpack [input] into the arguments to the SetStringInput.
+    // Assumes that [input] does not include selector
+    // You can use unpacked [inputStruct] variable in your code
+    inputStruct, err := UnpackSetStringInput(input)
+    if err != nil {
+        return nil, remainingGas, err
+    }
+
+    // CUSTOM CODE STARTS HERE
+    // Get K-V Mapping
+    currentState := accessibleState.GetStateDB()
+
+    // Set the value
+    StoreString(currentState, inputStruct)
+
+    // this function does not return an output, leave this one as is
+    packedOutput := []byte{}
+
+    // Return the packed output and the remaining gas
+    return packedOutput, remainingGas, nil
+}
+```

@@ -1,5 +1,5 @@
 ---
-title: Deploy on Fuji Testnet
+title: On Fuji Testnet
 description: This tutorial shows how to deploy an Avalanche L1 on Fuji Testnet.
 ---
 
@@ -7,7 +7,7 @@ description: This tutorial shows how to deploy an Avalanche L1 on Fuji Testnet.
 This document describes how to use the new Avalanche-CLI to deploy an Avalanche L1 on `Fuji`.
 </Callout>
 
-After trying out an Avalanche L1 on a local box by following [this tutorial](/avalanche-l1s/deploy-a-avalanche-l1/local-network), next step is to try it out on `Fuji` Testnet.
+After trying out an Avalanche L1 on a local box by following [this tutorial](/docs/avalanche-l1s/deploy-a-avalanche-l1/local-network), next step is to try it out on `Fuji` Testnet.
 
 In this article, it's shown how to do the following on `Fuji` Testnet.
 
@@ -25,7 +25,7 @@ All IDs in this article are for illustration purposes. They can be different in 
 Virtual Machine[​](#virtual-machine "Direct link to heading")
 -------------------------------------------------------------
 
-Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine](/learn/virtual-machines), much like an object in an object-oriented language is an instance of a class. That's, the VM defines the behavior of the blockchain.
+Avalanche can run multiple blockchains. Each blockchain is an instance of a [Virtual Machine](/docs/quick-start/virtual-machines), much like an object in an object-oriented language is an instance of a class. That's, the VM defines the behavior of the blockchain.
 
 [Subnet-EVM](https://github.com/ava-labs/subnet-evm) is the VM that defines the Avalanche L1 Contract Chains. Subnet-EVM is a simplified version of [Avalanche C-Chain](https://github.com/ava-labs/coreth).
 
@@ -35,7 +35,7 @@ This chain implements the Ethereum Virtual Machine and supports Solidity smart c
 Avalanche-CLI[​](#avalanche-cli "Direct link to heading")
 ---------------------------------------------------------
 
-If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/tooling/guides/get-avalanche-cli)
+If not yet installed, install `Avalanche-CLI` following the tutorial at [Avalanche-CLI installation](/docs/tooling/guides/get-avalanche-cli)
 
 ### Private Key[​](#private-key "Direct link to heading")
 
@@ -51,7 +51,7 @@ This tutorial focuses on stored key usage and leave ledger operation details for
 - list
 
 <Callout type="warn">
-You should only use the private key created for this tutorial for testing operations on `Fuji` or other testnets. Don't use this key on `Mainnet`. CLI is going to store the key on your file system. Whoever gets access to that key is going to have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](/avalanche-l1s/deploy-a-avalanche-l1/avalanche-mainnet).
+You should only use the private key created for this tutorial for testing operations on `Fuji` or other testnets. Don't use this key on `Mainnet`. CLI is going to store the key on your file system. Whoever gets access to that key is going to have access to all funds secured by that private key. To deploy to `Mainnet`, follow [this tutorial](/docs/avalanche-l1s/deploy-a-avalanche-l1/avalanche-mainnet).
 </Callout>
 
 Run `create` if you don't have any private key available yet. You can create multiple named keys. Each command requiring a key is going to therefore require the appropriate key name you want to use.
@@ -168,7 +168,7 @@ Choose either Proof of Authority (PoA) or Proof of Stake (PoS) as your consensus
 ```
 For this tutorial, select `Proof of Authority (PoA)`.
 
-For more info, reference the [Validator Management Contracts](/evm-l1s/validator-manager/contract).
+For more info, reference the [Validator Management Contracts](/docs/avalanche-l1s/validator-manager/contract).
 
 ```bash
 Which address do you want to enable as controller of ValidatorManager contract?:
@@ -356,7 +356,7 @@ To get your new Avalanche L1 information, visit the [Avalanche L1 Explorer](http
 Add a Validator[​](#add-a-validator "Direct link to heading")
 -------------------------------------------------------------
 
-Before proceeding to add a validator to our Avalanche L1, we will need to have the validator's NodeID, BLS public key and proof of possession. These can be obtained by ssh into the node itself and run the `getNodeID` API specified [here](/api-reference/info-api#infogetnodeid).
+Before proceeding to add a validator to our Avalanche L1, we will need to have the validator's NodeID, BLS public key and proof of possession. These can be obtained by ssh into the node itself and run the `getNodeID` API specified [here](/docs/api-reference/info-api#infogetnodeid).
 
 To add a validator to an Avalanche L1, the owner of the key that acts as the controller of `ValidatorManager` contract specified in `avalanche blockchain create` command above run:
 

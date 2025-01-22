@@ -1,0 +1,60 @@
+
+The Native Minter Precompile allows for fine-grained permissioning which address can mint more native tokens. There can be rich permissioning structures around precompiles with three roles. 
+
+![](/common-images/evm-precompiles/allowlist-roles.png)
+
+These addresses are not necessarily owned by a single entity, but can also be managed by a multi-sig or DAO.
+
+## Initial permissions
+
+If the native minter precompile is activated, the initial addresses can be set in genesis.
+
+```json
+{
+  "config": {
+    "contractNativeMinterConfig": {
+      "blockTimestamp": 0,
+      "adminAddresses": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"]
+    }
+  }
+}
+```
+
+If only an enabled address is set, only that address can mint native tokens. Allowing another address to mint native tokens would require a network upgrade.
+
+## Interacting with the NativeMinter from Solidity
+
+The Stateful Precompile contract powering the ContractNativeMinter adheres to the following Solidity interface at `0x0200000000000000000000000000000000000001`:
+
+```solidity title="Native Minter"
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface INativeMinter is IAllowList {
+  event NativeCoinMinted(address indexed sender, address indexed recipient, uint256 amount);
+
+  // Mint [amount] number of native coins and send to [addr]
+  function mintNativeCoin(address addr, uint256 amount) external;
+}
+
+interface IAllowList {
+  event RoleSet(uint256 indexed role, address indexed account, address indexed sender, uint256 oldRole);
+
+  // Enabled addresses can mint native tokens
+  function setEnabled(address addr) external;  
+
+  // Admins can mint native tokens and enable/disable addresses
+  function setManager(address addr) external;
+  
+  // Admins can mint native tokens and enable/disable addresses and give/revoke manager and admin rights
+  function setAdmin(address addr) external;
+
+  // Revoke the role from that address
+  function setNone(address addr) external;
+
+  // Read the status of [addr].
+  function readAllowList(address addr) external view returns (uint256 role);
+}
+```
+
+mintNativeCoin takes an address and amount of native coins to be minted. The amount denotes the amount in minimum denomination of native coins (10^18). For example, if you want to mint 1 native coin (in AVAX), you need to pass 1 * 10^18 as the amount. A NativeCoinMinted event is emitted with the sender, recipient and amount when a native coin is minted.

@@ -1,0 +1,75 @@
+---
+title: Defining Default Values via Genesis
+description: Learn how to set the default values of precompiled contracts using genesis JSON file.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+
+In the last section, we saw how to initialize the default values of our precompiled contracts via the Configure function. While straightforward, it would be ideal for us (and developers who don't write in Go) to initialize default values via the genesis JSON. Here's how to do just that.
+
+## Modifying config.go
+
+The first step is to extract the value from the JSON file. Go to `config.go` and look at the Config struct:
+
+```go
+// Config implements the precompileconfig.Config interface and
+// adds specific configuration for StringStore.
+type Config struct {
+    precompileconfig.Upgrade
+    // CUSTOM CODE STARTS HERE
+    // Add your own custom fields for Config here
+}
+```
+
+Within the Config struct, we can find another struct: the Upgrade struct. It is not necessary to look at the definition of this struct. However, it is useful to know that this struct allows for the `blockTimestamp` key to be parsed in our `genesis.json` file. 
+
+```go
+"stringStoreConfig" : {
+    "blockTimestamp": 0,
+}
+```
+
+To pass in default values via the genesis JSON, we must complete the following:
+
+- Define a key-value in the genesis JSON
+- Update our Config struct so it is able to parse our new key-value
+
+In the case of StringStore, after defining blockTimestamp, we will add another key-pair for our default string:
+
+```go
+"stringStoreConfig" : {
+    "blockTimestamp": 0,
+    "defaultString": "EGS"
+}
+```
+
+Next, we will want to update our Config struct:
+
+```go
+type Config struct {
+    precompileconfig.Upgrade
+    // CUSTOM CODE STARTS HERE
+    // Add your own custom fields for Config here
+    DefaultString string `json:"defaultString,omitempty"`
+}
+```
+
+In the above snippet, we are defining a new field of type string named `DefaultString`. With respect to its initialization, the value of `DefaultString` is derived from the JSON key `defaultString` from our genesis JSON (the value `json:"defaultString,omitempty"` tells Go to ignore the JSON field if we do not define it in our genesis JSON).
+
+At this point, we have defined our new key-value pair in the genesis JSON and incorporated the logic so that precompile-evm can parse the new key-value.
+
+However, one step remains. Although precompile-evm can parse the new key-value, we are not actually utilizing it anywhere. Our last-step is to update `Configure` method in `module.go` so it can read our new key-value pair.
+
+```go
+func (*configurator) Configure(chainConfig contract.ChainConfig, cfg precompileconfig.Config, state contract.StateDB, _ contract.BlockContext) error {
+    config, ok := cfg.(*Config)
+    if !ok {
+        return fmt.Errorf("incorrect config %T: %v", config, config)
+    }
+    // CUSTOM CODE STARTS HERE
+    StoreString(state, config.DefaultString)
+
+    return nil
+}
+```

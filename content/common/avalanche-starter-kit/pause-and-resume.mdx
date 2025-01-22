@@ -1,0 +1,103 @@
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+In this section, you’ll learn how to pause and resume your deployed Avalanche L1 using GitHub Codespaces. This will allow you to preserve the state of your blockchains and easily restore them when you return to development.
+
+### Restarting the Network After Codespace Pauses
+
+With **GitHub Codespaces**, you can easily spin up and manage your Avalanche L1 blockchains. However, after a period of inactivity, Codespace instances will automatically pause, or you can stop them manually.
+
+When you want to resume your work, start the Codespace instance again and follow these steps to restore your network.
+
+<Steps>
+<Step>
+### Start the Avalanche Network
+After restarting your Codespace instance, use the following command to restart your Avalanche network:
+
+```bash
+avalanche network start
+```
+
+Here’s what the output of this command looks like:
+
+```bash
+$ avalanche network start
+Backend controller started, pid: 1781, output at: /home/vscode/.avalanche-cli/runs/server_20241007_035854/avalanche-cli-backend.log
+Starting previously deployed and stopped snapshot
+Booting Network. Wait until healthy...
+Node logs directory: /home/vscode/.avalanche-cli/runs/network_20241007_035856/node<i>/logs
+
+Network ready to use.
+
++------------------------------------------------------------------------------------------------------------------------------------+
+|                                                          TESTEXP RPC URLS                                                          |
++-----------+------------------------------------------------------------------------------------------------------------------------+
+| Localhost | http://127.0.0.1:9650/ext/bc/testexp/rpc                                                                               |
+|           +------------------------------------------------------------------------------------------------------------------------+
+|           | http://127.0.0.1:9650/ext/bc/ZJ3iFLF2DJo31Koq7Ah2F7EwSmSCpXBG2LLX1bFhsdEfmxkWD/rpc                                     |
++-----------+------------------------------------------------------------------------------------------------------------------------+
+| Codespace | https://musical-lamp-5rgwvggj75xh777g-9650.app.github.dev/ext/bc/testexp/rpc                                           |
+|           +------------------------------------------------------------------------------------------------------------------------+
+|           | https://musical-lamp-5rgwvggj75xh777g-9650.app.github.dev/ext/bc/ZJ3iFLF2DJo31Koq7Ah2F7EwSmSCpXBG2LLX1bFhsdEfmxkWD/rpc |
++-----------+------------------------------------------------------------------------------------------------------------------------+
+
++--------------------------------------------------------------------------------------------------------------------------------------+
+|                                                                 NODES                                                                |
++-------+------------------------------------------+-----------------------+-----------------------------------------------------------+
+| NAME  | NODE ID                                  | LOCALHOST ENDPOINT    | CODESPACE ENDPOINT                                        |
++-------+------------------------------------------+-----------------------+-----------------------------------------------------------+
+| node1 | NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg | http://127.0.0.1:9650 | https://musical-lamp-5rgwvggj75xh777g-9650.app.github.dev |
++-------+------------------------------------------+-----------------------+-----------------------------------------------------------+
+| node2 | NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ | http://127.0.0.1:9652 | https://musical-lamp-5rgwvggj75xh777g-9652.app.github.dev |
++-------+------------------------------------------+-----------------------+-----------------------------------------------------------+
+| node3 | NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN | http://127.0.0.1:9654 | https://musical-lamp-5rgwvggj75xh777g-9654.app.github.dev |
++-------+------------------------------------------+-----------------------+-----------------------------------------------------------+
+| node4 | NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu | http://127.0.0.1:9656 | https://musical-lamp-5rgwvggj75xh777g-9656.app.github.dev |
++-------+------------------------------------------+-----------------------+-----------------------------------------------------------+
+| node5 | NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5 | http://127.0.0.1:9658 | https://musical-lamp-5rgwvggj75xh777g-9658.app.github.dev |
++-------+------------------------------------------+-----------------------+-----------------------------------------------------------+
+
+using awm-relayer version (v1.4.0)
+Executing AWM-Relayer...
+```
+</Step>
+
+<Step>
+### Make Ports Public Again
+After the network starts, all ports are closed by default in Codespaces. You need to make the necessary ports public, like port `9650` for RPC access:
+
+- Open the Codespace settings.
+- Go to Ports.
+- Select the row with the port 9650.
+- Right Click > Port Visibility > Public.
+
+![](/common-images/codespaces/ports-publish.png)
+</Step>
+
+<Step> 
+### Changing Timeout Duration for Codespaces
+By default, Codespaces will pause after 30 minutes of inactivity. You can extend this period to up to 4 hours to avoid frequent pauses during development.
+
+To configure the timeout duration:
+
+1. In the upper-right corner of any page on GitHub, click your profile photo, then click **"Settings"**.
+2. In the **"Code, planning, and automation"** section of the sidebar, click **"Codespaces"**.
+3. Under **"Default idle timeout"**, enter the time that you want, then click Save. The time must be between 5 minutes and 240 minutes (4 hours).
+
+![](/common-images/codespaces/specify-idle-timeout.png)
+
+This will help keep your blockchain running for longer periods without interruption. 
+</Step>
+
+<Step> 
+### Fee Considerations for Paid Users
+If you're a paid user, be cautious about the costs associated with running long-running Codespaces. It's important to avoid undesired fees, especially if you're keeping instances alive for extended periods but also the resource usage. Memory, storage, traffic, and bandwidth usage can significantly impact costs if not managed properly.
+
+You can manage these settings in GitHub:
+
+1. In the upper-right corner of any page on GitHub, click your profile photo, then click **"Settings"**.
+2. In the **"Access"** section of the sidebar, click **"Billing and Plans"**, and click **"Spending Limits"**.
+3. Set a budget or limitation on Codespace usage to prevent unexpected fees. Leaving it at $0.00 will avoid any extra expenses.
+
+![](/common-images/codespaces/specify-spending-limit.png)
+</Step>
+</Steps>

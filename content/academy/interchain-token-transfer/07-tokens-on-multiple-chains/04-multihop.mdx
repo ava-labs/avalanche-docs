@@ -1,0 +1,41 @@
+---
+title: Multi-hop Transfer
+description: Perform the multi-hop transfer of `TOK` from `myblockchain` to `myblockchain2`, with a 'hop' through the Avalanche C-Chain.
+updated: 2024-05-31
+authors: [owenwahlgren]
+icon: Book
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
+
+### Transfer the Token Cross-chain with a Multi-hop Transfer
+
+Now that all the bridge contracts have been deployed and configured, send the ERC-20 token from `myblockchain` to `myblockchain2` with the [`cast send`](https://book.getfoundry.sh/reference/cast/cast-send) foundry command.
+
+The token will be routed through the Avalanche C-Chain and then to `myblockchain2`.
+
+```bash
+cast send --rpc-url myblockchain --private-key $PK $ERC20_TOKEN_REMOTE_L1 \
+"send((bytes32, address, address, address, uint256, uint256, uint256, address), uint256)" \
+"(${SOURCE_BLOCKCHAIN2_ID_HEX}, ${ERC20_TOKEN_REMOTE_CHAIN2}, ${FUNDED_ADDRESS}, ${ERC20_C_CHAIN}, 0, 0, 250000, ${FUNDED_ADDRESS})" 500000000000000
+```
+
+</Step>
+<Step>
+
+### Check Balance
+
+To confirm the token was bridged from `myblockchain1` to `myblockchain2` via the C-Chain, we will check the recipient's balance on `myblockchain2` with the [`cast call`](https://book.getfoundry.sh/reference/cast/cast-call?highlight=cast%20call#cast-call) foundry command:
+
+```bash
+cast call --rpc-url myblockchain2 $ERC20_TOKEN_REMOTE_CHAIN2 "balanceOf(address)(uint)" $FUNDED_ADDRESS
+```
+
+```bash
+500000000000000 [5e14]
+```
+</Step>
+</Steps> 

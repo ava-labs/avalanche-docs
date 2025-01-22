@@ -1,0 +1,18 @@
+---
+title: Warp Message Format
+description: Learn about the structure of a Warp Message.
+updated: 2024-05-31
+authors: [martineckardt]
+icon: BookOpen
+---
+
+Warp Messages have a minimal message format that only contains the absolute necessary data for the transportation:
+
+- **NetworkID:** The ID of the Network (Mainnet, Fuji Test Network, Local Test Network). This is included as a security mechanisms, so messages from the Fuji Test Network cannot be replayed on the Mainnet.
+- **SourceChainID:** The chainID where the message originates from. This is not the EVM chain ID you may know from adding a network to a wallet, but the blockchain ID on the P-Chain. The P-Chain uses the transaction ID of the transaction that created those blockchain on the P-Chain for the chain ID, e.g.: 0xd7cdc6f08b167595d1577e24838113a88b1005b471a6c430d79c48b4c89cfc53
+- **SourceAddress:** The address of the message sender
+- **Payload:** The payload of the message
+
+Every Warp message can be uniquely identified by its ID: the SHA256 hash of the serialized message (NetworkID, SourceChainID, SourceAddress & Payload).
+
+The fields above are actually an UnsignedMessage. Hence, it has not been attached an aggregated signature yet. We will examine this in the following sections. 

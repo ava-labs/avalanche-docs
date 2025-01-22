@@ -1,0 +1,109 @@
+---
+title: Unpacking Multiple Inputs & Packing Multiple Outputs
+description: Learn how to unpack multiple inputs and packing multiple outputs.
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: BookOpen
+---
+
+## Unpack/Pack Functions For Each Operation
+
+As with the MD5 precompile, the generator created the pack/unpack functions for each operation of our Calculator and CalculatorPlus precompiles. However, you might have noticed that the generator also created some struct in each respective `contract.go` file. In the case of CalculatorPrecompile, we have:
+
+```go title="contract.go"
+type AddInput struct {
+    Value1 *big.Int
+    Value2 *big.Int
+}
+
+type NextTwoOutput struct {
+    Result1 *big.Int
+    Result2 *big.Int
+}
+
+type RepeatInput struct {
+    Times *big.Int
+    Text  string
+}
+```
+
+The generator creates these structs whenever a function defined in the respective Solidity interface has more than one input or more than one output. These multiple values are now stored together via structs.
+
+## Unpacking Multiple Inputs
+
+To understand how unpacking works when structs are introduced, let's take a look at the add function in the Calculator precompile, which takes in two inputs, and the nextTwo, which takes in only one input.
+
+```go
+// UnpackAddInput attempts to unpack [input] as AddInput
+// assumes that [input] does not include selector (omits first 4 func signature bytes)
+func UnpackAddInput(input []byte) (AddInput, error) {
+    inputStruct := AddInput{}
+    err := CalculatorABI.UnpackInputIntoInterface(&inputStruct, "add", input)
+    return inputStruct, err
+}
+
+// UnpackNextTwoInput attempts to unpack [input] into the *big.Int type argument
+// assumes that [input] does not include selector (omits first 4 func signature bytes)
+func UnpackNextTwoInput(input []byte) (*big.Int, error) {
+    res, err := CalculatorABI.UnpackInput("nextTwo", input)
+    if err != nil {
+        return big.NewInt(0), err
+    }
+    unpacked := *abi.ConvertType(res[0], new(*big.Int)).(**big.Int)
+    return unpacked, nil
+}
+```
+
+As you can see, both unpacker functions take a byte array as an input but the `UnpackAddInput` returns a value of the type `AddInput` (which contains two `big.Int` values) and `UnpackNextTwoInput` returns a value of the type `big.Int`.
+
+In each case, the respective unpacking function takes in a byte array as an input. However, `UnpackAddInput` returns a value of the type `AddInput`, which is a struct that contains two `big.Int` values. `UnpackNextTwo`, meanwhile, returns an value of type `big.Int`. 
+
+To demonstrate how one could use the output of unpacking functions like `UnpackAddInput`, below is the implementation of the add function of the Calculator precompile:
+
+```go
+func add(accessibleState contract.AccessibleState, caller common.Address, addr common.Address, input []byte, suppliedGas uint64, readOnly bool) (ret []byte, remainingGas uint64, err error) {
+    if remainingGas, err = contract.DeductGas(suppliedGas, AddGasCost); err != nil {
+        return nil, 0, err
+    }
+    // attempts to unpack [input] into the arguments to the AddInput.
+    // Assumes that [input] does not include selector
+    // You can use unpacked [inputStruct] variable in your code
+    inputStruct, err := UnpackAddInput(input)
+    if err != nil {
+        return nil, remainingGas, err
+    }
+
+    // CUSTOM CODE STARTS HERE
+    var output *big.Int // CUSTOM CODE FOR AN OUTPUT
+
+    output = big.NewInt(0).Add(inputStruct.Value1, inputStruct.Value2)
+
+    packedOutput, err := PackAddOutput(output)
+    if err != nil {
+        return nil, remainingGas, err
+    }
+
+    // Return the packed output and the remaining gas
+    return packedOutput, remainingGas, nil
+}
+```
+
+## Packing Multiple Outputs
+
+To understand how structs affect the packing of outputs, lets refer to `PackNextTwoOutput` for the Calculator precompile:
+
+```go
+// PackHashWithMd5Output attempts to pack given hash of type [16]
+// PackNextTwoOutput attempts to pack given [outputStruct] of type NextTwoOutput
+// to conform the ABI outputs.
+func PackNextTwoOutput(outputStruct NextTwoOutput) ([]byte, error) {
+    return CalculatorABI.PackOutput("nextTwo",
+        outputStruct.Result1,
+        outputStruct.Result2,
+    )
+}
+```           
+        
+Notice here that even though we are no longer working with singular types, the generator still is able to pack our struct so that it is of the type bytes.
+
+As a result, we are able to return the packed version of any `NextTwoOutput` struct as bytes at the end of nextTwo.

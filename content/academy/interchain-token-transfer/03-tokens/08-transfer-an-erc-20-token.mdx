@@ -1,0 +1,109 @@
+---
+title: Deploy and Transfer an ERC-20 Token
+description: Transfer an ERC-20 token between accounts
+updated: 2024-05-31
+authors: [ashucoder9]
+icon: Terminal
+---
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+<Steps>
+<Step>
+
+### Deploy ERC-20
+
+Let's deploy a basic demo ERC20 contract that comes integrated with the CLI on our Avalanche L1.
+
+```bash 
+avalanche contract deploy erc20
+```
+and follow this configuration:
+```bash 
+✔ Local Network
+✔ Avalanche L1 myblockchain
+A private key is needed to pay for the contract deploy fees.
+It will also be considered the owner address of the contract, beign able to call
+the contract methods only available to owners.
+Use the arrow keys to navigate: ↓ ↑ → ← 
+? Which private key do you want to use to deploy the contract?: 
+✔ Use the private key of the Genesis Allocated address 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+Which is the token symbol?
+Token symbol: TOK
+Which is the total token supply?
+Token supply: 1000000
+Which address should receive the supply?
+✔ Use the Genesis Allocated address 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
+
+Token Address: 0x52C84043CD9c865236f11d9Fc9F56aa003c1f922
+
+ERC20 Contract Successfully Deployed!
+```
+
+</Step>
+<Step>
+
+### Save the Token Address
+
+```bash
+export ERC20_CONTRACT_L1=0x...
+```
+
+</Step>
+<Step>
+
+### Get Recepient Address
+
+Before transfering the assets you need to make sure you have at least one extra account created so you can transfer funds to it:
+
+```bash
+avalanche key list -l --blockchains myblockchain --tokens $ERC20_CONTRACT_L1,native  --keys myAddress,ewoq
+```
+
+You will get an output like this:
+
+```
++--------+-------+----------+--------------------------------------------+---------------+-------------------+---------------+
+|  KIND  | NAME  |  SUBNET  |                  ADDRESS                   |     TOKEN     |      BALANCE      |    NETWORK    |
++--------+-------+----------+--------------------------------------------+---------------+-------------------+---------------+
+| stored | myAddress | myblockchain | 0x302Ce9b6346E477ecb774aF73E908a4971B7ce2E | NAT (Native)  |         0 | Local Network |
++        +       +          +--------------------------------------------+---------------+-------------------+---------------+
+|        |       |          | 0x302Ce9b6346E477ecb774aF73E908a4971B7ce2E | TOK (0x52C8.) |                 0 | Local Network |
++        +-------+          +--------------------------------------------+---------------+-------------------+---------------+
+|        | ewoq  |          | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | NAT (Native)  |  999999.984293650 | Local Network |
++        +       +          +--------------------------------------------+---------------+-------------------+---------------+
+|        |       |          | 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC | TOK (0x52C8.) | 1000000.000000000 | Local Network |
++--------+-------+----------+--------------------------------------------+---------------+-------------------+---------------+
+```
+
+Export the address of the EWOQ account in the table above to an environment variable:
+
+```bash
+export EWOQ=0x...
+```
+
+</Step>
+<Step>
+
+### Transfer ERC-20 Token
+
+Now, lets transfer some TOK from the ewoq address to the myAddress address.
+
+```bash
+cast send $ERC20_CONTRACT_L1 --value 0 --private-key $PK "transfer(address,uint256)" $MYADDRESS 200ether --rpc-url myblockchain
+```
+
+Notice how we are setting the value to 0 since the --value command works for sending the native token, and in this case we are really interacting with a function of the ERC20 standard called `transfer` and will be the one in charge of modifying the balances mapping in the TOK state. Notice the amount that transfer receives needs to be set in wei, except if you use the word ether to convert units automatically.
+
+</Step>
+<Step>
+
+### Verify transfer
+
+Again, you can verify the transfer was performed correctly by retrieving the balances of each token in the Avalanche L1.
+
+```bash
+avalanche key list -l --blockchains myblockchain --tokens $ERC20_CONTRACT_L1,native  --keys myAddress,ewoq
+```
+
+</Step>
+</Steps>

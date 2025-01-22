@@ -1,5 +1,5 @@
 ---
-title: Adding Postman Collection
+title: Import Collection
 ---
 
 We have made a Postman collection for Avalanche, that includes all the public API calls that are available on an [AvalancheGo instance](https://github.com/ava-labs/avalanchego/releases/), including environment variables, allowing developers to quickly issue commands to a node and see the response, without having to copy and paste long and complicated `curl` commands.
@@ -64,18 +64,18 @@ Select the Environments tab, choose the Avalanche environment which was just add
 
 ![Environment content](/images/postman6.png)
 
-As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node (change both the `initial` and `current` values). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](/nodes/configure/configs-flags#http-server).
+As a minimum, you will need to change the IP address of your node, which is the value of the `host` variable. Change it to the IP of your node (change both the `initial` and `current` values). Also, if your node is not running on the same machine where you installed Postman, make sure your node is accepting the connections on the API port from the outside by checking the appropriate [command line option](/docs/nodes/configure/configs-flags#http-server).
 
 Now we sorted everything out, and we're ready to query the node.
 
 Conclusion[​](#conclusion "Direct link to heading")
 ---------------------------------------------------
 
-If you have completed the tutorial, you are now able to quickly [issue API calls](/tooling/avalanche-postman/making-api-calls) to your node without messing with the curl commands in the terminal. This allows you to quickly see the state of your node, track changes or double-check the health or liveness of your node.
+If you have completed the tutorial, you are now able to quickly [issue API calls](/docs/tooling/avalanche-postman/making-api-calls) to your node without messing with the curl commands in the terminal. This allows you to quickly see the state of your node, track changes or double-check the health or liveness of your node.
 
 Contributing[​](#contributing "Direct link to heading")
 -------------------------------------------------------
 
-We're hoping to continuously keep this collection up-to-date with the [Avalanche APIs](/api-reference/p-chain/api). If you're able to help improve the Avalanche Postman Collection in any way, first create a feature branch by branching off of `master`, next make the improvements on your feature branch and lastly create a [pull request](https://github.com/ava-labs/avalanche-docs/pulls) to merge your work back in to `master`.
+We're hoping to continuously keep this collection up-to-date with the [Avalanche APIs](/docs/api-reference/p-chain/api). If you're able to help improve the Avalanche Postman Collection in any way, first create a feature branch by branching off of `master`, next make the improvements on your feature branch and lastly create a [pull request](https://github.com/ava-labs/avalanche-docs/pulls) to merge your work back in to `master`.
 
 If you have any other questions or suggestions, come [talk to us](https://chat.avalabs.org/).
