@@ -160,10 +160,11 @@ export default function FundTempWallet() {
 
     return (
         <div className="space-y-12">
-            <div>
-                <h1 className="text-2xl font-medium mb-4">Fund Temporary Wallet</h1>
+            <div className='space-y-4'>
+                <h1 className="text-2xl font-medium">Fund Temporary Wallet</h1>
                 <p>We will use a temporary wallet generated in your browser for issuing the transactions to set up your L1. After you've funded it on the Avalanche C-Chain it will transfer some of the funds to the P-Chain. After the set up of the L1 the address will no longer hold any power.</p>
-                <p className='mt-4 italic'>Private Key: {tempPrivateKeyHex}</p>
+                <p className='italic'>Private Key: {tempPrivateKeyHex}</p>
+                <p>You can claim Fuji AVAX at the <a href='https://core.app/tools/testnet-faucet/?subnet=c&token=c' target='_blank' className="underline">Faucet</a>. Use the coupon code <span className='italic'>l1-launcher</span>.</p>
             </div>
             <RequireWalletConnection chainConfig={fujiConfig}>
                 <div className="space-y-4 mb-4">

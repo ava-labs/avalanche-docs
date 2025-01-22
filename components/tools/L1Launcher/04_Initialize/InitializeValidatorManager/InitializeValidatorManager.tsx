@@ -20,8 +20,7 @@ export default function InitializeValidatorManager() {
 
     // Create chain config object
     const chainConfig: ChainConfig = {
-        network: "Testnet",
-        EVMChainId: `0x${evmChainId.toString(16)}`,
+        chainId: `0x${evmChainId.toString(16)}`,
         chainName: l1Name,
         nativeCurrency: {
             name: tokenSymbol,

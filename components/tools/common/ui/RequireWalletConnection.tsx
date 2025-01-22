@@ -1,8 +1,8 @@
 import { useState, useEffect, ReactNode } from 'react';
+import Pre from './Pre';
 
 export interface ChainConfig {
-    network: 'Mainnet' | 'Testnet';
-    EVMChainId: string;
+    chainId: string;
     chainName: string;
     nativeCurrency: {
         name: string;
@@ -14,8 +14,7 @@ export interface ChainConfig {
 }
 
 export const fujiConfig: ChainConfig = {
-    network: 'Testnet',
-    EVMChainId: '0xa869',
+    chainId: '0xa869',
     chainName: 'Avalanche Fuji Testnet',
     nativeCurrency: {
         name: 'Avalanche',
@@ -37,7 +36,7 @@ interface RequireWalletConnectionProps {
     onConnection?: () => void;
 }
 
-type Status = 'no_wallet_installed' | 'wrong_chain' | 'insufficient_balance' | 'correct_chain_connected';
+type Status = 'no_wallet_installed' | 'wrong_chain' | 'rpc_error' | 'insufficient_balance' | 'correct_chain_connected';
 
 /**
  * Component that checks if the user has a wallet installed and is connected to the right chain. If
@@ -64,7 +63,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
             // Check if connected to the correct chain
             setConnectionStatus('wrong_chain');
             const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-            if (chainId !== chainConfig.EVMChainId) return;
+            if (chainId !== chainConfig.chainId) return;
 
             // Check if account can be accessed
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -74,6 +73,12 @@ export default function RequireWalletConnection({ children, chainConfig, require
             }
             const account = accounts[0];
             setAccount(account);
+
+            // Check if RPC endpoint is reachable
+            setConnectionStatus('rpc_error');
+            const latestBlock = await window.ethereum.request({
+                method: 'eth_blockNumber',
+            });
             
             // Optional balance check
             if (requiredBalance && requiredBalance > 0) {
@@ -104,6 +109,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
             }
             
             // Set status to connected if every check passed and call onConnection callback
+            setError(null);
             setConnectionStatus('correct_chain_connected');
             onConnection && onConnection();
 
@@ -137,7 +143,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
         }
 
         try {
-            await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: chainConfig.EVMChainId }] });
+            await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: chainConfig.chainId }] });
         } catch (error: any) {
             // If the chain hasn't been added to the wallet, add it
             if (error.code === 4902) {
@@ -148,7 +154,12 @@ export default function RequireWalletConnection({ children, chainConfig, require
                     });
                     checkConnection();
                 } catch (addError) {
-                    setError(`Failed to add network: ${addError}`);
+                    if (addError instanceof Error) {
+                        setError(`Failed to add network: ${addError.message}`);
+                    } else {
+                        console.error(addError);
+                        setError(`An unknown error occurred ${addError}`);
+                    }
                 }
             } else {
                 setError(`Failed to switch network: ${error}`);
@@ -186,7 +197,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
                         </div>
                         <div>
                             <div className="font-medium">Chain ID:</div>
-                            <div>{chainConfig.EVMChainId}</div>
+                            <div>{chainConfig.chainId}</div>
                         </div>
                         <div>
                             <div className="font-medium">RPC URLs:</div>
@@ -210,6 +221,11 @@ export default function RequireWalletConnection({ children, chainConfig, require
                         </button>
                     </div>
                 </div>;
+            case 'rpc_error':
+                return <>
+                    <p>The RPC endpoint is unreachable. Please make sure it is accessible.</p>
+                    <Pre>{chainConfig.rpcUrls[0]}</Pre>
+                </>
             case "insufficient_balance":
                 return <>
                     <p>The balance of the account {account} is {accountBalance?.toFixed(4)} {chainConfig.nativeCurrency.symbol}. That is lower than the required balance of {requiredBalance} {chainConfig.nativeCurrency.symbol}. Please fund your account to proceed.</p>
@@ -232,6 +248,16 @@ export default function RequireWalletConnection({ children, chainConfig, require
     return (
         <div className="p-4 border rounded-lg bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-400 dark:border-blue-600 mb-6">
             <h3 className="font-medium mb-4">Network Check</h3>
+            <div className='steps space-y-6 mb-6'>
+                <div className="step">Wallet installed</div>
+                <div className="step">Connected to {chainConfig.chainName}</div>
+                <div className="step">RPC is reachable</div>
+                {requiredBalance && requiredBalance > 0 && 
+                    <div className="step">
+                        Account has at least {requiredBalance} {chainConfig.nativeCurrency.symbol}
+                    </div>
+                }
+            </div>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {renderContent()}
         </div>
