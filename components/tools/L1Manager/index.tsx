@@ -19,7 +19,7 @@ export default function L1Wizard() {
         <>
             <div className="container mx-auto max-w-6xl p-8 ">
                 <ToolHeader
-                    title="L1 Manager"
+                    title="PoA Manager"
                     duration="30 min"
                     description="Manage the validator set of your L1"
                 />
