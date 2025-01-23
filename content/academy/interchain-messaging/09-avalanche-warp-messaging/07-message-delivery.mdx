@@ -8,7 +8,7 @@ icon: BookOpen
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 
-Next, the AWM Relayer delivers the message with the aggregated signature by simply submitting a transaction to the destination Avalanche L1. The transaction is propagated through the validator set of the destination blockchain just as any other regular transaction would.
+Next, the AWM Relayer delivers the message with the aggregated signature by simply submitting a transaction to the destination Avalanche L1. The transaction is propagated through the validator set of the destination blockchain just as any other regular transaction would be.
 
 In order to submit the transaction, the AWM Relayer needs access to the private key of a wallet holding the gas token of the destination blockchain to sign the transaction.
 
@@ -27,7 +27,7 @@ The verifying validators of the destination L1 each query the validator set of t
 <Step>
  
 ### Verify Sufficient Stake Weight:
-First, the verifying validators are checking if the combined stake weight of the validators that have signed the Warp message is large enough to accept the message (e.g. validators representing 50% of the total stake have signed the message). The required stake weight required to accept a message from a source chain can be set arbitrarily by the destination chain. An Avalanche L1 may require 50% for chain A and 90% for chain B. If the stake weight of the validators of the aggregate signature is insufficient the message is rejected.
+First, the verifying validators are checking if the combined stake weight of the validators that have signed the Warp message is large enough to accept the message (e.g. validators representing 50% of the total stake have signed the message). The required stake weight to accept a message from a source chain can be set arbitrarily by the destination chain. An Avalanche L1 may require 50% for chain A and 90% for chain B. If the stake weight of the validators of the aggregate signature is insufficient the message is rejected.
 
 </Step>
 
