@@ -17,7 +17,7 @@ const Chatbot: React.FC = () => {
   }, []);
 
   return (
-    <div id="__cookbook" className="cookbook-gpt" data-api-key={COOKBOOK_API_KEY} />
+    <div id="__cookbook" data-api-key={COOKBOOK_API_KEY} />
   );
 };
 
