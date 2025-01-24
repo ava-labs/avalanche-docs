@@ -140,3 +140,80 @@ export function packL1ConversionMessage(args: PackL1ConversionMessageArgs, netwo
     const unsignedMessage = newUnsignedMessage(networkID, sourceChainID, subnetConversionAddressedCall);
     return [unsignedMessage, cb58ToBytes(args.subnetId)];
 }
+
+export interface PChainOwner {
+    threshold: number;
+    addresses: `0x${string}`[];
+}
+
+export interface ValidationPeriod {
+    subnetID: string;
+    nodeID: string;
+    blsPublicKey: `0x${string}`;
+    registrationExpiry: bigint;
+    remainingBalanceOwner: PChainOwner;
+    disableOwner: PChainOwner;
+    weight: bigint;
+}
+
+const REGISTER_L1_VALIDATOR_MESSAGE_TYPE_ID = 1;
+
+export function packRegisterL1ValidatorMessage(
+    validationPeriod: ValidationPeriod, 
+    networkID: number, 
+    sourceChainID: string
+): Uint8Array {
+    const parts: Uint8Array[] = [];
+    
+    // Validate BLS public key length
+    const blsPublicKeyBytes = hexToBytes(validationPeriod.blsPublicKey);
+    if (blsPublicKeyBytes.length !== 48) {
+        throw new Error('Invalid BLS public key length');
+    }
+
+    // Add codec version (uint16)
+    parts.push(encodeUint16(codecVersion));
+    
+    // Add type ID (uint32)
+    parts.push(encodeUint32(REGISTER_L1_VALIDATOR_MESSAGE_TYPE_ID));
+    
+    // Add subnetID
+    parts.push(cb58ToBytes(validationPeriod.subnetID));
+    
+    // Add nodeID
+    const nodeIDBytes = cb58ToBytes(validationPeriod.nodeID.split("-")[1]);
+    parts.push(encodeVarBytes(nodeIDBytes));
+    
+    // Add BLS public key
+    parts.push(blsPublicKeyBytes);
+    
+    // Add registration expiry
+    parts.push(encodeUint64(validationPeriod.registrationExpiry));
+    
+    // Add remaining balance owner
+    parts.push(encodeUint32(validationPeriod.remainingBalanceOwner.threshold));
+    parts.push(encodeUint32(validationPeriod.remainingBalanceOwner.addresses.length));
+    for (const address of validationPeriod.remainingBalanceOwner.addresses) {
+        parts.push(hexToBytes(address));
+    }
+    
+    // Add disable owner
+    parts.push(encodeUint32(validationPeriod.disableOwner.threshold));
+    parts.push(encodeUint32(validationPeriod.disableOwner.addresses.length));
+    for (const address of validationPeriod.disableOwner.addresses) {
+        parts.push(hexToBytes(address));
+    }
+    
+    // Add weight
+    parts.push(encodeUint64(validationPeriod.weight));
+    
+    const payload = concatenateUint8Arrays(...parts);
+    
+    // Create addressed call with empty source address
+    const addressedCall = newAddressedCall(new Uint8Array([]), payload);
+    
+    // Create unsigned message
+    const unsignedMessage = newUnsignedMessage(networkID, sourceChainID, addressedCall);
+    
+    return unsignedMessage;
+}

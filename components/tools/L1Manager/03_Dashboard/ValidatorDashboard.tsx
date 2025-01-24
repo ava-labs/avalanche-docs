@@ -12,6 +12,7 @@ import { Address, createWalletClient, createPublicClient, http, fromBytes, bytes
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { apiHostPromise } from '@/components/tools/common/utils/config';
 import { avm, pvm, evm, utils, TransferableOutput, Context, BlsSignature, secp256k1, pvmSerial, addTxSignatures } from '@avalabs/avalanchejs';
+import { packRegisterL1ValidatorMessage, ValidationPeriod } from '../../common/utils/convertWarp'
 
 declare global {
   interface Window {
@@ -226,6 +227,7 @@ export default function LaunchValidators() {
       return;
     };
 
+    // todo fetch PChain address from Core extension 
     // try {
     //   window.avalanche.request({
     //     method: 'avalanche_getAccounts',
@@ -252,8 +254,8 @@ export default function LaunchValidators() {
       // Process P-Chain Address
       const pChainAddressBytes = utils.bech32ToBytes(newPChainAddress)
       const pChainAddressHex = fromBytes(pChainAddressBytes, 'hex')
-      // Set expiry to 24 hours from now (86400 seconds)
-      const expiry = BigInt(Math.floor(Date.now() / 1000) + 86400)
+      // Set expiry to 12 hours from now (43200 seconds) to ensure we're well within the 24-hour limit
+      const expiry = BigInt(Math.floor(Date.now() / 1000) + 43200)
 
 
       const args = [
@@ -364,14 +366,66 @@ export default function LaunchValidators() {
 
       window.avalanche.request({
           method: 'avalanche_sendTransaction',
-          params: 
-          {
+          params: {
             transactionHex: unsignedRegisterValidatorTxHex,
             chainAlias: 'P',
           }
-      }).then((response: any) => {
+      }).then(async (response: any) => {
         console.log('P-Chain tx from Core: ', response)
+        while (true) {
+          let status = await pvmApi.getTxStatus({ txID: response });
+          console.log('P-Chain Status: ', status);
+          if (status.status === "Committed") break;
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+  
+      const pJson = await pvmApi.getTxJson({txID: response});
+      console.log('P-Chain JSON: ', pJson)
       })
+
+      const validationPeriod: ValidationPeriod = {
+        subnetID: subnetId,
+        nodeID: nodeIDHexTrimmed,
+        blsPublicKey: newBlsPublicKey as Address,
+        registrationExpiry: expiry,
+        remainingBalanceOwner: {
+          threshold: 1,
+          addresses: [pChainAddressHex as Address]
+        },
+        disableOwner: {
+          threshold: 1,
+          addresses: [pChainAddressHex as Address]
+        },
+        weight: BigInt(newWeight)
+      }
+
+      const pChainChainID = '11111111111111111111111111111111LpoYY'//TODO: unhardcode
+
+      const unsignedPChainWarpMsg = packRegisterL1ValidatorMessage(validationPeriod, 5, pChainChainID)
+
+      console.log('unsignedPChainWarpMsg: ', unsignedPChainWarpMsg)
+
+
+      const unsignedPChainWarpMsgHex = bytesToHex(unsignedPChainWarpMsg)
+
+      console.log('unsignedPChainWarpMsgHex: ', unsignedPChainWarpMsgHex)
+
+      const res = await fetch('/api/signature-aggregator', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            message: unsignedPChainWarpMsgHex,
+            justification: RegisterL1ValidatorUnsignedWarpMsg,
+        })
+      });
+
+      const { 'signed-message': signedPChainWarpMsg } = await res.json();
+
+      console.log('signedPChainWarpMsg: ', signedPChainWarpMsg)
+
+      //todo here, submit signedPChainWarpMsg to the EVM Proxy Contract
               // Update UI
         setValidators([...validators, {
           id: Date.now().toString(),
