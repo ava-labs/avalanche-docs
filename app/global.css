@@ -222,7 +222,12 @@ nav a:not(:first-child) {
     display: none; 
   }
 
+  /* for hiding avagpt */
   [data-open="true"] {
     z-index: 250;
+  }
+  
+  [data-state="open"] {
+    z-index: 450;
   }
 }
