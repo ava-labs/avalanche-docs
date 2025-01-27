@@ -30,7 +30,10 @@ export default function Permissions() {
 
     return (
         <div className="space-y-12">
-            <h1 className="text-2xl font-medium mb-6">Permissions</h1>
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Permissions</h1>
+                <p>You can optionally enable different kinds of permissions on your L1. You can configure who can validate the L1, who can deploy contracts and who can issue transactions. You can pick any combination or make your L1 completely permissionless.</p>
+            </div>
 
             <div>
                 <div>

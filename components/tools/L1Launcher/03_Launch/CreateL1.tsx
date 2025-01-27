@@ -12,7 +12,7 @@ interface StepStatus {
     data?: any;
 }
 
-export default function CreateChain() {
+export default function CreateL1() {
     const {
         tempPrivateKeyHex,
         l1Name,
@@ -171,11 +171,14 @@ export default function CreateChain() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto">
-            <h1 className="text-2xl font-medium mb-6">Create a Chain</h1>
+        <div className="space-y-12">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Create L1</h1>
+                <p>Creating an L1 involves a three separate transactions on the P-Chain. Firstly, a CreateSubnetTx is issued. A Subnet with the temporary wallet as it's owner is created. Next, a CreateChainTx with the genesis information from the configuration is issued, creating the actual blockchain. Lastly, the ConvertSubnetToL1Tx is issued, converting the Subnet to a sovereign L1. The ownership of the temporary key is given up and transferred to a validator manager contract on the L1.</p>
+            </div>
 
             {/* Creation Steps */}
-            <div className="p-4 border rounded-lg mb-4">
+            <div className="p-4 border rounded-lg">
                 <div className="mb-4">
                     <div className="flex flex-col mb-4">
                         <div className="flex items-center gap-3">

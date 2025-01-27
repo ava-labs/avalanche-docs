@@ -11,8 +11,11 @@ export default function ChainParameters() {
     const { l1Name, setL1Name, evmChainId, setEvmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
 
     return (
-        <div className="space-y-12">
-            <h1 className="text-2xl font-medium mb-6">Permissions</h1>
+        <div className="space-y-8">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Chain Parameters</h1>
+                <p>Enter the basic parameters of your L1, such as it's name, it's EVM chain ID, and the network you want to deploy it on.</p>
+            </div>
 
             <div>
                 <Label>L1 Name</Label>

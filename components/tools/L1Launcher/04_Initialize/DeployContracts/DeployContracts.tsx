@@ -424,8 +424,11 @@ export default function DeployContracts() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto">
-            <h1 className="text-2xl font-medium mb-6 dark:text-gray-200">Deploy Contracts</h1>
+        <div className="space-y-12">
+            <div>
+                <h1 className="text-2xl font-medium mb-4">Deploy Contracts</h1>
+                <p>In this step we will deploy the proxy for the validator manager and proxy contract for it.</p>
+            </div>
 
             <ContractDeployer
                 name="ValidatorMessages"
