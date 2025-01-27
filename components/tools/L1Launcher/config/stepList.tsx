@@ -8,7 +8,7 @@ import Genesis from "../02_Configure/Genesis";
 import PrepareValidators from "../03_Launch/PrepareValidators";
 import GenerateKeys from "../03_Launch/GenerateKeys";
 import FundTempWallet from "../03_Launch/FundTempWallet";
-import CreateChain from "../03_Launch/CreateChain"
+import CreateL1 from "../03_Launch/CreateL1"
 import LaunchValidators from "../03_Launch/LaunchValidators";
 import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
 import OpenRPCPort from "../03_Launch/OpenRPCPort";
@@ -85,8 +85,8 @@ export const stepList: StepListType = {
         group: "launch-l1",
     },
     "create-chain": {
-        title: "Create chain",
-        component: <CreateChain />,
+        title: "Create L1",
+        component: <CreateL1 />,
         group: "launch-l1",
     },
     "launch-validators": {

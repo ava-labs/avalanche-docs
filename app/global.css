@@ -201,3 +201,28 @@ nav a:not(:first-child) {
   height: 20px;
   margin-right: 8px;
 }
+
+@media (max-width: 639px) {
+  [data-state="open"][data-orientation="horizontal"] {
+    max-height: 75vh !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+  }
+
+  [data-state="open"][data-orientation="horizontal"]::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  [data-state="open"][data-orientation="horizontal"]::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 2px;
+  }
+
+  div[class*="flex flex-col sm:hidden"]:nth-last-of-type(-n+3) > a {
+    display: none; 
+  }
+
+  [data-open="true"] {
+    z-index: 250;
+  }
+}
