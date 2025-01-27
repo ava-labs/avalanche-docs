@@ -8,11 +8,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { AlertCircle, Plus, Trash2 } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useL1ManagerWizardStore } from '../config/store'
-import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, parseEther, defineChain, custom } from 'viem'
+import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, parseEther, defineChain, custom } from 'viem'
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { apiHostPromise } from '@/components/tools/common/utils/config';
 import { avm, pvm, evm, utils, TransferableOutput, Context, BlsSignature, secp256k1, pvmSerial, addTxSignatures } from '@avalabs/avalanchejs';
-import { packRegisterL1ValidatorMessage, ValidationPeriod } from '../../common/utils/convertWarp'
+import { packRegisterL1ValidatorMessage, packL1ValidatorRegistration, L1ValidatorRegistration, ValidationPeriod } from '../../common/utils/convertWarp'
 
 declare global {
   interface Window {
@@ -351,7 +351,7 @@ export default function LaunchValidators() {
       const context = await Context.getContextFromURI(platformEndpoint);
 
       const unsignedRegisterValidatorTx = pvm.e.newRegisterL1ValidatorTx({
-          balance: BigInt(1 * 1e9), // the pay as you go balance for the validator, 1 AVAX we send here 
+          balance: BigInt(0.2 * 1e9), // the pay as you go balance for the validator, 0.2 AVAX we send here 
           blsSignature: new Uint8Array(Buffer.from(newBlsProofOfPossession.slice(2), 'hex')),
           message: new Uint8Array(Buffer.from(signedMessage, 'hex')),
           feeState,
@@ -364,47 +364,32 @@ export default function LaunchValidators() {
       const unsignedRegisterValidatorTxBytes = unsignedRegisterValidatorTx.toBytes()
       const unsignedRegisterValidatorTxHex = bytesToHex(unsignedRegisterValidatorTxBytes)
 
-      window.avalanche.request({
+      const response = await window.avalanche.request({
           method: 'avalanche_sendTransaction',
           params: {
             transactionHex: unsignedRegisterValidatorTxHex,
             chainAlias: 'P',
           }
-      }).then(async (response: any) => {
-        console.log('P-Chain tx from Core: ', response)
-        while (true) {
-          let status = await pvmApi.getTxStatus({ txID: response });
-          console.log('P-Chain Status: ', status);
-          if (status.status === "Committed") break;
-          await new Promise(resolve => setTimeout(resolve, 1000));
-        }
+      });
+      
+      console.log('P-Chain tx from Core: ', response);
+      
+      while (true) {
+        let status = await pvmApi.getTxStatus({ txID: response });
+        console.log('P-Chain Status: ', status);
+        if (status.status === "Committed") break;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
   
       const pJson = await pvmApi.getTxJson({txID: response});
       console.log('P-Chain JSON: ', pJson)
-      })
-
-      const validationPeriod: ValidationPeriod = {
-        subnetID: subnetId,
-        nodeID: nodeIDHexTrimmed,
-        blsPublicKey: newBlsPublicKey as Address,
-        registrationExpiry: expiry,
-        remainingBalanceOwner: {
-          threshold: 1,
-          addresses: [pChainAddressHex as Address]
-        },
-        disableOwner: {
-          threshold: 1,
-          addresses: [pChainAddressHex as Address]
-        },
-        weight: BigInt(newWeight)
-      }
-
+      
       const pChainChainID = '11111111111111111111111111111111LpoYY'//TODO: unhardcode
 
-      const unsignedPChainWarpMsg = packRegisterL1ValidatorMessage(validationPeriod, 5, pChainChainID)
+      const validationIDBytes = hexToBytes(validationID)
+      const unsignedPChainWarpMsg = packL1ValidatorRegistration(validationIDBytes, true, 5, pChainChainID)
 
       console.log('unsignedPChainWarpMsg: ', unsignedPChainWarpMsg)
-
 
       const unsignedPChainWarpMsgHex = bytesToHex(unsignedPChainWarpMsg)
 
@@ -418,24 +403,50 @@ export default function LaunchValidators() {
         body: JSON.stringify({
             message: unsignedPChainWarpMsgHex,
             justification: RegisterL1ValidatorUnsignedWarpMsg,
+            "signing-subnet-id": subnetId,
         })
       });
 
-      const { 'signed-message': signedPChainWarpMsg } = await res.json();
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || `HTTP error! status: ${res.status}`);
+    }
 
-      console.log('signedPChainWarpMsg: ', signedPChainWarpMsg)
+    const { 'signed-message': signedPChainWarpMsg } = await res.json();
 
-      //todo here, submit signedPChainWarpMsg to the EVM Proxy Contract
-              // Update UI
-        setValidators([...validators, {
-          id: Date.now().toString(),
-          nodeID: newNodeID,
-          blsPublicKey: newBlsPublicKey,
-          blsProofOfPossession: newBlsProofOfPossession,
-          pChainAddress: newPChainAddress,
-          weight: newWeight,
-          uptime: '100%'
-        }])
+    console.log('signedPChainWarpMsg: ', signedPChainWarpMsg)
+
+
+    // wait for 30s to give PChain enough time to finalize the registration
+    await new Promise(resolve => setTimeout(resolve, 30000));
+
+    // finalize the registration on EVM Validator Manager
+    //first do a simulation 
+    const mockFinalizeRegistrationTx = await publicClient.simulateContract({
+      abi: validatorManagerAbi.abi,
+      address: transparentProxyAddress as Address,
+      functionName: 'completeValidatorRegistration',
+      args: [0],
+      account,
+      gas: BigInt(2500000),
+      nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
+    })
+
+    console.log('mockFinalizeRegistrationTx: ', mockFinalizeRegistrationTx)
+
+    //do the txn
+    const finalizeRegistrationTx = await walletClient.writeContract({
+      abi: validatorManagerAbi.abi,
+      address: transparentProxyAddress as Address,
+      functionName: 'completeValidatorRegistration',
+      args: [0],
+      account,
+      gas: BigInt(2500000),
+      nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
+    })
+
+    console.log('finalizeRegistrationTx: ', finalizeRegistrationTx)
+
 
         // Clear form
         setNewNodeID('')

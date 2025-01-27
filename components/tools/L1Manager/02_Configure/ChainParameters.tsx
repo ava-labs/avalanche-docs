@@ -9,12 +9,16 @@ import { getWalletAddress } from '@/components/tools/common/utils/wallet';
 const DEFAULT_PROXY_ADDRESS = "0x0feedc0de0000000000000000000000000000000";
 
 const getEndpoints = (rpcUrl: string) => {
-    const baseUrl = rpcUrl.split('/ext/bc/')[0];
+    // Parse the URL to handle query parameters
+    const url = new URL(rpcUrl);
+    const baseUrl = url.origin + url.pathname.split('/ext/bc/')[0];
+    const queryParams = url.search;
+    
     console.log('Base URL:', baseUrl);
     
     return {
-        platform: `${baseUrl}/ext/bc/P`,
-        info: `${baseUrl}/ext/info`,
+        platform: `${baseUrl}/ext/bc/P${queryParams}`,
+        info: `${baseUrl}/ext/info${queryParams}`,
         validators: rpcUrl.replace('/rpc', '/validators')
     };
 };
@@ -74,8 +78,12 @@ const checkEndpoint = async (url: string) => {
 };
 
 async function rpcRequest(rpcUrl: string, method: string, params: any) {
-    const url = rpcUrl.replace(/\/ext\/bc\/[^/]+\/rpc/, '/ext/info');
-    const response = await fetch(url, {
+    const url = new URL(rpcUrl);
+    const baseUrl = url.origin + url.pathname.split('/ext/bc/')[0];
+    const queryParams = url.search;
+    const infoUrl = `${baseUrl}/ext/info${queryParams}`;
+    
+    const response = await fetch(infoUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

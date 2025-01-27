@@ -217,3 +217,67 @@ export function packRegisterL1ValidatorMessage(
     
     return unsignedMessage;
 }
+
+export interface L1ValidatorRegistration {
+    validationID: Uint8Array;
+    registered: boolean;
+}
+
+const L1_VALIDATOR_REGISTRATION_MESSAGE_TYPE_ID = 2; // You may need to verify this constant value
+
+/**
+ * Packs a L1ValidatorRegistrationMessage into a byte array.
+ * The message format specification is:
+ * +--------------+----------+----------+
+ * |      codecID :   uint16 |  2 bytes |
+ * +--------------+----------+----------+
+ * |       typeID :   uint32 |  4 bytes |
+ * +--------------+----------+----------+
+ * | validationID : [32]byte | 32 bytes |
+ * +--------------+----------+----------+
+ * |        valid :     bool |  1 byte  |
+ * +--------------+----------+----------+
+ *                           | 39 bytes |
+ *                           +----------+
+ */
+export function packL1ValidatorRegistration(
+    validationID: Uint8Array,
+    registered: boolean,
+    networkID: number,
+    sourceChainID: string
+): Uint8Array {
+    // Validate validationID length
+    if (validationID.length !== 32) {
+        throw new Error('ValidationID must be exactly 32 bytes');
+    }
+
+    const messagePayload = concatenateUint8Arrays(
+        encodeUint16(codecVersion),
+        encodeUint32(L1_VALIDATOR_REGISTRATION_MESSAGE_TYPE_ID),
+        validationID,
+        new Uint8Array([registered ? 1 : 0])
+    );
+
+    // Create addressed call with empty source address
+    const addressedCall = newAddressedCall(new Uint8Array([]), messagePayload);
+    
+    // Create unsigned message
+    return newUnsignedMessage(networkID, sourceChainID, addressedCall);
+}
+
+export function parseL1ValidatorRegistration(bytes: Uint8Array): L1ValidatorRegistration {
+    const EXPECTED_LENGTH = 39; // 2 + 4 + 32 + 1 bytes
+    
+    if (bytes.length !== EXPECTED_LENGTH) {
+        throw new Error(`Invalid message length. Expected ${EXPECTED_LENGTH} bytes, got ${bytes.length}`);
+    }
+    
+    // Skip first 6 bytes (2 bytes codecID + 4 bytes typeID)
+    const validationID = bytes.slice(6, 38); // 32 bytes
+    const registered = bytes[38] === 1; // Last byte
+    
+    return {
+        validationID,
+        registered,
+    };
+}
