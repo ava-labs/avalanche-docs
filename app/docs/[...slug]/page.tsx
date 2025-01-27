@@ -55,7 +55,7 @@ export default async function Page(props: {
       editOnGithub={{
         repo: 'avalanche-docs',
         owner: 'ava-labs',
-        sha: 'main',
+        sha: 'master',
         path,
       }}
       article={{

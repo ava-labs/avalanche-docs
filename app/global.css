@@ -231,3 +231,7 @@ nav a:not(:first-child) {
     z-index: 450;
   }
 }
+
+.tools-page svg.lucide {
+  color: #EB4C50 !important;
+}
