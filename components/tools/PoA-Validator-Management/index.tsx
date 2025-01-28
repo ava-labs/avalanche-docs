@@ -19,9 +19,9 @@ export default function L1Wizard() {
         <>
             <div className="container mx-auto max-w-6xl p-8 ">
                 <ToolHeader
-                    title="L1 Manager"
+                    title="PoA Validator Management"
                     duration="30 min"
-                    description="Manage the validator set of your L1"
+                    description="Manage the validator set of your Proof of Authority L1"
                 />
                 <div className="flex flex-col lg:flex-row">
                     <div className="w-full lg:w-80 mb-8">

@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake } from 'lucide-react';
+import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake, HardDrive } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -218,14 +218,23 @@ const toolsMenu: LinkItemType = {
       },
     },
     {
-      icon: <Waypoints />,
-      text: 'ICTT Deployment (Coming soon)',
-      description: 'Deploy a bridge between two L1s to transfer fungible tokens.',
-      url: '',
+      icon: <HardDrive />,
+      text: 'PoA Validator Management (Beta)',
+      description: 'Manage your validator set from the web.',
+      url: '/tools/poa-validator-management',
       menu: {
         className: 'lg:col-start-3 lg:row-start-2',
       },
     },
+    // {
+    //   icon: <Waypoints />,
+    //   text: 'ICTT Deployment (Coming soon)',
+    //   description: 'Deploy a bridge between two L1s to transfer fungible tokens.',
+    //   url: '',
+    //   menu: {
+    //     className: 'lg:col-start-3 lg:row-start-2',
+    //   },
+    // },
   ],
 };
 
