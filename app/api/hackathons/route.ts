@@ -1,15 +1,6 @@
+import { HackathonsList, HackathonLite, getHackathonLite, Hackathon } from "@/types/hackathons";
 import { NextRequest } from "next/dist/server/web/spec-extension/request";
 import { NextResponse } from "next/server";
-
-const hackathons: HackathonLite[] = Array.from({ length: 50 }, (_, index) => ({
-    id: `hackathon-${index + 1}`,
-    title: `Hackathon ${index + 1}`,
-    description: `This is the description for Hackathon ${index + 1}.`,
-    date: `2025-02-${(index % 28) + 1}T10:00:00Z`,
-    type: index % 2 === 0 ? "Virtual" : "On-site",
-    city: index % 2 === 0 ? "Online" : `City ${index + 1}`,
-    total_prizes: 5000.00 + index * 100
-}));
 
 
 export async function GET(req: NextRequest) {
@@ -19,6 +10,10 @@ export async function GET(req: NextRequest) {
     const page = searchParams.get('page') ?? "1";
     const pageSize = searchParams.get('pageSize') ?? "10";
 
+    const location = searchParams.get('location');
+    const date = searchParams.get('date');
+    const status = searchParams.get('status');
+
     const pageNumber = parseInt(page as string) || 1;
     const pageSizeNumber = parseInt(pageSize as string) || 10;
 
@@ -26,12 +21,24 @@ export async function GET(req: NextRequest) {
     const startIndex = (pageNumber - 1) * pageSizeNumber;
     const endIndex = startIndex + pageSizeNumber;
 
-    const paginatedHackathons = hackathons.slice(startIndex, endIndex);
+    const filetredHackathons = HackathonsList.filter(hackathon => {
+        let mateched = true;
+        if (location)
+            mateched &&= hackathon.location === location;
+        if (date)
+            mateched &&= hackathon.date === date;
+        if (status)
+            mateched &&= hackathon.status == status;
+        return mateched;
+    });
+    const paginatedHackathons : Hackathon[] = filetredHackathons.slice(startIndex, endIndex);
+
+    const hackathonsLite: HackathonLite[] = paginatedHackathons.map(getHackathonLite);
 
 
     return NextResponse.json({
-        hackathons: paginatedHackathons,
-        total: hackathons.length
+        hackathons: hackathonsLite,
+        total: filetredHackathons.length
     })
 
 
