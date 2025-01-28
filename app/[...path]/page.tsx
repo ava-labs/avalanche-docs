@@ -275,6 +275,32 @@ const wildcardRedirects: WildcardRedirect[] = [
   },
 ];
 
+function resolveRedirectChain(currentPath: string, visited: Set<string> = new Set()): string {
+  const cleanPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
+
+  if (visited.has(cleanPath)) {
+    return cleanPath;
+  }
+  visited.add(cleanPath);
+
+  if (cleanPath in staticRedirects) {
+    const nextPath = staticRedirects[cleanPath];
+    return resolveRedirectChain(nextPath, visited);
+  }
+
+  for (const { pattern, destination } of wildcardRedirects) {
+    const match = cleanPath.match(pattern);
+    if (match) {
+      const wildcardPart = match[1] || '';
+      const separator = wildcardPart ? '/' : '';
+      const nextPath = `${destination}${separator}${wildcardPart}`;
+      return resolveRedirectChain(nextPath, visited);
+    }
+  }
+
+  return cleanPath;
+}
+
 function getDestinationUrl(currentPath: string): string {
   if (currentPath.startsWith('/integrations')) {
     const match = currentPath.match(/^\/integrations(?:\/(.*))?$/);
@@ -285,23 +311,9 @@ function getDestinationUrl(currentPath: string): string {
     }
   }
 
-  if (currentPath in staticRedirects) {
-    return `https://build.avax.network/docs${staticRedirects[currentPath]}`;
-  }
-  
-  const cleanPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
-
-  for (const { pattern, destination } of wildcardRedirects) {
-    const match = cleanPath.match(pattern);
-    if (match) {
-      const wildcardPart = match[1] || '';
-      const separator = wildcardPart ? '/' : '';
-      return `https://build.avax.network/docs${destination}${separator}${wildcardPart}`;
-    }
-  }
-  
-  const finalPath = cleanPath.startsWith('/') ? cleanPath.slice(1) : cleanPath;
-  return `https://build.avax.network/docs/${finalPath}`;
+  const finalPath = resolveRedirectChain(currentPath);
+  const cleanFinalPath = finalPath.startsWith('/') ? finalPath : `/${finalPath}`;
+  return `https://build.avax.network/docs${cleanFinalPath}`;
 }
 
 export async function generateMetadata({ 
@@ -320,7 +332,7 @@ export async function generateMetadata({
     alternates: {
       canonical: destinationUrl
     },
-    title: 'Redirecting to Avalanche Docs',
+    title: 'Redirecting to Avalanche Builders Hub',
     description: `This page has permanently moved to ${destinationUrl}`
   };
 }
