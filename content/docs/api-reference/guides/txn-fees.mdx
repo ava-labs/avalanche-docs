@@ -99,7 +99,7 @@ The total gas consumed ($G$) by a transaction is:
 G = B + 1000R + 1000W + 4C
 ```
 
-The current fee dimension weight configurations as well as the parameter configurations of the P-Chain can be read at any time with the [`platform.getFeeConfig`](https://docs.avax.network/api-reference/p-chain/api#platformgetfeeconfig) API endpoint. 
+The current fee dimension weight configurations as well as the parameter configurations of the P-Chain can be read at any time with the [`platform.getFeeConfig`](https://build.avax.network/docs/api-reference/p-chain/api#platformgetfeeconfig) API endpoint. 
 
 ### Fee Adjustment Mechanism
 Fees adjust dynamically based on excess gas consumption, the difference between current gas usage and the target gas rate. The exponential adjustment ensures consistent reactivity regardless of the current gas price. Fee changes scale proportionally with excess gas consumption, maintaining fairness and network stability. The technical specification of this mechanism is documented in [ACP-103](https://github.com/avalanche-foundation/ACPs/blob/main/ACPs/103-dynamic-fees/README.md#mechanism).

@@ -14,7 +14,7 @@ Avalanche Interchain Messaging uses BLS Multi-Signatures with Public-Key Aggrega
 
 Every node tracking a Subnet has read access to the Avalanche P-Chain. This provides weighted sets of BLS Public Keys that correspond to the validator sets of each Subnet on the Avalanche Network. Avalanche Warp Messaging provides a basic primitive for signing and verifying messages between Subnets: the receiving network can verify whether an aggregation of signatures from a set of source Subnet validators represents a threshold of stake large enough for the receiving network to process the message.
 
-For more details on Avalanche Warp Messaging, see the AvalancheGo [Warp README](https://docs.avax.network/build/cross-chain/awm/deep-dive).
+For more details on Avalanche Warp Messaging, see the AvalancheGo [Warp README](https://build.avax.network/docs/build/cross-chain/awm/deep-dive).
 
 ### Flow of Sending / Receiving an Interchain Message within the EVM
 
@@ -71,7 +71,7 @@ This pre-verification is performed using the ProposerVM Block header during [blo
 
 This is different from the conventional Ethereum ChainID registered to [ChainList](https://chainlist.org/).
 
-The `blockchainID` in Avalanche refers to the txID that created the blockchain on the Avalanche P-Chain ([docs](https://docs.avax.network/specs/platform-transaction-serialization#unsigned-create-chain-tx)).
+The `blockchainID` in Avalanche refers to the txID that created the blockchain on the Avalanche P-Chain ([docs](https://build.avax.network/docs/specs/platform-transaction-serialization#unsigned-create-chain-tx)).
 
 ### Predicate Encoding
 

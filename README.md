@@ -7,7 +7,7 @@
 ## Overview
 
 This repository contains the contents for the Avalanche Builder Hub. It hosts the Docs, the
-Avalanche Academy and the integrations directory and is deployed at [https://docs.avax.network](https://docs.avax.network).
+Avalanche Academy and the integrations directory and is deployed at [https://build.avax.network/docs](https://build.avax.network/docs).
 
 ## Contributing
 
@@ -50,7 +50,7 @@ To propose new docs or large edits to our existing pages, follow the steps accor
 
 - All PRs should be made against the `master` branch.
 - Following a successful build, Vercel will deploy your branch where you can verify your changes.
-- Once your PR is merged into `master`, [https://docs.avax.network/](https://docs.avax.network/) will be updated with your changes.
+- Once your PR is merged into `master`, [https://build.avax.network/docs/](https://build.avax.network/docs/) will be updated with your changes.
 
 ### Installation
 

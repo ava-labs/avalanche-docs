@@ -26,7 +26,7 @@ description: ICM Contracts is a messaging protocol built on top of Avalanche Int
 
 The `TeleporterMessenger` contract is a user-friendly interface to ICM, aimed at dApp developers. All of the message signing and verification is abstracted away from developers. Instead, developers simply call `sendCrossChainMessage` on the `TeleporterMessenger` contract to send a message invoking a smart contract on another Avalanche L1, and implement the `ITeleporterReceiver` interface to receive messages on the destination Avalanche L1. `TeleporterMessenger` handles all of the ICM message construction and sending, as well as the message delivery and execution.
 
-To get started with using `TeleporterMessenger`, see [How to Deploy ICM Enabled Avalanche L1s on a Local Network](https://docs.avax.network/tooling/cli-cross-chain/teleporter-on-local-networks)
+To get started with using `TeleporterMessenger`, see [How to Deploy ICM Enabled Avalanche L1s on a Local Network](https://build.avax.network/docs/tooling/cli-cross-chain/teleporter-on-local-networks)
 
 The `ITeleporterMessenger` interface provides two primary methods:
 
@@ -91,7 +91,7 @@ Once sent on chain, ICM messages cannot be re-signed by a new validator set in s
 
 ## TeleporterMessenger Contract Deployment
 
-**Do not deploy the `TeleporterMessenger` contract using `forge create`**. The `TeleporterMessenger` contract must be deployed to the same contract address on every chain. To achieve this, the contract can be deployed using a static transaction that uses Nick's method as documented in [this guide](https://github.com/ava-labs/icm-contracts/blob/main//utils/contract-deployment/README.md). Alternatively, if creating a new L1, the contract can be pre-allocated with the proper address and state in the new chain's [genesis file](https://docs.avax.network/build/subnet/upgrade/customize-a-subnet#setting-the-genesis-allocation).
+**Do not deploy the `TeleporterMessenger` contract using `forge create`**. The `TeleporterMessenger` contract must be deployed to the same contract address on every chain. To achieve this, the contract can be deployed using a static transaction that uses Nick's method as documented in [this guide](https://github.com/ava-labs/icm-contracts/blob/main//utils/contract-deployment/README.md). Alternatively, if creating a new L1, the contract can be pre-allocated with the proper address and state in the new chain's [genesis file](https://build.avax.network/docs/build/subnet/upgrade/customize-a-subnet#setting-the-genesis-allocation).
 
 As an example, to include `TeleporterMessenger` `v1.0.0` in the genesis file, include the following values in the `alloc` settings, as documented at the link above. The `storage` values included below correspond to the two contract values that are initialized as part of the default constructor of `TeleporterMessenger`. These are the `ReentrancyGuard` values set in this [abstract contract](https://github.com/ava-labs/icm-contracts/blob/main/contracts/utilities/ReentrancyGuards.sol). Future versions of `TeleporterMessenger` may require different storage value initializations.
 ```json

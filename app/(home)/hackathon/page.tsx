@@ -173,7 +173,7 @@ export default function HackathonPage() {
         'Develop platforms to manage memberships and validator node groups.'
       ],
       resources: [
-        { name: 'Avalanche Validator Guide', url: 'https://docs.avax.network/nodes' },
+        { name: 'Avalanche Validator Guide', url: 'https://build.avax.network/docs/nodes' },
         { name: 'Governance Models', url: 'https://github.com/ava-labs/icm-contracts/tree/main/contracts/governance' }
       ]
     },
@@ -209,7 +209,7 @@ export default function HackathonPage() {
       resources: [
         { name: 'InterChain Messaging', url: 'https://academy.avax.network/course/interchain-messaging' },
         { name: 'InterChain Token Transfer', url: 'https://academy.avax.network/course/interchain-token-transfer' },
-        { name: 'Cross-Chain Communication', url: 'https://docs.avax.network/build/avalanchego/cross-chain' }
+        { name: 'Cross-Chain Communication', url: 'https://build.avax.network/docs/build/avalanchego/cross-chain' }
       ]
     },
     {
@@ -226,7 +226,7 @@ export default function HackathonPage() {
       ],
       resources: [
         { name: 'Avalanche SDK', url: 'https://github.com/ava-labs/avalanchejs' },
-        { name: 'Developer Tools', url: 'https://docs.avax.network/tools' }
+        { name: 'Developer Tools', url: 'https://build.avax.network/docs/tools' }
         ]
     },
     {
@@ -243,7 +243,7 @@ export default function HackathonPage() {
       ],
       resources: [
         { name: 'AvalancheJS', url: 'https://github.com/ava-labs/avalanchejs' },
-        { name: 'Avalanche Developer Documentation', url: 'https://docs.avax.network/' }
+        { name: 'Avalanche Developer Documentation', url: 'https://build.avax.network/docs/' }
       ]
     },
   ];
@@ -366,7 +366,7 @@ export default function HackathonPage() {
                 <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200">Developer Resources</h3>
                 <ul className="space-y-3 text-gray-600 dark:text-gray-400">
                   <li>
-                    <Link href="https://docs.avax.network" className="flex items-center text-blue-600 dark:text-blue-400 hover:underline">
+                    <Link href="https://build.avax.network/docs" className="flex items-center text-blue-600 dark:text-blue-400 hover:underline">
                       Avalanche Docs
                     </Link>
                   </li>
