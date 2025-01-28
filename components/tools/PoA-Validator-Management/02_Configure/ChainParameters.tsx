@@ -442,7 +442,7 @@ export default function ChainParameters() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span>
-                            Enter the Developer RPC endpoint URL of your L1. The endpoint must have access to P-Chain and Subnet-EVM API for validator management (<a href="https://docs.avax.network/api-reference/subnet-evm-api#validators_getcurrentvalidators" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">see documentation</a>).
+                            Enter the Developer RPC endpoint URL of your L1. The endpoint must have access to P-Chain and Subnet-EVM API for validator management (<a href="https://build.avax.network/docs/api-reference/subnet-evm-api#validators_getcurrentvalidators" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">see documentation</a>).
                         </span>
                     </div>
                 </div>
