@@ -8,7 +8,7 @@ icon: BookOpen
 
 The receiver contract now has two tasks: 
 
-- **Receive a message from the sender**: Same as in the [last example](/course/interchain-messaging/04-icm-basics/05-receiving-a-message)
+- **Receive a message from the sender**: Same as in the [last example](/academy/interchain-messaging/04-icm-basics/05-receiving-a-message)
 - **Send a message back to the sender**: Now our receiver contract needs to be able to send a message back to the sender.
 
 Therefore, we need to change the receiver contract to be able to send a message back. We will need to instantiate a `TeleporterMessenger` and call the `sendCrossChainMessage()` function. 
