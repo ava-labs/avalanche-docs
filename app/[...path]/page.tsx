@@ -255,6 +255,7 @@ const staticRedirects: RedirectMap = {
   '/api-reference/x-chain/configs': '/nodes/chain-configs/x-chain',
   '/api-reference/c-chain/configs': '/nodes/chain-configs/c-chain',
   '/tooling/guides/get-avalanche-cli': '/tooling/get-avalanche-cli',
+  '/avalanche-l1s/deploy-a-avalanche-l1/production-infrastructure': '/tooling/create-deploy-avalanche-l1s/deploy-on-production-infra',
 };
 
 const wildcardRedirects: WildcardRedirect[] = [
