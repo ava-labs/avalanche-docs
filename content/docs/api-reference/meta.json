@@ -14,7 +14,6 @@
     "health-api",
     "index-api",
     "info-api",
-    "keystore-api",
     "metrics-api",
     "---Avalanche L1s---",
     "subnet-evm-api",
