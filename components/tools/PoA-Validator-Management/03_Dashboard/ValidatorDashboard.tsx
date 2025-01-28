@@ -104,6 +104,7 @@ export default function LaunchValidators() {
   const [isBootstrapped, setIsBootstrapped] = useState(false)
   const [selectedValidator, setSelectedValidator] = useState<Validator | null>(null);
   const [isWeightDialogOpen, setIsWeightDialogOpen] = useState(false);
+  const [coreWalletPChainAddress, setCoreWalletPChainAddress] = useState('')
 
   const chainConfig = defineChain({
     id: evmChainId,
@@ -121,8 +122,7 @@ export default function LaunchValidators() {
   })
 
   // Create clients inside component with dynamic chain config
-
-  const noopProvider = { request: () => null }
+  const noopProvider = { request: () => Promise.resolve(null) }
   const provider = typeof window !== 'undefined' ? window.ethereum! : noopProvider
   const walletClient = createWalletClient({
     chain: chainConfig,
@@ -221,25 +221,35 @@ export default function LaunchValidators() {
     fetchValidators();
   }, [evmChainId]);
 
+  // Fetch P-Chain address when component mounts
+  useEffect(() => {
+    const fetchPChainAddress = async () => {
+      try {
+        const response = await window.avalanche.request({
+          method: 'avalanche_getAccounts',
+          params: []
+        });
+        const activeAccountIndex = response.findIndex((account: any) => account.active === true);
+        const pChainAddress = response[activeAccountIndex].addressPVM.replace('avax', 'fuji');
+        console.log('P-Chain Address: ', pChainAddress);
+        setCoreWalletPChainAddress(pChainAddress);
+        // Also set it as the default value for the input if no value is already set
+        if (!newPChainAddress) {
+          setNewPChainAddress(pChainAddress);
+        }
+      } catch (error) {
+        console.error('Error fetching avalanche accounts, is Core wallet installed?:', error);
+      }
+    };
+
+    fetchPChainAddress();
+  }, []); // Run once when component mounts
+
   const addValidator = async () => {
     if (!newNodeID || !newBlsPublicKey || !newBlsProofOfPossession || !newPChainAddress || !newWeight || !poaOwnerAddress) {
       console.log('Missing required fields')
       return;
     };
-
-    // todo fetch PChain address from Core extension 
-    // try {
-    //   window.avalanche.request({
-    //     method: 'avalanche_getAccounts',
-    //     params: []
-    //   }).then((response: any) => {
-    //     const activeAccountIndex = response.findIndex((account: any) => account.active === true);
-    //     console.log('P-Chain Address: ', response[activeAccountIndex].addressPVM)
-      
-    //   })
-    // } catch (error) {
-    //   console.error('Error fetching avalanche accounts, is Core wallet installed?:', error)
-    // }
 
     try {
       // get account
@@ -638,7 +648,7 @@ export default function LaunchValidators() {
                 onChange={(e) => setNewBlsProofOfPossession(e.target.value)}
               />
               <Input 
-                placeholder="P-Chain Address" 
+                placeholder={coreWalletPChainAddress || "P-Chain Address"} 
                 value={newPChainAddress} 
                 onChange={(e) => setNewPChainAddress(e.target.value)}
               />

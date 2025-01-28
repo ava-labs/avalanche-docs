@@ -355,12 +355,12 @@ export default function ChainParameters() {
     return (
         <div className="space-y-12">
             <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-medium">Chain Configuration</h1>
+                <h1 className="text-2xl font-medium dark:text-white">Chain Configuration</h1>
             </div>
 
             <div className="space-y-6">
                 <div>
-                    <Label>Developer RPC URL</Label>
+                    <Label className="dark:text-gray-200">Developer RPC URL</Label>
                     <div className="flex gap-2 mt-1.5">
                         <Input 
                             type='text' 
@@ -379,8 +379,8 @@ export default function ChainParameters() {
                     </div>
                     
                     {rpcUrl && isValidUrl(rpcUrl) && (endpointStatus.platform || endpointStatus.info || endpointStatus.validators || endpointStatus.peers) && (
-                        <div className="mt-3 space-y-2 p-3 bg-gray-50 rounded-md">
-                            <h3 className="font-medium text-sm text-gray-700 mb-2">Endpoint Status:</h3>
+                        <div className="mt-3 space-y-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
+                            <h3 className="font-medium text-sm text-gray-700 dark:text-gray-300 mb-2">Endpoint Status:</h3>
                             <div className="flex items-center gap-2 text-sm">
                                 {endpointStatus.platform ? (
                                     <CheckCircle2 className="w-4 h-4 text-green-500" />
@@ -437,79 +437,79 @@ export default function ChainParameters() {
                             {error}
                         </p>
                     )}
-                    <div className="flex items-start gap-2 mt-2 text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
-                        <svg className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-start gap-2 mt-2 text-sm text-gray-600 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30 p-3 rounded-md">
+                        <svg className="w-5 h-5 text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span>
-                            Enter the Developer RPC endpoint URL of your L1. The endpoint must have access to P-Chain and Subnet-EVM API for validator management (<a href="https://docs.avax.network/api-reference/subnet-evm-api#validators_getcurrentvalidators" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">see documentation</a>).
+                            Enter the Developer RPC endpoint URL of your L1. The endpoint must have access to P-Chain and Subnet-EVM API for validator management (<a href="https://docs.avax.network/api-reference/subnet-evm-api#validators_getcurrentvalidators" className="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">see documentation</a>).
                         </span>
                     </div>
                 </div>
 
                 {evmChainId !== 0 && (
                     <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 rounded-lg border border-gray-100">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
                             <div>
-                                <Label>L1 Name</Label>
+                                <Label className="dark:text-gray-200">L1 Name</Label>
                                 <Input 
                                     type='text' 
                                     value={l1Name} 
                                     onChange={(e) => setL1Name(e.target.value)}
                                     placeholder="My L1"
-                                    className="mt-1.5"
+                                    className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 />
-                                <p className="mt-2 text-sm text-gray-500">
+                                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                                     Enter the name for your existing L1.
                                 </p>
                             </div>
 
                             <div>
-                                <Label>Chain ID</Label>
-                                <div className="mt-1.5 text-sm font-mono bg-white p-2.5 rounded border border-gray-200">
+                                <Label className="dark:text-gray-200">Chain ID</Label>
+                                <div className="mt-1.5 text-sm font-mono bg-white dark:bg-gray-700 p-2.5 rounded border border-gray-200 dark:border-gray-600 dark:text-white">
                                     {evmChainId}
                                 </div>
-                                <p className="mt-2 text-sm text-gray-500">
+                                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                                     Automatically detected from RPC endpoint.
                                 </p>
                             </div>
 
                             <div>
-                                <Label>Native Token Symbol</Label>
+                                <Label className="dark:text-gray-200">Native Token Symbol</Label>
                                 <Input 
                                     type='text' 
                                     value={tokenSymbol} 
                                     onChange={(e) => setTokenSymbol(e.target.value)}
                                     placeholder="TEST"
-                                    className="mt-1.5"
+                                    className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 />
-                                <p className="mt-2 text-sm text-gray-500">
+                                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                                     Enter the symbol for your L1's native token.
                                 </p>
                             </div>
 
                             <div>
-                                <Label>Validator Manager Proxy Contract Address</Label>
+                                <Label className="dark:text-gray-200">Validator Manager Proxy Contract Address</Label>
                                 <Input 
                                     type='text' 
                                     value={transparentProxyAddress} 
                                     onChange={(e) => setTransparentProxyAddress(e.target.value)}
                                     placeholder={DEFAULT_PROXY_ADDRESS}
-                                    className="mt-1.5"
+                                    className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 />
                                 {transparentProxyAddress && !isValidAddress(transparentProxyAddress) && (
                                     <p className="mt-2 text-sm text-red-500">
                                         Please enter a valid Ethereum address.
                                     </p>
                                 )}
-                                <p className="mt-2 text-sm text-gray-500">
-                                    Enter the address of the transparent proxy contract. Learn more about the proxy contract in the <a href="https://build.avax.network/docs/avalanche-l1s/validator-manager/contract" target="_blank" className="text-blue-500 hover:underline">documentation</a>.
+                                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                    Enter the address of the transparent proxy contract. Learn more about the proxy contract in the <a href="https://build.avax.network/docs/avalanche-l1s/validator-manager/contract" target="_blank" className="text-blue-500 dark:text-blue-400 hover:underline">documentation</a>.
                                 </p>
                             </div>
                         </div>
 
                         {showWallet && (
-                            <div className="mt-8 border-t pt-8">
+                            <div className="mt-8 border-t dark:border-gray-700 pt-8">
                                 <div className="mb-6">
                                     <button
                                         onClick={handleAddToWallet}
@@ -543,16 +543,16 @@ export default function ChainParameters() {
                                 </div>
 
                                 {walletError && (
-                                    <div className="bg-red-50 p-4 rounded-lg mb-6">
-                                        <h3 className="font-medium mb-2 text-red-700">Wallet Error</h3>
-                                        <p className="text-red-600">{walletError}</p>
+                                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded-lg mb-6">
+                                        <h3 className="font-medium mb-2 text-red-700 dark:text-red-400">Wallet Error</h3>
+                                        <p className="text-red-600 dark:text-red-300">{walletError}</p>
                                     </div>
                                 )}
 
                                 {isWalletAdded && balanceInfo && (
-                                    <div className="bg-green-50 p-4 rounded-lg mb-6">
-                                        <h3 className="font-medium mb-2">Wallet Added Successfully</h3>
-                                        <p>
+                                    <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg mb-6">
+                                        <h3 className="font-medium mb-2 dark:text-green-400">Wallet Added Successfully</h3>
+                                        <p className="dark:text-gray-300">
                                             Balance of account <span className="font-mono">{balanceInfo.address}</span> is{' '}
                                             <span className="font-bold">{balanceInfo.balance.toFixed(4)} {tokenSymbol}</span>.
                                         </p>
