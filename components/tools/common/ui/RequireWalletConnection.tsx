@@ -201,7 +201,9 @@ export default function RequireWalletConnection({ children, chainConfig, require
                         </div>
                         <div>
                             <div className="font-medium">RPC URLs:</div>
-                            {chainConfig.rpcUrls.map(rpcUrl => <div className="break-all">{rpcUrl}</div>)}
+                            {chainConfig.rpcUrls.map((rpcUrl, index) => (
+                                <div key={index} className="break-all">{rpcUrl}</div>
+                            ))}
                         </div>
                     </div>
 
