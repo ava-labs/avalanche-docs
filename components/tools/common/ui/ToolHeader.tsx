@@ -7,9 +7,10 @@ interface ToolHeaderProps {
   title: string
   duration: string
   description: string
+  githubDir: string
 }
 
-const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description }) => {
+const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description, githubDir }) => {
   return (
     <div className="space-y-4 mb-4">
       <div className="space-y-2">
@@ -20,7 +21,7 @@ const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description })
                 <span>{duration}</span>
             </div>
             <div className="sm:ml-auto space-x-2">
-              <Link href="https://t.me/+4kKgMmWAknxjY2Ey" target="_blank" rel="noopener noreferrer" >
+              <Link href={`https://github.com/ava-labs/avalanche-docs/blob/master/components/tools/${githubDir}`} target="_blank" rel="noopener noreferrer" >
                     <Button variant="outline" size="sm">
                     <GithubIcon className="w-4 h-4" />
                     </Button>

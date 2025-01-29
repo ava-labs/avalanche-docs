@@ -16,6 +16,7 @@ export default function L1Wizard() {
                     title="L1 Launcher"
                     duration="30 min"
                     description="Launch your self-hosted Testnet or Mainnet L1 on your own infrastructure"
+                    githubDir="L1Launcher"
                 />
                 <div className="flex flex-col lg:flex-row">
                     <div className="w-full lg:w-80 mb-8">
