@@ -120,7 +120,7 @@ export default async function Page(props: {
                     </div>
 
                     <a
-                        href={`https://github.com/ava-labs/avalanche-academy/blob/dev/${path}`}
+                        href={`https://github.com/ava-labs/avalanche-docs/blob/master/${path}`}
                         target="_blank"
                         rel="noreferrer noopener"
                         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
