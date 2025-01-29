@@ -73,6 +73,12 @@ interface L1LauncherWizardState extends StepWizardState {
 
     convertL1SignedWarpMessage: `0x${string}` | null;
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => void;
+
+    validatorMessagesAddress: string | null;
+    setValidatorMessagesAddress: (address: string) => void;
+    
+    poaValidatorManagerAddress: string | null;
+    setPoaValidatorManagerAddress: (address: string) => void;
 }
 
 
@@ -234,6 +240,16 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     convertL1SignedWarpMessage: null,
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => set(() => ({ convertL1SignedWarpMessage: message })),
+
+    validatorMessagesAddress: null,
+    setValidatorMessagesAddress: (address: string) => set(() => ({ 
+        validatorMessagesAddress: address 
+    })),
+
+    poaValidatorManagerAddress: null,
+    setPoaValidatorManagerAddress: (address: string) => set(() => ({ 
+        poaValidatorManagerAddress: address 
+    })),
 })
 
 

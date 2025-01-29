@@ -4,7 +4,6 @@ import { useL1LauncherWizardStore } from '../../config/store';
 import { cb58ToHex } from '@/components/tools/common/utils/cb58';
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
-import { privateKeyToAccount } from 'viem/accounts';
 import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
 
 export default function ContractInitialize() {
@@ -16,7 +15,6 @@ export default function ContractInitialize() {
         l1Name,
         tokenSymbol,
         getCChainRpcEndpoint,
-        tempPrivateKeyHex,
         subnetId,
         convertL1SignedWarpMessage
     } = useL1LauncherWizardStore();
@@ -47,12 +45,10 @@ export default function ContractInitialize() {
                     transport: http()
                 });
 
-                const managerAddress = PROXY_ADDRESS
-
                 const initializedEventABI = PoAValidatorManagerABI.abi.find(item => item.type === 'event' && item.name === 'Initialized') as AbiEvent;
 
                 const logs = await publicClient.getLogs({
-                    address: managerAddress,
+                    address: PROXY_ADDRESS,
                     event: initializedEventABI,
                     fromBlock: 'earliest',
                     toBlock: 'latest'
@@ -83,6 +79,7 @@ export default function ContractInitialize() {
 
         setStatus('in_progress');
         setErrorMessage(null);
+
         try {
             const customChain = {
                 id: evmChainId,
@@ -99,34 +96,23 @@ export default function ContractInitialize() {
                 },
             };
 
+            const walletClient = createWalletClient({
+                chain: customChain,
+                transport: custom(window.ethereum)
+            });
+
+            const [address] = await walletClient.requestAddresses();
+
             const publicClient = createPublicClient({
                 chain: customChain,
                 transport: http()
             });
 
-            // Create wallet client for metamask to get the address
-            const metamaskWallet = createWalletClient({
-                chain: customChain,
-                transport: custom(window.ethereum)
-            });
-            const [metamaskAddress] = await metamaskWallet.requestAddresses();
-
-            // Create wallet client with private key
-            const account = privateKeyToAccount(`0x${tempPrivateKeyHex}`);
-
             // Check account balance
-            const balance = await publicClient.getBalance({ address: account.address });
+            const balance = await publicClient.getBalance({ address });
             if (balance === BigInt(0)) {
                 throw new Error('Account has no funds to pay for gas. Please fund the account first.');
             }
-
-            const walletClient = createWalletClient({
-                chain: customChain,
-                transport: http(),
-                account
-            });
-
-            const managerAddress = PROXY_ADDRESS
 
             const settings = {
                 l1ID: cb58ToHex(subnetId),
@@ -134,16 +120,16 @@ export default function ContractInitialize() {
                 maximumChurnPercentage: 20
             };
 
-            // Simulate with private key account but keep metamask address as second arg
+            // Simulate the transaction
             const { request } = await publicClient.simulateContract({
-                address: managerAddress,
+                address: PROXY_ADDRESS,
                 abi: PoAValidatorManagerABI.abi,
                 functionName: 'initialize',
-                args: [settings, metamaskAddress],//has to be the metamask address, not temp account
-                account
+                args: [settings, address],
+                account: address
             });
 
-            // Execute with private key wallet
+            // Execute with MetaMask
             const hash = await walletClient.writeContract(request);
 
             // Wait for transaction receipt
