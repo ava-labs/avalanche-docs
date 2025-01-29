@@ -1,6 +1,6 @@
 import type React from "react"
 import Link from "next/link"
-import { Clock, MessageSquare } from "lucide-react"
+import { Clock, GithubIcon, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface ToolHeaderProps {
@@ -19,12 +19,20 @@ const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description })
                 <Clock className="w-4 h-4" />
                 <span>{duration}</span>
             </div>
-            <Link href="https://t.me/+4kKgMmWAknxjY2Ey" target="_blank" rel="noopener noreferrer" className="sm:ml-auto">
-                <Button variant="outline" size="sm">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Give Feedback
-                </Button>
-            </Link>
+            <div className="sm:ml-auto space-x-2">
+              <Link href="https://t.me/+4kKgMmWAknxjY2Ey" target="_blank" rel="noopener noreferrer" >
+                    <Button variant="outline" size="sm">
+                    <GithubIcon className="w-4 h-4" />
+                    </Button>
+              </Link>
+              <Link href="https://t.me/+4kKgMmWAknxjY2Ey" target="_blank" rel="noopener noreferrer" >
+                  <Button variant="outline" size="sm">
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Give Feedback
+                  </Button>
+              </Link>
+            </div>
+            
         </div>
         <p className="text-muted-foreground">{description}</p>
       </div>
