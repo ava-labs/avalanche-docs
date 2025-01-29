@@ -30,7 +30,7 @@ export default function AddToWallet() {
             </div>
             <RequireWalletConnection chainConfig={chainConfig} requiredBalance={0.1} onConnection={() => setConnectionSuccess(true)}/>
     
-            <NextPrev nextDisabled={connectionSuccess} onNext={goToNextStep} onPrev={goToPreviousStep} />
+            <NextPrev nextDisabled={!connectionSuccess} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 };
