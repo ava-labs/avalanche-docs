@@ -2,7 +2,7 @@ interface Window {
     ethereum?: {
         request: (args: {
             method: string;
-            params: any[];
+            params?: any[];
         }) => Promise<any>;
     };
 } 
