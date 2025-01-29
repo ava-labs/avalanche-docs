@@ -266,7 +266,7 @@ export default function OpenRPCPort() {
 
             {rpcLocationType === 'local' && (
                 <div className="mb-6">
-                    <p className="mb-4">Your RPC endpoint will be available at: <code className="bg-gray-100 px-2 py-1 rounded">http://localhost:8080</code></p>
+                    <p className="mb-4">Your RPC endpoint will be available at: <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">http://localhost:8080</code></p>
                 </div>
             )}
 

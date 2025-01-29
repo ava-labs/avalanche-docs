@@ -1,56 +1,9 @@
-import { apiHostPromise } from '../../../common/utils/config';
 import { useEffect, useState } from 'react';
 import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
 import { statusColors, StepState } from './colors';
 import { packL1ConversionMessage } from '@/components/tools/common/utils/convertWarp';
 import { bytesToHex } from 'viem';
-
-async function rpcRequest(rpcUrl: string, method: string, params: any) {
-    const response = await fetch(`${rpcUrl}/ext/info`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params })
-    });
-    const responseData = await response.json();
-    if (responseData.error) {
-        throw new Error(responseData.error.message);
-    }
-    return responseData.result;
-}
-
-async function collectPeers(rpcUrl: string) {
-    try {
-        let peers = [];
-
-        const peersData = await rpcRequest(rpcUrl, "info.peers", { nodeIDs: [] });
-
-        peers = peersData.peers;
-
-        try {
-            const [nodeIPData, nodeIDData] = await Promise.all([
-                rpcRequest(rpcUrl, "info.getNodeIP", {}),
-                rpcRequest(rpcUrl, "info.getNodeID", {})
-            ]);
-
-            peers.push({
-                "ip": nodeIPData.ip,
-                "publicIP": nodeIPData.ip,
-                "nodeID": nodeIDData.nodeID,
-            });
-
-            console.log('Successfully added node to peers', peers[peers.length - 1]);
-        } catch (e) {
-            console.warn('Failed to get node IP or ID', e);
-        }
-
-        return peers;
-    } catch (error) {
-        console.error('Error collecting peers:', error);
-    }
-}
 
 export default function CollectSignatures() {
     const {
@@ -61,13 +14,11 @@ export default function CollectSignatures() {
         nodesCount,
         convertL1SignedWarpMessage,
         setConvertL1SignedWarpMessage,
-        getRpcEndpoint
     } = useL1LauncherWizardStore();
 
     const [error, setError] = useState<string | null>(null);
     const [status, setStatus] = useState<StepState>('not_started');
     const [isLoading, setIsLoading] = useState(false);
-    const [collectedPeers, setCollectedPeers] = useState<string[]>([]);
 
     useEffect(() => {
         if (convertL1SignedWarpMessage) {
@@ -80,8 +31,6 @@ export default function CollectSignatures() {
         setIsLoading(true);
         setError(null);
         try {
-            const apiHost = await apiHostPromise;
-
             const pChainChainID = '11111111111111111111111111111111LpoYY'//TODO: unhardcode
 
             // Pack the message locally using packL1ConversionMessage
@@ -90,22 +39,19 @@ export default function CollectSignatures() {
                 managerChainID: chainId,
                 managerAddress: calculateContractAddress(tempPrivateKeyHex, 3),
                 validators: nodePopJsons.slice(0, nodesCount).map(json => JSON.parse(json).result)
-            }, 5, pChainChainID); // Using networkID 5 for Fuji as seen in the test
+            }, 5, pChainChainID);
 
-            const peers = await collectPeers(await getRpcEndpoint());
-            console.log('Collected ' + peers.length + ' peers');
-
-            // Then sign the message
-            const signResponse = await fetch(`${apiHost}/signMessage`, {
+            // Use the new API endpoint for signature aggregation
+            const signResponse = await fetch('https://glacier-api-dev.avax.network/v1/signatureAggregator/aggregateSignatures', {
                 method: 'POST',
                 headers: {
+                    'accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     message: bytesToHex(message),
                     justification: bytesToHex(justification),
-                    signingSubnetID: subnetId,
-                    extraPeers: peers,
+                    signingSubnetId: subnetId,
                 })
             });
 

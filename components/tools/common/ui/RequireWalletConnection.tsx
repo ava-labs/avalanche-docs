@@ -126,12 +126,13 @@ export default function RequireWalletConnection({ children, chainConfig, require
         checkConnection();
 
         if (window.ethereum) {
-            window.ethereum.on('chainChanged', checkConnection);
-            window.ethereum.on('accountsChanged', checkConnection);
+            const provider = window.ethereum!;
+            provider.on('chainChanged', checkConnection);
+            provider.on('accountsChanged', checkConnection);
 
             return () => {
-                window.ethereum.removeListener('chainChanged', checkConnection);
-                window.ethereum.removeListener('accountsChanged', checkConnection);
+                provider.removeListener('chainChanged', checkConnection);
+                provider.removeListener('accountsChanged', checkConnection);
             };
         }
     }, []);
@@ -201,7 +202,9 @@ export default function RequireWalletConnection({ children, chainConfig, require
                         </div>
                         <div>
                             <div className="font-medium">RPC URLs:</div>
-                            {chainConfig.rpcUrls.map(rpcUrl => <div className="break-all">{rpcUrl}</div>)}
+                            {chainConfig.rpcUrls.map((rpcUrl, index) => (
+                                <div key={index} className="break-all">{rpcUrl}</div>
+                            ))}
                         </div>
                     </div>
 

@@ -77,12 +77,13 @@ export default function SwitchChain({ children, chainConfig }: Props) {
         checkConnection();
 
         if (window.ethereum) {
-            window.ethereum.on('chainChanged', checkConnection);
-            window.ethereum.on('accountsChanged', checkConnection);
+            const provider = window.ethereum!;
+            provider.on('chainChanged', checkConnection);
+            provider.on('accountsChanged', checkConnection);
 
             return () => {
-                window.ethereum.removeListener('chainChanged', checkConnection);
-                window.ethereum.removeListener('accountsChanged', checkConnection);
+                provider.removeListener('chainChanged', checkConnection);
+                provider.removeListener('accountsChanged', checkConnection);
             };
         }
     }, []);
