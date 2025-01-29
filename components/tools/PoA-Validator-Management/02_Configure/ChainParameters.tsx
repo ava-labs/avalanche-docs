@@ -1,129 +1,25 @@
+import { useState } from 'react';
+
 import { Label } from '@radix-ui/react-label';
-import { useL1ManagerWizardStore } from '../config/store';
-import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { Input } from '@/components/ui/input';
-import { useState, useEffect } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
-import { getWalletAddress } from '@/components/tools/common/utils/wallet';
+import NextPrev from "@/components/tools/common/ui/NextPrev";
+import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection';
 
-const DEFAULT_PROXY_ADDRESS = "0x0feedc0de0000000000000000000000000000000";
+import { useL1ManagerWizardStore } from '../config/store';
 
-const getEndpoints = (rpcUrl: string) => {
-    // Parse the URL to handle query parameters
-    const url = new URL(rpcUrl);
-    const baseUrl = url.origin + url.pathname.split('/ext/bc/')[0];
-    const queryParams = url.search;
-    
-    console.log('Base URL:', baseUrl);
-    
-    return {
-        platform: `${baseUrl}/ext/bc/P${queryParams}`,
-        info: `${baseUrl}/ext/info${queryParams}`,
-        validators: rpcUrl.replace('/rpc', '/validators')
-    };
-};
+import PoAValidatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json';
+import { Address, createPublicClient, http } from 'viem';
 
-const checkEndpoint = async (url: string) => {
-    try {
-        console.log('Checking endpoint:', url);
-        
-        // Different request body based on endpoint type
-        let requestBody;
-        if (url.includes('/ext/bc/P')) {
-            requestBody = {
-                jsonrpc: "2.0",
-                method: "platform.getHeight",
-                params: {},
-                id: 1
-            };
-        } else if (url.includes('/ext/info')) {
-            requestBody = {
-                jsonrpc: "2.0",
-                method: "info.getNetworkName",
-                params: {},
-                id: 1
-            };
-        } else if (url.includes('/validators')) {
-            requestBody = {
-                jsonrpc: "2.0",
-                method: "validators.getCurrentValidators",
-                params: {
-                    nodeIDs: []
-                },
-                id: 1
-            };
-        }
+import { 
+    fetchValidators, 
+    checkEndpoint, 
+    fetchSubnetId, 
+    fetchSubnetInfo,
+    getEndpoints
+} from '../../common/api/validator-info';
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody)
-        });
-
-        console.log('Response status:', response.status, 'for', url);
-        const data = await response.json();
-        
-        if (data.error) {
-            console.error('API Error:', data.error);
-            return false;
-        }
-        
-        return true;
-    } catch (error) {
-        console.error('Error checking endpoint:', url, error);
-        return false;
-    }
-};
-
-async function rpcRequest(rpcUrl: string, method: string, params: any) {
-    const url = new URL(rpcUrl);
-    const baseUrl = url.origin + url.pathname.split('/ext/bc/')[0];
-    const queryParams = url.search;
-    const infoUrl = `${baseUrl}/ext/info${queryParams}`;
-    
-    const response = await fetch(infoUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params })
-    });
-    const responseData = await response.json();
-    if (responseData.error) {
-        throw new Error(responseData.error.message);
-    }
-    return responseData.result;
-}
-
-async function collectPeers(rpcUrl: string) {
-    try {
-        let peers = [];
-        const peersData = await rpcRequest(rpcUrl, "info.peers", { nodeIDs: [] });
-        peers = peersData.peers;
-
-        try {
-            const [nodeIPData, nodeIDData] = await Promise.all([
-                rpcRequest(rpcUrl, "info.getNodeIP", {}),
-                rpcRequest(rpcUrl, "info.getNodeID", {})
-            ]);
-
-            peers.push({
-                "ip": nodeIPData.ip,
-                "publicIP": nodeIPData.ip,
-                "nodeID": nodeIDData.nodeID,
-            });
-        } catch (e) {
-            console.warn('Failed to get node IP or ID', e);
-        }
-
-        return peers;
-    } catch (error) {
-        console.error('Error collecting peers:', error);
-        return null;
-    }
-}
+import { isValidUrl, isValidAddress } from '@/components/tools/common/utils/validation';
 
 export default function ChainParameters() {
     const { 
@@ -137,42 +33,23 @@ export default function ChainParameters() {
         setTransparentProxyAddress,
         l1Name,
         setL1Name,
+        poaOwnerAddress,
         setPoaOwnerAddress,
         goToNextStep,
-        goToPreviousStep
+        goToPreviousStep,
+        setValidators,
+        setSubnetId
     } = useL1ManagerWizardStore();
-
-    useEffect(() => {
-        if (!transparentProxyAddress) {
-            setTransparentProxyAddress(DEFAULT_PROXY_ADDRESS);
-        }
-    }, []);
 
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [endpointStatus, setEndpointStatus] = useState({
         platform: false,
         info: false,
-        validators: false,
-        peers: false
+        validators: false
     });
     const [showWallet, setShowWallet] = useState(false);
-    const [walletError, setWalletError] = useState<string | null>(null);
-    const [balanceInfo, setBalanceInfo] = useState<{ address: string; balance: number } | null>(null);
-    const [isWalletAdded, setIsWalletAdded] = useState(false);
-
-    const isValidUrl = (url: string) => {
-        try {
-            new URL(url);
-            return true;
-        } catch {
-            return false;
-        }
-    };
-
-    const isValidAddress = (address: string) => {
-        return /^0x[a-fA-F0-9]{40}$/.test(address);
-    };
+    const [ownerCheckStatus, setOwnerCheckStatus] = useState<'none' | 'checking' | 'success' | 'error'>('none');
 
     const fetchChainConfig = async () => {
         if (!isValidUrl(rpcUrl)) return;
@@ -192,30 +69,23 @@ export default function ChainParameters() {
                 checkEndpoint(endpoints.validators)
             ]);
 
-            // Check peers
-            const peers = await collectPeers(rpcUrl);
-            const peersOk = peers !== null && peers.length > 0;
-            
             console.log('Endpoint check results:', {
                 platform: platformOk,
                 info: infoOk,
-                validators: validatorsOk,
-                peers: peersOk
+                validators: validatorsOk
             });
             
             setEndpointStatus({
                 platform: platformOk,
                 info: infoOk,
-                validators: validatorsOk,
-                peers: peersOk
+                validators: validatorsOk
             });
 
-            if (!platformOk || !infoOk || !validatorsOk || !peersOk) {
+            if (!platformOk || !infoOk || !validatorsOk) {
                 const failedEndpoints = [
                     !platformOk && 'Platform Chain API',
                     !infoOk && 'Info API',
-                    !validatorsOk && 'Validators API',
-                    !peersOk && 'Network Peers'
+                    !validatorsOk && 'Validators API'
                 ].filter(Boolean);
                 
                 throw new Error(`The following endpoints are not accessible: ${failedEndpoints.join(', ')}`);
@@ -275,6 +145,33 @@ export default function ChainParameters() {
             } else {
                 throw new Error("Chain ID not found in response");
             }
+
+            // After successful endpoint checks, fetch validators
+            const validators = await fetchValidators(rpcUrl);
+            setValidators(validators);
+            console.log('validators', validators);
+            let subnetId = '';
+            if (validators.length > 0 && validators[0].validationID) {
+                subnetId = await fetchSubnetId(rpcUrl, validators[0].validationID);
+                setSubnetId(subnetId);
+            }
+            console.log('subnetId', subnetId);
+            try {
+                // get validator manager address from subnet info
+                const subnetInfo = await fetchSubnetInfo("fuji", subnetId);
+                if (subnetInfo.isL1 && subnetInfo.l1ValidatorManagerDetails) {
+                    setTransparentProxyAddress(subnetInfo.l1ValidatorManagerDetails.contractAddress);
+                } else {
+                    // If no contract address is found, clear any existing address
+                    setTransparentProxyAddress('');
+                    throw new Error("No validator manager contract found for this subnet");
+                }
+            } catch (err) {
+                console.error("Failed to fetch subnet info:", err);
+                setTransparentProxyAddress('');
+                setError("Failed to fetch validator manager contract address");
+            }
+            
         } catch (err) {
             console.error("Error:", err);
             setError(err instanceof Error ? err.message : "Failed to fetch chain configuration");
@@ -285,70 +182,42 @@ export default function ChainParameters() {
         }
     };
 
-    const checkAccountBalance = async (): Promise<{ address: string; balance: number } | null> => {
+    const handleCheckPoaOwner = async () => {
+        if (!window.ethereum) return;
+        setOwnerCheckStatus('checking');
+        
+        // Get connected account from wallet
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (!accounts || accounts.length === 0) return;
+        
+        // Create public client to read contract
+        const publicClient = createPublicClient({
+            transport: http(rpcUrl)
+        });
+
         try {
-            const account = await getWalletAddress()
-            const response = await fetch(rpcUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    jsonrpc: '2.0',
-                    method: 'eth_getBalance',
-                    params: [account, 'latest'],
-                    id: 1,
-                }),
-            });
+            // Get owner from PoA Validator Manager contract
+            const owner = await publicClient.readContract({
+                address: transparentProxyAddress as Address,
+                abi: PoAValidatorManagerAbi.abi,
+                functionName: 'owner'
+            }) as Address;
 
-            const data = await response.json();
-            if (data.error) {
-                throw new Error(data.error.message);
+            // Check if connected account matches contract owner
+            if (owner.toLowerCase() === accounts[0].toLowerCase()) {
+                setPoaOwnerAddress(accounts[0]);
+                setOwnerCheckStatus('success');
+                setError("");
+            } else {
+                setError("Connected wallet is not the contract owner");
+                setPoaOwnerAddress("undefined");
+                setOwnerCheckStatus('error');
             }
-
-            const balance = parseInt(data.result, 16) / 1e18;
-            if (balance === 0) {
-                throw new Error(`Connected account ${account} balance is zero. Please fund your account to proceed.`);
-            }
-
-            setWalletError(null);
-            return { address: account, balance };
-        } catch (error: any) {
-            console.error('Balance check failed:', error);
-            setWalletError(error.message);
-            return null;
-        }
-    };
-
-    const handleAddToWallet = async () => {
-        try {
-            setWalletError(null);
-            if (!window.ethereum) {
-                throw new Error('No wallet detected');
-            }
-
-            await window.ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [{
-                    chainId: `0x${evmChainId.toString(16)}`,
-                    chainName: l1Name,
-                    nativeCurrency: {
-                        name: tokenSymbol,
-                        symbol: tokenSymbol,
-                        decimals: 18
-                    },
-                    rpcUrls: [rpcUrl],
-                }],
-            });
-
-            const balanceInfo = await checkAccountBalance();
-            if (balanceInfo) {
-                setPoaOwnerAddress(balanceInfo.address);
-                setIsWalletAdded(true);
-                setBalanceInfo(balanceInfo);
-            }
-        } catch (error: any) {
-            console.error('Failed to add to wallet:', error);
-            setWalletError(error.message);
-            setIsWalletAdded(false);
+        } catch (err) {
+            console.error("Error checking contract owner:", err);
+            setError("Failed to verify contract owner");
+            setPoaOwnerAddress("undefined");
+            setOwnerCheckStatus('error');
         }
     };
 
@@ -378,7 +247,7 @@ export default function ChainParameters() {
                         </button>
                     </div>
                     
-                    {rpcUrl && isValidUrl(rpcUrl) && (endpointStatus.platform || endpointStatus.info || endpointStatus.validators || endpointStatus.peers) && (
+                    {rpcUrl && isValidUrl(rpcUrl) && (endpointStatus.platform || endpointStatus.info || endpointStatus.validators) && (
                         <div className="mt-3 space-y-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
                             <h3 className="font-medium text-sm text-gray-700 dark:text-gray-300 mb-2">Endpoint Status:</h3>
                             <div className="flex items-center gap-2 text-sm">
@@ -411,17 +280,6 @@ export default function ChainParameters() {
                                 )}
                                 <span className={endpointStatus.validators ? "text-green-700" : "text-red-700"}>
                                     Validators API
-                                </span>
-                            </div>
-                            
-                            <div className="flex items-center gap-2 text-sm">
-                                {endpointStatus.peers ? (
-                                    <CheckCircle2 className="w-4 h-4 text-green-500" />
-                                ) : (
-                                    <XCircle className="w-4 h-4 text-red-500" />
-                                )}
-                                <span className={endpointStatus.peers ? "text-green-700" : "text-red-700"}>
-                                    Network Peers
                                 </span>
                             </div>
                         </div>
@@ -489,73 +347,61 @@ export default function ChainParameters() {
                             </div>
 
                             <div>
-                                <Label className="dark:text-gray-200">Validator Manager Proxy Contract Address</Label>
+                                <Label className="dark:text-gray-200">PoA Validator Manager Contract Address</Label>
                                 <Input 
                                     type='text' 
                                     value={transparentProxyAddress} 
-                                    onChange={(e) => setTransparentProxyAddress(e.target.value)}
-                                    placeholder={DEFAULT_PROXY_ADDRESS}
-                                    className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    readOnly
+                                    placeholder="0x..."
+                                    className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white bg-gray-50"
                                 />
                                 {transparentProxyAddress && !isValidAddress(transparentProxyAddress) && (
                                     <p className="mt-2 text-sm text-red-500">
-                                        Please enter a valid Ethereum address.
+                                        Invalid contract address detected.
                                     </p>
                                 )}
                                 <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                                    Enter the address of the transparent proxy contract. Learn more about the proxy contract in the <a href="https://build.avax.network/docs/avalanche-l1s/validator-manager/contract" target="_blank" className="text-blue-500 dark:text-blue-400 hover:underline">documentation</a>.
+                                    Automatically fetched from L1 info. Learn more about the validator manager contract in the <a href="https://build.avax.network/docs/avalanche-l1s/validator-manager/contract" target="_blank" className="text-blue-500 dark:text-blue-400 hover:underline">documentation</a>.
                                 </p>
                             </div>
                         </div>
 
                         {showWallet && (
                             <div className="mt-8 border-t dark:border-gray-700 pt-8">
-                                <div className="mb-6">
-                                    <button
-                                        onClick={handleAddToWallet}
-                                        disabled={isWalletAdded}
-                                        className={`
-                                            w-full p-3 rounded-md transition-all duration-200 transform
-                                            ${isWalletAdded
-                                                ? 'bg-green-100 text-green-700 cursor-not-allowed'
-                                                : 'bg-blue-500 text-white hover:bg-blue-600 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg active:shadow-md'
-                                            }
-                                        `}
-                                    >
-                                        <span className="flex items-center justify-center gap-2">
-                                            {isWalletAdded ? (
-                                                <>
-                                                    Added to Wallet
-                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    Add to Wallet
-                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                                    </svg>
-                                                </>
-                                            )}
-                                        </span>
-                                    </button>
-                                </div>
-
-                                {walletError && (
-                                    <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded-lg mb-6">
-                                        <h3 className="font-medium mb-2 text-red-700 dark:text-red-400">Wallet Error</h3>
-                                        <p className="text-red-600 dark:text-red-300">{walletError}</p>
+                                <RequireWalletConnection
+                                    chainConfig={{
+                                        chainId: `0x${evmChainId.toString(16)}`,
+                                        chainName: l1Name,
+                                        nativeCurrency: {
+                                            name: tokenSymbol,
+                                            symbol: tokenSymbol,
+                                            decimals: 18
+                                        },
+                                        rpcUrls: [rpcUrl],
+                                        blockExplorerUrls: [],
+                                        isTestnet: true
+                                    }}
+                                    requiredBalance={0.1}
+                                    onConnection={handleCheckPoaOwner}
+                                />
+                                
+                                {ownerCheckStatus === 'checking' && (
+                                    <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                                        <p className="text-blue-700 dark:text-blue-300">Checking contract owner...</p>
                                     </div>
                                 )}
-
-                                {isWalletAdded && balanceInfo && (
-                                    <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg mb-6">
-                                        <h3 className="font-medium mb-2 dark:text-green-400">Wallet Added Successfully</h3>
-                                        <p className="dark:text-gray-300">
-                                            Balance of account <span className="font-mono">{balanceInfo.address}</span> is{' '}
-                                            <span className="font-bold">{balanceInfo.balance.toFixed(4)} {tokenSymbol}</span>.
+                                
+                                {ownerCheckStatus === 'success' && (
+                                    <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                                        <p className="text-green-700 dark:text-green-300">
+                                            Successfully verified PoA Validator Manager owner: {poaOwnerAddress}
                                         </p>
+                                    </div>
+                                )}
+                                
+                                {ownerCheckStatus === 'error' && error && (
+                                    <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/30 rounded-lg">
+                                        <p className="text-red-700 dark:text-red-300">{error}</p>
                                     </div>
                                 )}
                             </div>
@@ -575,11 +421,10 @@ export default function ChainParameters() {
                     !endpointStatus.platform ||
                     !endpointStatus.info ||
                     !endpointStatus.validators ||
-                    !endpointStatus.peers ||
-                    !isWalletAdded || 
-                    !!walletError
+                    ownerCheckStatus !== 'success'
                 } 
-                onNext={goToNextStep} onPrev={goToPreviousStep}
+                onNext={goToNextStep} 
+                onPrev={goToPreviousStep}
             />
         </div>
     );

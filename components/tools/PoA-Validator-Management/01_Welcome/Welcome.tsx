@@ -1,6 +1,7 @@
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { useL1ManagerWizardStore } from "../config/store";
 import { useState } from "react";
+import { checkCoreWallet } from '@/components/tools/common/utils/checkCoreWallet';
 
 export default function Welcome() {
     const { goToNextStep, goToPreviousStep } = useL1ManagerWizardStore();
@@ -8,22 +9,10 @@ export default function Welcome() {
 
     const handleNext = async () => {
         try {
-            // Check if ethereum object exists
-            if (!window.ethereum) {
-                setError("Core wallet is not installed.");
-                return;
-            }
-
-            // Try to get public key
-            await window.ethereum.request({
-                "method": "avalanche_getAccountPubKey",
-                "params": []
-            });
-            
-            // If successful, proceed to next step
+            await checkCoreWallet();
             goToNextStep();
-        } catch (error) {
-            setError("Core wallet appears to be installed but not properly configured.");
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Failed to check Core wallet");
         }
     };
 
@@ -44,14 +33,7 @@ export default function Welcome() {
                 >Core wallet browser extension</a> installed. This extension is required for interacting with the P-Chain.
             </p>
             <p className="mb-2 text-gray-800 dark:text-gray-200">
-                You'll also need to run a local signature aggregator service for fetching validator signatures. This requirement will be replaced in a future update, but for now you can find setup instructions in the <a 
-                    href="https://github.com/ava-labs/icm-services/blob/main/signature-aggregator/README.md"
-                    target="_blank"
-                    className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                >signature aggregator documentation</a>.
-            </p>
-            <p className="mb-2 text-gray-800 dark:text-gray-200">
-                Finally, you'll need to have AVAX balance on the P-Chain to perform validator management operations. If your AVAX is on the C-Chain, you can transfer it to the P-Chain using the <a 
+                You will also need to have AVAX balance on the P-Chain to perform validator management operations. If your AVAX is on the C-Chain, you can transfer it to the P-Chain using the <a 
                     href="https://test.core.app/stake/cross-chain-transfer/"
                     target="_blank"
                     className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"

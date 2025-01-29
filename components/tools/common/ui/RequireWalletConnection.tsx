@@ -11,6 +11,7 @@ export interface ChainConfig {
     };
     rpcUrls: string[];
     blockExplorerUrls: string[];
+    isTestnet: boolean;
 }
 
 export const fujiConfig: ChainConfig = {
@@ -22,7 +23,8 @@ export const fujiConfig: ChainConfig = {
         decimals: 18
     },
     rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+    blockExplorerUrls: ['https://testnet.snowtrace.io/'],
+    isTestnet: true
 };
 
 /**

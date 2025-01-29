@@ -7,6 +7,7 @@ import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-p
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 import { StepWizardState } from '@/components/tools/common/ui/types';
 import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
+import { Validator } from '../../common/api/types'
 
 interface NetworkToken {
     name: string;
@@ -111,6 +112,9 @@ interface L1ManagerWizardState extends StepWizardState {
 
     chainInfo: ChainInfo | null;
     setChainInfo: (info: ChainInfo) => void;
+
+    validators: Validator[]
+    setValidators: (validators: Validator[]) => void
 }
 
 const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) => ({
@@ -261,6 +265,9 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
 
     chainInfo: null,
     setChainInfo: (info: ChainInfo) => set(() => ({ chainInfo: info })),
+
+    validators: [],
+    setValidators: (validators: Validator[]) => set(() => ({ validators })),
 })
 
 
