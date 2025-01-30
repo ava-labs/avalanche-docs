@@ -139,7 +139,7 @@ export default function ChainParameters() {
                     console.error("Error fetching chain name:", chainErr);
                     setL1Name("My L1");
                 }
-                
+                 
                 setError("");
                 setShowWallet(true);
             } else {

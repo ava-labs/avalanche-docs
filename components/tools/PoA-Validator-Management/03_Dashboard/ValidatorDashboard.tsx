@@ -9,6 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useL1ManagerWizardStore } from '../config/store'
 import { fetchSubnetId, fetchValidators } from '../../common/api/validator-info'
 import AddValidator from './AddValidator'
+import RemoveValidator from './RemoveValidator'
 
 export default function LaunchValidators() {
   const { 
@@ -43,10 +44,6 @@ export default function LaunchValidators() {
   useEffect(() => {
     refreshValidators();
   }, [evmChainId]);
-
-  const removeValidator = (id: string) => {
-    // TODO: Implement remove validator functionality
-  }
 
   return (
     <div className="container mx-auto p-4">
@@ -159,32 +156,42 @@ export default function LaunchValidators() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Node ID</TableHead>
-                <TableHead>Weight</TableHead>
-                <TableHead>Uptime</TableHead>
-                <TableHead>Action</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {validators.map((validator) => (
-                <TableRow key={validator.id}>
-                  <TableCell className="font-medium">{validator.nodeID}</TableCell>
-                  <TableCell>{validator.weight}</TableCell>
-                  <TableCell>{validator.uptime}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Button variant="destructive" size="sm" onClick={() => removeValidator(validator.id)}>
-                        <Trash2 className="mr-2 h-4 w-4" /> Remove
-                      </Button>
-                    </div>
-                  </TableCell>
+          <div className="max-h-[400px] overflow-auto">
+            <Table>
+              <TableHeader className="sticky top-0 bg-white z-10">
+                <TableRow>
+                  <TableHead>Node ID</TableHead>
+                  <TableHead>Weight</TableHead>
+                  <TableHead>Uptime</TableHead>
+                  <TableHead className="bg-white">Action</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {validators.map((validator) => (
+                  <TableRow key={validator.id}>
+                    <TableCell className="font-medium">{validator.nodeID}</TableCell>
+                    <TableCell>{validator.weight}</TableCell>
+                    <TableCell>{validator.uptime}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-2">
+                        <RemoveValidator
+                          nodeId={validator.nodeID || ''}
+                          transparentProxyAddress={transparentProxyAddress}
+                          poaOwnerAddress={poaOwnerAddress}
+                          onValidatorRemoved={refreshValidators}
+                          evmChainId={evmChainId}
+                          l1Name={l1Name}
+                          tokenSymbol={tokenSymbol}
+                          rpcUrl={rpcUrl}
+                          subnetId={subnetId}
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
 
