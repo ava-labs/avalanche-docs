@@ -27,12 +27,12 @@ disk, and any messages from them will be invalid until they are revived. Inactiv
 ## How Fees are Charged
 
 AvalancheGo calculates the accrued fees for a block based on the formula: fee rate (in nAVAX/sec) \* duration since the prior block (in seconds) for
-every block. For each L1 validator, AvalancheGo tracks a value called the
+every block (suggest to explain that Avalanche only produces blocks when there are demand. There is no scheduled block on Avalanche). For each L1 validator, AvalancheGo tracks a value called the
 [`endAccumulatedFee`](https://github.com/ava-labs/avalanchego/blob/ab4619873028fd975dfa6e89e53e555dd53e0cdb/vms/platformvm/state/l1_validator.go#L116-L124), which represents the total fees that will accumulate
-in the future at the current rate. Once this value is reached, the validator will be marked as “inactive” due to the fact that its balance will not
+in the future at the current rate. Once this value is reached at a timestamp, the validator will be marked as “inactive” due to the fact that its balance will not
 cover the fees accrued until this final block.
 
-When a validator registers with `RegisterL1ValidatorTx`, the balance of AVAX is allocated to that validator, and is continuously charged by the
+When a validator registers with `RegisterL1ValidatorTx`, the balance of AVAX on P-Chain is allocated and locked to that validator, and is continuously charged by the
 P-Chain until it runs out. To prevent the balance from running out, and validation pausing, any validator can increase its balance with
 `IncreaseL1ValidatorBalanceTx`. If a validator decides to end its validation with `DisableL1ValidatorTx`, any remaining balance that has not
 been used to pay the continuous fee will be returned.
@@ -47,7 +47,7 @@ travel farther, you can add funds to your balance. Once you end the ride, the dr
 anyone can increase the balance on behalf of another validator.
 
 However, only the P-Chain address set as the `remainingBalanceOwner` when the validator originally registered with `RegisterL1ValidatorTx` can receive
-the funds left over if the validator decides to terminate with `DisableL1ValidatorTx`. Your friend can throw you some cash to pay for your cab fare,
+the funds left over if the validator decides to terminate with `DisableL1ValidatorTx`. This is the same as that your friend can throw you some cash to pay for your cab fare,
 but only you can keep the change at the end of the ride.
 
 ## Retrieving Validator Fee Information
@@ -69,7 +69,7 @@ The L1 Validator Fee is calculated each time the P-Chain adds a new block, accor
 
 $$ M \cdot \exp\left(\frac{x}{K}\right) $$
 
-where M is the minimum price for validators, and exp(x) is an approximation of the exponential function based on the EIP-4844 specification. The
+where M is the minimum price for validators, and exp(x) is an approximation of the exponential function based on the EIP-4844 (link to EIP-4844?) specification. The
 value K simply controls how quickly the price changes, and x is updated every second based on the difference between the number of active validators
 V and the target T:
 
