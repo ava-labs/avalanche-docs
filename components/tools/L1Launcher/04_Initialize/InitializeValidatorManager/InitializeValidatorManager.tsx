@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useL1LauncherWizardStore } from '../../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import RequireWalletConnection, { ChainConfig } from '@/components/tools/common/ui/RequireWalletConnection';
+import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection';
 import CheckContractLogs from './04_CheckContractLogs';
 import CollectSignatures from './01_CollectSignatures';
 import ContractInitialize from './02_ContractInitialize';
@@ -15,21 +15,10 @@ export default function InitializeValidatorManager() {
         tokenSymbol,
         getL1RpcEndpoint,
         goToNextStep,
-        goToPreviousStep
+        goToPreviousStep,
+        getViemL1Chain
     } = useL1LauncherWizardStore();
 
-    // Create chain config object
-    const chainConfig: ChainConfig = {
-        chainId: `0x${evmChainId.toString(16)}`,
-        chainName: l1Name,
-        nativeCurrency: {
-            name: tokenSymbol,
-            symbol: tokenSymbol,
-            decimals: 18
-        },
-        rpcUrls: [getL1RpcEndpoint()],
-        blockExplorerUrls: [] // Add block explorer URLs if available
-    };
     
     return (
         <div className="space-y-12">
@@ -38,7 +27,7 @@ export default function InitializeValidatorManager() {
                 <p>This step will initialize your validator manager contract with the required signatures.</p>
             </div>
 
-            <RequireWalletConnection chain={chainConfig}>
+            <RequireWalletConnection chain={getViemL1Chain()} skipUI={true}>
                 <CollectSignatures />
                 <ContractInitialize />
                 <ContractInitializeValidatorSet />

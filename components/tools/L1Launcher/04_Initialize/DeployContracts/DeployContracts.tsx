@@ -1,7 +1,8 @@
 import { useL1LauncherWizardStore } from '../../config/store';
 import NextPrev from '@/components/tools/common/ui/NextPrev';
+import { useState } from 'react';
 
-import { UpgradeProxyUI } from './UpgradeProxy';
+import { UpgradeProxyForm } from './UpgradeProxy';
 import { ValidatorMessagesDeployer } from './ValidatorMessages';
 import { PoAValidatorManagerDeployer } from './PoAValidatorManager';
 import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection';
@@ -17,9 +18,12 @@ export default function DeployContracts() {
         getViemL1Chain
     } = useL1LauncherWizardStore();
     
+    const [isProxyUpgraded, setIsProxyUpgraded] = useState(false);
 
-    // Both contracts must be deployed to proceed
-    const canProceed = validatorMessagesAddress !== null && poaValidatorManagerAddress !== null;
+    // Both contracts must be deployed and proxy must be upgraded to proceed
+    const canProceed = validatorMessagesAddress !== null && 
+                      poaValidatorManagerAddress !== null && 
+                      isProxyUpgraded;
 
     return (
         <RequireWalletConnection chain={getViemL1Chain()} skipUI={true}>
@@ -34,7 +38,7 @@ export default function DeployContracts() {
                     <PoAValidatorManagerDeployer />
 
                     {/* Step 3: Upgrade Proxy */}
-                    <UpgradeProxyUI />
+                    <UpgradeProxyForm onUpgradeComplete={setIsProxyUpgraded} />
                 </div>
 
                 <div className="mt-6">

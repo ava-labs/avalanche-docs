@@ -250,6 +250,10 @@ export default function RequireWalletConnection({ children, chain, requiredBalan
         return renderContent();
     }
 
+    if(!chain.rpcUrls?.default?.http[0]){
+        return <p>No RPC URL found for {chain?.name || 'unknown chain'}. This is likely a bug, please contact support.</p>
+    }
+
 
     return (
         <div className="p-4 border rounded-lg bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-400 dark:border-blue-600 mb-6">

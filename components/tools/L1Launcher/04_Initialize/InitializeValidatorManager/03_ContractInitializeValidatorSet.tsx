@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent } from 'viem';
-import { privateKeyToAccount } from 'viem/accounts';
+import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent, custom } from 'viem';
 
 import { useL1LauncherWizardStore } from '../../config/store';
-import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '../../../common/utils/cb58';
 import { packWarpIntoAccessList } from '../../../common/utils/packWarp';
 import PoAValidatorManagerABI from '../../../common/icm-contracts/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
+import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
 
 interface StatusState {
     status: StepState;
@@ -60,7 +59,6 @@ export default function ContractInitializeValidatorSet() {
                     transport: http()
                 });
 
-                const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
 
                 // Find the InitialValidatorCreated event in ABI
                 const initialValidatorEvent = PoAValidatorManagerABI.abi.find(
@@ -68,7 +66,7 @@ export default function ContractInitializeValidatorSet() {
                 ) as AbiEvent;
 
                 const logs = await publicClient.getLogs({
-                    address: managerAddress,
+                    address: PROXY_ADDRESS,
                     event: initialValidatorEvent,
                     fromBlock: 'earliest',
                     toBlock: 'latest'
@@ -87,6 +85,12 @@ export default function ContractInitializeValidatorSet() {
     }, [tempPrivateKeyHex, evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint]);
 
     const onInitialize = async () => {
+        if (!window.ethereum) {
+            setStatus({ status: 'error' });
+            setError('MetaMask is not installed');
+            return;
+        }
+
         setStatus({ status: 'in_progress' });
         setError(null);
         try {
@@ -110,12 +114,12 @@ export default function ContractInitializeValidatorSet() {
                 transport: http()
             });
 
-            const account = privateKeyToAccount(`0x${tempPrivateKeyHex}`);
+            // Create wallet client for metamask
             const walletClient = createWalletClient({
                 chain: customChain,
-                transport: http(),
-                account
+                transport: custom(window.ethereum)
             });
+            const [address] = await walletClient.requestAddresses();
 
             // Convert hex signature to bytes
             const signatureBytes = hexToBytes(convertL1SignedWarpMessage!);
@@ -123,12 +127,10 @@ export default function ContractInitializeValidatorSet() {
             // Pack the WARP message into access list format
             const accessList = packWarpIntoAccessList(signatureBytes);
 
-            const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
-
             const args = [{
-                l1ID: cb58ToHex(subnetId),
+                subnetID: cb58ToHex(subnetId),
                 validatorManagerBlockchainID: cb58ToHex(chainId),
-                validatorManagerAddress: managerAddress,
+                validatorManagerAddress: PROXY_ADDRESS,
                 initialValidators: nodePopJsons
                     .slice(0, nodesCount)
                     .map(json => {
@@ -142,26 +144,19 @@ export default function ContractInitializeValidatorSet() {
             }, 0];
 
             // First simulate the transaction
-            const simResult = await publicClient.simulateContract({
-                address: managerAddress,
+            const { request } = await publicClient.simulateContract({
+                address: PROXY_ADDRESS,
                 abi: PoAValidatorManagerABI.abi,
                 functionName: 'initializeValidatorSet',
                 args,
-                account,
+                account: address,
                 accessList
             });
 
-            console.log('Simulation request:', simResult);
+            console.log('Simulation request:', request);
 
-            // Modify the write contract call to include gas limit
-            const hash = await walletClient.writeContract({
-                address: managerAddress,
-                abi: PoAValidatorManagerABI.abi,
-                functionName: 'initializeValidatorSet',
-                args,
-                account,
-                accessList
-            });
+            // Execute with metamask wallet
+            const hash = await walletClient.writeContract(request);
 
             // Wait for transaction receipt
             const receipt = await publicClient.waitForTransactionReceipt({ hash });

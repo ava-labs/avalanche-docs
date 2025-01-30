@@ -60,23 +60,3 @@ export async function addSignature(tx: UnsignedTx, privateKeyHex: string) {
         throw new Error("Public key not found in transaction");
     }
 }
-
-export function calculateContractAddress(deployerPrivateKey: string, nonce: number): `0x${string}` {
-    // Get deployer address from private key
-    const { C: deployerAddress } = getAddresses(deployerPrivateKey);
-
-    // Remove '0x' prefix from address and convert to bytes
-    const addressBytes = toBytes(deployerAddress);
-
-    // Convert nonce to bytes - if 0, use empty array
-    const nonceBytes = nonce === 0 ? new Uint8Array() : toBytes(nonce);
-
-    // RLP encode the deployer address and nonce
-    const encodedData = toRlp([addressBytes, nonceBytes]);
-
-    // Calculate keccak256 hash and take last 20 bytes (40 hex chars)
-    const hash = keccak256(encodedData);
-    const contractAddress = `0x${hash.slice(-40)}` as `0x${string}`;
-
-    return contractAddress;
-}

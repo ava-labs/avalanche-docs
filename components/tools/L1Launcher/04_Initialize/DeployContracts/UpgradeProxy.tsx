@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { createPublicClient, http, getAddress, createWalletClient, custom, defineChain } from 'viem';
 import { useL1LauncherWizardStore } from "../../config/store";
 
-export function UpgradeProxyUI() {
+ function UpgradeProxyUI() {
     return (<>
         {/* <ProxyStorageReader /> */}
         <UpgradeProxyForm />
@@ -239,7 +239,7 @@ export function ProxyStorageReader() {
     );
 }
 
-function UpgradeProxyForm() {
+export function UpgradeProxyForm({ onUpgradeComplete }: { onUpgradeComplete?: (success: boolean) => void }) {
     const { evmChainId, chainId, getL1RpcEndpoint, poaValidatorManagerAddress } = useL1LauncherWizardStore();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -263,14 +263,21 @@ function UpgradeProxyForm() {
                 });
 
                 setCurrentImplementation(implementation as string);
+                if (implementation && poaValidatorManagerAddress && 
+                    (implementation as string).toLowerCase() === poaValidatorManagerAddress.toLowerCase()) {
+                    onUpgradeComplete?.(true);
+                } else {
+                    onUpgradeComplete?.(false);
+                }
             } catch (err) {
                 console.error('Error checking implementation:', err);
                 setError(err instanceof Error ? err.message : 'Unknown error occurred');
+                onUpgradeComplete?.(false);
             }
         }
 
         checkCurrentImplementation();
-    }, [evmChainId, chainId, getL1RpcEndpoint, poaValidatorManagerAddress]);
+    }, [evmChainId, chainId, getL1RpcEndpoint, poaValidatorManagerAddress, onUpgradeComplete]);
 
     const handleUpgrade = async () => {
         try {
@@ -310,9 +317,11 @@ function UpgradeProxyForm() {
             await publicClient.waitForTransactionReceipt({ hash });
             setSuccessMessage('Proxy implementation upgraded successfully!');
             setCurrentImplementation(poaValidatorManagerAddress);
+            onUpgradeComplete?.(true);
         } catch (err) {
             console.error('Error upgrading proxy:', err);
             setError(err instanceof Error ? err.message : 'Unknown error occurred');
+            onUpgradeComplete?.(false);
         } finally {
             setIsUpgrading(false);
         }
