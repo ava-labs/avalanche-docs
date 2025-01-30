@@ -194,7 +194,8 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
             tokenAllocations,
             txAllowlistConfig,
             contractDeployerAllowlistConfig,
-            nativeMinterAllowlistConfig
+            nativeMinterAllowlistConfig,
+            poaOwnerAddress: ownerEthAddress
         });
 
         set({ genesisString: JSON.stringify(genesis, null, 2) });
