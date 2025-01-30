@@ -6,15 +6,7 @@ authors: [Andrea Vargas, Ash, martineckardt]
 icon: Book
 ---
 Previously, we explored the ERC-20 interface, a contract standard which allowed for the implementation of a token contract which the majority of smart contract users are able to easily call. As a result of the ERC-20 standard, many protocols were able flourish without having to worry about incompatible token interfaces. However, there is one thing that the ERC-20 standard did not fix...
-To understand the biggest shortcoming of the ERC-20 standard, we will first digress from talking about the functionality of the ERC-20 to discussing the concept of fungibility. 
-
-## Fungibility
-
-Fungibility refers to the ability of an item to be converted into another item (without any difference in value). The most basic example of fungibility is currency:
-- Dollar bills are considered fungible because if we swap one dollar bill for another dollar bill without any change in value
-- For a given $100 bill, we can convert it into 100 $1 bills. Therefore, we can consider a $100 bill to be fungible
-- For a $2 bill, we can convert it into 200 pennies. Therefore, $2 bills are fungible.
-Relating this to ERC-20 tokens, notice that 1 unit of some ERC-20 token A will always be equivalent to 1 unit of the same ERC-20 token A. Therefore, ERC-20 tokens are fungible. However, this also implies that for a use case that requires for 1 unit of some ERC-20 A to be different in value than 1 unit of the same ERC-20 token A, the ERC-20 token standard is not sufficient for such a use case.
+To understand the biggest shortcoming of the ERC-20 standard, we have discussed the concept of fungibility. Its design enables crucial fucntionality. However, this also implies that for a use case that requires for 1 unit of some ERC-20 A to be different in value than 1 unit of the same ERC-20 token A, the ERC-20 token standard is not sufficient for such a use case.
 
 ## ERC-721
 
