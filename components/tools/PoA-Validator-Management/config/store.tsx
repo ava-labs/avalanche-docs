@@ -8,6 +8,7 @@ import { AllocationEntry } from '@/components/tools/common/token-allocation-list
 import { StepWizardState } from '@/components/tools/common/ui/types';
 import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
 import { Validator } from '../../common/api/types'
+import { Hex } from 'viem';
 
 interface NetworkToken {
     name: string;
@@ -44,6 +45,9 @@ interface ChainInfo {
 interface L1ManagerWizardState extends StepWizardState {
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
+
+    pChainWarpMsg: string;
+    setPChainWarpMsg: (msg: string) => void;
 
     nodesCount: number;
     setNodesCount: (count: number) => void;
@@ -96,6 +100,9 @@ interface L1ManagerWizardState extends StepWizardState {
     tempPrivateKeyHex: string;
     setTempPrivateKeyHex: (key: string) => void;
 
+    tempEVMPrivateKeyHex: Hex;
+    setTempEVMPrivateKeyHex: (key: Hex) => void;
+
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
     getCChainRpcEndpoint: () => string;
@@ -115,11 +122,23 @@ interface L1ManagerWizardState extends StepWizardState {
 
     validators: Validator[]
     setValidators: (validators: Validator[]) => void
+
+    registerL1ValidatorUnsignedWarpMsg: string;
+    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => void;
+    
+    validationID: string;
+    setValidationID: (id: string) => void;
 }
 
 const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) => ({
     ...createStepWizardStore({set, get, stepList}),
+
+    pChainWarpMsg: '',
+    setPChainWarpMsg: (msg: string) => set(() => ({ pChainWarpMsg: msg })),
     
+    tempEVMPrivateKeyHex: '0x',
+    setTempEVMPrivateKeyHex: (key: Hex) => set(() => ({ tempEVMPrivateKeyHex: key })),
+
     poaOwnerAddress: "",
     setPoaOwnerAddress: (address: string) => set(() => ({
         poaOwnerAddress: address
@@ -268,6 +287,16 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
 
     validators: [],
     setValidators: (validators: Validator[]) => set(() => ({ validators })),
+
+    registerL1ValidatorUnsignedWarpMsg: '',
+    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => set(() => ({ 
+        registerL1ValidatorUnsignedWarpMsg: msg 
+    })),
+    
+    validationID: '',
+    setValidationID: (id: string) => set(() => ({ 
+        validationID: id 
+    })),
 })
 
 
