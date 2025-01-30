@@ -139,7 +139,6 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
     setTempPrivateKeyHex: (key: string) => set(() => ({ 
         tempPrivateKeyHex: key, 
         tokenAllocations: [
-            { id:"Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
             ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
         ],
         txAllowlistConfig : {
