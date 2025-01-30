@@ -8,6 +8,9 @@ export const PROXY_ADMIN_ADDRESS = "0xdad0000000000000000000000000000000000000"
 import { addressEntryArrayToAddressArray } from './conversion';
 import { AllocationEntry } from '../token-allocation-list/types';
 
+export const UNITIALIZED_PROXY_ADDRESS = "0x1212121212121212121212121212121212121212"
+
+
 const currentTimestamp = Math.floor(Date.now() / 1000);
 
 type GenerateGenesisArgs = {
@@ -57,7 +60,7 @@ export function generateGenesis({ evmChainId, tokenAllocations, txAllowlistConfi
         balance: "0x0",
         code: TransparentUpgradeableProxy.deployedBytecode.object,
         storage: {
-            "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc": hexTo32Bytes("12".repeat(20)),
+            "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc": hexTo32Bytes(UNITIALIZED_PROXY_ADDRESS.slice(2).toLowerCase()),
             "0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103": hexTo32Bytes(PROXY_ADMIN_ADDRESS.slice(2).toLowerCase())
         },
         nonce: "0x1"

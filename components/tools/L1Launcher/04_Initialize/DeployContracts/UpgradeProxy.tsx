@@ -1,4 +1,4 @@
-import { PROXY_ADDRESS } from "@/components/tools/common/utils/genGenesis";
+import { PROXY_ADDRESS, UNITIALIZED_PROXY_ADDRESS } from "@/components/tools/common/utils/genGenesis";
 import { PROXY_ADMIN_ADDRESS } from "@/components/tools/common/utils/genGenesis";
 import ProxyAdmin from "../../../common/openzeppelin-contracts-4.9/compiled/ProxyAdmin.json";
 import { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import { useL1LauncherWizardStore } from "../../config/store";
 
 export function UpgradeProxyUI() {
     return (<>
-        <ProxyStorageReader />
+        {/* <ProxyStorageReader /> */}
         <UpgradeProxyForm />
     </>)
 }
@@ -240,16 +240,42 @@ export function ProxyStorageReader() {
 }
 
 function UpgradeProxyForm() {
-    const { evmChainId, chainId, getL1RpcEndpoint } = useL1LauncherWizardStore();
-    const [newImplementation, setNewImplementation] = useState('');
+    const { evmChainId, chainId, getL1RpcEndpoint, poaValidatorManagerAddress } = useL1LauncherWizardStore();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [currentImplementation, setCurrentImplementation] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function checkCurrentImplementation() {
+            try {
+                const chain = getChainConfig(evmChainId, chainId, getL1RpcEndpoint());
+                const client = createPublicClient({
+                    chain,
+                    transport: http(),
+                });
+
+                const implementation = await client.readContract({
+                    address: PROXY_ADMIN_ADDRESS,
+                    abi: ProxyAdmin.abi,
+                    functionName: 'getProxyImplementation',
+                    args: [PROXY_ADDRESS],
+                });
+
+                setCurrentImplementation(implementation as string);
+            } catch (err) {
+                console.error('Error checking implementation:', err);
+                setError(err instanceof Error ? err.message : 'Unknown error occurred');
+            }
+        }
+
+        checkCurrentImplementation();
+    }, [evmChainId, chainId, getL1RpcEndpoint, poaValidatorManagerAddress]);
 
     const handleUpgrade = async () => {
         try {
-            if (!newImplementation.match(/^0x[a-fA-F0-9]{40}$/)) {
-                throw new Error('Invalid implementation address format');
+            if (!poaValidatorManagerAddress) {
+                throw new Error('PoA Validator Manager address not set');
             }
 
             if (!window.ethereum) {
@@ -261,20 +287,18 @@ function UpgradeProxyForm() {
             setSuccessMessage(null);
 
             const chain = getChainConfig(evmChainId, chainId, getL1RpcEndpoint());
-
             const walletClient = createWalletClient({
                 chain,
                 transport: custom(window.ethereum)
             });
 
-            // Get the current account
             const [address] = await walletClient.requestAddresses();
 
             const hash = await walletClient.writeContract({
                 address: PROXY_ADMIN_ADDRESS,
                 abi: ProxyAdmin.abi,
                 functionName: 'upgrade',
-                args: [PROXY_ADDRESS, newImplementation as `0x${string}`],
+                args: [PROXY_ADDRESS, poaValidatorManagerAddress as `0x${string}`],
                 account: address,
             });
 
@@ -284,8 +308,8 @@ function UpgradeProxyForm() {
             });
 
             await publicClient.waitForTransactionReceipt({ hash });
-            setNewImplementation('');
             setSuccessMessage('Proxy implementation upgraded successfully!');
+            setCurrentImplementation(poaValidatorManagerAddress);
         } catch (err) {
             console.error('Error upgrading proxy:', err);
             setError(err instanceof Error ? err.message : 'Unknown error occurred');
@@ -294,23 +318,21 @@ function UpgradeProxyForm() {
         }
     };
 
+    let status = null;
+    if (currentImplementation === UNITIALIZED_PROXY_ADDRESS) {
+        status = <div className="text-yellow-600 dark:text-yellow-400 mb-4">Proxy is not initialized yet</div>;
+    } else if (currentImplementation?.toLowerCase() === poaValidatorManagerAddress?.toLowerCase()) {
+        status = <div className="text-green-600 dark:text-green-400 mb-4">Proxy is already pointing to the correct implementation</div>;
+    } else if (currentImplementation === null) {
+        status = <div className="text-red-600 dark:text-red-400 mb-4">loading...</div>;
+    }
+
     return (
         <div className="mt-6 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
             <h2 className="text-xl font-medium mb-4 dark:text-gray-200">Upgrade Proxy Implementation</h2>
 
             <div className="space-y-4">
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        New Implementation Address
-                    </label>
-                    <input
-                        type="text"
-                        value={newImplementation}
-                        onChange={(e) => setNewImplementation(e.target.value)}
-                        placeholder="0x..."
-                        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                </div>
+                {status}
 
                 {successMessage && (
                     <div className="text-green-600 dark:text-green-400 mb-2">
@@ -319,20 +341,21 @@ function UpgradeProxyForm() {
                 )}
 
                 {error && (
-                    <div className="text-red-600 dark:text-red-400">
+                    <div className="text-red-600 dark:text-red-400 mb-4">
                         Error: {error}
                     </div>
                 )}
 
                 <button
                     onClick={handleUpgrade}
-                    disabled={isUpgrading || !newImplementation}
-                    className={`w-full p-2 rounded ${isUpgrading || !newImplementation
-                        ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
-                        : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
-                        }`}
+                    disabled={isUpgrading || currentImplementation?.toLowerCase() === poaValidatorManagerAddress?.toLowerCase()}
+                    className={`w-full p-2 rounded ${
+                        isUpgrading || currentImplementation?.toLowerCase() === poaValidatorManagerAddress?.toLowerCase()
+                            ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                            : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+                    }`}
                 >
-                    {isUpgrading ? 'Upgrading...' : 'Upgrade'}
+                    {isUpgrading ? 'Upgrading...' : 'Upgrade to PoA Validator Manager'}
                 </button>
             </div>
         </div>

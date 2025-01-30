@@ -5,9 +5,6 @@ import PoAValidatorManagerABI from "../../../common/icm-contracts/compiled/PoAVa
 
 export function PoAValidatorManagerDeployer() {
     const { 
-        evmChainId, 
-        chainId, 
-        getL1RpcEndpoint, 
         setPoaValidatorManagerAddress,
         validatorMessagesAddress,
         poaValidatorManagerAddress,
