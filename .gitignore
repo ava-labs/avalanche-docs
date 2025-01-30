@@ -135,3 +135,12 @@ yarn.lock
 package-lock.json
 !next-env.d.ts
 .source
+
+# remote content 
+content/docs/api-reference/index-api.mdx
+content/docs/api-reference/info-api.mdx
+content/docs/api-reference/p-chain/api.mdx
+content/docs/api-reference/x-chain/api.mdx
+content/docs/cross-chain/avalanche-warp-messaging/deep-dive.mdx
+content/docs/cross-chain/avalanche-warp-messaging/evm-integration.mdx
+content/docs/cross-chain/teleporter/overview.mdx
