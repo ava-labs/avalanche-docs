@@ -3,7 +3,7 @@ import { createWalletClient, createPublicClient, custom, http, AbiEvent } from '
 import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '@/components/tools/common/utils/cb58';
-import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
+import PoAValidatorManagerABI from '../../../common/icm-contracts/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
 import { privateKeyToAccount } from 'viem/accounts';
 

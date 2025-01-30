@@ -3,12 +3,12 @@ import { useL1LauncherWizardStore } from '../../config/store';
 import { createPublicClient, createWalletClient, http, defineChain, keccak256, } from 'viem';
 import NextPrev from '@/components/tools/common/ui/NextPrev';
 import { calculateContractAddress, getAddresses } from '../../../common/utils/wallet';
-import ProxyAdmin from "../common/openzeppelin-contracts-4.9/compiled/ProxyAdmin.json";
+import ProxyAdmin from "../../../common/openzeppelin-contracts-4.9/compiled/ProxyAdmin.json";
 import { privateKeyToAccount } from 'viem/accounts';
 
-import PoAValidatorManager from "../common/openzeppelin-contracts-4.9/compiled/PoAValidatorManager.json"
-import ValidatorMessages from "../common/openzeppelin-contracts-4.9/compiled/ValidatorMessages.json"
-import TransparentUpgradeableProxy from "../common/openzeppelin-contracts-4.9/compiled/TransparentUpgradeableProxy.json"
+import PoAValidatorManager from "../../../common/icm-contracts/compiled/PoAValidatorManager.json"
+import ValidatorMessages from "../../../common/icm-contracts/compiled/ValidatorMessages.json"
+import TransparentUpgradeableProxy from "../../../common/openzeppelin-contracts-4.9/compiled/TransparentUpgradeableProxy.json"
 
 type Status = 'not_started' | 'in_progress' | 'error' | 'success' | 'loading';
 

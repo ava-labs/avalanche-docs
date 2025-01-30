@@ -9,7 +9,7 @@ import { AlertCircle, Plus, Trash2, Check, X, RefreshCw } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useL1ManagerWizardStore } from '../config/store'
 import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, parseEther, defineChain, custom } from 'viem'
-import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
+import validatorManagerAbi from '../../common/icm-contracts/compiled/PoAValidatorManager.json'
 import { apiHostPromise } from '@/components/tools/common/utils/config';
 import { avm, pvm, evm, utils, TransferableOutput, Context, BlsSignature, secp256k1, pvmSerial, addTxSignatures } from '@avalabs/avalanchejs';
 import { packRegisterL1ValidatorMessage, packL1ValidatorRegistration, L1ValidatorRegistration, ValidationPeriod } from '../../common/utils/convertWarp'

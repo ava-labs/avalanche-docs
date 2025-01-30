@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createPublicClient, http, AbiEvent, Log, decodeEventLog } from 'viem';
 import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
-import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
+import PoAValidatorManagerABI from '../../../common/icm-contracts/compiled/PoAValidatorManager.json';
 
 const serializeBigInt = (obj: any): any => {
     if (typeof obj === 'bigint') {

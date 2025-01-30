@@ -6,7 +6,7 @@ import { useL1LauncherWizardStore } from '../../config/store';
 import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '../../../common/utils/cb58';
 import { packWarpIntoAccessList } from '../../../common/utils/packWarp';
-import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
+import PoAValidatorManagerABI from '../../../common/icm-contracts/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
 
 interface StatusState {
