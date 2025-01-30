@@ -1,28 +1,23 @@
 import { useState, useEffect, ReactNode } from 'react';
 import Pre from './Pre';
+import { Chain, createWalletClient, custom } from 'viem';
 
-export interface ChainConfig {
-    chainId: string;
-    chainName: string;
-    nativeCurrency: {
-        name: string;
-        symbol: string;
-        decimals: number;
-    };
-    rpcUrls: string[];
-    blockExplorerUrls: string[];
-}
+//TODO: this component is overloaded with too many responsibilities. It should be 2 separate components
 
-export const fujiConfig: ChainConfig = {
-    chainId: '0xa869',
-    chainName: 'Avalanche Fuji Testnet',
+export const fujiConfig: Chain = {
+    id: 43113,
+    name: 'Avalanche Fuji Testnet',
     nativeCurrency: {
         name: 'Avalanche',
         symbol: 'AVAX',
         decimals: 18
     },
-    rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+    rpcUrls: {
+        default: { http: ['https://api.avax-test.network/ext/bc/C/rpc'] },
+    },
+    blockExplorers: {
+        default: { name: 'Snowtrace', url: 'https://testnet.snowtrace.io/' }
+    }
 };
 
 /**
@@ -31,9 +26,10 @@ export const fujiConfig: ChainConfig = {
  */
 interface RequireWalletConnectionProps {
     children?: ReactNode;
-    chainConfig: ChainConfig;
+    chain: Chain;
     requiredBalance?: number;
     onConnection?: () => void;
+    skipUI?: boolean;
 }
 
 type Status = 'no_wallet_installed' | 'wrong_chain' | 'rpc_error' | 'insufficient_balance' | 'correct_chain_connected';
@@ -43,7 +39,7 @@ type Status = 'no_wallet_installed' | 'wrong_chain' | 'rpc_error' | 'insufficien
  * not, the user will be prompted to install a wallet and connect to the chain. If the connection
  * is correctly established, the children elements will be shown.
  */
-export default function RequireWalletConnection({ children, chainConfig, requiredBalance, onConnection }: RequireWalletConnectionProps) {
+export default function RequireWalletConnection({ children, chain, requiredBalance, onConnection, skipUI }: RequireWalletConnectionProps) {
     const [connectionStatus, setConnectionStatus] = useState<Status>('no_wallet_installed');
     const [account, setAccount] = useState<string | null>(null);
     const [accountBalance, setAccountBalance] = useState<number | null>(null);
@@ -63,7 +59,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
             // Check if connected to the correct chain
             setConnectionStatus('wrong_chain');
             const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-            if (chainId !== chainConfig.chainId) return;
+            if (chainId !== `0x${chain.id.toString(16)}`) return;
 
             // Check if account can be accessed
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -85,7 +81,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
                 
                 // Check if account has sufficient balance
                 setConnectionStatus('insufficient_balance');
-                const response = await fetch(chainConfig.rpcUrls[0], {
+                const response = await fetch(chain.rpcUrls.default.http[0], {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -143,16 +139,18 @@ export default function RequireWalletConnection({ children, chainConfig, require
             return;
         }
 
+        const walletClient = createWalletClient({
+            chain,
+            transport: custom(window.ethereum)
+        });
+
         try {
-            await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: chainConfig.chainId }] });
+            await walletClient.switchChain({ id: chain.id });
         } catch (error: any) {
             // If the chain hasn't been added to the wallet, add it
             if (error.code === 4902) {
-                try {
-                    await window.ethereum.request({
-                        method: 'wallet_addEthereumChain',
-                        params: [chainConfig]
-                    });
+                try {               
+                    await walletClient.addChain({ chain });
                     checkConnection();
                 } catch (addError) {
                     if (addError instanceof Error) {
@@ -189,20 +187,20 @@ export default function RequireWalletConnection({ children, chainConfig, require
                 return <div>
                     <h3 className="font-medium mb-2">Add the Chain</h3>
                     <p className="mb-4">
-                        You need to add and connect the {chainConfig.chainName} chain to your wallet to continue.
+                        You need to add and connect the {chain.name} chain to your wallet to continue.
                     </p>
                     <div className="space-y-4">
                         <div>
                             <div className="font-medium">Chain Name:</div>
-                            <div>{chainConfig.chainName}</div>
+                            <div>{chain.name}</div>
                         </div>
                         <div>
                             <div className="font-medium">Chain ID:</div>
-                            <div>{chainConfig.chainId}</div>
+                            <div>{chain.id}</div>
                         </div>
                         <div>
                             <div className="font-medium">RPC URLs:</div>
-                            {chainConfig.rpcUrls.map((rpcUrl, index) => (
+                            {chain.rpcUrls.default.http.map((rpcUrl, index) => (
                                 <div key={index} className="break-all">{rpcUrl}</div>
                             ))}
                         </div>
@@ -213,7 +211,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
                             onClick={switchChain}
                             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                         >
-                            Add/Switch to {chainConfig.chainName}
+                            Add/Switch to {chain.name}
                         </button>
 
                         <button
@@ -227,11 +225,11 @@ export default function RequireWalletConnection({ children, chainConfig, require
             case 'rpc_error':
                 return <>
                     <p>The RPC endpoint is unreachable. Please make sure it is accessible.</p>
-                    <Pre>{chainConfig.rpcUrls[0]}</Pre>
+                    <Pre>{chain.rpcUrls.default.http[0]}</Pre>
                 </>
             case "insufficient_balance":
                 return <>
-                    <p>The balance of the account {account} is {accountBalance?.toFixed(4)} {chainConfig.nativeCurrency.symbol}. That is lower than the required balance of {requiredBalance} {chainConfig.nativeCurrency.symbol}. Please fund your account to proceed.</p>
+                    <p>The balance of the account {account} is {accountBalance?.toFixed(4)} {chain.nativeCurrency.symbol}. That is lower than the required balance of {requiredBalance} {chain.nativeCurrency.symbol}. Please fund your account to proceed.</p>
                     <button
                         onClick={checkConnection}
                         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
@@ -241,23 +239,28 @@ export default function RequireWalletConnection({ children, chainConfig, require
                 </>;
             case 'correct_chain_connected':
                 return <>
-                    {children ? children : `Succesful connected to ${chainConfig.chainName}!`}
+                    {children ? children : `Succesful connected to ${chain.name}!`}
                 </>;
             default:
                 return <p>An Unexpected error occured</p>
         }
     }
 
+    if(skipUI && connectionStatus === 'correct_chain_connected'){
+        return renderContent();
+    }
+
+
     return (
         <div className="p-4 border rounded-lg bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-400 dark:border-blue-600 mb-6">
             <h3 className="font-medium mb-4">Network Check</h3>
             <div className='steps space-y-6 mb-6'>
                 <div className="step">Wallet installed</div>
-                <div className="step">Connected to {chainConfig.chainName}</div>
+                <div className="step">Connected to {chain.name}</div>
                 <div className="step">RPC is reachable</div>
                 {requiredBalance && requiredBalance > 0 && 
                     <div className="step">
-                        Account has at least {requiredBalance} {chainConfig.nativeCurrency.symbol}
+                        Account has at least {requiredBalance} {chain.nativeCurrency.symbol}
                     </div>
                 }
             </div>

@@ -13,7 +13,7 @@ export default function InitializeValidatorManager() {
         evmChainId,
         l1Name,
         tokenSymbol,
-        getCChainRpcEndpoint,
+        getL1RpcEndpoint,
         goToNextStep,
         goToPreviousStep
     } = useL1LauncherWizardStore();
@@ -27,7 +27,7 @@ export default function InitializeValidatorManager() {
             symbol: tokenSymbol,
             decimals: 18
         },
-        rpcUrls: [getCChainRpcEndpoint()],
+        rpcUrls: [getL1RpcEndpoint()],
         blockExplorerUrls: [] // Add block explorer URLs if available
     };
     
@@ -38,7 +38,7 @@ export default function InitializeValidatorManager() {
                 <p>This step will initialize your validator manager contract with the required signatures.</p>
             </div>
 
-            <RequireWalletConnection chainConfig={chainConfig}>
+            <RequireWalletConnection chain={chainConfig}>
                 <CollectSignatures />
                 <ContractInitialize />
                 <ContractInitializeValidatorSet />

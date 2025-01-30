@@ -27,7 +27,7 @@ export default function ContractInitializeValidatorSet() {
         evmChainId,
         l1Name,
         tokenSymbol,
-        getCChainRpcEndpoint,
+        getL1RpcEndpoint,
         convertL1SignedWarpMessage
     } = useL1LauncherWizardStore();
 
@@ -50,8 +50,8 @@ export default function ContractInitializeValidatorSet() {
                         decimals: 18,
                     },
                     rpcUrls: {
-                        default: { http: [getCChainRpcEndpoint()] },
-                        public: { http: [getCChainRpcEndpoint()] },
+                        default: { http: [getL1RpcEndpoint()] },
+                        public: { http: [getL1RpcEndpoint()] },
                     },
                 };
 
@@ -84,7 +84,7 @@ export default function ContractInitializeValidatorSet() {
         };
 
         checkInitialization();
-    }, [tempPrivateKeyHex, evmChainId, l1Name, tokenSymbol, getCChainRpcEndpoint]);
+    }, [tempPrivateKeyHex, evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint]);
 
     const onInitialize = async () => {
         setStatus({ status: 'in_progress' });
@@ -100,8 +100,8 @@ export default function ContractInitializeValidatorSet() {
                     decimals: 18,
                 },
                 rpcUrls: {
-                    default: { http: [getCChainRpcEndpoint()] },
-                    public: { http: [getCChainRpcEndpoint()] },
+                    default: { http: [getL1RpcEndpoint()] },
+                    public: { http: [getL1RpcEndpoint()] },
                 },
             };
 
@@ -183,7 +183,7 @@ export default function ContractInitializeValidatorSet() {
     };
 
     const debugTraceAndDecode = async (txHash: string) => {
-        const traceResponse = await fetch(getCChainRpcEndpoint(), {
+        const traceResponse = await fetch(getL1RpcEndpoint(), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

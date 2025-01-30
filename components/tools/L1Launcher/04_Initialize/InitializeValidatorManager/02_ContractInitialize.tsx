@@ -15,7 +15,7 @@ export default function ContractInitialize() {
         evmChainId,
         l1Name,
         tokenSymbol,
-        getCChainRpcEndpoint,
+        getL1RpcEndpoint,
         tempPrivateKeyHex,
         subnetId,
         convertL1SignedWarpMessage
@@ -37,8 +37,8 @@ export default function ContractInitialize() {
                         decimals: 18,
                     },
                     rpcUrls: {
-                        default: { http: [getCChainRpcEndpoint()] },
-                        public: { http: [getCChainRpcEndpoint()] },
+                        default: { http: [getL1RpcEndpoint()] },
+                        public: { http: [getL1RpcEndpoint()] },
                     },
                 };
 
@@ -94,8 +94,8 @@ export default function ContractInitialize() {
                     decimals: 18,
                 },
                 rpcUrls: {
-                    default: { http: [getCChainRpcEndpoint()] },
-                    public: { http: [getCChainRpcEndpoint()] },
+                    default: { http: [getL1RpcEndpoint()] },
+                    public: { http: [getL1RpcEndpoint()] },
                 },
             };
 

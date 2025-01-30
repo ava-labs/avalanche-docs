@@ -68,16 +68,25 @@ interface L1LauncherWizardState extends StepWizardState {
 
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
-    getCChainRpcEndpoint: () => string;
+    getL1RpcEndpoint: () => string;
     getRpcEndpoint: () => string;
 
     convertL1SignedWarpMessage: `0x${string}` | null;
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => void;
+
+    poaValidatorManagerAddress: string;
+    setPoaValidatorManagerAddress: (address: string) => void;
+
+    validatorMessagesAddress: string;
+    setValidatorMessagesAddress: (address: string) => void;
+
+    getViemL1Chain: () => Chain;
 }
 
 
 import generateName from 'boring-name-generator'
 import { createStepWizardStore } from '../../common/ui/StepWizardStoreCreator';
+import { Chain } from 'viem';
 
 const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get) => ({
     ...createStepWizardStore({set, get, stepList}),
@@ -227,7 +236,7 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
         return `https://${state.rpcAddress}`;
     },
 
-    getCChainRpcEndpoint: () => {
+    getL1RpcEndpoint: () => {
         const state = get();
         const baseEndpoint = get().getRpcEndpoint();
         return `${baseEndpoint}/ext/bc/${state.chainId}/rpc`;
@@ -235,6 +244,29 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     convertL1SignedWarpMessage: null,
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => set(() => ({ convertL1SignedWarpMessage: message })),
+
+    poaValidatorManagerAddress: "",
+    setPoaValidatorManagerAddress: (address: string) => set(() => ({ poaValidatorManagerAddress: address })),
+
+    validatorMessagesAddress: "",
+    setValidatorMessagesAddress: (address: string) => set(() => ({ validatorMessagesAddress: address })),
+
+    getViemL1Chain: () => {
+        const state = get();
+        return {
+            id: state.evmChainId,
+            name: state.l1Name,
+            nativeCurrency: {
+                decimals: 18,
+                name: state.tokenSymbol + ' Native Token',
+                symbol: state.tokenSymbol,
+            },
+            rpcUrls: {
+                default: { http: [state.getL1RpcEndpoint()] },
+                public: { http: [state.getL1RpcEndpoint()] },
+            },
+        } as const;
+    },
 })
 
 

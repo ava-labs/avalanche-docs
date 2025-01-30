@@ -97,7 +97,7 @@ interface L1ManagerWizardState extends StepWizardState {
 
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
-    getCChainRpcEndpoint: () => string;
+    getL1RpcEndpoint: () => string;
     getRpcEndpoint: () => string;
 
     convertL1SignedWarpMessage: `0x${string}` | null;
@@ -244,7 +244,7 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
         return `https://${state.rpcAddress}`;
     },
 
-    getCChainRpcEndpoint: () => {
+    getL1RpcEndpoint: () => {
         const state = get();
         const baseEndpoint = get().getRpcEndpoint();
         return `${baseEndpoint}/ext/bc/${state.chainId}/rpc`;

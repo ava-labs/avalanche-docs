@@ -35,7 +35,7 @@ export default function CheckContractLogs({ onSuccess }: { onSuccess: () => void
         evmChainId,
         l1Name,
         tokenSymbol,
-        getCChainRpcEndpoint,
+        getL1RpcEndpoint,
         tempPrivateKeyHex,
     } = useL1LauncherWizardStore();
 
@@ -53,8 +53,8 @@ export default function CheckContractLogs({ onSuccess }: { onSuccess: () => void
                     decimals: 18,
                 },
                 rpcUrls: {
-                    default: { http: [getCChainRpcEndpoint()] },
-                    public: { http: [getCChainRpcEndpoint()] },
+                    default: { http: [getL1RpcEndpoint()] },
+                    public: { http: [getL1RpcEndpoint()] },
                 },
             };
 

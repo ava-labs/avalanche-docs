@@ -166,7 +166,7 @@ export default function FundTempWallet() {
                 <p className='italic'>Private Key: {tempPrivateKeyHex}</p>
                 <p>You can claim Fuji AVAX at the <a href='https://core.app/tools/testnet-faucet/?subnet=c&token=c' target='_blank' className="underline">Faucet</a>. Use the coupon code <span className='italic'>l1-launcher</span>.</p>
             </div>
-            <RequireWalletConnection chainConfig={fujiConfig}>
+            <RequireWalletConnection chain={fujiConfig}>
                 <div className="space-y-4 mb-4">
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between items-center mb-1">
