@@ -70,7 +70,7 @@ The L1 Validator Fee is calculated each time the P-Chain adds a new block, accor
 $$ M \cdot \exp\left(\frac{x}{K}\right) $$
 
 where M is the minimum price for validators, and exp(x) is an approximation of the exponential function based on the EIP-4844 specification. The
-value simply K controls how quickly the price changes, and x is updated every second based on the difference between the number of active validators
+value K simply controls how quickly the price changes, and x is updated every second based on the difference between the number of active validators
 V and the target T:
 
 $$ x = \max(x + V - T, 0) $$
