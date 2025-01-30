@@ -1,0 +1,103 @@
+---
+title: How Do L1 Validator Fees Work?
+description: This guide provides an overview of how L1 validators are charged AVAX to participate in sovereign L1s, how the fee is determined, and how this information can be retrieved from the Avalanche P-Chain.
+date: 2025-01-30
+authors: [meagfitzgerald]
+topics: [ Avalanche Network Upgrade, Etna Upgrade, Validators, Layer 1, L1, L1 Validators, Continuous L1 Validation Fee]
+comments: true
+---
+
+## What are L1 Validators?
+
+Introduced with ACP-77, [Avalanche L1 Validators](https://build.avax.network/guides/subnet-vs-l1-validators) enable the creation of sovereign L1
+networks with minimal dependency on the Avalanche Primary Network. Unlike Subnet validators, L1 validators do not stake AVAX, but instead pay a
+continuous dynamic fee called the L1 Validator Fee.
+
+## L1 Validator Balance
+
+This new fee mechanism takes advantage of the fact that each L1 validator uses the same amount of computation and charges every validator the same fee.
+
+To charge L1 validators, a "Balance" system is used. This balance is charged continuously while a validator is active to cover costs of storing their
+information (such as BLS key, weight, nonce) in active state and tracking their IP addresses. Each L1 Validator carries a balance, starting from when
+the validator is added with the `RegisterL1ValidatorTx` transaction. It can be increased anytime using the `IncreaseL1ValidatorBalanceTx`. If the
+balance reaches zero, the validator becomes "inactive" and stops validating. Once inactive, their properties are removed from memory and stored on
+disk, and any messages from them will be invalid until they are revived. Inactive validators can be revived by re-upping their balance using
+`IncreaseL1ValidatorBalanceTx`.
+
+## How Fees are Charged
+
+AvalancheGo calculates the accrued fees for a block based on the formula: fee rate (in nAVAX/sec) \* duration since the prior block (in seconds) for
+every block. For each L1 validator, AvalancheGo tracks a value called the
+[`endAccumulatedFee`](https://github.com/ava-labs/avalanchego/blob/ab4619873028fd975dfa6e89e53e555dd53e0cdb/vms/platformvm/state/l1_validator.go#L116-L124), which represents the total fees that will accumulate
+in the future at the current rate. Once this value is reached, the validator will be marked as “inactive” due to the fact that its balance will not
+cover the fees accrued until this final block.
+
+When a validator registers with `RegisterL1ValidatorTx`, the balance of AVAX is allocated to that validator, and is continuously charged by the
+P-Chain until it runs out. To prevent the balance from running out, and validation pausing, any validator can increase its balance with
+`IncreaseL1ValidatorBalanceTx`. If a validator decides to end its validation with `DisableL1ValidatorTx`, any remaining balance that has not
+been used to pay the continuous fee will be returned.
+
+For example, imagine a world where in order to take a taxi, you must first deposit a lump sum upfront. As the taxi travels to your destination,
+the fare for the distance travelled is continuously debited from your account. If during the drive you want to increase your balance so you can
+travel farther, you can add funds to your balance. Once you end the ride, the driver would return any of the remaining balance to you.
+
+## Who Pays and Who Gets the Change?
+
+`IncreaseBalanceTx` must be used whenever an L1 validator wishes to increase their balance. This transaction can be executed by anyone, meaning that
+anyone can increase the balance on behalf of another validator.
+
+However, only the P-Chain address set as the `remainingBalanceOwner` when the validator originally registered with `RegisterL1ValidatorTx` can receive
+the funds left over if the validator decides to terminate with `DisableL1ValidatorTx`. Your friend can throw you some cash to pay for your cab fare,
+but only you can keep the change at the end of the ride.
+
+## Retrieving Validator Fee Information
+
+The current validator fee rate can be retrieved with the P-Chain API endpoint
+[`platform.getValidatorFeeState`](https://build.avax.network/docs/api-reference/p-chain/api#platformgetvalidatorfeestate).
+
+An L1 validator's available remaining balance can be retrieved using the P-Chain API endpoint
+[`platform.getL1Validator`](https://build.avax.network/docs/api-reference/p-chain/api#platformgetl1validator).
+
+The validator fee configuration, with the current parameters set to calculate the L1 validator fee rate according to the formula in [ACP-77](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/77-reinventing-subnets#parameters), can be
+retrieved with the P-Chain API endpoint
+[`platform.getValidatorFeeConfig`](https://build.avax.network/docs/api-reference/p-chain/api#platformgetvalidatorfeeconfig).
+
+## How the Fee Changes
+
+The L1 Validator Fee is calculated each time the P-Chain adds a new block, according to the algorithm outlined in
+[ACP-77](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/77-reinventing-subnets#fee-algorithm):
+
+$$ M \cdot \exp\left(\frac{x}{K}\right) $$
+
+where M is the minimum price for validators, and exp(x) is an approximation of the exponential function based on the EIP-4844 specification. The
+value simply K controls how quickly the price changes, and x is updated every second based on the difference between the number of active validators
+V and the target T:
+
+$$ x = \max(x + V - T, 0) $$
+
+The max function above basically chooses either $(x + V - T)$, or 0, whichever is greater.
+
+If the fees become too high, some validators may exit the set, which will lower x and subsequently reduce the price, helping to maintain an average of
+T active validators on the P-Chain.
+
+## The Fee Rate Settings
+
+The parameters of the above functions at the time Etna activated were:
+
+- T: target number of validators: 10,000
+- C: capacity number of validators: 20,000
+- M: minimum fee rate: 512 nAVAX/s
+- K: constant to control the rate of fee changes: 1,246,488,515
+
+As long as the number of validators stays below the target of 10,000, it will cost ~1.33 AVAX/month to run an L1 validator.
+
+K was chosen to set the maximum fee doubling rate to ~24 hours. This is in the extreme case that the network has 20,000 active L1 validators for
+prolonged periods of time. Alternatively, if the network has 10,001 L1 validators for a prolonged period of time, the fee rate would double every
+~27 years.
+
+In a nutshell, when the total number of L1 validators is greater than or equal to 10,000, the fee rate, a.k.a. the L1 validation fee per second, will
+increase in the next block according to the formula. These parameters can be changed with community input and the implementation of any future ACP.
+
+The validator fee configuration, with the current parameters set to calculate the L1 validator fee rate according to the formula in
+[ACP-77](https://github.com/avalanche-foundation/ACPs/tree/main/ACPs/77-reinventing-subnets#parameters), can be retrieved with the P-Chain API
+endpoint [`platform.getValidatorFeeConfig`](https://build.avax.network/docs/api-reference/p-chain/api#platformgetvalidatorfeeconfig).
