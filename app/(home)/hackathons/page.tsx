@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,34 +16,124 @@ import {
   CalendarIcon,
   MapPinIcon,
 } from "lucide-react";
-import Link from "next/link";
 
-export default async function HackathonPage({
-  searchParams,
-}: {
-  searchParams?: { page?: string };
-}) {
-  const page = Number(searchParams?.page ?? 1);
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+export default function HackathonPage() {
+  const router = useRouter();
+  const params = useSearchParams();
+
+  const [page, setPage] = useState(() => Number(params.get("page")) || 1);
+  const [location, setLocation] = useState(() => params.get("location") || "");
+  const [status, setStatus] = useState(() => params.get("status") || "");
+
   const pageSize = 10;
 
-  const res = await fetch(
-    `https://avalanche-docs-eight.vercel.app/api/hackathons?page=${page}&pageSize=${pageSize}`,
-    {
-      cache: "no-store",
+  const [hackathons, setHackathons] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const fetchHackathons = () => {
+    const apiUrl = new URL("http://localhost:3000/api/hackathons");
+    apiUrl.searchParams.set("page", page.toString());
+    apiUrl.searchParams.set("pageSize", pageSize.toString());
+    if (location) apiUrl.searchParams.set("location", location);
+    if (status) apiUrl.searchParams.set("status", status);
+
+    fetch(apiUrl.toString(), { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        setHackathons(data.hackathons);
+        setTotal(data.total);
+      })
+      .catch((error) => console.error("Error fetching hackathons:", error));
+  };
+
+  useEffect(() => {
+    console.log("FETCH");
+    fetchHackathons();
+  }, [page, location, status]);
+
+  useEffect(() => {
+    if (
+      !params.get("page") &&
+      !params.get("location") &&
+      !params.get("status")
+    ) {
+      router.replace(`/hackathons?page=1&pageSize=10`);
     }
-  );
+  }, []);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch hackathons");
-  }
-
-  const { hackathons, total } = await res.json();
   const totalPages = Math.ceil(total / pageSize);
+
+  const handleFilterChange = (
+    type: "location" | "status" | "page",
+    value: string
+  ) => {
+    const newParams = new URLSearchParams(params.toString());
+
+    if (type === "location") {
+      setLocation(value === "all" ? "" : value);
+      if (value === "all") newParams.delete("location");
+      else newParams.set("location", value);
+    }
+
+    if (type === "status") {
+      setStatus(value === "all" ? "" : value);
+      if (value === "all") newParams.delete("status");
+      else newParams.set("status", value);
+    }
+
+    if (type === "page") {
+      setPage(Number(value));
+      newParams.set("page", value);
+    }
+
+    router.push(`/hackathons?${newParams.toString()}`);
+  };
 
   return (
     <main className="container mx-auto px-4 py-12 space-y-6">
       <h1 className="text-2xl font-bold">Hackathons</h1>
 
+      {/* Filters */}
+      <div className="flex gap-4">
+        <Select
+          onValueChange={(value) => handleFilterChange("location", value)}
+          value={location}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Filter by Location" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Locations</SelectItem>
+            <SelectItem value="Online">Online</SelectItem>
+            <SelectItem value="InPerson">In Person</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select
+          onValueChange={(value) => handleFilterChange("status", value)}
+          value={status}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Filter by Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Statuses</SelectItem>
+            <SelectItem value="Upcoming">Upcoming</SelectItem>
+            <SelectItem value="Ongoing">Ongoing</SelectItem>
+            <SelectItem value="Ended">Ended</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Hackathons List */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {hackathons.map((hackathon: any) => (
           <Card
@@ -95,16 +189,21 @@ export default async function HackathonPage({
         ))}
       </div>
 
+      {/* Pagination */}
       <div className="flex justify-center gap-4">
         {page > 1 && (
-          <Link href={`/hackathons?page=${page - 1}`}>
-            <Button>Previous</Button>
-          </Link>
+          <Button
+            onClick={() => handleFilterChange("page", (page - 1).toString())}
+          >
+            Previous
+          </Button>
         )}
         {page < totalPages && (
-          <Link href={`/hackathons?page=${page + 1}`}>
-            <Button>Next</Button>
-          </Link>
+          <Button
+            onClick={() => handleFilterChange("page", (page + 1).toString())}
+          >
+            Next
+          </Button>
         )}
       </div>
     </main>
