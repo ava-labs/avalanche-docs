@@ -1,7 +1,7 @@
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { useL1ManagerWizardStore } from "../config/store";
 import { useState } from "react";
-import { checkCoreWallet } from '@/components/tools/common/utils/checkCoreWallet';
+import { checkCoreWallet } from '@/components/tools/common/api/coreWallet';
 
 export default function Welcome() {
     const { goToNextStep, goToPreviousStep } = useL1ManagerWizardStore();

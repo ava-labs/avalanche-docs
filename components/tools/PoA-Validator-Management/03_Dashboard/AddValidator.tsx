@@ -5,23 +5,25 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, RefreshCw, Check, X } from 'lucide-react'
-import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, defineChain, custom, decodeErrorResult, type Abi, toHex, parseEther } from 'viem'
+import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, defineChain, custom, decodeErrorResult, type Abi, parseEther } from 'viem'
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { pvm, utils, Context } from '@avalabs/avalanchejs'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
 import { packWarpIntoAccessList } from '../../common/utils/packWarp'
 import { aggregateSignatures } from '@/components/tools/common/api/signature-aggregator'
-import { getAddresses, newPrivateKey } from '../../common/utils/wallet'
 import { useL1ManagerWizardStore } from '../config/store'
-import { avalancheFuji } from 'viem/chains'
 import { generatePrivateKey, privateKeyToAccount, privateKeyToAddress } from 'viem/accounts'
+import { platformEndpoint, pvmApi } from './const'
+import { fetchPChainAddressForActiveAccount } from '../../common/api/coreWallet'
+import { debugTraceAndDecode } from '../../common/api/debug'
+import { parseNodeID } from '../../common/utils/parse'
 
 interface StepStatus {
   status: 'pending' | 'loading' | 'success' | 'error'
   error?: string
 }
 
-interface ValidationSteps {
+export interface ValidationSteps {
   initializeRegistration: StepStatus
   signMessage: StepStatus
   registerOnPChain: StepStatus
@@ -59,6 +61,7 @@ export default function AddValidator({
         setRegisterL1ValidatorUnsignedWarpMsg,
         validationID,
         setValidationID,
+        chainConfig,
         
     } = useL1ManagerWizardStore()
 
@@ -68,7 +71,6 @@ export default function AddValidator({
   const [newPChainAddress, setNewPChainAddress] = useState('')
   const [newWeight, setNewWeight] = useState('')
   const [newBalance, setNewBalance] = useState('0.1')
-  const [coreWalletPChainAddress, setCoreWalletPChainAddress] = useState('')
   const [validationSteps, setValidationSteps] = useState<ValidationSteps>({
     initializeRegistration: { status: 'pending' },
     signMessage: { status: 'pending' },
@@ -84,24 +86,15 @@ export default function AddValidator({
   const [savedPChainWarpMsg, setSavedPChainWarpMsg] = useState('')
   const [savedPChainResponse, setSavedPChainResponse] = useState('')
 
-  const chainConfig = defineChain({
-    id: evmChainId,
-    name: l1Name,
-    network: l1Name.toLowerCase(),
-    nativeCurrency: {
-      name: tokenSymbol,
-      symbol: tokenSymbol,
-      decimals: 18,
-    },
-    rpcUrls: {
-      default: { http: [rpcUrl] },
-      public: { http: [rpcUrl] },
-    },
-  })
-
   // Create clients inside component with dynamic chain config
   const noopProvider = { request: () => Promise.resolve(null) }
   const provider = typeof window !== 'undefined' ? window.ethereum! : noopProvider
+
+  if (!chainConfig) {
+    console.error('Chain config is not defined')
+    return
+  }
+
   const walletClient = createWalletClient({
     chain: chainConfig,
     transport: custom(provider),
@@ -117,23 +110,11 @@ export default function AddValidator({
         setTempEVMPrivateKeyHex(generatePrivateKey())      
     }
     const fetchPChainAddress = async () => {
-      try {
-        const response = await window.avalanche.request({
-          method: 'avalanche_getAccounts',
-          params: []
-        });
-        const activeAccountIndex = response.findIndex((account: any) => account.active === true);
-        const pChainAddress = response[activeAccountIndex].addressPVM.replace('avax', 'fuji');
-        setCoreWalletPChainAddress(pChainAddress);
-        // Also set it as the default value for the input if no value is already set
-        if (!newPChainAddress) {
+        const pChainAddress = await fetchPChainAddressForActiveAccount();
+        if (!newPChainAddress || newPChainAddress === '') {
           setNewPChainAddress(pChainAddress);
         }
-      } catch (error) {
-        console.error('Error fetching avalanche accounts, is Core wallet installed?:', error);
-      }
     };
-
     fetchPChainAddress();
   }, []); // Run once when component mounts
 
@@ -189,40 +170,6 @@ export default function AddValidator({
     )
   }
 
-  const debugTraceAndDecode = async (txHash: string, rpcUrl: string, abi: Abi): Promise<string> => {
-    try {
-      const traceResponse = await fetch(rpcUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          jsonrpc: '2.0',
-          method: 'debug_traceTransaction',
-          params: [txHash, { tracer: 'callTracer' }],
-          id: 1
-        })
-      });
-
-      const trace = await traceResponse.json();
-
-      // The error selector is in the output field
-      const errorSelector = trace.result.output;
-      if (errorSelector && errorSelector.startsWith('0x')) {
-        try {
-          const errorResult = decodeErrorResult({
-            abi,
-            data: errorSelector
-          });
-          return `${errorResult.errorName}${errorResult.args ? ': ' + errorResult.args.join(', ') : ''}`;
-        } catch (e) {
-          return `Unknown error selector: ${errorSelector}`;
-        }
-      }
-      return 'No error selector found in trace';
-    } catch (error: any) {
-      return error.message || 'Failed to get revert reason';
-    }
-  };
-
   const retryStep = async (step: keyof ValidationSteps) => {
     // Reset status of current step and all following steps
     const steps = Object.keys(validationSteps) as Array<keyof ValidationSteps>
@@ -264,8 +211,6 @@ export default function AddValidator({
     let RegisterL1ValidatorUnsignedWarpMsg = '';
     let validationIDHex = '';
     let response = '';
-    const platformEndpoint = "https://api.avax-test.network";
-    const pvmApi = new pvm.PVMApi(platformEndpoint);
 
     try {
       // Get account first
@@ -275,20 +220,15 @@ export default function AddValidator({
       if (!startFromStep || startFromStep === 'initializeRegistration') {
         updateStepStatus('initializeRegistration', 'loading')
         try {
-          // Process NodeID
-          const nodeIDWithoutPrefix = newNodeID.replace("NodeID-", "");
-          const decodedID = utils.base58.decode(nodeIDWithoutPrefix)
-          const nodeIDHex = fromBytes(decodedID, 'hex')
-          const nodeIDHexTrimmed = nodeIDHex.slice(0, -8);
-
+            
           // Process P-Chain Address
           const pChainAddressBytes = utils.bech32ToBytes(newPChainAddress)
           const pChainAddressHex = fromBytes(pChainAddressBytes, 'hex')
-          const expiry = BigInt(Math.floor(Date.now() / 1000) + 43200)
+          const expiry = BigInt(Math.floor(Date.now() / 1000) + 43200) // 12 hours
 
           const args = [
             {
-              nodeID: nodeIDHexTrimmed as Address,
+              nodeID: parseNodeID(newNodeID),
               blsPublicKey: newBlsPublicKey,
               registrationExpiry: expiry,
               remainingBalanceOwner: {
@@ -472,11 +412,11 @@ export default function AddValidator({
         try {
             const walletBalance = await publicClient.getBalance({ address: tempWalletAddress })
             if (walletBalance < 1n) {
-                console.log("Funding temp wallet with 1 NATIVE TOKEN of L1")
+                console.log("Funding temp wallet with 5 NATIVE TOKEN of L1")
                 const hash = await walletClient.sendTransaction({
                     account: poaOwnerAddress as Address,
                     to: tempWalletAddress,
-                    value: parseEther('1') // 1 NATIVE TOKEN of L1 : calculate how much AVAX is needed
+                    value: parseEther('5') // 5 NATIVE TOKEN of L1 : calculate how much AVAX is needed
                 })
                 await publicClient.waitForTransactionReceipt({ hash })
             }
@@ -518,7 +458,7 @@ export default function AddValidator({
               functionName: 'completeValidatorRegistration',
               args: [0],
               account: tempAccount,
-              gas: BigInt(2500000),
+              gas: BigInt(500000),
               nonce: await publicClient.getTransactionCount({ address: tempAccount.address }),
               accessList
             }).catch((error) => {
@@ -640,11 +580,16 @@ export default function AddValidator({
               value={newBlsProofOfPossession} 
               onChange={(e) => setNewBlsProofOfPossession(e.target.value)}
             />
-            <Input 
-              placeholder={coreWalletPChainAddress || "P-Chain Address"} 
-              value={newPChainAddress} 
-              onChange={(e) => setNewPChainAddress(e.target.value)}
-            />
+            <div className="relative group">
+              <Input 
+                placeholder="P-Chain Address" 
+                value={newPChainAddress}
+                disabled
+              />
+              <div className="absolute hidden group-hover:block bg-gray-800 text-gray-100 text-xs rounded-md px-3 py-1.5 -top-10 left-0 shadow-md">
+                Autofilled from Core wallet
+              </div>
+            </div>
             <Input 
               placeholder="Initial Balance (AVAX)" 
               value={newBalance} 
@@ -695,7 +640,7 @@ export default function AddValidator({
           />
           <StepIndicator
             status={validationSteps.signMessage.status}
-            label="Aggregate Signatures for Validator Manager Warp Message"
+            label="Aggregating Signatures for Emitted Warp Message"
             error={validationSteps.signMessage.error}
             onRetry={() => retryStep('signMessage')}
           />
@@ -713,7 +658,7 @@ export default function AddValidator({
           />
           <StepIndicator
             status={validationSteps.fundTempWallet.status}
-            label={`Fund Temporary Wallet with 1 ${tokenSymbol} ${tempEVMPrivateKeyHex ? ` (${privateKeyToAddress(tempEVMPrivateKeyHex as Address)})` : ''}`}
+            label={`Fund Temporary Wallet with ${tokenSymbol} ${tempEVMPrivateKeyHex ? ` (${privateKeyToAddress(tempEVMPrivateKeyHex as Address)})` : ''}`}
             error={validationSteps.fundTempWallet.error}
             onRetry={() => retryStep('fundTempWallet')}
           />

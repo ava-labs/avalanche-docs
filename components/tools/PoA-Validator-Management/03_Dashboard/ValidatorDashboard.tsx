@@ -4,12 +4,23 @@ import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { AlertCircle, Trash2 } from 'lucide-react'
+import { AlertCircle } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useL1ManagerWizardStore } from '../config/store'
 import { fetchSubnetId, fetchValidators } from '../../common/api/validator-info'
 import AddValidator from './AddValidator'
 import RemoveValidator from './RemoveValidator'
+
+interface Validator {
+  id: string;
+  nodeID: string;
+  weight: number;
+  uptime: number;
+  validationID: string;
+  isActive: boolean;
+}
+
+type ValidatorFilter = 'active' | 'disabled' | 'all';
 
 export default function LaunchValidators() {
   const { 
@@ -25,6 +36,13 @@ export default function LaunchValidators() {
     setValidators,
   } = useL1ManagerWizardStore()
   const [isBootstrapped, setIsBootstrapped] = useState(false)
+  const [validatorFilter, setValidatorFilter] = useState<ValidatorFilter>('active');
+
+  const refreshValidatorsWithTimeout = async () => {
+    // wait for 5 second before refreshing validators
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    refreshValidators();
+  }
 
   const refreshValidators = async () => {
     try {
@@ -45,6 +63,9 @@ export default function LaunchValidators() {
     refreshValidators();
   }, [evmChainId]);
 
+  const activeValidators = validators.filter((v: Validator) => v.isActive).length
+  const disabledValidators = validators.filter((v: Validator) => !v.isActive).length
+
   return (
     <div className="container mx-auto p-4">
       <Card className="mb-6">
@@ -61,7 +82,7 @@ export default function LaunchValidators() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-3 gap-6">
-            <div className="p-4 rounded-lg border bg-gray-50">
+            <div className="p-4 rounded-lg border bg-gray-50 col-span-2">
               <p className="text-sm font-medium text-gray-600">Subnet ID</p>
               <div className="flex items-center gap-2">
                 <p 
@@ -69,10 +90,9 @@ export default function LaunchValidators() {
                   title={subnetId}
                   onClick={() => {
                     navigator.clipboard.writeText(subnetId);
-                    // Optional: Add a toast notification here
                   }}
                 >
-                  {subnetId ? subnetId.slice(0, 10) + '...' : 'Loading...'}
+                  {subnetId ? subnetId : 'Loading...'}
                 </p>
                 <button 
                   className="p-1 hover:bg-gray-200 rounded"
@@ -128,10 +148,24 @@ export default function LaunchValidators() {
                 </button>
               </div>
             </div>
+          </div>
+          <div className="grid grid-cols-3 gap-6 mt-4">
             <div className={`p-4 rounded-lg border ${validators.length >= 1 ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}>
               <p className="text-sm font-medium text-gray-600">Total Validators</p>
               <p className={`text-2xl font-mono mt-1 ${validators.length >= 1 ? 'text-green-600' : 'text-gray-900'}`}>
                 {validators.length}
+              </p>
+            </div>
+            <div className="p-4 rounded-lg border bg-orange-50 border-orange-200">
+              <p className="text-sm font-medium text-gray-600">Disabled Validators</p>
+              <p className="text-2xl font-mono mt-1 text-orange-600">
+                {disabledValidators}
+              </p>
+            </div>
+            <div className="p-4 rounded-lg border bg-green-50 border-green-200">
+              <p className="text-sm font-medium text-gray-600">Active Validators</p>
+              <p className="text-2xl font-mono mt-1 text-green-600">
+                {activeValidators}
               </p>
             </div>
           </div>
@@ -140,20 +174,47 @@ export default function LaunchValidators() {
 
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <span>Current Validators</span>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={refreshValidators}
-              className="gap-2"
-            >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              Refresh
-            </Button>
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <span>Current Validators</span>
+            </CardTitle>
+            <div className="flex items-center gap-4">
+              <div className="flex gap-1">
+                <Button 
+                  variant={validatorFilter === 'active' ? 'default' : 'outline'} 
+                  size="sm"
+                  onClick={() => setValidatorFilter('active')}
+                >
+                  Active
+                </Button>
+                <Button 
+                  variant={validatorFilter === 'disabled' ? 'default' : 'outline'} 
+                  size="sm"
+                  onClick={() => setValidatorFilter('disabled')}
+                >
+                  Disabled
+                </Button>
+                <Button 
+                  variant={validatorFilter === 'all' ? 'default' : 'outline'} 
+                  size="sm"
+                  onClick={() => setValidatorFilter('all')}
+                >
+                  All
+                </Button>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={refreshValidators}
+                className="gap-2"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Refresh
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="max-h-[400px] overflow-auto">
@@ -161,34 +222,56 @@ export default function LaunchValidators() {
               <TableHeader className="sticky top-0 bg-white z-10">
                 <TableRow>
                   <TableHead>Node ID</TableHead>
+                  <TableHead>Status</TableHead>
                   <TableHead>Weight</TableHead>
                   <TableHead>Uptime</TableHead>
                   <TableHead className="bg-white">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {validators.map((validator) => (
-                  <TableRow key={validator.id}>
-                    <TableCell className="font-medium">{validator.nodeID}</TableCell>
-                    <TableCell>{validator.weight}</TableCell>
-                    <TableCell>{validator.uptime}</TableCell>
-                    <TableCell>
-                      <div className="flex gap-2">
-                        <RemoveValidator
-                          nodeId={validator.nodeID || ''}
-                          transparentProxyAddress={transparentProxyAddress}
-                          poaOwnerAddress={poaOwnerAddress}
-                          onValidatorRemoved={refreshValidators}
-                          evmChainId={evmChainId}
-                          l1Name={l1Name}
-                          tokenSymbol={tokenSymbol}
-                          rpcUrl={rpcUrl}
-                          subnetId={subnetId}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {validators
+                  .filter((validator: Validator) => {
+                    switch (validatorFilter) {
+                      case 'active':
+                        return validator.isActive;
+                      case 'disabled':
+                        return !validator.isActive;
+                      default:
+                        return true;
+                    }
+                  })
+                  .map((validator: Validator) => (
+                    <TableRow key={validator.id}>
+                      <TableCell className="font-medium">{validator.nodeID}</TableCell>
+                      <TableCell>
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                          validator.isActive 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-orange-100 text-orange-800'
+                        }`}>
+                          {validator.isActive ? 'Active' : 'Disabled'}
+                        </span>
+                      </TableCell>
+                      <TableCell>{validator.weight}</TableCell>
+                      <TableCell>{validator.uptime}</TableCell>
+                      <TableCell>
+                        <div className="flex gap-2">
+                          <RemoveValidator
+                            nodeId={validator.nodeID}
+                            transparentProxyAddress={transparentProxyAddress}
+                            poaOwnerAddress={poaOwnerAddress}
+                            onValidatorRemoved={refreshValidatorsWithTimeout}
+                            evmChainId={evmChainId}
+                            l1Name={l1Name}
+                            tokenSymbol={tokenSymbol}
+                            rpcUrl={rpcUrl}
+                            subnetId={subnetId}
+                            validationIdPChain={validator.validationID}
+                          />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </div>

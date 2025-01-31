@@ -8,7 +8,7 @@ import { AllocationEntry } from '@/components/tools/common/token-allocation-list
 import { StepWizardState } from '@/components/tools/common/ui/types';
 import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
 import { Validator } from '../../common/api/types'
-import { Hex } from 'viem';
+import { ChainConfig, Hex } from 'viem';
 
 interface NetworkToken {
     name: string;
@@ -43,6 +43,10 @@ interface ChainInfo {
 }
 
 interface L1ManagerWizardState extends StepWizardState {
+
+    chainConfig: ChainConfig | null;
+    setChainConfig: (config: ChainConfig) => void;
+
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
 
@@ -132,6 +136,9 @@ interface L1ManagerWizardState extends StepWizardState {
 
 const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) => ({
     ...createStepWizardStore({set, get, stepList}),
+
+    chainConfig: null,
+    setChainConfig: (config: ChainConfig) => set(() => ({ chainConfig: config })),
 
     pChainWarpMsg: '',
     setPChainWarpMsg: (msg: string) => set(() => ({ pChainWarpMsg: msg })),

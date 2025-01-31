@@ -9,12 +9,12 @@ import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletC
 import { useL1ManagerWizardStore } from '../config/store';
 
 import PoAValidatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json';
-import { Address, createPublicClient, http } from 'viem';
+import { Address, createPublicClient, defineChain, http } from 'viem';
 
-import { 
-    fetchValidators, 
-    checkEndpoint, 
-    fetchSubnetId, 
+import {
+    fetchValidators,
+    checkEndpoint,
+    fetchSubnetId,
     fetchSubnetInfo,
     getEndpoints
 } from '../../common/api/validator-info';
@@ -22,7 +22,7 @@ import {
 import { isValidUrl, isValidAddress } from '@/components/tools/common/utils/validation';
 
 export default function ChainParameters() {
-    const { 
+    const {
         rpcUrl,
         setRpcUrl,
         setEvmChainId,
@@ -38,7 +38,8 @@ export default function ChainParameters() {
         goToNextStep,
         goToPreviousStep,
         setValidators,
-        setSubnetId
+        setSubnetId,
+        setChainConfig
     } = useL1ManagerWizardStore();
 
     const [error, setError] = useState("");
@@ -53,16 +54,16 @@ export default function ChainParameters() {
 
     const fetchChainConfig = async () => {
         if (!isValidUrl(rpcUrl)) return;
-        
+
         setIsLoading(true);
         setError("");
         setShowWallet(false);
-        
+
         try {
             // First validate the endpoints
             const endpoints = getEndpoints(rpcUrl);
             console.log('Generated endpoints:', endpoints);
-            
+
             const [platformOk, infoOk, validatorsOk] = await Promise.all([
                 checkEndpoint(endpoints.platform),
                 checkEndpoint(endpoints.info),
@@ -74,7 +75,7 @@ export default function ChainParameters() {
                 info: infoOk,
                 validators: validatorsOk
             });
-            
+
             setEndpointStatus({
                 platform: platformOk,
                 info: infoOk,
@@ -87,7 +88,7 @@ export default function ChainParameters() {
                     !infoOk && 'Info API',
                     !validatorsOk && 'Validators API'
                 ].filter(Boolean);
-                
+
                 throw new Error(`The following endpoints are not accessible: ${failedEndpoints.join(', ')}`);
             }
 
@@ -106,14 +107,14 @@ export default function ChainParameters() {
             });
 
             const data = await response.json();
-            
+
             if (data.error) {
                 throw new Error(data.error.message);
             }
 
             if (data.result && data.result.chainId) {
                 setEvmChainId(Number(data.result.chainId));
-                
+
                 // Try to get chain name using eth_chainId
                 try {
                     const chainIdResponse = await fetch(rpcUrl, {
@@ -128,7 +129,7 @@ export default function ChainParameters() {
                             id: 1
                         })
                     });
-                    
+
                     const chainIdData = await chainIdResponse.json();
                     if (chainIdData.result) {
                         const chainIdHex = chainIdData.result;
@@ -139,7 +140,7 @@ export default function ChainParameters() {
                     console.error("Error fetching chain name:", chainErr);
                     setL1Name("My L1");
                 }
-                 
+
                 setError("");
                 setShowWallet(true);
             } else {
@@ -171,7 +172,7 @@ export default function ChainParameters() {
                 setTransparentProxyAddress('');
                 setError("Failed to fetch validator manager contract address");
             }
-            
+
         } catch (err) {
             console.error("Error:", err);
             setError(err instanceof Error ? err.message : "Failed to fetch chain configuration");
@@ -182,14 +183,37 @@ export default function ChainParameters() {
         }
     };
 
+    const handleWalletConnectionCallback = async () => {
+        await handleCheckPoaOwner();
+        defineAndSaveChainConfig();
+    }
+
+    const defineAndSaveChainConfig = async () => {
+        const chainConfig = defineChain({
+            id: evmChainId,
+            name: l1Name,
+            network: l1Name.toLowerCase(),
+            nativeCurrency: {
+                name: tokenSymbol,
+                symbol: tokenSymbol,
+                decimals: 18,
+            },
+            rpcUrls: {
+                default: { http: [rpcUrl] },
+                public: { http: [rpcUrl] },
+            },
+        })
+        setChainConfig(chainConfig)
+    }
+
     const handleCheckPoaOwner = async () => {
         if (!window.ethereum) return;
         setOwnerCheckStatus('checking');
-        
+
         // Get connected account from wallet
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         if (!accounts || accounts.length === 0) return;
-        
+
         // Create public client to read contract
         const publicClient = createPublicClient({
             transport: http(rpcUrl)
@@ -231,9 +255,9 @@ export default function ChainParameters() {
                 <div>
                     <Label className="dark:text-gray-200">Developer RPC URL</Label>
                     <div className="flex gap-2 mt-1.5">
-                        <Input 
-                            type='text' 
-                            value={rpcUrl} 
+                        <Input
+                            type='text'
+                            value={rpcUrl}
                             onChange={(e) => setRpcUrl(e.target.value)}
                             placeholder="https://example.com/ext/bc/<BlockchainID>/rpc"
                             disabled={isLoading}
@@ -246,7 +270,7 @@ export default function ChainParameters() {
                             {isLoading ? "Loading..." : "Load"}
                         </button>
                     </div>
-                    
+
                     {rpcUrl && isValidUrl(rpcUrl) && (endpointStatus.platform || endpointStatus.info || endpointStatus.validators) && (
                         <div className="mt-3 space-y-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
                             <h3 className="font-medium text-sm text-gray-700 dark:text-gray-300 mb-2">Endpoint Status:</h3>
@@ -260,7 +284,7 @@ export default function ChainParameters() {
                                     Platform Chain API
                                 </span>
                             </div>
-                            
+
                             <div className="flex items-center gap-2 text-sm">
                                 {endpointStatus.info ? (
                                     <CheckCircle2 className="w-4 h-4 text-green-500" />
@@ -271,7 +295,7 @@ export default function ChainParameters() {
                                     Info API
                                 </span>
                             </div>
-                            
+
                             <div className="flex items-center gap-2 text-sm">
                                 {endpointStatus.validators ? (
                                     <CheckCircle2 className="w-4 h-4 text-green-500" />
@@ -310,9 +334,9 @@ export default function ChainParameters() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
                             <div>
                                 <Label className="dark:text-gray-200">L1 Name</Label>
-                                <Input 
-                                    type='text' 
-                                    value={l1Name} 
+                                <Input
+                                    type='text'
+                                    value={l1Name}
                                     onChange={(e) => setL1Name(e.target.value)}
                                     placeholder="My L1"
                                     className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -334,9 +358,9 @@ export default function ChainParameters() {
 
                             <div>
                                 <Label className="dark:text-gray-200">Native Token Symbol</Label>
-                                <Input 
-                                    type='text' 
-                                    value={tokenSymbol} 
+                                <Input
+                                    type='text'
+                                    value={tokenSymbol}
                                     onChange={(e) => setTokenSymbol(e.target.value)}
                                     placeholder="TEST"
                                     className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -348,9 +372,9 @@ export default function ChainParameters() {
 
                             <div>
                                 <Label className="dark:text-gray-200">PoA Validator Manager Contract Address</Label>
-                                <Input 
-                                    type='text' 
-                                    value={transparentProxyAddress} 
+                                <Input
+                                    type='text'
+                                    value={transparentProxyAddress}
                                     readOnly
                                     placeholder="0x..."
                                     className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white bg-gray-50"
@@ -382,15 +406,15 @@ export default function ChainParameters() {
                                         isTestnet: true
                                     }}
                                     requiredBalance={0.1}
-                                    onConnection={handleCheckPoaOwner}
+                                    onConnection={handleWalletConnectionCallback}
                                 />
-                                
+
                                 {ownerCheckStatus === 'checking' && (
                                     <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
                                         <p className="text-blue-700 dark:text-blue-300">Checking contract owner...</p>
                                     </div>
                                 )}
-                                
+
                                 {ownerCheckStatus === 'success' && (
                                     <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
                                         <p className="text-green-700 dark:text-green-300">
@@ -398,7 +422,7 @@ export default function ChainParameters() {
                                         </p>
                                     </div>
                                 )}
-                                
+
                                 {ownerCheckStatus === 'error' && error && (
                                     <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/30 rounded-lg">
                                         <p className="text-red-700 dark:text-red-300">{error}</p>
@@ -410,20 +434,20 @@ export default function ChainParameters() {
                 )}
             </div>
 
-            <NextPrev 
+            <NextPrev
                 nextDisabled={
-                    !isValidUrl(rpcUrl) || 
-                    !evmChainId || 
+                    !isValidUrl(rpcUrl) ||
+                    !evmChainId ||
                     !l1Name ||
-                    !tokenSymbol || 
-                    !transparentProxyAddress || 
+                    !tokenSymbol ||
+                    !transparentProxyAddress ||
                     !isValidAddress(transparentProxyAddress) ||
                     !endpointStatus.platform ||
                     !endpointStatus.info ||
                     !endpointStatus.validators ||
                     ownerCheckStatus !== 'success'
-                } 
-                onNext={goToNextStep} 
+                }
+                onNext={goToNextStep}
                 onPrev={goToPreviousStep}
             />
         </div>
