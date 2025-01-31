@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, RefreshCw, Check, X } from 'lucide-react'
-import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, defineChain, custom, decodeErrorResult, type Abi, parseEther } from 'viem'
+import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, defineChain, custom, decodeErrorResult, type Abi, parseEther, Chain } from 'viem'
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { pvm, utils, Context } from '@avalabs/avalanchejs'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'

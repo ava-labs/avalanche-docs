@@ -12,7 +12,7 @@ import { generatePrivateKey } from 'viem/accounts'
 import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
 import { packWarpIntoAccessList } from '../../common/utils/packWarp'
-import { pvmApi } from './const'
+import { platformEndpoint, pvmApi } from './const'
 import { fetchPChainAddressForActiveAccount } from '../../common/api/coreWallet'
 import { parseNodeID } from '../../common/utils/parse'
 
@@ -214,15 +214,15 @@ export default function RemoveValidator({
             const signedPChainWarpMsgBytes = hexToBytes(`0x${signedMessage}`)
             const accessList = packWarpIntoAccessList(signedPChainWarpMsgBytes)
 
-            const { request: completeRequest } = await publicClient.simulateContract({
-                abi: PoAValidatorManagerABI.abi,
-                address: transparentProxyAddress as Address,
-                functionName: 'completeValidatorRegistration',
-                args: [0],
-                account: tempAccount,
-                gas: BigInt(500000),
-                accessList: accessList,
-            })
+            // const { request: completeRequest } = await publicClient.simulateContract({
+            //     abi: PoAValidatorManagerABI.abi,
+            //     address: transparentProxyAddress as Address,
+            //     functionName: 'completeValidatorRegistration',
+            //     args: [0],
+            //     account: tempAccount,
+            //     gas: BigInt(500000),
+            //     accessList: accessList,
+            // })
 
             console.log("Access List: ", accessList)
 

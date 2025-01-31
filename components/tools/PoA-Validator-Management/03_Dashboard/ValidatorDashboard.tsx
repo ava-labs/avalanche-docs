@@ -1,5 +1,11 @@
 "use client"
-
+declare global {
+  interface Window {
+    avalanche: {
+      request: (args: { method: string; params: any }) => Promise<any>;
+    };
+  }
+}
 import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,12 +18,12 @@ import AddValidator from './AddValidator'
 import RemoveValidator from './RemoveValidator'
 
 interface Validator {
-  id: string;
-  nodeID: string;
-  weight: number;
-  uptime: number;
-  validationID: string;
-  isActive: boolean;
+  id?: string;
+  nodeID?: string;
+  weight: string;
+  uptime: string;
+  validationID?: string;
+  isActive?: boolean;
 }
 
 type ValidatorFilter = 'active' | 'disabled' | 'all';
@@ -63,8 +69,8 @@ export default function LaunchValidators() {
     refreshValidators();
   }, [evmChainId]);
 
-  const activeValidators = validators.filter((v: Validator) => v.isActive).length
-  const disabledValidators = validators.filter((v: Validator) => !v.isActive).length
+  const activeValidators = validators.filter((v: Validator) => v.isActive === true).length
+  const disabledValidators = validators.filter((v: Validator) => v.isActive === false).length
 
   return (
     <div className="container mx-auto p-4">
@@ -257,7 +263,7 @@ export default function LaunchValidators() {
                       <TableCell>
                         <div className="flex gap-2">
                           <RemoveValidator
-                            nodeId={validator.nodeID}
+                            nodeId={validator.nodeID ?? ''}
                             transparentProxyAddress={transparentProxyAddress}
                             poaOwnerAddress={poaOwnerAddress}
                             onValidatorRemoved={refreshValidatorsWithTimeout}
@@ -266,7 +272,7 @@ export default function LaunchValidators() {
                             tokenSymbol={tokenSymbol}
                             rpcUrl={rpcUrl}
                             subnetId={subnetId}
-                            validationIdPChain={validator.validationID}
+                            validationIdPChain={validator.validationID ?? ''}
                           />
                         </div>
                       </TableCell>

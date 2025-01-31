@@ -8,7 +8,7 @@ import { AllocationEntry } from '@/components/tools/common/token-allocation-list
 import { StepWizardState } from '@/components/tools/common/ui/types';
 import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
 import { Validator } from '../../common/api/types'
-import { ChainConfig, Hex } from 'viem';
+import { Chain, ChainConfig, Hex } from 'viem';
 
 interface NetworkToken {
     name: string;
@@ -44,8 +44,8 @@ interface ChainInfo {
 
 interface PoAValidatorManagementState extends StepWizardState {
 
-    chainConfig: ChainConfig | null;
-    setChainConfig: (config: ChainConfig) => void;
+    chainConfig: Chain | null;
+    setChainConfig: (config: Chain) => void;
 
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
@@ -138,7 +138,7 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
     ...createStepWizardStore({set, get, stepList}),
 
     chainConfig: null,
-    setChainConfig: (config: ChainConfig) => set(() => ({ chainConfig: config })),
+    setChainConfig: (config: Chain) => set(() => ({ chainConfig: config })),
 
     pChainWarpMsg: '',
     setPChainWarpMsg: (msg: string) => set(() => ({ pChainWarpMsg: msg })),
