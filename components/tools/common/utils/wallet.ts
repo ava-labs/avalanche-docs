@@ -32,8 +32,8 @@ export function newPrivateKey(): string {
     return bytesToHex(secp256k1.randomPrivateKey());
 }
 
-export function getAddresses(privateKeyHex: string): { C: `0x${string}`, P: string } {
-    const publicKey = secp256k1.getPublicKey(hexToBytes(privateKeyHex));
+export function getAddresses(publicKeyHex: string): { C: `0x${string}`, P: string } {
+    const publicKey = hexToBytes(publicKeyHex);
 
     const pChainAddress = `P-${utils.formatBech32(
         "fuji",

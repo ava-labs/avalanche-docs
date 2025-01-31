@@ -11,19 +11,13 @@ const changeAllowance = parseEther('0.1');
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
 
 export default function FundPChainWallet() {
-    const { nodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
+    const { nodesCount, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [cChainBalance, setCChainBalance] = useState<bigint>(BigInt(0));
     const [transferring, setTransferring] = useState(false);
     const [transferError, setTransferError] = useState<string | null>(null);
 
-    // Initialize temporary private key if not exists
-    useEffect(() => {
-        if (!tempPrivateKeyHex) {
-            setTempPrivateKeyHex(newPrivateKey());
-        }
-    }, [tempPrivateKeyHex, setTempPrivateKeyHex]);
 
-    const addresses = tempPrivateKeyHex ? getAddresses(tempPrivateKeyHex) : null;
+    const addresses = getAddresses("045035d1ea7767beee9ddcf6deaeb62e56a42e4fd3605c5563e56b6f56513f5b552a5b50b37271dc3a3d57b02fdbb4fdc9a51f7a0111f8e829bb3f6e60e049aae2")
 
     // Check C-Chain balance
     const checkCChainBalance = async () => {
@@ -44,34 +38,34 @@ export default function FundPChainWallet() {
         }
     };
 
-    // Check P-Chain balance
-    useEffect(() => {
-        if (!addresses?.P || !tempPrivateKeyHex) return;
+    // // Check P-Chain balance
+    // useEffect(() => {
+    //     if (!addresses?.P) return;
 
-        const checkPChainBalance = async () => {
-            try {
-                // First try to import any existing UTXOs
-                await importExistingUTXOs(tempPrivateKeyHex);
+    //     const checkPChainBalance = async () => {
+    //         try {
+    //             // First try to import any existing UTXOs
+    //             await importExistingUTXOs(tempPrivateKeyHex);
 
-                // Then get the P-chain balance
-                const balance = await getPChainBalance(addresses.P);
-                setPChainBalance(balance);
-            } catch (error) {
-                console.error('Failed to get P-Chain balance:', error);
-            }
-        };
+    //             // Then get the P-chain balance
+    //             const balance = await getPChainBalance(addresses.P);
+    //             setPChainBalance(balance);
+    //         } catch (error) {
+    //             console.error('Failed to get P-Chain balance:', error);
+    //         }
+    //     };
 
-        checkPChainBalance();
-        const interval = setInterval(checkPChainBalance, 5000);
-        return () => clearInterval(interval);
-    }, [addresses?.P, tempPrivateKeyHex, setPChainBalance]);
+    //     checkPChainBalance();
+    //     const interval = setInterval(checkPChainBalance, 5000);
+    //     return () => clearInterval(interval);
+    // }, [addresses?.P, tempPrivateKeyHex, setPChainBalance]);
 
-    // Check C-Chain balance periodically
-    useEffect(() => {
-        checkCChainBalance();
-        const interval = setInterval(checkCChainBalance, 5000);
-        return () => clearInterval(interval);
-    }, [addresses?.C]);
+    // // Check C-Chain balance periodically
+    // useEffect(() => {
+    //     checkCChainBalance();
+    //     const interval = setInterval(checkCChainBalance, 5000);
+    //     return () => clearInterval(interval);
+    // }, [addresses?.C]);
 
     const handleTransfer = async () => {
         if (!window.avalanche || !addresses?.C) return;
@@ -110,7 +104,7 @@ export default function FundPChainWallet() {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             // Transfer only the required amount to P chain (without change allowance)
-            await transferCToP(transferAmount.toFixed(2), tempPrivateKeyHex!, setPChainBalance);
+            // await transferCToP(transferAmount.toFixed(2), tempPrivateKeyHex!, setPChainBalance);
 
         } catch (error: any) {
             console.error('Transfer failed:', error);
@@ -120,27 +114,27 @@ export default function FundPChainWallet() {
     };
 
     const handleCToPTransfer = async () => {
-        if (!tempPrivateKeyHex) return;
-        setTransferError(null); // Clear previous errors
+        // if (!tempPrivateKeyHex) return;
+        // setTransferError(null); // Clear previous errors
 
-        const requiredTotal = nodesCount + 0.5;
-        const currentPBalance = Number(pChainBalance) / 1e9;
-        const currentCBalance = Number(formatEther(cChainBalance));
+        // const requiredTotal = nodesCount + 0.5;
+        // const currentPBalance = Number(pChainBalance) / 1e9;
+        // const currentCBalance = Number(formatEther(cChainBalance));
 
-        // Calculate how much more we need in P chain
-        const neededInP = requiredTotal - currentPBalance;
+        // // Calculate how much more we need in P chain
+        // const neededInP = requiredTotal - currentPBalance;
 
-        if (neededInP <= 0) return;
+        // if (neededInP <= 0) return;
 
-        setTransferring(true);
-        try {
-            await transferCToP(neededInP.toFixed(2), tempPrivateKeyHex, setPChainBalance);
-        } catch (error: any) {
-            console.error('C to P transfer failed:', error);
-            setTransferError(error.message || 'Failed to transfer to P-Chain');
-        } finally {
-            setTransferring(false);
-        }
+        // setTransferring(true);
+        // try {
+        //     await transferCToP(neededInP.toFixed(2), tempPrivateKeyHex, setPChainBalance);
+        // } catch (error: any) {
+        //     console.error('C to P transfer failed:', error);
+        //     setTransferError(error.message || 'Failed to transfer to P-Chain');
+        // } finally {
+        //     setTransferring(false);
+        // }
     };
 
     const hasEnoughFunds = () => {
@@ -161,9 +155,9 @@ export default function FundPChainWallet() {
     return (
         <div className="space-y-12">
             <div className='space-y-4'>
-                <h1 className="text-2xl font-medium">Fund Temporary Wallet</h1>
+                <h1 className="text-2xl font-medium">Fund P-Chain Wallet</h1>
                 <p>We will use a temporary wallet generated in your browser for issuing the transactions to set up your L1. After you've funded it on the Avalanche C-Chain it will transfer some of the funds to the P-Chain. After the set up of the L1 the address will no longer hold any power.</p>
-                <p className='italic'>Private Key: {tempPrivateKeyHex}</p>
+                {/* <p className='italic'>Private Key: {tempPrivateKeyHex}</p> */}
                 <p>You can claim Fuji AVAX at the <a href='https://core.app/tools/testnet-faucet/?subnet=c&token=c' target='_blank' className="underline">Faucet</a>. Use the coupon code <span className='italic'>l1-launcher</span>.</p>
             </div>
             <RequireWalletConnection chain={fujiConfig} skipUI={true}>

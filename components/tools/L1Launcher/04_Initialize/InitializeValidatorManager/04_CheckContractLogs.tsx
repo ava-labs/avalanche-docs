@@ -36,7 +36,6 @@ export default function CheckContractLogs({ onSuccess }: { onSuccess: () => void
         l1Name,
         tokenSymbol,
         getL1RpcEndpoint,
-        tempPrivateKeyHex,
     } = useL1LauncherWizardStore();
 
     const fetchLogs = async () => {

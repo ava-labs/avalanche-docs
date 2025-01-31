@@ -14,7 +14,6 @@ interface StepStatus {
 
 export default function CreateL1() {
     const {
-        tempPrivateKeyHex,
         l1Name,
         genesisString,
         setSubnetId,

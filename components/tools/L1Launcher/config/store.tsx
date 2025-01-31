@@ -63,9 +63,6 @@ interface L1LauncherWizardState extends StepWizardState {
     tokenAllocations: AllocationEntry[];
     setTokenAllocations: (allocations: AllocationEntry[]) => void;
 
-    tempPrivateKeyHex: string;
-    setTempPrivateKeyHex: (key: string) => void;
-
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
     getL1RpcEndpoint: () => string;
@@ -143,44 +140,6 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
-
-    tempPrivateKeyHex: "",
-    setTempPrivateKeyHex: (key: string) => set(() => ({ 
-        tempPrivateKeyHex: key, 
-        tokenAllocations: [
-            ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
-        ],
-        txAllowlistConfig : {
-            addresses: {
-                Admin: get().txAllowlistConfig.addresses.Admin,
-                Manager: get().txAllowlistConfig.addresses.Manager,
-                Enabled: [
-                    {
-                        id: '1',
-                        address: getAddresses(key).C,
-                        requiredReason: 'Initial Contract Deployer'
-                    },
-                    ...get().txAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
-                ]
-            },
-            activated: get().txAllowlistConfig.activated
-        },
-        contractDeployerAllowlistConfig : {
-            addresses: {
-                Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
-                Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
-                Enabled: [
-                    {
-                        id: '1',
-                        address: getAddresses(key).C,
-                        requiredReason: 'Initial Contract Deployer'
-                    },
-                    ...get().contractDeployerAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
-                ]
-            },
-            activated: get().txAllowlistConfig.activated
-        } 
-    })),
 
     tokenAllocations: [ ] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
@@ -272,12 +231,14 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
 const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
 
+const storageKey = 'l1-launcher-wizard-storage'
+
 export const useL1LauncherWizardStore = shouldPersist
     ? create<L1LauncherWizardState>()(
         persist(
             L1LauncherWizardStoreFunc,
             {
-                name: 'l1-launcher-wizard-storage',
+                name: storageKey,
                 storage: createJSONStorage(() => localStorage),
             }
         )
@@ -287,18 +248,7 @@ export const useL1LauncherWizardStore = shouldPersist
 export const resetL1ManagerWizardStore = () => {
     if (confirm('Are you sure you want to start over? This will reset all progress while preserving your temporary wallet.')) {
         const currentStore = useL1LauncherWizardStore.getState();
-        const savedPrivateKey = currentStore.tempPrivateKeyHex;
-        localStorage.setItem('temp-private-key', savedPrivateKey);
-        localStorage.removeItem('l1-launcher-wizard-storage');
+        localStorage.removeItem(storageKey);
         window.location.reload();
     }
 };
-
-// Initialize store with saved private key if it exists
-if (typeof window !== 'undefined') {
-    const savedPrivateKey = localStorage.getItem('temp-private-key');
-    if (savedPrivateKey) {
-        useL1LauncherWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
-        localStorage.removeItem('temp-private-key');
-    }
-}
