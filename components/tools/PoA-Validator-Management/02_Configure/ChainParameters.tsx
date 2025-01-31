@@ -19,7 +19,8 @@ import {
     getEndpoints
 } from '../../common/api/validator-info';
 
-import { isValidUrl, isValidAddress } from '@/components/tools/common/utils/validation';
+import { isValidUrl } from '@/components/tools/common/utils/validation';
+import { isAddress } from 'viem';
 
 export default function ChainParameters() {
     const {
@@ -379,7 +380,7 @@ export default function ChainParameters() {
                                     placeholder="0x..."
                                     className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white bg-gray-50"
                                 />
-                                {transparentProxyAddress && !isValidAddress(transparentProxyAddress) && (
+                                {transparentProxyAddress && !isAddress(transparentProxyAddress, {strict: false}) && (
                                     <p className="mt-2 text-sm text-red-500">
                                         Invalid contract address detected.
                                     </p>
@@ -441,7 +442,7 @@ export default function ChainParameters() {
                     !l1Name ||
                     !tokenSymbol ||
                     !transparentProxyAddress ||
-                    !isValidAddress(transparentProxyAddress) ||
+                    !isAddress(transparentProxyAddress, {strict: false}) ||
                     !endpointStatus.platform ||
                     !endpointStatus.info ||
                     !endpointStatus.validators ||
