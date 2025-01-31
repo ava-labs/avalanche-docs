@@ -1,10 +1,10 @@
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import { useL1ManagerWizardStore } from "../config/store";
+import { usePoAValidatorManagementWizardStore } from "../config/store";
 import { useState } from "react";
 import { checkCoreWallet } from '@/components/tools/common/api/coreWallet';
 
 export default function Welcome() {
-    const { goToNextStep, goToPreviousStep } = useL1ManagerWizardStore();
+    const { goToNextStep, goToPreviousStep } = usePoAValidatorManagementWizardStore();
     const [error, setError] = useState<string | null>(null);
 
     const handleNext = async () => {

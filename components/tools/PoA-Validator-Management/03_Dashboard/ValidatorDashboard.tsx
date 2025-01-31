@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { AlertCircle } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { useL1ManagerWizardStore } from '../config/store'
+import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { fetchSubnetId, fetchValidators } from '../../common/api/validator-info'
 import AddValidator from './AddValidator'
 import RemoveValidator from './RemoveValidator'
@@ -34,7 +34,7 @@ export default function LaunchValidators() {
     setSubnetId,
     validators,
     setValidators,
-  } = useL1ManagerWizardStore()
+  } = usePoAValidatorManagementWizardStore()
   const [isBootstrapped, setIsBootstrapped] = useState(false)
   const [validatorFilter, setValidatorFilter] = useState<ValidatorFilter>('active');
 

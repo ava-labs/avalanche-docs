@@ -9,7 +9,7 @@ import { fromBytes } from 'viem'
 import { aggregateSignatures } from '@/components/tools/common/api/signature-aggregator'
 import { pvm, utils, Context } from '@avalabs/avalanchejs'
 import { generatePrivateKey } from 'viem/accounts'
-import { useL1ManagerWizardStore } from '../config/store'
+import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
 import { packWarpIntoAccessList } from '../../common/utils/packWarp'
 import { pvmApi } from './const'
@@ -60,7 +60,7 @@ export default function RemoveValidator({
     const {
         tempEVMPrivateKeyHex,
         setTempEVMPrivateKeyHex,
-    } = useL1ManagerWizardStore()
+    } = usePoAValidatorManagementWizardStore()
 
 
     const [isRemoving, setIsRemoving] = useState(false)

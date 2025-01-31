@@ -6,7 +6,7 @@ import { CheckCircle2, XCircle } from 'lucide-react';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection';
 
-import { useL1ManagerWizardStore } from '../config/store';
+import { usePoAValidatorManagementWizardStore } from '../config/store';
 
 import PoAValidatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json';
 import { Address, createPublicClient, defineChain, http } from 'viem';
@@ -41,7 +41,7 @@ export default function ChainParameters() {
         setValidators,
         setSubnetId,
         setChainConfig
-    } = useL1ManagerWizardStore();
+    } = usePoAValidatorManagementWizardStore();
 
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);

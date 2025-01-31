@@ -11,7 +11,7 @@ import { pvm, utils, Context } from '@avalabs/avalanchejs'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
 import { packWarpIntoAccessList } from '../../common/utils/packWarp'
 import { aggregateSignatures } from '@/components/tools/common/api/signature-aggregator'
-import { useL1ManagerWizardStore } from '../config/store'
+import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { generatePrivateKey, privateKeyToAccount, privateKeyToAddress } from 'viem/accounts'
 import { platformEndpoint, pvmApi } from './const'
 import { fetchPChainAddressForActiveAccount } from '../../common/api/coreWallet'
@@ -63,7 +63,7 @@ export default function AddValidator({
         setValidationID,
         chainConfig,
         
-    } = useL1ManagerWizardStore()
+    } = usePoAValidatorManagementWizardStore()
 
   const [newNodeID, setNewNodeID] = useState('')
   const [newBlsPublicKey, setNewBlsPublicKey] = useState('')

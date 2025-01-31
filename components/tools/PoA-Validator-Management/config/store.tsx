@@ -42,7 +42,7 @@ interface ChainInfo {
     enabledFeatures: string[];
 }
 
-interface L1ManagerWizardState extends StepWizardState {
+interface PoAValidatorManagementState extends StepWizardState {
 
     chainConfig: ChainConfig | null;
     setChainConfig: (config: ChainConfig) => void;
@@ -134,7 +134,7 @@ interface L1ManagerWizardState extends StepWizardState {
     setValidationID: (id: string) => void;
 }
 
-const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) => ({
+const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagementState> = (set, get) => ({
     ...createStepWizardStore({set, get, stepList}),
 
     chainConfig: null,
@@ -309,21 +309,21 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
 
 const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
 
-export const useL1ManagerWizardStore = shouldPersist
-    ? create<L1ManagerWizardState>()(
+export const usePoAValidatorManagementWizardStore = shouldPersist
+    ? create<PoAValidatorManagementState>()(
         persist(
-            L1ManagerWizardStoreFunc,
+            PoAValidatorManagementWizardStoreFunc,
             {
                 name: 'l1-manager-wizard-storage',
                 storage: createJSONStorage(() => localStorage),
             }
         )
     )
-    : create<L1ManagerWizardState>()(L1ManagerWizardStoreFunc);
+    : create<PoAValidatorManagementState>()(PoAValidatorManagementWizardStoreFunc);
 
-export const resetL1ManagerWizardStore = () => {
+export const resetPoAValidatorManagementWizardStore = () => {
     if (confirm('Are you sure you want to start over? This will reset all progress while preserving your temporary wallet.')) {
-        const currentStore = useL1ManagerWizardStore.getState();
+        const currentStore = usePoAValidatorManagementWizardStore.getState();
         const savedPrivateKey = currentStore.tempPrivateKeyHex;
         localStorage.setItem('temp-private-key', savedPrivateKey);
         localStorage.removeItem('l1-manager-wizard-storage');
@@ -335,7 +335,7 @@ export const resetL1ManagerWizardStore = () => {
 if (typeof window !== 'undefined') {
     const savedPrivateKey = localStorage.getItem('temp-private-key');
     if (savedPrivateKey) {
-        useL1ManagerWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
+        usePoAValidatorManagementWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
         localStorage.removeItem('temp-private-key');
     }
 }
