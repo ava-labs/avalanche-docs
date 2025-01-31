@@ -37,14 +37,14 @@ export default function SwitchChain({ children, chainConfig }: Props) {
 
     // Check if user is connected and on the right chain
     const checkConnection = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             setChainStatus('wrong_chain');
             return;
         }
 
         try {
             // Request account access
-            const accounts = await window.ethereum.request({
+            const accounts = await window.avalanche.request({
                 method: 'eth_requestAccounts'
             });
 
@@ -57,7 +57,7 @@ export default function SwitchChain({ children, chainConfig }: Props) {
             setIsConnected(true);
 
             // Check chain
-            const chainId = await window.ethereum.request({
+            const chainId = await window.avalanche.request({
                 method: 'eth_chainId'
             });
 
@@ -76,8 +76,8 @@ export default function SwitchChain({ children, chainConfig }: Props) {
     useEffect(() => {
         checkConnection();
 
-        if (window.ethereum) {
-            const provider = window.ethereum!;
+        if (window.avalanche) {
+            const provider = window.avalanche!;
             provider.on('chainChanged', checkConnection);
             provider.on('accountsChanged', checkConnection);
 
@@ -89,10 +89,10 @@ export default function SwitchChain({ children, chainConfig }: Props) {
     }, []);
 
     const switchChain = async () => {
-        if (!window.ethereum) return;
+        if (!window.avalanche) return;
 
         try {
-            await window.ethereum.request({
+            await window.avalanche.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: chainConfig.chainId }],
             });
@@ -100,7 +100,7 @@ export default function SwitchChain({ children, chainConfig }: Props) {
             // If the chain hasn't been added to MetaMask, add it
             if (error.code === 4902) {
                 try {
-                    await window.ethereum.request({
+                    await window.avalanche.request({
                         method: 'wallet_addEthereumChain',
                         params: [chainConfig]
                     });

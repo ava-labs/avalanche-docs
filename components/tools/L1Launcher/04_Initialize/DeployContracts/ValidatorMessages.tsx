@@ -18,7 +18,7 @@ export function ValidatorMessagesDeployer() {
     }, [validatorMessagesAddress]);
 
     const deployContract = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             throw new Error('No ethereum wallet found');
         }
 
@@ -34,7 +34,7 @@ export function ValidatorMessagesDeployer() {
             });
 
             const walletClient = createWalletClient({
-                transport: custom(window.ethereum),
+                transport: custom(window.avalanche),
                 chain
             });
 

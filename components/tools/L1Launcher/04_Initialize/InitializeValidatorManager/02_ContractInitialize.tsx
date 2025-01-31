@@ -72,7 +72,7 @@ export default function ContractInitialize() {
     }, []); // Empty dependency array means this runs once on mount
 
     const onInitialize = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             setStatus('error');
             setErrorMessage('MetaMask is not installed');
             return;
@@ -104,7 +104,7 @@ export default function ContractInitialize() {
             // Create wallet client for metamask
             const walletClient = createWalletClient({
                 chain: customChain,
-                transport: custom(window.ethereum)
+                transport: custom(window.avalanche)
             });
             const [address] = await walletClient.requestAddresses();
 

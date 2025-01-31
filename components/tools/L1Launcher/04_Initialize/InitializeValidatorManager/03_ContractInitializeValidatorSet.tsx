@@ -85,7 +85,7 @@ export default function ContractInitializeValidatorSet() {
     }, [tempPrivateKeyHex, evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint]);
 
     const onInitialize = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             setStatus({ status: 'error' });
             setError('MetaMask is not installed');
             return;
@@ -117,7 +117,7 @@ export default function ContractInitializeValidatorSet() {
             // Create wallet client for metamask
             const walletClient = createWalletClient({
                 chain: customChain,
-                transport: custom(window.ethereum)
+                transport: custom(window.avalanche)
             });
             const [address] = await walletClient.requestAddresses();
 

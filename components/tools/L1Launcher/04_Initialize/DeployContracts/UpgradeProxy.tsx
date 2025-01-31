@@ -285,7 +285,7 @@ export function UpgradeProxyForm({ onUpgradeComplete }: { onUpgradeComplete?: (s
                 throw new Error('PoA Validator Manager address not set');
             }
 
-            if (!window.ethereum) {
+            if (!window.avalanche) {
                 throw new Error('No ethereum provider found');
             }
 
@@ -296,7 +296,7 @@ export function UpgradeProxyForm({ onUpgradeComplete }: { onUpgradeComplete?: (s
             const chain = getChainConfig(evmChainId, chainId, getL1RpcEndpoint());
             const walletClient = createWalletClient({
                 chain,
-                transport: custom(window.ethereum)
+                transport: custom(window.avalanche)
             });
 
             const [address] = await walletClient.requestAddresses();

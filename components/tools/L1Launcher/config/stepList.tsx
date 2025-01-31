@@ -7,7 +7,7 @@ import Genesis from "../02_Configure/Genesis";
 
 import PrepareValidators from "../03_Launch/PrepareValidators";
 import GenerateKeys from "../03_Launch/GenerateKeys";
-import FundTempWallet from "../03_Launch/FundTempWallet";
+import FundPChainWallet from "../03_Launch/FundPChainWallet";
 import CreateL1 from "../03_Launch/CreateL1"
 import LaunchValidators from "../03_Launch/LaunchValidators";
 import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
@@ -79,9 +79,9 @@ export const stepList: StepListType = {
         component: <GenerateKeys />,
         group: "launch-l1",
     },
-    "fund-temp-wallet": {
-        title: "Fund temp wallet",
-        component: <FundTempWallet />,
+    "fund-p-chain-wallet": {
+        title: "Fund P-chain wallet",
+        component: <FundPChainWallet />,
         group: "launch-l1",
     },
     "create-chain": {

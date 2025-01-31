@@ -54,15 +54,15 @@ export default function RequireWalletConnection({ children, chain, requiredBalan
 
             // Check if wallet is installed
             setConnectionStatus('no_wallet_installed');
-            if (!window.ethereum) return;
+            if (!window.avalanche) return;
 
             // Check if connected to the correct chain
             setConnectionStatus('wrong_chain');
-            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            const chainId = await window.avalanche.request({ method: 'eth_chainId' });
             if (chainId !== `0x${chain.id.toString(16)}`) return;
 
             // Check if account can be accessed
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await window.avalanche.request({ method: 'eth_requestAccounts' });
             if (!accounts || accounts.length === 0) {
                 setError('No account detected');
                 return;
@@ -72,7 +72,7 @@ export default function RequireWalletConnection({ children, chain, requiredBalan
 
             // Check if RPC endpoint is reachable
             setConnectionStatus('rpc_error');
-            const latestBlock = await window.ethereum.request({
+            const latestBlock = await window.avalanche.request({
                 method: 'eth_blockNumber',
             });
             
@@ -121,8 +121,8 @@ export default function RequireWalletConnection({ children, chain, requiredBalan
     useEffect(() => {
         checkConnection();
 
-        if (window.ethereum) {
-            const provider = window.ethereum!;
+        if (window.avalanche) {
+            const provider = window.avalanche!;
             provider.on('chainChanged', checkConnection);
             provider.on('accountsChanged', checkConnection);
 
@@ -134,14 +134,14 @@ export default function RequireWalletConnection({ children, chain, requiredBalan
     }, []);
 
     const switchChain = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             setConnectionStatus('no_wallet_installed');
             return;
         }
 
         const walletClient = createWalletClient({
             chain,
-            transport: custom(window.ethereum)
+            transport: custom(window.avalanche)
         });
 
         try {

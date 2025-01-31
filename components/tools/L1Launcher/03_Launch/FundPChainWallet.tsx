@@ -10,7 +10,7 @@ import NextPrev from "@/components/tools/common/ui/NextPrev";
 const changeAllowance = parseEther('0.1');
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
 
-export default function FundTempWallet() {
+export default function FundPChainWallet() {
     const { nodesCount, tempPrivateKeyHex, setTempPrivateKeyHex, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
     const [cChainBalance, setCChainBalance] = useState<bigint>(BigInt(0));
     const [transferring, setTransferring] = useState(false);
@@ -74,7 +74,7 @@ export default function FundTempWallet() {
     }, [addresses?.C]);
 
     const handleTransfer = async () => {
-        if (!window.ethereum || !addresses?.C) return;
+        if (!window.avalanche || !addresses?.C) return;
 
         const requiredTotal = nodesCount + 0.5;
         const currentCBalance = Number(formatEther(cChainBalance));
@@ -94,7 +94,7 @@ export default function FundTempWallet() {
         try {
             const walletClient = createWalletClient({
                 chain: avalancheFuji,
-                transport: custom(window.ethereum)
+                transport: custom(window.avalanche)
             });
 
             const [account] = await walletClient.requestAddresses();
@@ -166,7 +166,7 @@ export default function FundTempWallet() {
                 <p className='italic'>Private Key: {tempPrivateKeyHex}</p>
                 <p>You can claim Fuji AVAX at the <a href='https://core.app/tools/testnet-faucet/?subnet=c&token=c' target='_blank' className="underline">Faucet</a>. Use the coupon code <span className='italic'>l1-launcher</span>.</p>
             </div>
-            <RequireWalletConnection chain={fujiConfig}>
+            <RequireWalletConnection chain={fujiConfig} skipUI={true}>
                 <div className="space-y-4 mb-4">
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between items-center mb-1">

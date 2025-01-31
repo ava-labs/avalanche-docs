@@ -41,7 +41,7 @@ export function PoAValidatorManagerDeployer() {
     };
 
     const deployContract = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             throw new Error('No ethereum wallet found');
         }
 
@@ -57,7 +57,7 @@ export function PoAValidatorManagerDeployer() {
 
             const walletClient = createWalletClient({
                 chain,
-                transport: custom(window.ethereum)
+                transport: custom(window.avalanche)
             });
 
             const [address] = await walletClient.requestAddresses();
