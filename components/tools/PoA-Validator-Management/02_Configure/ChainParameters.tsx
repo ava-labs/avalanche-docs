@@ -9,14 +9,14 @@ import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletC
 import { usePoAValidatorManagementWizardStore } from '../config/store';
 
 import PoAValidatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json';
-import { Address, createPublicClient, defineChain, http } from 'viem';
+import { Address, Chain, createPublicClient, createWalletClient, custom, defineChain, http } from 'viem';
 
 import {
     fetchValidators,
     checkEndpoint,
-    fetchSubnetId,
-    fetchSubnetInfo,
-    getEndpoints
+    fetchSubnetIdByValidationID,
+    getEndpoints,
+    avaCloudSDK
 } from '../../common/api/validator-info';
 
 import { isValidUrl } from '@/components/tools/common/utils/validation';
@@ -40,7 +40,8 @@ export default function ChainParameters() {
         goToPreviousStep,
         setValidators,
         setSubnetId,
-        setChainConfig
+        setChainConfig,
+        setCoreWalletClient
     } = usePoAValidatorManagementWizardStore();
 
     const [error, setError] = useState("");
@@ -118,24 +119,13 @@ export default function ChainParameters() {
 
                 // Try to get chain name using eth_chainId
                 try {
-                    const chainIdResponse = await fetch(rpcUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            jsonrpc: '2.0',
-                            method: 'eth_chainId',
-                            params: [],
-                            id: 1
-                        })
+                    const publicClient = createPublicClient({
+                        transport: http(rpcUrl)
                     });
 
-                    const chainIdData = await chainIdResponse.json();
-                    if (chainIdData.result) {
-                        const chainIdHex = chainIdData.result;
-                        const chainIdNum = parseInt(chainIdHex, 16);
-                        setL1Name(`L1 ${chainIdNum}`);
+                    const chainId = await publicClient.getChainId()
+                    if (chainId) {
+                        setL1Name(`L1 ${chainId}`);
                     }
                 } catch (chainErr) {
                     console.error("Error fetching chain name:", chainErr);
@@ -154,13 +144,24 @@ export default function ChainParameters() {
             console.log('validators', validators);
             let subnetId = '';
             if (validators.length > 0 && validators[0].validationID) {
-                subnetId = await fetchSubnetId(rpcUrl, validators[0].validationID);
+                subnetId = await fetchSubnetIdByValidationID(validators[0].validationID);
                 setSubnetId(subnetId);
+                // const validatorResponse = await avaCloudSDK.data.primaryNetwork.listL1Validators({
+                //     l1ValidationId: validators[0].validationID,
+                //     network: "fuji",
+                //   }) as ListL1ValidatorsResponse;
+                // console.log('validatorResponse', validatorResponse);
+                // subnetId = validatorResponse.result.validators[0].subnetId;
+
             }
             console.log('subnetId', subnetId);
             try {
                 // get validator manager address from subnet info
-                const subnetInfo = await fetchSubnetInfo("fuji", subnetId);
+                const subnetInfo = await avaCloudSDK.data.primaryNetwork.getSubnetById({
+                    network: "fuji",
+                    subnetId: subnetId,
+                });
+
                 if (subnetInfo.isL1 && subnetInfo.l1ValidatorManagerDetails) {
                     setTransparentProxyAddress(subnetInfo.l1ValidatorManagerDetails.contractAddress);
                 } else {
@@ -186,10 +187,11 @@ export default function ChainParameters() {
 
     const handleWalletConnectionCallback = async () => {
         await handleCheckPoaOwner();
-        defineAndSaveChainConfig();
+        const config = defineAndSaveChainConfig();
+        saveCoreWalletClient(config);
     }
 
-    const defineAndSaveChainConfig = async () => {
+    const defineAndSaveChainConfig = () => {
         const chainConfig = defineChain({
             id: evmChainId,
             name: l1Name,
@@ -205,6 +207,19 @@ export default function ChainParameters() {
             },
         })
         setChainConfig(chainConfig)
+        return chainConfig;
+    }
+
+    const saveCoreWalletClient = (chainConfig: Chain) => {
+        if (!window.avalanche) return;
+        const noopProvider = { request: () => Promise.resolve(null) }
+        const provider = typeof window !== 'undefined' ? window.avalanche! : noopProvider
+        const walletClient = createWalletClient({
+            chain: chainConfig,
+            transport: custom(provider),
+        })
+        setCoreWalletClient(walletClient)
+
     }
 
     const handleCheckPoaOwner = async () => {
@@ -380,7 +395,7 @@ export default function ChainParameters() {
                                     placeholder="0x..."
                                     className="mt-1.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white bg-gray-50"
                                 />
-                                {transparentProxyAddress && !isAddress(transparentProxyAddress, {strict: false}) && (
+                                {transparentProxyAddress && !isAddress(transparentProxyAddress, { strict: false }) && (
                                     <p className="mt-2 text-sm text-red-500">
                                         Invalid contract address detected.
                                     </p>
@@ -442,7 +457,7 @@ export default function ChainParameters() {
                     !l1Name ||
                     !tokenSymbol ||
                     !transparentProxyAddress ||
-                    !isAddress(transparentProxyAddress, {strict: false}) ||
+                    !isAddress(transparentProxyAddress, { strict: false }) ||
                     !endpointStatus.platform ||
                     !endpointStatus.info ||
                     !endpointStatus.validators ||

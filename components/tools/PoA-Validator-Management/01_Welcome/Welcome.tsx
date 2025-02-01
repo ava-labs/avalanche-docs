@@ -20,20 +20,23 @@ export default function Welcome() {
         <h1 className="text-2xl font-medium mb-6">Welcome</h1>
 
         <p className="mb-4">
-            The PoA Manager helps you manage your L1's validator set. You can add new validators, remove existing ones, and adjust their weight of stake. This tool is designed for developers who need to maintain their Proof of Authority (PoA) validator set through a simple web interface. The tool is completely open source and available on <a href="https://github.com/ava-labs/avalanche-docs" target="_blank" className="text-blue-500 hover:text-blue-700 underline">GitHub</a>.
+            The PoA Manager helps you manage your L1's validator set. You can add new validators, disable existing ones, and adjust their weight. This tool is designed for developers who need to maintain their Proof of Authority (PoA) validator set through a simple web interface.
+        </p>
+        <p className="mb-4">
+            The tool is completely open source and available on <a href="https://github.com/ava-labs/avalanche-docs" target="_blank" className="text-blue-500 hover:text-blue-700 underline">GitHub</a>
         </p>
 
         <div className="p-4 mb-4 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-lg">
             <h2 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">Prerequisites</h2>
             <p className="mb-2 text-gray-800 dark:text-gray-200">
-                Before using the L1 Manager, please ensure you have the <a 
-                    href="https://core.app/" 
-                    target="_blank" 
+                Before using the L1 Manager, please ensure you have the <a
+                    href="https://core.app/"
+                    target="_blank"
                     className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
                 >Core wallet browser extension</a> installed. This extension is required for interacting with the P-Chain.
             </p>
             <p className="mb-2 text-gray-800 dark:text-gray-200">
-                You will also need to have AVAX balance on the P-Chain to perform validator management operations. If your AVAX is on the C-Chain, you can transfer it to the P-Chain using the <a 
+                You will also need to have AVAX balance on the P-Chain to perform validator management operations. If your AVAX is on the C-Chain, you can transfer it to the P-Chain using the <a
                     href="https://test.core.app/stake/cross-chain-transfer/"
                     target="_blank"
                     className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
@@ -45,9 +48,9 @@ export default function Welcome() {
             <div className="p-4 mb-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-lg">
                 <p className="text-red-700 dark:text-red-200">
                     {error} {error.includes("not installed") ? (
-                        <>Please install <a 
-                            href="https://core.app/" 
-                            target="_blank" 
+                        <>Please install <a
+                            href="https://core.app/"
+                            target="_blank"
                             className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
                         >Core wallet</a> to continue. After installing, refresh this page.</>
                     ) : (
@@ -57,11 +60,11 @@ export default function Welcome() {
             </div>
         )}
 
-        <NextPrev 
-            nextDisabled={false} 
-            prevHidden={false} 
-            onNext={handleNext} 
-            onPrev={goToPreviousStep} 
+        <NextPrev
+            nextDisabled={false}
+            prevHidden={false}
+            onNext={handleNext}
+            onPrev={goToPreviousStep}
         />
     </>;
 }

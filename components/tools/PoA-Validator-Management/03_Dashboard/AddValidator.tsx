@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Plus, RefreshCw, Check, X } from 'lucide-react'
-import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, defineChain, custom, decodeErrorResult, type Abi, parseEther, Chain } from 'viem'
+import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, type Abi, parseEther } from 'viem'
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { pvm, utils, Context } from '@avalabs/avalanchejs'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
@@ -13,7 +13,7 @@ import { packWarpIntoAccessList } from '../../common/utils/packWarp'
 import { aggregateSignatures } from '@/components/tools/common/api/signature-aggregator'
 import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { generatePrivateKey, privateKeyToAccount, privateKeyToAddress } from 'viem/accounts'
-import { platformEndpoint, pvmApi } from './const'
+import { pChainChainID, platformEndpoint, pvmApi } from './const'
 import { fetchPChainAddressForActiveAccount } from '../../common/api/coreWallet'
 import { debugTraceAndDecode } from '../../common/api/debug'
 import { parseNodeID } from '../../common/utils/parse'
@@ -44,26 +44,34 @@ interface AddValidatorProps {
   onValidatorAdded: () => void
 }
 
+
+// Add Validator to an L1
+// The complete process is as follows:
+// 1. `InitializeValidatorRegistration` on Validator Manager Contract
+// 2. Sign the emitted EVM warp message with signature aggregator
+// 3. Submit the transaction to P-Chain `registerL1Validator`
+// 4. Reconstruct the warp message from P-Chain
+// 5. Sign the reconstructed P-Chain warp message with signature aggregator
+// 6. Submit the transaction to Validator Manager Contract `completeRegistration` with the signed P-Chain warp message in an AccessList (temp wallet needed)
+
 export default function AddValidator({
   rpcUrl,
-  evmChainId,
   transparentProxyAddress,
-  l1Name,
   tokenSymbol,
   poaOwnerAddress,
   subnetId,
   onValidatorAdded
 }: AddValidatorProps) {
-    const { 
-        tempEVMPrivateKeyHex, 
-        setTempEVMPrivateKeyHex,
-        registerL1ValidatorUnsignedWarpMsg,
-        setRegisterL1ValidatorUnsignedWarpMsg,
-        validationID,
-        setValidationID,
-        chainConfig,
-        
-    } = usePoAValidatorManagementWizardStore()
+  const {
+    tempEVMPrivateKeyHex,
+    setTempEVMPrivateKeyHex,
+    registerL1ValidatorUnsignedWarpMsg,
+    setRegisterL1ValidatorUnsignedWarpMsg,
+    validationID,
+    setValidationID,
+    chainConfig,
+    coreWalletClient,
+  } = usePoAValidatorManagementWizardStore()
 
   const [newNodeID, setNewNodeID] = useState('')
   const [newBlsPublicKey, setNewBlsPublicKey] = useState('')
@@ -86,38 +94,36 @@ export default function AddValidator({
   const [savedPChainWarpMsg, setSavedPChainWarpMsg] = useState('')
   const [savedPChainResponse, setSavedPChainResponse] = useState('')
 
-  // Create clients inside component with dynamic chain config
-  const noopProvider = { request: () => Promise.resolve(null) }
-  const provider = typeof window !== 'undefined' ? window.ethereum! : noopProvider
-
   if (!chainConfig) {
     console.error('Chain config is not defined')
     return
   }
 
-  const walletClient = createWalletClient({
-    chain: chainConfig,
-    transport: custom(provider),
-  })
+  if (!coreWalletClient) {
+    console.error('Core wallet client is not defined')
+    return
+  }
 
   const publicClient = createPublicClient({
     chain: chainConfig,
     transport: http()
   })
 
+  // ensure temp wallet is set and get P-Chain address from core wallet
   useEffect(() => {
     if (tempEVMPrivateKeyHex === '0x') {
-        setTempEVMPrivateKeyHex(generatePrivateKey())      
+      setTempEVMPrivateKeyHex(generatePrivateKey())
     }
     const fetchPChainAddress = async () => {
-        const pChainAddress = await fetchPChainAddressForActiveAccount();
-        if (!newPChainAddress || newPChainAddress === '') {
-          setNewPChainAddress(pChainAddress);
-        }
+      const pChainAddress = await fetchPChainAddressForActiveAccount();
+      if (!newPChainAddress || newPChainAddress === '') {
+        setNewPChainAddress(pChainAddress);
+      }
     };
     fetchPChainAddress();
   }, []); // Run once when component mounts
 
+  // Update Step Status
   const updateStepStatus = (
     step: keyof ValidationSteps,
     status: StepStatus['status'],
@@ -129,16 +135,17 @@ export default function AddValidator({
     }))
   }
 
-  const StepIndicator = ({ 
-    status, 
-    label, 
-    error, 
-    onRetry 
-  }: { 
+  // Step Indicator Component
+  const StepIndicator = ({
+    status,
+    label,
+    error,
+    onRetry
+  }: {
     status: StepStatus['status']
     label: string
     error?: string
-    onRetry?: () => void 
+    onRetry?: () => void
   }) => {
     return (
       <div className="flex items-center gap-2 mb-2">
@@ -174,7 +181,7 @@ export default function AddValidator({
     // Reset status of current step and all following steps
     const steps = Object.keys(validationSteps) as Array<keyof ValidationSteps>
     const stepIndex = steps.indexOf(step)
-    
+
     // Only reset the statuses from the failed step onwards
     steps.slice(stepIndex).forEach(currentStep => {
       updateStepStatus(currentStep, 'pending')
@@ -182,7 +189,7 @@ export default function AddValidator({
 
     // Start the validation process from the failed step
     await addValidator(step)
-    
+
     // If the retried step succeeds (no error status), continue with the next steps
     const nextStepIndex = stepIndex + 1
     if (nextStepIndex < steps.length && validationSteps[step].status === 'success') {
@@ -190,6 +197,7 @@ export default function AddValidator({
     }
   }
 
+  // Add Validator
   const addValidator = async (startFromStep?: keyof ValidationSteps) => {
     if (!newNodeID || !newBlsPublicKey || !newBlsProofOfPossession || !newPChainAddress || !newWeight || !poaOwnerAddress) {
       console.log('Missing required fields')
@@ -214,18 +222,19 @@ export default function AddValidator({
 
     try {
       // Get account first
-      [account] = await walletClient.getAddresses()
+      [account] = await coreWalletClient.getAddresses()
 
       // Step 1: Initialize Registration
       if (!startFromStep || startFromStep === 'initializeRegistration') {
         updateStepStatus('initializeRegistration', 'loading')
         try {
-            
+
           // Process P-Chain Address
           const pChainAddressBytes = utils.bech32ToBytes(newPChainAddress)
           const pChainAddressHex = fromBytes(pChainAddressBytes, 'hex')
           const expiry = BigInt(Math.floor(Date.now() / 1000) + 43200) // 12 hours
 
+          // Build arguments for `initializeValidatorRegistration`
           const args = [
             {
               nodeID: parseNodeID(newNodeID),
@@ -242,7 +251,8 @@ export default function AddValidator({
             },
             BigInt(newWeight),
           ]
-          
+
+          // Simulate the transaction
           await publicClient.simulateContract({
             abi: validatorManagerAbi.abi,
             address: transparentProxyAddress as Address,
@@ -253,35 +263,33 @@ export default function AddValidator({
             nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
           })
 
-          const tx = await walletClient.writeContract({
+          // Submit the transaction to the core wallet
+          const tx = await coreWalletClient.writeContract({
             abi: validatorManagerAbi.abi,
             address: transparentProxyAddress as Address,
             functionName: 'initializeValidatorRegistration',
             args,
             account,
+            chain: chainConfig,
             gas: BigInt(2500000),
             nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
           })
 
+          // get the unsigned warp message and validation ID from the receipt
           const receipt = await publicClient.waitForTransactionReceipt({ hash: tx })
           RegisterL1ValidatorUnsignedWarpMsg = receipt.logs[0].data ?? '';
           validationIDHex = receipt.logs[1].topics[1] ?? '';
-          
-          
+
+
           // Save to store
           setRegisterL1ValidatorUnsignedWarpMsg(RegisterL1ValidatorUnsignedWarpMsg)
           setValidationID(validationIDHex)
-          
+
           console.log("RegisterL1ValidatorUnsignedWarpMsg: ", RegisterL1ValidatorUnsignedWarpMsg)
-          console.log("ValidationID: ", validationID)
-          
+          console.log("ValidationID: ", validationIDHex)
+
           updateStepStatus('initializeRegistration', 'success')
-          
-          // If this was a retry, continue with next step
-          if (startFromStep === 'initializeRegistration') {
-            await addValidator('signMessage')
-            return
-          }
+
         } catch (error: any) {
           updateStepStatus('initializeRegistration', 'error', error.message)
           return
@@ -294,17 +302,24 @@ export default function AddValidator({
         try {
           // Use stored message if retrying, otherwise use the one from previous step
           const messageToSign = startFromStep ? registerL1ValidatorUnsignedWarpMsg : RegisterL1ValidatorUnsignedWarpMsg;
-          
+
+          // sign the unsigned warp message with signature aggregator
           const signedMessage = await aggregateSignatures({
             message: messageToSign,
             signingSubnetId: subnetId,
           });
 
+          // we can use avaCloudSDK eventually
+          // const signedMessage = await avaCloudSDK.data.signatureAggregator.aggregateSignatures({
+          //   message: messageToSign,
+          //   signingSubnetId: subnetId,
+          // });
+
           signedValidatorManagerMessage = signedMessage;
           console.log("Signed Validator Manager Message: ", signedValidatorManagerMessage)
           setSavedSignedMessage(signedMessage);
           updateStepStatus('signMessage', 'success')
-          
+
           // If this was a retry, continue with next step
           if (startFromStep === 'signMessage') {
             await addValidator('registerOnPChain')
@@ -322,7 +337,8 @@ export default function AddValidator({
         try {
           // Use saved message if retrying
           const messageToUse = startFromStep ? savedSignedMessage : signedValidatorManagerMessage;
-          
+
+          // Get fee state, context and utxos from P-Chain
           const feeState = await pvmApi.getFeeState();
           const { utxos } = await pvmApi.getUTXOs({ addresses: [newPChainAddress] });
           const context = await Context.getContextFromURI(platformEndpoint);
@@ -330,6 +346,7 @@ export default function AddValidator({
           // Convert balance from AVAX to nAVAX (1 AVAX = 1e9 nAVAX)
           const balanceInNanoAvax = BigInt(Number(newBalance) * 1e9);
 
+          // Create a new register validator transaction
           const unsignedRegisterValidatorTx = pvm.e.newRegisterL1ValidatorTx({
             balance: balanceInNanoAvax,
             blsSignature: new Uint8Array(Buffer.from(newBlsProofOfPossession.slice(2), 'hex')),
@@ -342,6 +359,7 @@ export default function AddValidator({
           const unsignedRegisterValidatorTxBytes = unsignedRegisterValidatorTx.toBytes()
           const unsignedRegisterValidatorTxHex = bytesToHex(unsignedRegisterValidatorTxBytes)
 
+          // Submit the transaction to the P-Chain using Core Wallet
           response = await window.avalanche.request({
             method: 'avalanche_sendTransaction',
             params: {
@@ -349,12 +367,12 @@ export default function AddValidator({
               chainAlias: 'P',
             }
           });
-          
+
           // Save the response for future steps
           setSavedPChainResponse(response)
-          
+
           updateStepStatus('registerOnPChain', 'success')
-          
+
           // If this was a retry, continue with next step
           if (startFromStep === 'registerOnPChain') {
             await addValidator('waitForPChain')
@@ -373,21 +391,22 @@ export default function AddValidator({
           // Use saved response if available
           const responseToUse = startFromStep ? savedPChainResponse : response;
           const validationIDToUse = startFromStep ? validationID : validationIDHex;
-          
+
+          // Wait for transaction to be confirmed
           while (true) {
             let status = await pvmApi.getTxStatus({ txID: responseToUse });
             if (status.status === "Committed") break;
             await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
           }
-          
-          const pChainChainID = '11111111111111111111111111111111LpoYY'
+
           // Always use the validation ID from the store since it's set during initialization
           const validationIDBytes = hexToBytes(validationIDToUse as Address)
           const unsignedPChainWarpMsg = packL1ValidatorRegistration(validationIDBytes, true, 5, pChainChainID)
           const unsignedPChainWarpMsgHex = bytesToHex(unsignedPChainWarpMsg)
           console.log("Unsigned P-Chain Warp Message: ", unsignedPChainWarpMsgHex)
           console.log("Waiting 30s before aggregating signatures")
-          await new Promise(resolve => setTimeout(resolve, 30000)); // 30 seconds
+          await new Promise(resolve => setTimeout(resolve, 30000)); // we should always wait 30s before aggregating signatures when modifying validator set to make everything is updated
+          // Aggregate signatures from validators
           const signedMessage = await aggregateSignatures({
             message: unsignedPChainWarpMsgHex,
             justification: registerL1ValidatorUnsignedWarpMsg,
@@ -405,26 +424,27 @@ export default function AddValidator({
         }
       }
 
-      // Step 5: Fund EVM temp wallet to complete registration
+      // Step 5: Fund EVM temp wallet to complete registration. We use this because no browser wallet supports AccessList
       if (!startFromStep || startFromStep === 'fundTempWallet') {
         updateStepStatus('fundTempWallet', 'loading')
         const tempWalletAddress = privateKeyToAddress(tempEVMPrivateKeyHex as Address)
         try {
-            const walletBalance = await publicClient.getBalance({ address: tempWalletAddress })
-            if (walletBalance < 1n) {
-                console.log("Funding temp wallet with 5 NATIVE TOKEN of L1")
-                const hash = await walletClient.sendTransaction({
-                    account: poaOwnerAddress as Address,
-                    to: tempWalletAddress,
-                    value: parseEther('5') // 5 NATIVE TOKEN of L1 : calculate how much AVAX is needed
-                })
-                await publicClient.waitForTransactionReceipt({ hash })
-            }
-            updateStepStatus('fundTempWallet', 'success')
-            
+          const walletBalance = await publicClient.getBalance({ address: tempWalletAddress })
+          if (walletBalance < 1n) {
+            console.log("Funding temp wallet with 5 NATIVE TOKEN of L1")
+            const hash = await coreWalletClient.sendTransaction({
+              account: poaOwnerAddress as Address,
+              to: tempWalletAddress,
+              chain: chainConfig,
+              value: parseEther('5') // 5 NATIVE TOKEN of L1 : calculate how much AVAX is needed
+            })
+            await publicClient.waitForTransactionReceipt({ hash })
+          }
+          updateStepStatus('fundTempWallet', 'success')
+
         } catch (error: any) {
-            updateStepStatus('fundTempWallet', 'error', error.message)
-            return
+          updateStepStatus('fundTempWallet', 'error', error.message)
+          return
         }
       }
 
@@ -434,7 +454,8 @@ export default function AddValidator({
         try {
           // Use saved message if retrying
           const warpMsgToUse = startFromStep ? savedPChainWarpMsg : signedPChainWarpMsg;
-        
+
+          // Convert the signed warp message to hex then to bytes then pack into access list
           const signedPChainWarpMsgBytes = hexToBytes(`0x${warpMsgToUse}`)
           const accessList = packWarpIntoAccessList(signedPChainWarpMsgBytes)
           console.log("Access List: ", accessList)
@@ -445,6 +466,7 @@ export default function AddValidator({
           try {
 
             console.log("Temp Private Key Hex: ", tempEVMPrivateKeyHex)
+            // create wallet client for temp wallet
             const tempAccount = privateKeyToAccount(tempEVMPrivateKeyHex)
             const tempWalletClient = createWalletClient({
               account: tempAccount,
@@ -452,6 +474,7 @@ export default function AddValidator({
               transport: http(rpcUrl),
             })
 
+            // simulate the tx then submit it. notice the access list is used
             const { request } = await publicClient.simulateContract({
               abi: validatorManagerAbi.abi,
               address: transparentProxyAddress as Address,
@@ -469,9 +492,10 @@ export default function AddValidator({
             const finalizeRegistrationTx = await tempWalletClient.writeContract(request)
             finalizeRegistrationReceipt = await publicClient.waitForTransactionReceipt({ hash: finalizeRegistrationTx })
 
+            // check if weird revert reason
             if (finalizeRegistrationReceipt.status === 'reverted') {
               const revertReason = await debugTraceAndDecode(
-                finalizeRegistrationTx, 
+                finalizeRegistrationTx,
                 rpcUrl,
                 validatorManagerAbi.abi as Abi
               );
@@ -496,7 +520,7 @@ export default function AddValidator({
           }
           updateStepStatus('finalizeRegistration', 'success')
 
-          // Notify parent component
+          // Notify parent component to refresh UI
           onValidatorAdded()
         } catch (error: any) {
           updateStepStatus('finalizeRegistration', 'error', error.message)
@@ -504,10 +528,11 @@ export default function AddValidator({
         }
       }
 
-      // refund the temp wallet
+      // Step 7: Refund the temp wallet
       if (!startFromStep || startFromStep === 'refundTempWallet') {
         updateStepStatus('refundTempWallet', 'loading')
         try {
+          // create wallet client for temp wallet. This should be pulled out to a diff helper/util
           const tempAccount = privateKeyToAccount(tempEVMPrivateKeyHex)
           const tempWalletClient = createWalletClient({
             account: tempAccount,
@@ -515,6 +540,7 @@ export default function AddValidator({
             transport: http(rpcUrl),
           })
 
+          // refund the full balance of temp wallet
           const refundTx = await tempWalletClient.sendTransaction({
             to: poaOwnerAddress as Address,
             value: await publicClient.getBalance({ address: tempAccount.address }) - BigInt(30000) * await publicClient.getGasPrice() * 2n,
@@ -522,9 +548,9 @@ export default function AddValidator({
           })
           await publicClient.waitForTransactionReceipt({ hash: refundTx })
           console.log("Refund Transaction Receipt: ", refundTx)
-          
+
           updateStepStatus('refundTempWallet', 'success')
-          
+
           // After successful completion
           setIsProcessComplete(true)
           setIsAddingValidator(false)
@@ -565,24 +591,24 @@ export default function AddValidator({
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4">
-            <Input 
-              placeholder="Node ID" 
-              value={newNodeID} 
+            <Input
+              placeholder="Node ID"
+              value={newNodeID}
               onChange={(e) => setNewNodeID(e.target.value)}
             />
-            <Input 
-              placeholder="BLS Public Key" 
-              value={newBlsPublicKey} 
+            <Input
+              placeholder="BLS Public Key"
+              value={newBlsPublicKey}
               onChange={(e) => setNewBlsPublicKey(e.target.value)}
             />
-            <Input 
-              placeholder="BLS Proof of Possession" 
-              value={newBlsProofOfPossession} 
+            <Input
+              placeholder="BLS Proof of Possession"
+              value={newBlsProofOfPossession}
               onChange={(e) => setNewBlsProofOfPossession(e.target.value)}
             />
             <div className="relative group">
-              <Input 
-                placeholder="P-Chain Address" 
+              <Input
+                placeholder="P-Chain Address"
                 value={newPChainAddress}
                 disabled
               />
@@ -590,21 +616,21 @@ export default function AddValidator({
                 Autofilled from Core wallet
               </div>
             </div>
-            <Input 
-              placeholder="Initial Balance (AVAX)" 
-              value={newBalance} 
+            <Input
+              placeholder="Initial Balance (AVAX)"
+              value={newBalance}
               onChange={(e) => setNewBalance(e.target.value)}
               type="number"
               min="0"
               step="0.000000001"
             />
-            <Input 
-              placeholder="Weight" 
-              value={newWeight} 
+            <Input
+              placeholder="Weight"
+              value={newWeight}
               onChange={(e) => setNewWeight(e.target.value)}
               type="number"
             />
-            <Button 
+            <Button
               onClick={isAddingValidator ? resetValidation : () => addValidator()}
               variant={isAddingValidator ? "destructive" : "default"}
             >

@@ -8,7 +8,7 @@ import { AllocationEntry } from '@/components/tools/common/token-allocation-list
 import { StepWizardState } from '@/components/tools/common/ui/types';
 import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
 import { Validator } from '../../common/api/types'
-import { Chain, ChainConfig, Hex } from 'viem';
+import { Chain, ChainConfig, Hex, WalletClient } from 'viem';
 
 interface NetworkToken {
     name: string;
@@ -55,7 +55,7 @@ interface PoAValidatorManagementState extends StepWizardState {
 
     nodesCount: number;
     setNodesCount: (count: number) => void;
-    
+
     evmChainId: number;
     setEvmChainId: (chainId: number) => void;
 
@@ -117,7 +117,7 @@ interface PoAValidatorManagementState extends StepWizardState {
 
     rpcUrl: string;
     setRpcUrl: (url: string) => void;
-    
+
     transparentProxyAddress: string;
     setTransparentProxyAddress: (address: string) => void;
 
@@ -129,20 +129,26 @@ interface PoAValidatorManagementState extends StepWizardState {
 
     registerL1ValidatorUnsignedWarpMsg: string;
     setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => void;
-    
+
     validationID: string;
     setValidationID: (id: string) => void;
+
+    coreWalletClient: WalletClient | null;
+    setCoreWalletClient: (client: WalletClient | null) => void;
 }
 
 const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagementState> = (set, get) => ({
-    ...createStepWizardStore({set, get, stepList}),
+    ...createStepWizardStore({ set, get, stepList }),
 
     chainConfig: null,
     setChainConfig: (config: Chain) => set(() => ({ chainConfig: config })),
 
+    coreWalletClient: null,
+    setCoreWalletClient: (client: WalletClient | null) => set(() => ({ coreWalletClient: client })),
+
     pChainWarpMsg: '',
     setPChainWarpMsg: (msg: string) => set(() => ({ pChainWarpMsg: msg })),
-    
+
     tempEVMPrivateKeyHex: '0x',
     setTempEVMPrivateKeyHex: (key: Hex) => set(() => ({ tempEVMPrivateKeyHex: key })),
 
@@ -176,35 +182,35 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
 
     txAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: false
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setTxAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ txAllowlistConfig: config })),
 
     contractDeployerAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: true
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
 
     tempPrivateKeyHex: "",
-    setTempPrivateKeyHex: (key: string) => set(() => ({ 
-        tempPrivateKeyHex: key, 
+    setTempPrivateKeyHex: (key: string) => set(() => ({
+        tempPrivateKeyHex: key,
         tokenAllocations: [
-            { id:"Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
+            { id: "Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
             ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
         ],
-        txAllowlistConfig : {
+        txAllowlistConfig: {
             addresses: {
                 Admin: get().txAllowlistConfig.addresses.Admin,
                 Manager: get().txAllowlistConfig.addresses.Manager,
@@ -219,7 +225,7 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
             },
             activated: get().txAllowlistConfig.activated
         },
-        contractDeployerAllowlistConfig : {
+        contractDeployerAllowlistConfig: {
             addresses: {
                 Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
                 Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
@@ -233,19 +239,20 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
                 ]
             },
             activated: get().txAllowlistConfig.activated
-        } 
+        }
     })),
 
-    tokenAllocations: [ ] as AllocationEntry[],
+    tokenAllocations: [] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
 
     nativeMinterAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
-        activated: false} as AllowlistPrecompileConfig,
+        activated: false
+    } as AllowlistPrecompileConfig,
     setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
 
     rpcLocationType: 'local',
@@ -285,7 +292,7 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
 
     rpcUrl: '',
     setRpcUrl: (url: string) => set(() => ({ rpcUrl: url })),
-    
+
     transparentProxyAddress: '0x0feedc0de0000000000000000000000000000000',
     setTransparentProxyAddress: (address: string) => set(() => ({ transparentProxyAddress: address })),
 
@@ -296,13 +303,13 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
     setValidators: (validators: Validator[]) => set(() => ({ validators })),
 
     registerL1ValidatorUnsignedWarpMsg: '',
-    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => set(() => ({ 
-        registerL1ValidatorUnsignedWarpMsg: msg 
+    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => set(() => ({
+        registerL1ValidatorUnsignedWarpMsg: msg
     })),
-    
+
     validationID: '',
-    setValidationID: (id: string) => set(() => ({ 
-        validationID: id 
+    setValidationID: (id: string) => set(() => ({
+        validationID: id
     })),
 })
 

@@ -1,9 +1,14 @@
 import { Validator, SubnetInfo, L1ValidatorManagerDetails } from './types';
+import { pChainEndpoint } from './consts';
+import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
+export const avaCloudSDK = new AvaCloudSDK({
+    chainId: "43114",
+    network: "fuji",
+});
 
-export async function fetchSubnetId(rpcUrl: string, validationID: string): Promise<string> {
+export async function fetchSubnetIdByValidationID(validationID: string): Promise<string> {
     try {
-        const platformEndpoint = rpcUrl.replace(/\/ext\/bc\/[^/]+\/rpc/, '/ext/bc/P');
-        const response = await fetch(platformEndpoint, {
+        const response = await fetch(pChainEndpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +62,7 @@ export async function fetchValidators(rpcUrl: string): Promise<Validator[]> {
         }
 
         return data.result.validators.map((validator: any) => ({
-            id: validator.validationID || validator.nodeID,
+            id: validator.validationID,
             nodeID: validator.nodeID,
             blsPublicKey: validator.blsPublicKey || '',
             blsProofOfPossession: validator.blsProofOfPossession || '',
@@ -81,7 +86,7 @@ export async function fetchValidators(rpcUrl: string): Promise<Validator[]> {
 export async function checkEndpoint(url: string) {
     try {
         console.log('Checking endpoint:', url);
-        
+
         // Different request body based on endpoint type
         let requestBody;
         if (url.includes('/ext/bc/P')) {
@@ -119,12 +124,12 @@ export async function checkEndpoint(url: string) {
 
         console.log('Response status:', response.status, 'for', url);
         const data = await response.json();
-        
+
         if (data.error) {
             console.error('API Error:', data.error);
             return false;
         }
-        
+
         return true;
     } catch (error) {
         console.error('Error checking endpoint:', url, error);
@@ -132,37 +137,10 @@ export async function checkEndpoint(url: string) {
     }
 }
 
-export async function fetchSubnetInfo(networkID: string, subnetID: string): Promise<SubnetInfo> {
-    try {
-        const response = await fetch(
-            `https://glacier-api.avax.network/v1/networks/${networkID}/subnets/${subnetID}`,
-            {
-                method: 'GET',
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        return {
-            isL1: data.isL1 || false,
-            l1ValidatorManagerDetails: data.l1ValidatorManagerDetails,
-        };
-    } catch (error) {
-        console.error('Error fetching subnet info:', error);
-        throw error;
-    }
-}
-
 export function getEndpoints(rpcUrl: string) {
     const url = new URL(rpcUrl);
     const baseUrl = url.origin + url.pathname.split('/ext/bc/')[0];
     const queryParams = url.search;
-    
-    console.log('Base URL:', baseUrl);
-    
     return {
         platform: `${baseUrl}/ext/bc/P${queryParams}`,
         info: `${baseUrl}/ext/info${queryParams}`,
