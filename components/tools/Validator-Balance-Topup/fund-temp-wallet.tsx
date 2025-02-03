@@ -1,229 +1,298 @@
 "use client"
-import { useState, useEffect } from 'react';
-import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
+import { cn } from "@/lib/utils"
+import { ArrowUpRight, Loader2, Copy, CheckCircle2, ArrowRight } from "lucide-react"
+import { useState, useEffect } from "react"
+import { createPublicClient, http, formatEther } from 'viem';
 import { avalancheFuji } from 'viem/chains';
 import { newPrivateKey, getAddresses } from '../common/utils/wallet';
-import { transferCToP, getPChainBalance } from '../common/utils/utxo';
-import { pvm, utils, Context, TransferableOutput, addTxSignatures } from "@avalabs/avalanchejs";
+import { transferCToP } from '../common/utils/utxo';
+import { pvm, utils, Context, addTxSignatures } from "@avalabs/avalanchejs";
 
-export default function TempWalletFunder() {
-    const [tempPrivateKeyHex, setTempPrivateKeyHex] = useState('');
-    const [cChainBalance, setCChainBalance] = useState(BigInt(0));
-    const [destinationPAddress, setDestinationPAddress] = useState('');
-    const [transferAmount, setTransferAmount] = useState('');
-    const [transferring, setTransferring] = useState(false);
-    const [transferError, setTransferError] = useState<string | null>(null);
-    const [transferStep, setTransferStep] = useState<string>('');
+export default function ValidatorBalanceUI() {
+  const [currentStep, setCurrentStep] = useState(1)
+  const [tempPrivateKeyHex, setTempPrivateKeyHex] = useState('')
+  const [cChainBalance, setCChainBalance] = useState(BigInt(0))
+  const [validationId, setValidationId] = useState("BDP3ifTcrt6qMRS2g7dU7aQVwrYMHe9thJXYm2vJFh8tRVr3p")
+  const [transferAmount, setTransferAmount] = useState("")
+  const [transferring, setTransferring] = useState(false)
+  const [transferError, setTransferError] = useState<string | null>(null)
+  const [transferStep, setTransferStep] = useState<string>("")
+  const [copied, setCopied] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
 
-    // Initialize temporary private key
-    useEffect(() => {
-        if (!tempPrivateKeyHex) {
-            setTempPrivateKeyHex(newPrivateKey());
+  const addresses = tempPrivateKeyHex ? getAddresses(tempPrivateKeyHex) : null
+
+  useEffect(() => {
+    if (!tempPrivateKeyHex) {
+      setTempPrivateKeyHex(newPrivateKey())
+    }
+  }, [tempPrivateKeyHex])
+
+  useEffect(() => {
+    if (!addresses?.C) return
+
+    const checkCChainBalance = async () => {
+      const client = createPublicClient({
+        chain: avalancheFuji,
+        transport: http()
+      })
+
+      try {
+        const balance = await client.getBalance({
+          address: addresses.C
+        })
+        setCChainBalance(balance)
+        if (balance > BigInt(0) && currentStep === 1) {
+          setCurrentStep(2)
         }
-    }, [tempPrivateKeyHex]);
-
-    const addresses = tempPrivateKeyHex ? getAddresses(tempPrivateKeyHex) : null;
-
-    // Check C-Chain balance periodically
-    useEffect(() => {
-        if (!addresses?.C) return;
-
-        const checkCChainBalance = async () => {
-            const client = createPublicClient({
-                chain: avalancheFuji,
-                transport: http()
-            });
-
-            try {
-                const balance = await client.getBalance({
-                    address: addresses.C
-                });
-                setCChainBalance(balance);
-            } catch (error) {
-                console.error('Failed to get C-Chain balance:', error);
-            }
-        };
-
-        checkCChainBalance();
-        const interval = setInterval(checkCChainBalance, 5000);
-        return () => clearInterval(interval);
-    }, [addresses?.C]);
-
-    // Validate P-chain address format
-    const isPChainAddressValid = (address: string) => {
-        return address.startsWith('P-fuji') && address.length === 45;
-    };
-
-    // Function to transfer from P to P chain
-const transferPToP = async (sourcePrivateKey: string, destinationAddress: string, amount: string) => {
-    setTransferStep('Initiating P to P transfer...');
-    const pvmApi = new pvm.PVMApi('https://api.avax-test.network');
-    const context = await Context.getContextFromURI('https://api.avax-test.network');
-    const addresses = getAddresses(sourcePrivateKey);
-    const feeState = await pvmApi.getFeeState();
-    
-    const { utxos } = await pvmApi.getUTXOs({ addresses: [addresses.P] });
-
-    if (utxos.length === 0) {
-        console.log('No UTXOs found for P-chain transfer');
+      } catch (error) {
+        console.error('Failed to get C-Chain balance:', error)
+      }
     }
 
-    const amountNAvax = BigInt(Math.floor(Number(amount) * 1e9));
+    checkCChainBalance()
+    const interval = setInterval(checkCChainBalance, 5000)
+    return () => clearInterval(interval)
+  }, [addresses?.C, currentStep])
 
-    const tx = pvm.newBaseTx(context, [utils.bech32ToBytes(addresses.P)], utxos, [
-        TransferableOutput.fromNative(context.avaxAssetID, amountNAvax, [
-        utils.bech32ToBytes(destinationAddress),
-        ]),
-    ]);
+  const handleCopy = () => {
+    if (addresses?.C) {
+      navigator.clipboard.writeText(addresses.C)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
 
-    /*
+  const increaseBalanceTx = async (sourcePrivateKey: string, validationId: string, amount: string) => {
+    const pvmApi = new pvm.PVMApi('https://api.avax-test.network')
+    const context = await Context.getContextFromURI('https://api.avax-test.network')
+    const addresses = getAddresses(sourcePrivateKey)
+    const feeState = await pvmApi.getFeeState()
+    
+    const { utxos } = await pvmApi.getUTXOs({ addresses: [addresses.P] })
+    if (utxos.length === 0) {
+      throw new Error('No UTXOs found for P-chain transfer')
+    }
+
+    const amountNAvax = BigInt(Math.floor(Number(amount) * 1e9))
+
     const unsignedTx = pvm.e.newIncreaseL1ValidatorBalanceTx(
-        {
-        balance: BigInt(amountNAvax),
+      {
+        balance: amountNAvax,
         feeState,
-        fromAddressesBytes: [testPAddr],
+        fromAddressesBytes: [utils.bech32ToBytes(addresses.P)],
         utxos,
-        validationId: VALIDATION_ID,
-        },
-        context,
-    ); */
+        validationId,
+      },
+      context,
+    )
 
     await addTxSignatures({
-        unsignedTx: tx,
-        privateKeys: [utils.hexToBuffer(sourcePrivateKey)],
-    });
+      unsignedTx,
+      privateKeys: [utils.hexToBuffer(sourcePrivateKey)],
+    })
 
-    return pvmApi.issueSignedTx(tx.getSignedTx());
+    return pvmApi.issueSignedTx(unsignedTx.getSignedTx())
+  }
 
-    /* Sign the transaction
-    const keychain = context.newKeyChain();
-    keychain.importKey(sourcePrivateKey);
-    const signedTx = tx.sign(keychain);
+  const handleCToPTransfer = async () => {
+    if (!tempPrivateKeyHex || !validationId || !transferAmount) return
 
-    setTransferStep('Sending P to P transaction...');
-    
-    // Issue the transaction
-    await pvmApi.issueTx(signedTx.toString()); */
-};
+    setTransferError(null)
+    setTransferring(true)
 
-    // Handle transfer from C-chain to P-chain destination
-    const handleCToPTransfer = async () => {
-        if (!tempPrivateKeyHex || !destinationPAddress || !transferAmount) return;
-        if (!isPChainAddressValid(destinationPAddress)) {
-            setTransferError('Invalid P-Chain address format');
-            return;
+    try {
+      await transferCToP(
+        transferAmount,
+        tempPrivateKeyHex,
+        async (balance: string) => {
+          try {
+            await new Promise(resolve => setTimeout(resolve, 5000))
+            
+            await increaseBalanceTx(
+              tempPrivateKeyHex,
+              validationId,
+              transferAmount
+            )
+
+            setShowConfetti(true)
+            setCurrentStep(3)
+          } catch (error) {
+            console.error('Validator balance increase failed:', error)
+            throw error
+          }
         }
+      )
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to complete transfer'
+      setTransferError(errorMessage)
+    } finally {
+      setTransferring(false)
+      setTransferStep('')
+    }
+  }
 
-        setTransferError(null);
-        setTransferring(true);
-        setTransferStep('Starting C to P transfer...');
+  useEffect(() => {
+    if (showConfetti) {
+      const timer = setTimeout(() => setShowConfetti(false), 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [showConfetti])
 
-        try {
-            // First transfer from C to temp P-chain
-            await transferCToP(
-                transferAmount,
-                tempPrivateKeyHex,
-                async (balance: string) => {
-                    setTransferStep('C to P transfer complete, preparing P to P transfer...');
-                    try {
-                        // Add delay to ensure first transaction is processed
-                        await new Promise(resolve => setTimeout(resolve, 5000));
-                        
-                        // Now transfer from temp P-chain to final destination
-                        await transferPToP(
-                            tempPrivateKeyHex,
-                            destinationPAddress,
-                            transferAmount
-                        );
-
-                        setTransferStep('Verifying final balance...');
-                        
-                        // Verify final destination balance
-                        await new Promise(resolve => setTimeout(resolve, 5000));
-                        const finalBalance = await getPChainBalance(destinationPAddress);
-                        console.log('Final destination balance:', finalBalance);
-                    } catch (error) {
-                        console.error('P to P transfer failed:', error);
-                        throw error;
-                    }
-                }
-            );
-
-            setTransferAmount('');
-            setTransferError('Transfer completed successfully!');
-        } catch (error) {
-            console.error('Transfer failed:', error);
-            const errorMessage = error instanceof Error ? error.message : 'Failed to complete transfer';
-            setTransferError(errorMessage);
-        } finally {
-            setTransferring(false);
-            setTransferStep('');
-        }
-    };
-
-    return (
-        <div className="space-y-4">
-            <div className="space-y-2">
-                <h2 className="text-xl font-medium">Transfer to P-Chain Address</h2>
-                <p className="text-sm text-gray-600">
-                    1. Send AVAX to the C-Chain address below
-                    2. Enter your P-Chain address
-                    3. Click transfer to move funds to P-Chain
-                </p>
-            </div>
-
-            <div className="p-4 border rounded">
-                <div className="flex justify-between mb-2">
-                    <span>Temporary C-Chain Address:</span>
-                    <span>Balance: {formatEther(cChainBalance)} AVAX</span>
-                </div>
-                <div className="font-mono text-sm break-all">{addresses?.C}</div>
-            </div>
-
-            <div className="space-y-2">
-                <label className="block">
-                    <span className="text-sm font-medium">Your P-Chain Address</span>
-                    <input
-                        type="text"
-                        value={destinationPAddress}
-                        onChange={(e) => setDestinationPAddress(e.target.value)}
-                        placeholder="P-fuji..."
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                    />
-                </label>
-
-                <label className="block">
-                    <span className="text-sm font-medium">Amount to Transfer (AVAX)</span>
-                    <input
-                        type="number"
-                        value={transferAmount}
-                        onChange={(e) => setTransferAmount(e.target.value)}
-                        step="0.0001"
-                        min="0"
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                    />
-                </label>
-            </div>
-
-            <button
-                onClick={handleCToPTransfer}
-                disabled={
-                    transferring || 
-                    !destinationPAddress || 
-                    !transferAmount || 
-                    Number(transferAmount) <= 0 || 
-                    Number(formatEther(cChainBalance)) < Number(transferAmount)
-                }
-                className="w-full p-2 bg-green-500 text-white rounded disabled:bg-gray-400"
-            >
-                {transferring ? `Transferring... ${transferStep}` : `Transfer ${transferAmount || '0'} AVAX to P-Chain`}
-            </button>
-
-            {transferError && (
-                <p className={`text-sm ${transferError.includes('success') ? 'text-green-500' : 'text-red-500'}`}>
-                    {transferError}
-                </p>
-            )}
+  return (
+    <div className={cn(
+    "w-full max-w-[600px]",
+    "rounded-2xl",
+    "bg-white dark:bg-zinc-900", 
+    "border border-zinc-200 dark:border-zinc-800",
+    "shadow-lg",
+    "overflow-hidden",
+    "mx-auto",
+    "my-8",
+    )}>
+      <div className="p-6 space-y-6">
+        <div className="flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800">
+          <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Increase Validator Balance</h3>
         </div>
-    );
+
+        <div className={cn("space-y-4", currentStep !== 1 && "opacity-50")}>
+          <div className="flex items-center space-x-2">
+            <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-medium">1</div>
+            <h4 className="font-medium text-zinc-900 dark:text-zinc-100">Fund Temporary C-Chain Address</h4>
+          </div>
+        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4 space-y-3">
+        <div className="flex justify-between items-center">
+        <span className="text-sm font-medium text-indigo-700 dark:text-indigo-300">Address</span>
+        <span className="text-sm font-bold text-indigo-700 dark:text-indigo-300">
+            Balance: {formatEther(cChainBalance)} AVAX
+        </span>
+        </div>
+        <div className="flex items-center gap-3 bg-white dark:bg-zinc-800 rounded p-3">
+        <code className="font-mono text-sm text-indigo-600 dark:text-indigo-400 flex-1">
+            {addresses?.C}
+        </code>
+        <div className="flex items-center gap-2">
+            <code className="text-xs text-indigo-400 dark:text-indigo-500">{copied ? 'Copied!' : ''}</code>
+            <button onClick={handleCopy} className="p-1.5 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-md transition-colors" title="Copy address">
+                {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            </button>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <div className={cn("space-y-4", currentStep !== 2 && "opacity-50")}>
+          <div className="flex items-center space-x-2">
+            <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-medium">2</div>
+            <h4 className="font-medium text-zinc-900 dark:text-zinc-100">Enter Transfer Details</h4>
+          </div>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300" htmlFor="validationId">Validation ID</label>
+              <input id="validationId" type="text" value={validationId} onChange={(e) => setValidationId(e.target.value)} className="mt-1 block w-full font-mono text-sm rounded-md border-zinc-300 dark:border-zinc-700 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 p-3" placeholder="Enter validation ID" disabled={currentStep !== 2} />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300" htmlFor="transferAmount">
+                Amount to Transfer (AVAX)
+              </label>
+              <div className="relative">
+                <input id="transferAmount" type="number" value={transferAmount} onChange={(e) => setTransferAmount(e.target.value)} step="0.0001" min="0" className="mt-1 block w-full rounded-md border-zinc-300 dark:border-zinc-700 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-3 py-2 pr-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" placeholder="0.000" disabled={currentStep !== 2} />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 dark:text-zinc-400 pointer-events-none">AVAX</span>
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={handleCToPTransfer}
+            disabled={
+              transferring || 
+              !validationId || 
+              !transferAmount || 
+              Number(transferAmount) <= 0 || 
+              Number(formatEther(cChainBalance)) < Number(transferAmount) ||
+              currentStep !== 2
+            }
+            className={cn(
+              "w-full px-4 py-3 rounded-xl text-sm font-medium",
+              "bg-indigo-600 text-white",
+              "hover:bg-indigo-700",
+              "transition-colors duration-300",
+              "flex items-center justify-center gap-2",
+              "disabled:bg-zinc-400 disabled:cursor-not-allowed",
+            )}
+          >
+            {transferring ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                {transferStep || 'Transferring...'}
+              </>
+            ) : (
+              <>
+                Transfer {transferAmount || "0"} AVAX to Validator
+                <ArrowUpRight className="w-5 h-5" />
+              </>
+            )}
+          </button>
+        </div>
+
+        {currentStep === 3 && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                <CheckCircle2 className="w-10 h-10 text-green-600 dark:text-green-400" />
+              </div>
+            </div>
+            <div className="text-center space-y-2">
+              <h4 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Transfer Complete!</h4>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                You've successfully increased your validator balance.
+              </p>
+            </div>
+            <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-green-700 dark:text-green-300">Amount</span>
+                <span className="text-sm font-bold text-green-700 dark:text-green-300">{transferAmount} AVAX</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-green-700 dark:text-green-300">Validator ID</span>
+                <span className="text-sm font-mono text-green-700 dark:text-green-300">{validationId}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-green-700 dark:text-green-300">Status</span>
+                <span className="text-sm font-bold text-green-700 dark:text-green-300">Confirmed</span>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                setCurrentStep(1)
+                setTransferAmount("")
+                setCChainBalance(BigInt(0))
+              }}
+              className={cn(
+                "w-full px-4 py-2 rounded-xl text-sm font-medium",
+                "bg-indigo-600 text-white",
+                "hover:bg-indigo-700",
+                "transition-colors duration-300",
+                "flex items-center justify-center gap-2",
+              )}
+            >
+              Make Another Transfer
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        {transferError && !transferError.includes('success') && (
+          <p className="text-sm text-red-500">{transferError}</p>
+        )}
+      </div>
+
+      {showConfetti && (
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-4 h-4 bg-yellow-500 rounded-full animate-confetti-1"></div>
+          <div className="absolute top-0 left-1/2 w-4 h-4 bg-green-500 rounded-full animate-confetti-2"></div>
+          <div className="absolute top-0 right-1/4 w-4 h-4 bg-pink-500 rounded-full animate-confetti-3"></div>
+        </div>
+      )}
+    </div>
+  )
 }
