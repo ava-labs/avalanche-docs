@@ -238,7 +238,12 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
             params: []
         });
         const activeAccount = accounts.filter((item: any) => item.active)[0];
-        set({ pChainAddress: activeAccount.addressPVM });
+        const pChainAddress = activeAccount.addressPVM;
+        if (pChainAddress.startsWith("P-fuji")) {//TODO: unhardcode this
+            set({ pChainAddress });
+        } else {
+            throw new Error("Invalid P-Chain address starting with " + pChainAddress.substring(0, 4) + ". Please switch Core into the testnet mode. ");
+        }
     }
 
 })
