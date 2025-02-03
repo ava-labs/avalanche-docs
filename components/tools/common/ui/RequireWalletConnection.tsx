@@ -12,7 +12,7 @@ export const fujiConfig: Chain = {
         decimals: 18
     },
     rpcUrls: {
-        default: { http: ['https://api.avax-test.network/ext/bc/C/rpc'] },
+        default: { http: ['https://api.avax-test.network/ext/bc/C/rpc'] },//hardcoded, do not change
     },
     blockExplorers: {
         default: { name: 'Snowtrace', url: 'https://testnet.snowtrace.io/' }
@@ -157,7 +157,7 @@ export default function RequireWalletConnection({ children, chain, onConnection,
                             </div>
                             <div>
                                 <div className="font-medium">RPC URLs:</div>
-                                {chain.rpcUrls.default.http.map((rpcUrl, index) => (
+                                {chain.rpcUrls.default.http.map((rpcUrl: string, index: number) => (
                                     <div key={index} className="break-all">{rpcUrl}</div>
                                 ))}
                             </div>
@@ -214,7 +214,9 @@ export default function RequireWalletConnection({ children, chain, onConnection,
                 <div className="step">Connected to {chain.name}</div>
                 <div className="step">RPC is reachable</div>
             </div>
-            {error && <p className="text-red-500 mb-4">{error}</p>}
+            {error && connectionStatus !== 'correct_chain_connected' && (
+                <p className="text-red-500 mb-4">{error}</p>
+            )}
             {renderContent()}
         </div>
     );

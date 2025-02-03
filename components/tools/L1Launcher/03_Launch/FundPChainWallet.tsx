@@ -1,35 +1,45 @@
 import { useState, useEffect } from 'react';
 import { useL1LauncherWizardStore } from '../config/store';
-import { getPChainBalance } from '../../common/utils/utxo';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import RequireWalletConnection, { fujiConfig } from '@/components/tools/common/ui/RequireWalletConnection';
 import { RefreshCw } from 'lucide-react';
+import { getRPCEndpoint } from '../../common/endpoints';
 
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
 
+export async function getPChainBalance(address: string): Promise<string> {
+    const response = await fetch(getRPCEndpoint(true) + '/ext/bc/P', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json;'
+        },
+        body: JSON.stringify({
+            jsonrpc: "2.0",
+            id: 1,
+            method: "platform.getBalance",
+            params: {
+                addresses: [address]
+            }
+        })
+    });
+
+    const data = await response.json();
+    if (data.error) {
+        throw new Error(data.error.message || 'Failed to fetch P-chain balance');
+    }
+
+    return data.result.balance;
+}
+
+
 export default function FundPChainWallet() {
-    const { nodesCount, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
-    const [pChainAddress, setPChainAddress] = useState<string>('');
+    const { nodesCount, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep, updatePChainAddressFromCore, pChainAddress } = useL1LauncherWizardStore();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const requiredAmount = nodesCount + 0.5;
     const currentPBalance = Number(pChainBalance) / 1e9;
     const hasEnoughFunds = currentPBalance >= (requiredAmount - TRANSFER_BUFFER);
     const remainingAmount = Math.max(0, requiredAmount - currentPBalance).toFixed(2);
-
-    const fetchPChainAddress = async () => {
-        try {
-            const accounts = await window.avalanche.request({
-                method: 'avalanche_getAccounts',
-                params: []
-            });
-            const activeAccount = accounts.filter(item => item.active)[0];
-            setPChainAddress(activeAccount.addressPVM);
-        } catch (err) {
-            console.error('Failed to get P-Chain address:', err);
-            setError('Failed to get P-Chain address');
-        }
-    };
 
     const checkPChainBalance = async () => {
         if (!pChainAddress) return;
@@ -48,7 +58,10 @@ export default function FundPChainWallet() {
     };
 
     useEffect(() => {
-        fetchPChainAddress();
+        updatePChainAddressFromCore().catch(err => {
+            console.error('Failed to update P-Chain address:', err);
+            setError('Failed to update P-Chain address');
+        });
     }, []);
 
     useEffect(() => {

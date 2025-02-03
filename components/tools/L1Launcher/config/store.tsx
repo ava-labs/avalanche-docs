@@ -14,7 +14,7 @@ interface L1LauncherWizardState extends StepWizardState {
 
     nodesCount: number;
     setNodesCount: (count: number) => void;
-    
+
     evmChainId: number;
     setEvmChainId: (chainId: number) => void;
 
@@ -78,6 +78,9 @@ interface L1LauncherWizardState extends StepWizardState {
     setValidatorMessagesAddress: (address: string) => void;
 
     getViemL1Chain: () => Chain;
+
+    pChainAddress: string;
+    updatePChainAddressFromCore: () => Promise<void>;
 }
 
 
@@ -86,7 +89,7 @@ import { createStepWizardStore } from '../../common/ui/StepWizardStoreCreator';
 import { Chain } from 'viem';
 
 const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get) => ({
-    ...createStepWizardStore({set, get, stepList}),
+    ...createStepWizardStore({ set, get, stepList }),
 
     poaOwnerAddress: "",
     setPoaOwnerAddress: (address: string) => set(() => ({
@@ -120,43 +123,44 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     txAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: false
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setTxAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ txAllowlistConfig: config })),
 
     contractDeployerAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: true
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
 
-    tokenAllocations: [ ] as AllocationEntry[],
+    tokenAllocations: [] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
 
     nativeMinterAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
-        activated: false} as AllowlistPrecompileConfig,
+        activated: false
+    } as AllowlistPrecompileConfig,
     setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
 
     genesisString: "",
     regenerateGenesis: async () => {
         const { poaOwnerAddress: ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
-        
+
         const genesis = generateGenesis({
             evmChainId,
             tokenAllocations,
@@ -226,6 +230,17 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
             },
         } as const;
     },
+
+    pChainAddress: "",
+    updatePChainAddressFromCore: async () => {
+        const accounts = await window.avalanche.request({
+            method: 'avalanche_getAccounts',
+            params: []
+        });
+        const activeAccount = accounts.filter((item: any) => item.active)[0];
+        set({ pChainAddress: activeAccount.addressPVM });
+    }
+
 })
 
 
