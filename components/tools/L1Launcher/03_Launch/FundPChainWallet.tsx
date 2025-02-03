@@ -1,219 +1,136 @@
 import { useState, useEffect } from 'react';
-import RequireWalletConnection, { fujiConfig } from '@/components/tools/common/ui/RequireWalletConnection';
 import { useL1LauncherWizardStore } from '../config/store';
-import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
-import { avalancheFuji } from 'viem/chains';
-import { newPrivateKey, getAddresses } from '../../common/utils/wallet';
-import { transferCToP, getPChainBalance, importExistingUTXOs } from '../../common/utils/utxo';
+import { getPChainBalance } from '../../common/utils/utxo';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
+import RequireWalletConnection, { fujiConfig } from '@/components/tools/common/ui/RequireWalletConnection';
+import { RefreshCw } from 'lucide-react';
 
-const changeAllowance = parseEther('0.1');
 const TRANSFER_BUFFER = 0.1; // Buffer amount to account for fees/precision loss
 
 export default function FundPChainWallet() {
     const { nodesCount, pChainBalance, setPChainBalance, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
-    const [cChainBalance, setCChainBalance] = useState<bigint>(BigInt(0));
-    const [transferring, setTransferring] = useState(false);
-    const [transferError, setTransferError] = useState<string | null>(null);
+    const [pChainAddress, setPChainAddress] = useState<string>('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const requiredAmount = nodesCount + 0.5;
+    const currentPBalance = Number(pChainBalance) / 1e9;
+    const hasEnoughFunds = currentPBalance >= (requiredAmount - TRANSFER_BUFFER);
+    const remainingAmount = Math.max(0, requiredAmount - currentPBalance).toFixed(2);
 
-
-    const addresses = getAddresses("045035d1ea7767beee9ddcf6deaeb62e56a42e4fd3605c5563e56b6f56513f5b552a5b50b37271dc3a3d57b02fdbb4fdc9a51f7a0111f8e829bb3f6e60e049aae2")
-
-    // Check C-Chain balance
-    const checkCChainBalance = async () => {
-        if (!addresses?.C) return;
-
-        const client = createPublicClient({
-            chain: avalancheFuji,
-            transport: http()
-        });
-
+    const fetchPChainAddress = async () => {
         try {
-            const balance = await client.getBalance({
-                address: addresses.C as `0x${string}`
+            const accounts = await window.avalanche.request({
+                method: 'avalanche_getAccounts',
+                params: []
             });
-            setCChainBalance(balance);
-        } catch (error) {
-            console.error('Failed to get C-Chain balance:', error);
+            const activeAccount = accounts.filter(item => item.active)[0];
+            setPChainAddress(activeAccount.addressPVM);
+        } catch (err) {
+            console.error('Failed to get P-Chain address:', err);
+            setError('Failed to get P-Chain address');
         }
     };
 
-    // // Check P-Chain balance
-    // useEffect(() => {
-    //     if (!addresses?.P) return;
+    const checkPChainBalance = async () => {
+        if (!pChainAddress) return;
 
-    //     const checkPChainBalance = async () => {
-    //         try {
-    //             // First try to import any existing UTXOs
-    //             await importExistingUTXOs(tempPrivateKeyHex);
-
-    //             // Then get the P-chain balance
-    //             const balance = await getPChainBalance(addresses.P);
-    //             setPChainBalance(balance);
-    //         } catch (error) {
-    //             console.error('Failed to get P-Chain balance:', error);
-    //         }
-    //     };
-
-    //     checkPChainBalance();
-    //     const interval = setInterval(checkPChainBalance, 5000);
-    //     return () => clearInterval(interval);
-    // }, [addresses?.P, tempPrivateKeyHex, setPChainBalance]);
-
-    // // Check C-Chain balance periodically
-    // useEffect(() => {
-    //     checkCChainBalance();
-    //     const interval = setInterval(checkCChainBalance, 5000);
-    //     return () => clearInterval(interval);
-    // }, [addresses?.C]);
-
-    const handleTransfer = async () => {
-        if (!window.avalanche || !addresses?.C) return;
-
-        const requiredTotal = nodesCount + 0.5;
-        const currentCBalance = Number(formatEther(cChainBalance));
-        const currentPBalance = Number(pChainBalance) / 1e9;
-        const totalCurrentBalance = currentCBalance + currentPBalance;
-
-        // Calculate base transfer amount
-        let transferAmount = requiredTotal - totalCurrentBalance;
-        if (transferAmount <= 0) {
-            return; // Already have enough funds across both chains
-        }
-
-        // Add change allowance to initial transfer
-        const totalTransferAmount = transferAmount + Number(formatEther(changeAllowance));
-
-        setTransferring(true);
+        setIsLoading(true);
+        setError(null);
         try {
-            const walletClient = createWalletClient({
-                chain: avalancheFuji,
-                transport: custom(window.avalanche)
-            });
-
-            const [account] = await walletClient.requestAddresses();
-
-            // Transfer total amount (including change allowance) to C-chain
-            await walletClient.sendTransaction({
-                account,
-                to: addresses.C as `0x${string}`,
-                value: parseEther(totalTransferAmount.toFixed(2))
-            });
-
-            // Wait for the balance to update
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            // Transfer only the required amount to P chain (without change allowance)
-            // await transferCToP(transferAmount.toFixed(2), tempPrivateKeyHex!, setPChainBalance);
-
-        } catch (error: any) {
-            console.error('Transfer failed:', error);
+            const balance = await getPChainBalance(pChainAddress);
+            setPChainBalance(balance);
+        } catch (err) {
+            console.error('Failed to get P-Chain balance:', err);
+            setError('Failed to get P-Chain balance');
         } finally {
-            setTransferring(false);
+            setIsLoading(false);
         }
     };
 
-    const handleCToPTransfer = async () => {
-        // if (!tempPrivateKeyHex) return;
-        // setTransferError(null); // Clear previous errors
+    useEffect(() => {
+        fetchPChainAddress();
+    }, []);
 
-        // const requiredTotal = nodesCount + 0.5;
-        // const currentPBalance = Number(pChainBalance) / 1e9;
-        // const currentCBalance = Number(formatEther(cChainBalance));
-
-        // // Calculate how much more we need in P chain
-        // const neededInP = requiredTotal - currentPBalance;
-
-        // if (neededInP <= 0) return;
-
-        // setTransferring(true);
-        // try {
-        //     await transferCToP(neededInP.toFixed(2), tempPrivateKeyHex, setPChainBalance);
-        // } catch (error: any) {
-        //     console.error('C to P transfer failed:', error);
-        //     setTransferError(error.message || 'Failed to transfer to P-Chain');
-        // } finally {
-        //     setTransferring(false);
-        // }
-    };
-
-    const hasEnoughFunds = () => {
-        const currentPBalance = Number(pChainBalance) / 1e9;
-        const requiredTotal = nodesCount + 0.5;
-        // Add buffer to required amount check
-        return currentPBalance >= (requiredTotal - TRANSFER_BUFFER);
-    };
-
-    const needsPChainFunds = () => {
-        const requiredTotal = nodesCount + 0.5;
-        const currentPBalance = Number(pChainBalance) / 1e9;
-        const currentCBalance = Number(formatEther(cChainBalance));
-        // Add buffer to required amount check
-        return currentPBalance < (requiredTotal - TRANSFER_BUFFER) && currentCBalance >= (requiredTotal - currentPBalance);
-    };
+    useEffect(() => {
+        if (pChainAddress) {
+            checkPChainBalance();
+            const interval = setInterval(checkPChainBalance, 10000); // Refresh every 10 seconds
+            return () => clearInterval(interval);
+        }
+    }, [pChainAddress]);
 
     return (
-        <div className="space-y-12">
-            <div className='space-y-4'>
+        <div className="space-y-4">
+            <div className="space-y-4">
                 <h1 className="text-2xl font-medium">Fund P-Chain Wallet</h1>
-                <p>We will use a temporary wallet generated in your browser for issuing the transactions to set up your L1. After you've funded it on the Avalanche C-Chain it will transfer some of the funds to the P-Chain. After the set up of the L1 the address will no longer hold any power.</p>
-                {/* <p className='italic'>Private Key: {tempPrivateKeyHex}</p> */}
-                <p>You can claim Fuji AVAX at the <a href='https://core.app/tools/testnet-faucet/?subnet=c&token=c' target='_blank' className="underline">Faucet</a>. Use the coupon code <span className='italic'>l1-launcher</span>.</p>
+                <p>To set up your L1, you need to transfer {requiredAmount} AVAX to your P-Chain address. You can do this using the <a
+                    href="https://test.core.app/stake/cross-chain-transfer/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                    Cross-Chain Transfer tool in Core.app
+                </a>.</p>
+                {!hasEnoughFunds && (
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Transfer {remainingAmount} more AVAX to continue.
+                    </p>
+                )}
             </div>
+
             <RequireWalletConnection chain={fujiConfig} skipUI={true}>
-                <div className="space-y-4 mb-4">
-                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
-                        <div className="flex justify-between items-center mb-1">
-                            <div className="text-sm text-gray-600 dark:text-gray-400">C-Chain Address:</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Balance: {formatEther(cChainBalance)} AVAX</div>
-                        </div>
-                        <div className="font-mono text-sm break-all mb-3 text-gray-900 dark:text-gray-100">{addresses?.C}</div>
-                        {(nodesCount + 0.5 - (Number(formatEther(cChainBalance)) + Number(pChainBalance) / 1e9)) > 0 && (
+                <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
+                    <div className="flex justify-between items-center mb-1">
+                        <div className="text-sm text-gray-600 dark:text-gray-400">P-Chain Address:</div>
+                        <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                            <span>Balance: {currentPBalance.toFixed(4)} AVAX</span>
                             <button
-                                onClick={handleTransfer}
-                                disabled={transferring}
-                                className={`w-full px-4 py-2 rounded text-white ${transferring
-                                    ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
-                                    : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
-                                    }`}
+                                onClick={checkPChainBalance}
+                                disabled={isLoading}
+                                className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+                                title="Refresh Balance"
                             >
-                                {transferring ? 'Transferring...' : `Transfer ${(nodesCount + 0.5 + Number(formatEther(changeAllowance)) - (Number(formatEther(cChainBalance)) + Number(pChainBalance) / 1e9)).toFixed(2)} AVAX`}
+                                <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
                             </button>
-                        )}
-                    </div>
-                    <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded border border-gray-200 dark:border-gray-700">
-                        <div className="flex justify-between items-center mb-1">
-                            <div className="text-sm text-gray-600 dark:text-gray-400">P-Chain Address:</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Balance: {Number(pChainBalance) / 1e9} AVAX</div>
                         </div>
-                        <div className="font-mono text-sm break-all mb-3 text-gray-900 dark:text-gray-100">{addresses?.P}</div>
-                        {needsPChainFunds() && (
-                            <>
-                                <button
-                                    onClick={handleCToPTransfer}
-                                    disabled={transferring}
-                                    className={`w-full px-4 py-2 rounded text-white ${transferring
-                                        ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
-                                        : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
-                                        }`}
-                                >
-                                    {transferring ? 'Importing...' : `Import ${(nodesCount + 0.5 - Number(pChainBalance) / 1e9).toFixed(2)} AVAX to P-Chain`}
-                                </button>
-                                {transferError && (
-                                    <p className="mt-2 text-sm text-red-600 dark:text-red-400">
-                                        {transferError}
-                                    </p>
-                                )}
-                            </>
+                    </div>
+                    <div className="font-mono text-sm break-all mb-3 text-gray-900 dark:text-gray-100">
+                        {pChainAddress}
+                    </div>
+
+                    <div className="mt-2">
+                        {!hasEnoughFunds ? (
+                            <a
+                                href="https://test.core.app/stake/cross-chain-transfer/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block w-full px-4 py-2 text-center rounded text-white bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+                            >
+                                Transfer Funds in Core.app
+                            </a>
+                        ) : (
+                            <div className="flex items-center justify-center space-x-2 p-4 rounded bg-green-50 dark:bg-green-900/20">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-green-600 dark:text-green-400">Funds Sufficient</span>
+                            </div>
                         )}
                     </div>
+
+                    {error && (
+                        <p className="mt-4 text-sm text-red-600 dark:text-red-400">
+                            {error}
+                        </p>
+                    )}
                 </div>
             </RequireWalletConnection>
+
             <NextPrev
-                nextDisabled={!hasEnoughFunds()}
+                nextDisabled={!hasEnoughFunds}
                 onNext={goToNextStep}
                 onPrev={goToPreviousStep}
             />
-        </div >
+        </div>
     );
 }

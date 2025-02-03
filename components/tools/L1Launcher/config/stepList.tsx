@@ -7,7 +7,6 @@ import Genesis from "../02_Configure/Genesis";
 
 import PrepareValidators from "../03_Launch/PrepareValidators";
 import GenerateKeys from "../03_Launch/GenerateKeys";
-import FundPChainWallet from "../03_Launch/FundPChainWallet";
 import CreateL1 from "../03_Launch/CreateL1"
 import LaunchValidators from "../03_Launch/LaunchValidators";
 import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
@@ -19,8 +18,9 @@ import InitializeValidatorManager from "../04_Initialize/InitializeValidatorMana
 
 import WhatsNext from "../05_WhatsNext/WhatsNext";
 import { StepGroupListType, StepListType } from '../../common/ui/types';
+import FundPChainWallet from '../03_Launch/FundPChainWallet';
 
-export const stepGroups : StepGroupListType = {
+export const stepGroups: StepGroupListType = {
     "welcome": {
         title: "Welcome",
         icon: BookOpen
