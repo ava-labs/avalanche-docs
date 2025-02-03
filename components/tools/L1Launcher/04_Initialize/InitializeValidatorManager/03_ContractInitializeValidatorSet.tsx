@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent, custom } from 'viem';
+import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent, custom, formatEther } from 'viem';
 
 import { useL1LauncherWizardStore } from '../../config/store';
 import { cb58ToHex } from '../../../common/utils/cb58';
@@ -19,7 +19,6 @@ export default function ContractInitializeValidatorSet() {
     const [error, setError] = useState<string | null>(null);
     const {
         chainId,
-        tempPrivateKeyHex,
         subnetId,
         nodePopJsons,
         nodesCount,
@@ -82,7 +81,7 @@ export default function ContractInitializeValidatorSet() {
         };
 
         checkInitialization();
-    }, [tempPrivateKeyHex, evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint]);
+    }, [evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint]);
 
     const onInitialize = async () => {
         if (!window.avalanche) {
@@ -144,7 +143,7 @@ export default function ContractInitializeValidatorSet() {
             }, 0];
 
             // First simulate the transaction
-            const { request } = await publicClient.simulateContract({
+            const simlation = await publicClient.simulateContract({
                 address: PROXY_ADDRESS,
                 abi: PoAValidatorManagerABI.abi,
                 functionName: 'initializeValidatorSet',
@@ -153,10 +152,13 @@ export default function ContractInitializeValidatorSet() {
                 accessList
             });
 
-            console.log('Simulation request:', request);
+            const gasPrice = await publicClient.getGasPrice();
+            const gas = await publicClient.estimateContractGas(simlation.request)
+            const totalGas = gasPrice * gas;
+            console.log('Gas:', { gas, gasPrice, totalGas, totalGasInEth: formatEther(totalGas) });
 
             // Execute with metamask wallet
-            const hash = await walletClient.writeContract(request);
+            const hash = await walletClient.writeContract(simlation.request);
 
             // Wait for transaction receipt
             const receipt = await publicClient.waitForTransactionReceipt({ hash });
