@@ -8,7 +8,6 @@ import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
 export default function CollectSignatures() {
     const {
         chainId,
-        tempPrivateKeyHex,
         subnetId,
         nodePopJsons,
         nodesCount,
@@ -37,7 +36,7 @@ export default function CollectSignatures() {
             const [message, justification] = packL1ConversionMessage({
                 subnetId,
                 managerChainID: chainId,
-                managerAddress: PROXY_ADDRESS   ,
+                managerAddress: PROXY_ADDRESS,
                 validators: nodePopJsons.slice(0, nodesCount).map(json => JSON.parse(json).result)
             }, 5, pChainChainID);
 

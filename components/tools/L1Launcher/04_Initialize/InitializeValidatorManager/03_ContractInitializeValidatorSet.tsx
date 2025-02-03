@@ -7,6 +7,7 @@ import { packWarpIntoAccessList } from '../../../common/utils/packWarp';
 import PoAValidatorManagerABI from '../../../common/icm-contracts/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
 import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
 
 interface StatusState {
     status: StepState;
@@ -15,6 +16,7 @@ interface StatusState {
 }
 
 export default function ContractInitializeValidatorSet() {
+    const [tempPrivateKeyHex, setTempPrivateKeyHex] = useState<`0x${string}`>(generatePrivateKey());
     const [status, setStatus] = useState<StatusState>({ status: 'not_started' });
     const [error, setError] = useState<string | null>(null);
     const {
@@ -26,10 +28,31 @@ export default function ContractInitializeValidatorSet() {
         l1Name,
         tokenSymbol,
         getL1RpcEndpoint,
-        convertL1SignedWarpMessage
+        convertL1SignedWarpMessage,
+        getViemL1Chain
     } = useL1LauncherWizardStore();
 
     const [initialCheckHasRun, setInitialCheckHasRun] = useState(false);
+
+    const [txArgs, setTxArgs] = useState<any[]>([]);
+
+    useEffect(() => {
+        setTxArgs([{
+            subnetID: cb58ToHex(subnetId),
+            validatorManagerBlockchainID: cb58ToHex(chainId),
+            validatorManagerAddress: PROXY_ADDRESS,
+            initialValidators: nodePopJsons
+                .slice(0, nodesCount)
+                .map(json => {
+                    const node = JSON.parse(json).result;
+                    return {
+                        nodeID: cb58ToHex(node.nodeID.split('-')[1]),
+                        blsPublicKey: node.nodePOP.publicKey,
+                        weight: 100
+                    };
+                })
+        }, 0])
+    }, [subnetId, chainId, nodePopJsons, nodesCount]);
 
     // Add useEffect to check logs on load
     useEffect(() => {
@@ -83,6 +106,10 @@ export default function ContractInitializeValidatorSet() {
         checkInitialization();
     }, [evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint]);
 
+    const tempAccount = privateKeyToAccount(tempPrivateKeyHex)
+    console.log('Account:', tempAccount);
+
+
     const onInitialize = async () => {
         if (!window.avalanche) {
             setStatus({ status: 'error' });
@@ -93,32 +120,18 @@ export default function ContractInitializeValidatorSet() {
         setStatus({ status: 'in_progress' });
         setError(null);
         try {
-            const customChain = {
-                id: evmChainId,
-                name: l1Name,
-                network: l1Name.toLowerCase(),
-                nativeCurrency: {
-                    name: tokenSymbol,
-                    symbol: tokenSymbol,
-                    decimals: 18,
-                },
-                rpcUrls: {
-                    default: { http: [getL1RpcEndpoint()] },
-                    public: { http: [getL1RpcEndpoint()] },
-                },
-            };
-
             const publicClient = createPublicClient({
-                chain: customChain,
+                chain: getViemL1Chain(),
                 transport: http()
             });
 
+
             // Create wallet client for metamask
             const walletClient = createWalletClient({
-                chain: customChain,
-                transport: custom(window.avalanche)
+                chain: getViemL1Chain(),
+                transport: http(),
+                tempAccount
             });
-            const [address] = await walletClient.requestAddresses();
 
             // Convert hex signature to bytes
             const signatureBytes = hexToBytes(convertL1SignedWarpMessage!);
@@ -126,30 +139,14 @@ export default function ContractInitializeValidatorSet() {
             // Pack the WARP message into access list format
             const accessList = packWarpIntoAccessList(signatureBytes);
 
-            const args = [{
-                subnetID: cb58ToHex(subnetId),
-                validatorManagerBlockchainID: cb58ToHex(chainId),
-                validatorManagerAddress: PROXY_ADDRESS,
-                initialValidators: nodePopJsons
-                    .slice(0, nodesCount)
-                    .map(json => {
-                        const node = JSON.parse(json).result;
-                        return {
-                            nodeID: cb58ToHex(node.nodeID.split('-')[1]),
-                            blsPublicKey: node.nodePOP.publicKey,
-                            weight: 100
-                        };
-                    })
-            }, 0];
-
             // First simulate the transaction
             const simlation = await publicClient.simulateContract({
                 address: PROXY_ADDRESS,
                 abi: PoAValidatorManagerABI.abi,
                 functionName: 'initializeValidatorSet',
-                args,
-                account: address,
-                accessList
+                args: txArgs,
+                accessList,
+                account: tempAccount
             });
 
             const gasPrice = await publicClient.getGasPrice();
