@@ -15,7 +15,6 @@ export default function ContractInitialize() {
         l1Name,
         tokenSymbol,
         getL1RpcEndpoint,
-        tempPrivateKeyHex,
         subnetId,
         convertL1SignedWarpMessage
     } = useL1LauncherWizardStore();

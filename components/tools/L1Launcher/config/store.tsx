@@ -139,7 +139,7 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
             Manager: [],
             Enabled: []
         },
-        activated: true
+        activated: false
     } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 

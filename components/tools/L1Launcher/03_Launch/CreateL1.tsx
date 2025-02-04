@@ -5,6 +5,8 @@ import { newCreateSubnetTxHex, newCreateChainTxHex, newConvertSubnetToL1TxHex } 
 import { PROXY_ADDRESS } from '../../common/utils/genGenesis';
 import { pvm } from '@avalabs/avalanchejs';
 import { getRPCEndpoint } from '../../common/endpoints';
+import { packL1ConversionMessage, PackL1ConversionMessageArgs } from '../../common/utils/convertWarp';
+import { bytesToHex } from 'viem';
 
 const pvmApi = new pvm.PVMApi(getRPCEndpoint(true))
 
@@ -100,7 +102,7 @@ export default function CreateL1() {
 
                     const subnetTxHex = await newCreateSubnetTxHex(pChainAddress);
 
-                    const subnetTxId = await window.avalanche.request({
+                    subnetTxId = await window.avalanche.request({
                         method: 'avalanche_sendTransaction',
                         params: {
                             transactionHex: subnetTxHex,
@@ -113,7 +115,7 @@ export default function CreateL1() {
                         status: 'success',
                         data: subnetTxId
                     });
-                    setSubnetId(subnetTxId);
+                    setSubnetId(subnetTxId || '');
                 } catch (error: any) {
                     console.error('Failed to create subnet', error);
                     setSubnetStatus({
@@ -136,7 +138,8 @@ export default function CreateL1() {
                         subnetId: subnetTxId || subnetStatus.data,
                         genesisData: genesisString,
                     });
-                    const chainTxId = await window.avalanche.request({
+
+                    chainTxId = await window.avalanche.request({
                         method: 'avalanche_sendTransaction',
                         params: {
                             transactionHex: chainTxHex,
@@ -148,7 +151,7 @@ export default function CreateL1() {
                         status: 'success',
                         data: chainTxId
                     });
-                    setChainId(chainTxId);
+                    setChainId(chainTxId || '');
                 } catch (error: any) {
                     setCreateChainStatus({
                         status: 'error',
@@ -169,6 +172,19 @@ export default function CreateL1() {
                         managerAddress: PROXY_ADDRESS,
                         nodePopJsons: nodePopJsons.slice(0, nodesCount),
                     });
+
+                    const args: PackL1ConversionMessageArgs = {
+                        subnetId: subnetTxId || subnetStatus.data,
+                        managerChainID: chainTxId || createChainStatus.data,
+                        managerAddress: PROXY_ADDRESS,
+                        validators: nodePopJsons.slice(0, nodesCount).map(json => JSON.parse(json).result),
+                    }
+                    console.log('conversion args', args);
+                    const [message, justification] = packL1ConversionMessage(args, 5, '11111111111111111111111111111111LpoYY');
+
+                    console.log('expected conversion message', bytesToHex(message));
+                    console.log('expected justification', bytesToHex(justification));
+
                     const conversionTxId = await window.avalanche.request({
                         method: 'avalanche_sendTransaction',
                         params: {

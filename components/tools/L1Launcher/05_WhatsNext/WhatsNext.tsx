@@ -1,8 +1,6 @@
 import { useL1LauncherWizardStore } from "../config/store";
 
 export default function WhatsNext() {
-     const { tempPrivateKeyHex } = useL1LauncherWizardStore();
-
     return <div className="space-y-12">
         <div>
             <h1 className="text-2xl font-medium mb-4">What's Next?</h1>
@@ -11,7 +9,6 @@ export default function WhatsNext() {
         <div>
             <h3 className="mb-4 font-medium">Next Steps:</h3>
             <ul className="list-disc list-inside">
-                <li>Claim remaining funds in the temporary wallet (Private Key: {tempPrivateKeyHex}).</li>
                 <li>Deploy Interchain Messaging using our ICM Deployment tool (coming soon).</li>
                 <li>Deploy a Interchain Token Transfer (ICTT) bridge using our ICTT Deployment tool (coming soon).</li>
                 <li>Set up monitoring for you validators and RPC nodes (coming soon).</li>
