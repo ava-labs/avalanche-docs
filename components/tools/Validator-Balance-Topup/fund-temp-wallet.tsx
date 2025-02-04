@@ -100,6 +100,7 @@ export default function ValidatorBalanceUI() {
 
     setTransferError(null)
     setTransferring(true)
+    setTransferStep('Initiating C to P transfer...')
 
     try {
       await transferCToP(
@@ -107,8 +108,10 @@ export default function ValidatorBalanceUI() {
         tempPrivateKeyHex,
         async (balance: string) => {
           try {
-            await new Promise(resolve => setTimeout(resolve, 5000))
+            setTransferStep('Waiting for chain confirmation...')
+            await new Promise(resolve => setTimeout(resolve, 2000))
             
+            setTransferStep('Increasing validator balance...')
             await increaseBalanceTx(
               tempPrivateKeyHex,
               validationId,
@@ -119,7 +122,7 @@ export default function ValidatorBalanceUI() {
             setCurrentStep(3)
           } catch (error) {
             console.error('Validator balance increase failed:', error)
-            throw error
+            throw new Error(error instanceof Error ? error.message : 'Failed to increase validator balance')
           }
         }
       )
