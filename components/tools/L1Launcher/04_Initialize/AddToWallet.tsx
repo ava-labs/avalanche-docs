@@ -19,7 +19,8 @@ export default function AddToWallet() {
             decimals: 18
         },
         rpcUrls: [getCChainRpcEndpoint()],
-        blockExplorerUrls: [] // Add block explorer URLs if available
+        blockExplorerUrls: [], // Add block explorer URLs if available
+        isTestnet: true 
     };
 
     return (

@@ -25,7 +25,7 @@ const features = [
     title: "<strong>PoA Validator Management</strong>.",
     description: "Validator management dashboard for Proof of Authority based Avalanche L1s. Coming Soon.",
     icon: CircleFadingPlus,
-    href: "#"
+    href: "/tools/poa-validator-management"
   },
   {
     id: 3,

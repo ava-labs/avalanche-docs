@@ -27,6 +27,7 @@ export default function InitializeValidatorManager() {
             symbol: tokenSymbol,
             decimals: 18
         },
+        isTestnet: true,
         rpcUrls: [getCChainRpcEndpoint()],
         blockExplorerUrls: [] // Add block explorer URLs if available
     };
