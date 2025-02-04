@@ -18,6 +18,8 @@ import {
   MapPinIcon,
 } from "lucide-react";
 
+import { HackathonLite } from "@/types/hackathons";
+
 import {
   Select,
   SelectContent,
@@ -25,6 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+type Filter = "location" | "status" | "page";
 
 export default function HackathonsPage() {
   return (
@@ -44,15 +48,17 @@ function Hackathons() {
 
   const pageSize = 10;
 
-  const [hackathons, setHackathons] = useState([]);
+  const [hackathons, setHackathons] = useState<HackathonLite[]>([]);
   const [total, setTotal] = useState(0);
 
   const fetchHackathons = () => {
-    const apiUrl = new URL("http://localhost:3000/api/hackathons");
-    apiUrl.searchParams.set("page", page.toString());
-    apiUrl.searchParams.set("pageSize", pageSize.toString());
-    if (location) apiUrl.searchParams.set("location", location);
-    if (status) apiUrl.searchParams.set("status", status);
+    const params = new URLSearchParams();
+    params.set("page", page.toString());
+    params.set("pageSize", pageSize.toString());
+    if (location) params.set("location", location);
+    if (status) params.set("status", status);
+
+    const apiUrl = `/api/hackathons?${params.toString()}`;
 
     fetch(apiUrl.toString(), { cache: "no-store" })
       .then((res) => res.json())
@@ -64,7 +70,6 @@ function Hackathons() {
   };
 
   useEffect(() => {
-    console.log("FETCH");
     fetchHackathons();
   }, [page, location, status]);
 
@@ -80,10 +85,7 @@ function Hackathons() {
 
   const totalPages = Math.ceil(total / pageSize);
 
-  const handleFilterChange = (
-    type: "location" | "status" | "page",
-    value: string
-  ) => {
+  const handleFilterChange = (type: Filter, value: string) => {
     const newParams = new URLSearchParams(params.toString());
 
     if (type === "location") {
