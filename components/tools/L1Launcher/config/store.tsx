@@ -1,12 +1,14 @@
 import { create } from 'zustand'
 import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { getAddresses } from '../../common/utils/wallet';
 import { stepList } from './stepList';
 import { generateGenesis } from '../../common/utils/genGenesis';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 import { StepWizardState } from '@/components/tools/common/ui/types';
+import { utils, secp256k1 } from "@avalabs/avalanchejs";
+import { hexToBytes } from '@noble/hashes/utils';
+import { ProjectivePoint } from '@noble/secp256k1';
 
 interface L1LauncherWizardState extends StepWizardState {
     poaOwnerAddress: string;
@@ -159,7 +161,7 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     genesisString: "",
     regenerateGenesis: async () => {
-        const { poaOwnerAddress: ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
+        const { poaOwnerAddress: ownerEthAddress, evmChainId, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
 
         const genesis = generateGenesis({
             evmChainId,
@@ -233,23 +235,24 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     pChainAddress: "",
     updatePChainAddressFromCore: async () => {
-        const accounts = await window.avalanche.request({
-            method: 'avalanche_getAccounts',
-            params: []
-        });
-        const activeAccount = accounts.filter((item: any) => item.active)[0];
-        const pChainAddress = activeAccount.addressPVM;
-        if (pChainAddress.startsWith("P-fuji")) {//TODO: unhardcode this
-            set({ pChainAddress });
-        } else {
-            throw new Error("Invalid P-Chain address starting with " + pChainAddress.substring(0, 4) + ". Please switch Core into the testnet mode. ");
+        function getXPAddressFromPublicKey(publicKeyHex: string, chain: string, hrp: string) {
+            const compressed = ProjectivePoint.fromHex(publicKeyHex).toHex(true)
+            const address = secp256k1.publicKeyBytesToAddress(hexToBytes(compressed));
+            return utils.format(chain, hrp, address);
         }
+
+        const publicKeyHex = (await window.avalanche.request({
+            "method": "avalanche_getAccountPubKey",
+            "params": []
+        })).xp
+
+        const pChainAddress = getXPAddressFromPublicKey(publicKeyHex, 'P', 'fuji')
+        set({ pChainAddress });
     }
 
 })
 
-
-const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
+const shouldPersist = true
 
 const storageKey = 'l1-launcher-wizard-storage'
 

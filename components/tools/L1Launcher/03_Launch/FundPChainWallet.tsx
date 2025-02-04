@@ -51,7 +51,7 @@ export default function FundPChainWallet() {
             setPChainBalance(balance);
         } catch (err) {
             console.error('Failed to get P-Chain balance:', err);
-            setError('Failed to get P-Chain balance');
+            setError('Failed to get P-Chain balance: ' + err);
         } finally {
             setIsLoading(false);
         }
@@ -60,7 +60,7 @@ export default function FundPChainWallet() {
     useEffect(() => {
         updatePChainAddressFromCore().catch(err => {
             console.error('Failed to update P-Chain address:', err);
-            setError('Failed to update P-Chain address');
+            setError('Failed to update P-Chain address: ' + (err as Error).message || 'Unknown error');
         });
     }, []);
 
