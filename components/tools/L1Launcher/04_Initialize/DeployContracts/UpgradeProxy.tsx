@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { createPublicClient, http, getAddress, createWalletClient, custom, defineChain } from 'viem';
 import { useL1LauncherWizardStore } from "../../config/store";
 
- function UpgradeProxyUI() {
+function UpgradeProxyUI() {
     return (<>
         {/* <ProxyStorageReader /> */}
         <UpgradeProxyForm />
@@ -263,7 +263,7 @@ export function UpgradeProxyForm({ onUpgradeComplete }: { onUpgradeComplete?: (s
                 });
 
                 setCurrentImplementation(implementation as string);
-                if (implementation && poaValidatorManagerAddress && 
+                if (implementation && poaValidatorManagerAddress &&
                     (implementation as string).toLowerCase() === poaValidatorManagerAddress.toLowerCase()) {
                     onUpgradeComplete?.(true);
                 } else {
@@ -329,9 +329,9 @@ export function UpgradeProxyForm({ onUpgradeComplete }: { onUpgradeComplete?: (s
 
     let status = null;
     if (currentImplementation === UNITIALIZED_PROXY_ADDRESS) {
-        status = <div className="text-yellow-600 dark:text-yellow-400 mb-4">Proxy is not initialized yet</div>;
+        status = <div className="mb-4">Proxy is not initialized yet</div>;
     } else if (currentImplementation?.toLowerCase() === poaValidatorManagerAddress?.toLowerCase()) {
-        status = <div className="text-green-600 dark:text-green-400 mb-4">Proxy is already pointing to the correct implementation</div>;
+        status = <div className=" mb-4">Proxy is already pointing to the correct implementation</div>;
     } else if (currentImplementation === null) {
         status = <div className="text-red-600 dark:text-red-400 mb-4">loading...</div>;
     }
@@ -344,7 +344,7 @@ export function UpgradeProxyForm({ onUpgradeComplete }: { onUpgradeComplete?: (s
                 {status}
 
                 {successMessage && (
-                    <div className="text-green-600 dark:text-green-400 mb-2">
+                    <div className=" mb-2">
                         {successMessage}
                     </div>
                 )}
@@ -357,12 +357,19 @@ export function UpgradeProxyForm({ onUpgradeComplete }: { onUpgradeComplete?: (s
 
                 <button
                     onClick={handleUpgrade}
-                    disabled={isUpgrading || currentImplementation?.toLowerCase() === poaValidatorManagerAddress?.toLowerCase()}
-                    className={`w-full p-2 rounded ${
-                        isUpgrading || currentImplementation?.toLowerCase() === poaValidatorManagerAddress?.toLowerCase()
-                            ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
-                    }`}
+                    disabled={
+                        isUpgrading ||
+                        !poaValidatorManagerAddress ||
+                        (currentImplementation?.toLowerCase() ===
+                            poaValidatorManagerAddress?.toLowerCase())
+                    }
+                    className={`w-full p-2 rounded ${isUpgrading ||
+                        !poaValidatorManagerAddress ||
+                        (currentImplementation?.toLowerCase() ===
+                            poaValidatorManagerAddress?.toLowerCase())
+                        ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                        : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+                        }`}
                 >
                     {isUpgrading ? 'Upgrading...' : 'Upgrade to PoA Validator Manager'}
                 </button>

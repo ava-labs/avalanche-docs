@@ -108,6 +108,7 @@ export default function CreateL1() {
                         }
                     });
 
+                    await new Promise(resolve => setTimeout(resolve, 5 * 1000));
                     setSubnetStatus({
                         status: 'success',
                         data: subnetTxId
@@ -126,7 +127,6 @@ export default function CreateL1() {
             let chainTxId: string | undefined;
 
             if (createChainStatus.status === 'not_started') {
-                await new Promise(resolve => setTimeout(resolve, 3000));
                 // Step 2: Create Chain
                 setCreateChainStatus({ status: 'in_progress' });
                 try {
@@ -143,6 +143,7 @@ export default function CreateL1() {
                             chainAlias: 'P',
                         }
                     });
+                    await new Promise(resolve => setTimeout(resolve, 5 * 1000));
                     setCreateChainStatus({
                         status: 'success',
                         data: chainTxId
@@ -158,7 +159,6 @@ export default function CreateL1() {
             }
 
             if (convertToL1Status.status === 'not_started') {
-                await new Promise(resolve => setTimeout(resolve, 3000));
                 // Step 3: Convert to L1
                 setConvertToL1Status({ status: 'in_progress' });
                 try {
