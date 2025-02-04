@@ -17,6 +17,7 @@ import {
   CalendarIcon,
   MapPinIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 import { HackathonLite } from "@/types/hackathons";
 
@@ -90,10 +91,12 @@ function HackathonCard({ hackathon }: { hackathon: HackathonLite }) {
       </CardContent>
 
       <CardFooter>
-        <Button variant="outline" className="ml-auto">
-          Learn More
-          <ArrowUpRight />
-        </Button>
+        <Link href={`/hackathons/${hackathon.id}`}>
+          <Button variant="outline" className="ml-auto">
+            Learn More
+            <ArrowUpRight />
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
