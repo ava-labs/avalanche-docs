@@ -21,7 +21,7 @@ export const fujiConfig: Chain = {
 
 // RequireWalletConnection Props
 interface RequireWalletConnectionProps {
-    children: ReactNode;
+    children?: ReactNode;
     chain: Chain;
     onConnection?: () => void;
     skipUI?: boolean;
