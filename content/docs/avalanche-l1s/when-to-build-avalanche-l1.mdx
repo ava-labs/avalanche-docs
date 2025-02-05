@@ -27,6 +27,14 @@ The C-Chain is open and permissionless where anyone can deploy and interact with
 
 If your project is deployed on the C-Chain then your execution environment is dictated by the setup of the C-Chain. Changing any of the execution parameters means that the configuration of the C-Chain would need to change, and that is expensive, complex and difficult to change. So if your project needs some other capabilities, different execution parameters or precompiles that C-Chain does not provide, then Avalanche L1s are a solution you need. You can configure the EVM in an Avalanche L1 to run however you want, adding precompiles, and setting runtime parameters to whatever your project needs.
 
+### We Need Custom Validator Management[​](#we-need-custom-validator-management "Direct link to heading")
+
+With the Etna upgrade, L1s can implement their own validator management logic through a _ValidatorManager_ smart contract. This gives you complete control over your validator set, allowing you to define custom staking rules, implement permissionless proof-of-stake with your own token, or create permissioned proof-of-authority networks. The validator management can be handled directly through smart contracts, giving you programmatic control over validator selection and rewards distribution.
+
+### We Want to Build a Sovereign Network[​](#we-want-to-build-a-sovereign-network "Direct link to heading")
+
+L1s on Avalanche are truly sovereign networks that operate independently without relying on other systems. You have complete control over your network's consensus mechanisms, transaction processing, and security protocols. This independence allows you to scale horizontally without dependencies on other networks while maintaining full control over your network parameters and upgrades. This sovereignty is particularly important for projects that need complete autonomy over their blockchain's operation and evolution.
+
 ## Conclusion
 
 Here we presented some considerations in favor of running your own Avalanche L1 vs. deploying on the C-Chain.
