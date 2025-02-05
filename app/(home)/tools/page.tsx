@@ -41,7 +41,7 @@ const features = [
     title: "<strong>ICM Deployer</strong>.",
     description: "Tool for deploying ICM Contracts and enabling cross-chain messaging on Avalanche l1s.",
     icon: SendHorizontal,
-    href: "/grants"
+    href: "#"
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ const features = [
     title: "<strong>Relayer Launcher</strong>.",
     description: "Launch your own ICM Relayer between two Avalanche L1s and securely deliver cross-chain messages.",
     icon: SendHorizontal,
-    href: "/guides"
+    href: "#"
   },
   {
     id: 6,
@@ -57,11 +57,11 @@ const features = [
     title: "<strong>ICTT Deployment</strong>.",
     description: "Deploy token bridges between Avalanche L1s with pre-audited smart contracts and Interchain Messaging.",
     icon: SendHorizontal,
-    href: "https://discord.com/channels/578992315641626624/1230847375120011264"
+    href: "#"
   },
 ];
 
-export default function Page() {  
+export default function Page() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       <main className="relative container mx-auto px-4 py-12 space-y-12 tools-page">
@@ -105,6 +105,7 @@ export default function Page() {
                     className={cn(
                       "group block border-l-[1.2px] border-r-[1.2px] md:border-r-0 md:min-h-[200px] border-t-[1.2px] md:border-t-0 transform-gpu hover:bg-[#dfe3e8] dark:hover:bg-[#1c1c1c]",
                       index >= 3 && "md:border-t-[1.2px]",
+                      feature.href === "#" && "opacity-50 cursor-not-allowed pointer-events-none",
                       "transition-all duration-300 ease-in-out"
                     )}
                   >
