@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import RequireWalletConnection, { fujiConfig } from '@/components/tools/common/ui/RequireWalletConnection';
+import RequireWalletConnection, { fujiConfig } from '@/components/tools/common/ui/RequireWalletConnectionV2';
 import { RefreshCw } from 'lucide-react';
 import { getRPCEndpoint } from '../../common/endpoints';
 

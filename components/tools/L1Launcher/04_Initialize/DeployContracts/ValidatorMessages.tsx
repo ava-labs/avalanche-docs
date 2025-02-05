@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { useL1LauncherWizardStore } from '../../config/store';
 import { createWalletClient, custom, createPublicClient, http, Chain, ChainConfig } from 'viem';
 import ValidatorMessagesABI from "../../../common/icm-contracts/compiled/ValidatorMessages.json";
-import RequireWalletConnection, { fujiConfig } from '../../../common/ui/RequireWalletConnection';
 
 export function ValidatorMessagesDeployer() {
     const { setValidatorMessagesAddress, validatorMessagesAddress, evmChainId, chainId, getL1RpcEndpoint, tokenSymbol, l1Name, getViemL1Chain } = useL1LauncherWizardStore();
     const [status, setStatus] = useState<'not_started' | 'deploying' | 'success' | 'error'>('not_started');
     const [error, setError] = useState<string | null>(null);
-    
+
 
     // Initialize status based on stored address
     useEffect(() => {
@@ -66,7 +65,7 @@ export function ValidatorMessagesDeployer() {
     return (
         <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700">
             <h3 className="text-lg font-medium mb-4 dark:text-gray-200">ValidatorMessages Contract</h3>
-            
+
             {validatorMessagesAddress && (
                 <div className="mb-4">
                     <div className="text-sm text-gray-600 dark:text-gray-400">Contract Address:</div>
@@ -75,7 +74,7 @@ export function ValidatorMessagesDeployer() {
                     </code>
                 </div>
             )}
-            
+
             {error && (
                 <div className="text-red-600 dark:text-red-400 mb-4">
                     Error: {error}
@@ -85,15 +84,14 @@ export function ValidatorMessagesDeployer() {
             <button
                 onClick={deployContract}
                 disabled={status === 'deploying' || status === 'success'}
-                className={`w-full p-2 rounded ${
-                    status === 'deploying' || status === 'success'
-                        ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
-                        : 'bg-blue-500 text-white hover:bg-blue-600'
-                }`}
+                className={`w-full p-2 rounded ${status === 'deploying' || status === 'success'
+                    ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
+                    : 'bg-blue-500 text-white hover:bg-blue-600'
+                    }`}
             >
-                {status === 'deploying' ? 'Deploying...' : 
-                 status === 'success' ? 'Deployed' : 
-                 'Deploy ValidatorMessages'}
+                {status === 'deploying' ? 'Deploying...' :
+                    status === 'success' ? 'Deployed' :
+                        'Deploy ValidatorMessages'}
             </button>
         </div>
     );

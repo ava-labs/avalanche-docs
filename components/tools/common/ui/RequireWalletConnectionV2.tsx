@@ -44,11 +44,11 @@ export default function RequireWalletConnection({ children, chain, onConnection,
 
             // Check if connected to the correct chain
             setConnectionStatus('wrong_chain');
-            const chainId = await window.avalanche.request({ method: 'eth_chainId' });
+            const chainId = await window.avalanche.request({ method: 'eth_chainId', params: [] });
             if (chainId !== `0x${chain.id.toString(16)}`) return;
 
             // Check if account can be accessed
-            const accounts = await window.avalanche.request({ method: 'eth_requestAccounts' });
+            const accounts = await window.avalanche.request({ method: 'eth_requestAccounts', params: [] });
             if (!accounts || accounts.length === 0) {
                 setError('No account detected');
                 return;
@@ -60,6 +60,7 @@ export default function RequireWalletConnection({ children, chain, onConnection,
             setConnectionStatus('rpc_error');
             await window.avalanche.request({
                 method: 'eth_blockNumber',
+                params: []
             });
 
             setConnectionStatus('correct_chain_connected');

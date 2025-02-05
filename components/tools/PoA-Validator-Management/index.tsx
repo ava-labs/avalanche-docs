@@ -1,11 +1,11 @@
 'use client'
 import Steps from "@/components/tools/common/ui/Steps";
-import { useL1ManagerWizardStore, resetL1ManagerWizardStore } from "./config/store";
+import { usePoAValidatorManagementWizardStore, resetPoAValidatorManagementWizardStore } from "./config/store";
 import { stepList, stepGroups } from "./config/stepList";
 import ToolHeader from "../common/ui/ToolHeader";
 
 export default function L1Wizard() {
-    const { currentStep, maxAdvancedStep, advanceTo } = useL1ManagerWizardStore()
+    const { currentStep, maxAdvancedStep, advanceTo } = usePoAValidatorManagementWizardStore()
 
     // Add error handling for invalid steps
     const CurrentStepComponent = stepList[currentStep]?.component || (
@@ -26,7 +26,7 @@ export default function L1Wizard() {
                 />
                 <div className="flex flex-col lg:flex-row">
                     <div className="w-full lg:w-80 mb-8">
-                        <Steps currentStep={currentStep} maxAdvancedStep={maxAdvancedStep} advanceTo={advanceTo} stepList={stepList} stepGroups={stepGroups} onReset={resetL1ManagerWizardStore}/>
+                        <Steps currentStep={currentStep} maxAdvancedStep={maxAdvancedStep} advanceTo={advanceTo} stepList={stepList} stepGroups={stepGroups} onReset={resetPoAValidatorManagementWizardStore}/>
                     </div>
                     <div className="flex-1 min-w-0">
                         <div className="h-full">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from '@/components/tools/common/ui/NextPrev';
-import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection';
+import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnectionV2';
 
 export default function AddToWallet() {
     const { evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint, goToNextStep, goToPreviousStep, getViemL1Chain } = useL1LauncherWizardStore();

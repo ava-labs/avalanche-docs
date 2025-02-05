@@ -1,5 +1,4 @@
-import { StateCreator } from "zustand";
-import { StepListType, StepWizardState } from "./types";
+import { StepListType } from "./types";
 
 type CreateStepControlParams<TStepList extends StepListType> = {
     set: (updater: (state: any) => Partial<any>) => void;

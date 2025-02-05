@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useL1LauncherWizardStore } from '../../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection';
+import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnectionV2';
 import CheckContractLogs from './04_CheckContractLogs';
 import CollectSignatures from './01_CollectSignatures';
 import ContractInitialize from './02_ContractInitialize';
@@ -10,16 +10,12 @@ import ContractInitializeValidatorSet from './03_ContractInitializeValidatorSet'
 export default function InitializeValidatorManager() {
     const [isInitialized, setIsInitialized] = useState(false);
     const {
-        evmChainId,
-        l1Name,
-        tokenSymbol,
-        getL1RpcEndpoint,
         goToNextStep,
         goToPreviousStep,
         getViemL1Chain
     } = useL1LauncherWizardStore();
 
-    
+
     return (
         <div className="space-y-12">
             <div>

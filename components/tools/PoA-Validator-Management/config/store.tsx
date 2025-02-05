@@ -6,6 +6,8 @@ import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-p
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 import { StepWizardState } from '@/components/tools/common/ui/types';
 import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
+import { Validator } from '../../common/api/types'
+import { Chain, ChainConfig, Hex, WalletClient } from 'viem';
 
 interface NetworkToken {
     name: string;
@@ -39,9 +41,16 @@ interface ChainInfo {
     enabledFeatures: string[];
 }
 
-interface L1ManagerWizardState extends StepWizardState {
+interface PoAValidatorManagementState extends StepWizardState {
+
+    chainConfig: Chain | null;
+    setChainConfig: (config: Chain) => void;
+
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
+
+    pChainWarpMsg: string;
+    setPChainWarpMsg: (msg: string) => void;
 
     nodesCount: number;
     setNodesCount: (count: number) => void;
@@ -91,9 +100,15 @@ interface L1ManagerWizardState extends StepWizardState {
     tokenAllocations: AllocationEntry[];
     setTokenAllocations: (allocations: AllocationEntry[]) => void;
 
+    tempPrivateKeyHex: string;
+    setTempPrivateKeyHex: (key: string) => void;
+
+    tempEVMPrivateKeyHex: Hex;
+    setTempEVMPrivateKeyHex: (key: Hex) => void;
+
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
-    getL1RpcEndpoint: () => string;
+    getCChainRpcEndpoint: () => string;
     getRpcEndpoint: () => string;
 
     convertL1SignedWarpMessage: `0x${string}` | null;
@@ -107,10 +122,34 @@ interface L1ManagerWizardState extends StepWizardState {
 
     chainInfo: ChainInfo | null;
     setChainInfo: (info: ChainInfo) => void;
+
+    validators: Validator[]
+    setValidators: (validators: Validator[]) => void
+
+    registerL1ValidatorUnsignedWarpMsg: string;
+    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => void;
+
+    validationID: string;
+    setValidationID: (id: string) => void;
+
+    coreWalletClient: WalletClient | null;
+    setCoreWalletClient: (client: WalletClient | null) => void;
 }
 
-const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) => ({
+const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagementState> = (set, get) => ({
     ...createStepWizardStore({ set, get, stepList }),
+
+    chainConfig: null,
+    setChainConfig: (config: Chain) => set(() => ({ chainConfig: config })),
+
+    coreWalletClient: null,
+    setCoreWalletClient: (client: WalletClient | null) => set(() => ({ coreWalletClient: client })),
+
+    pChainWarpMsg: '',
+    setPChainWarpMsg: (msg: string) => set(() => ({ pChainWarpMsg: msg })),
+
+    tempEVMPrivateKeyHex: '0x',
+    setTempEVMPrivateKeyHex: (key: Hex) => set(() => ({ tempEVMPrivateKeyHex: key })),
 
     poaOwnerAddress: "",
     setPoaOwnerAddress: (address: string) => set(() => ({
@@ -156,12 +195,51 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
             Manager: [],
             Enabled: []
         },
-        activated: false
+        activated: true
     } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
+
+    tempPrivateKeyHex: "",
+    setTempPrivateKeyHex: (key: string) => set(() => ({
+        tempPrivateKeyHex: key,
+        // tokenAllocations: [
+        //     { id: "Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
+        //     ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
+        // ],
+        // txAllowlistConfig: {
+        //     addresses: {
+        //         Admin: get().txAllowlistConfig.addresses.Admin,
+        //         Manager: get().txAllowlistConfig.addresses.Manager,
+        //         Enabled: [
+        //             {
+        //                 id: '1',
+        //                 address: getAddresses(key).C,
+        //                 requiredReason: 'Initial Contract Deployer'
+        //             },
+        //             ...get().txAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
+        //         ]
+        //     },
+        //     activated: get().txAllowlistConfig.activated
+        // },
+        // contractDeployerAllowlistConfig: {
+        //     addresses: {
+        //         Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
+        //         Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
+        //         Enabled: [
+        //             {
+        //                 id: '1',
+        //                 address: getAddresses(key).C,
+        //                 requiredReason: 'Initial Contract Deployer'
+        //             },
+        //             ...get().contractDeployerAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
+        //         ]
+        //     },
+        //     activated: get().txAllowlistConfig.activated
+        // }
+    })),
 
     tokenAllocations: [] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
@@ -202,7 +280,7 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
         return `https://${state.rpcAddress}`;
     },
 
-    getL1RpcEndpoint: () => {
+    getCChainRpcEndpoint: () => {
         const state = get();
         const baseEndpoint = get().getRpcEndpoint();
         return `${baseEndpoint}/ext/bc/${state.chainId}/rpc`;
@@ -219,26 +297,51 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
 
     chainInfo: null,
     setChainInfo: (info: ChainInfo) => set(() => ({ chainInfo: info })),
+
+    validators: [],
+    setValidators: (validators: Validator[]) => set(() => ({ validators })),
+
+    registerL1ValidatorUnsignedWarpMsg: '',
+    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => set(() => ({
+        registerL1ValidatorUnsignedWarpMsg: msg
+    })),
+
+    validationID: '',
+    setValidationID: (id: string) => set(() => ({
+        validationID: id
+    })),
 })
 
 
 const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
-const storeName = 'l1-manager-wizard-storage'
-export const useL1ManagerWizardStore = shouldPersist
-    ? create<L1ManagerWizardState>()(
+
+export const usePoAValidatorManagementWizardStore = shouldPersist
+    ? create<PoAValidatorManagementState>()(
         persist(
-            L1ManagerWizardStoreFunc,
+            PoAValidatorManagementWizardStoreFunc,
             {
-                name: storeName,
+                name: 'l1-manager-wizard-storage',
                 storage: createJSONStorage(() => localStorage),
             }
         )
     )
-    : create<L1ManagerWizardState>()(L1ManagerWizardStoreFunc);
+    : create<PoAValidatorManagementState>()(PoAValidatorManagementWizardStoreFunc);
 
-export const resetL1ManagerWizardStore = () => {
+export const resetPoAValidatorManagementWizardStore = () => {
     if (confirm('Are you sure you want to start over? This will reset all progress while preserving your temporary wallet.')) {
-        localStorage.removeItem(storeName);
+        const currentStore = usePoAValidatorManagementWizardStore.getState();
+        const savedPrivateKey = currentStore.tempPrivateKeyHex;
+        localStorage.setItem('temp-private-key', savedPrivateKey);
+        localStorage.removeItem('l1-manager-wizard-storage');
         window.location.reload();
     }
 };
+
+// Initialize store with saved private key if it exists
+if (typeof window !== 'undefined') {
+    const savedPrivateKey = localStorage.getItem('temp-private-key');
+    if (savedPrivateKey) {
+        usePoAValidatorManagementWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
+        localStorage.removeItem('temp-private-key');
+    }
+}
