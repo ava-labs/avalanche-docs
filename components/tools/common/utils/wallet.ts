@@ -32,21 +32,6 @@ export function newPrivateKey(): string {
     return bytesToHex(secp256k1.randomPrivateKey());
 }
 
-export function getAddresses(publicKeyHex: string): { C: `0x${string}`, P: string } {
-    const publicKey = hexToBytes(publicKeyHex);
-
-    const pChainAddress = `P-${utils.formatBech32(
-        "fuji",
-        secp256k1.publicKeyBytesToAddress(publicKey)
-    )}`
-
-    const cChainAddress = Address.fromPublicKey(publicKey) as `0x${string}`
-
-    return {
-        C: cChainAddress,
-        P: pChainAddress
-    }
-}
 
 export async function addSignature(tx: UnsignedTx, privateKeyHex: string) {
     const privateKey = hexToBytes(privateKeyHex);

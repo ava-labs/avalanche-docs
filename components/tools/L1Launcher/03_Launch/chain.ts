@@ -1,7 +1,4 @@
-import { utils, pvm, Context, UnsignedTx, L1Validator, BigIntPr, pvmSerial, PChainOwner, Int, Bytes, Address } from "@avalabs/avalanchejs";
-import { getAddresses } from "../../common/utils/wallet";
-import { secp256k1 } from "@avalabs/avalanchejs";
-import { apiHostPromise } from "../../common/utils/config";
+import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
 import { bytesToHex, hexToBytes } from "viem";
 import { getRPCEndpoint } from "../../common/endpoints";
 
