@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { getAddresses } from '@/components/tools/common/utils/wallet';
 import { stepList } from './stepList';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
