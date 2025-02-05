@@ -45,7 +45,8 @@ export default function SwitchChain({ children, chainConfig }: Props) {
         try {
             // Request account access
             const accounts = await window.avalanche.request({
-                method: 'eth_requestAccounts'
+                method: 'eth_requestAccounts',
+                params: []
             });
 
             if (!accounts || accounts.length === 0) {
@@ -58,7 +59,8 @@ export default function SwitchChain({ children, chainConfig }: Props) {
 
             // Check chain
             const chainId = await window.avalanche.request({
-                method: 'eth_chainId'
+                method: 'eth_chainId',
+                params: []
             });
 
             if (chainId === chainConfig.chainId) {
