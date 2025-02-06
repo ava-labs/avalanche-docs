@@ -15,12 +15,12 @@ export const linkItems: LinkItemType[] = [
     url: '/integrations',
     active: 'nested-url',
   },
-  {
-    icon: <Cog />,
-    text: 'Hackathon',
-    url: '/hackathon',
-    active: 'nested-url',
-  }
+  // {
+  //   icon: <Cog />,
+  //   text: 'Hackathon',
+  //   url: '/hackathon',
+  //   active: 'nested-url',
+  // }
 ];
 
 const docsMenu: LinkItemType = {
