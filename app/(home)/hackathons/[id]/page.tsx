@@ -1,8 +1,10 @@
 import React from "react";
 import hackathonData from "./hackathon_example.json";
 import { Trophy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export default function HackathonPage() {
+export default function HackathonPage({ params }: { params: { id: string } }) {
   const menuItems = ["Overview", "Schedule", "Info", "Partners", "Tracks"];
 
 
@@ -90,6 +92,11 @@ export default function HackathonPage() {
             </div>
           </section>
         </div>
+      </div>
+      <div className="flex justify-end mt-4">
+        <Link href={`/hackathons/${params.id}/edit`}>
+          <Button>Edit Hackathon</Button>
+        </Link>
       </div>
     </div>
   );

@@ -224,6 +224,11 @@ function Hackathons() {
           </Button>
         )}
       </div>
+      <div className="flex justify-end">
+        <Link href="/hackathons/new">
+          <Button>Create New Hackathon</Button>
+        </Link>
+      </div>
     </main>
   );
 }
