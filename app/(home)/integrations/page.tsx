@@ -159,6 +159,18 @@ function Integrations({ list }: { list: any[] }) {
         filter();
     }, [input, chains]);
 
+    // New effect to check if a deep link (hash) exists, and scroll into view.
+    useEffect(() => {
+        if (categories.length > 0 && window.location.hash) {
+            // Remove the '#' from the hash and decode it to match the category value
+            const targetId = decodeURIComponent(window.location.hash.substring(1));
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    }, [categories]);
+
     return (
         <div>
             <div className='w-100 flex flex-col justify-center items-center'>
