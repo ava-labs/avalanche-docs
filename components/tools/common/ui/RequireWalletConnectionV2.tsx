@@ -128,7 +128,7 @@ export default function RequireWalletConnection({ children, chain, onConnection,
                     <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
                         <h3 className="font-medium mb-2">No Wallet Detected</h3>
                         <p className="mb-4">
-                            You need a Web3 wallet to interact with your L1 chain. We recommend installing Core wallet:
+                            You need an Core Wallet to launch your L1:
                         </p>
                         <a
                             href="https://chromewebstore.google.com/detail/core-crypto-wallet-nft-ex/agoakfejjabomempkjlepdflaleeobhb"
