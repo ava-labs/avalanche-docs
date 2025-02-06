@@ -10,9 +10,11 @@ export default async function EditHackathonPage({ params }: { params: { id: stri
   const hackathon = await fetchHackathon(params.id);
 
   return (
-    <div className="max-w-lg mx-auto mt-10">
-      <h1 className="text-xl font-bold mb-4">Edit Hackathon</h1>
-      <HackathonForm initialData={hackathon} />
+    <div className="container mx-auto mt-10 px-4">
+      <h1 className="text-2xl font-bold text-center mb-6">Edit Hackathon</h1>
+      <div className="max-w-3xl mx-auto">
+        <HackathonForm initialData={hackathon} />
+      </div>
     </div>
   );
 }

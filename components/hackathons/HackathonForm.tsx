@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { CalendarIcon } from "lucide-react";
 
 interface HackathonFormProps {
   initialData?: {
@@ -26,7 +29,7 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
 
   const [title, setTitle] = useState(initialData?.title || "");
   const [description, setDescription] = useState(initialData?.description || "");
-  const [date, setDate] = useState(initialData?.date || "");
+  const [date, setDate] = useState(initialData?.date ? new Date(initialData.date) : null);
   const [location, setLocation] = useState(initialData?.location || "");
   const [tags, setTags] = useState(initialData?.tags.join(", ") || "");
   const [status, setStatus] = useState(initialData?.status || "Upcoming");
@@ -43,7 +46,7 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
     const payload = {
       title,
       description,
-      date,
+      date: date?.toISOString().split("T")[0],
       location,
       tags: tags.split(",").map((tag) => tag.trim()),
       status,
@@ -61,7 +64,11 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
       alert(`Hackathon ${isEditing ? "updated" : "created"} successfully!`);
       router.push("/hackathons");
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("An unknown error occurred.");
+      }
     }
   };
 
@@ -71,12 +78,27 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
         <Input placeholder="Hackathon Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
         <Textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
 
-        <Calendar
-          mode="single"
-          selected={date ? new Date(date) : undefined}
-          onSelect={(selectedDate) => setDate(selectedDate?.toISOString() || "")}
-          className="rounded-md border"
-        />
+        {/* Updated Date Picker */}
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-full justify-start text-left"
+            >
+              {date ? format(date, "PPP") : "Pick a date"}
+              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent align="start" className="w-[300px] p-0">
+            <Calendar
+              mode="single"
+              selected={date || undefined}
+              onSelect={(selectedDate) => setDate(selectedDate || null)}
+              initialFocus
+              className="rounded-md border"
+            />
+          </PopoverContent>
+        </Popover>
 
         <Input placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
 
