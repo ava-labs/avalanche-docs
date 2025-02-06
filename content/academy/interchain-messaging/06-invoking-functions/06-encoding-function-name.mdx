@@ -179,7 +179,7 @@ Deploy the sender and receiver contracts and try out the `add` and `concatenate`
 <Callout type="warn" title="Don't forget to replace BOTH destinationBlockchainIDs in CalculatorSenderOnCChain with the Blockchain ID (HEX) from your Avalanche L1!" />
 
 ```bash
-forge create --rpc-url local-c --private-key $PK contracts/interchain-messaging/invoking-functions/CalculatorSenderOnCChain.sol:CalculatorSenderOnCChain
+forge create --rpc-url local-c --private-key $PK contracts/interchain-messaging/invoking-functions/CalculatorSenderOnCChain.sol:CalculatorSenderOnCChain --broadcast
 ```
 ```
 [⠃] Compiling...
@@ -206,7 +206,7 @@ export SENDER_ADDRESS=0x8B3BC4270BE2abbB25BC04717830bd1Cc493a461
 ### Deploy the Receiver Contract:
 
 ```bash
-forge create --rpc-url myblockchain --private-key $PK contracts/interchain-messaging/invoking-functions/CalculatorReceiverOnSubnet.sol:CalculatorReceiverOnSubnet
+forge create --rpc-url myblockchain --private-key $PK contracts/interchain-messaging/invoking-functions/CalculatorReceiverOnSubnet.sol:CalculatorReceiverOnSubnet --broadcast
 ```
 ```
 [⠊] Compiling...
