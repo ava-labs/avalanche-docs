@@ -156,7 +156,7 @@ function Features(): React.ReactElement {
         description="We provide a suite of tools to make your development experience as smooth as possible."
       >
       <div className="mt-8 flex flex-col gap-4">
-        <Link href="/docs/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
+        <Link href="/docs/tooling/get-avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <Terminal />
             <h3 className="font-semibold">Avalanche CLI</h3>
             <p className="text-sm text-fd-muted-foreground">
