@@ -17,7 +17,7 @@ Now, our goal is to create a dApp that works as a cross-Avalanche L1 Calculator,
 
 On the local C-Chain, we need to create the sender part of our cross-chain calculator. This will send two numbers (uint) to the receiver contract on your Avalanche L1. 
 
-```solidity title="src/02a-encoding-multiple-paramters/SimpleCalculatorSenderOnCChain.sol"
+```solidity title="contracts/interchain-messaging/invoking-functions/SimpleCalculatorSenderOnCChain.sol"
 pragma solidity ^0.8.18;
 
 import "@teleporter/ITeleporterMessenger.sol";
