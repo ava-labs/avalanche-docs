@@ -26,6 +26,7 @@ export default function ValidatorBalanceUI() {
   const [transferStep, setTransferStep] = useState<string>("")
   const [copied, setCopied] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
+  const [validatorTxId, setValidatorTxId] = useState("")
 
   const addresses = tempPrivateKeyHex ? getAddresses(tempPrivateKeyHex) : null
 
@@ -108,6 +109,7 @@ export default function ValidatorBalanceUI() {
     setTransferError(null)
     setTransferring(true)
     setTransferStep('Initiating C to P transfer...')
+    setValidatorTxId("")
 
     try {
       await transferCToP(
@@ -119,11 +121,15 @@ export default function ValidatorBalanceUI() {
             await new Promise(resolve => setTimeout(resolve, 2000))
             
             setTransferStep('Increasing validator balance...')
-            await increaseBalanceTx(
+            const tx = await increaseBalanceTx(
               tempPrivateKeyHex,
               validationId,
               transferAmount
             )
+            
+            if (tx?.txID) {
+              setValidatorTxId(tx.txID)
+            }
 
             setShowConfetti(true)
             setCurrentStep(3)
@@ -270,12 +276,27 @@ export default function ValidatorBalanceUI() {
                 <span className="text-sm font-medium text-green-700 dark:text-green-300">Status</span>
                 <span className="text-sm font-bold text-green-700 dark:text-green-300">Confirmed</span>
               </div>
+              {validatorTxId && (
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-green-700 dark:text-green-300">Transaction</span>
+                  <a
+                    href={`https://subnets-test.avax.network/p-chain/tx/${validatorTxId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center gap-1"
+                  >
+                    View in Explorer
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+              )}
             </div>
             <button
               onClick={() => {
                 setCurrentStep(1)
                 setTransferAmount("")
                 setCChainBalance(BigInt(0))
+                setValidatorTxId("")
               }}
               className={cn(
                 "w-full px-4 py-2 rounded-xl text-sm font-medium",
