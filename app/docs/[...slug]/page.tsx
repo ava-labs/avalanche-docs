@@ -30,6 +30,8 @@ import {
 import { BadgeCheck } from "lucide-react";
 import Mermaid from "@/components/content-design/mermaid";
 
+export const dynamicParams = false;
+
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
