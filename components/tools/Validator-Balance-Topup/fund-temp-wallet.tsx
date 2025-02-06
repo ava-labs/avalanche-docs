@@ -10,7 +10,13 @@ import { pvm, utils, Context, addTxSignatures } from "@avalabs/avalanchejs";
 
 export default function ValidatorBalanceUI() {
   const [currentStep, setCurrentStep] = useState(1)
-  const [tempPrivateKeyHex, setTempPrivateKeyHex] = useState('')
+  const [tempPrivateKeyHex, setTempPrivateKeyHex] = useState(() => {
+    const stored = localStorage.getItem('temp-private-key')
+    if (stored) return stored
+    const newKey = newPrivateKey()
+    localStorage.setItem('temp-private-key', newKey)
+    return newKey
+  })
   const [cChainBalance, setCChainBalance] = useState(BigInt(0))
   const [validationId, setValidationId] = useState("BDP3ifTcrt6qMRS2g7dU7aQVwrYMHe9thJXYm2vJFh8tRVr3p")
   const [transferAmount, setTransferAmount] = useState("")
