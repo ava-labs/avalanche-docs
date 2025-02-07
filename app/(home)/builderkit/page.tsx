@@ -7,8 +7,6 @@ import { InstallCommand } from '@/components/builderkit/install-command';
 import Link from 'next/link';
 import { ComponentShowcase } from '@/components/builderkit/sections/component-showcase';
 import { PainPoints } from '@/components/builderkit/sections/pain-points';
-import { Contribute } from '@/components/builderkit/sections/contribute';
-import { Contact } from '@/components/builderkit/sections/contact';
 import { useState, useEffect } from 'react';
 
 export default function Page() {
@@ -45,7 +43,7 @@ export default function Page() {
             Get Started
           </Link>
           <a
-            href="https://github.com/avalabs/builderkit"
+            href="https://github.com/ava-labs/builderkit"
             className="bg-white dark:bg-black border border-[0.5] border-black/25 dark:border-white/25 dark:hover:border-white/50 hover:border-black/50 dark:text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
             target="_blank"
             rel="noopener noreferrer"
