@@ -5,7 +5,7 @@ description: Hooks for interacting with Avalanche precompiled contracts.
 
 # Precompile Hooks
 
-BuilderKit provides a set of React hooks for interacting with Avalanche's precompiled contracts. These hooks simplify the interaction with subnet-level functionality and administrative operations.
+BuilderKit provides a set of React hooks for interacting with Avalanche's precompiled contracts. These hooks simplify the interaction with L1-level functionality and administrative operations.
 
 ## Available Hooks
 
@@ -117,7 +117,7 @@ const allowed = await areFeeRecipientsAllowed(43114);
 </Accordion>
 
 <Accordion title="useWarpMessenger">
-The `useWarpMessenger` hook enables cross-subnet messaging.
+The `useWarpMessenger` hook enables cross-chain messaging.
 
 ```tsx
 import { useWarpMessenger } from '@avalabs/builderkit';
@@ -138,7 +138,7 @@ const blockHash = await getVerifiedWarpBlockHash(43114, 0);
 ```
 
 **Available Functions:**
-- `sendWarpMessage`: Send a message to another subnet
+- `sendWarpMessage`: Send a message to another L1
 - `getVerifiedWarpMessage`: Get a verified message
 - `getVerifiedWarpBlockHash`: Get a verified block hash
 - `getBlockchainId`: Get the current blockchain ID
@@ -225,8 +225,8 @@ Here's how roles work across precompiles:
 | | Enabled | - Mint native tokens |
 | FeeManager | Admin | - Set roles for other addresses<br/>- Configure gas fees<br/>- Set minimum block cost<br/>- Set block gas cost step |
 | RewardManager | Admin | - Set roles for other addresses<br/>- Configure reward address<br/>- Enable/disable fee recipients<br/>- Set reward address |
-| WarpMessenger | Admin | - Set roles for other addresses<br/>- Send cross-subnet messages<br/>- Get verified messages |
-| | Enabled | - Send cross-subnet messages<br/>- Get verified messages |
+| WarpMessenger | Admin | - Set roles for other addresses<br/>- Send cross-chain messages<br/>- Get verified messages |
+| | Enabled | - Send cross-chain messages<br/>- Get verified messages |
 | TransactionAllowList | Admin | - Set roles for other addresses<br/>- Enable/disable addresses for transactions |
 | | Enabled | - Submit transactions (if enabled) |
 | DeployerAllowList | Admin | - Set roles for other addresses<br/>- Enable/disable addresses for deployments |
@@ -293,5 +293,5 @@ function AdminPanel() {
 | TransactionAllowList | `0x0200000000000000000000000000000000000002` | Control transaction permissions |
 | FeeManager | `0x0200000000000000000000000000000000000003` | Configure chain fees |
 | RewardManager | `0x0200000000000000000000000000000000000004` | Manage reward distribution |
-| WarpMessenger | `0x0200000000000000000000000000000000000005` | Cross-subnet messaging |
+| WarpMessenger | `0x0200000000000000000000000000000000000005` | Cross-chain messaging |
 | DeployerAllowList | `0x0200000000000000000000000000000000000000` | Control deployment permissions |
