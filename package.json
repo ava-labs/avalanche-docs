@@ -30,6 +30,7 @@
     "boring-name-generator": "^1.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.3.1",
     "fumadocs-core": "14.6.0",
     "fumadocs-mdx": "11.1.2",
     "fumadocs-twoslash": "^2.0.2",
@@ -43,6 +44,7 @@
     "next": "^15.1.0",
     "pdf-lib": "^1.17.1",
     "posthog-js": "^1.166.1",
+    "prismjs": "^1.29.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-use-measure": "^2.1.1",
@@ -62,6 +64,7 @@
   "devDependencies": {
     "@types/mdx": "^2.0.13",
     "@types/node": "22.10.2",
+    "@types/prismjs": "^1.26.5",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "autoprefixer": "^10.4.19",
