@@ -1,16 +1,26 @@
-import type React from "react"
+import React from "react"
 import Link from "next/link"
 import { Clock, GithubIcon, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper"
 
 interface ToolHeaderProps {
   title: string
   duration: string
   description: string
   githubDir: string
+  updatePath?: string
+  updateTitle?: string
 }
 
-const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description, githubDir }) => {
+const ToolHeader: React.FC<ToolHeaderProps> = ({
+  title,
+  duration,
+  description,
+  githubDir,
+  updatePath,
+  updateTitle,
+}) => {
   return (
     <div className="space-y-4 mb-4">
       <div className="space-y-2">
@@ -20,7 +30,7 @@ const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description, g
                 <Clock className="w-4 h-4" />
                 <span>{duration}</span>
             </div>
-            <div className="sm:ml-auto space-x-2">
+            <div className="sm:ml-auto flex items-center gap-2">
               <Link href={`https://github.com/ava-labs/avalanche-docs/blob/master/components/tools/${githubDir}`} target="_blank" rel="noopener noreferrer" >
                     <Button variant="outline" size="sm">
                     <GithubIcon className="w-4 h-4" />
@@ -32,6 +42,12 @@ const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description, g
                   Give Feedback
                   </Button>
               </Link>
+              {updatePath && updateTitle && (
+                <RequestUpdateButtonWrapper
+                  pagePath={updatePath}
+                  title={updateTitle}
+                />
+              )}
             </div>
             
         </div>

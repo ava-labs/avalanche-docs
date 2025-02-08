@@ -7,6 +7,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { Pill, Pills } from '@/components/ui/pills';
 import { SearchIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import RequestUpdateButton from '@/components/ui/request-update-button';
 
 export default function Page(): React.ReactElement {
     const list = [...getIntegrationPages()];
@@ -18,9 +19,10 @@ export default function Page(): React.ReactElement {
                     <p className="h-fit text-center p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl">
                         Discover best-in-class integrations for your Avalanche L1 and learn how to use them.
                     </p>
-                    <div className='inline-flex items-center gap-3'>
+                    <div className="inline-flex items-center gap-3">
                         <Link className={cn(buttonVariants())} href={`#Featured`}>Discover Integrations</Link>
                         <Link className={cn(buttonVariants({ variant: 'outline' }))} href="https://github.com/ava-labs/avalanche-docs/blob/master/content/integrations" target='_blank'>Add your Integration</Link>
+                        <RequestUpdateButton pagePath="/integrations" title="Update Integration Information" className={cn(buttonVariants({ variant: 'outline' }))} />
                     </div>
                 </div>
                 <Integrations list={JSON.parse(JSON.stringify(list))}></Integrations>

@@ -23,10 +23,19 @@ export default function L1Wizard() {
                     duration="30 min"
                     description="Manage the validator set of your Proof of Authority L1"
                     githubDir="PoA-Validator-Management"
+                    updatePath="/tools/poa-validator-management"
+                    updateTitle="Update PoA Validator Management Tool Information"
                 />
                 <div className="flex flex-col lg:flex-row">
                     <div className="w-full lg:w-80 mb-8">
-                        <Steps currentStep={currentStep} maxAdvancedStep={maxAdvancedStep} advanceTo={advanceTo} stepList={stepList} stepGroups={stepGroups} onReset={resetPoAValidatorManagementWizardStore}/>
+                        <Steps
+                            currentStep={currentStep}
+                            maxAdvancedStep={maxAdvancedStep}
+                            advanceTo={advanceTo}
+                            stepList={stepList}
+                            stepGroups={stepGroups}
+                            onReset={resetPoAValidatorManagementWizardStore}
+                        />
                     </div>
                     <div className="flex-1 min-w-0">
                         <div className="h-full">

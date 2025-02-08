@@ -7,6 +7,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { Pill, Pills } from '@/components/ui/pills';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import RequestUpdateButtonWrapper from '@/components/client/request-update-button-wrapper';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -14,6 +15,11 @@ export default async function Page(props: {
     const params = await props.params;
     const page = getIntegrationPage([params.slug]);
     if (!page) notFound();
+
+    // Dynamically build the issue title based on the page title.
+    const issueTitle = page.data.title 
+        ? `Update Integration ${page.data.title} information`
+        : "Update Integration Information";
 
     const { body: MDX } = await page.data.load();
     const path = `content/integrations/${page.file.path}`;
@@ -32,23 +38,33 @@ export default async function Page(props: {
                     backgroundBlendMode: 'difference, difference, normal',
                 }}
             >
-                <div className="flex items-center">
-                    <img
-                        src={page.data.logo}
-                        alt={page.data.title}
-                        className="w-12 h-12 object-contain mr-4"
-                    />
-                    <h1 className="mb-2 text-3xl font-bold text-white">
-                        {page.data.title}
-                    </h1>
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <img
+                            src={page.data.logo}
+                            alt={page.data.title}
+                            className="w-12 h-12 object-contain mr-4"
+                        />
+                        <h1 className="mb-2 text-3xl font-bold text-white">
+                            {page.data.title}
+                        </h1>
+                    </div>
+                    <div className="flex gap-2">
+                        <Link
+                            href="/integrations"
+                            className={buttonVariants({ size: 'sm', variant: 'secondary' })}
+                        >
+                            Back
+                        </Link>
+                        <RequestUpdateButtonWrapper
+                            pagePath={`/integrations/${params.slug}`}
+                            title={issueTitle}
+                            buttonVariant="outline"
+                            size="sm"
+                        />
+                    </div>
                 </div>
                 <p className="mb-4 text-white/80">{page.data.description}</p>
-                <Link
-                    href="/integrations"
-                    className={buttonVariants({ size: 'sm', variant: 'secondary' })}
-                >
-                    Back
-                </Link>
             </div>
             <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
                 <div className="prose p-4">

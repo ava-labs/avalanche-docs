@@ -11,6 +11,7 @@ import { cn } from '@/utils/cn';
 import { CodeBlock } from '@/components/content-design/code-block';
 import { File, Files, Folder } from 'fumadocs-ui/components/files';
 import { DeployBlockchainAnimation } from '@/app/(home)/page.client';
+import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper";
 
 const badgeVariants = cva(
   'mb-2 inline-flex size-7 items-center justify-center rounded-full bg-fd-primary font-medium text-fd-primary-foreground',
@@ -20,10 +21,19 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Documentation</h1>
+          <RequestUpdateButtonWrapper 
+            pagePath="/docs" 
+            title="Update Documentation Information"
+            buttonVariant="outline"
+            size="sm"
+          />
+        </div>
         <div>
-            <div className="relative">
+          <div className="relative">
             <Hero />
-            </div>
+          </div>
           <Introduction />
           <Highlights />
           <Features />

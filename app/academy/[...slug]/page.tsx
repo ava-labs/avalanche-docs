@@ -32,6 +32,7 @@ import {
   Pre,
 } from "fumadocs-ui/components/codeblock";
 import Mermaid from "@/components/content-design/mermaid";
+import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper";
 
 export const dynamicParams = false;
 
@@ -66,9 +67,19 @@ export default async function Page(props: {
               <div>Instructors:</div>
               <Instructors names={course?.instructors || []} />
             </div>
-            <Link href="https://t.me/avalancheacademy" target='_blank' className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}>
-              Join Telegram Course Chat
-            </Link>
+            <div className="flex flex-col gap-4">
+              <Link href="https://t.me/avalancheacademy" target='_blank' className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}>
+                Join Telegram Course Chat
+              </Link>
+              <RequestUpdateButtonWrapper
+                pagePath={`/academy/${page.slugs.join('/')}`}
+                title={`Update ${page.data.title}`}
+                buttonText="Request Update"
+                buttonVariant="secondary"
+                size="sm"
+                className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}
+              />
+            </div>
           </div>
         ),
       }}
