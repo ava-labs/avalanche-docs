@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake, HardDrive, LayoutTemplate } from 'lucide-react';
+import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake, HardDrive, LayoutTemplate, Wallet, Search, Cloud, Database, ListFilter } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -10,10 +10,65 @@ import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 
 export const linkItems: LinkItemType[] = [
   {
-    icon: <Workflow />,
+    type: 'menu',
     text: 'Integrations',
     url: '/integrations',
-    active: 'nested-url',
+    items: [
+      {
+        icon: <Wallet />,
+        text: 'Account Abstraction',
+        description: "Explore solutions for implementing account abstraction in your dApps.",
+        url: '/integrations#Account%20Abstraction',
+        menu: {
+          className: 'lg:col-start-1',
+        },
+      },
+      {
+        icon: <Search />,
+        text: 'Block Explorers',
+        description: "Tools to analyze and track blockchain transactions and activities.",
+        url: '/integrations#Block%20Explorers',
+        menu: {
+          className: 'lg:col-start-2',
+        },
+      },
+      {
+        icon: <Cloud />,
+        text: 'Blockchain-as-a-Service',
+        description: "Managed solutions for deploying and managing your Avalanche L1s.",
+        url: '/integrations#Blockchain%20as%20a%20Service',
+        menu: {
+          className: 'lg:col-start-2',
+        },
+      },
+      {
+        icon: <Database />,
+        text: 'Data Feeds',
+        description: "Access reliable oracle data feeds for your smart contracts.",
+        url: '/integrations#Data%20Feeds',
+        menu: {
+          className: 'lg:col-start-3 lg:row-start-1',
+        },
+      },
+      {
+        icon: <ListFilter />,
+        text: 'Indexers',
+        description: "Index and query blockchain data efficiently for your applications.",
+        url: '/integrations#Indexers',
+        menu: {
+          className: 'lg:col-start-3',
+        },
+      },
+      {
+        icon: <ArrowUpRight />,
+        text: 'Browse All Integrations',
+        description: "Discover all available integrations in the Avalanche ecosystem.",
+        url: '/integrations',
+        menu: {
+          className: 'lg:col-start-3',
+        },
+      },
+    ],
   },
   {
     icon: <Cog />,
