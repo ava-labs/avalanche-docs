@@ -4,8 +4,8 @@ import { ArrowUpRight, Loader2, Copy, CheckCircle2, ArrowRight } from "lucide-re
 import { useState, useEffect } from "react"
 import { createPublicClient, http, formatEther } from 'viem';
 import { avalancheFuji } from 'viem/chains';
-import { newPrivateKey, getAddresses } from '../common/utils/wallet';
-import { transferCToP } from '../common/utils/utxo';
+import { newPrivateKey } from '../common/utils/wallet';
+import { transferCToP, getAddresses } from './helper';
 import { pvm, utils, Context, addTxSignatures } from "@avalabs/avalanchejs";
 
 export default function ValidatorBalanceUI() {
