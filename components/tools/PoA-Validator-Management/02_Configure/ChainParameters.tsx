@@ -4,7 +4,7 @@ import { Label } from '@radix-ui/react-label';
 import { Input } from '@/components/ui/input';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection';
+import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection__deprecated';
 
 import { usePoAValidatorManagementWizardStore } from '../config/store';
 

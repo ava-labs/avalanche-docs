@@ -232,7 +232,7 @@ export default function OpenRPCPort() {
         setRpcAddress,
         rpcVerified,
         setRpcVerified,
-        getCChainRpcEndpoint,
+        getL1RpcEndpoint,
         evmChainId,
         goToNextStep,
         goToPreviousStep
@@ -331,7 +331,7 @@ export default function OpenRPCPort() {
                     {rpcAddress && isAddressValid() && (
                         <>
                             <CheckRPC
-                                endpoint={getCChainRpcEndpoint()}
+                                endpoint={getL1RpcEndpoint()}
                                 onSuccess={() => setRpcVerified(true)}
                                 evmChainId={evmChainId}
                             />

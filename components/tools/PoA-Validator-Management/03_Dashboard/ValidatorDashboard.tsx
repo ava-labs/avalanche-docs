@@ -3,6 +3,8 @@ declare global {
   interface Window {
     avalanche: {
       request: (args: { method: string; params: any }) => Promise<any>;
+      removeListener: (event: string, callback: () => void) => void;
+      on: (event: string, callback: () => void) => void;
     };
   }
 }
@@ -251,8 +253,8 @@ export default function LaunchValidators() {
                       <TableCell className="font-medium">{validator.nodeID}</TableCell>
                       <TableCell>
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${validator.isActive
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-orange-100 text-orange-800'
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-orange-100 text-orange-800'
                           }`}>
                           {validator.isActive ? 'Active' : 'Disabled'}
                         </span>

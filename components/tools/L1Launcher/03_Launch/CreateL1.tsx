@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useL1LauncherWizardStore } from '../config/store';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import { createSubnet, createChain, convertToL1 } from './chain';
-import { calculateContractAddress } from '../../common/utils/wallet';
+import { newCreateSubnetTxHex, newCreateChainTxHex, newConvertSubnetToL1TxHex } from './chain';
+import { PROXY_ADDRESS } from '../../common/utils/genGenesis';
+import { pvm } from '@avalabs/avalanchejs';
+import { getRPCEndpoint } from '../../common/endpoints';
+import { packL1ConversionMessage, PackL1ConversionMessageArgs } from '../../common/utils/convertWarp';
+import { bytesToHex } from 'viem';
+
+const pvmApi = new pvm.PVMApi(getRPCEndpoint(true))
 
 type Status = 'not_started' | 'in_progress' | 'error' | 'success';
 
@@ -14,7 +20,6 @@ interface StepStatus {
 
 export default function CreateL1() {
     const {
-        tempPrivateKeyHex,
         l1Name,
         genesisString,
         setSubnetId,
@@ -26,8 +31,19 @@ export default function CreateL1() {
         nodePopJsons,
         nodesCount,
         goToNextStep,
-        goToPreviousStep
+        goToPreviousStep,
+        updatePChainAddressFromCore,
+        pChainAddress
     } = useL1LauncherWizardStore();
+
+    const [globalError, setGlobalError] = useState<string | null>(null);
+
+    useEffect(() => {
+        updatePChainAddressFromCore().catch(err => {
+            console.error('Failed to update P-Chain address:', err);
+            setGlobalError(`Failed to update P-Chain address: ${err.message}`);
+        });
+    }, []);
 
     const [subnetStatus, setSubnetStatus] = useState<StepStatus>(() => ({
         status: existingSubnetId ? 'success' : 'not_started',
@@ -80,16 +96,28 @@ export default function CreateL1() {
         try {
             let subnetTxId: string | undefined;
             if (subnetStatus.status === 'not_started') {
-                // Step 1: Create Subnet
-                setSubnetStatus({ status: 'in_progress' });
                 try {
-                    subnetTxId = await createSubnet(tempPrivateKeyHex);
+                    // Step 1: Create Subnet
+                    setSubnetStatus({ status: 'in_progress' });
+
+                    const subnetTxHex = await newCreateSubnetTxHex(pChainAddress);
+
+                    subnetTxId = await window.avalanche.request({
+                        method: 'avalanche_sendTransaction',
+                        params: {
+                            transactionHex: subnetTxHex,
+                            chainAlias: 'P',
+                        }
+                    });
+
+                    await new Promise(resolve => setTimeout(resolve, 5 * 1000));
                     setSubnetStatus({
                         status: 'success',
                         data: subnetTxId
                     });
-                    setSubnetId(subnetTxId);
+                    setSubnetId(subnetTxId || '');
                 } catch (error: any) {
+                    console.error('Failed to create subnet', error);
                     setSubnetStatus({
                         status: 'error',
                         error: error.message || 'Failed to create subnet'
@@ -104,17 +132,26 @@ export default function CreateL1() {
                 // Step 2: Create Chain
                 setCreateChainStatus({ status: 'in_progress' });
                 try {
-                    chainTxId = await createChain({
-                        privateKeyHex: tempPrivateKeyHex,
+                    const chainTxHex = await newCreateChainTxHex({
+                        pChainAddress,
                         chainName: l1Name,
                         subnetId: subnetTxId || subnetStatus.data,
                         genesisData: genesisString,
                     });
+
+                    chainTxId = await window.avalanche.request({
+                        method: 'avalanche_sendTransaction',
+                        params: {
+                            transactionHex: chainTxHex,
+                            chainAlias: 'P',
+                        }
+                    });
+                    await new Promise(resolve => setTimeout(resolve, 5 * 1000));
                     setCreateChainStatus({
                         status: 'success',
                         data: chainTxId
                     });
-                    setChainId(chainTxId);
+                    setChainId(chainTxId || '');
                 } catch (error: any) {
                     setCreateChainStatus({
                         status: 'error',
@@ -128,18 +165,38 @@ export default function CreateL1() {
                 // Step 3: Convert to L1
                 setConvertToL1Status({ status: 'in_progress' });
                 try {
-                    const conversionId = await convertToL1({
-                        privateKeyHex: tempPrivateKeyHex,
+                    const conversionTxHex = await newConvertSubnetToL1TxHex({
+                        pChainAddress,
                         subnetId: subnetTxId || subnetStatus.data,
                         chainId: chainTxId || createChainStatus.data,
-                        managerAddress: calculateContractAddress(tempPrivateKeyHex, 3),
+                        managerAddress: PROXY_ADDRESS,
                         nodePopJsons: nodePopJsons.slice(0, nodesCount),
+                    });
+
+                    const args: PackL1ConversionMessageArgs = {
+                        subnetId: subnetTxId || subnetStatus.data,
+                        managerChainID: chainTxId || createChainStatus.data,
+                        managerAddress: PROXY_ADDRESS,
+                        validators: nodePopJsons.slice(0, nodesCount).map(json => JSON.parse(json).result),
+                    }
+                    console.log('conversion args', args);
+                    const [message, justification] = packL1ConversionMessage(args, 5, '11111111111111111111111111111111LpoYY');
+
+                    console.log('expected conversion message', bytesToHex(message));
+                    console.log('expected justification', bytesToHex(justification));
+
+                    const conversionTxId = await window.avalanche.request({
+                        method: 'avalanche_sendTransaction',
+                        params: {
+                            transactionHex: conversionTxHex,
+                            chainAlias: 'P',
+                        }
                     });
                     setConvertToL1Status({
                         status: 'success',
-                        data: conversionId
+                        data: conversionTxId
                     });
-                    setConversionId(conversionId);
+                    setConversionId(conversionTxId);
                 } catch (error: any) {
                     console.error('Failed to convert to L1', error);
                     setConvertToL1Status({
@@ -172,6 +229,11 @@ export default function CreateL1() {
 
     return (
         <div className="space-y-12">
+            {globalError && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <span className="block sm:inline">{globalError}</span>
+                </div>
+            )}
             <div>
                 <h1 className="text-2xl font-medium mb-4">Create L1</h1>
                 <p>Creating an L1 involves a three separate transactions on the P-Chain. Firstly, a CreateSubnetTx is issued. A Subnet with the temporary wallet as it's owner is created. Next, a CreateChainTx with the genesis information from the configuration is issued, creating the actual blockchain. Lastly, the ConvertSubnetToL1Tx is issued, converting the Subnet to a sovereign L1. The ownership of the temporary key is given up and transferred to a validator manager contract on the L1.</p>
@@ -254,7 +316,7 @@ export default function CreateL1() {
 
             <NextPrev
                 nextDisabled={createChainStatus.status !== 'success'}
-                onNext={goToNextStep} 
+                onNext={goToNextStep}
                 onPrev={goToPreviousStep}
             />
         </div>

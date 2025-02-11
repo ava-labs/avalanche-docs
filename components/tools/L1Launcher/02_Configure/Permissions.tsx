@@ -61,7 +61,7 @@ export default function Permissions() {
                 <Label>POA Owner Address</Label>
                 <div className="flex gap-3 items-start">
                     <Input type='text' value={poaOwnerAddress} onChange={(e) => setPoaOwnerAddress(e.target.value)} />
-                    {window.ethereum && <Button
+                    {window.avalanche && <Button
                         onClick={handleConnectWallet}
                         variant="secondary"
                     >

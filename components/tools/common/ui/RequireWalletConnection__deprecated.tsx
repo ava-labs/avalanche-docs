@@ -81,10 +81,10 @@ export default function RequireWalletConnection({ children, chainConfig, require
             const latestBlock = await window.ethereum.request({
                 method: 'eth_blockNumber',
             });
-            
+
             // Optional balance check
             if (requiredBalance && requiredBalance > 0) {
-                
+
                 // Check if account has sufficient balance
                 setConnectionStatus('insufficient_balance');
                 const response = await fetch(chainConfig.rpcUrls[0], {
@@ -109,7 +109,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
 
                 if (balance < requiredBalance) return;
             }
-            
+
             // Set status to connected if every check passed and call onConnection callback
             setError(null);
             setConnectionStatus('correct_chain_connected');
@@ -257,7 +257,7 @@ export default function RequireWalletConnection({ children, chainConfig, require
                 <div className="step">Wallet installed</div>
                 <div className="step">Connected to {chainConfig.chainName}</div>
                 <div className="step">RPC is reachable</div>
-                {requiredBalance && requiredBalance > 0 && 
+                {requiredBalance && requiredBalance > 0 &&
                     <div className="step">
                         Account has at least {requiredBalance} {chainConfig.nativeCurrency.symbol}
                     </div>
