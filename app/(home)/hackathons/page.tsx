@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
-  ArrowUpRight,
-  CalendarClock,
+  Trophy,
+  UserRound,
+  Circle,
   CalendarIcon,
   MapPinIcon,
 } from "lucide-react";
 import Link from "next/link";
+import Image from 'next/image'
 
 import { HackathonLite } from "@/types/hackathons";
 
@@ -41,17 +43,33 @@ export default function HackathonsPage() {
 }
 
 function HackathonCard({ hackathon }: { hackathon: HackathonLite }) {
+  const statusColors: Record<string, string> = {
+    Ongoing: "stroke-green-500",
+    Upcoming: "stroke-yellow-500",
+    Ended: "stroke-red-500",
+  };
+
   return (
     <div key={hackathon.id} className="w-[512px] flex rounded-lg overflow-hidden shadow-lg">
       {/* Left Section: Background Image or Red Color */}
       <div
-        className="flex-[2] h-[280px] bg-red-500"
-        style={{
-          backgroundImage: true ? `url("https://images.seeklogo.com/logo-png/49/2/avalanche-avax-logo-png_seeklogo-491111.png")` : "",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+        className="h-[280px] bg-zinc-800 flex items-center justify-start"
+      >
+        <Image
+          src="/logo-black.png"
+          alt="Avalanche Logo"
+          width={200}
+          height={50}
+          className="dark:hidden"
+        />
+        <Image
+          src="/logo-white.png"
+          alt="Avalanche Logo"
+          width={200}
+          height={50}
+          className="hidden dark:block"
+        />
+      </div>
 
       {/* Right Section */}
       <div className="flex-[3] bg-zinc-900 text-white p-4 flex flex-col justify-between">
@@ -84,10 +102,26 @@ function HackathonCard({ hackathon }: { hackathon: HackathonLite }) {
             ))}
           </div>
         )}
+        <div className="flex justify-around items-center text-gray-300 text-sm mt-4">
+          <div className="flex items-center gap-2">
+            <Trophy className="h-5 w-5 stroke-white" />
+            <span className="font-medium">10K</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <UserRound className="h-5 w-5 stroke-white" />
+            <span className="font-medium">9000</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Circle className={`h-5 w-5 ${statusColors[hackathon.status]}`} />
+            <span className="font-medium uppercase">{hackathon.status}</span>
+          </div>
+        </div>
         <div className="mx-auto">
-          <button className="w-[257px] h-[40px] min-h-[40px] max-h-[40px] bg-red-500 text-white font-medium uppercase rounded-md py-2 px-4 mt-4 flex items-center justify-center gap-2 hover:bg-red-600 transition">
-            JOIN NOW
-          </button>
+          <Link href={`/hackathons/${hackathon.id}`}>
+            <button className="w-[257px] h-[40px] min-h-[40px] max-h-[40px] bg-red-500 text-white font-medium uppercase rounded-md py-2 px-4 mt-4 flex items-center justify-center gap-2 hover:bg-red-600 transition">
+              JOIN NOW
+            </button>
+          </Link>
         </div>
       </div>
     </div>
