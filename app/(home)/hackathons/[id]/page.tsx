@@ -1,10 +1,16 @@
+"use client"
+
 import React from "react";
 import hackathonData from "./hackathon_example.json";
 import { Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
-export default function HackathonPage({ params }: { params: { id: string } }) {
+
+export default function HackathonPage() {
+  const { id } = useParams()
+
   const menuItems = ["Overview", "Schedule", "Info", "Partners", "Tracks"];
 
 
@@ -94,7 +100,7 @@ export default function HackathonPage({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="flex justify-end mt-4">
-        <Link href={`/hackathons/${params.id}/edit`}>
+        <Link href={`/hackathons/${id}/edit`}>
           <Button>Edit Hackathon</Button>
         </Link>
       </div>
