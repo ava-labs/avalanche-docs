@@ -6,30 +6,56 @@ authors: [ashucoder9]
 icon: Terminal
 ---
 
-## Build the Precompile-EVM
+<Steps>
+<Step>
 
-In the root of your Precompile-EVM, run the following script:
+### Build Your Precompile-EVM
+
+There's a simple build script in the Precompile-EVM we can utilize to build. First, make sure you are in the root folder of you Precompile-EVM:
+
+```bash
+cd $GOPATH/src/github.com/ava-labs/precompile-evm
+```
+
+Then run the command to initiate the build script:
 
 ```bash
 ./scripts/build.sh
 ```
 
-## Start an Avalanche Network with a New Blockchain
+</Step>
+<Step>
+
+### Create your blockchain configuration
+
 You can run your Precompile-EVM by using the Avalanche CLI.
 
 First, create the configuration for your blockchain:
 
 ```bash
-avalanche blockchain create myblockchain --custom --vm $AVALANCHEGO_PLUGIN_PATH/srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy --genesis ./.devcontainer/genesis-example.json
+avalanche blockchain create myblockchain \
+ --custom \
+ --vm $VM_PATH \
+ --genesis "./.devcontainer/genesis-example.json" \
+ --force \
+ --sovereign=false \
+ --evm-token "TOK" \
+ --warp \
+ --icm
 ```
 
-<Callout type="info"> Make sure you replace the binary name with the actual binary name of your Precompile-EVM, and genesis file with the actual path to your genesis file. </Callout>
+</Step>
+<Step>
 
-Next, launch the Avalanche L1 with your custom VM:
+### Launch L1 with you customized EVM
 
 ```bash
-avalanche blockchain deploy myblockchain
+avalanche blockchain deploy myblockchain --local
 ```
 
-After around 1 minute, the blockchain should have been created, and additional output will appear in the terminal. You'll also see the RPC URL of your blockchain in the terminal.
+After around 1 minute, the blockchain should have been created, and additional output will appear in
+the terminal. You'll also see the RPC URL of your blockchain in the terminal.
+
+</Step>
+</Steps>
 

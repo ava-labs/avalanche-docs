@@ -1,29 +1,18 @@
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import { useL1ManagerWizardStore } from "../config/store";
+import { usePoAValidatorManagementWizardStore } from "../config/store";
 import { useState } from "react";
+import { checkCoreWallet } from '@/components/tools/common/api/coreWallet';
 
 export default function Welcome() {
-    const { goToNextStep, goToPreviousStep } = useL1ManagerWizardStore();
+    const { goToNextStep, goToPreviousStep } = usePoAValidatorManagementWizardStore();
     const [error, setError] = useState<string | null>(null);
 
     const handleNext = async () => {
         try {
-            // Check if ethereum object exists
-            if (!window.ethereum) {
-                setError("Core wallet is not installed.");
-                return;
-            }
-
-            // Try to get public key
-            await window.ethereum.request({
-                "method": "avalanche_getAccountPubKey",
-                "params": []
-            });
-            
-            // If successful, proceed to next step
+            await checkCoreWallet();
             goToNextStep();
-        } catch (error) {
-            setError("Core wallet appears to be installed but not properly configured.");
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Failed to check Core wallet");
         }
     };
 
@@ -31,27 +20,23 @@ export default function Welcome() {
         <h1 className="text-2xl font-medium mb-6">Welcome</h1>
 
         <p className="mb-4">
-            The PoA Manager helps you manage your L1's validator set. You can add new validators, remove existing ones, and adjust their weight of stake. This tool is designed for developers who need to maintain their Proof of Authority (PoA) validator set through a simple web interface. The tool is completely open source and available on <a href="https://github.com/ava-labs/avalanche-docs" target="_blank" className="text-blue-500 hover:text-blue-700 underline">GitHub</a>.
+            The PoA Manager helps you manage your L1's validator set. You can add new validators, disable existing ones, and adjust their weight. This tool is designed for developers who need to maintain their Proof of Authority (PoA) validator set through a simple web interface.
+        </p>
+        <p className="mb-4">
+            The tool is completely open source and available on <a href="https://github.com/ava-labs/avalanche-docs" target="_blank" className="text-blue-500 hover:text-blue-700 underline">GitHub</a>
         </p>
 
         <div className="p-4 mb-4 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-lg">
             <h2 className="text-lg font-medium mb-2 text-gray-900 dark:text-gray-100">Prerequisites</h2>
             <p className="mb-2 text-gray-800 dark:text-gray-200">
-                Before using the L1 Manager, please ensure you have the <a 
-                    href="https://core.app/" 
-                    target="_blank" 
+                Before using the L1 Manager, please ensure you have the <a
+                    href="https://core.app/"
+                    target="_blank"
                     className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
                 >Core wallet browser extension</a> installed. This extension is required for interacting with the P-Chain.
             </p>
             <p className="mb-2 text-gray-800 dark:text-gray-200">
-                You'll also need to run a local signature aggregator service for fetching validator signatures. This requirement will be replaced in a future update, but for now you can find setup instructions in the <a 
-                    href="https://github.com/ava-labs/icm-services/blob/main/signature-aggregator/README.md"
-                    target="_blank"
-                    className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                >signature aggregator documentation</a>.
-            </p>
-            <p className="mb-2 text-gray-800 dark:text-gray-200">
-                Finally, you'll need to have AVAX balance on the P-Chain to perform validator management operations. If your AVAX is on the C-Chain, you can transfer it to the P-Chain using the <a 
+                You will also need to have AVAX balance on the P-Chain to perform validator management operations. If your AVAX is on the C-Chain, you can transfer it to the P-Chain using the <a
                     href="https://test.core.app/stake/cross-chain-transfer/"
                     target="_blank"
                     className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
@@ -63,9 +48,9 @@ export default function Welcome() {
             <div className="p-4 mb-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-lg">
                 <p className="text-red-700 dark:text-red-200">
                     {error} {error.includes("not installed") ? (
-                        <>Please install <a 
-                            href="https://core.app/" 
-                            target="_blank" 
+                        <>Please install <a
+                            href="https://core.app/"
+                            target="_blank"
                             className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline"
                         >Core wallet</a> to continue. After installing, refresh this page.</>
                     ) : (
@@ -75,11 +60,11 @@ export default function Welcome() {
             </div>
         )}
 
-        <NextPrev 
-            nextDisabled={false} 
-            prevHidden={false} 
-            onNext={handleNext} 
-            onPrev={goToPreviousStep} 
+        <NextPrev
+            nextDisabled={false}
+            prevHidden={false}
+            onNext={handleNext}
+            onPrev={goToPreviousStep}
         />
     </>;
 }

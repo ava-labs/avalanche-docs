@@ -27,6 +27,8 @@ import { BadgeCheck } from "lucide-react";
 import Mermaid from "@/components/content-design/mermaid";
 import Comments from '@/components/ui/comments';
 
+export const dynamicParams = false;
+
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
 }) {

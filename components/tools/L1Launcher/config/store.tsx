@@ -1,12 +1,14 @@
 import { create } from 'zustand'
 import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { getAddresses } from '../../common/utils/wallet';
 import { stepList } from './stepList';
 import { generateGenesis } from '../../common/utils/genGenesis';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 import { StepWizardState } from '@/components/tools/common/ui/types';
+import { utils, secp256k1 } from "@avalabs/avalanchejs";
+import { hexToBytes } from '@noble/hashes/utils';
+import { ProjectivePoint } from '@noble/secp256k1';
 
 interface L1LauncherWizardState extends StepWizardState {
     poaOwnerAddress: string;
@@ -14,7 +16,7 @@ interface L1LauncherWizardState extends StepWizardState {
 
     nodesCount: number;
     setNodesCount: (count: number) => void;
-    
+
     evmChainId: number;
     setEvmChainId: (chainId: number) => void;
 
@@ -63,24 +65,33 @@ interface L1LauncherWizardState extends StepWizardState {
     tokenAllocations: AllocationEntry[];
     setTokenAllocations: (allocations: AllocationEntry[]) => void;
 
-    tempPrivateKeyHex: string;
-    setTempPrivateKeyHex: (key: string) => void;
-
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
-    getCChainRpcEndpoint: () => string;
+    getL1RpcEndpoint: () => string;
     getRpcEndpoint: () => string;
 
     convertL1SignedWarpMessage: `0x${string}` | null;
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => void;
+
+    poaValidatorManagerAddress: string;
+    setPoaValidatorManagerAddress: (address: string) => void;
+
+    validatorMessagesAddress: string;
+    setValidatorMessagesAddress: (address: string) => void;
+
+    getViemL1Chain: () => Chain;
+
+    pChainAddress: string;
+    updatePChainAddressFromCore: () => Promise<void>;
 }
 
 
 import generateName from 'boring-name-generator'
 import { createStepWizardStore } from '../../common/ui/StepWizardStoreCreator';
+import { Chain } from 'viem';
 
 const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get) => ({
-    ...createStepWizardStore({set, get, stepList}),
+    ...createStepWizardStore({ set, get, stepList }),
 
     poaOwnerAddress: "",
     setPoaOwnerAddress: (address: string) => set(() => ({
@@ -114,88 +125,51 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     txAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: false
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setTxAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ txAllowlistConfig: config })),
 
     contractDeployerAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
-        activated: true
-      } as AllowlistPrecompileConfig,
+        activated: false
+    } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
 
-    tempPrivateKeyHex: "",
-    setTempPrivateKeyHex: (key: string) => set(() => ({ 
-        tempPrivateKeyHex: key, 
-        tokenAllocations: [
-            { id:"Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
-            ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
-        ],
-        txAllowlistConfig : {
-            addresses: {
-                Admin: get().txAllowlistConfig.addresses.Admin,
-                Manager: get().txAllowlistConfig.addresses.Manager,
-                Enabled: [
-                    {
-                        id: '1',
-                        address: getAddresses(key).C,
-                        requiredReason: 'Initial Contract Deployer'
-                    },
-                    ...get().txAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
-                ]
-            },
-            activated: get().txAllowlistConfig.activated
-        },
-        contractDeployerAllowlistConfig : {
-            addresses: {
-                Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
-                Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
-                Enabled: [
-                    {
-                        id: '1',
-                        address: getAddresses(key).C,
-                        requiredReason: 'Initial Contract Deployer'
-                    },
-                    ...get().contractDeployerAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
-                ]
-            },
-            activated: get().txAllowlistConfig.activated
-        } 
-    })),
-
-    tokenAllocations: [ ] as AllocationEntry[],
+    tokenAllocations: [] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
 
     nativeMinterAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
-        activated: false} as AllowlistPrecompileConfig,
+        activated: false
+    } as AllowlistPrecompileConfig,
     setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
 
     genesisString: "",
     regenerateGenesis: async () => {
-        const { poaOwnerAddress: ownerEthAddress, evmChainId, tempPrivateKeyHex, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
-        
+        const { poaOwnerAddress: ownerEthAddress, evmChainId, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, tokenAllocations } = get();
+
         const genesis = generateGenesis({
             evmChainId,
             tokenAllocations,
             txAllowlistConfig,
             contractDeployerAllowlistConfig,
-            nativeMinterAllowlistConfig
+            nativeMinterAllowlistConfig,
+            poaOwnerAddress: ownerEthAddress
         });
 
         set({ genesisString: JSON.stringify(genesis, null, 2) });
@@ -227,7 +201,7 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
         return `https://${state.rpcAddress}`;
     },
 
-    getCChainRpcEndpoint: () => {
+    getL1RpcEndpoint: () => {
         const state = get();
         const baseEndpoint = get().getRpcEndpoint();
         return `${baseEndpoint}/ext/bc/${state.chainId}/rpc`;
@@ -235,17 +209,59 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
     convertL1SignedWarpMessage: null,
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => set(() => ({ convertL1SignedWarpMessage: message })),
+
+    poaValidatorManagerAddress: "",
+    setPoaValidatorManagerAddress: (address: string) => set(() => ({ poaValidatorManagerAddress: address })),
+
+    validatorMessagesAddress: "",
+    setValidatorMessagesAddress: (address: string) => set(() => ({ validatorMessagesAddress: address })),
+
+    getViemL1Chain: () => {
+        const state = get();
+        return {
+            id: state.evmChainId,
+            name: state.l1Name,
+            nativeCurrency: {
+                decimals: 18,
+                name: state.tokenSymbol + ' Native Token',
+                symbol: state.tokenSymbol,
+            },
+            rpcUrls: {
+                default: { http: [state.getL1RpcEndpoint()] },
+                public: { http: [state.getL1RpcEndpoint()] },
+            },
+        } as const;
+    },
+
+    pChainAddress: "",
+    updatePChainAddressFromCore: async () => {
+        function getXPAddressFromPublicKey(publicKeyHex: string, chain: string, hrp: string) {
+            const compressed = ProjectivePoint.fromHex(publicKeyHex).toHex(true)
+            const address = secp256k1.publicKeyBytesToAddress(hexToBytes(compressed));
+            return utils.format(chain, hrp, address);
+        }
+
+        const publicKeyHex = (await window.avalanche.request({
+            "method": "avalanche_getAccountPubKey",
+            "params": []
+        })).xp
+
+        const pChainAddress = getXPAddressFromPublicKey(publicKeyHex, 'P', 'fuji')
+        set({ pChainAddress });
+    }
+
 })
 
+const shouldPersist = true
 
-const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
+const storageKey = 'l1-launcher-wizard-storage'
 
 export const useL1LauncherWizardStore = shouldPersist
     ? create<L1LauncherWizardState>()(
         persist(
             L1LauncherWizardStoreFunc,
             {
-                name: 'l1-launcher-wizard-storage',
+                name: storageKey,
                 storage: createJSONStorage(() => localStorage),
             }
         )
@@ -255,18 +271,7 @@ export const useL1LauncherWizardStore = shouldPersist
 export const resetL1ManagerWizardStore = () => {
     if (confirm('Are you sure you want to start over? This will reset all progress while preserving your temporary wallet.')) {
         const currentStore = useL1LauncherWizardStore.getState();
-        const savedPrivateKey = currentStore.tempPrivateKeyHex;
-        localStorage.setItem('temp-private-key', savedPrivateKey);
-        localStorage.removeItem('l1-launcher-wizard-storage');
+        localStorage.removeItem(storageKey);
         window.location.reload();
     }
 };
-
-// Initialize store with saved private key if it exists
-if (typeof window !== 'undefined') {
-    const savedPrivateKey = localStorage.getItem('temp-private-key');
-    if (savedPrivateKey) {
-        useL1LauncherWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
-        localStorage.removeItem('temp-private-key');
-    }
-}

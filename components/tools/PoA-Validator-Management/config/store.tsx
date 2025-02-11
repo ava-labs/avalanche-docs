@@ -1,12 +1,13 @@
 import { create } from 'zustand'
 import { StateCreator } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { getAddresses } from '@/components/tools/common/utils/wallet';
 import { stepList } from './stepList';
 import { AllowlistPrecompileConfig } from '@/components/tools/common/allowlist-precompile-configurator/types';
 import { AllocationEntry } from '@/components/tools/common/token-allocation-list/types';
 import { StepWizardState } from '@/components/tools/common/ui/types';
 import { createStepWizardStore } from '@/components/tools/common/ui/StepWizardStoreCreator';
+import { Validator } from '../../common/api/types'
+import { Chain, ChainConfig, Hex, WalletClient } from 'viem';
 
 interface NetworkToken {
     name: string;
@@ -40,13 +41,20 @@ interface ChainInfo {
     enabledFeatures: string[];
 }
 
-interface L1ManagerWizardState extends StepWizardState {
+interface PoAValidatorManagementState extends StepWizardState {
+
+    chainConfig: Chain | null;
+    setChainConfig: (config: Chain) => void;
+
     poaOwnerAddress: string;
     setPoaOwnerAddress: (address: string) => void;
 
+    pChainWarpMsg: string;
+    setPChainWarpMsg: (msg: string) => void;
+
     nodesCount: number;
     setNodesCount: (count: number) => void;
-    
+
     evmChainId: number;
     setEvmChainId: (chainId: number) => void;
 
@@ -95,6 +103,9 @@ interface L1ManagerWizardState extends StepWizardState {
     tempPrivateKeyHex: string;
     setTempPrivateKeyHex: (key: string) => void;
 
+    tempEVMPrivateKeyHex: Hex;
+    setTempEVMPrivateKeyHex: (key: Hex) => void;
+
     pChainBalance: string;
     setPChainBalance: (balance: string) => void;
     getCChainRpcEndpoint: () => string;
@@ -105,17 +116,41 @@ interface L1ManagerWizardState extends StepWizardState {
 
     rpcUrl: string;
     setRpcUrl: (url: string) => void;
-    
+
     transparentProxyAddress: string;
     setTransparentProxyAddress: (address: string) => void;
 
     chainInfo: ChainInfo | null;
     setChainInfo: (info: ChainInfo) => void;
+
+    validators: Validator[]
+    setValidators: (validators: Validator[]) => void
+
+    registerL1ValidatorUnsignedWarpMsg: string;
+    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => void;
+
+    validationID: string;
+    setValidationID: (id: string) => void;
+
+    coreWalletClient: WalletClient | null;
+    setCoreWalletClient: (client: WalletClient | null) => void;
 }
 
-const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) => ({
-    ...createStepWizardStore({set, get, stepList}),
-    
+const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagementState> = (set, get) => ({
+    ...createStepWizardStore({ set, get, stepList }),
+
+    chainConfig: null,
+    setChainConfig: (config: Chain) => set(() => ({ chainConfig: config })),
+
+    coreWalletClient: null,
+    setCoreWalletClient: (client: WalletClient | null) => set(() => ({ coreWalletClient: client })),
+
+    pChainWarpMsg: '',
+    setPChainWarpMsg: (msg: string) => set(() => ({ pChainWarpMsg: msg })),
+
+    tempEVMPrivateKeyHex: '0x',
+    setTempEVMPrivateKeyHex: (key: Hex) => set(() => ({ tempEVMPrivateKeyHex: key })),
+
     poaOwnerAddress: "",
     setPoaOwnerAddress: (address: string) => set(() => ({
         poaOwnerAddress: address
@@ -146,76 +181,77 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
 
     txAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: false
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setTxAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ txAllowlistConfig: config })),
 
     contractDeployerAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
         activated: true
-      } as AllowlistPrecompileConfig,
+    } as AllowlistPrecompileConfig,
     setContractDeployerAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ contractDeployerAllowlistConfig: config })),
 
     tokenSymbol: "TEST",
     setTokenSymbol: (symbol: string) => set(() => ({ tokenSymbol: symbol })),
 
     tempPrivateKeyHex: "",
-    setTempPrivateKeyHex: (key: string) => set(() => ({ 
-        tempPrivateKeyHex: key, 
-        tokenAllocations: [
-            { id:"Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
-            ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
-        ],
-        txAllowlistConfig : {
-            addresses: {
-                Admin: get().txAllowlistConfig.addresses.Admin,
-                Manager: get().txAllowlistConfig.addresses.Manager,
-                Enabled: [
-                    {
-                        id: '1',
-                        address: getAddresses(key).C,
-                        requiredReason: 'Initial Contract Deployer'
-                    },
-                    ...get().txAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
-                ]
-            },
-            activated: get().txAllowlistConfig.activated
-        },
-        contractDeployerAllowlistConfig : {
-            addresses: {
-                Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
-                Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
-                Enabled: [
-                    {
-                        id: '1',
-                        address: getAddresses(key).C,
-                        requiredReason: 'Initial Contract Deployer'
-                    },
-                    ...get().contractDeployerAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
-                ]
-            },
-            activated: get().txAllowlistConfig.activated
-        } 
+    setTempPrivateKeyHex: (key: string) => set(() => ({
+        tempPrivateKeyHex: key,
+        // tokenAllocations: [
+        //     { id: "Initial Contract Deployer", address: getAddresses(key).C, amount: 1, requiredReason: "Initial Contract Deployer" } as AllocationEntry,
+        //     ...get().tokenAllocations.filter((entry) => entry.requiredReason !== "Initial Contract Deployer")
+        // ],
+        // txAllowlistConfig: {
+        //     addresses: {
+        //         Admin: get().txAllowlistConfig.addresses.Admin,
+        //         Manager: get().txAllowlistConfig.addresses.Manager,
+        //         Enabled: [
+        //             {
+        //                 id: '1',
+        //                 address: getAddresses(key).C,
+        //                 requiredReason: 'Initial Contract Deployer'
+        //             },
+        //             ...get().txAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
+        //         ]
+        //     },
+        //     activated: get().txAllowlistConfig.activated
+        // },
+        // contractDeployerAllowlistConfig: {
+        //     addresses: {
+        //         Admin: get().contractDeployerAllowlistConfig.addresses.Admin,
+        //         Manager: get().contractDeployerAllowlistConfig.addresses.Manager,
+        //         Enabled: [
+        //             {
+        //                 id: '1',
+        //                 address: getAddresses(key).C,
+        //                 requiredReason: 'Initial Contract Deployer'
+        //             },
+        //             ...get().contractDeployerAllowlistConfig.addresses.Enabled.filter(entry => entry.requiredReason !== "Initial Contract Deployer")
+        //         ]
+        //     },
+        //     activated: get().txAllowlistConfig.activated
+        // }
     })),
 
-    tokenAllocations: [ ] as AllocationEntry[],
+    tokenAllocations: [] as AllocationEntry[],
     setTokenAllocations: (allocations: AllocationEntry[]) => set(() => ({ tokenAllocations: allocations })),
 
     nativeMinterAllowlistConfig: {
         addresses: {
-          Admin: [],
-          Manager: [],
-          Enabled: []
+            Admin: [],
+            Manager: [],
+            Enabled: []
         },
-        activated: false} as AllowlistPrecompileConfig,
+        activated: false
+    } as AllowlistPrecompileConfig,
     setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
 
     rpcLocationType: 'local',
@@ -255,32 +291,45 @@ const L1ManagerWizardStoreFunc: StateCreator<L1ManagerWizardState> = (set, get) 
 
     rpcUrl: '',
     setRpcUrl: (url: string) => set(() => ({ rpcUrl: url })),
-    
+
     transparentProxyAddress: '0x0feedc0de0000000000000000000000000000000',
     setTransparentProxyAddress: (address: string) => set(() => ({ transparentProxyAddress: address })),
 
     chainInfo: null,
     setChainInfo: (info: ChainInfo) => set(() => ({ chainInfo: info })),
+
+    validators: [],
+    setValidators: (validators: Validator[]) => set(() => ({ validators })),
+
+    registerL1ValidatorUnsignedWarpMsg: '',
+    setRegisterL1ValidatorUnsignedWarpMsg: (msg: string) => set(() => ({
+        registerL1ValidatorUnsignedWarpMsg: msg
+    })),
+
+    validationID: '',
+    setValidationID: (id: string) => set(() => ({
+        validationID: id
+    })),
 })
 
 
 const shouldPersist = true//window.location.origin.startsWith("http://localhost:") || window.location.origin.startsWith("http://tokyo:")
 
-export const useL1ManagerWizardStore = shouldPersist
-    ? create<L1ManagerWizardState>()(
+export const usePoAValidatorManagementWizardStore = shouldPersist
+    ? create<PoAValidatorManagementState>()(
         persist(
-            L1ManagerWizardStoreFunc,
+            PoAValidatorManagementWizardStoreFunc,
             {
                 name: 'l1-manager-wizard-storage',
                 storage: createJSONStorage(() => localStorage),
             }
         )
     )
-    : create<L1ManagerWizardState>()(L1ManagerWizardStoreFunc);
+    : create<PoAValidatorManagementState>()(PoAValidatorManagementWizardStoreFunc);
 
-export const resetL1ManagerWizardStore = () => {
+export const resetPoAValidatorManagementWizardStore = () => {
     if (confirm('Are you sure you want to start over? This will reset all progress while preserving your temporary wallet.')) {
-        const currentStore = useL1ManagerWizardStore.getState();
+        const currentStore = usePoAValidatorManagementWizardStore.getState();
         const savedPrivateKey = currentStore.tempPrivateKeyHex;
         localStorage.setItem('temp-private-key', savedPrivateKey);
         localStorage.removeItem('l1-manager-wizard-storage');
@@ -292,7 +341,7 @@ export const resetL1ManagerWizardStore = () => {
 if (typeof window !== 'undefined') {
     const savedPrivateKey = localStorage.getItem('temp-private-key');
     if (savedPrivateKey) {
-        useL1ManagerWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
+        usePoAValidatorManagementWizardStore.getState().setTempPrivateKeyHex(savedPrivateKey);
         localStorage.removeItem('temp-private-key');
     }
 }

@@ -13,8 +13,8 @@ import Chatbot from "@/components/ui/chatbot"
 
 export const metadata = createMetadata({
   title: {
-    template: '%s | Avalanche Developers',
-    default: 'Avalanche for Developers',
+    template: '%s | Avalanche Builder Hub',
+    default: 'Avalanche Builder Hub',
   },
   description: 'Build your Fast & Interoperable Layer 1 Blockchain with Avalanche.',
   metadataBase: baseUrl,

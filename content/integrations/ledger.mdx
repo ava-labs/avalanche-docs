@@ -1,0 +1,68 @@
+---
+title: Ledger
+category: Hardware Wallets
+available: ["C-Chain", "All EVM L1s"]
+description: Integrate Ledger hardware wallet support into your applications using official Ledger SDKs for Avalanche.
+logo: /images/ledger.png
+developer: Ledger
+website: https://www.ledger.com/
+documentation: https://developers.ledger.com/
+---
+
+## Overview
+
+Ledger provides multiple SDKs that enable wallet applications and dApps to integrate hardware wallet functionality for Avalanche chains. The SDKs are available in Go and JavaScript, making it easy to add Ledger support to both desktop and web applications.
+
+## Available SDKs
+
+- **[Avalanche Ledger App](https://github.com/ava-labs/ledger-avalanche)**: Core application running on Ledger devices
+- **[Go SDK](https://github.com/ava-labs/ledger-avalanche-go)**: Native Go implementation for backend and desktop applications
+- **[JavaScript SDK](https://github.com/ava-labs/ledger-avalanche)**: Browser and Node.js support for web applications
+
+## Integration Features
+
+- **Multi-Chain Support**: Enable transaction signing across C-Chain, X-Chain, and P-Chain
+- **Hardware-Based Security**: Leverage Ledger's secure element for key protection
+- **Cross-Platform**: Support for both desktop and web applications
+- **Transaction Signing**: Secure signing for transfers, staking, and smart contracts
+
+## Getting Started
+
+### Go SDK Integration
+
+```go
+import ledger "github.com/ava-labs/ledger-avalanche-go"
+
+// Initialize connection
+ledgerApp, err := ledger.NewLedgerApp()
+if err != nil {
+    // Handle connection error
+}
+```
+
+### JavaScript SDK Integration
+
+```javascript
+import Ledger from '@avalabs/ledger-avalanche'
+
+const ledger = new Ledger()
+await ledger.connect()
+```
+
+## Use Cases
+
+- **Wallet Applications**: Add hardware wallet support to cryptocurrency wallets
+- **DeFi Applications**: Enable secure transaction signing for DeFi operations
+- **Validator Tools**: Secure validator key management and staking operations
+- **Cross-Chain Applications**: Support multi-chain operations with single device
+
+## Documentation
+
+- [Ledger Developer Portal](https://developers.ledger.com/)
+- [Go SDK Documentation](https://pkg.go.dev/github.com/ava-labs/ledger-avalanche-go)
+- [JavaScript SDK Documentation](https://github.com/ava-labs/ledger-avalanche)
+
+## Conclusion
+
+Ledger's SDKs provide the essential tools for integrating secure hardware wallet functionality into your Avalanche applications. Whether you're building a wallet, DeFi platform, or validator tools, Ledger's SDKs offer robust support for hardware-based key management and transaction signing across all Avalanche chains.
+

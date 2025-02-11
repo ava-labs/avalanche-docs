@@ -9,14 +9,7 @@ import { newPrivateKey } from '../../common/utils/wallet';
 import { isValidAllowlistPrecompileConfig } from '../../common/utils/validation';
 
 export default function Permissions() {
-    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, tempPrivateKeyHex, setTempPrivateKeyHex, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
-
-    // Initialize temporary private key if not exists
-    useEffect(() => {
-        if (!tempPrivateKeyHex) {
-            setTempPrivateKeyHex(newPrivateKey());
-        }
-    }, [tempPrivateKeyHex, setTempPrivateKeyHex]);
+    const { tokenSymbol, setTokenSymbol, tokenAllocations, setTokenAllocations, nativeMinterAllowlistConfig, setNativeMinterAllowlistConfig, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
 
     return (
         <div className="space-y-12">
@@ -53,7 +46,7 @@ export default function Permissions() {
                 radioOptionTrueLabel="I want to be able to mint additional tokens (recommended for production)."
             />
 
-            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 2 || !isValidAllowlistPrecompileConfig(nativeMinterAllowlistConfig)} onNext={goToNextStep} onPrev={goToPreviousStep} />
+            <NextPrev nextDisabled={!tokenSymbol || tokenAllocations.length < 1 || !isValidAllowlistPrecompileConfig(nativeMinterAllowlistConfig)} onNext={goToNextStep} onPrev={goToPreviousStep} />
         </div>
     );
 }
