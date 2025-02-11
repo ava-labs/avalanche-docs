@@ -38,7 +38,7 @@ export const linkItems: LinkItemType[] = [
         description: "Managed solutions for deploying and managing your Avalanche L1s.",
         url: '/integrations#Blockchain%20as%20a%20Service',
         menu: {
-          className: 'lg:col-start-2',
+          className: 'lg:col-start-3',
         },
       },
       {
@@ -47,7 +47,7 @@ export const linkItems: LinkItemType[] = [
         description: "Access reliable oracle data feeds for your smart contracts.",
         url: '/integrations#Data%20Feeds',
         menu: {
-          className: 'lg:col-start-3 lg:row-start-1',
+          className: 'lg:col-start-1 lg:row-start-2',
         },
       },
       {
@@ -56,7 +56,7 @@ export const linkItems: LinkItemType[] = [
         description: "Index and query blockchain data efficiently for your applications.",
         url: '/integrations#Indexers',
         menu: {
-          className: 'lg:col-start-3',
+          className: 'lg:col-start-2 lg:row-start-2',
         },
       },
       {
@@ -65,7 +65,7 @@ export const linkItems: LinkItemType[] = [
         description: "Discover all available integrations in the Avalanche ecosystem.",
         url: '/integrations',
         menu: {
-          className: 'lg:col-start-3',
+          className: 'lg:col-start-3 lg:row-start-2',
         },
       },
     ],
