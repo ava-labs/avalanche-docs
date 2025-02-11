@@ -125,7 +125,7 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
           </SelectContent>
         </Select>
         <div className="flex justify-end">
-          <Button type="submit">{isEditing ? "Update Hackathon" : "Create Hackathon"}</Button>
+          <Button className="mb-6" type="submit">{isEditing ? "Update Hackathon" : "Create Hackathon"}</Button>
         </div>
       </form>
     </div>
