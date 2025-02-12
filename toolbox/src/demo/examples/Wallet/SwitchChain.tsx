@@ -92,7 +92,7 @@ export const SwitchChain = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Switch Chain</h2>
+            <h2 className="text-lg font-semibold">Switch Chain</h2>
             <div className="space-y-4">
                 <div className="mb-4">
                     Current Chain ID: {walletChainId}

@@ -1,4 +1,6 @@
 import { ChevronDown } from 'lucide-react';
+import { twMerge } from "tailwind-merge";
+import { clsx } from "clsx";
 
 interface SelectProps {
     label: string;
@@ -7,6 +9,7 @@ interface SelectProps {
     options: { value: string | number; label: string }[];
     notesUnderInput?: string;
     disabled?: boolean;
+    className?: string;
 }
 
 export const Select = ({
@@ -16,21 +19,24 @@ export const Select = ({
     options,
     notesUnderInput,
     disabled,
+    className,
 }: SelectProps) => {
-    const selectClasses =
-        "text-sm w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed";
-
     return (
-        <div className="mb-4">
-            <label className="block mb-2 text-sm font-medium text-gray-700">
-                {label}
-            </label>
+        <div className="w-full">
+            {label && (
+                <label className="text-sm font-medium leading-none mb-2 block">
+                    {label}
+                </label>
+            )}
             <div className="relative">
                 <select
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     disabled={disabled}
-                    className={`${selectClasses} appearance-none pr-10`}
+                    className={twMerge(clsx(
+                        "flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 appearance-none pr-10",
+                        className
+                    ))}
                 >
                     {options.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -38,10 +44,10 @@ export const Select = ({
                         </option>
                     ))}
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" />
             </div>
             {notesUnderInput && (
-                <p className="mt-1.5 text-xs text-gray-500">{notesUnderInput}</p>
+                <p className="mt-1.5 text-xs text-muted-foreground">{notesUnderInput}</p>
             )}
         </div>
     );

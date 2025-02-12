@@ -12,17 +12,23 @@ pre {
   font-family: 'Geist Mono Variable', monospace;
 }
 
-
 /** Below overrides for builder-docs */
 
 @media (min-width: 1400px) {
   .container {
-      max-width: 1400px;
+    max-width: 1400px;
   }
 }
 
+select,input, textarea, button {
+  @apply dark:bg-neutral-900 border-neutral-200 dark:border-neutral-700;
+}
+
 body {
-  background-color: hsl(0, 0%, 96%);
+  @apply bg-gray-100;
+  @apply dark:bg-black;
+  @apply text-neutral-900;
+  @apply dark:text-neutral-100;
 }
 
 .container {
@@ -34,3 +40,4 @@ body {
 svg.lucide {
   color: #1f66f4;
 }
+

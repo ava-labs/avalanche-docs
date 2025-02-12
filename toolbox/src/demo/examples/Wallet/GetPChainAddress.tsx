@@ -45,27 +45,29 @@ export const GetPChainAddress = () => {
 
   return (
     <>
-      <h2 className="text-lg font-semibold text-gray-800">Get P-Chain Address</h2>
+      <h2 className="text-lg font-semibold ">Get P-Chain Address</h2>
       {!store.xpPublicKey && !store.evmPublicKey && <div>
         <Button onClick={fetchPubKeys} type="primary" loading={isLoading}>
           Call avalanche_getAccountPubKey
         </Button>
       </div>}
-      <div className="space-y-2">
-        <Input label="XP Public Key" value={store.xpPublicKey} disabled={true} />
-        <Input label="EVM Public Key" value={store.evmPublicKey} disabled={true} />
-      </div>
-      <div>
-        <Select
-          label="Select Network"
-          value={store.networkID}
-          onChange={(value) => store.setNetworkID(Number(value))}
-          options={[
-            { value: networkIDs.FujiID, label: "Fuji" },
-            { value: networkIDs.MainnetID, label: "Mainnet" },
-          ]}
-        />
-      </div>
+      {(store.xpPublicKey || store.evmPublicKey) && <>
+        <div className="space-y-2">
+          <Input label="XP Public Key" value={store.xpPublicKey} disabled={true} />
+          <Input label="EVM Public Key" value={store.evmPublicKey} disabled={true} />
+        </div>
+        <div>
+          <Select
+            label="Select Network"
+            value={store.networkID}
+            onChange={(value) => store.setNetworkID(Number(value))}
+            options={[
+              { value: networkIDs.FujiID, label: "Fuji" },
+              { value: networkIDs.MainnetID, label: "Mainnet" },
+            ]}
+          />
+        </div>
+      </>}
       <Success
         label="P-Chain Address"
         value={store.pChainAddress}

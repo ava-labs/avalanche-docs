@@ -1,51 +1,53 @@
-export const Input = ({
+import * as React from "react"
+import { clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+type BaseProps = {
+    label?: string;
+    type?: 'textarea' | React.InputHTMLAttributes<HTMLInputElement>['type'];
+    className?: string;
+}
+
+type InputElementProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'>
+type TextAreaElementProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>
+
+export type InputProps = BaseProps & (InputElementProps | TextAreaElementProps)
+
+export function Input({
+    className,
+    type,
     label,
-    value,
-    onChange,
-    placeholder,
-    notesUnderInput,
-    type = "text",
-    rows,
-    disabled,
-}: {
-    label: string,
-    value: string,
-    onChange?: (value: string) => void,
-    placeholder?: string,
-    notesUnderInput?: string,
-    type?: string,
-    rows?: number,
-    disabled?: boolean,
-}) => {
-    const inputClasses = "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm disabled:bg-gray-100 disabled:cursor-not-allowed";
+    ...props
+}: InputProps) {
+    const sharedClassNames = "flex w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
 
     return (
-        <div className="mb-4">
-            <label className="block mb-2 text-sm font-medium text-gray-700">
-                {label}
-            </label>
-            {type === "textarea" ? (
+        <div className="w-full">
+            {label && (
+                <label className="text-sm font-medium leading-none mb-2 block">
+                    {label}
+                </label>
+            )}
+            {type === 'textarea' ? (
                 <textarea
-                    value={value}
-                    onChange={(e) => onChange?.(e.target.value)}
-                    placeholder={placeholder}
-                    rows={rows || 4}
-                    disabled={disabled}
-                    className={`${inputClasses} font-mono`}
+                    className={twMerge(clsx(
+                        sharedClassNames,
+                        "min-h-[80px] resize-vertical",
+                        className
+                    ))}
+                    {...props as TextAreaElementProps}
                 />
             ) : (
                 <input
                     type={type}
-                    value={value}
-                    onChange={(e) => onChange?.(e.target.value)}
-                    placeholder={placeholder}
-                    disabled={disabled}
-                    className={`${inputClasses} ${type === "text" ? "font-mono" : ""}`}
+                    className={twMerge(clsx(
+                        sharedClassNames,
+                        "h-9 file:border-0 file:bg-transparent file:text-sm file:font-medium",
+                        className
+                    ))}
+                    {...props as InputElementProps}
                 />
             )}
-            {notesUnderInput && (
-                <p className="mt-1.5 text-xs text-gray-500">{notesUnderInput}</p>
-            )}
         </div>
-    );
-};
+    )
+}

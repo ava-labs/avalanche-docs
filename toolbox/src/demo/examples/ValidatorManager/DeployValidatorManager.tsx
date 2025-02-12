@@ -88,7 +88,7 @@ export const DeployValidatorManager = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Deploy PoA Validator Manager</h2>
+            <h2 className="text-lg font-semibold ">Deploy PoA Validator Manager</h2>
             <div className="space-y-4">
                 <div className="p-4 bg-gray-100 rounded-lg">
                     <p className="text-gray-700 mb-4">

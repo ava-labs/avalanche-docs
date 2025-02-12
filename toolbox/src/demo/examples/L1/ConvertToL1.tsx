@@ -92,7 +92,7 @@ export const ConvertToL1 = () => {
     if (!pChainAddress) {
         return (
             <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-gray-800">Convert Subnet to L1</h2>
+                <h2 className="text-lg font-semibold ">Convert Subnet to L1</h2>
                 <div className="p-4 bg-gray-100 rounded-lg">
                     <p className="text-gray-700">Please get your P-Chain address first</p>
                 </div>
@@ -102,7 +102,7 @@ export const ConvertToL1 = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Convert Subnet to L1</h2>
+            <h2 className="text-lg font-semibold ">Convert Subnet to L1</h2>
             <div className="space-y-4">
                 <Input
                     label="Your P-Chain Address"

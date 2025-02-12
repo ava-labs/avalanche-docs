@@ -71,7 +71,7 @@ export const ConvertL1Signatures = () => {
     if (!pChainAddress) {
         return (
             <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-gray-800">Collect conversion signatures</h2>
+                <h2 className="text-lg font-semibold ">Collect conversion signatures</h2>
                 <div className="p-4 bg-gray-100 rounded-lg">
                     <p className="text-gray-700">Please get your P-Chain address first</p>
                 </div>
@@ -81,7 +81,7 @@ export const ConvertL1Signatures = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Collect conversion signatures</h2>
+            <h2 className="text-lg font-semibold ">Collect conversion signatures</h2>
             <div className="space-y-4">
                 <Input
                     label="Your P-Chain Address"

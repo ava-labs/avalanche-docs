@@ -135,19 +135,19 @@ function App() {
                 <ul className="space-y-6">
                     {Object.entries(componentGroups).map(([groupName, components]) => (
                         <li key={groupName}>
-                            <h3 className="text-sm font-semibold text-gray-800 uppercase tracking-wide mb-3">{groupName}</h3>
+                            <h3 className="text-sm font-semibold  uppercase tracking-wide mb-3">{groupName}</h3>
                             <ul className="space-y-1">
                                 {components.map(({ id, label }) => (
                                     <li key={id}>
-                                        <button
+                                        <div
                                             onClick={() => handleComponentClick(id)}
                                             className={`cursor-pointer w-full text-left px-3 py-2 text-sm rounded-md transition-all ${selectedTool === id
-                                                ? 'bg-blue-50 text-blue-700 font-medium'
-                                                : 'text-gray-700 hover:bg-gray-50'
+                                                ? 'bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-medium'
+                                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                                                 }`}
                                         >
                                             {label}
-                                        </button>
+                                        </div>
                                     </li>
                                 ))}
                             </ul>

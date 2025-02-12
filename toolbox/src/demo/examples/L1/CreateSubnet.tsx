@@ -52,7 +52,7 @@ export const CreateSubnet = () => {
   if (!pChainAddress) {
     return (
       <div className="space-y-4">
-        <h2 className="text-lg font-semibold text-gray-800">Create Subnet</h2>
+        <h2 className="text-lg font-semibold ">Create Subnet</h2>
         <div className="p-4 bg-gray-100 rounded-lg">
           <p className="text-gray-700">Please get your P-Chain address first using the Get P-Chain Address tool. Make sure to set the networkID to Fuji.</p>
         </div>
@@ -62,7 +62,7 @@ export const CreateSubnet = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold text-gray-800">Create Subnet</h2>
+      <h2 className="text-lg font-semibold ">Create Subnet</h2>
       <div className="space-y-4">
         <Input
           label="Your P-Chain Address"
