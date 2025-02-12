@@ -19,6 +19,7 @@ interface GithubEmbedProps {
 export function GithubEmbed({ filePath, user, repo, branch = "main", lang = "TS", maxHeight }: GithubEmbedProps) {
     const [code, setCode] = useState<string>('');
     const [error, setError] = useState<string>('');
+    const [theme, setTheme] = useState(vs); // Default to light theme
 
     const sourceURL = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${filePath}`;
 
@@ -28,6 +29,43 @@ export function GithubEmbed({ filePath, user, repo, branch = "main", lang = "TS"
             .then(setCode)
             .catch(err => setError(err.message));
     }, [sourceURL]);
+
+    const getTheme = () => {
+        if (typeof document === 'undefined') return vs;
+        if (document.documentElement.classList.contains('dark')) return vs2015;
+        if (document.documentElement.classList.contains('light')) return vs;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? vs2015 : vs;
+    };
+
+    useEffect(() => {
+        if (typeof document === 'undefined') return;
+
+        // Set initial theme
+        setTheme(getTheme());
+
+        // Watch for class changes on html element
+        const observer = new MutationObserver(() => {
+            setTheme(getTheme());
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        // Watch for system theme changes
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleThemeChange = () => {
+            setTheme(getTheme());
+        };
+
+        mediaQuery.addEventListener('change', handleThemeChange);
+
+        return () => {
+            observer.disconnect();
+            mediaQuery.removeEventListener('change', handleThemeChange);
+        };
+    }, []);
 
     if (lang !== "TS") {
         return <div className="text-red-500">
@@ -44,14 +82,14 @@ export function GithubEmbed({ filePath, user, repo, branch = "main", lang = "TS"
     }
 
     return (
-        <div className="my-4 border border-gray-200 dark:border-gray-700 rounded-md w-full overflow-hidden">
+        <div className="my-4 border border-gray-200 dark:border-gray-700 rounded-md w-full overflow-hidden bg-white dark:bg-black">
             <div style={{
                 maxHeight: maxHeight ? `${maxHeight}px` : undefined,
                 overflow: maxHeight ? 'auto' : undefined,
             }}>
                 <SyntaxHighlighter
                     language="typescript"
-                    style={typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? vs2015 : vs}
+                    style={theme}
                     showLineNumbers={true}
                     customStyle={{
                         margin: 0,
