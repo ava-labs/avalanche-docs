@@ -241,7 +241,9 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
             return utils.format(chain, hrp, address);
         }
 
-        const publicKeyHex = (await window.avalanche.request({
+        if (!window.avalanche) throw new Error('Core wallet not found');
+
+        const publicKeyHex = (await window.avalanche.request<{ xp: string }>({
             "method": "avalanche_getAccountPubKey",
             "params": []
         })).xp

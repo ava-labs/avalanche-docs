@@ -5,7 +5,7 @@ declare global {
     avalanche?: {
       request: <T>(args: {
         method: string;
-        params?: Record<string, unknown>;
+        params?: Record<string, unknown> | unknown[];
         id?: number;
       }) => Promise<T>;
       on: (event: string, callback: (newChainId: string) => void) => void;

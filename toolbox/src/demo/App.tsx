@@ -21,13 +21,13 @@ const componentGroups = {
             id: 'getPChainAddress',
             label: "Get P-chain Address",
             component: GetPChainAddress,
-            fileNames: ["src/demo/examples/Wallet/GetPChainAddress.tsx"]
+            fileNames: ["toolbox/src/demo/examples/Wallet/GetPChainAddress.tsx"]
         },
         {
             id: 'switchChain',
             label: "Switch Chain",
             component: SwitchChain,
-            fileNames: ["src/demo/examples/Wallet/SwitchChain.tsx"]
+            fileNames: ["toolbox/src/demo/examples/Wallet/SwitchChain.tsx"]
         }
     ],
     'Create an L1': [
@@ -35,25 +35,25 @@ const componentGroups = {
             id: 'createSubnet',
             label: "Create Subnet",
             component: CreateSubnet,
-            fileNames: ["src/demo/examples/L1/CreateSubnet.tsx"]
+            fileNames: ["toolbox/src/demo/examples/L1/CreateSubnet.tsx"]
         },
         {
             id: 'createChain',
             label: "Create Chain",
             component: CreateChain,
-            fileNames: ["src/demo/examples/L1/CreateChain.tsx"]
+            fileNames: ["toolbox/src/demo/examples/L1/CreateChain.tsx"]
         },
         {
             id: 'convertToL1',
             label: "Convert to L1",
             component: ConvertToL1,
-            fileNames: ["src/demo/examples/L1/ConvertToL1.tsx"]
+            fileNames: ["toolbox/src/demo/examples/L1/ConvertToL1.tsx"]
         },
         {
             id: 'convertL1Signatures',
             label: "Convert L1 Signatures",
             component: ConvertL1Signatures,
-            fileNames: ["src/demo/examples/L1/ConvertL1Signatures.tsx", "src/demo/examples/L1/convertWarp.ts"]
+            fileNames: ["toolbox/src/demo/examples/L1/ConvertL1Signatures.tsx", "src/demo/examples/L1/convertWarp.ts"]
         }
     ],
     "Deploy ValidatorManager": [
@@ -61,25 +61,25 @@ const componentGroups = {
             id: "deployValidatorMessages",
             label: "Validator Messages Library",
             component: DeployValidatorMessages,
-            fileNames: ["src/demo/examples/ValidatorManager/DeployValidatorMessages.tsx"]
+            fileNames: ["toolbox/src/demo/examples/ValidatorManager/DeployValidatorMessages.tsx"]
         },
         {
             id: "deployValidatorManager",
             label: "Deploy Validator Manager",
             component: DeployValidatorManager,
-            fileNames: ["src/demo/examples/ValidatorManager/DeployValidatorManager.tsx"]
+            fileNames: ["toolbox/src/demo/examples/ValidatorManager/DeployValidatorManager.tsx"]
         },
         {
             id: "readContract",
             label: "Read Contract",
             component: ReadContract,
-            fileNames: ["src/demo/examples/ValidatorManager/ReadContract.tsx"]
+            fileNames: ["toolbox/src/demo/examples/ValidatorManager/ReadContract.tsx"]
         },
         {
             id: "upgradeProxy",
             label: "Upgrade Proxy",
             component: UpgradeProxy,
-            fileNames: ["src/demo/examples/ValidatorManager/UpgradeProxy.tsx"]
+            fileNames: ["toolbox/src/demo/examples/ValidatorManager/UpgradeProxy.tsx"]
         }
     ],
     "Initialize PoA": [
@@ -87,13 +87,13 @@ const componentGroups = {
             id: "initialize",
             label: "Initialize",
             component: Initialize,
-            fileNames: ["src/demo/examples/InitializePoA/Initialize.tsx"]
+            fileNames: ["toolbox/src/demo/examples/InitializePoA/Initialize.tsx"]
         },
         {
             id: "initializeValidatorSet",
             label: "Initialize Validator Set",
             component: initializeValidatorSet,
-            fileNames: ["src/demo/examples/InitializePoA/initializeValidatorSet.tsx"]
+            fileNames: ["toolbox/src/demo/examples/InitializePoA/initializeValidatorSet.tsx"]
         }
     ]
 
@@ -140,8 +140,9 @@ function App() {
                         {comp.fileNames.map((fileName, index) => (
                             <GithubEmbed
                                 key={index}
-                                user="containerman17"
-                                repo="builders-hub-tools-temporary"
+                                user="ava-labs"
+                                repo="avalanche-docs"
+                                branch="l1-toolbox"//TODO: set automatically or at least change to main
                                 filePath={fileName}
                                 lang="TS"
                                 maxHeight={600}
