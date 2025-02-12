@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import 'non.geist';
+@import 'non.geist/mono';
+
+:root {
+  font-family: 'Geist Variable', system-ui, sans-serif;
+}
+
+.font-mono,
+code,
+pre {
+  font-family: 'Geist Mono Variable', monospace;
+}
+
+
+/** Below overrides for builder-docs */
+
+@media (min-width: 1400px) {
+  .container {
+      max-width: 1400px;
+  }
+}
+
+body {
+  background-color: hsl(0, 0%, 96%);
+}
+
+.container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+svg.lucide {
+  color: #1f66f4;
+}

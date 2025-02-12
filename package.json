@@ -8,7 +8,7 @@
     "build:remote": "tsx ./utils/content-loader/remote-content.mts",
     "start": "pnpm build:remote && next build && next start",
     "check-links": "tsx .github/linkChecker.ts",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx && cd toolbox && yarn && yarn build"
   },
   "dependencies": {
     "@avalabs/avacloud-sdk": "^0.8.7",
@@ -26,6 +26,7 @@
     "@vercel/analytics": "^1.3.1",
     "@vercel/speed-insights": "^1.0.12",
     "@wagmi/core": "^2.16.3",
+    "avalanche-docs-toolbox": "./toolbox/",
     "axios": "^1.7.7",
     "boring-name-generator": "^1.0.3",
     "class-variance-authority": "^0.7.1",
@@ -38,6 +39,7 @@
     "fumadocs-ui": "14.6.0",
     "geist": "^1.3.1",
     "idb": "^8.0.0",
+    "isolation-experiment": "./toolbox/",
     "katex": "^0.16.11",
     "lucide-react": "^0.471.1",
     "mermaid": "^11.4.0",

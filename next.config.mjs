@@ -13,6 +13,7 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  transpilePackages: ['avalanche-docs-toolbox']
 };
 
 export default withMDX(config);
