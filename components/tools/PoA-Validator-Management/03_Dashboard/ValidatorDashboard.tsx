@@ -1,13 +1,4 @@
 "use client"
-declare global {
-  interface Window {
-    avalanche: {
-      request: (args: { method: string; params: any }) => Promise<any>;
-      removeListener: (event: string, callback: () => void) => void;
-      on: (event: string, callback: () => void) => void;
-    };
-  }
-}
 import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"

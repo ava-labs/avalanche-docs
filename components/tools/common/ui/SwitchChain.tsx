@@ -44,7 +44,7 @@ export default function SwitchChain({ children, chainConfig }: Props) {
 
         try {
             // Request account access
-            const accounts = await window.avalanche.request({
+            const accounts = await window.avalanche.request<string[]>({
                 method: 'eth_requestAccounts',
                 params: []
             });
@@ -58,7 +58,7 @@ export default function SwitchChain({ children, chainConfig }: Props) {
             setIsConnected(true);
 
             // Check chain
-            const chainId = await window.avalanche.request({
+            const chainId = await window.avalanche.request<string>({
                 method: 'eth_chainId',
                 params: []
             });
