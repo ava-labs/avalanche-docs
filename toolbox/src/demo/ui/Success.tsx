@@ -9,7 +9,7 @@ export const Success = ({ label, value }: SuccessProps) => {
     if (!value) return null;
 
     return (
-        <div className="p-4 bg-gray-100 rounded-lg space-y-2">
+        <div className="p-4 bg-white rounded-lg space-y-2 border border-gray-200">
             <div className="flex items-center space-x-2">
                 <p className="text-gray-700 font-semibold">{label}:</p>
                 <Check className="h-5 w-5 text-green-500" />

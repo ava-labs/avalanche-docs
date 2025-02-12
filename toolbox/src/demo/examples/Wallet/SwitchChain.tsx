@@ -94,8 +94,8 @@ export const SwitchChain = () => {
         <div className="space-y-4">
             <h2 className="text-lg font-semibold text-gray-800">Switch Chain</h2>
             <div className="space-y-4">
-                <div className="p-4 bg-gray-100 rounded-lg">
-                    <p className="text-gray-700">Current Chain ID: {walletChainId}</p>
+                <div className="mb-4">
+                    Current Chain ID: {walletChainId}
                 </div>
                 <Input
                     label="Chain Name"
