@@ -2,15 +2,16 @@
 
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Zap, Cpu, Code, Coins } from 'lucide-react'
+import { ArrowRight, Zap, Cpu, Code, Coins, Bot, Home } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
+import { Banner } from "fumadocs-ui/components/banner"
 
 interface ProgramCardProps {
   title: string;
   description: string;
   icon: React.ReactNode;
-  color: 'red' | 'blue' | 'green' | 'pink' | 'grey';
+  color: 'red' | 'blue' | 'green' | 'pink' | 'grey' | 'purple' | 'orange';
   arrowColor: 'white' | 'black';
 }
 
@@ -21,6 +22,8 @@ function ProgramCard({ title, description, icon, color, arrowColor }: ProgramCar
     green: "from-green-500 to-emerald-500",
     pink: "from-pink-500 to-pink-500",
     grey: "from-gray-500 to-gray-500",
+    purple: "from-purple-500 to-purple-500",
+    orange: "from-orange-500 to-orange-500",
   }
 
   return (
@@ -49,6 +52,27 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      <div className="sticky top-[80px] z-30 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <Banner className="border-t border-b border-border/40">
+          <div className="flex items-center justify-between px-4 py-2 max-w-screen-2xl mx-auto">
+            <div className="flex items-center gap-2">
+              <span className="bg-red-500/10 text-red-500 text-xs font-medium px-2 py-1 rounded-full">NEW</span>
+              <p className="text-sm">
+                Applications for Avalanche Innovation House are now open! &nbsp;
+              </p>
+            </div>
+            <Link 
+              href="https://innovationhouse.avax.network/"
+              className="text-red-500 hover:text-red-600 text-sm font-medium flex items-center"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Apply now
+              <span className="ml-1">→</span>
+            </Link>
+          </div>
+        </Banner>
+      </div>
       
       <main className="relative container mx-auto px-4 py-12 space-y-24">
       {/* Hero Section */}
@@ -140,6 +164,24 @@ export default function Page() {
             description="A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support."
             icon={<Coins className="w-8 h-8" color='white'/>}
             color="pink"
+            arrowColor={arrowColor}
+            />
+          </a>
+          <a href="https://www.avax.network/infrabuidl-ai-program" target="_blank" rel="noopener noreferrer">
+            <ProgramCard
+            title="InfraBUIDL (AI)"
+            description="Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure."
+            icon={<Bot className="w-8 h-8" color='white'/>}
+            color="purple"
+            arrowColor={arrowColor}
+            />
+          </a>
+          <a href="https://innovationhouse.avax.network/" target="_blank" rel="noopener noreferrer">
+            <ProgramCard
+            title="Innovation House"
+            description="Join a 12-week residency program in London to build and scale your project in the Avalanche ecosystem."
+            icon={<Home className="w-8 h-8" color='white'/>}
+            color="orange"
             arrowColor={arrowColor}
             />
           </a>
