@@ -130,7 +130,7 @@ function App() {
     };
 
     return (
-        <div className="container mx-auto max-w-screen-2xl flex">
+        <div className="container mx-auto flex">
             <div className="w-64 flex-shrink-0 p-6">
                 <ul className="space-y-6">
                     {Object.entries(componentGroups).map(([groupName, components]) => (

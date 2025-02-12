@@ -18,17 +18,17 @@ export const Button = ({
     loading?: boolean
 }) => {
     const buttonStyles = {
-        default: 'bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 shadow-sm cursor-pointer   ',
-        primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm cursor-pointer',
-        secondary: 'bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 shadow-sm cursor-pointer',
-        danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm cursor-pointer'
+        default: 'bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 shadow-sm cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:text-gray-200',
+        primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm cursor-pointer dark:bg-blue-700 dark:hover:bg-blue-800',
+        secondary: 'bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 shadow-sm cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:text-gray-200',
+        danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm cursor-pointer dark:bg-red-700 dark:hover:bg-red-800'
     }
 
     return (
         <button
             onClick={onClick}
             disabled={disabled || loading}
-            className={`py-2 px-4 text-sm font-medium rounded-md transition-all flex items-center justify-center space-x-2 ${disabled || loading ? 'bg-gray-100 border border-gray-200 text-gray-400 cursor-not-allowed' : buttonStyles[type]
+            className={`py-2 px-4 text-sm font-medium rounded-md transition-all flex items-center justify-center space-x-2 ${disabled || loading ? 'bg-gray-100 border border-gray-200 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:border-gray-700 dark:text-gray-600' : buttonStyles[type]
                 } ${className}`}
         >
             {icon}
