@@ -14,9 +14,8 @@ function calculateLibraryHash(libraryPath: string) {
 }
 
 export const DeployValidatorManager = () => {
-    return <div>Will be available soon</div>;
     const { showBoundary } = useErrorBoundary();
-    const { validatorMessagesLibAddress, walletChainId, poaValidatorManagerAddress, setPoaValidatorManagerAddress } = useExampleStore();
+    const { validatorMessagesLibAddress, walletChainId, validatorManagerAddress, setValidatorManagerAddress } = useExampleStore();
     const [isDeploying, setIsDeploying] = useState(false);
 
     const getLinkedBytecode = () => {
@@ -41,7 +40,7 @@ export const DeployValidatorManager = () => {
 
     async function handleDeploy() {
         setIsDeploying(true);
-        setPoaValidatorManagerAddress("");
+        setValidatorManagerAddress("");
         try {
             const publicClient = createPublicClient({
                 transport: custom(window.avalanche!),
@@ -57,7 +56,7 @@ export const DeployValidatorManager = () => {
                 abi: ValidatorManagerABI.abi,
                 bytecode: getLinkedBytecode(),
                 account: address,
-                args: [0], // Initial threshold
+                args: [0], // TODO: Not sure about this. Please check the source https://github.com/ava-labs/icm-contracts/blob/48fe4883914b46ec7e4385dc0edf5c2df31c99f4/contracts/validator-manager/ValidatorManager.sol#L136C21-L136C48
                 chain: {
                     id: walletChainId,
                     name: "My L1",
@@ -78,7 +77,7 @@ export const DeployValidatorManager = () => {
                 throw new Error('No contract address in receipt');
             }
 
-            setPoaValidatorManagerAddress(receipt.contractAddress);
+            setValidatorManagerAddress(receipt.contractAddress);
         } catch (error) {
             showBoundary(error);
         } finally {
@@ -88,11 +87,11 @@ export const DeployValidatorManager = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold ">Deploy PoA Validator Manager</h2>
+            <h2 className="text-lg font-semibold text-gray-800">Deploy Validator Manager</h2>
             <div className="space-y-4">
                 <div className="p-4 bg-gray-100 rounded-lg">
                     <p className="text-gray-700 mb-4">
-                        This will deploy the <code>PoAValidatorManager</code> contract to the currently connected EVM network <code>{walletChainId}</code>.
+                        This will deploy the <code>ValidatorManager</code> contract to the currently connected EVM network <code>{walletChainId}</code>.
                     </p>
                     <p className="text-gray-700">
                         The contract requires the <code>ValidatorMessages</code> library at address: <code>{validatorMessagesLibAddress || "Not deployed"}</code>
@@ -113,8 +112,8 @@ export const DeployValidatorManager = () => {
                 </Button>
             </div>
             <Success
-                label="Contract Address"
-                value={poaValidatorManagerAddress}
+                label="ValidatorManager Address"
+                value={validatorManagerAddress}
             />
         </div>
     );

@@ -97,6 +97,9 @@ export default function CreateL1() {
             let subnetTxId: string | undefined;
             if (subnetStatus.status === 'not_started') {
                 try {
+                    if (!window.avalanche) {
+                        throw new Error('Core wallet not found');
+                    }
                     // Step 1: Create Subnet
                     setSubnetStatus({ status: 'in_progress' });
 
@@ -132,6 +135,9 @@ export default function CreateL1() {
                 // Step 2: Create Chain
                 setCreateChainStatus({ status: 'in_progress' });
                 try {
+                    if (!window.avalanche) {
+                        throw new Error('Core wallet not found');
+                    }
                     const chainTxHex = await newCreateChainTxHex({
                         pChainAddress,
                         chainName: l1Name,
@@ -165,6 +171,8 @@ export default function CreateL1() {
                 // Step 3: Convert to L1
                 setConvertToL1Status({ status: 'in_progress' });
                 try {
+                    if (!window.avalanche) throw new Error('Core wallet not found');
+
                     const conversionTxHex = await newConvertSubnetToL1TxHex({
                         pChainAddress,
                         subnetId: subnetTxId || subnetStatus.data,
@@ -185,7 +193,7 @@ export default function CreateL1() {
                     console.log('expected conversion message', bytesToHex(message));
                     console.log('expected justification', bytesToHex(justification));
 
-                    const conversionTxId = await window.avalanche.request({
+                    const conversionTxId = await window.avalanche.request<string>({
                         method: 'avalanche_sendTransaction',
                         params: {
                             transactionHex: conversionTxHex,

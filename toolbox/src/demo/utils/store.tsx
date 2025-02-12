@@ -22,7 +22,9 @@ export const initialState = {
     evmChainName: "My L1",
     evmChainRpcUrl: "",
     evmChainCoinName: "COIN",
-    poaValidatorManagerAddress: "",
+    validatorManagerAddress: "",
+    proxyAddress: "0xfacade0000000000000000000000000000000000",
+    proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
 }
 
 export const useExampleStore = create(
@@ -47,7 +49,9 @@ export const useExampleStore = create(
             setEvmChainName: (evmChainName: string) => set({ evmChainName }),
             setEvmChainRpcUrl: (evmChainRpcUrl: string) => set({ evmChainRpcUrl }),
             setEvmChainCoinName: (evmChainCoinName: string) => set({ evmChainCoinName }),
-            setPoaValidatorManagerAddress: (poaValidatorManagerAddress: string) => set({ poaValidatorManagerAddress }),
+            setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
+            setProxyAddress: (proxyAddress: string) => set({ proxyAddress }),
+            setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
             reset: () => set(initialState),
         })),
         {

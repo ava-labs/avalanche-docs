@@ -60,7 +60,7 @@ export const DeployValidatorMessages = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold ">Deploy Validator Messages Library</h2>
+            <h2 className="text-lg font-semibold text-gray-800">Deploy Validator Messages Library</h2>
             <div className="space-y-4">
                 <div className="p-4 bg-gray-100 rounded-lg">
                     <p className="text-gray-700 mb-4">

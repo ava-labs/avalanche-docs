@@ -1,17 +1,8 @@
-import { Input } from "./Input";
+import { Input, InputProps, TextareaProps } from "./Input";
 import { Button } from "./Button";
 import { X } from "lucide-react";
 
-export const InputArray = ({
-    label,
-    values,
-    onChange,
-    placeholder,
-    notesUnderInput,
-    type = "text",
-    rows,
-    disabled,
-}: {
+type InputArrayProps = {
     label: string,
     values: string[],
     onChange: (values: string[]) => void,
@@ -20,7 +11,16 @@ export const InputArray = ({
     type?: string,
     rows?: number,
     disabled?: boolean,
-}) => {
+} & Omit<InputProps | TextareaProps, 'label' | 'value' | 'onChange' | 'notes'>;
+
+export const InputArray = ({
+    label,
+    values,
+    onChange,
+    placeholder,
+    notesUnderInput,
+    ...inputProps
+}: InputArrayProps) => {
     const handleAdd = () => {
         onChange([...values, ""]);
     };
@@ -44,18 +44,16 @@ export const InputArray = ({
                 <div key={index} className="flex gap-2">
                     <div className="flex-grow relative">
                         <Input
+                            {...inputProps}
                             label={`Entry ${index + 1}`}
                             value={value}
                             onChange={(newValue) => handleChange(index, newValue)}
                             placeholder={placeholder}
-                            notesUnderInput={index === 0 ? notesUnderInput : undefined}
-                            type={type}
-                            rows={rows}
-                            disabled={disabled}
+                            notes={index === 0 ? notesUnderInput : undefined}
                         />
                         <button
                             onClick={() => handleRemove(index)}
-                            disabled={disabled}
+                            disabled={inputProps.disabled}
                             className="absolute top-9 right-2 p-1 text-gray-400 hover:text-gray-600 disabled:text-gray-300"
                         >
                             <X size={16} />
@@ -68,7 +66,7 @@ export const InputArray = ({
             )}
             <Button
                 onClick={handleAdd}
-                disabled={disabled}
+                disabled={inputProps.disabled}
                 type="default"
                 className="w-full mt-2"
             >

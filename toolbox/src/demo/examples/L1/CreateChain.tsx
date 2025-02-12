@@ -106,7 +106,7 @@ export const CreateChain = () => {
                     value={vmId}
                     onChange={setVmId}
                     placeholder="Enter VM ID"
-                    notesUnderInput={`Default is ${initialState.vmId}`}
+                    notes={`Default is ${initialState.vmId}`}
                 />
                 <Input
                     label="Genesis Data (JSON)"

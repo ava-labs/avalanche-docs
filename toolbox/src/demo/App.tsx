@@ -10,6 +10,10 @@ import { RefreshCw } from 'lucide-react';
 import { DeployValidatorMessages } from './examples/ValidatorManager/DeployValidatorMessages';
 import { SwitchChain } from "./examples/Wallet/SwitchChain";
 import { DeployValidatorManager } from "./examples/ValidatorManager/DeployValidatorManager";
+import { initializeValidatorSet } from "./examples/InitializePoA/initializeValidatorSet";
+import { Initialize } from "./examples/InitializePoA/Initialize";
+import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
+import { ReadContract } from "./examples/ValidatorManager/ReadContract";
 
 const componentGroups = {
     "Wallet": [
@@ -65,13 +69,33 @@ const componentGroups = {
             component: DeployValidatorManager,
             fileNames: ["src/demo/examples/ValidatorManager/DeployValidatorManager.tsx"]
         },
+        {
+            id: "readContract",
+            label: "Read Contract",
+            component: ReadContract,
+            fileNames: ["src/demo/examples/ValidatorManager/ReadContract.tsx"]
+        },
+        {
+            id: "upgradeProxy",
+            label: "Upgrade Proxy",
+            component: UpgradeProxy,
+            fileNames: ["src/demo/examples/ValidatorManager/UpgradeProxy.tsx"]
+        }
     ],
-    "Deploy PoS": [
-
-    ],
-    "Top up a validator": [
-
-    ],
+    "Initialize PoA": [
+        {
+            id: "initialize",
+            label: "Initialize",
+            component: Initialize,
+            fileNames: ["src/demo/examples/InitializePoA/Initialize.tsx"]
+        },
+        {
+            id: "initializeValidatorSet",
+            label: "Initialize Validator Set",
+            component: initializeValidatorSet,
+            fileNames: ["src/demo/examples/InitializePoA/initializeValidatorSet.tsx"]
+        }
+    ]
 
 };
 
