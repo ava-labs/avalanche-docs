@@ -1,6 +1,7 @@
 import React from 'react';
 import newGithubIssueUrl from 'new-github-issue-url';
 import { Button } from '@/components/ui/button';
+import { AlertCircle } from 'lucide-react';
 
 export interface RequestUpdateButtonProps {
   title: string;
@@ -14,7 +15,7 @@ export interface RequestUpdateButtonProps {
 const RequestUpdateButton: React.FC<RequestUpdateButtonProps> = ({
   title,
   pagePath,
-  buttonText,
+  buttonText = "Report Issue",
   buttonVariant,
   size = "sm",
   className,
@@ -32,8 +33,9 @@ const RequestUpdateButton: React.FC<RequestUpdateButtonProps> = ({
   };
 
   return (
-    <Button className={className} variant={buttonVariant || "outline"} size={size} onClick={openIssue}>
-      {buttonText || "Request Update"}
+    <Button className={`inline-flex items-center gap-2 ${className}`} variant={buttonVariant || "outline"} size={size} onClick={openIssue}>
+      <AlertCircle className="size-4" />
+      {buttonText || "Report Issue"}
     </Button>
   );
 };

@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { getIntegrationPage, getIntegrationPages } from '@/utils/content-loader/integrations-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
-import { ArrowUpRightIcon } from 'lucide-react';
+import { ArrowUpRightIcon, AlertCircle } from 'lucide-react';
 import { Pill, Pills } from '@/components/ui/pills';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
-import RequestUpdateButtonWrapper from '@/components/client/request-update-button-wrapper';
+import newGithubIssueUrl from 'new-github-issue-url';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -49,22 +49,16 @@ export default async function Page(props: {
                             {page.data.title}
                         </h1>
                     </div>
-                    <div className="flex gap-2">
-                        <Link
-                            href="/integrations"
-                            className={buttonVariants({ size: 'sm', variant: 'secondary' })}
-                        >
-                            Back
-                        </Link>
-                        <RequestUpdateButtonWrapper
-                            pagePath={`/integrations/${params.slug}`}
-                            title={issueTitle}
-                            buttonVariant="outline"
-                            size="sm"
-                        />
-                    </div>
+
+
                 </div>
                 <p className="mb-4 text-white/80">{page.data.description}</p>
+                <Link
+                    href="/integrations"
+                    className={buttonVariants({ size: 'sm', variant: 'secondary' })}
+                >
+                    Back
+                </Link>
             </div>
             <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
                 <div className="prose p-4">
@@ -109,6 +103,20 @@ export default async function Page(props: {
                         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
                     >
                         <ArrowUpRightIcon className="size-5" /> Edit on Github
+                    </a>
+                    <a
+                        href={newGithubIssueUrl({
+                            user: 'ava-labs',
+                            repo: 'avalanche-docs',
+                            title: `Update Integration ${page.data.title} information`,
+                            body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /integrations/${params.slug}\n\n[Provide more details here...]`,
+                            labels: ['outdated', 'documentation'],
+                        })}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+                    >
+                        <AlertCircle className="size-5" /> Report Issue
                     </a>
 
                     {/* <Control url={page.url} /> */}

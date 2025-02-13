@@ -32,7 +32,6 @@ import {
   Pre,
 } from "fumadocs-ui/components/codeblock";
 import Mermaid from "@/components/content-design/mermaid";
-import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper";
 
 export const dynamicParams = false;
 
@@ -57,6 +56,16 @@ export default async function Page(props: {
         sha: 'master',
         path,
       }}
+      reportIssue={{
+        owner: 'ava-labs',
+        repo: 'avalanche-docs',
+        path,
+        title: `Update Academy ${page.data.title} information`,
+        body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /academy/${page.slugs.join('/')}\n\n[Provide more details here...]`,
+        labels: ['outdated', 'documentation'],
+        target: '_blank',
+        rel: 'noreferrer noopener',
+      }}
       tableOfContent={{
         style: 'clerk',
         single: false,
@@ -71,14 +80,6 @@ export default async function Page(props: {
               <Link href="https://t.me/avalancheacademy" target='_blank' className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}>
                 Join Telegram Course Chat
               </Link>
-              <RequestUpdateButtonWrapper
-                pagePath={`/academy/${page.slugs.join('/')}`}
-                title={`Update ${page.data.title}`}
-                buttonText="Request Update"
-                buttonVariant="secondary"
-                size="sm"
-                className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}
-              />
             </div>
           </div>
         ),

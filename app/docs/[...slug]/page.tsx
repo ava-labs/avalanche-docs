@@ -72,6 +72,16 @@ export default async function Page(props: {
         sha: 'master',
         path,
       }}
+      reportIssue={{
+        owner: 'ava-labs',
+        repo: 'avalanche-docs',
+        path,
+        title: `Update Academy ${page.data.title} information`,
+        body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /academy/${page.slugs.join('/')}\n\n[Provide more details here...]`,
+        labels: ['outdated', 'documentation'],
+        target: '_blank',
+        rel: 'noreferrer noopener',
+      }}
       article={{
         className: 'max-sm:pb-16',
       }}>

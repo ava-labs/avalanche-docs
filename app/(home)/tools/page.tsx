@@ -6,10 +6,10 @@ import Link from "next/link";
 import {
   CircleFadingPlus,
   Plus,
-  SendHorizontal
+  SendHorizontal,
+  AlertCircle
 } from "lucide-react";
 import { cn } from "@/utils/cn";
-import RequestUpdateButton from '@/components/ui/request-update-button';
 
 const features = [
   {
@@ -93,10 +93,6 @@ export default function Page() {
             <p className="text-xl tracking-tight text-zinc-500 text-center">
               Find all the tools you will ever need to build an Avalanche L1.
             </p>
-            <RequestUpdateButton
-              pagePath="/tools"
-              title="Update Tools Information"
-            />
           </div>
           <div className="mt-10 mx-auto font-geist relative md:border-l-0 md:border-b-0 md:border-[1.2px] rounded-none -pr-2">
             <div className="w-full md:mx-0">

@@ -1,6 +1,5 @@
 import COURSES from '@/content/courses';
 import Link from 'next/link';
-import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper";
 
 export default function HomePage(): React.ReactElement {
   return (
@@ -50,14 +49,6 @@ function Courses(props: { title: string; description: string; courses: any[] }):
             <span className="font-medium">Are you new to Blockchain?</span> Start with our Blockchain Fundamentals course{' '}
             <span className="underline">here</span>.
           </Link>
-          <RequestUpdateButtonWrapper
-            pagePath="/academy"
-            title="Update Academy Information"
-            buttonText="Request Update"
-            buttonVariant="outline"
-            size="default"
-            className="block p-4 text-sm rounded-lg bg-muted border border-b h-full min-w-[200px]"
-          />
         </div>
         <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-gray-200 pt-7 sm:mt-12 sm:pt-0 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {props.courses.map((course) => (
