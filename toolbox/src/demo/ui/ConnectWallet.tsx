@@ -6,10 +6,9 @@ import { useExampleStore } from "../utils/store";
 
 
 export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
-    const { walletChainId, setWalletChainId } = useExampleStore();
+    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress } = useExampleStore();
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const [hasWallet, setHasWallet] = useState<boolean>(false);
-    const [address, setAddress] = useState<string>("");
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
     const [isConnecting, setIsConnecting] = useState(false);
@@ -28,7 +27,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
             if (!accounts?.[0]) {
                 throw new Error("No accounts found");
             }
-            setAddress(accounts[0]);
+            setWalletEVMAddress(accounts[0]);
             setIsConnected(true);
         } catch (error) {
             showBoundary(error as Error);
@@ -43,7 +42,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
         }).then((accounts) => {
             if (accounts.length > 0) {
                 console.log(`ConnectWallet:Connected to ${accounts[0]}`);
-                setAddress(accounts[0]);
+                setWalletEVMAddress(accounts[0]);
                 setIsConnected(true);
             } else {
                 console.log(`ConnectWallet:Not connected`);
@@ -70,8 +69,20 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
             setWalletChainId(parseInt(newChainId, 16));
         });
 
+        // Subscribe to account changes
+        window.avalanche?.on("accountsChanged", (accounts: string[]) => {
+            if (accounts.length > 0) {
+                setWalletEVMAddress(accounts[0]);
+                setIsConnected(true);
+            } else {
+                setWalletEVMAddress("");
+                setIsConnected(false);
+            }
+        });
+
         return () => {
             window.avalanche?.removeListener("chainChanged", () => { });
+            window.avalanche?.removeListener("accountsChanged", () => { });
         };
     }, []);
 
@@ -112,7 +123,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
                     </div>
                     <div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">Connected to</div>
-                        <div className="font-mono">{address}</div>
+                        <div className="font-mono">{walletEVMAddress}</div>
                     </div>
                 </div>
                 {walletChainId && (

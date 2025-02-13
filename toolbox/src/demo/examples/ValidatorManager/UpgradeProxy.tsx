@@ -52,9 +52,10 @@ export const UpgradeProxy = () => {
 
             setCurrentImplementation(implementation as string);
             setContractError(null);
-        } catch (error) {
+        } catch (error: unknown) {
             setCurrentImplementation(null);
             setContractError("No contract found at Proxy Address");
+            console.error(error);
         }
     }
 

@@ -14,6 +14,7 @@ import { initializeValidatorSet } from "./examples/InitializePoA/initializeValid
 import { Initialize } from "./examples/InitializePoA/Initialize";
 import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
 import { ReadContract } from "./examples/ValidatorManager/ReadContract";
+import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
 
 const componentGroups = {
     "Wallet": [
@@ -53,7 +54,13 @@ const componentGroups = {
             id: 'collectConversionSignatures',
             label: "Collect conversion signatures",
             component: CollectConversionSignatures,
-            fileNames: ["toolbox/src/demo/examples/L1/CollectConversionSignatures.tsx", "src/demo/examples/L1/convertWarp.ts"]
+            fileNames: ["toolbox/src/demo/examples/L1/CollectConversionSignatures.tsx", "toolbox/src/demo/examples/L1/convertWarp.ts"]
+        },
+        {
+            id: 'genesisBuilder',
+            label: "Genesis Builder",
+            component: GenesisBuilder,
+            fileNames: ["toolbox/src/demo/examples/L1/GenesisBuilder.tsx"]
         }
     ],
     "Deploy ValidatorManager": [

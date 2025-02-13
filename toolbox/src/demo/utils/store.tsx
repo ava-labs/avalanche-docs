@@ -25,6 +25,7 @@ export const initialState = {
     validatorManagerAddress: "",
     proxyAddress: "0xfacade0000000000000000000000000000000000",
     proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
+    walletEVMAddress: "",
 }
 
 export const useExampleStore = create(
@@ -52,6 +53,7 @@ export const useExampleStore = create(
             setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
             setProxyAddress: (proxyAddress: string) => set({ proxyAddress }),
             setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
+            setWalletEVMAddress: (walletEVMAddress: string) => set({ walletEVMAddress }),
             reset: () => set(initialState),
         })),
         {

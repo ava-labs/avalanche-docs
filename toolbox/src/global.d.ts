@@ -8,8 +8,8 @@ declare global {
         params?: Record<string, unknown> | unknown[];
         id?: number;
       }) => Promise<T>;
-      on: (event: string, callback: (newChainId: string) => void) => void;
-      removeListener: (event: string, callback: () => void) => void;
+      on<T>(event: string, callback: (data: T) => void): void;
+      removeListener(event: string, callback: () => void): void;
     }
   }
 }
