@@ -61,6 +61,44 @@ async function runEVMTests(payload: { evmChainRpcUrl: string, baseURL: string, p
         };
     }
 
+    // Debug and Trace methods - using fetch as viem doesn't support them
+    const debugTraceMethods = [
+        { method: 'debug_traceBlockByNumber', params: ['latest'] },
+        { method: 'trace_block', params: ['latest'] }
+    ];
+
+    for (const dm of debugTraceMethods) {
+        try {
+            const response = await fetch(payload.evmChainRpcUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    method: dm.method,
+                    params: dm.params,
+                    id: 1
+                })
+            });
+
+            const data = await response.json();
+
+            result[dm.method] = {
+                passed: !!data.error, // Expecting an error as these methods should be disabled
+                message: data.error ? `Error expected: ${data.error.message}` : "Warning: Method is accessible"
+            };
+
+
+        } catch (error) {
+            result[dm.method] = {
+                passed: true, // Network error is also a good sign - method not exposed
+                message: `Error expected: ${error instanceof Error ? error.message : 'API access restricted'}`
+            };
+        }
+    }
+
+
     return result;
 }
 
