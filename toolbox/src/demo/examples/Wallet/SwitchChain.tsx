@@ -126,6 +126,7 @@ export const SwitchChain = () => {
                         type="secondary"
                         onClick={checkRpc}
                         loading={isCheckingRpc}
+                        disabled={evmChainRpcUrl === ""}
                     >
                         Load Chain ID from RPC
                     </Button>
