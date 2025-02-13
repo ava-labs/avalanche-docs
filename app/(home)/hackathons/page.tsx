@@ -13,6 +13,14 @@ import {
   Search
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
 import Link from "next/link";
 import Image from 'next/image'
 
@@ -25,6 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
 
 type Filter = "location" | "status" | "page";
 
@@ -282,6 +291,28 @@ function Hackathons() {
       <div>
         <h3 className="text-2xl font-medium">Recommended for You</h3>
         <hr className="my-4 border-t border-zinc-800" />
+        <Carousel
+          opts={{
+            align: "start",
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {Array.from({ length: 10 }).map((_, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/6">
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex aspect-square items-center justify-center p-6">
+                      <span className="text-md font-semibold">Hackathon {index + 1}</span>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
 
       </div>
       <div className="flex justify-end">

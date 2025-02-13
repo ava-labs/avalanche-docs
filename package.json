@@ -29,6 +29,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "2.28.0",
+    "embla-carousel-react": "^8.5.2",
     "fumadocs-core": "14.6.0",
     "fumadocs-mdx": "11.1.2",
     "fumadocs-twoslash": "^2.0.2",
