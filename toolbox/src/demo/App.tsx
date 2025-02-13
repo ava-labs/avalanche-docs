@@ -5,7 +5,7 @@ import { useExampleStore } from './utils/store';
 import { CreateChain } from './examples/L1/CreateChain';
 import { ConvertToL1 } from './examples/L1/ConvertToL1';
 import { GetPChainAddress } from './examples/Wallet/GetPChainAddress';
-import { ConvertL1Signatures } from './examples/L1/ConvertL1Signatures';
+import { CollectConversionSignatures } from './examples/L1/CollectConversionSignatures';
 import { RefreshCw } from 'lucide-react';
 import { DeployValidatorMessages } from './examples/ValidatorManager/DeployValidatorMessages';
 import { SwitchChain } from "./examples/Wallet/SwitchChain";
@@ -50,10 +50,10 @@ const componentGroups = {
             fileNames: ["toolbox/src/demo/examples/L1/ConvertToL1.tsx"]
         },
         {
-            id: 'convertL1Signatures',
-            label: "Convert L1 Signatures",
-            component: ConvertL1Signatures,
-            fileNames: ["toolbox/src/demo/examples/L1/ConvertL1Signatures.tsx", "src/demo/examples/L1/convertWarp.ts"]
+            id: 'collectConversionSignatures',
+            label: "Collect conversion signatures",
+            component: CollectConversionSignatures,
+            fileNames: ["toolbox/src/demo/examples/L1/CollectConversionSignatures.tsx", "src/demo/examples/L1/convertWarp.ts"]
         }
     ],
     "Deploy ValidatorManager": [
@@ -82,7 +82,7 @@ const componentGroups = {
             fileNames: ["toolbox/src/demo/examples/ValidatorManager/UpgradeProxy.tsx"]
         }
     ],
-    "Initialize PoA": [
+    "Initialize ValidatorManager": [
         {
             id: "initialize",
             label: "Initialize",

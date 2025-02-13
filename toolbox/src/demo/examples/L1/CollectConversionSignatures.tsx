@@ -6,7 +6,7 @@ import { utils } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 
-export const ConvertL1Signatures = () => {
+export const CollectConversionSignatures = () => {
     const { showBoundary } = useErrorBoundary();
     const {
         networkID,
