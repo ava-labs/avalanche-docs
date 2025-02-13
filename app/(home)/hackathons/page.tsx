@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useCallback } from "react";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,9 @@ import {
   Circle,
   CalendarIcon,
   MapPinIcon,
+  Search
 } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from 'next/image'
 
@@ -139,33 +141,43 @@ function Hackathons() {
   };
 
   const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [hackathons, setHackathons] = useState<HackathonLite[]>([]);
+  const [total, setTotal] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const pageSize = 10;
 
-  const [hackathons, setHackathons] = useState<HackathonLite[]>([]);
-  const [total, setTotal] = useState(0);
-
-  const fetchHackathons = () => {
+  const fetchHackathons = useCallback(() => {
     const params = new URLSearchParams();
     params.set("page", filters.page.toString());
     params.set("pageSize", pageSize.toString());
     if (filters.location) params.set("location", filters.location);
     if (filters.status) params.set("status", filters.status);
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
 
-    const apiUrl = `/api/hackathons?${params.toString()}`;
-
-    fetch(apiUrl.toString(), { cache: "no-store" })
+    fetch(`/api/hackathons?${params.toString()}`, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         setHackathons(data.hackathons);
         setTotal(data.total);
       })
       .catch((error) => console.error("Error fetching hackathons:", error));
-  };
+  }, [filters, searchQuery])
+
+  const debouncedSearch = useCallback((query: string) => {
+    let timer: NodeJS.Timeout;
+
+    return () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setSearchQuery(query);
+      }, 300); // 300ms delay
+    };
+  }, []);
 
   useEffect(() => {
     fetchHackathons();
-  }, [filters]);
+  }, [filters, searchQuery]);
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -173,9 +185,10 @@ function Hackathons() {
     if (filters.location) params.set("location", filters.location);
     if (filters.status) params.set("status", filters.status);
     params.set("page", filters.page.toString());
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
 
     router.replace(`/hackathons?${params.toString()}`);
-  }, [filters]);
+  }, [filters, searchQuery]);
 
   const totalPages = Math.ceil(total / pageSize);
 
@@ -188,7 +201,24 @@ function Hackathons() {
 
   return (
     <section className="px-4 py-12 space-y-6">
+      <div className="flex items-center gap-2 max-w-xs">
+        {/* Input */}
+        <div className="relative w-full">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-400 stroke-zinc-700" />
+          <Input
+            type="text"
+            onChange={(e) => debouncedSearch(e.target.value)}
+            placeholder="Search by name, track or location"
+            className="w-full pl-10 bg-transparent border border-zinc-700 rounded-md text-white placeholder-zinc-500"
+          />
+        </div>
+        {/* Button */}
+        <button className="bg-red-500 p-2 rounded-md hover:bg-red-600 transition">
+          <Search className="h-5 w-5 text-white stroke-white" />
+        </button>
+      </div>
 
+      <hr className="my-4 border-t border-zinc-800" />
 
       {/* Filters */}
       <div className="flex gap-4 justify-end">
@@ -228,7 +258,6 @@ function Hackathons() {
           <HackathonCard key={hackathon.id} hackathon={hackathon} />
         ))}
       </div>
-
       {/* Pagination */}
       <div className="flex justify-center gap-4">
         {filters.page > 1 && (
