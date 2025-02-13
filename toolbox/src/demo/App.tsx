@@ -16,6 +16,7 @@ import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
 import { ReadContract } from "./examples/ValidatorManager/ReadContract";
 import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
 import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
+import { useState, useEffect } from "react";
 
 const componentGroups = {
     "Wallet": [
@@ -129,9 +130,27 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error, resetError
 };
 
 function App() {
-    const { selectedTool, setSelectedTool } = useExampleStore();
+    // Remove store-based selectedTool and use setSelectedTool
+    // const { selectedTool, setSelectedTool } = useExampleStore();
+
+    // Use state from URL hash. Default to "getPChainAddress" if hash is empty.
+    const [selectedTool, setSelectedTool] = useState(
+        window.location.hash ? window.location.hash.substring(1) : "getPChainAddress"
+    );
+
+    // Listen for URL hash changes (e.g. back/forward navigation)
+    useEffect(() => {
+        const handleHashChange = () => {
+            setSelectedTool(window.location.hash ? window.location.hash.substring(1) : "getPChainAddress");
+        };
+        window.addEventListener("hashchange", handleHashChange);
+        return () => window.removeEventListener("hashchange", handleHashChange);
+    }, []);
 
     const handleComponentClick = (toolId: string) => {
+        // Instead of updating the store, update the URL hash.
+        window.location.hash = toolId;
+        // Optionally update local state immediately (hashchange event will also trigger)
         setSelectedTool(toolId);
     };
 
@@ -158,7 +177,7 @@ function App() {
                                 key={index}
                                 user="ava-labs"
                                 repo="avalanche-docs"
-                                branch="l1-toolbox"//TODO: set automatically or at least change to main
+                                branch="l1-toolbox" // TODO: set automatically or at least change to main
                                 filePath={fileName}
                                 lang="TS"
                                 maxHeight={600}
