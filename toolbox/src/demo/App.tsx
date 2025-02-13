@@ -15,6 +15,7 @@ import { Initialize } from "./examples/InitializePoA/Initialize";
 import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
 import { ReadContract } from "./examples/ValidatorManager/ReadContract";
 import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
+import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
 
 const componentGroups = {
     "Wallet": [
@@ -101,6 +102,14 @@ const componentGroups = {
             label: "Initialize Validator Set",
             component: initializeValidatorSet,
             fileNames: ["toolbox/src/demo/examples/InitializePoA/initializeValidatorSet.tsx"]
+        }
+    ],
+    "Nodes": [
+        {
+            id: "rpcMethodsCheck",
+            label: "RPC Methods Check",
+            component: RPCMethodsCheck,
+            fileNames: ["toolbox/src/demo/examples/Nodes/RPCMethodsCheck.tsx"]
         }
     ]
 
