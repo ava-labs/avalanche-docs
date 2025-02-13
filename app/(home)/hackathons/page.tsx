@@ -1,7 +1,6 @@
 "use client";
 
-import React, { Suspense, useCallback } from "react";
-import { useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState, useRef, } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -155,6 +154,7 @@ function Hackathons() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const pageSize = 10;
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null); // ✅ Stores the timeout reference
 
   const fetchHackathons = useCallback(() => {
     const params = new URLSearchParams();
@@ -174,14 +174,13 @@ function Hackathons() {
   }, [filters, searchQuery])
 
   const debouncedSearch = useCallback((query: string) => {
-    let timer: NodeJS.Timeout;
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
 
-    return () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        setSearchQuery(query);
-      }, 300); // 300ms delay
-    };
+    searchTimeoutRef.current = setTimeout(() => {
+      setSearchQuery(query);
+    }, 300);
   }, []);
 
   useEffect(() => {
