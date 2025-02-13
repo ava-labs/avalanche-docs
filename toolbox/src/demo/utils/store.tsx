@@ -56,7 +56,7 @@ export const useExampleStore = create(
         })),
         {
             name: 'example-storage',
-            storage: createJSONStorage(() => sessionStorage),
+            storage: createJSONStorage(() => localStorage),
         },
     ),
 )
