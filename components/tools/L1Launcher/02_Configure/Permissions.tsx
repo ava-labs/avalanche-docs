@@ -30,9 +30,10 @@ export default function Permissions() {
 
     return (
         <div className="space-y-12">
-            <div>
-                <h1 className="text-2xl font-medium mb-4">Permissions</h1>
-                <p>You can optionally enable different kinds of permissions on your L1. You can configure who can validate the L1, who can deploy contracts and who can issue transactions. You can pick any combination or make your L1 completely permissionless.</p>
+            <div className='space-y-4'>
+                <h1 className="text-2xl font-medium">Permissions</h1>
+                <p>By design, blockchain networks are fully permissionless, allowing anyone to transact and deploy smart contracts. However, certain use cases require permissioning to control who can participate in transactions or deploy contracts. On Avalanche, permissioning is an optional feature for Layer 1 blockchains that may or may not be activated, depending on the network's needs.</p>
+                <p>This is achieved through the transaction allowlist and contract deployer allowlist precompiles, which enable fine-grained access control. These precompiles allow network administrators to restrict which addresses can send transactions or deploy contracts, ensuring compliance, security, or governance requirements are met. Permissioning can be flexibly administered by a multi-signature wallet, a simple address, or a decentralized autonomous organization (DAO), providing customizable and decentralized control over network participation.</p>
             </div>
 
             <div>
