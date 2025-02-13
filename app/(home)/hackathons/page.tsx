@@ -1,16 +1,27 @@
 "use client";
 
-import React, { Suspense } from "react";
-import { useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState, useRef, } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
-  ArrowUpRight,
-  CalendarClock,
+  Trophy,
+  UserRound,
+  Circle,
   CalendarIcon,
   MapPinIcon,
+  Search
 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
 import Link from "next/link";
+import Image from 'next/image'
 
 import { HackathonLite } from "@/types/hackathons";
 
@@ -21,6 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
 
 type Filter = "location" | "status" | "page";
 
@@ -41,17 +53,33 @@ export default function HackathonsPage() {
 }
 
 function HackathonCard({ hackathon }: { hackathon: HackathonLite }) {
+  const statusColors: Record<string, string> = {
+    Ongoing: "stroke-green-500",
+    Upcoming: "stroke-yellow-500",
+    Ended: "stroke-red-500",
+  };
+
   return (
     <div key={hackathon.id} className="w-[512px] flex rounded-lg overflow-hidden shadow-lg">
       {/* Left Section: Background Image or Red Color */}
       <div
-        className="flex-[2] h-[280px] bg-red-500"
-        style={{
-          backgroundImage: true ? `url("https://images.seeklogo.com/logo-png/49/2/avalanche-avax-logo-png_seeklogo-491111.png")` : "",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+        className="h-[280px] bg-zinc-800 flex items-center justify-start"
+      >
+        <Image
+          src="/logo-black.png"
+          alt="Avalanche Logo"
+          width={200}
+          height={50}
+          className="dark:hidden"
+        />
+        <Image
+          src="/logo-white.png"
+          alt="Avalanche Logo"
+          width={200}
+          height={50}
+          className="hidden dark:block"
+        />
+      </div>
 
       {/* Right Section */}
       <div className="flex-[3] bg-zinc-900 text-white p-4 flex flex-col justify-between">
@@ -84,10 +112,26 @@ function HackathonCard({ hackathon }: { hackathon: HackathonLite }) {
             ))}
           </div>
         )}
+        <div className="flex justify-around items-center text-gray-300 text-sm mt-4">
+          <div className="flex items-center gap-2">
+            <Trophy className="h-5 w-5 stroke-white" />
+            <span className="font-medium">10K</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <UserRound className="h-5 w-5 stroke-white" />
+            <span className="font-medium">9000</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Circle className={`h-5 w-5 ${statusColors[hackathon.status]}`} />
+            <span className="font-medium uppercase">{hackathon.status}</span>
+          </div>
+        </div>
         <div className="mx-auto">
-          <button className="w-[257px] h-[40px] min-h-[40px] max-h-[40px] bg-red-500 text-white font-medium uppercase rounded-md py-2 px-4 mt-4 flex items-center justify-center gap-2 hover:bg-red-600 transition">
-            JOIN NOW
-          </button>
+          <Link href={`/hackathons/${hackathon.id}`}>
+            <button className="w-[257px] h-[40px] min-h-[40px] max-h-[40px] bg-red-500 text-white font-medium uppercase rounded-md py-2 px-4 mt-4 flex items-center justify-center gap-2 hover:bg-red-600 transition">
+              JOIN NOW
+            </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -105,33 +149,43 @@ function Hackathons() {
   };
 
   const [filters, setFilters] = useState<Filters>(initialFilters);
-
-  const pageSize = 10;
-
   const [hackathons, setHackathons] = useState<HackathonLite[]>([]);
   const [total, setTotal] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const fetchHackathons = () => {
+  const pageSize = 10;
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null); // ✅ Stores the timeout reference
+
+  const fetchHackathons = useCallback(() => {
     const params = new URLSearchParams();
     params.set("page", filters.page.toString());
     params.set("pageSize", pageSize.toString());
     if (filters.location) params.set("location", filters.location);
     if (filters.status) params.set("status", filters.status);
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
 
-    const apiUrl = `/api/hackathons?${params.toString()}`;
-
-    fetch(apiUrl.toString(), { cache: "no-store" })
+    fetch(`/api/hackathons?${params.toString()}`, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         setHackathons(data.hackathons);
         setTotal(data.total);
       })
       .catch((error) => console.error("Error fetching hackathons:", error));
-  };
+  }, [filters, searchQuery])
+
+  const debouncedSearch = useCallback((query: string) => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    searchTimeoutRef.current = setTimeout(() => {
+      setSearchQuery(query);
+    }, 300);
+  }, []);
 
   useEffect(() => {
     fetchHackathons();
-  }, [filters]);
+  }, [filters, searchQuery]);
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -139,9 +193,10 @@ function Hackathons() {
     if (filters.location) params.set("location", filters.location);
     if (filters.status) params.set("status", filters.status);
     params.set("page", filters.page.toString());
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
 
     router.replace(`/hackathons?${params.toString()}`);
-  }, [filters]);
+  }, [filters, searchQuery]);
 
   const totalPages = Math.ceil(total / pageSize);
 
@@ -154,7 +209,24 @@ function Hackathons() {
 
   return (
     <section className="px-4 py-12 space-y-6">
+      <div className="flex items-center gap-2 max-w-xs">
+        {/* Input */}
+        <div className="relative w-full">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-400 stroke-zinc-700" />
+          <Input
+            type="text"
+            onChange={(e) => debouncedSearch(e.target.value)}
+            placeholder="Search by name, track or location"
+            className="w-full pl-10 bg-transparent border border-zinc-700 rounded-md text-white placeholder-zinc-500"
+          />
+        </div>
+        {/* Button */}
+        <button className="bg-red-500 p-2 rounded-md hover:bg-red-600 transition">
+          <Search className="h-5 w-5 text-white stroke-white" />
+        </button>
+      </div>
 
+      <hr className="my-4 border-t border-zinc-800" />
 
       {/* Filters */}
       <div className="flex gap-4 justify-end">
@@ -194,7 +266,6 @@ function Hackathons() {
           <HackathonCard key={hackathon.id} hackathon={hackathon} />
         ))}
       </div>
-
       {/* Pagination */}
       <div className="flex justify-center gap-4">
         {filters.page > 1 && (
@@ -219,6 +290,28 @@ function Hackathons() {
       <div>
         <h3 className="text-2xl font-medium">Recommended for You</h3>
         <hr className="my-4 border-t border-zinc-800" />
+        <Carousel
+          opts={{
+            align: "start",
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {Array.from({ length: 10 }).map((_, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/6">
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex aspect-square items-center justify-center p-6">
+                      <span className="text-md font-semibold">Hackathon {index + 1}</span>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
 
       </div>
       <div className="flex justify-end">

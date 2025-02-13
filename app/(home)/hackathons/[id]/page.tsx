@@ -15,7 +15,7 @@ export default function HackathonPage() {
 
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
       {/* Outer Wrapper with Rounded Top Corners */}
       <div className="border border-gray-700 rounded-t-lg overflow-hidden shadow-lg">
         {/* Menu Section */}
@@ -30,8 +30,8 @@ export default function HackathonPage() {
         </div>
 
         {/* Jumbotron Section */}
-        <div className="bg-gray-800 p-8">
-          <h1 className="text-3xl font-bold text-white">Hackathon Title</h1>
+        <div className="bg-zinc-800 p-8 min-h-[500px]">
+          <h1 className="text-3xl font-bold text-white">{hackathonData.title}</h1>
           <p className="text-gray-400 mt-2">
             This is a placeholder for a short description about the hackathon.
           </p>
@@ -61,7 +61,7 @@ export default function HackathonPage() {
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="w-50 h-50 object-contain"
+                    className="w-50 min-h-[120px] object-contain"
                   />
                 </div>
               ))}
@@ -104,6 +104,6 @@ export default function HackathonPage() {
           <Button>Edit Hackathon</Button>
         </Link>
       </div>
-    </div>
+    </main>
   );
 }

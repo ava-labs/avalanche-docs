@@ -10,6 +10,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils"
 
 interface HackathonFormProps {
   initialData?: {
@@ -73,8 +74,8 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
   };
 
   return (
-    <div className="mb-4">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-w-[500px] mx-auto">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <Input placeholder="Hackathon Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
         <Textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
 
@@ -82,20 +83,22 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
         <Popover>
           <PopoverTrigger asChild>
             <Button
-              variant="outline"
-              className="w-full justify-start text-left"
+              variant={"outline"}
+              className={cn(
+                "w-[280px] justify-start text-left font-normal",
+                !date && "text-muted-foreground"
+              )}
             >
-              {date ? format(date, "PPP") : "Pick a date"}
-              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+              <CalendarIcon className="stroke-white" />
+              {date ? format(date, "PPP") : <span>Pick a date</span>}
             </Button>
           </PopoverTrigger>
-          <PopoverContent align="start" className="w-[300px] p-0">
+          <PopoverContent className="w-auto p-0">
             <Calendar
               mode="single"
               selected={date || undefined}
               onSelect={(selectedDate) => setDate(selectedDate || null)}
-              initialFocus
-              className="rounded-md border"
+              className="rounded-md border bg-black"
             />
           </PopoverContent>
         </Popover>
@@ -121,8 +124,9 @@ export default function HackathonForm({ initialData }: HackathonFormProps) {
             <SelectItem value="Ongoing">Ongoing</SelectItem>
           </SelectContent>
         </Select>
-
-        <Button type="submit">{isEditing ? "Update Hackathon" : "Create Hackathon"}</Button>
+        <div className="flex justify-end">
+          <Button className="mb-6" type="submit">{isEditing ? "Update Hackathon" : "Create Hackathon"}</Button>
+        </div>
       </form>
     </div>
   );
