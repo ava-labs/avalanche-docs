@@ -96,7 +96,7 @@ echo '{
   ]
 }' > $HOME/.avalanchego_rpc/configs/chains/${chainId}/config.json`
 
-const checkNodeCommand = (chainID: string, domain: string) => {
+const checkNodeCommand = (chainID: string, domain: string, isDebugTrace: boolean) => {
     domain = nipify(domain);
     if (domain.startsWith("127.0.0.1")) {
         domain = "http://" + domain;
@@ -104,10 +104,17 @@ const checkNodeCommand = (chainID: string, domain: string) => {
         domain = "https://" + domain;
     }
 
-    return `curl -X POST --data '{ 
+    if (!isDebugTrace) {
+        return `curl -X POST --data '{ 
   "jsonrpc":"2.0", "method":"eth_chainId", "params":[], "id":1 
 }' -H 'content-type:application/json;' \\
 ${domain}/ext/bc/${chainID}/rpc`
+    } else {
+        return `curl -X POST --data '{ 
+  "jsonrpc":"2.0", "method":"debug_traceBlockByNumber", "params":["latest", {}], "id":1 
+}' -H 'content-type:application/json;' \\
+${domain}/ext/bc/${chainID}/rpc`
+    }
 }
 
 export const AvalanchegoDocker = () => {
@@ -211,7 +218,7 @@ export const AvalanchegoDocker = () => {
 
                 {domain && isRPC === "true" && (
                     <div className="mt-4">
-                        <h3 className="text-md font-medium  mb-2">Reverse Proxy Command:</h3>
+                        <h3 className="text-md font-medium  mb-2">Reverse Proxy Command ():</h3>
                         <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
                             {reverseProxyCommand(domain)}
                         </pre>
@@ -222,7 +229,16 @@ export const AvalanchegoDocker = () => {
                     <div className="mt-4">
                         <h3 className="text-md font-medium  mb-2">Check Node Command:</h3>
                         <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
-                            {checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")))}
+                            {checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), false)}
+                        </pre>
+                    </div>
+                )}
+
+                {chainID && isRPC === "true" && enableDebugTrace === "true" && (
+                    <div className="mt-4">
+                        <h3 className="text-md font-medium  mb-2">Check that debug & trace is working:</h3>
+                        <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
+                            {checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), true)}
                         </pre>
                     </div>
                 )}
