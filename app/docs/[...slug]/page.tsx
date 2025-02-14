@@ -31,6 +31,8 @@ import { BadgeCheck } from "lucide-react";
 import Mermaid from "@/components/content-design/mermaid";
 import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper";
 import { buttonVariants } from "@/components/ui/button";
+import EditOnGithubButton from "@/components/ui/edit-on-github-button";
+import ReportIssueButton from "@/components/ui/report-issue-button";
 
 export const dynamicParams = false;
 
@@ -52,35 +54,9 @@ export default async function Page(props: {
       tableOfContent={{
         style: 'clerk',
         single: false,
-        enabled: true,
         footer: (
-          <div className="flex flex-col gap-4">
-            <RequestUpdateButtonWrapper
-              pagePath={`/docs/${page.slugs.join('/')}`}
-              title={`Update ${page.data.title}`}
-              buttonText="Request Update"
-              buttonVariant="secondary"
-              size="lg"
-              className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }), "mt-4")}
-            />
-          </div>
+          <BackToTop />
         ),
-      }}
-      editOnGithub={{
-        repo: 'avalanche-docs',
-        owner: 'ava-labs',
-        sha: 'master',
-        path,
-      }}
-      reportIssue={{
-        owner: 'ava-labs',
-        repo: 'avalanche-docs',
-        path,
-        title: `Update Academy ${page.data.title} information`,
-        body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /academy/${page.slugs.join('/')}\n\n[Provide more details here...]`,
-        labels: ['outdated', 'documentation'],
-        target: '_blank',
-        rel: 'noreferrer noopener',
       }}
       article={{
         className: 'max-sm:pb-16',
@@ -102,6 +78,13 @@ export default async function Page(props: {
             </CodeBlock>
           ),
         }}/>
+        <div className="flex gap-6 mt-8">
+          <EditOnGithubButton path={path} />
+          <ReportIssueButton 
+            title={page.data.title}
+            pagePath={`/docs/${page.slugs.join('/')}`}
+          />
+        </div>
         {page.data.index ? <DocsCategory page={page} from={loaderOutput} /> : null}
       </DocsBody>
     </DocsPage>

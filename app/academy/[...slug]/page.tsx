@@ -32,6 +32,8 @@ import {
   Pre,
 } from "fumadocs-ui/components/codeblock";
 import Mermaid from "@/components/content-design/mermaid";
+import EditOnGithubButton from '@/components/ui/edit-on-github-button';
+import ReportIssueButton from "@/components/ui/report-issue-button";
 
 export const dynamicParams = false;
 
@@ -50,22 +52,6 @@ export default async function Page(props: {
     <DocsPage
       toc={toc}
       lastUpdate={lastModified}
-      editOnGithub={{
-        repo: 'avalanche-docs',
-        owner: 'ava-labs',
-        sha: 'master',
-        path,
-      }}
-      reportIssue={{
-        owner: 'ava-labs',
-        repo: 'avalanche-docs',
-        path,
-        title: `Update Academy ${page.data.title} information`,
-        body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /academy/${page.slugs.join('/')}\n\n[Provide more details here...]`,
-        labels: ['outdated', 'documentation'],
-        target: '_blank',
-        rel: 'noreferrer noopener',
-      }}
       tableOfContent={{
         style: 'clerk',
         single: false,
@@ -76,11 +62,9 @@ export default async function Page(props: {
               <div>Instructors:</div>
               <Instructors names={course?.instructors || []} />
             </div>
-            <div className="flex flex-col gap-4">
-              <Link href="https://t.me/avalancheacademy" target='_blank' className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}>
-                Join Telegram Course Chat
-              </Link>
-            </div>
+            <Link href="https://t.me/avalancheacademy" target='_blank' className={cn(buttonVariants({ size: 'lg', variant: 'secondary' }))}>
+              Join Telegram Course Chat
+            </Link>
           </div>
         ),
       }}
@@ -103,6 +87,13 @@ export default async function Page(props: {
             </CodeBlock>
           ),
         }}/>
+        <div className="flex gap-6 mt-8">
+          <EditOnGithubButton path={path} />
+          <ReportIssueButton 
+            title={page.data.title}
+            pagePath={`/academy/${page.slugs.join('/')}`}
+          />
+        </div>
       </DocsBody>
     </DocsPage>
   );
