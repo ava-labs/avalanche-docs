@@ -89,19 +89,17 @@ export const DeployValidatorManager = () => {
         <div className="space-y-4">
             <h2 className="text-lg font-semibold text-gray-800">Deploy Validator Manager</h2>
             <div className="space-y-4">
-                <div className="p-4 bg-gray-100 rounded-lg">
-                    <p className="text-gray-700 mb-4">
-                        This will deploy the <code>ValidatorManager</code> contract to the currently connected EVM network <code>{walletChainId}</code>.
-                    </p>
-                    <p className="text-gray-700">
-                        The contract requires the <code>ValidatorMessages</code> library at address: <code>{validatorMessagesLibAddress || "Not deployed"}</code>
-                    </p>
-                    {knownNetwoks[walletChainId] && (
-                        <p className="text-gray-700 mt-4">
-                            ⚠️ Warning: You are connected to {knownNetwoks[walletChainId]}, not to your L1.
-                        </p>
-                    )}
+                <div className="mb-4">
+                    This will deploy the <code>ValidatorManager</code> contract to the currently connected EVM network <code>{walletChainId}</code>.
                 </div>
+                <div className="mb-4">
+                    The contract requires the <code>ValidatorMessages</code> library at address: <code>{validatorMessagesLibAddress || "Not deployed"}</code>
+                </div>
+                {knownNetwoks[walletChainId] && (
+                    <div className="mb-4">
+                        ⚠️ Warning: You are connected to {knownNetwoks[walletChainId]}, not to your L1.
+                    </div>
+                )}
                 <Button
                     type="primary"
                     onClick={handleDeploy}
