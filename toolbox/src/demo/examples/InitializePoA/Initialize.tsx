@@ -3,18 +3,43 @@ import { useErrorBoundary } from "react-error-boundary";
 import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
-import { createWalletClient, custom, createPublicClient } from 'viem';
+import { createWalletClient, custom, createPublicClient, AbiEvent } from 'viem';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
+import { utils } from "@avalabs/avalanchejs";
 
 export const Initialize = () => {
     const { showBoundary } = useErrorBoundary();
-    const { subnetID, walletChainId, validatorManagerAddress, setValidatorManagerAddress } = useExampleStore();
+    const { subnetID, walletChainId, validatorManagerAddress, setValidatorManagerAddress, proxyAddress, setSubnetID, walletEVMAddress } = useExampleStore();
     const [isChecking, setIsChecking] = useState(false);
     const [isInitializing, setIsInitializing] = useState(false);
     const [isInitialized, setIsInitialized] = useState<boolean | null>(null);
-    const [initEvent, setInitEvent] = useState<any>(null);
+    const [initEvent, setInitEvent] = useState<unknown>(null);
     const [churnPeriodSeconds, setChurnPeriodSeconds] = useState("0");
     const [maximumChurnPercentage, setMaximumChurnPercentage] = useState("20");
+    const [contarctAddress, setContarctAddress] = useState("");
+    const [adminAddress, setAdminAddress] = useState("");
+
+    useEffect(() => {
+        if (walletEVMAddress && !adminAddress) {
+            setAdminAddress(walletEVMAddress);
+        }
+    }, [walletEVMAddress, adminAddress]);
+
+    let subnetIDHex = "";
+    try {
+        subnetIDHex = utils.bufferToHex(utils.base58check.decode(subnetID));
+    } catch (error) {
+        console.error('Error decoding subnetID:', error);
+    }
+
+    useEffect(() => {
+        if (contarctAddress) return
+        if (proxyAddress) {
+            setContarctAddress(proxyAddress);
+        } else if (validatorManagerAddress) {
+            setContarctAddress(validatorManagerAddress);
+        }
+    }, [contarctAddress, proxyAddress, validatorManagerAddress]);
 
     useEffect(() => {
         if (validatorManagerAddress) {
@@ -41,7 +66,7 @@ export const Initialize = () => {
 
             const logs = await publicClient.getLogs({
                 address: validatorManagerAddress as `0x${string}`,
-                event: initializedEvent as any,
+                event: initializedEvent as AbiEvent,
                 fromBlock: 0n,
                 toBlock: 'latest'
             });
@@ -64,18 +89,18 @@ export const Initialize = () => {
 
         setIsInitializing(true);
         try {
+            const settings = {
+                admin: adminAddress,
+                subnetID: subnetIDHex,
+                churnPeriodSeconds: BigInt(churnPeriodSeconds),
+                maximumChurnPercentage: Number(maximumChurnPercentage)
+            };
+
             const walletClient = createWalletClient({
                 transport: custom(window.avalanche)
             });
 
             const [address] = await walletClient.requestAddresses();
-
-            const settings = {
-                admin: address,
-                subnetID: `0x${subnetID.padStart(64, '0')}` as `0x${string}`,
-                churnPeriodSeconds: BigInt(churnPeriodSeconds),
-                maximumChurnPercentage: Number(maximumChurnPercentage)
-            };
 
             const hash = await walletClient.writeContract({
                 address: validatorManagerAddress as `0x${string}`,
@@ -135,6 +160,17 @@ export const Initialize = () => {
                     </div>
                 </div>
 
+                <Input
+                    label="Subnet ID"
+                    value={subnetID}
+                    onChange={setSubnetID}
+                />
+                <Input
+                    label={`Subnet ID (Hex), ${utils.hexToBuffer(subnetIDHex).length} bytes`}
+                    value={subnetIDHex}
+                    disabled
+                />
+
                 {isInitialized === true && (
                     <Success
                         label="Already Initialized"
@@ -158,6 +194,12 @@ export const Initialize = () => {
                             onChange={setMaximumChurnPercentage}
                             placeholder="Enter maximum churn percentage"
                         />
+                        <Input
+                            label="Admin Address"
+                            value={adminAddress}
+                            onChange={setAdminAddress}
+                            placeholder="Enter admin address"
+                        />
                         <Button
                             type="primary"
                             onClick={handleInitialize}
@@ -173,8 +215,8 @@ export const Initialize = () => {
     );
 };
 
-function jsonStringifyWithBigint(value: any) {
-    return JSON.stringify(value, (_, value) =>
-        typeof value === 'bigint' ? value.toString() : value
+function jsonStringifyWithBigint(value: unknown) {
+    return JSON.stringify(value, (_, v) =>
+        typeof v === 'bigint' ? v.toString() : v
         , 2);
 }
