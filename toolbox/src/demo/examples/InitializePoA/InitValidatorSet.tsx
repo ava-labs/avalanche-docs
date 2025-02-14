@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { useExampleStore } from "../../utils/store";
-import { useErrorBoundary } from "react-error-boundary";
-import { createWalletClient, custom, createPublicClient, hexToBytes, decodeErrorResult, Abi } from 'viem';
+import { createWalletClient, custom, createPublicClient, hexToBytes, decodeErrorResult, Abi, http, WalletClient, Account, Address } from 'viem';
 import { packWarpIntoAccessList } from './packWarp';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 import { utils } from '@avalabs/avalanchejs';
+import { privateKeyToAccount } from 'viem/accounts'
+
+//FIXME: Remove this after debugging. Do not actually allocate any funds to this wallet.
+const DEBUG_WALLETPRIVATE_KEY = "0xf60e772d20390599ff144f30015c0ab9560f40554e41be23c3ef5a382c39c294" as `0x${string}`
+const DEBUG_WALLET_ADDRESS = privateKeyToAccount(DEBUG_WALLETPRIVATE_KEY).address
+console.log("DEBUG_WALLET_ADDRESS", DEBUG_WALLET_ADDRESS)
 
 const cb58ToHex = (cb58: string) => utils.bufferToHex(utils.base58check.decode(cb58));
 const add0x = (hex: string): `0x${string}` => hex.startsWith('0x') ? hex as `0x${string}` : `0x${hex}`;
 export default function InitValidatorSet() {
-    const { showBoundary } = useErrorBoundary();
     const {
         subnetID,
         setSubnetID,
@@ -25,19 +29,27 @@ export default function InitValidatorSet() {
         proxyAddress,
         setProxyAddress,
         evmChainRpcUrl,
-        setEvmChainRpcUrl
+        setEvmChainRpcUrl,
+        walletEVMAddress
     } = useExampleStore();
 
     const [isInitializing, setIsInitializing] = useState(false);
     const [txHash, setTxHash] = useState<string | null>(null);
+    const [simulationWentThrough, setSimulationWentThrough] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const onInitialize = async () => {
+    const onInitialize = async (debug: boolean = false) => {
+        if (!evmChainRpcUrl && debug) {
+            setError('RPC endpoint is required for debug mode');
+            return;
+        }
         if (!window.avalanche) {
-            showBoundary(new Error('MetaMask (Avalanche wallet) is not installed'));
+            setError('MetaMask (Avalanche wallet) is not installed');
             return;
         }
 
         setIsInitializing(true);
+        setError(null);
         try {
             // Prepare transaction arguments
             const txArgs = [{
@@ -62,45 +74,46 @@ export default function InitValidatorSet() {
             const signatureBytes = hexToBytes(add0x(L1ConversionSignature));
             const accessList = packWarpIntoAccessList(signatureBytes);
 
+
+            let walletClient: WalletClient;
+            let from: Account | Address;
             // Setup clients
-            const walletClient = createWalletClient({
-                transport: custom(window.avalanche)
-            });
-            const [address] = await walletClient.requestAddresses();
+            if (debug) {
+                walletClient = createWalletClient({
+                    transport: http(),
+                    account: privateKeyToAccount(DEBUG_WALLETPRIVATE_KEY),
+                    chain: {
+                        id: walletChainId,
+                        name: "My L1",
+                        rpcUrls: {
+                            default: { http: [evmChainRpcUrl] },
+                        },
+                        nativeCurrency: {
+                            name: "COIN",
+                            symbol: "COIN",
+                            decimals: 18,
+                        },
+                    },
+                });
+                from = privateKeyToAccount(DEBUG_WALLETPRIVATE_KEY);
+            } else {
+                walletClient = createWalletClient({
+                    transport: custom(window.avalanche)
+                });
+                from = walletEVMAddress as `0x${string}`
+            }
+
             const publicClient = createPublicClient({
                 transport: custom(window.avalanche)
             });
 
-            // await publicClient.simulateContract({
-            //     address: proxyAddress as `0x${string}`,
-            //     abi: ValidatorManagerABI.abi,
-            //     functionName: 'initializeValidatorSet',
-            //     args: txArgs,
-            //     accessList,
-            //     account: address,
-            //     chain: {
-            //         id: walletChainId,
-            //         name: "My L1",
-            //         rpcUrls: {
-            //             default: { http: [] },
-            //         },
-            //         nativeCurrency: {
-            //             name: "COIN",
-            //             symbol: "COIN",
-            //             decimals: 18,
-            //         },
-            //     },
-            // });
-            // console.log('Simulation successful:', simulation);
-
-            // Send transaction
-            const hash = await walletClient.writeContract({
+            const sim = await publicClient.simulateContract({
                 address: proxyAddress as `0x${string}`,
                 abi: ValidatorManagerABI.abi,
                 functionName: 'initializeValidatorSet',
                 args: txArgs,
                 accessList,
-                account: address,
+                account: from,
                 gas: BigInt(1_000_000),
                 chain: {
                     id: walletChainId,
@@ -116,6 +129,12 @@ export default function InitValidatorSet() {
                 },
             });
 
+            console.log("Simulated transaction:", sim);
+            setSimulationWentThrough(true);
+
+            // Send transaction
+            const hash = await walletClient.writeContract(sim.request);
+
             // Wait for transaction confirmation
             const receipt = await publicClient.waitForTransactionReceipt({ hash });
 
@@ -123,12 +142,12 @@ export default function InitValidatorSet() {
                 setTxHash(hash);
             } else {
                 const decodedError = await debugTraceAndDecode(hash, evmChainRpcUrl);
-                throw new Error(`Transaction failed: ${decodedError}`);
+                setError(`Transaction failed: ${decodedError}`);
             }
 
         } catch (error) {
-            console.error('Transaction error:', error)
-            showBoundary(error);
+            console.error('Transaction error:', error);
+            setError(error instanceof Error ? error.message : 'An unknown error occurred');
         } finally {
             setIsInitializing(false);
         }
@@ -137,6 +156,18 @@ export default function InitValidatorSet() {
     return (
         <div className="space-y-4">
             <h2 className="text-lg font-semibold text-gray-800">Initialize Validator Set</h2>
+
+            {error && (
+                <div className="p-4 text-red-700 bg-red-100 rounded-md">
+                    {error}
+                </div>
+            )}
+
+            {simulationWentThrough && !error && (
+                <div className="p-4 text-green-700 bg-green-100 rounded-md">
+                    Transaction simulation successful
+                </div>
+            )}
 
             <div className="space-y-4">
                 <Input
@@ -202,6 +233,18 @@ export default function InitValidatorSet() {
             >
                 Initialize Validator Set
             </Button>
+
+            <Button
+                type="primary"
+                onClick={() => onInitialize(true)}
+                loading={isInitializing}
+                disabled={!L1ConversionSignature || isInitializing || !proxyAddress || !chainID}
+            >
+                Initialize Validator Set with debug wallet
+            </Button>
+            <div className="text-xs text-gray-500">
+                Make sure to transfer a couple coins to {DEBUG_WALLET_ADDRESS} before using the debug wallet.
+            </div>
         </div>
     );
 }

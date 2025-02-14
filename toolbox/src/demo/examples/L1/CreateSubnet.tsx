@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Success } from "../../ui/Success";
 import PChainAddressRequired from "../../ui/PChainAddressRequired";
 
+
 export const CreateSubnet = () => {
   const { showBoundary } = useErrorBoundary();
   const { networkID, pChainAddress, setSubnetID, subnetID } = useExampleStore(state => state);
@@ -34,6 +35,7 @@ export const CreateSubnet = () => {
         subnetOwners: [addressBytes],
       }, context);
 
+
       const txID = await window.avalanche!.request({
         method: 'avalanche_sendTransaction',
         params: {
@@ -41,6 +43,7 @@ export const CreateSubnet = () => {
           chainAlias: 'P',
         }
       }) as string;
+
 
       setSubnetID(txID);
     } catch (error) {

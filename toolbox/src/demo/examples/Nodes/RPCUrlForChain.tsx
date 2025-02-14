@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useExampleStore } from "../../utils/store";
 import { Button, Input } from "../../ui";
 import { createPublicClient, http } from 'viem';
@@ -11,10 +11,15 @@ export default function RPCUrlForChain() {
     const [domain, setDomain] = useState("");
     const [isChecking, setIsChecking] = useState(false);
     const [validatedUrl, setValidatedUrl] = useState("");
+    const [constructedUrl, setConstructedUrl] = useState("");
+    useEffect(() => {
+        if (!domain.startsWith("http://") && !domain.startsWith("https://")) {
+            setConstructedUrl("");
+        } else {
+            setConstructedUrl(`${domain}/ext/bc/${chainID}/rpc`);
+        }
+    }, [domain, chainID]);
 
-    const constructedUrl = domain && chainID
-        ? `${domain}/ext/bc/${chainID}/rpc`
-        : "";
 
     async function checkRpcUrl() {
         if (!constructedUrl) return;
@@ -37,7 +42,7 @@ export default function RPCUrlForChain() {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold">gRPC URL Builder</h2>
+            <h2 className="text-lg font-semibold">RPC URL Builder</h2>
             <div className="space-y-4">
                 <Input
                     label="Domain"

@@ -9,14 +9,13 @@ import { utils } from "@avalabs/avalanchejs";
 
 export const Initialize = () => {
     const { showBoundary } = useErrorBoundary();
-    const { subnetID, walletChainId, validatorManagerAddress, setValidatorManagerAddress, proxyAddress, setSubnetID, walletEVMAddress } = useExampleStore();
+    const { subnetID, walletChainId, proxyAddress, setProxyAddress, setSubnetID, walletEVMAddress } = useExampleStore();
     const [isChecking, setIsChecking] = useState(false);
     const [isInitializing, setIsInitializing] = useState(false);
     const [isInitialized, setIsInitialized] = useState<boolean | null>(null);
     const [initEvent, setInitEvent] = useState<unknown>(null);
     const [churnPeriodSeconds, setChurnPeriodSeconds] = useState("0");
     const [maximumChurnPercentage, setMaximumChurnPercentage] = useState("20");
-    const [contarctAddress, setContarctAddress] = useState("");
     const [adminAddress, setAdminAddress] = useState("");
 
     useEffect(() => {
@@ -33,22 +32,13 @@ export const Initialize = () => {
     }
 
     useEffect(() => {
-        if (contarctAddress) return
         if (proxyAddress) {
-            setContarctAddress(proxyAddress);
-        } else if (validatorManagerAddress) {
-            setContarctAddress(validatorManagerAddress);
-        }
-    }, [contarctAddress, proxyAddress, validatorManagerAddress]);
-
-    useEffect(() => {
-        if (validatorManagerAddress) {
             checkIfInitialized();
         }
     }, []);
 
     async function checkIfInitialized() {
-        if (!validatorManagerAddress || !window.avalanche) return;
+        if (!proxyAddress || !window.avalanche) return;
 
         setIsChecking(true);
         try {
@@ -65,7 +55,7 @@ export const Initialize = () => {
             }
 
             const logs = await publicClient.getLogs({
-                address: validatorManagerAddress as `0x${string}`,
+                address: proxyAddress as `0x${string}`,
                 event: initializedEvent as AbiEvent,
                 fromBlock: 0n,
                 toBlock: 'latest'
@@ -85,7 +75,7 @@ export const Initialize = () => {
     }
 
     async function handleInitialize() {
-        if (!validatorManagerAddress || !window.avalanche) return;
+        if (!proxyAddress || !window.avalanche) return;
 
         setIsInitializing(true);
         try {
@@ -96,6 +86,7 @@ export const Initialize = () => {
                 maximumChurnPercentage: Number(maximumChurnPercentage)
             };
 
+
             const walletClient = createWalletClient({
                 transport: custom(window.avalanche)
             });
@@ -103,7 +94,7 @@ export const Initialize = () => {
             const [address] = await walletClient.requestAddresses();
 
             const hash = await walletClient.writeContract({
-                address: validatorManagerAddress as `0x${string}`,
+                address: proxyAddress as `0x${string}`,
                 abi: ValidatorManagerABI.abi,
                 functionName: 'initialize',
                 args: [settings],
@@ -140,16 +131,16 @@ export const Initialize = () => {
             <h2 className="text-lg font-semibold text-gray-800">Initialize Validator Manager</h2>
             <div className="space-y-4">
                 <Input
-                    label="Validator Manager Address"
-                    value={validatorManagerAddress}
-                    onChange={setValidatorManagerAddress}
-                    placeholder="Enter validator manager address"
+                    label="Proxy address"
+                    value={proxyAddress}
+                    onChange={setProxyAddress}
+                    placeholder="Enter proxy address"
                     button={
                         <Button
                             type="secondary"
                             onClick={checkIfInitialized}
                             loading={isChecking}
-                            disabled={!validatorManagerAddress}
+                            disabled={!proxyAddress}
                             className="h-9 rounded-l-none"
                         >
                             Check Status

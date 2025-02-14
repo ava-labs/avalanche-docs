@@ -26,19 +26,19 @@ const serializeValue = (value: any): any => {
 
 export const ReadContract = () => {
     const { showBoundary } = useErrorBoundary();
-    const { validatorManagerAddress, setValidatorManagerAddress } = useExampleStore();
+    const { proxyAddress, setProxyAddress } = useExampleStore();
     const [viewData, setViewData] = useState<ViewData>({});
     const [isReading, setIsReading] = useState(false);
     const [eventLogs, setEventLogs] = useState<Record<string, any[]>>({});
 
     async function readContractData() {
-        if (!validatorManagerAddress) {
+        if (!proxyAddress) {
             return;
         }
         setIsReading(true);
         setEventLogs({});
 
-        if (!validatorManagerAddress || !window.avalanche) return;
+        if (!proxyAddress || !window.avalanche) return;
 
         try {
             const publicClient = createPublicClient({
@@ -59,7 +59,7 @@ export const ReadContract = () => {
 
                 try {
                     const result = await publicClient.readContract({
-                        address: validatorManagerAddress as `0x${string}`,
+                        address: proxyAddress as `0x${string}`,
                         abi: [func],
                         functionName: func.name,
                     });
@@ -82,7 +82,7 @@ export const ReadContract = () => {
                 if (!event.name) continue;
                 try {
                     const eventLogs = await publicClient.getLogs({
-                        address: validatorManagerAddress as `0x${string}`,
+                        address: proxyAddress as `0x${string}`,
                         event: event as AbiEvent,
                         fromBlock: 0n,
                         toBlock: 'latest'
@@ -106,17 +106,17 @@ export const ReadContract = () => {
 
     useEffect(() => {
         readContractData();
-    }, [validatorManagerAddress]);
+    }, [proxyAddress]);
 
     return (
         <div className="space-y-8">
             <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-gray-800">Read Validator Manager Contract</h2>
+                <h2 className="text-lg font-semibold text-gray-800">Read Proxy Contract</h2>
                 <Input
-                    label="Validator Manager Address"
-                    value={validatorManagerAddress || ""}
+                    label="Proxy Address"
+                    value={proxyAddress || ""}
                     placeholder="0x..."
-                    onChange={(value) => setValidatorManagerAddress(value)}
+                    onChange={(value) => setProxyAddress(value)}
                     button={
                         <Button
                             type="primary"
