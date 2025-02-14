@@ -143,7 +143,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error, resetError
     );
 };
 
-function App() {
+export default function ToolboxApp() {
     // Remove store-based selectedTool and use setSelectedTool
     // const { selectedTool, setSelectedTool } = useExampleStore();
 
@@ -250,4 +250,3 @@ function App() {
     );
 }
 
-export default App
