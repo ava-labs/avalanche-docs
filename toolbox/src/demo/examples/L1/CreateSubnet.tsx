@@ -6,6 +6,7 @@ import { Button, Input } from "../../ui";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { Success } from "../../ui/Success";
+import PChainAddressRequired from "../../ui/PChainAddressRequired";
 
 export const CreateSubnet = () => {
   const { showBoundary } = useErrorBoundary();
@@ -53,9 +54,7 @@ export const CreateSubnet = () => {
     return (
       <div className="space-y-4">
         <h2 className="text-lg font-semibold ">Create Subnet</h2>
-        <div className="p-4 bg-gray-100 rounded-lg">
-          <p className="text-gray-700">Please get your P-Chain address first using the Get P-Chain Address tool. Make sure to set the networkID to Fuji.</p>
-        </div>
+        <PChainAddressRequired />
       </div>
     );
   }

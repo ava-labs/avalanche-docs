@@ -5,7 +5,7 @@ import { useState } from "react";
 import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
-
+import PChainAddressRequired from "../../ui/PChainAddressRequired";
 export const ConvertToL1 = () => {
     const { showBoundary } = useErrorBoundary();
     const {
@@ -93,9 +93,7 @@ export const ConvertToL1 = () => {
         return (
             <div className="space-y-4">
                 <h2 className="text-lg font-semibold ">Convert Subnet to L1</h2>
-                <div className="p-4 bg-gray-100 rounded-lg">
-                    <p className="text-gray-700">Please get your P-Chain address first</p>
-                </div>
+                <PChainAddressRequired />
             </div>
         );
     }

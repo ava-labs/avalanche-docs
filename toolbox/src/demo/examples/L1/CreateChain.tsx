@@ -3,9 +3,11 @@ import { pvm } from "@avalabs/avalanchejs";
 import { getRPCEndpoint } from "../../utils/rpcEndpoint";
 import { initialState, useExampleStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
+import PChainAddressRequired from "../../ui/PChainAddressRequired";
+import { quickAndDirtyGenesisBuilder } from "./GenesisBuilder";
 
 export const CreateChain = () => {
     const { showBoundary } = useErrorBoundary();
@@ -15,15 +17,22 @@ export const CreateChain = () => {
         subnetID,
         chainName,
         vmId,
-        genesisData,
         setChainName,
         setVmId,
-        setGenesisData,
         chainID,
         setChainID,
         setSubnetID,
+        walletEVMAddress
     } = useExampleStore(state => state);
     const [isCreating, setIsCreating] = useState(false);
+    const [genesisData, setGenesisData] = useState("");
+
+    useEffect(() => {
+        if (walletEVMAddress) {
+            const randomInt = Math.floor(Math.random() * 1000000);
+            setGenesisData(quickAndDirtyGenesisBuilder(walletEVMAddress, randomInt));
+        }
+    }, [walletEVMAddress]);
 
     async function handleCreateChain() {
         setChainID("");
@@ -71,9 +80,7 @@ export const CreateChain = () => {
         return (
             <div className="space-y-4">
                 <h2 className="text-lg font-semibold ">Create Chain</h2>
-                <div className="p-4 bg-gray-100 rounded-lg">
-                    <p className="text-gray-700">Please get your P-Chain address first</p>
-                </div>
+                <PChainAddressRequired />
             </div>
         );
     }
@@ -114,6 +121,7 @@ export const CreateChain = () => {
                     onChange={setGenesisData}
                     type="textarea"
                     placeholder="Enter genesis data in JSON format"
+                    notes={`Auto-generated for address ${walletEVMAddress}`}
                 />
                 <Button
                     type="primary"

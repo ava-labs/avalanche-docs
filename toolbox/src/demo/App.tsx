@@ -10,13 +10,15 @@ import { RefreshCw } from 'lucide-react';
 import { DeployValidatorMessages } from './examples/ValidatorManager/DeployValidatorMessages';
 import { SwitchChain } from "./examples/Wallet/SwitchChain";
 import { DeployValidatorManager } from "./examples/ValidatorManager/DeployValidatorManager";
-import { initializeValidatorSet } from "./examples/InitializePoA/initializeValidatorSet";
+import { InitializeValidatorSet } from "./examples/InitializePoA/InitializeValidatorSet";
 import { Initialize } from "./examples/InitializePoA/Initialize";
 import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
 import { ReadContract } from "./examples/ValidatorManager/ReadContract";
 import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
 import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
 import { useState, useEffect } from "react";
+import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
+import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
 
 const componentGroups = {
     "Wallet": [
@@ -101,8 +103,8 @@ const componentGroups = {
         {
             id: "initializeValidatorSet",
             label: "Initialize Validator Set",
-            component: initializeValidatorSet,
-            fileNames: ["toolbox/src/demo/examples/InitializePoA/initializeValidatorSet.tsx"]
+            component: InitializeValidatorSet,
+            fileNames: ["toolbox/src/demo/examples/InitializePoA/InitializeValidatorSet.tsx"]
         }
     ],
     "Nodes": [
@@ -111,6 +113,18 @@ const componentGroups = {
             label: "RPC Methods Check",
             component: RPCMethodsCheck,
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCMethodsCheck.tsx"]
+        },
+        {
+            id: "avalanchegoDocker",
+            label: "Avalanchego in Docker",
+            component: AvalanchegoDocker,
+            fileNames: ["toolbox/src/demo/examples/Nodes/AvalanchegoDocker.tsx"]
+        },
+        {
+            id: "rpcUrlForChain",
+            label: "RPC URL Builder",
+            component: RPCUrlForChain,
+            fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"]
         }
     ]
 
