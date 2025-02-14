@@ -8,7 +8,7 @@ import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/Va
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
 
-export const InitializeValidatorSet = () => {
+export default function InitializeValidatorSet() {
     const { showBoundary } = useErrorBoundary();
     const {
         subnetID,

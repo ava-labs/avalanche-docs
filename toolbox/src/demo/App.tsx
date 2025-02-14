@@ -10,7 +10,7 @@ import { RefreshCw } from 'lucide-react';
 import { DeployValidatorMessages } from './examples/ValidatorManager/DeployValidatorMessages';
 import { SwitchChain } from "./examples/Wallet/SwitchChain";
 import { DeployValidatorManager } from "./examples/ValidatorManager/DeployValidatorManager";
-import { InitializeValidatorSet } from "./examples/InitializePoA/InitializeValidatorSet";
+import InitializeValidatorSet from "./examples/InitializePoA/InitializeValidatorSet";
 import { Initialize } from "./examples/InitializePoA/Initialize";
 import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
 import { ReadContract } from "./examples/ValidatorManager/ReadContract";

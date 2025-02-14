@@ -5,6 +5,7 @@ import { packL1ConversionMessage, PackL1ConversionMessageArgs } from "./convertW
 import { utils } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
+import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
 
 export const CollectConversionSignatures = () => {
     const { showBoundary } = useErrorBoundary();
@@ -39,28 +40,22 @@ export const CollectConversionSignatures = () => {
 
             const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, pChainChainID);
 
-            //TODO: Has to be replaced with the glacier API
-            const signResponse = await fetch('https://signature-aggregator-fuji.fly.dev/aggregate-signatures', {
-                method: 'POST',
-                headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: utils.bufferToHex(message),
-                    justification: utils.bufferToHex(justification),
-                    'signing-subnet-id': subnetID,
-                })
+            const avaCloudSDK = new AvaCloudSDK({
+                chainId: networkID.toString(),
+                network: networkID === 1 ? "mainnet" : "fuji",
             });
 
-            if (!signResponse.ok) {
-                const errorText = await signResponse.text();
-                throw new Error(errorText || `HTTP error! status: ${signResponse.status}`);
-            }
+            const response = await avaCloudSDK.data.signatureAggregator.aggregateSignatures({
+                network: networkID === 1 ? "mainnet" : "fuji",
+                signatureAggregatorRequest: {
+                    message: utils.bufferToHex(message).slice(2), // Remove '0x' prefix
+                    justification: utils.bufferToHex(justification).slice(2), // Remove '0x' prefix
+                    signingSubnetId: subnetID,
+                    quorumPercentage: 67, // Default threshold for subnet validation
+                },
+            });
 
-            const respJson = await signResponse.json();
-            const signedMessage = respJson['signed-message'];
-            setL1ConversionSignature(`0x${signedMessage}`);
+            setL1ConversionSignature(response.signedMessage);
         } catch (error) {
             showBoundary(error);
         } finally {
