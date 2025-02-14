@@ -1,3 +1,4 @@
+
 // Splits data into 32-byte chunks, adds 0xFF terminator, and pads with zeros
 export function packWarpIntoAccessList(warpMessageBytes: Uint8Array): [{
     address: `0x${string}`,
@@ -27,8 +28,4 @@ export function packWarpIntoAccessList(warpMessageBytes: Uint8Array): [{
         address: "0x0200000000000000000000000000000000000005",
         storageKeys: chunks as `0x${string}`[]
     }];
-}
-
-export function sum(a: number, b: number) {
-    return a + b
 }

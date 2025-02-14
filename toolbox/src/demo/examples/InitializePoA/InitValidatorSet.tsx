@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useExampleStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
-import { createWalletClient, custom, createPublicClient, hexToBytes } from 'viem';
+import { createWalletClient, custom, createPublicClient, hexToBytes, decodeErrorResult, Abi } from 'viem';
 import { packWarpIntoAccessList } from './packWarp';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
 import { Button, Input, InputArray } from "../../ui";
@@ -9,7 +9,7 @@ import { Success } from "../../ui/Success";
 import { utils } from '@avalabs/avalanchejs';
 
 const cb58ToHex = (cb58: string) => utils.bufferToHex(utils.base58check.decode(cb58));
-
+const add0x = (hex: string): `0x${string}` => hex.startsWith('0x') ? hex as `0x${string}` : `0x${hex}`;
 export default function InitValidatorSet() {
     const { showBoundary } = useErrorBoundary();
     const {
@@ -23,7 +23,9 @@ export default function InitValidatorSet() {
         L1ConversionSignature,
         setL1ConversionSignature,
         proxyAddress,
-        setProxyAddress
+        setProxyAddress,
+        evmChainRpcUrl,
+        setEvmChainRpcUrl
     } = useExampleStore();
 
     const [isInitializing, setIsInitializing] = useState(false);
@@ -53,15 +55,43 @@ export default function InitValidatorSet() {
                     })
             }, 0];
 
+            // Debug log the transaction arguments
+            console.log('Transaction Arguments:', txArgs);
+
             // Convert signature to bytes and pack into access list
-            const signatureBytes = hexToBytes(L1ConversionSignature as `0x${string}`);
+            const signatureBytes = hexToBytes(add0x(L1ConversionSignature));
             const accessList = packWarpIntoAccessList(signatureBytes);
 
-            // Setup wallet client
+            // Setup clients
             const walletClient = createWalletClient({
                 transport: custom(window.avalanche)
             });
             const [address] = await walletClient.requestAddresses();
+            const publicClient = createPublicClient({
+                transport: custom(window.avalanche)
+            });
+
+            // await publicClient.simulateContract({
+            //     address: proxyAddress as `0x${string}`,
+            //     abi: ValidatorManagerABI.abi,
+            //     functionName: 'initializeValidatorSet',
+            //     args: txArgs,
+            //     accessList,
+            //     account: address,
+            //     chain: {
+            //         id: walletChainId,
+            //         name: "My L1",
+            //         rpcUrls: {
+            //             default: { http: [] },
+            //         },
+            //         nativeCurrency: {
+            //             name: "COIN",
+            //             symbol: "COIN",
+            //             decimals: 18,
+            //         },
+            //     },
+            // });
+            // console.log('Simulation successful:', simulation);
 
             // Send transaction
             const hash = await walletClient.writeContract({
@@ -71,6 +101,7 @@ export default function InitValidatorSet() {
                 args: txArgs,
                 accessList,
                 account: address,
+                gas: BigInt(1_000_000),
                 chain: {
                     id: walletChainId,
                     name: "My L1",
@@ -86,18 +117,17 @@ export default function InitValidatorSet() {
             });
 
             // Wait for transaction confirmation
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche)
-            });
             const receipt = await publicClient.waitForTransactionReceipt({ hash });
 
             if (receipt.status === 'success') {
                 setTxHash(hash);
             } else {
-                throw new Error('Transaction failed');
+                const decodedError = await debugTraceAndDecode(hash, evmChainRpcUrl);
+                throw new Error(`Transaction failed: ${decodedError}`);
             }
 
         } catch (error) {
+            console.error('Transaction error:', error)
             showBoundary(error);
         } finally {
             setIsInitializing(false);
@@ -120,6 +150,12 @@ export default function InitValidatorSet() {
                     value={subnetID}
                     onChange={setSubnetID}
                     placeholder="Enter subnet ID (CB58 format)"
+                />
+                <Input
+                    label="RPC Endpoint (optional for debugging)"
+                    value={evmChainRpcUrl}
+                    onChange={setEvmChainRpcUrl}
+                    placeholder="Enter RPC endpoint"
                 />
 
                 <Input
@@ -169,3 +205,36 @@ export default function InitValidatorSet() {
         </div>
     );
 }
+
+
+const debugTraceAndDecode = async (txHash: string, rpcEndpoint: string) => {
+    const traceResponse = await fetch(rpcEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            jsonrpc: '2.0',
+            method: 'debug_traceTransaction',
+            params: [txHash, { tracer: 'callTracer' }],
+            id: 1
+        })
+    });
+
+    const trace = await traceResponse.json();
+
+    // The error selector is in the output field
+    const errorSelector = trace.result.output;
+    if (errorSelector && errorSelector.startsWith('0x')) {
+        try {
+            // For this specific case, we got 0x6b2f19e9
+            const errorResult = decodeErrorResult({
+                abi: ValidatorManagerABI.abi as Abi,
+                data: errorSelector
+            });
+            return `${errorResult.errorName}${errorResult.args ? ': ' + errorResult.args.join(', ') : ''}`;
+        } catch (e: unknown) {
+            console.error('Error decoding error result:', e);
+            return `Unknown error selector: ${errorSelector}`;
+        }
+    }
+    return 'No error selector found in trace';
+};
