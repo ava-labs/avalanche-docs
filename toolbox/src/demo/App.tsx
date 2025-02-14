@@ -10,7 +10,7 @@ import { RefreshCw } from 'lucide-react';
 import { DeployValidatorMessages } from './examples/ValidatorManager/DeployValidatorMessages';
 import { SwitchChain } from "./examples/Wallet/SwitchChain";
 import { DeployValidatorManager } from "./examples/ValidatorManager/DeployValidatorManager";
-import InitializeValidatorSet from "./examples/InitializePoA/InitializeValidatorSet";
+import InitValidatorSet from "./examples/InitializePoA/InitValidatorSet";
 import { Initialize } from "./examples/InitializePoA/Initialize";
 import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
 import { ReadContract } from "./examples/ValidatorManager/ReadContract";
@@ -101,10 +101,10 @@ const componentGroups = {
             fileNames: ["toolbox/src/demo/examples/InitializePoA/Initialize.tsx"]
         },
         {
-            id: "initializeValidatorSet",
+            id: "initValidatorSet",
             label: "Initialize Validator Set",
-            component: InitializeValidatorSet,
-            fileNames: ["toolbox/src/demo/examples/InitializePoA/InitializeValidatorSet.tsx"]
+            component: InitValidatorSet,
+            fileNames: ["toolbox/src/demo/examples/InitializePoA/InitValidatorSet.tsx"]
         }
     ],
     "Nodes": [
