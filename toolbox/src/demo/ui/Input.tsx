@@ -12,6 +12,7 @@ export type InputProps = {
     placeholder?: string;
     error?: string | null;
     notes?: string | null;
+    button?: React.ReactNode;
 }
 export type TextareaProps = InputProps & {
     rows?: number;
@@ -20,13 +21,18 @@ export type TextareaProps = InputProps & {
 
 
 export function Input(props: InputProps | TextareaProps) {
-    const { label, type, className, onChange, disabled, value, placeholder, error, notes } = props;
+    const { label, type, className, onChange, disabled, value, placeholder, error, notes, button } = props;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         onChange?.(e.target.value);
     };
 
-    const sharedClassNames = "flex w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+    const sharedClassNames = clsx(
+        "flex w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm",
+        "transition-colors placeholder:text-muted-foreground focus-visible:outline-none",
+        "focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+        button && "rounded-r-none border-r-0"
+    )
 
     return (
         <div className="w-full">
@@ -35,33 +41,40 @@ export function Input(props: InputProps | TextareaProps) {
                     {label}
                 </label>
             )}
-            {type === 'textarea' ? (
-                <textarea
-                    className={twMerge(clsx(
-                        sharedClassNames,
-                        "min-h-[80px] resize-vertical",
-                        className
-                    ))}
-                    onChange={handleChange}
-                    disabled={disabled}
-                    value={value}
-                    placeholder={placeholder}
-                    rows={type === 'textarea' ? (props as TextareaProps).rows : undefined}
-                />
-            ) : (
-                <input
-                    type={type}
-                    className={twMerge(clsx(
-                        sharedClassNames,
-                        "h-9 file:border-0 file:bg-transparent file:text-sm file:font-medium",
-                        className
-                    ))}
-                    onChange={handleChange}
-                    disabled={disabled}
-                    value={value}
-                    placeholder={placeholder}
-                />
-            )}
+            <div className="flex">
+                {type === 'textarea' ? (
+                    <textarea
+                        className={twMerge(clsx(
+                            sharedClassNames,
+                            "min-h-[80px] resize-vertical",
+                            className
+                        ))}
+                        onChange={handleChange}
+                        disabled={disabled}
+                        value={value}
+                        placeholder={placeholder}
+                        rows={type === 'textarea' ? (props as TextareaProps).rows : undefined}
+                    />
+                ) : (
+                    <input
+                        type={type}
+                        className={twMerge(clsx(
+                            sharedClassNames,
+                            "h-9 file:border-0 file:bg-transparent file:text-sm file:font-medium",
+                            className
+                        ))}
+                        onChange={handleChange}
+                        disabled={disabled}
+                        value={value}
+                        placeholder={placeholder}
+                    />
+                )}
+                {button && (
+                    <div className="flex-none">
+                        {button}
+                    </div>
+                )}
+            </div>
             {error && (
                 <p className="text-red-500 text-xs mt-1">{error}</p>
             )}

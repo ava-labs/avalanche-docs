@@ -139,26 +139,23 @@ export const Initialize = () => {
         <div className="space-y-4">
             <h2 className="text-lg font-semibold text-gray-800">Initialize Validator Manager</h2>
             <div className="space-y-4">
-                <div className="flex gap-4">
-                    <div className="flex-1">
-                        <Input
-                            label="Validator Manager Address"
-                            value={validatorManagerAddress}
-                            onChange={setValidatorManagerAddress}
-                            placeholder="Enter validator manager address"
-                        />
-                    </div>
-                    <div className="pt-7">
+                <Input
+                    label="Validator Manager Address"
+                    value={validatorManagerAddress}
+                    onChange={setValidatorManagerAddress}
+                    placeholder="Enter validator manager address"
+                    button={
                         <Button
                             type="secondary"
                             onClick={checkIfInitialized}
                             loading={isChecking}
                             disabled={!validatorManagerAddress}
+                            className="h-9 rounded-l-none"
                         >
                             Check Status
                         </Button>
-                    </div>
-                </div>
+                    }
+                />
 
                 <Input
                     label="Subnet ID"

@@ -112,25 +112,22 @@ export const ReadContract = () => {
         <div className="space-y-8">
             <div className="space-y-4">
                 <h2 className="text-lg font-semibold text-gray-800">Read Validator Manager Contract</h2>
-                <div className="flex gap-4 items-start mb-8">
-                    <div className="flex-1">
-                        <Input
-                            label="Validator Manager Address"
-                            value={validatorManagerAddress || ""}
-                            placeholder="0x..."
-                            onChange={(value) => setValidatorManagerAddress(value)}
-                        />
-                    </div>
-                    <div className="pt-7">
+                <Input
+                    label="Validator Manager Address"
+                    value={validatorManagerAddress || ""}
+                    placeholder="0x..."
+                    onChange={(value) => setValidatorManagerAddress(value)}
+                    button={
                         <Button
                             type="primary"
                             onClick={readContractData}
                             loading={isReading}
+                            className="h-9 rounded-l-none"
                         >
                             Refresh
                         </Button>
-                    </div>
-                </div>
+                    }
+                />
             </div>
 
             <div className="overflow-x-auto">
