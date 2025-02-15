@@ -1,0 +1,354 @@
+{
+  "id": "1",
+  "title": "Hackathon 1",
+  "description": "This is the description for Hackathon 1.",
+  "date": "2024-11-01T10:00:00.000Z",
+  "location": "Online",
+  "total_prizes": 5000,
+  "tags": ["IoT", "Big Data"],
+  "status": "Ended",
+  "agenda": [
+    {
+      "stage": "Stage 1",
+      "date": "2024-11-01T10:00:00.000Z",
+      "duration": "1 hour",
+      "name": "Activity 1 for Hackathon 1",
+      "description": "Description for Activity 1"
+    },
+    {
+      "stage": "Stage 2",
+      "date": "2024-11-01T12:00:00.000Z",
+      "duration": "1 hour",
+      "name": "Activity 2 for Hackathon 1",
+      "description": "Description for Activity 2"
+    },
+    {
+      "stage": "Stage 3",
+      "date": "2024-11-01T14:00:00.000Z",
+      "duration": "1 hour",
+      "name": "Activity 3 for Hackathon 1",
+      "description": "Description for Activity 3"
+    }
+  ],
+  "registration_deadline": "2024-10-22T10:00:00.000Z",
+  "partners": [
+    {
+      "name": "TechCorp",
+      "about": "About TechCorp",
+      "links": [
+        {
+          "name": "Partner Link 1",
+          "icon": "https://example.com/icons/partner-link-1.png",
+          "link": "https://www.techcorp.com/link-1"
+        },
+        {
+          "name": "Partner Link 2",
+          "icon": "https://example.com/icons/partner-link-2.png",
+          "link": "https://www.techcorp.com/link-2"
+        }
+      ],
+      "logo": "https://downloads.intercomcdn.com/i/o/573443/e4005e2ec01a0d47fc2307c3/c9589557fe23620722e438e1ca53793f.png"
+    },
+    {
+      "name": "InnovateX",
+      "about": "About InnovateX",
+      "links": [
+        {
+          "name": "Partner Link 1",
+          "icon": "https://example.com/icons/partner-link-1.png",
+          "link": "https://www.innovatex.com/link-1"
+        },
+        {
+          "name": "Partner Link 2",
+          "icon": "https://example.com/icons/partner-link-2.png",
+          "link": "https://www.innovatex.com/link-2"
+        }
+      ],
+      "logo": "https://downloads.intercomcdn.com/i/o/573443/e4005e2ec01a0d47fc2307c3/c9589557fe23620722e438e1ca53793f.png"
+    },
+    {
+      "name": "TechCorp",
+      "about": "About TechCorp",
+      "links": [
+        {
+          "name": "Partner Link 1",
+          "icon": "https://example.com/icons/partner-link-1.png",
+          "link": "https://www.techcorp.com/link-1"
+        },
+        {
+          "name": "Partner Link 2",
+          "icon": "https://example.com/icons/partner-link-2.png",
+          "link": "https://www.techcorp.com/link-2"
+        }
+      ],
+      "logo": "https://downloads.intercomcdn.com/i/o/573443/e4005e2ec01a0d47fc2307c3/c9589557fe23620722e438e1ca53793f.png"
+    },
+    {
+      "name": "TechCorp",
+      "about": "About TechCorp",
+      "links": [
+        {
+          "name": "Partner Link 1",
+          "icon": "https://example.com/icons/partner-link-1.png",
+          "link": "https://www.techcorp.com/link-1"
+        },
+        {
+          "name": "Partner Link 2",
+          "icon": "https://example.com/icons/partner-link-2.png",
+          "link": "https://www.techcorp.com/link-2"
+        }
+      ],
+      "logo": "https://downloads.intercomcdn.com/i/o/573443/e4005e2ec01a0d47fc2307c3/c9589557fe23620722e438e1ca53793f.png"
+    },
+    {
+      "name": "TechCorp",
+      "about": "About TechCorp",
+      "links": [
+        {
+          "name": "Partner Link 1",
+          "icon": "https://example.com/icons/partner-link-1.png",
+          "link": "https://www.techcorp.com/link-1"
+        },
+        {
+          "name": "Partner Link 2",
+          "icon": "https://example.com/icons/partner-link-2.png",
+          "link": "https://www.techcorp.com/link-2"
+        }
+      ],
+      "logo": "https://downloads.intercomcdn.com/i/o/573443/e4005e2ec01a0d47fc2307c3/c9589557fe23620722e438e1ca53793f.png"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "Healthcare Track",
+      "description": "Description for Healthcare track",
+      "prizes": [
+        {
+          "name": "Prize 1",
+          "description": "Description for Prize 1",
+          "type": "Pool",
+          "criteria": "Criteria for Prize 1",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [100, 200, 300]
+        },
+        {
+          "name": "Prize 2",
+          "description": "Description for Prize 2",
+          "type": "Ranked",
+          "criteria": "Criteria for Prize 2",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [150, 250, 350]
+        },
+        {
+          "name": "Prize 3",
+          "description": "Description for Prize 3",
+          "type": "Pool",
+          "criteria": "Criteria for Prize 3",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [200, 300, 400]
+        }
+      ],
+      "total_reward": 2250,
+      "partner": "TechCorp",
+      "resources": [
+        {
+          "name": "Track Resource 1",
+          "icon": "https://example.com/icons/track-resource-1.png",
+          "link": "https://example.com/track-resource-1"
+        },
+        {
+          "name": "Track Resource 2",
+          "icon": "https://example.com/icons/track-resource-2.png",
+          "link": "https://example.com/track-resource-2"
+        }
+      ]
+    },
+    {
+      "name": "Finance Track",
+      "description": "Description for Finance track",
+      "prizes": [
+        {
+          "name": "Prize 1",
+          "description": "Description for Prize 1",
+          "type": "Pool",
+          "criteria": "Criteria for Prize 1",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [100, 200, 300]
+        },
+        {
+          "name": "Prize 2",
+          "description": "Description for Prize 2",
+          "type": "Ranked",
+          "criteria": "Criteria for Prize 2",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [150, 250, 350]
+        },
+        {
+          "name": "Prize 3",
+          "description": "Description for Prize 3",
+          "type": "Pool",
+          "criteria": "Criteria for Prize 3",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [200, 300, 400]
+        }
+      ],
+      "total_reward": 2250,
+      "partner": "InnovateX",
+      "resources": [
+        {
+          "name": "Track Resource 1",
+          "icon": "https://example.com/icons/track-resource-1.png",
+          "link": "https://example.com/track-resource-1"
+        },
+        {
+          "name": "Track Resource 2",
+          "icon": "https://example.com/icons/track-resource-2.png",
+          "link": "https://example.com/track-resource-2"
+        }
+      ]
+    },
+    {
+      "name": "Education Track",
+      "description": "Description for Education track",
+      "prizes": [
+        {
+          "name": "Prize 1",
+          "description": "Description for Prize 1",
+          "type": "Pool",
+          "criteria": "Criteria for Prize 1",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [100, 200, 300]
+        },
+        {
+          "name": "Prize 2",
+          "description": "Description for Prize 2",
+          "type": "Ranked",
+          "criteria": "Criteria for Prize 2",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [150, 250, 350]
+        },
+        {
+          "name": "Prize 3",
+          "description": "Description for Prize 3",
+          "type": "Pool",
+          "criteria": "Criteria for Prize 3",
+          "resources": [
+            {
+              "name": "Resource 1",
+              "icon": "https://example.com/icons/resource-1.png",
+              "link": "https://example.com/resource-1"
+            },
+            {
+              "name": "Resource 2",
+              "icon": "https://example.com/icons/resource-2.png",
+              "link": "https://example.com/resource-2"
+            }
+          ],
+          "rewards": [200, 300, 400]
+        }
+      ],
+      "total_reward": 2250,
+      "partner": "CodeLabs",
+      "resources": [
+        {
+          "name": "Track Resource 1",
+          "icon": "https://example.com/icons/track-resource-1.png",
+          "link": "https://example.com/track-resource-1"
+        },
+        {
+          "name": "Track Resource 2",
+          "icon": "https://example.com/icons/track-resource-2.png",
+          "link": "https://example.com/track-resource-2"
+        }
+      ]
+    }
+  ]
+}
