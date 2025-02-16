@@ -3,12 +3,22 @@ import hackathonData from './hackathon_example.json';
 import { Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
-export const revalidate = 60 * 60 * 24;
+import { getHackathons } from '@/server/controllers/hackathons';
+import { HackathonLite } from '@/types/hackathons';
 
 async function getHackathon(id: string) {
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return hackathonData;
+}
+
+export const revalidate = 60;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const hackathons = getHackathons();
+  return hackathons.map((hackathon: HackathonLite) => ({
+    id: hackathon.id,
+  }));
 }
 
 export default async function HackathonPage({
@@ -37,9 +47,7 @@ export default async function HackathonPage({
 
         {/* Jumbotron Section */}
         <div className='bg-zinc-800 p-8 min-h-[500px]'>
-          <h1 className='text-3xl font-bold text-white'>
-            {hackaton.title}
-          </h1>
+          <h1 className='text-3xl font-bold text-white'>{hackaton.title}</h1>
           <p className='text-gray-400 mt-2'>
             This is a placeholder for a short description about the hackathon.
           </p>

@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { baseUrl } from "@/utils/metadata";
 import { useParams } from "next/navigation";
 import HackathonForm from "@/components/hackathons/HackathonForm";
 
@@ -32,7 +31,7 @@ export default function EditHackathonPage() {
 
     async function fetchHackathon() {
       try {
-        const { data } = await axios.get(`${baseUrl}/api/hackathons/${id}`);
+        const { data } = await axios.get(`/api/hackathons/${id}`);
         setHackathon(data);
       } catch (err) {
         const errorMessage =

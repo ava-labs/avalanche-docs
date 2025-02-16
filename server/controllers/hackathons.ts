@@ -60,3 +60,8 @@ export function getFilteredHackathons({
     total: filteredHackathons.length,
   };
 }
+
+
+export function getHackathons() {
+  return HackathonsList;
+}

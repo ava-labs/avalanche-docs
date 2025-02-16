@@ -23,6 +23,7 @@ import { Button } from '../ui/button';
 import { HackathonLite, HackathonsFilters } from '@/types/hackathons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 function buildQueryString(filters: HackathonsFilters, searchQuery: string) {
   const params = new URLSearchParams();
@@ -73,16 +74,10 @@ export default function Hackathons({
     async function fetchHackathons() {
       try {
         const queryString = buildQueryString(filters, searchQuery);
-        const res = await fetch(`/api/hackathons?${queryString}`, {
-          cache: 'no-store',
+        const { data } = await axios.get(`/api/hackathons?${queryString}`, {
           signal,
         });
 
-        if (!res.ok) {
-          throw new Error('Error fetching hackathons');
-        }
-
-        const data = await res.json();
         if (!signal.aborted) {
           setHackathons(data.hackathons);
           setTotalPages(Math.ceil(data.total / pageSize));
@@ -129,7 +124,6 @@ export default function Hackathons({
 
       setFilters(newFilters);
 
-      // Actualizamos la URL sin la clave `page`
       const queryString = buildQueryString(newFilters, query);
       router.replace(`/hackathons?${queryString}`);
     }, 300);
