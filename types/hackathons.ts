@@ -9,6 +9,12 @@ export interface HackathonLite {
   status: string;
 }
 
+export interface HackathonsFilters {
+  location?: string;
+  status?: string;
+  page?: number;
+}
+
 export interface Hackathon extends HackathonLite {
   agenda: HackathonActivity[];
   registration_deadline: string;

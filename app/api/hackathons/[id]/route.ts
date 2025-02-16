@@ -1,4 +1,4 @@
-import { HackathonsList, validateHackathon } from "@/services/hackathons";
+import { HackathonsList, validateHackathon } from "@/server/services/hackathons";
 import { Hackathon } from "@/types/hackathons";
 import { NextResponse } from "next/server";
 
