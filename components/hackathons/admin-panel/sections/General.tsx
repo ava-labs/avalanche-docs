@@ -56,6 +56,7 @@ function General({
                   className='bg-transparent'
                   placeholder='E.g., Avalanche Builder Hackathon'
                   {...field}
+                  value={field.value?? ''}
                 />
               </FormControl>
               <FormDescription className='text-zinc-400'>
@@ -79,6 +80,7 @@ function General({
                   placeholder='Provide a brief overview of the hackathon, its goals, and what participants can expect...'
                   maxLength={500}
                   {...field}
+                  value={field.value?? ''}
                 />
               </FormControl>
               <FormDescription className='text-zinc-400'>
@@ -196,6 +198,7 @@ function General({
                   className='bg-transparent'
                   placeholder='Enter the venue or city where the hackathon will take place'
                   {...field}
+                  value={field.value?? ''}
                 />
               </FormControl>
               <FormDescription className='text-zinc-400'>
