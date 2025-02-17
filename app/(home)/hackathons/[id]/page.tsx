@@ -3,13 +3,10 @@ import hackathonData from './hackathon_example.json';
 import { Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { getHackathons } from '@/server/controllers/hackathons';
+import { getHackathon, getHackathons } from '@/server/controllers/hackathons';
 import { HackathonLite } from '@/types/hackathons';
-
-async function getHackathon(id: string) {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  return hackathonData;
-}
+import axios from 'axios';
+import { redirect } from 'next/navigation';
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -27,8 +24,10 @@ export default async function HackathonPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const hackaton = await getHackathon(id);
+  const hackathon =  getHackathon(id);
   const menuItems = ['Overview', 'Schedule', 'Info', 'Partners', 'Tracks'];
+  
+  if (!hackathon) redirect('/hackathons');
 
   return (
     <main className='container relative max-w-[1100px] px-2 py-4 lg:py-16'>
@@ -47,7 +46,7 @@ export default async function HackathonPage({
 
         {/* Jumbotron Section */}
         <div className='bg-zinc-800 p-8 min-h-[500px]'>
-          <h1 className='text-3xl font-bold text-white'>{hackaton.title}</h1>
+          <h1 className='text-3xl font-bold text-white'>{hackathon.title}</h1>
           <p className='text-gray-400 mt-2'>
             This is a placeholder for a short description about the hackathon.
           </p>
@@ -68,7 +67,7 @@ export default async function HackathonPage({
           <section>
             <h2 className='text-xl font-bold mb-4'>Partners</h2>
             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6'>
-              {hackaton.partners.map((partner, index) => (
+              {hackathon.partners.map((partner, index) => (
                 <div
                   key={index}
                   className='flex flex-col items-center justify-center border border-gray-400 rounded-lg p-4'
@@ -86,7 +85,7 @@ export default async function HackathonPage({
           <section>
             <h2 className='text-xl font-bold mb-4'>Tracks</h2>
             <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
-              {hackaton.tracks.map((track, index) => (
+              {hackathon.tracks.map((track, index) => (
                 <div
                   key={index}
                   className='border border-white rounded-lg p-4 flex flex-col gap-4'

@@ -65,3 +65,9 @@ export function getFilteredHackathons({
 export function getHackathons() {
   return HackathonsList;
 }
+
+
+
+export function getHackathon(id: string) {
+  return HackathonsList.find((hackathon) => hackathon.id === id);
+}

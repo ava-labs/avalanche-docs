@@ -1,3 +1,4 @@
+import { getHackathon } from "@/server/controllers/hackathons";
 import { HackathonsList, validateHackathon } from "@/server/services/hackathons";
 import { Hackathon } from "@/types/hackathons";
 import { NextResponse } from "next/server";
@@ -5,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
     const id = (await params).id
-    const hackathon = HackathonsList.find(hackathon => hackathon.id === id);
+    const hackathon = getHackathon(id);
     return NextResponse.json(hackathon)
 
 }
