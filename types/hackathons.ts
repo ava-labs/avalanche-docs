@@ -18,7 +18,7 @@ export interface HackathonsFilters {
 export interface Hackathon extends HackathonLite {
   agenda: HackathonActivity[];
   registration_deadline: string;
-  address?: string;
+  address: string;
   total_prizes?: number;
   partners: Partner[];
   tracks: Track[];

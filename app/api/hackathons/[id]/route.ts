@@ -24,8 +24,8 @@ export async function PUT(req: NextRequest) {
   try {
 
     const id = req.nextUrl.searchParams.get('id')!;
-    let editedHackathon = (await req.json()) as Partial<Hackathon>;
-    const errors = validateHackathon(editedHackathon);
+    const partialEditedHackathon = (await req.json()) as Partial<Hackathon>;
+    const errors = validateHackathon(partialEditedHackathon);
     if (errors.length > 0) {
       return NextResponse.json({ errors }, { status: 400 });
     }
@@ -36,7 +36,12 @@ export async function PUT(req: NextRequest) {
     if (!existingHackathon) {
       return NextResponse.json({ error: "Hackathon not found." }, { status: 404 });
     }
-
+    const editedHackathon = {
+      ...partialEditedHackathon,
+      agenda: partialEditedHackathon.agenda ? JSON.stringify(partialEditedHackathon.agenda) : undefined,
+      partners: partialEditedHackathon.partners ? JSON.stringify(partialEditedHackathon.partners) : undefined,
+      tracks: partialEditedHackathon.tracks ? JSON.stringify(partialEditedHackathon.tracks) : undefined,
+    };
     const updatedHackathon = await prisma.hackathon.update({
       where: { id },
       data: editedHackathon,

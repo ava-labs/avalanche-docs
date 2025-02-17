@@ -3,8 +3,8 @@ import hackathonData from './hackathon_example.json';
 import { Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { getHackathons } from '@/server/controllers/hackathons';
 import { HackathonLite } from '@/types/hackathons';
+import { getFilteredHackathons } from '@/server/services/hackathons';
 
 async function getHackathon(id: string) {
   await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -15,8 +15,8 @@ export const revalidate = 60;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const hackathons = getHackathons();
-  return hackathons.map((hackathon: HackathonLite) => ({
+  const hackathons = await getFilteredHackathons({});
+  return hackathons.hackathons.map((hackathon: HackathonLite) => ({
     id: hackathon.id,
   }));
 }
