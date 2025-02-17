@@ -23,7 +23,10 @@ function convertDBToHackathon(hackathon: any): Hackathon {
     console.log(hackathon)
 
     return {
-        ...hackathon
+        ...hackathon,
+        agenda: typeof hackathon.agenda == 'string'? JSON.parse(hackathon.agenda) : hackathon.agenda,
+        tracks: typeof hackathon.tracks == 'string'? JSON.parse(hackathon.tracks) : hackathon.tracks,
+        partners: typeof hackathon.partners == 'string'? JSON.parse(hackathon.partners) : hackathon.partners,
     };
 }
 
