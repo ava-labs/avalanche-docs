@@ -3,7 +3,8 @@ import { createPreset, presets } from 'fumadocs-ui/tailwind-plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
+    // darkMode: ['class'],
+    content: [
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './content/**/*.mdx',
@@ -31,33 +32,47 @@ export default {
     }),
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)'],
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(circle, var(--tw-gradient-stops))',
-        'repeat-gradient-to-r':
-          'repeating-linear-gradient(to right, var(--tw-gradient-stops))',
-        'repeat-gradient-to-br':
-          'repeating-linear-gradient(to bottom right, var(--tw-gradient-stops))',
-      },
-      keyframes: {
-        stroke: {
-          from: {
-            'stroke-dasharray': '1000',
-          },
-          to: {
-            'stroke-dasharray': '1000',
-            'stroke-dashoffset': '2000',
-          },
-        },
-      },
-      animation: {
-        stroke: 'stroke 5s linear infinite',
-      },
-    },
+  	extend: {
+  		fontFamily: {
+  			sans: [
+  				'var(--font-geist-sans)'
+  			],
+  			mono: [
+  				'var(--font-geist-mono)'
+  			]
+  		},
+  		backgroundImage: {
+  			'gradient-radial': 'radial-gradient(circle, var(--tw-gradient-stops))',
+  			'repeat-gradient-to-r': 'repeating-linear-gradient(to right, var(--tw-gradient-stops))',
+  			'repeat-gradient-to-br': 'repeating-linear-gradient(to bottom right, var(--tw-gradient-stops))'
+  		},
+  		keyframes: {
+  			stroke: {
+  				from: {
+  					'stroke-dasharray': '1000'
+  				},
+  				to: {
+  					'stroke-dasharray': '1000',
+  					'stroke-dashoffset': '2000'
+  				}
+  			}
+  		},
+  		animation: {
+  			stroke: 'stroke 5s linear infinite'
+  		},
+  		colors: {
+  			sidebar: {
+  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				foreground: 'hsl(var(--sidebar-foreground))',
+  				primary: 'hsl(var(--sidebar-primary))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				accent: 'hsl(var(--sidebar-accent))',
+  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+  				border: 'hsl(var(--sidebar-border))',
+  				ring: 'hsl(var(--sidebar-ring))'
+  			}
+  		}
+  	}
   },
   preset: [createPreset()],
 };

@@ -93,7 +93,6 @@ const baseDate = new Date("2024-11-01T10:00:00Z");
 const now = new Date();
 
 
-
 // async function insertHackathons() {
 //     const hackathonsList: Hackathon[] = Array.from({ length: 50 }, (_, index) => {
 //         const randomTags = availableTags.filter((_, tagIndex) => {

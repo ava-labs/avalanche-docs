@@ -13,10 +13,10 @@ export default async function HackathonsPage({
   const { page, location, status } = await searchParams;
   const { hackathons, total } =  await getFilteredHackathons({
     page: page ?? 1,
+    pageSize: 4,
     location: location,
     status: status,
   });
-
 
   const initialFilters: HackathonsFilters = {
     page: page ?? 1,
@@ -25,12 +25,14 @@ export default async function HackathonsPage({
   };
 
   return (
-    <main className='container relative max-w-[1100px] px-2 py-4 lg:py-16'>
-      <Hackathons
-        initialHackathons={hackathons}
-        initialFilters={initialFilters}
-        totalHackathons={total}
-      />
+    <main className='container relative max-w-[1100px] px-2 py-4 lg:py-16 '>
+      <div className='border border-zinc-800 shadow-sm bg-zinc-950 rounded-md'>
+        <Hackathons
+          initialHackathons={hackathons}
+          initialFilters={initialFilters}
+          totalHackathons={total}
+        />
+      </div>
     </main>
   );
 }
