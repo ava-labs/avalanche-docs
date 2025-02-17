@@ -62,7 +62,7 @@ export default function Hackathons({
   totalHackathons: number;
 }) {
   const router = useRouter();
-  const pageSize = 10;
+  const pageSize = 4;
 
   console.debug({ initialHackathons, initialFilters, totalHackathons });
   const [hackathons, setHackathons] =
@@ -140,7 +140,7 @@ export default function Hackathons({
 
   return (
     <section className='px-8 py-6'>
-      <div className='flex items-center justify-between'>
+      <div className='flex flex-col md:flex-row items-start md:items-center gap-4 justify-between'>
         <div className='flex items-stretch gap-4 max-w-sm w-full h-9'>
           {/* Input */}
           <div className='relative flex-grow h-full'>
@@ -169,11 +169,11 @@ export default function Hackathons({
       <hr className='my-4 border-t border-zinc-800' />
 
       {/* Filters */}
-      <div className='flex items-center justify-between'>
+      <div className='flex flex-col md:flex-row items-start md:items-center justify-between'>
         <h3 className='font-medium text-2xl py-5'>
           {totalHackathons} Hackathons found
         </h3>
-        <div className='flex gap-4 justify-end'>
+        <div className='flex gap-4 flex-col md:flex-row justify-end'>
           <Select
             onValueChange={(value) => handleFilterChange('location', value)}
             value={filters.location} 
@@ -207,7 +207,7 @@ export default function Hackathons({
 
       <hr className='my-4 border-t border-zinc-800' />
       {/* Hackathons List */}
-      <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
+      <div className='grid grid-cols-1 gap-y-8 gap-x-4 lg:grid-cols-2'>
         {hackathons.map((hackathon: any) => (
           <HackathonCard key={hackathon.id} hackathon={hackathon} />
         ))}
