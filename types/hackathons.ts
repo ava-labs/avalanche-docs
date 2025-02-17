@@ -2,9 +2,9 @@ export interface HackathonLite {
   id: string;
   title: string;
   description: string;
-  date: string;
+  date: Date;
   location: string;
-  total_prizes?: number;
+  total_prizes: number;
   tags: string[];
   status: string;
 }
@@ -17,9 +17,8 @@ export interface HackathonsFilters {
 
 export interface Hackathon extends HackathonLite {
   agenda: HackathonActivity[];
-  registration_deadline: string;
+  registration_deadline: Date;
   address: string;
-  total_prizes?: number;
   partners: Partner[];
   tracks: Track[];
 

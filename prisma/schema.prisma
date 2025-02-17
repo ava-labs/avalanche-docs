@@ -14,12 +14,12 @@ model Hackathon {
   description         String
   date                DateTime
   location            String
-  total_prizes        Int?
+  total_prizes        Int
   tags                String[]
   status              String
   registration_deadline DateTime
   address             String
-  agenda              Json?
+  agenda              Json
   partners            Json
   tracks              Json
 }

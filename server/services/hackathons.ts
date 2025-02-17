@@ -38,7 +38,16 @@ export async function getHackathon(id: string) {
 
     if (!hackathon)
         throw new Error("Hackathon not found", { cause: "BadRequest" });
-    return hackathon;
+
+    const convertedHackathon: Hackathon = {
+        ...hackathon,
+        agenda: hackathon.agenda as unknown as HackathonActivity[],
+        partners: hackathon.partners as unknown as Partner[],
+        tracks: hackathon.tracks as unknown as Track[],
+        registration_deadline: hackathon.registration_deadline, 
+    };
+
+    return convertedHackathon;
 }
 
 export async function getFilteredHackathons(options: GetHackathonsOptions) {
