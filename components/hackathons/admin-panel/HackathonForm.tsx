@@ -98,30 +98,30 @@ export default function HackathonForm({
   });
 
   return (
-    <section className="px-8 py-6">
-      <h1 className="font-medium text-lg text-zinc-50">
+    <section className="px-4 sm:px-8 py-4 sm:py-6">
+      <h1 className="font-medium text-base sm:text-lg text-zinc-50">
         Hackathon Admin Panel
       </h1>
-      <p className="text-zinc-400">
+      <p className="text-sm sm:text-base text-zinc-400">
         Edit and manage all aspects of your hackathon in one place.
       </p>
       <hr className="my-4 border-t border-zinc-800" />
-      <div className="flex flex-row justify-between items-center mb-4">
-        <div className="py-2 px-3 flex flex-row items-center gap-2 rounded-md border-zinc-800 border">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-4">
+        <div className="w-full sm:w-auto py-2 px-3 flex flex-row items-center gap-2 rounded-md border-zinc-800 border">
           <GalleryVerticalEnd className="w-4 h-4 stroke-white" />
-          Hackathon Admin Panel
+          <span className="text-sm sm:text-base">Hackathon Admin Panel</span>
         </div>
-        <div className="flex gap-4 justify-end items-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-start sm:justify-end items-stretch sm:items-center w-full sm:w-auto">
           <Button
             variant="secondary"
             onClick={form.handleSubmit(onSubmit)}
-            className="bg-red-500 hover:bg-red-600 py-2 px-4"
+            className="bg-red-500 hover:bg-red-600 py-2 px-4 w-full sm:w-auto"
             disabled={isLoading}
           >
             {isLoading ? (
               <>
                 <Loader2 className="animate-spin" />
-                Saving...
+                <span className="ml-2">Saving...</span>
               </>
             ) : (
               "Save All Changes"
@@ -130,12 +130,15 @@ export default function HackathonForm({
           <Button
             variant="secondary"
             onClick={() => router.push(`/hackathons/${initialData?.id ?? ""}`)}
+            className="w-full sm:w-auto"
           >
             View Public Page
           </Button>
-          <Button variant="secondary">Publish</Button>
-          <div className="border-l border-zinc-800 h-8"></div>
-          <Badge variant="outline" className="px-3 flex items-center gap-2">
+          <Button variant="secondary" className="w-full sm:w-auto">
+            Publish
+          </Button>
+          <div className="hidden sm:block border-l border-zinc-800 h-8"></div>
+          <Badge variant="outline" className="px-3 flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
             Status: Live
             <Circle className="w-3 h-3 stroke-green-500" />
           </Badge>
@@ -144,9 +147,9 @@ export default function HackathonForm({
       <div className="relative">
         <SidebarProvider>
           <AdminSidebar />
-          <SidebarInset className="p-2 pl-6  max-h-[70vh] overflow-y-auto">
+          <SidebarInset className="p-2 pl-4 max-w-full sm:pl-6 flex flex-col md:max-h-[70vh] md:overflow-y-auto">
             <Form {...form}>
-              <form className="pb-24" onSubmit={form.handleSubmit(onSubmit)}>
+              <form className="pb-16 sm:pb-24 w-full" onSubmit={form.handleSubmit(onSubmit)}>
                 <General form={form} />
               </form>
             </Form>
