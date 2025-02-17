@@ -34,12 +34,12 @@ function convertHackathonToDB(hackathon: Partial<Hackathon>) {
     };
 }
 
-function convertDBToHackathon(hackathon: any): Hackathon {
-    console.log(hackathon.agenda)
-    console.log(hackathon.partners)
-    console.log(hackathon.tracks)
+function convertDBToHackathon(hackathon: any): Hackathon {   
     return {
-        ...hackathon    
+        ...hackathon,
+        agenda: hackathon.agenda ? JSON.parse(hackathon.agenda) : JSON.stringify([]),
+        partners: hackathon.partners ? JSON.parse(hackathon.partners) : JSON.stringify([]),
+        tracks: hackathon.tracks ? JSON.parse(hackathon.tracks) : JSON.stringify([]),    
     };
 }
 
