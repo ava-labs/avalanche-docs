@@ -1,6 +1,6 @@
 import type { HackathonsFilters } from '@/types/hackathons';
 import Hackathons from '@/components/hackathons/Hackathons';
-import { getFilteredHackathons } from '@/server/controllers/hackathons';
+import { getFilteredHackathons } from '@/server/services/hackathons';
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -11,7 +11,7 @@ export default async function HackathonsPage({
   searchParams: Promise<{ page?: number; location?: string; status?: string }>;
 }) {
   const { page, location, status } = await searchParams;
-  const { hackathons, total } = getFilteredHackathons({
+  const { hackathons, total } =  await getFilteredHackathons({
     page: page ?? 1,
     location: location,
     status: status,

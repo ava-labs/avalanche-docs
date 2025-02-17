@@ -1,0 +1,25 @@
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Hackathon {
+  id                  String   @id @default(uuid())
+  title               String
+  description         String
+  date                DateTime
+  location            String
+  total_prizes        Int?
+  tags                String[]
+  status              String
+  registration_deadline DateTime
+  address             String
+  agenda              Json?
+  partners            Json
+  tracks              Json
+}
