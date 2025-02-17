@@ -3,8 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "db:generate": "drizzle-kit generate --dialect=postgresql --schema=drizzle/schema/schema.ts --out=./drizzle/migrations",
-    "db:migrate": "tsx ./drizzle/migrate.ts",
     "build": "next build",
     "dev": "next dev",
     "build:remote": "tsx ./utils/content-loader/remote-content.mts",
@@ -71,7 +69,6 @@
     "autoprefixer": "^10.4.19",
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
-    "drizzle-kit": "^0.30.4",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.3"
