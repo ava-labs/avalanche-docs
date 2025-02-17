@@ -1,6 +1,7 @@
 import { Hackathon, HackathonActivity, HackathonLite, Partner, Track, TrackPrize } from "@/types/hackathons";
 import { hasAtLeastOne, requiredField, validateEntity, Validation } from "./base";
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
+import { JsonArray, JsonValue } from "@prisma/client/runtime/library";
 
 const prisma = new PrismaClient();
 
@@ -16,30 +17,18 @@ export const hackathonsValidations: Validation[] = [
 export const validateHackathon = (hackathon: Partial<Hackathon>) => validateEntity(hackathonsValidations, hackathon);
 
 
-function convertHackathonToDB(hackathon: Partial<Hackathon>) {
-    return {
-        ...hackathon,
-        address: hackathon.address ?? "",
-        registration_deadline: hackathon.registration_deadline ?? new Date(),
-        total_prizes: hackathon.total_prizes ?? 0,
-        title: hackathon.title ?? "",
-        description: hackathon.description ?? "",
-        date: hackathon.date ?? new Date(),
-        location: hackathon.location ?? "",
-        tags: hackathon.tags ?? [],
-        status: hackathon.status ?? "draft",
-        agenda: hackathon.agenda ? JSON.stringify(hackathon.agenda) : JSON.stringify([]),
-        partners: hackathon.partners ? JSON.stringify(hackathon.partners) : JSON.stringify([]),
-        tracks: hackathon.tracks ? JSON.stringify(hackathon.tracks) : JSON.stringify([]),
-    };
-}
 
-function convertDBToHackathon(hackathon: any): Hackathon {   
+
+function convertDBToHackathon(hackathon: any): Hackathon {
+    console.log(hackathon.agenda)
+    console.log(hackathon.partners)
+    console.log(hackathon.tracks)
+
     return {
         ...hackathon,
-        agenda: hackathon.agenda ? JSON.parse(hackathon.agenda) : JSON.stringify([]),
-        partners: hackathon.partners ? JSON.parse(hackathon.partners) : JSON.stringify([]),
-        tracks: hackathon.tracks ? JSON.parse(hackathon.tracks) : JSON.stringify([]),    
+        agenda: JSON.parse(hackathon.agenda),
+        partners: JSON.parse(hackathon.partners),
+        tracks: JSON.parse(hackathon.tracks),
     };
 }
 
@@ -66,6 +55,7 @@ export async function getHackathon(id: string) {
     if (!hackathon)
         throw new Error("Hackathon not found", { cause: "BadRequest" });
 
+    console.log(hackathon)
     return convertDBToHackathon(hackathon);
 }
 
@@ -83,6 +73,7 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     if (options.location) filters.location = options.location;
     if (options.date) filters.date = options.date;
     if (options.status) filters.status = options.status;
+    if (options.search) filters.title = { contains: options.search, mode: "insensitive" };
 
     const hackathonList = await prisma.hackathon.findMany({
         where: filters,
@@ -110,10 +101,24 @@ export async function createHackathon(hackathonData: Partial<Hackathon>): Promis
         throw new Error(`Validation errors: ${errors.join(", ")}`);
     }
 
-    const newHackathonData = convertHackathonToDB(hackathonData);
 
     const newHackathon = await prisma.hackathon.create({
-        data: newHackathonData,
+        data: {
+            ...hackathonData,
+            address: hackathonData.address ?? "",
+            registration_deadline: hackathonData.registration_deadline ?? new Date(),
+            total_prizes: hackathonData.total_prizes ?? 0,
+            title: hackathonData.title ?? "",
+            description: hackathonData.description ?? "",
+            date: hackathonData.date ?? new Date(),
+            location: hackathonData.location ?? "",
+            tags: hackathonData.tags ?? [],
+            status: hackathonData.status ?? "draft",
+            agenda: hackathonData.agenda!,
+            partners: hackathonData.partners!,
+            tracks: hackathonData.tracks!,
+
+        },
     });
 
     return convertDBToHackathon(newHackathon);
@@ -133,11 +138,25 @@ export async function updateHackathon(id: string, partialEditedHackathon: Partia
         throw new Error("Hackathon not found");
     }
 
-    const editedHackathon = convertHackathonToDB(partialEditedHackathon);
 
     const updatedHackathon = await prisma.hackathon.update({
         where: { id },
-        data: editedHackathon,
+        data: {
+            ...partialEditedHackathon,
+            address: partialEditedHackathon.address ?? "",
+            registration_deadline: partialEditedHackathon.registration_deadline ?? new Date(),
+            total_prizes: partialEditedHackathon.total_prizes ?? 0,
+            title: partialEditedHackathon.title ?? "",
+            description: partialEditedHackathon.description ?? "",
+            date: partialEditedHackathon.date ?? new Date(),
+            location: partialEditedHackathon.location ?? "",
+            tags: partialEditedHackathon.tags ?? [],
+            status: partialEditedHackathon.status ?? "draft",
+            agenda: partialEditedHackathon.agenda!,
+            partners: partialEditedHackathon.partners!,
+            tracks: partialEditedHackathon.tracks!,
+
+        },
     });
 
     return convertDBToHackathon(updatedHackathon);
