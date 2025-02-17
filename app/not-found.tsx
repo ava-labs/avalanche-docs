@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { baseOptions } from "@/app/layout.config";
-import { usePathname } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from 'react';
 
@@ -20,13 +19,17 @@ function createGitHubIssueURL(path: string) {
   return `https://github.com/ava-labs/avalanche-docs/issues/new?title=${title}&body=${body}&labels=bug`;
 }
 
-export default function HomePage(): React.ReactElement {
-  const pathname = usePathname();
-  const [actualPath, setActualPath] = useState(pathname);
+export default function NotFound() {
+  const [currentPath, setCurrentPath] = useState('');
 
   useEffect(() => {
-    setActualPath(window.location.pathname);
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      setCurrentPath(path);
+    }
   }, []);
+
+  const issueURL = currentPath ? createGitHubIssueURL(currentPath) : '#';
 
   return (
     <HomeLayout {...baseOptions}>
@@ -64,10 +67,11 @@ export default function HomePage(): React.ReactElement {
                   Scold Intern on Twitter
                 </Button>
               </Link>
-              <Link href={createGitHubIssueURL(actualPath)} target="_blank">
+              <Link href={issueURL} target="_blank">
                 <Button 
                   variant="default"
                   className="dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
+                  disabled={!currentPath}
                 >
                   Report Missing Page
                 </Button>
