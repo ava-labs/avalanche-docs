@@ -29,10 +29,12 @@ const now = new Date();
 
 export const HackathonsList: Hackathon[] = Array.from({ length: 50 }, (_, index) => {
     
-    const randomTags = availableTags.filter((_, tagIndex) => {
+    let randomTags = availableTags.filter((_, tagIndex) => {
         randomizer += tagIndex;
         return (index + tagIndex + randomizer) % 5 === 0;
     });
+
+    randomTags = randomTags.length === 0 ? [availableTags[index % availableTags.length]] : randomTags;
 
    
     const hackathonDate = new Date(baseDate);
@@ -108,7 +110,7 @@ export const HackathonsList: Hackathon[] = Array.from({ length: 50 }, (_, index)
         title: `Hackathon ${index + 1}`,
         description: `This is the description for Hackathon ${index + 1}.`,
         date: hackathonDate.toISOString(),
-        location: index % 2 === 0 ? "Online" : `City ${(index % 5) + 1}`,
+        location: index % 2 === 0 ? "Online" : `San Francisco, CA (On-site)`,
         total_prizes: 5000.0 + index * 100,
         tags: randomTags,
         status: status,
