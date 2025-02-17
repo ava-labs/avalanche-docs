@@ -1,11 +1,9 @@
 import React from 'react';
-import hackathonData from './hackathon_example.json';
 import { Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { getHackathon, getHackathons } from '@/server/controllers/hackathons';
 import { HackathonLite } from '@/types/hackathons';
-import axios from 'axios';
 import { redirect } from 'next/navigation';
 
 export const revalidate = 60;
@@ -116,7 +114,7 @@ export default async function HackathonPage({
         </div>
       </div>
       <div className='flex justify-end mt-4'>
-        <Link href={`/hackathons/${id}/edit`}>
+        <Link href={`/hackathons/${id}/admin-panel`}>
           <Button>Edit Hackathon</Button>
         </Link>
       </div>
