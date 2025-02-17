@@ -1,17 +1,12 @@
 import { useState } from 'react';
 import { useExampleStore } from "../../utils/store";
-import { createWalletClient, custom, createPublicClient, hexToBytes, decodeErrorResult, Abi, http, WalletClient, Account, Address } from 'viem';
+import { createWalletClient, custom, createPublicClient, hexToBytes, decodeErrorResult, Abi } from 'viem';
 import { packWarpIntoAccessList } from './packWarp';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 import { utils } from '@avalabs/avalanchejs';
-import { privateKeyToAccount } from 'viem/accounts'
 
-//FIXME: Remove this after debugging. Do not actually allocate any funds to this wallet.
-const DEBUG_WALLETPRIVATE_KEY = "0xf60e772d20390599ff144f30015c0ab9560f40554e41be23c3ef5a382c39c294" as `0x${string}`
-const DEBUG_WALLET_ADDRESS = privateKeyToAccount(DEBUG_WALLETPRIVATE_KEY).address
-console.log("DEBUG_WALLET_ADDRESS", DEBUG_WALLET_ADDRESS)
 
 const cb58ToHex = (cb58: string) => utils.bufferToHex(utils.base58check.decode(cb58));
 const add0x = (hex: string): `0x${string}` => hex.startsWith('0x') ? hex as `0x${string}` : `0x${hex}`;
@@ -75,33 +70,10 @@ export default function InitValidatorSet() {
             const accessList = packWarpIntoAccessList(signatureBytes);
 
 
-            let walletClient: WalletClient;
-            let from: Account | Address;
-            // Setup clients
-            if (debug) {
-                walletClient = createWalletClient({
-                    transport: http(),
-                    account: privateKeyToAccount(DEBUG_WALLETPRIVATE_KEY),
-                    chain: {
-                        id: walletChainId,
-                        name: "My L1",
-                        rpcUrls: {
-                            default: { http: [evmChainRpcUrl] },
-                        },
-                        nativeCurrency: {
-                            name: "COIN",
-                            symbol: "COIN",
-                            decimals: 18,
-                        },
-                    },
-                });
-                from = privateKeyToAccount(DEBUG_WALLETPRIVATE_KEY);
-            } else {
-                walletClient = createWalletClient({
-                    transport: custom(window.avalanche)
-                });
-                from = walletEVMAddress as `0x${string}`
-            }
+            const walletClient = createWalletClient({
+                transport: custom(window.avalanche)
+            });
+            const from = walletEVMAddress as `0x${string}`
 
             const publicClient = createPublicClient({
                 transport: custom(window.avalanche)
@@ -227,24 +199,12 @@ export default function InitValidatorSet() {
 
             <Button
                 type="primary"
-                onClick={onInitialize}
+                onClick={() => onInitialize(false)}
                 loading={isInitializing}
                 disabled={!L1ConversionSignature || isInitializing || !proxyAddress || !chainID}
             >
                 Initialize Validator Set
             </Button>
-
-            <Button
-                type="primary"
-                onClick={() => onInitialize(true)}
-                loading={isInitializing}
-                disabled={!L1ConversionSignature || isInitializing || !proxyAddress || !chainID}
-            >
-                Initialize Validator Set with debug wallet
-            </Button>
-            <div className="text-xs text-gray-500">
-                Make sure to transfer a couple coins to {DEBUG_WALLET_ADDRESS} before using the debug wallet.
-            </div>
         </div>
     );
 }

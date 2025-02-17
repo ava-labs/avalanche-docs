@@ -159,44 +159,45 @@ export const Initialize = () => {
                     disabled
                 />
 
+
+
+                <div className="space-y-4">
+                    <Input
+                        label="Churn Period (seconds)"
+                        type="number"
+                        value={churnPeriodSeconds}
+                        onChange={setChurnPeriodSeconds}
+                        placeholder="Enter churn period in seconds"
+                    />
+                    <Input
+                        label="Maximum Churn Percentage"
+                        type="number"
+                        value={maximumChurnPercentage}
+                        onChange={setMaximumChurnPercentage}
+                        placeholder="Enter maximum churn percentage"
+                    />
+                    <Input
+                        label="Admin Address"
+                        value={adminAddress}
+                        onChange={setAdminAddress}
+                        placeholder="Enter admin address"
+                    />
+                    <Button
+                        type="primary"
+                        onClick={handleInitialize}
+                        loading={isInitializing}
+                        disabled={isInitializing}
+                    >
+                        Initialize Contract
+                    </Button>
+                </div>
+
+
                 {isInitialized === true && (
                     <Success
                         label="Already Initialized"
                         value={jsonStringifyWithBigint(initEvent)}
                     />
-                )}
-
-                {isInitialized === false && (
-                    <div className="space-y-4">
-                        <Input
-                            label="Churn Period (seconds)"
-                            type="number"
-                            value={churnPeriodSeconds}
-                            onChange={setChurnPeriodSeconds}
-                            placeholder="Enter churn period in seconds"
-                        />
-                        <Input
-                            label="Maximum Churn Percentage"
-                            type="number"
-                            value={maximumChurnPercentage}
-                            onChange={setMaximumChurnPercentage}
-                            placeholder="Enter maximum churn percentage"
-                        />
-                        <Input
-                            label="Admin Address"
-                            value={adminAddress}
-                            onChange={setAdminAddress}
-                            placeholder="Enter admin address"
-                        />
-                        <Button
-                            type="primary"
-                            onClick={handleInitialize}
-                            loading={isInitializing}
-                            disabled={isInitializing}
-                        >
-                            Initialize Contract
-                        </Button>
-                    </div>
                 )}
             </div>
         </div>
