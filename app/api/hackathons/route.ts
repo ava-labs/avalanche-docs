@@ -1,60 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/drizzle/db/db";
 import { hackathons } from "@/drizzle/schema/schema";
-import { eq, sql, and } from "drizzle-orm";
+import { getFilteredHackathons, GetHackathonsOptions } from "@/server/services/hackathons";
 
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = req.nextUrl;
 
-    const page = parseInt(searchParams.get("page") ?? "1", 10);
-    const pageSize = parseInt(searchParams.get("pageSize") ?? "10", 10);
 
-    if (isNaN(page) || page < 1 || isNaN(pageSize) || pageSize < 1) {
-      return NextResponse.json(
-        { error: "Pagination params invalid" },
-        { status: 400 }
-      );
+    const searchParams = req.nextUrl.searchParams;
+    const options: GetHackathonsOptions = {
+      page: Number(searchParams.get("page") || 1),
+      pageSize: Number(searchParams.get("pageSize") || 10),
+      location: searchParams.get("location") || undefined,
+      date: searchParams.get("date") || undefined,
+      status: searchParams.get("status") || undefined,
+      search: searchParams.get("search") || undefined,
     }
+    const response = await getFilteredHackathons(options);
 
-    const offset = (page - 1) * pageSize;
-
-    const location = searchParams.get("location");
-    const date = searchParams.get("date");
-    const status = searchParams.get("status");
-
-    const filters = [];
-    if (location) filters.push(eq(hackathons.location, location));
-    if (date) filters.push(eq(hackathons.date, date));
-    if (status) filters.push(eq(hackathons.status, status));
-
-    const whereCondition = filters.length ? and(...filters) : undefined;
-
-    const hackathonList = await db
-      .select()
-      .from(hackathons)
-      .where(whereCondition)
-      .limit(pageSize)
-      .offset(offset);
-    const totalResult = await db
-      .select({ count: sql<number>`COUNT(*)` })
-      .from(hackathons)
-      .where(whereCondition);
-
-    const totalHackathons = totalResult[0]?.count ?? 0;
-
-    return NextResponse.json({
-      hackathons: hackathonList,
-      total: totalHackathons,
-      page,
-      pageSize,
-    });
+    return NextResponse.json(response);
   } catch (error) {
     console.error("Error in GET /api/hackathons:", error);
+    const wrappedError = error as Error
     return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
+      { error: wrappedError.message },
+      { status: wrappedError.cause == "BadRequest" ? 400 : 500 }
     );
   }
 }
@@ -80,12 +51,12 @@ export async function POST(req: NextRequest) {
       tracks,
     } = body;
 
-    
+
     if (!title || !description || !date || !location || !status || !registration_deadline) {
       return NextResponse.json({ error: "Faltan campos obligatorios" }, { status: 400 });
     }
 
-  
+
     const newHackathon = await db
       .insert(hackathons)
       .values({
