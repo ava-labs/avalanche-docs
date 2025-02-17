@@ -1,38 +1,33 @@
-import { getHackathon } from "@/server/controllers/hackathons";
-import { HackathonsList, validateHackathon } from "@/server/services/hackathons";
+import { NextRequest, NextResponse } from "next/server";
+import { getHackathon, updateHackathon } from "@/server/services/hackathons";
 import { Hackathon } from "@/types/hackathons";
-import { NextResponse } from "next/server";
 
+export async function GET(req: NextRequest) {
 
-export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
-    const id = (await params).id
-    const hackathon = getHackathon(id);
-    return NextResponse.json(hackathon)
+  try {
+    const id = req.nextUrl.searchParams.get('id');
+    const hackathon = await getHackathon(id!)
 
+    return NextResponse.json(hackathon);
+  } catch (error) {
+    console.error("Error in GET /api/hackathons/[id]:", error);
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 }
+    );
+  }
 }
 
-export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
-    try {
-        const id = (await params).id
+export async function PUT(req: NextRequest) {
+  try {
+    const id = req.nextUrl.searchParams.get('id')!;
+    const partialEditedHackathon = (await req.json()) as Partial<Hackathon>;
 
-        const index = HackathonsList.findIndex((hackathon) => hackathon.id === id );
-        if (index === -1) {
-            return NextResponse.json({ error: "Hackathon not found." }, { status: 404 });
-        }
-        const editedHackathon = (await req.json()) as Partial<Hackathon>;
-        editedHackathon.id = id;
+    const updatedHackathon = await updateHackathon(id, partialEditedHackathon);
 
-
-        const errors = validateHackathon(editedHackathon);
-        if (errors.length > 0) {
-            return NextResponse.json({ errors }, { status: 400 });
-        }
-
-        HackathonsList[index] = editedHackathon as Hackathon;
-        return NextResponse.json(editedHackathon)
-    } catch (error) {
-        console.error("Error in PUT /hackathons:", error);
-        return NextResponse.json({ error: `Internal Server Error ${error}` }, { status: 500 });
-    }
+    return NextResponse.json(updatedHackathon);
+  } catch (error) {
+    console.error("Error in PUT /api/hackathons/[id]:", error);
+    return NextResponse.json({ error: `Internal Server Error: ${error}` }, { status: 500 });
+  }
 }
-

@@ -2,16 +2,16 @@ import React from 'react';
 import { Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { getHackathon, getHackathons } from '@/server/controllers/hackathons';
 import { HackathonLite } from '@/types/hackathons';
 import { redirect } from 'next/navigation';
+import { getFilteredHackathons, getHackathon } from '@/server/services/hackathons';
 
 export const revalidate = 60;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const hackathons = getHackathons();
-  return hackathons.map((hackathon: HackathonLite) => ({
+  const hackathons = await getFilteredHackathons({});
+  return hackathons.hackathons.map((hackathon: HackathonLite) => ({
     id: hackathon.id,
   }));
 }
@@ -22,7 +22,7 @@ export default async function HackathonPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const hackathon =  getHackathon(id);
+  const hackathon =  await getHackathon(id);
   const menuItems = ['Overview', 'Schedule', 'Info', 'Partners', 'Tracks'];
   
   if (!hackathon) redirect('/hackathons');
