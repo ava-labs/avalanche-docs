@@ -20,15 +20,10 @@ export const validateHackathon = (hackathon: Partial<Hackathon>) => validateEnti
 
 
 function convertDBToHackathon(hackathon: any): Hackathon {
-    console.log(hackathon.agenda)
-    console.log(hackathon.partners)
-    console.log(hackathon.tracks)
+    console.log(hackathon)
 
     return {
-        ...hackathon,
-        agenda: JSON.parse(hackathon.agenda),
-        partners: JSON.parse(hackathon.partners),
-        tracks: JSON.parse(hackathon.tracks),
+        ...hackathon
     };
 }
 
