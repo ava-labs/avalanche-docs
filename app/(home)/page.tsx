@@ -3,6 +3,7 @@ import Features from '@/components/landing/features';
 import Development from '@/components/landing/development';
 import Ecosystem from '@/components/landing/ecosystem';
 import Support from '@/components/landing/support';
+import { PrivacyPolicyBox } from "@/components/privacy-policy"
 
 export default function HomePage(): React.ReactElement {
   return (
@@ -13,6 +14,9 @@ export default function HomePage(): React.ReactElement {
           <Development />
           <Ecosystem />
           <Support />
+          <div className="fixed bottom-0 right-0 sm:bottom-4 sm:right-4 p-4 sm:p-0">
+            <PrivacyPolicyBox />
+          </div>
       </main>
     </>
   );
