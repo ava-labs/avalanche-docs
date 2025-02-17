@@ -39,10 +39,7 @@ function convertDBToHackathon(hackathon: any): Hackathon {
     console.log(hackathon.partners)
     console.log(hackathon.tracks)
     return {
-        ...hackathon,
-        agenda: hackathon.agenda && hackathon.agenda.toString() != "[]" ? JSON.parse(hackathon.agenda.toString()) as HackathonActivity[] : [],
-        partners: hackathon.partners && hackathon.partners.toString() !== "[]" ? JSON.parse(hackathon.partners.toString()) as Partner[] : [],
-        tracks: hackathon.tracks && hackathon.tracks.toString() != "[]" ? JSON.parse(hackathon.tracks.toString()) as Track[] : [],
+        ...hackathon    
     };
 }
 

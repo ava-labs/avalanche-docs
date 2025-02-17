@@ -62,7 +62,7 @@ export default function Hackathons({
   totalHackathons: number;
 }) {
   const router = useRouter();
-  const pageSize = 4;
+  const pageSize = 10;
 
   console.debug({ initialHackathons, initialFilters, totalHackathons });
   const [hackathons, setHackathons] =
@@ -176,12 +176,12 @@ export default function Hackathons({
         <div className='flex gap-4 justify-end'>
           <Select
             onValueChange={(value) => handleFilterChange('location', value)}
-            value={filters.location}
+            value={filters.location} 
           >
-            <SelectTrigger className='w-[180px]'>
+            <SelectTrigger className='w-[180px]' >
               <SelectValue placeholder='Filter by Location' />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent >
               <SelectItem value='all'>All Locations</SelectItem>
               <SelectItem value='Online'>Online</SelectItem>
               <SelectItem value='InPerson'>In Person</SelectItem>
