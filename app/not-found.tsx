@@ -4,23 +4,29 @@ import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { baseOptions } from "@/app/layout.config";
 import { usePathname } from 'next/navigation';
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from 'react';
 
 function createGitHubIssueURL(path: string) {
-  const title = encodeURIComponent(`Missing Documentation: ${path}`);
+  const title = encodeURIComponent(`Missing Page: ${path}`);
   const body = encodeURIComponent(
-    `# Missing Documentation Report\n\n` +
-    `The following documentation page was not found: \`${path}\`\n\n` +
+    `# Missing Page Report\n\n` +
+    `The following page was not found: \`${path}\`\n\n` +
     `## Expected Location\n` +
     `I was trying to access: ${path}\n\n` +
     `## Additional Context\n` +
     `Please provide any additional context about what you were looking for.`
   );
   
-  return `https://github.com/ava-labs/avalanche-docs/issues/new?title=${title}&body=${body}&labels=documentation`;
+  return `https://github.com/ava-labs/avalanche-docs/issues/new?title=${title}&body=${body}&labels=bug`;
 }
 
 export default function HomePage(): React.ReactElement {
   const pathname = usePathname();
+  const [actualPath, setActualPath] = useState(pathname);
+
+  useEffect(() => {
+    setActualPath(window.location.pathname);
+  }, []);
 
   return (
     <HomeLayout {...baseOptions}>
@@ -58,7 +64,7 @@ export default function HomePage(): React.ReactElement {
                   Scold Intern on Twitter
                 </Button>
               </Link>
-              <Link href={createGitHubIssueURL(pathname)} target="_blank">
+              <Link href={createGitHubIssueURL(actualPath)} target="_blank">
                 <Button 
                   variant="default"
                   className="dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
