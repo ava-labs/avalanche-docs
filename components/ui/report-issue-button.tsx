@@ -15,7 +15,11 @@ export default function ReportIssueButton({ title, pagePath }: ReportIssueButton
         user: 'ava-labs',
         repo: 'avalanche-docs',
         title: `Update ${title} information`,
-        body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: ${pagePath}\n\n[Provide more details here...]`,
+        body: `It appears that the information on this page might be outdated. Please review and update as needed.
+
+Page: [${pagePath}](https://build.avax.network${pagePath})
+
+[Provide more details here...]`,
         labels: ['outdated', 'documentation'],
       })}
       target="_blank"

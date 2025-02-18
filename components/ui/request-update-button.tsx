@@ -24,7 +24,11 @@ const RequestUpdateButton: React.FC<RequestUpdateButtonProps> = ({
     user: 'ava-labs',
     repo: 'avalanche-docs',
     title: title || `Outdated Information on ${pagePath || 'this page'}`,
-    body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: ${pagePath || 'Unknown'}\n\n[Provide more details here...]`,
+    body: `It appears that the information on this page might be outdated. Please review and update as needed.
+
+Page: [${pagePath || 'Unknown'}](https://docs.avax.network${pagePath})
+
+[Provide more details here...]`,
     labels: ['outdated', 'documentation'],
   });
 

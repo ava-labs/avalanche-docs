@@ -29,8 +29,6 @@ import {
 } from "fumadocs-ui/components/codeblock";
 import { BadgeCheck } from "lucide-react";
 import Mermaid from "@/components/content-design/mermaid";
-import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper";
-import { buttonVariants } from "@/components/ui/button";
 import EditOnGithubButton from "@/components/ui/edit-on-github-button";
 import ReportIssueButton from "@/components/ui/report-issue-button";
 

@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { getIntegrationPage, getIntegrationPages } from '@/utils/content-loader/integrations-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
-import { ArrowUpRightIcon, AlertCircle } from 'lucide-react';
 import { Pill, Pills } from '@/components/ui/pills';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
-import newGithubIssueUrl from 'new-github-issue-url';
+import EditOnGithubButton from '@/components/ui/edit-on-github-button';
+import ReportIssueButton from '@/components/ui/report-issue-button';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -63,6 +63,13 @@ export default async function Page(props: {
             <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
                 <div className="prose p-4">
                     <MDX components={defaultMdxComponents}/>
+                    <div className="flex gap-6 mt-8">
+                        <EditOnGithubButton path={path} />
+                        <ReportIssueButton 
+                            title={page.data.title}
+                            pagePath={`/integrations/${params.slug}`}
+                        />
+                    </div>
                 </div>
                 <div className="flex flex-col gap-4 border-l p-4 text-sm">
                     <div>
@@ -95,29 +102,6 @@ export default async function Page(props: {
                             {page.data.documentation}
                         </a>
                     </div>
-
-                    <a
-                        href={`https://github.com/ava-labs/avalanche-docs/blob/master/${path}`}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-                    >
-                        <ArrowUpRightIcon className="size-5" /> Edit on Github
-                    </a>
-                    <a
-                        href={newGithubIssueUrl({
-                            user: 'ava-labs',
-                            repo: 'avalanche-docs',
-                            title: `Update Integration ${page.data.title} information`,
-                            body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /integrations/${params.slug}\n\n[Provide more details here...]`,
-                            labels: ['outdated', 'documentation'],
-                        })}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-                    >
-                        <AlertCircle className="size-5" /> Report Issue
-                    </a>
 
                     {/* <Control url={page.url} /> */}
                 </div>
