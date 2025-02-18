@@ -12,7 +12,8 @@ export default function CreateL1() {
         walletChainId,
         evmChainRpcUrl,
         validatorManagerAddress,
-        evmChainId } = useExampleStore();
+        evmChainId, genesisData
+    } = useExampleStore();
 
     // FIXME: The 'done' property should either be implemented for all steps or not implemented at all. Hidden for now.
 
@@ -28,6 +29,12 @@ export default function CreateL1() {
             title: "Create Subnet",
             description: "Create a new subnet on the P-chain.",
             done: subnetID !== ""
+        },
+        {
+            id: "genesisBuilder",
+            title: "Build Genesis Data",
+            description: "Build genesis data for your new chain.",
+            done: genesisData !== ""
         },
         {
             id: "createChain",

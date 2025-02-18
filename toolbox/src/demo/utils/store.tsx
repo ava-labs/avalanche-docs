@@ -53,7 +53,10 @@ export const useExampleStore = create(
             setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
             setWalletEVMAddress: (walletEVMAddress: string) => set({ walletEVMAddress }),
             setGenesisData: (genesisData: string) => set({ genesisData }),
-            reset: () => set(initialState),
+            reset: () => {
+                window.localStorage.removeItem('example-storage');
+                window.location.reload();
+            },
             setEvmChainId: (evmChainId: number) => set({ evmChainId }),
         })),
         {
