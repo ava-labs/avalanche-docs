@@ -2,8 +2,7 @@ import { useExampleStore } from "../../utils/store";
 import { Input, Select } from "../../ui";
 import { useState, useEffect } from "react";
 import { networkIDs } from "@avalabs/avalanchejs";
-
-const CONTAINER_VERSION = 'v0.7.1';
+import versions from "../../../versions.json";
 
 const generateDockerCommand = (subnets: string[], isRPC: boolean, networkID: number) => {
     const httpPort = isRPC ? "8080" : "9650";
@@ -49,7 +48,7 @@ const generateDockerCommand = (subnets: string[], isRPC: boolean, networkID: num
         `-p ${isRPC ? "0.0.0.0" : "127.0.0.1"}:${httpPort}:${httpPort} -p ${stakingPort}:${stakingPort}`,
         `-v ${localFolder}:/root/.avalanchego`,
         ...Object.entries(env).map(([key, value]) => `-e ${key}=${value}`),
-        `avaplatform/subnet-evm:${CONTAINER_VERSION}`
+        `avaplatform/subnet-evm:${versions['avaplatform/subnet-evm']}`
     ];
     return chunks.map(chunk => `    ${chunk}`).join(" \\\n").trim();
 }

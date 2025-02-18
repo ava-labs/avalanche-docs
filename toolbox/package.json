@@ -22,7 +22,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "postinstall": "node update_docker-tag.js"
   },
   "dependencies": {
     "@avalabs/avacloud-sdk": "^0.9.0",
