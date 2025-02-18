@@ -176,15 +176,17 @@ export default function ToolboxApp() {
     // Remove store-based selectedTool and use setSelectedTool
     // const { selectedTool, setSelectedTool } = useExampleStore();
 
+    const defaultTool = Object.values(componentGroups).flat()[0].id;
+
     // Use state from URL hash. Default to "getPChainAddress" if hash is empty.
     const [selectedTool, setSelectedTool] = useState(
-        window.location.hash ? window.location.hash.substring(1) : "getPChainAddress"
+        window.location.hash ? window.location.hash.substring(1) : defaultTool
     );
 
     // Listen for URL hash changes (e.g. back/forward navigation)
     useEffect(() => {
         const handleHashChange = () => {
-            setSelectedTool(window.location.hash ? window.location.hash.substring(1) : "getPChainAddress");
+            setSelectedTool(window.location.hash ? window.location.hash.substring(1) : defaultTool);
         };
         window.addEventListener("hashchange", handleHashChange);
         return () => window.removeEventListener("hashchange", handleHashChange);
