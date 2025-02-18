@@ -25,6 +25,7 @@ export const ConvertToL1 = () => {
         setValidatorWeights
     } = useExampleStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
+    const [validatorBalances, setValidatorBalances] = useState(Array(100).fill(BigInt(1000000000)) as bigint[]);
 
     async function handleConvertToL1() {
         setL1ID("");
@@ -56,7 +57,7 @@ export const ConvertToL1 = () => {
                 validators.push(L1Validator.fromNative(
                     nodeID,
                     BigInt(validatorWeights[i]), // weight 
-                    BigInt(1000000000), // balance 
+                    validatorBalances[i], // balance 
                     new pvmSerial.ProofOfPossession(publicKey, signature),
                     pChainOwner,
                     pChainOwner
@@ -148,6 +149,13 @@ export const ConvertToL1 = () => {
                     label="Validator Weights (in the same order as the validators)"
                     values={validatorWeights.map(weight => weight.toString()).slice(0, nodePopJsons.length)}
                     onChange={(weightsStrings) => setValidatorWeights(weightsStrings.map(weight => parseInt(weight)))}
+                    type="number"
+                    disableAddRemove={true}
+                />
+                <InputArray
+                    label="Validator Balances (in the same order as the validators)"
+                    values={validatorBalances.map(balance => balance.toString()).slice(0, nodePopJsons.length)}
+                    onChange={(balancesStrings) => setValidatorBalances(balancesStrings.map(balance => BigInt(balance)))}
                     type="number"
                     disableAddRemove={true}
                 />
