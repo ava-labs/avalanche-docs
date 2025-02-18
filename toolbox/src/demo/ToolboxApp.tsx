@@ -16,18 +16,27 @@ import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
 import { ReadContract } from "./examples/ValidatorManager/ReadContract";
 import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
 import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactElement } from "react";
 import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
 import CreateL1 from "./examples/Guides/CreateL1";
 
-const componentGroups = {
+type ComponentType = {
+    id: string;
+    label: string;
+    component: () => ReactElement;
+    fileNames: string[];
+    skipWalletConnection?: boolean;
+}
+
+const componentGroups: Record<string, ComponentType[]> = {
     "Guides": [
         {
             id: 'createL1Guide',
             label: "Create L1",
             component: CreateL1,
-            fileNames: ["toolbox/src/demo/examples/Guides/CreateL1.tsx"]
+            fileNames: ["toolbox/src/demo/examples/Guides/CreateL1.tsx"],
+            skipWalletConnection: true,
         }
     ],
     "Wallet": [
@@ -121,19 +130,22 @@ const componentGroups = {
             id: "rpcMethodsCheck",
             label: "RPC Methods Check",
             component: RPCMethodsCheck,
-            fileNames: ["toolbox/src/demo/examples/Nodes/RPCMethodsCheck.tsx"]
+            fileNames: ["toolbox/src/demo/examples/Nodes/RPCMethodsCheck.tsx"],
+            skipWalletConnection: true,
         },
         {
             id: "avalanchegoDocker",
             label: "Avalanchego in Docker",
             component: AvalanchegoDocker,
-            fileNames: ["toolbox/src/demo/examples/Nodes/AvalanchegoDocker.tsx"]
+            fileNames: ["toolbox/src/demo/examples/Nodes/AvalanchegoDocker.tsx"],
+            skipWalletConnection: true,
         },
         {
             id: "rpcUrlForChain",
             label: "RPC URL Builder",
             component: RPCUrlForChain,
-            fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"]
+            fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
+            skipWalletConnection: true,
         }
     ]
 
@@ -160,6 +172,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error, resetError
 };
 
 export default function ToolboxApp() {
+    const [, setIsWalletConnected] = useState(false);
     // Remove store-based selectedTool and use setSelectedTool
     // const { selectedTool, setSelectedTool } = useExampleStore();
 
@@ -197,7 +210,7 @@ export default function ToolboxApp() {
                     window.location.reload();
                 }}
             >
-                <ConnectWallet>
+                <ConnectWallet onConnect={setIsWalletConnected} required={!comp.skipWalletConnection}>
                     <div className="space-y-4">
                         <comp.component />
                     </div>

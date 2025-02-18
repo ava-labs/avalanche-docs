@@ -5,7 +5,7 @@ import { Wallet } from "lucide-react";
 import { useExampleStore } from "../utils/store";
 
 
-export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
+export const ConnectWallet = ({ children, onConnect, required }: { children: React.ReactNode, onConnect: (connected: boolean) => void, required: boolean }) => {
     const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress } = useExampleStore();
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const [hasWallet, setHasWallet] = useState<boolean>(false);
@@ -29,6 +29,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
             }
             setWalletEVMAddress(accounts[0]);
             setIsConnected(true);
+            onConnect(true);
         } catch (error) {
             showBoundary(error as Error);
         } finally {
@@ -44,9 +45,11 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
                 console.log(`ConnectWallet:Connected to ${accounts[0]}`);
                 setWalletEVMAddress(accounts[0]);
                 setIsConnected(true);
+                onConnect(true);
             } else {
                 console.log(`ConnectWallet:Not connected`);
                 setIsConnected(false);
+                onConnect(false);
             }
         }).catch((error) => {
             // We can still log errors here, but no need to set localError for initial connection check
@@ -74,9 +77,11 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
             if (accounts.length > 0) {
                 setWalletEVMAddress(accounts[0]);
                 setIsConnected(true);
+                onConnect(true);
             } else {
                 setWalletEVMAddress("");
                 setIsConnected(false);
+                onConnect(false);
             }
         });
 
@@ -86,7 +91,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
         };
     }, []);
 
-    if (!hasWallet) {
+    if (required && !hasWallet) {
         return (
             <div className="space-y-2">
                 <a
@@ -100,7 +105,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
         );
     }
 
-    if (!isConnected && isLoaded) {
+    if (required && !isConnected && isLoaded) {
         return (
             <div className="space-y-2">
                 <Button onClick={connectWallet} icon={<Wallet className="w-4 h-4 mr-2" />} loading={isConnecting}>
@@ -110,13 +115,13 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
         );
     }
 
-    if (!isLoaded) {
+    if (required && !isLoaded) {
         return null;
     }
 
     return (
         <div className={`space-y-4 transition`}>
-            <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 shadow-sm rounded-lg p-3 flex items-center justify-between">
+            {walletEVMAddress && <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 shadow-sm rounded-lg p-3 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                     <div className="p-2 rounded-full">
                         <Wallet className="w-6 h-8 text-blue-600 dark:text-blue-400" />
@@ -131,7 +136,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
                         Chain ID: <span className="font-mono  dark:">{walletChainId}</span>
                     </div>
                 )}
-            </div>
+            </div>}
             {children}
         </div>
     );
