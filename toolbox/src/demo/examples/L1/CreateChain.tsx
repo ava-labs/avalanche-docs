@@ -3,11 +3,10 @@ import { pvm } from "@avalabs/avalanchejs";
 import { getRPCEndpoint } from "../../utils/rpcEndpoint";
 import { initialState, useExampleStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
 import PChainAddressRequired from "../../ui/PChainAddressRequired";
-import { quickAndDirtyGenesisBuilder } from "./GenesisBuilder";
 
 export const CreateChain = () => {
     const { showBoundary } = useErrorBoundary();
@@ -22,17 +21,12 @@ export const CreateChain = () => {
         chainID,
         setChainID,
         setSubnetID,
-        walletEVMAddress
+        walletEVMAddress,
+        genesisData,
+        setGenesisData
     } = useExampleStore(state => state);
     const [isCreating, setIsCreating] = useState(false);
-    const [genesisData, setGenesisData] = useState("");
 
-    useEffect(() => {
-        if (walletEVMAddress) {
-            const randomInt = Math.floor(Math.random() * 1000000);
-            setGenesisData(quickAndDirtyGenesisBuilder(walletEVMAddress, randomInt));
-        }
-    }, [walletEVMAddress]);
 
     async function handleCreateChain() {
         setChainID("");
@@ -81,6 +75,21 @@ export const CreateChain = () => {
             <div className="space-y-4">
                 <h2 className="text-lg font-semibold ">Create Chain</h2>
                 <PChainAddressRequired />
+            </div>
+        );
+    }
+
+    if (!genesisData) {
+        return (
+            <div className="space-y-4">
+                <h2 className="text-lg font-semibold ">Create Chain</h2>
+                <div className="flex items-center bg-amber-50 border border-amber-300 rounded-md p-3 text-amber-800">
+                    <span className="mr-2">⚠️</span>
+                    Please generate genesis data first using
+                    <a href="#genesisBuilder" className="text-amber-800 hover:text-amber-900 underline ml-1">
+                        the Genesis Builder tool
+                    </a>.
+                </div>
             </div>
         );
     }

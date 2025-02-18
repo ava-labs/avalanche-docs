@@ -19,11 +19,13 @@ export const initialState = {
     walletChainId: 0,
     evmChainName: "My L1",
     evmChainRpcUrl: "",
+    evmChainId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     evmChainCoinName: "COIN",
     validatorManagerAddress: "",
     proxyAddress: "0xfacade0000000000000000000000000000000000",
     proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
     walletEVMAddress: "",
+    genesisData: "",
 }
 
 export const useExampleStore = create(
@@ -50,7 +52,9 @@ export const useExampleStore = create(
             setProxyAddress: (proxyAddress: string) => set({ proxyAddress }),
             setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
             setWalletEVMAddress: (walletEVMAddress: string) => set({ walletEVMAddress }),
+            setGenesisData: (genesisData: string) => set({ genesisData }),
             reset: () => set(initialState),
+            setEvmChainId: (evmChainId: number) => set({ evmChainId }),
         })),
         {
             name: 'example-storage',

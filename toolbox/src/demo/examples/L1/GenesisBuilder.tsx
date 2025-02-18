@@ -3,7 +3,7 @@
 import TransparentUpgradableProxy from "../../../../contracts/openzeppelin-4.9/compiled/TransparentUpgradeableProxy.json"
 import ProxyAdmin from "../../../../contracts/openzeppelin-4.9/compiled/ProxyAdmin.json"
 
-export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: number) => {
+const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: number) => {
     if (!/^0x[a-fA-F0-9]{40}$/.test(ownerAddress)) {
         throw new Error("Invalid ownerAddress format. It should be '0x' followed by 20 hex bytes (40 characters).");
     }
@@ -90,10 +90,8 @@ import { useExampleStore } from "../../utils/store";
 import { CodeHighlighter } from "../../ui/CodeHighlighter";
 
 export const GenesisBuilder = () => {
-    const { walletEVMAddress } = useExampleStore()
+    const { walletEVMAddress, evmChainId, setEvmChainId, genesisData, setGenesisData } = useExampleStore()
     const [ownerAddress, setOwnerAddress] = useState<string>("")
-    const [genesisOutput, setGenesisOutput] = useState<string>("")
-    const [desiredChainID, setDesiredChainID] = useState<string>(Math.floor(Math.random() * (100000 - 1000 + 1) + 1000).toString())
 
     useEffect(() => {
         if (ownerAddress) return
@@ -101,16 +99,16 @@ export const GenesisBuilder = () => {
     }, [walletEVMAddress, ownerAddress])
 
     useEffect(() => {
-        if (!ownerAddress || !desiredChainID) {
-            setGenesisOutput("")
+        if (!ownerAddress || !evmChainId) {
+            setGenesisData("")
             return
         }
         try {
-            setGenesisOutput(quickAndDirtyGenesisBuilder(ownerAddress, parseInt(desiredChainID)))
+            setGenesisData(quickAndDirtyGenesisBuilder(ownerAddress, evmChainId))
         } catch (error) {
-            setGenesisOutput(error instanceof Error ? error.message : "Invalid owner address")
+            setGenesisData(error instanceof Error ? error.message : "Invalid owner address")
         }
-    }, [ownerAddress, desiredChainID])
+    }, [ownerAddress, evmChainId])
 
     return (
         <div className="space-y-4">
@@ -119,19 +117,19 @@ export const GenesisBuilder = () => {
                 value={ownerAddress}
                 onChange={setOwnerAddress}
                 placeholder="0x..."
-                error={genesisOutput.includes("Invalid") ? genesisOutput : null}
+                error={genesisData.includes("Invalid") ? genesisData : null}
                 notes="The address that will own the subnet's initial funds"
             />
             <Input
                 label="Desired Chain ID"
-                value={desiredChainID}
-                onChange={setDesiredChainID}
+                value={evmChainId.toString()}
+                onChange={(value) => setEvmChainId(Number(value))}
                 placeholder="Enter desired chain ID"
                 type="number"
             />
-            {genesisOutput && !genesisOutput.includes("Invalid") && (
+            {genesisData && !genesisData.includes("Invalid") && (
                 <CodeHighlighter
-                    code={genesisOutput}
+                    code={genesisData}
                     language="typescript"
                 />
             )}
