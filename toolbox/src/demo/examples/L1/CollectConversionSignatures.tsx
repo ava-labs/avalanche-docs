@@ -182,7 +182,7 @@ const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggre
                     <div className="text-sm font-semibold">SDK Call that will be executed</div>
                     <CodeHighlighter
                         code={sdkCallString}
-                        language="typescript"
+                        lang="ts"
                     />
                 </div>}
                 <Button
