@@ -271,7 +271,7 @@ const toolsMenu: LinkItemType = {
     },
     {
       icon: <Waypoints />,
-      text: 'L1 Toolbox',
+      text: 'L1 Toolbox (Beta)',
       description: 'Manage your L1 with a highly granular set of tools.',
       url: '/tools/l1-toolbox',
       menu: {
