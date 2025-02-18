@@ -161,8 +161,8 @@ export const AvalanchegoDocker = () => {
                     value={isRPC}
                     onChange={(value) => setIsRPC(value as "true" | "false")}
                     options={[
-                        { value: "true", label: "RPC Node" },
                         { value: "false", label: "Validator Node" },
+                        { value: "true", label: "RPC Node" },
                     ]}
                 />
 
