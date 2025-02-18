@@ -25,7 +25,9 @@ export default function InitValidatorSet() {
         setProxyAddress,
         evmChainRpcUrl,
         setEvmChainRpcUrl,
-        walletEVMAddress
+        walletEVMAddress,
+        validatorWeights,
+        setValidatorWeights
     } = useExampleStore();
 
     const [isInitializing, setIsInitializing] = useState(false);
@@ -52,12 +54,12 @@ export default function InitValidatorSet() {
                 validatorManagerBlockchainID: cb58ToHex(chainID),
                 validatorManagerAddress: proxyAddress as `0x${string}`,
                 initialValidators: nodePopJsons
-                    .map(json => {
+                    .map((json, index) => {
                         const node = JSON.parse(json).result;
                         return {
                             nodeID: cb58ToHex(node.nodeID.split('-')[1]),
                             blsPublicKey: node.nodePOP.publicKey,
-                            weight: 100
+                            weight: validatorWeights[index]
                         };
                     })
             }, 0];
@@ -179,6 +181,14 @@ export default function InitValidatorSet() {
                 <div className="text-sm text-gray-500">
                     Type in terminal: <span className="font-mono block">{`curl -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.getNodeID"}' -H "content-type:application/json;" 127.0.0.1:9650/ext/info`}</span>
                 </div>
+
+                <InputArray
+                    label="Validator Weights"
+                    values={validatorWeights.map(weight => weight.toString()).slice(0, nodePopJsons.length)}
+                    onChange={(weightsStrings) => setValidatorWeights(weightsStrings.map(weight => parseInt(weight)))}
+                    type="number"
+                    disableAddRemove={true}
+                />
 
                 <Input
                     label="L1 Conversion Signature"

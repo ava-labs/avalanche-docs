@@ -2,11 +2,12 @@ import { useExampleStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { packL1ConversionMessage, PackL1ConversionMessageArgs } from "./convertWarp";
-import { utils } from "@avalabs/avalanchejs";
+import { networkIDs, utils } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
-
+import { useEffect } from "react";
+import { CodeHighlighter } from "../../ui/CodeHighlighter";
 export const CollectConversionSignatures = () => {
     const { showBoundary } = useErrorBoundary();
     const {
@@ -22,40 +23,79 @@ export const CollectConversionSignatures = () => {
         setNodePopJsons,
         L1ConversionSignature,
         setL1ConversionSignature,
+        validatorWeights,
+        setValidatorWeights,
     } = useExampleStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
+    const [message, setMessage] = useState("");
+    const [justification, setJustification] = useState("");
+    const [networkName, setNetworkName] = useState<"fuji" | "mainnet" | undefined>(undefined);
+    const [sdkCallString, setSdkCallString] = useState("");
+
+
+    useEffect(() => {
+        if (networkID === networkIDs.MainnetID) {
+            setNetworkName("mainnet");
+        } else if (networkID === networkIDs.FujiID) {
+            setNetworkName("fuji");
+        } else {
+            showBoundary(new Error("Unsupported network with ID " + networkID));
+        }
+    }, [networkID]);
+
+    useEffect(() => {
+        const pChainChainID = '11111111111111111111111111111111LpoYY';
+
+        const conversionArgs: PackL1ConversionMessageArgs = {
+            subnetId: subnetID,
+            managerChainID: chainID,
+            managerAddress,
+            validators: nodePopJsons.map((json, i) => {
+                const { nodeID, nodePOP } = JSON.parse(json).result;
+                return {
+                    nodeID,
+                    nodePOP,
+                    weight: validatorWeights[i]
+                }
+            })
+        };
+
+        const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, pChainChainID);
+
+        if (networkName) {
+            setMessage(utils.bufferToHex(message));
+            setJustification(utils.bufferToHex(justification));
+        }
+    }, [networkName, subnetID, chainID, managerAddress, nodePopJsons, validatorWeights, networkID]);
+
+    useEffect(() => {
+        setSdkCallString(`import { AvaCloudSDK } from "https://esm.sh/@avalabs/avacloud-sdk";
+const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
+    network: "${networkName}",
+    signatureAggregatorRequest: {
+        message: "${message}",
+        justification: "${justification}",
+        signingSubnetId: "${subnetID}",
+        quorumPercentage: 67, // Default threshold for subnet validation
+    },
+});`);
+    }, [networkName, message, justification, subnetID]);
 
     async function handleConvertSignatures() {
         setL1ConversionSignature("");
         setIsConverting(true);
         try {
-            const pChainChainID = '11111111111111111111111111111111LpoYY';
-
-            const conversionArgs: PackL1ConversionMessageArgs = {
-                subnetId: subnetID,
-                managerChainID: chainID,
-                managerAddress,
-                validators: nodePopJsons.map(json => JSON.parse(json).result)
-            };
-
-            const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, pChainChainID);
-
-            const avaCloudSDK = new AvaCloudSDK({
-                chainId: networkID.toString(),
-                network: networkID === 1 ? "mainnet" : "fuji",
-            });
-
-            const response = await avaCloudSDK.data.signatureAggregator.aggregateSignatures({
-                network: networkID === 1 ? "mainnet" : "fuji",
+            const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
+                network: networkName,
                 signatureAggregatorRequest: {
-                    message: utils.bufferToHex(message).slice(2), // Remove '0x' prefix
-                    justification: utils.bufferToHex(justification).slice(2), // Remove '0x' prefix
+                    message: message,
+                    justification: justification,
                     signingSubnetId: subnetID,
                     quorumPercentage: 67, // Default threshold for subnet validation
                 },
             });
 
-            setL1ConversionSignature(response.signedMessage);
+            setL1ConversionSignature(signedMessage);
         } catch (error) {
             showBoundary(error);
         } finally {
@@ -68,7 +108,7 @@ export const CollectConversionSignatures = () => {
             <div className="space-y-4">
                 <h2 className="text-lg font-semibold ">Collect conversion signatures</h2>
                 <div className="p-4 bg-gray-100 rounded-lg">
-                    <p className="text-gray-700">Please get your P-Chain address first</p>
+                    <p className="">Please get your P-Chain address first</p>
                 </div>
             </div>
         );
@@ -113,8 +153,22 @@ export const CollectConversionSignatures = () => {
                     placeholder={'{"result":{"nodeID":"NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg","nodePOP":{"publicKey":"0x...","proofOfPossession":"0x..."}}}'}
                     rows={4}
                 />
-                <div className="text-sm text-gray-500">
+                <div className="text-sm ">
                     Type in terminal: <span className="font-mono block">{`curl -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.getNodeID"}' -H "content-type:application/json;" 127.0.0.1:9650/ext/info`}</span>
+                </div>
+                <InputArray
+                    label="Validator Weights"
+                    values={validatorWeights.map(weight => weight.toString()).slice(0, nodePopJsons.length)}
+                    onChange={(weightsStrings) => setValidatorWeights(weightsStrings.map(weight => parseInt(weight)))}
+                    type="number"
+                    disableAddRemove={true}
+                />
+                <div className="mb-4">
+                    <div className="text-sm font-semibold">SDK Call that will be executed</div>
+                    <CodeHighlighter
+                        code={sdkCallString}
+                        language="typescript"
+                    />
                 </div>
                 <Button
                     type="primary"

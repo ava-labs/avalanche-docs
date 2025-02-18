@@ -20,7 +20,9 @@ export const ConvertToL1 = () => {
         managerAddress,
         setManagerAddress,
         L1ID,
-        setL1ID
+        setL1ID,
+        validatorWeights,
+        setValidatorWeights
     } = useExampleStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
 
@@ -38,8 +40,10 @@ export const ConvertToL1 = () => {
                 addresses: [pChainAddress]
             });
 
-            const validators = nodePopJsons.map(nodePopJson => {
-                const { nodeID, nodePOP } = JSON.parse(nodePopJson).result;
+            const validators: L1Validator[] = [];
+
+            for (let i = 0; i < nodePopJsons.length; i++) {
+                const { nodeID, nodePOP } = JSON.parse(nodePopJsons[i]).result;
                 const publicKey = utils.hexToBuffer(nodePOP.publicKey);
                 if (!nodePOP.proofOfPossession) throw new Error("Proof of possession is missing");
                 const signature = utils.hexToBuffer(nodePOP.proofOfPossession);
@@ -47,15 +51,17 @@ export const ConvertToL1 = () => {
 
                 const pChainOwner = PChainOwner.fromNative([addressBytes], 1);
 
-                return L1Validator.fromNative(
+                if (!validatorWeights[i]) throw new Error("Validator weight is missing for validator #" + i);
+
+                validators.push(L1Validator.fromNative(
                     nodeID,
-                    BigInt(100), // weight 
+                    BigInt(validatorWeights[i]), // weight 
                     BigInt(1000000000), // balance 
                     new pvmSerial.ProofOfPossession(publicKey, signature),
                     pChainOwner,
                     pChainOwner
-                );
-            });
+                ));
+            }
 
             const managerAddressBytes = utils.hexToBuffer(managerAddress.replace('0x', ''));
 
@@ -128,7 +134,7 @@ export const ConvertToL1 = () => {
                     type="text"
                 />
                 <InputArray
-                    label="Info.getNodeID responses of the initial validators"
+                    label="Proofs of possession of the initial validators"
                     values={nodePopJsons}
                     onChange={setNodePopJsons}
                     type="textarea"
@@ -138,6 +144,13 @@ export const ConvertToL1 = () => {
                 <div className="text-sm text-gray-500 ">
                     Type in terminal: <span className="font-mono block">{`curl -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.getNodeID"}' -H "content-type:application/json;" 127.0.0.1:9650/ext/info`}</span>
                 </div>
+                <InputArray
+                    label="Validator Weights (in the same order as the validators)"
+                    values={validatorWeights.map(weight => weight.toString()).slice(0, nodePopJsons.length)}
+                    onChange={(weightsStrings) => setValidatorWeights(weightsStrings.map(weight => parseInt(weight)))}
+                    type="number"
+                    disableAddRemove={true}
+                />
                 <Button
                     type="primary"
                     onClick={handleConvertToL1}

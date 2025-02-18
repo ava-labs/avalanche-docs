@@ -17,9 +17,9 @@ interface SubnetToL1ConversionValidatorData {
         publicKey: string;
         proofOfPossession: string;
     };
+    weight: number;
 }
 
-const BootstrapValidatorWeight = 100n;
 const codecVersion = 0;
 
 const encodeUint16 = (num: number): Uint8Array => encodeNumber(num, 2);
@@ -73,7 +73,7 @@ export function marshalSubnetToL1ConversionData(args: PackL1ConversionMessageArg
         }
         parts.push(encodeVarBytes(utils.base58check.decode(validator.nodeID.split("-")[1])));
         parts.push(utils.hexToBuffer(validator.nodePOP.publicKey));
-        parts.push(encodeUint64(BootstrapValidatorWeight));
+        parts.push(encodeUint64(BigInt(validator.weight)));
     }
 
     const result = concatenateUint8Arrays(...parts);

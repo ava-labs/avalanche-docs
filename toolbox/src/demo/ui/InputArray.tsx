@@ -11,6 +11,7 @@ type InputArrayProps = {
     type?: string,
     rows?: number,
     disabled?: boolean,
+    disableAddRemove?: boolean,
 } & Omit<InputProps | TextareaProps, 'label' | 'value' | 'onChange' | 'notes'>;
 
 export const InputArray = ({
@@ -19,6 +20,7 @@ export const InputArray = ({
     onChange,
     placeholder,
     notesUnderInput,
+    disableAddRemove,
     ...inputProps
 }: InputArrayProps) => {
     const handleAdd = () => {
@@ -51,27 +53,32 @@ export const InputArray = ({
                             placeholder={placeholder}
                             notes={index === 0 ? notesUnderInput : undefined}
                         />
-                        <button
-                            onClick={() => handleRemove(index)}
-                            disabled={inputProps.disabled}
-                            className="absolute top-9 right-2 p-1 text-gray-400 hover:text-gray-600 disabled:text-gray-300"
-                        >
-                            <X size={16} />
-                        </button>
+                        {!disableAddRemove && (
+                            <button
+                                onClick={() => handleRemove(index)}
+                                disabled={inputProps.disabled}
+                                className="absolute top-9 right-2 p-1 text-gray-400 hover:text-gray-600 disabled:text-gray-300"
+                            >
+                                <X size={16} />
+                            </button>
+                        )}
                     </div>
                 </div>
             ))}
             {values.length === 0 && (
                 <p className="text-sm text-gray-500 italic">No entries yet. Click "Add Entry" to begin.</p>
             )}
-            <Button
-                onClick={handleAdd}
-                disabled={inputProps.disabled}
-                type="default"
-                className="w-full mt-2"
-            >
-                Add Entry
-            </Button>
+            {!disableAddRemove && (
+                <Button
+                    onClick={handleAdd}
+                    disabled={inputProps.disabled}
+                    type="default"
+                    className="w-full mt-2"
+                >
+                    Add Entry
+                </Button>
+            )}
         </div>
     );
 };
+

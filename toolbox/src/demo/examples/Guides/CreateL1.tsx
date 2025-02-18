@@ -12,102 +12,103 @@ export default function CreateL1() {
         walletChainId,
         evmChainRpcUrl,
         validatorManagerAddress,
-        evmChainId, genesisData
+        evmChainId, genesisData,
     } = useExampleStore();
 
     // FIXME: The 'done' property should either be implemented for all steps or not implemented at all. Hidden for now.
 
-    const steps: { id: string, title: string, description: string, done: boolean | undefined }[] = [
+    const steps: { link: string, title: string, description: string, done: boolean | undefined }[] = [
         {
-            id: "getPChainAddress",
+            link: "getPChainAddress",
             title: "Get P-chain Address",
             description: "Connect your wallet and get your P-chain address to start the process.",
             done: pChainAddress !== ""
         },
         {
-            id: "createSubnet",
+            link: "createSubnet",
             title: "Create Subnet",
             description: "Create a new subnet on the P-chain.",
             done: subnetID !== ""
         },
         {
-            id: "genesisBuilder",
+            link: "genesisBuilder",
             title: "Build Genesis Data",
-            description: "Build genesis data for your new chain.",
+            description: "Just open the page and it will generate genesis data for you.",
             done: genesisData !== ""
         },
         {
-            id: "createChain",
+            link: "createChain",
             title: "Create Chain",
-            description: "Create a new chain within your subnet.",
+            description: "Create a new chain within your subnet using the genesis data you built.",
             done: chainID !== ""
         },
         {
-            id: "avalanchegoDocker",
+            link: "avalanchegoDocker",
             title: "Launch Validator Node",
-            description: "Set up an Avalanchego node in Docker to get proof of possession.",
+            description: "Use the default settings",
             done: nodePopJsons.length > 0
         },
         {
-            id: "convertToL1",
+            link: "convertToL1",
             title: "Convert to L1",
             description: "Convert your subnet to an L1 chain.",
             done: L1ID !== ""
         },
         {
-            id: "collectConversionSignatures",
+            link: "collectConversionSignatures",
             title: "Collect Signatures",
             description: "Collect conversion signatures from validators.",
             done: L1ConversionSignature !== ""
         },
         {
-            id: "rpcUrlForChain",
+            link: "avalanchegoDocker",
+            title: "Launch RPC Node",
+            description: "Set Node Type to RPC, enable Debug&Trace, enter your IP address",
+            done: undefined
+        },
+        {
+            link: "rpcUrlForChain",
             title: "Build RPC URL",
-            description: "Create the RPC URL for your new chain.",
+            description: "Use https://[yourIP].nip.io as a domain",
             done: evmChainRpcUrl !== ""
         },
         {
-            id: "switchChain",
+            link: "switchChain",
             title: "Switch Chain",
             description: "Connect to your new L1 chain using the RPC URL.",
             done: walletChainId === evmChainId
         },
         {
-            id: "deployValidatorMessages",
+            link: "deployValidatorMessages",
             title: "Deploy Validator Messages",
             description: "Deploy the validator messages library contract.",
             done: validatorMessagesLibAddress !== ""
         },
         {
-            id: "deployValidatorManager",
+            link: "deployValidatorManager",
             title: "Deploy Validator Manager",
             description: "Deploy the validator manager contract.",
             done: validatorManagerAddress !== ""
         },
         {
-            id: "upgradeProxy",
+            link: "upgradeProxy",
             title: "Upgrade Proxy",
             description: "Point the proxy to the validator manager.",
             done: undefined
         },
         {
-            id: "initialize",
+            link: "initialize",
             title: "Initialize",
             description: "Initialize the validator manager contract.",
             done: undefined
         },
         {
-            id: "initValidatorSet",
+            link: "initValidatorSet",
             title: "Initialize Validator Set",
             description: "Initialize the validator set.",
             done: undefined
         }
     ];
-
-    const handleStepClick = (stepId: string) => {
-        window.location.hash = stepId;
-    };
-
 
     return (
         <div className="space-y-6">
@@ -122,9 +123,9 @@ export default function CreateL1() {
             <div className="space-y-4">
                 {steps.map((step, index) => (
                     <div
-                        key={step.id}
+                        key={`${step.link}-${index}`}
                         className={`p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors cursor-pointer`}
-                        onClick={() => handleStepClick(step.id)}
+                        onClick={() => window.location.hash = step.link}
                     >
                         <div className="flex items-start space-x-3">
                             <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
