@@ -130,7 +130,7 @@ export const GenesisBuilder = () => {
             {genesisData && !genesisData.includes("Invalid") && (
                 <CodeHighlighter
                     code={genesisData}
-                    language="typescript"
+                    lang="json"
                 />
             )}
         </div>
