@@ -8,15 +8,17 @@ const node1Validator = {
     nodePOP: {
         publicKey: "0xa2ea5071b185225223ceb743fe265b47905fff03c64d6517733b9f79bde4937bfab0a7b903e697e2b4b5b90a7aa74427" as `0x${string}`,
         proofOfPossession: "0x98b52bcfbbb9425f14ca97aedcfc318e00f92daaac711cb0b6a7da4af9c9aac20f4ce986f45165747c4f5ece93860c250640e060a0ac6af89c95f2aadff1eb2515bb9fdd05dbdfa12bf63ba7e07dc53b94f37c31a3ecc680fdb76cc300821b8c" as `0x${string}`
-    }
+    },
+    weight: 100
 };
 
 const node2Validator = {
     nodeID: "NodeID-5o3bfUMfJhxfKYSKu3VyiAq7APVZNyX19",
     nodePOP: {
         publicKey: "0xa09e63e32ce3b24205455bc470b54d6260bc826821857458b67adcab63ea842b392407b9dff0564ce520f6337ac2b5ca" as `0x${string}`,
-        proofOfPossession: "0x83fdae9dc276b17c8fe21f2800b6794466102d17d59ff914e667ed2ba4fecd948ad226b7d3aec6e5c813a303ef58429919ee029472646c582e636b07051fc495ae4c12f3b624f87945a489d5902472e53239a9a1417be83ecd6c9cd987f32663" as `0x${string}`
-    }
+        proofOfPossession: "0x83fdae9dc276b17c8fe21f2800b6794466102d17d59ff914e667ed2ba4fecd948ad226b7d3aec6e5c813a303ef58429919ee029472646c582e636b07051fc495ae4c12f3b624f87945a489d5902472e53239a9a1417be83ecd6c9cd987f32663" as `0x${string}`,
+    },
+    weight: 100
 };
 
 const defaultArgs: PackL1ConversionMessageArgs = {
