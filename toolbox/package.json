@@ -23,7 +23,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "postinstall": "node update_docker-tag.js"
+    "postinstall": "node update_docker_tags.js"
   },
   "dependencies": {
     "@avalabs/avacloud-sdk": "^0.9.0",
