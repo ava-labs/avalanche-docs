@@ -33,7 +33,7 @@ const features = [
     title: "<strong>Balance TopUp</strong>.",
     description: "Tool for funding AVAX balances of Avalanche L1 Validators directly from the C-Chain. Coming Soon.",
     icon: CircleFadingPlus,
-    href: "#"
+    href: "/tools/l1-validator-balance-topup"
   },
   {
     id: 4,
