@@ -145,23 +145,3 @@ export default function CreateL1() {
         </div>
     );
 }
-
-/*
-
-This guide will walk you through manual L1 creation step by step. You will need a vm with a static IPv4 address, for example from AWS or DigitalOcean with ports 443, 9651 and 9653 open.  
-
-0. Connect your wallet and get your P-chain address
-1. Create a new subnet
-2. Create a new chain 
-3. launch a validator node (link to Avalanchego in Docker) to get a proof of possesion
-4. Convert Subnet to L1
-5. Collect conversion signatures
-6. Launch an RPC node. 
-7. Build an RPC URL, copy it
-8. Switch Chain. Use the RPC URL you copied. 
-9. Deploy a validator messages library
-10. Deploy a validator manager
-11. Upgrade the proxy to point to the validator manager
-12. Initialize the validator manager contract
-
-*/
