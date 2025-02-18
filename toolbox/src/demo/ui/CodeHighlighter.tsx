@@ -5,6 +5,7 @@ import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
 import { oneLight, vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { Copy, Check } from 'lucide-react';
 
 // Register only TypeScript language for now
 
@@ -23,10 +24,12 @@ interface CodeHighlighterProps {
     lang: string;
     maxHeight?: number;
     footer?: React.ReactNode;
+    disableCopy?: boolean;
 }
 
-export function CodeHighlighter({ code, lang, maxHeight, footer }: CodeHighlighterProps) {
+export function CodeHighlighter({ code, lang, maxHeight, footer, disableCopy }: CodeHighlighterProps) {
     const [isDark, setIsDark] = useState(false);
+    const [copied, setCopied] = useState(false);
     const theme = isDark ? DARK_THEME : LIGHT_THEME;
 
     useEffect(() => {
@@ -65,6 +68,12 @@ export function CodeHighlighter({ code, lang, maxHeight, footer }: CodeHighlight
         };
     }, []);
 
+    const handleCopy = async () => {
+        await navigator.clipboard.writeText(code);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
     if (!availableLanguages.includes(lang)) {
         return <div className="text-red-500">
             Language "{lang}" is not supported yet by CodeHighlighter.tsx. Edit the file to add support for it.
@@ -72,9 +81,21 @@ export function CodeHighlighter({ code, lang, maxHeight, footer }: CodeHighlight
     }
 
     return (
-        <div className="my-4 border border-gray-200 dark:border-gray-700 rounded-md w-full overflow-hidden " style={{
+        <div className="my-4 border border-gray-200 dark:border-gray-700 rounded-md w-full overflow-hidden relative" style={{
             backgroundColor: isDark ? '#000000' : 'rgb(250, 250, 250)',
         }}>
+            {!disableCopy && <button
+                onClick={handleCopy}
+                className="absolute top-2 right-2 p-2 rounded-md bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Copy code"
+            >
+                {copied ? (
+                    <Check size={16} className="text-green-500" />
+                ) : (
+                    <Copy size={16} className="text-gray-500 dark:text-gray-400" />
+                )}
+            </button>}
+
             <div style={{
                 maxHeight: maxHeight ? `${maxHeight}px` : undefined,
                 overflow: maxHeight ? 'auto' : undefined,

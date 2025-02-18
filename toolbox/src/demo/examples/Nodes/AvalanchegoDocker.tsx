@@ -3,7 +3,7 @@ import { Input, Select } from "../../ui";
 import { useState, useEffect } from "react";
 import { networkIDs } from "@avalabs/avalanchejs";
 import versions from "../../../versions.json";
-
+import { CodeHighlighter } from "../../ui/CodeHighlighter";
 const generateDockerCommand = (subnets: string[], isRPC: boolean, networkID: number) => {
     const httpPort = isRPC ? "8080" : "9650";
     const stakingPort = isRPC ? "9653" : "9651";
@@ -202,43 +202,48 @@ export const AvalanchegoDocker = () => {
                     <div className="mt-4">
                         <h3 className="text-md font-medium mb-2">Debug & Trace Setup Command:</h3>
                         <p className="text-sm mb-2">Note: Run this before starting the node.</p>
-                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
-                            {enableDebugNTraceCommand(chainID)}
-                        </pre>
+                        <CodeHighlighter
+                            code={enableDebugNTraceCommand(chainID)}
+                            lang="bash"
+                        />
                     </div>
                 )}
 
                 <div className="mt-4">
                     <h3 className="text-md font-medium mb-2">Node Command:</h3>
-                    <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
-                        {rpcCommand}
-                    </pre>
+                    <CodeHighlighter
+                        code={rpcCommand}
+                        lang="bash"
+                    />
                 </div>
 
                 {domain && isRPC === "true" && (
                     <div className="mt-4">
                         <h3 className="text-md font-medium mb-2">Reverse Proxy Command:</h3>
-                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
-                            {reverseProxyCommand(domain)}
-                        </pre>
+                        <CodeHighlighter
+                            code={reverseProxyCommand(domain)}
+                            lang="bash"
+                        />
                     </div>
                 )}
 
                 {chainID && (
                     <div className="mt-4">
                         <h3 className="text-md font-medium mb-2">Check Node Command:</h3>
-                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
-                            {checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), false)}
-                        </pre>
+                        <CodeHighlighter
+                            code={checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), false)}
+                            lang="bash"
+                        />
                     </div>
                 )}
 
                 {chainID && isRPC === "true" && enableDebugTrace === "true" && (
                     <div className="mt-4">
                         <h3 className="text-md font-medium mb-2">Check that debug & trace is working:</h3>
-                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
-                            {checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), true)}
-                        </pre>
+                        <CodeHighlighter
+                            code={checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), true)}
+                            lang="bash"
+                        />
                     </div>
                 )}
             </div>

@@ -51,6 +51,7 @@ export function GithubEmbed({ filePath, user, repo, branch = "main", maxHeight }
             lang={lang}
             maxHeight={maxHeight}
             footer={footer}
+            disableCopy={true}
         />
     );
 }
