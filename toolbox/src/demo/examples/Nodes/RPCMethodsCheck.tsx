@@ -298,14 +298,14 @@ export const RPCMethodsCheck = () => {
                             <div>
                                 <span>{testName}</span>
                                 {result.message && (
-                                    <span className="text-sm text-gray-600"> | {result.message.substring(0, 100)}{result.message.length > 100 && '...'}</span>
+                                    <span className="text-sm "> | {result.message.substring(0, 100)}{result.message.length > 100 && '...'}</span>
                                 )}
                             </div>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p className="text-gray-500">No results yet</p>
+                <p className="">No results yet</p>
             )}
         </div>
     );

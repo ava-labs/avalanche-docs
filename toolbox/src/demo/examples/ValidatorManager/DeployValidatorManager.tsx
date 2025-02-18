@@ -87,7 +87,7 @@ export const DeployValidatorManager = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Deploy Validator Manager</h2>
+            <h2 className="text-lg font-semibold ">Deploy Validator Manager</h2>
             <div className="space-y-4">
                 <div className="mb-4">
                     This will deploy the <code>ValidatorManager</code> contract to the currently connected EVM network <code>{walletChainId}</code>.

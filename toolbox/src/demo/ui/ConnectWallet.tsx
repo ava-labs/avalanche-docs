@@ -122,13 +122,13 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
                         <Wallet className="w-6 h-8 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">Connected to</div>
+                        <div className="text-sm  dark:">Connected to</div>
                         <div className="font-mono">{walletEVMAddress}</div>
                     </div>
                 </div>
                 {walletChainId && (
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                        Chain ID: <span className="font-mono text-gray-900 dark:text-gray-100">{walletChainId}</span>
+                    <div className="text-sm  dark:">
+                        Chain ID: <span className="font-mono  dark:">{walletChainId}</span>
                     </div>
                 )}
             </div>

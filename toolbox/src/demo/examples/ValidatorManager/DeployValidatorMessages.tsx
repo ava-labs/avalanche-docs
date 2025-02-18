@@ -60,7 +60,7 @@ export const DeployValidatorMessages = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Deploy Validator Messages Library</h2>
+            <h2 className="text-lg font-semibold ">Deploy Validator Messages Library</h2>
             <div className="space-y-4">
                 <div className="mb-4">
                     This will deploy the <code>ValidatorMessages</code> contract to the currently connected EVM network <code>{walletChainId}</code>. <code>ValidatorMessages</code> is a library required by the <code>ValidatorManager</code> family of contracts.

@@ -128,7 +128,7 @@ export const Initialize = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Initialize Validator Manager</h2>
+            <h2 className="text-lg font-semibold ">Initialize Validator Manager</h2>
             <div className="space-y-4">
                 <Input
                     label="Proxy address"

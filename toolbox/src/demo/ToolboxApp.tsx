@@ -233,7 +233,7 @@ export default function ToolboxApp() {
                                             onClick={() => handleComponentClick(id)}
                                             className={`cursor-pointer w-full text-left px-3 py-2 text-sm rounded-md transition-all ${selectedTool === id
                                                 ? 'bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-medium'
-                                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                                                : ' dark: hover:bg-gray-50 dark:hover:bg-gray-800'
                                                 }`}
                                         >
                                             {label}

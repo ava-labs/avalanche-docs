@@ -44,32 +44,44 @@ export const CollectConversionSignatures = () => {
     }, [networkID]);
 
     useEffect(() => {
-        const pChainChainID = '11111111111111111111111111111111LpoYY';
+        try {
+            const pChainChainID = '11111111111111111111111111111111LpoYY';
 
-        const conversionArgs: PackL1ConversionMessageArgs = {
-            subnetId: subnetID,
-            managerChainID: chainID,
-            managerAddress,
-            validators: nodePopJsons.map((json, i) => {
-                const { nodeID, nodePOP } = JSON.parse(json).result;
-                return {
-                    nodeID,
-                    nodePOP,
-                    weight: validatorWeights[i]
-                }
-            })
-        };
+            const conversionArgs: PackL1ConversionMessageArgs = {
+                subnetId: subnetID,
+                managerChainID: chainID,
+                managerAddress,
+                validators: nodePopJsons.filter(json => json !== "").map((json, i) => {
+                    const { nodeID, nodePOP } = JSON.parse(json).result;
+                    return {
+                        nodeID,
+                        nodePOP,
+                        weight: validatorWeights[i]
+                    }
+                })
+            };
 
-        const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, pChainChainID);
+            if (conversionArgs.validators.length === 0) {
+                setMessage("")
+                setJustification("")
+                return
+            }
 
-        if (networkName) {
-            setMessage(utils.bufferToHex(message));
-            setJustification(utils.bufferToHex(justification));
+            const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, pChainChainID);
+
+            if (networkName) {
+                setMessage(utils.bufferToHex(message));
+                setJustification(utils.bufferToHex(justification));
+            }
+        } catch (e) {
+            setMessage("")
+            setJustification("")
         }
     }, [networkName, subnetID, chainID, managerAddress, nodePopJsons, validatorWeights, networkID]);
 
     useEffect(() => {
-        setSdkCallString(`import { AvaCloudSDK } from "https://esm.sh/@avalabs/avacloud-sdk";
+        if (message && justification) {
+            setSdkCallString(`import { AvaCloudSDK } from "https://esm.sh/@avalabs/avacloud-sdk";
 const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
     network: "${networkName}",
     signatureAggregatorRequest: {
@@ -79,6 +91,9 @@ const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggre
         quorumPercentage: 67, // Default threshold for subnet validation
     },
 });`);
+        } else {
+            setSdkCallString("")
+        }
     }, [networkName, message, justification, subnetID]);
 
     async function handleConvertSignatures() {
@@ -163,13 +178,13 @@ const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggre
                     type="number"
                     disableAddRemove={true}
                 />
-                <div className="mb-4">
+                {sdkCallString && <div className="mb-4">
                     <div className="text-sm font-semibold">SDK Call that will be executed</div>
                     <CodeHighlighter
                         code={sdkCallString}
                         language="typescript"
                     />
-                </div>
+                </div>}
                 <Button
                     type="primary"
                     onClick={handleConvertSignatures}

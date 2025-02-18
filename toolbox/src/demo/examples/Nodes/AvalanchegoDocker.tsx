@@ -134,7 +134,7 @@ export const AvalanchegoDocker = () => {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Avalanchego in Docker</h2>
+            <h2 className="text-lg font-semibold ">Avalanchego in Docker</h2>
             <div className="space-y-4">
                 <div className="mb-4">
                     This command will start a Docker container running an RPC or validator node that tracks your subnet.
@@ -201,25 +201,25 @@ export const AvalanchegoDocker = () => {
                 )}
                 {chainID && enableDebugTrace === "true" && isRPC === "true" && (
                     <div className="mt-4">
-                        <h3 className="text-md font-medium  mb-2">Debug & Trace Setup Command:</h3>
-                        <p className="text-sm text-gray-600 mb-2">Note: Run this before starting the node.</p>
-                        <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
+                        <h3 className="text-md font-medium mb-2">Debug & Trace Setup Command:</h3>
+                        <p className="text-sm mb-2">Note: Run this before starting the node.</p>
+                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
                             {enableDebugNTraceCommand(chainID)}
                         </pre>
                     </div>
                 )}
 
                 <div className="mt-4">
-                    <h3 className="text-md font-medium  mb-2">Node Command:</h3>
-                    <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
+                    <h3 className="text-md font-medium mb-2">Node Command:</h3>
+                    <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
                         {rpcCommand}
                     </pre>
                 </div>
 
                 {domain && isRPC === "true" && (
                     <div className="mt-4">
-                        <h3 className="text-md font-medium  mb-2">Reverse Proxy Command ():</h3>
-                        <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
+                        <h3 className="text-md font-medium mb-2">Reverse Proxy Command:</h3>
+                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
                             {reverseProxyCommand(domain)}
                         </pre>
                     </div>
@@ -227,8 +227,8 @@ export const AvalanchegoDocker = () => {
 
                 {chainID && (
                     <div className="mt-4">
-                        <h3 className="text-md font-medium  mb-2">Check Node Command:</h3>
-                        <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
+                        <h3 className="text-md font-medium mb-2">Check Node Command:</h3>
+                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
                             {checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), false)}
                         </pre>
                     </div>
@@ -236,8 +236,8 @@ export const AvalanchegoDocker = () => {
 
                 {chainID && isRPC === "true" && enableDebugTrace === "true" && (
                     <div className="mt-4">
-                        <h3 className="text-md font-medium  mb-2">Check that debug & trace is working:</h3>
-                        <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap">
+                        <h3 className="text-md font-medium mb-2">Check that debug & trace is working:</h3>
+                        <pre className="p-4 rounded-lg overflow-x-auto text-sm whitespace-pre-wrap border border-gray-500">
                             {checkNodeCommand(chainID, domain || ("127.0.0.1:" + (isRPC === "true" ? "8080" : "9650")), true)}
                         </pre>
                     </div>

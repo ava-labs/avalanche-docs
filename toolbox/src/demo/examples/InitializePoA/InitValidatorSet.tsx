@@ -129,7 +129,7 @@ export default function InitValidatorSet() {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-gray-800">Initialize Validator Set</h2>
+            <h2 className="text-lg font-semibold ">Initialize Validator Set</h2>
 
             {error && (
                 <div className="p-4 text-red-700 bg-red-100 rounded-md">
@@ -178,7 +178,7 @@ export default function InitValidatorSet() {
                     placeholder={'{"result":{"nodeID":"NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg","nodePOP":{"publicKey":"0x...","proofOfPossession":"0x..."}}}'}
                     rows={4}
                 />
-                <div className="text-sm text-gray-500">
+                <div className="text-sm ">
                     Type in terminal: <span className="font-mono block">{`curl -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.getNodeID"}' -H "content-type:application/json;" 127.0.0.1:9650/ext/info`}</span>
                 </div>
 

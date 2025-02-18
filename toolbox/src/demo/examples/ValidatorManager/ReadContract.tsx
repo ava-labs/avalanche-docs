@@ -111,7 +111,7 @@ export const ReadContract = () => {
     return (
         <div className="space-y-8">
             <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-gray-800">Read Proxy Contract</h2>
+                <h2 className="text-lg font-semibold ">Read Proxy Contract</h2>
                 <Input
                     label="Proxy Address"
                     value={proxyAddress || ""}
@@ -131,25 +131,25 @@ export const ReadContract = () => {
             </div>
 
             <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                <table className="min-w-full border border-gray-500">
+                    <thead>
                         <tr>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b border-gray-500">
                                 Function
                             </th>
-                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-b border-gray-500">
                                 Value
                             </th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody>
                         {Object.entries(viewData).map(([key, value]) => (
-                            <tr key={key} className="hover:bg-gray-50">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <tr key={key} className="hover:bg-gray-50/10">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium border-b border-gray-500">
                                     {key}
                                 </td>
-                                <td className="px-6 py-4 text-sm text-gray-500">
-                                    <pre className="whitespace-pre-wrap font-mono bg-gray-50 p-2 rounded">
+                                <td className="px-6 py-4 text-sm border-b border-gray-500">
+                                    <pre className="whitespace-pre-wrap font-mono rounded border border-gray-500 p-2">
                                         {typeof value === 'string'
                                             ? value
                                             : JSON.stringify(value, null, 2)}
@@ -163,12 +163,12 @@ export const ReadContract = () => {
 
             {Object.keys(eventLogs).length > 0 && (
                 <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Events</h3>
+                    <h3 className="text-lg font-semibold mb-4">Events</h3>
                     <div className="space-y-4">
                         {Object.entries(eventLogs).map(([eventName, logs]) => (
-                            <div key={eventName} className="p-4 bg-gray-50 rounded-lg">
-                                <h4 className="font-medium text-gray-900 mb-2">{eventName}</h4>
-                                <pre className="text-sm text-gray-700 overflow-auto">
+                            <div key={eventName} className="p-4 rounded-lg border border-gray-500">
+                                <h4 className="font-medium mb-2">{eventName}</h4>
+                                <pre className="text-sm overflow-auto">
                                     {JSON.stringify(logs, null, 2)}
                                 </pre>
                             </div>

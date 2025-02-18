@@ -141,7 +141,7 @@ export const ConvertToL1 = () => {
                     placeholder={'{"result":{"nodeID":"NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg","nodePOP":{"publicKey":"0x...","proofOfPossession":"0x..."}}}'}
                     rows={4}
                 />
-                <div className="text-sm text-gray-500 ">
+                <div className="text-sm  ">
                     Type in terminal: <span className="font-mono block">{`curl -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.getNodeID"}' -H "content-type:application/json;" 127.0.0.1:9650/ext/info`}</span>
                 </div>
                 <InputArray

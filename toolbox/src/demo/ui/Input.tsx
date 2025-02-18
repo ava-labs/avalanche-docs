@@ -79,7 +79,7 @@ export function Input(props: InputProps | TextareaProps) {
                 <p className="text-red-500 text-xs mt-1">{error}</p>
             )}
             {notes && (
-                <p className="text-gray-500 text-xs mt-1">{notes}</p>
+                <p className=" text-xs mt-1">{notes}</p>
             )}
         </div>
     )

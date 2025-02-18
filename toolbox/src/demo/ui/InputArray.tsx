@@ -39,7 +39,7 @@ export const InputArray = ({
 
     return (
         <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium ">
                 {label}
             </label>
             {values.map((value, index) => (
@@ -57,7 +57,7 @@ export const InputArray = ({
                             <button
                                 onClick={() => handleRemove(index)}
                                 disabled={inputProps.disabled}
-                                className="absolute top-9 right-2 p-1 text-gray-400 hover:text-gray-600 disabled:text-gray-300"
+                                className="absolute top-9 right-2 p-1  hover: disabled:"
                             >
                                 <X size={16} />
                             </button>
@@ -66,7 +66,7 @@ export const InputArray = ({
                 </div>
             ))}
             {values.length === 0 && (
-                <p className="text-sm text-gray-500 italic">No entries yet. Click "Add Entry" to begin.</p>
+                <p className="text-sm  italic">No entries yet. Click "Add Entry" to begin.</p>
             )}
             {!disableAddRemove && (
                 <Button

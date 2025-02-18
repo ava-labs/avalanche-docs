@@ -113,8 +113,8 @@ export default function CreateL1() {
     return (
         <div className="space-y-6">
             <div>
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Create L1 Guide</h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                <h2 className="text-lg font-semibold  dark:">Create L1 Guide</h2>
+                <p className="text-sm  dark: mt-2">
                     This guide will walk you through manual L1 creation step by step. You will need a VM with a static IPv4 address
                     with ports 443, 9651, and 9653 open.
                 </p>
@@ -132,11 +132,11 @@ export default function CreateL1() {
                                 <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">{index + 1}</span>
                             </div>
                             <div className="flex-1">
-                                <h3 className={`text-base font-medium text-gray-900 dark:text-gray-100`}>{step.title}</h3>
-                                <p className={`mt-1 text-sm text-gray-500 dark:text-gray-400`}>{step.description}</p>
+                                <h3 className={`text-base font-medium  dark:`}>{step.title}</h3>
+                                <p className={`mt-1 text-sm  dark:`}>{step.description}</p>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <ArrowRight className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+                                <ArrowRight className="w-5 h-5  dark:" />
                             </div>
                         </div>
                     </div>
