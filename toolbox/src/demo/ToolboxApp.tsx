@@ -19,8 +19,17 @@ import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
 import { useState, useEffect } from "react";
 import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
+import CreateL1 from "./examples/Guides/CreateL1";
 
 const componentGroups = {
+    "Guides": [
+        {
+            id: 'createL1Guide',
+            label: "Create L1",
+            component: CreateL1,
+            fileNames: ["toolbox/src/demo/examples/Guides/CreateL1.tsx"]
+        }
+    ],
     "Wallet": [
         {
             id: 'getPChainAddress',
