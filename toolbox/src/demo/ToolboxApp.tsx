@@ -224,7 +224,6 @@ export default function ToolboxApp() {
                                 repo="avalanche-docs"
                                 branch="l1-toolbox" // TODO: set automatically or at least change to main
                                 filePath={fileName}
-                                lang="TS"
                                 maxHeight={600}
                             />
                         ))}

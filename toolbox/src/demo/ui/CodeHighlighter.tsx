@@ -1,37 +1,47 @@
 import { useEffect, useState } from 'react';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import ts from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript';
-import { vs, vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
+import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
+import { oneLight, vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Register only TypeScript language for now
-SyntaxHighlighter.registerLanguage('typescript', ts);
+
+const DARK_THEME = vscDarkPlus;
+const LIGHT_THEME = oneLight;
+
+const availableLanguages = ['ts', 'tsx', 'bash'];
+
+SyntaxHighlighter.registerLanguage('ts', ts);
+SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('bash', bash);
 
 interface CodeHighlighterProps {
     code: string;
-    language?: "typescript" | "javascript";
+    lang: string;
     maxHeight?: number;
     footer?: React.ReactNode;
 }
 
-export function CodeHighlighter({ code, language = "typescript", maxHeight, footer }: CodeHighlighterProps) {
-    const [theme, setTheme] = useState(vs);
-
-    const getTheme = () => {
-        if (typeof document === 'undefined') return vs;
-        if (document.documentElement.classList.contains('dark')) return vs2015;
-        if (document.documentElement.classList.contains('light')) return vs;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? vs2015 : vs;
-    };
+export function CodeHighlighter({ code, lang, maxHeight, footer }: CodeHighlighterProps) {
+    const [isDark, setIsDark] = useState(false);
+    const theme = isDark ? DARK_THEME : LIGHT_THEME;
 
     useEffect(() => {
         if (typeof document === 'undefined') return;
 
-        // Set initial theme
-        setTheme(getTheme());
+        const checkIsDark = () => {
+            return document.documentElement.classList.contains('dark') ||
+                (!document.documentElement.classList.contains('light') &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches);
+        };
+
+        // Set initial dark mode
+        setIsDark(checkIsDark());
 
         // Watch for class changes on html element
         const observer = new MutationObserver(() => {
-            setTheme(getTheme());
+            setIsDark(checkIsDark());
         });
 
         observer.observe(document.documentElement, {
@@ -42,7 +52,7 @@ export function CodeHighlighter({ code, language = "typescript", maxHeight, foot
         // Watch for system theme changes
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         const handleThemeChange = () => {
-            setTheme(getTheme());
+            setIsDark(checkIsDark());
         };
 
         mediaQuery.addEventListener('change', handleThemeChange);
@@ -53,14 +63,22 @@ export function CodeHighlighter({ code, language = "typescript", maxHeight, foot
         };
     }, []);
 
+    if (!availableLanguages.includes(lang)) {
+        return <div className="text-red-500">
+            Language "{lang}" is not supported yet by CodeHighlighter.tsx. Edit the file to add support for it.
+        </div>
+    }
+
     return (
-        <div className="my-4 border border-gray-200 dark:border-gray-700 rounded-md w-full overflow-hidden bg-white dark:bg-black">
+        <div className="my-4 border border-gray-200 dark:border-gray-700 rounded-md w-full overflow-hidden " style={{
+            backgroundColor: isDark ? '#000000' : 'rgb(250, 250, 250)',
+        }}>
             <div style={{
                 maxHeight: maxHeight ? `${maxHeight}px` : undefined,
                 overflow: maxHeight ? 'auto' : undefined,
             }}>
                 <SyntaxHighlighter
-                    language={language}
+                    language={lang}
                     style={theme}
                     showLineNumbers={true}
                     customStyle={{

@@ -7,13 +7,14 @@ interface GithubEmbedProps {
     user: string;
     repo: string;
     branch?: string;
-    lang?: "TS" | "JS";
     maxHeight?: number;
 }
 
-export function GithubEmbed({ filePath, user, repo, branch = "main", lang = "TS", maxHeight }: GithubEmbedProps) {
+export function GithubEmbed({ filePath, user, repo, branch = "main", maxHeight }: GithubEmbedProps) {
     const [code, setCode] = useState<string>('');
     const [error, setError] = useState<string>('');
+
+    const lang = filePath.split('.').pop()?.toLowerCase() || 'unknown';
 
     const sourceURL = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${filePath}`;
 
@@ -23,12 +24,6 @@ export function GithubEmbed({ filePath, user, repo, branch = "main", lang = "TS"
             .then(setCode)
             .catch(err => setError(err.message));
     }, [sourceURL]);
-
-    if (lang !== "TS") {
-        return <div className="text-red-500">
-            {lang} is not supported yet
-        </div>
-    }
 
     if (error) {
         return <div className="text-red-500">Failed to load code: {error}</div>
@@ -53,7 +48,7 @@ export function GithubEmbed({ filePath, user, repo, branch = "main", lang = "TS"
     return (
         <CodeHighlighter
             code={code}
-            language="typescript"
+            lang={lang}
             maxHeight={maxHeight}
             footer={footer}
         />
