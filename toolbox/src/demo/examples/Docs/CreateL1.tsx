@@ -1,7 +1,4 @@
 export default function CreateL1() {
-    // We'll keep the store import for future use but remove unused variables
-    // const { } = useExampleStore();
-
     return (
         <div className="space-y-6">
             <div>
