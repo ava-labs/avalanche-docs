@@ -5,7 +5,7 @@ import { useState } from "react";
 import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
-import PChainAddressRequired from "../../ui/PChainAddressRequired";
+
 export const ConvertToL1 = () => {
     const { showBoundary } = useErrorBoundary();
     const {
