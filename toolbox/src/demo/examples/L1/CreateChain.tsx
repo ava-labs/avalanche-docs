@@ -3,16 +3,16 @@ import { pvm } from "@avalabs/avalanchejs";
 import { getRPCEndpoint } from "../../utils/rpcEndpoint";
 import { initialState, useExampleStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
-import PChainAddressRequired from "../../ui/PChainAddressRequired";
+import { quickAndDirtyGenesisBuilder } from "./GenesisBuilder";
 
 export const CreateChain = () => {
     const { showBoundary } = useErrorBoundary();
     const {
         networkID,
-        pChainAddress,
+        getPChainAddress,
         subnetID,
         chainName,
         vmId,
@@ -21,11 +21,18 @@ export const CreateChain = () => {
         chainID,
         setChainID,
         setSubnetID,
-        walletEVMAddress,
         genesisData,
-        setGenesisData
+        setGenesisData,
+        walletEVMAddress,
+        evmChainId,
     } = useExampleStore(state => state);
     const [isCreating, setIsCreating] = useState(false);
+
+    useEffect(() => {
+        if (!genesisData) {
+            setGenesisData(quickAndDirtyGenesisBuilder(walletEVMAddress, evmChainId));
+        }
+    }, [walletEVMAddress, evmChainId]);
 
 
     async function handleCreateChain() {
@@ -36,10 +43,10 @@ export const CreateChain = () => {
             const feeState = await pvmApi.getFeeState();
             const context = await Context.getContextFromURI(getRPCEndpoint(networkID));
 
-            const addressBytes = utils.bech32ToBytes(pChainAddress);
+            const addressBytes = utils.bech32ToBytes(getPChainAddress());
 
             const { utxos } = await pvmApi.getUTXOs({
-                addresses: [pChainAddress]
+                addresses: [getPChainAddress()]
             });
 
             const tx = pvm.e.newCreateChainTx({
@@ -70,14 +77,6 @@ export const CreateChain = () => {
         }
     }
 
-    if (!pChainAddress) {
-        return (
-            <div className="space-y-4">
-                <h2 className="text-lg font-semibold ">Create Chain</h2>
-                <PChainAddressRequired />
-            </div>
-        );
-    }
 
     if (!genesisData) {
         return (
@@ -100,7 +99,7 @@ export const CreateChain = () => {
             <div className="space-y-4">
                 <Input
                     label="Your P-Chain Address"
-                    value={pChainAddress}
+                    value={getPChainAddress()}
                     disabled={true}
                     type="text"
                 />
@@ -131,6 +130,7 @@ export const CreateChain = () => {
                     type="textarea"
                     placeholder="Enter genesis data in JSON format"
                     notes={`Auto-generated for address ${walletEVMAddress}`}
+                    rows={20}
                 />
                 <Button
                     type="primary"

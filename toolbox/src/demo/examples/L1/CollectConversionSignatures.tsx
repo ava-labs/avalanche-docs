@@ -12,7 +12,6 @@ export const CollectConversionSignatures = () => {
     const { showBoundary } = useErrorBoundary();
     const {
         networkID,
-        pChainAddress,
         subnetID,
         chainID,
         setSubnetID,
@@ -74,6 +73,8 @@ export const CollectConversionSignatures = () => {
                 setJustification(utils.bufferToHex(justification));
             }
         } catch (e) {
+            console.error(e);
+            showBoundary(e);
             setMessage("")
             setJustification("")
         }
@@ -118,27 +119,11 @@ const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggre
         }
     }
 
-    if (!pChainAddress) {
-        return (
-            <div className="space-y-4">
-                <h2 className="text-lg font-semibold ">Collect conversion signatures</h2>
-                <div className="p-4 bg-gray-100 rounded-lg">
-                    <p className="">Please get your P-Chain address first</p>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="space-y-4">
             <h2 className="text-lg font-semibold ">Collect conversion signatures</h2>
             <div className="space-y-4">
-                <Input
-                    label="Your P-Chain Address"
-                    value={pChainAddress}
-                    disabled={true}
-                    type="text"
-                />
                 <Input
                     label="Subnet ID"
                     value={subnetID}

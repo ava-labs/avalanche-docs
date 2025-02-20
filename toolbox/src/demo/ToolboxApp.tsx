@@ -35,7 +35,7 @@ const componentGroups: Record<string, ComponentType[]> = {
             id: 'getPChainAddress',
             label: "Get P-chain Address",
             component: GetPChainAddress,
-            fileNames: ["toolbox/src/demo/examples/Wallet/GetPChainAddress.tsx"]
+            fileNames: ["toolbox/src/demo/examples/Wallet/pChainAddrFromPubKey.ts", "toolbox/src/demo/examples/Wallet/GetPChainAddress.tsx"]
         },
         {
             id: 'switchChain',

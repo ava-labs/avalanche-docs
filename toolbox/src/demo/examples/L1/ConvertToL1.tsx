@@ -10,7 +10,7 @@ export const ConvertToL1 = () => {
     const { showBoundary } = useErrorBoundary();
     const {
         networkID,
-        pChainAddress,
+        getPChainAddress,
         subnetID,
         chainID,
         setSubnetID,
@@ -35,10 +35,10 @@ export const ConvertToL1 = () => {
             const feeState = await pvmApi.getFeeState();
             const context = await Context.getContextFromURI(getRPCEndpoint(networkID));
 
-            const addressBytes = utils.bech32ToBytes(pChainAddress);
+            const addressBytes = utils.bech32ToBytes(getPChainAddress());
 
             const { utxos } = await pvmApi.getUTXOs({
-                addresses: [pChainAddress]
+                addresses: [getPChainAddress()]
             });
 
             const validators: L1Validator[] = [];
@@ -96,22 +96,13 @@ export const ConvertToL1 = () => {
         }
     }
 
-    if (!pChainAddress) {
-        return (
-            <div className="space-y-4">
-                <h2 className="text-lg font-semibold ">Convert Subnet to L1</h2>
-                <PChainAddressRequired />
-            </div>
-        );
-    }
-
     return (
         <div className="space-y-4">
             <h2 className="text-lg font-semibold ">Convert Subnet to L1</h2>
             <div className="space-y-4">
                 <Input
                     label="Your P-Chain Address"
-                    value={pChainAddress}
+                    value={getPChainAddress()}
                     disabled={true}
                     type="text"
                 />

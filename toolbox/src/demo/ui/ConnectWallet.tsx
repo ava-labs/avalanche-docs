@@ -6,7 +6,7 @@ import { useExampleStore } from "../utils/store";
 
 
 export const ConnectWallet = ({ children, onConnect, required }: { children: React.ReactNode, onConnect: (connected: boolean) => void, required: boolean }) => {
-    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress } = useExampleStore();
+    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress, setXpPublicKey, setEvmPublicKey } = useExampleStore();
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -27,7 +27,18 @@ export const ConnectWallet = ({ children, onConnect, required }: { children: Rea
             if (!accounts?.[0]) {
                 throw new Error("No accounts found");
             }
+
+            // Request public keys after connecting
+            const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
+                method: "avalanche_getAccountPubKey",
+            });
+            if (!pubkeys) {
+                throw new Error("Failed to get public keys");
+            }
+
             setWalletEVMAddress(accounts[0]);
+            setXpPublicKey(pubkeys.xp);
+            setEvmPublicKey(pubkeys.evm);
             setIsConnected(true);
             onConnect(true);
         } catch (error) {
@@ -40,10 +51,20 @@ export const ConnectWallet = ({ children, onConnect, required }: { children: Rea
     useEffect(() => {
         window.avalanche?.request<string[]>({
             method: "eth_accounts",
-        }).then((accounts) => {
+        }).then(async (accounts) => {
             if (accounts.length > 0) {
                 console.log(`ConnectWallet:Connected to ${accounts[0]}`);
                 setWalletEVMAddress(accounts[0]);
+
+                // Get public keys for already connected account
+                const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
+                    method: "avalanche_getAccountPubKey",
+                });
+                if (pubkeys) {
+                    setXpPublicKey(pubkeys.xp);
+                    setEvmPublicKey(pubkeys.evm);
+                }
+
                 setIsConnected(true);
                 onConnect(true);
             } else {
@@ -52,7 +73,6 @@ export const ConnectWallet = ({ children, onConnect, required }: { children: Rea
                 onConnect(false);
             }
         }).catch((error) => {
-            // We can still log errors here, but no need to set localError for initial connection check
             console.log(`ConnectWallet:Error connecting to wallet: ${error}`);
         }).finally(() => {
             setIsLoaded(true);

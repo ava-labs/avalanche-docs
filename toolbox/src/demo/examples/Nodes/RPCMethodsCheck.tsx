@@ -237,7 +237,7 @@ export const RPCMethodsCheck = () => {
     const {
         evmChainRpcUrl,
         setEvmChainRpcUrl,
-        pChainAddress,
+        getPChainAddress,
         walletEVMAddress
     } = useExampleStore();
     const { showBoundary } = useErrorBoundary();
@@ -249,6 +249,8 @@ export const RPCMethodsCheck = () => {
         metrics: TestResult | null
     }>({ pChain: null, evm: null, admin: null, metrics: null });
     const [baseURL, setBaseURL] = useState<string>("");
+
+    const pChainAddress = getPChainAddress();
 
 
     useEffect(() => {

@@ -3,7 +3,7 @@
 import TransparentUpgradableProxy from "../../../../contracts/openzeppelin-4.9/compiled/TransparentUpgradeableProxy.json"
 import ProxyAdmin from "../../../../contracts/openzeppelin-4.9/compiled/ProxyAdmin.json"
 
-const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: number) => {
+export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: number) => {
     if (!/^0x[a-fA-F0-9]{40}$/.test(ownerAddress)) {
         throw new Error("Invalid ownerAddress format. It should be '0x' followed by 20 hex bytes (40 characters).");
     }
