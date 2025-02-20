@@ -1,5 +1,3 @@
-import { useExampleStore } from "../../utils/store";
-
 export default function CreateL1() {
     // We'll keep the store import for future use but remove unused variables
     // const { } = useExampleStore();
