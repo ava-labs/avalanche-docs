@@ -149,18 +149,20 @@ export const ConnectWallet = ({ children, onConnect, required }: { children: Rea
     return (
         <div className={`space-y-4 transition`}>
             {walletEVMAddress && <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 shadow-sm rounded-lg p-3 flex items-center justify-between">
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 flex-4 min-w-0">
                     <div className="p-2 rounded-full">
                         <Wallet className="w-6 h-8 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <div>
-                        <div className="text-sm  dark:">Connected to</div>
-                        <div className="font-mono">{walletEVMAddress}</div>
+                    <div className="min-w-0">
+                        <div className="text-sm">Connected to</div>
+                        <div className="font-mono truncate whitespace-nowrap overflow-hidden text-ellipsis block">
+                            {walletEVMAddress}
+                        </div>
                     </div>
                 </div>
                 {walletChainId && (
-                    <div className="text-sm  dark:">
-                        Chain ID: <span className="font-mono  dark:">{walletChainId}</span>
+                    <div className="text-sm flex-3 min-w-0">
+                        Chain ID: <span className="font-mono truncate whitespace-nowrap overflow-hidden text-ellipsis block">{walletChainId}</span>
                     </div>
                 )}
             </div>}

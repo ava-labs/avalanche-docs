@@ -234,7 +234,7 @@ export default function ToolboxApp() {
     };
 
     return (
-        <div className="container mx-auto flex">
+        <div className="container mx-auto flex flex-col md:flex-row">
             <div className="w-64 flex-shrink-0 p-6">
                 <ul className="space-y-6">
                     {Object.entries(componentGroups).map(([groupName, components]) => (
