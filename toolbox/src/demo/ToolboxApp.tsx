@@ -19,7 +19,7 @@ import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
 import { useState, useEffect, ReactElement } from "react";
 import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
-import CreateL1 from "./examples/Guides/CreateL1";
+import CreateL1 from "./examples/Docs/CreateL1";
 
 type ComponentType = {
     id: string;
@@ -30,15 +30,6 @@ type ComponentType = {
 }
 
 const componentGroups: Record<string, ComponentType[]> = {
-    "Guides": [
-        {
-            id: 'createL1Guide',
-            label: "Create L1",
-            component: CreateL1,
-            fileNames: ["toolbox/src/demo/examples/Guides/CreateL1.tsx"],
-            skipWalletConnection: true,
-        }
-    ],
     "Wallet": [
         {
             id: 'getPChainAddress',
@@ -147,7 +138,16 @@ const componentGroups: Record<string, ComponentType[]> = {
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
             skipWalletConnection: true,
         }
-    ]
+    ],
+    "Docs": [
+        {
+            id: 'createL1Guide',
+            label: "Create L1",
+            component: CreateL1,
+            fileNames: ["toolbox/src/demo/examples/Docs/CreateL1.tsx"],
+            skipWalletConnection: true,
+        }
+    ],
 
 };
 
