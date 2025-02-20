@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake, HardDrive, LayoutTemplate, Wallet, Search, Cloud, Database, ListFilter } from 'lucide-react';
+import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness, MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake, HardDrive, LayoutTemplate, Wallet, Search, Cloud, Database, ListFilter } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -89,7 +89,7 @@ const docsMenu: LinkItemType = {
   text: 'Documentation',
   url: '/docs',
   items: [
-   {
+    {
       menu: {
         banner: (
           <div className="-mx-3 -mt-3">
@@ -155,7 +155,7 @@ const academyMenu: LinkItemType = {
   text: 'Academy',
   url: '/academy',
   items: [
-   {
+    {
       menu: {
         banner: (
           <div className="-mx-3 -mt-3">
@@ -271,9 +271,9 @@ const toolsMenu: LinkItemType = {
     },
     {
       icon: <Waypoints />,
-      text: 'ICM Deployment (Coming soon)',
-      description: 'Deploy the Interchain Messaging contracts and the ICM Registry to connect your L1 to the Avalanche network.',
-      url: '',
+      text: 'L1 Toolbox (Beta)',
+      description: 'Manage your L1 with a highly granular set of tools.',
+      url: '/tools/l1-toolbox',
       menu: {
         className: 'lg:col-start-3 lg:row-start-1',
       },
@@ -305,64 +305,64 @@ const grantsMenu: LinkItemType = {
   url: '/grants',
   items: [
     {
-       menu: {
-         banner: (
-           <div className="-mx-3 -mt-3">
-             <Image
-               src={CodebaseBanner}
-               alt="Preview"
-               className="rounded-t-lg object-cover"
-               style={{
-                 maskImage:
-                   'linear-gradient(to bottom,white 60%,transparent)',
-               }}
-             />
-           </div>
-         ),
-         className: 'md:row-span-2',
-       },
-       icon: <BriefcaseBusiness />,
-       text: 'Codebase',
-       description: 'We help transform good ideas into great web3 companies & ambitious builders into extraordinary founders.',
-       url: 'https://codebase.avax.network/',
-     },
-     {
-       icon: <Cpu />,
-       text: 'InfraBUIDL',
-       description: "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
-       url: 'https://www.avax.network/infrabuidl-program',
-       menu: {
-         className: 'lg:col-start-2',
-       },
-     },
-     {
-       icon: <Bot />,
-       text: 'InfraBUIDL (AI)',
-       description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure.',
-       url: 'https://www.avax.network/infrabuidl-ai-program',
-       menu: {
-         className: 'lg:col-start-2',
-       },
-     },
-     {
-       icon: <MessageSquareQuote />,
-       text: 'Retro9000',
-       description: "Build innovative projects on Avalanche. Get rewarded for your creativity.",
-       url: 'https://retro9000.avax.network/',
-       menu: {
-         className: 'lg:col-start-3 lg:row-start-1',
-       },
-     },
-     {
-       icon: <Snowflake />,
-       text: 'Blizzard Fund',
-       description: "A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support.",
-       url: 'https://www.blizzard.fund/',
-       menu: {
-         className: 'lg:col-start-3',
-       },
-     },
-   ],
+      menu: {
+        banner: (
+          <div className="-mx-3 -mt-3">
+            <Image
+              src={CodebaseBanner}
+              alt="Preview"
+              className="rounded-t-lg object-cover"
+              style={{
+                maskImage:
+                  'linear-gradient(to bottom,white 60%,transparent)',
+              }}
+            />
+          </div>
+        ),
+        className: 'md:row-span-2',
+      },
+      icon: <BriefcaseBusiness />,
+      text: 'Codebase',
+      description: 'We help transform good ideas into great web3 companies & ambitious builders into extraordinary founders.',
+      url: 'https://codebase.avax.network/',
+    },
+    {
+      icon: <Cpu />,
+      text: 'InfraBUIDL',
+      description: "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
+      url: 'https://www.avax.network/infrabuidl-program',
+      menu: {
+        className: 'lg:col-start-2',
+      },
+    },
+    {
+      icon: <Bot />,
+      text: 'InfraBUIDL (AI)',
+      description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure.',
+      url: 'https://www.avax.network/infrabuidl-ai-program',
+      menu: {
+        className: 'lg:col-start-2',
+      },
+    },
+    {
+      icon: <MessageSquareQuote />,
+      text: 'Retro9000',
+      description: "Build innovative projects on Avalanche. Get rewarded for your creativity.",
+      url: 'https://retro9000.avax.network/',
+      menu: {
+        className: 'lg:col-start-3 lg:row-start-1',
+      },
+    },
+    {
+      icon: <Snowflake />,
+      text: 'Blizzard Fund',
+      description: "A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support.",
+      url: 'https://www.blizzard.fund/',
+      menu: {
+        className: 'lg:col-start-3',
+      },
+    },
+  ],
 };
 
 export const baseOptions: BaseLayoutProps = {
@@ -370,7 +370,7 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
       <>
-        { <AvalancheLogo className="size-7" fill="currentColor"/> }
+        {<AvalancheLogo className="size-7" fill="currentColor" />}
         <span style={{ fontSize: "large" }}>Builders Hub</span>
       </>
     ),

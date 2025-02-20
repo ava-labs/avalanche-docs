@@ -148,7 +148,8 @@ export default function RemoveValidator({
             const unsignedPChainDisableValidatorTxHex = bytesToHex(unsignedPChainDisableValidatorTxBytes)
 
             // Submit to Core Wallet
-            const disabledValidatorTxResponse = await window.avalanche.request({
+            if (!window.avalanche) throw new Error('Core wallet not found');
+            const disabledValidatorTxResponse = await window.avalanche.request<string>({
                 method: 'avalanche_sendTransaction',
                 params: {
                     transactionHex: unsignedPChainDisableValidatorTxHex,
@@ -182,7 +183,7 @@ export default function RemoveValidator({
             const unsignedPChainChangeWeightTxHex = bytesToHex(unsignedPChainChangeWeightTxBytes)
 
             // Submit to Core Wallet
-            const changeWeightTxResponse = await window.avalanche.request({
+            const changeWeightTxResponse = await window.avalanche.request<string>({
                 method: 'avalanche_sendTransaction',
                 params: {
                     transactionHex: unsignedPChainChangeWeightTxHex,

@@ -117,7 +117,7 @@ export default function AddValidator({
     const fetchPChainAddress = async () => {
       const pChainAddress = await fetchPChainAddressForActiveAccount();
       if (!newPChainAddress || newPChainAddress === '') {
-        setNewPChainAddress(pChainAddress);
+        setNewPChainAddress(pChainAddress as string);
       }
     };
     fetchPChainAddress();
@@ -335,6 +335,7 @@ export default function AddValidator({
       if (!startFromStep || startFromStep === 'registerOnPChain') {
         updateStepStatus('registerOnPChain', 'loading')
         try {
+          if (!window.avalanche) throw new Error('Core wallet not found');
           // Use saved message if retrying
           const messageToUse = startFromStep ? savedSignedMessage : signedValidatorManagerMessage;
 

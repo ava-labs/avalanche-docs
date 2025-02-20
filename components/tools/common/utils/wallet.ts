@@ -13,7 +13,7 @@ export async function getWalletAddress() {
         throw new Error('No wallet detected');
     }
 
-    const accounts = await window.avalanche.request({ method: 'eth_requestAccounts', params: [] });
+    const accounts = await window.avalanche.request<string[]>({ method: 'eth_requestAccounts', params: [] });
     if (!accounts || accounts.length === 0) {
         throw new Error('No account found');
     }
