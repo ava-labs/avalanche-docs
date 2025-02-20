@@ -91,9 +91,18 @@ export const ConnectWallet = ({ children, onConnect, required }: { children: Rea
         });
 
         // Subscribe to account changes
-        window.avalanche?.on("accountsChanged", (accounts: string[]) => {
+        window.avalanche?.on("accountsChanged", async (accounts: string[]) => {
             if (accounts.length > 0) {
                 setWalletEVMAddress(accounts[0]);
+
+                // Get public keys for already connected account
+                const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
+                    method: "avalanche_getAccountPubKey",
+                });
+                if (pubkeys) {
+                    setXpPublicKey(pubkeys.xp);
+                }
+
                 setIsConnected(true);
                 onConnect(true);
             } else {
