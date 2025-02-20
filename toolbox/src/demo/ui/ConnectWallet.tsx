@@ -121,6 +121,7 @@ export const ConnectWallet = ({ children, onConnect, required }: { children: Rea
     if (required && !hasWallet) {
         return (
             <div className="space-y-2">
+                <p>Core wallet is required for most of these tools.</p>
                 <a
                     href="https://chromewebstore.google.com/detail/core-crypto-wallet-nft-ex/agoakfejjabomempkjlepdflaleeobhb"
                     target="_blank"
