@@ -8,14 +8,12 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GoogleLogo } from "./google-logo";
 import { AvalancheLoginLogo } from "./AvalancheLoginLogo";
-import { WalletLogo } from "./WalletLogo";
-
+import { signIn } from "next-auth/react";
 export const loginFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
@@ -30,14 +28,26 @@ function Formlogin() {
     },
   });
 
+  async function SignInGoogle() {
+    await signIn("google", { callbackUrl: `/` });
+  }
+
   return (
     <>
-      <div className="grid grid-cols-2 gap-4 pt-10">
-        <div className=" p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-10 items-center">
+        <a
+          href="#"
+          className="absolute right-20 text-sm text-zinc-400 underline hover:text-gray-300"
+          style={{ top: "7rem" }}
+        >
+          Sign Up
+        </a>
+        <div className="hidden md:flex justify-center">
           <AvalancheLoginLogo className="w-[90%] max-w-[28rem] text-white"></AvalancheLoginLogo>
         </div>
+
         <div className="flex flex-col justify-center items-center ">
-          <div className="text-center">
+          <div className="text-center mt-6">
             <h3 className="font-medium text-2xl">Sign in to your account</h3>
             <p className="text-zinc-400">
               Sign up with email or choose another method.
@@ -45,8 +55,8 @@ function Formlogin() {
           </div>
           <br></br>
           <Form {...formMethods}>
-            <form className="space-y-2.5 w-full max-w-[25rem]">
-              {/* Campo de Email */}
+            <form method="post" className="space-y-2.5 w-full max-w-[25rem]">
+              
               <FormField
                 control={formMethods.control}
                 name="email"
@@ -64,8 +74,6 @@ function Formlogin() {
                   </FormItem>
                 )}
               />
-
-              {/* Campo de Contraseña */}
               <FormField
                 control={formMethods.control}
                 name="password"
@@ -110,7 +118,10 @@ function Formlogin() {
           </div>
 
           <div className="flex items-center justify-center gap-4">
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition">
+            <button
+              className="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition"
+              onClick={SignInGoogle}
+            >
               <GoogleLogo fill="currentColor" />
             </button>
 
@@ -118,17 +129,8 @@ function Formlogin() {
               {/* <GithubLogo className="w-5 h-5" fill="currentColor" /> */}
               <span className="text-sm font-medium">Github</span>
             </button>
-
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition">
-              {/* <XLogo className="w-5 h-5" fill="currentColor" /> */}
-              <span className="text-sm font-medium">X</span>
-            </button>
           </div>
-          <br></br>
-          <button className="flex items-center justify-center gap-1 px-4 py-2  bg-zinc-950  text-white rounded w-full max-w-[400px]  border border-red-500 hover:bg-gray-800 transition">
-            <WalletLogo fill="currentColor"></WalletLogo>
-            <span className="text-sm font-medium">Connect a Wallet</span>
-          </button>
+
           <br></br>
           <footer className="pt-10">
             <p className="text-zinc-400 items-center justify-center w-full max-w-[400px] text-center text-sm font-medium">
