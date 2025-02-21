@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { getGuidePage, getGuidePages } from '@/utils/content-loader/guide-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
-import { ArrowUpRightIcon, MessagesSquare } from 'lucide-react';
+import { ArrowUpRightIcon, MessagesSquare, AlertCircle } from 'lucide-react';
 import { SiX } from '@icons-pack/react-simple-icons';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { Popup, PopupContent, PopupTrigger } from 'fumadocs-twoslash/ui';
@@ -26,6 +26,7 @@ import {
 import { BadgeCheck } from "lucide-react";
 import Mermaid from "@/components/content-design/mermaid";
 import Comments from '@/components/ui/comments';
+import newGithubIssueUrl from 'new-github-issue-url';
 
 export const dynamicParams = false;
 
@@ -127,7 +128,21 @@ export default async function Page(props: {
                         rel="noreferrer noopener"
                         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
                     >
-                        <ArrowUpRightIcon className="size-5" /> Edit on Github 
+                        <ArrowUpRightIcon className="size-5" /> Edit on Github
+                    </a>
+                    <a
+                        href={newGithubIssueUrl({
+                            user: 'ava-labs',
+                            repo: 'avalanche-docs',
+                            title: `Update Guide ${page.data.title} information`,
+                            body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /guides/${params.slug}\n\n[Provide more details here...]`,
+                            labels: ['outdated', 'documentation'],
+                        })}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+                    >
+                        <AlertCircle className="size-5" /> Report Issue
                     </a>
                 </div>
             </article>

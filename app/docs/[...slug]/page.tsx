@@ -29,6 +29,8 @@ import {
 } from "fumadocs-ui/components/codeblock";
 import { BadgeCheck } from "lucide-react";
 import Mermaid from "@/components/content-design/mermaid";
+import EditOnGithubButton from "@/components/ui/edit-on-github-button";
+import ReportIssueButton from "@/components/ui/report-issue-button";
 
 export const dynamicParams = false;
 
@@ -54,12 +56,6 @@ export default async function Page(props: {
           <BackToTop />
         ),
       }}
-      editOnGithub={{
-        repo: 'avalanche-docs',
-        owner: 'ava-labs',
-        sha: 'master',
-        path,
-      }}
       article={{
         className: 'max-sm:pb-16',
       }}>
@@ -80,6 +76,13 @@ export default async function Page(props: {
             </CodeBlock>
           ),
         }}/>
+        <div className="flex gap-6 mt-8">
+          <EditOnGithubButton path={path} />
+          <ReportIssueButton 
+            title={page.data.title}
+            pagePath={`/docs/${page.slugs.join('/')}`}
+          />
+        </div>
         {page.data.index ? <DocsCategory page={page} from={loaderOutput} /> : null}
       </DocsBody>
     </DocsPage>

@@ -20,10 +20,13 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Documentation</h1>
+        </div>
         <div>
-            <div className="relative">
+          <div className="relative">
             <Hero />
-            </div>
+          </div>
           <Introduction />
           <Highlights />
           <Features />
