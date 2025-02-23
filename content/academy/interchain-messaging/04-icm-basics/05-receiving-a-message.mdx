@@ -10,7 +10,7 @@ To receive a message we need to enable our cross-L1 dApps to being called by the
 
 ![](/course-images/teleporter/teleporter-source-destination-with-relayer.png)
 
-The Interchain Messaging does not know our contract and what functions it has. Therefore, our dApp on the destination Subnet has to implement the ITeleporterReceiver interface. It is very straight forward and only requires a single method for receiving the message that then can be called by the Interchain Messaging contract:
+The Interchain Messaging does not know our contract and what functions it has. Therefore, our dApp on the destination L1 has to implement the ITeleporterReceiver interface. It is very straight forward and only requires a single method for receiving the message that then can be called by the Interchain Messaging contract:
 
 ```solidity
 pragma solidity 0.8.18;
@@ -37,7 +37,7 @@ interface ITeleporterReceiver {
 The function receiveTeleporterMessage has three parameters:
 
 - **`originChainID`**: The chainID where the message originates from, meaning where the user or contract called the `sendCrossChainMessage` function of the Interchain Messaging contract
-- **`originSenderAddress`**: The address of the user or contract that called the `sendCrossChainMessage` function of the Interchain Messaging contract on the origin Subnet
+- **`originSenderAddress`**: The address of the user or contract that called the `sendCrossChainMessage` function of the Interchain Messaging contract on the origin L1
 - **`message`**: The message encoded in bytes
 
 An example for a contract being able to receive Interchain Messaging messages and storing these in a mapping could look like this:

@@ -57,7 +57,7 @@ If the verification is successful, the message is executed.
 
 ## Why doesn't the AWM Relayer also aggregate the BLS Public Keys?
 
-The BLS public key aggregation has to be done by every validator of the destination subnet. Some may ask why we don't perform this action off-chain through the AWM Relayer and attach it to the message (similar to the BLS signature aggregation).
+The BLS public key aggregation has to be done by every validator of the destination L1. Some may ask why we don't perform this action off-chain through the AWM Relayer and attach it to the message (similar to the BLS signature aggregation).
 
 Even though this would make the verification much faster, there is a security issue here. How can we be sure that the aggregated public key actually represents the public keys of the signing validators? How do we know that the AWM Relayer did not just create a bunch of public keys and an aggregated signature of these?
 
