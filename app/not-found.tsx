@@ -1,17 +1,18 @@
 "use client"
+
 import Link from "next/link";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { baseOptions } from "@/app/layout.config";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from 'react';
 
-function createGitHubIssueURL(path: string) {
-  const title = encodeURIComponent(`Missing Page: ${path}`);
+function createGitHubIssueURL(path: string | null) {
+  const title = encodeURIComponent(`Missing Page${path ? `: ${path}` : ''}`);
   const body = encodeURIComponent(
     `# Missing Page Report\n\n` +
-    `The following page was not found: \`${path}\`\n\n` +
+    `${path ? `The following page was not found: \`${path}\`\n\n` : ''}` +
     `## Expected Location\n` +
-    `I was trying to access: ${path}\n\n` +
+    `${path ? `I was trying to access: ${path}` : 'Please enter the URL you were trying to access'}\n\n` +
     `## Additional Context\n` +
     `Please provide any additional context about what you were looking for.`
   );
@@ -20,7 +21,7 @@ function createGitHubIssueURL(path: string) {
 }
 
 export default function NotFound() {
-  const [currentPath, setCurrentPath] = useState('');
+  const [currentPath, setCurrentPath] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -29,7 +30,7 @@ export default function NotFound() {
     }
   }, []);
 
-  const issueURL = currentPath ? createGitHubIssueURL(currentPath) : '#';
+  const issueURL = createGitHubIssueURL(currentPath);
 
   return (
     <HomeLayout {...baseOptions}>
@@ -60,7 +61,7 @@ export default function NotFound() {
             </div>
             <div className="flex flex-wrap gap-4">
               <Link href="https://x.com/AvalancheIntern" target="_blank">
-                <Button 
+                <Button
                   variant="outline"
                   className="dark:border-border dark:hover:bg-accent"
                 >
@@ -68,10 +69,9 @@ export default function NotFound() {
                 </Button>
               </Link>
               <Link href={issueURL} target="_blank">
-                <Button 
+                <Button
                   variant="default"
                   className="dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
-                  disabled={!currentPath}
                 >
                   Report Missing Page
                 </Button>

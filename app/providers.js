@@ -5,11 +5,12 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
   const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST
-
+  
   if (posthogKey) {
+    const consent = localStorage.getItem('cookie_consent')
     posthog.init(posthogKey, {
       api_host: posthogHost || 'https://app.posthog.com',
-      persistence: 'memory' //enables cookieless tracking
+      persistence: consent === 'yes' ? 'localStorage+cookie' : 'memory'
     })
   } else {
     console.warn('PostHog key not found in environment variables')
@@ -17,7 +18,6 @@ if (typeof window !== 'undefined') {
 }
 
 export function PHProvider({ children }) {
-  // Only render PostHogProvider if posthog is properly initialized
   if (!process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     return children
   }

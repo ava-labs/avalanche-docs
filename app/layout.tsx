@@ -10,6 +10,7 @@ import { baseUrl, createMetadata } from '@/utils/metadata';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Chatbot from "@/components/ui/chatbot"
+import { PrivacyPolicyBox } from "@/components/privacy-policy"
 
 export const metadata = createMetadata({
   title: {
@@ -36,6 +37,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Analytics />
           <SpeedInsights />
           <Chatbot />
+          <div id="privacy-banner-root" className="relative">
+            <PrivacyPolicyBox />
+          </div>
         </body>
       </PHProvider>
     </html>
