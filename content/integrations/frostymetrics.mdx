@@ -1,0 +1,78 @@
+---
+title: FrostyMetrics
+category: Analytics & Data
+available: ["C-Chain"]
+description: "FrostyMetrics provides comprehensive analytics APIs and SDKs for accessing real-time and historical Avalanche blockchain data."
+logo: /images/frostymetrics.jpeg
+developer: FrostyMetrics
+website: https://www.frostymetrics.com/
+documentation: https://docs.frostymetrics.com/
+---
+
+## Overview
+
+FrostyMetrics is a specialized analytics platform built for Avalanche, providing developers with APIs and SDKs to access comprehensive blockchain data. It enables integration of real-time metrics, historical data, and custom analytics into applications built on Avalanche.
+
+## Features
+
+- **Data Access**:
+  - Real-time blockchain metrics
+  - Historical data queries
+  - Custom data endpoints
+  - Aggregated statistics
+- **Integration Tools**:
+  - REST API
+  - WebSocket feeds
+  - GraphQL endpoints
+  - SDK integration
+- **Analytics Types**:
+  - Transaction metrics
+  - Address analytics
+  - Token statistics
+  - Protocol data
+- **Developer Tools**:
+  - Query builder
+  - Data filtering
+  - Custom endpoints
+  - Rate limiting options
+
+## Getting Started
+
+To integrate FrostyMetrics:
+
+1. **Access API**:
+   - Register for API key
+   - Choose subscription plan
+   - Set up authentication
+2. **Implementation**:
+```javascript
+import { FrostyMetricsClient } from '@frostymetrics/sdk';
+
+const client = new FrostyMetricsClient({
+  apiKey: 'your-api-key'
+});
+
+// Fetch real-time metrics
+const metrics = await client.getMetrics({
+  type: 'transaction',
+  timeframe: '24h'
+});
+```
+
+## Documentation
+
+For detailed API documentation and integration guides, visit the [FrostyMetrics Documentation](https://docs.frostymetrics.com/).
+
+## Use Cases
+
+FrostyMetrics enables:
+
+- **DApp Analytics**: Integrate blockchain metrics into applications
+- **Market Analysis**: Access historical data and trends
+- **Protocol Monitoring**: Track protocol performance and usage
+- **User Analytics**: Analyze user behavior and transactions
+- **Custom Dashboards**: Build custom analytics displays
+
+## Conclusion
+
+FrostyMetrics provides essential data infrastructure for developers building on Avalanche, offering comprehensive APIs and SDKs for accessing and analyzing blockchain data. Its tools enable developers to integrate sophisticated analytics capabilities into their applications. 
