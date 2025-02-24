@@ -52,7 +52,28 @@ function replaceRelativeLinks(content: string, sourceBaseUrl: string): string {
 }
 
 function transformContent(content: string, customTitle: string, customDescription: string, sourceBaseUrl: string): string {
+  // Remove any existing frontmatter
+  content = content.replace(/^---\n[\s\S]*?\n---\n/, '');
+  
+  // Remove the first heading as we'll use the frontmatter title
   content = content.replace(/^#\s+.+\n/, '');
+  
+  // Convert GitHub-flavored markdown to MDX-compatible syntax
+  content = content
+    // Handle note/warning/info blocks
+    .replace(/^:::(\s*note|tip|warning|info|caution)\s*$/gm, ':::$1')
+    // Convert image syntax to MDX-compatible format BEFORE handling other ! characters
+    .replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2" />')
+    // Convert admonitions to MDX callouts
+    .replace(/^!!!\s+(\w+)\s*\n/gm, ':::$1\n')
+    .replace(/^!!\s+(\w+)\s*\n/gm, '::$1\n')
+    // Convert any remaining ! at start of lines to text
+    .replace(/^!([^[{].*?)$/gm, '$1')
+    // Ensure proper spacing around HTML comments
+    .replace(/<!--(.*?)-->/g, '{/* $1 */}')
+    // Handle any inline ! that might be causing issues
+    .replace(/([^`]|^)!([^[{])/g, '$1$2');
+
   const title = customTitle || 'Untitled';
   const description = customDescription || '';
 
@@ -188,6 +209,34 @@ async function main(): Promise<void> {
       title: "CLI Commands",
       description: "Complete list of Avalanche CLI commands and their usage.",
       contentUrl: "https://github.com/ava-labs/avalanche-cli/blob/main/cmd/",
+    },
+    {
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/subnets/config.md",
+      outputPath: "content/docs/nodes/configure/subnet-configs.mdx",
+      title: "Subnet Configurations",
+      description: "This page describes the configuration options available for Subnets.",
+      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/subnets/",
+    },
+    {
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/platformvm/config/config.md",
+      outputPath: "content/docs/nodes/configure/chain-configs/p-chain.mdx",
+      title: "P-Chain Configurations",
+      description: "This page describes the configuration options available for the P-Chain.",
+      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/platformvm/config/",
+    },
+    {
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/config.md",
+      outputPath: "content/docs/nodes/configure/chain-configs/x-chain.mdx",
+      title: "X-Chain Configurations", 
+      description: "This page describes the configuration options available for the X-Chain.",
+      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/",
+    },
+    {
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/config/config.md",
+      outputPath: "content/docs/nodes/configure/configs-flags.mdx",
+      title: "AvalancheGo Config Flags",
+      description: "This page lists all available configuration options for AvalancheGo nodes.",
+      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/config/",
     },
   ];
 
