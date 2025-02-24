@@ -13,7 +13,7 @@ const dockerCommand = (activeOS: string, subnetID: string) => `docker run -it -d
   -e AVAGO_NETWORK_ID=fuji \\
   -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
   -e AVAGO_TRACK_SUBNETS=${subnetID} \\
-  -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \\
+  -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=opendns \\
   -e AVAGO_PLUGIN_DIR=/avalanchego/build/plugins/ \\
   -e HOME=/home/avalanche \\
   --user $(id -u):$(id -g) \\
