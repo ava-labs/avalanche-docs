@@ -60,6 +60,9 @@ function transformContent(content: string, customTitle: string, customDescriptio
   
   // Convert GitHub-flavored markdown to MDX-compatible syntax
   content = content
+    // Convert note blocks to proper MDX format
+    .replace(/>\s*\[NOTE\]\s*(.*?)$/gm, ':::note\n$1\n:::')
+    .replace(/>\s*\[TIP\]\s*(.*?)$/gm, ':::tip\n$1\n:::')
     // Handle note/warning/info blocks
     .replace(/^:::(\s*note|tip|warning|info|caution)\s*$/gm, ':::$1')
     // Convert image syntax to MDX-compatible format BEFORE handling other ! characters
