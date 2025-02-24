@@ -34,7 +34,7 @@ function Formlogin() {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-10 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4  items-center">
         <a
           href="#"
           className="absolute right-20 text-sm text-zinc-400 underline hover:text-gray-300"
@@ -42,8 +42,8 @@ function Formlogin() {
         >
           Sign Up
         </a>
-        <div className="hidden md:flex justify-center">
-          <AvalancheLoginLogo className="w-[90%] max-w-[28rem] text-white"></AvalancheLoginLogo>
+        <div className="hidden md:flex  h-full justify-center bg-zinc-900">
+          <AvalancheLoginLogo className="w-full max-w-[28rem] text-white"></AvalancheLoginLogo>
         </div>
 
         <div className="flex flex-col justify-center items-center ">
