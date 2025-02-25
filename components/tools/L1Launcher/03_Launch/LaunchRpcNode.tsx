@@ -17,7 +17,7 @@ const dockerCommand = (activeOS:string, subnetID: string) => `mkdir -p ~/.avalan
   -e AVAGO_STAKING_PORT=9653 \\
   -e AVAGO_HTTP_ALLOWED_HOSTS="*" \\
   -e AVAGO_HTTP_HOST=0.0.0.0 \\
-  -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \\
+  -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=opendns \\
   -e AVAGO_PLUGIN_DIR=/avalanchego/build/plugins/ \\
   -e HOME=/home/avalanche \\
   --user $(id -u):$(id -g) \\
