@@ -6,7 +6,8 @@ import Link from "next/link";
 import {
   CircleFadingPlus,
   Plus,
-  SendHorizontal
+  SendHorizontal,
+  AlertCircle
 } from "lucide-react";
 import { cn } from "@/utils/cn";
 
@@ -88,9 +89,11 @@ export default function Page() {
         </section>
 
         <section className="flex flex-col justify-center items-center px-4 mb-16">
-          <p className="text-xl tracking-tight text-zinc-500 text-center">
-            Find all the tools you will ever need to build an Avalanche L1.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <p className="text-xl tracking-tight text-zinc-500 text-center">
+              Find all the tools you will ever need to build an Avalanche L1.
+            </p>
+          </div>
           <div className="mt-10 mx-auto font-geist relative md:border-l-0 md:border-b-0 md:border-[1.2px] rounded-none -pr-2">
             <div className="w-full md:mx-0">
               <div className="grid grid-cols-1 relative md:grid-rows-2 md:grid-cols-3 border-b-[1.2px]">

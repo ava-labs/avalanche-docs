@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { getIntegrationPage, getIntegrationPages } from '@/utils/content-loader/integrations-loader';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
-import { ArrowUpRightIcon } from 'lucide-react';
 import { Pill, Pills } from '@/components/ui/pills';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import EditOnGithubButton from '@/components/ui/edit-on-github-button';
+import ReportIssueButton from '@/components/ui/report-issue-button';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -14,6 +15,11 @@ export default async function Page(props: {
     const params = await props.params;
     const page = getIntegrationPage([params.slug]);
     if (!page) notFound();
+
+    // Dynamically build the issue title based on the page title.
+    const issueTitle = page.data.title 
+        ? `Update Integration ${page.data.title} information`
+        : "Update Integration Information";
 
     const { body: MDX } = await page.data.load();
     const path = `content/integrations/${page.file.path}`;
@@ -32,15 +38,19 @@ export default async function Page(props: {
                     backgroundBlendMode: 'difference, difference, normal',
                 }}
             >
-                <div className="flex items-center">
-                    <img
-                        src={page.data.logo}
-                        alt={page.data.title}
-                        className="w-12 h-12 object-contain mr-4"
-                    />
-                    <h1 className="mb-2 text-3xl font-bold text-white">
-                        {page.data.title}
-                    </h1>
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <img
+                            src={page.data.logo}
+                            alt={page.data.title}
+                            className="w-12 h-12 object-contain mr-4"
+                        />
+                        <h1 className="mb-2 text-3xl font-bold text-white">
+                            {page.data.title}
+                        </h1>
+                    </div>
+
+
                 </div>
                 <p className="mb-4 text-white/80">{page.data.description}</p>
                 <Link
@@ -53,6 +63,13 @@ export default async function Page(props: {
             <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
                 <div className="prose p-4">
                     <MDX components={defaultMdxComponents}/>
+                    <div className="flex gap-6 mt-8">
+                        <EditOnGithubButton path={path} />
+                        <ReportIssueButton 
+                            title={page.data.title}
+                            pagePath={`/integrations/${params.slug}`}
+                        />
+                    </div>
                 </div>
                 <div className="flex flex-col gap-4 border-l p-4 text-sm">
                     <div>
@@ -85,15 +102,6 @@ export default async function Page(props: {
                             {page.data.documentation}
                         </a>
                     </div>
-
-                    <a
-                        href={`https://github.com/ava-labs/avalanche-docs/blob/master/${path}`}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-                    >
-                        <ArrowUpRightIcon className="size-5" /> Edit on Github
-                    </a>
 
                     {/* <Control url={page.url} /> */}
                 </div>
