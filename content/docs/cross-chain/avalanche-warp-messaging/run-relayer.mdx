@@ -21,14 +21,14 @@ Applications in this repository depend on the following upstream repositories, b
 2.  [coreth](https://github.com/ava-labs/coreth) (indirectly)
 3.  [subnet-evm](https://github.com/ava-labs/subnet-evm)
 
-> [!NOTE]
+> [NOTE]
 > We require any commits referenced in our `main` branch to be present in the default branches of the repositories above, but during active development it might be useful to work against changes in progress that are still on feature branches.
 
 When developing such features that require updates to one or more of the above, care must be taken to understand where the relevant code comes from. The binaries of applications built in this repo are built against versions referenced in the `go.mod` file. The E2E tests run against a simulated network running locally that is started by calling a separately compiled `avalanchego` binary as well as its plugins. These are compiled based on the values of `AVALANCHEGO_VERSION` in this repository's `./scripts/versions.sh`.
 
 `avalanchego` and `coreth` have a direct circular dependency and this repository is only indirectly dependent on `coreth` but directly dependent on `avalanchego`. Therefore if any updates are required from the `coreth` side, a corresponding `avalanchego` commit referencing those changes is required. On the other hand `subnet-evm` just depends directly on `avalanchego`.
 
-> [!NOTE]
+> [NOTE]
 > It's possible that a `subnet-evm` version is compatible with multiple different `avalanchego` versions and not limited to the one listed in `subnet-evm`'s `/scripts/versions.sh`
 
 ### Example dependency update flow
@@ -41,7 +41,7 @@ The most complicated example case that can arise above is that a feature depends
 
 Publishing all of the commits mentioned above to GitHub branches will enable running E2E tests through the CI.
 
-> [!TIP]
+> [TIP]
 > Running the tests locally doesn't require publishing the `subnet-evm` commit since `./scripts/e2e_test.sh` takes a flag specifying a local checkout of the `subnet-evm` repository.
 
 ## Releases
