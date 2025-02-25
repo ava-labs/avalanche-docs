@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { newAddressedCall, marshalSubnetToL1ConversionData, PackL1ConversionMessageArgs, packL1ConversionMessage, subnetToL1ConversionID, newUnsignedMessage, newSubnetToL1Conversion } from './convertWarp';
+import { newAddressedCall, marshalSubnetToL1ConversionData, PackL1ConversionMessageArgs, packL1ConversionMessage, subnetToL1ConversionID, newUnsignedMessage, newSubnetToL1Conversion, compareNodeIDs } from './convertWarp';
 import { utils } from '@avalabs/avalanchejs';
 const { hexToBuffer, bufferToHex } = utils;
 
@@ -97,5 +97,46 @@ describe('L1 Conversion Tests', () => {
             "00000000" + // empty source address length
             "32858f45b192eeb190e643f6915d45f832def5d2021b77b151867ec29843af18" // subnetConversionID bytes
         );
+    });
+});
+
+describe('compareNodeIDs', () => {
+    const testCases = [
+        {
+            name: 'first node ID is less than second',
+            a: "NodeID-5o3bfUMfJhxfKYSKu3VyiAq7APVZNyX19",
+            b: "NodeID-FTbzbUVtjSpKC4nFFFM9Gb8iAqJKZpzMQ",
+            expected: -1
+        },
+        {
+            name: 'first node ID is greater than second',
+            a: "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ",
+            b: "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg",
+            expected: 1
+        },
+        {
+            name: 'node IDs are equal',
+            a: "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
+            b: "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
+            expected: 0
+        },
+        {
+            name: 'node IDs with very different values',
+            a: "NodeID-1111111111111111111111111111111111",
+            b: "NodeID-9999999999999999999999999999999999",
+            expected: -1
+        },
+        {
+            name: 'node IDs with different lengths',
+            a: "NodeID-1111111111111111111111111111111111",
+            b: "NodeID-11111111111111111111111111111111111",
+            expected: -1
+        }
+    ];
+
+    testCases.forEach(({ name, a, b, expected }) => {
+        it(name, () => {
+            expect(compareNodeIDs(a, b)).toBe(expected);
+        });
     });
 });

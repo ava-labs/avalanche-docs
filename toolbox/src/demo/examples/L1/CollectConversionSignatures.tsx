@@ -30,6 +30,8 @@ export const CollectConversionSignatures = () => {
     const [justification, setJustification] = useState("");
     const [networkName, setNetworkName] = useState<"fuji" | "mainnet" | undefined>(undefined);
     const [sdkCallString, setSdkCallString] = useState("");
+    const [localError, setLocalError] = useState("");
+
 
 
     useEffect(() => {
@@ -44,6 +46,7 @@ export const CollectConversionSignatures = () => {
 
     useEffect(() => {
         try {
+            setLocalError("");
             const pChainChainID = '11111111111111111111111111111111LpoYY';
 
             const conversionArgs: PackL1ConversionMessageArgs = {
@@ -74,7 +77,7 @@ export const CollectConversionSignatures = () => {
             }
         } catch (e) {
             console.error(e);
-            showBoundary(e);
+            setLocalError(e instanceof Error ? e.message : "An unknown error occurred");
             setMessage("")
             setJustification("")
         }
@@ -170,6 +173,7 @@ const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggre
                         lang="ts"
                     />
                 </div>}
+                {localError && <div className="text-red-500">{localError}</div>}
                 <Button
                     type="primary"
                     onClick={handleConvertSignatures}

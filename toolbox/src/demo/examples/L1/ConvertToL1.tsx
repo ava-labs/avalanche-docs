@@ -1,13 +1,11 @@
 import { getRPCEndpoint } from "../../utils/rpcEndpoint";
 import { useExampleStore } from "../../utils/store";
-import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 
 export const ConvertToL1 = () => {
-    const { showBoundary } = useErrorBoundary();
     const {
         networkID,
         getPChainAddress,
@@ -26,6 +24,7 @@ export const ConvertToL1 = () => {
     } = useExampleStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
     const [validatorBalances, setValidatorBalances] = useState(Array(100).fill(BigInt(1000000000)) as bigint[]);
+    const [localError, setLocalError] = useState("");
 
     async function handleConvertToL1() {
         setL1ID("");
@@ -90,7 +89,7 @@ export const ConvertToL1 = () => {
 
             setL1ID(transactionID);
         } catch (error) {
-            showBoundary(error);
+            setLocalError(error instanceof Error ? error.message : "An unknown error occurred");
         } finally {
             setIsConverting(false);
         }
@@ -150,6 +149,7 @@ export const ConvertToL1 = () => {
                     type="number"
                     disableAddRemove={true}
                 />
+                {localError && <div className="text-red-500">{localError}</div>}
                 <Button
                     type="primary"
                     onClick={handleConvertToL1}
