@@ -67,7 +67,9 @@ export function marshalSubnetToL1ConversionData(args: PackL1ConversionMessageArg
     parts.push(encodeVarBytes(utils.hexToBuffer(args.managerAddress)));
     parts.push(encodeUint32(args.validators.length));
 
-    for (const validator of args.validators) {
+    const sortedValidators = args.validators.sort((a, b) => compareNodeIDs(a.nodeID, b.nodeID));
+
+    for (const validator of sortedValidators) {
         if (!validator.nodeID || !validator.nodePOP) {
             throw new Error(`Invalid validator data: ${JSON.stringify(validator)}`);
         }
@@ -129,6 +131,25 @@ export function newUnsignedMessage(networkID: number, sourceChainID: string, mes
 
     return concatenateUint8Arrays(...parts);
 }
+
+export const compareNodeIDs = (a: string, b: string) => {
+    const aNodeID = utils.base58check.decode(a.split("-")[1]);
+    const bNodeID = utils.base58check.decode(b.split("-")[1]);
+
+    // Compare all bytes
+    const minLength = Math.min(aNodeID.length, bNodeID.length);
+    for (let i = 0; i < minLength; i++) {
+        if (aNodeID[i] !== bNodeID[i]) {
+            return aNodeID[i] < bNodeID[i] ? -1 : 1;
+        }
+    }
+
+    // If all bytes match up to the minimum length, the shorter one is considered less
+    if (aNodeID.length < bNodeID.length) return -1;
+    if (aNodeID.length > bNodeID.length) return 1;
+    return 0;
+}
+
 
 export function packL1ConversionMessage(args: PackL1ConversionMessageArgs, networkID: number, sourceChainID: string): [Uint8Array, Uint8Array] {
     const subnetConversionID = subnetToL1ConversionID(args);
