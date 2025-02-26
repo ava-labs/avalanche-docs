@@ -1,17 +1,15 @@
 import { useExampleStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
-import { Button, Input } from "../../ui";
-import { createWalletClient, createPublicClient, custom, http } from 'viem';
+import { Button, Input, Select } from "../../ui";
+import { createWalletClient, createPublicClient, custom, http, AddEthereumChainParameter } from 'viem';
 
-const isWalletError = (error: unknown): error is { code: number } => {
-    return typeof (error as { code?: unknown })?.code === 'number';
-};
 
 export const SwitchChain = () => {
     const { showBoundary } = useErrorBoundary();
     const [isSwitching, setIsSwitching] = useState(false);
     const [targetChainId, setTargetChainId] = useState<number>(0);
+    const [isTestnet, setIsTestnet] = useState<boolean>(true);
     const {
         walletChainId,
         evmChainName,
@@ -31,36 +29,26 @@ export const SwitchChain = () => {
                 transport: custom(window.avalanche!),
             });
 
-            // Try to switch to the chain first
-            try {
-                await walletClient.switchChain({
-                    id: targetChainId
-                });
-            } catch (switchError: unknown) {
-                // If the chain hasn't been added yet, add it
-                if (isWalletError(switchError) && switchError.code === 4902) {
-                    await walletClient.addChain({
-                        chain: {
-                            id: targetChainId,
-                            name: evmChainName,
-                            nativeCurrency: {
-                                name: evmChainCoinName,
-                                symbol: evmChainCoinName,
-                                decimals: 18,
-                            },
-                            rpcUrls: {
-                                default: { http: [evmChainRpcUrl] },
-                            },
-                        }
-                    });
-                    // Try switching again after adding
-                    await walletClient.switchChain({
-                        id: targetChainId
-                    });
-                } else {
-                    throw switchError;
-                }
+            const chain: AddEthereumChainParameter = {
+                chainId: `0x${targetChainId.toString(16)}`,
+                chainName: evmChainName,
+                nativeCurrency: {
+                    name: evmChainCoinName,
+                    symbol: evmChainCoinName,
+                    decimals: 18,
+                },
+                rpcUrls: [evmChainRpcUrl],
             }
+
+            await walletClient.request({
+                id: "1",
+                method: "wallet_addEthereumChain",
+                params: [{ ...chain, isTestnet } as unknown as AddEthereumChainParameter],//Core wallet supports a custom 
+            });
+
+            await walletClient.switchChain({
+                id: targetChainId,
+            });
         } catch (error) {
             showBoundary(error);
         } finally {
@@ -114,6 +102,15 @@ export const SwitchChain = () => {
                     value={evmChainCoinName}
                     onChange={setEvmChainCoinName}
                     placeholder="Enter coin name"
+                />
+                <Select
+                    label="Is Testnet"
+                    value={isTestnet.toString()}
+                    onChange={(value) => setIsTestnet(value === "true")}
+                    options={[
+                        { value: "true", label: "Yes" },
+                        { value: "false", label: "No" }
+                    ]}
                 />
                 <Input
                     label="Target Chain ID"
