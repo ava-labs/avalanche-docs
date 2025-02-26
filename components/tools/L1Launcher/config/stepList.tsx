@@ -6,7 +6,7 @@ import Permissions from "../02_Configure/Permissions";
 import Genesis from "../02_Configure/Genesis";
 
 import PrepareValidators from "../03_Launch/PrepareValidators";
-import GenerateKeys from "../03_Launch/GenerateKeys";
+import GenerateKeys from "../03_Launch/_DELETEME_GenerateKeys";
 import CreateL1 from "../03_Launch/CreateL1"
 import LaunchValidators from "../03_Launch/LaunchValidators";
 import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
@@ -72,11 +72,6 @@ export const stepList: StepListType = {
     "prepare-validators": {
         title: "Prepare Validators",
         component: <PrepareValidators />,
-        group: "launch-l1",
-    },
-    "generate-validator-keys": {
-        title: "Generate keys",
-        component: <GenerateKeys />,
         group: "launch-l1",
     },
     "fund-p-chain-wallet": {

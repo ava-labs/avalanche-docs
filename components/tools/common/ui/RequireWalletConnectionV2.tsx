@@ -1,6 +1,6 @@
 import { useState, useEffect, ReactNode } from 'react';
 import Pre from './Pre';
-import { Chain, createWalletClient, custom } from 'viem';
+import { AddEthereumChainParameter, Chain, createWalletClient, custom } from 'viem';
 
 // Fuji Testnet configuration
 export const fujiConfig: Chain = {
@@ -100,24 +100,25 @@ export default function RequireWalletConnection({ children, chain, onConnection,
             transport: custom(window.avalanche)
         });
 
+        const rpcChainPayload: AddEthereumChainParameter = {
+            chainId: `0x${chain.id.toString(16)}`,
+            chainName: chain.name,
+            nativeCurrency: {
+                name: chain.nativeCurrency.name,
+                symbol: chain.nativeCurrency.symbol,
+                decimals: chain.nativeCurrency.decimals,
+            },
+            rpcUrls: chain.rpcUrls.default.http.map((rpcUrl: string) => rpcUrl)
+        }
+
         try {
+            await walletClient.request({
+                method: "wallet_addEthereumChain",
+                params: [rpcChainPayload]
+            });
             await walletClient.switchChain({ id: chain.id });
         } catch (error: any) {
-            if (error.code === 4902) {
-                try {
-                    await walletClient.addChain({ chain });
-                    checkConnection();
-                } catch (addError) {
-                    if (addError instanceof Error) {
-                        setError(`Failed to add network: ${addError.message}`);
-                    } else {
-                        console.error(addError);
-                        setError(`An unknown error occurred: ${addError}`);
-                    }
-                }
-            } else {
-                setError(`Failed to switch network: ${error}`);
-            }
+            setError(`Failed to switch network: ${error?.message}`);
         }
     };
 
