@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactNode } from 'react';
+import { deduplicateEthRequestAccounts } from '../../L1Launcher/config/store';
 
 interface ChainConfig {
     chainId: string;
@@ -10,6 +11,7 @@ interface ChainConfig {
     };
     rpcUrls: string[];
     blockExplorerUrls: string[];
+    isTestnet: boolean;
 }
 
 export const fujiConfig: ChainConfig = {
@@ -21,7 +23,8 @@ export const fujiConfig: ChainConfig = {
         decimals: 18
     },
     rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+    blockExplorerUrls: ['https://testnet.snowtrace.io/'],
+    isTestnet: true
 };
 
 interface Props {
@@ -44,10 +47,7 @@ export default function SwitchChain({ children, chainConfig }: Props) {
 
         try {
             // Request account access
-            const accounts = await window.avalanche.request<string[]>({
-                method: 'eth_requestAccounts',
-                params: []
-            });
+            const accounts = await deduplicateEthRequestAccounts()
 
             if (!accounts || accounts.length === 0) {
                 setChainStatus('wrong_chain');
@@ -94,22 +94,17 @@ export default function SwitchChain({ children, chainConfig }: Props) {
         if (!window.avalanche) return;
 
         try {
+
+            await window.avalanche.request({
+                method: 'wallet_addEthereumChain',
+                params: [chainConfig]
+            });
             await window.avalanche.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: chainConfig.chainId }],
             });
         } catch (error: any) {
-            // If the chain hasn't been added to MetaMask, add it
-            if (error.code === 4902) {
-                try {
-                    await window.avalanche.request({
-                        method: 'wallet_addEthereumChain',
-                        params: [chainConfig]
-                    });
-                } catch (addError) {
-                    console.error('Failed to add network:', addError);
-                }
-            }
+            console.error('Failed to add network:', error);
         }
     };
 

@@ -7,7 +7,7 @@ import Genesis from "../02_Configure/Genesis";
 
 import PrepareValidators from "../03_Launch/PrepareValidators";
 import GenerateKeys from "../03_Launch/_DELETEME_GenerateKeys";
-import CreateL1 from "../03_Launch/CreateL1"
+import CreateChain from "../03_Launch/CreateChain"
 import LaunchValidators from "../03_Launch/LaunchValidators";
 import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
 import OpenRPCPort from "../03_Launch/OpenRPCPort";
@@ -19,7 +19,7 @@ import InitializeValidatorManager from "../04_Initialize/InitializeValidatorMana
 import WhatsNext from "../05_WhatsNext/WhatsNext";
 import { StepGroupListType, StepListType } from '../../common/ui/types';
 import FundPChainWallet from '../03_Launch/FundPChainWallet';
-
+import ConvertToL1 from '../03_Launch/ConvertToL1';
 export const stepGroups: StepGroupListType = {
     "welcome": {
         title: "Welcome",
@@ -80,13 +80,18 @@ export const stepList: StepListType = {
         group: "launch-l1",
     },
     "create-chain": {
-        title: "Create L1",
-        component: <CreateL1 />,
+        title: "Create chain",
+        component: <CreateChain />,
         group: "launch-l1",
     },
     "launch-validators": {
         title: "Launch validators",
         component: <LaunchValidators />,
+        group: "launch-l1",
+    },
+    "convert-to-l1": {
+        title: "Convert to L1",
+        component: <ConvertToL1 />,
         group: "launch-l1",
     },
     "launch-rpc-node": {

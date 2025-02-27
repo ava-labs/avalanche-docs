@@ -1,6 +1,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 import Pre from './Pre';
 import { AddEthereumChainParameter, Chain, createWalletClient, custom } from 'viem';
+import { deduplicateEthRequestAccounts } from '../../L1Launcher/config/store';
 
 // Fuji Testnet configuration
 export const fujiConfig: Chain = {
@@ -48,7 +49,7 @@ export default function RequireWalletConnection({ children, chain, onConnection,
             if (chainId !== `0x${chain.id.toString(16)}`) return;
 
             // Check if account can be accessed
-            const accounts = await window.avalanche.request<string[]>({ method: 'eth_requestAccounts', params: [] });
+            const accounts = await deduplicateEthRequestAccounts()
             if (!accounts || accounts.length === 0) {
                 setError('No account detected');
                 return;

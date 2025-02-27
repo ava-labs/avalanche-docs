@@ -21,6 +21,7 @@ import {
 
 import { isValidUrl } from '@/components/tools/common/utils/validation';
 import { isAddress } from 'viem';
+import { deduplicateEthRequestAccounts } from '../../L1Launcher/config/store';
 
 export default function ChainParameters() {
     const {
@@ -227,7 +228,7 @@ export default function ChainParameters() {
         setOwnerCheckStatus('checking');
 
         // Get connected account from wallet
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await deduplicateEthRequestAccounts()
         if (!accounts || accounts.length === 0) return;
 
         // Create public client to read contract
