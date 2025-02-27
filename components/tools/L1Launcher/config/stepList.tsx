@@ -6,7 +6,6 @@ import Permissions from "../02_Configure/Permissions";
 import Genesis from "../02_Configure/Genesis";
 
 import PrepareValidators from "../03_Launch/PrepareValidators";
-import GenerateKeys from "../03_Launch/_DELETEME_GenerateKeys";
 import CreateChain from "../03_Launch/CreateChain"
 import LaunchValidators from "../03_Launch/LaunchValidators";
 import LaunchRpcNode from "../03_Launch/LaunchRpcNode";
