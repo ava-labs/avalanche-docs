@@ -9,6 +9,7 @@ if [ ! -d "/teleporter_src/contracts" ]; then
     git submodule update --init --recursive
 fi
 
+cd /teleporter_src
 git checkout $ICM_COMMIT
 
 # Add foundry to PATH
