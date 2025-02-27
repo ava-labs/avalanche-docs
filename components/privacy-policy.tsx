@@ -60,7 +60,7 @@ export function PrivacyPolicyBox() {
             </Button>
           </div>
           <Button variant="outline" asChild className="w-full text-xs sm:text-sm">
-            <Link href="/full-privacy-policy">Read full policy</Link>
+            <Link href="https://www.avax.network/privacy-policy">Read full policy</Link>
           </Button>
         </CardFooter>
       </Card>
