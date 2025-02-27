@@ -243,6 +243,16 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
         if (!window.avalanche) throw new Error('Core wallet not found');
 
+        try {
+            //Trigger Core wallet window
+            await window.avalanche.request<string[]>({
+                method: 'eth_requestAccounts',
+                params: []
+            });
+        } catch (e) {
+            //Ignore the error
+        }
+
         const publicKeyHex = (await window.avalanche.request<{ xp: string }>({
             "method": "avalanche_getAccountPubKey",
             "params": []
