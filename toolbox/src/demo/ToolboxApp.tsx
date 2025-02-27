@@ -18,6 +18,7 @@ import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
 import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
 import { useState, useEffect, ReactElement } from "react";
 import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
+import ICMContracts from "./examples/ICM/ICMContracts";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
 import CreateL1 from "./examples/Docs/CreateL1";
 
@@ -137,6 +138,14 @@ const componentGroups: Record<string, ComponentType[]> = {
             component: RPCUrlForChain,
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
             skipWalletConnection: true,
+        }
+    ],
+    "ICM": [
+        {
+            id: "icmContracts",
+            label: "ICM Contracts",
+            component: ICMContracts,
+            fileNames: ["toolbox/src/demo/examples/ICM/Contracts.tsx"]
         }
     ],
     "Docs": [
