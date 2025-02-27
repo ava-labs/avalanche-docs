@@ -2,8 +2,8 @@ import { signIn } from 'next-auth/react';
 import React from 'react'
 import Image from 'next/image';
 function SocialMediaLoginButtons() {
-     async function SignInGoogle() {
-        await signIn('google', { callbackUrl: `/` });
+     async function SignInGoogle(provider:'google' | 'github' | 'twitter') {
+        await signIn(provider, { callbackUrl: `/` });
       }
   return (
     <div>
@@ -17,7 +17,7 @@ function SocialMediaLoginButtons() {
       <div className="flex items-center justify-center gap-4">
         <button
           className="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition"
-          onClick={SignInGoogle}
+          onClick={()=>SignInGoogle('google')}
         >
           <Image
             src="/images/googleLogo.svg"
@@ -28,14 +28,29 @@ function SocialMediaLoginButtons() {
           <span className="text-sm font-medium">Google</span>
         </button>
 
-        <button className="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition">
+        <button className="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition"
+           onClick={()=>SignInGoogle('github')}
+        >
           <Image
             src="/images/githubLogo.svg"
-            alt="googleLogo"
+            alt="githubLogo"
             width={24}
             height={16}
           ></Image>
           <span className="text-sm font-medium">Github</span>
+        </button>
+
+        <button
+          className="flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition"
+          onClick={()=>SignInGoogle('twitter')}
+        >
+          <Image
+            src="/images/twitter_X_logo.svg"
+            alt="googleLogo"
+            width={24}
+            height={16}
+          ></Image>
+          <span className="text-sm font-medium">X</span>
         </button>
       </div>
     </div>

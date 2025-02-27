@@ -1,38 +1,16 @@
 'use client';
-import { Input } from '@/components/ui/input';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
+
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from "@/components/ui/button"
+
 import SocialMediaLoginButtons from './sections/social-media-login-buttons';
-export const loginFormSchema = z.object({
-  email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters long'),
-});
+import { FooterLogin } from './sections/footer-login';
+import { SignInInputs } from './sections/sing-in-inputs';
+
 
 function Formlogin() {
-  const formMethods = useForm<z.infer<typeof loginFormSchema>>({
-    resolver: zodResolver(loginFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
 
-  async function SignInGoogle() {
-    await signIn('google', { callbackUrl: `/` });
-  }
 
   return (
     <main>
@@ -65,82 +43,11 @@ function Formlogin() {
             </div>
 
             <div className="flex flex-col justify-center items-center space-y-6 w-full mt-6 max-w-[350px]">
-              <Form {...formMethods}>
-                <form method="post" className="space-y-6 w-full">
-                  <div className="space-y-2">
-                    <FormField
-                      control={formMethods.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input
-                              className="bg-transparent w-full"
-                              placeholder="name@example.com"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={formMethods.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input
-                              type="password"
-                              className="bg-transparent w-full"
-                              placeholder="password"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription className="text-zinc-400">
-                            At least 8 characters, 1 number & 1 symbol
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <Button
-                    variant="destructive"
-                    className="w-full bg-red-500 p-2 rounded"
-                  >
-                    SIGN IN
-                  </Button>
-                </form>
-              </Form>
-
-              <Link href="#" className="text-zinc-400 text-sm text-center">
-                Forgot password?
-              </Link>
-
-       
-
+    
+              <SignInInputs></SignInInputs>
               <SocialMediaLoginButtons></SocialMediaLoginButtons>
 
-              <footer className="pt-10">
-              <p className="text-zinc-400 items-center justify-center w-full max-w-[400px] text-center text-sm font-medium">
-                By clicking continue, you agree to our{" "}
-                <Link
-                  href="#"
-                  className="underline text-white hover:text-gray-300"
-                >
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="#"
-                  className="underline text-white hover:text-gray-300"
-                >
-                  Privacy Policy
-                </Link>
-                .
-              </p>
-            </footer>
+              <FooterLogin></FooterLogin>
             </div>
 
           </div>
