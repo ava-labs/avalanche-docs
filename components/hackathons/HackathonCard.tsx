@@ -21,19 +21,19 @@ export default function HackathonCard({
   return (
     <div
       key={hackathon.id}
-      className='flex rounded-lg shadow-lg'
+      className='flex rounded-lg shadow-lg h-[280px]'
     >
       {/* Left Section: Background Image or Red Color */}
       <Image
         src='/temp/hackathon-mock.png'
         alt='Avalanche Logo'
-        className='rounded-l-md'
+        className='rounded-l-md w-[200px] hidden md:block'
         width={200}
         height={280}
       />
 
       {/* Right Section */}
-      <div className='flex-1 justify-evenly bg-zinc-900 text-white p-6 flex flex-col gap-1 rounded-r-md'>
+      <div className='flex-1 justify-evenly bg-zinc-900 text-white p-6 flex flex-col gap-1 rounded-md md:rounded-l-none'>
         <h2 className='uppercase font-bold text-3xl'>{hackathon.title}</h2>
 
         <div className='flex items-center gap-2 text-gray-300 text-sm mt-2'>

@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
-  color: #E84142;
+.prose
+  :where(ul > li):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  )::marker {
+  color: #e84142;
 }
 
 .uwu {
@@ -41,16 +42,16 @@ svg.lucide {
 }
 
 .my-6 > svg.lucide {
-    color: #fff;
+  color: #fff;
 }
 
 .text-fd-primary {
-    --tw-text-opacity: 1;
-    color: #1f66f4;
+  --tw-text-opacity: 1;
+  color: #1f66f4;
 }
 
 .bg-fd-primary\/10 {
-    background-color: #1f66f41a;
+  background-color: #1f66f41a;
 }
 
 .text-xs {
@@ -70,8 +71,9 @@ h2.text-sm.font-medium {
   color: #737373;
 }
 
-.hide-icons svg.lucide.lucide-folder, svg.lucide.lucide-folder-open {
-    display: none;
+.hide-icons svg.lucide.lucide-folder,
+svg.lucide.lucide-folder-open {
+  display: none;
 }
 
 nav a:not(:first-child) {
@@ -79,12 +81,17 @@ nav a:not(:first-child) {
 }
 
 @keyframes ripple {
-  0%, 100% { transform: translate(-50%, -50%) scale(0.9); }
-  50% { transform: translate(-50%, -50%) scale(1); }
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .animate-ripple {
-  animation: ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite;
+  animation: ripple var(--duration, 2s) ease calc(var(--i, 0) * 0.2s) infinite;
   animation-delay: calc(var(--i) * 0.5s);
 }
 
@@ -109,12 +116,12 @@ nav a:not(:first-child) {
 
 .border-avax-green {
   --tw-border-opacity: 1;
-  border-color: #0B7f54;
+  border-color: #0b7f54;
 }
 
 .bg-avax-green {
   --tw-bg-opacity: 1;
-  background-color: #0B7f54;
+  background-color: #0b7f54;
 }
 
 .my-6 > svg.lucide {
@@ -135,7 +142,7 @@ nav a:not(:first-child) {
 }
 
 #comment-box::-webkit-scrollbar-thumb {
-  background: #3752AC;
+  background: #3752ac;
   border-radius: 1px;
 }
 
@@ -144,15 +151,15 @@ nav a:not(:first-child) {
 }
 
 @media screen and (max-width: 768px) {
-    #comment-box {
-        max-height: 250px;
-    }
+  #comment-box {
+    max-height: 250px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    #comment-box {
-        max-height: 200px;
-    }
+  #comment-box {
+    max-height: 200px;
+  }
 }
 
 .quiz-option-letter {
@@ -209,28 +216,34 @@ nav a:not(:first-child) {
 }
 
 @media (max-width: 639px) {
-  [data-state="open"][data-orientation="horizontal"] {
+  [data-state='open'][data-orientation='horizontal'] {
     max-height: 75vh !important;
     overflow-y: auto !important;
     overscroll-behavior: contain !important;
   }
 
-  [data-state="open"][data-orientation="horizontal"]::-webkit-scrollbar {
+  [data-state='open'][data-orientation='horizontal']::-webkit-scrollbar {
     width: 4px;
   }
 
-  [data-state="open"][data-orientation="horizontal"]::-webkit-scrollbar-thumb {
+  [data-state='open'][data-orientation='horizontal']::-webkit-scrollbar-thumb {
     background-color: rgba(156, 163, 175, 0.5);
     border-radius: 2px;
   }
 
-  div[class*="flex flex-col sm:hidden"]:nth-last-of-type(-n+3) > a {
-    display: none; 
+  div[class*='flex flex-col sm:hidden']:nth-last-of-type(-n + 3) > a {
+    display: none;
   }
 
-  [data-open="true"] {
+  [data-open='true'] {
     z-index: 250;
   }
+}
+
+/* This is a workaround for this issue: https://github.com/shadcn-ui/ui/issues/4227 */
+html body[data-scroll-locked] {
+  overflow: visible !important;
+  margin-right: 0 !important;
 }
 
 @layer base {

@@ -44,7 +44,7 @@ function General({
 
       <hr className='my-4 border-t border-zinc-800' />
       {/* Hackathon Name */}
-      <div className='flex flex-col gap-12'>
+      <div className='flex flex-col gap-12 max-w-full'>
         <FormField
           control={form.control}
           name='name'
@@ -53,7 +53,7 @@ function General({
               <FormLabel>Hackathon Name</FormLabel>
               <FormControl>
                 <Input
-                  className='bg-transparent'
+                  className='bg-transparent w-full'
                   placeholder='E.g., Avalanche Builder Hackathon'
                   {...field}
                   value={field.value?? ''}
@@ -76,7 +76,7 @@ function General({
               <FormLabel>Hackathon Description</FormLabel>
               <FormControl>
                 <Textarea
-                  className='bg-transparent'
+                  className='bg-transparent w-full'
                   placeholder='Provide a brief overview of the hackathon, its goals, and what participants can expect...'
                   maxLength={500}
                   {...field}
@@ -103,6 +103,7 @@ function General({
                 <Input
                   type='file'
                   accept='.png, .jpg, .svg'
+                  className='w-full'
                   onChange={(e) => {
                     // Puedes guardar el File en el field si lo deseas
                     field.onChange(e.target.files?.[0]);
@@ -133,6 +134,7 @@ function General({
                 <Input
                   type='file'
                   accept='.png, .jpg'
+                  className='w-full'
                   onChange={(e) => {
                     field.onChange(e.target.files?.[0]);
                   }}
@@ -161,7 +163,7 @@ function General({
               <FormLabel>Hackathon Format</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className='bg-transparent'>
+                  <SelectTrigger className='bg-transparent w-full'>
                     <SelectValue placeholder='Select hackathon format' />
                   </SelectTrigger>
                 </FormControl>
@@ -195,7 +197,7 @@ function General({
               <FormLabel>Location</FormLabel>
               <FormControl>
                 <Input
-                  className='bg-transparent'
+                  className='bg-transparent w-full'
                   placeholder='Enter the venue or city where the hackathon will take place'
                   {...field}
                   value={field.value?? ''}
@@ -223,14 +225,14 @@ function General({
                     <Button
                       variant='outline'
                       className={cn(
-                        'pl-3 text-left font-normal',
+                        'pl-3 text-left font-normal w-full overflow-hidden',
                         !field.value && 'text-zinc-400'
                       )}
                     >
                       {field.value ? (
                         format(field.value, 'PPP')
                       ) : (
-                        <span>MM/DD/YYYY HH:MM (12H format. Select AM/PM)</span>
+                        <span className="truncate max-w-full">MM/DD/YYYY HH:MM (12H format. Select AM/PM)</span>
                       )}
                       <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
                     </Button>
@@ -271,7 +273,7 @@ function General({
                     <Button
                       variant='outline'
                       className={cn(
-                        'justify-start text-left font-normal',
+                        'justify-start text-left font-normal w-full truncate',
                         !field.value && 'text-zinc-400'
                       )}
                     >
@@ -317,7 +319,7 @@ function General({
                     <Button
                       variant='outline'
                       className={cn(
-                        'justify-start text-left font-normal',
+                        'justify-start text-left font-normal w-full truncate',
                         !field.value && 'text-zinc-400'
                       )}
                     >
@@ -362,7 +364,7 @@ function General({
                 defaultValue={field.value ?? '(UTC-12:00) Baker Island'}
               >
                 <FormControl>
-                  <SelectTrigger className='bg-transparent'>
+                  <SelectTrigger className='bg-transparent w-full'>
                     <SelectValue placeholder='Select a time zone' />
                   </SelectTrigger>
                 </FormControl>
@@ -401,7 +403,7 @@ function General({
               <FormLabel>Hackathon Visibility</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className='bg-transparent'>
+                  <SelectTrigger className='bg-transparent w-full'>
                     <SelectValue placeholder='Select visibility' />
                   </SelectTrigger>
                 </FormControl>
@@ -430,7 +432,7 @@ function General({
               <FormLabel>Hackathon Status</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className='bg-transparent'>
+                  <SelectTrigger className='bg-transparent w-full'>
                     <SelectValue placeholder='Select hackathon status' />
                   </SelectTrigger>
                 </FormControl>

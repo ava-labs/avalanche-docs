@@ -21,9 +21,7 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const partialEditedHackathon = (await req.json()) as Partial<Hackathon>;
-
     const updatedHackathon = await updateHackathon(partialEditedHackathon.id!, partialEditedHackathon);
-
     return NextResponse.json(updatedHackathon);
   } catch (error) {
     console.error("Error in PUT /api/hackathons/[id]:", error);
