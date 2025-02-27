@@ -243,6 +243,8 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
 
         if (!window.avalanche) throw new Error('Core wallet not found');
 
+        await deduplicateEthRequestAccounts();
+
         const publicKeyHex = (await window.avalanche.request<{ xp: string }>({
             "method": "avalanche_getAccountPubKey",
             "params": []
@@ -253,6 +255,19 @@ const L1LauncherWizardStoreFunc: StateCreator<L1LauncherWizardState> = (set, get
     }
 
 })
+
+
+let ethRequestAccountsPromise: Promise<string[]> | null = null;
+export const deduplicateEthRequestAccounts = async () => {
+    if (!window.avalanche) throw new Error('Core wallet not found');
+    if (!ethRequestAccountsPromise) {
+        ethRequestAccountsPromise = window.avalanche.request<string[]>({
+            method: 'eth_requestAccounts',
+            params: []
+        });
+    }
+    return ethRequestAccountsPromise;
+}
 
 const shouldPersist = true
 

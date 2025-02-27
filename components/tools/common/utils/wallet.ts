@@ -13,7 +13,7 @@ export async function getWalletAddress() {
         throw new Error('No wallet detected');
     }
 
-    const accounts = await window.avalanche.request<string[]>({ method: 'eth_requestAccounts', params: [] });
+    const accounts = await deduplicateEthRequestAccounts()
     if (!accounts || accounts.length === 0) {
         throw new Error('No account found');
     }
@@ -26,6 +26,7 @@ import { secp256k1, UnsignedTx, utils } from '@avalabs/avalanchejs';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 import { Address } from 'micro-eth-signer';
 import { keccak256, toRlp, toBytes } from 'viem'
+import { deduplicateEthRequestAccounts } from '../../L1Launcher/config/store';
 
 
 export function newPrivateKey(): string {

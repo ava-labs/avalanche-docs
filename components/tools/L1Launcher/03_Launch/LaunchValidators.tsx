@@ -6,17 +6,16 @@ import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
 import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
-const dockerCommand = (activeOS: string, subnetID: string) => `docker run -it -d \\
+const dockerCommand = (subnetID: string) => `docker run -it -d \\
   --name avago \\
-  ${activeOS === "macOS" ? "-p 9650:9650 -p 9651:9651" : "--network host" } \\
-  -v ~/.avalanchego:/home/avalanche/.avalanchego \\
+  -p 127.0.0.1:9650:9650 -p 9651:9651 \\
+  -v ~/.avalanchego:/root/.avalanchego \\
   -e AVAGO_NETWORK_ID=fuji \\
   -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
   -e AVAGO_TRACK_SUBNETS=${subnetID} \\
   -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=opendns \\
   -e AVAGO_PLUGIN_DIR=/avalanchego/build/plugins/ \\
-  -e HOME=/home/avalanche \\
-  --user $(id -u):$(id -g) \\
+  -e AVAGO_HTTP_HOST=0.0.0.0 \\
   avaplatform/subnet-evm:${CONTAINER_VERSION}`
 
 const operatingSystems = ['Linux', 'macOS'];
@@ -25,7 +24,6 @@ const operatingSystems = ['Linux', 'macOS'];
 export default function LaunchValidators() {
   const { subnetId, chainId, evmChainId, nodesCount, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
   const [isBootstrapped, setIsBootstrapped] = useState(false);
-  const [activeOS, setActiveOS] = useState("Linux");
 
   return (
     <div className="space-y-12">
@@ -38,16 +36,8 @@ export default function LaunchValidators() {
         <h3 className="mb-4 font-medium text-gray-900 dark:text-gray-100">
           {nodesCount > 1 ? 'Launch this on each of your ' + nodesCount + ' validator nodes' + ':' : 'Launch this on your validator node:'}
         </h3>
-        <OSSelectionTabs 
-                operatingSystems={operatingSystems} 
-                activeOS={activeOS} 
-                setActiveOS={setActiveOS} 
-            />
 
-        {activeOS === 'macOS' && (<p className="mt-2 text-sm text-red-500">
-          Please note that --network host does not work on macOS, so you have to map the ports manually.
-        </p>)}
-        <Pre>{dockerCommand(activeOS, subnetId)}</Pre>
+        <Pre>{dockerCommand(subnetId)}</Pre>
         <Note>
           <code className="font-mono bg-blue-100 dark:bg-blue-800 px-1 py-0.5 rounded text-blue-900 dark:text-blue-200">{subnetId}</code> is the subnet ID
         </Note>
