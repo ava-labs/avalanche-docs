@@ -2,11 +2,13 @@ export interface HackathonLite {
   id: string;
   title: string;
   description: string;
-  date: Date;
+  start_date: Date;
+  end_date: Date;
   location: string;
   total_prizes: number;
   tags: string[];
-  status: string;
+  status: "Draft" | "Live";
+  timezone: string;
 }
 
 export interface HackathonsFilters {
@@ -16,39 +18,42 @@ export interface HackathonsFilters {
 }
 
 export interface Hackathon extends HackathonLite {
-  agenda: HackathonActivity[];
+  schedule: ScheduleActivity[];
   registration_deadline: Date;
   address: string;
   partners: Partner[];
   tracks: Track[];
+  participants: number;
+  speakers: Speaker[];
 
 }
 
-export type HackathonActivity = {
+export type ScheduleActivity = {
   stage: string;
   date: string;
-  duration: string;
+  duration: number; //Duration in minutes
   name: string;
   description: string;
+  host_name: string;
+  host_media: string;
+  host_icon: string;
+  location: string;
+  category: string;
+  url: string;
 }
 
 export type Track = {
   name: string;
-  description: string;
-  prizes: TrackPrize[];
+  short_description: string;
+  icon:string;
+  logo:string;
+  description: string; //Markdown
   total_reward: number;
   partner?: string;
   resources: Resource[];
 }
 
-export type TrackPrize = {
-  name: string;
-  description: string;
-  type: "Pool" | "Ranked";
-  criteria: string;
-  resources: Resource[];
-  rewards: number[];
-}
+
 
 export type Resource = {
   name: string;
@@ -56,17 +61,19 @@ export type Resource = {
   link: string;
 }
 
-export type Reward = {
-  position: number;
-  description?: string;
-  reward_value: number;
-}
 
 export type Partner = {
   name: string;
   about: string;
   links: Resource[];
   logo: string;
+}
+
+export type Speaker = {
+  name: string;
+  picture: string;
+  icon: string;
+  category: string;
 }
 
 

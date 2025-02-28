@@ -94,7 +94,7 @@ export default async function HackathonPage({
 
                   <div className='flex justify-between items-center text-white mt-2'>
                     <span className='text-sm'>
-                      {track.prizes.length} prizes
+                      prizes
                     </span>
                     <div className='flex items-center gap-1'>
                       <Trophy className='w-4 h-4' />
