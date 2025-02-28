@@ -86,7 +86,7 @@ const TopUpComponent = ({
     );
 };
 
-export default function ICMContracts() {
+export default function TeleporterMessenger() {
     const { showBoundary } = useErrorBoundary();
     const { walletChainId } = useExampleStore();
     const [isDeploying, setIsDeploying] = useState(false);

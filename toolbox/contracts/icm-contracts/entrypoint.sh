@@ -27,6 +27,7 @@ cd /teleporter_src/contracts && forge build
 # Extract and format JSON files
 for file in /teleporter_src/out/ValidatorManager.sol/ValidatorManager.json \
             /teleporter_src/out/ValidatorMessages.sol/ValidatorMessages.json \
+            /teleporter_src/out/TeleporterRegistry.sol/TeleporterRegistry.json \
             /teleporter_src/out/NativeTokenStakingManager.sol/NativeTokenStakingManager.json ; do
     filename=$(basename "$file")
     jq '.' "$file" > "/compiled/$filename"
