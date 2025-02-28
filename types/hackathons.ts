@@ -24,7 +24,7 @@ export interface Hackathon extends HackathonLite {
 
 }
 
-export interface HackathonActivity {
+export type HackathonActivity = {
   stage: string;
   date: string;
   duration: string;
@@ -32,7 +32,7 @@ export interface HackathonActivity {
   description: string;
 }
 
-export interface Track {
+export type Track = {
   name: string;
   description: string;
   prizes: TrackPrize[];
@@ -41,7 +41,7 @@ export interface Track {
   resources: Resource[];
 }
 
-export interface TrackPrize {
+export type TrackPrize = {
   name: string;
   description: string;
   type: "Pool" | "Ranked";
@@ -50,19 +50,19 @@ export interface TrackPrize {
   rewards: number[];
 }
 
-export interface Resource {
+export type Resource = {
   name: string;
   icon: string;
   link: string;
 }
 
-export interface Reward {
+export type Reward = {
   position: number;
   description?: string;
   reward_value: number;
 }
 
-export interface Partner {
+export type Partner = {
   name: string;
   about: string;
   links: Resource[];

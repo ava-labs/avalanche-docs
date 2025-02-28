@@ -31,7 +31,7 @@ const items = [
 
 export default function AdminSidebar() {
   return (
-    <Sidebar className='!border-r-0' collapsible='icon'>
+    <Sidebar className='!border-r-0 hidden md:block' collapsible='icon'>
       <SidebarContent className='bg-zinc-950'>
         <SidebarGroup>
           <SidebarGroupContent>

@@ -13,7 +13,7 @@ export default async function HackathonsPage({
   const { page, location, status } = await searchParams;
   const { hackathons, total } =  await getFilteredHackathons({
     page: page ?? 1,
-    pageSize: 10,
+    pageSize: 4,
     location: location,
     status: status,
   });
