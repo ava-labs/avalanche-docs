@@ -28,58 +28,58 @@ export function SignInInputs() {
       });
   return (
     <div>
-                <Form {...formMethods}>
-                <form method="post" className="space-y-6 w-full">
-                  <div className="space-y-2">
-                    <FormField
-                      control={formMethods.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input
-                              className="bg-transparent w-full"
-                              placeholder="name@example.com"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+      <Form {...formMethods}>
+        <form method="post" className="space-y-6 w-full">
+          <div className="space-y-2">
+            <FormField
+              control={formMethods.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="bg-transparent w-full"
+                      placeholder="name@example.com"
+                      {...field}
                     />
-                    <FormField
-                      control={formMethods.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input
-                              type="password"
-                              className="bg-transparent w-full"
-                              placeholder="password"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription className="text-zinc-400">
-                            At least 8 characters, 1 number & 1 symbol
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={formMethods.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      className="bg-transparent w-full"
+                      placeholder="password"
+                      {...field}
                     />
-                  </div>
-                  <Button
-                    variant="destructive"
-                    className="w-full bg-red-500 p-2 rounded"
-                  >
-                    SIGN IN
-                  </Button>
-                </form>
-              </Form>
+                  </FormControl>
+                  <FormDescription className="text-zinc-400">
+                    At least 8 characters, 1 number & 1 symbol
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button
+            variant="destructive"
+            className="w-full bg-red-500 p-2 rounded"
+          >
+            SIGN IN
+          </Button>
+        </form>
+      </Form>
 
-              <Link href="#" className="text-zinc-400 text-sm text-center">
-                Forgot password?
-              </Link>
+      <Link href="#" className="text-zinc-400 text-sm text-center">
+        Forgot password?
+      </Link>
     </div>
-  )
+  );
 }

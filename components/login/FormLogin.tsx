@@ -17,10 +17,10 @@ function Formlogin() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4  items-center">
         <div className="hidden lg:flex pt-14 pb-14 justify-center items-center bg-zinc-900">
           <Image
-            src={"/images/avalancheLoginLogo.svg"}
+            src={"/hackaton-platform-images/avalancheLoginLogo.svg"}
             alt={"logo_avalanche "}
-            width={559.5}
-            height={685.81}
+            width="560"
+            height="685"
           ></Image>
         </div>
 
@@ -44,10 +44,9 @@ function Formlogin() {
 
             <div className="flex flex-col justify-center items-center space-y-6 w-full mt-6 max-w-[350px]">
     
-              <SignInInputs></SignInInputs>
-              <SocialMediaLoginButtons></SocialMediaLoginButtons>
-
-              <FooterLogin></FooterLogin>
+              <SignInInputs/>
+              <SocialMediaLoginButtons/>
+              <FooterLogin/>
             </div>
 
           </div>
