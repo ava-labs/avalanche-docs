@@ -121,9 +121,9 @@ export function RegisterForm({
         Builders Hub - Registration Page (Step {step}/3)
       </h2>
       {/* Barra de progreso (línea blanca) */}
-      <div className="relative w-full h-1 bg-zinc-800 mb-4">
+      <div className="relative w-full h-1 bg-white dark:bg-zinc-800 mb-4">
         <div
-          className={`absolute h-full bg-white ${progressPosition()} w-1/3 transition-all duration-300`}
+          className={`absolute h-full bg-zinc-800  dark:bg-white ${progressPosition()} w-1/3 transition-all duration-300`}
         />
       </div>
       <Form {...form}>
