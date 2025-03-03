@@ -3,7 +3,7 @@
 import TransparentUpgradableProxy from "../../../../contracts/openzeppelin-4.9/compiled/TransparentUpgradeableProxy.json"
 import ProxyAdmin from "../../../../contracts/openzeppelin-4.9/compiled/ProxyAdmin.json"
 
-export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: number) => {
+export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: number, gasLimit: number, targetBlockRate: number) => {
     if (!/^0x[a-fA-F0-9]{40}$/.test(ownerAddress)) {
         throw new Error("Invalid ownerAddress format. It should be '0x' followed by 20 hex bytes (40 characters).");
     }
@@ -46,11 +46,11 @@ export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: 
             "feeConfig": {
                 "baseFeeChangeDenominator": 36,
                 "blockGasCostStep": 200000,
-                "gasLimit": 12000000,
+                "gasLimit": gasLimit,
                 "maxBlockGasCost": 1000000,
                 "minBaseFee": 25000000000,
                 "minBlockGasCost": 0,
-                "targetBlockRate": 2,
+                "targetBlockRate": targetBlockRate,
                 "targetGas": 60000000
             },
             "homesteadBlock": 0,
@@ -67,7 +67,7 @@ export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: 
         "difficulty": "0x0",
         "excessBlobGas": null,
         "extraData": "0x",
-        "gasLimit": "0xb71b00",
+        "gasLimit": `0x${gasLimit.toString(16)}`,
         "gasUsed": "0x0",
         "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
         "nonce": "0x0",
@@ -90,7 +90,18 @@ import { useExampleStore } from "../../utils/store";
 import { CodeHighlighter } from "../../ui/CodeHighlighter";
 
 export const GenesisBuilder = () => {
-    const { walletEVMAddress, evmChainId, setEvmChainId, genesisData, setGenesisData } = useExampleStore()
+    const {
+        walletEVMAddress,
+        evmChainId,
+        setEvmChainId,
+        genesisData,
+        setGenesisData,
+        gasLimit,
+        setGasLimit,
+        targetBlockRate,
+        setTargetBlockRate
+    } = useExampleStore()
+
     const [ownerAddress, setOwnerAddress] = useState<string>("")
 
     useEffect(() => {
@@ -104,11 +115,11 @@ export const GenesisBuilder = () => {
             return
         }
         try {
-            setGenesisData(quickAndDirtyGenesisBuilder(ownerAddress, evmChainId))
+            setGenesisData(quickAndDirtyGenesisBuilder(ownerAddress, evmChainId, gasLimit, targetBlockRate))
         } catch (error) {
             setGenesisData(error instanceof Error ? error.message : "Invalid owner address")
         }
-    }, [ownerAddress, evmChainId])
+    }, [ownerAddress, evmChainId, gasLimit, targetBlockRate])
 
     return (
         <div className="space-y-4">
@@ -126,6 +137,22 @@ export const GenesisBuilder = () => {
                 onChange={(value) => setEvmChainId(Number(value))}
                 placeholder="Enter desired chain ID"
                 type="number"
+            />
+            <Input
+                label="Gas Limit"
+                value={gasLimit.toString()}
+                onChange={(value) => setGasLimit(Number(value))}
+                placeholder="Enter gas limit"
+                type="number"
+                notes="Maximum gas allowed per block"
+            />
+            <Input
+                label="Target Block Rate (seconds)"
+                value={targetBlockRate.toString()}
+                onChange={(value) => setTargetBlockRate(Number(value))}
+                placeholder="Enter target block rate"
+                type="number"
+                notes="Target time between blocks in seconds"
             />
             {genesisData && !genesisData.includes("Invalid") && (
                 <CodeHighlighter

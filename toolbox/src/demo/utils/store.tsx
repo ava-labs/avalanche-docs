@@ -26,6 +26,8 @@ export const initialState = {
     proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
     walletEVMAddress: "",
     genesisData: "",
+    gasLimit: 12000000,
+    targetBlockRate: 2,
 }
 
 export const useExampleStore = create(
@@ -56,6 +58,8 @@ export const useExampleStore = create(
             setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
             setWalletEVMAddress: (walletEVMAddress: string) => set({ walletEVMAddress }),
             setGenesisData: (genesisData: string) => set({ genesisData }),
+            setGasLimit: (gasLimit: number) => set({ gasLimit }),
+            setTargetBlockRate: (targetBlockRate: number) => set({ targetBlockRate }),
             reset: () => {
                 window.localStorage.removeItem('example-storage');
                 window.location.reload();
