@@ -1,8 +1,7 @@
 import React from 'react';
-import { Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { HackathonHeader, ScheduleActivity } from '@/types/hackathons';
+import {  ScheduleActivity } from '@/types/hackathons';
 import { redirect } from 'next/navigation';
 import {
   getFilteredHackathons,
@@ -136,22 +135,33 @@ export default async function HackathonPage({
 
   return (
     <main className='container px-2 py-4 lg:py-16'>
-      {/* Outer Wrapper with Rounded Top Corners */}
+      <div className='flex gap-4 items-center'>
+        <Image
+          src='/temp/hackathon-icon.png'
+          alt='Hackathon background'
+          width={40}
+          height={40}
+        />
+        <span className='text-xl font-bold'>{hackathon.title}</span>{' '}
+        <Button asChild>
+          <Link href={`/hackathons/${id}`}>Join now</Link>
+        </Button>
+      </div>
 
-      <div className='flex flex-col '>
+      <div className='flex flex-col mt-8 '>
         {/* Menu Section */}
         <NavigationMenu items={menuItems} />
 
-        <div className='px-8 pt-6'>
-          {/* Jumbotron Section */}
-          <Image
-            src='/builders-hub/hackathons/main_banner_img.png'
-            alt='Hackathon background'
-            width={1270}
-            height={760}
-            priority
-          />
-
+        <div className='px-8 pt-6 '>
+          <Link href={`/hackathons/${id}`}>
+            <Image
+              src='/builders-hub/hackathons/main_banner_img.png'
+              alt='Hackathon background'
+              width={1270}
+              height={760}
+              priority
+            />
+          </Link>
           <div className='p-8 flex flex-col gap-24'>
             {/* Schedule Section */}
             <section>
