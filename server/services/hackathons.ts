@@ -112,10 +112,10 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
     const errors = validateHackathon(hackathonData);
     console.log(errors)
     if (errors.length > 0) {
-        throw new ValidationError("Validation failed", errors);
+        throw new ValidationError("Validation failed", errors)
     }
 
-    const content = { ...hackathonData.content } as Prisma.JsonObject;
+    const content = { ...hackathonData.content } as Prisma.JsonObject
     const newHackathon = await prisma.hackathon.create({
         data: {
             id: hackathonData.id,
@@ -138,18 +138,19 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
 
 export async function updateHackathon(id: string, hackathonData: Partial<HackathonHeader>): Promise<HackathonHeader> {
     const errors = validateHackathon(hackathonData);
+    console.log(errors)
     if (errors.length > 0) {
-        throw new Error(`Validation errors: ${errors.join(", ")}`);
+        throw new ValidationError("Validation failed", errors)
     }
 
     const existingHackathon = await prisma.hackathon.findUnique({
         where: { id },
     });
     if (!existingHackathon) {
-        throw new Error("Hackathon not found");
+        throw new Error("Hackathon not found")
     }
 
-    const content = hackathonData as Prisma.JsonObject;
+    const content = { ...hackathonData.content } as Prisma.JsonObject
     await prisma.hackathon.update({
         where: { id },
         data: {
