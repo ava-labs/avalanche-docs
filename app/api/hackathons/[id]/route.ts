@@ -1,16 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getHackathon, updateHackathon } from "@/server/services/hackathons";
 import { Hackathon } from "@/types/hackathons";
+import { NextApiRequest } from "next";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, context: { params: { id: string } }) {
 
   try {
-    const id = req.nextUrl.searchParams.get('id');
-    const hackathon = await getHackathon(id!)
+    const { id } = context.params;
 
+    if (!id) {
+      return NextResponse.json({ error: "ID required" }, { status: 400 });
+    }
+
+    const hackathon = await getHackathon(id)
     return NextResponse.json(hackathon);
   } catch (error) {
-    console.error("Error in GET /api/hackathons/[id]:", error);
+    console.error("Error in GET /api/hackathons/[id]:");
     return NextResponse.json(
       { error: (error as Error).message },
       { status: 500 }

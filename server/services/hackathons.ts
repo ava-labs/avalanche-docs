@@ -1,7 +1,6 @@
-import { Hackathon, HackathonActivity, HackathonLite, Partner, Track, TrackPrize } from "@/types/hackathons";
+import { Hackathon, HackathonLite, HackathonStatus } from "@/types/hackathons";
 import { hasAtLeastOne, requiredField, validateEntity, Validation } from "./base";
 import { Prisma, PrismaClient } from "@prisma/client";
-import { JsonArray, JsonValue } from "@prisma/client/runtime/library";
 
 const prisma = new PrismaClient();
 
@@ -9,31 +8,32 @@ const prisma = new PrismaClient();
 export const hackathonsValidations: Validation[] = [
     { field: "title", message: "Please provide a title for the hackathon.", validation: (hackathon: Hackathon) => requiredField(hackathon, "title") },
     { field: "description", message: "A description is required.", validation: (hackathon: Hackathon) => requiredField(hackathon, "description") },
-    { field: "date", message: "Please enter a valid date for the hackathon.", validation: (hackathon: Hackathon) => requiredField(hackathon, "date") },
+    { field: "start_date", message: "Please enter a valid date for the hackathon.", validation: (hackathon: Hackathon) => requiredField(hackathon, "start_date") },
+    { field: "end_date", message: "Please enter a valid end date for the hackathon.", validation: (hackathon: Hackathon) => requiredField(hackathon, "end_date") },
     { field: "location", message: "Please specify the location of the hackathon.", validation: (hackathon: Hackathon) => requiredField(hackathon, "location") },
     { field: "tags", message: "Please add at least one category or tag.", validation: (hackathon: Hackathon) => hasAtLeastOne(hackathon, "tags") }
 ];
 
-export const validateHackathon = (hackathon: Partial<Hackathon>) => validateEntity(hackathonsValidations, hackathon);
+export const validateHackathon = (hackathon: Partial<Hackathon>) : Validation[] => validateEntity(hackathonsValidations, hackathon);
+
+class ValidationError extends Error {
+    public details: Validation[];
+    public cause: string;
+  
+    constructor(message: string, details: Validation[]) {
+      super(message);
+      this.cause = "ValidationError";
+      this.details = details;
+    }
+  }
+  
 
 
 
 
-function convertDBToHackathon(hackathon: any): Hackathon {
-    console.log(hackathon)
-
-    return {
-        ...hackathon,
-        agenda: typeof hackathon.agenda == 'string'? JSON.parse(hackathon.agenda) : hackathon.agenda,
-        tracks: typeof hackathon.tracks == 'string'? JSON.parse(hackathon.tracks) : hackathon.tracks,
-        partners: typeof hackathon.partners == 'string'? JSON.parse(hackathon.partners) : hackathon.partners,
-    };
-}
-
-
-export function getHackathonLite(hackathon: any): HackathonLite {
-    const { ...hackathonLite } = hackathon;
-    return hackathonLite;
+export function getHackathonLite(hackathon: any): HackathonLite {   
+    delete hackathon.content
+    return hackathon;
 }
 
 export interface GetHackathonsOptions {
@@ -41,20 +41,20 @@ export interface GetHackathonsOptions {
     pageSize?: number;
     location?: string | null;
     date?: string | null;
-    status?: string | null;
+    status?: HackathonStatus | null;
     search?: string;
 }
 
 export async function getHackathon(id: string) {
-    const hackathon = await prisma.hackathon.findUnique({
+    
+    const hackathon = await prisma.hackathon.findUnique({   
         where: { id },
     });
-
+    console.log('Imprimiendo')
     if (!hackathon)
         throw new Error("Hackathon not found", { cause: "BadRequest" });
 
-    console.log(hackathon)
-    return convertDBToHackathon(hackathon);
+    return hackathon;
 }
 
 export async function getFilteredHackathons(options: GetHackathonsOptions) {
@@ -70,7 +70,6 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     const filters: any = {};
     if (options.location) filters.location = options.location;
     if (options.date) filters.date = options.date;
-    if (options.status) filters.status = options.status;
     if (options.search) filters.title = { contains: options.search, mode: "insensitive" };
 
     const hackathonList = await prisma.hackathon.findMany({
@@ -79,7 +78,23 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
         take: pageSize,
     });
 
-    const hackathonsLite = hackathonList.map(getHackathonLite);
+    const hackathons = hackathonList.map(getHackathonLite);
+    let hackathonsLite = hackathons
+
+    if (options.status) {
+        switch (options.status) {
+            case "UPCOMING":
+                hackathonsLite = hackathons.filter(hackathon => hackathon.start_date.getTime() > Date.now());
+                break;
+            case "ONGOING":
+                hackathonsLite = hackathons.filter(hackathon => hackathon.start_date.getTime() <= Date.now() && hackathon.end_date.getTime() >= Date.now());
+                break;
+            case "ENDED":
+                hackathonsLite = hackathons.filter(hackathon => hackathon.end_date.getTime() < Date.now());
+                break;
+        }
+    }
+
     const totalHackathons = await prisma.hackathon.count({
         where: filters,
     });
@@ -93,38 +108,36 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
 }
 
 
-export async function createHackathon(hackathonData: Partial<Hackathon>): Promise<Hackathon> {
+export async function createHackathon(hackathonData: Partial<Hackathon>): Promise<Hackathon > {
     const errors = validateHackathon(hackathonData);
+    console.log(errors)
     if (errors.length > 0) {
-        throw new Error(`Validation errors: ${errors.join(", ")}`);
+        throw new ValidationError("Validation failed", errors);
     }
 
-
+    const content = hackathonData as Prisma.JsonObject;
     const newHackathon = await prisma.hackathon.create({
         data: {
-            ...hackathonData,
-            address: hackathonData.address ?? "",
-            registration_deadline: hackathonData.registration_deadline ?? new Date(),
-            total_prizes: hackathonData.total_prizes ?? 0,
-            title: hackathonData.title ?? "",
-            description: hackathonData.description ?? "",
-            date: hackathonData.date ?? new Date(),
-            location: hackathonData.location ?? "",
-            tags: hackathonData.tags ?? [],
-            status: hackathonData.status ?? "draft",
-            agenda: hackathonData.agenda!,
-            partners: hackathonData.partners!,
-            tracks: hackathonData.tracks!,
+            id: hackathonData.id,
+            title: hackathonData.title!,
+            description: hackathonData.description!,
+            start_date: hackathonData.start_date!,
+            end_date: hackathonData.end_date!,
+            location: hackathonData.location!,
+            total_prizes: hackathonData.total_prizes!,
+            tags: hackathonData.tags!,
+            timezone: hackathonData.timezone!,
+            content: content
 
         },
     });
 
-    return convertDBToHackathon(newHackathon);
+    return newHackathon;
 }
 
 
-export async function updateHackathon(id: string, partialEditedHackathon: Partial<Hackathon>): Promise<Hackathon> {
-    const errors = validateHackathon(partialEditedHackathon);
+export async function updateHackathon(id: string, hackathonData: Partial<Hackathon>): Promise<Hackathon> {
+    const errors = validateHackathon(hackathonData);
     if (errors.length > 0) {
         throw new Error(`Validation errors: ${errors.join(", ")}`);
     }
@@ -136,23 +149,20 @@ export async function updateHackathon(id: string, partialEditedHackathon: Partia
         throw new Error("Hackathon not found");
     }
 
-
+    const content = hackathonData as Prisma.JsonObject;
     const updatedHackathon = await prisma.hackathon.update({
         where: { id },
         data: {
-            ...partialEditedHackathon,
-            address: partialEditedHackathon.address ?? "",
-            registration_deadline: partialEditedHackathon.registration_deadline ?? new Date(),
-            total_prizes: partialEditedHackathon.total_prizes ?? 0,
-            title: partialEditedHackathon.title ?? "",
-            description: partialEditedHackathon.description ?? "",
-            date: partialEditedHackathon.date ?? new Date(),
-            location: partialEditedHackathon.location ?? "",
-            tags: partialEditedHackathon.tags ?? [],
-            status: partialEditedHackathon.status ?? "draft",
-            agenda: partialEditedHackathon.agenda!,
-            partners: partialEditedHackathon.partners!,
-            tracks: partialEditedHackathon.tracks!,
+            id: hackathonData.id,
+            title: hackathonData.title!,
+            description: hackathonData.description!,
+            start_date: hackathonData.start_date!,
+            end_date: hackathonData.end_date!,
+            location: hackathonData.location!,
+            total_prizes: hackathonData.total_prizes!,
+            tags: hackathonData.tags!,
+            timezone: hackathonData.timezone!,
+            content: content
 
         },
     });
