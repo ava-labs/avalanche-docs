@@ -202,8 +202,6 @@ class BlockWatcher {
                 });
             },
             onError: (error) => {
-                this.error = error;
-
                 // Reject all pending transactions
                 for (const [, txData] of this.awaitedTransactions) {
                     clearTimeout(txData.timer);
