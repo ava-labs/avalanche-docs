@@ -20,7 +20,7 @@ For small typos or corrections, it is easy to contribute without the need to clo
 repository. Simply:
 
 - Find the page you want to edit.
-- Click on the "Edit on GitHub" button in the right sidebar
+- Click the "Edit on GitHub" button in the right sidebar
 - Make the changes and Hit "Commit changes ..."
 - Edit the `commit message` to describe the change in 4 or less words, and include any extra details in the description
 - Hit "Sign off and commit changes" to raise a PR with your proposed changes
