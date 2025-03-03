@@ -18,5 +18,8 @@ model Hackathon {
   total_prizes        Int
   tags                String[]
   timezone             String @default("UTC")
+  icon                 String @default("")
+  banner               String @default("")
+  small_banner         String @default("")
   content              Json @default("{}")
 }

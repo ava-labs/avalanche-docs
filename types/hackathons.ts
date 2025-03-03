@@ -10,6 +10,9 @@ export type HackathonHeader = {
   tags: string[]
   status: HackathonStatus
   timezone: string
+  icon: string
+  banner: string
+  small_banner: string
   content: Hackathon
 }
 
