@@ -3,13 +3,13 @@ import { CalendarIcon } from 'lucide-react';
 import { MapPinIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { HackathonLite } from '@/types/hackathons';
+import { HackathonHeader } from '@/types/hackathons';
 import { Button } from '../ui/button';
 
 export default function HackathonCard({
   hackathon,
 }: {
-  hackathon: HackathonLite;
+  hackathon: HackathonHeader;
 }) {
   const statusColors: Record<string, string> = {
     Ongoing: 'stroke-green-500',

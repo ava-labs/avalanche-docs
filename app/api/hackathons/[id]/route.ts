@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getHackathon, updateHackathon } from "@/server/services/hackathons";
-import { Hackathon } from "@/types/hackathons";
-import { NextApiRequest } from "next";
+import { HackathonHeader } from "@/types/hackathons";
 
-export async function GET(req: NextRequest, context: { params: { id: string } }) {
+export async function GET(req: NextRequest, context: any) {
 
   try {
     const { id } = context.params;
@@ -26,7 +25,7 @@ export async function GET(req: NextRequest, context: { params: { id: string } })
 export async function PUT(req: NextRequest) {
   try {
     const id = req.nextUrl.searchParams.get('id')!;
-    const partialEditedHackathon = (await req.json()) as Partial<Hackathon>;
+    const partialEditedHackathon = (await req.json()) as Partial<HackathonHeader>;
 
     const updatedHackathon = await updateHackathon(id ?? partialEditedHackathon.id, partialEditedHackathon);
 

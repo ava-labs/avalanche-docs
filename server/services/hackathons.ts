@@ -1,4 +1,4 @@
-import { Hackathon, HackathonLite, HackathonStatus } from "@/types/hackathons";
+import { Hackathon, HackathonHeader, HackathonStatus } from "@/types/hackathons";
 import { hasAtLeastOne, requiredField, validateEntity, Validation } from "./base";
 import { Prisma, PrismaClient } from "@prisma/client";
 
@@ -14,7 +14,7 @@ export const hackathonsValidations: Validation[] = [
     { field: "tags", message: "Please add at least one category or tag.", validation: (hackathon: Hackathon) => hasAtLeastOne(hackathon, "tags") }
 ];
 
-export const validateHackathon = (hackathon: Partial<Hackathon>): Validation[] => validateEntity(hackathonsValidations, hackathon);
+export const validateHackathon = (hackathon: Partial<HackathonHeader>): Validation[] => validateEntity(hackathonsValidations, hackathon);
 
 class ValidationError extends Error {
     public details: Validation[];
@@ -31,7 +31,7 @@ class ValidationError extends Error {
 
 
 
-export function getHackathonLite(hackathon: any): HackathonLite {
+export function getHackathonLite(hackathon: any): HackathonHeader {
     delete hackathon.content
     return hackathon;
 }
@@ -54,7 +54,7 @@ export async function getHackathon(id: string) {
     if (!hackathon)
         throw new Error("Hackathon not found", { cause: "BadRequest" });
 
-    return hackathon;
+    return hackathon as any;
 }
 
 export async function getFilteredHackathons(options: GetHackathonsOptions) {
@@ -108,7 +108,7 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
 }
 
 
-export async function createHackathon(hackathonData: Partial<Hackathon>): Promise<Hackathon> {
+export async function createHackathon(hackathonData: Partial<HackathonHeader>): Promise<HackathonHeader> {
     const errors = validateHackathon(hackathonData);
     console.log(errors)
     if (errors.length > 0) {
@@ -133,11 +133,11 @@ export async function createHackathon(hackathonData: Partial<Hackathon>): Promis
     });
 
     hackathonData.id = newHackathon.id;
-    return hackathonData as Hackathon;
+    return hackathonData as HackathonHeader;
 }
 
 
-export async function updateHackathon(id: string, hackathonData: Partial<Hackathon>): Promise<Hackathon> {
+export async function updateHackathon(id: string, hackathonData: Partial<HackathonHeader>): Promise<HackathonHeader> {
     const errors = validateHackathon(hackathonData);
     if (errors.length > 0) {
         throw new Error(`Validation errors: ${errors.join(", ")}`);
@@ -168,5 +168,5 @@ export async function updateHackathon(id: string, hackathonData: Partial<Hackath
         },
     });
 
-    return hackathonData as Hackathon;
+    return hackathonData as HackathonHeader;
 }

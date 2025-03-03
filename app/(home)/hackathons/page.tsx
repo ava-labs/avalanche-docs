@@ -1,4 +1,4 @@
-import type { HackathonsFilters } from '@/types/hackathons';
+import type { HackathonsFilters, HackathonStatus } from '@/types/hackathons';
 import Hackathons from '@/components/hackathons/Hackathons';
 import { getFilteredHackathons } from '@/server/services/hackathons';
 
@@ -8,7 +8,7 @@ export const dynamicParams = true;
 export default async function HackathonsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: number; location?: string; status?: string }>;
+  searchParams: Promise<{ page?: number; location?: string; status?: HackathonStatus | null }>;
 }) {
   const { page, location, status } = await searchParams;
   const { hackathons, total } =  await getFilteredHackathons({
@@ -21,7 +21,7 @@ export default async function HackathonsPage({
   const initialFilters: HackathonsFilters = {
     page: page ?? 1,
     location: location,
-    status: status,
+    status: status as (HackathonStatus | null),
   };
 
   return (
