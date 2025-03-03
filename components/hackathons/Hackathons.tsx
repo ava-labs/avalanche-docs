@@ -12,7 +12,7 @@ import HackathonCard from './HackathonCard';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 import Link from 'next/link';
 import { Button } from '../ui/button';
-import { HackathonLite, HackathonsFilters } from '@/types/hackathons';
+import { HackathonHeader, HackathonsFilters } from '@/types/hackathons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -57,7 +57,7 @@ export default function Hackathons({
   initialFilters,
   totalHackathons,
 }: {
-  initialHackathons: HackathonLite[];
+  initialHackathons: HackathonHeader[];
   initialFilters: HackathonsFilters;
   totalHackathons: number;
 }) {
@@ -66,7 +66,7 @@ export default function Hackathons({
 
   console.debug({ initialHackathons, initialFilters, totalHackathons });
   const [hackathons, setHackathons] =
-    useState<HackathonLite[]>(initialHackathons);
+    useState<HackathonHeader[]>(initialHackathons);
   const [filters, setFilters] = useState<HackathonsFilters>(initialFilters);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [totalPages, setTotalPages] = useState<number>(
@@ -190,7 +190,7 @@ export default function Hackathons({
 
           <Select
             onValueChange={(value) => handleFilterChange('status', value)}
-            value={filters.status}
+            value={filters.status as string}
           >
             <SelectTrigger className='w-[180px]'>
               <SelectValue placeholder='Filter by Status' />

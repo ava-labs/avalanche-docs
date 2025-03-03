@@ -5,6 +5,7 @@ import {
   GetHackathonsOptions,
 } from '@/server/services/hackathons';
 import { PrismaClient } from '@prisma/client';
+import { HackathonStatus } from '@/types/hackathons';
 
 const prisma = new PrismaClient();
 
@@ -16,7 +17,7 @@ export async function GET(req: NextRequest) {
       pageSize: Number(searchParams.get('pageSize') || 10),
       location: searchParams.get('location') || undefined,
       date: searchParams.get('date') || undefined,
-      status: searchParams.get('status') || undefined,
+      status: searchParams.get('status') as HackathonStatus || undefined,
       search: searchParams.get('search') || undefined,
     };
     const response = await getFilteredHackathons(options);
@@ -45,8 +46,9 @@ export async function POST(req: NextRequest) {
     console.error('Error POST /api/hackathons:', error.message);
     const wrappedError = error as Error;
     return NextResponse.json(
-      { error: wrappedError.message },
-      { status: wrappedError.cause == 'BadRequest' ? 400 : 500 }
+      { error: wrappedError },
+      { status: wrappedError.cause == 'ValidationError' ? 400 : 500 }
     );
   }
 }
+
