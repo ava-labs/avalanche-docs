@@ -1,16 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getHackathon, updateHackathon } from "@/server/services/hackathons";
-import { Hackathon } from "@/types/hackathons";
+import { HackathonHeader } from "@/types/hackathons";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, context: any) {
 
   try {
-    const id = req.nextUrl.searchParams.get('id');
-    const hackathon = await getHackathon(id!)
+    const { id } = context.params;
 
+    if (!id) {
+      return NextResponse.json({ error: "ID required" }, { status: 400 });
+    }
+
+    const hackathon = await getHackathon(id)
     return NextResponse.json(hackathon);
   } catch (error) {
-    console.error("Error in GET /api/hackathons/[id]:", error);
+    console.error("Error in GET /api/hackathons/[id]:");
     return NextResponse.json(
       { error: (error as Error).message },
       { status: 500 }
@@ -20,8 +24,11 @@ export async function GET(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const partialEditedHackathon = (await req.json()) as Partial<Hackathon>;
-    const updatedHackathon = await updateHackathon(partialEditedHackathon.id!, partialEditedHackathon);
+    const id = req.nextUrl.searchParams.get('id')!;
+    const partialEditedHackathon = (await req.json()) as Partial<HackathonHeader>;
+
+    const updatedHackathon = await updateHackathon(id ?? partialEditedHackathon.id, partialEditedHackathon);
+
     return NextResponse.json(updatedHackathon);
   } catch (error) {
     console.error("Error in PUT /api/hackathons/[id]:", error);

@@ -2,7 +2,7 @@ import React from "react";
 import { Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { HackathonLite } from "@/types/hackathons";
+import { HackathonHeader } from "@/types/hackathons";
 import { redirect } from "next/navigation";
 import {
   getFilteredHackathons,
@@ -20,7 +20,7 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const hackathons = await getFilteredHackathons({});
-  return hackathons.hackathons.map((hackathon: HackathonLite) => ({
+  return hackathons.hackathons.map((hackathon: HackathonHeader) => ({
     id: hackathon.id,
   }));
 }
@@ -164,13 +164,13 @@ export default async function HackathonPage({
               Schedule
             </h2>
             <Divider />
-            <p>{getDateRange(hackathon.agenda as any)}</p>
+            <p>{getDateRange(hackathon.content.schedule)}</p>
             <div className="flex justify-between gap-10 mt-4 min-w-full">
               <div className="flex items-center justify-center gap-10">
                 <SearchEventInput />
                 <TimeZoneSelect />
               </div>
-              <DeadlineTimer events={hackathon.agenda} />
+              <DeadlineTimer events={hackathon.content.schedule} />
             </div>
             <Divider />
             {/* Schedule content will go here */}
@@ -243,7 +243,7 @@ export default async function HackathonPage({
               Partners
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
-              {hackathon.partners.map((partner, index) => (
+              {hackathon.content.partners.map((partner, index) => (
                 <div
                   key={index}
                   className="flex flex-col items-center justify-center border border-gray-400 rounded-lg p-4"
@@ -264,10 +264,11 @@ export default async function HackathonPage({
             </h2>
             <Divider />
             <div className="h-px grid grid-cols-1 xl:grid-cols-2 gap-4">
-              {hackathon.tracks.map((track, index) => (
+              {hackathon.content.tracks.map((track, index) => (
                 <div
                   key={index}
                   className="border border-white rounded-lg p-4 flex flex-col gap-4"
+                >
                 >
                   <h3 className="text-lg font-bold">{track.name}</h3>
 
@@ -275,7 +276,7 @@ export default async function HackathonPage({
 
                   <div className="flex justify-between items-center text-white mt-2">
                     <span className="text-sm">
-                      {track.prizes.length} prizes
+                       prizes
                     </span>
                     <div className="flex items-center gap-1">
                       <Trophy className="w-4 h-4" />
