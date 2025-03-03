@@ -54,7 +54,11 @@ export async function getHackathon(id: string) {
     if (!hackathon)
         throw new Error("Hackathon not found", { cause: "BadRequest" });
 
-    return hackathon as any;
+    const hackathonContent = hackathon.content as unknown as Hackathon
+    return {
+        ...hackathon,
+        content: hackathonContent
+    } as HackathonHeader
 }
 
 export async function getFilteredHackathons(options: GetHackathonsOptions) {
