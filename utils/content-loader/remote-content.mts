@@ -116,11 +116,11 @@ async function main(): Promise<void> {
       contentUrl: "https://github.com/ava-labs/avalanchego/tree/master/vms/platformvm/warp/",
     },
     { 
-      sourceUrl: "https://raw.githubusercontent.com/ava-labs/icm-services/refs/heads/main/README.md",
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/icm-services/refs/heads/main/relayer/README.md",
       outputPath: "content/docs/cross-chain/avalanche-warp-messaging/run-relayer.mdx",
       title: "Run a Relayer",
       description: "Reference relayer implementation for cross-chain Avalanche Interchain Message delivery.",
-      contentUrl: "https://github.com/ava-labs/icm-services/blob/main/",
+      contentUrl: "https://github.com/ava-labs/icm-services/blob/main/relayer/",
     },
     { 
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/icm-contracts/refs/heads/main/contracts/teleporter/README.md",
