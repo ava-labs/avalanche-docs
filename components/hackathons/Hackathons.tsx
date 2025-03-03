@@ -190,7 +190,7 @@ export default function Hackathons({
 
           <Select
             onValueChange={(value) => handleFilterChange('status', value)}
-            value={filters.status}
+            value={filters.status as string}
           >
             <SelectTrigger className='w-[180px]'>
               <SelectValue placeholder='Filter by Status' />
