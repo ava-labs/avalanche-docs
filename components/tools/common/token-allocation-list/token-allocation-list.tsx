@@ -77,7 +77,7 @@ export default function TokenAllocationList({
       const newAddresses = inputValue.split(/[\s,]+/).filter(addr => addr.trim() !== '');
       const newAllocations = newAddresses.map(address => ({
         address,
-        amount: 0,
+        amount: 1_000_000,
         error: isAddressInvalid(address)
       }));
       handleAddAllocations(newAllocations);
@@ -90,7 +90,7 @@ export default function TokenAllocationList({
       const newAddresses = newAddress.split(/[\s,]+/).filter(addr => addr.trim() !== '');
       const newAllocations = newAddresses.map(address => ({
         address,
-        amount: 0,
+        amount: 10000000,
         error: isAddressInvalid(address)
       }));
       handleAddAllocations(newAllocations);
@@ -187,7 +187,7 @@ export default function TokenAllocationList({
           </TableBody>
         </Table>
       </TooltipProvider>
-      {allocations.length === 1 && (<p className="mt-2 text-sm text-red-500">
+      {allocations.length < 1 && (<p className="mt-2 text-sm text-red-500">
           Please add at least one address that holds some tokens.
       </p>)}
     </div>

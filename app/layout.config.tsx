@@ -1,7 +1,7 @@
 import { type LinkItemType } from 'fumadocs-ui/layouts/docs';
 import { type BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
-import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness,MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake } from 'lucide-react';
+import { Workflow, Sprout, Logs, MonitorCheck, ArrowUpRight, SendHorizontal, Cable, Bot, Cpu, Cog, Snowflake, BriefcaseBusiness, MessageSquareQuote, Server, Github, Waypoints, HandCoins, Ticket, Handshake, HardDrive, LayoutTemplate, Wallet, Search, Cloud, Database, ListFilter } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
@@ -10,15 +10,76 @@ import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 
 export const linkItems: LinkItemType[] = [
   {
-    icon: <Workflow />,
+    type: 'menu',
     text: 'Integrations',
     url: '/integrations',
-    active: 'nested-url',
+    items: [
+      {
+        icon: <Wallet />,
+        text: 'Account Abstraction',
+        description: "Explore solutions for implementing account abstraction in your dApps.",
+        url: '/integrations#Account%20Abstraction',
+        menu: {
+          className: 'lg:col-start-1',
+        },
+      },
+      {
+        icon: <Search />,
+        text: 'Block Explorers',
+        description: "Tools to analyze and track blockchain transactions and activities.",
+        url: '/integrations#Block%20Explorers',
+        menu: {
+          className: 'lg:col-start-2',
+        },
+      },
+      {
+        icon: <Cloud />,
+        text: 'Blockchain-as-a-Service',
+        description: "Managed solutions for deploying and managing your Avalanche L1s.",
+        url: '/integrations#Blockchain%20as%20a%20Service',
+        menu: {
+          className: 'lg:col-start-3',
+        },
+      },
+      {
+        icon: <Database />,
+        text: 'Data Feeds',
+        description: "Access reliable oracle data feeds for your smart contracts.",
+        url: '/integrations#Data%20Feeds',
+        menu: {
+          className: 'lg:col-start-1 lg:row-start-2',
+        },
+      },
+      {
+        icon: <ListFilter />,
+        text: 'Indexers',
+        description: "Index and query blockchain data efficiently for your applications.",
+        url: '/integrations#Indexers',
+        menu: {
+          className: 'lg:col-start-2 lg:row-start-2',
+        },
+      },
+      {
+        icon: <ArrowUpRight />,
+        text: 'Browse All Integrations',
+        description: "Discover all available integrations in the Avalanche ecosystem.",
+        url: '/integrations',
+        menu: {
+          className: 'lg:col-start-3 lg:row-start-2',
+        },
+      },
+    ],
   },
   {
     icon: <Cog />,
     text: 'Hackathon',
     url: '/hackathons',
+    active: 'nested-url',
+  },
+  {
+    icon: <LayoutTemplate />,
+    text: 'Builder Kit',
+    url: '/builderkit',
     active: 'nested-url',
   }
 ];
@@ -28,7 +89,7 @@ const docsMenu: LinkItemType = {
   text: 'Documentation',
   url: '/docs',
   items: [
-   {
+    {
       menu: {
         banner: (
           <div className="-mx-3 -mt-3">
@@ -94,7 +155,7 @@ const academyMenu: LinkItemType = {
   text: 'Academy',
   url: '/academy',
   items: [
-   {
+    {
       menu: {
         banner: (
           <div className="-mx-3 -mt-3">
@@ -210,22 +271,31 @@ const toolsMenu: LinkItemType = {
     },
     {
       icon: <Waypoints />,
-      text: 'ICM Deployment (Coming soon)',
-      description: 'Deploy the Interchain Messaging contracts and the ICM Registry to connect your L1 to the Avalanche network.',
-      url: '',
+      text: 'L1 Toolbox (Beta)',
+      description: 'Manage your L1 with a highly granular set of tools.',
+      url: '/tools/l1-toolbox',
       menu: {
         className: 'lg:col-start-3 lg:row-start-1',
       },
     },
     {
-      icon: <Waypoints />,
-      text: 'ICTT Deployment (Coming soon)',
-      description: 'Deploy a bridge between two L1s to transfer fungible tokens.',
-      url: '',
+      icon: <HardDrive />,
+      text: 'PoA Validator Management (Beta)',
+      description: 'Manage your validator set from the web.',
+      url: '/tools/poa-validator-management',
       menu: {
         className: 'lg:col-start-3 lg:row-start-2',
       },
     },
+    // {
+    //   icon: <Waypoints />,
+    //   text: 'ICTT Deployment (Coming soon)',
+    //   description: 'Deploy a bridge between two L1s to transfer fungible tokens.',
+    //   url: '',
+    //   menu: {
+    //     className: 'lg:col-start-3 lg:row-start-2',
+    //   },
+    // },
   ],
 };
 
@@ -235,64 +305,64 @@ const grantsMenu: LinkItemType = {
   url: '/grants',
   items: [
     {
-       menu: {
-         banner: (
-           <div className="-mx-3 -mt-3">
-             <Image
-               src={CodebaseBanner}
-               alt="Preview"
-               className="rounded-t-lg object-cover"
-               style={{
-                 maskImage:
-                   'linear-gradient(to bottom,white 60%,transparent)',
-               }}
-             />
-           </div>
-         ),
-         className: 'md:row-span-2',
-       },
-       icon: <BriefcaseBusiness />,
-       text: 'Codebase',
-       description: 'We help transform good ideas into great web3 companies & ambitious builders into extraordinary founders.',
-       url: 'https://codebase.avax.network/',
-     },
-     {
-       icon: <Cpu />,
-       text: 'InfraBUIDL',
-       description: "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
-       url: 'https://www.avax.network/infrabuidl-program',
-       menu: {
-         className: 'lg:col-start-2',
-       },
-     },
-     {
-       icon: <Bot />,
-       text: 'InfraBUIDL (AI)',
-       description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure.',
-       url: 'https://www.avax.network/infrabuidl-ai-program',
-       menu: {
-         className: 'lg:col-start-2',
-       },
-     },
-     {
-       icon: <MessageSquareQuote />,
-       text: 'Retro9000',
-       description: "Build innovative projects on Avalanche. Get rewarded for your creativity.",
-       url: 'https://retro9000.avax.network/',
-       menu: {
-         className: 'lg:col-start-3 lg:row-start-1',
-       },
-     },
-     {
-       icon: <Snowflake />,
-       text: 'Blizzard Fund',
-       description: "A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support.",
-       url: 'https://www.blizzard.fund/',
-       menu: {
-         className: 'lg:col-start-3',
-       },
-     },
-   ],
+      menu: {
+        banner: (
+          <div className="-mx-3 -mt-3">
+            <Image
+              src={CodebaseBanner}
+              alt="Preview"
+              className="rounded-t-lg object-cover"
+              style={{
+                maskImage:
+                  'linear-gradient(to bottom,white 60%,transparent)',
+              }}
+            />
+          </div>
+        ),
+        className: 'md:row-span-2',
+      },
+      icon: <BriefcaseBusiness />,
+      text: 'Codebase',
+      description: 'We help transform good ideas into great web3 companies & ambitious builders into extraordinary founders.',
+      url: 'https://codebase.avax.network/',
+    },
+    {
+      icon: <Cpu />,
+      text: 'InfraBUIDL',
+      description: "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
+      url: 'https://www.avax.network/infrabuidl-program',
+      menu: {
+        className: 'lg:col-start-2',
+      },
+    },
+    {
+      icon: <Bot />,
+      text: 'InfraBUIDL (AI)',
+      description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure.',
+      url: 'https://www.avax.network/infrabuidl-ai-program',
+      menu: {
+        className: 'lg:col-start-2',
+      },
+    },
+    {
+      icon: <MessageSquareQuote />,
+      text: 'Retro9000',
+      description: "Build innovative projects on Avalanche. Get rewarded for your creativity.",
+      url: 'https://retro9000.avax.network/',
+      menu: {
+        className: 'lg:col-start-3 lg:row-start-1',
+      },
+    },
+    {
+      icon: <Snowflake />,
+      text: 'Blizzard Fund',
+      description: "A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support.",
+      url: 'https://www.blizzard.fund/',
+      menu: {
+        className: 'lg:col-start-3',
+      },
+    },
+  ],
 };
 
 // const hackathonsMenu: LinkItemType = {
@@ -326,7 +396,7 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
       <>
-        { <AvalancheLogo className="size-7" fill="currentColor"/> }
+        {<AvalancheLogo className="size-7" fill="currentColor" />}
         <span style={{ fontSize: "large" }}>Builders Hub</span>
       </>
     ),

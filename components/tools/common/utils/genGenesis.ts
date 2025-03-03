@@ -1,7 +1,15 @@
 import { parseEther } from 'viem'
-import { AllowlistPrecompileConfig } from '../allowlist-precompile-configurator/types';
+import { AllowlistPrecompileConfig } from '../../common/allowlist-precompile-configurator/types';
+import TransparentUpgradeableProxy from "../openzeppelin-contracts-4.9/compiled/TransparentUpgradeableProxy.json"
+import ProxyAdmin from "../openzeppelin-contracts-4.9/compiled/ProxyAdmin.json"
+
+export const PROXY_ADDRESS = "0xfacade0000000000000000000000000000000000"
+export const PROXY_ADMIN_ADDRESS = "0xdad0000000000000000000000000000000000000"
 import { addressEntryArrayToAddressArray } from './conversion';
 import { AllocationEntry } from '../token-allocation-list/types';
+
+export const UNITIALIZED_PROXY_ADDRESS = "0x1212121212121212121212121212121212121212"
+
 
 const currentTimestamp = Math.floor(Date.now() / 1000);
 
@@ -10,7 +18,8 @@ type GenerateGenesisArgs = {
     tokenAllocations: AllocationEntry[];
     txAllowlistConfig: AllowlistPrecompileConfig,
     contractDeployerAllowlistConfig: AllowlistPrecompileConfig,
-    nativeMinterAllowlistConfig: AllowlistPrecompileConfig
+    nativeMinterAllowlistConfig: AllowlistPrecompileConfig,
+    poaOwnerAddress: string
 }
 
 function generateAllowListConfig(config: AllowlistPrecompileConfig) {
@@ -28,14 +37,44 @@ function generateAllowListConfig(config: AllowlistPrecompileConfig) {
     };
 }
 
-export function generateGenesis({ evmChainId, tokenAllocations, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig }: GenerateGenesisArgs) {
+function hexTo32Bytes(hex: string) {
+    if (hex.slice(0, 2) === "0x") {
+        hex = hex.slice(2);
+    }
+    if (hex.length > 64) {
+        throw new Error("Hex string too long");
+    }
+    return "0x" + hex.padStart(64, "0");
+}
+
+export function generateGenesis({ evmChainId, tokenAllocations, txAllowlistConfig, contractDeployerAllowlistConfig, nativeMinterAllowlistConfig, poaOwnerAddress }: GenerateGenesisArgs) {
     // Convert balances to wei
-    const allocations: Record<string, { balance: string }> = {};
+    const allocations: Record<string, { balance: string, code?: string, storage?: Record<string, string>, nonce?: string }> = {};
     tokenAllocations.forEach((allocation) => {
         allocations[allocation.address.toLowerCase().replace('0x', '')] = {
             balance: "0x" + parseEther(allocation.amount.toString()).toString(16)
         };
     });
+
+    allocations[PROXY_ADDRESS.slice(2).toLowerCase()] = {
+        balance: "0x0",
+        code: TransparentUpgradeableProxy.deployedBytecode.object,
+        storage: {
+            "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc": hexTo32Bytes(UNITIALIZED_PROXY_ADDRESS.slice(2).toLowerCase()),
+            "0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103": hexTo32Bytes(PROXY_ADMIN_ADDRESS.slice(2).toLowerCase())
+        },
+        nonce: "0x1"
+    };
+
+    allocations[PROXY_ADMIN_ADDRESS.slice(2).toLowerCase()] = {
+        balance: "0x0",
+        code: ProxyAdmin.deployedBytecode.object,
+        nonce: "0x1",
+        storage: {
+            "0x0000000000000000000000000000000000000000000000000000000000000000": hexTo32Bytes(poaOwnerAddress),
+        }
+    };
+
 
     return {
         "airdropAmount": null,

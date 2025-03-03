@@ -22,7 +22,7 @@ Now we have all the Smart Contract 📜 set we can start sending incentivized cr
 To deploy the sender contract run:
 
 ```bash
-forge create --rpc-url local-c --private-key $PK contracts/interchain-messaging/incentivize-relayer/senderWithFees.sol:SenderWithFeesOnCChain
+forge create --rpc-url local-c --private-key $PK contracts/interchain-messaging/incentivize-relayer/senderWithFees.sol:SenderWithFeesOnCChain --broadcast
 ```
 ```
 [⠊] Compiling...
@@ -50,7 +50,7 @@ export SENDER_ADDRESS=0xa4DfF80B4a1D748BF28BC4A271eD834689Ea3407
 Now, deploy the receiver contract.
 
 ```bash
-forge create --rpc-url myblockchain --private-key $PK contracts/interchain-messaging/incentivize-relayer/receiverWithFees.sol:ReceiverOnSubnet
+forge create --rpc-url myblockchain --private-key $PK contracts/interchain-messaging/incentivize-relayer/receiverWithFees.sol:ReceiverOnSubnet --broadcast
 ```
 ```
 [⠊] Compiling...
