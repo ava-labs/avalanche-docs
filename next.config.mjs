@@ -13,7 +13,16 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  transpilePackages: ['avalanche-docs-toolbox']
+  transpilePackages: ['avalanche-docs-toolbox'],
+  async redirects() {
+    return [
+      {
+        source: '/docs/avalanche-l1s/build-first-avalanche-l1',
+        destination: '/docs/tooling/create-avalanche-l1',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default withMDX(config);
