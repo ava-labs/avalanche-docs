@@ -256,6 +256,9 @@ const staticRedirects: RedirectMap = {
   '/api-reference/c-chain/configs': '/nodes/chain-configs/c-chain',
   '/tooling/guides/get-avalanche-cli': '/tooling/get-avalanche-cli',
   '/avalanche-l1s/deploy-a-avalanche-l1/production-infrastructure': '/tooling/create-deploy-avalanche-l1s/deploy-on-production-infra',
+  '/avalanche-l1s/deploy-a-avalanche-l1/local-network': '/tooling/create-deploy-avalanche-l1s/deploy-locally',
+  '/dapps/launch-your-ethereum-dapp': '/dapps/end-to-end/launch-ethereum-dapp',
+  '/api-reference/standards/guides/txn-fees': '/api-reference/guides/txn-fees',
 };
 
 const wildcardRedirects: WildcardRedirect[] = [
