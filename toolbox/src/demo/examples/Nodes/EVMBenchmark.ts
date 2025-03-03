@@ -175,7 +175,6 @@ export class EVMBenchmark {
 
 class BlockWatcher {
     private unsubscribe: WatchBlocksReturnType | undefined = undefined;
-    private error: Error | undefined = undefined;
     private awaitedTransactions: Map<string, {
         resolve: (blockNumber: number) => void;
         reject: (error: Error) => void;
