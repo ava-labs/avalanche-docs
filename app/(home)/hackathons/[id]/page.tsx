@@ -68,7 +68,7 @@ export default async function HackathonPage({
           <section>
             <h2 className="text-xl font-bold mb-4">Partners</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-6">
-              {hackathon.content.partners.map((partner, index) => (
+              {hackathon.content.partners?.map((partner, index) => (
                 <div
                   key={index}
                   className="flex flex-col items-center justify-center border border-gray-400 rounded-lg p-4"
@@ -86,7 +86,7 @@ export default async function HackathonPage({
           <section>
             <h2 className="text-xl font-bold mb-4">Tracks</h2>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-              {hackathon.content.tracks.map((track, index) => (
+              {hackathon.content.tracks?.map((track, index) => (
                 <div
                   key={index}
                   className="border border-white rounded-lg p-4 flex flex-col gap-4"

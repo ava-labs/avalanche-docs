@@ -39,7 +39,7 @@ export default function HackathonCard({
         <div className='flex items-center gap-2 text-gray-300 text-sm mt-2'>
           <CalendarIcon className='h-4 w-4 stroke-white' />
           <span className='font-medium'>
-            {new Date(hackathon.date).toLocaleDateString('en-US', {
+            {new Date(hackathon.start_date).toLocaleDateString('en-US', {
               month: 'long',
               day: 'numeric',
               year: 'numeric',
