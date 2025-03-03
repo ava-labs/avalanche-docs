@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build:remote": "tsx ./utils/content-loader/remote-content.mts",
     "start": "pnpm build:remote && next build && next start",
-    "check-links": "tsx .github/linkChecker.ts",
-    "postinstall": "prisma generate && fumadocs-mdx"
+    "check-links": "tsx .github/linkChecker.ts"
+    
   },
   "dependencies": {
     "@avalabs/avalanchejs": "4.1.2-alpha.4",
