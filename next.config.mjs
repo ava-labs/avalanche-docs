@@ -12,7 +12,14 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const config = {
-  reactStrictMode: true,
+  reactStrictMode: true,images: {
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'lh3.googleusercontent.com', 
+      port: '', 
+      pathname: '/a/**', 
+    },]
+  },
 };
 
 export default withMDX(config);

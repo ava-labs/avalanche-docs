@@ -7,6 +7,9 @@ import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
 import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
 import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
+import UserNav from '@/components/login/user-button/UserNav';
+
+
 
 export const linkItems: LinkItemType[] = [
   {
@@ -294,7 +297,13 @@ const grantsMenu: LinkItemType = {
      },
    ],
 };
-
+const LoginIcon:LinkItemType={
+  type:"icon",
+  icon:<UserNav/>,
+  url:'#',
+  text:"usuario",
+  active:'none'
+}
 // const hackathonsMenu: LinkItemType = {
 //   type: 'menu',
 //   text: 'Hackathons',
@@ -330,6 +339,7 @@ export const baseOptions: BaseLayoutProps = {
         <span style={{ fontSize: "large" }}>Builders Hub</span>
       </>
     ),
+    
   },
   links: [
     docsMenu,
@@ -338,5 +348,6 @@ export const baseOptions: BaseLayoutProps = {
     grantsMenu,
     //hackathonsMenu,
     ...linkItems,
+    LoginIcon
   ],
 };
