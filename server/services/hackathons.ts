@@ -128,7 +128,6 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
             tags: hackathonData.tags!,
             timezone: hackathonData.timezone!,
             content: content
-
         },
     });
 
