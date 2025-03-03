@@ -13,7 +13,7 @@ technology ecosystem.
 
 Effective immediately, the developer documentation will no longer accept requests to add 
 tutorials or extensive explanations on third-party/external technologies or services, unless 
-exceptional circumstances warrant their inclusion. This decision address several key concerns:
+exceptional circumstances warrant their inclusion. This decision addresses several key concerns:
 
 ### 1. Clutter and Complexity
 
