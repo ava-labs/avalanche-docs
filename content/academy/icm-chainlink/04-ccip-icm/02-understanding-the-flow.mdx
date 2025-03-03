@@ -1,0 +1,151 @@
+---
+title: Understanding the Flow
+description: Learn what is the Flow needed to transfer data between different networks from Avalanche and other ecosystem.
+updated: 2025-03-02
+authors: [Andrea]
+icon: Book
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+In this section, we will explore the architecture for transferring data between different blockchains involving the Avalanche ecosystem (L1), and external blockchains like Ethereum.
+
+Let's begin by understanding how Chainlink's Cross-Chain Interoperability Protocol (CCIP) functions:
+
+1. **Need for Message Transfer:** A message exists on a source network and needs to be sent to a destination network.
+
+2. **Validation of Technology Availability:** Confirm that the source network and destination network are among those with Chainlink CCIP contracts deployed.
+
+3. **Review and Acquisition of Necessary Data**: Identify the Chainlink sender contract address, the recipient contract address on the destination network, the necessary keywords in the Chainlink sender contract that reference the destination network, the data to be sent, and specific information if a token is involved.
+
+4. **Creation of Sender Contract:** Using this information, create a contract on the source network with the necessary details to send the message or asset to a contract on a different network.
+
+5. **Creation of Receiver Contract:** The contract on the destination network must be configured to receive messages from the source network and process them accordingly, such as minting an asset or performing the required action based on the received data.
+
+6. **Process Testing:** Once these smart contracts are understood and deployed, conduct a demo by sending test messages from the source network, triggering the following process:
+
+<Steps>
+<Step>
+
+### Step 1
+
+A message is sent from the smart contract on the source network.
+
+</Step>
+<Step>
+
+### Step 2
+
+A group of oracles receives the message and processes it for transmission.
+
+</Step>
+<Step>
+
+### Step 3
+
+The message is sent for validation.
+
+</Step>
+<Step>
+
+### Step 4
+
+The messages are handled by a network of oracles and sent to the contract on the destination network. The received data is compared, and if an equal or greater number of oracles than a predefined threshold send the same messages and data, the message or data is sent with confidence to the contract on the destination network; otherwise, it undergoes further review.
+
+</Step>
+<Step>
+
+### Step 5
+
+If the message is approved, it is sent to the receiver contract on the destination network.
+
+</Step>
+<Step>
+
+### Step 6
+
+Once the data is in the destination, it is processed based on whether it is a message, a token, or any other sent item.
+
+</Step>
+</Steps>
+
+7. **Deployment to Production:** After verifying that messages are sent correctly, deploy this series of contracts in a production environment for real-world use. This involves deploying the smart contracts on both the source and destination networks.
+
+![](/course-images/ccip-ict/ccip-diagram.gif)
+
+Next, let's discuss Avalanche's Interchain Token Transfer (ICT):
+
+1. **Need for Data Transfer:** A message or data exists on a source blockchain and needs to be transmitted to a destination blockchain.
+
+2. **Validation of Technology Availability:** Confirm that both the source and destination blockchains support the necessary interoperability protocols, it is Avalanche's Interchain Messaging (ICM).​
+
+3. **Preparation of Necessary Data:** Identify the sender contract on the source chain, the receiver contract on the destination chain, any required keywords or identifiers referencing the destination network, the data to be sent, and any specific information if tokens are involved.​
+
+4. **Creation of Sender Contract:** Develop a smart contract on the source blockchain designed to send the message or data to a contract on a different blockchain.​
+
+5. **Creation of Receiver Contract:** Deploy a smart contract on the destination blockchain configured to receive messages from the source blockchain and process them accordingly, such as triggering specific functions or handling the received data.
+
+6. Testing the Process: After deploying these smart contracts, conduct tests by sending sample messages from the source blockchain, triggering the following process:​
+
+<Steps>
+<Step>
+
+### Step 1
+
+A message is sent from the smart contract on the source L1.
+
+</Step>
+<Step>
+
+### Step 2
+
+A message is signed by validators.
+
+</Step>
+<Step>
+
+### Step 3
+
+A network of validators generate a signature aggregation based on original signatures and send it to relayers.
+
+</Step>
+<Step>
+
+### Step 4
+
+A network of relayers receives and processes the message for transmission.
+
+</Step>
+<Step>
+
+### Step 5
+
+The message is recived in a destionation L1.
+
+</Step>
+<Step>
+
+### Step 6
+
+The message is recived in the destionation L1.
+
+</Step>
+<Step>
+
+### Step 7
+
+The message and signature aggregation recived are verified with P-Chain.
+
+</Step>
+<Step>
+
+### Step 8
+
+The receiver contract processes the data based on its type and intended function.​
+
+</Step>
+</Steps>
+
+7. **Deployment to Production:** After successful testing, deploy the smart contracts in a production environment to enable real-world data transfers between L1s. This involves deploying the contracts on both the source and destination L1s.
+
+<img src="/course-images/ictt/ictt.png" class="mx-auto"/>
