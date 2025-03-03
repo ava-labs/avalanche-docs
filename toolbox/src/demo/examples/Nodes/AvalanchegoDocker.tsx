@@ -72,8 +72,10 @@ const reverseProxyCommand = (domain: string) => {
   caddy reverse-proxy --from ${domain} --to localhost:8080`
 }
 
-const enableDebugNTraceCommand = (chainId: string) => `mkdir -p $HOME/.avalanchego_rpc/configs/chains/${chainId}
-echo '{
+const enableDebugNTraceCommand = (chainId: string) => `sudo mkdir -p $HOME/.avalanchego_rpc/configs/chains/${chainId}; 
+sudo chown -R $USER:$USER $HOME/.avalanchego_rpc/configs/chains/;
+
+sudo echo '{
   "log-level": "debug",
   "warp-api-enabled": true,
   "eth-apis": [

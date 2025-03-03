@@ -20,6 +20,7 @@ import { useState, useEffect, ReactElement } from "react";
 import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
 import CreateL1 from "./examples/Docs/CreateL1";
+import Benchmark from "./examples/Nodes/Benchmark";
 
 type ComponentType = {
     id: string;
@@ -137,6 +138,13 @@ const componentGroups: Record<string, ComponentType[]> = {
             component: RPCUrlForChain,
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
             skipWalletConnection: true,
+        },
+        {
+            id: "benchmark",
+            label: "EVM Benchmark",
+            component: Benchmark,
+            fileNames: ["toolbox/src/demo/examples/Nodes/Benchmark.tsx"],
+            skipWalletConnection: true,
         }
     ],
     "Docs": [
@@ -222,7 +230,7 @@ export default function ToolboxApp() {
                                 key={index}
                                 user="ava-labs"
                                 repo="avalanche-docs"
-                                branch="l1-toolbox" // TODO: set automatically or at least change to main
+                                branch="master" // TODO: set automatically or at least change to main
                                 filePath={fileName}
                                 maxHeight={600}
                             />

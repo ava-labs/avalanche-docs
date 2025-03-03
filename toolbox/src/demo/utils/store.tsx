@@ -19,6 +19,7 @@ export const initialState = {
     walletChainId: 0,
     evmChainName: "My L1",
     evmChainRpcUrl: "",
+    evmChainWsUrl: "",
     evmChainId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     evmChainCoinName: "COIN",
     validatorManagerAddress: "",
@@ -26,6 +27,8 @@ export const initialState = {
     proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
     walletEVMAddress: "",
     genesisData: "",
+    gasLimit: 12000000,
+    targetBlockRate: 2,
 }
 
 export const useExampleStore = create(
@@ -50,12 +53,15 @@ export const useExampleStore = create(
             setWalletChainId: (walletChainId: number) => set({ walletChainId }),
             setEvmChainName: (evmChainName: string) => set({ evmChainName }),
             setEvmChainRpcUrl: (evmChainRpcUrl: string) => set({ evmChainRpcUrl }),
+            setEvmChainWsUrl: (evmChainWsUrl: string) => set({ evmChainWsUrl }),
             setEvmChainCoinName: (evmChainCoinName: string) => set({ evmChainCoinName }),
             setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
             setProxyAddress: (proxyAddress: string) => set({ proxyAddress }),
             setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
             setWalletEVMAddress: (walletEVMAddress: string) => set({ walletEVMAddress }),
             setGenesisData: (genesisData: string) => set({ genesisData }),
+            setGasLimit: (gasLimit: number) => set({ gasLimit }),
+            setTargetBlockRate: (targetBlockRate: number) => set({ targetBlockRate }),
             reset: () => {
                 window.localStorage.removeItem('example-storage');
                 window.location.reload();

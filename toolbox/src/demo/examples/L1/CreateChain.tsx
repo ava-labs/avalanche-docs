@@ -25,14 +25,16 @@ export const CreateChain = () => {
         setGenesisData,
         walletEVMAddress,
         evmChainId,
+        gasLimit,
+        targetBlockRate,
     } = useExampleStore(state => state);
     const [isCreating, setIsCreating] = useState(false);
 
     useEffect(() => {
         if (!genesisData) {
-            setGenesisData(quickAndDirtyGenesisBuilder(walletEVMAddress, evmChainId));
+            setGenesisData(quickAndDirtyGenesisBuilder(walletEVMAddress, evmChainId, gasLimit, targetBlockRate));
         }
-    }, [walletEVMAddress, evmChainId]);
+    }, [walletEVMAddress, evmChainId, gasLimit, targetBlockRate]);
 
 
     async function handleCreateChain() {
