@@ -230,7 +230,7 @@ export default function ToolboxApp() {
                                 key={index}
                                 user="ava-labs"
                                 repo="avalanche-docs"
-                                branch="l1-toolbox" // TODO: set automatically or at least change to main
+                                branch="master" // TODO: set automatically or at least change to main
                                 filePath={fileName}
                                 maxHeight={600}
                             />
