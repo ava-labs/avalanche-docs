@@ -9,6 +9,7 @@ if [ ! -d "/teleporter_src/contracts" ]; then
     git submodule update --init --recursive
 fi
 
+cd /teleporter_src
 git checkout $ICM_COMMIT
 
 # Add foundry to PATH
@@ -26,6 +27,7 @@ cd /teleporter_src/contracts && forge build
 # Extract and format JSON files
 for file in /teleporter_src/out/ValidatorManager.sol/ValidatorManager.json \
             /teleporter_src/out/ValidatorMessages.sol/ValidatorMessages.json \
+            /teleporter_src/out/TeleporterRegistry.sol/TeleporterRegistry.json \
             /teleporter_src/out/NativeTokenStakingManager.sol/NativeTokenStakingManager.json ; do
     filename=$(basename "$file")
     jq '.' "$file" > "/compiled/$filename"

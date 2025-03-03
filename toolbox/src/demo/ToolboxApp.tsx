@@ -18,9 +18,10 @@ import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
 import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
 import { useState, useEffect, ReactElement } from "react";
 import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
+import TeleporterMessenger from "./examples/ICM/TeleporterMessenger";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
 import CreateL1 from "./examples/Docs/CreateL1";
-
+import TeleporterRegistry from "./examples/ICM/TeleporterRegistry";
 type ComponentType = {
     id: string;
     label: string;
@@ -137,6 +138,20 @@ const componentGroups: Record<string, ComponentType[]> = {
             component: RPCUrlForChain,
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
             skipWalletConnection: true,
+        }
+    ],
+    "ICM": [
+        {
+            id: "teleporterMessenger",
+            label: "Teleporter Messenger",
+            component: TeleporterMessenger,
+            fileNames: ["toolbox/src/demo/examples/ICM/TeleporterMessenger.tsx"]
+        },
+        {
+            id: "teleporterRegistry",
+            label: "Teleporter Registry",
+            component: TeleporterRegistry,
+            fileNames: ["toolbox/src/demo/examples/ICM/TeleporterRegistry.tsx"]
         }
     ],
     "Docs": [
