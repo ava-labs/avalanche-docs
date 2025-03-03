@@ -2,7 +2,7 @@ import { Input, Button } from "../../ui";
 import { useEffect, useState, useRef } from "react";
 import { EVMBenchmark } from "./EVMBenchmark";
 import { useExampleStore } from "../../utils/store";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function Benchmark() {
     const {
@@ -12,7 +12,8 @@ export default function Benchmark() {
         setEvmChainWsUrl
     } = useExampleStore();
 
-    const [maxConcurrency, setMaxConcurrency] = useState("100");
+    const [tpsString, setTpsString] = useState("10");
+    const [maxConcurrencyString, setMaxConcurrencyString] = useState("10000");
     const [lastError, setLastError] = useState<Error | null>(null);
     const [insufficientBalance, setInsufficientBalance] = useState(false);
     const [benchmarkStats, setBenchmarkStats] = useState<{
@@ -29,9 +30,9 @@ export default function Benchmark() {
 
     useEffect(() => {
         if (benchmarkRef.current) {
-            benchmarkRef.current.setMaxConcurrency(parseInt(maxConcurrency));
+            benchmarkRef.current.setMaxConcurrency(parseInt(maxConcurrencyString));
         }
-    }, [maxConcurrency]);
+    }, [maxConcurrencyString]);
 
     useEffect(() => {
         if (evmChainRpcUrl && !evmChainWsUrl && evmChainRpcUrl.startsWith('http') && evmChainRpcUrl.endsWith('/rpc')) {
@@ -49,6 +50,12 @@ export default function Benchmark() {
         };
     }, []);
 
+    useEffect(() => {
+        if (benchmarkRef.current) {
+            benchmarkRef.current.setTps(parseInt(tpsString));
+        }
+    }, [tpsString]);
+
     function startBenchmark() {
         // Clean up any existing benchmark first
         if (benchmarkRef.current) {
@@ -61,6 +68,9 @@ export default function Benchmark() {
         setChartData([]);
 
         const benchmark = new EVMBenchmark();
+        benchmark.setTps(parseInt(tpsString));
+        benchmark.setMaxConcurrency(parseInt(maxConcurrencyString));
+
         benchmark.initialize((data) => {
             console.log(data);
             setBenchmarkStats({
@@ -105,7 +115,8 @@ export default function Benchmark() {
     }
 
     return <>
-        <Input type="number" label="Max Concurrency" value={maxConcurrency} onChange={setMaxConcurrency} step={10} />
+        <Input type="number" label="TPS" value={tpsString} onChange={setTpsString} step={10} />
+        <Input type="number" label="Max Concurrency" value={maxConcurrencyString} onChange={setMaxConcurrencyString} step={10} />
         <Input type="text" label="EVM RPC URL (http)" value={evmChainRpcUrl} onChange={setEvmChainRpcUrl} />
         <Input type="text" label="EVM RPC URL (ws)" value={evmChainWsUrl} onChange={setEvmChainWsUrl} />
         <Button onClick={() => startBenchmark()}>Start</Button>

@@ -1,6 +1,6 @@
 import { Chain, createPublicClient, webSocket, HDAccount, createWalletClient, WalletClient, WatchBlocksReturnType, PublicClient, parseEther } from 'viem'
 import { HDKey, hdKeyToAccount } from 'viem/accounts'
-
+import { Scheduler } from './Scheduler'
 
 const getAccount = (index: number): HDAccount => {
     const hdKey = HDKey.fromMasterSeed(new Uint8Array(Array(32).fill(0)))
@@ -36,21 +36,26 @@ export class EVMBenchmark {
     private unsubscribe: WatchBlocksReturnType | null = null;
     private blockWatcher!: BlockWatcher;
     private started: boolean = true;
-    private maxConcurrency: number = 100;
-    private activeTransactionsNumber: number = 0;
     private errorCounter: number = 0;
     public lastError: Error | null = null;
     private txErrors: number = 0;
     private publicClient!: PublicClient;
     private insufficientBalance: boolean = false;
-
+    private scheduler: Scheduler = new Scheduler();
+    private activeAccountsCount: number = 0;
 
     static rootAccount: HDAccount = getAccount(0);
     static getRootAddress(): string {
         return this.rootAccount.address;
     }
 
-    private activeAccountsCount: number = 0;
+    public setTps(tps: number) {
+        this.scheduler.setTps(tps);
+    }
+
+    public async setMaxConcurrency(concurrency: number) {
+        this.scheduler.setConcurrency(concurrency);
+    }
 
     async initialize(callback: (blockInfo: blockInfoPayload) => void, httpEndpoint: string, wsEndpoint: string, accountsCount: number = 1000) {
         this.accounts = Array.from({ length: accountsCount }, (_, index) => getAccount(index + 1));
@@ -78,7 +83,7 @@ export class EVMBenchmark {
         this.blockWatcher = new BlockWatcher(this.publicClient, ({ includedInBlock }) => {
             this.callback({
                 includedInBlock,
-                concurrency: this.activeTransactionsNumber,
+                concurrency: this.scheduler.getActiveTransactions(),
                 errors: this.txErrors,
                 lastError: this.lastError,
             });
@@ -91,7 +96,9 @@ export class EVMBenchmark {
         for (const account of this.accounts) {
             await retry(() => this.initializeAccount(account));
             this.activeAccountsCount++;
-            console.log(`Active accounts count: ${this.activeAccountsCount}`);
+            if (this.activeAccountsCount % 10 === 0) {
+                console.log(`Active accounts count: ${this.activeAccountsCount}`);
+            }
         }
     }
 
@@ -102,22 +109,19 @@ export class EVMBenchmark {
         const currentBalance = await this.publicClient.getBalance({ address: account.address });
 
         if (currentBalance < minBalance) {
-            // Wait until we're below concurrency limit
-            while (this.activeTransactionsNumber >= this.maxConcurrency && this.started) {
-                await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 100)));
-            }
-
+            // Send initial transaction using scheduler
             if (!this.started) return;
 
-            // Send initial transaction
-            const txHash = await this.client.sendTransaction({
-                chain: this.client.chain,
-                account: EVMBenchmark.rootAccount,
-                to: account.address,
-                value: parseEther('1')
-            });
+            await this.scheduler.schedule(async () => {
+                const txHash = await this.client.sendTransaction({
+                    chain: this.client.chain,
+                    account: EVMBenchmark.rootAccount,
+                    to: account.address,
+                    value: parseEther('1')
+                });
 
-            await this.blockWatcher.awaitTx(txHash, 10 * 1000);
+                await this.blockWatcher.awaitTx(txHash, 10 * 1000);
+            });
         }
 
         // Start the transaction loop for this account
@@ -128,36 +132,23 @@ export class EVMBenchmark {
         // Use setTimeout to prevent blocking the event loop
         setTimeout(async () => {
             while (this.started) {
-                // Wait until we're below concurrency limit
-                while (this.activeTransactionsNumber >= this.maxConcurrency && this.started) {
-                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 3 * 1000)));
-                }
-
                 if (!this.started) break;
 
                 try {
-                    this.activeTransactionsNumber++;
+                    await this.scheduler.schedule(async () => {
+                        const txHash = await this.client.sendTransaction({
+                            chain: this.client.chain,
+                            account: account,
+                            to: this.accounts[1].address,
+                            value: BigInt(Math.floor(Math.random() * 100000000))
+                        });
 
-                    await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 3 * 1000)));
-
-
-                    // await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 10 * this.activeAccountsCount)));
-
-
-                    const txHash = await this.client.sendTransaction({
-                        chain: this.client.chain,
-                        account: account,
-                        to: this.accounts[1].address,
-                        value: BigInt(Math.floor(Math.random() * 100000000))
+                        await this.blockWatcher.awaitTx(txHash, 10 * 1000);
                     });
-
-                    await this.blockWatcher.awaitTx(txHash, 10 * 1000);
-
                 } catch (e) {
                     this.errorCounter++;
                     this.lastError = e instanceof Error ? e : new Error(String(e));
-                } finally {
-                    this.activeTransactionsNumber--;
+                    this.txErrors++;
                 }
 
                 // Small delay between transactions from the same account
@@ -173,10 +164,6 @@ export class EVMBenchmark {
 
     public hasInsufficientBalance(): boolean {
         return this.insufficientBalance;
-    }
-
-    public async setMaxConcurrency(concurrency: number) {
-        this.maxConcurrency = concurrency;
     }
 
     public async stop() {
