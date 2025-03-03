@@ -14,24 +14,24 @@ export const hackathonsValidations: Validation[] = [
     { field: "tags", message: "Please add at least one category or tag.", validation: (hackathon: Hackathon) => hasAtLeastOne(hackathon, "tags") }
 ];
 
-export const validateHackathon = (hackathon: Partial<Hackathon>) : Validation[] => validateEntity(hackathonsValidations, hackathon);
+export const validateHackathon = (hackathon: Partial<Hackathon>): Validation[] => validateEntity(hackathonsValidations, hackathon);
 
 class ValidationError extends Error {
     public details: Validation[];
     public cause: string;
-  
+
     constructor(message: string, details: Validation[]) {
-      super(message);
-      this.cause = "ValidationError";
-      this.details = details;
+        super(message);
+        this.cause = "ValidationError";
+        this.details = details;
     }
-  }
-  
+}
 
 
 
 
-export function getHackathonLite(hackathon: any): HackathonLite {   
+
+export function getHackathonLite(hackathon: any): HackathonLite {
     delete hackathon.content
     return hackathon;
 }
@@ -46,8 +46,8 @@ export interface GetHackathonsOptions {
 }
 
 export async function getHackathon(id: string) {
-    
-    const hackathon = await prisma.hackathon.findUnique({   
+
+    const hackathon = await prisma.hackathon.findUnique({
         where: { id },
     });
     console.log('Imprimiendo')
@@ -108,7 +108,7 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
 }
 
 
-export async function createHackathon(hackathonData: Partial<Hackathon>): Promise<Hackathon > {
+export async function createHackathon(hackathonData: Partial<Hackathon>): Promise<Hackathon> {
     const errors = validateHackathon(hackathonData);
     console.log(errors)
     if (errors.length > 0) {
@@ -132,7 +132,8 @@ export async function createHackathon(hackathonData: Partial<Hackathon>): Promis
         },
     });
 
-    return newHackathon;
+    hackathonData.id = newHackathon.id;
+    return hackathonData as Hackathon;
 }
 
 
@@ -150,7 +151,7 @@ export async function updateHackathon(id: string, hackathonData: Partial<Hackath
     }
 
     const content = hackathonData as Prisma.JsonObject;
-    const updatedHackathon = await prisma.hackathon.update({
+    await prisma.hackathon.update({
         where: { id },
         data: {
             id: hackathonData.id,
@@ -167,5 +168,5 @@ export async function updateHackathon(id: string, hackathonData: Partial<Hackath
         },
     });
 
-    return convertDBToHackathon(updatedHackathon);
+    return hackathonData as Hackathon;
 }
