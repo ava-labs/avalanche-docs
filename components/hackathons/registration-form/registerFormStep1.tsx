@@ -53,7 +53,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         )}
       />
 
-      {/* Correo electrónico */}
+      {/* Email */}
       <FormField
         control={form.control}
         name="email"
@@ -75,7 +75,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         )}
       />
 
-      {/* Nombre de la empresa (opcional) */}
+      {/* NameCompany (opcional) */}
       <FormField
         control={form.control}
         name="companyName"
@@ -97,7 +97,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         )}
       />
 
-      {/* Rol en la empresa (opcional) */}
+      {/* Rol */}
       <FormField
         control={form.control}
         name="role"
@@ -115,7 +115,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         )}
       />
 
-      {/* Ciudad de residencia */}
+      {/* City */}
       <FormField
         control={form.control}
         name="city"
@@ -143,7 +143,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         )}
       />
 
-      {/* Contraseña */}
+      {/* password */}
       <FormField
         control={form.control}
         name="password"
@@ -166,7 +166,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         )}
       />
 
-      {/* Confirmar Contraseña */}
+      {/* confirm pass */}
       <FormField
         control={form.control}
         name="confirmPassword"
@@ -189,10 +189,10 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         )}
       />
 
-      {/* Restricciones dietéticas (opcional) */}
+      {/* dietary restrictions */}
       <FormField
         control={form.control}
-        name="name"
+        name="dietary"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Dietary Restrictions</FormLabel>

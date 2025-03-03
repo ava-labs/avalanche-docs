@@ -46,7 +46,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }: { session: Session; token: JWT }) {
       if (!session.user) {
-        session.user = { name: "", email: "", image: "" }; // ✅ Asegurar que `session.user` no sea undefined
+        session.user = { name: "", email: "", image: "" }; 
       }
       session.user.id = token.id as string;
       session.user.avatar = token.avatar as string;

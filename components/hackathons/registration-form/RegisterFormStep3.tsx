@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -11,7 +9,7 @@ import {
 } from "@/components/ui/form";
 
 import { useFormContext } from "react-hook-form";
-import { RegisterFormValues } from "./registrationForm"; // Asegúrate de que la ruta sea correcta
+import { RegisterFormValues } from "./registrationForm"; 
 import { Checkbox } from "@/components/ui/checkbox";
 
 export function RegisterFormStep3() {
@@ -20,11 +18,11 @@ export function RegisterFormStep3() {
   return (
     <>
       {/* Step 3: Terms & Agreements */}
-      {/* Encabezado del Step 3 */}
+   
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-foreground">Step 3: Terms & Agreements</h3>
         <p className="text-zinc-400">Review and agree to the terms to complete your registration.</p>
-        <div className="w-full h-px bg-zinc-800 mt-2" /> {/* Línea gris debajo */}
+        <div className="w-full h-px bg-zinc-800 mt-2" /> 
       </div>
       <div className="space-y-6">
 

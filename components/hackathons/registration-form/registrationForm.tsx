@@ -14,7 +14,8 @@ import { cn } from "@/utils/cn";
 import { RegisterFormStep3 } from "./RegisterFormStep3";
 
 import { RegisterFormStep2 } from "./RegisterFormStep2";
-import RegisterFormStep1 from "./RegisterFormStep1";
+import RegisterFormStep1 from "./registerFormStep1";
+
 
 
 
@@ -31,6 +32,7 @@ export const registerSchema = z.object({
   roles: z.array(z.string()).optional(),
   languages: z.array(z.string()), 
   hackathonParticipation: z.string(),
+  dietary: z.string(),
   githubPortfolio: z.string().url("Set a valid Url").optional(),
   password: z
     .string()
