@@ -115,7 +115,7 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
         throw new ValidationError("Validation failed", errors);
     }
 
-    const content = hackathonData as Prisma.JsonObject;
+    const content = { ...hackathonData.content } as Prisma.JsonObject;
     const newHackathon = await prisma.hackathon.create({
         data: {
             id: hackathonData.id,

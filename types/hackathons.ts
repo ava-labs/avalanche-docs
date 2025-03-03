@@ -1,5 +1,5 @@
 export type HackathonStatus = "UPCOMING" | "ONGOING" | "ENDED"
-export interface HackathonHeader {
+export type HackathonHeader = {
   id: string
   title: string
   description: string
@@ -13,13 +13,13 @@ export interface HackathonHeader {
   content: Hackathon
 }
 
-export interface HackathonsFilters {
+export type HackathonsFilters = {
   location?: string
   status?: HackathonStatus | null
   page?: number
 }
 
-export interface Hackathon   {
+export type Hackathon = {
   schedule: ScheduleActivity[]
   registration_deadline: Date
   address: string
