@@ -7,20 +7,30 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-
 import React from "react";
 import { RegisterFormValues } from "./registrationForm";
 import { useFormContext } from "react-hook-form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function RegisterFormStep1({ cities }: { cities: string[] }) {
   const form = useFormContext<RegisterFormValues>();
   return (
     <>
-    <div className="mb-6">
-        <h3 className="text-lg font-semibold text-foreground">Step 1: Personal Information</h3>
-        <p className="text-zinc-400">Provide your personal details to create your Builders Hub profile.</p>
-        <div className="w-full h-px bg-zinc-800 mt-2" /> {/* Línea gris debajo */}
+      <div className="mb-6">
+        <h3 className="text-lg font-semibold text-foreground">
+          Step 1: Personal Information
+        </h3>
+        <p className="text-zinc-400">
+          Provide your personal details to create your Builders Hub profile.
+        </p>
+        <div className="w-full h-px bg-zinc-800 mt-2" />{" "}
+  
       </div>
       {/* Full Name or Nickname */}
       <FormField
@@ -32,6 +42,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
             <FormControl>
               <Input
                 placeholder="Enter your full name or preferred display name"
+                className="bg-transparent "
                 {...field}
               />
             </FormControl>
@@ -50,7 +61,12 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
           <FormItem>
             <FormLabel>Email Address</FormLabel>
             <FormControl>
-              <Input type="email" placeholder="your@email.com" {...field} />
+              <Input
+                type="email"
+                placeholder="your@email.com"
+                {...field}
+                className="bg-transparent "
+              />
             </FormControl>
             <FormMessage className="text-zinc-400">
               This email will be used for login and communications.
@@ -67,7 +83,11 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
           <FormItem>
             <FormLabel>Company (if applicable)</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your company name" {...field} />
+              <Input
+                placeholder="Enter your company name"
+                {...field}
+                className="bg-transparent "
+              />
             </FormControl>
             <FormMessage className="text-zinc-400">
               If you are part of a company, mention it here. Otherwise, leave
@@ -85,7 +105,11 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
           <FormItem>
             <FormLabel>Role at Company</FormLabel>
             <FormControl>
-              <Input placeholder="Your role" {...field} />
+              <Input
+                placeholder="Your role"
+                {...field}
+                className="bg-transparent "
+              />
             </FormControl>
           </FormItem>
         )}
@@ -130,6 +154,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
               <Input
                 type="password"
                 placeholder="Enter a secure password"
+                className="bg-transparent "
                 {...field}
               />
             </FormControl>
@@ -150,6 +175,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
             <FormLabel>Confirm Password</FormLabel>
             <FormControl>
               <Input
+                className="bg-transparent "
                 type="password"
                 placeholder="Re-enter your password"
                 {...field}
@@ -173,6 +199,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
             <FormControl>
               <Input
                 placeholder="Enter any dietary restrictions (if applicable)"
+                className="bg-transparent "
                 {...field}
               />
             </FormControl>

@@ -20,6 +20,7 @@ import { useFormContext } from "react-hook-form";
 import { RegisterFormValues } from "./registrationForm"; // Asegúrate de que la ruta sea correcta
 import { Check } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 
 export function RegisterFormStep2() {
@@ -110,7 +111,7 @@ export function RegisterFormStep2() {
                   <SelectValue placeholder="Select your Web3 knowledge level" />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
                 {web3ProficiencyOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
@@ -145,7 +146,7 @@ export function RegisterFormStep2() {
             >
               <FormControl>
                 <SelectTrigger>
-                  <SelectValue
+                  <SelectValue  
                     placeholder={formatSelectedValues(
                       field.value as string[],
                       roleOptions
@@ -155,7 +156,7 @@ export function RegisterFormStep2() {
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
                 {roleOptions.map((option) => (
                   <SelectItem
                     key={option.value}
@@ -165,7 +166,7 @@ export function RegisterFormStep2() {
                     <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
                       {Array.isArray(field.value) &&
                         field.value.includes(option.value) && (
-                          <Check className="h-4 w-4 text-white" />
+                          <Check className="h-4 w-4 " />
                         )}
                     </span>
                     <span>{option.label}</span>
@@ -212,7 +213,7 @@ export function RegisterFormStep2() {
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
                 {interestOptions.map((option) => (
                   <SelectItem
                     key={option.value}
@@ -267,7 +268,7 @@ export function RegisterFormStep2() {
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
                 {toolOptions.map((option) => (
                   <SelectItem
                     key={option.value}

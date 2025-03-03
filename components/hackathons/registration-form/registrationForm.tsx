@@ -7,35 +7,38 @@ import {
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import RegisterFormStep1 from "./registerFormStep1";
-import { RegisterFormStep2 } from "./registrationFormStep2";
 import { cn } from "@/utils/cn";
-import { RegisterFormStep3 } from "./registration-form-step-3";
+import { RegisterFormStep3 } from "./RegisterFormStep3";
+
+import { RegisterFormStep2 } from "./RegisterFormStep2";
+import RegisterFormStep1 from "./RegisterFormStep1";
+
+
 
 
 export const registerSchema = z.object({
-  name: z.string().min(1, "El nombre es requerido"),
-  email: z.string().email("Correo electrónico inválido"),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email"),
   companyName: z.string().optional(),
   role: z.string().optional(),
-  city: z.string().min(1, "La ciudad es requerida"),
-  interests: z.array(z.string()), // Cambiado a array de strings
+  city: z.string().min(1, "City is required"),
+  interests: z.array(z.string()).min(1, "Interests is required"),
   web3Proficiency: z.string(),
-  tools: z.array(z.string()), // Cambiado a array de strings
+  tools: z.array(z.string()), 
   roles: z.array(z.string()).optional(),
-  languages: z.array(z.string()), // Cambiado a array de strings
+  languages: z.array(z.string()), 
   hackathonParticipation: z.string(),
-  githubPortfolio: z.string().url("Ingresa un enlace válido de GitHub o Portfolio").optional(),
+  githubPortfolio: z.string().url("Set a valid Url").optional(),
   password: z
     .string()
     .min(8, "La contraseña debe tener al menos 8 caracteres")
     .regex(/[A-Z]/, "Debe incluir una letra mayúscula")
     .regex(/[0-9]/, "Debe incluir un número")
     .regex(/[^A-Za-z0-9]/, "Debe incluir un símbolo"),
-  confirmPassword: z.string().min(1, "Confirma tu contraseña"),
+  confirmPassword: z.string().min(1, "Confirm password"),
   termsEventConditions: z.boolean().refine((value) => value === true, {
     message: "Debes aceptar los Términos y Condiciones del Evento para continuar.",
   }),
@@ -52,18 +55,10 @@ export const registerSchema = z.object({
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 
-export function RegisterForm({
-  step = 1,
-  onSubmit,
-  onSaveLater,
-  onStepChange,
-}: {
-  step: number;
-  onSubmit: (data: RegisterFormValues) => void; // Corregido para usar RegisterFormValues
-  onSaveLater: () => void;
-  onStepChange: (newStep: number) => void;
-}) {
-  const cities = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao"];
+export function RegisterForm() {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({});
+  const cities = ["Bogota", "Medellin", "Valencia", "Londres", "Bilbao"];
 
   const progressPosition = () => {
     switch (step) {
@@ -92,43 +87,60 @@ export function RegisterForm({
     },
   });
 
-  const onSubmitHandler = (data: RegisterFormValues) => {
-    onSubmit(data);
-  };
-
   const handleStepChange = (newStep: number) => {
+   
     if (newStep >= 1 && newStep <= 3) {
-      onStepChange(newStep)
+      setStep(newStep); // Actualiza step en RegisterPage cuando RegisterForm lo solicita
+      console.log("Paso cambiado a:", newStep);
     }
   };
 
   const handleNextClick = () => {
     if (step < 3) {
-      onStepChange(step + 1); // Notifica al padre para avanzar al siguiente paso
-      console.log("Avanzando al siguiente paso solicitado:", step + 1);
+      setStep(step + 1); 
+   
     }
-    form.handleSubmit(onSubmitHandler)(); // Esto disparará handleSubmit en RegisterPage
+    form.handleSubmit; 
   };
   const handlePreviousClick=()=>{
     if (step > 1) {
-      onStepChange(step - 1); // Notifica al padre para avanzar al siguiente paso
+      setStep(step - 1);
       
     }
   }
+
+  const handleSubmit = (data: any) => {
+    setFormData({ ...formData, ...data });
+    console.log("algo")
+    if (step < 3) {
+      setStep(step + 1);
+    } else {
+      console.log("Formulario completado:", formData);
+      // Enviar datos al servidor
+    }
+  };
+
+  const onSaveLater = () => {
+    console.log("Progreso guardado:", formData);
+    // Lógica para guardar en localStorage o backend
+  };
+
+
+
   return (
     <div className="w-full items-center justify-center ">
       <h2 className="text-2xl font-bold mb-6 text-foreground">
         Builders Hub - Registration Page (Step {step}/3)
       </h2>
       {/* Barra de progreso (línea blanca) */}
-      <div className="relative w-full h-1 bg-white dark:bg-zinc-800 mb-4">
+      <div className="relative w-full h-1 bg-white dark:bg-zinc-900 mb-4">
         <div
           className={`absolute h-full bg-zinc-800  dark:bg-white ${progressPosition()} w-1/3 transition-all duration-300`}
         />
       </div>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmitHandler)}
+          onSubmit={form.handleSubmit(handleSubmit)}
           className="space-y-6"
         >
           {step === 1 && <RegisterFormStep1 cities={cities} />}
@@ -173,11 +185,11 @@ export function RegisterForm({
                 Save & Continue Later
               </Button>
             </div>
-            <div className="flex items-center space-x-1 text-white">
+            <div className="flex items-center space-x-1 ">
               <PaginationPrevious
                 className={cn(
                   step > 1 ? "flex" : "hidden",
-                  "text-white hover:text-gray-200"
+                  " Dark:hover:text-gray-200 cursor-pointer "
                 )}
                 onClick={handlePreviousClick}
                 hidden={step < 2}
@@ -188,6 +200,7 @@ export function RegisterForm({
                     <PaginationItem key={page}>
                       <PaginationLink
                         isActive={step === page}
+                        className="cursor-pointer"
                         onClick={() => handleStepChange(page)}
                       >
                         {page}
@@ -199,7 +212,7 @@ export function RegisterForm({
               <PaginationNext
                 className={cn(
                   step < 3 ? "flex" : "hidden",
-                  "text-white hover:text-gray-200"
+                  " Dark:hover:text-gray-200 cursor-pointer"
                 )}
                 onClick={handleNextClick}
                 hidden={step == 3}
