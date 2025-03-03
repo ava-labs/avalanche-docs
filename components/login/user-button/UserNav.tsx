@@ -1,11 +1,10 @@
 import { getServerSession } from "next-auth/next";
-
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { UserButton } from "./UserButton";
+import { AuthOptions } from "@/lib/auth/authOptions";
 
 
 export default async function UserNavServer() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(AuthOptions);
 
   return <UserButton session={session} />;
 }
