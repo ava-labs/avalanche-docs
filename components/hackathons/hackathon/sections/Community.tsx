@@ -33,7 +33,7 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
       </p>
       <Separator className="mb-6 bg-gray-200 dark:bg-gray-700" />
 
-      {/* Tarjetas con íconos y links */}
+      
       <div className="flex flex-col md:flex-row justify-center gap-4">
         {communityResources.map((item, index) => (
           <a 
