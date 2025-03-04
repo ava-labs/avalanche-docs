@@ -32,6 +32,7 @@ export default function Benchmark() {
         gasUsed: number;
         gasLimit: number;
         blockTimestampDiff: number;
+        effectiveTps: number;
     }>>([]);
     const benchmarkRef = useRef<EVMBenchmark | null>(null);
 
@@ -105,7 +106,8 @@ export default function Benchmark() {
                     concurrency: data.concurrency,
                     gasUsed: Number(data.gasUsed),
                     gasLimit: Number(data.gasLimit),
-                    blockTimestampDiff: data.blockTimestampDiff
+                    blockTimestampDiff: data.blockTimestampDiff,
+                    effectiveTps: data.includedInBlock / data.blockTimestampDiff
                 };
 
                 // Keep only the last 20 data points to prevent the chart from becoming too crowded
@@ -154,10 +156,11 @@ export default function Benchmark() {
                 <li><strong>Gradual Ramp-up:</strong> The benchmark will slowly ramp up transaction volume to reach the target TPS.</li>
                 <li><strong>Adjustable TPS:</strong> You can change the target TPS during the benchmark run - the system will adjust accordingly.</li>
                 <li><strong>Max Concurrency:</strong> This limits the number of pending transactions to prevent overwhelming the network. It's automatically set to 3x the target TPS.</li>
+                <li><strong>Browser limits:</strong> This benchmark is not too demanding for the browser, but still limited by your CPU/RAM/Network. </li>
             </ul>
         </div>
 
-        <Input type="number" label="TPS" value={tpsString} onChange={setTpsString} step={10} />
+        <Input type="number" label="TPS" value={tpsString} onChange={setTpsString} step={50} />
         <Input type="number" label="Max Concurrency" value={maxConcurrencyString} onChange={setMaxConcurrencyString} step={10} disabled={true} notes={`3xTPS`} />
         <Input type="text" label="EVM RPC URL (http)" value={evmChainRpcUrl} onChange={setEvmChainRpcUrl} />
         <Input type="text" label="EVM RPC URL (ws)" value={evmChainWsUrl} onChange={setEvmChainWsUrl} notes={`Auto filled by replacing http with ws in the beginning and /rpc with /ws in the end`} />
@@ -302,6 +305,41 @@ export default function Benchmark() {
                             <ReferenceLine
                                 y={1}
                                 stroke="#cccccc"
+                            />
+                        </LineChart>
+                    </ResponsiveContainer>
+                    {/* Effective TPS Chart */}
+                    <ResponsiveContainer width="100%" height={200}>
+                        <LineChart data={chartData} syncId="benchmarkCharts" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="time" />
+                            <YAxis
+                                tickFormatter={(value) => `${value}TPS`}
+                                domain={[0, 'dataMax']}
+                            />
+                            <Tooltip />
+                            <Legend />
+                            <Line
+                                type="monotone"
+                                dataKey="effectiveTps"
+                                name="Effective TPS"
+                                stroke="#8884d8"
+                                activeDot={{ r: 8 }}
+                                animationDuration={100}
+                            />
+                            <ReferenceLine
+                                y={chartData.length > 0
+                                    ? chartData.reduce((sum, point) => sum + point.effectiveTps, 0) / chartData.length
+                                    : 0}
+                                stroke="#2ca02c"
+                                strokeDasharray="3 3"
+                                label={{
+                                    value: chartData.length > 0
+                                        ? `Avg: ${(chartData.reduce((sum, point) => sum + point.effectiveTps, 0) / chartData.length).toFixed(1)} TPS`
+                                        : "Avg TPS",
+                                    fill: "#2ca02c",
+                                    position: "insideBottomRight"
+                                }}
                             />
                         </LineChart>
                     </ResponsiveContainer>
