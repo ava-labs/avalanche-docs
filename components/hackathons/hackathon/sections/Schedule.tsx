@@ -1,108 +1,145 @@
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Divider } from '@/components/ui/divider';
 import { SearchEventInput } from '@/components/ui/search-event-input';
 import { TimeZoneSelect } from '@/components/ui/timezone-select';
 import { HackathonHeader, ScheduleActivity } from '@/types/hackathons';
-import { Hourglass } from 'lucide-react';
+import { CalendarPlus2, Hourglass, MapPin } from 'lucide-react';
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
-const mockActivities = [
-  // Day 1
+
+const mockActivities: ScheduleActivity[] = [
   {
     date: '2024-11-01T10:00:00.000Z',
     name: 'Opening Ceremony',
     stage: 'Main Stage',
-    duration: '2 hours',
-    description:
-      'Welcome and kickoff event with special guests and announcements',
-    host: 'Ava Labs Team',
-    level: 'All',
+    duration: 120,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs Team',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Main Stage',
+    category: 'Opening',
+    url: 'https://hackathon.com/opening',
   },
   {
     date: '2024-11-01T13:00:00.000Z',
     name: 'Team Formation',
     stage: 'Collaboration Zone',
-    duration: '3 hours',
-    description: 'Meet potential teammates and form your hackathon team',
-    host: 'Ava Labs Team',
-    level: 'Advanced',
+    duration: 180,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Collaboration Zone',
+    category: 'Networking',
+    url: 'https://hackathon.com/team-formation',
   },
   {
     date: '2024-11-01T16:00:00.000Z',
     name: 'Ideation Workshop',
     stage: 'Workshop Area',
-    duration: '2 hours',
-    description: 'Brainstorming session with mentors',
-    host: 'Ava Labs Team',
-    level: 'Intermediate',
+    duration: 120,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Workshop Area',
+    category: 'Workshop',
+    url: 'https://hackathon.com/ideation',
   },
-
-  // Day 2
   {
     date: '2024-11-02T09:00:00.000Z',
     name: 'Technical Workshop',
     stage: 'Workshop Area',
-    duration: '3 hours',
-    description: 'Learn about smart contract development',
-    host: 'Ava Labs Team',
-    level: 'Beginner',
+    duration: 180,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Workshop Area',
+    category: 'Workshop',
+    url: 'https://hackathon.com/technical-workshop',
   },
   {
     date: '2024-11-02T14:00:00.000Z',
     name: 'Mentor Office Hours',
     stage: 'Meeting Rooms',
-    duration: '4 hours',
-    description: 'One-on-one sessions with industry experts',
-    host: 'Ava Labs Team',
-    level: 'All',
+    duration: 240,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Meeting Rooms',
+    category: 'Mentorship',
+    url: 'https://hackathon.com/mentor-office-hours',
   },
   {
     date: '2024-11-02T19:00:00.000Z',
     name: 'Evening Social',
     stage: 'Social Area',
-    duration: '2 hours',
-    description: 'Network with other participants',
-    host: 'Ava Labs Team',
-    level: 'All',
+    duration: 120,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Social Area',
+    category: 'Social',
+    url: 'https://hackathon.com/evening-social',
   },
-
-  // Day 3
   {
     date: '2024-11-03T10:00:00.000Z',
     name: 'Progress Check-in',
     stage: 'Main Stage',
-    duration: '1 hour',
-    description: 'Teams share their progress and get feedback',
-    host: 'Ava Labs Team',
-    level: 'Wellness',
+    duration: 60,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Main Stage',
+    category: 'Progress',
+    url: 'https://hackathon.com/progress-checkin',
   },
   {
     date: '2024-11-03T14:00:00.000Z',
     name: 'Security Workshop',
     stage: 'Workshop Area',
-    duration: '2 hours',
-    description: 'Best practices for smart contract security',
-    host: 'Ava Labs Team',
-    level: 'Advanced',
+    duration: 120,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Workshop Area',
+    category: 'Workshop',
+    url: 'https://hackathon.com/security-workshop',
   },
   {
     date: '2024-11-03T17:00:00.000Z',
     name: 'Practice Pitches',
     stage: 'Presentation Area',
-    duration: '3 hours',
-    description: 'Teams practice their final presentations',
-    host: 'Ava Labs Team',
-    level: 'Intermediate',
+    duration: 180,
+    description: 'Ava Labs Team',
+    host_name: 'Ava Labs',
+    host_icon: '/temp/hackathon-icon.png',
+    host_media: 'Avalabs',
+    location: 'Presentation Area',
+    category: 'Pitching',
+    url: 'https://hackathon.com/practice-pitches',
   },
 ];
 
 function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
+  console.debug(hackathon.content.schedule);
   return (
-    <section>
-      <h2 className='text-5xl font-bold mb-8' id='schedule'>
+    <section className='flex flex-col gap-6'>
+      <h2 className='text-5xl font-bold mb-2' id='schedule'>
         Schedule
       </h2>
       <Divider />
-      <p>{getDateRange(hackathon.content.schedule)}</p>
+      <span className='text-zinc-50 text-lg font-medium'>{getDateRange(mockActivities)}</span>
       <div className='flex justify-between gap-10 mt-4 min-w-full'>
         <div className='flex items-center justify-center gap-10'>
           <SearchEventInput />
@@ -137,53 +174,107 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
         </div>
       </div>
       <Divider />
-      {/* Schedule content will go here */}
+      <div
+        className='grid grid-flow-col grid-cols-2  grid-auto-rows-auto gap-5'
+        style={{ gridTemplateRows: 'auto auto auto auto' }}
+      >
+        {Object.entries(groupActivitiesByDay(mockActivities))
+          .slice(0, 2)
+          .map(([date, activities], index) => (
+            <>
+              <h3 className='text-2xl text-center p-4 rounded-md text-zinc-900 font-black mb-4 bg-red-500'>
+                {new Date(date).getDate()}TH{' '}
+                {new Date(date)
+                  .toLocaleString('en-US', { weekday: 'long' })
+                  .toUpperCase()}
+              </h3>
 
-      {/* Group activities by day */}
-      <div className='relative overflow-x-auto'>
-        <div className='grid grid-flow-col auto-cols-[100%] md:auto-cols-[50%] gap-5'>
-          {Object.entries(groupActivitiesByDay(mockActivities)).map(
-            ([date, activities], index) => (
-              <div key={index} className='min-w-[300px]'>
-                <h3 className='text-lg font-bold mb-4'>
-                  {new Date(date).toDateString()}
-                </h3>
-                <div className='max-h-[600px] overflow-y-auto pr-2'>
-                  <div className='space-y-4'>
-                    {activities.map((activity, index) => (
-                      <div
-                        key={index}
-                        className='bg-zinc-900 rounded-lg p-6 flex flex-col'
-                      >
-                        <div className='flex justify-between items-center mb-5'>
-                          <div>
-                            <h4 className='text-2xl font-bold text-red-500'>
-                              {activity.name}
-                            </h4>
-                            <p className='text-md text-zinc-400'>
-                              {activity.host}
-                            </p>
-                          </div>
-                          <p className='text-sm bg-zinc-50 rounded-full text-black px-2.5 py-0.5'>
-                            {activity.level}
-                          </p>
+              {activities.map((activity, index) => (
+                <div key={index} className='flex flex-row gap-3'>
+                  <Card  className='bg-zinc-900 border-red-500 px-4'>
+                    <CardHeader>
+                      <div className='border border-red-500 rounded-full text-sm font-medium text-center'>
+                        Live now
+                      </div>
+                    </CardHeader>
+                    <CardContent className='flex flex-col gap-2 justify-center'>
+                      <div className='flex flex-col items-center justify-center'>
+                        <span className='text-lg font-medium'>
+                          {new Date(date).toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true,
+                          })}
+                        </span>
+                        <span className='text-lg font-medium'>
+                          {new Date(
+                            new Date(date).getTime() +
+                              activities[0].duration * 60000
+                          ).toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true,
+                          })}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className='bg-zinc-900 border-red-500 flex-1'>
+                    <CardHeader>
+                      <div className='flex flex-row justify-between'>
+                        <div>
+                          <CardTitle className='text-red-500'>
+                            {activity.name}
+                          </CardTitle>
+                          <span className='text-zinc-400 text-sm font-normal'>
+                            {activity.description}
+                          </span>
                         </div>
-                        <div className='flex justify-between items-center text-white mt-2'>
-                          {/* <span className="text-sm">
-                        {activity.stage}
-                      </span>
-                      <span className="text-sm">
-                        {activity.duration}
-                      </span> */}
+                        <Badge className='bg-zinc-50 text-zinc-900 py-0.5 px-2.5 text-xs w-fit h-fit'>
+                          {activity.category}
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className='flex flex-row gap-12'>
+                        <div className='flex flex-row gap-4'>
+                          <Image
+                            src={activity.host_icon}
+                            alt={activity.host_name}
+                            width={40}
+                            height={40}
+                          />
+                          <div className='flex flex-col'>
+                            <span>{activity.host_name}</span>
+                            <Link
+                              className='text-zinc-400 text-sm font-normal'
+                              href={`https://x.com${activity.host_media}`}
+                            >
+                              @{activity.host_media}
+                            </Link>
+                          </div>
+                        </div>
+                        <div className='flex flex-row gap-4 flex-1 justify-between'>
+                          <div className='flex flex-row items-center gap-2'>
+                            <MapPin color='#8F8F99' className='w-5 h-5' />
+                            <span className='text-zinc-50 text-sm font-medium'>
+                              {activity.location}
+                            </span>
+                          </div>
+                          <Button variant='secondary' size='icon'>
+                            <CalendarPlus2
+                              color='#F5F5F9'
+                              className='w-4 h-4'
+                            />
+                          </Button>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </div>
-            )
-          )}
-        </div>
+              ))}
+            </>
+          ))}
       </div>
     </section>
   );
@@ -213,15 +304,6 @@ function getDateRange(activities: ScheduleActivity[]): string {
 
   if (earliestDate.getTime() === latestDate.getTime()) {
     return formatter.format(earliestDate);
-  }
-
-  if (
-    earliestDate.getMonth() === latestDate.getMonth() &&
-    earliestDate.getFullYear() === latestDate.getFullYear()
-  ) {
-    return `${earliestDate.toLocaleString('en-US', {
-      month: 'long',
-    })} ${earliestDate.getDate()} - ${latestDate.getDate()}, ${latestDate.getFullYear()}`;
   }
 
   return `${formatter.format(earliestDate)} - ${formatter.format(latestDate)}`;
