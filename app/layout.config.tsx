@@ -32,6 +32,7 @@ import CoursePreview from '@/public/nav-banner/course-preview.png';
 import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
 import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 import UserWrapper from '@/components/login/user-button/UserWrapper';
+import { SiGithub } from '@icons-pack/react-simple-icons';
 
 export const linkItems: LinkItemType[] = [
   {
@@ -432,17 +433,23 @@ const hackathonsMenu: LinkItemType = {
   ],
 };
 
-const userMenu:LinkItemType={
-  type:"icon",
-  icon: <UserWrapper/>,
-  url:'#',
-  text:"User",
-  active:'none'
-}
+const github: LinkItemType = {
+  type: 'icon',
+  icon: <SiGithub />,
+  url: 'https://github.com/ava-labs/avalanche-docs',
+  text: 'Github',
+  active: 'none',
+};
 
+const userMenu: LinkItemType = {
+  type: 'icon',
+  icon: <UserWrapper />,
+  url: '#',
+  text: 'User',
+};
 
 export const baseOptions: BaseLayoutProps = {
-  githubUrl: 'https://github.com/ava-labs/avalanche-docs',
+  // githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
     title: (
       <>
@@ -457,6 +464,7 @@ export const baseOptions: BaseLayoutProps = {
     toolsMenu,
     grantsMenu,
     hackathonsMenu,
+    github,
     userMenu,
     ...linkItems,
   ],
