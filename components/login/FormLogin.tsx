@@ -17,11 +17,18 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useForm } from 'react-hook-form';
 
+import { useState } from 'react';
+import { VerifyEmail } from './verify/VerifyEmail';
+import { signIn } from 'next-auth/react';
+
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
 });
 
 function Formlogin() {
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Controla el estado del botón
   const formMethods = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,11 +38,30 @@ function Formlogin() {
 
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    setIsLoading(true);
+    const result = await signIn('credentials', {
+      email: values.email,
+      redirect: false, // No redirigir automáticamente aquí
+    });
+
+    setIsLoading(false);
+
+    if (result?.error) {
+      if (result.error.includes('OTP enviado')) {
+        setEmail(values.email);
+        setIsVerifying(true);
+      } else {
+        formMethods.setError('email', { message: result.error });
+      }
+    }
   }
 
+  if (isVerifying && email) {
+    return <VerifyEmail email={email} onBack={() => setIsVerifying(false)} />;
+  }
   return (
     <main>
+      
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-4  items-center'>
         <div className='hidden lg:block p-10 w-full h-full '>
           <Image
