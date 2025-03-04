@@ -15,6 +15,9 @@ export type blockInfoPayload = {
     errors: number;
     concurrency: number;
     lastError: Error | null;
+    blockTimestamp: number;
+    blockTimestampDiff: number;
+
 }
 
 async function retry<T>(fn: () => Promise<T>, retries: number = 3, delay: number = 3000): Promise<T> {
@@ -86,11 +89,15 @@ export class EVMBenchmark {
                 lastError: this.lastError,
                 gasUsed: BigInt(0),
                 gasLimit: BigInt(0),
+                blockTimestamp: 0,
+                blockTimestampDiff: 0,
             });
             return;
         }
 
-        this.blockWatcher = new BlockWatcher(this.publicClient, ({ includedInBlock, gasUsed, gasLimit }) => {
+        let lastBlockTimestamp = 0;
+
+        this.blockWatcher = new BlockWatcher(this.publicClient, ({ includedInBlock, gasUsed, gasLimit, blockTimestamp }) => {
             this.callback({
                 includedInBlock,
                 concurrency: this.scheduler.getActiveTransactions(),
@@ -98,7 +105,10 @@ export class EVMBenchmark {
                 lastError: this.lastError,
                 gasUsed: gasUsed,
                 gasLimit: gasLimit,
+                blockTimestamp: blockTimestamp,
+                blockTimestampDiff: blockTimestamp - lastBlockTimestamp,
             });
+            lastBlockTimestamp = blockTimestamp;
             this.txErrors = 0;
             this.lastError = null;
         });
@@ -106,11 +116,14 @@ export class EVMBenchmark {
         this.client = createWalletClient({ chain, transport: webSocket() })
 
         for (const account of this.accounts) {
-            await retry(() => this.initializeAccount(account));
-            this.activeAccountsCount++;
-            if (this.activeAccountsCount % 10 === 0) {
-                console.log(`Active accounts count: ${this.activeAccountsCount}`);
-            }
+            retry(() => this.initializeAccount(account)).then(() => {
+                this.activeAccountsCount++;
+                if (this.activeAccountsCount % 10 === 0) {
+                    console.log(`Active accounts count: ${this.activeAccountsCount}`);
+                }
+            })
+
+            await new Promise(resolve => setTimeout(resolve, 200));
         }
     }
 
@@ -143,7 +156,7 @@ export class EVMBenchmark {
                     chain: this.client.chain,
                     account: EVMBenchmark.rootAccount,
                     to: account.address,
-                    value: parseEther('1'),
+                    value: minBalance * BigInt(2),
                     nonce: await this.getNonce(EVMBenchmark.rootAccount.address),
                     gas: BigInt(21000),
                     gasPrice: this.initialGasPrice,
@@ -222,7 +235,7 @@ class BlockWatcher {
         timer: NodeJS.Timeout;
     }> = new Map();
 
-    constructor(publicClient: PublicClient, callback: (blockInfo: { includedInBlock: number, gasUsed: bigint, gasLimit: bigint }) => void) {
+    constructor(publicClient: PublicClient, callback: (blockInfo: { includedInBlock: number, gasUsed: bigint, gasLimit: bigint, blockTimestamp: number }) => void) {
         this.unsubscribe = publicClient.watchBlocks({
             emitMissed: true,
             emitOnBegin: false,
@@ -244,6 +257,7 @@ class BlockWatcher {
                     includedInBlock: Number(block.transactions.length),
                     gasUsed: block.gasUsed,
                     gasLimit: block.gasLimit,
+                    blockTimestamp: Number(block.timestamp),
                 });
             },
             onError: (error) => {

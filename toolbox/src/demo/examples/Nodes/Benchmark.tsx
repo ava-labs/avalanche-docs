@@ -22,6 +22,7 @@ export default function Benchmark() {
         concurrency: number;
         gasUsed: number;
         gasLimit: number;
+        blockTimestampDiff: number;
     } | null>(null);
     const [chartData, setChartData] = useState<Array<{
         time: string;
@@ -30,6 +31,7 @@ export default function Benchmark() {
         concurrency: number;
         gasUsed: number;
         gasLimit: number;
+        blockTimestampDiff: number;
     }>>([]);
     const benchmarkRef = useRef<EVMBenchmark | null>(null);
 
@@ -76,15 +78,23 @@ export default function Benchmark() {
         benchmark.setTps(parseInt(tpsString));
         benchmark.setMaxConcurrency(parseInt(maxConcurrencyString));
 
+        let firstDatapoint = true;
+
         benchmark.initialize((data: blockInfoPayload) => {
-            console.log(data);
+            if (firstDatapoint) {
+                firstDatapoint = false;
+                return;
+            }
+
             setBenchmarkStats({
                 includedInBlock: data.includedInBlock,
                 errors: data.errors,
                 concurrency: data.concurrency,
                 gasUsed: Number(data.gasUsed),
-                gasLimit: Number(data.gasLimit)
+                gasLimit: Number(data.gasLimit),
+                blockTimestampDiff: data.blockTimestampDiff
             });
+
 
             // Add data point to chart data
             setChartData(prevData => {
@@ -94,7 +104,8 @@ export default function Benchmark() {
                     errors: data.errors,
                     concurrency: data.concurrency,
                     gasUsed: Number(data.gasUsed),
-                    gasLimit: Number(data.gasLimit)
+                    gasLimit: Number(data.gasLimit),
+                    blockTimestampDiff: data.blockTimestampDiff
                 };
 
                 // Keep only the last 20 data points to prevent the chart from becoming too crowded
@@ -136,10 +147,20 @@ export default function Benchmark() {
     }, [tpsString]);
 
     return <>
+        <div className="mb-6 ">
+            <h3 className="text-lg font-semibold mb-2">EVM Benchmark Tool</h3>
+            <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Funding Required:</strong> Send at least 200,000 coins (2x the minimum requirement) to the root address shown below before starting.</li>
+                <li><strong>Gradual Ramp-up:</strong> The benchmark will slowly ramp up transaction volume to reach the target TPS.</li>
+                <li><strong>Adjustable TPS:</strong> You can change the target TPS during the benchmark run - the system will adjust accordingly.</li>
+                <li><strong>Max Concurrency:</strong> This limits the number of pending transactions to prevent overwhelming the network. It's automatically set to 3x the target TPS.</li>
+            </ul>
+        </div>
+
         <Input type="number" label="TPS" value={tpsString} onChange={setTpsString} step={10} />
         <Input type="number" label="Max Concurrency" value={maxConcurrencyString} onChange={setMaxConcurrencyString} step={10} disabled={true} notes={`3xTPS`} />
         <Input type="text" label="EVM RPC URL (http)" value={evmChainRpcUrl} onChange={setEvmChainRpcUrl} />
-        <Input type="text" label="EVM RPC URL (ws)" value={evmChainWsUrl} onChange={setEvmChainWsUrl} />
+        <Input type="text" label="EVM RPC URL (ws)" value={evmChainWsUrl} onChange={setEvmChainWsUrl} notes={`Auto filled by replacing http with ws in the beginning and /rpc with /ws in the end`} />
 
         <div className="flex gap-2.5">
             <Button onClick={() => startBenchmark()} type="primary" disabled={!evmChainRpcUrl || !evmChainWsUrl || !!benchmarkRef.current}>Start</Button>
@@ -226,7 +247,7 @@ export default function Benchmark() {
                             <XAxis dataKey="time" />
                             <YAxis
                                 tickFormatter={(value) => `${(value / 1_000_000).toFixed(2)}M`}
-                                domain={['dataMin', 'dataMax']}
+                                domain={[0, 'dataMax']}
                             />
                             <Tooltip
                                 formatter={(value) => [`${(Number(value) / 1_000_000).toFixed(2)}M`, 'Gas']}
@@ -250,6 +271,37 @@ export default function Benchmark() {
                                     fill: "#0088aa",
                                     position: "insideBottomRight"
                                 }}
+                            />
+                        </LineChart>
+                    </ResponsiveContainer>
+                    {/* Block Timestamp Diff Chart */}
+                    <ResponsiveContainer width="100%" height={200}>
+                        <LineChart
+                            data={chartData}
+                            syncId="benchmarkCharts"
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="time" />
+                            <YAxis
+                                tickFormatter={(value) => `${value}s`}
+                                domain={[0, 'dataMax']}
+                            />
+                            <Tooltip
+                                formatter={(value) => [`${value}s`, 'Difference between block timestamps']}
+                            />
+                            <Legend />
+                            <Line
+                                type="monotone"
+                                dataKey="blockTimestampDiff"
+                                name="Difference between block timestamps"
+                                stroke="#0088aa"
+                                activeDot={{ r: 8 }}
+                                animationDuration={100}
+                            />
+                            <ReferenceLine
+                                y={1}
+                                stroke="#cccccc"
                             />
                         </LineChart>
                     </ResponsiveContainer>
