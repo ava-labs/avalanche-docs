@@ -21,6 +21,7 @@ import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
 import CreateL1 from "./examples/Docs/CreateL1";
 import Benchmark from "./examples/Nodes/Benchmark";
+import ExtraLocalValidators from "./examples/Nodes/ExtraLocalValidators";
 
 type ComponentType = {
     id: string;
@@ -144,6 +145,13 @@ const componentGroups: Record<string, ComponentType[]> = {
             label: "EVM Benchmark",
             component: Benchmark,
             fileNames: ["toolbox/src/demo/examples/Nodes/Benchmark.tsx"],
+            skipWalletConnection: true,
+        },
+        {
+            id: "extraLocalValidators",
+            label: "Extra Local Validators",
+            component: ExtraLocalValidators,
+            fileNames: ["toolbox/src/demo/examples/Nodes/ExtraLocalValidators.tsx"],
             skipWalletConnection: true,
         }
     ],
