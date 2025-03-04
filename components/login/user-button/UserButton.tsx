@@ -1,6 +1,5 @@
 'use client';
 
-import type { Session } from 'next-auth';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -9,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { CircleUserRound } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
