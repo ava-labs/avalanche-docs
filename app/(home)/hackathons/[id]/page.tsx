@@ -1,19 +1,14 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ScheduleActivity } from '@/types/hackathons';
 import { redirect } from 'next/navigation';
 import {
   getFilteredHackathons,
   getHackathon,
 } from '@/server/services/hackathons';
 import { Divider } from '@/components/ui/divider';
-import { TimeZoneSelect } from '@/components/ui/timezone-select';
-import { DeadlineTimer } from '@/components/ui/deadline-timer';
-import { SearchEventInput } from '@/components/ui/search-event-input';
 import Image from 'next/image';
 import { NavigationMenu } from '@/components/hackathons/NavigationMenu';
-import { Hourglass } from 'lucide-react';
 import Schedule from '@/components/hackathons/hackathon/sections/Schedule';
 
 export const revalidate = 60;
@@ -38,9 +33,11 @@ export default async function HackathonPage({
   const menuItems = [
     { name: 'Overview', ref: 'overview' },
     { name: 'Schedule', ref: 'schedule' },
-    { name: 'Info', ref: 'info' },
-    { name: 'Partners', ref: 'partners' },
-    { name: 'Tracks', ref: 'tracks' },
+    { name: 'Prizes & Tracks', ref: 'tracks' },
+    { name: 'Sponsors', ref: 'sponsors' },
+    { name: 'Submission', ref: 'submission' },
+    { name: 'Resources', ref: 'resources' },
+    { name: 'Speakers', ref: 'speakers' },
   ];
 
   if (!hackathon) redirect('/hackathons');
@@ -79,8 +76,8 @@ export default async function HackathonPage({
             <Schedule hackathon={hackathon} />
             {/* Info Section */}
             <section>
-              <h2 className='text-4xl font-bold mb-8' id='info'>
-                Info
+              <h2 className='text-4xl font-bold mb-8' id='tracks'>
+                Prizes & Tracks
               </h2>
               <Divider />
               {/* Info content will go here */}
