@@ -1,3 +1,6 @@
+"use client";
+
+import { useTheme } from "next-themes";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { Divider } from "@/components/ui/divider";
 import { HackathonHeader } from "@/types/hackathons";
@@ -7,6 +10,8 @@ import { Card } from "fumadocs-ui/components/card";
 import { CardTitle } from "@/components/ui/card";
 
 function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
+  const { resolvedTheme } = useTheme();
+  const iconColor = resolvedTheme === "dark" ? "#A7A7B0" : "#6F6F77";
   return (
     <section>
       <h2 className="text-4xl font-bold mb-8" id="tracks">
@@ -34,15 +39,15 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
           <Card key={index} title="" className="h-44 w-full">
             <CardTitle>
               <div className="flex justify-between items-center gap-2">
-                <h2 className="text-xl text-zinc-900 dark:text-zinc-50 font-bold">{track.name}</h2>
-                <DynamicIcon
-                  name={'camera'}
-                  color="#A7A7B0"
-                  size={16}
-                />
+                <h2 className="text-xl text-zinc-900 dark:text-zinc-50 font-bold">
+                  {track.name}
+                </h2>
+                <DynamicIcon name={"camera"} color={iconColor} size={16} />
               </div>
             </CardTitle>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">{track.description}</p>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              {track.description}
+            </p>
           </Card>
         ))}
       </div>
