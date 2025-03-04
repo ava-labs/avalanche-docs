@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 
-const mockActivities = [
+const mockActivities: ScheduleActivity[] = [
   {
     date: '2024-11-01T10:00:00.000Z',
     name: 'Opening Ceremony',
