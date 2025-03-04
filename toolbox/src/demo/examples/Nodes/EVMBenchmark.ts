@@ -8,14 +8,16 @@ const getAccount = (index: number): HDAccount => {
     return account
 }
 
-type blockInfoPayload = {
+export type blockInfoPayload = {
+    gasLimit: bigint;
+    gasUsed: bigint;
     includedInBlock: number;
     errors: number;
     concurrency: number;
     lastError: Error | null;
 }
 
-async function retry<T>(fn: () => Promise<T>, retries: number = 3, delay: number = 1000): Promise<T> {
+async function retry<T>(fn: () => Promise<T>, retries: number = 3, delay: number = 3000): Promise<T> {
     for (let i = 0; i < retries; i++) {
         try {
             return await fn();
@@ -43,6 +45,8 @@ export class EVMBenchmark {
     private insufficientBalance: boolean = false;
     private scheduler: Scheduler = new Scheduler();
     private activeAccountsCount: number = 0;
+    private accountNonces: Map<string, number> = new Map();
+    private initialGasPrice: bigint = BigInt(0);
 
     static rootAccount: HDAccount = getAccount(0);
     static getRootAddress(): string {
@@ -57,13 +61,17 @@ export class EVMBenchmark {
         this.scheduler.setConcurrency(concurrency);
     }
 
-    async initialize(callback: (blockInfo: blockInfoPayload) => void, httpEndpoint: string, wsEndpoint: string, accountsCount: number = 1000) {
+    async initialize(callback: (blockInfo: blockInfoPayload) => void, httpEndpoint: string, wsEndpoint: string, accountsCount: number = 3000) {
+
         this.accounts = Array.from({ length: accountsCount }, (_, index) => getAccount(index + 1));
         this.callback = callback;
 
         const chain = await getChain(httpEndpoint, wsEndpoint);
 
         this.publicClient = createPublicClient({ chain, transport: webSocket() });
+
+        this.initialGasPrice = await this.publicClient.getGasPrice();
+
 
         // Check root account balance
         const balance = await this.publicClient.getBalance({ address: EVMBenchmark.rootAccount.address });
@@ -76,16 +84,20 @@ export class EVMBenchmark {
                 concurrency: 0,
                 errors: 0,
                 lastError: this.lastError,
+                gasUsed: BigInt(0),
+                gasLimit: BigInt(0),
             });
             return;
         }
 
-        this.blockWatcher = new BlockWatcher(this.publicClient, ({ includedInBlock }) => {
+        this.blockWatcher = new BlockWatcher(this.publicClient, ({ includedInBlock, gasUsed, gasLimit }) => {
             this.callback({
                 includedInBlock,
                 concurrency: this.scheduler.getActiveTransactions(),
                 errors: this.txErrors,
                 lastError: this.lastError,
+                gasUsed: gasUsed,
+                gasLimit: gasLimit,
             });
             this.txErrors = 0;
             this.lastError = null;
@@ -102,8 +114,22 @@ export class EVMBenchmark {
         }
     }
 
+    private async getNonce(address: `0x${string}`) {
+        let nonce = this.accountNonces.get(address);
+        if (typeof nonce !== 'number') {
+            nonce = await this.publicClient.getTransactionCount({ address: address })
+        }
+        this.accountNonces.set(address, nonce + 1);
+        return nonce;
+    }
+
+    private clearNonce(address: string) {
+        this.accountNonces.delete(address);
+    }
+
 
     private async initializeAccount(account: HDAccount) {
+        this.accountNonces.set(account.address, await this.getNonce(account.address));
         const minBalance = parseEther('1');
 
         const currentBalance = await this.publicClient.getBalance({ address: account.address });
@@ -112,16 +138,22 @@ export class EVMBenchmark {
             // Send initial transaction using scheduler
             if (!this.started) return;
 
-            await this.scheduler.schedule(async () => {
+            try {
                 const txHash = await this.client.sendTransaction({
                     chain: this.client.chain,
                     account: EVMBenchmark.rootAccount,
                     to: account.address,
-                    value: parseEther('1')
+                    value: parseEther('1'),
+                    nonce: await this.getNonce(EVMBenchmark.rootAccount.address),
+                    gas: BigInt(21000),
+                    gasPrice: this.initialGasPrice,
                 });
 
                 await this.blockWatcher.awaitTx(txHash, 10 * 1000);
-            });
+            } catch (e) {
+                this.clearNonce(account.address);//re-fetch nonce on the next transaction
+                throw e
+            }
         }
 
         // Start the transaction loop for this account
@@ -136,14 +168,23 @@ export class EVMBenchmark {
 
                 try {
                     await this.scheduler.schedule(async () => {
-                        const txHash = await this.client.sendTransaction({
-                            chain: this.client.chain,
-                            account: account,
-                            to: this.accounts[1].address,
-                            value: BigInt(Math.floor(Math.random() * 100000000))
-                        });
+                        try {
+                            const txHash = await this.client.sendTransaction({
+                                chain: this.client.chain,
+                                account: account,
+                                to: this.accounts[1].address,
+                                value: BigInt(Math.floor(Math.random() * 100000000)),
+                                nonce: await this.getNonce(account.address),
+                                gas: BigInt(21000),
+                                gasPrice: this.initialGasPrice,
+                            });
 
-                        await this.blockWatcher.awaitTx(txHash, 10 * 1000);
+
+                            await this.blockWatcher.awaitTx(txHash, 10 * 1000);
+                        } catch (e) {
+                            this.clearNonce(account.address);//re-fetch nonce on the next transaction
+                            throw e
+                        }
                     });
                 } catch (e) {
                     this.errorCounter++;
@@ -181,11 +222,13 @@ class BlockWatcher {
         timer: NodeJS.Timeout;
     }> = new Map();
 
-    constructor(publicClient: PublicClient, callback: (blockInfo: { includedInBlock: number }) => void) {
+    constructor(publicClient: PublicClient, callback: (blockInfo: { includedInBlock: number, gasUsed: bigint, gasLimit: bigint }) => void) {
         this.unsubscribe = publicClient.watchBlocks({
             emitMissed: true,
-            emitOnBegin: true,
+            emitOnBegin: false,
+            includeTransactions: false,
             onBlock: (block) => {
+                console.log(`Block received: ${block.number}`, block);
                 // Check if any awaited transactions are in this block
                 for (const txHash of block.transactions) {
                     const txData = this.awaitedTransactions.get(txHash);
@@ -199,6 +242,8 @@ class BlockWatcher {
 
                 callback({
                     includedInBlock: Number(block.transactions.length),
+                    gasUsed: block.gasUsed,
+                    gasLimit: block.gasLimit,
                 });
             },
             onError: (error) => {

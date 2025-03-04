@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { EVMBenchmark } from "./EVMBenchmark";
 import { useExampleStore } from "../../utils/store";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
-
+import { blockInfoPayload } from "./EVMBenchmark";
 export default function Benchmark() {
     const {
         evmChainRpcUrl,
@@ -20,12 +20,16 @@ export default function Benchmark() {
         includedInBlock: number;
         errors: number;
         concurrency: number;
+        gasUsed: number;
+        gasLimit: number;
     } | null>(null);
     const [chartData, setChartData] = useState<Array<{
         time: string;
         includedInBlock: number;
         errors: number;
         concurrency: number;
+        gasUsed: number;
+        gasLimit: number;
     }>>([]);
     const benchmarkRef = useRef<EVMBenchmark | null>(null);
 
@@ -72,12 +76,14 @@ export default function Benchmark() {
         benchmark.setTps(parseInt(tpsString));
         benchmark.setMaxConcurrency(parseInt(maxConcurrencyString));
 
-        benchmark.initialize((data) => {
+        benchmark.initialize((data: blockInfoPayload) => {
             console.log(data);
             setBenchmarkStats({
                 includedInBlock: data.includedInBlock,
                 errors: data.errors,
-                concurrency: data.concurrency
+                concurrency: data.concurrency,
+                gasUsed: Number(data.gasUsed),
+                gasLimit: Number(data.gasLimit)
             });
 
             // Add data point to chart data
@@ -86,7 +92,9 @@ export default function Benchmark() {
                     time: new Date().toLocaleTimeString(),
                     includedInBlock: data.includedInBlock,
                     errors: data.errors,
-                    concurrency: data.concurrency
+                    concurrency: data.concurrency,
+                    gasUsed: Number(data.gasUsed),
+                    gasLimit: Number(data.gasLimit)
                 };
 
                 // Keep only the last 20 data points to prevent the chart from becoming too crowded
@@ -105,7 +113,13 @@ export default function Benchmark() {
                     setInsufficientBalance(true);
                 }
             }
-        }, evmChainRpcUrl, evmChainWsUrl);
+        }, evmChainRpcUrl, evmChainWsUrl)
+            .catch(error => {
+                setLastError(error);
+                // Clean up benchmark reference since initialization failed
+                benchmarkRef.current = null;
+            });
+
         benchmarkRef.current = benchmark;
     }
 
@@ -198,6 +212,45 @@ export default function Benchmark() {
                                 animationDuration={100}
                             />
                             <ReferenceLine y={parseInt(maxConcurrencyString)} stroke="#ff0000" name="Max Concurrency" />
+                        </LineChart>
+                    </ResponsiveContainer>
+
+                    {/* Gas Usage Chart */}
+                    <ResponsiveContainer width="100%" height={200}>
+                        <LineChart
+                            data={chartData}
+                            syncId="benchmarkCharts"
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="time" />
+                            <YAxis
+                                tickFormatter={(value) => `${(value / 1_000_000).toFixed(2)}M`}
+                                domain={['dataMin', 'dataMax']}
+                            />
+                            <Tooltip
+                                formatter={(value) => [`${(Number(value) / 1_000_000).toFixed(2)}M`, 'Gas']}
+                            />
+                            <Legend />
+                            <Line
+                                type="monotone"
+                                dataKey="gasUsed"
+                                name="Gas Used"
+                                stroke="#ff7300"
+                                activeDot={{ r: 8 }}
+                                animationDuration={100}
+                            />
+                            <ReferenceLine
+                                y={chartData.length > 0 ? chartData[chartData.length - 1].gasLimit : 0}
+                                stroke="#0088aa"
+                                label={{
+                                    value: chartData.length > 0 ?
+                                        `Gas Limit: ${(chartData[chartData.length - 1].gasLimit / 1_000_000).toFixed(1)}M` :
+                                        "Gas Limit",
+                                    fill: "#0088aa",
+                                    position: "insideBottomRight"
+                                }}
+                            />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
