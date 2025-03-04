@@ -181,7 +181,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
         {Object.entries(groupActivitiesByDay(mockActivities))
           .slice(0, 2)
           .map(([date, activities], index) => (
-            <>
+            <div key={index}>
               <h3 className='text-2xl text-center p-4 rounded-md text-zinc-900 font-black mb-4 bg-red-500'>
                 {new Date(date).getDate()}TH{' '}
                 {new Date(date)
@@ -273,7 +273,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                   </Card>
                 </div>
               ))}
-            </>
+            </div>
           ))}
       </div>
     </section>
