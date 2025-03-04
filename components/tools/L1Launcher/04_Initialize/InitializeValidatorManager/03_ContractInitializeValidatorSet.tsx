@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent } from 'viem';
-import { privateKeyToAccount } from 'viem/accounts';
-
+import { createWalletClient, createPublicClient, http, hexToBytes, Abi, decodeErrorResult, AbiEvent, formatEther, custom, WalletClient } from 'viem';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { createJSONStorage } from 'zustand/middleware';
+import { StateCreator } from 'zustand';
 import { useL1LauncherWizardStore } from '../../config/store';
-import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '../../../common/utils/cb58';
 import { packWarpIntoAccessList } from '../../../common/utils/packWarp';
-import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
+import PoAValidatorManagerABI from '../../../common/icm-contracts/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
+import { PROXY_ADDRESS } from '@/components/tools/common/utils/genGenesis';
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
 
 interface StatusState {
     status: StepState;
@@ -15,25 +18,115 @@ interface StatusState {
     data?: string;
 }
 
+interface PrivateKeyState {
+    privateKey: `0x${string}`;
+    clearPrivateKey: () => void;
+    initializePrivateKey: () => void;
+}
+
+const PrivateKeyStoreFunc: StateCreator<PrivateKeyState> = (set, get) => ({
+    privateKey: '0x',
+    clearPrivateKey: () => set({ privateKey: '0x' }),
+    initializePrivateKey: () => {
+        const { privateKey } = get();
+        if (privateKey === '0x') {
+            set({ privateKey: generatePrivateKey() });
+        }
+    }
+});
+
+const usePrivateKeyStore = create<PrivateKeyState>()(
+    persist(PrivateKeyStoreFunc, {
+        name: 'temp-private-key-storage-wizard-initialize-validator-set',
+        storage: createJSONStorage(() => localStorage),
+    })
+);
+
 export default function ContractInitializeValidatorSet() {
+    const { privateKey, initializePrivateKey } = usePrivateKeyStore();
+    const clearTempPrivateKey = usePrivateKeyStore(state => state.clearPrivateKey);
+
     const [status, setStatus] = useState<StatusState>({ status: 'not_started' });
     const [error, setError] = useState<string | null>(null);
+    const [depositStatus, setDepositStatus] = useState<StatusState>({ status: 'not_started' });
     const {
         chainId,
-        tempPrivateKeyHex,
         subnetId,
         nodePopJsons,
         nodesCount,
         evmChainId,
         l1Name,
         tokenSymbol,
-        getCChainRpcEndpoint,
-        convertL1SignedWarpMessage
+        getL1RpcEndpoint,
+        convertL1SignedWarpMessage,
+        getViemL1Chain
     } = useL1LauncherWizardStore();
+
 
     const [initialCheckHasRun, setInitialCheckHasRun] = useState(false);
 
-    // Add useEffect to check logs on load
+    const [txArgs, setTxArgs] = useState<any[]>([]);
+
+
+    const [tempWalletClient, setTempWalletClient] = useState<WalletClient | null>(null);
+    const [hasEnoughFunds, setHasEnoughFunds] = useState(false);
+
+    useEffect(() => {
+        if (privateKey === '0x') return;
+        const newTempWalletClient = createWalletClient({
+            chain: getViemL1Chain(),
+            transport: http(),
+            account: privateKeyToAccount(privateKey)
+        })
+        setTempWalletClient(newTempWalletClient)
+        console.log('tempWalletClient address', newTempWalletClient.account?.address);
+
+    }, [privateKey]);
+
+    useEffect(() => {
+        initializePrivateKey();
+    }, []);
+
+    useEffect(() => {
+        setTxArgs([{
+            subnetID: cb58ToHex(subnetId),
+            validatorManagerBlockchainID: cb58ToHex(chainId),
+            validatorManagerAddress: PROXY_ADDRESS,
+            initialValidators: nodePopJsons
+                .slice(0, nodesCount)
+                .map(json => {
+                    const node = JSON.parse(json).result;
+                    return {
+                        nodeID: cb58ToHex(node.nodeID.split('-')[1]),
+                        blsPublicKey: node.nodePOP.publicKey,
+                        weight: 100
+                    };
+                })
+        }, 0])
+    }, [subnetId, chainId, nodePopJsons, nodesCount]);
+
+    useEffect(() => {
+        const checkBalance = async () => {
+            if (!tempWalletClient?.account?.address) return;
+
+            try {
+                const publicClient = createPublicClient({ chain: getViemL1Chain(), transport: http() })
+
+                const balance = await publicClient.getBalance({
+                    address: tempWalletClient.account.address
+                });
+
+                // Check if balance is >= 0.5 tokens
+                const requiredBalance = BigInt(5e17);
+                setHasEnoughFunds(balance >= requiredBalance);
+            } catch (err) {
+                console.error('Error checking balance:', err);
+            }
+        };
+
+        checkBalance();
+    }, [tempWalletClient?.account?.address, depositStatus.status]);
+
     useEffect(() => {
         if (initialCheckHasRun) return;
         setInitialCheckHasRun(true);
@@ -50,8 +143,8 @@ export default function ContractInitializeValidatorSet() {
                         decimals: 18,
                     },
                     rpcUrls: {
-                        default: { http: [getCChainRpcEndpoint()] },
-                        public: { http: [getCChainRpcEndpoint()] },
+                        default: { http: [getL1RpcEndpoint()] },
+                        public: { http: [getL1RpcEndpoint()] },
                     },
                 };
 
@@ -60,7 +153,6 @@ export default function ContractInitializeValidatorSet() {
                     transport: http()
                 });
 
-                const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
 
                 // Find the InitialValidatorCreated event in ABI
                 const initialValidatorEvent = PoAValidatorManagerABI.abi.find(
@@ -68,7 +160,7 @@ export default function ContractInitializeValidatorSet() {
                 ) as AbiEvent;
 
                 const logs = await publicClient.getLogs({
-                    address: managerAddress,
+                    address: PROXY_ADDRESS,
                     event: initialValidatorEvent,
                     fromBlock: 'earliest',
                     toBlock: 'latest'
@@ -84,84 +176,94 @@ export default function ContractInitializeValidatorSet() {
         };
 
         checkInitialization();
-    }, [tempPrivateKeyHex, evmChainId, l1Name, tokenSymbol, getCChainRpcEndpoint]);
+    }, [evmChainId, l1Name, tokenSymbol, getL1RpcEndpoint]);
+
+
+    // Add UI Flow: function to add money (send 0.5 AVAX) from the extension wallet (browser wallet)
+    const onDepositFunds = async () => {
+        if (!window.avalanche || !tempWalletClient?.account?.address) {
+            setDepositStatus({ status: 'error' });
+            setError('MetaMask (Avalanche wallet) is not installed or temporary wallet not initialized');
+            return;
+        }
+
+        setDepositStatus({ status: 'in_progress' });
+        setError(null);
+
+        try {
+            const value = BigInt(5e17); // 0.5 coins in wei
+
+
+            const browserWalletClient = createWalletClient({
+                chain: getViemL1Chain(),
+                transport: custom(window.avalanche!)
+            })
+
+            const [address] = await browserWalletClient.getAddresses()
+
+            const txRequest = {
+                account: address,
+                to: tempWalletClient.account.address,
+                value,
+            }
+            console.log('txRequest', txRequest);
+            const txHash = await browserWalletClient.sendTransaction(txRequest);
+
+            // Wait for transaction confirmation
+            const publicClient = createPublicClient({ chain: getViemL1Chain(), transport: http() })
+            const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash });
+            console.log('Deposit transaction receipt:', receipt);
+
+            if (receipt.status === 'success') {
+                setDepositStatus({ status: 'success', data: txHash });
+            } else {
+                throw new Error('Deposit transaction failed');
+            }
+        } catch (err) {
+            setDepositStatus({ status: 'error' });
+            setError(err instanceof Error ? err.message : 'An error occurred during deposit');
+            console.error('Deposit error:', err);
+        }
+    };
 
     const onInitialize = async () => {
+        if (!window.avalanche || !tempWalletClient?.account) {
+            setStatus({ status: 'error' });
+            setError('MetaMask is not installed or temporary wallet not initialized');
+            return;
+        }
+
         setStatus({ status: 'in_progress' });
         setError(null);
         try {
-            const customChain = {
-                id: evmChainId,
-                name: l1Name,
-                network: l1Name.toLowerCase(),
-                nativeCurrency: {
-                    name: tokenSymbol,
-                    symbol: tokenSymbol,
-                    decimals: 18,
-                },
-                rpcUrls: {
-                    default: { http: [getCChainRpcEndpoint()] },
-                    public: { http: [getCChainRpcEndpoint()] },
-                },
-            };
-
             const publicClient = createPublicClient({
-                chain: customChain,
+                chain: getViemL1Chain(),
                 transport: http()
             });
 
-            const account = privateKeyToAccount(`0x${tempPrivateKeyHex}`);
-            const walletClient = createWalletClient({
-                chain: customChain,
-                transport: http(),
-                account
-            });
 
             // Convert hex signature to bytes
             const signatureBytes = hexToBytes(convertL1SignedWarpMessage!);
-
-            // Pack the WARP message into access list format
             const accessList = packWarpIntoAccessList(signatureBytes);
 
-            const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
-
-            const args = [{
-                l1ID: cb58ToHex(subnetId),
-                validatorManagerBlockchainID: cb58ToHex(chainId),
-                validatorManagerAddress: managerAddress,
-                initialValidators: nodePopJsons
-                    .slice(0, nodesCount)
-                    .map(json => {
-                        const node = JSON.parse(json).result;
-                        return {
-                            nodeID: cb58ToHex(node.nodeID.split('-')[1]),
-                            blsPublicKey: node.nodePOP.publicKey,
-                            weight: 100
-                        };
-                    })
-            }, 0];
-
             // First simulate the transaction
-            const simResult = await publicClient.simulateContract({
-                address: managerAddress,
+            const simlation = await publicClient.simulateContract({
+                address: PROXY_ADDRESS,
                 abi: PoAValidatorManagerABI.abi,
                 functionName: 'initializeValidatorSet',
-                args,
-                account,
-                accessList
+                args: txArgs,
+                accessList,
+                account: tempWalletClient.account
             });
 
-            console.log('Simulation request:', simResult);
+            console.log('simlation', simlation);
+            const gasPrice = await publicClient.getGasPrice();
+            const gas = await publicClient.estimateContractGas(simlation.request)
+            const totalGas = gasPrice * gas;
+            console.log('Gas:', { gas, gasPrice, totalGas, totalGasInEth: formatEther(totalGas) });
 
-            // Modify the write contract call to include gas limit
-            const hash = await walletClient.writeContract({
-                address: managerAddress,
-                abi: PoAValidatorManagerABI.abi,
-                functionName: 'initializeValidatorSet',
-                args,
-                account,
-                accessList
-            });
+            // Execute with metamask wallet
+            const hash = await tempWalletClient.writeContract(simlation.request);
 
             // Wait for transaction receipt
             const receipt = await publicClient.waitForTransactionReceipt({ hash });
@@ -183,7 +285,7 @@ export default function ContractInitializeValidatorSet() {
     };
 
     const debugTraceAndDecode = async (txHash: string) => {
-        const traceResponse = await fetch(getCChainRpcEndpoint(), {
+        const traceResponse = await fetch(getL1RpcEndpoint(), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -215,42 +317,75 @@ export default function ContractInitializeValidatorSet() {
 
     return (
         <>
-            <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status.status]} mb-4 dark:bg-gray-800`}>
-                <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium dark:text-white">Call initializeValidatorSet in PoA Validator Manager</h3>
-                    <span className={`${status.status === 'error' ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}`}>
-                        {status.status === 'not_started' ? 'Not started' :
-                            status.status === 'in_progress' ? 'In progress...' :
-                                status.status === 'error' ? 'Failed' : 'Success'}
-                    </span>
-                </div>
-
-                {error && (
-                    <div className="text-sm text-red-600 dark:text-red-400 mb-2">{error}</div>
-                )}
-
-                {status.status === 'success' && status.data && (
-                    <div className="mb-2">
-                        <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Transaction Hash:</div>
-                        <div className="bg-white dark:bg-gray-900 rounded p-2 border border-gray-100 dark:border-gray-700">
-                            <pre className="font-mono text-sm whitespace-pre-wrap break-all dark:text-gray-300">{status.data}</pre>
-                        </div>
+            {/* Only show Initialize Validator Set if we have enough funds */}
+            {hasEnoughFunds && (
+                <div className={`pt-4 px-4 pb-2 rounded-lg border ${statusColors[status.status]} mb-4 dark:bg-gray-800`}>
+                    <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-medium dark:text-white">Call initializeValidatorSet in PoA Validator Manager</h3>
+                        <span className={`${status.status === 'error' ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}`}>
+                            {status.status === 'not_started' ? 'Not started' :
+                                status.status === 'in_progress' ? 'In progress...' :
+                                    status.status === 'error' ? 'Failed' : 'Success'}
+                        </span>
                     </div>
-                )}
 
-                {status.status === 'not_started' && (
+                    {error && (
+                        <div className="text-sm text-red-600 dark:text-red-400 mb-2">{error}</div>
+                    )}
+
+                    {status.status === 'success' && status.data && (
+                        <div className="mb-2">
+                            <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Transaction Hash:</div>
+                            <div className="bg-white dark:bg-gray-900 rounded p-2 border border-gray-100 dark:border-gray-700">
+                                <pre className="font-mono text-sm whitespace-pre-wrap break-all dark:text-gray-300">{status.data}</pre>
+                            </div>
+                        </div>
+                    )}
+
+                    {status.status === 'not_started' && (
+                        <button
+                            onClick={onInitialize}
+                            disabled={!convertL1SignedWarpMessage}
+                            className={`mt-2 w-full p-2 mb-2 rounded ${!convertL1SignedWarpMessage
+                                ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                                : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+                                }`}
+                        >
+                            Initialize
+                        </button>
+                    )}
+                </div>
+            )}
+
+            {/* Only show Deposit UI if we don't have enough funds */}
+            {!hasEnoughFunds && (
+                <div className="pt-4 px-4 pb-2 rounded-lg border border-green-300 mb-4 dark:bg-gray-800">
+                    <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-medium dark:text-white">Deposit 0.5 AVAX into Temporary Wallet</h3>
+                        <span className={`${depositStatus.status === 'error' ? 'text-red-600 dark:text-red-400' : 'dark:text-gray-300'}`}>
+                            {depositStatus.status === 'not_started' ? 'Not started' :
+                                depositStatus.status === 'in_progress' ? 'In progress...' :
+                                    depositStatus.status === 'error' ? 'Failed' : 'Success'}
+                        </span>
+                    </div>
+
+                    {depositStatus.status === 'success' && depositStatus.data && (
+                        <div className="mb-2">
+                            <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Deposit Transaction Hash:</div>
+                            <div className="bg-white dark:bg-gray-900 rounded p-2 border border-gray-100 dark:border-gray-700">
+                                <pre className="font-mono text-sm whitespace-pre-wrap break-all dark:text-gray-300">{depositStatus.data}</pre>
+                            </div>
+                        </div>
+                    )}
+
                     <button
-                        onClick={onInitialize}
-                        disabled={!convertL1SignedWarpMessage}
-                        className={`mt-2 w-full p-2 mb-2 rounded ${!convertL1SignedWarpMessage
-                            ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
-                            }`}
+                        onClick={onDepositFunds}
+                        className="mt-2 w-full p-2 mb-2 rounded bg-green-500 text-white hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700"
                     >
-                        Initialize
+                        Deposit 0.5 AVAX
                     </button>
-                )}
-            </div>
+                </div>
+            )}
         </>
     );
 } 

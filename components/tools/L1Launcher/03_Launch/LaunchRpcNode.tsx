@@ -6,24 +6,21 @@ import Pre from '@/components/tools/common/ui/Pre';
 import { CONTAINER_VERSION } from '../constants';
 import OSSelectionTabs from '../../common/ui/OSSelectionTabs';
 
-const dockerCommand = (activeOS:string, subnetID: string) => `mkdir -p ~/.avalanchego_rpc/staking; docker run -it -d \\
+const dockerCommand = (subnetID: string) => `docker run -it -d \\
   --name rpc \\
-  ${activeOS === "macOS" ? "-p 8080:8080 -p 9653:9653" : "--network host" } \\
-  -v ~/.avalanchego_rpc/:/home/avalanche/.avalanchego \\
-  -e AVAGO_NETWORK_ID=fuji \\
+  -p 0.0.0.0:8080:8080 -p 9653:9653 \\
+  -v ~/.avalanchego_rpc:/root/.avalanchego \\
   -e AVAGO_PARTIAL_SYNC_PRIMARY_NETWORK=true \\
+  -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=opendns \\
+  -e AVAGO_PLUGIN_DIR=/avalanchego/build/plugins/ \\
+  -e AVAGO_HTTP_HOST=0.0.0.0 \\
   -e AVAGO_TRACK_SUBNETS=${subnetID} \\
   -e AVAGO_HTTP_PORT=8080 \\
   -e AVAGO_STAKING_PORT=9653 \\
+  -e AVAGO_NETWORK_ID=fuji \\
   -e AVAGO_HTTP_ALLOWED_HOSTS="*" \\
-  -e AVAGO_HTTP_HOST=0.0.0.0 \\
-  -e AVAGO_PUBLIC_IP_RESOLUTION_SERVICE=ifconfigme \\
-  -e AVAGO_PLUGIN_DIR=/avalanchego/build/plugins/ \\
-  -e HOME=/home/avalanche \\
-  --user $(id -u):$(id -g) \\
   avaplatform/subnet-evm:${CONTAINER_VERSION}`;
 
-const operatingSystems = ['Linux', 'macOS'];
 
 export default function LaunchRpcNode() {
     const { subnetId, chainId, evmChainId, goToNextStep, goToPreviousStep } = useL1LauncherWizardStore();
@@ -63,17 +60,7 @@ export default function LaunchRpcNode() {
                     This command launches an AvalancheGo node configured as an RPC node. It changes the RPC port to <code>8080</code> and the P2P port to <code>9653</code> to avoid conflicts with your validator node. You can run this on the same machine as one of your validator nodes or even on your local computer for easier access from a wallet.
                 </p>
 
-                <OSSelectionTabs
-                    operatingSystems={operatingSystems}
-                    activeOS={activeOS}
-                    setActiveOS={setActiveOS}
-                />
-
-                {activeOS === 'macOS' && (<p className="mt-2 text-sm text-red-500">
-                    Please note that --network host does not work on macOS, so you have to map the ports manually.
-                </p>)}
-
-                <Pre>{dockerCommand(activeOS, subnetId)}</Pre>
+                <Pre>{dockerCommand(subnetId)}</Pre>
             </div>
 
             <div>
@@ -147,8 +134,8 @@ function EnableDebug() {
 
                 <h4 className="font-medium mb-2">To enable these features, run this before launching your RPC node:</h4>
                 <Pre>
-                    {`mkdir -p $HOME/.avalanchego_rpc/configs/chains/${chainId}
-echo '{
+                    {`sudo mkdir -p $HOME/.avalanchego_rpc/configs/chains/${chainId}
+sudo echo '{
   "log-level": "debug",
   "warp-api-enabled": true,
   "eth-apis": [

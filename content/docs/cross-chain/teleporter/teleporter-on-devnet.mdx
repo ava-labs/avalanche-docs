@@ -279,9 +279,9 @@ avalanche primary describe --cluster <devnetName>
 +                              +--------------------------------------------------------------------+
 |                              | 0xa2b6b947cf2b9bf6df03c8caab08e38ab951d8b120b9c37265d9be01d86bb170 |
 +------------------------------+--------------------------------------------------------------------+
-| Teleporter Messenger Address | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf                         |
+| ICM Messenger Address        | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf                         |
 +------------------------------+--------------------------------------------------------------------+
-| Teleporter Registry Address  | 0x5DB9A7629912EBF95876228C24A848de0bfB43A9                         |
+| ICM Registry Address         | 0x5DB9A7629912EBF95876228C24A848de0bfB43A9                         |
 +------------------------------+--------------------------------------------------------------------+
 ```
 
@@ -291,12 +291,12 @@ Controlling Relayer Execution[​](#controlling-relayer-execution "Direct link t
 CLI provides two commands to remotely control Relayer execution:
 
 ```
-avalanche teleporter relayer stop --cluster <devnetName>
+avalanche interchain relayer stop --cluster <devnetName>
 ✓ Remote AWM Relayer on i-0f1815c016b555fcc successfully stopped
 ```
 
 ```
-avalanche teleporter relayer start --cluster <devnetName>
+avalanche interchain relayer start --cluster <devnetName>
 ✓ Remote AWM Relayer on i-0f1815c016b555fcc successfully started
 
 ```

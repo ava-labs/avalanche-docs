@@ -18,7 +18,7 @@ export default function Page(): React.ReactElement {
                     <p className="h-fit text-center p-2 text-fd-muted-foreground md:max-w-[80%] md:text-xl">
                         Discover best-in-class integrations for your Avalanche L1 and learn how to use them.
                     </p>
-                    <div className='inline-flex items-center gap-3'>
+                    <div className="inline-flex items-center gap-3">
                         <Link className={cn(buttonVariants())} href={`#Featured`}>Discover Integrations</Link>
                         <Link className={cn(buttonVariants({ variant: 'outline' }))} href="https://github.com/ava-labs/avalanche-docs/blob/master/content/integrations" target='_blank'>Add your Integration</Link>
                     </div>
@@ -158,6 +158,18 @@ function Integrations({ list }: { list: any[] }) {
     useEffect(() => {
         filter();
     }, [input, chains]);
+
+    // New effect to check if a deep link (hash) exists, and scroll into view.
+    useEffect(() => {
+        if (categories.length > 0 && window.location.hash) {
+            // Remove the '#' from the hash and decode it to match the category value
+            const targetId = decodeURIComponent(window.location.hash.substring(1));
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    }, [categories]);
 
     return (
         <div>

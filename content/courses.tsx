@@ -103,6 +103,17 @@ const officialCourses: Course[] = [
         instructors: ["Owen Wahlgren"]
     },
     {
+         name:"Solidity Programming with Foundry",
+         description:"Learn the basics on how to code in Solidity with Foundry",
+         slug:"solidity-foundry",
+         icon: <SquareCode />,
+         duration: "1 hour",
+         status: "featured",
+         tools: ["Starter-Kit", "Foundry"],
+         languages: ["Solidity"],
+         instructors: ["Andrea Vargas"]
+     },
+    {
         name:"HyperSDK",
         description:"Learn how to build a high-performance blockchain using HyperSDK",
         slug:"hypersdk",

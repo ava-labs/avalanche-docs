@@ -18,18 +18,18 @@ avalanche blockchain describe myblockchain
 
 ```
 +-------------------------------------------------------------------------------------------+
-|                                         TELEPORTER                                        |
+|                                         ICM                                               |
 +---------------+------------------------------+--------------------------------------------+
-| Local Network | Teleporter Messenger Address | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf |
+| Local Network | ICM Messenger Address        | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf |
 |               +------------------------------+--------------------------------------------+
-|               | Teleporter Registry Address  | 0xB4DC3d786D658d118631F5C6B75CB5935be8407C | // [!code highlight]
+|               | ICM Registry Address         | 0xB4DC3d786D658d118631F5C6B75CB5935be8407C | // [!code highlight]
 +---------------+------------------------------+--------------------------------------------+
 ```
 </Step>
 <Step>
 ### Save the `Teleporter Registry Address`
 
-Most other environment variables we will need are already set in the devcontainer or from the [previous section](/course/interchain-token-transfer/06-erc-20-to-erc-20-bridge/01-erc-20-to-erc-20-bridge).
+Most other environment variables we will need are already set in the devcontainer or from the [previous section](/academy/interchain-token-transfer/06-erc-20-to-erc-20-bridge/01-erc-20-to-erc-20-bridge).
 ```bash
 export TELEPORTER_REGISTRY_L1=0xa3493940a13b426BD2f7dA6E55A39c060C0e6020
 ```
@@ -81,7 +81,7 @@ Using the [`forge create`](https://book.getfoundry.sh/reference/forge/forge-crea
 - Wrapped Token Address (deployed in the last step)
 
 ```bash
-forge create --rpc-url myblockchain --private-key $PK lib/avalanche-interchain-token-transfer/contracts/src/TokenHome/NativeTokenHome.sol:NativeTokenHome --constructor-args $TELEPORTER_REGISTRY_L1 $FUNDED_ADDRESS $WRAPPED_ERC20_L1
+forge create --rpc-url myblockchain --private-key $PK lib/avalanche-interchain-token-transfer/contracts/src/TokenHome/NativeTokenHome.sol:NativeTokenHome --constructor-args $TELEPORTER_REGISTRY_L1 $FUNDED_ADDRESS $WRAPPED_ERC20_L1 --broadcast
 ```
 ```
 [⠊] Compiling...

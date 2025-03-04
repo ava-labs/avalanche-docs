@@ -1,15 +1,26 @@
-import type React from "react"
+import React from "react"
 import Link from "next/link"
-import { Clock, MessageSquare } from "lucide-react"
+import { Clock, GithubIcon, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import RequestUpdateButtonWrapper from "@/components/client/request-update-button-wrapper"
 
 interface ToolHeaderProps {
   title: string
   duration: string
   description: string
+  githubDir: string
+  updatePath?: string
+  updateTitle?: string
 }
 
-const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description }) => {
+const ToolHeader: React.FC<ToolHeaderProps> = ({
+  title,
+  duration,
+  description,
+  githubDir,
+  updatePath,
+  updateTitle,
+}) => {
   return (
     <div className="space-y-4 mb-4">
       <div className="space-y-2">
@@ -19,12 +30,26 @@ const ToolHeader: React.FC<ToolHeaderProps> = ({ title, duration, description })
                 <Clock className="w-4 h-4" />
                 <span>{duration}</span>
             </div>
-            <Link href="https://t.me/+4kKgMmWAknxjY2Ey" target="_blank" rel="noopener noreferrer" className="sm:ml-auto">
-                <Button variant="outline" size="sm">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Give Feedback
-                </Button>
-            </Link>
+            <div className="sm:ml-auto flex items-center gap-2">
+              <Link href={`https://github.com/ava-labs/avalanche-docs/blob/master/components/tools/${githubDir}`} target="_blank" rel="noopener noreferrer" >
+                    <Button variant="outline" size="sm">
+                    <GithubIcon className="w-4 h-4" />
+                    </Button>
+              </Link>
+              <Link href="https://t.me/+4kKgMmWAknxjY2Ey" target="_blank" rel="noopener noreferrer" >
+                  <Button variant="outline" size="sm">
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Give Feedback
+                  </Button>
+              </Link>
+              {updatePath && updateTitle && (
+                <RequestUpdateButtonWrapper
+                  pagePath={updatePath}
+                  title={updateTitle}
+                />
+              )}
+            </div>
+            
         </div>
         <p className="text-muted-foreground">{description}</p>
       </div>

@@ -235,9 +235,29 @@ nav a:not(:first-child) {
     display: none;
   }
 
+  /* for hiding avagpt */
   [data-open='true'] {
     z-index: 250;
   }
+  
+  [data-state="open"] {
+    z-index: 450;
+  }
+}
+
+.tools-page svg.lucide {
+  color: #EB4C50 !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* This is a workaround for this issue: https://github.com/shadcn-ui/ui/issues/4227 */
@@ -271,4 +291,10 @@ html body[data-scroll-locked] {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* This is a workaround for this issue: https://github.com/shadcn-ui/ui/issues/4227 */
+html body[data-scroll-locked] {
+  overflow: visible !important;
+  margin-right: 0 !important;
 }

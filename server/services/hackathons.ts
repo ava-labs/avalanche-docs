@@ -1,6 +1,7 @@
 import { Hackathon, HackathonHeader, HackathonStatus } from "@/types/hackathons";
 import { hasAtLeastOne, requiredField, validateEntity, Validation } from "./base";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -131,11 +132,14 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
             total_prizes: hackathonData.total_prizes!,
             tags: hackathonData.tags!,
             timezone: hackathonData.timezone!,
+            icon: hackathonData.icon!,
+            banner: hackathonData.banner!,
+            small_banner: hackathonData.small_banner!,
             content: content
         },
-    });
-
+    });    
     hackathonData.id = newHackathon.id;
+    revalidatePath('/api/hackathons/')
     return hackathonData as HackathonHeader;
 }
 
@@ -167,10 +171,14 @@ export async function updateHackathon(id: string, hackathonData: Partial<Hackath
             total_prizes: hackathonData.total_prizes!,
             tags: hackathonData.tags!,
             timezone: hackathonData.timezone!,
+            icon: hackathonData.icon!,
+            banner: hackathonData.banner!,
+            small_banner: hackathonData.small_banner!,
             content: content
 
         },
     });
-
+    revalidatePath(`/api/hackathons/${hackathonData.id}`)
+    revalidatePath('/api/hackathons/')
     return hackathonData as HackathonHeader;
 }

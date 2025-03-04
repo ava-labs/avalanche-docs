@@ -1,0 +1,78 @@
+---
+title: The TIE
+category: Analytics & Data
+available: ["C-Chain"]
+description: "The TIE provides real-time and historical data APIs for Avalanche, offering sentiment analysis, trading signals, and on-chain metrics through their SigDev Terminal."
+logo: /images/thetie.jpg
+developer: The TIE
+website: https://thetie.io/
+documentation: https://docs.thetie.io/
+---
+
+## Overview
+
+The TIE's SigDev platform provides developers with access to comprehensive crypto data APIs including Avalanche-specific metrics, sentiment analysis, and on-chain data. Their SDK enables integration of both real-time and historical data for applications built on Avalanche.
+
+## Features
+
+- **Data APIs**:
+  - Real-time market data
+  - Social sentiment analysis
+  - On-chain metrics
+  - Trading signals
+- **Integration Options**:
+  - REST API
+  - WebSocket feeds
+  - Python SDK
+  - R SDK
+- **Data Types**:
+  - Price data
+  - Volume analytics
+  - Social metrics
+  - News sentiment
+  - On-chain activity
+- **Developer Tools**:
+  - API authentication
+  - Rate limiting options
+  - Data filtering
+  - Custom endpoints
+
+## Getting Started
+
+To integrate The TIE's data:
+
+1. **Access Setup**:
+   - Register for API access
+   - Get API credentials
+   - Choose data endpoints
+2. **Implementation**:
+```python
+from thetie import TieClient
+
+client = TieClient(api_key='your-api-key')
+
+# Fetch Avalanche metrics
+avalanche_data = client.get_metrics(
+    asset='AVAX',
+    metrics=['price', 'volume', 'sentiment'],
+    interval='1h'
+)
+```
+
+## Documentation
+
+For comprehensive API documentation and integration guides, visit [The TIE Documentation](https://docs.thetie.io/).
+
+## Use Cases
+
+The TIE enables:
+
+- **Market Analysis**: Access comprehensive market data
+- **Sentiment Tracking**: Monitor social sentiment metrics
+- **Trading Applications**: Integrate trading signals and metrics
+- **Research Tools**: Build research and analysis platforms
+- **Portfolio Analytics**: Track and analyze asset performance
+
+## Conclusion
+
+The TIE provides robust data infrastructure for developers building on Avalanche, offering comprehensive APIs and SDKs for accessing market, social, and on-chain data. Their tools enable developers to integrate sophisticated data analytics into their applications with reliable and scalable access to multiple data types. 
