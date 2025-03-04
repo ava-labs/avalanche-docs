@@ -12,7 +12,7 @@ import General from './sections/General';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/components/ui/form';
-import type { Hackathon } from '@/types/hackathons';
+import type {  HackathonHeader } from '@/types/hackathons';
 import axios from 'axios';
 import { useToast } from '@/hooks/use-toast';
 
@@ -44,7 +44,7 @@ export default function HackathonForm({
   initialData,
   isEditing = false,
 }: {
-  initialData?: Hackathon;
+  initialData?: HackathonHeader;
   isEditing?: boolean;
 }) {
   const { toast } = useToast();
@@ -383,8 +383,8 @@ export default function HackathonForm({
       name: initialData?.title,
       description: initialData?.description,
       location: initialData?.location,
-      registrationDeadline: initialData?.registration_deadline
-        ? new Date(initialData.registration_deadline)
+      registrationDeadline: initialData?.content.registration_deadline
+        ? new Date(initialData.content.registration_deadline)
         : undefined,
     },
   });

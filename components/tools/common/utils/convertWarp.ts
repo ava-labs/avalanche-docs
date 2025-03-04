@@ -140,3 +140,144 @@ export function packL1ConversionMessage(args: PackL1ConversionMessageArgs, netwo
     const unsignedMessage = newUnsignedMessage(networkID, sourceChainID, subnetConversionAddressedCall);
     return [unsignedMessage, cb58ToBytes(args.subnetId)];
 }
+
+export interface PChainOwner {
+    threshold: number;
+    addresses: `0x${string}`[];
+}
+
+export interface ValidationPeriod {
+    subnetID: string;
+    nodeID: string;
+    blsPublicKey: `0x${string}`;
+    registrationExpiry: bigint;
+    remainingBalanceOwner: PChainOwner;
+    disableOwner: PChainOwner;
+    weight: bigint;
+}
+
+const REGISTER_L1_VALIDATOR_MESSAGE_TYPE_ID = 1;
+
+export function packRegisterL1ValidatorMessage(
+    validationPeriod: ValidationPeriod,
+    networkID: number,
+    sourceChainID: string
+): Uint8Array {
+    const parts: Uint8Array[] = [];
+
+    // Validate BLS public key length
+    const blsPublicKeyBytes = hexToBytes(validationPeriod.blsPublicKey);
+    if (blsPublicKeyBytes.length !== 48) {
+        throw new Error('Invalid BLS public key length');
+    }
+
+    // Add codec version (uint16)
+    parts.push(encodeUint16(codecVersion));
+
+    // Add type ID (uint32)
+    parts.push(encodeUint32(REGISTER_L1_VALIDATOR_MESSAGE_TYPE_ID));
+
+    // Add subnetID
+    parts.push(cb58ToBytes(validationPeriod.subnetID));
+
+    // Add nodeID
+    const nodeIDBytes = cb58ToBytes(validationPeriod.nodeID.split("-")[1]);
+    parts.push(encodeVarBytes(nodeIDBytes));
+
+    // Add BLS public key
+    parts.push(blsPublicKeyBytes);
+
+    // Add registration expiry
+    parts.push(encodeUint64(validationPeriod.registrationExpiry));
+
+    // Add remaining balance owner
+    parts.push(encodeUint32(validationPeriod.remainingBalanceOwner.threshold));
+    parts.push(encodeUint32(validationPeriod.remainingBalanceOwner.addresses.length));
+    for (const address of validationPeriod.remainingBalanceOwner.addresses) {
+        parts.push(hexToBytes(address));
+    }
+
+    // Add disable owner
+    parts.push(encodeUint32(validationPeriod.disableOwner.threshold));
+    parts.push(encodeUint32(validationPeriod.disableOwner.addresses.length));
+    for (const address of validationPeriod.disableOwner.addresses) {
+        parts.push(hexToBytes(address));
+    }
+
+    // Add weight
+    parts.push(encodeUint64(validationPeriod.weight));
+
+    const payload = concatenateUint8Arrays(...parts);
+
+    // Create addressed call with empty source address
+    const addressedCall = newAddressedCall(new Uint8Array([]), payload);
+
+    // Create unsigned message
+    const unsignedMessage = newUnsignedMessage(networkID, sourceChainID, addressedCall);
+
+    return unsignedMessage;
+}
+
+export interface L1ValidatorRegistration {
+    validationID: Uint8Array;
+    registered: boolean;
+}
+
+const L1_VALIDATOR_REGISTRATION_MESSAGE_TYPE_ID = 2; // You may need to verify this constant value
+
+/**
+ * Packs a L1ValidatorRegistrationMessage into a byte array.
+ * The message format specification is:
+ * +--------------+----------+----------+
+ * |      codecID :   uint16 |  2 bytes |
+ * +--------------+----------+----------+
+ * |       typeID :   uint32 |  4 bytes |
+ * +--------------+----------+----------+
+ * | validationID : [32]byte | 32 bytes |
+ * +--------------+----------+----------+
+ * |        valid :     bool |  1 byte  |
+ * +--------------+----------+----------+
+ *                           | 39 bytes |
+ *                           +----------+
+ */
+export function packL1ValidatorRegistration(
+    validationID: Uint8Array,
+    registered: boolean,
+    networkID: number,
+    sourceChainID: string
+): Uint8Array {
+    // Validate validationID length
+    if (validationID.length !== 32) {
+        throw new Error('ValidationID must be exactly 32 bytes');
+    }
+
+    const messagePayload = concatenateUint8Arrays(
+        encodeUint16(codecVersion),
+        encodeUint32(L1_VALIDATOR_REGISTRATION_MESSAGE_TYPE_ID),
+        validationID,
+        new Uint8Array([registered ? 1 : 0])
+    );
+
+    // Create addressed call with empty source address
+    const addressedCall = newAddressedCall(new Uint8Array([]), messagePayload);
+
+    // Create unsigned message
+    return newUnsignedMessage(networkID, sourceChainID, addressedCall);
+}
+
+export function parseL1ValidatorRegistration(bytes: Uint8Array): L1ValidatorRegistration {
+    const EXPECTED_LENGTH = 39; // 2 + 4 + 32 + 1 bytes
+
+    if (bytes.length !== EXPECTED_LENGTH) {
+        throw new Error(`Invalid message length. Expected ${EXPECTED_LENGTH} bytes, got ${bytes.length}`);
+    }
+
+    // Skip first 6 bytes (2 bytes codecID + 4 bytes typeID)
+    const validationID = bytes.slice(6, 38); // 32 bytes
+    const registered = bytes[38] === 1; // Last byte
+
+    return {
+        validationID,
+        registered,
+    };
+}

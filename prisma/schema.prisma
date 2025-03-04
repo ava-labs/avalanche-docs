@@ -12,14 +12,14 @@ model Hackathon {
   id                  String   @id @default(uuid())
   title               String
   description         String
-  date                DateTime
+  start_date          DateTime @default(now()) @db.Timestamptz(3)
+  end_date            DateTime @default(now()) @db.Timestamptz(3)
   location            String
   total_prizes        Int
   tags                String[]
-  status              String
-  registration_deadline DateTime
-  address             String
-  agenda              Json
-  partners            Json
-  tracks              Json
+  timezone             String @default("UTC")
+  icon                 String @default("")
+  banner               String @default("")
+  small_banner         String @default("")
+  content              Json @default("{}")
 }

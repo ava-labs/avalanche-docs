@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactNode } from 'react';
+import { deduplicateEthRequestAccounts } from '../../L1Launcher/config/store';
 
 interface ChainConfig {
     chainId: string;
@@ -10,6 +11,7 @@ interface ChainConfig {
     };
     rpcUrls: string[];
     blockExplorerUrls: string[];
+    isTestnet: boolean;
 }
 
 export const fujiConfig: ChainConfig = {
@@ -21,7 +23,8 @@ export const fujiConfig: ChainConfig = {
         decimals: 18
     },
     rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+    blockExplorerUrls: ['https://testnet.snowtrace.io/'],
+    isTestnet: true
 };
 
 interface Props {
@@ -37,16 +40,14 @@ export default function SwitchChain({ children, chainConfig }: Props) {
 
     // Check if user is connected and on the right chain
     const checkConnection = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             setChainStatus('wrong_chain');
             return;
         }
 
         try {
             // Request account access
-            const accounts = await window.ethereum.request({
-                method: 'eth_requestAccounts'
-            });
+            const accounts = await deduplicateEthRequestAccounts()
 
             if (!accounts || accounts.length === 0) {
                 setChainStatus('wrong_chain');
@@ -57,8 +58,9 @@ export default function SwitchChain({ children, chainConfig }: Props) {
             setIsConnected(true);
 
             // Check chain
-            const chainId = await window.ethereum.request({
-                method: 'eth_chainId'
+            const chainId = await window.avalanche.request<string>({
+                method: 'eth_chainId',
+                params: []
             });
 
             if (chainId === chainConfig.chainId) {
@@ -76,37 +78,33 @@ export default function SwitchChain({ children, chainConfig }: Props) {
     useEffect(() => {
         checkConnection();
 
-        if (window.ethereum) {
-            window.ethereum.on('chainChanged', checkConnection);
-            window.ethereum.on('accountsChanged', checkConnection);
+        if (window.avalanche) {
+            const provider = window.avalanche!;
+            provider.on('chainChanged', checkConnection);
+            provider.on('accountsChanged', checkConnection);
 
             return () => {
-                window.ethereum.removeListener('chainChanged', checkConnection);
-                window.ethereum.removeListener('accountsChanged', checkConnection);
+                provider.removeListener('chainChanged', checkConnection);
+                provider.removeListener('accountsChanged', checkConnection);
             };
         }
     }, []);
 
     const switchChain = async () => {
-        if (!window.ethereum) return;
+        if (!window.avalanche) return;
 
         try {
-            await window.ethereum.request({
+
+            await window.avalanche.request({
+                method: 'wallet_addEthereumChain',
+                params: [chainConfig]
+            });
+            await window.avalanche.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: chainConfig.chainId }],
             });
         } catch (error: any) {
-            // If the chain hasn't been added to MetaMask, add it
-            if (error.code === 4902) {
-                try {
-                    await window.ethereum.request({
-                        method: 'wallet_addEthereumChain',
-                        params: [chainConfig]
-                    });
-                } catch (addError) {
-                    console.error('Failed to add network:', addError);
-                }
-            }
+            console.error('Failed to add network:', error);
         }
     };
 

@@ -23,9 +23,9 @@ avalanche blockchain describe myblockchain
 +-------------------------------------------------------------------------------------------+
 |                                         TELEPORTER                                        |
 +---------------+------------------------------+--------------------------------------------+
-| Local Network | Teleporter Messenger Address | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf |
+| Local Network | ICM Messenger Address        | 0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf |
 |               +------------------------------+--------------------------------------------+
-|               | Teleporter Registry Address  | 0x82EeEf8e31D4Bf95916219D7949D66c468Ac0681 | // [!code highlight]
+|               | ICM Registry Address         | 0x82EeEf8e31D4Bf95916219D7949D66c468Ac0681 | // [!code highlight]
 +---------------+------------------------------+--------------------------------------------+
 ```
 </Step>
@@ -92,7 +92,7 @@ Using the [`forge create`](https://book.getfoundry.sh/reference/forge/forge-crea
 ```bash
 forge create --rpc-url myblockchain --private-key $PK \
 lib/avalanche-interchain-token-transfer/contracts/src/TokenRemote/ERC20TokenRemote.sol:ERC20TokenRemote \
---constructor-args "(${TELEPORTER_REGISTRY_L1}, ${FUNDED_ADDRESS}, ${C_CHAIN_BLOCKCHAIN_ID_HEX}, ${ERC20_HOME_C_CHAIN}, 18)" "TOK" "TOK" 18
+--constructor-args "(${TELEPORTER_REGISTRY_L1}, ${FUNDED_ADDRESS}, ${C_CHAIN_BLOCKCHAIN_ID_HEX}, ${ERC20_HOME_C_CHAIN}, 18)" "TOK" "TOK" 18 --broadcast
 ```
 
 </Step>

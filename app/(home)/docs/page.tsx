@@ -20,10 +20,13 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Documentation</h1>
+        </div>
         <div>
-            <div className="relative">
+          <div className="relative">
             <Hero />
-            </div>
+          </div>
           <Introduction />
           <Highlights />
           <Features />
@@ -156,7 +159,7 @@ function Features(): React.ReactElement {
         description="We provide a suite of tools to make your development experience as smooth as possible."
       >
       <div className="mt-8 flex flex-col gap-4">
-        <Link href="/docs/tooling/avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
+        <Link href="/docs/tooling/get-avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
             <Terminal />
             <h3 className="font-semibold">Avalanche CLI</h3>
             <p className="text-sm text-fd-muted-foreground">
