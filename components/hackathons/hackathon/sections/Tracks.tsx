@@ -3,6 +3,8 @@ import { Divider } from "@/components/ui/divider";
 import { HackathonHeader } from "@/types/hackathons";
 import { Crown } from "lucide-react";
 import React from "react";
+import { Card } from "fumadocs-ui/components/card";
+import { CardTitle } from "@/components/ui/card";
 
 function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
   return (
@@ -19,7 +21,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
       </div>
       <div className="relative py-32 grid grid-cols-4 content-center gap-8 mt-24">
         <div className="absolute -z-10 w-screen h-full left-1/2 transform -translate-x-1/2 bg-zinc-200"></div>
-        <div className="w-1/4 absolute top-[-5.5rem] left-1/2 transform -translate-x-1/2 p-8 flex flex-col content-center items-center bg-red-300 rounded-xl">
+        <div className="w-[356px] absolute top-[-5.5rem] left-1/2 transform -translate-x-1/2 p-8 flex flex-col content-center items-center bg-red-300 rounded-xl">
           <div className="p-2 rounded-full bg-white mb-4">
             <Crown color="#FF394A" />
           </div>
@@ -29,16 +31,19 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
           <p className="text-sm text-zinc-900">Total price pool</p>
         </div>
         {hackathon.content.tracks.map((track, index) => (
-          <div
-            key={index}
-            className="w-full h-44 p-8 bg-zinc-900 rounded-xl border-zinc-800 border-2"
-          >
-            <div className="flex justify-between items-center gap-2">
-              <h2 className="text-xl font-bold">{track.name}</h2>
-              <DynamicIcon name={track.icon as any} color="#A7A7B0" size={16} />
-            </div>
+          <Card key={index} title="" className="h-44 w-full">
+            <CardTitle>
+              <div className="flex justify-between items-center gap-2">
+                <h2 className="text-xl text-zinc-50 font-bold">{track.name}</h2>
+                <DynamicIcon
+                  name={'camera'}
+                  color="#A7A7B0"
+                  size={16}
+                />
+              </div>
+            </CardTitle>
             <p className="text-sm text-zinc-400">{track.description}</p>
-          </div>
+          </Card>
         ))}
       </div>
     </section>
