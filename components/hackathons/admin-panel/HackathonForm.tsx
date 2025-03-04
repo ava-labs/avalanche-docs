@@ -8,7 +8,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { useForm } from 'react-hook-form';
 import { Badge } from '@/components/ui/badge';
 import AdminSidebar from './AdminSidebar';
-import General from './sections/General';
+import General, { hackathonAdminFormSchema } from './sections/General';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/components/ui/form';
@@ -16,29 +16,7 @@ import type {  HackathonHeader } from '@/types/hackathons';
 import axios from 'axios';
 import { useToast } from '@/hooks/use-toast';
 
-export const hackathonAdminFormSchema = z.object({
-  name: z.string().min(1, 'The hackathon needs a name'),
-  description: z
-    .string()
-    .min(10, 'The description must be at least 10 characters')
-    .max(500, 'The description cannot exceed 500 characters'),
-  logo: z.any().optional(),
-  banner: z.any().optional(),
 
-  format: z.enum(['on-site', 'virtual', 'hybrid']).optional(),
-  location: z.string(),
-
-  registrationDeadline: z.date().optional(),
-  startDate: z.date().optional(),
-  endDate: z.date().optional(),
-  timeZone: z.string().optional(),
-
-  totalPrizePool: z.string().optional(),
-
-  visibility: z.enum(['public', 'private']).default('public'),
-
-  status: z.enum(['draft', 'live', 'ended']).default('draft'),
-});
 
 export default function HackathonForm({
   initialData,

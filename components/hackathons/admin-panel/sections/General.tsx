@@ -17,7 +17,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import React from 'react';
-import { hackathonAdminFormSchema } from '../HackathonForm';
 import type { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import {
@@ -29,6 +28,32 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { format } from 'date-fns';
+
+
+
+export const hackathonAdminFormSchema = z.object({
+  name: z.string().min(1, 'The hackathon needs a name'),
+  description: z
+    .string()
+    .min(10, 'The description must be at least 10 characters')
+    .max(500, 'The description cannot exceed 500 characters'),
+  logo: z.any().optional(),
+  banner: z.any().optional(),
+
+  format: z.enum(['on-site', 'virtual', 'hybrid']).optional(),
+  location: z.string(),
+
+  registrationDeadline: z.date().optional(),
+  startDate: z.date().optional(),
+  endDate: z.date().optional(),
+  timeZone: z.string().optional(),
+
+  totalPrizePool: z.string().optional(),
+
+  visibility: z.enum(['public', 'private']).default('public'),
+
+  status: z.enum(['draft', 'live', 'ended']).default('draft'),
+});
 
 function General({
   form,
