@@ -21,7 +21,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
       </div>
       <div className="relative py-32 grid grid-cols-4 content-center gap-8 mt-24">
         <div className="absolute -z-10 w-screen h-full left-1/2 transform -translate-x-1/2 bg-zinc-200"></div>
-        <div className="w-[356px] absolute top-[-5.5rem] left-1/2 transform -translate-x-1/2 p-8 flex flex-col content-center items-center bg-red-300 rounded-xl">
+        <div className="w-[356px] absolute top-[-5.5rem] left-1/2 transform -translate-x-1/2 p-8 flex flex-col content-center items-center bg-red-300 rounded-xl border-2 border-red-500">
           <div className="p-2 rounded-full bg-white mb-4">
             <Crown color="#FF394A" />
           </div>
@@ -34,7 +34,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
           <Card key={index} title="" className="h-44 w-full">
             <CardTitle>
               <div className="flex justify-between items-center gap-2">
-                <h2 className="text-xl text-zinc-50 font-bold">{track.name}</h2>
+                <h2 className="text-xl text-zinc-900 dark:text-zinc-50 font-bold">{track.name}</h2>
                 <DynamicIcon
                   name={'camera'}
                   color="#A7A7B0"
@@ -42,7 +42,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
                 />
               </div>
             </CardTitle>
-            <p className="text-sm text-zinc-400">{track.description}</p>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">{track.description}</p>
           </Card>
         ))}
       </div>
