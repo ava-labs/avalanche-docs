@@ -32,6 +32,8 @@ import {
   Pre,
 } from "fumadocs-ui/components/codeblock";
 import Mermaid from "@/components/content-design/mermaid";
+import EditOnGithubButton from '@/components/ui/edit-on-github-button';
+import ReportIssueButton from "@/components/ui/report-issue-button";
 
 export const dynamicParams = false;
 
@@ -50,12 +52,6 @@ export default async function Page(props: {
     <DocsPage
       toc={toc}
       lastUpdate={lastModified}
-      editOnGithub={{
-        repo: 'avalanche-docs',
-        owner: 'ava-labs',
-        sha: 'master',
-        path,
-      }}
       tableOfContent={{
         style: 'clerk',
         single: false,
@@ -91,6 +87,13 @@ export default async function Page(props: {
             </CodeBlock>
           ),
         }}/>
+        <div className="flex gap-6 mt-8">
+          <EditOnGithubButton path={path} />
+          <ReportIssueButton 
+            title={page.data.title}
+            pagePath={`/academy/${page.slugs.join('/')}`}
+          />
+        </div>
       </DocsBody>
     </DocsPage>
   );

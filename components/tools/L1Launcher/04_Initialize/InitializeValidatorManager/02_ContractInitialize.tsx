@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { createWalletClient, createPublicClient, custom, http, AbiEvent } from 'viem';
 import { useL1LauncherWizardStore } from '../../config/store';
-import { calculateContractAddress } from '../../../common/utils/wallet';
 import { cb58ToHex } from '@/components/tools/common/utils/cb58';
-import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json';
+import PoAValidatorManagerABI from '../../../common/icm-contracts/compiled/PoAValidatorManager.json';
 import { statusColors, StepState } from './colors';
-import { privateKeyToAccount } from 'viem/accounts';
+import { PROXY_ADDRESS } from "@/components/tools/common/utils/genGenesis";
 
 export default function ContractInitialize() {
     const [status, setStatus] = useState<StepState>('not_started');
@@ -15,8 +14,7 @@ export default function ContractInitialize() {
         evmChainId,
         l1Name,
         tokenSymbol,
-        getCChainRpcEndpoint,
-        tempPrivateKeyHex,
+        getL1RpcEndpoint,
         subnetId,
         convertL1SignedWarpMessage
     } = useL1LauncherWizardStore();
@@ -37,8 +35,8 @@ export default function ContractInitialize() {
                         decimals: 18,
                     },
                     rpcUrls: {
-                        default: { http: [getCChainRpcEndpoint()] },
-                        public: { http: [getCChainRpcEndpoint()] },
+                        default: { http: [getL1RpcEndpoint()] },
+                        public: { http: [getL1RpcEndpoint()] },
                     },
                 };
 
@@ -47,12 +45,10 @@ export default function ContractInitialize() {
                     transport: http()
                 });
 
-                const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
-
                 const initializedEventABI = PoAValidatorManagerABI.abi.find(item => item.type === 'event' && item.name === 'Initialized') as AbiEvent;
 
                 const logs = await publicClient.getLogs({
-                    address: managerAddress,
+                    address: PROXY_ADDRESS,
                     event: initializedEventABI,
                     fromBlock: 'earliest',
                     toBlock: 'latest'
@@ -75,7 +71,7 @@ export default function ContractInitialize() {
     }, []); // Empty dependency array means this runs once on mount
 
     const onInitialize = async () => {
-        if (!window.ethereum) {
+        if (!window.avalanche) {
             setStatus('error');
             setErrorMessage('MetaMask is not installed');
             return;
@@ -94,8 +90,8 @@ export default function ContractInitialize() {
                     decimals: 18,
                 },
                 rpcUrls: {
-                    default: { http: [getCChainRpcEndpoint()] },
-                    public: { http: [getCChainRpcEndpoint()] },
+                    default: { http: [getL1RpcEndpoint()] },
+                    public: { http: [getL1RpcEndpoint()] },
                 },
             };
 
@@ -104,46 +100,38 @@ export default function ContractInitialize() {
                 transport: http()
             });
 
-            // Create wallet client for metamask to get the address
-            const metamaskWallet = createWalletClient({
-                chain: customChain,
-                transport: custom(window.ethereum)
-            });
-            const [metamaskAddress] = await metamaskWallet.requestAddresses();
-
-            // Create wallet client with private key
-            const account = privateKeyToAccount(`0x${tempPrivateKeyHex}`);
-
-            // Check account balance
-            const balance = await publicClient.getBalance({ address: account.address });
-            if (balance === BigInt(0)) {
-                throw new Error('Account has no funds to pay for gas. Please fund the account first.');
-            }
-
+            // Create wallet client for metamask
             const walletClient = createWalletClient({
                 chain: customChain,
-                transport: http(),
-                account
+                transport: custom(window.avalanche)
             });
+            const [address] = await walletClient.requestAddresses();
 
-            const managerAddress = calculateContractAddress(tempPrivateKeyHex, 3);
 
             const settings = {
-                l1ID: cb58ToHex(subnetId),
+                subnetID: cb58ToHex(subnetId),
                 churnPeriodSeconds: BigInt(0),
                 maximumChurnPercentage: 20
             };
 
-            // Simulate with private key account but keep metamask address as second arg
-            const { request } = await publicClient.simulateContract({
-                address: managerAddress,
+            console.log('calling initialize', {
+                address: PROXY_ADDRESS,
                 abi: PoAValidatorManagerABI.abi,
                 functionName: 'initialize',
-                args: [settings, metamaskAddress],//has to be the metamask address, not temp account
-                account
+                args: [settings, address],
+                account: address
             });
 
-            // Execute with private key wallet
+            // Simulate with metamask address
+            const { request } = await publicClient.simulateContract({
+                address: PROXY_ADDRESS,
+                abi: PoAValidatorManagerABI.abi,
+                functionName: 'initialize',
+                args: [settings, address],
+                account: address
+            });
+
+            // Execute with metamask wallet
             const hash = await walletClient.writeContract(request);
 
             // Wait for transaction receipt

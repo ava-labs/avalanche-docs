@@ -122,7 +122,7 @@ Using specific version:
             ITeleporterMessenger teleporter = teleporterRegistry
                 .getTeleporterFromVersion($VERSION);
             require(
-                !pausedTeleporterAddresses[address(teleporter)],
+                pausedTeleporterAddresses[address(teleporter)],
                 "TeleporterRegistryApp: Teleporter sending version paused"
             );
 

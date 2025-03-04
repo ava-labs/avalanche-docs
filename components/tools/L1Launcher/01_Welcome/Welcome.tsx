@@ -12,7 +12,7 @@ export default function Welcome() {
         </p>
 
         <p className="mb-4">
-            If you're looking for a full-service solution that includes hosting, monitoring, maintenance and support of the L1's validators for you and offers many additional features check out <a href="https://avacloud.io/" target="_blank" className="text-blue-500 hover:text-blue-700 underline">AvaCloud</a>. If you're looking to spin up short-lived test environments, check out the <a href="https://github.com/ava-labs/avalanche-starter-kit" target="_blank" className="text-blue-500 hover:text-blue-700 underline">Avalanche Starter Kit</a>.
+            If you're looking for a full-service solution that includes hosting, monitoring, maintenance and support of the L1's validators for you and offers many additional features, consider a <a href="https://build.avax.network/integrations#Blockchain%20as%20a%20Service" target="_blank" className="text-blue-500 hover:text-blue-700 underline">Blockchain as a Service (BaaS)</a> like AvaCloud. AvaCloud provides a free trial where you can experience the power of Avalanche L1. If you're looking to spin up short-lived test environments, check out the <a href="https://github.com/ava-labs/avalanche-starter-kit" target="_blank" className="text-blue-500 hover:text-blue-700 underline">Avalanche Starter Kit</a>.
         </p>
 
         <div className="mx-auto my-6">
