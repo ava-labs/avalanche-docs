@@ -358,15 +358,13 @@ const grantsMenu: LinkItemType = {
       },
       icon: <BriefcaseBusiness />,
       text: 'Codebase',
-      description:
-        'We help transform good ideas into great web3 companies & ambitious builders into extraordinary founders.',
+      description: 'We help transform good ideas into great web3 companies & ambitious builders into extraordinary founders.',
       url: 'https://codebase.avax.network/',
     },
     {
       icon: <Cpu />,
       text: 'InfraBUIDL',
-      description:
-        "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
+      description: "Strengthening Avalanche's infrastructure. Build the foundation for next-gen blockchain applications.",
       url: 'https://www.avax.network/infrabuidl-program',
       menu: {
         className: 'lg:col-start-2',
@@ -375,8 +373,7 @@ const grantsMenu: LinkItemType = {
     {
       icon: <Bot />,
       text: 'InfraBUIDL (AI)',
-      description:
-        'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure.',
+      description: 'Supports projects that fuse artificial intelligence (AI) with decentralized infrastructure.',
       url: 'https://www.avax.network/infrabuidl-ai-program',
       menu: {
         className: 'lg:col-start-2',
@@ -385,8 +382,7 @@ const grantsMenu: LinkItemType = {
     {
       icon: <MessageSquareQuote />,
       text: 'Retro9000',
-      description:
-        'Build innovative projects on Avalanche. Get rewarded for your creativity.',
+      description: "Build innovative projects on Avalanche. Get rewarded for your creativity.",
       url: 'https://retro9000.avax.network/',
       menu: {
         className: 'lg:col-start-3 lg:row-start-1',
@@ -395,8 +391,7 @@ const grantsMenu: LinkItemType = {
     {
       icon: <Snowflake />,
       text: 'Blizzard Fund',
-      description:
-        'A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support.',
+      description: "A $200M+ fund investing in promising Avalanche projects. Fuel your growth with institutional support.",
       url: 'https://www.blizzard.fund/',
       menu: {
         className: 'lg:col-start-3',
@@ -453,8 +448,8 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
       <>
-        {<AvalancheLogo className='size-7' fill='currentColor' />}
-        <span style={{ fontSize: 'large' }}>Builders Hub</span>
+        {<AvalancheLogo className="size-7" fill="currentColor" />}
+        <span style={{ fontSize: "large" }}>Builders Hub</span>
       </>
     ),
   },
