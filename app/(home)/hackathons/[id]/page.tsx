@@ -135,7 +135,7 @@ export default async function HackathonPage({
   if (!hackathon) redirect("/hackathons");
 
   return (
-    <main className="container relative px-2 py-4 lg:py-16 overflow-x-hidden">
+    <main className="container relative px-2 py-4 lg:py-16 hidden">
       <div className="flex gap-4 items-center">
         <Image
           src="/temp/hackathon-icon.png"
