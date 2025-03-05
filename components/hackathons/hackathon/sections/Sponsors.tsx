@@ -1,6 +1,11 @@
-import { Carousel } from "@/components/ui/carousel";
+"use client";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { HackathonHeader } from "@/types/hackathons";
-import Autoplay from 'embla-carousel-autoplay'
+import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 
 function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
@@ -18,18 +23,22 @@ function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
             }),
           ]}
         >
-          {hackathon.content.partners.map((partner, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center border border-gray-400 rounded-lg p-4"
-            >
-              <img
-                src={partner.logo}
-                alt={partner.name}
-                className="w-50 min-h-[120px] object-contain"
-              />
-            </div>
-          ))}
+          <CarouselContent>
+            {hackathon.content.partners.map((partner, index) => (
+              <CarouselItem>
+                <div
+                  key={index}
+                  className="flex flex-col items-center justify-center border border-gray-400 rounded-lg p-4"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="w-50 min-h-[120px] object-contain"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
         </Carousel>
       </div>
     </section>

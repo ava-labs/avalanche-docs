@@ -89,7 +89,7 @@ export default async function HackathonPage({
             <Divider />
             <Community hackathon={hackathon}></Community>
             <Divider />
-            <Speakers hackathon={hackathon}></Speakers>
+            <Speakers hackathon={hackathon}></Speakers> 
           </div>
         </div>
       </div>
