@@ -25,11 +25,8 @@ function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
         >
           <CarouselContent>
             {hackathon.content.partners.map((partner, index) => (
-              <CarouselItem>
-                <div
-                  key={index}
-                  className="flex flex-col items-center justify-center border border-gray-400 rounded-lg p-4"
-                >
+              <CarouselItem key={index}>
+                <div className="flex flex-col items-center justify-center border border-gray-400 rounded-lg p-4">
                   <img
                     src={partner.logo}
                     alt={partner.name}
