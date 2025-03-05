@@ -27,28 +27,28 @@ const formSchema = z.object({
 
 function Formlogin() {
   const [isVerifying, setIsVerifying] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Controla el estado del botón
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const formMethods = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-    },
+    defaultValues: { email: '' },
   });
 
-
+  // Manejo del envío del formulario
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    setEmail(values.email); // Guarda el email para el paso de verificación
+
     const result = await signIn('credentials', {
       email: values.email,
-      redirect: false, // No redirigir automáticamente aquí
+      redirect: false,
     });
 
     setIsLoading(false);
 
     if (result?.error) {
-      if (result.error.includes('OTP enviado')) {
-        setEmail(values.email);
+      if (result.error.includes('OTP SENT')) {
         setIsVerifying(true);
       } else {
         formMethods.setError('email', { message: result.error });
@@ -56,9 +56,7 @@ function Formlogin() {
     }
   }
 
-  if (isVerifying && email) {
-    return <VerifyEmail email={email} onBack={() => setIsVerifying(false)} />;
-  }
+
   return (
     <main>
       
@@ -71,7 +69,13 @@ function Formlogin() {
             height='685'
           />
         </div>
-
+        {
+          isVerifying && email &&
+          <div className='justify-between p-10'>
+          <VerifyEmail email={email} onBack={() => setIsVerifying(false)} />
+          </div>
+        }
+        {!isVerifying &&
         <div className='justify-between p-10'>
           <div className='flex flex-col justify-center items-center gap-2'>
             <div className='text-center '>
@@ -108,7 +112,7 @@ function Formlogin() {
                       variant='destructive'
                       className='w-full bg-red-500 p-2 rounded'
                     >
-                      SEND VERIFICATION CODE
+                     {isLoading ? 'Sending...' : 'SEND VERIFICATION CODE'}
                     </Button>
                   </form>
                 </Form>
@@ -129,7 +133,7 @@ function Formlogin() {
                     <Link
                       href='#'
                       target='_blank'
-                      className='underline  Dark:text-white  Dark:hover:text-gray-300'
+                      className='tracking-normal text-center underline underline-offset-auto decoration-solid  Dark:text-white  Dark:hover:text-gray-300'
                     >
                       Privacy Policy
                     </Link>
@@ -140,6 +144,7 @@ function Formlogin() {
             </div>
           </div>
         </div>
+        }
       </div>
     </main>
   );
