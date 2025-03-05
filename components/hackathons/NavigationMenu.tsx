@@ -22,7 +22,7 @@ export function NavigationMenu({ items }: NavigationMenuProps) {
               <a
                 href={`#${item.ref}`}
                 className={`hover:text-zinc-300 transition-colors cursor-pointer ${
-                  currentPath.includes(item.ref) ? 'font-bold' : ''
+                  currentPath?.includes(item.ref) ? 'font-bold' : ''
                 }`}
               >
                 {item.name}
