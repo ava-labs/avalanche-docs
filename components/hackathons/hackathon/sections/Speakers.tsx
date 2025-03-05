@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { HackathonHeader } from "@/types/hackathons";
 import React from "react";
+import { DynamicIcon } from "lucide-react/dynamic";
 
 function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
   return (
@@ -38,15 +39,9 @@ function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
               <div className="h-40 w-40 bg-zinc-200 rounded-lg"></div>
               <div>
                 <h3 className="text-md font-bold">{speaker.name}</h3>
-                <div className="flex gap-2">
-                  {/* <Image
-              src={speaker.picture}
-              alt={speaker.name}
-              width={40}
-              height={40}
-              className="rounded-full"
-            /> */}
-                  <p className="text-sm font-light">{speaker.category}</p>
+                <div className="flex items-center gap-2">
+                  <DynamicIcon name={speaker.icon as any} size={16} color="#F5F5F9"/>
+                  <p className="text-sm font-light text-zinc-300">{speaker.category}</p>
                 </div>
               </div>
             </div>

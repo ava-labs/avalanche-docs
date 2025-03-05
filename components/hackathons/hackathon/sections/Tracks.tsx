@@ -42,7 +42,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
                 <h2 className="text-xl text-zinc-900 dark:text-zinc-50 font-bold">
                   {track.name}
                 </h2>
-                <DynamicIcon name={"camera"} color={iconColor} size={16} />
+                <DynamicIcon name={track.icon} color={iconColor} size={16} />
               </div>
             </CardTitle>
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
