@@ -17,21 +17,12 @@ export function AnnouncementBanner() {
           <p className="flex-grow">
             Applications for{" "}
             <Link
-              href="https://codebase.avax.network"
+              href="https://lu.ma/avalanchesummitlondonhackathon"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-red-600 transition-colors"
             >
-              Codebase
-            </Link>{" "}
-            &{" "}
-            <Link
-              href="https://innovationhouse.avax.network"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-red-600 transition-colors"
-            >
-              Avalanche Innovation House
+              London Hackathon
             </Link>{" "}
             are now open!
           </p>
