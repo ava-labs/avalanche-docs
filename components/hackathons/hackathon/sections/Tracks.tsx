@@ -8,6 +8,8 @@ import { Crown } from "lucide-react";
 import React from "react";
 import { Card } from "fumadocs-ui/components/card";
 import { CardTitle } from "@/components/ui/card";
+import TrackDialogContent from "../TrackModal";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
   const { resolvedTheme } = useTheme();
@@ -36,19 +38,28 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
           <p className="text-sm text-zinc-900">Total price pool</p>
         </div>
         {hackathon.content.tracks.map((track, index) => (
-          <Card key={index} title="" className="h-44 w-full">
-            <CardTitle>
-              <div className="flex justify-between items-center gap-2">
-                <h2 className="text-xl text-zinc-900 dark:text-zinc-50 font-bold">
-                  {track.name}
-                </h2>
-                <DynamicIcon name={track.icon} color={iconColor} size={16} />
-              </div>
-            </CardTitle>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              {track.description}
-            </p>
-          </Card>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Card key={index} title="" className="h-44 w-full">
+                <CardTitle>
+                  <div className="flex justify-between items-center gap-2">
+                    <h2 className="text-xl text-zinc-900 dark:text-zinc-50 font-bold">
+                      {track.name}
+                    </h2>
+                    <DynamicIcon
+                      name={track.icon as any}
+                      color={iconColor}
+                      size={16}
+                    />
+                  </div>
+                </CardTitle>
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  {track.short_description}
+                </p>
+              </Card>
+            </DialogTrigger>
+            <DialogContent className="bg-zinc-900"><TrackDialogContent track={track} /></DialogContent>
+          </Dialog>
         ))}
       </div>
     </section>
