@@ -57,8 +57,19 @@ export async function getHackathon(id: string) {
     const hackathonContent = hackathon.content as unknown as Hackathon
     return {
         ...hackathon,
-        content: hackathonContent
+        content: hackathonContent,
+        status: getStatus(hackathon.start_date, hackathon.end_date)
     } as HackathonHeader
+}
+
+const getStatus = (start_date: Date, end_date: Date) => {
+
+    if (start_date.getTime() <= Date.now() && end_date.getTime() >= Date.now())
+        return "ONGOING"
+    if (start_date.getTime() > Date.now())
+        return "UPCOMING"
+    else
+        return "ENDED"
 }
 
 export async function getFilteredHackathons(options: GetHackathonsOptions) {
@@ -136,7 +147,7 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
             small_banner: hackathonData.small_banner!,
             content: content
         },
-    });    
+    });
     hackathonData.id = newHackathon.id;
     revalidatePath('/api/hackathons/')
     return hackathonData as HackathonHeader;
