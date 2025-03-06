@@ -58,7 +58,7 @@ export default async function HackathonPage({
         />
         <span className="text-xl font-bold">{hackathon.title}</span>{" "}
         <Button asChild>
-          <Link href={`/hackathon/registration-form`}>Join now</Link>
+          <Link href={`/hackathons/registration-form`}>Join now</Link>
         </Button>
       </div>
 
