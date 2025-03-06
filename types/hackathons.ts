@@ -8,7 +8,6 @@ export type HackathonHeader = {
   location: string
   total_prizes: number
   tags: string[]
-  status: HackathonStatus
   timezone: string
   icon: string
   banner: string

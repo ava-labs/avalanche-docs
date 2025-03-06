@@ -289,6 +289,10 @@ html body[data-scroll-locked] {
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* This is a workaround for this issue: https://github.com/shadcn-ui/ui/issues/4227 */
 html body[data-scroll-locked] {
   overflow: visible !important;
