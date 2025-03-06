@@ -16,7 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
+async function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
   const { resolvedTheme } = useTheme();
   const iconColor = resolvedTheme === "dark" ? "#A7A7B0" : "#6F6F77";
   return (
@@ -43,7 +43,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
           <p className="text-sm text-zinc-900">Total price pool</p>
         </div>
         {hackathon.content.tracks.map((track, index) => (
-          <Dialog>
+          <Dialog key={index}>
             <DialogClose />
             <DialogTrigger asChild>
               <Card key={index} title="" className="h-44 w-full">

@@ -1,10 +1,11 @@
 import { Track } from "@/types/hackathons";
 import { DynamicIcon } from "lucide-react/dynamic";
-
+import defaultMdxComponents from "fumadocs-ui/mdx";
 type Props = {
   track: Track;
 };
 export default function TrackDialogContent({ track }: Props) {
+  // const { body: MDX } = track.description.load();
   return (
     <div className="max-w-lg mx-auto text-white rounded-2xl">
       {/* Header */}
@@ -15,8 +16,8 @@ export default function TrackDialogContent({ track }: Props) {
         <h2 className="text-xl font-semibold">{track.name}</h2>
       </div>
       <span className="block w-full h-[1px] mt-4 bg-red-500"></span>
-      {/* Description */}
-      <p className="mt-4 text-zinc-400">{track.description}</p>
+      <p>{track.description}</p>
+      {/* <MDX components={defaultMdxComponents} /> */}
     </div>
   );
 }
