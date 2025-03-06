@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getHackathon, updateHackathon } from "@/server/services/hackathons";
 import { HackathonHeader } from "@/types/hackathons";
-import { Params } from "next/dist/server/request/params";
 
-export async function GET(req: NextRequest, context: { params: Params }) {
+export async function GET(req: NextRequest, context: any) {
 
   try {
-    const params = await context.params;
-    const id = Array.isArray(params.id) ? params.id[0] : params.id;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
