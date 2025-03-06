@@ -9,7 +9,12 @@ import React from "react";
 import { Card } from "fumadocs-ui/components/card";
 import { CardTitle } from "@/components/ui/card";
 import TrackDialogContent from "../TrackModal";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
   const { resolvedTheme } = useTheme();
@@ -39,6 +44,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
         </div>
         {hackathon.content.tracks.map((track, index) => (
           <Dialog>
+            <DialogClose />
             <DialogTrigger asChild>
               <Card key={index} title="" className="h-44 w-full">
                 <CardTitle>
@@ -58,7 +64,9 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
                 </p>
               </Card>
             </DialogTrigger>
-            <DialogContent className="bg-zinc-900"><TrackDialogContent track={track} /></DialogContent>
+            <DialogContent className="bg-zinc-900">
+              <TrackDialogContent track={track} />
+            </DialogContent>
           </Dialog>
         ))}
       </div>
