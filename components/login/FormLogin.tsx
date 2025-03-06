@@ -37,7 +37,7 @@ function Formlogin() {
   return (
     <main>
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-4  items-center'>
-        <div className='hidden lg:block p-10 w-full h-full bg-zinc-900'>
+        <div className='hidden lg:block p-10 w-full h-full '>
           <Image
             src='/hackaton-platform-images/avalancheLoginLogo.svg'
             alt='logo_avalanche '
@@ -46,7 +46,7 @@ function Formlogin() {
           />
         </div>
 
-        <div className='justify-between p-10 bg-zinc-950'>
+        <div className='justify-between p-10'>
           <div className='flex flex-col justify-center items-center gap-2'>
             <div className='text-center '>
               <h3 className='font-medium text-2xl'>Sign in to your account</h3>
@@ -95,7 +95,7 @@ function Formlogin() {
                     <Link
                       href='#'
                       target='_blank'
-                      className='underline text-white hover:text-gray-300'
+                      className='underline Dark:text-white  Dark:hover:text-gray-300'
                     >
                       Terms of Service
                     </Link>{' '}
@@ -103,7 +103,7 @@ function Formlogin() {
                     <Link
                       href='#'
                       target='_blank'
-                      className='underline text-white hover:text-gray-300'
+                      className='underline  Dark:text-white  Dark:hover:text-gray-300'
                     >
                       Privacy Policy
                     </Link>
