@@ -7,6 +7,8 @@ import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
 import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
 import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
+import { SiGithub } from '@icons-pack/react-simple-icons';
+import UserWrapper from '@/components/login/user-button/UserWrapper';
 
 export const linkItems: LinkItemType[] = [
   {
@@ -364,9 +366,22 @@ const grantsMenu: LinkItemType = {
     },
   ],
 };
+const userMenu: LinkItemType = {
+  type: 'icon',
+  icon: <UserWrapper />,
+  url: '#',
+  text: 'User',
+};
 
+const github: LinkItemType = {
+  type: 'icon',
+  icon: <SiGithub />,
+  url: 'https://github.com/ava-labs/avalanche-docs',
+  text: 'Github',
+  active: 'none',
+};
 export const baseOptions: BaseLayoutProps = {
-  githubUrl: 'https://github.com/ava-labs/avalanche-docs',
+  // githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
     title: (
       <>
@@ -380,6 +395,9 @@ export const baseOptions: BaseLayoutProps = {
     academyMenu,
     toolsMenu,
     grantsMenu,
+    github,
+
     ...linkItems,
+    userMenu
   ],
 };
