@@ -1,20 +1,22 @@
+import { Button } from "@/components/ui/button";
+import { Divider } from "@/components/ui/divider";
 import { HackathonHeader } from "@/types/hackathons";
-import { Button } from "@/components/ui/button"; 
 import { Calendar, CheckCircle, Trophy, Rocket } from "lucide-react"; 
 import React from "react";
 
 function Submission({ hackathon }: { hackathon: HackathonHeader }) {
   return (
-    <section className="py-16 px-6 md:px-20 bg-white dark:bg-zinc-900 text-black dark:text-white">
-      <h2 className="text-4xl font-bold mb-4">Submit Your Project</h2>
-      <p className="text-center text-lg mb-8">
+    <section className="py-16 text-black dark:text-white">
+      <h2 className="text-4xl font-bold mb-8">Submit Your Project</h2>
+      <Divider/>
+      <p className="text-lg my-8">
         Follow the guidelines to submit your hackathon project successfully
       </p>
 
      
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4">
        
-        <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md flex flex-col items-start">
+        <div className="bg-zinc-100 dark:bg-zinc-900 p-6 shadow-md flex flex-col items-start">
           <Calendar className="w-8 h-8 text-gray-600 dark:text-gray-300 mb-4" />
           <h3 className="text-xl font-semibold mb-2">Deadline</h3>
           <p className="text-sm">
@@ -23,7 +25,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
         </div>
 
        
-        <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md flex flex-col items-start">
+        <div className="bg-zinc-100 dark:bg-zinc-800 p-6 shadow-md flex flex-col items-start">
           <CheckCircle className="w-8 h-8 text-gray-600 dark:text-gray-300 mb-4" />
           <h3 className="text-xl font-semibold mb-2">Requirements</h3>
           <p className="text-sm">
@@ -32,7 +34,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
         </div>
 
        
-        <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md flex flex-col items-start">
+        <div className="bg-zinc-100 dark:bg-zinc-900 p-6 shadow-md flex flex-col items-start">
           <Trophy className="w-8 h-8 text-gray-600 dark:text-gray-300 mb-4" />
           <h3 className="text-xl font-semibold mb-2">Evaluation Criteria</h3>
           <p className="text-sm">
@@ -41,7 +43,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
         </div>
 
        
-        <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-xl shadow-md flex flex-col items-start">
+        <div className="bg-zinc-100 dark:bg-zinc-800 p-6 shadow-md flex flex-col items-start">
           <Rocket className="w-8 h-8 text-gray-600 dark:text-gray-300 mb-4" />
           <h3 className="text-xl font-semibold mb-2">Submission Process</h3>
           <p className="text-sm">
@@ -52,7 +54,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
 
       
       <div className="flex justify-center mt-8">
-        <Button className="bg-red-500 text-white hover:bg-red-600 px-6 py-3 rounded-lg text-lg">
+        <Button variant={'secondary'} className="w-1/3 bg-red-500 rounded-md dark:text-zinc-100">
           VIEW SUBMISSION GUIDELINES
         </Button>
       </div>
