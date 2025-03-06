@@ -76,17 +76,11 @@ export default async function HackathonPage({
           </Link>
           <div className="p-8 flex flex-col gap-24">
             <Schedule hackathon={hackathon} />
-            <Divider />
             <Tracks hackathon={hackathon}></Tracks>
-            <Divider />
             <Sponsors hackathon={hackathon}></Sponsors>
-            <Divider />
             <Submission hackathon={hackathon}></Submission>
-            <Divider />
             <Resources hackathon={hackathon}></Resources>
-            <Divider />
             <Community hackathon={hackathon}></Community>
-            <Divider />
             <Speakers hackathon={hackathon}></Speakers> 
           </div>
         </div>
