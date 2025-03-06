@@ -6,7 +6,7 @@ import TwitterProvider from "next-auth/providers/twitter";
 import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 import { JWT } from "next-auth/jwt";
 import { prisma } from "../../prisma/prisma"; 
-import { VerifyOTPResult } from '../../types/verifyOTPResult';
+import { VerifyOTPResult } from '../../types/verifyOtpResult';
 
 
 

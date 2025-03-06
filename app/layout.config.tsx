@@ -75,7 +75,7 @@ export const linkItems: LinkItemType[] = [
   {
     icon: <Cog />,
     text: 'Hackathon',
-    url: '/hackathon',
+    url: '/hackathons',
     active: 'nested-url',
   },
   {
