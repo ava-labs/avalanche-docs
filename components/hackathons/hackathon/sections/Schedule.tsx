@@ -9,6 +9,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const mockActivities: ScheduleActivity[] = [
   {
@@ -137,7 +138,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
       <h2 className="text-5xl font-bold mb-2" id="schedule">
         Schedule
       </h2>
-      <Divider />
+      <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
       <span className="text-zinc-50 text-lg font-medium">
         {getDateRange(mockActivities)}
       </span>

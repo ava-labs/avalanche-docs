@@ -14,6 +14,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 
 function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
   const { resolvedTheme } = useTheme();
@@ -23,7 +24,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
       <h2 className="text-4xl font-bold mb-8" id="tracks">
         Prizes & Tracks
       </h2>
-      <Divider />
+      <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
       <div className="pt-5 pb-5">
         <p>
           Unlock incredible rewards for your innovation and skills in AvaHack
