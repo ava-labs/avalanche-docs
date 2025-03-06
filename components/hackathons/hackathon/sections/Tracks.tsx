@@ -51,7 +51,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
                       {track.name}
                     </h2>
                     <DynamicIcon
-                      name='apple'
+                      name={track.icon as any}
                       color={iconColor}
                       size={16}
                     />
