@@ -63,9 +63,7 @@ export default async function HackathonPage({
       </div>
 
       <div className="flex flex-col mt-8 ">
-        {/* Menu Section */}
         <NavigationMenu items={menuItems} />
-
         <div className="px-8 pt-6 ">
           <Link href={`/hackathons/${id}`}>
             <Image

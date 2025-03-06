@@ -1,10 +1,11 @@
-import Formlogin from '@/components/login/FormLogin';
+
+import FormLoginWrapper from '@/components/login/FormLoginWrapper';
 
 export default function LoginPage(): React.ReactElement {
   return (
     <main className='min-h-[calc(100vh-56px)] flex items-center justify-center lg:min-h-full container relative px-2 py-4 lg:p-14 '>
-      <div className='border border-zinc-800 shadow-sm bg-zinc-950 rounded-md'>
-        <Formlogin />
+      <div className='border  shadow-sm  rounded-md'>
+        <FormLoginWrapper />
       </div>
     </main>
   );

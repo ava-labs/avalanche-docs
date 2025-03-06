@@ -6,7 +6,7 @@ function SocialLoginButton({ name, image, onClick }: { name: string; image: stri
   return (
     <Button
       variant='outline'
-      className='flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg bg-black text-white hover:bg-gray-800 transition'
+      className='flex items-center gap-2 px-4 py-2 border border-gray-600 rounded-lg  Dark:bg-black  Dark:text-white  Dark:hover:bg-gray-800 transition'
       onClick={onClick}
     >
       <Image
@@ -14,6 +14,7 @@ function SocialLoginButton({ name, image, onClick }: { name: string; image: stri
         alt={name}
         width={24}
         height={16}
+        className='filter invert dark:filter-none'
       ></Image>
       <span className='text-sm font-medium'>{name}</span>
     </Button>
