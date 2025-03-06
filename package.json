@@ -62,9 +62,20 @@
     "vitest": "^2.1.9",
     "wagmi": "^2.14.8",
     "zod": "^3.24.1",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "@hookform/resolvers": "^4.1.0",
+    "@next-auth/prisma-adapter": "^1.0.7",
+    "next-auth": "^4.24.11",
+    "react-day-picker": "8.10.1",
+    "react-hook-form": "^7.54.2",
+    "date-fns": "^4.1.0",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
+    "input-otp": "^1.4.2",
+    "mailersend": "^2.3.0"
   },
   "devDependencies": {
+    "dotenv": "^16.4.7",
     "@types/mdx": "^2.0.13",
     "@types/node": "22.10.2",
     "@types/prismjs": "^1.26.5",
