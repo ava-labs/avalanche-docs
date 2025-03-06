@@ -6,7 +6,8 @@ import { Params } from "next/dist/server/request/params";
 export async function GET(req: NextRequest, context: { params: Params }) {
 
   try {
-    const { id } = await context.params;
+    const params = await context.params;
+    const id = Array.isArray(params.id) ? params.id[0] : params.id;
 
     if (!id) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
