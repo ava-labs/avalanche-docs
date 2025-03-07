@@ -1,5 +1,4 @@
 import { Track } from "@/types/hackathons";
-import defaultMdxComponents from "fumadocs-ui/mdx";
 import { DynamicIcon } from "lucide-react/dynamic";
 type Props = {
   track: Track;
