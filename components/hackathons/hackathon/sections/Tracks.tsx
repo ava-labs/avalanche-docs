@@ -45,7 +45,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
         {hackathon.content.tracks.map((track, index) => (
           <Dialog key={index}>
             <DialogTrigger asChild>
-              <Card key={index} title="" className="h-44 w-full">
+              <Card key={index} title="" className="h-44 w-full rounded-xl">
                 <CardTitle>
                   <div className="flex justify-between items-center gap-2">
                     <h2 className="text-xl text-zinc-900 dark:text-zinc-50 font-bold">

@@ -13,7 +13,7 @@ export default function TrackDialogContent({ track }: Props) {
         <div className="p-2 bg-red-500 rounded-full">
           <DynamicIcon name={track.logo as any} size={36} color="#F5F5F9" />
         </div>
-        <h2 className="text-xl font-semibold">{track.name}</h2>
+        <h1 className="text-3xl font-semibold">{track.name}</h1>
       </div>
       <span className="block w-full h-[1px] my-8 bg-red-500"></span>
       <p>{track.description}</p>
