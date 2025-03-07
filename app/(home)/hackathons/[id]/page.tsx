@@ -6,7 +6,6 @@ import {
   getFilteredHackathons,
   getHackathon,
 } from "@/server/services/hackathons";
-import { Divider } from "@/components/ui/divider";
 import Image from "next/image";
 import { NavigationMenu } from "@/components/hackathons/NavigationMenu";
 import Schedule from "@/components/hackathons/hackathon/sections/Schedule";
@@ -16,6 +15,7 @@ import Submission from "@/components/hackathons/hackathon/sections/Submission";
 import Resources from "@/components/hackathons/hackathon/sections/Resources";
 import Community from "@/components/hackathons/hackathon/sections/Community";
 import Speakers from "@/components/hackathons/hackathon/sections/Speakers";
+import OverviewBanner from "@/components/hackathons/hackathon/OverviewBanner";
 export const revalidate = 60;
 export const dynamicParams = true;
 
@@ -65,29 +65,25 @@ export default async function HackathonPage({
       <div className="flex flex-col mt-8 ">
         <NavigationMenu items={menuItems} />
         <div className="px-8 pt-6 ">
-          <Link href={`/hackathons/${id}`}>
+          <div className="relative w-full">
+            <OverviewBanner hackathon={hackathon} id={id} />
             <Image
               src="/builders-hub/hackathons/main_banner_img.png"
               alt="Hackathon background"
               width={1270}
               height={760}
+              className="w-full h-full"
               priority
             />
-          </Link>
+          </div>
           <div className="p-8 flex flex-col gap-24">
             <Schedule hackathon={hackathon} />
-            <Divider />
             <Tracks hackathon={hackathon}></Tracks>
-            <Divider />
             <Sponsors hackathon={hackathon}></Sponsors>
-            <Divider />
             <Submission hackathon={hackathon}></Submission>
-            <Divider />
             <Resources hackathon={hackathon}></Resources>
-            <Divider />
             <Community hackathon={hackathon}></Community>
-            <Divider />
-            <Speakers hackathon={hackathon}></Speakers> 
+            <Speakers hackathon={hackathon}></Speakers>
           </div>
         </div>
       </div>
