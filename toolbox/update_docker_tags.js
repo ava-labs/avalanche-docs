@@ -25,7 +25,7 @@ function fetchTags() {
                     // Find semantic version tags like v0.7.1
                     const semanticTags = results
                         .map(tag => tag.name)
-                        .filter(name => /^v\d+\.\d+\.\d+$/.test(name));
+                        .filter(name => /^v\d+\.\d+\.\d+/.test(name));
 
                     if (semanticTags.length > 0) {
                         resolve(semanticTags[0]);
