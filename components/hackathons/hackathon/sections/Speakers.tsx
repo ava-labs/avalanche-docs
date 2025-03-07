@@ -8,11 +8,11 @@ function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
     <section className="px-4">
       <div className="bg-zinc-900 p-16 flex flex-col gap-4">
         <div className="flex items-center">
-          <div className="flex-1 pr-16">
-            <h2 className="text-4xl font-bold mb-8" id="speakers">
+          <div className="w-[45%] pr-16">
+            <h2 className="text-4xl font-bold mb-8 text-zinc-100" id="speakers">
               Speakers & Judges
             </h2>
-            <p>
+            <p className="text-zinc-100">
               Connect with top industry leaders, judges, and mentors. Learn from
               the best, pitch your ideas, and get expert feedback to refine your
               project!
@@ -23,7 +23,7 @@ function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
             alt="Speakers and judges collage"
             width={300}
             height={300}
-            className="flex-1"
+            className="w-[55%]"
           ></Image>
         </div>
         <div className="flex gap-4">
@@ -38,7 +38,7 @@ function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
             /> */}
               <div className="h-40 w-40 bg-zinc-200 rounded-lg"></div>
               <div>
-                <h3 className="text-md font-bold">{speaker.name}</h3>
+                <h3 className="text-md font-bold text-zinc-100">{speaker.name}</h3>
                 <div className="flex items-center gap-2">
                   <DynamicIcon name={speaker.icon as any} size={16} color="#F5F5F9"/>
                   <p className="text-sm font-light text-zinc-300">{speaker.category}</p>

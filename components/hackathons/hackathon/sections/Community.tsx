@@ -4,54 +4,62 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Crown, User, Handshake } from "lucide-react";
+import { Divider } from "@/components/ui/divider";
+import { DynamicIcon } from "lucide-react/dynamic";
 
 const communityResources = [
   {
     title: "Discord / Telegram",
-    icon: <Crown className="w-6 h-6 stroke-black dark:stroke-white" />,
+    icon: "crown",
     link: "https://discord.com/invite/avax",
   },
   {
     title: "Mentorship Program",
-    icon: <User className="w-6 h-6 stroke-black dark:stroke-white" />,
+    icon: "circle-user",
     link: "https://www.avax.network/blog/avalanche-launches-ambassador-dao",
   },
   {
     title: "Networking Opportunities",
-    icon: <Handshake className="w-6 h-6 stroke-black dark:stroke-white" />,
+    icon: "handshake",
     link: "https://www.avax.network/",
   },
 ];
 
 function Community({ hackathon }: { hackathon: HackathonHeader }) {
   return (
-    <section className="text-black dark:text-white bg-white dark:bg-black py-12 px-6">
+    <section className="text-black dark:text-white py-12">
       <h2 className="text-4xl font-bold mb-6">Community</h2>
-      <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 text-center">
-        Connect with fellow hackers, mentors, and experts. Get real-time support, network with industry leaders, 
-        and make the most of your hackathon experience.
+      <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
+      <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
+        Connect with fellow hackers, mentors, and experts. Get real-time
+        support, network with industry leaders, and make the most of your
+        hackathon experience.
       </p>
-      <Separator className="mb-6 bg-gray-200 dark:bg-gray-700" />
 
-      
       <div className="flex flex-col md:flex-row justify-center gap-4">
         {communityResources.map((item, index) => (
-          <a 
-            key={index} 
-            href={item.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            key={index}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-[350px] h-[80px]"
           >
             <Card
               className="border border-gray-300 dark:border-gray-800 hover:border-gray-500 dark:hover:border-gray-600 transition 
                          flex items-center justify-center gap-3 w-full h-full 
-                         rounded-lg px-6 py-4 bg-gray-100 dark:bg-[#111] hover:bg-gray-200 dark:hover:bg-gray-900"
+                         rounded-lg px-6 py-4 "
             >
-              <div className="w-10 h-10 flex items-center justify-center bg-[#FF394A] rounded-full">
-                {item.icon}
+              <div className="p-3 flex items-center justify-center bg-[#FF394A] rounded-full text-zinc-50">
+                <DynamicIcon
+                  name={item.icon as any}
+                  size={27}
+                  color="#F5F5F9"
+                />
               </div>
-              <h3 className="text-black dark:text-white text-lg font-semibold">{item.title}</h3>
+              <h3 className="text-black dark:text-white text-lg font-semibold">
+                {item.title}
+              </h3>
             </Card>
           </a>
         ))}
@@ -59,11 +67,16 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
 
       {/* Botón de acción */}
       <div className="mt-8 flex justify-center">
-        <Button 
+        <Button
           asChild
-          className="bg-red-500 dark:bg-red-600 hover:bg-red-600 dark:hover:bg-red-700 text-white text-lg px-6 py-3"
+          variant={"secondary"}
+          className="w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
-          <a href="https://example.com/community" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://example.com/community"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             EXPLORE COMMUNITY & NETWORKING
           </a>
         </Button>
