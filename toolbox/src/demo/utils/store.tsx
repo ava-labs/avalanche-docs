@@ -27,6 +27,7 @@ export const initialState = {
     proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
     walletEVMAddress: "",
     genesisData: "",
+    teleporterRegistryAddress: "",
     gasLimit: 12000000,
     targetBlockRate: 2,
 }
@@ -67,6 +68,7 @@ export const useExampleStore = create(
                 window.location.reload();
             },
             setEvmChainId: (evmChainId: number) => set({ evmChainId }),
+            setTeleporterRegistryAddress: (address: string) => set({ teleporterRegistryAddress: address }),
         })),
         {
             name: 'example-storage',

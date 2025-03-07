@@ -66,10 +66,10 @@ export default function Hero() {
 
               <div className="mt-8 flex flex-col gap-4 items-center lg:items-start lg:flex-row">
                 <Link
-                  href="/docs/avalanche-l1s"
+                  href="/academy/avalanche-fundamentals"
                   className="w-full md:w-auto hover:shadow-sm dark:border-stone-100 dark:hover:shadow-sm border-2 border-black bg-white px-4 py-1.5 text-sm uppercase text-black shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,0,0),5px_5px_0px_0px_rgba(0,0,0)] transition duration-200 md:px-8 dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,255),3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)]"
                 >
-                  Get Started
+                  Start Learning
                 </Link>
                 <Link 
                   href="/academy" 
@@ -81,7 +81,7 @@ export default function Hero() {
                   </span>
                   <div className="relative flex space-x-2 items-center justify-center z-10 rounded-none bg-zinc-950 py-2 px-4 ring-1 ring-white/10">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-                    <span>Learn With Academy</span>
+                    <span>Explore all Courses</span>
                   </div>
                   <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-stone-800/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
                 </Link>

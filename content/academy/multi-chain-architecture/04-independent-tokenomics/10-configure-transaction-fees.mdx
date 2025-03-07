@@ -21,7 +21,7 @@ Let's assume we are creating an enterprise blockchain with very few computationa
 
 - Allow very computationally expensive operations. The gas limit of the C-Chain is set to 8,000,000 gwei. Let's pick a number higher than that.
 - Target producing one block every 10 seconds
-- The same minimum transaction base fee as the C-Chain (25000000000wei = 25 gwei)
+- A minimum transaction base fee of 25000000000 wei (25 gwei)
 - Only slowly adjust the fee. The base fee change denominator of the C-Chain is 36.
 - Have every block cost at least 500,000 gwei and at most 1,000,000 gwei
 - Adjust the block gas cost same as the C-Chain (value 200000)
