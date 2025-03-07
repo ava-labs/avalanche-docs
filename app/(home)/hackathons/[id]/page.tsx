@@ -66,7 +66,7 @@ export default async function HackathonPage({
         <NavigationMenu items={menuItems} />
         <div className="px-8 pt-6 ">
           <div className="relative w-full">
-            <OverviewBanner hackathon={hackathon} />
+            <OverviewBanner hackathon={hackathon} id={id} />
             <Image
               src="/builders-hub/hackathons/main_banner_img.png"
               alt="Hackathon background"

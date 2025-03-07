@@ -3,18 +3,20 @@ import { Button } from "@/components/ui/button";
 import { HackathonHeader } from "@/types/hackathons";
 import { format } from "date-fns";
 import { Calendar, MapPin, Users } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 type Props = {
+  id: string
   hackathon: HackathonHeader;
 };
 
-export default function OverviewBanner({ hackathon }: Props) {
+export default function OverviewBanner({ hackathon, id }: Props) {
   return (
     <div className="z-10 h-full absolute flex flex-col justify-end bottom-20 left-[10%]">
-      <h1 className="text-6xl font-bold mb-2">AVAHACK 2025</h1>
+      <h1 className="text-6xl text-zinc-50 font-bold mb-2">AVAHACK 2025</h1>
       <div className="w-[70%]">
-        <p className="text-base">
+        <p className="text-base text-zinc-50">
           Your Ideas, Your Code, The Next Big Thing. <br /> Join the future of
           Web3 at AvaHack 2025!
         </p>
@@ -28,7 +30,7 @@ export default function OverviewBanner({ hackathon }: Props) {
           variant={"secondary"}
           className="w-full mb-20 bg-red-500 rounded-md text-zinc-100"
         >
-          JOIN NOW
+          <Link href={`/hackathons/${id}`}>Join now</Link>
         </Button>
         <div className="flex flex-col w-[90%]">
           <div className="flex flex-col gap-2 w-[80%]">
