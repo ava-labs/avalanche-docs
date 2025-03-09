@@ -30,6 +30,7 @@ export const viewport: Viewport = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+      <meta name="algolia-site-verification"  content="CF9DB4A2FFAFFA68" />
       <Provider>
         <body className="flex min-h-screen flex-col">
           {children}
