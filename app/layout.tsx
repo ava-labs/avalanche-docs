@@ -11,6 +11,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Chatbot from "@/components/ui/chatbot"
 import { PrivacyPolicyBox } from "@/components/privacy-policy"
+import { SearchRootProvider } from './searchRootProvider';
 
 export const metadata = createMetadata({
   title: {
@@ -33,7 +34,9 @@ export default function Layout({ children }: { children: ReactNode }) {
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <PHProvider>
         <body className="flex min-h-screen flex-col">
-          <RootProvider>{children}</RootProvider>
+          <SearchRootProvider>
+            {children}
+          </SearchRootProvider>
           <Analytics />
           <SpeedInsights />
           <Chatbot />
