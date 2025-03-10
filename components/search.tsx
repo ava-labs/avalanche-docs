@@ -13,7 +13,7 @@ export default function SearchDialog(props: SharedProps) {
 
     const handleSearchButtonClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (target.closest('button[data-search-full]')) {
+      if (target.closest('button[data-search-full]') || target.closest('button[data-search]')) {
         event.preventDefault();
         toggleSearch();
       }
