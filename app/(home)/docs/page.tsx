@@ -20,9 +20,6 @@ export default function HomePage(): React.ReactElement {
   return (
     <>
       <main className="container relative max-w-[1100px] px-2 py-4 lg:py-16">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Documentation</h1>
-        </div>
         <div>
           <div className="relative">
             <Hero />
@@ -88,11 +85,8 @@ function Highlight({
 function Hero(): React.ReactElement {
   return (
     <div className="flex flex-col justify-center items-center px-4 mb-16">
-      <h2 className="font-display text-3xl tracking-tight sm:text-5xl text-center">
-        Avalanche Docs
-      </h2>
       <p className="mt-4 text-lg tracking-tight text-zinc-400 text-center">
-        Full-Stack Avalanche Development, All in One Place
+        Full-Stack Avalanche Development
       </p>
     </div>
   );

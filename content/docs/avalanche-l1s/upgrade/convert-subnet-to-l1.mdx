@@ -1,0 +1,191 @@
+---
+title: Convert Subnet to L1
+description: Learn how to convert a Avalanche Subnet to an Avalanche L1.
+---
+
+![Subnet to L1 Conversion](/common-images/multi-chain-architecture/etna-upgrade/subnetToL1.png)
+
+With the Etna upgrade ([ACP-77](https://github.com/avalanche-foundation/ACPs/blob/main/ACPs/77-reinventing-subnets/README.md)), Avalanche now supports sovereign validator sets known as L1s.
+
+## Prerequisites
+
+- A running Avalanche Subnet
+- [Avalanche-CLI](/docs/tooling/get-avalanche-cli) installed
+
+## Steps
+1. Deploy ValidatorManager & Proxy + ProxyAdmin contracts on the Subnet
+2. Bootstrap new L1 nodes
+3. Create `bootstrap.json` file for the new L1
+4. Convert the Subnet to an L1
+5. Initialize Validator Set on the new L1
+### Deploy ValidatorManager contracts on the Subnet
+If you are unfamilar with the ValidatorManager contracts, please refer to the [ValidatorManager documentation](https://github.com/ava-labs/icm-contracts/tree/main/contracts/validator-manager#readme).
+
+Clone the icm-contracts repo:
+```bash
+git clone https://github.com/ava-labs/icm-contracts.git
+```
+
+Move to the `contracts/validator-manager` directory:
+```bash
+cd icm-contracts/contracts/validator-manager
+```
+
+Create a new script file:
+```bash
+mkdir scripts && touch scripts/DeployValidatorManager.s.sol
+```
+
+Add the following content to the file:
+```solidity
+// SPDX-License-Identifier: Ecosystem
+pragma solidity 0.8.25;
+
+import {ICMInitializable} from "@utilities/ICMInitializable.sol";
+import {Script} from "forge-std/Script.sol";
+import {ValidatorManager} from "../ValidatorManager.sol";
+import {console} from "forge-std/console.sol";
+import {TransparentUpgradeableProxy} from "@openzeppelin/contracts@5.0.2/proxy/transparent/TransparentUpgradeableProxy.sol";
+import {ITransparentUpgradeableProxy} from "@openzeppelin/contracts@5.0.2/proxy/transparent/TransparentUpgradeableProxy.sol";
+
+import {ICMInitializable} from "@utilities/ICMInitializable.sol";
+import {ITransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
+import {ProxyAdmin} from "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
+import {Script} from "forge-std/Script.sol";
+import {
+    ValidatorManagerSettings, ValidatorManager
+} from "../ValidatorManager.sol";
+import {console} from "forge-std/console.sol";
+
+
+/**
+ * @notice Script to deploy and initialize ValidatorManager with a new proxy
+ * 
+ * @dev To run this script:
+ * 1. Update the initialization parameters below
+ * 2. Run the script with forge:
+ *    ```bash
+ *    forge script contracts/validator-manager/scripts/DeployValidatorManager.s.sol --slow --optimize --optimizer-runs 200 -vvv --rpc-url <your-rpc-url> --private-key <your-private-key>
+ *    ```
+ * 3. Add --broadcast flag to broadcast the transaction
+ */
+contract DeployValidatorManager is Script {
+    // Example initialization parameters - adjust as needed
+    address private constant _ADMIN_ADDRESS = address(0xd68F802fD0B6f56524F379805DD8FcC152DB9d5c); // Replace with L1 owner address (e.g. multisig or EOA)
+    bytes32 private constant _SUBNET_ID = bytes32(hex"55437b606820ab92499f5f44a72d9a17c777eec4e103fec17d48bb0283197cf2"); // Convert Subnet ID using https://avatools.io
+    uint64 private constant _CHURN_PERIOD = 1 hours;
+    uint8 private constant _MAX_CHURN_PERCENTAGE = 20;
+
+    function run() external {
+        // Start broadcasting transactions
+        vm.startBroadcast();
+
+        // Deploy new implementation
+        ValidatorManager implementation = new ValidatorManager(ICMInitializable.Disallowed);
+        console.log("ValidatorManager implementation deployed at:", address(implementation));
+        
+        // Prepare initialization data
+        ValidatorManagerSettings memory settings = ValidatorManagerSettings({
+            admin: _ADMIN_ADDRESS,
+            subnetID: _SUBNET_ID,
+            churnPeriodSeconds: _CHURN_PERIOD,
+            maximumChurnPercentage: _MAX_CHURN_PERCENTAGE
+        });
+
+        // Encode the initialization call
+        bytes memory initData = abi.encodeWithSelector(
+            ValidatorManager.initialize.selector,
+            settings
+        );
+
+        // Deploy proxy with initialization
+        TransparentUpgradeableProxy proxy = new TransparentUpgradeableProxy(
+            address(implementation),
+            msg.sender,
+            initData
+        );
+        console.log("Deployed and initialized proxy at:", address(proxy));
+
+        bytes32 ADMIN_SLOT = 0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103;
+        address proxyAdmin = address(uint160(uint256(vm.load(address(proxy), ADMIN_SLOT))));
+        console.log("ProxyAdmin contract deployed at:", proxyAdmin);
+
+        vm.stopBroadcast();
+    }
+}
+```
+Deploy the ValidatorManager contracts:
+```bash
+forge script scripts/DeployValidatorManager.s.sol --slow --optimize --optimizer-runs 200 -vvv --rpc-url <your-rpc-url> --private-key <your-private-key> --broadcast
+```
+
+```bash
+  Deployed implementation at: 0x35489d6880593f0c1F4D683B681912097f78D776
+  Deployed and initialized proxy at: 0x33B9785E20ec582d5009965FB3346F1716e8A423
+  ProxyAdmin contract deployed at: 0xc978Fa17FC3a5DE2559258E01cF02edD188c60d9 
+```
+
+### Bootstrap new L1 nodes
+Run avalanchego with the following flags on each new L1 node:
+```bash
+avalanchego --partial-sync-primary-network=true --network-id=<NETWORK_ID> --track-subnets=<SUBNET_ID>
+```
+<Callout>
+`<NETWORK_ID>` is the ID of the network you want to connect to:
+- 5 for Fuji testnet 
+- 1 for Mainnet
+
+`<SUBNET_ID>` is the ID of the subnet you want to convert to an L1.
+</Callout>
+
+### Create `bootstrap.json` file for the new L1
+
+Once the nodes are synced, run the following command on each new L1 node to collect the `nodeID`, `publicKey` and `proofOfPossession`:
+```bash
+curl -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.getNodeID"}' -H "content-type:application/json;" 127.0.0.1:9650/ext/info
+```
+
+Create a `bootstrap.json` file following the format below, using your **NEW** L1 node's `nodeID`, `publicKey` and `proofOfPossession`:
+```json
+[
+  {
+    "NodeID": "NodeID-BeGPt1HpBiVtbr3JNihvTtHJQnMmeXyKi",
+    "Weight": 17000000000, // initial weight of the validator
+    "Balance": 5000000000, // initial AVAX balance of the validator
+    "BLSPublicKey": "0xaf7085c9a2185512cd634e54a10df64d9dd6c776000e7b07277a4ac42d708c1fd74df636ddb1e7f60fd62ff13451810b",
+    "BLSProofOfPossession": "0x8161de19c3b157908b389ab105ab9682300fe00d6b9c5329710eb644b3d1aeb37a9db52ab3fa39d6e2b44efa00f7ee8414e17f82befc5a514d3c03ad071db5ddc6e3192138a42f5bd5b2194971cf54fdf8caa836c3f8e020941c2f3a47108a4d",
+    "ChangeOwnerAddr": "P-fuji1x5crhu8d9lsmsc26snpn4ct43tcchhyn0930lj" // where remaining AVAX will be sent on validator removal
+  },
+  {
+    "NodeID": "NodeID-3dDXMUfK2bhk8aBrc2LLk4SV4bcxYqyxS",
+    "Weight": 14000000000, // initial weight of the validator
+    "Balance": 5000000000, // initial AVAX balance of the validator
+    "BLSPublicKey": "0xa88fd1a41b4c63b89d06c0df3833225011cd097cd00967b9ca7d38ff3ce9a992a0f27f3a96c73f832628856ad9f9b0f8",
+    "BLSProofOfPossession": "0x895e6050ef1637518debd690526d1e18c83bfddc5b106864e1048dc87e6e863db155ad2981e9024d39849add293e5f2506407f68ba83817983f7a694c1e2b1afa2a7f704f9adc13c31202056b356ab9d347ff354b97511ea2236802ea2b46607",
+    "ChangeOwnerAddr": "P-fuji1x5crhu8d9lsmsc26snpn4ct43tcchhyn0930lj" // where remaining AVAX will be sent on validator removal
+  }
+]
+```
+
+
+### Convert the Subnet to an L1
+```bash
+avalanche blockchain convert <BLOCKCHAIN_NAME> --convert-only=true --bootstrap-filepath=./bootstrap.json --validator-manager-address=0x33B9785E20ec582d5009965FB3346F1716e8A423
+```
+
+
+### Initialize Validator Set on the new L1
+
+Collect signatures for the `convertSubnetToL1` P-Chain transaction.
+
+
+`initializeValidatorSet` on the new L1's ValidatorManager contract:
+```bash
+avalanche contract initializeValidatorSet <BLOCKCHAIN_NAME> --validator-manager-address=0x33B9785E20ec582d5009965FB3346F1716e8A423
+```
+
+
+## Next Steps
+
+- [Upgrade from PoA to PoS](/docs/avalanche-l1s/upgrade/upgrade-from-poa-to-pos)
+- [Adding and Removing Validators](/docs/avalanche-l1s/upgrade/adding-and-removing-validators)
