@@ -1,7 +1,7 @@
 import './global.css';
 import 'katex/dist/katex.css';
 import { RootProvider } from 'fumadocs-ui/provider';
-import { PHProvider } from './providers'
+import { Provider } from './providers'
 import type { Viewport } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
@@ -31,9 +31,8 @@ export const viewport: Viewport = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
-      <PHProvider>
         <body className="flex min-h-screen flex-col">
-          <RootProvider>{children}</RootProvider>
+          <Provider>{children}</Provider>
           <Analytics />
           <SpeedInsights />
           <Chatbot />
@@ -41,7 +40,6 @@ export default function Layout({ children }: { children: ReactNode }) {
             <PrivacyPolicyBox />
           </div>
         </body>
-      </PHProvider>
     </html>
   );
 }
