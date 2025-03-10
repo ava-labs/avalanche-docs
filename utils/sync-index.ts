@@ -3,7 +3,7 @@ import * as fs from 'node:fs/promises';
 import { CloudManager } from '@oramacloud/client';
  
 export async function updateSearchIndexes() {
-  const apiKey = "Q2OlqJIgzDY8HXo1IHE0jboZjWQAs8QY";
+  const apiKey = "random-api-key";
  
   if (!apiKey) {
     console.log('no api key for Orama found, skipping');
