@@ -47,7 +47,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
               </span>
             </div>
           </div>
-          <div className="flex justify-center gap-4 mt-4">
+          <div className="flex justify-around gap-2 mt-4">
             {hackathon.tags.map((tag, index) => (
               <Badge key={index} className="bg-zinc-800 text-zinc-50 px-3 py-1 text-sm rounded-full">
                 {tag}

@@ -13,7 +13,7 @@ export function SearchEventInput() {
         id="search"
         type="search"
         placeholder="Search by name, level, location..."
-        className="rounded-md bg-transparent pl-8 border-zinc-800 w-[270px] h-10"
+        className="rounded-md bg-transparent pl-8 dark:border-zinc-800 border-zinc-300 w-[270px] h-10"
       />
     </div>
   );

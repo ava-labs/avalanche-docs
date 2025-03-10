@@ -1,15 +1,18 @@
+'use client'
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Divider } from "@/components/ui/divider";
 import { SearchEventInput } from "@/components/ui/search-event-input";
 import { TimeZoneSelect } from "@/components/ui/timezone-select";
 import { HackathonHeader, ScheduleActivity } from "@/types/hackathons";
-import { CalendarPlus2, Hourglass, MapPin } from "lucide-react";
+import { CalendarPlus2, MapPin } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import DeadLine from "../DeadLine";
+import { useTheme } from "next-themes";
 
 const mockActivities: ScheduleActivity[] = [
   {
@@ -132,9 +135,14 @@ const mockActivities: ScheduleActivity[] = [
 ];
 
 function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
+  const { resolvedTheme } = useTheme();
+  const calendarColor = resolvedTheme == "dark" ? "#F5F5F9" : "#161617";
   return (
     <section className="flex flex-col gap-6">
-      <h2 className="text-5xl font-bold mb-2 md:text-4xl sm:text-3xl" id="schedule">
+      <h2
+        className="text-5xl font-bold mb-2 md:text-4xl sm:text-3xl"
+        id="schedule"
+      >
         Schedule
       </h2>
       <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
@@ -146,36 +154,10 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
           <SearchEventInput />
           <TimeZoneSelect />
         </div>
-        <div className="inline-flex items-center gap-3 rounded-md border-2 border-red-500 bg-black px-3 py-2 text-zinc-50 h-10 justify-center w-fit md:justify-start whitespace-nowrap">
-          <Hourglass className="h-5 w-5" color="#F5F5F9" />
-          <div className="flex flex-col">
-            <span className="whitespace-nowrap">
-              {(() => {
-                const deadline = new Date(
-                  hackathon.content.registration_deadline
-                );
-                const now = new Date();
-                const diffMs = deadline.getTime() - now.getTime();
-                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                const diffHours = Math.floor(
-                  (diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                );
-                const diffMinutes = Math.floor(
-                  (diffMs % (1000 * 60 * 60)) / (1000 * 60)
-                );
-
-                if (diffDays > 0) {
-                  return `${diffDays} days to deadline`;
-                } else {
-                  return `${diffHours}h ${diffMinutes}m to deadline`;
-                }
-              })()}
-            </span>
-          </div>
-        </div>
+        <DeadLine deadline={hackathon.content.registration_deadline} />
       </div>
       <Divider />
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">  
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
         {Object.entries(groupActivitiesByDay(mockActivities))
           .slice(0, 2)
           .map(([date, activities], index) => (
@@ -189,7 +171,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
 
               {activities.map((activity, index) => (
                 <div key={index} className="flex flex-row gap-3">
-                  <Card className="bg-zinc-900 border-red-500 px-2 sm:px-4">
+                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 px-2 sm:px-4">
                     <CardHeader className="px-2 sm:px-6">
                       <div className="border border-red-500 rounded-full text-sm font-medium text-center">
                         Live now
@@ -217,18 +199,18 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                       </div>
                     </CardContent>
                   </Card>
-                  <Card className="bg-zinc-900 border-red-500 flex-1">
+                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 flex-1">
                     <CardHeader className="px-3 sm:px-6">
                       <div className="flex flex-col sm:flex-row justify-between gap-2">
                         <div>
                           <CardTitle className="text-red-500 text-base sm:text-lg">
                             {activity.name}
                           </CardTitle>
-                          <span className="text-zinc-400 text-xs sm:text-sm font-normal">
+                          <span className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal">
                             {activity.description}
                           </span>
                         </div>
-                        <Badge className="bg-zinc-50 text-zinc-900 py-0.5 px-2.5 text-xs w-fit h-fit">
+                        <Badge className="dark:bg-zinc-50 bg-zinc-900 dark:text-zinc-900 text-zinc-50 py-0.5 px-2.5 text-xs w-fit h-fit">
                           {activity.category}
                         </Badge>
                       </div>
@@ -243,9 +225,11 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                             height={40}
                           />
                           <div className="flex flex-col">
-                            <span className="text-sm sm:text-base">{activity.host_name}</span>
+                            <span className="text-sm sm:text-base">
+                              {activity.host_name}
+                            </span>
                             <Link
-                              className="text-zinc-400 text-xs sm:text-sm font-normal"
+                              className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
                               href={`https://x.com${activity.host_media}`}
                             >
                               @{activity.host_media}
@@ -254,14 +238,21 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                         </div>
                         <div className="flex flex-row gap-4 flex-1 justify-between mt-3 sm:mt-0">
                           <div className="flex flex-row items-center gap-2">
-                            <MapPin color="#8F8F99" className="w-4 h-4 sm:w-5 sm:h-5" />
-                            <span className="text-zinc-50 text-xs sm:text-sm font-medium">
+                            <MapPin
+                              color="#8F8F99"
+                              className="w-4 h-4 sm:w-5 sm:h-5"
+                            />
+                            <span className="dark:text-zinc-50 zinc-900 text-xs sm:text-sm font-medium">
                               {activity.location}
                             </span>
                           </div>
-                          <Button variant="secondary" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                          <Button
+                            variant="secondary"
+                            size="icon"
+                            className="bg-zinc-100 dark:bg-zinc-800 h-8 w-8 sm:h-10 sm:w-10"
+                          >
                             <CalendarPlus2
-                              color="#F5F5F9"
+                              color={calendarColor}
                               className="w-3 h-3 sm:w-4 sm:h-4"
                             />
                           </Button>
