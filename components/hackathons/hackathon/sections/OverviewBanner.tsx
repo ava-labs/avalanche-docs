@@ -13,7 +13,7 @@ type Props = {
 
 export default function OverviewBanner({ hackathon, id }: Props) {
   return (
-    <div className="z-10 h-full absolute flex flex-col justify-end bottom-20 left-[10%]">
+    <div className="z-10 h-full absolute flex flex-col justify-end bottom-20 left-[10%]  mb-[-30px]">
       <h1 className="text-6xl text-zinc-50 font-bold mb-2">AVAHACK 2025</h1>
       <div className="w-[70%]">
         <p className="text-base text-zinc-50">
