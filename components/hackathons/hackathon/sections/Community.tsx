@@ -3,8 +3,6 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Crown, User, Handshake } from "lucide-react";
-import { Divider } from "@/components/ui/divider";
 import { DynamicIcon } from "lucide-react/dynamic";
 
 const communityResources = [
