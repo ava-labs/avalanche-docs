@@ -65,7 +65,7 @@ const TopUpComponent = ({
     return (
         <div className="space-y-4">
             <h3 className="font-semibold">Top Up Deployer Address</h3>
-            <p>The deployer address needs at least 0.1 COIN to send the transaction.</p>
+            <p>The deployer address needs at least {formatEther(MINIMUM_BALANCE)} native coins to send the transaction.</p>
             <div className="flex items-center gap-2">
                 <input
                     type="text"
