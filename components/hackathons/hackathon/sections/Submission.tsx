@@ -12,7 +12,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
   const { resolvedTheme } = useTheme();
   return (
     <section className="py-16 text-black dark:text-white">
-      <h2 className="text-4xl font-bold">Submit Your Project</h2>
+      <h2 className="text-4xl font-bold"  id='submission'>Submit Your Project</h2>
       <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
       <p className="text-lg mb-8">
         Follow the guidelines to submit your hackathon project successfully

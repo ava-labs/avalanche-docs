@@ -57,8 +57,12 @@ export default async function HackathonPage({
           height={40}
         />
         <span className="text-xl font-bold">{hackathon.title}</span>{" "}
-        <Button asChild>
-          <Link href={`/hackathons/registration-form`}>Join now</Link>
+        <Button
+          asChild
+          variant={"secondary"}
+          className="w-1/3 bg-red-500 rounded-md text-zinc-100"
+        >
+          <Link href={`/hackathons/${id}`}>Join now</Link>
         </Button>
       </div>
       <div className="p-4 flex flex-col gap-24">
