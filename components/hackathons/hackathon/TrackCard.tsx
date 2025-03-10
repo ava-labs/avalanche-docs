@@ -14,7 +14,7 @@ export default function TrackCard({track}: Props) {
   const { resolvedTheme } = useTheme();
   const iconColor = resolvedTheme === "dark" ? "#A7A7B0" : "#6F6F77";
   return (
-    <Card className="min-w-72 min-h-40 bg-zinc-50 dark:bg-zinc-900 cursor-pointer">
+    <Card className="flex-1 min-h-40 bg-zinc-50 dark:bg-zinc-900 cursor-pointer">
       <CardHeader>
         <CardTitle>
           <div className="flex justify-between items-center gap-2">

@@ -26,9 +26,9 @@ function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
             className="w-[55%]"
           ></Image>
         </div>
-        <div className="flex gap-4">
-          {hackathon.content.speakers.map((speaker) => (
-            <div key={speaker.name} className="flex flex-col gap-4 mt-4">
+        <div className="flex gap-4 flex-wrap">
+          {hackathon.content.speakers.map((speaker, index) => (
+            <div key={index} className="flex flex-col gap-4 mt-4">
               <div className="h-40 w-40 bg-zinc-200 rounded-lg"></div>
               <div>
                 <h3 className="text-md font-bold text-zinc-100">{speaker.name}</h3>
