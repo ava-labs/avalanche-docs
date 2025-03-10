@@ -10,9 +10,11 @@ interface GithubEmbedProps {
     maxHeight?: number;
 }
 
-export function GithubEmbed({ filePath, user, repo, branch = "main", maxHeight }: GithubEmbedProps) {
+export function GithubEmbed({ filePath, user, repo, maxHeight }: GithubEmbedProps) {
     const [code, setCode] = useState<string>('');
     const [error, setError] = useState<string>('');
+
+    const branch = import.meta.env.VITE_GIT_BRANCH_NAME || "master"
 
     const lang = filePath.split('.').pop()?.toLowerCase() || 'unknown';
 
