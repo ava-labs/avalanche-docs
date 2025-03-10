@@ -22,6 +22,7 @@ import TeleporterMessenger from "./examples/ICM/TeleporterMessenger";
 import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
 import CreateL1 from "./examples/Docs/CreateL1";
 import TeleporterRegistry from "./examples/ICM/TeleporterRegistry";
+import PerformanceMonitor from "./examples/Nodes/PerformanceMonitor";
 type ComponentType = {
     id: string;
     label: string;
@@ -138,6 +139,13 @@ const componentGroups: Record<string, ComponentType[]> = {
             component: RPCUrlForChain,
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
             skipWalletConnection: true,
+        },
+        {
+            id: "performanceMonitor",
+            label: "Performance Monitor",
+            component: PerformanceMonitor,
+            fileNames: ["toolbox/src/demo/examples/Nodes/PerformanceMonitor.tsx"],
+            skipWalletConnection: true,
         }
     ],
     "ICM": [
@@ -237,7 +245,7 @@ export default function ToolboxApp() {
                                 key={index}
                                 user="ava-labs"
                                 repo="avalanche-docs"
-                                branch="l1-toolbox" // TODO: set automatically or at least change to main
+                                branch="master" // TODO: set automatically or at least change to main
                                 filePath={fileName}
                                 maxHeight={600}
                             />
