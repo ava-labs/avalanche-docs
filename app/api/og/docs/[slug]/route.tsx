@@ -52,7 +52,7 @@ function OG({
         backgroundColor: '#fafafa',
         overflow: 'hidden',
         alignItems: 'center',
-        backgroundImage: "url('http://build.avax.network/og.png')",
+        backgroundImage: "url('http://builders-hub-git-og-ava-labs.vercel.app/og.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
