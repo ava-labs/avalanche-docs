@@ -24,7 +24,7 @@ const serializeValue = (value: any): any => {
     return value;
 };
 
-export const ReadContract = () => {
+export default function ReadContract() {
     const { showBoundary } = useErrorBoundary();
     const { proxyAddress, setProxyAddress } = useExampleStore();
     const [viewData, setViewData] = useState<ViewData>({});

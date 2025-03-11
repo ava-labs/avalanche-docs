@@ -7,7 +7,7 @@ import {
 import { pChainAddrFromPubKey } from "./pChainAddrFromPubKey";
 
 
-export const GetPChainAddress = () => {
+export default function GetPChainAddress() {
   const { networkID, setNetworkID } = useExampleStore();
   const [xpPublicKey, setXpPublicKey] = useState<string>("");
   const [pChainAddress, setPChainAddress] = useState<string>("");

@@ -6,7 +6,7 @@ import { Success } from "../../ui/Success";
 import { createWalletClient, custom, createPublicClient } from 'viem';
 import ProxyAdminABI from "../../../../contracts/openzeppelin-4.9/compiled/ProxyAdmin.json";
 
-export const UpgradeProxy = () => {
+export default function UpgradeProxy() {
     const { showBoundary } = useErrorBoundary();
     const {
         walletChainId,

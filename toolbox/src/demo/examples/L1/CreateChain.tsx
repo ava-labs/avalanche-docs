@@ -8,7 +8,7 @@ import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
 import { quickAndDirtyGenesisBuilder } from "./GenesisBuilder";
 
-export const CreateChain = () => {
+export default function CreateChain() {
     const { showBoundary } = useErrorBoundary();
     const {
         networkID,

@@ -89,7 +89,7 @@ import { Input } from "../../ui";
 import { useExampleStore } from "../../utils/store";
 import { CodeHighlighter } from "../../ui/CodeHighlighter";
 
-export const GenesisBuilder = () => {
+export default function GenesisBuilder() {
     const {
         walletEVMAddress,
         evmChainId,

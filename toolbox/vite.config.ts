@@ -14,12 +14,18 @@ export default ({ mode }: ConfigEnv) => {
     }
   }
 
-
-
   return defineConfig({
     plugins: [react()],
     define: {
       'process.env': process.env,
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+          },
+        },
+      },
     },
   })
 }

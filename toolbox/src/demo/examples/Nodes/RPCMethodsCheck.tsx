@@ -233,7 +233,7 @@ const isInExtBcFormat = (rpcUrl: string) => {
     return regex.test(rpcUrl);
 };
 
-export const RPCMethodsCheck = () => {
+export default function RPCMethodsCheck() {
     const {
         evmChainRpcUrl,
         setEvmChainRpcUrl,

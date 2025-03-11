@@ -116,7 +116,7 @@ ${domain}/ext/bc/${chainID}/rpc`
     }
 }
 
-export const AvalanchegoDocker = () => {
+export default function AvalanchegoDocker() {
     const { subnetID, setSubnetID, networkID, setNetworkID, chainID, setChainID } = useExampleStore();
     const [isRPC, setIsRPC] = useState<"true" | "false">("false");
     const [rpcCommand, setRpcCommand] = useState("");

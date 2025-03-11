@@ -1,31 +1,34 @@
 import { Button, GithubEmbed, ConnectWallet } from "./ui";
 import { ErrorBoundary } from "react-error-boundary";
-import { CreateSubnet } from './examples/L1/CreateSubnet';
 import { useExampleStore } from './utils/store';
-import { CreateChain } from './examples/L1/CreateChain';
-import { ConvertToL1 } from './examples/L1/ConvertToL1';
-import { GetPChainAddress } from './examples/Wallet/GetPChainAddress';
-import { CollectConversionSignatures } from './examples/L1/CollectConversionSignatures';
 import { RefreshCw } from 'lucide-react';
-import { DeployValidatorMessages } from './examples/ValidatorManager/DeployValidatorMessages';
-import { SwitchChain } from "./examples/Wallet/SwitchChain";
-import { DeployValidatorManager } from "./examples/ValidatorManager/DeployValidatorManager";
-import InitValidatorSet from "./examples/InitializePoA/InitValidatorSet";
-import { Initialize } from "./examples/InitializePoA/Initialize";
-import { UpgradeProxy } from "./examples/ValidatorManager/UpgradeProxy";
-import { ReadContract } from "./examples/ValidatorManager/ReadContract";
-import { GenesisBuilder } from "./examples/L1/GenesisBuilder";
-import { RPCMethodsCheck } from "./examples/Nodes/RPCMethodsCheck";
-import { useState, useEffect, ReactElement } from "react";
-import { AvalanchegoDocker } from "./examples/Nodes/AvalanchegoDocker";
-import TeleporterMessenger from "./examples/ICM/TeleporterMessenger";
-import RPCUrlForChain from "./examples/Nodes/RPCUrlForChain";
-import CreateL1 from "./examples/Docs/CreateL1";
-import TeleporterRegistry from "./examples/ICM/TeleporterRegistry";
+import { useState, useEffect, ReactElement, lazy, Suspense } from "react";
+
+// Dynamically import components
+const GetPChainAddress = lazy(() => import('./examples/Wallet/GetPChainAddress'));
+const SwitchChain = lazy(() => import('./examples/Wallet/SwitchChain'));
+const CreateSubnet = lazy(() => import('./examples/L1/CreateSubnet'));
+const CreateChain = lazy(() => import('./examples/L1/CreateChain'));
+const ConvertToL1 = lazy(() => import('./examples/L1/ConvertToL1'));
+const CollectConversionSignatures = lazy(() => import('./examples/L1/CollectConversionSignatures'));
+const DeployValidatorMessages = lazy(() => import('./examples/ValidatorManager/DeployValidatorMessages'));
+const DeployValidatorManager = lazy(() => import('./examples/ValidatorManager/DeployValidatorManager'));
+const InitValidatorSet = lazy(() => import('./examples/InitializePoA/InitValidatorSet'));
+const Initialize = lazy(() => import('./examples/InitializePoA/Initialize'));
+const UpgradeProxy = lazy(() => import('./examples/ValidatorManager/UpgradeProxy'));
+const ReadContract = lazy(() => import('./examples/ValidatorManager/ReadContract'));
+const GenesisBuilder = lazy(() => import('./examples/L1/GenesisBuilder'));
+const RPCMethodsCheck = lazy(() => import('./examples/Nodes/RPCMethodsCheck'));
+const AvalanchegoDocker = lazy(() => import('./examples/Nodes/AvalanchegoDocker'));
+const TeleporterMessenger = lazy(() => import('./examples/ICM/TeleporterMessenger'));
+const RPCUrlForChain = lazy(() => import('./examples/Nodes/RPCUrlForChain'));
+const CreateL1 = lazy(() => import('./examples/Docs/CreateL1'));
+const TeleporterRegistry = lazy(() => import('./examples/ICM/TeleporterRegistry'));
+
 type ComponentType = {
     id: string;
     label: string;
-    component: () => ReactElement;
+    component: React.LazyExoticComponent<() => ReactElement>;
     fileNames: string[];
     skipWalletConnection?: boolean;
 }
@@ -163,7 +166,6 @@ const componentGroups: Record<string, ComponentType[]> = {
             skipWalletConnection: true,
         }
     ],
-
 };
 
 const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error, resetErrorBoundary: () => void }) => {
@@ -186,14 +188,18 @@ const ErrorFallback = ({ error, resetErrorBoundary }: { error: Error, resetError
     );
 };
 
+// Loading component for Suspense
+const ComponentLoader = () => (
+    <div className="flex justify-center items-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+    </div>
+);
+
 export default function ToolboxApp() {
     const [, setIsWalletConnected] = useState(false);
-    // Remove store-based selectedTool and use setSelectedTool
-    // const { selectedTool, setSelectedTool } = useExampleStore();
-
     const defaultTool = Object.values(componentGroups).flat()[0].id;
 
-    // Use state from URL hash. Default to "getPChainAddress" if hash is empty.
+    // Use state from URL hash. Default to first tool if hash is empty.
     const [selectedTool, setSelectedTool] = useState(
         window.location.hash ? window.location.hash.substring(1) : defaultTool
     );
@@ -208,9 +214,9 @@ export default function ToolboxApp() {
     }, []);
 
     const handleComponentClick = (toolId: string) => {
-        // Instead of updating the store, update the URL hash.
+        // Update the URL hash
         window.location.hash = toolId;
-        // Optionally update local state immediately (hashchange event will also trigger)
+        // Optionally update local state immediately
         setSelectedTool(toolId);
     };
 
@@ -220,7 +226,10 @@ export default function ToolboxApp() {
         if (!comp) {
             return <div>Component not found</div>;
         }
-        return <>
+
+        const Component = comp.component;
+
+        return (
             <ErrorBoundary
                 FallbackComponent={ErrorFallback}
                 onReset={() => {
@@ -229,7 +238,9 @@ export default function ToolboxApp() {
             >
                 <ConnectWallet onConnect={setIsWalletConnected} required={!comp.skipWalletConnection}>
                     <div className="space-y-4">
-                        <comp.component />
+                        <Suspense fallback={<ComponentLoader />}>
+                            <Component />
+                        </Suspense>
                     </div>
                     <div className="overflow-x-hidden">
                         {comp.fileNames.map((fileName, index) => (
@@ -237,7 +248,7 @@ export default function ToolboxApp() {
                                 key={index}
                                 user="ava-labs"
                                 repo="avalanche-docs"
-                                branch="l1-toolbox" // TODO: set automatically or at least change to main
+                                branch="l1-toolbox"
                                 filePath={fileName}
                                 maxHeight={600}
                             />
@@ -245,7 +256,7 @@ export default function ToolboxApp() {
                     </div>
                 </ConnectWallet>
             </ErrorBoundary>
-        </>
+        );
     };
 
     return (
@@ -254,7 +265,7 @@ export default function ToolboxApp() {
                 <ul className="space-y-6">
                     {Object.entries(componentGroups).map(([groupName, components]) => (
                         <li key={groupName}>
-                            <h3 className="text-sm font-semibold  uppercase tracking-wide mb-3">{groupName}</h3>
+                            <h3 className="text-sm font-semibold uppercase tracking-wide mb-3">{groupName}</h3>
                             <ul className="space-y-1">
                                 {components.map(({ id, label }) => (
                                     <li key={id}>

@@ -6,7 +6,7 @@ import { Success } from "../../ui/Success";
 import { createWalletClient, custom, createPublicClient } from 'viem';
 import ValidatorMessagesABI from "../../../../contracts/icm-contracts/compiled/ValidatorMessages.json";
 
-export const DeployValidatorMessages = () => {
+export default function DeployValidatorMessages() {
     const { showBoundary } = useErrorBoundary();
     const { validatorMessagesLibAddress, setValidatorMessagesLibAddress, walletChainId } = useExampleStore();
     const [isDeploying, setIsDeploying] = useState(false);
