@@ -9,14 +9,10 @@ import {
   SelectValue,
 } from '../ui/select';
 import HackathonCard from './HackathonCard';
-import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
-import Link from 'next/link';
-import { Button } from '../ui/button';
-import { HackathonHeader, HackathonsFilters } from '@/types/hackathons';
+import {  HackathonHeader, HackathonsFilters } from '@/types/hackathons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import Image from 'next/image';
 import {
   Pagination,
   PaginationContent,
@@ -157,13 +153,13 @@ export default function Hackathons({
             <Search className='h-6 w-6 text-white stroke-white' />
           </button>
         </div>
-        <Button
+        {/* <Button
           asChild
           variant='secondary'
           className='bg-red-500 hover:bg-red-600 py-2 px-4'
         >
           <Link href='/hackathons/new'>Create New Hackathon</Link>
-        </Button>
+        </Button> */}
       </div>
 
       <hr className='my-4 border-t border-zinc-800' />
@@ -298,7 +294,7 @@ export default function Hackathons({
         </PaginationContent>
       </Pagination>
 
-      <h3 className='font-medium text-2xl my-4'>Recommended for You</h3>
+      {/* <h3 className='font-medium text-2xl my-4'>Recommended for You</h3>
 
       <hr className='my-4 border-t border-zinc-800' />
       <Carousel
@@ -335,7 +331,7 @@ export default function Hackathons({
             </CarouselItem>
           ))}
         </CarouselContent>
-      </Carousel>
+      </Carousel> */}
     </section>
   );
 }
