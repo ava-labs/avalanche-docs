@@ -5,15 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Trash2 } from 'lucide-react'
 import { Address, bytesToHex, createPublicClient, hexToBytes, http } from 'viem'
 import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json'
-import { aggregateSignatures } from '@/components/tools/common/api/signature-aggregator'
 import { pvm, utils, Context } from '@avalabs/avalanchejs'
-import { generatePrivateKey } from 'viem/accounts'
 import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
 import { packWarpIntoAccessList } from '../../common/utils/packWarp'
 import { pChainChainID, platformEndpoint, pvmApi } from './const'
 import { fetchPChainAddressForActiveAccount } from '../../common/api/coreWallet'
 import { parseNodeID } from '../../common/utils/parse'
+import { AvaCloudSDK } from '@avalabs/avacloud-sdk'
 
 interface RemoveValidatorProps {
     nodeId: string
@@ -45,13 +44,10 @@ export default function RemoveValidator({
     poaOwnerAddress,
     rpcUrl,
     subnetId,
-    tokenSymbol,
     validationIdPChain,
     onValidatorRemoved
 }: RemoveValidatorProps) {
     const {
-        tempEVMPrivateKeyHex,
-        setTempEVMPrivateKeyHex,
         chainConfig,
         coreWalletClient
     } = usePoAValidatorManagementWizardStore()
@@ -73,13 +69,17 @@ export default function RemoveValidator({
 
     // ensure temp wallet is set and get P-Chain address from core wallet
     useEffect(() => {
-        if (tempEVMPrivateKeyHex === '0x') {
-            setTempEVMPrivateKeyHex(generatePrivateKey())
-        }
-        (async () => {
-            setCoreWalletPChainAddress(await fetchPChainAddressForActiveAccount());
-        })();
-    }, []); // Run once when component mounts
+        const fetchPChainAddress = async () => {
+            try {
+                const pChainAddress = await fetchPChainAddressForActiveAccount();
+                setCoreWalletPChainAddress(pChainAddress);
+                console.log("Core Wallet P-Chain Address: ", pChainAddress);
+            } catch (error) {
+                console.error("Error fetching P-Chain address:", error);
+            }
+        };
+        fetchPChainAddress();
+    }, []); // Add dependency to re-run if temp wallet changes
 
     const handleRemoveValidator = async () => {
         if (!publicClient) return
@@ -121,57 +121,24 @@ export default function RemoveValidator({
             console.log("Initialize End Validation Warp Msg: ", unsignedWarpMsg)
 
             // Aggregate signatures from validators
-            const signedWarpMsg = await aggregateSignatures({
-                message: unsignedWarpMsg,
-                signingSubnetId: subnetId,
-            })
+            const { signedMessage: signedWarpMsg } = await new AvaCloudSDK({network: 'fuji', serverURL: "https://api.avax-test.network"}).data.signatureAggregator.aggregateSignatures({
+                network: 'fuji',
+                signatureAggregatorRequest: {
+                  message: unsignedWarpMsg,
+                  signingSubnetId: subnetId,
+                  quorumPercentage: 67
+                }
+              });
 
             console.log("Initialize End Validation Signed Warp Msg: ", signedWarpMsg)
 
-            // Get fee state and utxos from P-Chain
-            let feeState = await pvmApi.getFeeState();
-            let { utxos } = await pvmApi.getUTXOs({ addresses: [coreWalletPChainAddress] });
-            let context = await Context.getContextFromURI(platformEndpoint);
+             // Create a new change weight transaction
+             const pChainAddressBytes = utils.bech32ToBytes(coreWalletPChainAddress)
 
-            // Create a new disable validator transaction
-            const pChainAddressBytes = utils.bech32ToBytes(coreWalletPChainAddress)
-            const unsignedPChainDisableValidatorMsg = pvm.e.newDisableL1ValidatorTx({
-                disableAuth: [0],
-                feeState,
-                fromAddressesBytes: [pChainAddressBytes],
-                utxos,
-                validationId: validationIdPChain,
-            }, context)
-
-            // Convert to bytes then to hex
-            const unsignedPChainDisableValidatorTxBytes = unsignedPChainDisableValidatorMsg.toBytes()
-            const unsignedPChainDisableValidatorTxHex = bytesToHex(unsignedPChainDisableValidatorTxBytes)
-
-            // Submit to Core Wallet
-            if (!window.avalanche) throw new Error('Core wallet not found');
-            const disabledValidatorTxResponse = await window.avalanche.request<string>({
-                method: 'avalanche_sendTransaction',
-                params: {
-                    transactionHex: unsignedPChainDisableValidatorTxHex,
-                    chainAlias: 'P',
-                }
-            });
-
-            // Wait for transaction to be confirmed
-            while (true) {
-                let status = await pvmApi.getTxStatus({ txID: disabledValidatorTxResponse });
-                console.log("PX Chain Tx Status: ", status)
-                if (status.status === "Committed") break;
-                await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
-            }
-
-            // refresh fee state and utxos
-            feeState = await pvmApi.getFeeState();
-            ({ utxos } = await pvmApi.getUTXOs({ addresses: [coreWalletPChainAddress] }));
-            context = await Context.getContextFromURI(platformEndpoint);
-
-            // Create a new change weight transaction
-            const unsignedPChainChangeWeightMsg = pvm.e.newSetL1ValidatorWeightTx({
+             let feeState = await pvmApi.getFeeState();
+             let { utxos } = await pvmApi.getUTXOs({ addresses: [coreWalletPChainAddress] });
+             let context = await Context.getContextFromURI(platformEndpoint);
+             const unsignedPChainChangeWeightMsg = pvm.e.newSetL1ValidatorWeightTx({
                 message: new Uint8Array(Buffer.from(signedWarpMsg, 'hex')),
                 feeState,
                 fromAddressesBytes: [pChainAddressBytes],
@@ -183,6 +150,7 @@ export default function RemoveValidator({
             const unsignedPChainChangeWeightTxHex = bytesToHex(unsignedPChainChangeWeightTxBytes)
 
             // Submit to Core Wallet
+            if (!window.avalanche) throw new Error('Core wallet not found');
             const changeWeightTxResponse = await window.avalanche.request<string>({
                 method: 'avalanche_sendTransaction',
                 params: {
@@ -199,24 +167,63 @@ export default function RemoveValidator({
                 await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
             }
 
-            console.log("Validator removed successfully from P-Chain")
+            console.log("Validator changed weight to 0 successfully on P-Chain")
+
+
+            // Get fee state and utxos from P-Chain
+            // feeState = await pvmApi.getFeeState();
+            // ({ utxos } = await pvmApi.getUTXOs({ addresses: [coreWalletPChainAddress] }));
+            // context = await Context.getContextFromURI(platformEndpoint);
+
+            // // Create a new disable validator transaction
+            // const unsignedPChainDisableValidatorMsg = pvm.e.newDisableL1ValidatorTx({
+            //     disableAuth: [0],
+            //     feeState,
+            //     fromAddressesBytes: [pChainAddressBytes],
+            //     utxos,
+            //     validationId: validationIdPChain,
+            // }, context)
+
+            // // Convert to bytes then to hex
+            // const unsignedPChainDisableValidatorTxBytes = unsignedPChainDisableValidatorMsg.toBytes()
+            // const unsignedPChainDisableValidatorTxHex = bytesToHex(unsignedPChainDisableValidatorTxBytes)
+
+            // // Submit to Core Wallet
+            // const disabledValidatorTxResponse = await window.avalanche.request<string>({
+            //     method: 'avalanche_sendTransaction',
+            //     params: {
+            //         transactionHex: unsignedPChainDisableValidatorTxHex,
+            //         chainAlias: 'P',
+            //     }
+            // });
+
+            // // Wait for transaction to be confirmed
+            // while (true) {
+            //     let status = await pvmApi.getTxStatus({ txID: disabledValidatorTxResponse });
+            //     console.log("PX Chain Tx Status: ", status)
+            //     if (status.status === "Committed") break;
+            //     await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
+            // }
 
             // TODO: RECONSTRUCT THE WARP MESSAGE FROM P-CHAIN AND COMPLETEENDVALIDATION ON EVM
 
             // // Reconstruct the warp message from P-Chain
-            // const validationIDBytes = hexToBytes(validationIdPChain as Address)
-            // const unsignedPChainWarpMsg = packL1ValidatorRegistration(validationIDBytes, false, 5, pChainChainID)
-            // const unsignedPChainWarpMsgHex = bytesToHex(unsignedPChainWarpMsg)
-            // console.log("Unsigned P-Chain Warp Message: ", unsignedPChainWarpMsgHex)
-            // console.log("Waiting 30s before aggregating signatures")
-            // await new Promise(resolve => setTimeout(resolve, 30000)); // 30 seconds
+            const validationIDBytes = hexToBytes(validationIdPChain as Address)
+            const unsignedPChainWarpMsg = packL1ValidatorRegistration(validationIDBytes, false, 5, pChainChainID)
+            const unsignedPChainWarpMsgHex = bytesToHex(unsignedPChainWarpMsg)
+            console.log("Unsigned P-Chain Warp Message: ", unsignedPChainWarpMsgHex)
+          
 
             // Sign the reconstructed P-Chain warp message with justification (unsigned warp msg from EVM??)
-            // const signedMessage = await aggregateSignatures({
-            //     message: unsignedPChainWarpMsgHex,
-            //     justification: unsignedWarpMsg,
-            //     signingSubnetId: subnetId,
-            // });
+            // const { signedMessage } = await new AvaCloudSDK({network: 'fuji', serverURL: "https://api.avax-test.network"}).data.signatureAggregator.aggregateSignatures({
+            //     network: 'fuji',
+            //     signatureAggregatorRequest: {
+            //       message: unsignedPChainWarpMsgHex,
+            //       justification: "PLACEHOLDER",
+            //       signingSubnetId: subnetId,
+            //       quorumPercentage: 67
+            //     }
+            //   });
 
             // console.log("Signed P-Chain Warp Message: ", signedMessage)
 

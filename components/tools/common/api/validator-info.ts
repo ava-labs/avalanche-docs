@@ -4,6 +4,7 @@ import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
 export const avaCloudSDK = new AvaCloudSDK({
     chainId: "43114",
     network: "fuji",
+    serverURL: "https://api.avax-test.network"
 });
 
 export async function fetchSubnetIdByValidationID(validationID: string): Promise<string> {

@@ -187,9 +187,28 @@ export default function ChainParameters() {
     };
 
     const handleWalletConnectionCallback = async () => {
-        await handleCheckPoaOwner();
-        const config = defineAndSaveChainConfig();
-        saveCoreWalletClient(config);
+        if (!window.avalanche) {
+            console.error("Core wallet not found");
+            return;
+        }
+        
+        try {
+            // Get addresses directly from Core Wallet
+            const addresses = await window.avalanche.request({
+                method: 'eth_requestAccounts'
+            }) as string[];
+            
+            if (!addresses || addresses.length === 0) {
+                throw new Error("No addresses found in Core Wallet");
+            }
+            
+            await handleCheckPoaOwner();
+            const config = defineAndSaveChainConfig();
+            await saveCoreWalletClient(config);
+        } catch (error) {
+            console.error("Failed to get addresses from Core Wallet:", error);
+            setError("Failed to connect to Core Wallet");
+        }
     }
 
     const defineAndSaveChainConfig = () => {
@@ -211,32 +230,54 @@ export default function ChainParameters() {
         return chainConfig;
     }
 
-    const saveCoreWalletClient = (chainConfig: Chain) => {
+    const saveCoreWalletClient = async (chainConfig: Chain) => {
         if (!window.avalanche) return;
-        const noopProvider = { request: () => Promise.resolve(null) }
-        const provider = typeof window !== 'undefined' ? window.avalanche! : noopProvider
-        const walletClient = createWalletClient({
-            chain: chainConfig,
-            transport: custom(provider),
-        })
-        setCoreWalletClient(walletClient)
+        
+        try {
+            // Get connected account from Core Wallet
+            const accounts = await window.avalanche.request({
+                method: 'eth_requestAccounts'
+            }) as string[];
 
+            if (!accounts || accounts.length === 0) {
+                throw new Error("No accounts found in Core Wallet");
+            }
+
+            const walletClient = createWalletClient({
+                account: accounts[0] as Address,
+                chain: chainConfig,
+                transport: custom(window.avalanche)
+            })
+
+            setCoreWalletClient(walletClient)
+        } catch (error) {
+            console.error("Failed to setup wallet client:", error);
+            setError("Failed to setup wallet connection");
+        }
     }
 
     const handleCheckPoaOwner = async () => {
-        if (!window.ethereum) return;
+        if (!window.avalanche) {
+            console.error("Core wallet not found");
+            return;
+        }
         setOwnerCheckStatus('checking');
 
-        // Get connected account from wallet
-        const accounts = await deduplicateEthRequestAccounts()
-        if (!accounts || accounts.length === 0) return;
-
-        // Create public client to read contract
-        const publicClient = createPublicClient({
-            transport: http(rpcUrl)
-        });
-
         try {
+            // Get connected account from Core Wallet
+            const accounts = await window.avalanche.request({
+                method: 'eth_requestAccounts'
+            }) as string[];
+
+            if (!accounts || accounts.length === 0) {
+                throw new Error("No accounts found in Core Wallet");
+            }
+
+            // Create public client to read contract
+            const publicClient = createPublicClient({
+                transport: http(rpcUrl)
+            });
+
             // Get owner from PoA Validator Manager contract
             const owner = await publicClient.readContract({
                 address: transparentProxyAddress as Address,
