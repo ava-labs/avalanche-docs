@@ -1,4 +1,3 @@
-'use client'
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Divider } from "@/components/ui/divider";
@@ -12,7 +11,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import DeadLine from "../DeadLine";
-import { useTheme } from "next-themes";
 
 const mockActivities: ScheduleActivity[] = [
   {
@@ -135,8 +133,6 @@ const mockActivities: ScheduleActivity[] = [
 ];
 
 function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
-  const { resolvedTheme } = useTheme();
-  const calendarColor = resolvedTheme == "dark" ? "#F5F5F9" : "#161617";
   return (
     <section className="flex flex-col gap-6">
       <h2
@@ -252,8 +248,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                             className="bg-zinc-100 dark:bg-zinc-800 h-8 w-8 sm:h-10 sm:w-10"
                           >
                             <CalendarPlus2
-                              color={calendarColor}
-                              className="w-3 h-3 sm:w-4 sm:h-4"
+                              className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50"
                             />
                           </Button>
                         </div>

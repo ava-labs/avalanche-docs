@@ -1,12 +1,9 @@
-"use client";
-
 import React from "react";
 import { HackathonHeader } from "@/types/hackathons";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { DynamicIcon } from "lucide-react/dynamic";
-import { useTheme } from "next-themes";
 
 const resources = [
   {
@@ -36,8 +33,6 @@ const resources = [
 ];
 
 function Resources({ hackathon }: { hackathon: HackathonHeader }) {
-  const { resolvedTheme } = useTheme();
-  const iconColor = resolvedTheme == "dark" ? "#F5F5F9" : "#161617";
   return (
     <section className="text-black dark:text-white dark:bg-black py-12">
       <h2 className="text-4xl font-bold mb-6" id="resources">
@@ -61,7 +56,7 @@ function Resources({ hackathon }: { hackathon: HackathonHeader }) {
               <DynamicIcon
                 name={resource.icon as any}
                 size={16}
-                color={iconColor}
+                className="!text-zinc-900 dark:!text-zinc-50"
               />
             </div>
             <div>
