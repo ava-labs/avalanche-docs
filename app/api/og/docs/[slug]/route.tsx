@@ -52,7 +52,7 @@ function OG({
         backgroundColor: '#fafafa',
         overflow: 'hidden',
         alignItems: 'center',
-        backgroundImage: "url('http://localhost:3000/og.png')",
+        backgroundImage: "url('https://build.avax.network/og.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
