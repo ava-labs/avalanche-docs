@@ -3,6 +3,7 @@ import { createPreset, presets } from 'fumadocs-ui/tailwind-plugin';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: ['class'],
     // darkMode: ['class'],
     content: [
     './components/**/*.{ts,tsx}',
@@ -56,10 +57,28 @@ export default {
   					'stroke-dasharray': '1000',
   					'stroke-dashoffset': '2000'
   				}
+  			},
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
   			}
   		},
   		animation: {
-  			stroke: 'stroke 5s linear infinite'
+  			stroke: 'stroke 5s linear infinite',
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		},
   		colors: {
   			sidebar: {
