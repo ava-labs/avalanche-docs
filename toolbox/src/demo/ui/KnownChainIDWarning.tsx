@@ -1,5 +1,5 @@
 
-const knownNetworks: Record<number, string> = {
+export const knownNetworks: Record<number, string> = {
     43114: "Avalanche Mainnet",
     43113: "Avalanche Fuji Testnet",
     43117: "Avalanche Devnet",

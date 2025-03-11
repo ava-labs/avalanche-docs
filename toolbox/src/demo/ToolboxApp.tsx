@@ -138,14 +138,18 @@ const componentGroups: Record<string, ComponentType[]> = {
         {
             id: "deployICMSenderRecever",
             label: "Deploy ICMSenderRecever",
-            component: lazy(() => import('./examples/ICM/DeployICMSenderRecever')),
+            component: lazy(() => import('./examples/ICM/TestICM')),
             fileNames: ["toolbox/src/demo/examples/ICM/DeployICMSenderRecever.tsx"]
         },
         {
             id: "testICM",
             label: "Test ICM",
-            component: lazy(() => import('./examples/ICM/testICM')),
-            fileNames: ["toolbox/src/demo/examples/ICM/testICM.tsx"]
+            component: lazy(() => import('./examples/ICM/TestICM')),
+            fileNames: [
+                "toolbox/src/demo/examples/ICM/TestICM.tsx",
+                "toolbox/contracts/example-contracts/contracts/receiverOnSubnet.sol",
+                "toolbox/contracts/example-contracts/contracts/senderOnCChain.sol"
+            ]
         }
     ],
     "Docs": [
