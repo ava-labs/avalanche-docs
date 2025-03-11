@@ -24,8 +24,8 @@ export async function GET(
 
   return new ImageResponse(
     OG({
-      title: title ?? 'Avalanche Docs',
-      description: description ?? 'Developer documentation for everything Avalanche.',
+      title: title ?? 'Integrations with Avalanche',
+      description: description ?? 'Discover best-in-class integrations for your Avalanche L1 and learn how to use them.',
     }),
     {
       width: 1280,
@@ -133,7 +133,7 @@ function OG({
                 />
               </g>
             </svg>
-            <span style={{paddingLeft: "10px"}}>build.avax.network/<span style={{color: "red"}}>docs</span></span>
+            <span style={{paddingLeft: "10px"}}>build.avax.network/<span style={{color: "red"}}>integrations</span></span>
           </div>
         </div>
       </div>
