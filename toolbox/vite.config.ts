@@ -5,14 +5,16 @@ import react from '@vitejs/plugin-react'
 export default ({ mode }: ConfigEnv) => {
   if (process.env.VERCEL_GIT_COMMIT_REF) {
     process.env.VITE_GIT_BRANCH_NAME = process.env.VERCEL_GIT_COMMIT_REF
+  } else {
+    try {
+      const { execSync } = require('child_process')
+      process.env.VITE_GIT_BRANCH_NAME = execSync('git rev-parse --abbrev-ref HEAD').toString().trimEnd()
+    } catch (error) {
+      //ignore error
+    }
   }
 
-  try {
-    const { execSync } = require('child_process')
-    process.env.VITE_GIT_BRANCH_NAME = execSync('git rev-parse --abbrev-ref HEAD').toString().trimEnd()
-  } catch (error) {
-    //ignore error
-  }
+
 
   return defineConfig({
     plugins: [react()],
