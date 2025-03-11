@@ -72,7 +72,8 @@ const reverseProxyCommand = (domain: string) => {
   caddy reverse-proxy --from ${domain} --to localhost:8080`
 }
 
-const enableDebugNTraceCommand = (chainId: string) => `mkdir -p $HOME/.avalanchego_rpc/configs/chains/${chainId}
+const enableDebugNTraceCommand = (chainId: string) => `sudo mkdir -p $HOME/.avalanchego_rpc/configs/chains/${chainId} &&
+sudo chmod 777 $HOME/.avalanchego_rpc/configs/chains/${chainId} &&
 echo '{
   "log-level": "debug",
   "warp-api-enabled": true,
@@ -116,8 +117,9 @@ ${domain}/ext/bc/${chainID}/rpc`
     }
 }
 
+
 export default function AvalanchegoDocker() {
-    const { subnetID, setSubnetID, networkID, setNetworkID, chainID, setChainID } = useExampleStore();
+    const { subnetID, setSubnetID, networkID, setNetworkID, chainID, setChainID, setEvmChainRpcUrl } = useExampleStore();
     const [isRPC, setIsRPC] = useState<"true" | "false">("false");
     const [rpcCommand, setRpcCommand] = useState("");
     const [domain, setDomain] = useState("");
@@ -130,6 +132,19 @@ export default function AvalanchegoDocker() {
             setRpcCommand((error as Error).message);
         }
     }, [subnetID, isRPC, networkID]);
+
+
+    useEffect(() => {
+        if (domain && chainID && isRPC === "true") {
+            setEvmChainRpcUrl("https://" + nipify(domain) + "/ext/bc/" + chainID + "/rpc");
+        }
+    }, [domain, chainID, isRPC]);
+
+    useEffect(() => {
+        if (isRPC === "false") {
+            setDomain("");
+        }
+    }, [isRPC]);
 
     return (
         <div className="space-y-4">

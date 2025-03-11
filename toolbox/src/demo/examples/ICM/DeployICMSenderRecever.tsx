@@ -4,19 +4,17 @@ import { useState } from "react";
 import { Button } from "../../ui";
 import { Success } from "../../ui/Success";
 import { createWalletClient, custom, createPublicClient } from 'viem';
-import TeleporterRegistryBytecode from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterRegistry_Bytecode_v1.0.0.txt.json';
-import TeleporterMessengerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Contract_Address_v1.0.0.txt.json';
-import TeleporterRegistryManualyCompiled from '../../../../contracts/icm-contracts/compiled/TeleporterRegistry.json';
+import ICMSenderReceiverABI from "../../../../contracts/example-contracts/compiled/ICMSenderReceiver.json";
 import KnownChainIDWarning from "../../ui/KnownChainIDWarning";
 
-export default function TeleporterRegistry() {
+export default function DeployICMSenderRecever() {
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId, setTeleporterRegistryAddress, teleporterRegistryAddress } = useExampleStore();
+    const { walletChainId, setIcmSenderReceiverAddress, icmSenderReceiverAddress } = useExampleStore();
     const [isDeploying, setIsDeploying] = useState(false);
 
     async function handleDeploy() {
         setIsDeploying(true);
-        setTeleporterRegistryAddress("");
+        setIcmSenderReceiverAddress("");
         try {
             const publicClient = createPublicClient({
                 transport: custom(window.avalanche!),
@@ -28,17 +26,12 @@ export default function TeleporterRegistry() {
 
             const [address] = await walletClient.requestAddresses();
 
-            // Get messenger address
-            const messengerAddress = TeleporterMessengerAddress.content.trim() as `0x${string}`;
-
             const hash = await walletClient.deployContract({
+                abi: ICMSenderReceiverABI.abi,
+                bytecode: ICMSenderReceiverABI.bytecode.object as `0x${string}`,
                 account: address,
-                bytecode: TeleporterRegistryBytecode.content.trim() as `0x${string}`,
-                abi: TeleporterRegistryManualyCompiled.abi,
-                args: [
-                    [{ version: 1n, protocolAddress: messengerAddress }]
-                ],
                 chain: {
+                    // The values below (except for chainID) are not important since viem only checks chainID
                     id: walletChainId,
                     name: "My L1",
                     rpcUrls: {
@@ -58,7 +51,7 @@ export default function TeleporterRegistry() {
                 throw new Error('No contract address in receipt');
             }
 
-            setTeleporterRegistryAddress(receipt.contractAddress);
+            setIcmSenderReceiverAddress(receipt.contractAddress);
         } catch (error) {
             showBoundary(error);
         } finally {
@@ -68,11 +61,10 @@ export default function TeleporterRegistry() {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Deploy Teleporter Registry</h2>
+            <h2 className="text-lg font-semibold">Deploy ICM Sender Receiver</h2>
             <div className="space-y-4">
                 <div className="mb-4">
-                    This will deploy the <code>TeleporterRegistry</code> contract to the currently connected EVM network <code>{walletChainId}</code>.
-                    The contract will be initialized with the Teleporter Messenger address <code>{TeleporterMessengerAddress.content.trim()}</code>.
+                    This will deploy the <code>ICMSenderReceiver</code> contract to the currently connected EVM network <code>{walletChainId}</code>. This contract can be used to send and receive messages between blockchains using the Inter-Chain Messaging (ICM) protocol.
                 </div>
                 <KnownChainIDWarning walletChainId={walletChainId} />
                 <Button
@@ -81,12 +73,12 @@ export default function TeleporterRegistry() {
                     loading={isDeploying}
                     disabled={isDeploying}
                 >
-                    {teleporterRegistryAddress ? "Redeploy" : "Deploy"} TeleporterRegistry
+                    Deploy Contract
                 </Button>
             </div>
             <Success
-                label="TeleporterRegistry Address"
-                value={teleporterRegistryAddress}
+                label="ICMSenderReceiver Address"
+                value={icmSenderReceiverAddress}
             />
         </div>
     );

@@ -29,6 +29,7 @@ export const initialState = {
     teleporterRegistryAddress: "",
     gasLimit: 12000000,
     targetBlockRate: 2,
+    icmSenderReceiverAddress: "",
 }
 
 export const useExampleStore = create(
@@ -67,6 +68,7 @@ export const useExampleStore = create(
             },
             setEvmChainId: (evmChainId: number) => set({ evmChainId }),
             setTeleporterRegistryAddress: (address: string) => set({ teleporterRegistryAddress: address }),
+            setIcmSenderReceiverAddress: (address: string) => set({ icmSenderReceiverAddress: address }),
         })),
         {
             name: 'example-storage',

@@ -4,27 +4,6 @@ import { useExampleStore } from './utils/store';
 import { RefreshCw } from 'lucide-react';
 import { useState, useEffect, ReactElement, lazy, Suspense } from "react";
 
-// Dynamically import components
-const GetPChainAddress = lazy(() => import('./examples/Wallet/GetPChainAddress'));
-const SwitchChain = lazy(() => import('./examples/Wallet/SwitchChain'));
-const CreateSubnet = lazy(() => import('./examples/L1/CreateSubnet'));
-const CreateChain = lazy(() => import('./examples/L1/CreateChain'));
-const ConvertToL1 = lazy(() => import('./examples/L1/ConvertToL1'));
-const CollectConversionSignatures = lazy(() => import('./examples/L1/CollectConversionSignatures'));
-const DeployValidatorMessages = lazy(() => import('./examples/ValidatorManager/DeployValidatorMessages'));
-const DeployValidatorManager = lazy(() => import('./examples/ValidatorManager/DeployValidatorManager'));
-const InitValidatorSet = lazy(() => import('./examples/InitializePoA/InitValidatorSet'));
-const Initialize = lazy(() => import('./examples/InitializePoA/Initialize'));
-const UpgradeProxy = lazy(() => import('./examples/ValidatorManager/UpgradeProxy'));
-const ReadContract = lazy(() => import('./examples/ValidatorManager/ReadContract'));
-const GenesisBuilder = lazy(() => import('./examples/L1/GenesisBuilder'));
-const RPCMethodsCheck = lazy(() => import('./examples/Nodes/RPCMethodsCheck'));
-const AvalanchegoDocker = lazy(() => import('./examples/Nodes/AvalanchegoDocker'));
-const TeleporterMessenger = lazy(() => import('./examples/ICM/TeleporterMessenger'));
-const RPCUrlForChain = lazy(() => import('./examples/Nodes/RPCUrlForChain'));
-const CreateL1 = lazy(() => import('./examples/Docs/CreateL1'));
-const TeleporterRegistry = lazy(() => import('./examples/ICM/TeleporterRegistry'));
-
 type ComponentType = {
     id: string;
     label: string;
@@ -38,13 +17,13 @@ const componentGroups: Record<string, ComponentType[]> = {
         {
             id: 'getPChainAddress',
             label: "Get P-chain Address",
-            component: GetPChainAddress,
+            component: lazy(() => import('./examples/Wallet/GetPChainAddress')),
             fileNames: ["toolbox/src/demo/examples/Wallet/pChainAddrFromPubKey.ts", "toolbox/src/demo/examples/Wallet/GetPChainAddress.tsx"]
         },
         {
             id: 'switchChain',
             label: "Switch Chain",
-            component: SwitchChain,
+            component: lazy(() => import('./examples/Wallet/SwitchChain')),
             fileNames: ["toolbox/src/demo/examples/Wallet/SwitchChain.tsx"]
         }
     ],
@@ -52,31 +31,31 @@ const componentGroups: Record<string, ComponentType[]> = {
         {
             id: 'createSubnet',
             label: "Create Subnet",
-            component: CreateSubnet,
+            component: lazy(() => import('./examples/L1/CreateSubnet')),
             fileNames: ["toolbox/src/demo/examples/L1/CreateSubnet.tsx"]
         },
         {
             id: 'createChain',
             label: "Create Chain",
-            component: CreateChain,
+            component: lazy(() => import('./examples/L1/CreateChain')),
             fileNames: ["toolbox/src/demo/examples/L1/CreateChain.tsx"]
         },
         {
             id: 'convertToL1',
             label: "Convert to L1",
-            component: ConvertToL1,
+            component: lazy(() => import('./examples/L1/ConvertToL1')),
             fileNames: ["toolbox/src/demo/examples/L1/ConvertToL1.tsx"]
         },
         {
             id: 'collectConversionSignatures',
             label: "Collect conversion signatures",
-            component: CollectConversionSignatures,
+            component: lazy(() => import('./examples/L1/CollectConversionSignatures')),
             fileNames: ["toolbox/src/demo/examples/L1/CollectConversionSignatures.tsx", "toolbox/src/demo/examples/L1/convertWarp.ts"]
         },
         {
             id: 'genesisBuilder',
             label: "Genesis Builder",
-            component: GenesisBuilder,
+            component: lazy(() => import('./examples/L1/GenesisBuilder')),
             fileNames: ["toolbox/src/demo/examples/L1/GenesisBuilder.tsx"]
         }
     ],
@@ -84,25 +63,25 @@ const componentGroups: Record<string, ComponentType[]> = {
         {
             id: "deployValidatorMessages",
             label: "Validator Messages Library",
-            component: DeployValidatorMessages,
+            component: lazy(() => import('./examples/ValidatorManager/DeployValidatorMessages')),
             fileNames: ["toolbox/src/demo/examples/ValidatorManager/DeployValidatorMessages.tsx"]
         },
         {
             id: "deployValidatorManager",
             label: "Deploy Validator Manager",
-            component: DeployValidatorManager,
+            component: lazy(() => import('./examples/ValidatorManager/DeployValidatorManager')),
             fileNames: ["toolbox/src/demo/examples/ValidatorManager/DeployValidatorManager.tsx"]
         },
         {
             id: "readContract",
             label: "Read Contract",
-            component: ReadContract,
+            component: lazy(() => import('./examples/ValidatorManager/ReadContract')),
             fileNames: ["toolbox/src/demo/examples/ValidatorManager/ReadContract.tsx"]
         },
         {
             id: "upgradeProxy",
             label: "Upgrade Proxy",
-            component: UpgradeProxy,
+            component: lazy(() => import('./examples/ValidatorManager/UpgradeProxy')),
             fileNames: ["toolbox/src/demo/examples/ValidatorManager/UpgradeProxy.tsx"]
         }
     ],
@@ -110,13 +89,13 @@ const componentGroups: Record<string, ComponentType[]> = {
         {
             id: "initialize",
             label: "Initialize",
-            component: Initialize,
+            component: lazy(() => import('./examples/InitializePoA/Initialize')),
             fileNames: ["toolbox/src/demo/examples/InitializePoA/Initialize.tsx"]
         },
         {
             id: "initValidatorSet",
             label: "Initialize Validator Set",
-            component: InitValidatorSet,
+            component: lazy(() => import('./examples/InitializePoA/InitValidatorSet')),
             fileNames: ["toolbox/src/demo/examples/InitializePoA/InitValidatorSet.tsx"]
         }
     ],
@@ -124,21 +103,21 @@ const componentGroups: Record<string, ComponentType[]> = {
         {
             id: "rpcMethodsCheck",
             label: "RPC Methods Check",
-            component: RPCMethodsCheck,
+            component: lazy(() => import('./examples/Nodes/RPCMethodsCheck')),
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCMethodsCheck.tsx"],
             skipWalletConnection: true,
         },
         {
             id: "avalanchegoDocker",
             label: "Avalanchego in Docker",
-            component: AvalanchegoDocker,
+            component: lazy(() => import('./examples/Nodes/AvalanchegoDocker')),
             fileNames: ["toolbox/src/demo/examples/Nodes/AvalanchegoDocker.tsx"],
             skipWalletConnection: true,
         },
         {
             id: "rpcUrlForChain",
             label: "RPC URL Builder",
-            component: RPCUrlForChain,
+            component: lazy(() => import('./examples/Nodes/RPCUrlForChain')),
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
             skipWalletConnection: true,
         }
@@ -147,22 +126,34 @@ const componentGroups: Record<string, ComponentType[]> = {
         {
             id: "teleporterMessenger",
             label: "Teleporter Messenger",
-            component: TeleporterMessenger,
+            component: lazy(() => import('./examples/ICM/TeleporterMessenger')),
             fileNames: ["toolbox/src/demo/examples/ICM/TeleporterMessenger.tsx"]
         },
         {
             id: "teleporterRegistry",
             label: "Teleporter Registry",
-            component: TeleporterRegistry,
+            component: lazy(() => import('./examples/ICM/TeleporterRegistry')),
             fileNames: ["toolbox/src/demo/examples/ICM/TeleporterRegistry.tsx"]
+        },
+        {
+            id: "deployICMSenderRecever",
+            label: "Deploy ICMSenderRecever",
+            component: lazy(() => import('./examples/ICM/DeployICMSenderRecever')),
+            fileNames: ["toolbox/src/demo/examples/ICM/DeployICMSenderRecever.tsx"]
+        },
+        {
+            id: "testICM",
+            label: "Test ICM",
+            component: lazy(() => import('./examples/ICM/testICM')),
+            fileNames: ["toolbox/src/demo/examples/ICM/testICM.tsx"]
         }
     ],
     "Docs": [
         {
             id: 'createL1Guide',
             label: "Create L1",
-            component: CreateL1,
-            fileNames: ["toolbox/src/demo/examples/Docs/CreateL1.tsx"],
+            component: lazy(() => import('./examples/Docs/CreateL1')),
+            fileNames: [],
             skipWalletConnection: true,
         }
     ],
@@ -269,15 +260,16 @@ export default function ToolboxApp() {
                             <ul className="space-y-1">
                                 {components.map(({ id, label }) => (
                                     <li key={id}>
-                                        <div
+                                        <a
+                                            href={`#${id}`}
                                             onClick={() => handleComponentClick(id)}
-                                            className={`cursor-pointer w-full text-left px-3 py-2 text-sm rounded-md transition-all ${selectedTool === id
+                                            className={`block cursor-pointer w-full text-left px-3 py-2 text-sm rounded-md transition-all ${selectedTool === id
                                                 ? 'bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-medium'
                                                 : ' dark: hover:bg-gray-50 dark:hover:bg-gray-800'
                                                 }`}
                                         >
                                             {label}
-                                        </div>
+                                        </a>
                                     </li>
                                 ))}
                             </ul>

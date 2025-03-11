@@ -7,6 +7,7 @@ import { useExampleStore } from "../../utils/store";
 import TeleporterMessengerDeploymentTransaction from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployment_Transaction_v1.0.0.txt.json';
 import TeleporterMessengerDeployerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployer_Address_v1.0.0.txt.json';
 import TeleporterMessengerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Contract_Address_v1.0.0.txt.json';
+import KnownChainIDWarning from "../../ui/KnownChainIDWarning";
 
 const MINIMUM_BALANCE = parseEther('11');
 
@@ -239,18 +240,8 @@ export default function TeleporterMessenger() {
                     />
                 )}
 
-                {knownNetworks[walletChainId] && (
-                    <div className="py-4">
-                        ⚠️ Warning: You are connected to {knownNetworks[walletChainId]}, not to your L1.
-                    </div>
-                )}
+                <KnownChainIDWarning walletChainId={walletChainId} />
             </div>
         </div>
     );
 }
-
-const knownNetworks: Record<number, string> = {
-    43114: "Avalanche Mainnet",
-    43113: "Avalanche Fuji Testnet",
-    43117: "Avalanche Devnet",
-};
