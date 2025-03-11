@@ -59,7 +59,7 @@ export function TimeZoneSelect() {
       <Label htmlFor="timezone" className="pr-3 dark:text-zinc-50 text-zinc-900">Time Zone: </Label>
       <Select value={selectedTimezone} onValueChange={setSelectedTimezone}>
         <SelectTrigger className="w-[270px] [&>svg]:text-zinc-400 rounded-md" id="timezone" color="#a1a1aa">
-          <AlarmClock className="h-5 w-5" color="#a1a1aa" /** text-zinc-400 = #a1a1aa */ />
+          <AlarmClock className="h-5 w-5 !text-zinc-600 dark:!text-zinc-400" /** text-zinc-400 = #a1a1aa */ />
           <SelectValue placeholder="Select timezone" color="#a1a1aa" />
         </SelectTrigger>
         <SelectContent color="#a1a1aa">
