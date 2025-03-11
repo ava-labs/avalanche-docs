@@ -14,7 +14,7 @@ export function GithubEmbed({ filePath, user, repo, maxHeight }: GithubEmbedProp
     const [code, setCode] = useState<string>('');
     const [error, setError] = useState<string>('');
 
-    const branch = import.meta.env.VITE_GIT_BRANCH_NAME || "master"
+    const branch = import.meta.env?.VITE_GIT_BRANCH_NAME || "master"
 
     const lang = filePath.split('.').pop()?.toLowerCase() || 'unknown';
 
