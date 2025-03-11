@@ -1,4 +1,4 @@
-//Original: https://github.com/ava-labs/avalanche-starter-kit/blob/21e0481966167736d616397ff09b52b0b2cc2398/contracts/interchain-messaging/send-roundtrip/receiverOnSubnet.solhttps://github.com/ava-labs/avalanche-starter-kit/blob/21e0481966167736d616397ff09b52b0b2cc2398/contracts/interchain-messaging/send-roundtrip/receiverOnSubnet.sol
+//Original: https://github.com/ava-labs/avalanche-starter-kit/blob/21e0481966167736d616397ff09b52b0b2cc2398/contracts/interchain-messaging/send-receive/receiverOnSubnet.sol
 
 // (c) 2023, Ava Labs, Inc. All rights reserved.
 // See the file LICENSE for licensing terms.
@@ -14,9 +14,11 @@ contract ReceiverOnSubnet is ITeleporterReceiver {
     ITeleporterMessenger public immutable messenger =
         ITeleporterMessenger(0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf);
 
+    string public lastMessage;
+
     function receiveTeleporterMessage(
-        bytes32 sourceBlockchainID,
-        address originSenderAddress,
+        bytes32,
+        address,
         bytes calldata message
     ) external {
         // Only the Teleporter receiver can deliver a message.
@@ -25,25 +27,7 @@ contract ReceiverOnSubnet is ITeleporterReceiver {
             "ReceiverOnSubnet: unauthorized TeleporterMessenger"
         );
 
-        // Send Roundtrip message back to sender
-        string memory response = string.concat(
-            abi.decode(message, (string)),
-            " World!"
-        );
-
-        messenger.sendCrossChainMessage(
-            TeleporterMessageInput({
-                // Blockchain ID of C-Chain
-                destinationBlockchainID: sourceBlockchainID,
-                destinationAddress: originSenderAddress,
-                feeInfo: TeleporterFeeInfo({
-                    feeTokenAddress: address(0),
-                    amount: 0
-                }),
-                requiredGasLimit: 100000,
-                allowedRelayerAddresses: new address[](0),
-                message: abi.encode(response)
-            })
-        );
+        // Store the message.
+        lastMessage = abi.decode(message, (string));
     }
 }
