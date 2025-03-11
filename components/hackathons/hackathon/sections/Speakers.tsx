@@ -3,14 +3,14 @@ import { HackathonHeader } from "@/types/hackathons";
 import React from "react";
 import { DynamicIcon } from "lucide-react/dynamic";
 
-function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
+function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
   return (
     <section className="px-4" id="speakers">
       <div className="bg-zinc-900 p-16 flex flex-col gap-4">
         <div className="flex items-center">
           <div className="w-[45%] pr-16">
             <h2 className="text-4xl font-bold mb-8 text-zinc-100" >
-              Speakers & Judges
+              Mentors & Judges
             </h2>
             <p className="text-zinc-100">
               Connect with top industry leaders, judges, and mentors. Learn from
@@ -44,4 +44,4 @@ function Speakers({ hackathon }: { hackathon: HackathonHeader }) {
     </section>
   );
 }
-export default Speakers;
+export default MentorsJudges;
