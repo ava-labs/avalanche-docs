@@ -52,10 +52,6 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-
-      isActive
-        ? " border border-red-500 hover:border-red-600" 
-        : "", 
       className
     )}
     {...props}
@@ -90,7 +86,7 @@ const PaginationNext = ({
     {...props}
   >
     <span>Next</span>
-    <ChevronRight className="h-4 w-4 text-white" />
+    <ChevronRight className="h-4 w-4" />
   </PaginationLink>
 )
 PaginationNext.displayName = "PaginationNext"
@@ -113,9 +109,9 @@ PaginationEllipsis.displayName = "PaginationEllipsis"
 export {
   Pagination,
   PaginationContent,
-  PaginationLink,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext,
   PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
 }
