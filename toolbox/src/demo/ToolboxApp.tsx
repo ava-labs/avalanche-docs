@@ -136,19 +136,21 @@ const componentGroups: Record<string, ComponentType[]> = {
             fileNames: ["toolbox/src/demo/examples/ICM/TeleporterRegistry.tsx"]
         },
         {
-            id: "deployICMSenderRecever",
-            label: "Deploy ICMSenderRecever",
-            component: lazy(() => import('./examples/ICM/TestICM')),
-            fileNames: ["toolbox/src/demo/examples/ICM/DeployICMSenderRecever.tsx"]
+            id: "receiverOnSubnet",
+            label: "ReceiverOnSubnet",
+            component: lazy(() => import('./examples/ICM/ReceiverOnSubnet')),
+            fileNames: [
+                "toolbox/src/demo/examples/ICM/DeployReceiver.tsx",
+                "toolbox/contracts/example-contracts/contracts/receiverOnSubnet.sol",
+            ]
         },
         {
-            id: "testICM",
-            label: "Test ICM",
-            component: lazy(() => import('./examples/ICM/TestICM')),
+            id: "sendICMMessage",
+            label: "Send ICM Message",
+            component: lazy(() => import('./examples/ICM/SendICMMessage')),
             fileNames: [
-                "toolbox/src/demo/examples/ICM/TestICM.tsx",
-                "toolbox/contracts/example-contracts/contracts/receiverOnSubnet.sol",
-                "toolbox/contracts/example-contracts/contracts/senderOnCChain.sol"
+                "toolbox/src/demo/examples/ICM/SendICMMessage.tsx",
+                "toolbox/contracts/example-contracts/contracts/senderOnCChain.sol",
             ]
         }
     ],
