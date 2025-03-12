@@ -6,9 +6,9 @@ type Props = {
 
 export default function HackathonStatus({ status }: Props) {
   const statusColors: Record<string, string> = {
-    Ongoing: "border-green-500",
-    Upcoming: "border-yellow-500",
-    Ended: "border-red-500",
+    ONGOING: "border-green-500",
+    UPCOMING: "border-yellow-500",
+    ENDED: "border-red-500",
   };
   return (
     <div className="flex items-center gap-2 font-semibold">

@@ -33,15 +33,15 @@ export default function OverviewBanner({ hackathon, id }: Props) {
           <Link href={`/hackathons/registration-form`}>JOIN NOW</Link>
         </Button>
         <div className="flex flex-col w-[90%]">
-          <div className="flex flex-col gap-2 w-[80%]">
-            <div className="flex justify-between gap-2 text-gray-400">
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-start gap-8 text-gray-400">
               <Calendar size={20} color="#F5F5F9" />
               <span className="text-sm text-zinc-50">
                 {format(hackathon.start_date, "MMMM d")} -{" "}
                 {format(hackathon.end_date, "d, yyyy")}
               </span>
             </div>
-            <div className="flex justify-between gap-2 text-gray-400">
+            <div className="flex justify-start gap-8 text-gray-400">
               <MapPin size={20} color="#F5F5F9" />
               <span className="text-sm text-zinc-300">
                 {hackathon.location}

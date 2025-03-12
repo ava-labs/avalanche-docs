@@ -142,7 +142,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
         Schedule
       </h2>
       <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
-      <span className="text-zinc-50 text-lg font-medium sm:text-base">
+      <span className="dark:text-zinc-50 text-zinc-900 text-lg font-medium sm:text-base">
         {getDateRange(mockActivities)}
       </span>
       <div className="flex flex-col lg:flex-row justify-between gap-4 md:gap-10 mt-4 min-w-full">
