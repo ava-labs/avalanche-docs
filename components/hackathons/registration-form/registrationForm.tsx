@@ -129,9 +129,9 @@ export function RegisterForm() {
         Builders Hub - Registration Page (Step {step}/3)
       </h2>
       {/* progress bar */}
-      <div className='relative w-full h-1 bg-white dark:bg-zinc-900 mb-4'>
+      <div className='relative w-full h-1 bg-zinc-300 dark:bg-zinc-900 mb-4'>
         <div
-          className={`absolute h-full bg-zinc-800  dark:bg-white ${progressPosition()} w-1/3 transition-all duration-300`}
+          className={`absolute h-full bg-zinc-800  dark:bg-zinc-300 ${progressPosition()} w-1/3 transition-all duration-300`}
         />
       </div>
       <Form {...form}>
@@ -139,15 +139,16 @@ export function RegisterForm() {
           onSubmit={form.handleSubmit(handleSubmit)}
           className='space-y-6'
         >
+          <div>
           {step === 1 && <RegisterFormStep1 cities={cities} />}
           {step === 2 && <RegisterFormStep2 />}
           {step === 3 && <RegisterFormStep3 />}
-
-          <div className='flex-1 bg-zinc-800 px-4 gap-[10px]'>
-            <Separator />
           </div>
+          <div className="w-full h-px bg-zinc-300 mt-4"/>{""} 
+          <Separator className='border-red-300 dark:border-red-300'/>
+          
 
-          <div className=' mt-8 gap-[10px] pt-8  flex justify-between items-center pl-0 border-gray-800'>
+          <div className=' mt-8 gap-[10px] pt-8  flex justify-between items-center pl-0 '>
             <div className='flex gap-x-4'>
               <Button
                 variant='outline'

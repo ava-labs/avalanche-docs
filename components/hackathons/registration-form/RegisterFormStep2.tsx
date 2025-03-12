@@ -20,8 +20,6 @@ import { useFormContext } from "react-hook-form";
 import { RegisterFormValues } from "./registrationForm"; // Asegúrate de que la ruta sea correcta
 import { Check } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
-
 
 export function RegisterFormStep2() {
   const form = useFormContext<RegisterFormValues>();
@@ -74,7 +72,10 @@ export function RegisterFormStep2() {
   ];
 
   // Función para formatear los valores seleccionados en el SelectTrigger
-  const formatSelectedValues = (values: string[], options: { value: string; label: string }[]) => {
+  const formatSelectedValues = (
+    values: string[],
+    options: { value: string; label: string }[]
+  ) => {
     if (!values || values.length === 0) return "Select one or more options";
     if (values.length === 1) {
       const selectedOption = options.find((o) => o.value === values[0]);
@@ -89,11 +90,11 @@ export function RegisterFormStep2() {
         <h3 className="text-lg font-semibold text-foreground">
           Step 2: Experience & Skills
         </h3>
-        <p className="text-zinc-400">
+        <p className="text-zinc-600">
           Share your skills and expertise to tailor your experience on Builders
           Hub.
         </p>
-        <div className="w-full h-px bg-zinc-800 mt-2" />{" "}
+        <div className="w-full h-px bg-zinc-300 mt-2" />{" "}
         {/* Línea gris debajo */}
       </div>
       {/* Step 2: Conocimientos y Participación en Web3 y Hackatones */}
@@ -107,11 +108,11 @@ export function RegisterFormStep2() {
             </FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="text-zinc-600">
                   <SelectValue placeholder="Select your Web3 knowledge level" />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600  placeholder-zinc-600 text-zinc-600 rounded-md shadow-md">
                 {web3ProficiencyOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
@@ -119,7 +120,7 @@ export function RegisterFormStep2() {
                 ))}
               </SelectContent>
             </Select>
-            <FormMessage className="text-zinc-400">
+            <FormMessage className="text-zinc-600">
               Rate your experience from beginner to expert.
             </FormMessage>
           </FormItem>
@@ -133,7 +134,7 @@ export function RegisterFormStep2() {
           <FormItem>
             <FormLabel>Which of the following best describes you?</FormLabel>
             <Select
-              onValueChange={(value:string) => {
+              onValueChange={(value: string) => {
                 const currentValues = Array.isArray(field.value)
                   ? field.value
                   : [];
@@ -145,8 +146,8 @@ export function RegisterFormStep2() {
               value=""
             >
               <FormControl>
-                <SelectTrigger>
-                  <SelectValue  
+                <SelectTrigger className="text-zinc-600">
+                  <SelectValue
                     placeholder={formatSelectedValues(
                       field.value as string[],
                       roleOptions
@@ -156,7 +157,7 @@ export function RegisterFormStep2() {
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
+              <SelectContent className="bg-white dark:bg-black  border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
                 {roleOptions.map((option) => (
                   <SelectItem
                     key={option.value}
@@ -174,12 +175,14 @@ export function RegisterFormStep2() {
                 ))}
               </SelectContent>
             </Select>
-            <FormMessage className="text-zinc-400">
+            <FormMessage className="text-zinc-600">
               Choose roles that best represent your expertise.
             </FormMessage>
           </FormItem>
         )}
       />
+
+      {/* Interest*/}
       <FormField
         control={form.control}
         name="interests"
@@ -187,7 +190,7 @@ export function RegisterFormStep2() {
           <FormItem>
             <FormLabel>What are you most interested in within Web3?</FormLabel>
             <Select
-              onValueChange={(value:string) => {
+              onValueChange={(value: string) => {
                 const currentValues = Array.isArray(field.value)
                   ? field.value
                   : [];
@@ -199,7 +202,7 @@ export function RegisterFormStep2() {
               value=""
             >
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="text-zinc-600">
                   <SelectValue
                     placeholder={formatSelectedValues(
                       field.value as string[],
@@ -213,7 +216,7 @@ export function RegisterFormStep2() {
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
+              <SelectContent className="bg-white dark:bg-black  border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
                 {interestOptions.map((option) => (
                   <SelectItem
                     key={option.value}
@@ -245,7 +248,7 @@ export function RegisterFormStep2() {
           <FormItem>
             <FormLabel>Which tools are you familiar with?</FormLabel>
             <Select
-              onValueChange={(value:string) => {
+              onValueChange={(value: string) => {
                 const currentValues = Array.isArray(field.value)
                   ? field.value
                   : [];
@@ -257,7 +260,7 @@ export function RegisterFormStep2() {
               value=""
             >
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="text-zinc-600">
                   <SelectValue
                     placeholder={formatSelectedValues(
                       field.value as string[],
@@ -268,7 +271,7 @@ export function RegisterFormStep2() {
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md" >
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
                 {toolOptions.map((option) => (
                   <SelectItem
                     key={option.value}
@@ -286,7 +289,7 @@ export function RegisterFormStep2() {
                 ))}
               </SelectContent>
             </Select>
-            <FormMessage className="text-zinc-400">
+            <FormMessage className="text-zinc-600">
               Select platforms or technologies you have experience with.
             </FormMessage>
           </FormItem>
@@ -302,7 +305,7 @@ export function RegisterFormStep2() {
               Which programming languages are you familiar with?
             </FormLabel>
             <Select
-              onValueChange={(value:string) => {
+              onValueChange={(value: string) => {
                 const currentValues = Array.isArray(field.value)
                   ? field.value
                   : [];
@@ -314,7 +317,7 @@ export function RegisterFormStep2() {
               value=""
             >
               <FormControl>
-                <SelectTrigger>
+                <SelectTrigger className="text-zinc-600">
                   <SelectValue
                     placeholder={formatSelectedValues(
                       field.value as string[],
@@ -328,7 +331,7 @@ export function RegisterFormStep2() {
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black  border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
                 {languageOptions.map((option) => (
                   <SelectItem
                     key={option.value}
@@ -338,7 +341,7 @@ export function RegisterFormStep2() {
                     <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
                       {Array.isArray(field.value) &&
                         field.value.includes(option.value) && (
-                          <Check className="h-4 w-4 text-white" />
+                          <Check className="h-4 w-4 text-zinc-600" />
                         )}
                     </span>
                     <span>{option.label}</span>
@@ -346,29 +349,25 @@ export function RegisterFormStep2() {
                 ))}
               </SelectContent>
             </Select>
-            <FormMessage className="text-zinc-400">
+            <FormMessage className="text-zinc-600">
               Choose all that apply.
             </FormMessage>
           </FormItem>
         )}
       />
 
-      <div className="flex-1 bg-zinc-800 px-4 gap-[10px]">
-        <Separator />
-      </div>
-      <div className="mb-6">
+    <div className="w-full h-px bg-zinc-200 mt-4"/>{""} 
+      <div className="">
         <h3 className="text-lg font-semibold text-foreground ">
           Hackathon Participation
         </h3>
-        <FormMessage className="text-zinc-400 ">
+        <FormMessage className="text-zinc-600 ">
           Tell us about your hackathon experience to help us customize your
           journey on Builders Hub.
         </FormMessage>
       </div>
 
-      <div className="flex-1 bg-zinc-800 px-4 gap-[10px]">
-        <Separator />
-      </div>
+      <div className="w-full h-px bg-zinc-300 mt-4"/>{""} 
       <div className="mt-4 pt-8">
         <FormField
           control={form.control}
@@ -380,7 +379,7 @@ export function RegisterFormStep2() {
               </FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className="text-zinc-600">
                     <SelectValue placeholder="Select an option" />
                   </SelectTrigger>
                 </FormControl>
@@ -392,7 +391,7 @@ export function RegisterFormStep2() {
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage className="text-zinc-400">
+              <FormMessage className="text-zinc-600">
                 Let us know if this is your first hackathon or if you have prior
                 experience.
               </FormMessage>
@@ -412,14 +411,14 @@ export function RegisterFormStep2() {
                     type="url"
                     placeholder="Enter your GitHub or Portfolio link"
                     {...field}
-                    className="pr-10"
+                    className="bg-transparent placeholder-zinc-600 pr-10"
                   />
-                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-400">
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-600">
                     🔗
                   </span>
                 </div>
               </FormControl>
-              <FormMessage className="text-zinc-400">
+              <FormMessage className="text-zinc-600">
                 Provide a link to showcase your past work.
               </FormMessage>
             </FormItem>

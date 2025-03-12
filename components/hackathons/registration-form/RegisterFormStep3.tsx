@@ -22,7 +22,7 @@ export function RegisterFormStep3() {
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-foreground">Step 3: Terms & Agreements</h3>
         <p className="text-zinc-400">Review and agree to the terms to complete your registration.</p>
-        <div className="w-full h-px bg-zinc-800 mt-2" /> 
+        <div className="w-full h-px bg-zinc-300 mt-2" /> 
       </div>
       <div className="space-y-6">
 

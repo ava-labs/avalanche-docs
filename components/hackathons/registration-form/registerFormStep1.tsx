@@ -29,7 +29,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
         <p className="text-zinc-400">
           Provide your personal details to create your Builders Hub profile.
         </p>
-        <div className="w-full h-px bg-zinc-800 mt-2" />{" "}
+        <div className="w-full h-px bg-zinc-300 mt-2" />{" "}
   
       </div>
       {/* Full Name or Nickname */}
@@ -42,7 +42,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
             <FormControl>
               <Input
                 placeholder="Enter your full name or preferred display name"
-                className="bg-transparent "
+                className="bg-transparent placeholder-zinc-600  "
                 {...field}
               />
             </FormControl>
@@ -65,10 +65,10 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
                 type="email"
                 placeholder="your@email.com"
                 {...field}
-                className="bg-transparent "
+                className="bg-transparent placeholder-zinc-600"
               />
             </FormControl>
-            <FormMessage className="text-zinc-400">
+            <FormMessage className="text-zinc-600">
               This email will be used for login and communications.
             </FormMessage>
           </FormItem>
@@ -86,7 +86,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
               <Input
                 placeholder="Enter your company name"
                 {...field}
-                className="bg-transparent "
+                className="bg-transparent placeholder-zinc-600"
               />
             </FormControl>
             <FormMessage className="text-zinc-400">
@@ -108,7 +108,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
               <Input
                 placeholder="Your role"
                 {...field}
-                className="bg-transparent "
+                className="bg-transparent placeholder-zinc-600 "
               />
             </FormControl>
           </FormItem>
@@ -124,13 +124,14 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
             <FormLabel>City of Residence</FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your city" />
+                <SelectTrigger className="text-zinc-600">
+                  <SelectValue placeholder="Select your city"  className="placeholder-zinc-600"/>
                 </SelectTrigger>
               </FormControl>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600  placeholder-zinc-600 text-zinc-600 rounded-md shadow-md" >
                 {cities.map((city) => (
-                  <SelectItem key={city} value={city}>
+                  <SelectItem  className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50" 
+                  key={city} value={city}>
                     {city}
                   </SelectItem>
                 ))}
@@ -154,7 +155,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
               <Input
                 type="password"
                 placeholder="Enter a secure password"
-                className="bg-transparent "
+                className="bg-transparent placeholder-zinc-600 "
                 {...field}
               />
             </FormControl>
@@ -175,7 +176,7 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
             <FormLabel>Confirm Password</FormLabel>
             <FormControl>
               <Input
-                className="bg-transparent "
+                className="bg-transparent placeholder-zinc-600"
                 type="password"
                 placeholder="Re-enter your password"
                 {...field}
@@ -199,11 +200,11 @@ export default function RegisterFormStep1({ cities }: { cities: string[] }) {
             <FormControl>
               <Input
                 placeholder="Enter any dietary restrictions (if applicable)"
-                className="bg-transparent "
+                className="bg-transparent placeholder-zinc-600"
                 {...field}
               />
             </FormControl>
-            <FormMessage className="text-zinc-400">
+            <FormMessage className="text-zinc-600">
               If you have allergies or dietary needs, please specify them here.
             </FormMessage>
           </FormItem>
