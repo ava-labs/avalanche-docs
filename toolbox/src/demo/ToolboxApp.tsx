@@ -120,6 +120,13 @@ const componentGroups: Record<string, ComponentType[]> = {
             component: lazy(() => import('./examples/Nodes/RPCUrlForChain')),
             fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
             skipWalletConnection: true,
+        },
+        {
+            id: "performanceMonitor",
+            label: "Performance Monitor",
+            component: lazy(() => import('./examples/Nodes/PerformanceMonitor')),
+            fileNames: ["toolbox/src/demo/examples/Nodes/PerformanceMonitor.tsx"],
+            skipWalletConnection: true,
         }
     ],
     "ICM": [
@@ -251,7 +258,7 @@ export default function ToolboxApp() {
                                 key={index}
                                 user="ava-labs"
                                 repo="avalanche-docs"
-                                branch="l1-toolbox"
+                                branch={import.meta.env?.VITE_GIT_BRANCH_NAME || "master"}
                                 filePath={fileName}
                                 maxHeight={600}
                             />

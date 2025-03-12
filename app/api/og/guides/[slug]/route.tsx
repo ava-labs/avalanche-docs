@@ -24,8 +24,8 @@ export async function GET(
 
   return new ImageResponse(
     OG({
-      title: title ?? 'Avalanche Academy',
-      description: description ?? 'The Learning Platform for Avalanche Ecosystem.'
+      title: title ?? 'Builders Hub Guides',
+      description: description ?? 'Avalanche development guides and tutorials.'
     }),
     {
       width: 1280,
@@ -41,7 +41,14 @@ function OG({
 }: {
   title: string;
   description: string;
-}): React.ReactElement {  
+}): React.ReactElement {
+  const truncateText: React.CSSProperties = {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+  };
+
   return (
     <div
       style={{
@@ -77,7 +84,7 @@ function OG({
             color: 'black',
           }}
         >
-          {title}
+          <span style={{ ...truncateText, WebkitLineClamp: 2}}>{title}</span>
         </h1>
         
         <p
@@ -91,7 +98,7 @@ function OG({
             fontFamily: "Geist-Light" 
           }}
         >
-          {description}
+          <span style={{ ...truncateText, WebkitLineClamp: 3}}>{description}</span>
         </p>
         
         <div
@@ -133,7 +140,7 @@ function OG({
                 />
               </g>
             </svg>
-            <span style={{paddingLeft: "10px"}}>build.avax.network/<span style={{color: "red"}}>academy</span></span>
+            <span style={{paddingLeft: "10px"}}>build.avax.network/<span style={{color: "red"}}>guides</span></span>
           </div>
         </div>
       </div>

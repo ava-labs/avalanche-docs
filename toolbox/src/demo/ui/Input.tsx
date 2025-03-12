@@ -14,6 +14,9 @@ export type InputProps = {
     notes?: string | null;
     button?: React.ReactNode;
     validator?: (value: string) => string | undefined;
+    step?: number;
+    min?: number;
+    max?: number;
 }
 export type TextareaProps = InputProps & {
     rows?: number;
@@ -22,7 +25,13 @@ export type TextareaProps = InputProps & {
 
 
 export function Input(props: InputProps | TextareaProps) {
-    const { label, type, className, onChange, disabled, value, placeholder, error, notes, button, validator } = props;
+    const { label, type, className, onChange, disabled, value, placeholder, error, notes, button, step, min, max, validator } = props;
+
+    React.useEffect(() => {
+        if (step !== undefined && type !== 'number') {
+            throw new Error('Step property can only be used with inputs of type "number"');
+        }
+    }, [step, type]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         onChange?.(e.target.value);
@@ -66,6 +75,7 @@ export function Input(props: InputProps | TextareaProps) {
                         value={value}
                         placeholder={placeholder}
                         rows={type === 'textarea' ? (props as TextareaProps).rows : undefined}
+
                     />
                 ) : (
                     <input
@@ -79,6 +89,9 @@ export function Input(props: InputProps | TextareaProps) {
                         disabled={disabled}
                         value={value}
                         placeholder={placeholder}
+                        step={type === 'number' ? step : undefined}
+                        min={min}
+                        max={max}
                     />
                 )}
                 {button && (
