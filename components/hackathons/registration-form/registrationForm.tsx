@@ -7,14 +7,17 @@ import {
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Separator } from '@/components/ui/separator';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { cn } from '@/utils/cn';
 import { RegisterFormStep3 } from './RegisterFormStep3';
-
 import { RegisterFormStep2 } from './RegisterFormStep2';
-import RegisterFormStep1 from './registerFormStep1';
+import RegisterFormStep1 from './RegisterFormStep1';
+import { RegisterFormProps } from '@/types/registerFormProps';
+import { useSession } from 'next-auth/react';
+import { User } from 'next-auth';
+
 
 
 export const registerSchema = z.object({
@@ -31,13 +34,6 @@ export const registerSchema = z.object({
   hackathonParticipation: z.string(),
   dietary: z.string(),
   githubPortfolio: z.string().url('Set a valid URL').optional(),
-  password: z
-    .string()
-    .min(8, 'The password must be at least 8 characters long')
-    .regex(/[A-Z]/, 'Must include an uppercase letter')
-    .regex(/[0-9]/, 'Must include a number')
-    .regex(/[^A-Za-z0-9]/, 'Must include a symbol'),
-  confirmPassword: z.string().min(1, 'Confirm password is required'),
   termsEventConditions: z.boolean().refine((value) => value === true, {
     message: 'You must accept the Event Terms and Conditions to continue.',
   }),
@@ -45,18 +41,40 @@ export const registerSchema = z.object({
   prohibitedItems: z.boolean().refine((value) => value === true, {
     message: 'You must agree not to bring prohibited items to continue.',
   }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: 'Passwords do not match',
-  path: ['confirmPassword'],
 });
 
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export function RegisterForm() {
+  const { data: session,status } = useSession();
+  // Use session.user directly, with fallback to undefined if not available
+  const currentUser: User | undefined = session?.user;
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
   const cities = ['Bogota', 'Medellin', 'Valencia', 'Londres', 'Bilbao'];
+  const form = useForm<RegisterFormValues>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name:  currentUser?.name || '',
+      email: currentUser?.email || '',
+      companyName: '',
+      role:  '',
+      city: ''
+    
+    },
+  });
+  useEffect(() => {
+    if (status === 'authenticated' && currentUser) {
+      form.reset({
+        name: currentUser?.name || '',
+        email: currentUser?.email || '',
+        companyName: '',
+        role: '',
+        city: '',
+      });
+    }
+  }, [status, currentUser, form]);
 
   const progressPosition = () => {
     switch (step) {
@@ -71,19 +89,7 @@ export function RegisterForm() {
     }
   };
 
-  const form = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      companyName: '',
-      role: '',
-      city: '',
-      password: '',
-      confirmPassword: '',
-      
-    },
-  });
+
 
   const handleStepChange = (newStep: number) => {
    
@@ -140,7 +146,7 @@ export function RegisterForm() {
           className='space-y-6'
         >
           <div>
-          {step === 1 && <RegisterFormStep1 cities={cities} />}
+          {step === 1 && <RegisterFormStep1 cities={cities} user={session?.user}/>}
           {step === 2 && <RegisterFormStep2 />}
           {step === 3 && <RegisterFormStep3 />}
           </div>

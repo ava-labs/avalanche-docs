@@ -15,11 +15,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"; // Usa la implementación de Shadcn/UI
+} from "@/components/ui/select";
 import { useFormContext } from "react-hook-form";
-import { RegisterFormValues } from "./registrationForm"; // Asegúrate de que la ruta sea correcta
+import { RegisterFormValues } from "./RegistrationForm";
 import { Check } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 
 export function RegisterFormStep2() {
   const form = useFormContext<RegisterFormValues>();
@@ -91,339 +90,305 @@ export function RegisterFormStep2() {
           Step 2: Experience & Skills
         </h3>
         <p className="text-zinc-600">
-          Share your skills and expertise to tailor your experience on Builders
-          Hub.
+          Share your skills and expertise to tailor your experience on Builders Hub.
         </p>
-        <div className="w-full h-px bg-zinc-300 mt-2" />{" "}
-        {/* Línea gris debajo */}
-      </div>
-      {/* Step 2: Conocimientos y Participación en Web3 y Hackatones */}
-      <FormField
-        control={form.control}
-        name="web3Proficiency"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>
-              What is your proficiency with Web3? (Amateur, 5 = Expert)
-            </FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger className="text-zinc-600">
-                  <SelectValue placeholder="Select your Web3 knowledge level" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600  placeholder-zinc-600 text-zinc-600 rounded-md shadow-md">
-                {web3ProficiencyOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage className="text-zinc-600">
-              Rate your experience from beginner to expert.
-            </FormMessage>
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="roles"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Which of the following best describes you?</FormLabel>
-            <Select
-              onValueChange={(value: string) => {
-                const currentValues = Array.isArray(field.value)
-                  ? field.value
-                  : [];
-                const newValues = currentValues.includes(value)
-                  ? currentValues.filter((v) => v !== value)
-                  : [...currentValues, value];
-                field.onChange(newValues);
-              }}
-              value=""
-            >
-              <FormControl>
-                <SelectTrigger className="text-zinc-600">
-                  <SelectValue
-                    placeholder={formatSelectedValues(
-                      field.value as string[],
-                      roleOptions
-                    )}
-                  >
-                    {formatSelectedValues(field.value as string[], roleOptions)}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-white dark:bg-black  border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
-                {roleOptions.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                  >
-                    <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                      {Array.isArray(field.value) &&
-                        field.value.includes(option.value) && (
-                          <Check className="h-4 w-4 " />
-                        )}
-                    </span>
-                    <span>{option.label}</span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage className="text-zinc-600">
-              Choose roles that best represent your expertise.
-            </FormMessage>
-          </FormItem>
-        )}
-      />
-
-      {/* Interest*/}
-      <FormField
-        control={form.control}
-        name="interests"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>What are you most interested in within Web3?</FormLabel>
-            <Select
-              onValueChange={(value: string) => {
-                const currentValues = Array.isArray(field.value)
-                  ? field.value
-                  : [];
-                const newValues = currentValues.includes(value)
-                  ? currentValues.filter((v) => v !== value)
-                  : [...currentValues, value];
-                field.onChange(newValues);
-              }}
-              value=""
-            >
-              <FormControl>
-                <SelectTrigger className="text-zinc-600">
-                  <SelectValue
-                    placeholder={formatSelectedValues(
-                      field.value as string[],
-                      interestOptions
-                    )}
-                  >
-                    {formatSelectedValues(
-                      field.value as string[],
-                      interestOptions
-                    )}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-white dark:bg-black  border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
-                {interestOptions.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                  >
-                    <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                      {Array.isArray(field.value) &&
-                        field.value.includes(option.value) && (
-                          <Check className="h-4 w-4 text-white" />
-                        )}
-                    </span>
-                    <span>{option.label}</span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage className="text-zinc-400">
-              Choose the topics you want to explore further.
-            </FormMessage>
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="tools"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Which tools are you familiar with?</FormLabel>
-            <Select
-              onValueChange={(value: string) => {
-                const currentValues = Array.isArray(field.value)
-                  ? field.value
-                  : [];
-                const newValues = currentValues.includes(value)
-                  ? currentValues.filter((v) => v !== value)
-                  : [...currentValues, value];
-                field.onChange(newValues);
-              }}
-              value=""
-            >
-              <FormControl>
-                <SelectTrigger className="text-zinc-600">
-                  <SelectValue
-                    placeholder={formatSelectedValues(
-                      field.value as string[],
-                      toolOptions
-                    )}
-                  >
-                    {formatSelectedValues(field.value as string[], toolOptions)}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
-                {toolOptions.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                  >
-                    <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                      {Array.isArray(field.value) &&
-                        field.value.includes(option.value) && (
-                          <Check className="h-4 w-4 text-white" />
-                        )}
-                    </span>
-                    <span>{option.label}</span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage className="text-zinc-600">
-              Select platforms or technologies you have experience with.
-            </FormMessage>
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="languages"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>
-              Which programming languages are you familiar with?
-            </FormLabel>
-            <Select
-              onValueChange={(value: string) => {
-                const currentValues = Array.isArray(field.value)
-                  ? field.value
-                  : [];
-                const newValues = currentValues.includes(value)
-                  ? currentValues.filter((v) => v !== value)
-                  : [...currentValues, value];
-                field.onChange(newValues);
-              }}
-              value=""
-            >
-              <FormControl>
-                <SelectTrigger className="text-zinc-600">
-                  <SelectValue
-                    placeholder={formatSelectedValues(
-                      field.value as string[],
-                      languageOptions
-                    )}
-                  >
-                    {formatSelectedValues(
-                      field.value as string[],
-                      languageOptions
-                    )}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-white dark:bg-black  border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
-                {languageOptions.map((option) => (
-                  <SelectItem
-                    key={option.value}
-                    value={option.value}
-                    className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                  >
-                    <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                      {Array.isArray(field.value) &&
-                        field.value.includes(option.value) && (
-                          <Check className="h-4 w-4 text-zinc-600" />
-                        )}
-                    </span>
-                    <span>{option.label}</span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage className="text-zinc-600">
-              Choose all that apply.
-            </FormMessage>
-          </FormItem>
-        )}
-      />
-
-    <div className="w-full h-px bg-zinc-200 mt-4"/>{""} 
-      <div className="">
-        <h3 className="text-lg font-semibold text-foreground ">
-          Hackathon Participation
-        </h3>
-        <FormMessage className="text-zinc-600 ">
-          Tell us about your hackathon experience to help us customize your
-          journey on Builders Hub.
-        </FormMessage>
+        <div className="w-full h-px bg-zinc-300 mt-2" />
       </div>
 
-      <div className="w-full h-px bg-zinc-300 mt-4"/>{""} 
-      <div className="mt-4 pt-8">
-        <FormField
-          control={form.control}
-          name="hackathonParticipation"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                Have you participated in any other hackathons before?
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+      {/* Two-column grid */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* Left Column */}
+        <div className="space-y-6">
+          <FormField
+            control={form.control}
+            name="web3Proficiency"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  What is your proficiency with Web3? (Amateur, 5 = Expert)
+                </FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="text-zinc-600">
+                      <SelectValue placeholder="Select your Web3 knowledge level" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-zinc-600 rounded-md shadow-md">
+                    {web3ProficiencyOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-zinc-600">
+                  Rate your experience from beginner to expert.
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="roles"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Which of the following best describes you?</FormLabel>
+                <Select
+                  onValueChange={(value: string) => {
+                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const newValues = currentValues.includes(value)
+                      ? currentValues.filter((v) => v !== value)
+                      : [...currentValues, value];
+                    field.onChange(newValues);
+                  }}
+                  value=""
+                >
+                  <FormControl>
+                    <SelectTrigger className="text-zinc-600">
+                      <SelectValue placeholder="Select one or more options">
+                        {formatSelectedValues(field.value as string[], roleOptions)}
+                      </SelectValue>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                    {roleOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
+                          {Array.isArray(field.value) && field.value.includes(option.value) && (
+                            <Check className="h-4 w-4" />
+                          )}
+                        </span>
+                        <span>{option.label}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-zinc-600">
+                  Choose roles that best represent your expertise.
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="interests"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>What are you most interested in within Web3?</FormLabel>
+                <Select
+                  onValueChange={(value: string) => {
+                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const newValues = currentValues.includes(value)
+                      ? currentValues.filter((v) => v !== value)
+                      : [...currentValues, value];
+                    field.onChange(newValues);
+                  }}
+                  value=""
+                >
+                  <FormControl>
+                    <SelectTrigger className="text-zinc-600">
+                      <SelectValue placeholder="Select your interests">
+                        {formatSelectedValues(field.value as string[], interestOptions)}
+                      </SelectValue>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                    {interestOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
+                          {Array.isArray(field.value) && field.value.includes(option.value) && (
+                            <Check className="h-4 w-4 text-white" />
+                          )}
+                        </span>
+                        <span>{option.label}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-zinc-400">
+                  Choose the topics you want to explore further.
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="tools"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Which tools are you familiar with?</FormLabel>
+                <Select
+                  onValueChange={(value: string) => {
+                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const newValues = currentValues.includes(value)
+                      ? currentValues.filter((v) => v !== value)
+                      : [...currentValues, value];
+                    field.onChange(newValues);
+                  }}
+                  value=""
+                >
+                  <FormControl>
+                    <SelectTrigger className="text-zinc-600">
+                      <SelectValue placeholder="Select tools you have used">
+                        {formatSelectedValues(field.value as string[], toolOptions)}
+                      </SelectValue>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                    {toolOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
+                          {Array.isArray(field.value) && field.value.includes(option.value) && (
+                            <Check className="h-4 w-4 text-white" />
+                          )}
+                        </span>
+                        <span>{option.label}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-zinc-600">
+                  Select platforms or technologies you have experience with.
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+        </div>
+
+        {/* Right Column */}
+        <div className="space-y-6">
+          <FormField
+            control={form.control}
+            name="languages"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Which programming languages are you familiar with?
+                </FormLabel>
+                <Select 
+                  onValueChange={(value: string) => {
+                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const newValues = currentValues.includes(value)
+                      ? currentValues.filter((v) => v !== value)
+                      : [...currentValues, value];
+                    field.onChange(newValues);
+                  }}
+                  value=""
+                >
+                  <FormControl>
+                    <SelectTrigger className="text-zinc-600">
+                      <SelectValue placeholder="Select programming languages">
+                        {formatSelectedValues(field.value as string[], languageOptions)}
+                      </SelectValue>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                    {languageOptions.map((option) => (
+                      <SelectItem
+                        key={option.value}
+                        value={option.value}
+                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
+                          {Array.isArray(field.value) && field.value.includes(option.value) && (
+                            <Check className="h-4 w-4 text-zinc-600" />
+                          )}
+                        </span>
+                        <span>{option.label}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-zinc-600">
+                  Choose all that apply.
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+
+          <div className="space-y-6">
+            <div className="w-full h-px bg-zinc-300" />
+            <div>
+              <h3 className="text-lg font-semibold text-foreground">
+                Hackathon Participation
+              </h3>
+              <FormMessage className="text-zinc-600">
+                Tell us about your hackathon experience to help us customize your journey on Builders Hub.
+              </FormMessage>
+            </div>
+            <div className="w-full h-px bg-zinc-300" />
+          </div>
+
+          <FormField
+            control={form.control}
+            name="hackathonParticipation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Have you participated in any other hackathons before?
+                </FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="text-zinc-600">
+                      <SelectValue placeholder="Select an option" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {hackathonParticipationOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-zinc-600">
+                  Let us know if this is your first hackathon or if you have prior experience.
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="githubPortfolio"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>What’s your GitHub or Portfolio account?</FormLabel>
                 <FormControl>
-                  <SelectTrigger className="text-zinc-600">
-                    <SelectValue placeholder="Select an option" />
-                  </SelectTrigger>
+                  <div className="relative">
+                    <Input
+                      type="url"
+                      placeholder="Enter your GitHub or Portfolio link"
+                      {...field}
+                      className="bg-transparent placeholder-zinc-600 pr-10"
+                    />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-600">
+                      🔗
+                    </span>
+                  </div>
                 </FormControl>
-                <SelectContent>
-                  {hackathonParticipationOptions.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage className="text-zinc-600">
-                Let us know if this is your first hackathon or if you have prior
-                experience.
-              </FormMessage>
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="githubPortfolio"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>What’s your GitHub or Portfolio account?</FormLabel>
-              <FormControl>
-                <div className="relative">
-                  <Input
-                    type="url"
-                    placeholder="Enter your GitHub or Portfolio link"
-                    {...field}
-                    className="bg-transparent placeholder-zinc-600 pr-10"
-                  />
-                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-600">
-                    🔗
-                  </span>
-                </div>
-              </FormControl>
-              <FormMessage className="text-zinc-600">
-                Provide a link to showcase your past work.
-              </FormMessage>
-            </FormItem>
-          )}
-        />
+                <FormMessage className="text-zinc-600">
+                  Provide a link to showcase your past work.
+                </FormMessage>
+              </FormItem>
+            )}
+          />
+        </div>
       </div>
     </>
   );

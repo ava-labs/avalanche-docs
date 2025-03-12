@@ -3,16 +3,18 @@ import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import TwitterProvider from 'next-auth/providers/twitter';
-import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend';
+import { MailerSend } from 'mailersend';
 import { prisma } from '../../prisma/prisma';
 import { JWT } from 'next-auth/jwt';
 import type { VerifyOTPResult } from '@/types/verifyOTPResult';
 
 declare module 'next-auth' {
-  interface Session {
+  export interface Session {
     user: {
-      id?: string;
+      id: string;
       avatar?: string;
+      role?:string;
+      email?:string;
     } & DefaultSession['user'];
   }
   interface JWT {
@@ -137,11 +139,15 @@ export const AuthOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
+      
       if (!session.user) {
-        session.user = { name: '', email: '', image: '' };
+        session.user = { name: '', email: '', image: '' ,id:""};
       }
       session.user.id = token.id as string;
       session.user.avatar = token.avatar as string;
+      session.user.name = token.name??"";
+      session.user.email = token.email??"";
+
       return session;
     },
   },

@@ -1,11 +1,12 @@
-'use client'
-import { SessionProvider } from 'next-auth/react';
-import Formlogin from './FormLogin';
+"use client";
+import { SessionProvider } from "next-auth/react";
+import Formlogin from "./FormLogin";
 
-export default function FormLoginWrapper() {
+
+export default function FormLoginWrapper({ callbackUrl = '/' }: { callbackUrl?: string }) {
   return (
     <SessionProvider>
-      <Formlogin />
+        <Formlogin callbackUrl={callbackUrl} />
     </SessionProvider>
   );
 }
