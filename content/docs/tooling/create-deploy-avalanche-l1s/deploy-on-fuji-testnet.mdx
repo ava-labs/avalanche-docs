@@ -131,10 +131,17 @@ Do these steps only to follow this tutorial for `Fuji` addresses. To access the 
 </Callout>
 
 1. A newly created key has no funds on it. Send funds via transfer to its correspondent addresses if you already have funds on a different address, or get it from the faucet at [`https://core.app/tools/testnet-faucet/`](https://core.app/tools/testnet-faucet/) using your **C-Chain address**. If you already have an AVAX balance greater than zero on Mainnet, paste your C-Chain address there, and request test tokens. Otherwise, please request a faucet coupon on [Guild](https://guild.xyz/avalanche). Admins and mods on the official [Discord](https://discord.com/invite/RwXY7P6) can provide testnet AVAX if developers are unable to obtain it from the other two options.
-2. Export your key via the `avalanche key export` command. The output is your private key, which will help you [import](https://support.avax.network/en/articles/6821877-core-extension-how-can-i-import-an-account) your account into the Core extension.
-3. Connect Core extension to [Core web](https://core.app/), and move the test funds from C-Chain to the P-Chain by clicking Stake, then Cross-Chain Transfer (find more details on [this tutorial](https://support.avax.network/en/articles/8133713-core-web-how-do-i-make-cross-chain-transfers-in-core-stake)).
-
-After following these 3 steps, your test key should now have a balance on the P-Chain on `Fuji` Testnet.
+2. Move AVAX from the C-Chain to the P-Chain:
+```bash
+avalanche key transfer --fuji --c-chain-sender --p-chain-receiver --key mytestkey --amount 2
+```
+Here’s what the flags mean:
+	•	`--fuji`: Perform this transfer on Fuji Testnet.
+	•	`--c-chain-sender`: The source of the AVAX (C-Chain).
+	•	`--p-chain-receiver`: The destination (P-Chain).
+	•	`--key mytestkey`: Use the private key named “mytestkey”.
+	•	`--amount 2`: Transfer 2 AVAX.
+Your C-Chain balance decreases by 2 AVAX (+fee), and your P-Chain balance increases by 2 AVAX.
 
 Create an EVM Avalanche L1[​](#create-an-evm-avalanche-l1 "Direct link to heading")
 -----------------------------------------------------------------------
