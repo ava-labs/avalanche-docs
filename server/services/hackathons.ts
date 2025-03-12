@@ -82,10 +82,38 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     const pageSize = options.pageSize ?? 10;
     const offset = (page - 1) * pageSize;
 
-    const filters: any = {};
+    let filters: any = {};
     if (options.location) filters.location = options.location;
     if (options.date) filters.date = options.date;
-    if (options.search) filters.title = { contains: options.search, mode: "insensitive" };
+    if (options.search) {
+        filters = {
+            ...filters,
+            OR: [
+                {
+                    title: {
+                        contains: options.search, mode: "insensitive"
+                    },
+                },
+                {
+                    location: {
+                        contains: options.search, mode: "insensitive"
+                    },
+                },
+                {
+                    description: {
+                        contains: options.search, mode: "insensitive"
+                    },
+                },
+                {
+                    tags: {
+                        has: options.search
+                    },
+                },
+            ]
+        }
+        // filters.title = { contains: options.search, mode: "insensitive" }
+    }
+    console.log('Filters: ', filters)
 
     const hackathonList = await prisma.hackathon.findMany({
         where: filters,

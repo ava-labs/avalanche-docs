@@ -137,7 +137,7 @@ export default function Hackathons({
               type="text"
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search by name, track or location"
-              className="w-full h-full px-3 pl-10 bg-transparent border border-zinc-300 dark:border-zinc-700 rounded-md text-white placeholder-zinc-500"
+              className="w-full h-full px-3 pl-10 bg-transparent border border-zinc-300 dark:border-zinc-700 rounded-md dark:text-zinc-50 text-zinc-900 placeholder-zinc-500"
             />
           </div>
           {/* Button */}
