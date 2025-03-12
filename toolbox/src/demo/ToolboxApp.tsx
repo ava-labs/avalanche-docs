@@ -146,7 +146,7 @@ const componentGroups: Record<string, ComponentType[]> = {
             label: "ReceiverOnSubnet",
             component: lazy(() => import('./examples/ICM/ReceiverOnSubnet')),
             fileNames: [
-                "toolbox/src/demo/examples/ICM/DeployReceiver.tsx",
+                "toolbox/src/demo/examples/ICM/ReceiverOnSubnet.tsx",
                 "toolbox/contracts/example-contracts/contracts/receiverOnSubnet.sol",
             ]
         },
