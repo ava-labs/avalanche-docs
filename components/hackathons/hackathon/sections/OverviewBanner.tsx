@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HackathonHeader } from "@/types/hackathons";
-import { addMonths, format } from "date-fns";
+import { format } from "date-fns";
 import { Calendar, MapPin, Users } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -13,6 +13,16 @@ type Props = {
 };
 
 export default function OverviewBanner({ hackathon, id }: Props) {
+  const startDate = new Date(hackathon.start_date);
+  const endDate = new Date(hackathon.end_date);
+
+  const startMonth = format(startDate, "MMMM");
+  const endMonth = format(endDate, "MMMM");
+
+  const formattedDate =
+    startMonth === endMonth
+      ? `${format(startDate, "MMMM d")} - ${format(endDate, "d, yyyy")}`
+      : `${format(startDate, "MMMM d")} - ${format(endDate, "MMMM d, yyyy")}`;
   return (
     <div className="z-10 h-full absolute flex flex-col justify-end bottom-20 left-[10%]  mb-[-30px]">
       <h1 className="text-6xl text-zinc-50 font-bold mb-2">
@@ -33,22 +43,19 @@ export default function OverviewBanner({ hackathon, id }: Props) {
           <Link href={`/hackathons/registration-form`}>JOIN NOW</Link>
         </Button>
         <div className="flex flex-col w-[90%]">
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-start gap-8 text-gray-400">
+          <div className="flex flex-col gap-2 w-[75%]">
+            <div className="flex justify-between gap-8 text-gray-400">
               <Calendar size={20} color="#F5F5F9" />
-              <span className="text-sm text-zinc-50">
-                {format(hackathon.start_date, "MMMM d")} -{" "}
-                {format(addMonths(hackathon.end_date, 2), "d, yyyy")}
-              </span>
+              <span className="text-sm text-zinc-50">{formattedDate}</span>
             </div>
-            <div className="flex justify-start gap-8 text-gray-400">
+            <div className="flex justify-between gap-8 text-gray-400">
               <MapPin size={20} color="#F5F5F9" />
               <span className="text-sm text-zinc-300">
                 {hackathon.location}
               </span>
             </div>
           </div>
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-4 mt-4">
             {hackathon.tags.map((tag, index) => (
               <Badge
                 key={index}

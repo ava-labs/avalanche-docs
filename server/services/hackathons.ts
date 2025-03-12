@@ -121,6 +121,8 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
         take: pageSize,
     });
 
+    console.log('Hackas: ', hackathonList)
+
     const hackathons = hackathonList.map(getHackathonLite);
     let hackathonsLite = hackathons
 
@@ -143,7 +145,10 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     });
 
     return {
-        hackathons: hackathonsLite,
+        hackathons: hackathonsLite.map((hackathon) => ({
+            ...hackathon,
+            status: getStatus(hackathon.start_date, hackathon.end_date)
+        })),
         total: totalHackathons,
         page,
         pageSize,
