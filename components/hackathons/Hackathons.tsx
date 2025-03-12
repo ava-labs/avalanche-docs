@@ -127,7 +127,7 @@ export default function Hackathons({
   }, []);
 
   return (
-    <section className="px-8 py-6 bg-zinc-50 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800">
+    <section className="px-8 py-6">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 justify-between">
         <div className="flex items-stretch gap-4 max-w-sm w-full h-9">
           {/* Input */}
@@ -137,12 +137,12 @@ export default function Hackathons({
               type="text"
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search by name, track or location"
-              className="w-full h-full px-3 pl-10 bg-transparent border border-zinc-700 rounded-md text-white placeholder-zinc-500"
+              className="w-full h-full px-3 pl-10 bg-transparent border border-zinc-300 dark:border-zinc-700 rounded-md text-white placeholder-zinc-500"
             />
           </div>
           {/* Button */}
-          <button className="bg-red-500 p-1 rounded-md hover:bg-red-600 transition">
-            <Search className="h-6 w-6 text-white stroke-white" />
+          <button className="px-[6px] rounded-md bg-red-500 hover:bg-red-600 transition">
+            <Search size={24} color="white" />
           </button>
         </div>
         {/* <Button
@@ -169,10 +169,10 @@ export default function Hackathons({
             }
             value={filters.location}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] border border-zinc-300 dark:border-zinc-800">
               <SelectValue placeholder="Filter by Location" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
               <SelectItem value="all">All Locations</SelectItem>
               <SelectItem value="Online">Online</SelectItem>
               <SelectItem value="InPerson">In Person</SelectItem>
@@ -185,10 +185,10 @@ export default function Hackathons({
             }
             value={filters.status as string}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] border border-zinc-300 dark:border-zinc-800">
               <SelectValue placeholder="Filter by Status" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
               <SelectItem value="all">All Statuses</SelectItem>
               <SelectItem value="Upcoming">Upcoming</SelectItem>
               <SelectItem value="Ongoing">Ongoing</SelectItem>
