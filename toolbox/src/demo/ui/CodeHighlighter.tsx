@@ -13,11 +13,12 @@ import { Copy, Check } from 'lucide-react';
 const DARK_THEME = vscDarkPlus;
 const LIGHT_THEME = oneLight;
 
-const availableLanguages = ['ts', 'tsx', 'sh', 'json', 'sol'];
+const availableLanguages = ['ts', 'tsx', 'sh', 'bash', 'json', 'sol'];
 
 SyntaxHighlighter.registerLanguage('ts', ts);
 SyntaxHighlighter.registerLanguage('tsx', tsx);
 SyntaxHighlighter.registerLanguage('sh', bash);
+SyntaxHighlighter.registerLanguage('bash', bash);
 SyntaxHighlighter.registerLanguage('json', json);
 SyntaxHighlighter.registerLanguage('sol', solidity);
 
