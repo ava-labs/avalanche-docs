@@ -115,13 +115,6 @@ const componentGroups: Record<string, ComponentType[]> = {
             skipWalletConnection: true,
         },
         {
-            id: "rpcUrlForChain",
-            label: "RPC URL Builder",
-            component: lazy(() => import('./examples/Nodes/RPCUrlForChain')),
-            fileNames: ["toolbox/src/demo/examples/Nodes/RPCUrlForChain.tsx"],
-            skipWalletConnection: true,
-        },
-        {
             id: "performanceMonitor",
             label: "Performance Monitor",
             component: lazy(() => import('./examples/Nodes/PerformanceMonitor')),
