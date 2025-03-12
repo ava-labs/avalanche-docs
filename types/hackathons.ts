@@ -30,7 +30,9 @@ export type Hackathon = {
   tracks: Track[]
   participants: number
   speakers: Speaker[]
-
+  become_sponsor_link: string
+  submission_deadline: Date 
+  mentors_judges_img_url: string
 }
 
 export type ScheduleActivity = {
