@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { HackathonHeader } from "@/types/hackathons";
 import AutoScroll from "embla-carousel-auto-scroll";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
@@ -60,7 +61,9 @@ function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
           variant={"secondary"}
           className="w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
-          BECOME A SPONSOR
+          <Link href={hackathon.content.become_sponsor_link ?? ''}>
+            BECOME A SPONSOR
+          </Link>
         </Button>
       </div>
     </section>

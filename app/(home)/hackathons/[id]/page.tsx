@@ -92,11 +92,11 @@ export default async function HackathonPage({
           </div>
         </div>
       </div>
-      <div className="flex justify-end mt-4">
+      {/* <div className="flex justify-end mt-4">
         <Link href={`/hackathons/${id}/admin-panel`}>
           <Button>Edit Hackathon</Button>
         </Link>
-      </div>
+      </div> */}
     </main>
   );
 }

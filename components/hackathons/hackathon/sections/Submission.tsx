@@ -7,10 +7,11 @@ import { Calendar, Trophy, Rocket, Check } from "lucide-react";
 import React from "react";
 
 function Submission({ hackathon }: { hackathon: HackathonHeader }) {
-  const iconColor = '!text-zinc-600 dark:!text-zinc-400'
   return (
     <section className="py-16 text-black dark:text-white">
-      <h2 className="text-4xl font-bold"  id='submission'>Submit Your Project</h2>
+      <h2 className="text-4xl font-bold" id="submission">
+        Submit Your Project
+      </h2>
       <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
       <p className="text-lg mb-8">
         Follow the guidelines to submit your hackathon project successfully
@@ -19,7 +20,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
       <div className="grid grid-cols-1 md:grid-cols-4">
         <div className="bg-zinc-200 dark:bg-zinc-900 p-6 shadow-md flex flex-col items-start justify-center rounded-tl-md rounded-bl-md">
           <Calendar
-            className={`mb-4 ${iconColor}`}
+            className={`mb-4 !text-zinc-600 dark:!text-zinc-400`}
             size={24}
           />
           <h3 className="text-xl font-semibold mb-2">Deadline</h3>
@@ -31,9 +32,11 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
         <div className="bg-zinc-700 dark:bg-zinc-800 p-6 shadow-md flex flex-col items-start justify-center">
           <Check
             size={24}
-            className={`mb-4 ${iconColor}`}
+            className={`mb-4 !text-zinc-200 dark:!text-zinc-400`}
           />
-          <h3 className="text-xl font-semibold mb-2 text-zinc-50">Requirements</h3>
+          <h3 className="text-xl font-semibold mb-2 text-zinc-50">
+            Requirements
+          </h3>
           <p className="text-sm text-zinc-50">
             Your project must include a GitHub repo, a short demo video, and a
             brief pitch.
@@ -43,7 +46,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
         <div className="bg-zinc-200 dark:bg-zinc-900 p-6 shadow-md flex flex-col items-start justify-center">
           <Trophy
             size={24}
-            className={`mb-4 ${iconColor}`}
+            className={`mb-4 !text-zinc-600 dark:!text-zinc-400`}
           />
           <h3 className="text-xl font-semibold mb-2">Evaluation Criteria</h3>
           <p className="text-sm">
@@ -55,9 +58,11 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
         <div className="bg-zinc-700 dark:bg-zinc-800 p-6 shadow-md flex flex-col items-start justify-center rounded-tr-md rounded-br-md">
           <Rocket
             size={24}
-            className={`mb-4 ${iconColor}`}
+            className={`mb-4 !text-zinc-200 dark:!text-zinc-400`}
           />
-          <h3 className="text-xl font-semibold mb-2 text-zinc-50">Submission Process</h3>
+          <h3 className="text-xl font-semibold mb-2 text-zinc-50">
+            Submission Process
+          </h3>
           <p className="text-sm text-zinc-50">
             Submit your project through the Avalanche Builders Hub, add your
             team members, and upload your GitHub repo along with a demo video.
@@ -70,7 +75,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
           variant={"secondary"}
           className="w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
-          VIEW SUBMISSION GUIDELINES
+          SUBMIT PROJECT
         </Button>
       </div>
     </section>

@@ -5,18 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { HackathonHeader } from "@/types/hackathons";
 import { Button } from "../ui/button";
+import HackathonStatus from "./hackathon/HackathonStatus";
 
 export default function HackathonCard({
   hackathon,
 }: {
   hackathon: HackathonHeader;
 }) {
-  const statusColors: Record<string, string> = {
-    Ongoing: "stroke-green-500",
-    Upcoming: "stroke-yellow-500",
-    Ended: "stroke-red-500",
-  };
-
   return (
     <div key={hackathon.id} className="flex rounded-lg shadow-lg h-[280px]">
       {/* Left Section: Background Image or Red Color */}
@@ -69,8 +64,7 @@ export default function HackathonCard({
             <span className="font-medium">9000</span>
           </div>
           <div className="flex items-center gap-2">
-            <Circle className={`h-4 w-4 ${statusColors[hackathon.status]}`} />
-            <span className="font-medium uppercase">{hackathon.status}</span>
+            <HackathonStatus status={hackathon.status} />
           </div>
         </div>
         <Button

@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { Calendar, MapPin, Users } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import HackathonStatus from "../HackathonStatus";
 
 type Props = {
   id: string;
@@ -47,9 +48,12 @@ export default function OverviewBanner({ hackathon, id }: Props) {
               </span>
             </div>
           </div>
-          <div className="flex justify-around gap-2 mt-4">
+          <div className="flex justify-center gap-2 mt-4">
             {hackathon.tags.map((tag, index) => (
-              <Badge key={index} className="bg-zinc-800 text-zinc-50 px-3 py-1 text-sm rounded-full">
+              <Badge
+                key={index}
+                className="bg-zinc-800 text-zinc-50 px-3 py-1 text-sm rounded-full"
+              >
                 {tag}
               </Badge>
             ))}
@@ -61,10 +65,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
                 {hackathon.content.participants}
               </span>
             </div>
-            <div className="flex items-center gap-2 text-yellow-500 font-semibold">
-              <span className="w-3 h-3 rounded-full border-2 border-yellow-500"></span>
-              <span className="text-sm text-zinc-50">{hackathon.status}</span>
-            </div>
+            <HackathonStatus status={hackathon.status} />
           </div>
         </div>
       </div>

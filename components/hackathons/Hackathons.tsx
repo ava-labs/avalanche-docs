@@ -208,7 +208,7 @@ export default function Hackathons({
           <HackathonCard key={hackathon.id} hackathon={hackathon} />
         ))}
       </div>
-      <Pagination className='my-4'>
+      {/* <Pagination className='my-4'>
         <PaginationContent className='flex justify-center gap-4'>
           {(filters.page ?? 1) > 1 && (
             <PaginationItem>
@@ -292,7 +292,7 @@ export default function Hackathons({
             </PaginationItem>
           )}
         </PaginationContent>
-      </Pagination>
+      </Pagination> */}
 
       {/* <h3 className='font-medium text-2xl my-4'>Recommended for You</h3>
 
