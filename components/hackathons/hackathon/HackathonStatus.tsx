@@ -2,9 +2,10 @@ import { type HackathonStatus } from "@/types/hackathons";
 
 type Props = {
   status: HackathonStatus;
+  enableLightMode?: boolean;
 };
 
-export default function HackathonStatus({ status }: Props) {
+export default function HackathonStatus({ status, enableLightMode }: Props) {
   const statusColors: Record<string, string> = {
     ONGOING: "border-green-500",
     UPCOMING: "border-yellow-500",
@@ -15,7 +16,13 @@ export default function HackathonStatus({ status }: Props) {
       <span
         className={`w-3 h-3 rounded-full border-2 ${statusColors[status]}`}
       ></span>
-      <span className="text-sm text-zinc-50">{status}</span>
+      <span
+        className={`text-sm ${
+          enableLightMode ? "dark:text-zinc-50 text-zinc-900" : "text-zinc-50"
+        }`}
+      >
+        {status}
+      </span>
     </div>
   );
 }

@@ -158,7 +158,7 @@ export default function Hackathons({
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-        <h3 className="font-medium text-2xl py-5 text-zinc-900 dark:text-zinc-50">
+        <h3 className="font-medium text-xl py-5 text-zinc-900 dark:text-zinc-50">
           {totalHackathons} {totalHackathons > 1 ? "Hackathons" : "Hackathon"}{" "}
           found
         </h3>
@@ -172,7 +172,7 @@ export default function Hackathons({
             <SelectTrigger className="w-[180px] border border-zinc-300 dark:border-zinc-800">
               <SelectValue placeholder="Filter by Location" />
             </SelectTrigger>
-            <SelectContent className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
+            <SelectContent className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
               <SelectItem value="all">All Locations</SelectItem>
               <SelectItem value="Online">Online</SelectItem>
               <SelectItem value="InPerson">In Person</SelectItem>
@@ -188,7 +188,7 @@ export default function Hackathons({
             <SelectTrigger className="w-[180px] border border-zinc-300 dark:border-zinc-800">
               <SelectValue placeholder="Filter by Status" />
             </SelectTrigger>
-            <SelectContent className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
+            <SelectContent className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
               <SelectItem value="all">All Statuses</SelectItem>
               <SelectItem value="Upcoming">Upcoming</SelectItem>
               <SelectItem value="Ongoing">Ongoing</SelectItem>
