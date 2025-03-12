@@ -1,4 +1,4 @@
-import { createPublicClient, createWalletClient, custom, formatEther, parseEther, zeroAddress } from 'viem'
+import { createPublicClient, createWalletClient, custom, formatEther, parseEther } from 'viem'
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import { useExampleStore } from '../../utils/store';
 import { Input, Button } from '../../ui';
