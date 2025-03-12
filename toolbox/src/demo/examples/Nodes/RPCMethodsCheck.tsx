@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
 import { createPublicClient, http } from 'viem';

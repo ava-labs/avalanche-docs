@@ -1,3 +1,5 @@
+"use client";
+
 export default function CreateL1() {
     return (
         <div className="space-y-6">

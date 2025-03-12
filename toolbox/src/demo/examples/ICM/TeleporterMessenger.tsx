@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 import { Button } from "../../ui";

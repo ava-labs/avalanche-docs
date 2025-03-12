@@ -1,3 +1,5 @@
+"use client";
+
 import { getRPCEndpoint } from "../../utils/rpcEndpoint";
 import { useExampleStore } from "../../utils/store";
 import { useState } from "react";

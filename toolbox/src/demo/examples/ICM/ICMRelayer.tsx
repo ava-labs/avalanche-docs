@@ -1,3 +1,5 @@
+"use client";
+
 import { createPublicClient, createWalletClient, custom, formatEther, parseEther } from 'viem'
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import { useExampleStore } from '../../utils/store';

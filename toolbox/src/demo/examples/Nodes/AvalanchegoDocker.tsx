@@ -1,3 +1,5 @@
+"use client";
+
 import { useExampleStore } from "../../utils/store";
 import { Input, Select } from "../../ui";
 import { useState, useEffect } from "react";

@@ -199,7 +199,6 @@ const ComponentLoader = () => (
 );
 
 export default function ToolboxApp() {
-    const [, setIsWalletConnected] = useState(false);
     const defaultTool = Object.values(componentGroups).flat()[0].id;
 
     // Use state from URL hash. Default to first tool if hash is empty.
@@ -239,7 +238,7 @@ export default function ToolboxApp() {
                     window.location.reload();
                 }}
             >
-                <ConnectWallet onConnect={setIsWalletConnected} required={!comp.skipWalletConnection}>
+                <ConnectWallet required={!comp.skipWalletConnection}>
                     <div className="space-y-4">
                         <Suspense fallback={<ComponentLoader />}>
                             <Component />
