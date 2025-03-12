@@ -9,8 +9,8 @@ const content = fs.readFileSync('.next/server/app/static.json.body');
 const records = JSON.parse(content.toString());
  
 const client = new TrieveSDK({
-  apiKey: 'tr-ghtudbTDqQktNR1JJPsQ9Pwl7Xi5r4HW',
-  datasetId: '4948db5c-a7e7-423f-bf6a-0ac1ba7a2b76',
+  apiKey: env["TRIEVE_ADMIN_API_KEY"],
+  datasetId: env["TRIEVE_DATASET_ID"],
 });
  
 sync(client, records);  
