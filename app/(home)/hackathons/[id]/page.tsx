@@ -14,7 +14,7 @@ import Sponsors from "@/components/hackathons/hackathon/sections/Sponsors";
 import Submission from "@/components/hackathons/hackathon/sections/Submission";
 import Resources from "@/components/hackathons/hackathon/sections/Resources";
 import Community from "@/components/hackathons/hackathon/sections/Community";
-import Speakers from "@/components/hackathons/hackathon/sections/Speakers";
+import Speakers from "@/components/hackathons/hackathon/sections/MentorsJudges";
 import OverviewBanner from "@/components/hackathons/hackathon/sections/OverviewBanner";
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -81,7 +81,7 @@ export default async function HackathonPage({
               priority
             />
           </div>
-          <div className="p-8 flex flex-col gap-24">
+          <div className="p-8 flex flex-col gap-20">
             <Schedule hackathon={hackathon} />
             <Tracks hackathon={hackathon} />
             <Sponsors hackathon={hackathon} />

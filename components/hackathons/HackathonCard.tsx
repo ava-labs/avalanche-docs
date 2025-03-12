@@ -73,7 +73,7 @@ export default function HackathonCard({
         <Button
           asChild
           variant="secondary"
-          className="w-full bg-red-500 hover:bg-red-600 py-2 px-4"
+          className="w-full bg-red-500 py-2 px-4"
         >
           <Link className="text-sm text-zinc-50" href={`/hackathons/${hackathon.id}`}>
             LEARN MORE

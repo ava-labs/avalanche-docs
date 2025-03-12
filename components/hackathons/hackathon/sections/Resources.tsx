@@ -38,7 +38,7 @@ function Resources({ hackathon }: { hackathon: HackathonHeader }) {
       <h2 className="text-4xl font-bold mb-6" id="resources">
         Resources
       </h2>
-      <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
+      <Separator className="my-8 h-[1px] bg-zinc-300 dark:bg-zinc-800" />
       <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
         Unlock incredible rewards for your innovation and skills in{" "}
         {hackathon.title}
@@ -70,8 +70,7 @@ function Resources({ hackathon }: { hackathon: HackathonHeader }) {
           </Card>
         ))}
       </div>
-
-      <p className="text-lg text-gray-600 dark:text-gray-300 mt-8">
+      {/* <p className="text-lg text-gray-600 dark:text-gray-300 mt-8">
         Need deeper insights? Access the full set of Avalanche documentation,
         tools, and developer guides.
       </p>
@@ -83,7 +82,7 @@ function Resources({ hackathon }: { hackathon: HackathonHeader }) {
         >
           Explore Full Documentation & Tools
         </Button>
-      </div>
+      </div> */}
     </section>
   );
 }

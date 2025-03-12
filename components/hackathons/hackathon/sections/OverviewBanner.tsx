@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HackathonHeader } from "@/types/hackathons";
-import { format } from "date-fns";
+import { addMonths, format } from "date-fns";
 import { Calendar, MapPin, Users } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -38,7 +38,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
               <Calendar size={20} color="#F5F5F9" />
               <span className="text-sm text-zinc-50">
                 {format(hackathon.start_date, "MMMM d")} -{" "}
-                {format(hackathon.end_date, "d, yyyy")}
+                {format(addMonths(hackathon.end_date, 2), "d, yyyy")}
               </span>
             </div>
             <div className="flex justify-start gap-8 text-gray-400">
