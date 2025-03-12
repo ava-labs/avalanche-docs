@@ -136,6 +136,12 @@ const componentGroups: Record<string, ComponentType[]> = {
             fileNames: ["toolbox/src/demo/examples/ICM/TeleporterRegistry.tsx"]
         },
         {
+            id: "icmRelayer",
+            label: "ICM Relayer",
+            component: lazy(() => import('./examples/ICM/ICMRelayer')),
+            fileNames: ["toolbox/src/demo/examples/ICM/ICMRelayer.tsx"]
+        },
+        {
             id: "receiverOnSubnet",
             label: "ReceiverOnSubnet",
             component: lazy(() => import('./examples/ICM/ReceiverOnSubnet')),

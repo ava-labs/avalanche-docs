@@ -3,10 +3,9 @@ import { useErrorBoundary } from "react-error-boundary";
 import { useState, useMemo } from "react";
 import { Button } from "../../ui";
 import { Success } from "../../ui/Success";
-import { createWalletClient, custom, createPublicClient, AddEthereumChainParameter } from 'viem';
+import { createWalletClient, custom, createPublicClient, http } from 'viem';
 import ReceiverOnSubnetABI from "../../../../contracts/example-contracts/compiled/ReceiverOnSubnet.json";
 import SenderOnCChainABI from "../../../../contracts/example-contracts/compiled/SenderOnCChain.json";
-import KnownChainIDWarning from "../../ui/KnownChainIDWarning";
 import { utils } from "@avalabs/avalanchejs";
 import { Input } from "../../ui";
 import { avalancheFuji } from "viem/chains";
@@ -15,11 +14,13 @@ const SENDER_C_CHAIN_ADDRESS = "0x2419133a23EA13EAF3dC3ee2382F083067107386";
 
 export default function DeployReceiver() {
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId, icmReceiverAddress, chainID, setChainID, evmChainId } = useExampleStore();
-    const [message, setMessage] = useState("Hello");
+    const { walletChainId, icmReceiverAddress, chainID, setChainID, evmChainId, evmChainRpcUrl, setEvmChainRpcUrl } = useExampleStore();
+    const [message, setMessage] = useState(`It is around ${new Date().toISOString().slice(11, 16)} o'clock in England`);
     const [isSending, setIsSending] = useState(false);
     const [isSwitchingChains, setIsSwitchingChains] = useState(false);
     const [lastTxId, setLastTxId] = useState<string>();
+    const [lastReceivedMessage, setLastReceivedMessage] = useState<string>();
+    const [isQuerying, setIsQuerying] = useState(false);
 
     const chainIDHex = useMemo(() =>
         utils.bufferToHex(utils.base58check.decode(chainID))
@@ -77,6 +78,46 @@ export default function DeployReceiver() {
         }
     }
 
+    async function queryLastMessage() {
+        if (!icmReceiverAddress) {
+            throw new Error('Receiver contract not deployed');
+        }
+
+        setIsQuerying(true);
+        try {
+            const publicClient = createPublicClient({
+                transport: http(evmChainRpcUrl),
+                chain: {
+                    id: evmChainId,
+                    name: "EVM Chain",
+                    rpcUrls: {
+                        default: { http: [] }
+                    },
+                    nativeCurrency: {
+                        name: "EVM Chain",
+                        symbol: "EVM",
+                        decimals: 18
+                    }
+                },
+            });
+            if (!icmReceiverAddress) {
+                throw new Error('Receiver contract not deployed');
+            }
+
+            const lastMessage = await publicClient.readContract({
+                address: icmReceiverAddress as `0x${string}`,
+                abi: ReceiverOnSubnetABI.abi,
+                functionName: 'lastMessage',
+            });
+
+            setLastReceivedMessage(lastMessage as string);
+        } catch (error) {
+            showBoundary(error);
+        } finally {
+            setIsQuerying(false);
+        }
+    }
+
     return (
         <div className="space-y-4">
             <h2 className="text-lg font-semibold">Send ICM Message</h2>
@@ -105,6 +146,11 @@ export default function DeployReceiver() {
                 label="C-Chain Sender Address"
                 value={SENDER_C_CHAIN_ADDRESS}
                 disabled
+            />
+            <Input
+                label="EVM Chain RPC URL"
+                value={evmChainRpcUrl}
+                onChange={setEvmChainRpcUrl}
             />
             {!isOnFuji && <Button
                 type="primary"
@@ -143,6 +189,18 @@ export default function DeployReceiver() {
                     </a>
                 )}
             </div>
+            <Button
+                type="primary"
+                onClick={queryLastMessage}
+                loading={isQuerying}
+                disabled={isQuerying || !icmReceiverAddress}
+            >
+                Query Last Message
+            </Button>
+            <Success
+                label="Last Received Message"
+                value={lastReceivedMessage ?? ""}
+            />
         </div>
     );
 }
