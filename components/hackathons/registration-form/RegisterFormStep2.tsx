@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -70,7 +69,6 @@ export function RegisterFormStep2() {
     { value: "firstTime", label: "First Time" },
   ];
 
-  // Función para formatear los valores seleccionados en el SelectTrigger
   const formatSelectedValues = (
     values: string[],
     options: { value: string; label: string }[]
@@ -90,7 +88,8 @@ export function RegisterFormStep2() {
           Step 2: Experience & Skills
         </h3>
         <p className="text-zinc-600">
-          Share your skills and expertise to tailor your experience on Builders Hub.
+          Share your skills and expertise to tailor your experience on Builders
+          Hub.
         </p>
         <div className="w-full h-px bg-zinc-300 mt-2" />
       </div>
@@ -107,7 +106,10 @@ export function RegisterFormStep2() {
                 <FormLabel>
                   What is your proficiency with Web3? (Amateur, 5 = Expert)
                 </FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
                       <SelectValue placeholder="Select your Web3 knowledge level" />
@@ -133,10 +135,14 @@ export function RegisterFormStep2() {
             name="roles"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Which of the following best describes you?</FormLabel>
+                <FormLabel>
+                  Which of the following best describes you?
+                </FormLabel>
                 <Select
                   onValueChange={(value: string) => {
-                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const currentValues = Array.isArray(field.value)
+                      ? field.value
+                      : [];
                     const newValues = currentValues.includes(value)
                       ? currentValues.filter((v) => v !== value)
                       : [...currentValues, value];
@@ -146,44 +152,56 @@ export function RegisterFormStep2() {
                 >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
-                      <SelectValue placeholder="Select one or more options">
-                        {formatSelectedValues(field.value as string[], roleOptions)}
+                      <SelectValue
+                        placeholder={formatSelectedValues(
+                          field.value as string[],
+                          roleOptions
+                        )}
+                      >
+                        {formatSelectedValues(
+                          field.value as string[],
+                          roleOptions
+                        )}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md">
                     {roleOptions.map((option) => (
                       <SelectItem
                         key={option.value}
                         value={option.value}
-                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                       >
                         <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                          {Array.isArray(field.value) && field.value.includes(option.value) && (
-                            <Check className="h-4 w-4" />
-                          )}
+                          {Array.isArray(field.value) &&
+                            field.value.includes(option.value) && (
+                              <Check className="h-4 w-4 " />
+                            )}
                         </span>
                         <span>{option.label}</span>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-zinc-600">
+                <FormMessage className="text-zinc-400">
                   Choose roles that best represent your expertise.
                 </FormMessage>
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="interests"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>What are you most interested in within Web3?</FormLabel>
+                <FormLabel>
+                  What are you most interested in within Web3?
+                </FormLabel>
                 <Select
                   onValueChange={(value: string) => {
-                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const currentValues = Array.isArray(field.value)
+                      ? field.value
+                      : [];
                     const newValues = currentValues.includes(value)
                       ? currentValues.filter((v) => v !== value)
                       : [...currentValues, value];
@@ -193,22 +211,31 @@ export function RegisterFormStep2() {
                 >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
-                      <SelectValue placeholder="Select your interests">
-                        {formatSelectedValues(field.value as string[], interestOptions)}
+                      <SelectValue
+                        placeholder={formatSelectedValues(
+                          field.value as string[],
+                          interestOptions
+                        )}
+                      >
+                        {formatSelectedValues(
+                          field.value as string[],
+                          interestOptions
+                        )}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md">
                     {interestOptions.map((option) => (
                       <SelectItem
                         key={option.value}
                         value={option.value}
-                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                       >
                         <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                          {Array.isArray(field.value) && field.value.includes(option.value) && (
-                            <Check className="h-4 w-4 text-white" />
-                          )}
+                          {Array.isArray(field.value) &&
+                            field.value.includes(option.value) && (
+                              <Check className="h-4 w-4 text-white" />
+                            )}
                         </span>
                         <span>{option.label}</span>
                       </SelectItem>
@@ -230,7 +257,9 @@ export function RegisterFormStep2() {
                 <FormLabel>Which tools are you familiar with?</FormLabel>
                 <Select
                   onValueChange={(value: string) => {
-                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const currentValues = Array.isArray(field.value)
+                      ? field.value
+                      : [];
                     const newValues = currentValues.includes(value)
                       ? currentValues.filter((v) => v !== value)
                       : [...currentValues, value];
@@ -240,29 +269,38 @@ export function RegisterFormStep2() {
                 >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
-                      <SelectValue placeholder="Select tools you have used">
-                        {formatSelectedValues(field.value as string[], toolOptions)}
+                      <SelectValue
+                        placeholder={formatSelectedValues(
+                          field.value as string[],
+                          toolOptions
+                        )}
+                      >
+                        {formatSelectedValues(
+                          field.value as string[],
+                          toolOptions
+                        )}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-white rounded-md shadow-md">
                     {toolOptions.map((option) => (
                       <SelectItem
                         key={option.value}
                         value={option.value}
-                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                       >
                         <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                          {Array.isArray(field.value) && field.value.includes(option.value) && (
-                            <Check className="h-4 w-4 text-white" />
-                          )}
+                          {Array.isArray(field.value) &&
+                            field.value.includes(option.value) && (
+                              <Check className="h-4 w-4 text-white" />
+                            )}
                         </span>
                         <span>{option.label}</span>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage className="text-zinc-600">
+                <FormMessage className="text-zinc-400">
                   Select platforms or technologies you have experience with.
                 </FormMessage>
               </FormItem>
@@ -280,9 +318,11 @@ export function RegisterFormStep2() {
                 <FormLabel>
                   Which programming languages are you familiar with?
                 </FormLabel>
-                <Select 
+                <Select
                   onValueChange={(value: string) => {
-                    const currentValues = Array.isArray(field.value) ? field.value : [];
+                    const currentValues = Array.isArray(field.value)
+                      ? field.value
+                      : [];
                     const newValues = currentValues.includes(value)
                       ? currentValues.filter((v) => v !== value)
                       : [...currentValues, value];
@@ -292,8 +332,15 @@ export function RegisterFormStep2() {
                 >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
-                      <SelectValue placeholder="Select programming languages">
-                        {formatSelectedValues(field.value as string[], languageOptions)}
+                      <SelectValue placeholder= {formatSelectedValues(
+                          field.value as string[],
+                          languageOptions
+                        )}
+                      >
+                        {formatSelectedValues(
+                          field.value as string[],
+                          languageOptions
+                        )}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
@@ -305,9 +352,10 @@ export function RegisterFormStep2() {
                         className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
                       >
                         <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                          {Array.isArray(field.value) && field.value.includes(option.value) && (
-                            <Check className="h-4 w-4 text-zinc-600" />
-                          )}
+                          {Array.isArray(field.value) &&
+                            field.value.includes(option.value) && (
+                              <Check className="h-4 w-4 text-zinc-600" />
+                            )}
                         </span>
                         <span>{option.label}</span>
                       </SelectItem>
@@ -328,7 +376,8 @@ export function RegisterFormStep2() {
                 Hackathon Participation
               </h3>
               <FormMessage className="text-zinc-600">
-                Tell us about your hackathon experience to help us customize your journey on Builders Hub.
+                Tell us about your hackathon experience to help us customize
+                your journey on Builders Hub.
               </FormMessage>
             </div>
             <div className="w-full h-px bg-zinc-300" />
@@ -342,13 +391,16 @@ export function RegisterFormStep2() {
                 <FormLabel>
                   Have you participated in any other hackathons before?
                 </FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
                     {hackathonParticipationOptions.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
                         {option.label}
@@ -357,7 +409,8 @@ export function RegisterFormStep2() {
                   </SelectContent>
                 </Select>
                 <FormMessage className="text-zinc-600">
-                  Let us know if this is your first hackathon or if you have prior experience.
+                  Let us know if this is your first hackathon or if you have
+                  prior experience.
                 </FormMessage>
               </FormItem>
             )}

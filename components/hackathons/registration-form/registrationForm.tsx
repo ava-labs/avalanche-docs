@@ -140,10 +140,10 @@ export function RegisterForm() {
       fieldsToValidate = ["hackathonParticipation", "dietary", "githubPortfolio", "termsEventConditions", "prohibitedItems"];
     }
   
-    const isValid = await form.trigger(fieldsToValidate); // Valida solo estos campos
+    const isValid = await form.trigger(fieldsToValidate); 
   
     if (isValid) {
-      setStep((prev) => prev + 1); // Solo avanza si es válido
+      setStep((prev) => prev + 1);
     }
   };
 
