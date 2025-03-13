@@ -55,7 +55,8 @@
     "uuid": "^11.1.0",
     "viem": "^2.23.10",
     "vitest": "^3.0.8",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "recharts": "^2.10.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.9",
