@@ -26,8 +26,11 @@ model Hackathon {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  user_name     String?
+  integration   String?
+  authentication_mode String?
   email         String?   @unique
-  emailVerified DateTime?
+  last_login     DateTime?
   image         String?
 }
 

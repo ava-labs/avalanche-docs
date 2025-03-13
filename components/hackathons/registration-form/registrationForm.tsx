@@ -1,9 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-} from '@/components/ui/form';
+import {Form} from '@/components/ui/form';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Separator } from '@/components/ui/separator';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,10 +12,8 @@ import { cn } from '@/utils/cn';
 import { RegisterFormStep3 } from './RegisterFormStep3';
 import { RegisterFormStep2 } from './RegisterFormStep2';
 import RegisterFormStep1 from './RegisterFormStep1';
-import { RegisterFormProps } from '@/types/registerFormProps';
 import { useSession } from 'next-auth/react';
 import { User } from 'next-auth';
-
 
 
 export const registerSchema = z.object({
@@ -32,7 +28,7 @@ export const registerSchema = z.object({
   roles: z.array(z.string()).optional(),
   languages: z.array(z.string()), 
   hackathonParticipation: z.string(),
-  dietary: z.string(),
+  dietary: z.string().optional(),
   githubPortfolio: z.string().url('Set a valid URL').optional(),
   termsEventConditions: z.boolean().refine((value) => value === true, {
     message: 'You must accept the Event Terms and Conditions to continue.',
@@ -67,8 +63,8 @@ export function RegisterForm() {
   useEffect(() => {
     if (status === 'authenticated' && currentUser) {
       form.reset({
-        name: currentUser?.name || '',
-        email: currentUser?.email || '',
+        name: currentUser.name || '',
+        email: currentUser.email || '',
         companyName: '',
         role: '',
         city: '',
@@ -169,11 +165,13 @@ export function RegisterForm() {
               <Button
                 variant='outline'
                 type='submit'
+                onClick={handleSubmit}
                 className={cn(
                   step != 3 ? 'block' : 'hidden',
                   'bg-red-500 hover:bg-red-600'
                 )}
               >
+                
                 Continue
               </Button>
               <Button
