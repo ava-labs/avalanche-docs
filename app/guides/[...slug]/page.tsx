@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { type ReactElement } from 'react';
 import Link from 'next/link';
-import { guide } from '@/lib/source';
+import { guidesContent } from '@/lib/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon, MessagesSquare, AlertCircle } from 'lucide-react';
@@ -34,7 +34,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<ReactElement> {
     const params = await props.params;
-    const page = guide.getPage(params.slug);
+    const page = guidesContent.getPage(params.slug);
     if (!page) notFound();
 
     const MDX = page.data.body;
@@ -150,7 +150,7 @@ export default async function Page(props: {
 }
 
 export async function generateStaticParams() {
-  return guide.getPages().map((page) => ({
+  return guidesContent.getPages().map((page) => ({
     slug: page.slugs,
   }));
 }
@@ -159,7 +159,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = guide.getPage(params.slug);
+  const page = guidesContent.getPage(params.slug);
 
   if (!page) notFound();
 

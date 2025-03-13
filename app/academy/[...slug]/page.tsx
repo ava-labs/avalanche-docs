@@ -7,7 +7,7 @@ import {
 } from 'fumadocs-ui/page';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { notFound } from 'next/navigation';
-import { academy } from '@/lib/source';
+import { academyContent } from '@/lib/source';
 import { createMetadata } from '@/utils/metadata';
 import IndexedDBComponent from '@/components/tracker'
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -41,16 +41,20 @@ export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
   const params = await props.params;
-  const page = academy.getPage(params.slug);
+  const page = academyContent.getPage(params.slug);
+
   if (!page) notFound();
 
+  const { body: MDX, toc, lastModified } = await page.data.load();
+
   const path = `content/academy/${page.file.path}`;
-  const MDX = page.data.body;
+
   const course = COURSES.official.find(c => c.slug === page.slugs[0]);
 
   return (
     <DocsPage
-      lastUpdate={page.data.lastModified}
+      toc={toc}
+      lastUpdate={lastModified}
       tableOfContent={{
         style: 'clerk',
         single: false,
@@ -102,7 +106,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = academy.getPage(params.slug);
+  const page = academyContent.getPage(params.slug);
 
   if (!page) notFound();
 
@@ -134,7 +138,7 @@ export async function generateMetadata(props: {
 }
 
 export async function generateStaticParams() {
-  return academy.getPages().map((page) => ({
+  return academyContent.getPages().map((page) => ({
     slug: page.slugs,
   }));
 }

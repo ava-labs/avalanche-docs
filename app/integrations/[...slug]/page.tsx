@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { integration } from '@/lib/source';
+import { integrationsContent } from '@/lib/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { Pill, Pills } from '@/components/ui/pills';
@@ -13,7 +13,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string[] }>;
 }) {
     const params = await props.params;
-    const page = integration.getPage(params.slug);
+    const page = integrationsContent.getPage(params.slug);
     if (!page) notFound();
 
     // Dynamically build the issue title based on the page title.
@@ -111,7 +111,7 @@ export default async function Page(props: {
 }
 
 export async function generateStaticParams() {
-  return integration.getPages().map((page) => ({
+  return integrationsContent.getPages().map((page) => ({
     slug: page.slugs,
   }));
 }
@@ -120,7 +120,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = integration.getPage(params.slug);
+  const page = integrationsContent.getPage(params.slug);
 
   if (!page) notFound();
 

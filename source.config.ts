@@ -12,7 +12,7 @@ import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
 import { transformerTwoslash } from 'fumadocs-twoslash';
 import { createFileSystemTypesCache } from 'fumadocs-twoslash/cache-fs';
 
-export const { docs, meta } = defineDocs({
+export const { docs: docsSource, meta: docsMeta } = defineDocs({
   docs: {
     async: true,
     schema: frontmatterSchema.extend({
@@ -26,32 +26,31 @@ export const { docs, meta } = defineDocs({
   },
 });
 
-export const course = defineCollections({
-  type: 'doc',
+export const { docs: academySource, meta: academyMeta } = defineDocs({
   dir: 'content/academy',
-  schema: frontmatterSchema.extend({
-    preview: z.string().optional(),
-    toc: z.boolean().default(true),
-    index: z.boolean().default(false),
-    updated: z.string().or(z.date()).transform((value, context) => {
-        try {
-          return new Date(value);
-        } catch {
-          context.addIssue({ code: z.ZodIssueCode.custom, message: "Invalid date" });
-          return z.NEVER;
-        }
-      }),
-    authors: z.array(z.string()),
-    comments: z.boolean().default(false),
-  }),
-});
-
-export const courseMeta = defineCollections({
-  type: 'meta',
-  dir: 'content/academy',
-  schema: metaSchema.extend({
-    description: z.string().optional(),
-  }),
+  docs: {
+    async: true,
+    schema: frontmatterSchema.extend({
+      preview: z.string().optional(),
+      toc: z.boolean().default(true),
+      index: z.boolean().default(false),
+      updated: z.string().or(z.date()).transform((value, context) => {
+          try {
+            return new Date(value);
+          } catch {
+            context.addIssue({ code: z.ZodIssueCode.custom, message: "Invalid date" });
+            return z.NEVER;
+          }
+        }),
+      authors: z.array(z.string()),
+      comments: z.boolean().default(false),
+    }),
+  },
+  meta: {
+    schema: metaSchema.extend({
+      description: z.string().optional(),
+    }),
+  },
 });
 
 export const integrations = defineCollections({

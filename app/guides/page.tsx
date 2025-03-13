@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { guide } from '@/lib/source';
+import { guidesContent } from '@/lib/source';
 import { buttonVariants } from '@/components/ui/button';
 import { Twitter } from 'lucide-react';
 
 export default function Page(): React.ReactElement {
-    const guides = [...guide.getPages()].sort(
+    const guides = [...guidesContent.getPages()].sort(
         (a, b) =>
             new Date(b.data.date ?? b.file.name).getTime() -
             new Date(a.data.date ?? a.file.name).getTime(),
