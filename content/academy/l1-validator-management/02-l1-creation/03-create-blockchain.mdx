@@ -1,0 +1,25 @@
+---
+title: Create a Blockchain
+description: Create a blockchain on the P-Chain.
+updated: 2025-03-13
+authors: [owenwahlgren]
+icon: Smile
+---
+
+import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper"
+import CreateChain from "../../../../toolbox/src/demo/examples/L1/CreateChain.tsx"
+
+
+Now that you have created a subnet, you can create a blockchain. This transaction creates a blockchain on the P-Chain that is linked to the subnet.
+
+Notice the `genesis` field, this is the genesis data for the blockchain.
+The tool automatically generates the genesis data for you and will fund the connected wallet with an initial balance.
+
+The `VM ID` field is the VM ID for the blockchain. When you build default `subnet-evm` chains, the VM ID is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`.
+
+If you are using a custom VM (e.g. `subnet-evm` with custom precompiles, or `hypersdk`), you will want to change this field to the correct VM ID.
+
+<ToolboxMdxWrapper>
+    <CreateChain />
+</ToolboxMdxWrapper>
+
