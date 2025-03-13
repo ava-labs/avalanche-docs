@@ -83,7 +83,16 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     const offset = (page - 1) * pageSize;
 
     let filters: any = {};
-    if (options.location) filters.location = options.location;
+    if (options.location) {
+        filters.location = options.location;
+        if (options.location == 'InPerson') {
+            filters = {
+                NOT: {
+                    location: 'Online'
+                },
+            }
+        }
+    }
     if (options.date) filters.date = options.date;
     if (options.search) {
         const searchWords = options.search.split(/\s+/)
@@ -110,7 +119,7 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
         searchFilters = [...searchFilters,
         {
             tags: {
-                has:options.search 
+                has: options.search
             },
         },
         ]
