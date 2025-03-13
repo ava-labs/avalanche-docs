@@ -50,6 +50,7 @@ export default async function Page(props: {
 
   return (
     <DocsPage
+      toc={page.data.toc}
       lastUpdate={page.data.lastModified}
       tableOfContent={{
         style: 'clerk',

@@ -31,7 +31,6 @@ export const course = defineCollections({
   dir: 'content/academy',
   schema: frontmatterSchema.extend({
     preview: z.string().optional(),
-    toc: z.boolean().default(true),
     index: z.boolean().default(false),
     updated: z.string().or(z.date()).transform((value, context) => {
         try {
