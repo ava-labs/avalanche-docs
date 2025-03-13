@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { Button } from "./Button";
 import { useErrorBoundary } from "react-error-boundary";
 import { Wallet } from "lucide-react";
-import { useExampleStore } from "../utils/store";
+import { useWalletStore } from "../utils/store";
 import { createCoreWalletClient } from "../utils/wallet/createCoreWallet";
+import { networkIDs } from "@avalabs/avalanchejs";
 
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
-    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient } = useExampleStore();
+    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress } = useWalletStore();
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -31,12 +32,50 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
             const coreWalletClient = await createCoreWalletClient(accounts[0] as `0x${string}`);
             setCoreWalletClient(coreWalletClient);
 
-            setWalletEVMAddress(accounts[0]);
-            setIsConnected(true);
+            await refetchWalletData();
         } catch (error) {
             showBoundary(error as Error);
         } finally {
             setIsConnecting(false);
+        }
+    }
+
+    async function refetchWalletData() {
+        try {
+            // Get current accounts
+            const accounts = await window.avalanche?.request<string[]>({
+                method: "eth_accounts",
+            }) || [];
+
+            if (accounts.length > 0) {
+                setWalletEVMAddress(accounts[0]);
+                setIsConnected(true);
+            } else {
+                setWalletEVMAddress("");
+                setIsConnected(false);
+            }
+
+            // Get chain ID
+            const chainId = await window.avalanche?.request<string>({
+                method: "eth_chainId",
+            });
+            if (chainId) {
+                setWalletChainId(parseInt(chainId, 16));
+            }
+
+            // Get network and P-chain info if core wallet client exists
+            if (coreWalletClient) {
+                console.log(`ConnectWallet:Refetching wallet data`, coreWalletClient)
+                // Update network ID
+                const isTestnet = await coreWalletClient.isTestnet();
+                setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID);
+
+                // Update P-chain address
+                const pChainAddress = await coreWalletClient.getPChainAddress();
+                setPChainAddress(pChainAddress);
+            }
+        } catch (error) {
+            console.error("Error fetching wallet data:", error);
         }
     }
 
@@ -46,12 +85,11 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
         }).then(async (accounts) => {
             if (accounts.length > 0) {
                 console.log(`ConnectWallet:Connected to ${accounts[0]}`);
-                setWalletEVMAddress(accounts[0]);
 
                 const coreWalletClient = await createCoreWalletClient(accounts[0] as `0x${string}`);
                 setCoreWalletClient(coreWalletClient);
 
-                setIsConnected(true);
+                await refetchWalletData();
             } else {
                 console.log(`ConnectWallet:Not connected`);
                 setIsConnected(false);
@@ -64,38 +102,28 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
     }, []);
 
     useEffect(() => {
-        // Initial chain ID check
-        window.avalanche?.request<string>({
-            method: "eth_chainId",
-        }).then((id) => {
-            setWalletChainId(parseInt(id, 16));
-        }).catch(console.error);
+        // Initial data fetch
+        refetchWalletData();
 
         // Subscribe to chain changes
-        window.avalanche?.on("chainChanged", (newChainId: string) => {
-            setWalletChainId(parseInt(newChainId, 16));
+        window.avalanche?.on("chainChanged", async () => {
+            await refetchWalletData();
         });
 
         // Subscribe to account changes
         window.avalanche?.on("accountsChanged", async (accounts: string[]) => {
-            if (accounts.length > 0) {
-                setWalletEVMAddress(accounts[0]);
-                setIsConnected(true);
-            } else {
-                setWalletEVMAddress("");
-                setIsConnected(false);
-            }
-
-            if (coreWalletClient) {
+            if (coreWalletClient && accounts.length > 0) {
                 coreWalletClient.account = { address: accounts[0] as `0x${string}`, type: "json-rpc" };
             }
+
+            await refetchWalletData();
         });
 
         return () => {
             window.avalanche?.removeListener("chainChanged", () => { });
             window.avalanche?.removeListener("accountsChanged", () => { });
         };
-    }, []);
+    }, [coreWalletClient]);
 
     if (required && !hasWallet) {
         return (

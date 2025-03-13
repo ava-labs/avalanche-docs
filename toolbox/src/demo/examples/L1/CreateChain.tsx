@@ -50,7 +50,6 @@ export default function CreateChain() {
             vmId,
             fxIds: [],
             genesisData,
-            fromAddresses: [pChainAddress!],
             subnetAuth: [0],
         }).then(txID => {
             setChainID(txID);

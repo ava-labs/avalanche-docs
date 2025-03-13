@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
+import { ConvertToL1Validator } from "../../utils/wallet/methods/convertToL1";
+import { useErrorBoundary } from "react-error-boundary";
 
 export default function ConvertToL1() {
     const {
@@ -21,88 +23,47 @@ export default function ConvertToL1() {
         setL1ID,
         validatorWeights,
         setValidatorWeights,
-        coreWalletClient
+        coreWalletClient,
+        walletChainId
     } = useExampleStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
     const [validatorBalances, setValidatorBalances] = useState(Array(100).fill(BigInt(1000000000)) as bigint[]);
     const [localError, setLocalError] = useState("");
-    const [pChainAddress, setPChainAddress] = useState("");
+    const [pChainAddress, setPChainAddress] = useState<string>("");
+    const { showBoundary } = useErrorBoundary();
 
     useEffect(() => {
-        async function getPChainAddress() {
-            const pChainAddress = await coreWalletClient!.getPChainAddress();
-            setPChainAddress(pChainAddress);
-        }
-        getPChainAddress();
-    }, []);
+        coreWalletClient!.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+    }, [walletChainId]);
 
     async function handleConvertToL1() {
         setL1ID("");
         setIsConverting(true);
         try {
-            const isTestnet = await coreWalletClient!.isTestnet()
-            const pChainAddress = await coreWalletClient!.getPChainAddress();
-
-            const rpcEndpoint = getRPCEndpoint(isTestnet);
-
-            const pvmApi = new pvm.PVMApi(rpcEndpoint);
-            const feeState = await pvmApi.getFeeState();
-            const context = await Context.getContextFromURI(rpcEndpoint);
-
-            const addressBytes = utils.bech32ToBytes(pChainAddress);
-
-            const { utxos } = await pvmApi.getUTXOs({
-                addresses: [pChainAddress]
-            });
-
-            const validators: L1Validator[] = [];
+            const validators: ConvertToL1Validator[] = [];
 
             for (let i = 0; i < nodePopJsons.length; i++) {
-                const { nodeID, nodePOP } = JSON.parse(nodePopJsons[i]).result;
-                const publicKey = utils.hexToBuffer(nodePOP.publicKey);
-                if (!nodePOP.proofOfPossession) throw new Error("Proof of possession is missing");
-                const signature = utils.hexToBuffer(nodePOP.proofOfPossession);
-                if (!nodeID) throw new Error("Node ID is missing");
+                const { nodeID, nodePOP } = JSON.parse(nodePopJsons[i]).result as { nodeID: string, nodePOP: { publicKey: string, proofOfPossession: string } };
 
-                const pChainOwner = PChainOwner.fromNative([addressBytes], 1);
-
-                if (!validatorWeights[i]) throw new Error("Validator weight is missing for validator #" + i);
-
-                validators.push(L1Validator.fromNative(
+                validators.push({
                     nodeID,
-                    BigInt(validatorWeights[i]), // weight 
-                    validatorBalances[i], // balance 
-                    new pvmSerial.ProofOfPossession(publicKey, signature),
-                    pChainOwner,
-                    pChainOwner
-                ));
+                    nodePOP,
+                    validatorWeight: BigInt(validatorWeights[i]),
+                    validatorBalance: validatorBalances[i],
+                    remainingBalanceOwner: { addresses: [pChainAddress], threshold: 1 },
+                    deactivationOwner: { addresses: [pChainAddress], threshold: 1 }
+                });
             }
 
-            const managerAddressBytes = utils.hexToBuffer(managerAddress.replace('0x', ''));
+            const txID = await coreWalletClient!.convertToL1({
+                managerAddress,
+                subnetId: subnetID,
+                chainId: chainID,
+                subnetAuth: [0],
+                validators
+            });
 
-            const tx = pvm.e.newConvertSubnetToL1Tx(
-                {
-                    feeState,
-                    fromAddressesBytes: [addressBytes],
-                    subnetId: subnetID,
-                    utxos,
-                    chainId: chainID,
-                    validators,
-                    subnetAuth: [0],
-                    address: managerAddressBytes,
-                },
-                context,
-            );
-
-            const transactionID = await window.avalanche!.request({
-                method: 'avalanche_sendTransaction',
-                params: {
-                    transactionHex: utils.bufferToHex(tx.toBytes()),
-                    chainAlias: 'P',
-                }
-            }) as string;
-
-            setL1ID(transactionID);
+            setL1ID(txID);
         } catch (error) {
             setLocalError(error instanceof Error ? error.message : "An unknown error occurred");
         } finally {
