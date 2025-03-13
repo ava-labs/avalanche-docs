@@ -1,21 +1,10 @@
 import NextPrev from "@/components/tools/common/ui/NextPrev";
 import { usePoAValidatorManagementWizardStore } from "../config/store";
 import { useState } from "react";
-import { checkCoreWallet } from '@/components/tools/common/api/coreWallet';
 
 export default function Welcome() {
     const { goToNextStep, goToPreviousStep } = usePoAValidatorManagementWizardStore();
-    const [error, setError] = useState<string | null>(null);
-
-    const handleNext = async () => {
-        try {
-            await checkCoreWallet();
-            goToNextStep();
-        } catch (err) {
-            setError(err instanceof Error ? err.message : "Failed to check Core wallet");
-        }
-    };
-
+    const [error, _] = useState<string | null>(null);
     return <>
         <h1 className="text-2xl font-medium mb-6">Welcome</h1>
 
@@ -63,7 +52,7 @@ export default function Welcome() {
         <NextPrev
             nextDisabled={false}
             prevHidden={false}
-            onNext={handleNext}
+            onNext={goToNextStep}
             onPrev={goToPreviousStep}
         />
     </>;

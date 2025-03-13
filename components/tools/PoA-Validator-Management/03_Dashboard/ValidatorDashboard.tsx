@@ -9,6 +9,7 @@ import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { fetchSubnetIdByValidationID, fetchValidators } from '../../common/api/validator-info'
 import AddValidator from './AddValidator'
 import RemoveValidator from './RemoveValidator'
+import { createWalletClient, custom } from 'viem'
 
 interface Validator {
   id?: string;
@@ -33,10 +34,16 @@ export default function LaunchValidators() {
     setSubnetId,
     validators,
     setValidators,
+    getViemL1Chain,
+    setCoreWalletClient,
+    coreWalletClient
   } = usePoAValidatorManagementWizardStore()
   const [isBootstrapped, setIsBootstrapped] = useState(false)
   const [validatorFilter, setValidatorFilter] = useState<ValidatorFilter>('active');
 
+  // Create a chain config
+  const chainConfig = getViemL1Chain();
+  const isTestnet = true;
   const refreshValidatorsWithTimeout = async () => {
     // wait for 5 second before refreshing validators
     await new Promise(resolve => setTimeout(resolve, 5000));
@@ -62,11 +69,44 @@ export default function LaunchValidators() {
     refreshValidators();
   }, [evmChainId]);
 
+  // Initialize wallet client if Core wallet is available but client isn't set
+  useEffect(() => {
+    const initializeWalletClient = async () => {
+      if (window.avalanche && !coreWalletClient) {
+        try {
+          // Create wallet client and store it
+          const walletClient = createWalletClient({
+            chain: chainConfig,
+            transport: custom(window.avalanche)
+          });
+          
+          setCoreWalletClient(walletClient);
+          console.log("Core wallet client initialized in dashboard");
+        } catch (error) {
+          console.error("Error initializing wallet client:", error);
+        }
+      }
+    };
+
+    initializeWalletClient();
+  }, [coreWalletClient, chainConfig, setCoreWalletClient]);
+
   const activeValidators = validators.filter((v: Validator) => v.isActive === true).length
   const disabledValidators = validators.filter((v: Validator) => v.isActive === false).length
 
   return (
     <div className="container mx-auto p-4">
+      {/* Wallet Connection Alert - only shown if wallet is not connected */}
+      {!coreWalletClient && (
+        <Alert variant="warning" className="mb-6">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Wallet Not Connected</AlertTitle>
+          <AlertDescription>
+            Please connect your Core wallet in the Chain Configuration step to manage validators.
+          </AlertDescription>
+        </Alert>
+      )}
+
       <Card className="mb-6">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -253,9 +293,11 @@ export default function LaunchValidators() {
                       <TableCell>{validator.weight}</TableCell>
                       <TableCell>{validator.uptime}</TableCell>
                       <TableCell>
-                        <div className="flex gap-2">
+                        {validator.isActive && (
                           <RemoveValidator
-                            nodeId={validator.nodeID ?? ''}
+                            isTestnet={isTestnet}
+                            subnetId={subnetId}
+                            validatorNodeID={validator.nodeID || ''}
                             transparentProxyAddress={transparentProxyAddress}
                             poaOwnerAddress={poaOwnerAddress}
                             onValidatorRemoved={refreshValidatorsWithTimeout}
@@ -263,10 +305,8 @@ export default function LaunchValidators() {
                             l1Name={l1Name}
                             tokenSymbol={tokenSymbol}
                             rpcUrl={rpcUrl}
-                            subnetId={subnetId}
-                            validationIdPChain={validator.validationID ?? ''}
                           />
-                        </div>
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -284,7 +324,7 @@ export default function LaunchValidators() {
         tokenSymbol={tokenSymbol}
         poaOwnerAddress={poaOwnerAddress}
         subnetId={subnetId}
-        onValidatorAdded={refreshValidators}
+        onValidatorAdded={refreshValidatorsWithTimeout}
       />
 
       <Alert variant="warning" className="mb-6">

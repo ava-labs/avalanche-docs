@@ -110,7 +110,7 @@ interface PoAValidatorManagementState extends StepWizardState {
     setPChainBalance: (balance: string) => void;
     getCChainRpcEndpoint: () => string;
     getRpcEndpoint: () => string;
-
+    getL1RpcEndpoint: () => string;
     convertL1SignedWarpMessage: `0x${string}` | null;
     setConvertL1SignedWarpMessage: (message: `0x${string}` | null) => void;
 
@@ -134,6 +134,8 @@ interface PoAValidatorManagementState extends StepWizardState {
 
     coreWalletClient: WalletClient | null;
     setCoreWalletClient: (client: WalletClient | null) => void;
+
+    getViemL1Chain: () => Chain;
 }
 
 const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagementState> = (set, get) => ({
@@ -254,7 +256,7 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
     } as AllowlistPrecompileConfig,
     setNativeMinterAllowlistConfig: (config: AllowlistPrecompileConfig) => set(() => ({ nativeMinterAllowlistConfig: config })),
 
-    rpcLocationType: 'local',
+    rpcLocationType: 'remote',
     setRpcLocationType: (type) => set(() => ({ rpcLocationType: type })),
 
     rpcDomainType: 'has-domain',
@@ -278,6 +280,29 @@ const PoAValidatorManagementWizardStoreFunc: StateCreator<PoAValidatorManagement
             return `https://${state.rpcAddress}.nip.io`;
         }
         return `https://${state.rpcAddress}`;
+    },
+    
+    getL1RpcEndpoint: () => {
+        const state = get();
+        const baseEndpoint = get().getRpcEndpoint();
+        return `${baseEndpoint}/ext/bc/${state.chainId}/rpc`;
+    },
+
+    getViemL1Chain: () => {
+        const state = get();
+        return {
+            id: state.evmChainId,
+            name: state.l1Name,
+            nativeCurrency: {
+                decimals: 18,
+                name: state.tokenSymbol + ' Native Token',
+                symbol: state.tokenSymbol,
+            },
+            rpcUrls: {
+                default: { http: [state.getL1RpcEndpoint()] },
+                public: { http: [state.getL1RpcEndpoint()] },
+            },
+        } as const;
     },
 
     getCChainRpcEndpoint: () => {

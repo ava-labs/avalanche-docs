@@ -1,264 +1,266 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Trash2 } from 'lucide-react'
-import { Address, bytesToHex, createPublicClient, hexToBytes, http } from 'viem'
-import PoAValidatorManagerABI from '../contract_compiler/compiled/PoAValidatorManager.json'
-import { pvm, utils, Context } from '@avalabs/avalanchejs'
+import { Address, createPublicClient, http, type Abi, Chain, bytesToHex, hexToBytes } from 'viem'
+import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { usePoAValidatorManagementWizardStore } from '../config/store'
-import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
-import { packWarpIntoAccessList } from '../../common/utils/packWarp'
-import { pChainChainID, platformEndpoint, pvmApi } from './const'
-import { fetchPChainAddressForActiveAccount } from '../../common/api/coreWallet'
+import { debugTraceAndDecode } from '../../common/api/debug'
 import { parseNodeID } from '../../common/utils/parse'
+import { Context, utils, pvm } from '@avalabs/avalanchejs'
+import { platformEndpoint, pvmApi } from './const'
 import { AvaCloudSDK } from '@avalabs/avacloud-sdk'
+import { getRegistrationJustification } from './justification'
+import { packWarpIntoAccessList } from '@/toolbox/src/demo/examples/InitializePoA/packWarp'
 
 interface RemoveValidatorProps {
-    nodeId: string
-    transparentProxyAddress: string
-    poaOwnerAddress: string
-    onValidatorRemoved: () => void
+    rpcUrl: string
     evmChainId: number
+    subnetId: string
+    transparentProxyAddress: string
     l1Name: string
     tokenSymbol: string
-    rpcUrl: string,
-    subnetId: string,
-    validationIdPChain: string
+    poaOwnerAddress: string
+    validatorNodeID: string
+    isTestnet: boolean
+    onValidatorRemoved: () => void
 }
 
-
-// Remove Validator From an L1
-// The complete process is as follows:
-// 1. `InitializeEndValidation` on Validator Manager Contract
-// 2. Sign the emitted EVM warp message with signature aggregator
-// 3. Set the validator weight to 0 on P-Chain using a `SetL1ValidatorWeightTx`
-// 4. Set the validator as disabled on P-Chain using a `DisableL1ValidatorTx` (which withdraws the AVAX PAYG balance to address specified from `RegisterL1Validator`)
-// 5. Reconstruct the warp message from P-Chain that disables the validator
-// 6. Sign the reconstructed P-Chain warp message with signature aggregator (justification needed??? Probably unsigned warp msg from EVM?)
-// 7. Submit the transaction to P-Chain `completeEndValidation` passing the signed P-Chain warp message in an AccessList (temp wallet needed)
-
 export default function RemoveValidator({
-    nodeId,
-    transparentProxyAddress,
-    poaOwnerAddress,
-    rpcUrl,
     subnetId,
-    validationIdPChain,
+    rpcUrl,
+    transparentProxyAddress,
+    validatorNodeID,
+    isTestnet,
     onValidatorRemoved
 }: RemoveValidatorProps) {
-    const {
-        chainConfig,
-        coreWalletClient
-    } = usePoAValidatorManagementWizardStore()
-
-    if (!chainConfig) {
-        throw new Error('Chain config is not set')
-    }
-    if (!coreWalletClient) {
-        throw new Error('Core wallet client is not set')
-    }
-
+    const { chainConfig, coreWalletClient, getViemL1Chain } = usePoAValidatorManagementWizardStore()
     const [isRemoving, setIsRemoving] = useState(false)
-    const [coreWalletPChainAddress, setCoreWalletPChainAddress] = useState('')
-
+    const [error, setError] = useState<string | null>(null)
+    // Create a fallback chain config if none is provided
+    const effectiveChainConfig = getViemL1Chain()
     const publicClient = createPublicClient({
-        chain: chainConfig,
-        transport: http(rpcUrl)
-    });
+        chain: effectiveChainConfig,
+        transport: http()
+    })
 
-    // ensure temp wallet is set and get P-Chain address from core wallet
-    useEffect(() => {
-        const fetchPChainAddress = async () => {
+    const handleRemoveValidator = async () => {
+        // Check if wallet client is available
+        if (!coreWalletClient) {
+            setError("Wallet client not initialized. Please connect your wallet in the Chain Configuration step.");
+            return;
+        }
+
+        setIsRemoving(true)
+        setError(null)
+
+        try {
+            // Get account
+            const [account] = await coreWalletClient.getAddresses()
+
+            // Parse the node ID using the utility function
+            const nodeIDHex = parseNodeID(validatorNodeID) as Address
+
+            // Get the validation ID from the validator manager contract
+            const validationID = await publicClient.readContract({
+                abi: validatorManagerAbi.abi,
+                address: transparentProxyAddress as Address,
+                functionName: 'registeredValidators',
+                args: [nodeIDHex],
+            })
+            console.log("Validation ID: ", validationID)
+
+            // Simulate the transaction
+            let request;
             try {
-                const pChainAddress = await fetchPChainAddressForActiveAccount();
-                setCoreWalletPChainAddress(pChainAddress);
+                const simulationResult = await publicClient.simulateContract({
+                    abi: validatorManagerAbi.abi,
+                    address: transparentProxyAddress as Address,
+                    functionName: 'initializeEndValidation',
+                    args: [validationID],
+                    account,
+                    gas: BigInt(2500000),
+                })
+                request = simulationResult.request;
+            } catch (error) {
+                console.log("Initial simulation failed, trying resendEndValidatorMessage instead");
+                const fallbackSimulation = await publicClient.simulateContract({
+                    abi: validatorManagerAbi.abi,
+                    address: transparentProxyAddress as Address,
+                    functionName: 'resendEndValidatorMessage',
+                    args: [validationID],
+                    account,
+                    gas: BigInt(2500000),
+                })
+                request = fallbackSimulation.request;
+            }
+
+            // Submit the transaction to the core wallet
+            const tx = await coreWalletClient.writeContract({
+                ...request,
+                chain: effectiveChainConfig,
+            })
+            // Wait for the transaction to be confirmed
+            const receipt = await publicClient.waitForTransactionReceipt({ hash: tx })
+            console.log("Remove Validator Transaction: ", tx)
+            console.log("Remove Validator Receipt: ", receipt)
+
+            // Check if the transaction was successful
+            if (receipt.status === 'reverted') {
+                const revertReason = await debugTraceAndDecode(
+                    tx,
+                    rpcUrl,
+                    validatorManagerAbi.abi as Abi
+                )
+                throw new Error(`Transaction reverted: ${revertReason}`)
+            }
+
+            // Get changeWeight warp message from tx logs
+            const changeWeightWarpMessage = receipt.logs[0].data
+            console.log("Change Weight Warp Message: ", changeWeightWarpMessage)
+
+            let networkName: "fuji" | "mainnet" = isTestnet ? "fuji" : "mainnet";
+
+            const { signedMessage } = await new AvaCloudSDK({network: networkName, serverURL: "https://api.avax-test.network"}).data.signatureAggregator.aggregateSignatures({
+                network: networkName,
+                signatureAggregatorRequest: {
+                  message: changeWeightWarpMessage,
+                  signingSubnetId: subnetId,
+                  quorumPercentage: 67
+                }
+            });
+
+            console.log("Signed Message: ", signedMessage)
+
+            let newPChainAddress = ''
+            try {
+                if (!window.avalanche || !coreWalletClient) {
+                    return;
+                }
+
+                const response = await window.avalanche.request<{ addressPVM: string }[]>({
+                    method: 'avalanche_getAccounts',
+                    params: []
+                });
+
+                const activeAccountIndex = response.findIndex((account: any) => account.active === true);
+                const pChainAddress = response[activeAccountIndex].addressPVM;
+
+                if (!newPChainAddress || newPChainAddress === '') {
+                    newPChainAddress = pChainAddress as string;
+                }
+
                 console.log("Core Wallet P-Chain Address: ", pChainAddress);
             } catch (error) {
                 console.error("Error fetching P-Chain address:", error);
             }
-        };
-        fetchPChainAddress();
-    }, []); // Add dependency to re-run if temp wallet changes
+            // Get fee state, context and utxos from P-Chain
+            const feeState = await pvmApi.getFeeState();
+            const { utxos } = await pvmApi.getUTXOs({ addresses: [newPChainAddress] });
+            const context = await Context.getContextFromURI(platformEndpoint);
 
-    const handleRemoveValidator = async () => {
-        if (!publicClient) return
-        try {
-            setIsRemoving(true)
-
-            // Get validationId from Validator Manager Contract
-            const validationId = await publicClient.readContract({
-                address: transparentProxyAddress as Address,
-                abi: PoAValidatorManagerABI.abi,
-                functionName: 'registeredValidators',
-                args: [parseNodeID(nodeId)],
-            }) as string
-
-            if (!validationId) {
-                throw new Error('Validator not registered')
-            }
-
-            console.log("Removing validator with validationId:", validationId)
-
-            // Initialize End Validation on Validator Manager Contract
-            const { request } = await publicClient.simulateContract({
-                address: transparentProxyAddress as Address,
-                abi: PoAValidatorManagerABI.abi,
-                functionName: 'initializeEndValidation',
-                args: [validationId],
-                account: poaOwnerAddress as Address,
-                chain: chainConfig,
-            })
-
-            const hash = await coreWalletClient.writeContract(request)
-
-            // Wait for transaction to be confirmed
-            const receipt = await publicClient.waitForTransactionReceipt({ hash })
-            console.log("Initialize End Validation Receipt: ", receipt)
-
-            // Get the unsigned warp message from the receipt
-            const unsignedWarpMsg = receipt.logs[0].data ?? '';
-            console.log("Initialize End Validation Warp Msg: ", unsignedWarpMsg)
-
-            // Aggregate signatures from validators
-            const { signedMessage: signedWarpMsg } = await new AvaCloudSDK({network: 'fuji', serverURL: "https://api.avax-test.network"}).data.signatureAggregator.aggregateSignatures({
-                network: 'fuji',
-                signatureAggregatorRequest: {
-                  message: unsignedWarpMsg,
-                  signingSubnetId: subnetId,
-                  quorumPercentage: 67
-                }
-              });
-
-            console.log("Initialize End Validation Signed Warp Msg: ", signedWarpMsg)
-
-             // Create a new change weight transaction
-             const pChainAddressBytes = utils.bech32ToBytes(coreWalletPChainAddress)
-
-             let feeState = await pvmApi.getFeeState();
-             let { utxos } = await pvmApi.getUTXOs({ addresses: [coreWalletPChainAddress] });
-             let context = await Context.getContextFromURI(platformEndpoint);
-             const unsignedPChainChangeWeightMsg = pvm.e.newSetL1ValidatorWeightTx({
-                message: new Uint8Array(Buffer.from(signedWarpMsg, 'hex')),
+            const unsignedRemoveValidatorTx = pvm.e.newSetL1ValidatorWeightTx({
+                message: new Uint8Array(Buffer.from(signedMessage, 'hex')),
                 feeState,
-                fromAddressesBytes: [pChainAddressBytes],
+                fromAddressesBytes: [utils.bech32ToBytes(newPChainAddress)],
                 utxos,
-            }, context)
+            }, context);
 
-            // convert to bytes then to hex
-            const unsignedPChainChangeWeightTxBytes = unsignedPChainChangeWeightMsg.toBytes()
-            const unsignedPChainChangeWeightTxHex = bytesToHex(unsignedPChainChangeWeightTxBytes)
-
-            // Submit to Core Wallet
-            if (!window.avalanche) throw new Error('Core wallet not found');
-            const changeWeightTxResponse = await window.avalanche.request<string>({
-                method: 'avalanche_sendTransaction',
-                params: {
-                    transactionHex: unsignedPChainChangeWeightTxHex,
-                    chainAlias: 'P',
-                }
+            console.log("Unsigned Change Weight Tx: ", unsignedRemoveValidatorTx)
+            const unsignedRemoveValidatorTxBytes = unsignedRemoveValidatorTx.toBytes()
+            const unsignedRemoveValidatorTxHex = bytesToHex(unsignedRemoveValidatorTxBytes)
+  
+            if (!window.avalanche) {
+                return;
+            }
+            // Submit the transaction to the P-Chain using Core Wallet
+            const txID = await window.avalanche.request({
+              method: 'avalanche_sendTransaction',
+              params: {
+                transactionHex: unsignedRemoveValidatorTxHex,
+                chainAlias: 'P',
+              }
             });
+            console.log("Change Weight Validator Response: ", txID)
 
-            // Wait for transaction to be confirmed
+              // Wait for transaction to be confirmed
             while (true) {
-                let status = await pvmApi.getTxStatus({ txID: changeWeightTxResponse });
-                console.log("PX Chain Change Weight Tx Status: ", status)
+                let status = await pvmApi.getTxStatus({ txID: txID as string });
                 if (status.status === "Committed") break;
                 await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
             }
+   
+            // get justification for original register validator tx (the unsigned warp msg emitted)
+            const justification = await getRegistrationJustification(effectiveChainConfig.rpcUrls.default.http[0], validationID as string, subnetId);
+            console.log("Justification: ", justification)
+            // get signature for p-chain change weight tx
+            const { signedMessage: finalSignedMessage } = await new AvaCloudSDK({network: networkName, serverURL: "https://api.avax-test.network"}).data.signatureAggregator.aggregateSignatures({
+                network: networkName,
+                signatureAggregatorRequest: {
+                  message: changeWeightWarpMessage,
+                  justification: bytesToHex(justification),
+                  signingSubnetId: subnetId,
+                  quorumPercentage: 67
+                }
+            });
 
-            console.log("Validator changed weight to 0 successfully on P-Chain")
+            console.log("Final Signed Message: ", finalSignedMessage)
 
+            const signedPChainWarpMsgBytes = hexToBytes(`0x${finalSignedMessage}`)
+            const accessList = packWarpIntoAccessList(signedPChainWarpMsgBytes)
+            console.log("Access List: ", accessList)
 
-            // Get fee state and utxos from P-Chain
-            // feeState = await pvmApi.getFeeState();
-            // ({ utxos } = await pvmApi.getUTXOs({ addresses: [coreWalletPChainAddress] }));
-            // context = await Context.getContextFromURI(platformEndpoint);
+            // Submit the transaction to the Validator Manager
+            const {request: completeEndValidationTx} = await publicClient.simulateContract({
+                abi: validatorManagerAbi.abi,
+                address: transparentProxyAddress as Address,
+                functionName: 'completeEndValidation',
+                args: [validationID],
+                account,
+                gas: BigInt(2500000),
+                accessList
+            })
 
-            // // Create a new disable validator transaction
-            // const unsignedPChainDisableValidatorMsg = pvm.e.newDisableL1ValidatorTx({
-            //     disableAuth: [0],
-            //     feeState,
-            //     fromAddressesBytes: [pChainAddressBytes],
-            //     utxos,
-            //     validationId: validationIdPChain,
-            // }, context)
+            const finalizeRegistrationTx = await coreWalletClient.writeContract(completeEndValidationTx)
+            console.log("Finalize Registration Tx: ", finalizeRegistrationTx)
 
-            // // Convert to bytes then to hex
-            // const unsignedPChainDisableValidatorTxBytes = unsignedPChainDisableValidatorMsg.toBytes()
-            // const unsignedPChainDisableValidatorTxHex = bytesToHex(unsignedPChainDisableValidatorTxBytes)
-
-            // // Submit to Core Wallet
-            // const disabledValidatorTxResponse = await window.avalanche.request<string>({
-            //     method: 'avalanche_sendTransaction',
-            //     params: {
-            //         transactionHex: unsignedPChainDisableValidatorTxHex,
-            //         chainAlias: 'P',
-            //     }
-            // });
-
-            // // Wait for transaction to be confirmed
-            // while (true) {
-            //     let status = await pvmApi.getTxStatus({ txID: disabledValidatorTxResponse });
-            //     console.log("PX Chain Tx Status: ", status)
-            //     if (status.status === "Committed") break;
-            //     await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay
-            // }
-
-            // TODO: RECONSTRUCT THE WARP MESSAGE FROM P-CHAIN AND COMPLETEENDVALIDATION ON EVM
-
-            // // Reconstruct the warp message from P-Chain
-            const validationIDBytes = hexToBytes(validationIdPChain as Address)
-            const unsignedPChainWarpMsg = packL1ValidatorRegistration(validationIDBytes, false, 5, pChainChainID)
-            const unsignedPChainWarpMsgHex = bytesToHex(unsignedPChainWarpMsg)
-            console.log("Unsigned P-Chain Warp Message: ", unsignedPChainWarpMsgHex)
-          
-
-            // Sign the reconstructed P-Chain warp message with justification (unsigned warp msg from EVM??)
-            // const { signedMessage } = await new AvaCloudSDK({network: 'fuji', serverURL: "https://api.avax-test.network"}).data.signatureAggregator.aggregateSignatures({
-            //     network: 'fuji',
-            //     signatureAggregatorRequest: {
-            //       message: unsignedPChainWarpMsgHex,
-            //       justification: "PLACEHOLDER",
-            //       signingSubnetId: subnetId,
-            //       quorumPercentage: 67
-            //     }
-            //   });
-
-            // console.log("Signed P-Chain Warp Message: ", signedMessage)
-
-            // Convert to bytes then to hex then pack into access list
-            // const signedPChainWarpMsgBytes = hexToBytes(`0x${signedMessage}`)
-            // const accessList = packWarpIntoAccessList(signedPChainWarpMsgBytes)
-
-            // const { request: completeRequest } = await publicClient.simulateContract({
-            //     abi: PoAValidatorManagerABI.abi,
-            //     address: transparentProxyAddress as Address,
-            //     functionName: 'completeValidatorRegistration',
-            //     args: [0],
-            //     account: tempAccount,
-            //     gas: BigInt(500000),
-            //     accessList: accessList,
-            // })
-
-            // console.log("Access List: ", accessList)
             onValidatorRemoved()
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error removing validator:', error)
+            setError(error.message || 'An unknown error occurred while removing the validator')
         } finally {
             setIsRemoving(false)
         }
     }
 
     return (
-        <Button
-            variant="destructive"
-            size="sm"
-            onClick={handleRemoveValidator}
-            disabled={isRemoving}
-        >
-            <Trash2 className="mr-2 h-4 w-4" />
-            {isRemoving ? 'Removing...' : 'Remove'}
-        </Button>
+        <>
+            {error && (
+                <div className="bg-red-50 border border-red-200 rounded-md p-2 mb-2 text-xs">
+                    <div className="flex items-center">
+                        <svg className="h-3 w-3 text-red-400 mr-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                        </svg>
+                        <div>
+                            {error.includes("InvalidValidatorStatus") ? (
+                                <span className="text-red-700">Invalid validator status. Try initializing the end process first.</span>
+                            ) : (
+                                <span className="text-red-700">{error}</span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+            <Button
+                variant="destructive"
+                size="sm"
+                onClick={handleRemoveValidator}
+                disabled={isRemoving || !coreWalletClient}
+            >
+                <Trash2 className="mr-2 h-4 w-4" />
+                {!coreWalletClient ? 'Connect Wallet First' : isRemoving ? 'Removing...' : 'Remove'}
+            </Button>
+        </>
     )
 }

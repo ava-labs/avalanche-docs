@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Plus, RefreshCw, Check, X } from 'lucide-react'
-import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, type Abi, parseEther } from 'viem'
+import { Plus, RefreshCw, Check, X, AlertCircle } from 'lucide-react'
+import { Address, createWalletClient, createPublicClient, http, fromBytes, bytesToHex, hexToBytes, type Abi, parseEther, Chain } from 'viem'
 import validatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json'
 import { pvm, utils, Context, networkIDs } from '@avalabs/avalanchejs'
 import { packL1ValidatorRegistration } from '../../common/utils/convertWarp'
@@ -13,11 +13,9 @@ import { packWarpIntoAccessList } from '../../common/utils/packWarp'
 import { usePoAValidatorManagementWizardStore } from '../config/store'
 import { generatePrivateKey, privateKeyToAccount, privateKeyToAddress } from 'viem/accounts'
 import { pChainChainID, platformEndpoint, pvmApi } from './const'
-import { fetchPChainAddressForActiveAccount } from '../../common/api/coreWallet'
 import { debugTraceAndDecode } from '../../common/api/debug'
 import { parseNodeID } from '../../common/utils/parse'
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
-
 
 interface StepStatus {
   status: 'pending' | 'loading' | 'success' | 'error'
@@ -62,69 +60,85 @@ export default function AddValidator({
   onValidatorAdded
 }: AddValidatorProps) {
   const {
-    tempEVMPrivateKeyHex,
-    setTempEVMPrivateKeyHex,
+    chainConfig,
+    coreWalletClient,
     registerL1ValidatorUnsignedWarpMsg,
     setRegisterL1ValidatorUnsignedWarpMsg,
     validationID,
     setValidationID,
-    chainConfig,
-    coreWalletClient,
+    tempEVMPrivateKeyHex,
+    setTempEVMPrivateKeyHex,
+    getViemL1Chain
   } = usePoAValidatorManagementWizardStore()
 
-  // const { showBoundary } = useErrorBoundary();
   const [newNodeID, setNewNodeID] = useState('')
   const [newBlsPublicKey, setNewBlsPublicKey] = useState('')
   const [newBlsProofOfPossession, setNewBlsProofOfPossession] = useState('')
   const [newPChainAddress, setNewPChainAddress] = useState('')
   const [newWeight, setNewWeight] = useState('')
-  const [newBalance, setNewBalance] = useState('0.1')
+  const [newBalance, setNewBalance] = useState('')
+  const [isAddingValidator, setIsAddingValidator] = useState(false)
+  const [isProcessComplete, setIsProcessComplete] = useState(false)
   const [validationSteps, setValidationSteps] = useState<ValidationSteps>({
     initializeRegistration: { status: 'pending' },
     signMessage: { status: 'pending' },
     registerOnPChain: { status: 'pending' },
     waitForPChain: { status: 'pending' },
-    finalizeRegistration: { status: 'pending' },
+    finalizeRegistration: { status: 'pending' }
   })
-  const [isAddingValidator, setIsAddingValidator] = useState(false)
-  const [isProcessComplete, setIsProcessComplete] = useState(false)
   const [savedSignedMessage, setSavedSignedMessage] = useState('')
   const [savedPChainWarpMsg, setSavedPChainWarpMsg] = useState('')
   const [savedPChainResponse, setSavedPChainResponse] = useState('')
   
   const [networkName, setNetworkName] = useState<"fuji" | "mainnet" | undefined>(undefined);
-  if (!chainConfig) {
-    console.error('Chain config is not defined')
-    return
-  }
-
-  if (!coreWalletClient) {
-    console.error('Core wallet client is not defined')
-    return
-  }
-
+  const [error, setError] = useState<string | null>(null);
+  
+  // Create a fallback chain config if none is provided
+  const effectiveChainConfig = getViemL1Chain();
   const publicClient = createPublicClient({
-    chain: chainConfig,
+    chain: effectiveChainConfig,
     transport: http()
   })
 
-  // ensure temp wallet is set and get P-Chain address from core wallet
+  // ensure temp wallet is set
   useEffect(() => {
     if (tempEVMPrivateKeyHex === '0x') {
       setTempEVMPrivateKeyHex(generatePrivateKey())
     }
-    const fetchPChainAddress = async () => {
-      const pChainAddress = await fetchPChainAddressForActiveAccount();
-      if (!newPChainAddress || newPChainAddress === '') {
-        setNewPChainAddress(pChainAddress as string);
-      }
-    };
-    fetchPChainAddress();
-  }, []); // Run once when component mounts
+  }, []);
 
   useEffect(() => {
     setNetworkName("fuji");
   }, []);
+  
+  // Get P-Chain address when wallet is connected
+  useEffect(() => {
+    const fetchPChainAddress = async () => {
+      try {
+        if (!window.avalanche || !coreWalletClient) {
+          return;
+        }
+        
+        const response = await window.avalanche.request<{ addressPVM: string }[]>({
+          method: 'avalanche_getAccounts',
+          params: []
+        });
+        
+        const activeAccountIndex = response.findIndex((account: any) => account.active === true);
+        const pChainAddress = response[activeAccountIndex].addressPVM;
+        
+        if (!newPChainAddress || newPChainAddress === '') {
+          setNewPChainAddress(pChainAddress as string);
+        }
+        
+        console.log("Core Wallet P-Chain Address: ", pChainAddress);
+      } catch (error) {
+        console.error("Error fetching P-Chain address:", error);
+      }
+    };
+
+    fetchPChainAddress();
+  }, [coreWalletClient, newPChainAddress]);
 
   // Update Step Status
   const updateStepStatus = (
@@ -203,17 +217,24 @@ export default function AddValidator({
   // Add Validator
   const addValidator = async (startFromStep?: keyof ValidationSteps) => {
     if (!newNodeID || !newBlsPublicKey || !newBlsProofOfPossession || !newPChainAddress || !newWeight || !poaOwnerAddress) {
-      console.log('Missing required fields')
-      return
+      setError('Missing required fields');
+      return;
+    }
+
+    // Check if wallet client is available
+    if (!coreWalletClient) {
+      setError("Wallet client not initialized. Please connect your wallet in the Chain Configuration step.");
+      return;
     }
 
     // Only reset steps and validation state if starting fresh
     if (!startFromStep) {
-      setIsAddingValidator(true)
-      setIsProcessComplete(false)
+      setIsAddingValidator(true);
+      setIsProcessComplete(false);
+      setError(null); // Clear any previous errors
       Object.keys(validationSteps).forEach(step => {
-        updateStepStatus(step as keyof ValidationSteps, 'pending')
-      })
+        updateStepStatus(step as keyof ValidationSteps, 'pending');
+      });
     }
 
     let account: Address;
@@ -273,7 +294,7 @@ export default function AddValidator({
             functionName: 'initializeValidatorRegistration',
             args,
             account,
-            chain: chainConfig,
+            chain: effectiveChainConfig,
             gas: BigInt(2500000),
             nonce: await publicClient.getTransactionCount({ address: poaOwnerAddress as Address })
           })
@@ -296,6 +317,7 @@ export default function AddValidator({
 
         } catch (error: any) {
           updateStepStatus('initializeRegistration', 'error', error.message)
+          setError(error.message || "Failed to initialize validator registration")
           return
         }
       }
@@ -329,10 +351,12 @@ export default function AddValidator({
             }
           } catch (error: any) {
             updateStepStatus('signMessage', 'error', error.message);
+            setError(error.message || "Failed to aggregate signatures");
             return;
           }
         } catch (error: any) {
           updateStepStatus('signMessage', 'error', error.message)
+          setError(error.message || "Failed to sign message")
           return
         }
       }
@@ -387,6 +411,7 @@ export default function AddValidator({
           }
         } catch (error: any) {
           updateStepStatus('registerOnPChain', 'error', error.message)
+          setError(error.message || "Failed to register on P-Chain")
           return
         }
       }
@@ -395,6 +420,9 @@ export default function AddValidator({
       if (!startFromStep || startFromStep === 'waitForPChain') {
         updateStepStatus('waitForPChain', 'loading')
         try {
+
+          const justificationToUse = startFromStep ? registerL1ValidatorUnsignedWarpMsg : RegisterL1ValidatorUnsignedWarpMsg;
+
           // Use saved response if available
           const responseToUse = startFromStep ? savedPChainResponse : response;
           const validationIDToUse = startFromStep ? validationID : validationIDHex;
@@ -416,7 +444,7 @@ export default function AddValidator({
             network: networkName,
             signatureAggregatorRequest: {
               message: unsignedPChainWarpMsgHex,
-              justification: registerL1ValidatorUnsignedWarpMsg,
+              justification: justificationToUse,
               signingSubnetId: subnetId,
               quorumPercentage: 67
             }
@@ -427,8 +455,15 @@ export default function AddValidator({
           console.log("Signed P-Chain Warp Message: ", signedPChainWarpMsg)
 
           updateStepStatus('waitForPChain', 'success')
+          
+          // If this was a retry, continue with next step
+          if (startFromStep === 'waitForPChain') {
+            await addValidator('finalizeRegistration')
+            return
+          }
         } catch (error: any) {
           updateStepStatus('waitForPChain', 'error', error.message)
+          setError(error.message || "Failed to wait for P-Chain confirmation")
           return
         }
       }
@@ -463,6 +498,10 @@ export default function AddValidator({
               console.error('Contract simulation failed:', error)
               throw new Error('Failed to simulate contract interaction: ' + error.message)
             })
+
+            if (!coreWalletClient) {
+              throw new Error("Wallet client not initialized. Please reconnect your wallet.");
+            }
 
             const finalizeRegistrationTx = await coreWalletClient.writeContract(request)
             finalizeRegistrationReceipt = await publicClient.waitForTransactionReceipt({ hash: finalizeRegistrationTx })
@@ -499,6 +538,7 @@ export default function AddValidator({
           onValidatorAdded()
         } catch (error: any) {
           updateStepStatus('finalizeRegistration', 'error', error.message)
+          setError(error.message || "Failed to finalize registration")
           return
         }
 
@@ -517,6 +557,8 @@ export default function AddValidator({
 
     } catch (error: any) {
       console.error('Error adding validator:', error)
+      setError(error.message || 'An unknown error occurred while adding the validator')
+      setIsAddingValidator(false)
     }
   }
 
@@ -531,68 +573,90 @@ export default function AddValidator({
 
   return (
     <>
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>Add New Validator</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-4">
-            <Input
-              placeholder="Node ID"
-              value={newNodeID}
-              onChange={(e) => setNewNodeID(e.target.value)}
-            />
-            <Input
-              placeholder="BLS Public Key"
-              value={newBlsPublicKey}
-              onChange={(e) => setNewBlsPublicKey(e.target.value)}
-            />
-            <Input
-              placeholder="BLS Proof of Possession"
-              value={newBlsProofOfPossession}
-              onChange={(e) => setNewBlsProofOfPossession(e.target.value)}
-            />
-            <div className="relative group">
-              <Input
-                placeholder="P-Chain Address"
-                value={newPChainAddress}
-                disabled
-              />
-              <div className="absolute hidden group-hover:block bg-gray-800 text-gray-100 text-xs rounded-md px-3 py-1.5 -top-10 left-0 shadow-md">
-                Autofilled from Core wallet
+      {!coreWalletClient ? (
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>Add New Validator</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 mb-4 flex items-start">
+              <AlertCircle className="h-5 w-5 text-amber-500 mr-2 mt-0.5" />
+              <div>
+                <p className="text-amber-700 font-medium">Wallet Not Connected</p>
+                <p className="text-amber-600">Please connect your Core wallet in the Chain Configuration step to add validators.</p>
               </div>
             </div>
-            <Input
-              placeholder="Initial Balance (AVAX)"
-              value={newBalance}
-              onChange={(e) => setNewBalance(e.target.value)}
-              type="number"
-              min="0"
-              step="0.000000001"
-            />
-            <Input
-              placeholder="Weight"
-              value={newWeight}
-              onChange={(e) => setNewWeight(e.target.value)}
-              type="number"
-            />
-            <Button
-              onClick={isAddingValidator ? resetValidation : () => addValidator()}
-              variant={isAddingValidator ? "destructive" : "default"}
-            >
-              {isAddingValidator ? (
-                <>
-                  <X className="mr-2 h-4 w-4" /> Cancel
-                </>
-              ) : (
-                <>
-                  <Plus className="mr-2 h-4 w-4" /> Add Validator
-                </>
-              )}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>Add New Validator</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {error && (
+              <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+                <p className="text-red-700">{error}</p>
+              </div>
+            )}
+            <div className="grid grid-cols-1 gap-4">
+              <Input
+                placeholder="Node ID"
+                value={newNodeID}
+                onChange={(e) => setNewNodeID(e.target.value)}
+              />
+              <Input
+                placeholder="BLS Public Key"
+                value={newBlsPublicKey}
+                onChange={(e) => setNewBlsPublicKey(e.target.value)}
+              />
+              <Input
+                placeholder="BLS Proof of Possession"
+                value={newBlsProofOfPossession}
+                onChange={(e) => setNewBlsProofOfPossession(e.target.value)}
+              />
+              <div className="relative group">
+                <Input
+                  placeholder="P-Chain Address"
+                  value={newPChainAddress}
+                  disabled
+                />
+                <div className="absolute hidden group-hover:block bg-gray-800 text-gray-100 text-xs rounded-md px-3 py-1.5 -top-10 left-0 shadow-md">
+                  Autofilled from Core wallet
+                </div>
+              </div>
+              <Input
+                placeholder="Initial Balance (AVAX)"
+                value={newBalance}
+                onChange={(e) => setNewBalance(e.target.value)}
+                type="number"
+                min="0"
+                step="0.000000001"
+              />
+              <Input
+                placeholder="Weight"
+                value={newWeight}
+                onChange={(e) => setNewWeight(e.target.value)}
+                type="number"
+              />
+              <Button
+                onClick={isAddingValidator ? resetValidation : () => addValidator()}
+                variant={isAddingValidator ? "destructive" : "default"}
+              >
+                {isAddingValidator ? (
+                  <>
+                    <X className="mr-2 h-4 w-4" /> Cancel
+                  </>
+                ) : (
+                  <>
+                    <Plus className="mr-2 h-4 w-4" /> Add Validator
+                  </>
+                )}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {isAddingValidator && (
         <div className="mt-4 p-4 border rounded-lg bg-background/95 dark:bg-gray-800/95 border-border">
@@ -630,7 +694,7 @@ export default function AddValidator({
           />
           <StepIndicator
             status={validationSteps.finalizeRegistration.status}
-            label="Finalize Validator Registration"
+            label="Finalize Registration"
             error={validationSteps.finalizeRegistration.error}
             onRetry={() => retryStep('finalizeRegistration')}
           />
