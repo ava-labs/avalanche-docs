@@ -4,12 +4,10 @@ import { Label } from '@radix-ui/react-label';
 import { Input } from '@/components/ui/input';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import NextPrev from "@/components/tools/common/ui/NextPrev";
-import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnection__deprecated';
-
+import RequireWalletConnection from '@/components/tools/common/ui/RequireWalletConnectionV2';
 import { usePoAValidatorManagementWizardStore } from '../config/store';
-
 import PoAValidatorManagerAbi from '../contract_compiler/compiled/PoAValidatorManager.json';
-import { Address, Chain, createPublicClient, createWalletClient, custom, defineChain, http } from 'viem';
+import { Address, createPublicClient, http, createWalletClient, custom, PublicClient } from 'viem';
 
 import {
     fetchValidators,
@@ -21,7 +19,6 @@ import {
 
 import { isValidUrl } from '@/components/tools/common/utils/validation';
 import { isAddress } from 'viem';
-import { deduplicateEthRequestAccounts } from '../../L1Launcher/config/store';
 
 export default function ChainParameters() {
     const {
@@ -41,8 +38,10 @@ export default function ChainParameters() {
         goToPreviousStep,
         setValidators,
         setSubnetId,
-        setChainConfig,
-        setCoreWalletClient
+        getViemL1Chain,
+        setCoreWalletClient,
+        setChainId,
+        setRpcAddress
     } = usePoAValidatorManagementWizardStore();
 
     const [error, setError] = useState("");
@@ -61,8 +60,32 @@ export default function ChainParameters() {
         setIsLoading(true);
         setError("");
         setShowWallet(false);
+        setOwnerCheckStatus('none');
 
         try {
+            // Parse blockchainID from RPC URL
+            const blockchainIdMatch = rpcUrl.match(/\/ext\/bc\/([^\/]+)\/rpc/);
+            if (blockchainIdMatch && blockchainIdMatch[1]) {
+                const blockchainId = blockchainIdMatch[1];
+                setChainId(blockchainId);
+                console.log('Parsed blockchainID:', blockchainId);
+            } else {
+                console.warn('Could not parse blockchainID from RPC URL');
+            }
+
+            // Extract and set the base URL
+            try {
+                const url = new URL(rpcUrl);
+                const baseUrlPath = url.pathname.split('/ext/bc/')[0];
+                const baseUrl = url.origin + baseUrlPath;
+                // Remove the protocol prefix (http:// or https://) before setting
+                const baseUrlWithoutProtocol = baseUrl.replace(/^https?:\/\//, '');
+                setRpcAddress(baseUrlWithoutProtocol);
+                console.log('Set base URL (without protocol):', baseUrlWithoutProtocol);
+            } catch (urlError) {
+                console.warn('Could not parse base URL from RPC URL:', urlError);
+            }
+
             // First validate the endpoints
             const endpoints = getEndpoints(rpcUrl);
             console.log('Generated endpoints:', endpoints);
@@ -115,12 +138,13 @@ export default function ChainParameters() {
                 throw new Error(data.error.message);
             }
 
+            let publicClient: PublicClient | undefined;
             if (data.result && data.result.chainId) {
                 setEvmChainId(Number(data.result.chainId));
 
                 // Try to get chain name using eth_chainId
                 try {
-                    const publicClient = createPublicClient({
+                    publicClient = createPublicClient({
                         transport: http(rpcUrl)
                     });
 
@@ -147,13 +171,6 @@ export default function ChainParameters() {
             if (validators.length > 0 && validators[0].validationID) {
                 subnetId = await fetchSubnetIdByValidationID(validators[0].validationID);
                 setSubnetId(subnetId);
-                // const validatorResponse = await avaCloudSDK.data.primaryNetwork.listL1Validators({
-                //     l1ValidationId: validators[0].validationID,
-                //     network: "fuji",
-                //   }) as ListL1ValidatorsResponse;
-                // console.log('validatorResponse', validatorResponse);
-                // subnetId = validatorResponse.result.validators[0].subnetId;
-
             }
             console.log('subnetId', subnetId);
             try {
@@ -164,7 +181,28 @@ export default function ChainParameters() {
                 });
 
                 if (subnetInfo.isL1 && subnetInfo.l1ValidatorManagerDetails) {
-                    setTransparentProxyAddress(subnetInfo.l1ValidatorManagerDetails.contractAddress);
+                    const contractAddress = subnetInfo.l1ValidatorManagerDetails.contractAddress;
+                    setTransparentProxyAddress(contractAddress);
+                    
+                    // Automatically check PoA owner if wallet is available
+                    if (window.avalanche && contractAddress) {
+                        // Create wallet client and store it in the global state
+                        const chain = getViemL1Chain();
+                        const walletClient = createWalletClient({
+                            chain,
+                            transport: custom(window.avalanche)
+                        });
+                        setCoreWalletClient(walletClient);
+                        
+                        // Perform owner check immediately after setting the contract address
+                        setTimeout(() => {
+                            if (publicClient) {
+                                checkPoaOwner(contractAddress, publicClient);
+                            } else {
+                                checkPoaOwner(contractAddress);
+                            }
+                        }, 100);
+                    }
                 } else {
                     // If no contract address is found, clear any existing address
                     setTransparentProxyAddress('');
@@ -186,60 +224,32 @@ export default function ChainParameters() {
         }
     };
 
-    const handleWalletConnectionCallback = async () => {
-        await handleCheckPoaOwner();
-        const config = defineAndSaveChainConfig();
-        saveCoreWalletClient(config);
-    }
-
-    const defineAndSaveChainConfig = () => {
-        const chainConfig = defineChain({
-            id: evmChainId,
-            name: l1Name,
-            network: l1Name.toLowerCase(),
-            nativeCurrency: {
-                name: tokenSymbol,
-                symbol: tokenSymbol,
-                decimals: 18,
-            },
-            rpcUrls: {
-                default: { http: [rpcUrl] },
-                public: { http: [rpcUrl] },
-            },
-        })
-        setChainConfig(chainConfig)
-        return chainConfig;
-    }
-
-    const saveCoreWalletClient = (chainConfig: Chain) => {
-        if (!window.avalanche) return;
-        const noopProvider = { request: () => Promise.resolve(null) }
-        const provider = typeof window !== 'undefined' ? window.avalanche! : noopProvider
-        const walletClient = createWalletClient({
-            chain: chainConfig,
-            transport: custom(provider),
-        })
-        setCoreWalletClient(walletClient)
-
-    }
-
-    const handleCheckPoaOwner = async () => {
-        if (!window.ethereum) return;
+    const checkPoaOwner = async (contractAddress = transparentProxyAddress, client?: PublicClient) => {
+        if (!window.avalanche) {
+            console.error("Core wallet not found");
+            return;
+        }
+        
         setOwnerCheckStatus('checking');
 
-        // Get connected account from wallet
-        const accounts = await deduplicateEthRequestAccounts()
-        if (!accounts || accounts.length === 0) return;
-
-        // Create public client to read contract
-        const publicClient = createPublicClient({
-            transport: http(rpcUrl)
-        });
-
         try {
+            // Get connected account from Core Wallet
+            const accounts = await window.avalanche.request({
+                method: 'eth_requestAccounts'
+            }) as string[];
+
+            if (!accounts || accounts.length === 0) {
+                throw new Error("No accounts found in Core Wallet");
+            }
+
+            // Create public client to read contract if not provided
+            const publicClient = client || createPublicClient({
+                transport: http(rpcUrl)
+            });
+
             // Get owner from PoA Validator Manager contract
             const owner = await publicClient.readContract({
-                address: transparentProxyAddress as Address,
+                address: contractAddress as Address,
                 abi: PoAValidatorManagerAbi.abi,
                 functionName: 'owner'
             }) as Address;
@@ -250,15 +260,38 @@ export default function ChainParameters() {
                 setOwnerCheckStatus('success');
                 setError("");
             } else {
-                setError("Connected wallet is not the contract owner");
+                setError(`Connected wallet (${accounts[0]}) is not the contract owner (${owner})`);
                 setPoaOwnerAddress("undefined");
                 setOwnerCheckStatus('error');
             }
         } catch (err) {
             console.error("Error checking contract owner:", err);
-            setError("Failed to verify contract owner");
+            setError("Failed to verify contract owner. Please try again.");
             setPoaOwnerAddress("undefined");
             setOwnerCheckStatus('error');
+        }
+    };
+
+    // Handle wallet connection
+    const handleWalletConnection = async () => {
+        try {
+            if (!window.avalanche) {
+                console.error("Core wallet not found");
+                return;
+            }
+            
+            // Create wallet client and store it in the global state
+            const chain = getViemL1Chain();
+            const walletClient = createWalletClient({
+                chain,
+                transport: custom(window.avalanche)
+            });
+            setCoreWalletClient(walletClient);
+            
+            // Check PoA owner after wallet connection
+            await checkPoaOwner();
+        } catch (error) {
+            console.error("Error connecting wallet:", error);
         }
     };
 
@@ -409,22 +442,7 @@ export default function ChainParameters() {
 
                         {showWallet && (
                             <div className="mt-8 border-t dark:border-gray-700 pt-8">
-                                <RequireWalletConnection
-                                    chainConfig={{
-                                        chainId: `0x${evmChainId.toString(16)}`,
-                                        chainName: l1Name,
-                                        nativeCurrency: {
-                                            name: tokenSymbol,
-                                            symbol: tokenSymbol,
-                                            decimals: 18
-                                        },
-                                        rpcUrls: [rpcUrl],
-                                        blockExplorerUrls: [],
-                                        isTestnet: true
-                                    }}
-                                    requiredBalance={0.1}
-                                    onConnection={handleWalletConnectionCallback}
-                                />
+                                <RequireWalletConnection chain={getViemL1Chain()} onConnection={handleWalletConnection} />
 
                                 {ownerCheckStatus === 'checking' && (
                                     <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
@@ -443,6 +461,16 @@ export default function ChainParameters() {
                                 {ownerCheckStatus === 'error' && error && (
                                     <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/30 rounded-lg">
                                         <p className="text-red-700 dark:text-red-300">{error}</p>
+                                        <button 
+                                            onClick={() => {
+                                                setOwnerCheckStatus('none');
+                                                setError("");
+                                                checkPoaOwner();
+                                            }}
+                                            className="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                        >
+                                            Try Again
+                                        </button>
                                     </div>
                                 )}
                             </div>
