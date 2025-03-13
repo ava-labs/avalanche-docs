@@ -187,6 +187,7 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
             end_date: hackathonData.end_date!,
             location: hackathonData.location!,
             total_prizes: hackathonData.total_prizes!,
+            participants: hackathonData.participants!,
             tags: hackathonData.tags!,
             timezone: hackathonData.timezone!,
             icon: hackathonData.icon!,
