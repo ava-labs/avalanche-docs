@@ -16,7 +16,7 @@ export default function HackathonCard({
   return (
     <div
       key={hackathon.id}
-      className="flex rounded-lg shadow-lg h-[280px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-transparent"
+      className="flex rounded-lg shadow-lg h-[300px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-transparent"
     >
       {/* Left Section: Background Image or Red Color */}
       <Image

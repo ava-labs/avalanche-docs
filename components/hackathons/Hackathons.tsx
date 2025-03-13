@@ -60,6 +60,7 @@ export default function Hackathons({
   const [totalPages, setTotalPages] = useState<number>(
     Math.ceil(totalHackathons / pageSize)
   );
+  const [searchValue, setSearchValue] = useState("");
 
   // Search debounce
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -126,6 +127,12 @@ export default function Hackathons({
     }, 300);
   }, []);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearchChange(searchValue);
+    }
+  };
+
   return (
     <section className="px-8 py-6">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 justify-between">
@@ -135,13 +142,17 @@ export default function Hackathons({
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-400 stroke-zinc-700" />
             <Input
               type="text"
-              onChange={(e) => handleSearchChange(e.target.value)}
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={handleKeyDown}
               placeholder="Search by name, track or location"
               className="w-full h-full px-3 pl-10 bg-transparent border border-zinc-300 dark:border-zinc-700 rounded-md dark:text-zinc-50 text-zinc-900 placeholder-zinc-500"
             />
           </div>
           {/* Button */}
-          <button className="px-[6px] rounded-md bg-red-500 hover:bg-red-600 transition">
+          <button
+            onClick={() => handleSearchChange(searchValue)}
+            className="px-[6px] rounded-md bg-red-500 hover:bg-red-600 transition"
+          >
             <Search size={24} color="white" />
           </button>
         </div>
@@ -159,7 +170,12 @@ export default function Hackathons({
       {/* Filters */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
         <h3 className="font-medium text-xl py-5 text-zinc-900 dark:text-zinc-50">
-          {totalHackathons} {totalHackathons > 1 ? "Hackathons" : "Hackathon"}{" "}
+          {hackathons.length ?? ''}{" "}
+          {hackathons.length > 1
+            ? "Hackathons"
+            : hackathons.length == 0
+            ? "No hackathons found"
+            : "Hackathon"}{" "}
           found
         </h3>
         <div className="flex gap-4 flex-col md:flex-row justify-end">

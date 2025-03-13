@@ -86,32 +86,39 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     if (options.location) filters.location = options.location;
     if (options.date) filters.date = options.date;
     if (options.search) {
+        const searchWords = options.search.split(/\s+/)
+        let searchFilters: any[] = []
+        searchWords.forEach((word) => {
+            searchFilters = [...searchFilters,
+            {
+                title: {
+                    contains: word, mode: "insensitive",
+                },
+            },
+            {
+                location: {
+                    contains: word, mode: "insensitive"
+                },
+            },
+            {
+                description: {
+                    contains: word, mode: "insensitive"
+                },
+            },
+            ]
+        })
+        searchFilters = [...searchFilters,
+        {
+            tags: {
+                has:options.search 
+            },
+        },
+        ]
+
         filters = {
             ...filters,
-            OR: [
-                {
-                    title: {
-                        contains: options.search, mode: "insensitive"
-                    },
-                },
-                {
-                    location: {
-                        contains: options.search, mode: "insensitive"
-                    },
-                },
-                {
-                    description: {
-                        contains: options.search, mode: "insensitive"
-                    },
-                },
-                {
-                    tags: {
-                        has: options.search
-                    },
-                },
-            ]
+            OR: searchFilters
         }
-        // filters.title = { contains: options.search, mode: "insensitive" }
     }
     console.log('Filters: ', filters)
 
@@ -120,8 +127,6 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
         skip: offset,
         take: pageSize,
     });
-
-    console.log('Hackas: ', hackathonList)
 
     const hackathons = hackathonList.map(getHackathonLite);
     let hackathonsLite = hackathons
