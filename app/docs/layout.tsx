@@ -1,23 +1,12 @@
-import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/docs';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
-import { docsPageTree } from '@/utils/content-loader/docs-loader';
+import { source } from '@/lib/source';
 import 'fumadocs-twoslash/twoslash.css';
-import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import { ArrowUpRight } from 'lucide-react';
 
-const docsOptions: DocsLayoutProps = {
+const docsOptions = {
   ...baseOptions,
-  nav: {
-    title: (
-      <>
-        { <AvalancheLogo className="size-7" fill="currentColor"/> }
-        <span style={{ fontSize: "large" }}>Documentation</span>
-      </>
-    ),
-    transparentMode: 'top',
-  },
-  tree: docsPageTree,
   links: [
     {
       text: 'Academy',
@@ -34,12 +23,16 @@ const docsOptions: DocsLayoutProps = {
       url: '/integrations',
       icon: <ArrowUpRight />
     },
-  ],
+  ]
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <DocsLayout {...docsOptions}>
+    <DocsLayout 
+      {...docsOptions} 
+      tabMode="navbar"
+      tree={source.pageTree}
+    >
       <span
         className="absolute inset-0 z-[-1] h-[64rem] max-h-screen overflow-hidden"
         style={{

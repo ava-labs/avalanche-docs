@@ -1,11 +1,9 @@
-import { getDocsPages } from '@/utils/content-loader/docs-loader'
+import { source, academy, integration, guide } from '@/lib/source'
 import { createSearchAPI } from 'fumadocs-core/search/server'
-import { getCoursePages } from '@/utils/content-loader/course-loader';
-import { getIntegrationPages } from '@/utils/content-loader/integrations-loader';
 
 export const { GET } = createSearchAPI('advanced', {
   indexes: await Promise.all([
-    ...getDocsPages().map(async (page) => {
+    ...source.getPages().map(async (page) => {
       const loadedData = await page.data.load()
       return {
         title: page.data.title,
@@ -14,7 +12,15 @@ export const { GET } = createSearchAPI('advanced', {
         structuredData: loadedData.structuredData
       }
     }),
-    ...getCoursePages().map(async (page) => {
+    ...academy.getPages().map((page) => {
+      return {
+        title: page.data.title,
+        url: page.url,
+        id: page.url,
+        structuredData: page.data.structuredData
+      }
+    }),
+    ...integration.getPages().map(async (page) => {
       const loadedData = await page.data.load()
       return {
         title: page.data.title,
@@ -23,13 +29,12 @@ export const { GET } = createSearchAPI('advanced', {
         structuredData: loadedData.structuredData
       }
     }),
-    ...getIntegrationPages().map(async (page) => {
-      const loadedData = await page.data.load()
+    ...guide.getPages().map((page) => {
       return {
         title: page.data.title,
         url: page.url,
         id: page.url,
-        structuredData: loadedData.structuredData
+        structuredData: page.data.structuredData
       }
     })
   ])

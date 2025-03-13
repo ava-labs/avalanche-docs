@@ -14,7 +14,7 @@ export function AnnouncementBanner() {
       <Banner changeLayout={false} className="bg-gray-100 dark:bg-gray-900 text-sm">
         <div className="flex items-center space-x-3 text-black dark:text-white">
           <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded-full text-xs">NEW</span>
-          <p className="flex-grow">
+          <p className="grow">
             Applications for{" "}
             <Link
               href="https://lu.ma/avalanchesummitlondonhackathon?utm_source=builder_hub"

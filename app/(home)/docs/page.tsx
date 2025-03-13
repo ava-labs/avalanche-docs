@@ -3,10 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
   CpuIcon,
   BadgeDollarSign,
-  Globe, SproutIcon, SquareGanttChart, MonitorCog, Atom, Logs, MonitorCheck, Settings, Terminal, Cable, Webhook, Github,
-  Wrench,
-  GraduationCap,
-  Rocket
+  Globe, SproutIcon, SquareGanttChart, MonitorCog, Atom, Logs, MonitorCheck, Settings, Terminal, Cable, Webhook, Github
 } from 'lucide-react';
 import Link from 'next/link';
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -27,6 +24,7 @@ export default function HomePage(): React.ReactElement {
           <div className="relative">
             <Hero />
           </div>
+          <Introduction />
           <Highlights />
           <Features />
         </div>
@@ -38,17 +36,14 @@ export default function HomePage(): React.ReactElement {
 function Highlights(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-r md:grid-cols-2 lg:grid-cols-3">
-      <Highlight icon={GraduationCap} heading="Learn the Fundamentals" link="/academy/avalanche-fundamentals">
+      <Highlight icon={SproutIcon} heading="Quick Start" link="/docs/quick-start">
         Learn about the Avalanche Protocol and it's groundbreaking consensus algorithm.
-      </Highlight>
-      <Highlight icon={Logs} heading="Avalanche L1s" link="/docs/avalanche-l1s">
-        Utilize the Avalanche tech stack to build your own layer 1 blockchain.
-      </Highlight>
-      <Highlight icon={Cable} heading="Interoperability" link="/docs/cross-chain">
-        Advanced interoperability protocols to communicate with other blockchains.
       </Highlight>
       <Highlight icon={SquareGanttChart} heading="Build Applications" link="/docs/dapps">
         Your one stop shop to deploy smart contracts on the Avalanche C-Chain.
+      </Highlight>
+      <Highlight icon={Logs} heading="Avalanche L1s" link="/docs/avalanche-l1s">
+        Utilize the Avalanche tech stack to build your own layer 1 blockchain.
       </Highlight>
       <Highlight icon={MonitorCog} heading="Virtual Machines" link="/docs/virtual-machines">
         Learn how to customize the EVM or build new virtual machines from scratch.
@@ -56,7 +51,9 @@ function Highlights(): React.ReactElement {
       <Highlight icon={MonitorCheck} heading="Nodes & Validators" link="/docs/nodes">
         Become an active participant in the network by running a node or validator.
       </Highlight>
-
+      <Highlight icon={Cable} heading="Interoperability" link="/docs/cross-chain">
+        Advanced interoperability protocols to communicate with other blockchains.
+      </Highlight>
     </div>
   );
 }
@@ -73,15 +70,15 @@ function Highlight({
   children: ReactNode;
 }): React.ReactElement {
   return (
-    <a href={link}>
-      <div className="border-l border-t px-6 py-12 hover:bg-fd-accent">
-        <div className="mb-4 flex flex-row items-center gap-2 text-fd-muted-foreground">
-          <Icon className="size-4" />
-          <h2 className="text-sm font-medium">{heading}</h2>
-        </div>
-        <span className="font-medium">{children}</span>
+  <a href={link}>
+    <div className="border-l border-t px-6 py-12 hover:bg-fd-accent">
+      <div className="mb-4 flex flex-row items-center gap-2 text-fd-muted-foreground">
+        <Icon className="size-4" />
+        <h2 className="text-sm font-medium">{heading}</h2>
       </div>
-    </a>
+      <span className="font-medium">{children}</span>
+    </div>
+  </a>
   );
 }
 
@@ -98,38 +95,88 @@ function Hero(): React.ReactElement {
   );
 }
 
+function Introduction(): React.ReactElement {
+  return (
+    <div className="grid grid-cols-1 border-r md:grid-cols-2">
+      <div className="flex flex-col border-l border-t px-6 py-12 md:py-16">
+        <div className={cn(badgeVariants(), 'bg-red-500', 'text-white')}>1</div>
+        <h3 className="text-xl font-bold">Configure.</h3>
+        <p className="mb-8 text-fd-muted-foreground">
+          Configure your blockchain using Avalanche CLI.
+        </p>
+        <div className="relative flex flex-col">
+          <CodeBlock
+            lang="bash"
+            wrapper={{ className: 'absolute inset-x-2 top-0' }}
+            code="avalanche blockchain create myblockchain"
+          />
+            <div className="relative mt-20">
+            <Link href="https://build.avax.network/academy">
+              <img 
+              src="/wolfie.png" 
+              alt="Avalanche Logo" 
+              className="absolute top-5 left-1/2 -translate-x-1/2 z-1 w-32 h-32 object-contain transition-all duration-300 ease-in-out group-[.closed]:translate-y-[20px] group-[.closed]:opacity-50 group-[.open]:translate-y-10 group-[.open]:opacity-0"
+              />
+            </Link>
+            <Files className="z-2 shadow-xl hide-icons relative dark:text-white group transition-all duration-300 ease-in-out [&[open]]:open [&:not([open])]:closed">
+              <Folder name="Using the above command, you can configure your:" defaultOpen>
+              <Link href="/docs/virtual-machines">
+              <File icon={<CpuIcon />} name="Virtual Machine" />
+              </Link>
+              <Link href="/docs/tooling/create-avalanche-l1#enter-your-avalanche-l1s-chainid">
+              <File icon={<Globe />} name="Chain ID" />
+              </Link>
+              <Link href="/docs/tooling/create-avalanche-l1#token-symbol">
+              <File icon={<BadgeDollarSign />} name="Token Name & Symbol" />
+              </Link>
+              </Folder>
+            </Files>
+            </div>
+        </div>
+      </div>
+      <div className="flex flex-col border-l border-t px-6 py-12 md:py-16">
+        <div className={cn(badgeVariants(), 'bg-red-500', 'text-white')}>2</div>
+        <h3 className="text-xl font-bold">Deploy.</h3>
+        <p className="mb-8 text-fd-muted-foreground">
+          Deploy an interoperable layer 1 with a single command.
+        </p>
+        <DeployBlockchainAnimation />
+      </div>
+    </div>
+  )
+}
 
 function Features(): React.ReactElement {
   return (
     <div className="grid grid-cols-1 border-b border-r md:grid-cols-2">
       <Feature
         icon={Settings}
-        subheading="Tooling"
+        subheading="Toolings"
         heading="Tools For Developers."
         description="We provide a suite of tools to make your development experience as smooth as possible."
       >
-        <div className="mt-8 flex flex-col gap-4">
-          <Link href="/tools/l1-launcher" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
-            <Rocket />
-            <h3 className="font-semibold">L1 Launcher</h3>
+      <div className="mt-8 flex flex-col gap-4">
+        <Link href="/docs/tooling/get-avalanche-cli" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
+            <Terminal />
+            <h3 className="font-semibold">Avalanche CLI</h3>
             <p className="text-sm text-fd-muted-foreground">
-              Launch your EVM L1 with Docker and Core Wallet.
+              Command line interface for everything Avalanche.
             </p>
-          </Link>
-          <Link href="/tools/l1-toolbox" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
-            <Wrench />
-            <h3 className="font-semibold">L1 Toolbox</h3>
+        </Link>
+        <Link href="https://github.com/ava-labs/avalanche-starter-kit" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
+          <Github />
+          <h3 className="font-semibold">Avalanche Starter Kit</h3>
+          <p className="text-sm text-fd-muted-foreground">
+            Quickstart your journey into Avalanche with our Starter Kit.
+          </p>
+        </Link>
+        <Link href="https://github.com/ava-labs/hypersdk" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
+            <Atom />
+            <h3 className="font-semibold">HyperSDK</h3>
             <p className="text-sm text-fd-muted-foreground">
-              Simple atomic tools to launch and maintain your L1.
+              High performance, customizable framework for building blockchains.
             </p>
-          </Link>
-          <Link href="https://github.com/ava-labs/avalanche-starter-kit" className="rounded-xl border bg-fd-background p-4 shadow-lg transition-colors hover:bg-fd-accent">
-            <Github />
-            <h3 className="font-semibold">Avalanche Starter Kit</h3>
-            <p className="text-sm text-fd-muted-foreground">
-              Quickstart your journey into Avalanche with our Starter Kit.
-            </p>
-          </Link>
+        </Link>
         </div>
       </Feature>
       <Feature
@@ -209,56 +256,4 @@ function Feature({
       {props.children}
     </div>
   );
-}
-
-
-function Introduction(): React.ReactElement {
-  return (
-    <div className="grid grid-cols-1 border-r md:grid-cols-2">
-      <div className="flex flex-col border-l border-t px-6 py-12 md:py-16">
-        <div className={cn(badgeVariants(), 'bg-red-500', 'text-white')}>1</div>
-        <h3 className="text-xl font-bold">Configure.</h3>
-        <p className="mb-8 text-fd-muted-foreground">
-          Configure your blockchain using Avalanche CLI.
-        </p>
-        <div className="relative flex flex-col">
-          <CodeBlock
-            lang="bash"
-            wrapper={{ className: 'absolute inset-x-2 top-0' }}
-            code="avalanche blockchain create myblockchain"
-          />
-          <div className="relative mt-20">
-            <Link href="https://build.avax.network/academy">
-              <img
-                src="/wolfie.png"
-                alt="Avalanche Logo"
-                className="absolute top-5 left-1/2 -translate-x-1/2 z-[1] w-32 h-32 object-contain transition-all duration-300 ease-in-out group-[.closed]:translate-y-[20px] group-[.closed]:opacity-50 group-[.open]:translate-y-10 group-[.open]:opacity-0"
-              />
-            </Link>
-            <Files className="z-[2] shadow-xl hide-icons relative dark:text-white group transition-all duration-300 ease-in-out [&[open]]:open [&:not([open])]:closed">
-              <Folder name="Using the above command, you can configure your:" defaultOpen>
-                <Link href="/docs/virtual-machines">
-                  <File icon={<CpuIcon />} name="Virtual Machine" />
-                </Link>
-                <Link href="/docs/tooling/create-avalanche-l1#enter-your-avalanche-l1s-chainid">
-                  <File icon={<Globe />} name="Chain ID" />
-                </Link>
-                <Link href="/docs/tooling/create-avalanche-l1#token-symbol">
-                  <File icon={<BadgeDollarSign />} name="Token Name & Symbol" />
-                </Link>
-              </Folder>
-            </Files>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col border-l border-t px-6 py-12 md:py-16">
-        <div className={cn(badgeVariants(), 'bg-red-500', 'text-white')}>2</div>
-        <h3 className="text-xl font-bold">Deploy.</h3>
-        <p className="mb-8 text-fd-muted-foreground">
-          Deploy an interoperable layer 1 with a single command.
-        </p>
-        <DeployBlockchainAnimation />
-      </div>
-    </div>
-  )
 }

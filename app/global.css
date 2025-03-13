@@ -1,6 +1,61 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+ 
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+@plugin 'tailwindcss-animate';
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --background-image-gradient-radial: radial-gradient(
+    circle,
+    var(--tw-gradient-stops)
+  );
+  --background-image-repeat-gradient-to-r: repeating-linear-gradient(
+    to right,
+    var(--tw-gradient-stops)
+  );
+  --background-image-repeat-gradient-to-br: repeating-linear-gradient(
+    to bottom right,
+    var(--tw-gradient-stops)
+  );
+
+  --color-gradient-radial: radial-gradient(circle, var(--tw-gradient-stops));
+  --color-repeat-gradient-to-r: repeating-linear-gradient(
+    to right,
+    var(--tw-gradient-stops)
+  );
+  --color-repeat-gradient-to-br: repeating-linear-gradient(
+    to bottom right,
+    var(--tw-gradient-stops)
+  );
+
+  --animate-stroke: stroke 5s linear infinite;
+
+  @keyframes stroke {
+    from {
+      stroke-dasharray: 1000;
+    }
+    to {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 2000;
+    }
+  }
+}
+
+@layer base {
+  button {
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 768px) {
+#nd-sidebar > div:first-child {
+    padding-top: calc(var(--spacing)* 3.5);
+}
+}
 
 .prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
   color: #E84142;
