@@ -5,7 +5,6 @@ import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input, Select } from "../../ui";
 import { createPublicClient, http } from 'viem';
-import { createDefaultCoreWalletClient } from "../../utils/wallet/createCoreWallet";
 
 
 export default function SwitchChain() {
@@ -21,6 +20,7 @@ export default function SwitchChain() {
         setEvmChainName,
         setEvmChainRpcUrl,
         setEvmChainCoinName,
+        coreWalletClient
     } = useExampleStore();
     const [isCheckingRpc, setIsCheckingRpc] = useState(false);
 
@@ -28,9 +28,7 @@ export default function SwitchChain() {
     async function handleSwitchChain() {
         setIsSwitching(true);
         try {
-            const walletClient = await createDefaultCoreWalletClient()
-
-            await walletClient.addChain({
+            await coreWalletClient!.addChain({
                 chain: {
                     id: targetChainId,
                     name: evmChainName,
@@ -44,11 +42,11 @@ export default function SwitchChain() {
                             http: [evmChainRpcUrl],
                         },
                     },
-                    isTestnet: true,
+                    isTestnet: isTestnet,
                 }
             });
 
-            await walletClient.switchChain({
+            await coreWalletClient!.switchChain({
                 id: targetChainId,
             });
         } catch (error) {

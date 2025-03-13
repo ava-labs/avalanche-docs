@@ -2,15 +2,14 @@
 
 import { getRPCEndpoint } from "../../utils/rpcEndpoint";
 import { useExampleStore } from "../../utils/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
+import { createCoreWalletClient } from "../../utils/wallet/createCoreWallet";
 
 export default function ConvertToL1() {
     const {
-        networkID,
-        getPChainAddress,
         subnetID,
         chainID,
         setSubnetID,
@@ -22,24 +21,39 @@ export default function ConvertToL1() {
         L1ID,
         setL1ID,
         validatorWeights,
-        setValidatorWeights
+        setValidatorWeights,
+        coreWalletClient
     } = useExampleStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
     const [validatorBalances, setValidatorBalances] = useState(Array(100).fill(BigInt(1000000000)) as bigint[]);
     const [localError, setLocalError] = useState("");
+    const [pChainAddress, setPChainAddress] = useState("");
+
+    useEffect(() => {
+        async function getPChainAddress() {
+            const pChainAddress = await coreWalletClient!.getPChainAddress();
+            setPChainAddress(pChainAddress);
+        }
+        getPChainAddress();
+    }, []);
 
     async function handleConvertToL1() {
         setL1ID("");
         setIsConverting(true);
         try {
-            const pvmApi = new pvm.PVMApi(getRPCEndpoint(networkID));
-            const feeState = await pvmApi.getFeeState();
-            const context = await Context.getContextFromURI(getRPCEndpoint(networkID));
+            const isTestnet = await coreWalletClient!.isTestnet()
+            const pChainAddress = await coreWalletClient!.getPChainAddress();
 
-            const addressBytes = utils.bech32ToBytes(getPChainAddress());
+            const rpcEndpoint = getRPCEndpoint(isTestnet);
+
+            const pvmApi = new pvm.PVMApi(rpcEndpoint);
+            const feeState = await pvmApi.getFeeState();
+            const context = await Context.getContextFromURI(rpcEndpoint);
+
+            const addressBytes = utils.bech32ToBytes(pChainAddress);
 
             const { utxos } = await pvmApi.getUTXOs({
-                addresses: [getPChainAddress()]
+                addresses: [pChainAddress]
             });
 
             const validators: L1Validator[] = [];
@@ -103,7 +117,7 @@ export default function ConvertToL1() {
             <div className="space-y-4">
                 <Input
                     label="Your P-Chain Address"
-                    value={getPChainAddress()}
+                    value={pChainAddress}
                     disabled={true}
                     type="text"
                 />

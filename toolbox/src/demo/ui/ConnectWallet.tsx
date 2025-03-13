@@ -3,16 +3,16 @@ import { Button } from "./Button";
 import { useErrorBoundary } from "react-error-boundary";
 import { Wallet } from "lucide-react";
 import { useExampleStore } from "../utils/store";
+import { createCoreWalletClient } from "../utils/wallet/createCoreWallet";
 
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
-    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress, setXpPublicKey } = useExampleStore();
+    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient } = useExampleStore();
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
     const [isConnecting, setIsConnecting] = useState(false);
-
 
     useEffect(() => {
         setHasWallet(!!window.avalanche);
@@ -28,16 +28,10 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                 throw new Error("No accounts found");
             }
 
-            // Request public keys after connecting
-            const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
-                method: "avalanche_getAccountPubKey",
-            });
-            if (!pubkeys) {
-                throw new Error("Failed to get public keys");
-            }
+            const coreWalletClient = await createCoreWalletClient(accounts[0] as `0x${string}`);
+            setCoreWalletClient(coreWalletClient);
 
             setWalletEVMAddress(accounts[0]);
-            setXpPublicKey(pubkeys.xp);
             setIsConnected(true);
         } catch (error) {
             showBoundary(error as Error);
@@ -54,13 +48,8 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                 console.log(`ConnectWallet:Connected to ${accounts[0]}`);
                 setWalletEVMAddress(accounts[0]);
 
-                // Get public keys for already connected account
-                const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
-                    method: "avalanche_getAccountPubKey",
-                });
-                if (pubkeys) {
-                    setXpPublicKey(pubkeys.xp);
-                }
+                const coreWalletClient = await createCoreWalletClient(accounts[0] as `0x${string}`);
+                setCoreWalletClient(coreWalletClient);
 
                 setIsConnected(true);
             } else {
@@ -91,19 +80,14 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
         window.avalanche?.on("accountsChanged", async (accounts: string[]) => {
             if (accounts.length > 0) {
                 setWalletEVMAddress(accounts[0]);
-
-                // Get public keys for already connected account
-                const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
-                    method: "avalanche_getAccountPubKey",
-                });
-                if (pubkeys) {
-                    setXpPublicKey(pubkeys.xp);
-                }
-
                 setIsConnected(true);
             } else {
                 setWalletEVMAddress("");
                 setIsConnected(false);
+            }
+
+            if (coreWalletClient) {
+                coreWalletClient.account = { address: accounts[0] as `0x${string}`, type: "json-rpc" };
             }
         });
 

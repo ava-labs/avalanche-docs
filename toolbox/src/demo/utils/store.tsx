@@ -1,11 +1,9 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage, combine } from 'zustand/middleware'
-import { networkIDs } from "@avalabs/avalanchejs";
-import { pChainAddrFromPubKey } from "../examples/Wallet/pChainAddrFromPubKey";
+import { createCoreWalletClient } from './wallet/createCoreWallet';
 
 export const initialState = {
-    networkID: networkIDs.FujiID,
-    xpPublicKey: "",
+    coreWalletClient: null as ReturnType<typeof createCoreWalletClient> | null,
     subnetID: "",
     chainName: "My Chain",
     vmId: "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy",
@@ -34,13 +32,8 @@ export const initialState = {
 
 export const useExampleStore = create(
     persist(
-        combine(initialState, (set, get) => ({
-            getPChainAddress: () => {
-                const { xpPublicKey, networkID } = get();
-                return pChainAddrFromPubKey(xpPublicKey, networkID)
-            },
-            setNetworkID: (networkID: number) => set({ networkID }),
-            setXpPublicKey: (xpPublicKey: string) => set({ xpPublicKey }),
+        combine(initialState, set => ({
+            setCoreWalletClient: (coreWalletClient: ReturnType<typeof createCoreWalletClient>) => set({ coreWalletClient }),
             setSubnetID: (subnetID: string) => set({ subnetID }),
             setChainName: (chainName: string) => set({ chainName }),
             setVmId: (vmId: string) => set({ vmId }),
@@ -76,3 +69,4 @@ export const useExampleStore = create(
         },
     ),
 )
+

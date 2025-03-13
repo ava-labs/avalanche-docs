@@ -1,4 +1,3 @@
-
 export type CoreWalletRpcSchema = [
     {
         Method: 'avalanche_getAccountPubKey',
@@ -18,6 +17,20 @@ export type CoreWalletRpcSchema = [
                 decimals: number
             },
             isTestnet: boolean
+        }
+    },
+    {
+        Method: 'avalanche_sendTransaction',
+        Parameters: {
+            transactionHex: string,
+            chainAlias: "X" | "P" | "C",
+            externalIndices?: number[],
+            internalIndices?: number[],
+            utxos?: string[],
+            feeTolerance?: number
+        }
+        ReturnType: {
+            txHash: string
         }
     }
 ]
