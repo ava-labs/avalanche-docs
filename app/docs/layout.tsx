@@ -1,4 +1,4 @@
-import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
+import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
 import { source } from '@/lib/source';
@@ -6,16 +6,18 @@ import 'fumadocs-twoslash/twoslash.css';
 import { ArrowUpRight } from 'lucide-react';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 
-const docsOptions = {
-  ...baseOptions,
-  nav: {
-    mode: "top" as const,
+const docsOptions: DocsLayoutProps = {
+tree: source.pageTree,
+tabMode: 'navbar',
+nav: {
+    ...baseOptions.nav,
+    mode: 'top',
     title: (
       <>
         {<AvalancheLogo className="size-7" fill="currentColor" />}
         <span style={{ fontSize: "large" }}>Documentation</span>
       </>
-    )
+    ),
   },
   links: [
     {
@@ -24,8 +26,8 @@ const docsOptions = {
       icon: <ArrowUpRight />
     },
     {
-      text: 'Guides',
-      url: '/guides',
+      text: 'Tools',
+      url: '/tools',
       icon: <ArrowUpRight />
     },
     {
@@ -38,11 +40,7 @@ const docsOptions = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <DocsLayout 
-      {...docsOptions}
-      tabMode="navbar"
-      tree={source.pageTree}
-    >
+    <DocsLayout {...docsOptions}>
       <span
         className="absolute inset-0 z-[-1] h-[64rem] max-h-screen overflow-hidden"
         style={{
