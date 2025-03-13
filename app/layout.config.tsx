@@ -373,7 +373,7 @@ export const baseOptions: BaseLayoutProps = {
         {<AvalancheLogo className="size-7" fill="currentColor" />}
         <span style={{ fontSize: "large" }}>Builders Hub</span>
       </>
-    ),
+    )
   },
   links: [
     docsMenu,

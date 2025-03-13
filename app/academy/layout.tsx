@@ -1,20 +1,20 @@
-import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/docs';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
 import { academy } from '@/lib/source';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 import { ArrowUpRight } from 'lucide-react';
 
-const docsOptions: DocsLayoutProps = {
+const docsOptions = {
   ...baseOptions,
   nav: {
+    mode: "top" as const,
     title: (
       <>
-        { <AvalancheLogo className="size-7" fill="currentColor"/> }
+        {<AvalancheLogo className="size-7" fill="currentColor" />}
         <span style={{ fontSize: "large" }}>Academy</span>
       </>
-    ),
-    transparentMode: 'top',
+    )
   },
   tree: academy.pageTree,
   links: [
