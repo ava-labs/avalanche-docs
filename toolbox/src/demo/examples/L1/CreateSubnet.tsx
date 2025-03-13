@@ -5,21 +5,17 @@ import { Button, Input } from "../../ui";
 import { useErrorBoundary } from "react-error-boundary";
 import { useEffect, useState } from "react";
 import { Success } from "../../ui/Success";
-import { getPChainAddress } from "../../utils/wallet/methods/getPChainAddress";
 
 
 export default function CreateSubnet() {
   const { showBoundary } = useErrorBoundary();
-  const { setSubnetID, subnetID, coreWalletClient } = useExampleStore(state => state);
+  const { setSubnetID, subnetID, coreWalletClient, walletChainId } = useExampleStore(state => state);
   const [isCreating, setIsCreating] = useState(false);
-  const [pChainAddress, setPChainAddress] = useState("");
+
+  const [pChainAddress, setPChainAddress] = useState<string>("");
   useEffect(() => {
-    coreWalletClient!.getPChainAddress().then(addr => {
-      setPChainAddress(addr);
-    }).catch(err => {
-      showBoundary(err);
-    });
-  }, []);
+    coreWalletClient!.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+  }, [walletChainId]);
 
   async function handleCreateSubnet() {
     setSubnetID("");
@@ -43,7 +39,7 @@ export default function CreateSubnet() {
       <div className="space-y-4">
         <Input
           label="Your P-Chain Address"
-          value={pChainAddress}
+          value={pChainAddress ?? ""}
           disabled={true}
           type="text"
         />

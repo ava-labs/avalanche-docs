@@ -4,7 +4,9 @@ import { sendTransaction } from './overrides/sendTransaction'
 import { CoreWalletRpcSchema } from './rpcSchema'
 import { isTestnet } from './methods/isTestnet'
 import { getPChainAddress } from './methods/getPChainAddress'
-import { createSubnet, CreateSubnetParams } from './methods/CreateSubnet'
+import { createSubnet, CreateSubnetParams } from './methods/createSubnet'
+import { createChain, CreateChainParams } from './methods/createChain'
+
 
 export function createCoreWalletClient(account?: `0x${string}`) {
     return createWalletClient({
@@ -17,5 +19,6 @@ export function createCoreWalletClient(account?: `0x${string}`) {
         isTestnet: () => isTestnet(client),
         getPChainAddress: () => getPChainAddress(client),
         createSubnet: (args: CreateSubnetParams) => createSubnet(client, args),
+        createChain: (args: CreateChainParams) => createChain(client, args),
     }))
 }
