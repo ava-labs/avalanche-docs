@@ -148,7 +148,7 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
         hackathons: hackathonsLite.map((hackathon) => ({
             ...hackathon,
             status: getStatus(hackathon.start_date, hackathon.end_date)
-        })),
+        } as HackathonHeader)),
         total: totalHackathons,
         page,
         pageSize,
