@@ -1,0 +1,14 @@
+{
+    "title": "L1 Validator Management",
+    "icon": "UserPen",
+    "root": true,
+    "pages": [
+      "index",
+      "---Recap---",
+      "...01-recap",
+      "---L1 Creation---",
+      "...02-l1-creation"
+    
+    ]
+  }
+  
