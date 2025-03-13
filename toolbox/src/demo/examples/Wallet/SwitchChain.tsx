@@ -4,7 +4,8 @@ import { useExampleStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input, Select } from "../../ui";
-import { createWalletClient, createPublicClient, custom, http, AddEthereumChainParameter } from 'viem';
+import { createPublicClient, http } from 'viem';
+import { createDefaultCoreWalletClient } from "../../utils/wallet/createCoreWallet";
 
 
 export default function SwitchChain() {
@@ -27,25 +28,24 @@ export default function SwitchChain() {
     async function handleSwitchChain() {
         setIsSwitching(true);
         try {
-            const walletClient = createWalletClient({
-                transport: custom(window.avalanche!),
-            });
+            const walletClient = await createDefaultCoreWalletClient()
 
-            const chain: AddEthereumChainParameter = {
-                chainId: `0x${targetChainId.toString(16)}`,
-                chainName: evmChainName,
-                nativeCurrency: {
-                    name: evmChainCoinName,
-                    symbol: evmChainCoinName,
-                    decimals: 18,
-                },
-                rpcUrls: [evmChainRpcUrl],
-            }
-
-            await walletClient.request({
-                id: "1",
-                method: "wallet_addEthereumChain",
-                params: [{ ...chain, isTestnet } as unknown as AddEthereumChainParameter],//Core wallet supports a custom 
+            await walletClient.addChain({
+                chain: {
+                    id: targetChainId,
+                    name: evmChainName,
+                    nativeCurrency: {
+                        name: evmChainCoinName,
+                        symbol: evmChainCoinName,
+                        decimals: 18,
+                    },
+                    rpcUrls: {
+                        default: {
+                            http: [evmChainRpcUrl],
+                        },
+                    },
+                    isTestnet: true,
+                }
             });
 
             await walletClient.switchChain({

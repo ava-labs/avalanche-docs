@@ -1,10 +1,12 @@
 import { networkIDs } from "@avalabs/avalanchejs";
+import { avalanche, avalancheFuji } from "viem/chains";
 
+//TODO: probably we should get rid of this
 export const getRPCEndpoint = (networkID: number) => {
     if (networkID === networkIDs.FujiID) {
-        return "https://api.avax-test.network";
+        return avalancheFuji.rpcUrls.default.http[0].split("/").slice(0, 3).join("/");
     } else if (networkID === networkIDs.MainnetID) {
-        return "https://api.avax.network";
+        return avalanche.rpcUrls.default.http[0].split("/").slice(0, 3).join("/");
     } else {
         throw new Error("Invalid network ID");
     }

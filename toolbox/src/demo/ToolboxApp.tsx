@@ -15,12 +15,6 @@ type ComponentType = {
 const componentGroups: Record<string, ComponentType[]> = {
     "Wallet": [
         {
-            id: 'getPChainAddress',
-            label: "Get P-chain Address",
-            component: lazy(() => import('./examples/Wallet/GetPChainAddress')),
-            fileNames: ["toolbox/src/demo/examples/Wallet/pChainAddrFromPubKey.ts", "toolbox/src/demo/examples/Wallet/GetPChainAddress.tsx"]
-        },
-        {
             id: 'switchChain',
             label: "Switch Chain",
             component: lazy(() => import('./examples/Wallet/SwitchChain')),
