@@ -7,6 +7,7 @@ export type HackathonHeader = {
   end_date: Date
   location: string
   total_prizes: number
+  participants: number
   tags: string[]
   status: HackathonStatus
   small_banner: string
@@ -28,7 +29,6 @@ export type Hackathon = {
   address: string
   partners: Partner[]
   tracks: Track[]
-  participants: number
   speakers: Speaker[]
   become_sponsor_link: string
   submission_deadline: Date 

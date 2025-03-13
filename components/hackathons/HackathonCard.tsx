@@ -51,7 +51,7 @@ export default function HackathonCard({
         {hackathon.tags && hackathon.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
             {hackathon.tags.map((tag: string) => (
-              <Badge className="border-2 border-zinc-900 dark:border-zinc-50">
+              <Badge key={tag} className="border-2 border-zinc-900 dark:border-zinc-50">
                 <p className="text-sm">{tag}</p>
               </Badge>
             ))}
@@ -60,14 +60,21 @@ export default function HackathonCard({
         <div className="flex justify-around items-center text-gray-300 text-sm py-[10px]">
           <div className="flex items-center gap-2">
             <Trophy className="h-4 w-4 dark:stroke-zinc-50 stroke-zinc-900" />
-            <span className="font-medium dark:text-zinc-50 text-zinc-900">10k</span>
+            <span className="font-medium dark:text-zinc-50 text-zinc-900">
+              {hackathon.total_prizes}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <UserRound className="h-4 w-4 dark:stroke-zinc-50 stroke-zinc-900" />
-            <span className="font-medium dark:text-zinc-50 text-zinc-900">9000</span>
+            <span className="font-medium dark:text-zinc-50 text-zinc-900">
+              {hackathon.participants}
+            </span>
           </div>
           <div className="flex items-center gap-2">
-            <HackathonStatus status={hackathon.status ?? 'UPCOMING'} enableLightMode={true} />
+            <HackathonStatus
+              status={hackathon.status ?? "UPCOMING"}
+              enableLightMode={true}
+            />
           </div>
         </div>
         <Button
@@ -75,7 +82,10 @@ export default function HackathonCard({
           variant="secondary"
           className="w-full bg-red-500 py-2 px-4"
         >
-          <Link className="text-sm text-zinc-50" href={`/hackathons/${hackathon.id}`}>
+          <Link
+            className="text-sm text-zinc-50"
+            href={`/hackathons/${hackathon.id}`}
+          >
             LEARN MORE
           </Link>
         </Button>

@@ -15,6 +15,7 @@ model Hackathon {
   end_date     DateTime @default(now()) @db.Timestamptz(3)
   location     String
   total_prizes Int
+  participants Int
   tags         String[]
   timezone     String   @default("UTC")
   icon         String   @default("")
