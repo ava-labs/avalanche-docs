@@ -206,9 +206,9 @@ export default function Hackathons({
             </SelectTrigger>
             <SelectContent className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
               <SelectItem value="all">All Statuses</SelectItem>
-              <SelectItem value="Upcoming">Upcoming</SelectItem>
-              <SelectItem value="Ongoing">Ongoing</SelectItem>
-              <SelectItem value="Ended">Ended</SelectItem>
+              <SelectItem value="UPCOMING">Upcoming</SelectItem>
+              <SelectItem value="ONGOING">Ongoing</SelectItem>
+              <SelectItem value="ENDED">Ended</SelectItem>
             </SelectContent>
           </Select>
         </div>
