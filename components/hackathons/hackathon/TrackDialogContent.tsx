@@ -1,13 +1,13 @@
 import { Track } from "@/types/hackathons";
 import { DynamicIcon } from "lucide-react/dynamic";
+import ReactMarkdown from "react-markdown";
+
 type Props = {
   track: Track;
 };
-export default function TrackDialogContent({ track }: Props) {
-  // const { body: MDX } = track.description.load();
+export default async function TrackDialogContent({ track }: Props) {
   return (
-    <div className="max-w-lg mx-auto text-white rounded-2xl">
-      {/* Header */}
+    <div className="max-w-lg max-h-[80vh] mx-auto text-white rounded-2xl">
       <div className="flex items-center space-x-3">
         <div className="p-2 bg-red-500 rounded-full">
           <DynamicIcon name={track.logo as any} size={36} color="#F5F5F9" />
@@ -15,8 +15,7 @@ export default function TrackDialogContent({ track }: Props) {
         <h1 className="text-3xl font-semibold">{track.name}</h1>
       </div>
       <span className="block w-full h-[1px] my-8 bg-red-500"></span>
-      <p>{track.description}</p>
-      {/* <MDX components={defaultMdxComponents} /> */}
+      <ReactMarkdown>{track.description}</ReactMarkdown>
     </div>
   );
 }

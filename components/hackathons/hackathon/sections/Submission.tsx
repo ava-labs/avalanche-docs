@@ -1,10 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { HackathonHeader } from "@/types/hackathons";
 import { Calendar, Trophy, Rocket, Check } from "lucide-react";
 import React from "react";
+import ReactMarkdown from "react-markdown";
 
 function Submission({ hackathon }: { hackathon: HackathonHeader }) {
   return (
@@ -71,12 +73,31 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
       </div>
 
       <div className="flex justify-center mt-8">
-        <Button
-          variant={"secondary"}
-          className="w-1/3 bg-red-500 rounded-md text-zinc-100"
-        >
-          SUBMIT PROJECT
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              variant={"secondary"}
+              className="w-1/3 bg-red-500 rounded-md text-zinc-100"
+            >
+              View full guidelines
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="bg-zinc-900">
+            <div className="max-w-lg text-white rounded-2xl">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-red-500 rounded-full">
+                  <Trophy
+                    size={24}
+                    color="#F5F5F9"
+                  />
+                </div>
+                <h1 className="text-3xl font-semibold">Guidelines</h1>
+              </div>
+              <span className="block w-full h-[1px] my-8 bg-red-500"></span>
+              <ReactMarkdown></ReactMarkdown>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );

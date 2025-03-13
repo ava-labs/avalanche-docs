@@ -2,7 +2,7 @@ import { HackathonHeader } from "@/types/hackathons";
 import { Crown } from "lucide-react";
 import React from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import TrackDialogContent from "../TrackModal";
+import TrackDialogContent from "../TrackDialogContent";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import TrackCard from "../TrackCard";
