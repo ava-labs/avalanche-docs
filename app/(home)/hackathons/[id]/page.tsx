@@ -82,13 +82,13 @@ export default async function HackathonPage({
             />
           </div>
           <div className="p-8 flex flex-col gap-20">
-            <Schedule hackathon={hackathon} />
-            <Tracks hackathon={hackathon} />
-            <Sponsors hackathon={hackathon} />
+            {hackathon.content.schedule && <Schedule hackathon={hackathon} />}
+            {hackathon.content.tracks && <Tracks hackathon={hackathon} />}
+            {hackathon.content.partners && <Sponsors hackathon={hackathon} />}
             <Submission hackathon={hackathon} />
             <Resources hackathon={hackathon} />
             <Community hackathon={hackathon} />
-            <Speakers hackathon={hackathon} />
+            {hackathon.content.speakers && <Speakers hackathon={hackathon} />}
           </div>
         </div>
       </div>

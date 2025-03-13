@@ -9,7 +9,7 @@ type Props = {
 
 export default function TrackCard({track}: Props) {
   return (
-    <Card className="flex-1 min-h-40 bg-zinc-50 dark:bg-zinc-900 cursor-pointer">
+    <Card className="basis-1/4 min-h-40 bg-zinc-50 dark:bg-zinc-900 cursor-pointer">
       <CardHeader>
         <CardTitle>
           <div className="flex justify-between items-center gap-2">
