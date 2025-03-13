@@ -61,7 +61,8 @@
     "vitest": "^2.1.9",
     "wagmi": "^2.14.8",
     "zod": "^3.24.1",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "recharts": "^2.10.3"
   },
   "devDependencies": {
     "@types/mdx": "^2.0.13",
