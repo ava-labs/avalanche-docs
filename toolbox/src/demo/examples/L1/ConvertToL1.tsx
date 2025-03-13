@@ -1,12 +1,11 @@
 "use client";
 
-import { getRPCEndpoint } from "../../utils/rpcEndpoint";
+import { getRPCEndpoint } from "../../utils/wallet/utils/rpc";
 import { useExampleStore } from "../../utils/store";
 import { useEffect, useState } from "react";
 import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
-import { createCoreWalletClient } from "../../utils/wallet/createCoreWallet";
 
 export default function ConvertToL1() {
     const {
