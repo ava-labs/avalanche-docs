@@ -1,6 +1,6 @@
 "use client";
 
-import { initialState, useExampleStore } from "../../utils/store";
+import { DEFAULT_VM_ID, useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
@@ -20,14 +20,12 @@ export default function CreateChain() {
         setSubnetID,
         genesisData,
         setGenesisData,
-        walletEVMAddress,
         evmChainId,
         gasLimit,
         targetBlockRate,
-        coreWalletClient,
-        walletChainId
-    } = useExampleStore(state => state);
+    } = useToolboxStore(state => state);
     const [isCreating, setIsCreating] = useState(false);
+    const { walletEVMAddress, coreWalletClient, walletChainId } = useWalletStore();
 
     useEffect(() => {
         if (!genesisData) {
@@ -85,7 +83,7 @@ export default function CreateChain() {
                     value={vmId}
                     onChange={setVmId}
                     placeholder="Enter VM ID"
-                    notes={`Default is ${initialState.vmId}`}
+                    notes={`Default is ${DEFAULT_VM_ID}`}
                 />
                 <Input
                     label="Genesis Data (JSON)"

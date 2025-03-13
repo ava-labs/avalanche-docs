@@ -1,9 +1,7 @@
 "use client";
 
-import { getRPCEndpoint } from "../../utils/wallet/utils/rpc";
-import { useExampleStore } from "../../utils/store";
-import { useEffect, useState } from "react";
-import { utils, pvm, Context, L1Validator, pvmSerial, PChainOwner } from "@avalabs/avalanchejs";
+import { useToolboxStore, useWalletStore } from "../../utils/store";
+import { useState } from "react";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 import { ConvertToL1Validator } from "../../utils/wallet/methods/convertToL1";
@@ -23,18 +21,11 @@ export default function ConvertToL1() {
         setL1ID,
         validatorWeights,
         setValidatorWeights,
-        coreWalletClient,
-        walletChainId
-    } = useExampleStore(state => state);
+    } = useToolboxStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
     const [validatorBalances, setValidatorBalances] = useState(Array(100).fill(BigInt(1000000000)) as bigint[]);
-    const [localError, setLocalError] = useState("");
-    const [pChainAddress, setPChainAddress] = useState<string>("");
+    const { coreWalletClient, pChainAddress } = useWalletStore();
     const { showBoundary } = useErrorBoundary();
-
-    useEffect(() => {
-        coreWalletClient!.getPChainAddress().then(setPChainAddress).catch(showBoundary);
-    }, [walletChainId]);
 
     async function handleConvertToL1() {
         setL1ID("");
@@ -65,7 +56,7 @@ export default function ConvertToL1() {
 
             setL1ID(txID);
         } catch (error) {
-            setLocalError(error instanceof Error ? error.message : "An unknown error occurred");
+            showBoundary(error);
         } finally {
             setIsConverting(false);
         }
@@ -125,7 +116,6 @@ export default function ConvertToL1() {
                     type="number"
                     disableAddRemove={true}
                 />
-                {localError && <div className="text-red-500">{localError}</div>}
                 <Button
                     type="primary"
                     onClick={handleConvertToL1}

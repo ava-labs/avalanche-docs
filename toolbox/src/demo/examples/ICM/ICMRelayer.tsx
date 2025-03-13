@@ -2,7 +2,7 @@
 
 import { createPublicClient, createWalletClient, custom, formatEther, parseEther } from 'viem'
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
-import { useExampleStore } from '../../utils/store';
+import { useToolboxStore } from '../../utils/store';
 import { Input, Button } from '../../ui';
 import { CodeHighlighter } from '../../ui/CodeHighlighter';
 import { useState, useEffect } from 'react';
@@ -12,7 +12,7 @@ const randomPrivateKey = generatePrivateKey()
 const MINIMUM_BALANCE = parseEther('100')
 
 export default function ICMRelayer() {
-    const { chainID, setChainID, subnetID, setSubnetID, evmChainRpcUrl, setEvmChainRpcUrl, walletChainId } = useExampleStore();
+    const { chainID, setChainID, subnetID, setSubnetID, evmChainRpcUrl, setEvmChainRpcUrl, walletChainId } = useToolboxStore();
     const [balance, setBalance] = useState<bigint>(BigInt(0));
     const [isCheckingBalance, setIsCheckingBalance] = useState(true);
     const [isSending, setIsSending] = useState(false);

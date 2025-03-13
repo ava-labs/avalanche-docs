@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useMemo } from "react";
 import { Button } from "../../ui";
@@ -16,7 +16,7 @@ const SENDER_C_CHAIN_ADDRESS = "0x2419133a23EA13EAF3dC3ee2382F083067107386";
 
 export default function DeployReceiver() {
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId, icmReceiverAddress, chainID, setChainID, evmChainId, evmChainRpcUrl, setEvmChainRpcUrl } = useExampleStore();
+    const { walletChainId, icmReceiverAddress, chainID, setChainID, evmChainId, evmChainRpcUrl, setEvmChainRpcUrl } = useToolboxStore();
     const [message, setMessage] = useState(`It is around ${new Date().toISOString().slice(11, 16)} o'clock in England`);
     const [isSending, setIsSending] = useState(false);
     const [isSwitchingChains, setIsSwitchingChains] = useState(false);

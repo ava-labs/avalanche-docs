@@ -1,6 +1,6 @@
 import { Button, GithubEmbed, ConnectWallet } from "./ui";
 import { ErrorBoundary } from "react-error-boundary";
-import { useExampleStore } from './utils/store';
+import { useToolboxStore } from './utils/store';
 import { RefreshCw } from 'lucide-react';
 import { useState, useEffect, ReactElement, lazy, Suspense } from "react";
 
@@ -285,7 +285,7 @@ export default function ToolboxApp() {
                     <Button
                         onClick={() => {
                             if (window.confirm("Are you sure you want to reset the state?")) {
-                                useExampleStore.getState().reset();
+                                useToolboxStore.getState().reset();
                             }
                         }}
                         className="w-full"

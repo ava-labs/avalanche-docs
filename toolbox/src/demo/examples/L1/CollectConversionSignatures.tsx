@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { packL1ConversionMessage, PackL1ConversionMessageArgs } from "./convertWarp";
@@ -8,12 +8,10 @@ import { networkIDs, utils } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
-import { useEffect } from "react";
-import { CodeHighlighter } from "../../ui/CodeHighlighter";
+
 export default function CollectConversionSignatures() {
     const { showBoundary } = useErrorBoundary();
     const {
-        networkID,
         subnetID,
         chainID,
         setSubnetID,
@@ -26,29 +24,19 @@ export default function CollectConversionSignatures() {
         setL1ConversionSignature,
         validatorWeights,
         setValidatorWeights,
-    } = useExampleStore(state => state);
+    } = useToolboxStore(state => state);
+    const { coreWalletClient } = useWalletStore();
     const [isConverting, setIsConverting] = useState(false);
-    const [message, setMessage] = useState("");
-    const [justification, setJustification] = useState("");
-    const [networkName, setNetworkName] = useState<"fuji" | "mainnet" | undefined>(undefined);
-    const [sdkCallString, setSdkCallString] = useState("");
-    const [localError, setLocalError] = useState("");
 
+    async function handleConvertSignatures() {
+        setL1ConversionSignature("");
+        setIsConverting(true);
 
-
-    useEffect(() => {
-        if (networkID === networkIDs.MainnetID) {
-            setNetworkName("mainnet");
-        } else if (networkID === networkIDs.FujiID) {
-            setNetworkName("fuji");
-        } else {
-            showBoundary(new Error("Unsupported network with ID " + networkID));
-        }
-    }, [networkID]);
-
-    useEffect(() => {
         try {
-            setLocalError("");
+            const isTestnet = await coreWalletClient!.isTestnet();
+            const networkName = isTestnet ? "fuji" : "mainnet";
+            const networkID = isTestnet ? networkIDs.FujiID : networkIDs.MainnetID;
+
             const pChainChainID = '11111111111111111111111111111111LpoYY';
 
             const conversionArgs: PackL1ConversionMessageArgs = {
@@ -65,52 +53,13 @@ export default function CollectConversionSignatures() {
                 })
             };
 
-            if (conversionArgs.validators.length === 0) {
-                setMessage("")
-                setJustification("")
-                return
-            }
-
             const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, pChainChainID);
 
-            if (networkName) {
-                setMessage(utils.bufferToHex(message));
-                setJustification(utils.bufferToHex(justification));
-            }
-        } catch (e) {
-            console.error(e);
-            setLocalError(e instanceof Error ? e.message : "An unknown error occurred");
-            setMessage("")
-            setJustification("")
-        }
-    }, [networkName, subnetID, chainID, managerAddress, nodePopJsons, validatorWeights, networkID]);
-
-    useEffect(() => {
-        if (message && justification) {
-            setSdkCallString(`import { AvaCloudSDK } from "https://esm.sh/@avalabs/avacloud-sdk";
-const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
-    network: "${networkName}",
-    signatureAggregatorRequest: {
-        message: "${message}",
-        justification: "${justification}",
-        signingSubnetId: "${subnetID}",
-        quorumPercentage: 67, // Default threshold for subnet validation
-    },
-});`);
-        } else {
-            setSdkCallString("")
-        }
-    }, [networkName, message, justification, subnetID]);
-
-    async function handleConvertSignatures() {
-        setL1ConversionSignature("");
-        setIsConverting(true);
-        try {
             const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
                 network: networkName,
                 signatureAggregatorRequest: {
-                    message: message,
-                    justification: justification,
+                    message: utils.bufferToHex(message),
+                    justification: utils.bufferToHex(justification),
                     signingSubnetId: subnetID,
                     quorumPercentage: 67, // Default threshold for subnet validation
                 },
@@ -123,7 +72,6 @@ const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggre
             setIsConverting(false);
         }
     }
-
 
     return (
         <div className="space-y-4">
@@ -168,14 +116,6 @@ const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggre
                     type="number"
                     disableAddRemove={true}
                 />
-                {sdkCallString && <div className="mb-4">
-                    <div className="text-sm font-semibold">SDK Call that will be executed</div>
-                    <CodeHighlighter
-                        code={sdkCallString}
-                        lang="ts"
-                    />
-                </div>}
-                {localError && <div className="text-red-500">{localError}</div>}
                 <Button
                     type="primary"
                     onClick={handleConvertSignatures}
