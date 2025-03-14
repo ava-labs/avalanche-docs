@@ -10,7 +10,7 @@ import ValidatorMessagesABI from "../../../../contracts/icm-contracts/compiled/V
 
 export default function DeployValidatorMessages() {
     const { showBoundary } = useErrorBoundary();
-    const { validatorMessagesLibAddress, setValidatorMessagesLibAddress, walletChainId } = useToolboxStore();
+    const { validatorMessagesLibAddress, setValidatorMessagesLibAddress } = useToolboxStore();
     const [isDeploying, setIsDeploying] = useState(false);
 
     async function handleDeploy() {
