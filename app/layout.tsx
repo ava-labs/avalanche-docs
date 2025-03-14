@@ -9,6 +9,8 @@ import { baseUrl, createMetadata } from '@/utils/metadata';
 import Chatbot from "@/components/ui/chatbot"
 import { PrivacyPolicyBox } from "@/components/privacy-policy"
 import { SearchRootProvider } from './searchRootProvider';
+import { Banner } from "fumadocs-ui/components/banner";
+import Link from "next/link"
 
 export const metadata = createMetadata({
   title: {
@@ -30,6 +32,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <PHProvider>
+        <Banner id="banner" className="border-b border-border"><pre>Applications for <a href="https://lu.ma/avalanchesummitlondonhackathon?utm_source=builder_hub" target="_blank" rel="noopener noreferrer" className="underline hover:text-red-600 transition-colors">London Hackathon</a> are now open!</pre></Banner>
         <body className="flex min-h-screen flex-col">
           <SearchRootProvider>
             {children}

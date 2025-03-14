@@ -2,7 +2,6 @@
 import React, { useState, ReactNode } from "react";
 import Link from 'next/link';
 import { ArrowUpRight, Code, Link as Zap, X, Book, Users, SquareTerminal, Box, Network } from 'lucide-react';
-//import PartnerTracks from './partners';
 import { buttonVariants } from '@/components/ui/button';
 
 const Card = ({ children, className = "", onClick = () => {} }: { children: ReactNode; className?: string; onClick?: () => void }) => (
