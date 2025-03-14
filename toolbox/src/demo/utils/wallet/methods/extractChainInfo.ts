@@ -2,6 +2,7 @@ import { WalletClient } from "viem";
 import { getRPCEndpoint } from "../utils/rpc";
 import { isTestnet } from "./isTestnet";
 import { CoreWalletRpcSchema } from "../rpcSchema";
+import { error } from "console";
 
 export type ExtractChainInfoParams = {
     txId: string;
@@ -60,8 +61,22 @@ export async function extractChainInfo(client: WalletClient<any, any, any, CoreW
         })
     });
 
-    const data = await response.json() as PlatformGetTxResponse;
+    const data = await response.json() as PlatformGetTxResponse | { error: { message: string } };
 
+    // Type guard to check if we have an error response
+    const isErrorResponse = (res: any): res is { error: { message: string } } => {
+        return 'error' in res && typeof res.error?.message === 'string';
+    };
+
+    if (isErrorResponse(data)) {
+        throw new Error(data.error.message);
+    }
+
+    if (!data.result) {
+        throw new Error("Received unexpected response from node: " + JSON.stringify(data).slice(0, 150));
+    }
+
+    console.log(data);
     // Extract the relevant information from the response
     const { subnetID, chainName, vmID, genesisData } = data.result.tx.unsignedTx;
 

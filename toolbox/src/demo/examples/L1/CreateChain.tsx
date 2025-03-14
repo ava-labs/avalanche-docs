@@ -25,18 +25,13 @@ export default function CreateChain() {
         targetBlockRate,
     } = useToolboxStore(state => state);
     const [isCreating, setIsCreating] = useState(false);
-    const { walletEVMAddress, coreWalletClient, walletChainId } = useWalletStore();
+    const { walletEVMAddress, coreWalletClient } = useWalletStore();
 
     useEffect(() => {
         if (!genesisData) {
             setGenesisData(quickAndDirtyGenesisBuilder(walletEVMAddress, evmChainId, gasLimit, targetBlockRate));
         }
     }, [walletEVMAddress, evmChainId, gasLimit, targetBlockRate]);
-
-    const [pChainAddress, setPChainAddress] = useState<string>("");
-    useEffect(() => {
-        coreWalletClient!.getPChainAddress().then(setPChainAddress).catch(showBoundary);
-    }, [walletChainId]);
 
     function handleCreateChain() {
         setChainID("");
@@ -59,12 +54,6 @@ export default function CreateChain() {
         <div className="space-y-4">
             <h2 className="text-lg font-semibold ">Create Chain</h2>
             <div className="space-y-4">
-                <Input
-                    label="Your P-Chain Address"
-                    value={pChainAddress}
-                    disabled={true}
-                    type="text"
-                />
                 <Input
                     label="Chain Name"
                     value={evmChainName}
@@ -101,7 +90,7 @@ export default function CreateChain() {
                     type="primary"
                     onClick={handleCreateChain}
                     loading={isCreating}
-                    disabled={!pChainAddress || !subnetID || !vmId || !genesisData}
+                    disabled={!subnetID || !vmId || !genesisData}
                 >
                     Create Chain
                 </Button>

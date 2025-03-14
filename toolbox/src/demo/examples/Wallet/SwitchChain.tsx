@@ -5,6 +5,7 @@ import { Button } from "../../ui";
 import L1Form from "./L1Form";
 import { useErrorBoundary } from "react-error-boundary";
 import { useViemChainStore } from '../../utils/store';
+import { avalanche, avalancheFuji } from "viem/chains";
 
 
 export default function SwitchChain() {
@@ -48,7 +49,7 @@ export default function SwitchChain() {
         <div className="space-y-4">
             <h2 className="text-lg font-semibold">Enter L1 Data</h2>
             <div className="space-y-4">
-                {walletChainId !== evmChainId && <div className="mb-4">
+                {walletChainId !== evmChainId && walletChainId !== avalanche.id && walletChainId !== avalancheFuji.id && <div className="mb-4">
                     <Button onClick={loadFromWallet}
                     >Load from wallet</Button>
                 </div>}
