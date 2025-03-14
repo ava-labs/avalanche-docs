@@ -77,12 +77,27 @@ export default function SwitchChain() {
     }, [evmChainRpcUrl]);
 
 
+
+    async function loadFromWallet() {
+        const chain = await coreWalletClient!.getEthereumChain();
+        setEvmChainName(chain.chainName);
+        setEvmChainRpcUrl(chain.rpcUrls.filter((url) => url.startsWith('http'))[0]);
+        setEvmChainCoinName(chain.nativeCurrency.name);
+        setTargetChainId(parseInt(chain.chainId));
+        setIsTestnet(chain.isTestnet);
+    }
+
     return (
         <div className="space-y-4">
             <h2 className="text-lg font-semibold">Switch Chain</h2>
             <div className="space-y-4">
                 <div className="mb-4">
                     Current Chain ID: {walletChainId}
+                </div>
+                <div className="mb-4">
+                    <Button onClick={loadFromWallet}
+                        disabled={walletChainId === targetChainId}
+                    >Load from wallet</Button>
                 </div>
                 <Input
                     label="Chain Name"
