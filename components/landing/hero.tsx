@@ -7,12 +7,12 @@ import { Sponsors } from '@/components/landing/globe';
 
 export default function Hero() {
   return (
-    <section className="h-screen md:h-[40rem] w-full flex items-center justify-center dark:bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden px-4 md:px-8">
+    <section className="h-screen md:h-[40rem] w-full flex items-center justify-center antialiased bg-grid-white/[0.02] relative overflow-hidden px-4 md:px-8">
       <div className="absolute inset-0 h-screen md:h-[40rem] overflow-hidden pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(155, 122, 122, 0.3)" strokeWidth="0.5"/>
+              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(80, 80, 80, 0.3)" strokeWidth="0.5"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
