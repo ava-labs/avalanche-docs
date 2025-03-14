@@ -22,7 +22,7 @@ import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { createMetadata } from '@/utils/metadata';
 import { source } from '@/lib/source';
 import { AutoTypeTable } from '@/components/content-design/type-table';
-import { metadataImage } from '@/utils/metadata-image';
+import { BackToTop } from '@/components/ui/back-to-top';
 import { File, Folder, Files } from 'fumadocs-ui/components/files';
 import Mermaid from "@/components/content-design/mermaid";
 import type { MDXComponents } from 'mdx/types';
@@ -51,6 +51,9 @@ export default async function Page(props: {
       tableOfContent={{
         style: 'clerk',
         single: false,
+        footer: (
+          <BackToTop />
+        ),
       }}
       article={{
         className: 'max-sm:pb-16',
