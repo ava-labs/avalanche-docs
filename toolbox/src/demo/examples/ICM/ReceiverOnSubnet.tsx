@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button } from "../../ui";
@@ -15,7 +15,7 @@ const SENDER_C_CHAIN_ADDRESS = "0x2419133a23EA13EAF3dC3ee2382F083067107386";
 
 export default function DeployReceiver() {
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId, setIcmReceiverAddress, icmReceiverAddress } = useExampleStore();
+    const { walletChainId, setIcmReceiverAddress, icmReceiverAddress } = useToolboxStore();
     const [isDeploying, setIsDeploying] = useState(false);
     const [isTeleporterDeployed, setIsTeleporterDeployed] = useState(false);
 

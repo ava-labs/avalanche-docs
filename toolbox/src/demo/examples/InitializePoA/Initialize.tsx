@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
@@ -11,7 +11,7 @@ import { utils } from "@avalabs/avalanchejs";
 
 export default function Initialize() {
     const { showBoundary } = useErrorBoundary();
-    const { subnetID, walletChainId, proxyAddress, setProxyAddress, setSubnetID, walletEVMAddress } = useExampleStore();
+    const { subnetID, walletChainId, proxyAddress, setProxyAddress, setSubnetID, walletEVMAddress } = useToolboxStore();
     const [isChecking, setIsChecking] = useState(false);
     const [isInitializing, setIsInitializing] = useState(false);
     const [isInitialized, setIsInitialized] = useState<boolean | null>(null);

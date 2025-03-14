@@ -1,6 +1,6 @@
 import { Button, GithubEmbed, ConnectWallet } from "./ui";
 import { ErrorBoundary } from "react-error-boundary";
-import { useExampleStore } from './utils/store';
+import { useToolboxStore } from './utils/store';
 import { RefreshCw } from 'lucide-react';
 import { useState, useEffect, ReactElement, lazy, Suspense } from "react";
 
@@ -14,12 +14,6 @@ type ComponentType = {
 
 const componentGroups: Record<string, ComponentType[]> = {
     "Wallet": [
-        {
-            id: 'getPChainAddress',
-            label: "Get P-chain Address",
-            component: lazy(() => import('./examples/Wallet/GetPChainAddress')),
-            fileNames: ["toolbox/src/demo/examples/Wallet/pChainAddrFromPubKey.ts", "toolbox/src/demo/examples/Wallet/GetPChainAddress.tsx"]
-        },
         {
             id: 'switchChain',
             label: "Switch Chain",
@@ -291,7 +285,7 @@ export default function ToolboxApp() {
                     <Button
                         onClick={() => {
                             if (window.confirm("Are you sure you want to reset the state?")) {
-                                useExampleStore.getState().reset();
+                                useToolboxStore.getState().reset();
                             }
                         }}
                         className="w-full"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { createWalletClient, custom, createPublicClient, hexToBytes, decodeErrorResult, Abi } from 'viem';
 import { packWarpIntoAccessList } from './packWarp';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
@@ -30,7 +30,7 @@ export default function InitValidatorSet() {
         walletEVMAddress,
         validatorWeights,
         setValidatorWeights
-    } = useExampleStore();
+    } = useToolboxStore();
 
     const [isInitializing, setIsInitializing] = useState(false);
     const [txHash, setTxHash] = useState<string | null>(null);

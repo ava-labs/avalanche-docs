@@ -5,7 +5,7 @@ import { useErrorBoundary } from "react-error-boundary";
 import { Button } from "../../ui";
 import { Success } from "../../ui/Success";
 import { createPublicClient, createWalletClient, custom, formatEther, parseEther } from 'viem';
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import TeleporterMessengerDeploymentTransaction from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployment_Transaction_v1.0.0.txt.json';
 import TeleporterMessengerDeployerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployer_Address_v1.0.0.txt.json';
 import TeleporterMessengerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Contract_Address_v1.0.0.txt.json';
@@ -23,7 +23,7 @@ const TopUpComponent = ({
     const [amount, setAmount] = useState(formatEther(MINIMUM_BALANCE));
     const [isSending, setIsSending] = useState(false);
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId } = useExampleStore();
+    const { walletChainId } = useToolboxStore();
 
     const handleTopUp = async () => {
         setIsSending(true);
@@ -91,7 +91,7 @@ const TopUpComponent = ({
 
 export default function TeleporterMessenger() {
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId } = useExampleStore();
+    const { walletChainId } = useToolboxStore();
     const [isDeploying, setIsDeploying] = useState(false);
     const [deployerBalance, setDeployerBalance] = useState(BigInt(0));
     const [isCheckingBalance, setIsCheckingBalance] = useState(true);

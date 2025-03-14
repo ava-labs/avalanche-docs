@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { AbiEvent, createPublicClient, custom } from 'viem';
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ const serializeValue = (value: any): any => {
 
 export default function ReadContract() {
     const { showBoundary } = useErrorBoundary();
-    const { proxyAddress, setProxyAddress } = useExampleStore();
+    const { proxyAddress, setProxyAddress } = useToolboxStore();
     const [viewData, setViewData] = useState<ViewData>({});
     const [isReading, setIsReading] = useState(false);
     const [eventLogs, setEventLogs] = useState<Record<string, any[]>>({});

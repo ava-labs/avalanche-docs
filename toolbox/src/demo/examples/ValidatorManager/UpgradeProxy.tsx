@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input } from "../../ui";
@@ -17,7 +17,7 @@ export default function UpgradeProxy() {
         proxyAdminAddress,
         setProxyAddress,
         setProxyAdminAddress
-    } = useExampleStore();
+    } = useToolboxStore();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [currentImplementation, setCurrentImplementation] = useState<string | null>(null);
     const [desiredImplementation, setDesiredImplementation] = useState<string | null>(null);

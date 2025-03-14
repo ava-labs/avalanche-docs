@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { Button } from "../../ui";
@@ -13,7 +13,7 @@ import KnownChainIDWarning from "../../ui/KnownChainIDWarning";
 
 export default function TeleporterRegistry() {
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId, setTeleporterRegistryAddress, teleporterRegistryAddress } = useExampleStore();
+    const { walletChainId, setTeleporterRegistryAddress, teleporterRegistryAddress } = useToolboxStore();
     const [isDeploying, setIsDeploying] = useState(false);
 
     async function handleDeploy() {

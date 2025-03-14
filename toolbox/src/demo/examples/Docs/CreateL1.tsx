@@ -15,9 +15,6 @@ export default function CreateL1() {
                 <div className="prose dark:prose-invert max-w-none">
                     <ol className="list-decimal pl-8">
                         <li>
-                            <a className="text-blue-500 hover:underline" href="#getPChainAddress">Connect your wallet and get your P-chain address</a>
-                        </li>
-                        <li>
                             <a className="text-blue-500 hover:underline" href="#createSubnet">Create a new subnet on the P-chain</a>
                         </li>
                         <li>

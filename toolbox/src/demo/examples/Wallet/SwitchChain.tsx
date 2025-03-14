@@ -1,144 +1,62 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore, useWalletStore } from "../../utils/store";
+import { Button } from "../../ui";
+import L1Form from "./L1Form";
 import { useErrorBoundary } from "react-error-boundary";
-import { useState, useEffect } from "react";
-import { Button, Input, Select } from "../../ui";
-import { createWalletClient, createPublicClient, custom, http, AddEthereumChainParameter } from 'viem';
+import { useViemChainStore } from '../../utils/store';
+import { avalanche, avalancheFuji } from "viem/chains";
 
 
 export default function SwitchChain() {
-    const { showBoundary } = useErrorBoundary();
-    const [isSwitching, setIsSwitching] = useState(false);
-    const [targetChainId, setTargetChainId] = useState<number>(0);
-    const [isTestnet, setIsTestnet] = useState<boolean>(true);
     const {
-        walletChainId,
-        evmChainName,
-        evmChainRpcUrl,
-        evmChainCoinName,
+        evmChainId,
+        setEvmChainId,
         setEvmChainName,
         setEvmChainRpcUrl,
         setEvmChainCoinName,
-    } = useExampleStore();
-    const [isCheckingRpc, setIsCheckingRpc] = useState(false);
+        setEvmChainIsTestnet,
+    } = useToolboxStore();
+    const { coreWalletClient, walletChainId } = useWalletStore();
+    const { showBoundary } = useErrorBoundary();
 
+    // Use the dedicated store
+    const viemChain = useViemChainStore();
 
-    async function handleSwitchChain() {
-        setIsSwitching(true);
+    async function addToWallet() {
         try {
-            const walletClient = createWalletClient({
-                transport: custom(window.avalanche!),
-            });
-
-            const chain: AddEthereumChainParameter = {
-                chainId: `0x${targetChainId.toString(16)}`,
-                chainName: evmChainName,
-                nativeCurrency: {
-                    name: evmChainCoinName,
-                    symbol: evmChainCoinName,
-                    decimals: 18,
-                },
-                rpcUrls: [evmChainRpcUrl],
+            if (!viemChain) {
+                throw new Error("Some chain data is missing. Please reach out to the developers, this was not supposed to happen.");
             }
-
-            await walletClient.request({
-                id: "1",
-                method: "wallet_addEthereumChain",
-                params: [{ ...chain, isTestnet } as unknown as AddEthereumChainParameter],//Core wallet supports a custom 
-            });
-
-            await walletClient.switchChain({
-                id: targetChainId,
-            });
+            await coreWalletClient!.addChain({ chain: viemChain });
+            await coreWalletClient!.switchChain({ id: viemChain.id });
         } catch (error) {
             showBoundary(error);
-        } finally {
-            setIsSwitching(false);
         }
     }
 
-    async function checkRpc() {
-        setIsCheckingRpc(true);
-        try {
-            const publicClient = createPublicClient({
-                transport: http(evmChainRpcUrl)
-            });
-
-            const chainId = await publicClient.getChainId();
-            setTargetChainId(chainId);
-        } catch (error) {
-            showBoundary(error);
-            setTargetChainId(0);
-        } finally {
-            setIsCheckingRpc(false);
-        }
+    async function loadFromWallet() {
+        const chain = await coreWalletClient!.getEthereumChain();
+        setEvmChainName(chain.chainName);
+        setEvmChainRpcUrl(chain.rpcUrls.filter((url) => url.startsWith('http'))[0]);
+        setEvmChainCoinName(chain.nativeCurrency.name);
+        setEvmChainId(parseInt(chain.chainId));
+        setEvmChainIsTestnet(chain.isTestnet);
     }
-
-    useEffect(() => {
-        setTargetChainId(0);
-    }, [evmChainRpcUrl]);
 
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Switch Chain</h2>
+            <h2 className="text-lg font-semibold">Enter L1 Data</h2>
             <div className="space-y-4">
-                <div className="mb-4">
-                    Current Chain ID: {walletChainId}
-                </div>
-                <Input
-                    label="Chain Name"
-                    value={evmChainName}
-                    onChange={setEvmChainName}
-                    placeholder="Enter chain name"
-                />
-                <Input
-                    label="RPC URL"
-                    value={evmChainRpcUrl}
-                    onChange={setEvmChainRpcUrl}
-                    placeholder="Enter RPC URL"
-                />
-                <Input
-                    label="Coin Name"
-                    value={evmChainCoinName}
-                    onChange={setEvmChainCoinName}
-                    placeholder="Enter coin name"
-                />
-                <Select
-                    label="Is Testnet"
-                    value={isTestnet.toString()}
-                    onChange={(value) => setIsTestnet(value === "true")}
-                    options={[
-                        { value: "true", label: "Yes" },
-                        { value: "false", label: "No" }
-                    ]}
-                />
-                <Input
-                    label="Target Chain ID"
-                    value={targetChainId.toString()}
-                    disabled={true}
-                    type="text"
-                />
-                {targetChainId === 0 && (
-                    <Button
-                        type="secondary"
-                        onClick={checkRpc}
-                        loading={isCheckingRpc}
-                        disabled={evmChainRpcUrl === ""}
-                    >
-                        Load Chain ID from RPC
-                    </Button>
-                )}
-                {targetChainId > 0 && (
-                    <Button
-                        type="primary"
-                        onClick={handleSwitchChain}
-                        loading={isSwitching}
-                    >
-                        Switch Chain
-                    </Button>
-                )}
+                {walletChainId !== evmChainId && walletChainId !== avalanche.id && walletChainId !== avalancheFuji.id && <div className="mb-4">
+                    <Button onClick={loadFromWallet}
+                    >Load from wallet</Button>
+                </div>}
+                <L1Form />
+                <Button onClick={addToWallet} type="primary" disabled={!viemChain || walletChainId === viemChain.id} >Add to wallet & switch</Button>
+                {walletChainId === viemChain?.id && <div className="text-xs">Already on chain with id {walletChainId}</div>}
+                {!viemChain && <div className="text-xs">Fill out the chain details</div>}
             </div>
         </div>
     );
