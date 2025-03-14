@@ -34,7 +34,7 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
         hackathon experience.
       </p>
 
-      <div className="flex flex-col md:flex-row justify-center gap-4">
+      <div className="flex flex-col items-center md:flex-row justify-center gap-4">
         {communityResources.map((item, index) => (
           <a
             key={index}
@@ -75,7 +75,7 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            EXPLORE COMMUNITY & NETWORKING
+            <p className="text-xs md:text-base">EXPLORE COMMUNITY & NETWORKING</p>
           </a>
         </Button>
       </div>

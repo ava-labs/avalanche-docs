@@ -146,7 +146,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
         {getDateRange(mockActivities)}
       </span>
       <div className="flex flex-col lg:flex-row justify-between gap-4 md:gap-10 mt-4 min-w-full">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-4 md:gap-10 w-full md:w-auto">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-4 md:gap-10 w-full md:w-auto">
           <SearchEventInput />
           <TimeZoneSelect />
         </div>
@@ -167,7 +167,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
 
               {activities.map((activity, index) => (
                 <div key={index} className="flex flex-row gap-3">
-                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 px-2 sm:px-4">
+                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 px-2 sm:px-4 w-[40%] md:w-auto">
                     <CardHeader className="px-2 sm:px-6">
                       <div className="border border-red-500 rounded-full text-sm font-medium text-center">
                         Live now
@@ -175,14 +175,14 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                     </CardHeader>
                     <CardContent className="flex flex-col gap-2 justify-center px-2 sm:px-6">
                       <div className="flex flex-col items-center justify-center">
-                        <span className="text-base sm:text-lg font-medium">
+                        <span className="text-base md:text-lg font-medium">
                           {new Date(date).toLocaleTimeString("en-US", {
                             hour: "2-digit",
                             minute: "2-digit",
                             hour12: true,
                           })}
                         </span>
-                        <span className="text-base sm:text-lg font-medium">
+                        <span className="text-base md:text-lg font-medium">
                           {new Date(
                             new Date(date).getTime() +
                               activities[0].duration * 60000
@@ -195,7 +195,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                       </div>
                     </CardContent>
                   </Card>
-                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 flex-1">
+                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 w-[60%] md:flex-1">
                     <CardHeader className="px-3 sm:px-6">
                       <div className="flex flex-col sm:flex-row justify-between gap-2">
                         <div>
@@ -212,7 +212,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                       </div>
                     </CardHeader>
                     <CardContent className="px-3 sm:px-6">
-                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-12">
+                      <div className="flex flex-col md:flex-row gap-4 md:gap-8">
                         <div className="flex flex-row gap-4">
                           <Image
                             src={activity.host_icon}
@@ -232,7 +232,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                             </Link>
                           </div>
                         </div>
-                        <div className="flex flex-row gap-4 flex-1 justify-between mt-3 sm:mt-0">
+                        <div className="flex flex-row md:gap-4 flex-1 justify-between">
                           <div className="flex flex-row items-center gap-2">
                             <MapPin
                               color="#8F8F99"

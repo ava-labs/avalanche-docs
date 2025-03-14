@@ -7,9 +7,9 @@ export default function DeadLine({ deadline }: Props) {
   console.log("Deadline: ", deadline);
   return (
     <div className="inline-flex items-center gap-3 rounded-md border-2 border-red-500 dark:bg-black px-3 py-2 text-zinc-50 h-10 justify-center w-fit md:justify-start whitespace-nowrap">
-      <Hourglass className="h-5 w-5 dark:!text-zinc-50 !text-zinc-900" />
+      <Hourglass className="h-3 md:h-5 w-3 md:w-5 dark:!text-zinc-50 !text-zinc-900" />
       <div className="flex flex-col">
-        <span className="whitespace-nowrap text-zinc-900 dark:text-zinc-50">
+        <span className="whitespace-nowrap text-zinc-900 dark:text-zinc-50 text-sm md:text-base">
           {(() => {
             const deadLineDate = new Date(deadline);
             const now = new Date();
