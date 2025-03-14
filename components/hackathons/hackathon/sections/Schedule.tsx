@@ -136,12 +136,12 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
   return (
     <section className="flex flex-col gap-6">
       <h2
-        className="text-5xl font-bold mb-2 md:text-4xl sm:text-3xl"
+        className="text-4xl font-bold mb-2 md:text-4xl sm:text-3xl"
         id="schedule"
       >
         Schedule
       </h2>
-      <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
+      <Separator className="my-2 sm:my-8 bg-zinc-300 dark:bg-zinc-800" />
       <span className="dark:text-zinc-50 text-zinc-900 text-lg font-medium sm:text-base">
         {getDateRange(mockActivities)}
       </span>
@@ -166,10 +166,10 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
               </h3>
 
               {activities.map((activity, index) => (
-                <div key={index} className="flex flex-row gap-3">
-                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 px-2 sm:px-4 w-[40%] md:w-auto">
-                    <CardHeader className="px-2 sm:px-6">
-                      <div className="border border-red-500 rounded-full text-sm font-medium text-center">
+                <div key={index} className="flex flex-col sm:flex-row gap-3">
+                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 px-2 sm:px-4 sm:w-[40%] md:w-auto">
+                    <CardHeader className="px-2 sm:px-6 flex items-center">
+                      <div className="border border-red-500 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto">
                         Live now
                       </div>
                     </CardHeader>
@@ -195,20 +195,20 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                       </div>
                     </CardContent>
                   </Card>
-                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 w-[60%] md:flex-1">
+                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 sm:w-[60%] md:flex-1">
                     <CardHeader className="px-3 sm:px-6">
-                      <div className="flex flex-col sm:flex-row justify-between gap-2">
-                        <div>
-                          <CardTitle className="text-red-500 text-base sm:text-lg">
+                      <div className="flex flex-col">
+                        <div className="flex justify-between items-center">
+                          <CardTitle className="text-red-500 text-lg sm:text-lg">
                             {activity.name}
                           </CardTitle>
-                          <span className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal">
-                            {activity.description}
-                          </span>
+                          <Badge className="dark:bg-zinc-50 bg-zinc-900 dark:text-zinc-900 text-zinc-50 py-0.5 px-2.5 text-xs w-fit h-fit">
+                            {activity.category}
+                          </Badge>
                         </div>
-                        <Badge className="dark:bg-zinc-50 bg-zinc-900 dark:text-zinc-900 text-zinc-50 py-0.5 px-2.5 text-xs w-fit h-fit">
-                          {activity.category}
-                        </Badge>
+                        <span className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal">
+                          {activity.description}
+                        </span>
                       </div>
                     </CardHeader>
                     <CardContent className="px-3 sm:px-6">
@@ -247,9 +247,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                             size="icon"
                             className="bg-zinc-100 dark:bg-zinc-800 h-8 w-8 sm:h-10 sm:w-10"
                           >
-                            <CalendarPlus2
-                              className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50"
-                            />
+                            <CalendarPlus2 className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50" />
                           </Button>
                         </div>
                       </div>

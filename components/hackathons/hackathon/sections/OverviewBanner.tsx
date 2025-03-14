@@ -28,7 +28,9 @@ export default function OverviewBanner({ hackathon, id }: Props) {
       <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-zinc-50 font-bold mb-2">
         {hackathon.title}
       </h1>
-      <p className="text-xs xl:text-base text-zinc-50 hidden lg:inline">{hackathon.description}</p>
+      <p className="text-xs xl:text-base text-zinc-50 hidden lg:inline">
+        {hackathon.description}
+      </p>
       <div className="max-w-80">
         <h2
           className="mt-0 md:mt-2 lg:mt-4 xl:mt-6 mb-2 md:mb-6 lg:mb-8 xl:mb-12 text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-red-500"
@@ -46,7 +48,9 @@ export default function OverviewBanner({ hackathon, id }: Props) {
           <div className="flex flex-col gap-2 max-w-[60%] md:max-w-[50%] xl:max-w-[60%]">
             <div className="flex justify-between gap-2 text-gray-400">
               <Calendar color="#F5F5F9" className="w-4 lg:w-5 h-4 lg:h-5" />
-              <span className="text-xs xl:text-sm text-zinc-50">{formattedDate}</span>
+              <span className="text-xs xl:text-sm text-zinc-50">
+                {formattedDate}
+              </span>
             </div>
             <div className="flex justify-between gap-2 text-gray-400">
               <MapPin color="#F5F5F9" className="w-4 lg:w-5 h-4 lg:h-5" />

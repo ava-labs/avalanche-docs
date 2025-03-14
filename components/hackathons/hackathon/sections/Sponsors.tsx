@@ -42,7 +42,7 @@ function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
             {hackathon.content.partners.map((partner, index) => (
               <CarouselItem
                 key={index}
-                className="basis-1/5 h-44 items-center justify-center flex"
+                className="basis-1/2 sm:basis-1/5 h-44 items-center justify-center flex"
               >
                 <Image
                   src="/temp/ava_cloud_banner.svg"
@@ -59,7 +59,7 @@ function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
       <div className="flex justify-center mt-8">
         <Button
           variant={"secondary"}
-          className="w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
+          className="w-3/4 sm:w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
           <Link href={hackathon.content.become_sponsor_link ?? ''}>
             BECOME A SPONSOR

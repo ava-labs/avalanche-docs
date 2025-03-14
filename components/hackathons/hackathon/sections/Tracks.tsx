@@ -21,9 +21,9 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
           2025!
         </p>
       </div>
-      <div className="relative py-32 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-24 grid-flow-row">
+      <div className="relative py-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-24 grid-flow-row">
         <div className="absolute -z-10 w-screen h-full left-1/2 transform -translate-x-1/2 bg-zinc-200" />
-        <Card className="w-[356px] absolute top-[-80px] left-1/2 transform -translate-x-1/2  bg-red-300 rounded-xl border-2 border-red-500">
+        <Card className="w-[200px] sm:w-[356px] absolute top-[-80px] left-1/2 transform -translate-x-1/2  bg-red-300 rounded-xl border-2 border-red-500">
           <CardHeader className="justify-center items-center">
             <div className="p-2 rounded-full bg-white">
               <Crown color="#FF394A" />

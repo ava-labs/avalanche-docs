@@ -6,7 +6,7 @@ import { DynamicIcon } from "lucide-react/dynamic";
 function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
   return (
     <section className="px-4" id="speakers">
-      <div className="bg-zinc-900 p-16 flex flex-col gap-4">
+      <div className="bg-zinc-900 p-4 sm:p-16 flex flex-col gap-4">
         <div className="flex items-center">
           <div className="lg:w-[45%] pr-16">
             <h2 className="text-4xl font-bold mb-8 text-zinc-100">

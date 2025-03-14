@@ -48,7 +48,7 @@ export default async function HackathonPage({
   if (!hackathon) redirect("/hackathons");
 
   return (
-    <main className="container px-2 py-4 lg:py-16">
+    <main className="container sm:px-2 py-4 lg:py-16">
       <div className="flex gap-4 items-center">
         <Image
           src="/temp/hackathon-icon.png"
@@ -69,8 +69,8 @@ export default async function HackathonPage({
         <NavigationMenu items={menuItems} />
       </div>
       <div className="flex flex-col mt-2 ">
-        <div className="px-8 pt-6 ">
-          <div className="relative w-full">
+        <div className="sm:px-8 pt-6 ">
+          <div className="hidden sm:block relative w-full">
             <OverviewBanner hackathon={hackathon} id={id} />
             <Image
               src="/builders-hub/hackathons/main_banner_img.png"
@@ -81,7 +81,7 @@ export default async function HackathonPage({
               priority
             />
           </div>
-          <div className="p-8 flex flex-col gap-20">
+          <div className="sm:p-8 flex flex-col gap-20">
             {hackathon.content.schedule && <Schedule hackathon={hackathon} />}
             {hackathon.content.tracks && <Tracks hackathon={hackathon} />}
             {hackathon.content.partners && <Sponsors hackathon={hackathon} />}
