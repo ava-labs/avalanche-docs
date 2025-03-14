@@ -1,5 +1,3 @@
-"use client";
-
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import type { ReactNode } from 'react';
 import { Footer } from '@/components/navigation/footer';
@@ -10,14 +8,8 @@ export default function Layout({
 }: {
   children: ReactNode;
 }): React.ReactElement {
-  return (
-    <>
-      <div>
-        <HomeLayout {...baseOptions}>
-          {children}
-          <Footer />
-        </HomeLayout>
-      </div>
-    </>
-  );
+  return <HomeLayout {...baseOptions}>
+    {children}
+    <Footer />
+    </HomeLayout>;
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getIntegrationPage, getIntegrationPages } from '@/utils/content-loader/integrations-loader';
+import { integration } from '@/lib/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { Pill, Pills } from '@/components/ui/pills';
@@ -10,10 +10,10 @@ import EditOnGithubButton from '@/components/ui/edit-on-github-button';
 import ReportIssueButton from '@/components/ui/report-issue-button';
 
 export default async function Page(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
     const params = await props.params;
-    const page = getIntegrationPage([params.slug]);
+    const page = integration.getPage(params.slug);
     if (!page) notFound();
 
     // Dynamically build the issue title based on the page title.
@@ -110,41 +110,43 @@ export default async function Page(props: {
     );
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-    const params = await props.params;
-    const page = getIntegrationPage([params.slug]);
-    if (!page) notFound();
-
-    const description = page.data.description ?? 'Learn how to build on Avalanche blockchain with Academy';
-    const imageParams = new URLSearchParams();
-    imageParams.set('title', page.data.title);
-    imageParams.set('description', description);
-
-    const image = {
-        alt: 'Banner',
-        url: `/api/og/integrations/${params.slug}?${imageParams.toString()}`,
-        width: 1200,
-        height: 630,
-    };
-
-    return createMetadata({
-        title: page.data.title,
-        description,
-        openGraph: {
-            url: `/integrations/${page.slugs.join('/')}`,
-            images: image,
-        },
-        twitter: {
-            images: image,
-        },
-    });
+export async function generateStaticParams() {
+  return integration.getPages().map((page) => ({
+    slug: page.slugs,
+  }));
 }
 
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
+  const params = await props.params;
+  const page = integration.getPage(params.slug);
 
-export function generateStaticParams(): { slug: string }[] {
-    return getIntegrationPages().map((page) => ({
-        slug: page.slugs[0],
-    }));
+  if (!page) notFound();
+
+  const description =
+    page.data.description ?? 'Developer documentation for everything related to the Avalanche ecosystem.';
+
+  const imageParams = new URLSearchParams();
+  imageParams.set('title', page.data.title);
+  imageParams.set('description', description);
+
+  const image = {
+    alt: 'Banner',
+    url: `/api/og/docs/${params.slug[0]}?${imageParams.toString()}`,
+    width: 1200,
+    height: 630,
+  };
+
+  return createMetadata({
+    title: page.data.title,
+    description,
+    openGraph: {
+      url: `/docs/${page.slugs.join('/')}`,
+      images: image,
+    },
+    twitter: {
+      images: image,
+    },
+  });
 }

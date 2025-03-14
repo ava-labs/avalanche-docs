@@ -7,7 +7,7 @@ import {
 } from 'fumadocs-ui/page';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { notFound } from 'next/navigation';
-import { getCoursePage, getCoursePages, type Page } from '@/utils/content-loader/course-loader';
+import { academy } from '@/lib/source';
 import { createMetadata } from '@/utils/metadata';
 import IndexedDBComponent from '@/components/tracker'
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -41,17 +41,17 @@ export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
   const params = await props.params;
-  const page = getCoursePage(params.slug);
+  const page = academy.getPage(params.slug);
   if (!page) notFound();
 
   const path = `content/academy/${page.file.path}`;
-  const { body: MDX, toc, lastModified } = await page.data.load();
+  const MDX = page.data.body;
   const course = COURSES.official.find(c => c.slug === page.slugs[0]);
 
   return (
     <DocsPage
-      toc={toc}
-      lastUpdate={lastModified}
+      toc={page.data.toc}
+      lastUpdate={page.data.lastModified}
       tableOfContent={{
         style: 'clerk',
         single: false,
@@ -99,32 +99,11 @@ export default async function Page(props: {
   );
 }
 
-function Category({ page }: { page: Page }): React.ReactElement {
-  const filtered = getCoursePages()
-    .filter(
-      (item) =>
-        item.file.dirname === page.file.dirname && item.file.name !== 'index',
-    );
-
-  return (
-    <Cards>
-      {filtered.map((item) => (
-        <Card
-          key={item.url}
-          title={item.data.title}
-          description={item.data.description ?? 'No Description'}
-          href={item.url}
-        />
-      ))}
-    </Cards>
-  );
-}
-
 export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = getCoursePage(params.slug);
+  const page = academy.getPage(params.slug);
 
   if (!page) notFound();
 
@@ -156,7 +135,7 @@ export async function generateMetadata(props: {
 }
 
 export async function generateStaticParams() {
-  return getCoursePages().map((page) => ({
+  return academy.getPages().map((page) => ({
     slug: page.slugs,
   }));
 }

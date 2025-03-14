@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { type ReactElement } from 'react';
 import Link from 'next/link';
-import { getGuidePage, getGuidePages } from '@/utils/content-loader/guide-loader';
+import { guide } from '@/lib/source';
 import { createMetadata } from '@/utils/metadata';
 import { buttonVariants } from '@/components/ui/button';
 import { ArrowUpRightIcon, MessagesSquare, AlertCircle } from 'lucide-react';
-import { SiX } from '@icons-pack/react-simple-icons';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { Popup, PopupContent, PopupTrigger } from 'fumadocs-twoslash/ui';
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
@@ -31,13 +31,13 @@ import newGithubIssueUrl from 'new-github-issue-url';
 export const dynamicParams = false;
 
 export default async function Page(props: {
-  params: Promise<{ slug: string }>;
-}) {
+  params: Promise<{ slug: string[] }>;
+}): Promise<ReactElement> {
     const params = await props.params;
-    const page = getGuidePage([params.slug]);
+    const page = guide.getPage(params.slug);
     if (!page) notFound();
 
-    const { body: MDX } = await page.data.load();
+    const MDX = page.data.body;
     const path = `content/guides/${page.file.path}`;
 
     return (
@@ -96,8 +96,7 @@ export default async function Page(props: {
                                     target='_blank'
                                     className="text-foreground transition-colors flex flex-row items-center gap-2 group"
                                 >
-                                    <SiX size={12} />
-                                    <span className="flex-grow truncate">{author}</span>
+                                    <span className="grow truncate">{author}</span>
                                 </Link>
                             ))}
                         </div>
@@ -150,16 +149,22 @@ export default async function Page(props: {
     );
 }
 
+export async function generateStaticParams() {
+  return guide.getPages().map((page) => ({
+    slug: page.slugs,
+  }));
+}
+
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = getGuidePage([params.slug]);
+  const page = guide.getPage(params.slug);
 
   if (!page) notFound();
 
   const description =
-    page.data.description ?? 'Learn how to build on Avalanche blockchain with Academy';
+    page.data.description ?? 'Developer documentation for everything related to the Avalanche ecosystem.';
 
   const imageParams = new URLSearchParams();
   imageParams.set('title', page.data.title);
@@ -167,7 +172,7 @@ export async function generateMetadata(props: {
 
   const image = {
     alt: 'Banner',
-    url: `/api/og/guides/${params.slug[0]}?${imageParams.toString()}`,
+    url: `/api/og/docs/${params.slug[0]}?${imageParams.toString()}`,
     width: 1200,
     height: 630,
   };
@@ -176,18 +181,11 @@ export async function generateMetadata(props: {
     title: page.data.title,
     description,
     openGraph: {
-      url: `/guides/${page.slugs.join('/')}`,
+      url: `/docs/${page.slugs.join('/')}`,
       images: image,
     },
     twitter: {
       images: image,
     },
   });
-}
-
-
-export function generateStaticParams(): { slug: string }[] {
-    return getGuidePages().map((page) => ({
-        slug: page.slugs[0],
-    }));
 }
