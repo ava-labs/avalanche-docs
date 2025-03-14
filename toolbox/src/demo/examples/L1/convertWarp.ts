@@ -73,7 +73,8 @@ export function marshalSubnetToL1ConversionData(args: PackL1ConversionMessageArg
         if (!validator.nodeID || !validator.nodePOP) {
             throw new Error(`Invalid validator data: ${JSON.stringify(validator)}`);
         }
-        parts.push(encodeVarBytes(utils.base58check.decode(validator.nodeID.split("-")[1])));
+        const nodeIDBytes = validator.nodeID.startsWith("NodeID-") ? utils.base58check.decode(validator.nodeID.split("-")[1]) : utils.hexToBuffer(validator.nodeID);
+        parts.push(encodeVarBytes(nodeIDBytes));
         parts.push(utils.hexToBuffer(validator.nodePOP.publicKey));
         parts.push(encodeUint64(BigInt(validator.weight)));
     }
@@ -152,6 +153,7 @@ export const compareNodeIDs = (a: string, b: string) => {
 
 
 export function packL1ConversionMessage(args: PackL1ConversionMessageArgs, networkID: number, sourceChainID: string): [Uint8Array, Uint8Array] {
+    console.log(args);
     const subnetConversionID = subnetToL1ConversionID(args);
 
     const addressedCallPayload = newSubnetToL1Conversion(subnetConversionID)
@@ -202,7 +204,7 @@ export function packRegisterL1ValidatorMessage(
     parts.push(utils.base58check.decode(validationPeriod.subnetID));
 
     // Add nodeID
-    const nodeIDBytes = utils.base58check.decode(validationPeriod.nodeID.split("-")[1]);
+    const nodeIDBytes = validationPeriod.nodeID.startsWith("NodeID-") ? utils.base58check.decode(validationPeriod.nodeID.split("-")[1]) : utils.hexToBuffer(validationPeriod.nodeID);
     parts.push(encodeVarBytes(nodeIDBytes));
 
     // Add BLS public key

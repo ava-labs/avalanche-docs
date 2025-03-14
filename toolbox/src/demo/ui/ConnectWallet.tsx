@@ -65,7 +65,6 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
 
             // Get network and P-chain info if core wallet client exists
             if (coreWalletClient) {
-                console.log(`ConnectWallet:Refetching wallet data`, coreWalletClient)
                 // Update network ID
                 const isTestnet = await coreWalletClient.isTestnet();
                 setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input, Select } from "../../ui";
@@ -13,15 +13,14 @@ export default function SwitchChain() {
     const [targetChainId, setTargetChainId] = useState<number>(0);
     const [isTestnet, setIsTestnet] = useState<boolean>(true);
     const {
-        walletChainId,
         evmChainName,
         evmChainRpcUrl,
         evmChainCoinName,
         setEvmChainName,
         setEvmChainRpcUrl,
         setEvmChainCoinName,
-        coreWalletClient
     } = useToolboxStore();
+    const { coreWalletClient, walletChainId } = useWalletStore();
     const [isCheckingRpc, setIsCheckingRpc] = useState(false);
 
 

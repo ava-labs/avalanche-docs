@@ -2,31 +2,30 @@
 
 import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { packL1ConversionMessage, PackL1ConversionMessageArgs } from "./convertWarp";
 import { networkIDs, utils } from "@avalabs/avalanchejs";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
+import getConversionDataFromTx from "./getConversionDataFromTx";
 
 export default function CollectConversionSignatures() {
     const { showBoundary } = useErrorBoundary();
     const {
         subnetID,
-        chainID,
-        setSubnetID,
-        setChainID,
-        managerAddress,
-        setManagerAddress,
-        nodePopJsons,
-        setNodePopJsons,
         L1ConversionSignature,
         setL1ConversionSignature,
-        validatorWeights,
-        setValidatorWeights,
+        L1ID,
+        setL1ID,
     } = useToolboxStore(state => state);
     const { coreWalletClient } = useWalletStore();
     const [isConverting, setIsConverting] = useState(false);
+
+    useEffect(() => {
+        getConversionDataFromTx(L1ID, true);
+    }, []);
+
 
     async function handleConvertSignatures() {
         setL1ConversionSignature("");
@@ -34,29 +33,14 @@ export default function CollectConversionSignatures() {
 
         try {
             const isTestnet = await coreWalletClient!.isTestnet();
-            const networkName = isTestnet ? "fuji" : "mainnet";
             const networkID = isTestnet ? networkIDs.FujiID : networkIDs.MainnetID;
 
-            const pChainChainID = '11111111111111111111111111111111LpoYY';
+            const { conversionArgs, blockchainID } = await getConversionDataFromTx(L1ID, isTestnet);
 
-            const conversionArgs: PackL1ConversionMessageArgs = {
-                subnetId: subnetID,
-                managerChainID: chainID,
-                managerAddress,
-                validators: nodePopJsons.filter(json => json !== "").map((json, i) => {
-                    const { nodeID, nodePOP } = JSON.parse(json).result;
-                    return {
-                        nodeID,
-                        nodePOP,
-                        weight: validatorWeights[i]
-                    }
-                })
-            };
-
-            const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, pChainChainID);
+            const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, blockchainID);
 
             const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
-                network: networkName,
+                network: isTestnet ? "fuji" : "mainnet",
                 signatureAggregatorRequest: {
                     message: utils.bufferToHex(message),
                     justification: utils.bufferToHex(justification),
@@ -78,48 +62,17 @@ export default function CollectConversionSignatures() {
             <h2 className="text-lg font-semibold ">Collect conversion signatures</h2>
             <div className="space-y-4">
                 <Input
-                    label="Subnet ID"
-                    value={subnetID}
-                    onChange={setSubnetID}
+                    label="Conversion ID"
+                    value={L1ID}
+                    onChange={setL1ID}
                     type="text"
-                    placeholder="Enter subnet ID to convert"
-                />
-                <Input
-                    label="Chain ID"
-                    value={chainID}
-                    onChange={setChainID}
-                    type="text"
-                    placeholder="Enter chain ID"
-                />
-                <Input
-                    label="Manager Address (0x...)"
-                    value={managerAddress}
-                    onChange={setManagerAddress}
-                    placeholder="0x..."
-                    type="text"
-                />
-                <InputArray
-                    label="Info.getNodeID responses of the initial validators"
-                    values={nodePopJsons}
-                    onChange={setNodePopJsons}
-                    type="textarea"
-                    placeholder={'{"result":{"nodeID":"NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg","nodePOP":{"publicKey":"0x...","proofOfPossession":"0x..."}}}'}
-                    rows={4}
-                />
-                <div className="text-sm ">
-                    Type in terminal: <span className="font-mono block">{`curl -X POST --data '{"jsonrpc":"2.0","id":1,"method":"info.getNodeID"}' -H "content-type:application/json;" 127.0.0.1:9650/ext/info`}</span>
-                </div>
-                <InputArray
-                    label="Validator Weights"
-                    values={validatorWeights.map(weight => weight.toString()).slice(0, nodePopJsons.length)}
-                    onChange={(weightsStrings) => setValidatorWeights(weightsStrings.map(weight => parseInt(weight)))}
-                    type="number"
-                    disableAddRemove={true}
+                    placeholder="Enter conversion ID"
+                    notes={`Also called L1 ID. Transaction ID of the conversion transaction on the P-Chain.`}
                 />
                 <Button
                     type="primary"
                     onClick={handleConvertSignatures}
-                    disabled={!managerAddress || nodePopJsons.length === 0}
+                    disabled={!L1ID}
                     loading={isConverting}
                 >
                     Collect Signatures
