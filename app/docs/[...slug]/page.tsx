@@ -20,7 +20,7 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { createMetadata } from '@/utils/metadata';
-import { source } from '@/lib/source';
+import { documentation } from '@/lib/source';
 import { AutoTypeTable } from '@/components/content-design/type-table';
 import { BackToTop } from '@/components/ui/back-to-top';
 import { File, Folder, Files } from 'fumadocs-ui/components/files';
@@ -36,7 +36,7 @@ export default async function Page(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<ReactElement> {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = documentation.getPage(params.slug);
   if (!page) notFound();
 
   const { body: MDX, toc, lastModified } = await page.data.load();
@@ -84,7 +84,7 @@ export default async function Page(props: {
             Folder,
             Files,
             blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
-            DocsCategory: () => <DocsCategory page={page} from={source} />,
+            DocsCategory: () => <DocsCategory page={page} from={documentation} />,
           }}
         />
         <div className="flex gap-6 mt-8">
@@ -94,14 +94,14 @@ export default async function Page(props: {
             pagePath={`/docs/${page.slugs.join('/')}`}
           />
         </div>
-        {page.data.index ? <DocsCategory page={page} from={source} /> : null}
+        {page.data.index ? <DocsCategory page={page} from={documentation} /> : null}
       </DocsBody>
     </DocsPage>
   );
 }
 
 export async function generateStaticParams() {
-  return source.getPages().map((page) => ({
+  return documentation.getPages().map((page) => ({
     slug: page.slugs,
   }));
 }
@@ -110,7 +110,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = documentation.getPage(params.slug);
 
   if (!page) notFound();
 

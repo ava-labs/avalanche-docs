@@ -1,13 +1,13 @@
 import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
 import { baseOptions, academyMenu, toolsMenu, integrationsMenu } from '@/app/layout.config';
-import { source } from '@/lib/source';
+import { documentation } from '@/lib/source';
 import 'fumadocs-twoslash/twoslash.css';
 import { ArrowUpRight } from 'lucide-react';
 import { AvalancheLogo } from '@/components/navigation/avalanche-logo';
 
 const docsOptions: DocsLayoutProps = {
-tree: source.pageTree,
+tree: documentation.pageTree,
 tabMode: 'navbar',
 nav: {
     ...baseOptions.nav,

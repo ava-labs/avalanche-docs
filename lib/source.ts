@@ -5,7 +5,7 @@ import { createMDXSource } from 'fumadocs-mdx';
 import { meta, docs, guide as guides, course, courseMeta, integrations } from '@/.source';
 import type { InferMetaType, InferPageType } from 'fumadocs-core/source';
 
-export const source = loader({
+export const documentation = loader({
   baseUrl: '/docs',
   icon(icon) {
     if (icon && icon in icons)
@@ -33,5 +33,5 @@ export const integration = loader({
   source: createMDXSource(integrations, []),
 });
 
-export type Page = InferPageType<typeof source>;
-export type Meta = InferMetaType<typeof source>;
+export type Page = InferPageType<typeof documentation>;
+export type Meta = InferMetaType<typeof documentation>;

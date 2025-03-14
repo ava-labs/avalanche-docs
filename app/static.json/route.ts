@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { source, guide, academy, integration } from '@/lib/source';
+import { documentation, guide, academy, integration } from '@/lib/source';
 import { type TrieveDocument } from 'trieve-fumadocs-adapter/search/sync';
 
 export const revalidate = false;
 
 export async function GET() {
   const results: TrieveDocument[] = await Promise.all([
-    ...source.getPages().map(async (page) => {
+    ...documentation.getPages().map(async (page) => {
       const loadedData = await page.data.load()
       return {
         title: page.data.title,
