@@ -57,6 +57,7 @@ export function RegisterForm() {
   const cities = ["Bogota", "Medellin", "Valencia", "Londres", "Bilbao"];
   const searchParams = useSearchParams();
   const hackathonId = searchParams.get("hackaId");
+  const utm = searchParams.get("utm")??"";
   const [hackathon, setHackathon] = useState<HackathonHeader | null>(null);
 
   async function getHackathon() {
@@ -65,6 +66,16 @@ export function RegisterForm() {
     try {
       const response = await axios.get(`/api/hackathons/${hackathonId}`);
       setHackathon(response.data);
+    } catch (err) {
+      console.error("API Error:", err);
+    }
+  }
+
+  async function saveRegisterForm(data: RegisterFormValues) {
+    try {
+      const response = await axios.post(`/api/register-form/`, data);
+
+  
     } catch (err) {
       console.error("API Error:", err);
     }
@@ -132,12 +143,13 @@ export function RegisterForm() {
     let fieldsToValidate: (keyof RegisterFormValues)[] = [];
   
     if (step === 1) {
-      
+    
+
       fieldsToValidate = ["name", "email", "companyName", "dietary","role","city"];
     } else if (step === 2) {
-      fieldsToValidate = ["web3Proficiency", "tools", "roles", "languages"];
+      fieldsToValidate = ["web3Proficiency", "tools", "roles", "languages","interests","hackathonParticipation","githubPortfolio"];
     } else if (step === 3) {
-      fieldsToValidate = ["hackathonParticipation", "dietary", "githubPortfolio", "termsEventConditions", "prohibitedItems"];
+      fieldsToValidate = ["newsletterSubscription", "termsEventConditions", "prohibitedItems"];
     }
   
     const isValid = await form.trigger(fieldsToValidate); 
@@ -147,15 +159,22 @@ export function RegisterForm() {
     }
   };
 
-  const onSubmit = (data: RegisterFormValues) => {
-  
-  
-
+  const onSubmit =async (data: RegisterFormValues) => {
     if (step < 3) {
       setStep(step + 1);
     } else {
+      console.info("ya ya ")
       setFormData((prevData) => ({ ...prevData, ...data }));
-      console.log("Final Form Data:", formData);
+         const finalData = {
+      ...data,
+      hackathonId: hackathonId || "",
+      utm: utm,
+      interests: data.interests ??[],
+      languages: data.languages ??[],
+      roles: data.roles ??[] ,
+      tools: data.tools,
+    };
+    await saveRegisterForm(finalData);
       // Aquí puedes enviar los datos a la API
     }
   };
