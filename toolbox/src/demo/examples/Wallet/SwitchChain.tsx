@@ -46,7 +46,6 @@ export default function SwitchChain() {
 
     return (
         <div className="space-y-4">
-            <pre>{JSON.stringify(viemChain)}</pre>
             <h2 className="text-lg font-semibold">Enter L1 Data</h2>
             <div className="space-y-4">
                 {walletChainId !== evmChainId && <div className="mb-4">
@@ -54,7 +53,9 @@ export default function SwitchChain() {
                     >Load from wallet</Button>
                 </div>}
                 <L1Form />
-                {/* <Button onClick={addToWallet} type="primary" disabled={!viemChain} >Add to wallet & switch</Button> */}
+                <Button onClick={addToWallet} type="primary" disabled={!viemChain || walletChainId === viemChain.id} >Add to wallet & switch</Button>
+                {walletChainId === viemChain?.id && <div className="text-xs">Already on chain with id {walletChainId}</div>}
+                {!viemChain && <div className="text-xs">Fill out the chain details</div>}
             </div>
         </div>
     );
