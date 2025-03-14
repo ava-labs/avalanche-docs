@@ -19,8 +19,8 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
         Follow the guidelines to submit your hackathon project successfully
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-4">
-        <div className="bg-zinc-200 dark:bg-zinc-900 p-6 shadow-md flex flex-col items-start justify-center rounded-tl-md rounded-bl-md">
+      <div className="grid grid-cols-1 lg:grid-cols-4">
+        <div className="bg-zinc-200 dark:bg-zinc-900 p-6 shadow-md flex flex-col items-start justify-center rounded-tl-md rounded-tr-md lg:rounded-tr-none rounded-bl-md">
           <Calendar
             className={`mb-4 !text-zinc-600 dark:!text-zinc-400`}
             size={24}
@@ -57,7 +57,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
           </p>
         </div>
 
-        <div className="bg-zinc-700 dark:bg-zinc-800 p-6 shadow-md flex flex-col items-start justify-center rounded-tr-md rounded-br-md">
+        <div className="bg-zinc-700 dark:bg-zinc-800 p-6 shadow-md flex flex-col items-start justify-center lg:rounded-tr-md rounded-bl-md lg:rounded-bl-none rounded-br-md">
           <Rocket
             size={24}
             className={`mb-4 !text-zinc-200 dark:!text-zinc-400`}
