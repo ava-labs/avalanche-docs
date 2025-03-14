@@ -1,6 +1,6 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { Button } from "../../ui";
@@ -17,8 +17,11 @@ function calculateLibraryHash(libraryPath: string) {
 
 export default function DeployValidatorManager() {
     const { showBoundary } = useErrorBoundary();
-    const { validatorMessagesLibAddress, walletChainId, validatorManagerAddress, setValidatorManagerAddress } = useToolboxStore();
+    const { validatorMessagesLibAddress, validatorManagerAddress, setValidatorManagerAddress } = useToolboxStore();
+    const { walletChainId } = useWalletStore();
     const [isDeploying, setIsDeploying] = useState(false);
+    const [isTestnet, setIsTestnet] = useState<boolean>(true);
+
 
     const getLinkedBytecode = () => {
         if (!validatorMessagesLibAddress) {

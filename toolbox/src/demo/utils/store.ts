@@ -2,81 +2,64 @@ import { create } from 'zustand'
 import { persist, createJSONStorage, combine } from 'zustand/middleware'
 import { createCoreWalletClient } from './wallet/createCoreWallet';
 import { networkIDs } from '@avalabs/avalanchejs';
-import { Chain } from 'viem';
+import { CoreWalletChain } from './wallet/overrides/addChain';
+import { useShallow } from 'zustand/react/shallow'
+import { useMemo } from 'react'
 
 export const DEFAULT_VM_ID = "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy";
 
 export const useToolboxStore = create(
     persist(
         combine({
-            subnetID: "",
-            chainName: "My Chain",
-            vmId: DEFAULT_VM_ID,
             chainID: "",
-            nodePopJsons: [""] as string[],
-            validatorWeights: Array(100).fill(100) as number[],
-            managerAddress: "0xfacade0000000000000000000000000000000000",
-            L1ID: "",
-            L1ConversionSignature: "",
-            validatorMessagesLibAddress: "",
+            evmChainCoinName: "COIN",
+            evmChainId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
+            evmChainIsTestnet: true,
             evmChainName: "My L1",
             evmChainRpcUrl: "",
-            evmChainId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
-            evmChainCoinName: "COIN",
-            validatorManagerAddress: "",
+            gasLimit: 12000000,
+            genesisData: "",
+            icmReceiverAddress: "",
+            L1ConversionSignature: "",
+            L1ID: "",
+            managerAddress: "0xfacade0000000000000000000000000000000000",
+            nodePopJsons: [""] as string[],
             proxyAddress: "0xfacade0000000000000000000000000000000000",
             proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
-            genesisData: "",
-            teleporterRegistryAddress: "",
-            gasLimit: 12000000,
+            subnetID: "",
             targetBlockRate: 2,
-            icmReceiverAddress: "",
-        }, (set, get) => ({
-            setSubnetID: (subnetID: string) => set({ subnetID }),
-            setChainName: (chainName: string) => set({ chainName }),
-            setVmId: (vmId: string) => set({ vmId }),
+            teleporterRegistryAddress: "",
+            validatorManagerAddress: "",
+            validatorMessagesLibAddress: "",
+            validatorWeights: Array(100).fill(100) as number[],
+            vmId: DEFAULT_VM_ID,
+        }, (set) => ({
+            reset: () => { window.localStorage.removeItem('toolbox-storage'); window.location.reload(); },
+
             setChainID: (chainID: string) => set({ chainID }),
-            setNodePopJsons: (nodePopJsons: string[]) => set({ nodePopJsons }),
-            setValidatorWeights: (validatorWeights: number[]) => set({ validatorWeights }),
-            setManagerAddress: (managerAddress: string) => set({ managerAddress }),
-            setL1ID: (L1ID: string) => set({ L1ID }),
-            setL1ConversionSignature: (L1ConversionSignature: string) => set({ L1ConversionSignature }),
-            setValidatorMessagesLibAddress: (validatorMessagesLibAddress: string) => set({ validatorMessagesLibAddress }),
+
+            setEvmChainCoinName: (evmChainCoinName: string) => set({ evmChainCoinName }),
+            setEvmChainId: (evmChainId: number) => set({ evmChainId }),
+            setEvmChainIsTestnet: (evmChainIsTestnet: boolean) => set({ evmChainIsTestnet }),
             setEvmChainName: (evmChainName: string) => set({ evmChainName }),
             setEvmChainRpcUrl: (evmChainRpcUrl: string) => set({ evmChainRpcUrl }),
-            setEvmChainCoinName: (evmChainCoinName: string) => set({ evmChainCoinName }),
-            setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
+
+            setGasLimit: (gasLimit: number) => set({ gasLimit }),
+            setGenesisData: (genesisData: string) => set({ genesisData }),
+            setIcmReceiverAddress: (address: string) => set({ icmReceiverAddress: address }),
+            setL1ConversionSignature: (L1ConversionSignature: string) => set({ L1ConversionSignature }),
+            setL1ID: (L1ID: string) => set({ L1ID }),
+            setManagerAddress: (managerAddress: string) => set({ managerAddress }),
+            setNodePopJsons: (nodePopJsons: string[]) => set({ nodePopJsons }),
             setProxyAddress: (proxyAddress: string) => set({ proxyAddress }),
             setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
-            setGenesisData: (genesisData: string) => set({ genesisData }),
-            setGasLimit: (gasLimit: number) => set({ gasLimit }),
+            setSubnetID: (subnetID: string) => set({ subnetID }),
             setTargetBlockRate: (targetBlockRate: number) => set({ targetBlockRate }),
-            reset: () => {
-                window.localStorage.removeItem('toolbox-storage');
-                window.location.reload();
-            },
-            setEvmChainId: (evmChainId: number) => set({ evmChainId }),
             setTeleporterRegistryAddress: (address: string) => set({ teleporterRegistryAddress: address }),
-            setIcmReceiverAddress: (address: string) => set({ icmReceiverAddress: address }),
-
-            getChain: (): Chain | null => {
-                if (!get().evmChainId || !get().evmChainName || !get().evmChainRpcUrl || !get().evmChainCoinName) {
-                    return null;
-                }
-
-                return {
-                    id: get().evmChainId,
-                    name: get().evmChainName,
-                    rpcUrls: {
-                        default: { http: [get().evmChainRpcUrl] },
-                    },
-                    nativeCurrency: {
-                        name: get().evmChainCoinName || get().evmChainName + " Coin",
-                        symbol: get().evmChainCoinName || get().evmChainName + " Coin",
-                        decimals: 18
-                    }
-                }
-            }
+            setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
+            setValidatorMessagesLibAddress: (validatorMessagesLibAddress: string) => set({ validatorMessagesLibAddress }),
+            setValidatorWeights: (validatorWeights: number[]) => set({ validatorWeights }),
+            setVmId: (vmId: string) => set({ vmId }),
         })),
         {
             name: 'toolbox-storage',
@@ -84,6 +67,44 @@ export const useToolboxStore = create(
         },
     ),
 )
+
+export function useViemChainStore() {
+    // Use useShallow to select the primitive state values we need
+    const chainData = useToolboxStore(
+        useShallow((state) => ({
+            evmChainId: state.evmChainId,
+            evmChainName: state.evmChainName,
+            evmChainRpcUrl: state.evmChainRpcUrl,
+            evmChainCoinName: state.evmChainCoinName,
+            evmChainIsTestnet: state.evmChainIsTestnet
+        }))
+    );
+
+    // Create the viemChain object with useMemo to prevent unnecessary recreation
+    const viemChain = useMemo(() => {
+        const { evmChainId, evmChainName, evmChainRpcUrl, evmChainCoinName, evmChainIsTestnet } = chainData;
+
+        if (!evmChainId || !evmChainName || !evmChainRpcUrl || !evmChainCoinName) {
+            return null;
+        }
+
+        return {
+            id: evmChainId,
+            name: evmChainName,
+            rpcUrls: {
+                default: { http: [evmChainRpcUrl] },
+            },
+            nativeCurrency: {
+                name: evmChainCoinName || evmChainName + " Coin",
+                symbol: evmChainCoinName || evmChainName + " Coin",
+                decimals: 18
+            },
+            isTestnet: evmChainIsTestnet,
+        };
+    }, [chainData]);
+
+    return viemChain;
+}
 
 export const useWalletStore = create(
     combine({

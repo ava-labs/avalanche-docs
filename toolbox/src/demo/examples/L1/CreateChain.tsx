@@ -11,9 +11,9 @@ export default function CreateChain() {
     const { showBoundary } = useErrorBoundary();
     const {
         subnetID,
-        chainName,
+        evmChainName,
         vmId,
-        setChainName,
+        setEvmChainName,
         setVmId,
         chainID,
         setChainID,
@@ -43,7 +43,7 @@ export default function CreateChain() {
         setIsCreating(true);
 
         coreWalletClient!.createChain({
-            chainName,
+            chainName: evmChainName,
             subnetId: subnetID,
             vmId,
             fxIds: [],
@@ -67,8 +67,8 @@ export default function CreateChain() {
                 />
                 <Input
                     label="Chain Name"
-                    value={chainName}
-                    onChange={setChainName}
+                    value={evmChainName}
+                    onChange={setEvmChainName}
                     placeholder="Enter chain name"
                 />
                 <Input
