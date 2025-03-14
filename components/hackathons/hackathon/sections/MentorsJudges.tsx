@@ -8,7 +8,7 @@ function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
     <section className="px-4" id="speakers">
       <div className="bg-zinc-900 p-16 flex flex-col gap-4">
         <div className="flex items-center">
-          <div className="w-[45%] pr-16">
+          <div className="lg:w-[45%] pr-16">
             <h2 className="text-4xl font-bold mb-8 text-zinc-100">
               Mentors & Judges
             </h2>
@@ -23,10 +23,10 @@ function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
             alt="Speakers and judges collage"
             width={300}
             height={300}
-            className="w-[55%]"
+            className="w-[55%] hidden lg:block"
           ></Image>
         </div>
-        <div className="flex gap-4 flex-wrap">
+        <div className="flex gap-4 justify-center flex-wrap">
           {hackathon.content.speakers.map((speaker, index) => (
             <div key={index} className="flex flex-col gap-4 mt-4">
               <Image

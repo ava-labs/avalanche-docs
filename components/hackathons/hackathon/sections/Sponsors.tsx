@@ -59,7 +59,7 @@ function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
       <div className="flex justify-center mt-8">
         <Button
           variant={"secondary"}
-          className="w-1/3 bg-red-500 rounded-md text-zinc-100"
+          className="w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
           <Link href={hackathon.content.become_sponsor_link ?? ''}>
             BECOME A SPONSOR

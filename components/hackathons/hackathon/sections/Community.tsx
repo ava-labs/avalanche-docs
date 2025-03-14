@@ -68,7 +68,7 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
         <Button
           asChild
           variant={"secondary"}
-          className="w-1/3 bg-red-500 rounded-md text-zinc-100"
+          className="w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
           <a
             href="https://example.com/community"
