@@ -56,7 +56,7 @@ export default async function HackathonPage({
           width={40}
           height={40}
         />
-        <span className="text-xl font-bold">{hackathon.title}</span>{" "}
+        <span className="text-sm sm:text-xl font-bold">{hackathon.title}</span>{" "}
         <Button
           asChild
           variant={"secondary"}
@@ -70,7 +70,7 @@ export default async function HackathonPage({
       </div>
       <div className="flex flex-col mt-2 ">
         <div className="sm:px-8 pt-6 ">
-          <div className="hidden sm:block relative w-full">
+          <div className="sm:block relative w-full">
             <OverviewBanner hackathon={hackathon} id={id} />
             <Image
               src="/builders-hub/hackathons/main_banner_img.png"
@@ -81,7 +81,7 @@ export default async function HackathonPage({
               priority
             />
           </div>
-          <div className="sm:p-8 flex flex-col gap-20">
+          <div className="py-8 sm:p-8 flex flex-col gap-20">
             {hackathon.content.schedule && <Schedule hackathon={hackathon} />}
             {hackathon.content.tracks && <Tracks hackathon={hackathon} />}
             {hackathon.content.partners && <Sponsors hackathon={hackathon} />}

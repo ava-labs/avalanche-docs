@@ -24,8 +24,8 @@ export default function OverviewBanner({ hackathon, id }: Props) {
       ? `${format(startDate, "MMMM d")} - ${format(endDate, "d, yyyy")}`
       : `${format(startDate, "MMMM d")} - ${format(endDate, "MMMM d, yyyy")}`;
   return (
-    <div className="z-10 pointer-events-none h-full w-[46%] absolute flex flex-col justify-end bottom-6 lg:bottom-10 xl:bottom-16 left-[10%]">
-      <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-zinc-50 font-bold mb-2">
+    <div className="z-10 pointer-events-none h-full w-[46%] absolute flex flex-col justify-end bottom-2 sm:bottom-6 lg:bottom-10 xl:bottom-16 left-[10%]">
+      <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-zinc-50 font-bold sm:mb-2">
         {hackathon.title}
       </h1>
       <p className="text-xs xl:text-base text-zinc-50 hidden lg:inline">
@@ -33,7 +33,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
       </p>
       <div className="max-w-80">
         <h2
-          className="mt-0 md:mt-2 lg:mt-4 xl:mt-6 mb-2 md:mb-6 lg:mb-8 xl:mb-12 text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-red-500"
+          className="mt-0 md:mt-2 lg:mt-4 xl:mt-6 mb-2 md:mb-6 lg:mb-8 xl:mb-12 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-red-500"
           style={{ textShadow: "0px 4px 6px #9F2428" }}
         >
           ${hackathon.total_prizes.toLocaleString("en-US")}
@@ -45,7 +45,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
           <Link href={`/hackathons/registration-form`}>JOIN NOW</Link>
         </Button>
         <div className="flex flex-col">
-          <div className="flex flex-col gap-2 max-w-[60%] md:max-w-[50%] xl:max-w-[60%]">
+          <div className="hidden sm:flex flex-col gap-2 max-w-[60%] md:max-w-[50%] xl:max-w-[60%]">
             <div className="flex justify-between gap-2 text-gray-400">
               <Calendar color="#F5F5F9" className="w-4 lg:w-5 h-4 lg:h-5" />
               <span className="text-xs xl:text-sm text-zinc-50">
@@ -59,7 +59,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
               </span>
             </div>
           </div>
-          <div className="max-w-[90%] flex justify-center flex-wrap gap-x-2 xl:gap-x-4 gap-y-2 xl:gap-y-2 mt-4">
+          <div className="max-w-[90%] hidden sm:flex justify-center flex-wrap gap-x-2 xl:gap-x-4 gap-y-2 xl:gap-y-2 mt-4">
             {hackathon.tags.map((tag, index) => (
               <Badge
                 key={index}
