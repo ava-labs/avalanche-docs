@@ -33,6 +33,7 @@ export type Hackathon = {
   become_sponsor_link: string
   submission_deadline: Date 
   mentors_judges_img_url: string
+  judging_guidelines: string
 }
 
 export type ScheduleActivity = {

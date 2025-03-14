@@ -6,6 +6,7 @@ import TrackDialogContent from "../TrackDialogContent";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import TrackCard from "../TrackCard";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
   return (
@@ -41,6 +42,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
               <TrackCard key={index} track={track} />
             </DialogTrigger>
             <DialogContent className="bg-zinc-900">
+              <DialogTitle />
               <TrackDialogContent track={track} />
             </DialogContent>
           </Dialog>

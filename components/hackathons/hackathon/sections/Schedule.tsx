@@ -150,7 +150,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
           <SearchEventInput />
           <TimeZoneSelect />
         </div>
-        <DeadLine deadline={hackathon.content.registration_deadline} />
+        <DeadLine deadline={hackathon.content.submission_deadline} />
       </div>
       <Divider />
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">

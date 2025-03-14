@@ -94,7 +94,7 @@ function Submission({ hackathon }: { hackathon: HackathonHeader }) {
                 <h1 className="text-3xl font-semibold">Guidelines</h1>
               </div>
               <span className="block w-full h-[1px] my-8 bg-red-500"></span>
-              <ReactMarkdown></ReactMarkdown>
+              <ReactMarkdown>{hackathon.content.judging_guidelines}</ReactMarkdown>
             </div>
           </DialogContent>
         </Dialog>
