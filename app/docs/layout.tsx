@@ -1,6 +1,6 @@
 import { DocsLayout, type DocsLayoutProps } from 'fumadocs-ui/layouts/notebook';
 import type { ReactNode } from 'react';
-import { baseOptions } from '@/app/layout.config';
+import { baseOptions, academyMenu, toolsMenu, integrationsMenu } from '@/app/layout.config';
 import { source } from '@/lib/source';
 import 'fumadocs-twoslash/twoslash.css';
 import { ArrowUpRight } from 'lucide-react';
@@ -20,21 +20,9 @@ nav: {
     ),
   },
   links: [
-    {
-      text: 'Academy',
-      url: '/academy',
-      icon: <ArrowUpRight />
-    },
-    {
-      text: 'Tools',
-      url: '/tools',
-      icon: <ArrowUpRight />
-    },
-    {
-      text: 'Integrations',
-      url: '/integrations',
-      icon: <ArrowUpRight />
-    },
+    academyMenu,
+    toolsMenu,
+    integrationsMenu
   ]
 };
 
