@@ -6,6 +6,9 @@ import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
 import CoursePreview from '@/public/nav-banner/course-preview.png';
 import CodebaseBanner from '@/public/nav-banner/codebase-banner.png';
+import SummitLondonBanner from '@/public/nav-banner/avalanche_summit_london.png';
+import HackathonLondonBanner from '@/public/nav-banner/hackathon_luma.png';
+import Team1Banner from '@/public/nav-banner/local_events_team1.jpg';
 import L1LauncherPreview from '@/public/nav-banner/l1-launcher-preview.png';
 
 export const linkItems: LinkItemType[] = [
@@ -359,6 +362,80 @@ const grantsMenu: LinkItemType = {
   ],
 };
 
+const eventsMenu: LinkItemType = {
+  type: 'menu',
+  text: 'Events',
+  url: '/events',
+  items: [
+    {
+      menu: {
+        banner: (
+          <div className="-mx-3 -mt-3">
+            <Image
+              src={SummitLondonBanner}
+              alt="Preview"
+              className="rounded-t-lg object-cover"
+              style={{
+                maskImage:
+                  'linear-gradient(to bottom,white 60%,transparent)',
+              }}
+            />
+          </div>
+        ),
+        className: 'md:row-span-2',
+      },
+      icon: <Ticket />,
+      text: 'Avalanche Summit London',
+      description: 'Join us for Avalanche Summit, London, as we explore the world’s original global financial hub through the lens of Web3.',
+      url: 'https://www.avalanchesummitlondon.com/',
+    },
+    {
+      menu: {
+        banner: (
+          <div className="-mx-3 -mt-3">
+            <Image
+              src={HackathonLondonBanner}
+              alt="Preview"
+              className="rounded-t-lg object-cover"
+              style={{
+                maskImage:
+                  'linear-gradient(to bottom,white 60%,transparent)',
+              }}
+            />
+          </div>
+        ),
+        className: 'md:row-span-2',
+      },
+      icon: <Ticket />,
+      text: 'Summit Hackathon London',
+      description: 'This hackathon aims to harness the potential of Avalanche’s robust technology stack to address pressing issues and create scalable, practical solutions.',
+      url: '/hackathon',
+    },
+    {
+      menu: {
+        banner: (
+          <div className="-mx-3 -mt-3">
+            <Image
+              src={Team1Banner}
+              alt="Preview"
+              className="rounded-t-lg object-cover"
+              style={{
+                maskImage:
+                  'linear-gradient(to bottom,white 60%,transparent)',
+              }}
+            />
+          </div>
+        ),
+        className: 'md:row-span-2',
+      },
+      icon: <Earth />,
+      text: 'Team1 Events',
+      description: 'Check out and join the global meetups, workshops and events organized by Avalanche Team1',
+      url: 'https://lu.ma/Team1?utm_source=builder_hub',
+    },
+  ],
+};
+
 export const baseOptions: BaseLayoutProps = {
   githubUrl: 'https://github.com/ava-labs/avalanche-docs',
   nav: {
@@ -374,6 +451,7 @@ export const baseOptions: BaseLayoutProps = {
     academyMenu,
     toolsMenu,
     grantsMenu,
+    eventsMenu,
     ...linkItems,
   ],
 };
