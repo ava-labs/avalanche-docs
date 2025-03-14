@@ -20,59 +20,55 @@ export default function SwitchChain() {
         setEvmChainName,
         setEvmChainRpcUrl,
         setEvmChainCoinName,
+        getChain
     } = useToolboxStore();
     const { coreWalletClient, walletChainId } = useWalletStore();
-    const [isCheckingRpc, setIsCheckingRpc] = useState(false);
-    const [checkedRpc, setCheckedRpc] = useState(false);
+    const [localError, setLocalError] = useState<string | null>(null);
 
-
-    async function handleSwitchChain() {
-        setIsSwitching(true);
-        try {
-            await coreWalletClient!.addChain({
-                chain: {
-                    id: evmChainId,
-                    name: evmChainName,
-                    nativeCurrency: {
-                        name: evmChainCoinName,
-                        symbol: evmChainCoinName,
-                        decimals: 18,
-                    },
-                    rpcUrls: {
-                        default: {
-                            http: [evmChainRpcUrl],
-                        },
-                    },
-                    isTestnet: isTestnet,
-                }
-            });
-
-            await coreWalletClient!.switchChain({
-                id: evmChainId,
-            });
-        } catch (error) {
-            showBoundary(error);
-        } finally {
-            setIsSwitching(false);
+    async function addToWallet() {
+        const chain = getChain();
+        if (!chain) {
+            setLocalError("Chain not found");
+            return;
         }
+        await coreWalletClient!.addChain({ chain: { ...chain, isTestnet } });
+        await coreWalletClient!.switchChain({ id: chain.id });
     }
 
-    async function checkRpc() {
-        setIsCheckingRpc(true);
-        try {
+    useEffect(() => {
+        setLocalError(null);
+        if (evmChainRpcUrl) {
             const publicClient = createPublicClient({
                 transport: http(evmChainRpcUrl)
             });
 
-            const chainId = await publicClient.getChainId();
-            setEvmChainId(chainId);
-        } catch (error) {
-            showBoundary(error);
-            setEvmChainId(0);
-        } finally {
-            setIsCheckingRpc(false);
+            //loading chain id from rpc
+            setEvmChainId(0)
+            publicClient.getChainId().then((chainId) => {
+                setEvmChainId(chainId);
+            }).catch((error) => {
+                setLocalError("Loading chain id failed: " + error.message || String(error));
+            });
         }
-    }
+
+        if (evmChainRpcUrl) {
+            const match = evmChainRpcUrl.match(/\/ext\/bc\/([a-zA-Z0-9]{49})\/rpc/);
+            if (match) {
+                //try to load chain info from rpc
+                coreWalletClient!.extractChainInfo({ txId: match[1] }).then((chainInfo) => {
+                    setEvmChainName(chainInfo.chainName);
+                }).catch((error) => {
+                    setLocalError("Loading chain name failed: " + error.message || String(error));
+                });
+            }
+        }
+    }, [evmChainRpcUrl]);
+
+    useEffect(() => {
+        if (evmChainName && !evmChainCoinName) {
+            setEvmChainCoinName(evmChainName + " Coin");
+        }
+    }, [evmChainName, evmChainCoinName]);
 
     async function loadFromWallet() {
         const chain = await coreWalletClient!.getEthereumChain();
@@ -85,27 +81,24 @@ export default function SwitchChain() {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Switch Chain</h2>
+            <h2 className="text-lg font-semibold">Enter L1 Data</h2>
             <div className="space-y-4">
-                <div className="mb-4">
-                    Current Chain ID: {walletChainId}
-                </div>
-                <div className="mb-4">
+                {localError && <p className="text-red-500">{localError}</p>}
+                {walletChainId !== evmChainId && <div className="mb-4">
                     <Button onClick={loadFromWallet}
-                        disabled={walletChainId === evmChainId}
                     >Load from wallet</Button>
-                </div>
-                <Input
-                    label="Chain Name"
-                    value={evmChainName}
-                    onChange={setEvmChainName}
-                    placeholder="Enter chain name"
-                />
+                </div>}
                 <Input
                     label="RPC URL"
                     value={evmChainRpcUrl}
                     onChange={setEvmChainRpcUrl}
                     placeholder="Enter RPC URL"
+                />
+                <Input
+                    label="Chain Name"
+                    value={evmChainName}
+                    onChange={setEvmChainName}
+                    placeholder="Enter chain name"
                 />
                 <Input
                     label="Coin Name"
@@ -118,8 +111,8 @@ export default function SwitchChain() {
                     value={isTestnet.toString()}
                     onChange={(value) => setIsTestnet(value === "true")}
                     options={[
-                        { value: "true", label: "Yes" },
-                        { value: "false", label: "No" }
+                        { value: "true", label: "Testnet" },
+                        { value: "false", label: "Mainnet" }
                     ]}
                 />
                 <Input
@@ -128,25 +121,7 @@ export default function SwitchChain() {
                     disabled={true}
                     type="text"
                 />
-                {!checkedRpc && (
-                    <Button
-                        type="secondary"
-                        onClick={checkRpc}
-                        loading={isCheckingRpc}
-                        disabled={evmChainRpcUrl === ""}
-                    >
-                        Load Chain ID from RPC
-                    </Button>
-                )}
-                {evmChainId > 0 && (
-                    <Button
-                        type="primary"
-                        onClick={handleSwitchChain}
-                        loading={isSwitching}
-                    >
-                        Switch Chain
-                    </Button>
-                )}
+                <Button onClick={addToWallet} type="primary" disabled={!evmChainId || !evmChainName || !evmChainRpcUrl || localError} >Add to wallet & switch</Button>
             </div>
         </div>
     );

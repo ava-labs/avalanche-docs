@@ -71,8 +71,8 @@ export const useToolboxStore = create(
                         default: { http: [get().evmChainRpcUrl] },
                     },
                     nativeCurrency: {
-                        name: get().evmChainCoinName,
-                        symbol: get().evmChainCoinName,
+                        name: get().evmChainCoinName || get().evmChainName + " Coin",
+                        symbol: get().evmChainCoinName || get().evmChainName + " Coin",
                         decimals: 18
                     }
                 }
