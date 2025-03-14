@@ -70,6 +70,6 @@ model RegisterForm {
   created_at              DateTime  @default(now()) @db.Timestamptz(3)
   updated_at              DateTime  @updatedAt @db.Timestamptz(3)
 
-  @@unique([hackathonId, email])
+  @@unique([hackathon_id, email])
 
 }

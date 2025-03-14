@@ -1,76 +1,97 @@
-import { RegisterForm } from "@/types/registerForm";
-import { hasAtLeastOne, requiredField, validateEntity, Validation } from "./base";
-import { revalidatePath } from "next/cache";
-import { ValidationError } from "./hackathons";
-import { Prisma, PrismaClient } from "@prisma/client";
-import { prisma } from "@/prisma/prisma";
+
+import { hasAtLeastOne, requiredField, validateEntity, Validation } from './base';
+import { revalidatePath } from 'next/cache';
+import { ValidationError } from './hackathons';
+import { Prisma, PrismaClient } from '@prisma/client';
+import { prisma } from '@/prisma/prisma';
+import { RegistrationForm } from '@/types/registrationForm';
 
 
 export const registerValidations: Validation[] = [
-    { field: "title", message: "Please provide a title for the hackathon.", validation: (hackathon: RegisterForm) => requiredField(hackathon, "title") },
-    { field: "description", message: "A description is required.", validation: (hackathon: RegisterForm) => requiredField(hackathon, "description") },
-    { field: "start_date", message: "Please enter a valid date for the hackathon.", validation: (hackathon: RegisterForm) => requiredField(hackathon, "start_date") },
-    { field: "end_date", message: "Please enter a valid end date for the hackathon.", validation: (hackathon: RegisterForm) => requiredField(hackathon, "end_date") },
-    { field: "location", message: "Please specify the location of the hackathon.", validation: (hackathon: RegisterForm) => requiredField(hackathon, "location") },
-    { field: "tags", message: "Please add at least one category or tag.", validation: (hackathon: RegisterForm) => hasAtLeastOne(hackathon, "tags") }
+    // { field: 'title', message: 'Please provide a title for the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'title') },
+    // { field: 'description', message: 'A description is required.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'description') },
+    // { field: 'start_date', message: 'Please enter a valid date for the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'start_date') },
+    // { field: 'end_date', message: 'Please enter a valid end date for the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'end_date') },
+    // { field: 'location', message: 'Please specify the location of the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'location') },
+    // { field: 'tags', message: 'Please add at least one category or tag.', validation: (hackathon: RegisterForm) => hasAtLeastOne(hackathon, 'tags') }
 ];
 
-export const validateRegisterForm = (registerData: Partial<RegisterForm>): Validation[] => validateEntity(registerValidations, registerData);
-export async function createRegisterForm(registerData: Partial<RegisterForm>): Promise<RegisterForm> {
+export const validateRegisterForm = (registerData: Partial<RegistrationForm>): Validation[] => validateEntity(registerValidations, registerData);
+export async function createRegisterForm(registerData: Partial<RegistrationForm>): Promise<RegistrationForm> {
     const errors = validateRegisterForm(registerData);
-    console.log(errors)
+    console.error(errors)
     if (errors.length > 0) {
-        throw new ValidationError("Validation failed", errors)
+        throw new ValidationError('Validation failed', errors)
     }
 
     const content = { ...registerData } as Prisma.JsonObject
-    // const prisma = new PrismaClient();
-    const registerFormData = await prisma.registerForm.create({
-      data: {
-        hackathon: {
-          connect: { id: "some-hackathon-id" }, // Conectar con un Hackathon existente
-        },
-        user: {
-            connect: { email: "user@example.com" }, // Conectar usuario existente
-          },
-        utm: "some-utm",
-        city: "Bogota",
-        companyName: "My Company",
-        dietary: "Vegetarian",
-        hackathonParticipation: "Yes",
-        interests: ["AI", "Blockchain"].join(","),
-        languages: ["JavaScript", "Python"].join(","),
-        roles: ["Developer"].join(","),
-        name: "John Doe",
-        newsletterSubscription: true,
-        prohibitedItems: false,
-        role: "Frontend Developer",
-        termsEventConditions: true,
-        tools: ["React", "Next.js"].join(","),
-        web3Proficiency: "Intermediate",
-      }
-    });
-      
 
-    // const newHackathon = await prisma.hackathon.create({
-    //     data: {
-    //         id: hackathonData.id,
-    //         title: hackathonData.title!,
-    //         description: hackathonData.description!,
-    //         start_date: hackathonData.start_date!,
-    //         end_date: hackathonData.end_date!,
-    //         location: hackathonData.location!,
-    //         total_prizes: hackathonData.total_prizes!,
-    //         tags: hackathonData.tags!,
-    //         timezone: hackathonData.timezone!,
-    //         icon: hackathonData.icon!,
-    //         banner: hackathonData.banner!,
-    //         small_banner: hackathonData.small_banner!,
-    //         content: content
-    //     },
-    // });
-     registerData.id= registerFormData.id;
-    revalidatePath('/api/hackathons/')
-    // return hackathonData as HackathonHeader;
-    throw new Error("Not implemented");
+    console.log("content",content)
+    const newRegisterFormData = await prisma.registerForm.upsert({
+      where: {
+          hackathon_id_email: {
+              hackathon_id: registerData.hackathon_id as string,
+              email: registerData.email as string,
+          },
+      },
+      update: {
+          utm: registerData.utm ?? "",
+          city: registerData.city ?? "",
+          company_name: registerData.company_name ?? null,
+          dietary: registerData.dietary ?? null,
+          hackathon_participation: registerData.hackathon_participation ?? "",
+          interests: (registerData.interests ?? []).join(','),
+          languages: (registerData.languages ?? []).join(','),
+          roles: (registerData.roles ?? []).join(','),
+          name: registerData.name ?? "",
+          newsletter_subscription: registerData.newsletter_subscription ?? false,
+          prohibited_items: registerData.prohibited_items ?? false,
+          role: registerData.role ?? "",
+          terms_event_conditions: registerData.terms_event_conditions ?? false,
+          tools: (registerData.tools ?? []).join(','),
+          web3_proficiency: registerData.web3_proficiency ?? "",
+      },
+      create: {
+          hackathon: {
+              connect: { id: registerData.hackathon_id },
+          },
+          user: {
+              connect: { email: registerData.email },
+          },
+          utm: registerData.utm ?? "",
+          city: registerData.city ?? "",
+          company_name: registerData.company_name ?? null,
+          dietary: registerData.dietary ?? null,
+          hackathon_participation: registerData.hackathon_participation ?? "",
+          interests: (registerData.interests ?? []).join(','),
+          languages: (registerData.languages ?? []).join(','),
+          roles: (registerData.roles ?? []).join(','),
+          name: registerData.name ?? "",
+          newsletter_subscription: registerData.newsletter_subscription ?? false,
+          prohibited_items: registerData.prohibited_items ?? false,
+          role: registerData.role ?? "",
+          terms_event_conditions: registerData.terms_event_conditions ?? false,
+          tools: (registerData.tools ?? []).join(','),
+          web3_proficiency: registerData.web3_proficiency ?? "",
+      },
+  });
+     registerData.id= newRegisterFormData.id;
+    revalidatePath('/api/register-form/')
+    return newRegisterFormData as unknown as RegistrationForm;
+    
+}
+
+
+export async function getRegisterForm(email:string,hackathon_id:string) {
+
+  const registeredData = await prisma.registerForm.findFirst({
+    where: {
+        user: {
+            email: email,
+        },
+        hackathon_id: hackathon_id,
+    },
+});
+
+return registeredData || null;
 }

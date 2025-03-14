@@ -23,26 +23,29 @@ import { User } from "next-auth";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { HackathonHeader } from "@/types/hackathons";
+import { RegistrationForm } from "@/types/registrationForm";
 
 export const registerSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email"),
-  companyName: z.string().optional(),
+  company_name: z.string().optional(),
   role: z.string().optional(),
   city: z.string().min(1, "City is required"),
   interests: z.array(z.string()).min(1, "Interests are required"),
-  web3Proficiency: z.string(),
-  tools: z.array(z.string()),
-  roles: z.array(z.string()).optional(),
-  languages: z.array(z.string()),
-  hackathonParticipation: z.string(),
-  dietary: z.string().optional(),
-  githubPortfolio: z.string().url("Set a valid URL").optional(),
-  termsEventConditions: z.boolean().refine((value) => value === true, {
+  web3_proficiency: z.string().min(1, "web3 proficiency is required"),
+  tools: z.array(z.string()).min(1, "Tools are required"),
+  roles: z.array(z.string()).min(1, "Roles are required"),
+  languages: z.array(z.string()).min(1, "Languages are required"),
+  hackathon_participation: z.string().min(1, "Hackathon participation is required"),
+  dietary: z.string().optional().default(""),
+  github_portfolio: z.string().optional().default(""),
+  terms_event_conditions: z.boolean().refine((value) => value === true, {
     message: "You must accept the Event Terms and Conditions to continue.",
   }),
-  newsletterSubscription: z.boolean().optional(),
-  prohibitedItems: z.boolean().refine((value) => value === true, {
+  newsletter_subscription: z.boolean().refine((value) => value === true, {
+    message: "This field is required.",
+  }),
+  prohibited_items: z.boolean().refine((value) => value === true, {
     message: "You must agree not to bring prohibited items to continue.",
   }),
 });
@@ -56,16 +59,55 @@ export function RegisterForm() {
   const [formData, setFormData] = useState({});
   const cities = ["Bogota", "Medellin", "Valencia", "Londres", "Bilbao"];
   const searchParams = useSearchParams();
-  const hackathonId = searchParams.get("hackaId");
-  const utm = searchParams.get("utm")??"";
+  const hackathon_id = searchParams.get("hackaId");
+  const utm = searchParams.get("utm") ?? "";
   const [hackathon, setHackathon] = useState<HackathonHeader | null>(null);
+  const [formLoaded, setRegistrationForm] = useState<RegistrationForm | null>(null);
 
   async function getHackathon() {
-    if (!hackathonId) return;
+    if (!hackathon_id) return;
 
     try {
-      const response = await axios.get(`/api/hackathons/${hackathonId}`);
+      const response = await axios.get(`/api/hackathons/${hackathon_id}`);
       setHackathon(response.data);
+    } catch (err) {
+      console.error("API Error:", err);
+    }
+  }
+
+  async function getRegisterFormLoaded() {
+    if (!hackathon_id || !currentUser?.email) return;
+
+    try {
+      const response = await axios.get(
+        `/api/register-form?hackathonId=${hackathon_id}&email=${currentUser.email}`
+      );
+      const loadedData = response.data;
+      
+      if (loadedData) {
+        console.log("cargando datos", loadedData);  
+        // Actualizar el formulario con los datos cargados
+        form.reset({
+          name: loadedData.name || currentUser.name || "",
+          email: loadedData.email || currentUser.email || "",
+          company_name: loadedData.company_name || "",
+          role: loadedData.role || "",
+          city: loadedData.city || "",
+          dietary: loadedData.dietary || "",
+          interests: loadedData.interests ? loadedData.interests.split(',') : [],
+          web3_proficiency: loadedData.web3_proficiency || "",
+          tools: loadedData.tools ? loadedData.tools.split(',') : [],
+          roles: loadedData.roles ? loadedData.roles.split(',') : [],
+          languages: loadedData.languages ? loadedData.languages.split(',') : [],
+          hackathon_participation: loadedData.hackathon_participation || "",
+          github_portfolio: loadedData.github_portfolio || "",
+          terms_event_conditions: loadedData.terms_event_conditions || false,
+          newsletter_subscription: loadedData.newsletter_subscription || false,
+          prohibited_items: loadedData.prohibited_items || false,
+      });
+      
+        setRegistrationForm(loadedData);
+      }
     } catch (err) {
       console.error("API Error:", err);
     }
@@ -73,38 +115,41 @@ export function RegisterForm() {
 
   async function saveRegisterForm(data: RegisterFormValues) {
     try {
+      console.info("saving data");
       const response = await axios.post(`/api/register-form/`, data);
-
-  
+      console.info("data saved", response);
     } catch (err) {
+      console.info("dio error");
       console.error("API Error:", err);
     }
   }
 
   useEffect(() => {
     getHackathon();
-  }, [hackathonId]);
+    if (status === "authenticated" && currentUser) {
+      getRegisterFormLoaded(); // Ejecutar cuando el usuario está autenticado
+    }
+  }, [hackathon_id,status, currentUser]);
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: currentUser?.name || "",
       email: currentUser?.email || "",
-      companyName: "",
+      company_name: "",
       role: "",
       city: "",
-      dietary:"",
+      dietary: "",
       interests: [],
-      web3Proficiency: "",
+      web3_proficiency: "",
       tools: [],
       roles: [],
       languages: [],
-      hackathonParticipation: "",
-      githubPortfolio: "",
-      termsEventConditions: false,
-      newsletterSubscription: false,
-      prohibitedItems: false,
-
+      hackathon_participation: "",
+      github_portfolio: "",
+      terms_event_conditions: false,
+      newsletter_subscription: false,
+      prohibited_items: false,
     },
   });
 
@@ -112,10 +157,7 @@ export function RegisterForm() {
     if (status === "authenticated" && currentUser) {
       form.reset({
         name: currentUser.name || "",
-        email: currentUser.email || "",
-        companyName: "",
-        role: "",
-        city: "",
+        email: currentUser.email || ''
       });
     }
   }, [status, currentUser, form]);
@@ -141,40 +183,57 @@ export function RegisterForm() {
 
   const onNextStep = async () => {
     let fieldsToValidate: (keyof RegisterFormValues)[] = [];
-  
-    if (step === 1) {
-    
 
-      fieldsToValidate = ["name", "email", "companyName", "dietary","role","city"];
+    if (step === 1) {
+      fieldsToValidate = [
+        "name",
+        "email",
+        "company_name",
+        "dietary",
+        "role",
+        "city",
+      ];
     } else if (step === 2) {
-      fieldsToValidate = ["web3Proficiency", "tools", "roles", "languages","interests","hackathonParticipation","githubPortfolio"];
+      fieldsToValidate = [
+        "web3_proficiency",
+        "tools",
+        "roles",
+        "languages",
+        "interests",
+        "hackathon_participation",
+        "github_portfolio",
+      ];
     } else if (step === 3) {
-      fieldsToValidate = ["newsletterSubscription", "termsEventConditions", "prohibitedItems"];
+      fieldsToValidate = [
+        "newsletter_subscription",
+        "terms_event_conditions",
+        "prohibited_items",
+      ];
     }
-  
-    const isValid = await form.trigger(fieldsToValidate); 
-  
+
+    const isValid = await form.trigger(fieldsToValidate);
+
     if (isValid) {
       setStep((prev) => prev + 1);
     }
   };
 
-  const onSubmit =async (data: RegisterFormValues) => {
+  const onSubmit = async (data: RegisterFormValues) => {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      console.info("ya ya ")
+     
       setFormData((prevData) => ({ ...prevData, ...data }));
-         const finalData = {
-      ...data,
-      hackathonId: hackathonId || "",
-      utm: utm,
-      interests: data.interests ??[],
-      languages: data.languages ??[],
-      roles: data.roles ??[] ,
-      tools: data.tools,
-    };
-    await saveRegisterForm(finalData);
+      const finalData = {
+        ...data,
+        hackathon_id: hackathon_id || "",
+        utm: utm,
+        interests: data.interests ?? [],
+        languages: data.languages ?? [],
+        roles: data.roles ?? [],
+        tools: data.tools,
+      };
+      await saveRegisterForm(finalData);
       // Aquí puedes enviar los datos a la API
     }
   };
@@ -187,7 +246,9 @@ export function RegisterForm() {
   return (
     <div className="w-full items-center justify-center">
       <h2 className="text-2xl font-bold mb-6 text-foreground">
-        {hackathon ? `${hackathon.title} (Step ${step}/3)` : `Builders Hub - Registration Page (Step ${step}/3)`}
+        {hackathon
+          ? `${hackathon.title} (Step ${step}/3)`
+          : `Builders Hub - Registration Page (Step ${step}/3)`}
       </h2>
 
       {/* Barra de progreso */}
@@ -199,7 +260,9 @@ export function RegisterForm() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          {step === 1 && <RegisterFormStep1 cities={cities} user={session?.user} />}
+          {step === 1 && (
+            <RegisterFormStep1 cities={cities} user={session?.user} />
+          )}
           {step === 2 && <RegisterFormStep2 />}
           {step === 3 && <RegisterFormStep3 />}
 
@@ -208,7 +271,12 @@ export function RegisterForm() {
           <div className="mt-8 flex justify-between items-center">
             <div className="flex gap-x-4">
               {step === 3 && (
-                <Button variant="outline" type="submit" className="bg-red-500 hover:bg-red-600">
+                <Button
+                  variant="outline"
+                  type="submit"
+                  onClick={form.handleSubmit(onSubmit)}
+                  className="bg-red-500 hover:bg-red-600"
+                >
                   Save & Exit
                 </Button>
               )}

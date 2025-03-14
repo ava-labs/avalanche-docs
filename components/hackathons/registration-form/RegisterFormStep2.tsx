@@ -69,18 +69,14 @@ export function RegisterFormStep2() {
     { value: "firstTime", label: "First Time" },
   ];
 
-  const formatSelectedValues = (
-    values: string[],
-    options: { value: string; label: string }[]
-  ) => {
+  const formatSelectedValues = (values: string[] | undefined) => {
     if (!values || values.length === 0) return "Select one or more options";
     if (values.length === 1) {
-      const selectedOption = options.find((o) => o.value === values[0]);
-      return selectedOption ? selectedOption.label : "";
+      const selectedOption = languageOptions.find((o) => o.value.toLowerCase() === values[0].toLowerCase());
+      return selectedOption ? selectedOption.label : values[0];
     }
     return `${values.length} options selected`;
   };
-
   return (
     <>
       <div className="mb-6">
@@ -100,7 +96,7 @@ export function RegisterFormStep2() {
         <div className="space-y-6">
           <FormField
             control={form.control}
-            name="web3Proficiency"
+            name="web3_proficiency"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -108,7 +104,7 @@ export function RegisterFormStep2() {
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
@@ -153,15 +149,9 @@ export function RegisterFormStep2() {
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
                       <SelectValue
-                        placeholder={formatSelectedValues(
-                          field.value as string[],
-                          roleOptions
-                        )}
+                        placeholder= {formatSelectedValues(field.value)}
                       >
-                        {formatSelectedValues(
-                          field.value as string[],
-                          roleOptions
-                        )}
+                        {formatSelectedValues(field.value)}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
@@ -212,15 +202,9 @@ export function RegisterFormStep2() {
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
                       <SelectValue
-                        placeholder={formatSelectedValues(
-                          field.value as string[],
-                          interestOptions
-                        )}
+                        placeholder= {formatSelectedValues(field.value)}
                       >
-                        {formatSelectedValues(
-                          field.value as string[],
-                          interestOptions
-                        )}
+                        {formatSelectedValues(field.value)}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
@@ -270,15 +254,9 @@ export function RegisterFormStep2() {
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
                       <SelectValue
-                        placeholder={formatSelectedValues(
-                          field.value as string[],
-                          toolOptions
-                        )}
+                        placeholder= {formatSelectedValues(field.value)}
                       >
-                        {formatSelectedValues(
-                          field.value as string[],
-                          toolOptions
-                        )}
+                        {formatSelectedValues(field.value)}
                       </SelectValue>
                     </SelectTrigger>
                   </FormControl>
@@ -310,64 +288,54 @@ export function RegisterFormStep2() {
 
         {/* Right Column */}
         <div className="space-y-6">
-          <FormField
-            control={form.control}
-            name="languages"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Which programming languages are you familiar with?
-                </FormLabel>
-                <Select
-                  onValueChange={(value: string) => {
-                    const currentValues = Array.isArray(field.value)
-                      ? field.value
-                      : [];
-                    const newValues = currentValues.includes(value)
-                      ? currentValues.filter((v) => v !== value)
-                      : [...currentValues, value];
-                    field.onChange(newValues);
-                  }}
-                  value=""
-                >
-                  <FormControl>
-                    <SelectTrigger className="text-zinc-600">
-                      <SelectValue placeholder= {formatSelectedValues(
-                          field.value as string[],
-                          languageOptions
-                        )}
-                      >
-                        {formatSelectedValues(
-                          field.value as string[],
-                          languageOptions
-                        )}
-                      </SelectValue>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
-                    {languageOptions.map((option) => (
-                      <SelectItem
-                        key={option.value}
-                        value={option.value}
-                        className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
-                      >
-                        <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
-                          {Array.isArray(field.value) &&
-                            field.value.includes(option.value) && (
-                              <Check className="h-4 w-4 text-zinc-600" />
-                            )}
-                        </span>
-                        <span>{option.label}</span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage className="text-zinc-600">
-                  Choose all that apply.
-                </FormMessage>
-              </FormItem>
-            )}
-          />
+        <FormField
+        control={form.control}
+        name="languages"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>
+              Which programming languages are you familiar with?
+            </FormLabel>
+            <Select
+              onValueChange={(value: string) => {
+                const currentValues = field.value || []; // Si no hay valor inicial, usa un array vacío
+                const newValues = currentValues.includes(value)
+                  ? currentValues.filter((v) => v !== value)
+                  : [...currentValues, value];
+                field.onChange(newValues);
+              }}
+              // No usamos "value" en el Select porque es multiselect
+            >
+              <FormControl>
+                <SelectTrigger className="text-zinc-600">
+                  <SelectValue>
+                    {formatSelectedValues(field.value)}
+                  </SelectValue>
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent className="bg-white dark:bg-black border-gray-300 dark:border-zinc-600 text-black dark:text-zinc-600 rounded-md shadow-md">
+                {languageOptions.map((option) => (
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground"
+                  >
+                    <span className="absolute left-2 flex h-4 w-4 items-center justify-center">
+                      {field.value?.includes(option.value) && (
+                        <Check className="h-4 w-4 text-zinc-600" />
+                      )}
+                    </span>
+                    <span>{option.label}</span>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <FormMessage className="text-zinc-600">
+              Choose all that apply.
+            </FormMessage>
+          </FormItem>
+        )}
+      />
 
           <div className="space-y-6">
             <div className="w-full h-px bg-zinc-300" />
@@ -385,7 +353,7 @@ export function RegisterFormStep2() {
 
           <FormField
             control={form.control}
-            name="hackathonParticipation"
+            name="hackathon_participation"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -393,7 +361,7 @@ export function RegisterFormStep2() {
                 </FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                
                 >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
@@ -418,7 +386,7 @@ export function RegisterFormStep2() {
 
           <FormField
             control={form.control}
-            name="githubPortfolio"
+            name="github_portfolio"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>What’s your GitHub or Portfolio account?</FormLabel>

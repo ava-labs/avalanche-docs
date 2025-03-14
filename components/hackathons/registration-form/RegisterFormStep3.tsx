@@ -29,7 +29,7 @@ export function RegisterFormStep3() {
 
         <FormField
           control={form.control}
-          name="termsEventConditions"
+          name="terms_event_conditions"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
               <FormControl>
@@ -53,7 +53,7 @@ export function RegisterFormStep3() {
 
         <FormField
           control={form.control}
-          name="newsletterSubscription"
+          name="newsletter_subscription"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
               <FormControl>
@@ -75,7 +75,7 @@ export function RegisterFormStep3() {
 
         <FormField
           control={form.control}
-          name="prohibitedItems"
+          name="prohibited_items"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
               <FormControl>

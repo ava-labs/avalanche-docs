@@ -89,7 +89,7 @@ export default function RegisterFormStep1({ cities,user }: Step1Props) {
           {/* NameCompany (opcional) */}
           <FormField
             control={form.control}
-            name="companyName"
+            name="company_name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Company (if applicable)</FormLabel>
@@ -142,7 +142,7 @@ export default function RegisterFormStep1({ cities,user }: Step1Props) {
                 <FormLabel>City of Residence</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  
+                  value={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="text-zinc-600">
