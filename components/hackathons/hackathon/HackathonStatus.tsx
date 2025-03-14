@@ -12,12 +12,12 @@ export default function HackathonStatus({ status, enableLightMode }: Props) {
     ENDED: "border-red-500",
   };
   return (
-    <div className="flex items-center gap-2 font-semibold">
+    <div className="flex items-center gap-1 md:gap-2 font-semibold">
       <span
-        className={`w-3 h-3 rounded-full border-2 ${statusColors[status]}`}
+        className={`w-3 lg:w-3 h-3 lg:h-3 rounded-full border-2 ${statusColors[status]}`}
       ></span>
       <span
-        className={`text-sm ${
+        className={`text-xs xl:text-sm ${
           enableLightMode ? "dark:text-zinc-50 text-zinc-900" : "text-zinc-50"
         }`}
       >

@@ -16,7 +16,7 @@ export default function HackathonCard({
   return (
     <div
       key={hackathon.id}
-      className="flex rounded-lg shadow-lg h-[340px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-transparent"
+      className="flex rounded-lg shadow-lg h-400px md:h-[340px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-transparent"
     >
       {/* Left Section: Background Image or Red Color */}
       <Image
@@ -64,20 +64,20 @@ export default function HackathonCard({
             ))}
           </div>
         )}
-        <div className="flex justify-around items-center text-gray-300 text-sm py-[10px]">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-wrap justify-around items-center text-gray-300 text-sm py-[10px]">
+          <div className="flex items-center gap-1 md:gap-2">
             <Trophy className="h-4 w-4 dark:stroke-zinc-50 stroke-zinc-900" />
             <span className="font-medium dark:text-zinc-50 text-zinc-900">
               {hackathon.total_prizes}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 md:gap-2">
             <UserRound className="h-4 w-4 dark:stroke-zinc-50 stroke-zinc-900" />
             <span className="font-medium dark:text-zinc-50 text-zinc-900">
               {hackathon.participants}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 md:gap-2">
             <HackathonStatus
               status={hackathon.status ?? "UPCOMING"}
               enableLightMode={true}
