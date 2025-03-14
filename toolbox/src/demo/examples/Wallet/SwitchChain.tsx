@@ -10,9 +10,10 @@ import { createPublicClient, http } from 'viem';
 export default function SwitchChain() {
     const { showBoundary } = useErrorBoundary();
     const [isSwitching, setIsSwitching] = useState(false);
-    const [targetChainId, setTargetChainId] = useState<number>(0);
     const [isTestnet, setIsTestnet] = useState<boolean>(true);
     const {
+        evmChainId,
+        setEvmChainId,
         evmChainName,
         evmChainRpcUrl,
         evmChainCoinName,
@@ -22,6 +23,7 @@ export default function SwitchChain() {
     } = useToolboxStore();
     const { coreWalletClient, walletChainId } = useWalletStore();
     const [isCheckingRpc, setIsCheckingRpc] = useState(false);
+    const [checkedRpc, setCheckedRpc] = useState(false);
 
 
     async function handleSwitchChain() {
@@ -29,7 +31,7 @@ export default function SwitchChain() {
         try {
             await coreWalletClient!.addChain({
                 chain: {
-                    id: targetChainId,
+                    id: evmChainId,
                     name: evmChainName,
                     nativeCurrency: {
                         name: evmChainCoinName,
@@ -46,7 +48,7 @@ export default function SwitchChain() {
             });
 
             await coreWalletClient!.switchChain({
-                id: targetChainId,
+                id: evmChainId,
             });
         } catch (error) {
             showBoundary(error);
@@ -63,27 +65,21 @@ export default function SwitchChain() {
             });
 
             const chainId = await publicClient.getChainId();
-            setTargetChainId(chainId);
+            setEvmChainId(chainId);
         } catch (error) {
             showBoundary(error);
-            setTargetChainId(0);
+            setEvmChainId(0);
         } finally {
             setIsCheckingRpc(false);
         }
     }
-
-    useEffect(() => {
-        setTargetChainId(0);
-    }, [evmChainRpcUrl]);
-
-
 
     async function loadFromWallet() {
         const chain = await coreWalletClient!.getEthereumChain();
         setEvmChainName(chain.chainName);
         setEvmChainRpcUrl(chain.rpcUrls.filter((url) => url.startsWith('http'))[0]);
         setEvmChainCoinName(chain.nativeCurrency.name);
-        setTargetChainId(parseInt(chain.chainId));
+        setEvmChainId(parseInt(chain.chainId));
         setIsTestnet(chain.isTestnet);
     }
 
@@ -96,7 +92,7 @@ export default function SwitchChain() {
                 </div>
                 <div className="mb-4">
                     <Button onClick={loadFromWallet}
-                        disabled={walletChainId === targetChainId}
+                        disabled={walletChainId === evmChainId}
                     >Load from wallet</Button>
                 </div>
                 <Input
@@ -127,12 +123,12 @@ export default function SwitchChain() {
                     ]}
                 />
                 <Input
-                    label="Target Chain ID"
-                    value={targetChainId.toString()}
+                    label="EVM Chain ID"
+                    value={evmChainId.toString()}
                     disabled={true}
                     type="text"
                 />
-                {targetChainId === 0 && (
+                {!checkedRpc && (
                     <Button
                         type="secondary"
                         onClick={checkRpc}
@@ -142,7 +138,7 @@ export default function SwitchChain() {
                         Load Chain ID from RPC
                     </Button>
                 )}
-                {targetChainId > 0 && (
+                {evmChainId > 0 && (
                     <Button
                         type="primary"
                         onClick={handleSwitchChain}

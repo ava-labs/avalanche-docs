@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist, createJSONStorage, combine } from 'zustand/middleware'
 import { createCoreWalletClient } from './wallet/createCoreWallet';
 import { networkIDs } from '@avalabs/avalanchejs';
+import { Chain } from 'viem';
 
 export const DEFAULT_VM_ID = "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy";
 
@@ -30,7 +31,7 @@ export const useToolboxStore = create(
             gasLimit: 12000000,
             targetBlockRate: 2,
             icmReceiverAddress: "",
-        }, set => ({
+        }, (set, get) => ({
             setSubnetID: (subnetID: string) => set({ subnetID }),
             setChainName: (chainName: string) => set({ chainName }),
             setVmId: (vmId: string) => set({ vmId }),
@@ -57,6 +58,25 @@ export const useToolboxStore = create(
             setEvmChainId: (evmChainId: number) => set({ evmChainId }),
             setTeleporterRegistryAddress: (address: string) => set({ teleporterRegistryAddress: address }),
             setIcmReceiverAddress: (address: string) => set({ icmReceiverAddress: address }),
+
+            getChain: (): Chain | null => {
+                if (!get().evmChainId || !get().evmChainName || !get().evmChainRpcUrl || !get().evmChainCoinName) {
+                    return null;
+                }
+
+                return {
+                    id: get().evmChainId,
+                    name: get().evmChainName,
+                    rpcUrls: {
+                        default: { http: [get().evmChainRpcUrl] },
+                    },
+                    nativeCurrency: {
+                        name: get().evmChainCoinName,
+                        symbol: get().evmChainCoinName,
+                        decimals: 18
+                    }
+                }
+            }
         })),
         {
             name: 'toolbox-storage',

@@ -97,11 +97,6 @@ export default function DeployValidatorManager() {
                 <div className="mb-4">
                     The contract requires the <code>ValidatorMessages</code> library at address: <code>{validatorMessagesLibAddress || "Not deployed"}</code>
                 </div>
-                {knownNetwoks[walletChainId] && (
-                    <div className="mb-4">
-                        ⚠️ Warning: You are connected to {knownNetwoks[walletChainId]}, not to your L1.
-                    </div>
-                )}
                 <Button
                     type="primary"
                     onClick={handleDeploy}
@@ -117,10 +112,4 @@ export default function DeployValidatorManager() {
             />
         </div>
     );
-};
-
-const knownNetwoks: Record<number, string> = {
-    43114: "Avalanche Mainnet",
-    43113: "Avalanche Fuji Testnet",
-    43117: "Avalanche Devnet",
 };

@@ -10,7 +10,7 @@ import ValidatorMessagesABI from "../../../../contracts/icm-contracts/compiled/V
 
 export default function DeployValidatorMessages() {
     const { showBoundary } = useErrorBoundary();
-    const { validatorMessagesLibAddress, setValidatorMessagesLibAddress } = useToolboxStore();
+    const { validatorMessagesLibAddress, setValidatorMessagesLibAddress, getChain, evmChainId } = useToolboxStore();
     const [isDeploying, setIsDeploying] = useState(false);
 
     async function handleDeploy() {
@@ -27,23 +27,16 @@ export default function DeployValidatorMessages() {
 
             const [address] = await walletClient.requestAddresses();
 
+            const chain = getChain();
+            if (!chain) {
+                throw new Error('No chain found');
+            }
+
             const hash = await walletClient.deployContract({
                 abi: ValidatorMessagesABI.abi,
                 bytecode: ValidatorMessagesABI.bytecode.object as `0x${string}`,
                 account: address,
-                chain: {
-                    // The values below (except for chainID) are not important since viem only checks chainID
-                    id: walletChainId,
-                    name: "My L1",
-                    rpcUrls: {
-                        default: { http: [] },
-                    },
-                    nativeCurrency: {
-                        name: "COIN",
-                        symbol: "COIN",
-                        decimals: 18,
-                    },
-                },
+                chain: chain,
             });
 
             const receipt = await publicClient.waitForTransactionReceipt({ hash });
@@ -65,13 +58,8 @@ export default function DeployValidatorMessages() {
             <h2 className="text-lg font-semibold ">Deploy Validator Messages Library</h2>
             <div className="space-y-4">
                 <div className="mb-4">
-                    This will deploy the <code>ValidatorMessages</code> contract to the currently connected EVM network <code>{walletChainId}</code>. <code>ValidatorMessages</code> is a library required by the <code>ValidatorManager</code> family of contracts.
+                    This will deploy the <code>ValidatorMessages</code> contract to the currently connected EVM network <code>{evmChainId}</code>. <code>ValidatorMessages</code> is a library required by the <code>ValidatorManager</code> family of contracts.
                 </div>
-                {knownNetwoks[walletChainId] && (
-                    <div className="mb-4">
-                        ⚠️ Warning: You are connected to {knownNetwoks[walletChainId]}, not to your L1.
-                    </div>
-                )}
                 <Button
                     type="primary"
                     onClick={handleDeploy}
@@ -89,9 +77,3 @@ export default function DeployValidatorMessages() {
     );
 };
 
-
-const knownNetwoks: Record<number, string> = {
-    43114: "Avalanche Mainnet",
-    43113: "Avalanche Fuji Testnet",
-    43117: "Avalanche Devnet",
-}
