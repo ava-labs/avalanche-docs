@@ -29,7 +29,11 @@ export default function HackathonCard({
 
       {/* Right Section */}
       <div className="flex-1 justify-evenly bg-zinc-50 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 p-6 flex flex-col gap-1 rounded-md md:rounded-l-none">
-        <h2 className="uppercase font-bold text-2xl">{hackathon.title}</h2>
+        <h2 className="uppercase font-bold text-2xl">
+          {hackathon.title.length < 30
+            ? hackathon.title
+            : hackathon.title.split(" ").slice(0, -1).join(" ") + "..."}
+        </h2>
 
         <div className="flex items-center gap-2 dark:text-zinc-300 text-zinc-600 text-sm mt-2">
           <CalendarIcon className="h-4 w-4 dark:stroke-zinc-50 stroke-zinc-900" />
@@ -51,7 +55,10 @@ export default function HackathonCard({
         {hackathon.tags && hackathon.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
             {hackathon.tags.map((tag: string) => (
-              <Badge key={tag} className="border-2 border-zinc-900 dark:border-zinc-50">
+              <Badge
+                key={tag}
+                className="border-2 border-zinc-900 dark:border-zinc-50"
+              >
                 <p className="text-sm">{tag}</p>
               </Badge>
             ))}
