@@ -2,18 +2,15 @@
 
 import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
-import { useEffect, useState } from "react";
-import { packL1ConversionMessage, PackL1ConversionMessageArgs } from "./convertWarp";
-import { networkIDs, utils } from "@avalabs/avalanchejs";
-import { Button, Input, InputArray } from "../../ui";
+import { useState } from "react";
+import { networkIDs } from "@avalabs/avalanchejs";
+import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
-import getConversionDataFromTx from "./getConversionDataFromTx";
 
 export default function CollectConversionSignatures() {
     const { showBoundary } = useErrorBoundary();
     const {
-        subnetID,
         L1ConversionSignature,
         setL1ConversionSignature,
         L1ID,
@@ -22,29 +19,22 @@ export default function CollectConversionSignatures() {
     const { coreWalletClient } = useWalletStore();
     const [isConverting, setIsConverting] = useState(false);
 
-    useEffect(() => {
-        getConversionDataFromTx(L1ID, true);
-    }, []);
-
 
     async function handleConvertSignatures() {
         setL1ConversionSignature("");
         setIsConverting(true);
 
         try {
-            const isTestnet = await coreWalletClient!.isTestnet();
-            const networkID = isTestnet ? networkIDs.FujiID : networkIDs.MainnetID;
+            const { message, justification, signingSubnetId, networkId } = await coreWalletClient!.extractWarpMessageFromPChainTx({ txId: L1ID });
 
-            const { conversionArgs, blockchainID } = await getConversionDataFromTx(L1ID, isTestnet);
-
-            const [message, justification] = packL1ConversionMessage(conversionArgs, networkID, blockchainID);
+            const networkName = networkId === networkIDs.FujiID ? "fuji" : "mainnet";
 
             const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
-                network: isTestnet ? "fuji" : "mainnet",
+                network: networkName,
                 signatureAggregatorRequest: {
-                    message: utils.bufferToHex(message),
-                    justification: utils.bufferToHex(justification),
-                    signingSubnetId: subnetID,
+                    message: message,
+                    justification: justification,
+                    signingSubnetId: signingSubnetId,
                     quorumPercentage: 67, // Default threshold for subnet validation
                 },
             });
