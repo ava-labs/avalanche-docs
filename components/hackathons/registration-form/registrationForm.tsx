@@ -59,8 +59,8 @@ export function RegisterForm({ searchParams }: { searchParams: { [key: string]: 
   const [formData, setFormData] = useState({});
   const cities = ["Bogota", "Medellin", "Valencia", "Londres", "Bilbao"];
 
-  const hackathon_id = searchParams?.hackaId ?? "";
-  const utm = searchParams?.utm ?? "";
+  let hackathon_id = searchParams?.hackaId ?? "";
+  let utm = searchParams?.utm ?? "";
   const [hackathon, setHackathon] = useState<HackathonHeader | null>(null);
   const [formLoaded, setRegistrationForm] = useState<RegistrationForm | null>(null);
 
@@ -257,15 +257,23 @@ export function RegisterForm({ searchParams }: { searchParams: { [key: string]: 
   };
 
   const onSaveLater = () => {
-    
-    localStorage.setItem("formData", JSON.stringify(form.getValues()));
+    const finalData = {
+      ...form.getValues(),
+      hackathon_id: hackathon_id || "",
+      utm: utm,
+   
+    };
+    localStorage.setItem("formData", JSON.stringify(finalData));
     
   };
   const loadFormFromLocalStorage = () => {
     const savedData = localStorage.getItem("formData");
     if (savedData) {
       try {
+        const dataJson:any = JSON.parse(savedData);
         const parsedData: RegisterFormValues = JSON.parse(savedData);
+        utm = dataJson.utm;
+        hackathon_id = dataJson.hackathon_id;
         form.reset(parsedData);
         console.log("Form loaded from localStorage:", parsedData);
       } catch (err) {
