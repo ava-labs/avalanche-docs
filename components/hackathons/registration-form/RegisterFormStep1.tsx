@@ -37,7 +37,7 @@ export default function RegisterFormStep1({ cities,user }: Step1Props) {
         <div className="w-full h-px bg-zinc-300 mt-2" />
       </div>
 
-      {/* Contenedor de dos columnas */}
+     
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Columna izquierda */}
         <div className="space-y-6">
@@ -109,7 +109,7 @@ export default function RegisterFormStep1({ cities,user }: Step1Props) {
           />
         </div>
 
-        {/* Columna derecha */}
+    
         <div className="space-y-6">
           {/* Rol */}
           <FormField

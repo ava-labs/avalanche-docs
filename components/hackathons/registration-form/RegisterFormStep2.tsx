@@ -22,7 +22,7 @@ import { Check } from "lucide-react";
 export function RegisterFormStep2() {
   const form = useFormContext<RegisterFormValues>();
 
-  // Opciones para los Selects
+
   const web3ProficiencyOptions = [
     { value: "1", label: "Amateur" },
     { value: "2", label: "2" },
@@ -71,10 +71,7 @@ export function RegisterFormStep2() {
 
   const formatSelectedValues = (values: string[] | undefined) => {
     if (!values || values.length === 0) return "Select one or more options";
-    // if (values.length === 1) {
-    //   const selectedOption = languageOptions.find((o) => o.value.toLowerCase() === values[0].toLowerCase());
-    //   return selectedOption ? selectedOption.label : values[0];
-    // }
+
     return `${values.length} options selected`;
   };
   return (
