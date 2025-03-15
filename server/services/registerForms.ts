@@ -50,6 +50,7 @@ export async function createRegisterForm(registerData: Partial<RegistrationForm>
           terms_event_conditions: registerData.terms_event_conditions ?? false,
           tools: (registerData.tools ?? []).join(','),
           web3_proficiency: registerData.web3_proficiency ?? "",
+          github_portfolio: registerData.github_portfolio ?? "",
       },
       create: {
           hackathon: {
@@ -73,6 +74,7 @@ export async function createRegisterForm(registerData: Partial<RegistrationForm>
           terms_event_conditions: registerData.terms_event_conditions ?? false,
           tools: (registerData.tools ?? []).join(','),
           web3_proficiency: registerData.web3_proficiency ?? "",
+          github_portfolio: registerData.github_portfolio ?? "",
       },
   });
      registerData.id= newRegisterFormData.id;
@@ -92,6 +94,6 @@ export async function getRegisterForm(email:string,hackathon_id:string) {
         hackathon_id: hackathon_id,
     },
 });
-
+console.log("registeredData",registeredData)
 return registeredData || null;
 }

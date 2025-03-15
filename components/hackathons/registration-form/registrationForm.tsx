@@ -52,15 +52,15 @@ export const registerSchema = z.object({
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 
-export function RegisterForm() {
+export function RegisterForm({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   const { data: session, status } = useSession();
   const currentUser: User | undefined = session?.user;
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
   const cities = ["Bogota", "Medellin", "Valencia", "Londres", "Bilbao"];
-  const searchParams = useSearchParams();
-  const hackathon_id = searchParams.get("hackaId");
-  const utm = searchParams.get("utm") ?? "";
+
+  const hackathon_id = searchParams?.hackaId ?? "";
+  const utm = searchParams?.utm ?? "";
   const [hackathon, setHackathon] = useState<HackathonHeader | null>(null);
   const [formLoaded, setRegistrationForm] = useState<RegistrationForm | null>(null);
 
@@ -85,8 +85,23 @@ export function RegisterForm() {
       const loadedData = response.data;
       
       if (loadedData) {
-        console.log("cargando datos", loadedData);  
-        // Actualizar el formulario con los datos cargados
+        // Función auxiliar para normalizar valores de arreglo
+        const parseArrayField = (value: string | string[] | undefined): string[] => {
+          if (!value) return [];
+          if (Array.isArray(value)) return value; // Si ya es un arreglo, úsalo directamente
+          if (typeof value === "string") {
+            // Intenta parsear como JSON primero
+            try {
+              const parsed = JSON.parse(value);
+              return Array.isArray(parsed) ? parsed : value.split(",");
+            } catch {
+              // Si no es JSON, asume que es una cadena separada por comas
+              return value.split(",");
+            }
+          }
+          return [];
+        };
+        
         form.reset({
           name: loadedData.name || currentUser.name || "",
           email: loadedData.email || currentUser.email || "",
@@ -94,19 +109,22 @@ export function RegisterForm() {
           role: loadedData.role || "",
           city: loadedData.city || "",
           dietary: loadedData.dietary || "",
-          interests: loadedData.interests ? loadedData.interests.split(',') : [],
+          interests: parseArrayField(loadedData.interests),
           web3_proficiency: loadedData.web3_proficiency || "",
-          tools: loadedData.tools ? loadedData.tools.split(',') : [],
-          roles: loadedData.roles ? loadedData.roles.split(',') : [],
-          languages: loadedData.languages ? loadedData.languages.split(',') : [],
+          tools: parseArrayField(loadedData.tools),
+          roles: parseArrayField(loadedData.roles),
+          languages: parseArrayField(loadedData.languages),
           hackathon_participation: loadedData.hackathon_participation || "",
           github_portfolio: loadedData.github_portfolio || "",
           terms_event_conditions: loadedData.terms_event_conditions || false,
           newsletter_subscription: loadedData.newsletter_subscription || false,
           prohibited_items: loadedData.prohibited_items || false,
-      });
-      
+        });
+  
         setRegistrationForm(loadedData);
+      }
+      else {
+        loadFormFromLocalStorage(); 
       }
     } catch (err) {
       console.error("API Error:", err);
@@ -127,7 +145,7 @@ export function RegisterForm() {
   useEffect(() => {
     getHackathon();
     if (status === "authenticated" && currentUser) {
-      getRegisterFormLoaded(); // Ejecutar cuando el usuario está autenticado
+      getRegisterFormLoaded(); 
     }
   }, [hackathon_id,status, currentUser]);
 
@@ -239,10 +257,24 @@ export function RegisterForm() {
   };
 
   const onSaveLater = () => {
-    console.log("Saving data for later:", form.getValues());
+    
     localStorage.setItem("formData", JSON.stringify(form.getValues()));
+    
   };
-
+  const loadFormFromLocalStorage = () => {
+    const savedData = localStorage.getItem("formData");
+    if (savedData) {
+      try {
+        const parsedData: RegisterFormValues = JSON.parse(savedData);
+        form.reset(parsedData);
+        console.log("Form loaded from localStorage:", parsedData);
+      } catch (err) {
+        console.error("Error parsing localStorage data:", err);
+      }
+    } else {
+      console.log("No form data found in localStorage");
+    }
+  };
   return (
     <div className="w-full items-center justify-center">
       <h2 className="text-2xl font-bold mb-6 text-foreground">
