@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useFormContext } from "react-hook-form";
-import { RegisterFormValues } from "./RegistrationForm";
+import { RegisterFormValues } from "./registrationForm";
 import { Check } from "lucide-react";
 
 export function RegisterFormStep2() {

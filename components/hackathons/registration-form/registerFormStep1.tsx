@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import { RegisterFormValues } from "./RegistrationForm";
+import { RegisterFormValues } from "./registrationForm";
 import { useFormContext } from "react-hook-form";
 import {
   Select,
