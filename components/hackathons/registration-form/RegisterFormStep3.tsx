@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 
 import { useFormContext } from "react-hook-form";
-import { RegisterFormValues } from "./registrationForm"; 
+import { RegisterFormValues } from "./RegistrationForm"; 
 import { Checkbox } from "@/components/ui/checkbox";
 
 export function RegisterFormStep3() {
