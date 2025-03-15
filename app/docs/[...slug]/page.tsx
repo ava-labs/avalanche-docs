@@ -30,6 +30,7 @@ import EditOnGithubButton from "@/components/ui/edit-on-github-button";
 import ReportIssueButton from "@/components/ui/report-issue-button";
 import YouTube from '@/components/content-design/youtube';
 
+export const dynamicParams = false;
 export const revalidate = false;
 
 export default async function Page(props: {
