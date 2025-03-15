@@ -4,7 +4,7 @@ import { Divider } from "@/components/ui/divider";
 import { SearchEventInput } from "@/components/ui/search-event-input";
 import { TimeZoneSelect } from "@/components/ui/timezone-select";
 import { HackathonHeader, ScheduleActivity } from "@/types/hackathons";
-import { CalendarPlus2, MapPin } from "lucide-react";
+import { CalendarPlus2, Link as LinkIcon, MapPin } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -154,109 +154,153 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
       </div>
       <Divider />
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-        {Object.entries(groupActivitiesByDay(mockActivities))
+        {Object.entries(groupActivitiesByDay(hackathon.content.schedule))
           .slice(0, 2)
-          .map(([date, activities], index) => (
-            <div key={index} className="flex flex-col gap-4">
-              <h3 className="text-2xl text-center p-4 rounded-md text-zinc-900 font-black mb-4 bg-red-500 sm:text-xl">
-                {new Date(date).getDate()}TH{" "}
-                {new Date(date)
-                  .toLocaleString("en-US", { weekday: "long" })
-                  .toUpperCase()}
-              </h3>
+          .map(([date, activities], index) => {
+            const dateIsCurrentDate =
+              new Date(date).getFullYear() === new Date().getFullYear() &&
+              new Date(date).getMonth() === new Date().getMonth() &&
+              new Date(date).getDate() === new Date().getDate();
+            return (
+              <div key={index} className="flex flex-col gap-4">
+                <h3
+                  className={`text-2xl text-center p-4 rounded-md text-zinc-900 font-black mb-4 ${
+                    dateIsCurrentDate ? "bg-red-500" : "bg-red-300"
+                  } sm:text-xl`}
+                >
+                  {new Date(date).getDate()}TH{" "}
+                  {new Date(date)
+                    .toLocaleString("en-US", { weekday: "long" })
+                    .toUpperCase()}
+                </h3>
 
-              {activities.map((activity, index) => (
-                <div key={index} className="flex flex-col sm:flex-row gap-3">
-                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 px-2 sm:px-4 sm:w-[40%] md:w-auto">
-                    <CardHeader className="px-2 sm:px-6 flex items-center">
-                      <div className="border border-red-500 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto">
-                        Live now
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-2 justify-center px-2 sm:px-6">
-                      <div className="flex flex-col items-center justify-center">
-                        <span className="text-base md:text-lg font-medium">
-                          {new Date(date).toLocaleTimeString("en-US", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: true,
-                          })}
-                        </span>
-                        <span className="text-base md:text-lg font-medium">
-                          {new Date(
-                            new Date(date).getTime() +
-                              activities[0].duration * 60000
-                          ).toLocaleTimeString("en-US", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: true,
-                          })}
-                        </span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  <Card className="dark:bg-zinc-900 bg-zinc-50 border-red-500 sm:w-[60%] md:flex-1">
-                    <CardHeader className="px-3 sm:px-6">
-                      <div className="flex flex-col">
-                        <div className="flex justify-between items-center">
-                          <CardTitle className="text-red-500 text-lg sm:text-lg">
-                            {activity.name}
-                          </CardTitle>
-                          <Badge className="dark:bg-zinc-50 bg-zinc-900 dark:text-zinc-900 text-zinc-50 py-0.5 px-2.5 text-xs w-fit h-fit">
-                            {activity.category}
-                          </Badge>
-                        </div>
-                        <span className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal">
-                          {activity.description}
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="px-3 sm:px-6">
-                      <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-                        <div className="flex flex-row gap-4">
-                          <Image
-                            src={activity.host_icon}
-                            alt={activity.host_name}
-                            width={40}
-                            height={40}
-                          />
+                {activities.map((activity, index) => {
+                  const startDate = new Date(activity.date);
+                  const endDate = new Date(
+                    new Date(activity.date).getTime() +
+                      (Number(activity.duration) || 0) * 60000
+                  );
+                  const now = new Date();
+                  console.log('NOW: ', now)
+                  console.log('Start: ', startDate)
+                  console.log('End: ', endDate)
+                  const activityIsOcurring = startDate <= now && now <= endDate;
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-col sm:flex-row gap-3"
+                    >
+                      <Card
+                        className={`${
+                          dateIsCurrentDate
+                            ? "dark:bg-zinc-900 bg-zinc-100 dark:border-zinc-900 border-zinc-400"
+                            : "dark:bg-zinc-950 bg-zinc-50 dark:border-zinc-800 border-zinc-300"
+                        } ${
+                          activityIsOcurring ? "border-red-500" : ""
+                        } px-2 sm:px-4 sm:w-[40%] md:w-auto`}
+                      >
+                        <CardHeader className="px-2 sm:px-6 flex items-center">
+                          {activityIsOcurring && (
+                            <div className="border border-red-500 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
+                              Live now
+                            </div>
+                          )}
+                          {!activityIsOcurring && dateIsCurrentDate && (
+                            <div className="border bg-zinc-800 flex items-center justify-center gap-1 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
+                              <LinkIcon size={16} color="#F5F5F9"/>
+                              Zoom
+                            </div>
+                          )}
+                        </CardHeader>
+                        <CardContent className="flex flex-col gap-2 justify-center px-2 sm:px-6">
+                          <div className="flex flex-col items-center justify-center">
+                            <span className="text-base md:text-lg font-medium">
+                              {startDate.toLocaleTimeString("en-US", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: true,
+                              })}
+                            </span>
+                            <span className="text-base md:text-lg font-medium">
+                              {endDate.toLocaleTimeString("en-US", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: true,
+                              })}
+                            </span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                      <Card
+                        className={`${
+                          dateIsCurrentDate
+                            ? "dark:bg-zinc-900 bg-zinc-100 dark:border-zinc-900 border-zinc-400"
+                            : "dark:bg-zinc-950 bg-zinc-50 dark:border-zinc-800 border-zinc-300"
+                        } border-red-500 sm:w-[60%] md:flex-1`}
+                      >
+                        <CardHeader className="px-3 sm:px-6">
                           <div className="flex flex-col">
-                            <span className="text-sm sm:text-base">
-                              {activity.host_name}
-                            </span>
-                            <Link
-                              className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
-                              href={`https://x.com${activity.host_media}`}
-                            >
-                              @{activity.host_media}
-                            </Link>
-                          </div>
-                        </div>
-                        <div className="flex flex-row md:gap-4 flex-1 justify-between">
-                          <div className="flex flex-row items-center gap-2">
-                            <MapPin
-                              color="#8F8F99"
-                              className="w-4 h-4 sm:w-5 sm:h-5"
-                            />
-                            <span className="dark:text-zinc-50 zinc-900 text-xs sm:text-sm font-medium">
-                              {activity.location}
+                            <div className="flex justify-between items-center">
+                              <CardTitle className="text-red-500 text-lg sm:text-lg">
+                                {activity.name}
+                              </CardTitle>
+                              <Badge className="dark:bg-zinc-50 bg-zinc-900 dark:text-zinc-900 text-zinc-50 py-0.5 px-2.5 text-xs w-fit h-fit">
+                                {activity.category}
+                              </Badge>
+                            </div>
+                            <span className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal">
+                              {activity.description}
                             </span>
                           </div>
-                          <Button
-                            variant="secondary"
-                            size="icon"
-                            className="bg-zinc-100 dark:bg-zinc-800 h-8 w-8 sm:h-10 sm:w-10"
-                          >
-                            <CalendarPlus2 className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50" />
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          ))}
+                        </CardHeader>
+                        <CardContent className="px-3 sm:px-6">
+                          <div className="flex flex-col md:flex-row md:justify-between gap-4">
+                            <div className="flex flex-row gap-4">
+                              <Image
+                                src={activity.host_icon}
+                                alt={activity.host_name}
+                                width={40}
+                                height={40}
+                              />
+                              <div className="flex flex-col">
+                                <span className="text-sm sm:text-base">
+                                  {activity.host_name}
+                                </span>
+                                <Link
+                                  className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
+                                  href={`https://x.com${activity.host_media}`}
+                                >
+                                  @{activity.host_media}
+                                </Link>
+                              </div>
+                            </div>
+                            <div className="flex flex-row md:gap-4 flex-1 justify-between">
+                              <div className="flex flex-row items-center gap-2">
+                                <MapPin
+                                  color="#8F8F99"
+                                  className="w-4 h-4 sm:w-5 sm:h-5"
+                                />
+                                <span className="dark:text-zinc-50 zinc-900 text-xs font-medium">
+                                  {activity.location}
+                                </span>
+                              </div>
+                              <Button
+                                variant="secondary"
+                                size="icon"
+                                className="bg-zinc-100 dark:bg-zinc-800 w-8 sm:w-10 min-w-8 sm:min-w-10 h-8 sm:h-10"
+                              >
+                                <CalendarPlus2 className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50" />
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
       </div>
     </section>
   );
