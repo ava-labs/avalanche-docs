@@ -6,7 +6,11 @@ import { Calendar, Trophy, Rocket, Check } from 'lucide-react';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import React from 'react';
 
-export default async function Submission({ hackathon }: { hackathon: HackathonHeader }) {
+export default async function Submission({
+  hackathon,
+}: {
+  hackathon: HackathonHeader;
+}) {
   return (
     <section className='py-16 text-black dark:text-white'>
       <h2 className='text-4xl font-bold' id='submission'>
@@ -89,7 +93,9 @@ export default async function Submission({ hackathon }: { hackathon: HackathonHe
                 <h1 className='text-3xl font-semibold'>Guidelines</h1>
               </div>
               <span className='block w-full h-[1px] my-8 bg-red-500'></span>
-              <MDXRemote source={hackathon.content.judging_guidelines} />
+              <div className='prose'>
+                <MDXRemote source={hackathon.content.judging_guidelines} />
+              </div>
             </div>
           </DialogContent>
         </Dialog>
@@ -97,4 +103,3 @@ export default async function Submission({ hackathon }: { hackathon: HackathonHe
     </section>
   );
 }
-
