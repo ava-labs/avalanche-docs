@@ -34,6 +34,7 @@ export async function GET(req: NextRequest) {
     }
 
     const registerFormLoaded = await getRegisterForm(email, id);
+
     return NextResponse.json(registerFormLoaded);
   } catch (error) {
     console.error("Error in GET /api/register-form/", error);

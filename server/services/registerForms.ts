@@ -8,13 +8,67 @@ import { RegistrationForm } from '@/types/registrationForm';
 
 
 export const registerValidations: Validation[] = [
-    // { field: 'title', message: 'Please provide a title for the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'title') },
-    // { field: 'description', message: 'A description is required.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'description') },
-    // { field: 'start_date', message: 'Please enter a valid date for the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'start_date') },
-    // { field: 'end_date', message: 'Please enter a valid end date for the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'end_date') },
-    // { field: 'location', message: 'Please specify the location of the hackathon.', validation: (hackathon: RegisterForm) => requiredField(hackathon, 'location') },
-    // { field: 'tags', message: 'Please add at least one category or tag.', validation: (hackathon: RegisterForm) => hasAtLeastOne(hackathon, 'tags') }
-];
+    { 
+      field: 'name', 
+      message: 'Name is required.', 
+      validation: (registerForm: RegistrationForm) => requiredField(registerForm, 'name') 
+    },
+    { 
+      field: 'email', 
+      message: 'A valid email is required.', 
+      validation: (registerForm: RegistrationForm) => requiredField(registerForm, 'email') && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(registerForm.email || '') 
+    },
+    { 
+      field: 'city', 
+      message: 'City is required.', 
+      validation: (registerForm: RegistrationForm) => requiredField(registerForm, 'city') 
+    },
+    { 
+      field: 'interests', 
+      message: 'Please select at least one interest.', 
+      validation: (registerForm: RegistrationForm) => hasAtLeastOne(registerForm, 'interests') 
+    },
+    { 
+      field: 'web3_proficiency', 
+      message: 'Web3 proficiency is required.', 
+      validation: (registerForm: RegistrationForm) => requiredField(registerForm, 'web3_proficiency') 
+    },
+    { 
+      field: 'tools', 
+      message: 'Please select at least one tool.', 
+      validation: (registerForm: RegistrationForm) => hasAtLeastOne(registerForm, 'tools') 
+    },
+    { 
+      field: 'roles', 
+      message: 'Please select at least one role.', 
+      validation: (registerForm: RegistrationForm) => hasAtLeastOne(registerForm, 'roles') 
+    },
+    { 
+      field: 'languages', 
+      message: 'Please select at least one programming language.', 
+      validation: (registerForm: RegistrationForm) => hasAtLeastOne(registerForm, 'languages') 
+    },
+    { 
+      field: 'hackathon_participation', 
+      message: 'Hackathon participation is required.', 
+      validation: (registerForm: RegistrationForm) => requiredField(registerForm, 'hackathon_participation') 
+    },
+    { 
+      field: 'terms_event_conditions', 
+      message: 'You must accept the Event Terms and Conditions to continue.', 
+      validation: (registerForm: RegistrationForm) => registerForm.terms_event_conditions === true 
+    },
+    { 
+      field: 'newsletter_subscription', 
+      message: 'You must agree to the newsletter subscription.', 
+      validation: (registerForm: RegistrationForm) => registerForm.newsletter_subscription === true 
+    },
+    { 
+      field: 'prohibited_items', 
+      message: 'You must agree not to bring prohibited items to continue.', 
+      validation: (registerForm: RegistrationForm) => registerForm.prohibited_items === true 
+    },
+  ];
 
 export const validateRegisterForm = (registerData: Partial<RegistrationForm>): Validation[] => validateEntity(registerValidations, registerData);
 export async function createRegisterForm(registerData: Partial<RegistrationForm>): Promise<RegistrationForm> {
@@ -35,7 +89,7 @@ export async function createRegisterForm(registerData: Partial<RegistrationForm>
           },
       },
       update: {
-          utm: registerData.utm ?? "",
+         
           city: registerData.city ?? "",
           company_name: registerData.company_name ?? null,
           dietary: registerData.dietary ?? null,
@@ -94,6 +148,6 @@ export async function getRegisterForm(email:string,hackathon_id:string) {
         hackathon_id: hackathon_id,
     },
 });
-console.log("registeredData",registeredData)
+
 return registeredData || null;
 }
