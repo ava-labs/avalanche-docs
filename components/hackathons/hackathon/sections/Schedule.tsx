@@ -6,135 +6,23 @@ import { SearchEventInput } from "@/components/ui/search-event-input";
 import { TimeZoneSelect } from "@/components/ui/timezone-select";
 import { HackathonHeader, ScheduleActivity } from "@/types/hackathons";
 import { CalendarPlus2, Link as LinkIcon, MapPin } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import DeadLine from "../DeadLine";
 
-const mockActivities: ScheduleActivity[] = [
-  {
-    date: "2024-11-01T10:00:00.000Z",
-    name: "Opening Ceremony",
-    stage: "Main Stage",
-    duration: 120,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs Team",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Main Stage",
-    category: "Opening",
-    url: "https://hackathon.com/opening",
-  },
-  {
-    date: "2024-11-01T13:00:00.000Z",
-    name: "Team Formation",
-    stage: "Collaboration Zone",
-    duration: 180,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Collaboration Zone",
-    category: "Networking",
-    url: "https://hackathon.com/team-formation",
-  },
-  {
-    date: "2024-11-01T16:00:00.000Z",
-    name: "Ideation Workshop",
-    stage: "Workshop Area",
-    duration: 120,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Workshop Area",
-    category: "Workshop",
-    url: "https://hackathon.com/ideation",
-  },
-  {
-    date: "2024-11-02T09:00:00.000Z",
-    name: "Technical Workshop",
-    stage: "Workshop Area",
-    duration: 180,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Workshop Area",
-    category: "Workshop",
-    url: "https://hackathon.com/technical-workshop",
-  },
-  {
-    date: "2024-11-02T14:00:00.000Z",
-    name: "Mentor Office Hours",
-    stage: "Meeting Rooms",
-    duration: 240,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Meeting Rooms",
-    category: "Mentorship",
-    url: "https://hackathon.com/mentor-office-hours",
-  },
-  {
-    date: "2024-11-02T19:00:00.000Z",
-    name: "Evening Social",
-    stage: "Social Area",
-    duration: 120,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Social Area",
-    category: "Social",
-    url: "https://hackathon.com/evening-social",
-  },
-  {
-    date: "2024-11-03T10:00:00.000Z",
-    name: "Progress Check-in",
-    stage: "Main Stage",
-    duration: 60,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Main Stage",
-    category: "Progress",
-    url: "https://hackathon.com/progress-checkin",
-  },
-  {
-    date: "2024-11-03T14:00:00.000Z",
-    name: "Security Workshop",
-    stage: "Workshop Area",
-    duration: 120,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Workshop Area",
-    category: "Workshop",
-    url: "https://hackathon.com/security-workshop",
-  },
-  {
-    date: "2024-11-03T17:00:00.000Z",
-    name: "Practice Pitches",
-    stage: "Presentation Area",
-    duration: 180,
-    description: "Ava Labs Team",
-    host_name: "Ava Labs",
-    host_icon: "/temp/hackathon-icon.png",
-    host_media: "Avalabs",
-    location: "Presentation Area",
-    category: "Pitching",
-    url: "https://hackathon.com/practice-pitches",
-  },
-];
-
 function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
   const [search, setSearch] = useState<string>("");
+  const [timeZone, setTimeZone] = useState<string>("");
+  useEffect(() => {
+    // Get local UTC offset in minutes and convert to hours
+    const localOffset = new Date().getTimezoneOffset() / -60;
+    // Round to nearest hour to match our options
+    const roundedOffset = Math.round(localOffset).toString();
+    setTimeZone(roundedOffset);
+  }, []);
   return (
     <section className="flex flex-col gap-6">
       <h2
@@ -145,12 +33,12 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
       </h2>
       <Separator className="my-2 sm:my-8 bg-zinc-300 dark:bg-zinc-800" />
       <span className="dark:text-zinc-50 text-zinc-900 text-lg font-medium sm:text-base">
-        {getDateRange(mockActivities)}
+        {getDateRange(hackathon.content.schedule)}
       </span>
       <div className="flex flex-col lg:flex-row justify-between gap-4 md:gap-10 mt-4 min-w-full">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-4 md:gap-10 w-full md:w-auto">
           <SearchEventInput setSearch={setSearch} />
-          <TimeZoneSelect />
+          <TimeZoneSelect timeZone={timeZone} setTimeZone={setTimeZone} />
         </div>
         <DeadLine deadline={hackathon.content.submission_deadline} />
       </div>
@@ -158,11 +46,10 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
         {Object.entries(groupActivitiesByDay(hackathon.content.schedule))
           .slice(0, 2)
-          .map(([date, activities], index) => {
-            const dateIsCurrentDate =
-              new Date(date).getFullYear() === new Date().getFullYear() &&
-              new Date(date).getMonth() === new Date().getMonth() &&
-              new Date(date).getDate() === new Date().getDate();
+          .map(([formattedGroupDate, activities], index) => {
+            const now = new Date();
+            const nowFormattedDay = getFormattedDay(now);
+            const dateIsCurrentDate = formattedGroupDate == nowFormattedDay;
             return (
               <div key={index} className="flex flex-col gap-4">
                 <h3
@@ -170,10 +57,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                     dateIsCurrentDate ? "bg-red-500" : "bg-red-300"
                   } sm:text-xl`}
                 >
-                  {new Date(date).getDate()}TH{" "}
-                  {new Date(date)
-                    .toLocaleString("en-US", { weekday: "long" })
-                    .toUpperCase()}
+                  {formattedGroupDate}
                 </h3>
 
                 {activities
@@ -194,10 +78,6 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                       new Date(activity.date).getTime() +
                         (Number(activity.duration) || 0) * 60000
                     );
-                    const now = new Date();
-                    console.log("NOW: ", now);
-                    console.log("Start: ", startDate);
-                    console.log("End: ", endDate);
                     const activityIsOcurring =
                       startDate <= now && now <= endDate;
                     return (
@@ -208,21 +88,28 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                         <Card
                           className={`${
                             dateIsCurrentDate
-                              ? "dark:bg-zinc-900 bg-zinc-100 dark:border-zinc-900 border-zinc-400"
-                              : "dark:bg-zinc-950 bg-zinc-50 dark:border-zinc-800 border-zinc-300"
+                              ? "dark:bg-zinc-900 bg-zinc-100 "
+                              : "dark:bg-zinc-950 bg-zinc-50"
                           } ${
-                            activityIsOcurring ? "border-red-500" : ""
+                            activityIsOcurring && dateIsCurrentDate
+                              ? "border-2 dark:border-red-500 border-red-500"
+                              : dateIsCurrentDate
+                              ? "dark:border-zinc-900 border-zinc-400"
+                              : "dark:border-zinc-800 border-zinc-300"
                           } px-2 sm:px-4 sm:w-[40%] md:w-[173px] rounded-lg`}
                         >
                           <CardHeader className="px-2 sm:px-6 flex items-center">
-                            {activityIsOcurring && (
+                            {activityIsOcurring && dateIsCurrentDate && (
                               <div className="border border-red-500 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
                                 Live now
                               </div>
                             )}
                             {!activityIsOcurring && dateIsCurrentDate && (
-                              <div className="border bg-zinc-800 flex items-center justify-center gap-1 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
-                                <LinkIcon size={16} color="#F5F5F9" />
+                              <div className="border dark:bg-zinc-800 bg-zinc-300 flex items-center justify-center gap-1 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
+                                <LinkIcon
+                                  size={16}
+                                  className="!text-zinc-900 dark:!text-zinc-50"
+                                />
                                 Zoom
                               </div>
                             )}
@@ -249,9 +136,15 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                         <Card
                           className={`${
                             dateIsCurrentDate
-                              ? "dark:bg-zinc-900 bg-zinc-100 dark:border-zinc-900 border-zinc-400"
-                              : "dark:bg-zinc-950 bg-zinc-50 dark:border-zinc-800 border-zinc-300"
-                          } border-red-500 sm:w-[60%] md:flex-1 rounded-lg`}
+                              ? "dark:bg-zinc-900 bg-zinc-100"
+                              : "dark:bg-zinc-950 bg-zinc-50"
+                          } border ${
+                            activityIsOcurring && dateIsCurrentDate
+                              ? "border-2 dark:border-red-500 border-red-500"
+                              : dateIsCurrentDate
+                              ? "dark:border-zinc-900 border-zinc-400"
+                              : "dark:border-zinc-800 border-zinc-300"
+                          } sm:w-[60%] md:flex-1 rounded-lg`}
                         >
                           <CardContent className="px-3 sm:p-4 h-full flex flex-col justify-between gap-2">
                             <div className="flex flex-col md:mt-2">
@@ -274,6 +167,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                                   alt={activity.host_name}
                                   width={40}
                                   height={40}
+                                  className="min-w-[40px]"
                                 />
                                 <div className="flex flex-col">
                                   <span className="text-sm sm:text-base">
@@ -300,7 +194,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                                 <Button
                                   variant="secondary"
                                   size="icon"
-                                  className="bg-zinc-100 dark:bg-zinc-800 w-8 sm:w-10 min-w-8 sm:min-w-10 h-8 sm:h-10"
+                                  className="bg-zinc-300 dark:bg-zinc-800 w-8 sm:w-10 min-w-8 sm:min-w-10 h-8 sm:h-10"
                                 >
                                   <CalendarPlus2 className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50" />
                                 </Button>
@@ -324,6 +218,12 @@ export default Schedule;
 type GroupedActivities = {
   [key: string]: ScheduleActivity[];
 };
+
+function getFormattedDay(date: Date) {
+  return `${date.getDate()}TH ${date.toLocaleString("en-US", {
+    weekday: "long",
+  })}`;
+}
 
 function getDateRange(activities: ScheduleActivity[]): string {
   if (!activities.length) return "No dates available";
@@ -354,7 +254,7 @@ function groupActivitiesByDay(
   return activities.reduce((groups: GroupedActivities, activity) => {
     // Format the date to YYYY-MM-DD to use as key
     const date = new Date(activity.date);
-    const dateKey = date.toISOString().split("T")[0];
+    const dateKey = getFormattedDay(date);
 
     // If this date doesn't exist in groups, create an empty array
     if (!groups[dateKey]) {

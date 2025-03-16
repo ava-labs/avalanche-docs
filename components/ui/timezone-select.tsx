@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { AlarmClock } from 'lucide-react';
 
 // Mapping of UTC offsets to major cities/regions
-const timezoneMap: Record<number, string[]> = {
+export const timezoneMap: Record<number, string[]> = {
   "-12": ["Baker Island, US Minor Outlying Islands"],
   "-11": ["Pago Pago, American Samoa"],
   "-10": ["Honolulu, Hawaii"],
@@ -36,17 +36,13 @@ const timezoneMap: Record<number, string[]> = {
   "14": ["Kiritimati, Line Islands"],
 }
 
-export function TimeZoneSelect() {
-  const [selectedTimezone, setSelectedTimezone] = useState<string>("")
-  const utcOffsets = Array.from({ length: 27 }, (_, i) => i - 12)
+type Props = {
+  timeZone: string
+  setTimeZone: React.Dispatch<React.SetStateAction<string>> 
+}
 
-  useEffect(() => {
-    // Get local UTC offset in minutes and convert to hours
-    const localOffset = new Date().getTimezoneOffset() / -60
-    // Round to nearest hour to match our options
-    const roundedOffset = Math.round(localOffset).toString()
-    setSelectedTimezone(roundedOffset)
-  }, [])
+export function TimeZoneSelect({timeZone, setTimeZone}: Props) {
+  const utcOffsets = Array.from({ length: 27 }, (_, i) => i - 12)
 
   const formatTimezoneLabel = (offset: number) => {
     const sign = offset >= 0 ? "+" : ""
@@ -57,7 +53,7 @@ export function TimeZoneSelect() {
   return (
     <div className="flex w-full max-w-md items-center gap-1.5 text-zinc-400" color="#a1a1aa">
       <Label htmlFor="timezone" className="pr-3 dark:text-zinc-50 text-zinc-900 hidden md:inline">Time Zone: </Label>
-      <Select value={selectedTimezone} onValueChange={setSelectedTimezone}>
+      <Select value={timeZone} onValueChange={setTimeZone}>
         <SelectTrigger className="w-[270px] [&>svg]:text-zinc-400 rounded-md" id="timezone" color="#a1a1aa">
           <AlarmClock className="h-5 w-5 !text-zinc-600 dark:!text-zinc-400" /** text-zinc-400 = #a1a1aa */ />
           <SelectValue placeholder="Select timezone" color="#a1a1aa" />
