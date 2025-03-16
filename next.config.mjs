@@ -13,7 +13,7 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  transpilePackages: ["avalanche-docs-toolbox"],
+  transpilePackages: ["avalanche-docs-toolbox", "next-mdx-remote"],
   images: {
     // domains: ['avatars.githubusercontent.com', 'lh3.googleusercontent.com'],
     remotePatterns: [
