@@ -45,7 +45,7 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
           >
             <Card
               className="border border-gray-300 dark:border-gray-800 hover:border-gray-500 dark:hover:border-gray-600 transition 
-                         flex items-center justify-center gap-3 w-full h-full 
+                         flex items-center justify-between gap-3 w-full h-full 
                          rounded-lg px-6 py-4 "
             >
               <div className="p-3 flex items-center justify-center bg-[#FF394A] rounded-full text-zinc-50">
@@ -75,7 +75,7 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <p className="text-xs md:text-base">EXPLORE COMMUNITY & NETWORKING</p>
+            <p className="text-xs lg:text-base">EXPLORE COMMUNITY & NETWORKING</p>
           </a>
         </Button>
       </div>

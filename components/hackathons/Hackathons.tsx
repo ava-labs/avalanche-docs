@@ -215,7 +215,7 @@ export default function Hackathons({
       </div>
       <Separator className="my-4 bg-zinc-300 dark:bg-zinc-800" />
       {/* Hackathons List */}
-      <div className="grid grid-cols-1 gap-y-8 gap-x-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-y-8 gap-x-4 xl:grid-cols-2">
         {hackathons.map((hackathon: any) => (
           <HackathonCard key={hackathon.id} hackathon={hackathon} />
         ))}

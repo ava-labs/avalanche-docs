@@ -48,7 +48,7 @@ export default async function HackathonPage({
 
   return (
     <main className="container sm:px-2 py-4 lg:py-16">
-      <div className="flex gap-4 items-center">
+      <div className="pl-4 flex gap-4 items-center">
         <Image
           src="/temp/hackathon-icon.png"
           alt="Hackathon background"

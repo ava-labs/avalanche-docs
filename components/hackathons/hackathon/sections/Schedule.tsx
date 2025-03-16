@@ -60,6 +60,36 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
       return groups;
     }, {});
   }
+
+  function getDateRange(activities: ScheduleActivity[]): string {
+    if (!activities.length) return "No dates available";
+
+    const dates = activities.map((activity) => new Date(activity.date));
+
+    const earliestDate = new Date(
+      Math.min(...dates.map((date) => date.getTime()))
+    );
+    const latestDate = new Date(
+      Math.max(...dates.map((date) => date.getTime()))
+    );
+
+    const formatter = new Intl.DateTimeFormat(
+      "en-US",
+      addTimeZone({
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    );
+
+    if (earliestDate.getTime() === latestDate.getTime()) {
+      return formatter.format(earliestDate);
+    }
+
+    return `${formatter.format(earliestDate)} - ${formatter.format(
+      latestDate
+    )}`;
+  }
   return (
     <section className="flex flex-col gap-6">
       <h2
@@ -154,18 +184,24 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                           <CardContent className="flex flex-col gap-2 justify-center px-2 sm:px-6">
                             <div className="flex flex-col items-center justify-center">
                               <span className="text-base md:text-lg font-medium">
-                                {startDate.toLocaleTimeString("en-US", addTimeZone({
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: true,
-                                }))}
+                                {startDate.toLocaleTimeString(
+                                  "en-US",
+                                  addTimeZone({
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true,
+                                  })
+                                )}
                               </span>
                               <span className="text-base md:text-lg font-medium">
-                                {endDate.toLocaleTimeString("en-US", addTimeZone({
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: true,
-                                }))}
+                                {endDate.toLocaleTimeString(
+                                  "en-US",
+                                  addTimeZone({
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true,
+                                  })
+                                )}
                               </span>
                             </div>
                           </CardContent>
@@ -255,26 +291,3 @@ export default Schedule;
 type GroupedActivities = {
   [key: string]: ScheduleActivity[];
 };
-
-function getDateRange(activities: ScheduleActivity[]): string {
-  if (!activities.length) return "No dates available";
-
-  const dates = activities.map((activity) => new Date(activity.date));
-
-  const earliestDate = new Date(
-    Math.min(...dates.map((date) => date.getTime()))
-  );
-  const latestDate = new Date(Math.max(...dates.map((date) => date.getTime())));
-
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  if (earliestDate.getTime() === latestDate.getTime()) {
-    return formatter.format(earliestDate);
-  }
-
-  return `${formatter.format(earliestDate)} - ${formatter.format(latestDate)}`;
-}

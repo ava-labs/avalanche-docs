@@ -49,7 +49,7 @@ function Resources({ hackathon }: { hackathon: HackathonHeader }) {
           <Card
             key={index}
             className="border border-gray-300 dark:border-gray-800 hover:border-gray-500 dark:hover:border-gray-600 transition 
-                  sm:h-16 sm:min-h-16 sm:max-h-16 rounded-lg 
+                  sm:h-20 sm:max-h-20 rounded-lg 
                  px-4 py-3 flex items-center space-x-3"
           >
             <div>
