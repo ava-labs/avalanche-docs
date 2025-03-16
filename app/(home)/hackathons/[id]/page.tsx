@@ -33,7 +33,6 @@ export default async function HackathonPage({
 }) {
   const { id } = await params;
   const hackathon = await getHackathon(id);
-  console.log({ hackathon });
 
   const menuItems = [
     { name: "Overview", ref: "overview" },

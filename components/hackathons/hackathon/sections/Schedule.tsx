@@ -16,13 +16,50 @@ import DeadLine from "../DeadLine";
 function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
   const [search, setSearch] = useState<string>("");
   const [timeZone, setTimeZone] = useState<string>("");
-  useEffect(() => {
-    // Get local UTC offset in minutes and convert to hours
-    const localOffset = new Date().getTimezoneOffset() / -60;
-    // Round to nearest hour to match our options
-    const roundedOffset = Math.round(localOffset).toString();
-    setTimeZone(roundedOffset);
-  }, []);
+
+  const addTimeZone = (object: any) => {
+    if (timeZone) return { ...object, timeZone: timeZone };
+    return object;
+  };
+
+  function getFormattedDay(date: Date) {
+    return `${date.toLocaleString(
+      "en-US",
+      addTimeZone({
+        day: "numeric",
+      })
+    )}TH ${date.toLocaleString(
+      "en-US",
+      addTimeZone({
+        weekday: "long",
+      })
+    )}`;
+  }
+
+  function groupActivitiesByDay(
+    activities: ScheduleActivity[]
+  ): GroupedActivities {
+    return activities.reduce((groups: GroupedActivities, activity) => {
+      // Format the date to YYYY-MM-DD to use as key
+      const date = new Date(activity.date);
+      const dateKey = getFormattedDay(date);
+
+      // If this date doesn't exist in groups, create an empty array
+      if (!groups[dateKey]) {
+        groups[dateKey] = [];
+      }
+
+      // Add the activity to the corresponding date group
+      groups[dateKey].push(activity);
+
+      // Sort activities within the day by time
+      groups[dateKey].sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+
+      return groups;
+    }, {});
+  }
   return (
     <section className="flex flex-col gap-6">
       <h2
@@ -105,7 +142,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                               </div>
                             )}
                             {!activityIsOcurring && dateIsCurrentDate && (
-                              <div className="border dark:bg-zinc-800 bg-zinc-300 flex items-center justify-center gap-1 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
+                              <div className="border dark:bg-zinc-800 bg-zinc-300 flex items-center justify-center gap-1 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-3 py-1">
                                 <LinkIcon
                                   size={16}
                                   className="!text-zinc-900 dark:!text-zinc-50"
@@ -117,18 +154,18 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                           <CardContent className="flex flex-col gap-2 justify-center px-2 sm:px-6">
                             <div className="flex flex-col items-center justify-center">
                               <span className="text-base md:text-lg font-medium">
-                                {startDate.toLocaleTimeString("en-US", {
+                                {startDate.toLocaleTimeString("en-US", addTimeZone({
                                   hour: "2-digit",
                                   minute: "2-digit",
                                   hour12: true,
-                                })}
+                                }))}
                               </span>
                               <span className="text-base md:text-lg font-medium">
-                                {endDate.toLocaleTimeString("en-US", {
+                                {endDate.toLocaleTimeString("en-US", addTimeZone({
                                   hour: "2-digit",
                                   minute: "2-digit",
                                   hour12: true,
-                                })}
+                                }))}
                               </span>
                             </div>
                           </CardContent>
@@ -219,12 +256,6 @@ type GroupedActivities = {
   [key: string]: ScheduleActivity[];
 };
 
-function getFormattedDay(date: Date) {
-  return `${date.getDate()}TH ${date.toLocaleString("en-US", {
-    weekday: "long",
-  })}`;
-}
-
 function getDateRange(activities: ScheduleActivity[]): string {
   if (!activities.length) return "No dates available";
 
@@ -246,29 +277,4 @@ function getDateRange(activities: ScheduleActivity[]): string {
   }
 
   return `${formatter.format(earliestDate)} - ${formatter.format(latestDate)}`;
-}
-
-function groupActivitiesByDay(
-  activities: ScheduleActivity[]
-): GroupedActivities {
-  return activities.reduce((groups: GroupedActivities, activity) => {
-    // Format the date to YYYY-MM-DD to use as key
-    const date = new Date(activity.date);
-    const dateKey = getFormattedDay(date);
-
-    // If this date doesn't exist in groups, create an empty array
-    if (!groups[dateKey]) {
-      groups[dateKey] = [];
-    }
-
-    // Add the activity to the corresponding date group
-    groups[dateKey].push(activity);
-
-    // Sort activities within the day by time
-    groups[dateKey].sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
-
-    return groups;
-  }, {});
 }
