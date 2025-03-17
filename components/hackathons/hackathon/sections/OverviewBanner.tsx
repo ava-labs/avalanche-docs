@@ -24,8 +24,8 @@ export default function OverviewBanner({ hackathon, id }: Props) {
       ? `${format(startDate, "MMMM d")} - ${format(endDate, "d, yyyy")}`
       : `${format(startDate, "MMMM d")} - ${format(endDate, "MMMM d, yyyy")}`;
   return (
-    <div className="z-10 pointer-events-none h-full w-[46%] absolute flex flex-col justify-end bottom-2 sm:bottom-6 lg:bottom-10 xl:bottom-12 left-[10%]">
-      <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-zinc-50 font-bold sm:mb-2">
+    <div className="z-10 pointer-events-none h-full w-[55%] absolute flex flex-col justify-end bottom-2 sm:bottom-6 lg:bottom-10 xl:bottom-12 left-[4%]">
+      <h1 className="text-md sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-zinc-50 font-bold sm:mb-2">
         {hackathon.title}
       </h1>
       <p className="text-xs xl:text-sm 2xl:text-base text-zinc-50 hidden xl:inline">

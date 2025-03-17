@@ -5,11 +5,10 @@ import { Divider } from "@/components/ui/divider";
 import { SearchEventInput } from "@/components/ui/search-event-input";
 import { TimeZoneSelect } from "@/components/ui/timezone-select";
 import { HackathonHeader, ScheduleActivity } from "@/types/hackathons";
-import { CalendarPlus2, Link as LinkIcon, MapPin } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Link as LinkIcon, MapPin } from "lucide-react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import DeadLine from "../DeadLine";
 
@@ -17,20 +16,20 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
   const [search, setSearch] = useState<string>("");
   const [timeZone, setTimeZone] = useState<string>("");
 
-  const addTimeZone = (object: any) => {
-    if (timeZone) return { ...object, timeZone: timeZone };
-    return object;
+  const defineTimeZone = (formatDateParams: any) => {
+    if (timeZone) return { ...formatDateParams, timeZone: timeZone };
+    return formatDateParams;
   };
 
   function getFormattedDay(date: Date) {
     return `${date.toLocaleString(
       "en-US",
-      addTimeZone({
+      defineTimeZone({
         day: "numeric",
       })
     )}TH ${date.toLocaleString(
       "en-US",
-      addTimeZone({
+      defineTimeZone({
         weekday: "long",
       })
     )}`;
@@ -75,7 +74,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
 
     const formatter = new Intl.DateTimeFormat(
       "en-US",
-      addTimeZone({
+      defineTimeZone({
         month: "long",
         day: "numeric",
         year: "numeric",
@@ -147,6 +146,10 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                     );
                     const activityIsOcurring =
                       startDate <= now && now <= endDate;
+                    const voidHost =
+                      !activity.host_icon &&
+                      !activity.host_name &&
+                      !activity.host_media;
                     return (
                       <div
                         key={index}
@@ -165,28 +168,28 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                               : "dark:border-zinc-800 border-zinc-300"
                           } px-2 sm:px-4 sm:w-[40%] md:w-[173px] rounded-lg`}
                         >
-                          <CardHeader className="px-2 sm:px-6 flex items-center">
-                            {activityIsOcurring && dateIsCurrentDate && (
-                              <div className="border border-red-500 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
-                                Live now
-                              </div>
-                            )}
-                            {!activityIsOcurring && dateIsCurrentDate && (
-                              <div className="border dark:bg-zinc-800 bg-zinc-300 flex items-center justify-center gap-1 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-3 py-1">
-                                <LinkIcon
-                                  size={16}
-                                  className="!text-zinc-900 dark:!text-zinc-50"
-                                />
-                                Zoom
-                              </div>
-                            )}
-                          </CardHeader>
-                          <CardContent className="flex flex-col gap-2 justify-center px-2 sm:px-6">
-                            <div className="flex flex-col items-center justify-center">
+                          <CardContent className="h-full relative flex flex-col gap-2 justify-center items-center p-2 sm:p-6">
+                            <div className="absolute top-4">
+                              {activityIsOcurring && dateIsCurrentDate && (
+                                <div className="border border-red-500 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-2">
+                                  Live now
+                                </div>
+                              )}
+                              {!activityIsOcurring && dateIsCurrentDate && (
+                                <div className="border dark:bg-zinc-800 bg-zinc-300 flex items-center justify-center gap-1 rounded-full text-sm font-medium text-center w-1/3 sm:w-auto sm:px-3 py-1">
+                                  <LinkIcon
+                                    size={16}
+                                    className="!text-zinc-900 dark:!text-zinc-50"
+                                  />
+                                  Zoom
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex flex-col items-center justify-center h-full">
                               <span className="text-base md:text-lg font-medium">
                                 {startDate.toLocaleTimeString(
                                   "en-US",
-                                  addTimeZone({
+                                  defineTimeZone({
                                     hour: "2-digit",
                                     minute: "2-digit",
                                     hour12: true,
@@ -196,7 +199,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                               <span className="text-base md:text-lg font-medium">
                                 {endDate.toLocaleTimeString(
                                   "en-US",
-                                  addTimeZone({
+                                  defineTimeZone({
                                     hour: "2-digit",
                                     minute: "2-digit",
                                     hour12: true,
@@ -219,7 +222,13 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                               : "dark:border-zinc-800 border-zinc-300"
                           } sm:w-[60%] md:flex-1 rounded-lg`}
                         >
-                          <CardContent className="p-3 sm:p-4 h-full flex flex-col justify-between gap-2">
+                          <CardContent
+                            className={`p-3 sm:p-4 h-full flex flex-col ${
+                              voidHost
+                                ? "justify-start"
+                                : "justify-between"
+                            } gap-2`}
+                          >
                             <div>
                               <div className="flex justify-between items-center">
                                 <CardTitle className="text-red-500 text-lg sm:text-base">
@@ -235,39 +244,38 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                                 {activity.description}
                               </span>
                             </div>
-                            <div className="flex flex-row items-center gap-4">
-                              {activity.host_icon && (
-                                <Image
-                                  src={activity.host_icon}
-                                  alt={activity.host_name || "Host"}
-                                  width={40}
-                                  height={40}
-                                  className="min-w-[40px]"
-                                />
-                              )}
-                              <div className="flex flex-col">
-                                {activity.host_name && (
-                                  <span className="text-sm sm:text-base">
-                                    {activity.host_name}
-                                  </span>
+                            {!voidHost && (
+                              <div className="flex flex-row items-center gap-4">
+                                {activity.host_icon && (
+                                  <Image
+                                    src={activity.host_icon}
+                                    alt={activity.host_name || "Host"}
+                                    width={40}
+                                    height={40}
+                                    className="min-w-[40px]"
+                                  />
                                 )}
-                                {activity.host_media && (
-                                  <Link
-                                    className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
-                                    href={`https://x.com/${activity.host_media}`}
-                                    target="_blank"
-                                  >
-                                    @{activity.host_media}
-                                  </Link>
-                                )}
+                                <div className="flex flex-col">
+                                  {activity.host_name && (
+                                    <span className="text-sm sm:text-base">
+                                      {activity.host_name}
+                                    </span>
+                                  )}
+                                  {activity.host_media && (
+                                    <Link
+                                      className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
+                                      href={`https://x.com/${activity.host_media}`}
+                                      target="_blank"
+                                    >
+                                      @{activity.host_media}
+                                    </Link>
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                            <div className="flex flex-row sm:gap-4 justify-between">
+                            )}
+                            <div className={`flex flex-row sm:gap-4 ${voidHost ? 'flex-1 items-center' : 'justify-between'}`}>
                               <div className="flex flex-row items-center gap-2">
-                                <MapPin
-                                  color="#8F8F99"
-                                  className="w-5 h-5"
-                                />
+                                <MapPin color="#8F8F99" className="w-5 h-5" />
                                 <span className="dark:text-zinc-50 zinc-900 text-xs font-medium">
                                   {activity.location}
                                 </span>

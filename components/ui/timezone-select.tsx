@@ -1,14 +1,19 @@
 "use client";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { AlarmClock } from "lucide-react";
+import { AlarmClock, Check, ChevronsUpDown } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Button } from "./button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "./command";
+import { useState } from "react";
+import { cn } from "@/utils/cn";
 
 // Mapping of UTC offsets to major cities/regions
 export const timezoneMap: Record<string, string[]> = {
@@ -47,15 +52,7 @@ type Props = {
 };
 
 export function TimeZoneSelect({ timeZone, setTimeZone }: Props) {
-  const utcOffsets = Array.from({ length: 27 }, (_, i) => i - 12);
-
-  const formatTimezoneLabel = (offset: number) => {
-    const sign = offset >= 0 ? "+" : "";
-    const cities = timezoneMap[offset]
-      ? timezoneMap[offset].join(", ")
-      : "Unknown Region";
-    return `(UTC${sign}${offset}:00) ${cities}`;
-  };
+  const [open, setOpen] = useState(false);
 
   return (
     <div
@@ -68,35 +65,59 @@ export function TimeZoneSelect({ timeZone, setTimeZone }: Props) {
       >
         Time Zone:{" "}
       </Label>
-      <Select value={timeZone} onValueChange={setTimeZone}>
-        <SelectTrigger
-          className="w-[270px] [&>svg]:text-zinc-400 rounded-md dark:border-zinc-800 border-zinc-300"
-          id="timezone"
-          color="#a1a1aa"
-        >
-          <AlarmClock
-            className="h-5 w-5 !text-zinc-600 dark:!text-zinc-400" /** text-zinc-400 = #a1a1aa */
-          />
-          <SelectValue
-            placeholder="Select timezone"
-            className="text-zinc-600 dark:text-zinc-400"
-          />
-        </SelectTrigger>
-        <SelectContent className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
-          {Object.entries(timezoneMap).map((entries) => {
-            console.log("Keys: ", entries);
-            return (
-              <SelectItem
-                key={entries[0]}
-                value={entries[0]}
-                className="whitespace-nowrap"
-              >
-                {entries[1]}
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-[270px] justify-between"
+          >
+            <AlarmClock
+              className="h-5 w-5 !text-zinc-600 dark:!text-zinc-400" /** text-zinc-400 = #a1a1aa */
+            />
+            <p className="!text-zinc-600 dark:!text-zinc-400">
+              {timezoneMap[timeZone]
+                ? timezoneMap[timeZone][0]?.slice(0, 25)
+                : "Select time zone"}
+              ...
+            </p>
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50 !text-zinc-600 dark:!text-zinc-400" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0 bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
+          <Command className="w-full">
+            <CommandInput placeholder="Search framework..." />
+            <CommandList>
+              <CommandEmpty>No time zone found.</CommandEmpty>
+              <CommandGroup>
+                {Object.entries(timezoneMap).map((timeZoneEntrie) => (
+                  <CommandItem
+                    key={timeZoneEntrie[0]}
+                    value={timeZoneEntrie[0]}
+                    onSelect={(currentValue) => {
+                      setTimeZone(
+                        timeZone === timeZoneEntrie[0] ? "" : currentValue
+                      );
+                      setOpen(false);
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4 !text-zinc-600 dark:!text-zinc-400",
+                        timeZone === timeZoneEntrie[0]
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                    {timeZoneEntrie[1]}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }
