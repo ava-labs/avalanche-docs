@@ -70,7 +70,7 @@ export function TimeZoneSelect({ timeZone, setTimeZone }: Props) {
       </Label>
       <Select value={timeZone} onValueChange={setTimeZone}>
         <SelectTrigger
-          className="w-[270px] [&>svg]:text-zinc-400 rounded-md"
+          className="w-[270px] [&>svg]:text-zinc-400 rounded-md dark:border-zinc-800 border-zinc-300"
           id="timezone"
           color="#a1a1aa"
         >

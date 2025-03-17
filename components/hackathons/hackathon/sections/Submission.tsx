@@ -72,7 +72,8 @@ export default async function Submission({
           />
           <h3 className="text-xl font-semibold mb-2">Evaluation Criteria</h3>
           <p className="text-sm">
-            Projects will be judged on value proposition, technical complexity and usage of Avalanche technologies
+            Projects will be judged on value proposition, technical complexity
+            and usage of Avalanche technologies
           </p>
         </div>
 
@@ -96,9 +97,9 @@ export default async function Submission({
           <DialogTrigger asChild>
             <Button
               variant={"secondary"}
-              className="w-3/4 sm:w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
+              className="md:w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
             >
-              View full guidelines
+              VIEW FULL GUIDELINES
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-zinc-900">

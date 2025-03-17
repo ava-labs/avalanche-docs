@@ -103,7 +103,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
         {getDateRange(hackathon.content.schedule)}
       </span>
       <div className="flex flex-col lg:flex-row justify-between gap-4 md:gap-10 mt-4 min-w-full">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-4 md:gap-10 w-full md:w-auto">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-start lg:justify-center gap-4 md:gap-10 w-full md:w-auto">
           <SearchEventInput setSearch={setSearch} />
           <TimeZoneSelect timeZone={timeZone} setTimeZone={setTimeZone} />
         </div>
@@ -150,7 +150,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                     return (
                       <div
                         key={index}
-                        className="flex flex-col sm:flex-row gap-3 sm:h-[200px] md:h-[180px]"
+                        className="flex flex-col sm:flex-row gap-3 sm:h-[220px] md:h-[180px]"
                       >
                         <Card
                           className={`${
@@ -219,8 +219,8 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                               : "dark:border-zinc-800 border-zinc-300"
                           } sm:w-[60%] md:flex-1 rounded-lg`}
                         >
-                          <CardContent className="px-3 sm:p-4 h-full flex flex-col justify-between gap-2">
-                            <div className="flex flex-col md:mt-2">
+                          <CardContent className="p-3 sm:p-4 h-full flex flex-col justify-between gap-2">
+                            <div>
                               <div className="flex justify-between items-center">
                                 <CardTitle className="text-red-500 text-lg sm:text-base">
                                   {activity.name}
@@ -235,52 +235,50 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                                 {activity.description}
                               </span>
                             </div>
-                            <div className="flex flex-col md:justify-between gap-2">
-                              <div className="flex flex-row items-center gap-4">
-                                {activity.host_icon && (
-                                  <Image
-                                    src={activity.host_icon}
-                                    alt={activity.host_name || "Host"}
-                                    width={40}
-                                    height={40}
-                                    className="min-w-[40px]"
-                                  />
-                                )}
-                                <div className="flex flex-col">
-                                  {activity.host_name && (
-                                    <span className="text-sm sm:text-base">
-                                      {activity.host_name}
-                                    </span>
-                                  )}
-                                  {activity.host_media && (
-                                    <Link
-                                      className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
-                                      href={`https://x.com/${activity.host_media}`}
-                                      target="_blank"
-                                    >
-                                      @{activity.host_media}
-                                    </Link>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="flex flex-row sm:gap-4 flex-1 justify-between">
-                                <div className="flex flex-row items-center gap-2">
-                                  <MapPin
-                                    color="#8F8F99"
-                                    className="w-4 h-4 sm:w-5 sm:h-5"
-                                  />
-                                  <span className="dark:text-zinc-50 zinc-900 text-xs font-medium">
-                                    {activity.location}
+                            <div className="flex flex-row items-center gap-4">
+                              {activity.host_icon && (
+                                <Image
+                                  src={activity.host_icon}
+                                  alt={activity.host_name || "Host"}
+                                  width={40}
+                                  height={40}
+                                  className="min-w-[40px]"
+                                />
+                              )}
+                              <div className="flex flex-col">
+                                {activity.host_name && (
+                                  <span className="text-sm sm:text-base">
+                                    {activity.host_name}
                                   </span>
-                                </div>
-                                {/* <Button
+                                )}
+                                {activity.host_media && (
+                                  <Link
+                                    className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
+                                    href={`https://x.com/${activity.host_media}`}
+                                    target="_blank"
+                                  >
+                                    @{activity.host_media}
+                                  </Link>
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex flex-row sm:gap-4 justify-between">
+                              <div className="flex flex-row items-center gap-2">
+                                <MapPin
+                                  color="#8F8F99"
+                                  className="w-5 h-5"
+                                />
+                                <span className="dark:text-zinc-50 zinc-900 text-xs font-medium">
+                                  {activity.location}
+                                </span>
+                              </div>
+                              {/* <Button
                                   variant="secondary"
                                   size="icon"
                                   className="bg-zinc-300 dark:bg-zinc-800 w-8 sm:w-10 min-w-8 sm:min-w-10 h-8 sm:h-10"
                                 >
                                   <CalendarPlus2 className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50" />
                                 </Button> */}
-                              </div>
                             </div>
                           </CardContent>
                         </Card>

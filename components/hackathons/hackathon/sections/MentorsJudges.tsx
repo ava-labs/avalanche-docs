@@ -5,7 +5,7 @@ import { DynamicIcon } from "lucide-react/dynamic";
 
 function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
   return (
-    <section className="px-4" id="speakers">
+    <section id="speakers">
       <div className="bg-zinc-900 p-4 sm:p-16 flex flex-col gap-4">
         <div className="flex items-center">
           <div className="lg:w-[45%] pr-16">
@@ -24,7 +24,7 @@ function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
             className="w-[55%] hidden lg:block"
           ></Image>
         </div>
-        <div className="flex gap-4 justify-start flex-wrap">
+        <div className="flex gap-4 justify-center sm:justify-start flex-wrap">
           {hackathon.content.speakers.map((speaker, index) => (
             <div key={index} className="flex flex-col gap-4 mt-4">
               <Image
@@ -32,7 +32,7 @@ function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
                 alt="speaker picture"
                 width={160}
                 height={160}
-                className="rounded-md"
+                className="rounded-md w-32 md:w-40 h-32 md:h-40"
               />
               <div>
                 <h3 className="text-md font-bold text-zinc-100">

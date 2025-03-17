@@ -5,6 +5,9 @@
 .prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
   color: #E84142;
 }
+.prose :where(a:not([data-card])):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: #F5F5F9;
+}
 
 .uwu {
   --background: 240 80% 94% !important;
