@@ -34,6 +34,8 @@ export type Hackathon = {
   submission_deadline: Date 
   mentors_judges_img_url: string
   judging_guidelines: string
+  speakers_banner: string
+  speakers_text: string
 }
 
 export type ScheduleActivity = {

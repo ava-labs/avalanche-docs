@@ -14,7 +14,7 @@ import Sponsors from "@/components/hackathons/hackathon/sections/Sponsors";
 import Submission from "@/components/hackathons/hackathon/sections/Submission";
 import Resources from "@/components/hackathons/hackathon/sections/Resources";
 import Community from "@/components/hackathons/hackathon/sections/Community";
-import Speakers from "@/components/hackathons/hackathon/sections/MentorsJudges";
+import MentorsJudges from "@/components/hackathons/hackathon/sections/MentorsJudges";
 import OverviewBanner from "@/components/hackathons/hackathon/sections/OverviewBanner";
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -41,7 +41,7 @@ export default async function HackathonPage({
     { name: "Sponsors", ref: "sponsors" },
     { name: "Submission", ref: "submission" },
     { name: "Resources", ref: "resources" },
-    { name: "Speakers", ref: "speakers" },
+    { name: "Mentors & Judges", ref: "speakers" },
   ];
 
   if (!hackathon) redirect("/hackathons");
@@ -87,7 +87,7 @@ export default async function HackathonPage({
             <Submission hackathon={hackathon} />
             <Resources hackathon={hackathon} />
             <Community hackathon={hackathon} />
-            {hackathon.content.speakers && <Speakers hackathon={hackathon} />}
+            {hackathon.content.speakers && <MentorsJudges hackathon={hackathon} />}
           </div>
         </div>
       </div>

@@ -13,20 +13,18 @@ function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
               Mentors & Judges
             </h2>
             <p className="text-zinc-100">
-              Connect with top industry leaders, judges, and mentors. Learn from
-              the best, pitch your ideas, and get expert feedback to refine your
-              project!
+              {hackathon.content.speakers_text}
             </p>
           </div>
           <Image
-            src="/speakers-judges-collage.png"
+            src={hackathon.content.speakers_banner}
             alt="Speakers and judges collage"
             width={300}
             height={300}
             className="w-[55%] hidden lg:block"
           ></Image>
         </div>
-        <div className="flex gap-4 justify-center flex-wrap">
+        <div className="flex gap-4 justify-start flex-wrap">
           {hackathon.content.speakers.map((speaker, index) => (
             <div key={index} className="flex flex-col gap-4 mt-4">
               <Image
