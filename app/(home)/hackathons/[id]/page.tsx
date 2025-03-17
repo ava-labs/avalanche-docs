@@ -35,12 +35,11 @@ export default async function HackathonPage({
   const hackathon = await getHackathon(id);
 
   const menuItems = [
-    { name: "Overview", ref: "overview" },
-    { name: "Schedule", ref: "schedule" },
-    { name: "Prizes & Tracks", ref: "tracks" },
     { name: "Sponsors", ref: "sponsors" },
-    { name: "Submission", ref: "submission" },
+    { name: "Prizes & Tracks", ref: "tracks" },
     { name: "Resources", ref: "resources" },
+    { name: "Schedule", ref: "schedule" },
+    { name: "Submission", ref: "submission" },    
     { name: "Mentors & Judges", ref: "speakers" },
   ];
 
@@ -81,13 +80,15 @@ export default async function HackathonPage({
             />
           </div>
           <div className="py-8 sm:p-8 flex flex-col gap-20">
-            {hackathon.content.schedule && <Schedule hackathon={hackathon} />}
-            {hackathon.content.tracks && <Tracks hackathon={hackathon} />}
             {hackathon.content.partners && <Sponsors hackathon={hackathon} />}
-            <Submission hackathon={hackathon} />
+            {hackathon.content.tracks && <Tracks hackathon={hackathon} />}
             <Resources hackathon={hackathon} />
+            {hackathon.content.schedule && <Schedule hackathon={hackathon} />}
+            <Submission hackathon={hackathon} />
+            {hackathon.content.speakers && (
+              <MentorsJudges hackathon={hackathon} />
+            )}
             <Community hackathon={hackathon} />
-            {hackathon.content.speakers && <MentorsJudges hackathon={hackathon} />}
           </div>
         </div>
       </div>

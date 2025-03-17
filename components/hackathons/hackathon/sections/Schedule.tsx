@@ -235,23 +235,30 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                             </div>
                             <div className="flex flex-col md:flex-row md:justify-between gap-2">
                               <div className="flex flex-row gap-4">
-                                <Image
-                                  src={activity.host_icon}
-                                  alt={activity.host_name}
-                                  width={40}
-                                  height={40}
-                                  className="min-w-[40px]"
-                                />
+                                {activity.host_icon && (
+                                  <Image
+                                    src={activity.host_icon}
+                                    alt={activity.host_name || "Host"}
+                                    width={40}
+                                    height={40}
+                                    className="min-w-[40px]"
+                                  />
+                                )}
                                 <div className="flex flex-col">
-                                  <span className="text-sm sm:text-base">
-                                    {activity.host_name}
-                                  </span>
-                                  <Link
-                                    className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
-                                    href={`https://x.com${activity.host_media}`}
-                                  >
-                                    @{activity.host_media}
-                                  </Link>
+                                  {activity.host_name && (
+                                    <span className="text-sm sm:text-base">
+                                      {activity.host_name}
+                                    </span>
+                                  )}
+                                  {activity.host_media && (
+                                    <Link
+                                      className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal"
+                                      href={`https://x.com/${activity.host_media}`}
+                                      target="_blank"
+                                    >
+                                      @{activity.host_media}
+                                    </Link>
+                                  )}
                                 </div>
                               </div>
                               <div className="flex flex-row sm:gap-4 flex-1 justify-between">
@@ -264,13 +271,13 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                                     {activity.location}
                                   </span>
                                 </div>
-                                <Button
+                                {/* <Button
                                   variant="secondary"
                                   size="icon"
                                   className="bg-zinc-300 dark:bg-zinc-800 w-8 sm:w-10 min-w-8 sm:min-w-10 h-8 sm:h-10"
                                 >
                                   <CalendarPlus2 className="w-3 h-3 sm:w-4 sm:h-4 !text-zinc-900 dark:!text-zinc-50" />
-                                </Button>
+                                </Button> */}
                               </div>
                             </div>
                           </CardContent>
