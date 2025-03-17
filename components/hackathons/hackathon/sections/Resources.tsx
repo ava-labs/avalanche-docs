@@ -4,33 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { DynamicIcon } from "lucide-react/dynamic";
-
-const resources = [
-  {
-    title: "Official Docs & API",
-    description:
-      "Explore Avalanche's official documentation and APIs to integrate blockchain functionalities into your project.",
-    icon: "app-window",
-  },
-  {
-    title: "FAQs",
-    description:
-      "Get answers to frequently asked questions about the hackathon, rules, and submission process.",
-    icon: "circle-help",
-  },
-  {
-    title: "Developer Tools",
-    description:
-      "Recommended tools for building on Avalanche, including SDKs, testnets, and debugging utilities.",
-    icon: "pickaxe",
-  },
-  {
-    title: "Important Links",
-    description:
-      "Find key resources such as GitHub repos, starter guides, and demo project templates.",
-    icon: "link",
-  },
-];
+import { Link } from "lucide-react";
 
 function Resources({ hackathon }: { hackathon: HackathonHeader }) {
   return (
@@ -45,7 +19,7 @@ function Resources({ hackathon }: { hackathon: HackathonHeader }) {
       </p>
 
       <div className="grid gap-3">
-        {resources.map((resource, index) => (
+        {hackathon.content.resources.map((resource, index) => (
           <Card
             key={index}
             className="border border-gray-300 dark:border-gray-800 hover:border-gray-500 dark:hover:border-gray-600 transition 
@@ -60,9 +34,11 @@ function Resources({ hackathon }: { hackathon: HackathonHeader }) {
               />
             </div>
             <div>
-              <h3 className="text-[#FF394A] text-base font-semibold">
-                {resource.title}
-              </h3>
+              <a href= {resource.link} target="_blank">
+                <h3 className="text-[#FF394A] text-base font-semibold">
+                  {resource.title}
+                </h3>
+              </a>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-tight">
                 {resource.description}
               </p>
