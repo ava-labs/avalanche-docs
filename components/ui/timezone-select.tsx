@@ -12,33 +12,33 @@ import { AlarmClock } from "lucide-react";
 
 // Mapping of UTC offsets to major cities/regions
 export const timezoneMap: Record<string, string[]> = {
-  "Pacific/Midway": ["Baker Island, US Minor Outlying Islands"],
-  "Pacific/Pago_Pago": ["Pago Pago, American Samoa"],
-  "Pacific/Honolulu": ["Honolulu, Hawaii"],
-  "America/Anchorage": ["Anchorage, Alaska"],
-  "America/Los_Angeles": ["Los Angeles, Vancouver"],
-  "America/Denver": ["Phoenix, Denver"],
-  "America/Chicago": ["Chicago, Mexico City"],
-  "America/New_York": ["Bogotá, New York"],
-  "America/Santiago": ["Santiago, Santo Domingo"],
-  "America/Sao_Paulo": ["São Paulo, Buenos Aires"],
-  "America/Noronha": ["Fernando de Noronha, Brazil"],
-  "Atlantic/Azores": ["Azores, Cape Verde"],
-  "Europe/London": ["London, Dublin"],
-  "Europe/Berlin": ["Berlin, Paris"],
-  "Africa/Cairo": ["Cairo, Jerusalem"],
-  "Europe/Istanbul": ["Moscow, Istanbul"],
-  "Asia/Dubai": ["Dubai, Baku"],
-  "Asia/Karachi": ["Karachi, Tashkent"],
-  "Asia/Dhaka": ["Dhaka, Almaty"],
-  "Asia/Bangkok": ["Bangkok, Jakarta"],
-  "Asia/Singapore": ["Singapore, Beijing"],
-  "Asia/Tokyo": ["Tokyo, Seoul"],
-  "Australia/Sydney": ["Sydney, Melbourne"],
-  "Pacific/Noumea": ["Noumea, Solomon Islands"],
-  "Pacific/Auckland": ["Auckland, Fiji"],
-  "Pacific/Apia": ["Samoa, Tonga"],
-  "Pacific/Kiritimati": ["Kiritimati, Line Islands"],
+  "Pacific/Midway": ["(GMT -11:00) Baker Island, US Minor Outlying Islands"],
+  "Pacific/Pago_Pago": ["(GMT -11:00) Pago Pago, American Samoa"],
+  "Pacific/Honolulu": ["(GMT -10:00) Honolulu, Hawaii"],
+  "America/Anchorage": ["(GMT -09:00) Anchorage, Alaska"],
+  "America/Los_Angeles": ["(GMT -08:00) Los Angeles, Vancouver"],
+  "America/Denver": ["(GMT -07:00) Phoenix, Denver"],
+  "America/Chicago": ["(GMT -06:00) Chicago, Mexico City"],
+  "America/New_York": ["(GMT -05:00) Bogotá, New York"],
+  "America/Santiago": ["(GMT -04:00) Santiago, Santo Domingo"],
+  "America/Sao_Paulo": ["(GMT -03:00) São Paulo, Buenos Aires"],
+  "America/Noronha": ["(GMT -02:00) Fernando de Noronha, Brazil"],
+  "Atlantic/Azores": ["(GMT -01:00) Azores, Cape Verde"],
+  "Europe/London": ["(GMT +00:00) London, Dublin"],
+  "Europe/Berlin": ["(GMT +01:00) Berlin, Paris"],
+  "Africa/Cairo": ["(GMT +02:00) Cairo, Jerusalem"],
+  "Europe/Istanbul": ["(GMT +03:00) Moscow, Istanbul"],
+  "Asia/Dubai": ["(GMT +04:00) Dubai, Baku"],
+  "Asia/Karachi": ["(GMT +05:00) Karachi, Tashkent"],
+  "Asia/Dhaka": ["(GMT +06:00) Dhaka, Almaty"],
+  "Asia/Bangkok": ["(GMT +07:00) Bangkok, Jakarta"],
+  "Asia/Singapore": ["(GMT +08:00) Singapore, Beijing"],
+  "Asia/Tokyo": ["(GMT +09:00) Tokyo, Seoul"],
+  "Australia/Sydney": ["(GMT +10:00) Sydney, Melbourne"],
+  "Pacific/Noumea": ["(GMT +11:00) Noumea, Solomon Islands"],
+  "Pacific/Auckland": ["(GMT +12:00) Auckland, Fiji"],
+  "Pacific/Apia": ["(GMT +13:00) Samoa, Tonga"],
+  "Pacific/Kiritimati": ["(GMT +14:00) Kiritimati, Line Islands"],
 };
 
 type Props = {
@@ -77,7 +77,10 @@ export function TimeZoneSelect({ timeZone, setTimeZone }: Props) {
           <AlarmClock
             className="h-5 w-5 !text-zinc-600 dark:!text-zinc-400" /** text-zinc-400 = #a1a1aa */
           />
-          <SelectValue placeholder="Select timezone" className="text-zinc-600 dark:text-zinc-400" />
+          <SelectValue
+            placeholder="Select timezone"
+            className="text-zinc-600 dark:text-zinc-400"
+          />
         </SelectTrigger>
         <SelectContent className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800">
           {Object.entries(timezoneMap).map((entries) => {
