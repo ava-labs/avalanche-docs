@@ -60,10 +60,7 @@ export function UserButton() {
       <DropdownMenuContent className="bg-black border-zinc-600 text-white shadow-lg p-1 rounded-md w-48">
         {isAuthenticated ? (
           <>
-            <DropdownMenuItem>
-              <Link href="/profile">View Profile</Link>
-            </DropdownMenuItem>
- 
+  
             <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
             Sign Out
             </DropdownMenuItem>
