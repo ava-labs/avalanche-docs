@@ -1,107 +1,31 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 import { Button, Select } from "../../ui";
 import { createWalletClient, custom, AddEthereumChainParameter } from 'viem';
 import { useExampleStore } from "../../utils/store";
+import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
+import { ChainInfo } from "@avalabs/avacloud-sdk/models/components";
 
-interface Chain {
-  chainId: string;
-  status: string;
-  chainName: string;
-  description: string;
-  rpcUrl: string;
-  wsUrl?: string;
-  isTestnet: boolean;
-  networkToken: {
-    name: string;
-    symbol: string;
-    decimals: number;
-    logoUri: string;
-    description: string;
-  };
-  chainLogoUri: string;
-  enabledFeatures?: string[];
-  platformChainId?: string;
-  subnetId?: string;
-  vmId?: string;
-  explorerUrl?: string;
-}
+const sdk = new AvaCloudSDK();
 
 export default function AddL1s() {
   const { showBoundary } = useErrorBoundary();
   const { 
     walletChainId, 
-    walletEVMAddress, 
-    setWalletChainId, 
-    setWalletEVMAddress 
+    setWalletChainId
   } = useExampleStore();
   
-  const [chains, setChains] = useState<Chain[]>([]);
-  const [filteredChains, setFilteredChains] = useState<Chain[]>([]);
+  const [chains, setChains] = useState<ChainInfo[]>([]);
+  const [filteredChains, setFilteredChains] = useState<ChainInfo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [networkType, setNetworkType] = useState<string>("mainnet");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [addingChainId, setAddingChainId] = useState<string | null>(null);
-  const walletConnected = useRef(false);
-  const [selectedChain, setSelectedChain] = useState<Chain | null>(null);
+  const [selectedChain, setSelectedChain] = useState<ChainInfo | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
-
-  // Connect to wallet and update store state - only once
-  useEffect(() => {
-    async function connectWallet() {
-      if (walletConnected.current) return;
-      
-      try {
-        if (!window.avalanche) {
-          console.warn("Core wallet not detected");
-          return;
-        }
-
-        walletConnected.current = true;
-        const walletClient = createWalletClient({
-          transport: custom(window.avalanche),
-        });
-
-        // Get chain ID
-        const chainIdHex = await walletClient.getChainId();
-        setWalletChainId(Number(chainIdHex));
-
-        // Get wallet address - only do this if we don't already have an address
-        if (!walletEVMAddress) {
-          const [address] = await walletClient.requestAddresses();
-          if (address) {
-            setWalletEVMAddress(address);
-          }
-        }
-
-        // Listen for chain changes
-        window.avalanche.on('chainChanged', (chainId: string) => {
-          setWalletChainId(Number(chainId));
-        });
-
-        // Listen for account changes
-        window.avalanche.on('accountsChanged', (accounts: string[]) => {
-          if (accounts.length > 0) {
-            setWalletEVMAddress(accounts[0]);
-          }
-        });
-      } catch (err) {
-        console.error("Error connecting to wallet:", err);
-      }
-    }
-
-    connectWallet();
-    return () => {
-      // Clean up event listeners if needed
-      if (window.avalanche) {
-        window.avalanche.removeListener('chainChanged', () => {});
-        window.avalanche.removeListener('accountsChanged', () => {});
-      }
-    };
-  }, [setWalletChainId, setWalletEVMAddress, walletEVMAddress]);
 
   useEffect(() => {
     fetchChains();
@@ -111,28 +35,15 @@ export default function AddL1s() {
     setIsLoading(true);
     setError(null);
     try {
-      // Use the actual Glacier API endpoint
-      const url = new URL('https://glacier-api.avax.network/v1/chains');
-      
-      // Add the network parameter for filtering
-      if (networkType) {
-        url.searchParams.append('network', networkType);
-      }
-      
-      const response = await fetch(url.toString(), {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-        },
+      // Use AvaCloudSDK to get chains
+      const result = await sdk.data.evm.chains.supportedChains({
+        network: networkType as "mainnet" | "testnet"
       });
       
-      if (!response.ok) {
-        throw new Error(`Error fetching chains: ${response.status}`);
-      }
+      const chainsData = result.chains;
       
-      const data = await response.json();
-      if (data.chains && data.chains.length > 0) {
-        setChains(data.chains);
+      if (chainsData && chainsData.length > 0) {
+        setChains(chainsData);
       } else {
         setChains([]);
         setError("No chains found for this network type");
@@ -210,7 +121,7 @@ export default function AddL1s() {
     }
   }
 
-  async function handleAddToWallet(chain: Chain) {
+  async function handleAddToWallet(chain: ChainInfo) {
     setAddingChainId(chain.chainId);
     try {
       if (!window.avalanche) {
@@ -282,7 +193,7 @@ export default function AddL1s() {
   };
 
   // Function to show chain details modal
-  const openChainDetails = (chain: Chain) => {
+  const openChainDetails = (chain: ChainInfo) => {
     setSelectedChain(chain);
   };
 
