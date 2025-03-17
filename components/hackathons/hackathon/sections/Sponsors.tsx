@@ -23,11 +23,11 @@ function Sponsors({ hackathon }: { hackathon: HackathonHeader }) {
   return (
     <section>
       <h2 className="text-4xl font-bold mb-8" id="sponsors">
-        Sponsors
+        Partners
       </h2>
       <Separator className="my-8 bg-zinc-300 dark:bg-zinc-800" />
       <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-        Our sponsors drive the future of blockchain innovation.
+        Our partners drive the future of blockchain innovation.
       </p>
       <div>
         <Carousel

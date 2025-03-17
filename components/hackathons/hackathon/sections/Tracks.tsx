@@ -21,7 +21,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
       <Separator className='my-8 bg-zinc-300 dark:bg-zinc-800' />
       <div className='pt-5 pb-5'>
         <p>
-          Unlock incredible rewards for your innovation and skills
+          {hackathon.content.tracks_text}
         </p>
       </div>
       <div className='relative py-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-24 grid-flow-row'>

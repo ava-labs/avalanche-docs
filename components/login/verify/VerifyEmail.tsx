@@ -13,6 +13,7 @@ import {
   InputOTPSlot,
 } from '@/components/ui/input-otp';
 import Link from 'next/link';
+import { VerifyEmailProps } from '@/types/verifyEmailProps';
 
 const verifySchema = z.object({
   code: z
@@ -21,13 +22,9 @@ const verifySchema = z.object({
     .regex(/^\d+$/, 'Code must be only numbers'),
 });
 
-export function VerifyEmail({
-  email,
-  onBack,
-}: {
-  email: string;
-  onBack: () => void;
-}) {
+
+
+export function VerifyEmail({ email, onBack, callbackUrl = '/' }: VerifyEmailProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [resendCooldown, setResendCooldown] = useState(30);
   const [isResending, setIsResending] = useState(false);
@@ -57,7 +54,7 @@ export function VerifyEmail({
         email,
         otp: values.code,
         redirect: false,
-        callbackUrl: '/',
+        callbackUrl: callbackUrl,
       });
       if (result?.error) {
         switch (result?.error) {

@@ -15,15 +15,18 @@ const config = {
   reactStrictMode: true,
   transpilePackages: ["avalanche-docs-toolbox", "next-mdx-remote"],
   images: {
-    // domains: ['avatars.githubusercontent.com', 'lh3.googleusercontent.com'],
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "**", // Permite cualquier dominio con HTTPS
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
       },
       {
-        protocol: "http",
-        hostname: "**", // Permite cualquier dominio con HTTP (opcional)
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'abs.twimg.com', 
       },
     ],
   },

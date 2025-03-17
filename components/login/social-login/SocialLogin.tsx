@@ -2,11 +2,12 @@ import { signIn } from 'next-auth/react';
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 import SocialLoginButton from './SocialLoginButton';
+import { SocialLoginProps } from '@/types/socialLoginProps';
 
 
-function SocialLogin() {
+function SocialLogin({ callbackUrl = '/' }: SocialLoginProps) {
   async function SignInSocialMedia(provider: 'google' | 'github' | 'twitter') {
-    await signIn(provider, { callbackUrl: `/` });
+    await signIn(provider, { callbackUrl: callbackUrl });
   }
 
   return (
