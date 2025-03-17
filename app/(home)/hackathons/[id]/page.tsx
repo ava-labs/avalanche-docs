@@ -62,7 +62,7 @@ export default async function HackathonPage({
           variant={"secondary"}
           className="w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
-          <Link href={`/hackathons/registration-form`}>Join now</Link>
+          <Link href={`/hackathons/registration-form?hackaId=${id}`}>Join now</Link>
         </Button>
       </div>
       <div className="p-4 flex flex-col gap-24">

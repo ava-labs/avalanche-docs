@@ -17,7 +17,7 @@ export const hackathonsValidations: Validation[] = [
 
 export const validateHackathon = (hackathon: Partial<HackathonHeader>): Validation[] => validateEntity(hackathonsValidations, hackathon);
 
-class ValidationError extends Error {
+export class ValidationError extends Error {
     public details: Validation[];
     public cause: string;
 

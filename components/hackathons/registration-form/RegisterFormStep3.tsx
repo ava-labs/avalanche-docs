@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 
 import { useFormContext } from "react-hook-form";
-import { RegisterFormValues } from "./registrationForm"; 
+import { RegisterFormValues } from "./RegistrationForm"; 
 import { Checkbox } from "@/components/ui/checkbox";
 
 export function RegisterFormStep3() {
@@ -22,14 +22,14 @@ export function RegisterFormStep3() {
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-foreground">Step 3: Terms & Agreements</h3>
         <p className="text-zinc-400">Review and agree to the terms to complete your registration.</p>
-        <div className="w-full h-px bg-zinc-800 mt-2" /> 
+        <div className="w-full h-px bg-zinc-300 mt-2" /> 
       </div>
       <div className="space-y-6">
 
 
         <FormField
           control={form.control}
-          name="termsEventConditions"
+          name="terms_event_conditions"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
               <FormControl>
@@ -53,7 +53,7 @@ export function RegisterFormStep3() {
 
         <FormField
           control={form.control}
-          name="newsletterSubscription"
+          name="newsletter_subscription"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
               <FormControl>
@@ -75,7 +75,7 @@ export function RegisterFormStep3() {
 
         <FormField
           control={form.control}
-          name="prohibitedItems"
+          name="prohibited_items"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
               <FormControl>
