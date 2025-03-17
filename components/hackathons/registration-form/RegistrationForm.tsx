@@ -30,7 +30,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"; // Componente Dialog de shadcn/ui
 
 export const registerSchema = z.object({
@@ -316,38 +315,6 @@ export function RegisterForm({
           {step === 3 && <RegisterFormStep3 />}
           <Separator className="border-red-300 dark:border-red-300 mt-4" />
           <div className="mt-8 flex flex-col md:flex-row md:justify-between md:items-center">
-            <div className="order-1 md:order-2 mb-4 md:mb-0 flex  items-center space-x-1">
-              {step > 1 && (
-                <PaginationPrevious
-                  className="dark:hover:text-gray-200 cursor-pointer"
-                  onClick={() => setStep(step - 1)}
-                />
-              )}
-              <Pagination>
-                <PaginationContent>
-                  {Array.from({ length: 3 }, (_, i) => i + 1).map((page) => (
-                    <PaginationItem key={page}>
-                      <PaginationLink
-                        isActive={step === page}
-                        className="cursor-pointer"
-                        onClick={() => handleStepChange(page)}
-                      >
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                </PaginationContent>
-              </Pagination>
-              {step < 3 && (
-                <PaginationNext
-                  className="dark:hover:text-gray-200 cursor-pointer"
-                  onClick={form.handleSubmit(onSubmit)}
-                />
-              )}
-              <span className="font-Aeonik text-xs sm:text-sm">
-                Step {step} of 3
-              </span>
-            </div>
             <div className="order-2 md:order-1 flex gap-x-4">
               {step === 3 && (
                 <Button
@@ -380,13 +347,47 @@ export function RegisterForm({
                 </Button>
               )}
             </div>
+
+            <div className="order-1 md:order-2 mb-4 md:mb-0 flex flex-col md:flex-row items-center justify-center">
+              <div className="flex items-center space-x-1">
+                {step > 1 && (
+                  <PaginationPrevious
+                    className="dark:hover:text-gray-200 cursor-pointer"
+                    onClick={() => setStep(step - 1)}
+                  />
+                )}
+                <Pagination>
+                  <PaginationContent>
+                    {Array.from({ length: 3 }, (_, i) => i + 1).map((page) => (
+                      <PaginationItem key={page}>
+                        <PaginationLink
+                          isActive={step === page}
+                          className="cursor-pointer"
+                          onClick={() => handleStepChange(page)}
+                        >
+                          {page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                  </PaginationContent>
+                </Pagination>
+                {step < 3 && (
+                  <PaginationNext
+                    className="dark:hover:text-gray-200 cursor-pointer"
+                    onClick={form.handleSubmit(onSubmit)}
+                  />
+                )}
+              </div>
+              <span className="font-Aeonik text-xs sm:text-sm mt-2 md:mt-0 md:ml-2">
+                Step {step} of 3
+              </span>
+            </div>
           </div>
         </form>
       </Form>
 
-      {/* Dialog para Save & Exit */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
+        <DialogContent className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto p-4">
           <DialogHeader>
             <DialogTitle>Application Submitted</DialogTitle>
             <DialogDescription>
