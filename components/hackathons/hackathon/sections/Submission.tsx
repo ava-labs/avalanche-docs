@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { HackathonHeader } from "@/types/hackathons";
 import { Calendar, Trophy, Rocket, Check } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import Link from "next/link";
 import React from "react";
 
 export default async function Submission({
@@ -92,14 +93,14 @@ export default async function Submission({
         </div>
       </div>
 
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 gap-4">
         <Dialog>
           <DialogTrigger asChild>
             <Button
               variant={"secondary"}
-              className="md:w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
+              className="w-2/5 md:w-1/3 lg:w-1/4 bg-red-500 rounded-md text-zinc-100 text-xs sm:text-base"          
             >
-              VIEW FULL GUIDELINES
+              View full guidelines
             </Button>
           </DialogTrigger>
           <DialogContent className="bg-zinc-900">
@@ -117,6 +118,25 @@ export default async function Submission({
             </div>
           </DialogContent>
         </Dialog>
+        <Button
+          asChild
+          variant={"secondary"}
+          className="w-2/5 md:w-1/3 lg:w-1/4 bg-red-500 rounded-md text-zinc-100 text-xs sm:text-base"
+        >
+          <Link
+            href={
+              hackathon.content.submission_custom_link
+                ? hackathon.content.submission_custom_link
+                : `/hackathons/submit-project?hackaId=${hackathon.id}`
+            }
+            target={
+              hackathon.content.submission_custom_link ? "_blank" : "_self"
+            }
+            className="text-xs sm:text-base"
+          >
+            Submit project
+          </Link>
+        </Button>
       </div>
     </section>
   );

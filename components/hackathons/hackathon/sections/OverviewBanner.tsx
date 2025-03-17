@@ -46,7 +46,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
               hackathon.content.join_custom_link
                 ? hackathon.content.join_custom_link
                 : `/hackathons/registration-form?hackaId=${id}`
-            }> { hackathon.content.join_custom_text?? "Join now"} </Link>
+             } target={hackathon.content.join_custom_link? '_blank': '_self'}> { hackathon.content.join_custom_text?? "Join now"} </Link>
         </Button>
         <div className="flex flex-col">
           <div className="hidden sm:flex flex-col gap-2 max-w-[60%] md:max-w-[50%] xl:max-w-[60%]">
