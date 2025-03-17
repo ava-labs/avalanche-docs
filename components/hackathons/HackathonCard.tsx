@@ -19,13 +19,15 @@ export default function HackathonCard({
       className="flex rounded-lg shadow-lg h-400px md:h-[340px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-transparent"
     >
       {/* Left Section: Background Image or Red Color */}
-      <Image
-        src={hackathon.small_banner}
-        alt="Avalanche Logo"
-        className="rounded-l-md w-[200px] hidden md:block"
-        width={200}
-        height={280}
-      />
+      <Link href={`/hackathons/${hackathon.id}`}>
+        <Image
+          src={hackathon.small_banner}
+          alt="Avalanche Logo"
+          className="rounded-l-md hidden md:block h-full"
+          width={200}
+          height={280}
+        />
+      </Link>
 
       {/* Right Section */}
       <div className="flex-1 justify-evenly bg-zinc-50 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 p-6 flex flex-col gap-1 rounded-md md:rounded-l-none">
@@ -68,7 +70,7 @@ export default function HackathonCard({
           <div className="flex items-center gap-1 md:gap-2">
             <Trophy className="h-4 w-4 dark:stroke-zinc-50 stroke-zinc-900" />
             <span className="font-medium dark:text-zinc-50 text-zinc-900">
-            ${hackathon.total_prizes.toLocaleString("en-US")}
+              ${hackathon.total_prizes.toLocaleString("en-US")}
             </span>
           </div>
           <div className="flex items-center gap-1 md:gap-2">

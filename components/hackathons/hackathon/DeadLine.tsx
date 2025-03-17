@@ -28,7 +28,7 @@ export default function DeadLine({ deadline }: Props) {
             }
 
             if (diffDays > 0) {
-              return `${diffDays} days to deadline`;
+              return `${diffDays}d ${diffHours}h to deadline`;
             } else {
               return `${diffHours}h ${diffMinutes}m to deadline`;
             }

@@ -24,23 +24,23 @@ export default function OverviewBanner({ hackathon, id }: Props) {
       ? `${format(startDate, "MMMM d")} - ${format(endDate, "d, yyyy")}`
       : `${format(startDate, "MMMM d")} - ${format(endDate, "MMMM d, yyyy")}`;
   return (
-    <div className="z-10 pointer-events-none h-full w-[46%] absolute flex flex-col justify-end bottom-2 sm:bottom-6 lg:bottom-10 xl:bottom-16 left-[10%]">
+    <div className="z-10 pointer-events-none h-full w-[46%] absolute flex flex-col justify-end bottom-2 sm:bottom-6 lg:bottom-10 xl:bottom-12 left-[10%]">
       <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-zinc-50 font-bold sm:mb-2">
         {hackathon.title}
       </h1>
-      <p className="text-xs xl:text-base text-zinc-50 hidden lg:inline">
+      <p className="text-xs xl:text-sm 2xl:text-base text-zinc-50 hidden xl:inline">
         {hackathon.description}
       </p>
       <div className="max-w-80">
         <h2
-          className="mt-0 md:mt-2 lg:mt-4 xl:mt-6 mb-2 md:mb-6 lg:mb-8 xl:mb-12 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-red-500"
+          className="mt-0 md:mt-2 lg:mt-4 mb-2 md:mb-6 lg:mb-8 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-red-500"
           style={{ textShadow: "0px 4px 6px #9F2428" }}
         >
           ${hackathon.total_prizes.toLocaleString("en-US")}
         </h2>
         <Button
           variant={"secondary"}
-          className="w-full mb-12 xl:mb-20 bg-red-500 border-none text-zinc-100 rounded-md hidden xl:block"
+          className="w-full mb-12 bg-red-500 border-none text-zinc-100 rounded-md hidden xl:block"
         >
           <Link href={`/hackathons/registration-form`}>JOIN NOW</Link>
         </Button>

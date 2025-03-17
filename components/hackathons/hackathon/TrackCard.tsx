@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Track } from '@/types/hackathons';
 import { DynamicIcon } from 'lucide-react/dynamic';
@@ -11,7 +10,7 @@ type Props = {
 export default function TrackCard(props: Props) {
   return (
     <Card
-      className='basis-1/4 min-h-40 bg-zinc-50 dark:bg-zinc-900 cursor-pointer'
+      className='basis-1/4 min-h-40 h-full bg-zinc-50 dark:bg-zinc-900 cursor-pointer'
     >
       <CardHeader>
         <CardTitle>

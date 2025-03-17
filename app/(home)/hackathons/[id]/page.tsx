@@ -39,7 +39,7 @@ export default async function HackathonPage({
     { name: "Prizes & Tracks", ref: "tracks" },
     { name: "Resources", ref: "resources" },
     { name: "Schedule", ref: "schedule" },
-    { name: "Submission", ref: "submission" },    
+    { name: "Submission", ref: "submission" },
     { name: "Mentors & Judges", ref: "speakers" },
   ];
 
@@ -58,7 +58,7 @@ export default async function HackathonPage({
         <Button
           asChild
           variant={"secondary"}
-          className="w-1/3 bg-red-500 rounded-md text-zinc-100"
+          className="w-1/4 bg-red-500 rounded-md text-zinc-100"
         >
           <Link href={`/hackathons/registration-form`}>JOIN NOW</Link>
         </Button>
@@ -70,14 +70,16 @@ export default async function HackathonPage({
         <div className="sm:px-8 pt-6 ">
           <div className="sm:block relative w-full">
             <OverviewBanner hackathon={hackathon} id={id} />
-            <Image
-              src={hackathon.banner}
-              alt="Hackathon background"
-              width={1270}
-              height={760}
-              className="w-full h-full"
-              priority
-            />
+            <Link href={`/hackathons/registration-form`}>
+              <Image
+                src={hackathon.banner}
+                alt="Hackathon background"
+                width={1270}
+                height={760}
+                className="w-full h-full"
+                priority
+              />
+            </Link>
           </div>
           <div className="py-8 sm:p-8 flex flex-col gap-20">
             {hackathon.content.partners && <Sponsors hackathon={hackathon} />}

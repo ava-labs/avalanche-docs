@@ -150,7 +150,7 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                     return (
                       <div
                         key={index}
-                        className="flex flex-col sm:flex-row gap-3 sm:h-[200px] md:h-[154px]"
+                        className="flex flex-col sm:flex-row gap-3 sm:h-[200px] md:h-[180px]"
                       >
                         <Card
                           className={`${
@@ -225,16 +225,18 @@ function Schedule({ hackathon }: { hackathon: HackathonHeader }) {
                                 <CardTitle className="text-red-500 text-lg sm:text-base">
                                   {activity.name}
                                 </CardTitle>
-                                <Badge className="dark:bg-zinc-50 bg-zinc-900 dark:text-zinc-900 text-zinc-50 py-0.5 px-2.5 text-xs w-fit h-fit">
-                                  {activity.category}
-                                </Badge>
+                                {activity.category && (
+                                  <Badge className="dark:bg-zinc-50 bg-zinc-900 dark:text-zinc-900 text-zinc-50 py-0.5 px-2.5 text-xs w-fit h-fit">
+                                    {activity.category}
+                                  </Badge>
+                                )}
                               </div>
                               <span className="dark:text-zinc-400 text-zinc-600 text-xs sm:text-sm font-normal">
                                 {activity.description}
                               </span>
                             </div>
-                            <div className="flex flex-col md:flex-row md:justify-between gap-2">
-                              <div className="flex flex-row gap-4">
+                            <div className="flex flex-col md:justify-between gap-2">
+                              <div className="flex flex-row items-center gap-4">
                                 {activity.host_icon && (
                                   <Image
                                     src={activity.host_icon}
