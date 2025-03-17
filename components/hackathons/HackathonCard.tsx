@@ -20,7 +20,7 @@ export default function HackathonCard({
     >
       {/* Left Section: Background Image or Red Color */}
       <Image
-        src="/temp/hackathon-mock.png"
+        src={hackathon.small_banner}
         alt="Avalanche Logo"
         className="rounded-l-md w-[200px] hidden md:block"
         width={200}
@@ -68,7 +68,7 @@ export default function HackathonCard({
           <div className="flex items-center gap-1 md:gap-2">
             <Trophy className="h-4 w-4 dark:stroke-zinc-50 stroke-zinc-900" />
             <span className="font-medium dark:text-zinc-50 text-zinc-900">
-              {hackathon.total_prizes}
+            ${hackathon.total_prizes.toLocaleString("en-US")}
             </span>
           </div>
           <div className="flex items-center gap-1 md:gap-2">

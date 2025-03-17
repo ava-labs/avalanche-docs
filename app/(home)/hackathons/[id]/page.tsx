@@ -50,7 +50,7 @@ export default async function HackathonPage({
     <main className="container sm:px-2 py-4 lg:py-16">
       <div className="pl-4 flex gap-4 items-center">
         <Image
-          src="/temp/hackathon-icon.png"
+          src={hackathon.icon}
           alt="Hackathon background"
           width={40}
           height={40}
@@ -72,7 +72,7 @@ export default async function HackathonPage({
           <div className="sm:block relative w-full">
             <OverviewBanner hackathon={hackathon} id={id} />
             <Image
-              src="/builders-hub/hackathons/main_banner_img.png"
+              src={hackathon.banner}
               alt="Hackathon background"
               width={1270}
               height={760}

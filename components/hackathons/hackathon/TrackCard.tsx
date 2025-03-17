@@ -19,12 +19,12 @@ export default function TrackCard(props: Props) {
             <h2 className='text-xl text-zinc-900 dark:text-zinc-50 font-bold'>
               {props.track.name}
             </h2>
-            {/* <DynamicIcon name={track.icon as any} size={16} className="dark:!text-zinc-400 !text-zinc-600" /> */}
+            <DynamicIcon name={props.track.icon as any} size={16} className="dark:!text-zinc-400 !text-zinc-600" />
           </div>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className='text-sm text-zinc-600 dark:text-zinc-400'>
+        <p className='text-sm text-zinc-600 dark:text-zinc-400 text-left'>
           {props.track.short_description}
         </p>
       </CardContent>
