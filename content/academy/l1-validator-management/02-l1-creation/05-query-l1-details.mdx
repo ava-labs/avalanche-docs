@@ -5,3 +5,45 @@ updated: 2025-03-13
 authors: [owenwahlgren]
 icon: Smile
 ---
+
+
+### Query the L1 Details
+
+To query the L1 details, you can simply use the [Glacier API from AvaCloud](https://developers.avacloud.io/data-api/primary-network/get-subnet-details-by-id).
+
+Enter your `subnetID` and network name (e.g. `mainnet` or `fuji`) and you will receive the L1 details.
+
+It should display the L1 details similar to the following:
+
+```json 
+{
+  "createBlockTimestamp": 123,
+  "createBlockIndex": "<string>",
+  "subnetId": "<string>",
+  "ownerAddresses": [
+    "<string>"
+  ],
+  "threshold": 123,
+  "locktime": 123,
+  "subnetOwnershipInfo": {
+    "locktime": 0,
+    "threshold": 1,
+    "addresses": [
+      "avax1qm2a25eytsrj235hxg6jc0mwk99tss64eqevsw"
+    ]
+  },
+  "isL1": true,
+  "l1ConversionTransactionHash": "<string>",
+  "l1ValidatorManagerDetails": {
+    "blockchainId": "<string>",
+    "contractAddress": "<string>"
+  },
+  "blockchains": [
+    {
+      "blockchainId": "<string>"
+    }
+  ]
+}
+```
+
+We mainly care that the `isL1` field is `true` and that the `l1ValidatorManagerDetails` field is not empty.
