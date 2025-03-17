@@ -8,15 +8,19 @@ icon: Smile
 import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper"
 import CreateSubnet from "../../../../toolbox/src/demo/examples/L1/CreateSubnet.tsx"
 
+### Process of Creating a Subnet
+Now that you have connected your wallet to the P-Chain, you can create a subnet.
+
+The first step is to issue a `CreateSubnetTx` transaction on the P-Chain. This transaction hashes your wallet address and creates a `subnetID` with that hash.
+
+We will use this `subnetID` later on to create our blockchain and add validators to it.
+
+You can create as many subnets as you want using the same wallet.
+
+
 <ToolboxMdxWrapper>
     <CreateSubnet />
 </ToolboxMdxWrapper>
-
-Now that you have connected your wallet to the P-Chain, you can create a subnet.
-
-This transaction simply hashes your wallet address and creates a subnet with that hash.
-
-You can create as many subnets as you want.
 
 
 

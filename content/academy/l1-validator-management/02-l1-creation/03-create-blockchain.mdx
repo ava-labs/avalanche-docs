@@ -10,16 +10,25 @@ import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper
 import CreateChain from "../../../../toolbox/src/demo/examples/L1/CreateChain.tsx"
 
 
-Now that you have created a subnet, you can create a blockchain. This transaction creates a blockchain on the P-Chain that is linked to the subnet.
+### Creating a Blockchain
+Now that you have created a `subnet`, and created a `genesis.json` file, you can create a blockchain.
 
-Notice the `genesis` field, this is the genesis data for the blockchain.
-The tool automatically generates the genesis data for you and will fund the connected wallet with an initial balance.
+The `CreateChainTx` transaction establishes a new blockchain on the P-Chain, associating it with your previously created `subnetID`.
+
+During this process, the transaction uploads your `genesis.json` configuration to the P-Chain and generates a unique `blockchainID` that will permanently identify your chain on the network.
+
 
 The `VM ID` field is the VM ID for the blockchain. When you build default `subnet-evm` chains, the VM ID is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`.
-
 If you are using a custom VM (e.g. `subnet-evm` with custom precompiles, or `hypersdk`), you will want to change this field to the correct VM ID.
 
 <ToolboxMdxWrapper>
     <CreateChain />
 </ToolboxMdxWrapper>
+
+
+Once the transaction is confirmed, you will have a new blockchain on the P-Chain.
+
+You can quickly start an `avalanchego` node in Docker and connect it to your chain using the [L1 Toolbox](https://build.avax.network/tools/l1-toolbox#avalanchegoDocker)
+
+If you want a more hands on approach, you can read the [Node & Validator](/docs/nodes) documentation.    
 

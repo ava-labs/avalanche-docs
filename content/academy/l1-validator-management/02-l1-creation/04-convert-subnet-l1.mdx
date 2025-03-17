@@ -9,16 +9,50 @@ icon: Smile
 import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper.tsx"
 import ConvertToL1 from "../../../../toolbox/src/demo/examples/L1/ConvertToL1.tsx"
 
-Now we will convert the subnet to an L1. 
 
-Notice the input fields for validator information. This will be the "genesis" validators for the L1.
+### Subnet to L1 Conversion
 
-This is the initial validator set for the L1. They will always be treated as Proof of Authority (PoA) validators, but can be removed and added later for Proof of Stake (PoS) validators.
+The blockchain has been created, but it does not yet have any validators and hence can not process any transactions.
+
+At this point, you have two options:
+
+1. Convert the Subnet to an L1 and start with a new validator set. Each validator pays 1.33 `AVAX` / month.
+2. Stay a Subnet and add validators. Each validators stakes 2,000 `AVAX`.
+
+<Callout type="info">
+If you are unsure what setup is right for you, please read details on the [Etna Upgrade](/academy/avalanche-fundamentals/03-multi-chain-architecture-intro/03a-etna-upgrade).
+</Callout>
+
+
+The conversion process is done through the `ConvertSubnetToL1Tx` transaction on the P-Chain.
+
+The process takes a few parameters:
+
+- `subnetID`: The ID of the Subnet to convert.
+- `blockchainID`: The ID of the blockchain where Validator Manager will be deployed.
+- `Node Info`: The information for each validator in the new L1.
+- `Weight`: Each validators relative weight in the validator set.
+- `Balance`: The amount of `AVAX` each validator has in their initial AVAX balance (`1000000000` = 1 `AVAX`).
+- `Manager Address`: The address of the `ValidatorManager` contract for the new L1.
+
+<Callout type="info">
+    As a trick, the `Manager Address` placeholder is actually a Open Zeppelin [TransparentUpgradeableProxy](https://docs.openzeppelin.com/contracts/4.x/api/proxy) contract included in the `genesis.json` file as pre-deployed bytecode.
+    After the L1 is converted, we will deploy the `ValidatorManager` contract and update the proxy to point to the new address.
+</Callout>
+
+
+
 
 <ToolboxMdxWrapper>
     <ConvertToL1 />
 </ToolboxMdxWrapper>
 
+<Callout type="info">
+    The initial validator set will always be treated as Proof of Authority (PoA) validators (and be uneligable for rewards), but can be removed and added later for Proof of Stake (PoS) validators.
+</Callout>
 
+<Callout type="warn">
+   If you are a pre-existing (legacy) Subnet with validators, you will need a NEW validator set for the L1 conversion.
+</Callout>
 
 

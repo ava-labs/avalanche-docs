@@ -1,0 +1,42 @@
+---
+title: Fetch P-Chain Address
+description: Fetch your P-Chain address.
+updated: 2025-03-13
+authors: [owenwahlgren]
+icon: Smile
+---
+
+import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper.tsx"
+import GetPChainAddress from "../../../../toolbox/src/demo/examples/Wallet/GetPChainAddress.tsx"
+
+### P-Chain Address Format
+The P-Chain uses [Bech32](https://en.bitcoin.it/wiki/Bech32) addresses, which follow the BIP-0173 standard. 
+
+These addresses consist of:
+- A Human-Readable Part (HRP) - "avax" for mainnet or "fuji" for testnet
+- The separator "1" 
+- A base32-encoded address
+- A 6-character error correction code
+
+For example: `P-avax1kj06lhgx84h39snsljcey3tpc046ze68mek3g5`
+
+This differs from C-Chain addresses which use the Ethereum hex format (starting with 0x). While both P-Chain and X-Chain use Bech32, they are distinguished by their chain prefix (P- vs X-).
+
+<ToolboxMdxWrapper>
+    <GetPChainAddress />
+</ToolboxMdxWrapper>
+
+<Callout type="info">
+    If you don't have Core wallet installed, you can download it from the [Core website](https://core.app/).
+</Callout>
+<Callout type="info">
+    If you don't have funds on Fuji, you can request testnet AVAX from the [Faucet](https://faucet.avax.network/).
+</Callout>
+
+
+<Callout type="warn">
+   Remember, the network you select here will be used for the remainder of this tutorial.
+</Callout>
+
+
+

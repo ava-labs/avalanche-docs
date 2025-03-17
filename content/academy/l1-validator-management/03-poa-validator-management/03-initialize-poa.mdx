@@ -1,6 +1,6 @@
 ---
-title: Initialize PoA Settings
-description: Initialize the PoA settings.
+title: Initialize Validator Manager Settings
+description: Initialize the Validator Manager settings.
 updated: 2025-03-13
 authors: [owenwahlgren]
 icon: Smile
@@ -8,6 +8,17 @@ icon: Smile
 
 import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper"
 import Initialize from "../../../../toolbox/src/demo/examples/InitializePoA/Initialize.tsx"
+
+The `ValidatorManager` contract has some settings we can initialize:
+
+```solidity
+struct ValidatorManagerSettings {
+    address admin; // The address of the admin (EoA, multisig, timelock, etc.)
+    bytes32 subnetID; // The ID of the Subnet
+    uint64 churnPeriodSeconds; // The number of seconds between churns
+    uint8 maximumChurnPercentage; // The maximum percentage of validators that can be churned per churn period
+}
+```
 
 <ToolboxMdxWrapper>
     <Initialize />

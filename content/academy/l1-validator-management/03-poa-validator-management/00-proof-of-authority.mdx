@@ -5,3 +5,19 @@ updated: 2025-03-13
 authors: [owenwahlgren]
 icon: Smile
 ---
+
+
+## Proof of Authority
+
+Proof of Authority for an Avalanche L1 is controlled by the `ValidatorManager` contract.
+
+The controller of the `ValidatorManager` contract is the `admin` address. Only the `admin` address can add, remove, and update weights from the validator set.
+
+Because the `ValidatorManager` is a Solidity contract, any type of address can be set as the `admin` address. This means that the `admin` address can be a multisig address, a timelock address, or a simple externally owned account (EOA).
+<Callout type="info">
+    `ValidatorManager` can later be converted to Proof of Stake by transferring the ownership to a `StakingManager` contract.
+</Callout>
+
+The `ValidatorManager` inherits from Open Zeppelin's `OwnableUpgradeable` contract, so the `admin` address can be changed by the current owner using the `transferOwnership` function.
+
+The P-Chain will accept signed warp messages emitted by the `ValidatorManager` contract.

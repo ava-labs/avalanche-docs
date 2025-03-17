@@ -1,6 +1,6 @@
 ---
 title: Create Genesis
-description: Create a genesis for an L1.
+description: Create the genesis.json file for an EVM Avalanche L1.
 updated: 2025-03-13
 authors: [owenwahlgren]
 icon: Smile
@@ -9,6 +9,18 @@ icon: Smile
 import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper.tsx"
 import GenesisBuilder from "../../../../toolbox/src/demo/examples/L1/GenesisBuilder.tsx"
 
+### Creating a Genesis for an EVM L1
+
+The next step is to create a genesis block for your new blockchain. 
+
+The genesis determines the starting state of your blockchain. This step is important because it determines configuration parameters such as:
+- Chain ID
+- Gas Limits
+- Block Time
+- Initial Token Allocations
+- Enabled Precompiles
+
+You can read more about the `genesis.json` file for `subnet-evm` [here](/docs/avalanche-l1s/upgrade/customize-avalanche-l1#chain-config).
 <ToolboxMdxWrapper>
     <GenesisBuilder />
 </ToolboxMdxWrapper>
