@@ -25,6 +25,7 @@ export type HackathonsFilters = {
 
 export type Hackathon = {
   join_custom_link: string
+  join_custom_text: string
   schedule: ScheduleActivity[]
   registration_deadline: Date
   address: string

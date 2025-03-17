@@ -16,7 +16,6 @@ import {
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useForm } from 'react-hook-form';
-
 import { useState } from 'react';
 import { VerifyEmail } from './verify/VerifyEmail';
 import axios from 'axios';
@@ -25,11 +24,13 @@ const formSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
 });
 
-function Formlogin() {
+
+
+function Formlogin({ callbackUrl = '/' }: { callbackUrl?: string }) {
   const [isVerifying, setIsVerifying] = useState(false);
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  
   const formMethods = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { email: '' },
@@ -64,7 +65,9 @@ function Formlogin() {
         </div>
         {isVerifying && email && (
           <div className='justify-between p-10'>
-            <VerifyEmail email={email} onBack={() => setIsVerifying(false)} />
+            <VerifyEmail email={email} onBack={() => setIsVerifying(false)} 
+            callbackUrl={callbackUrl}
+             />
           </div>
         )}
         {!isVerifying && (
@@ -114,7 +117,7 @@ function Formlogin() {
                     </form>
                   </Form>
                 </div>
-                <SocialLogin />
+                <SocialLogin callbackUrl={callbackUrl} />
                 <div>
                   <footer className='pt-10'>
                     <p className='text-zinc-400 items-center justify-center w-full max-w-[400px] text-center text-sm font-medium'>

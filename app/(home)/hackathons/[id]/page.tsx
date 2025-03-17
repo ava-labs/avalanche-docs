@@ -64,10 +64,10 @@ export default async function HackathonPage({
             href={
               hackathon.content.join_custom_link
                 ? hackathon.content.join_custom_link
-                : `/hackathons/registration-form`
+                : `/hackathons/registration-form?hackaId=${id}`
             }
           >
-            JOIN NOW
+           { hackathon.content.join_custom_text?? "Join now"} 
           </Link>
         </Button>
       </div>
@@ -78,7 +78,11 @@ export default async function HackathonPage({
         <div className="sm:px-8 pt-6 ">
           <div className="sm:block relative w-full">
             <OverviewBanner hackathon={hackathon} id={id} />
-            <Link href={`/hackathons/registration-form`}>
+            <Link href={
+              hackathon.content.join_custom_link
+                ? hackathon.content.join_custom_link
+                : `/hackathons/registration-form?hackaId=${id}`
+            }>
               <Image
                 src={hackathon.banner}
                 alt="Hackathon background"
