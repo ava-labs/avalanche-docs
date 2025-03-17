@@ -29,6 +29,8 @@ import type { MDXComponents } from 'mdx/types';
 import EditOnGithubButton from "@/components/ui/edit-on-github-button";
 import ReportIssueButton from "@/components/ui/report-issue-button";
 import YouTube from '@/components/content-design/youtube';
+import { Rate } from '@/components/ui/rate';
+import posthog from 'posthog-js';
 
 export const dynamicParams = false;
 export const revalidate = false;
@@ -97,6 +99,12 @@ export default async function Page(props: {
         </div>
         {page.data.index ? <DocsCategory page={page} from={documentation} /> : null}
       </DocsBody>
+      <Rate
+        onRateAction={async (url, feedback) => {
+          'use server';
+          await posthog.capture('on_rate_document', feedback);
+        }}
+      />
     </DocsPage>
   );
 }

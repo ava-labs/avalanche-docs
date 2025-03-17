@@ -34,6 +34,8 @@ import {
 import Mermaid from "@/components/content-design/mermaid";
 import EditOnGithubButton from '@/components/ui/edit-on-github-button';
 import ReportIssueButton from "@/components/ui/report-issue-button";
+import { Rate } from '@/components/ui/rate';
+import posthog from 'posthog-js';
 
 export const dynamicParams = false;
 
@@ -95,6 +97,12 @@ export default async function Page(props: {
           />
         </div>
       </DocsBody>
+      <Rate
+        onRateAction={async (url, feedback) => {
+          'use server';
+          await posthog.capture('on_rate_document', feedback);
+        }}
+      />
     </DocsPage>
   );
 }
