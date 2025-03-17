@@ -42,7 +42,7 @@ export function Container({
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
             Explore more{" "}
             <a
-              href="https://docs.avax.network/tools/l1-toolbox"
+              href="https://build.avax.network/tools/l1-toolbox"
               target="_blank"
               className="text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 font-medium"
             >
