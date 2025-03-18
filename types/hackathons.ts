@@ -7,6 +7,7 @@ export type HackathonHeader = {
   end_date: Date
   location: string
   total_prizes: number
+  participants: number
   tags: string[]
   status: HackathonStatus
   small_banner: string
@@ -23,14 +24,23 @@ export type HackathonsFilters = {
 }
 
 export type Hackathon = {
+  join_custom_link: string
+  join_custom_text: string
+  submission_custom_link: string
   schedule: ScheduleActivity[]
   registration_deadline: Date
   address: string
   partners: Partner[]
+  tracks_text: string
   tracks: Track[]
-  participants: number
   speakers: Speaker[]
-
+  become_sponsor_link: string
+  submission_deadline: Date
+  mentors_judges_img_url: string
+  judging_guidelines: string
+  speakers_banner: string
+  speakers_text: string
+  resources: Resource[]
 }
 
 export type ScheduleActivity = {
@@ -61,7 +71,8 @@ export type Track = {
 
 
 export type Resource = {
-  name: string
+  title: string
+  description: string
   icon: string
   link: string
 }

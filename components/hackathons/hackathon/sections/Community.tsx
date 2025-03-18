@@ -34,28 +34,28 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
         hackathon experience.
       </p>
 
-      <div className="flex flex-col md:flex-row justify-center gap-4">
+      <div className="flex flex-col items-center md:flex-row justify-center gap-4">
         {communityResources.map((item, index) => (
           <a
             key={index}
             href={item.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[350px] h-[80px]"
+            className="w-full md:w-[250px] h-[80px]"
           >
             <Card
               className="border border-gray-300 dark:border-gray-800 hover:border-gray-500 dark:hover:border-gray-600 transition 
-                         flex items-center justify-center gap-3 w-full h-full 
+                         flex items-center justify-start md:justify-center gap-3 w-full h-full 
                          rounded-lg px-6 py-4 "
             >
               <div className="p-3 flex items-center justify-center bg-[#FF394A] rounded-full text-zinc-50">
                 <DynamicIcon
                   name={item.icon as any}
-                  size={27}
                   color="#F5F5F9"
+                  className="w-5 sm:w-7 h-5 sm:h-7"
                 />
               </div>
-              <h3 className="text-black dark:text-white text-lg font-semibold">
+              <h3 className="text-black dark:text-white sm:text-lg font-semibold">
                 {item.title}
               </h3>
             </Card>
@@ -68,14 +68,14 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
         <Button
           asChild
           variant={"secondary"}
-          className="w-1/3 bg-red-500 rounded-md text-zinc-100"
+          className="w-full md:w-1/2 lg:w-1/3 bg-red-500 rounded-md text-zinc-100"
         >
           <a
             href="https://example.com/community"
             target="_blank"
             rel="noopener noreferrer"
           >
-            EXPLORE COMMUNITY & NETWORKING
+            <p className="lg:text-base">EXPLORE COMMUNITY & NETWORKING</p>
           </a>
         </Button>
       </div>

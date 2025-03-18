@@ -14,9 +14,9 @@ interface NavigationMenuProps {
 export function NavigationMenu({ items }: NavigationMenuProps) {
   const currentPath = useHash();
   return (
-    <div className='py-4 px-8 border-b border-gray-700'>
-      <nav className='text-sm'>
-        <ul className='flex gap-6 px-4 py-2 text-sm'>
+    <div className='hidden sm:block py-4 md:px-8 border-b border-gray-700'>
+      <nav className='text-xs lg:text-sm'>
+        <ul className='flex gap-6 px-4 py-2'>
           {items.map((item, index) => (
             <li key={index}>
               <a

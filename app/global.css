@@ -1,10 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "@tailwindcss/typography";
 
 .prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
   color: #E84142;
 }
+/* .light .prose :where(a:not([data-card])):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: #18181B; 
+}
+.light .prose :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: #18181B; 
+} */
+
+/* .dark .prose :where(a:not([data-card])):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: #F5F5F9;
+}
+
+.dark .prose :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: #F5F5F9;
+} */
 
 .uwu {
   --background: 240 80% 94% !important;

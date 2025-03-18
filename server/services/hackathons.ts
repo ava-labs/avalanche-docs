@@ -82,10 +82,54 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     const pageSize = options.pageSize ?? 10;
     const offset = (page - 1) * pageSize;
 
-    const filters: any = {};
-    if (options.location) filters.location = options.location;
+    let filters: any = {};
+    if (options.location) {
+        filters.location = options.location;
+        if (options.location == 'InPerson') {
+            filters = {
+                NOT: {
+                    location: 'Online'
+                },
+            }
+        }
+    }
     if (options.date) filters.date = options.date;
-    if (options.search) filters.title = { contains: options.search, mode: "insensitive" };
+    if (options.search) {
+        const searchWords = options.search.split(/\s+/)
+        let searchFilters: any[] = []
+        searchWords.forEach((word) => {
+            searchFilters = [...searchFilters,
+            {
+                title: {
+                    contains: word, mode: "insensitive",
+                },
+            },
+            {
+                location: {
+                    contains: word, mode: "insensitive"
+                },
+            },
+            {
+                description: {
+                    contains: word, mode: "insensitive"
+                },
+            },
+            ]
+        })
+        searchFilters = [...searchFilters,
+        {
+            tags: {
+                has: options.search
+            },
+        },
+        ]
+
+        filters = {
+            ...filters,
+            OR: searchFilters
+        }
+    }
+    console.log('Filters: ', filters)
 
     const hackathonList = await prisma.hackathon.findMany({
         where: filters,
@@ -115,7 +159,10 @@ export async function getFilteredHackathons(options: GetHackathonsOptions) {
     });
 
     return {
-        hackathons: hackathonsLite,
+        hackathons: hackathonsLite.map((hackathon) => ({
+            ...hackathon,
+            status: getStatus(hackathon.start_date, hackathon.end_date)
+        } as HackathonHeader)),
         total: totalHackathons,
         page,
         pageSize,
@@ -140,6 +187,7 @@ export async function createHackathon(hackathonData: Partial<HackathonHeader>): 
             end_date: hackathonData.end_date!,
             location: hackathonData.location!,
             total_prizes: hackathonData.total_prizes!,
+            participants: hackathonData.participants!,
             tags: hackathonData.tags!,
             timezone: hackathonData.timezone!,
             icon: hackathonData.icon!,
