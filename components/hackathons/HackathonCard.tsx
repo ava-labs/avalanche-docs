@@ -32,9 +32,9 @@ export default function HackathonCard({
       {/* Right Section */}
       <div className="flex-1 justify-evenly bg-zinc-50 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 p-6 flex flex-col gap-1 rounded-md md:rounded-l-none">
         <h2 className="uppercase font-bold text-2xl">
-          {hackathon.title.length < 30
+          {hackathon.title.length < 45 
             ? hackathon.title
-            : hackathon.title.split(" ").slice(0, -1).join(" ") + "..."}
+            : hackathon.title.slice(0, 40) + "..."}
         </h2>
 
         <div className="flex items-center gap-2 dark:text-zinc-300 text-zinc-600 text-sm mt-2">
