@@ -131,7 +131,7 @@ export async function extractWarpMessageFromPChainTx(client: WalletClient<any, a
         subnetId: data.result.tx.unsignedTx.subnetID,
         managerChainID: data.result.tx.unsignedTx.chainID,
         managerAddress: data.result.tx.unsignedTx.address,
-        validators: data.result.tx.unsignedTx.validators.map((validator, i) => {
+        validators: data.result.tx.unsignedTx.validators.map((validator) => {
             return {
                 nodeID: validator.nodeID,
                 nodePOP: validator.signer,

@@ -2,7 +2,6 @@ import { WalletClient } from "viem";
 import { getRPCEndpoint } from "../utils/rpc";
 import { isTestnet } from "./isTestnet";
 import { CoreWalletRpcSchema } from "../rpcSchema";
-import { error } from "console";
 
 export type ExtractChainInfoParams = {
     txId: string;
