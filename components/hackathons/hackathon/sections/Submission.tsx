@@ -98,7 +98,7 @@ export default async function Submission({
           <DialogTrigger asChild>
             <Button
               variant={"secondary"}
-              className="w-2/5 md:w-1/3 lg:w-1/4 bg-red-500 rounded-md text-zinc-100 text-xs sm:text-base"          
+              className="w-2/5 md:w-1/3 lg:w-1/4 bg-red-500 hover:bg-red-500 rounded-md text-zinc-100 text-xs sm:text-base"          
             >
               View full guidelines
             </Button>
@@ -121,7 +121,7 @@ export default async function Submission({
         <Button
           asChild
           variant={"secondary"}
-          className="w-2/5 md:w-1/3 lg:w-1/4 bg-red-500 rounded-md text-zinc-100 text-xs sm:text-base"
+          className="w-2/5 md:w-1/3 lg:w-1/4 bg-red-500 hover:bg-red-500 rounded-md text-zinc-100 text-xs sm:text-base"
         >
           <Link
             href={
