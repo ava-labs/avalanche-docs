@@ -19,7 +19,13 @@ export default function HackathonCard({
       className="flex rounded-lg shadow-lg h-400px md:h-[340px] bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-transparent"
     >
       {/* Left Section: Background Image or Red Color */}
-      <Link href={`/hackathons/${hackathon.id}`}>
+      <Link
+        href={
+          hackathon.id == "26bfce9b-4d44-4d40-8fbe-7903e76d48fa"
+            ? "/hackathon"
+            : `/hackathons/${hackathon.id}`
+        }
+      >
         <Image
           src={hackathon.small_banner}
           alt="Avalanche Logo"
@@ -32,7 +38,7 @@ export default function HackathonCard({
       {/* Right Section */}
       <div className="flex-1 justify-evenly bg-zinc-50 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 p-6 flex flex-col gap-1 rounded-md md:rounded-l-none">
         <h2 className="uppercase font-bold text-2xl">
-          {hackathon.title.length < 45 
+          {hackathon.title.length < 45
             ? hackathon.title
             : hackathon.title.slice(0, 40) + "..."}
         </h2>
@@ -93,7 +99,11 @@ export default function HackathonCard({
         >
           <Link
             className="text-sm text-zinc-50"
-            href={`/hackathons/${hackathon.id}`}
+            href={
+              hackathon.id == "26bfce9b-4d44-4d40-8fbe-7903e76d48fa"
+                ? "/hackathon"
+                : `/hackathons/${hackathon.id}`
+            }
           >
             LEARN MORE
           </Link>
