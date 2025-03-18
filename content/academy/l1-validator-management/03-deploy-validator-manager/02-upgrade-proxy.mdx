@@ -11,6 +11,10 @@ import UpgradeProxy from "../../../../toolbox/src/demo/examples/ValidatorManager
 
 Now that the `ValidatorManager` contract has been deployed, we can upgrade the proxy that is registered on the P-Chain as the `ValidatorManager` contract to point to the actual `ValidatorManager` implementation.
 
+<Callout type="info">
+    If you used the Genesis Builder from this course to create your L1, the `Manager Address` placeholder is a Open Zeppelin [TransparentUpgradeableProxy](https://docs.openzeppelin.com/contracts/4.x/api/proxy) contract included in the `genesis.json` file as pre-deployed bytecode.
+</Callout>
+
 
 <ToolboxMdxWrapper>
     <UpgradeProxy />

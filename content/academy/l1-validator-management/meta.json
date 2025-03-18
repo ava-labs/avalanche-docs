@@ -4,12 +4,14 @@
     "root": true,
     "pages": [
       "index",
-      "---Recap---",
+      "---Review---",
       "...01-recap",
-      "---L1 Creation---",
+      "---Create L1---",
       "...02-l1-creation",
-      "---Proof of Authority---",
-      "...03-poa-validator-management"
+      "---Deploy Validator Manager---",
+      "...03-deploy-validator-manager",
+      "---Validator Management---",
+      "...04-validator-management"
     ]
   }
   
