@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <PHProvider>
-        <Banner id="banner" className="border-b border-border"><div className='max-w-10/12'><span className="bg-red-100 text-red-600 px-2 py-0.5 rounded-full text-xs">NEW</span> Register for the <a href="https://lu.ma/avalanchesummitlondonhackathon?utm_source=builder_hub" target="_blank" rel="noopener noreferrer" className="underline hover:text-red-600 transition-colors">London Hackathon</a>!</div></Banner>
+        <Banner id="banner" className="border-b border-border"><span className="bg-red-100 text-red-600 px-2 py-0.5 rounded-full text-xs">NEW</span> Register for the <a href="https://lu.ma/avalanchesummitlondonhackathon?utm_source=builder_hub" target="_blank" rel="noopener noreferrer" className="underline hover:text-red-600 transition-colors">London Hackathon</a>!</Banner>
         <body className="flex min-h-screen flex-col">
           <SearchRootProvider>
             {children}
