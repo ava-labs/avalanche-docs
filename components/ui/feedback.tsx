@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/utils/cn';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
-import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import { ThumbsDown, ThumbsUp, PencilIcon, AlertCircle } from 'lucide-react';
 import { type SyntheticEvent, useEffect, useState } from 'react';
 import {
   Collapsible,
@@ -9,6 +9,7 @@ import {
 } from 'fumadocs-ui/components/ui/collapsible';
 import { cva } from 'class-variance-authority';
 import { usePathname } from 'next/navigation';
+import newGithubIssueUrl from 'new-github-issue-url';
  
 const rateButtonVariants = cva(
   'inline-flex items-center gap-2 px-3 py-2 rounded-full font-medium border text-sm [&_svg]:size-4 disabled:cursor-not-allowed',
@@ -40,19 +41,27 @@ function set(url: string, feedback: Feedback | null) {
   else localStorage.removeItem(key);
 }
  
-export function Rate({
-  onRateAction,
-}: {
+export interface UnifiedFeedbackProps {
   onRateAction: (url: string, feedback: Feedback) => Promise<void>;
-}) {
-  const url = usePathname();
+  path: string;
+  title: string;
+  pagePath: string;
+}
+
+export function Feedback({
+  onRateAction,
+  path,
+  title,
+  pagePath,
+}: UnifiedFeedbackProps) {
+  const pathname = usePathname();
   const [previous, setPrevious] = useState<Feedback | null>(null);
   const [opinion, setOpinion] = useState<'yes' | 'no' | null>(null);
   const [message, setMessage] = useState('');
  
   useEffect(() => {
-    setPrevious(get(url));
-  }, [url]);
+    setPrevious(get(pathname));
+  }, [pathname]);
  
   function submit(e?: SyntheticEvent) {
     e?.preventDefault();
@@ -63,9 +72,9 @@ export function Rate({
       message,
     };
  
-    void onRateAction(url, feedback);
+    void onRateAction(pathname, feedback);
  
-    set(url, feedback);
+    set(pathname, feedback);
     setPrevious(feedback);
     setMessage('');
     setOpinion(null);
@@ -79,37 +88,70 @@ export function Rate({
       }}
       className="border-y py-3"
     >
-      <div className="flex flex-row items-center gap-2">
-        <p className="text-sm font-medium pe-2">Is this guide helpful?</p>
-        <button
-          disabled={previous !== null}
-          className={cn(
-            rateButtonVariants({
-              active: (previous?.opinion ?? opinion) === 'yes',
-            }),
-          )}
-          onClick={() => {
-            setOpinion('yes');
-          }}
-        >
-          <ThumbsUp />
-          Yes
-        </button>
-        <button
-          disabled={previous !== null}
-          className={cn(
-            rateButtonVariants({
-              active: (previous?.opinion ?? opinion) === 'no',
-            }),
-          )}
-          onClick={() => {
-            setOpinion('no');
-          }}
-        >
-          <ThumbsDown />
-          No
-        </button>
+      <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center gap-1.5">
+          <p className="text-sm font-medium pe-2">Is this guide helpful?</p>
+          <button
+            disabled={previous !== null}
+            className={cn(
+              rateButtonVariants({
+                active: (previous?.opinion ?? opinion) === 'yes',
+              }),
+            )}
+            onClick={() => {
+              setOpinion('yes');
+            }}
+          >
+            <ThumbsUp />
+            Yes
+          </button>
+          <button
+            disabled={previous !== null}
+            className={cn(
+              rateButtonVariants({
+                active: (previous?.opinion ?? opinion) === 'no',
+              }),
+            )}
+            onClick={() => {
+              setOpinion('no');
+            }}
+          >
+            <ThumbsDown />
+            No
+          </button>
+        </div>
+        
+        <div className="flex flex-row items-center gap-1.5">
+          <a
+            href={`https://github.com/ava-labs/builders-hub/edit/master/${path}`}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={cn(rateButtonVariants(), "gap-2 no-underline text-sm")}
+          >
+            <PencilIcon className="size-4" /> Edit on GitHub
+          </a>
+          
+          <a
+            href={newGithubIssueUrl({
+              user: 'ava-labs',
+              repo: 'builders-hub',
+              title: `Update ${title} information`,
+              body: `It appears that the information on this page might be outdated. Please review and update as needed.
+
+Page: [${pagePath}](https://build.avax.network${pagePath})
+
+[Provide more details here...]`,
+              labels: ['outdated', 'documentation'],
+            })}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={cn(rateButtonVariants(), "gap-2 no-underline text-sm")}
+          >
+            <AlertCircle className="size-4" /> Report Issue
+          </a>
+        </div>
       </div>
+      
       <CollapsibleContent className="mt-3">
         {previous ? (
           <div className="px-3 py-6 flex flex-col items-center gap-3 bg-fd-card text-fd-card-foreground text-sm text-center rounded-xl text-fd-muted-foreground">
@@ -123,7 +165,7 @@ export function Rate({
               )}
               onClick={() => {
                 setOpinion(previous?.opinion);
-                set(url, null);
+                set(pathname, null);
                 setPrevious(null);
               }}
             >

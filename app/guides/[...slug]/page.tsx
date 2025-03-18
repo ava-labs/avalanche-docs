@@ -122,7 +122,7 @@ export default async function Page(props: {
                     </div>
 
                     <a
-                        href={`https://github.com/ava-labs/avalanche-docs/blob/master/${path}`}
+                        href={`https://github.com/ava-labs/builders-hub/blob/master/${path}`}
                         target="_blank"
                         rel="noreferrer noopener"
                         className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
@@ -132,7 +132,7 @@ export default async function Page(props: {
                     <a
                         href={newGithubIssueUrl({
                             user: 'ava-labs',
-                            repo: 'avalanche-docs',
+                            repo: 'builders-hub',
                             title: `Update Guide ${page.data.title} information`,
                             body: `It appears that the information on this page might be outdated. Please review and update as needed.\n\nPage: /guides/${params.slug}\n\n[Provide more details here...]`,
                             labels: ['outdated', 'documentation'],

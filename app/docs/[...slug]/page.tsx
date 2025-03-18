@@ -26,11 +26,10 @@ import { BackToTop } from '@/components/ui/back-to-top';
 import { File, Folder, Files } from 'fumadocs-ui/components/files';
 import Mermaid from "@/components/content-design/mermaid";
 import type { MDXComponents } from 'mdx/types';
-import EditOnGithubButton from "@/components/ui/edit-on-github-button";
-import ReportIssueButton from "@/components/ui/report-issue-button";
 import YouTube from '@/components/content-design/youtube';
-import { Rate } from '@/components/ui/rate';
+import { Feedback } from '@/components/ui/feedback';
 import posthog from 'posthog-js';
+import { getGithubLastEdit } from 'fumadocs-core/server';
 
 export const dynamicParams = false;
 export const revalidate = false;
@@ -42,14 +41,18 @@ export default async function Page(props: {
   const page = documentation.getPage(params.slug);
   if (!page) notFound();
 
-  const { body: MDX, toc, lastModified } = await page.data.load();
-
+  const { body: MDX, toc } = await page.data.load();
   const path = `content/docs/${page.file.path}`;
+  const time = await getGithubLastEdit({
+    owner: 'ava-labs',
+    repo: 'builders-hub',
+    path: `content/docs/${page.file.path}`,
+  });
 
   return (
     <DocsPage
       toc={toc}
-      lastUpdate={lastModified}
+      lastUpdate={new Date(time ?? Date.now())}
       full={page.data.full}
       tableOfContent={{
         style: 'clerk',
@@ -90,16 +93,12 @@ export default async function Page(props: {
             DocsCategory: () => <DocsCategory page={page} from={documentation} />,
           }}
         />
-        <div className="flex gap-6 mt-8">
-          <EditOnGithubButton path={path} />
-          <ReportIssueButton 
-            title={page.data.title}
-            pagePath={`/docs/${page.slugs.join('/')}`}
-          />
-        </div>
         {page.data.index ? <DocsCategory page={page} from={documentation} /> : null}
       </DocsBody>
-      <Rate
+      <Feedback
+        path={path}
+        title={page.data.title}
+        pagePath={`/docs/${page.slugs.join('/')}`}
         onRateAction={async (url, feedback) => {
           'use server';
           await posthog.capture('on_rate_document', feedback);
