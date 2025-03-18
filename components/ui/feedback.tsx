@@ -88,7 +88,7 @@ export function Feedback({
       }}
       className="border-y py-3"
     >
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
         <div className="flex flex-row items-center gap-1.5">
           <p className="text-sm font-medium pe-2">Is this guide helpful?</p>
           <button
@@ -121,7 +121,7 @@ export function Feedback({
           </button>
         </div>
         
-        <div className="flex flex-row items-center gap-1.5">
+        <div className="flex flex-row items-center gap-1.5 w-full sm:w-auto">
           <a
             href={`https://github.com/ava-labs/builders-hub/edit/master/${path}`}
             target="_blank"
