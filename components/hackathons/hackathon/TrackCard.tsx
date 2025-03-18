@@ -22,7 +22,7 @@ export default function TrackCard(props: Props) {
           </div>
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className='dark:bg-zinc-900 bg-zinc-50'>
         <p className='text-sm text-zinc-600 dark:text-zinc-400 text-left'>
           {props.track.short_description}
         </p>

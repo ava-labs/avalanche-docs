@@ -44,7 +44,7 @@ function Tracks({ hackathon }: { hackathon: HackathonHeader }) {
             <DialogTrigger>
               <TrackCard key={index} track={track} />
             </DialogTrigger>
-            <DialogContent className='bg-zinc-900'>
+            <DialogContent className='dark:bg-zinc-900 bg-zinc-50'>
               <DialogTitle />
               <TrackDialogContent track={track} />
             </DialogContent>

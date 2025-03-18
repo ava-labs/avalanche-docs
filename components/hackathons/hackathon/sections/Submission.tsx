@@ -103,7 +103,7 @@ export default async function Submission({
               View full guidelines
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-zinc-900">
+          <DialogContent className="dark:bg-zinc-900 bg-zinc-50">
             <div className="max-w-lg text-white rounded-2xl">
               <div className="flex items-center space-x-3">
                 <div className="p-2 bg-red-500 rounded-full">
@@ -112,7 +112,7 @@ export default async function Submission({
                 <h1 className="text-3xl font-semibold">Guidelines</h1>
               </div>
               <span className="block w-full h-[1px] my-8 bg-red-500"></span>
-              <div className="prose">
+              <div className="prose text-zinc-50">
                 <MDXRemote source={hackathon.content.judging_guidelines} />
               </div>
             </div>

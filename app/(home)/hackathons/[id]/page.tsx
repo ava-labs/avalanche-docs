@@ -16,6 +16,7 @@ import Resources from "@/components/hackathons/hackathon/sections/Resources";
 import Community from "@/components/hackathons/hackathon/sections/Community";
 import MentorsJudges from "@/components/hackathons/hackathon/sections/MentorsJudges";
 import OverviewBanner from "@/components/hackathons/hackathon/sections/OverviewBanner";
+import MdxLayout from "@/app/mdx-layout";
 export const revalidate = 60;
 export const dynamicParams = true;
 
