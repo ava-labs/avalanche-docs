@@ -29,7 +29,6 @@ import type { MDXComponents } from 'mdx/types';
 import YouTube from '@/components/content-design/youtube';
 import { Feedback } from '@/components/ui/feedback';
 import posthog from 'posthog-js';
-import { getGithubLastEdit } from 'fumadocs-core/server';
 
 export const dynamicParams = false;
 export const revalidate = false;
@@ -43,16 +42,10 @@ export default async function Page(props: {
 
   const { body: MDX, toc } = await page.data.load();
   const path = `content/docs/${page.file.path}`;
-  const time = await getGithubLastEdit({
-    owner: 'ava-labs',
-    repo: 'builders-hub',
-    path: `content/docs/${page.file.path}`,
-  });
 
   return (
     <DocsPage
       toc={toc}
-      lastUpdate={new Date(time ?? Date.now())}
       full={page.data.full}
       tableOfContent={{
         style: 'clerk',
