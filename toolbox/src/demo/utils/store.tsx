@@ -1,11 +1,9 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage, combine } from 'zustand/middleware'
 import { networkIDs } from "@avalabs/avalanchejs";
-import { pChainAddrFromPubKey } from "../examples/Wallet/pChainAddrFromPubKey";
+import { createCoreWalletClient } from '../../coreViem';
 
 export const initialState = {
-    networkID: networkIDs.FujiID,
-    xpPublicKey: "",
     subnetID: "",
     chainName: "My Chain",
     vmId: "srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy",
@@ -24,7 +22,6 @@ export const initialState = {
     validatorManagerAddress: "",
     proxyAddress: "0xfacade0000000000000000000000000000000000",
     proxyAdminAddress: "0xdad0000000000000000000000000000000000000" as `0x${string}`,
-    walletEVMAddress: "",
     genesisData: "",
     teleporterRegistryAddress: "",
     gasLimit: 12000000,
@@ -32,15 +29,9 @@ export const initialState = {
     icmReceiverAddress: "",
 }
 
-export const useExampleStore = create(
+export const useToolboxStore = create(
     persist(
-        combine(initialState, (set, get) => ({
-            getPChainAddress: () => {
-                const { xpPublicKey, networkID } = get();
-                return pChainAddrFromPubKey(xpPublicKey, networkID)
-            },
-            setNetworkID: (networkID: number) => set({ networkID }),
-            setXpPublicKey: (xpPublicKey: string) => set({ xpPublicKey }),
+        combine(initialState, (set) => ({
             setSubnetID: (subnetID: string) => set({ subnetID }),
             setChainName: (chainName: string) => set({ chainName }),
             setVmId: (vmId: string) => set({ vmId }),
@@ -58,7 +49,6 @@ export const useExampleStore = create(
             setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
             setProxyAddress: (proxyAddress: string) => set({ proxyAddress }),
             setProxyAdminAddress: (proxyAdminAddress: `0x${string}`) => set({ proxyAdminAddress }),
-            setWalletEVMAddress: (walletEVMAddress: string) => set({ walletEVMAddress }),
             setGenesisData: (genesisData: string) => set({ genesisData }),
             setGasLimit: (gasLimit: number) => set({ gasLimit }),
             setTargetBlockRate: (targetBlockRate: number) => set({ targetBlockRate }),
@@ -75,4 +65,22 @@ export const useExampleStore = create(
             storage: createJSONStorage(() => localStorage),
         },
     ),
+)
+
+
+
+export const useWalletStore = create(
+    combine({
+        coreWalletClient: null as ReturnType<typeof createCoreWalletClient> | null,
+        walletChainId: 0,
+        walletEVMAddress: "",
+        avalancheNetworkID: networkIDs.FujiID as typeof networkIDs.FujiID | typeof networkIDs.MainnetID,
+        pChainAddress: "",
+    }, set => ({
+        setCoreWalletClient: (coreWalletClient: ReturnType<typeof createCoreWalletClient>) => set({ coreWalletClient }),
+        setWalletChainId: (walletChainId: number) => set({ walletChainId }),
+        setWalletEVMAddress: (walletEVMAddress: string) => set({ walletEVMAddress }),
+        setAvalancheNetworkID: (avalancheNetworkID: typeof networkIDs.FujiID | typeof networkIDs.MainnetID) => set({ avalancheNetworkID }),
+        setPChainAddress: (pChainAddress: string) => set({ pChainAddress }),
+    })),
 )

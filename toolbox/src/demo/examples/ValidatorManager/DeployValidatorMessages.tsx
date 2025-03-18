@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { Button } from "../../ui";
@@ -10,7 +10,7 @@ import ValidatorMessagesABI from "../../../../contracts/icm-contracts/compiled/V
 
 export default function DeployValidatorMessages() {
     const { showBoundary } = useErrorBoundary();
-    const { validatorMessagesLibAddress, setValidatorMessagesLibAddress, walletChainId } = useExampleStore();
+    const { validatorMessagesLibAddress, setValidatorMessagesLibAddress, walletChainId } = useToolboxStore();
     const [isDeploying, setIsDeploying] = useState(false);
 
     async function handleDeploy() {

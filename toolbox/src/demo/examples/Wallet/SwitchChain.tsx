@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input, Select } from "../../ui";
@@ -20,7 +20,7 @@ export default function SwitchChain() {
         setEvmChainName,
         setEvmChainRpcUrl,
         setEvmChainCoinName,
-    } = useExampleStore();
+    } = useToolboxStore();
     const [isCheckingRpc, setIsCheckingRpc] = useState(false);
 
 

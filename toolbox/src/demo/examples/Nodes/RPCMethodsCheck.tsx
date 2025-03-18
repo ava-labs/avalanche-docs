@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
 import { createPublicClient, http } from 'viem';
 import { useErrorBoundary } from "react-error-boundary";
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { pvm } from '@avalabs/avalanchejs';
 
 type TestResult = Record<string, { passed: boolean, message: string }>;
@@ -241,7 +241,7 @@ export default function RPCMethodsCheck() {
         setEvmChainRpcUrl,
         getPChainAddress,
         walletEVMAddress
-    } = useExampleStore();
+    } = useToolboxStore();
     const { showBoundary } = useErrorBoundary();
     const [isChecking, setIsChecking] = useState(false);
     const [testResults, setTestResults] = useState<{

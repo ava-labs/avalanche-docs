@@ -88,7 +88,7 @@ export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: 
 
 import { useEffect, useState } from "react";
 import { Input } from "../../ui";
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { CodeHighlighter } from "../../ui/CodeHighlighter";
 
 export default function GenesisBuilder() {
@@ -102,7 +102,7 @@ export default function GenesisBuilder() {
         setGasLimit,
         targetBlockRate,
         setTargetBlockRate
-    } = useExampleStore()
+    } = useToolboxStore()
 
     const [ownerAddress, setOwnerAddress] = useState<string>("")
 

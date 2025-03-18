@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { packL1ConversionMessage, PackL1ConversionMessageArgs } from "./convertWarp";
@@ -26,7 +26,7 @@ export default function CollectConversionSignatures() {
         setL1ConversionSignature,
         validatorWeights,
         setValidatorWeights,
-    } = useExampleStore(state => state);
+    } = useToolboxStore(state => state);
     const [isConverting, setIsConverting] = useState(false);
     const [message, setMessage] = useState("");
     const [justification, setJustification] = useState("");

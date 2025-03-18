@@ -2,116 +2,72 @@ import { useState, useEffect } from "react";
 import { Button } from "./Button";
 import { useErrorBoundary } from "react-error-boundary";
 import { Wallet } from "lucide-react";
-import { useExampleStore } from "../utils/store";
-
+import { useWalletStore } from "../utils/store";
+import { createCoreWalletClient } from "../../coreViem";
+import { networkIDs } from "@avalabs/avalanchejs";
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
-    const { walletChainId, setWalletChainId, walletEVMAddress, setWalletEVMAddress, setXpPublicKey } = useExampleStore();
-    const [isConnected, setIsConnected] = useState<boolean>(false);
+    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId } = useWalletStore();
     const [hasWallet, setHasWallet] = useState<boolean>(false);
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
-    const [isConnecting, setIsConnecting] = useState(false);
-
 
     useEffect(() => {
-        setHasWallet(!!window.avalanche);
+        async function init() {
+            try {
+                const client = createCoreWalletClient();
+                setCoreWalletClient(client);
+
+                //first, let's check if there is a wallet at all
+                if (window.avalanche) {
+                    setHasWallet(true);
+                } else {
+                    setHasWallet(false);
+                    return
+                }
+
+                window.avalanche?.on("accountsChanged", async (accounts: string[]) => {
+                    if (accounts.length === 0) {
+                        setWalletEVMAddress("");
+                        return
+                    }
+
+                    client.account = { address: accounts[0] as `0x${string}`, type: "json-rpc" };
+                    setWalletEVMAddress(accounts[0] as `0x${string}`);
+
+                    client.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+
+                    if (walletChainId === 0) {
+                        client.getChainId().then(onChainChanged).catch(showBoundary);
+                    }
+                });
+
+
+                const onChainChanged = (chainId: string | number) => {
+                    if (typeof chainId === "string") {
+                        chainId = parseInt(chainId, 16);
+                    }
+
+                    setWalletChainId(chainId);
+                    client.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+
+                    client.getEthereumChain().then(({ isTestnet }) => {
+                        setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID);
+                    }).catch(showBoundary);
+                }
+                window.avalanche.on("chainChanged", onChainChanged);
+
+            } catch (error) {
+                showBoundary(error);
+            }
+        }
+        init();
     }, []);
 
     async function connectWallet() {
-        setIsConnecting(true);
-        try {
-            const accounts = await window.avalanche?.request<string[]>({
-                method: "eth_requestAccounts",
-            });
-            if (!accounts?.[0]) {
-                throw new Error("No accounts found");
-            }
-
-            // Request public keys after connecting
-            const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
-                method: "avalanche_getAccountPubKey",
-            });
-            if (!pubkeys) {
-                throw new Error("Failed to get public keys");
-            }
-
-            setWalletEVMAddress(accounts[0]);
-            setXpPublicKey(pubkeys.xp);
-            setIsConnected(true);
-        } catch (error) {
-            showBoundary(error as Error);
-        } finally {
-            setIsConnecting(false);
-        }
+        window.avalanche?.request({ method: "eth_requestAccounts" }).catch((error) => {
+            showBoundary(error);
+        });
     }
-
-    useEffect(() => {
-        window.avalanche?.request<string[]>({
-            method: "eth_accounts",
-        }).then(async (accounts) => {
-            if (accounts.length > 0) {
-                console.log(`ConnectWallet:Connected to ${accounts[0]}`);
-                setWalletEVMAddress(accounts[0]);
-
-                // Get public keys for already connected account
-                const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
-                    method: "avalanche_getAccountPubKey",
-                });
-                if (pubkeys) {
-                    setXpPublicKey(pubkeys.xp);
-                }
-
-                setIsConnected(true);
-            } else {
-                console.log(`ConnectWallet:Not connected`);
-                setIsConnected(false);
-            }
-        }).catch((error) => {
-            console.log(`ConnectWallet:Error connecting to wallet: ${error}`);
-        }).finally(() => {
-            setIsLoaded(true);
-        });
-    }, []);
-
-    useEffect(() => {
-        // Initial chain ID check
-        window.avalanche?.request<string>({
-            method: "eth_chainId",
-        }).then((id) => {
-            setWalletChainId(parseInt(id, 16));
-        }).catch(console.error);
-
-        // Subscribe to chain changes
-        window.avalanche?.on("chainChanged", (newChainId: string) => {
-            setWalletChainId(parseInt(newChainId, 16));
-        });
-
-        // Subscribe to account changes
-        window.avalanche?.on("accountsChanged", async (accounts: string[]) => {
-            if (accounts.length > 0) {
-                setWalletEVMAddress(accounts[0]);
-
-                // Get public keys for already connected account
-                const pubkeys = await window.avalanche?.request<{ xp: string, evm: string }>({
-                    method: "avalanche_getAccountPubKey",
-                });
-                if (pubkeys) {
-                    setXpPublicKey(pubkeys.xp);
-                }
-
-                setIsConnected(true);
-            } else {
-                setWalletEVMAddress("");
-                setIsConnected(false);
-            }
-        });
-
-        return () => {
-            window.avalanche?.removeListener("chainChanged", () => { });
-            window.avalanche?.removeListener("accountsChanged", () => { });
-        };
-    }, []);
 
     if (required && !hasWallet) {
         return (
@@ -128,18 +84,14 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
         );
     }
 
-    if (required && !isConnected && isLoaded) {
+    if (required && !walletEVMAddress) {
         return (
             <div className="space-y-2">
-                <Button onClick={connectWallet} icon={<Wallet className="w-4 h-4 mr-2" />} loading={isConnecting}>
+                <Button onClick={connectWallet} icon={<Wallet className="w-4 h-4 mr-2" />}>
                     Connect Wallet
                 </Button>
             </div>
         );
-    }
-
-    if (required && !isLoaded) {
-        return null;
     }
 
     return (
