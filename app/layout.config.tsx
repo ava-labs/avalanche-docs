@@ -497,7 +497,7 @@ export const baseOptions: BaseLayoutProps = {
     github,
     eventsMenu,
     integrationsMenu,
-    hackathons,
+    // hackathons,
     //userMenu,
   ],
 };
