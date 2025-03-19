@@ -16,15 +16,14 @@ function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
               {hackathon.content.speakers_text}
             </p>
           </div>
-          <Image
+          {/* <Image
             src={hackathon.content.speakers_banner}
             alt="Speakers and judges collage"
             width={300}
             height={300}
             className="w-[55%] hidden lg:block"
-          ></Image>
-        </div>
-        <div className="flex gap-4 justify-center sm:justify-start flex-wrap">
+          ></Image> */}
+            <div className="flex gap-10 justify-center sm:justify-start flex-wrap">
           {hackathon.content.speakers.map((speaker, index) => (
             <div key={index} className="flex flex-col gap-4 mt-4">
               <Image
@@ -52,6 +51,8 @@ function MentorsJudges({ hackathon }: { hackathon: HackathonHeader }) {
             </div>
           ))}
         </div>
+        </div>
+      
       </div>
     </section>
   );

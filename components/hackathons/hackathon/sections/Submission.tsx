@@ -36,6 +36,7 @@ export default async function Submission({
                 month: 'long',
                 day: 'numeric',
                 year: 'numeric',
+                timeZone: hackathon.timezone,
               }).format(new Date(hackathon.content.submission_deadline))}
             </b>
             , at{' '}
@@ -44,9 +45,9 @@ export default async function Submission({
                 hour: '2-digit',
                 minute: '2-digit',
                 hour12: true,
-                timeZone: 'UTC',
+                timeZone: hackathon.timezone,
               }).format(new Date(hackathon.content.submission_deadline))}{' '}
-              UTC
+              {hackathon.timezone}
             </b>
             .
           </p>
@@ -96,7 +97,7 @@ export default async function Submission({
       <div className='flex justify-center mt-8 gap-4'>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant='red' className='w-2/5 md:w-1/3 lg:w-1/4 cursor-pointer'>
+            <Button variant='red' className='text-s w-2/5 md:w-1/3 lg:w-1/4 cursor-pointer'>
               View full guidelines
             </Button>
           </DialogTrigger>
@@ -125,7 +126,7 @@ export default async function Submission({
             target={
               hackathon.content.submission_custom_link ? '_blank' : '_self'
             }
-            className='text-xs sm:text-base'
+            className='text-s sm:text-base'
           >
             Submit project
           </Link>

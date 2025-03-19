@@ -16,7 +16,6 @@ import Resources from '@/components/hackathons/hackathon/sections/Resources';
 import Community from '@/components/hackathons/hackathon/sections/Community';
 import MentorsJudges from '@/components/hackathons/hackathon/sections/MentorsJudges';
 import OverviewBanner from '@/components/hackathons/hackathon/sections/OverviewBanner';
-import MdxLayout from '@/app/mdx-layout';
 export const revalidate = 60;
 export const dynamicParams = true;
 
@@ -59,7 +58,7 @@ export default async function HackathonPage({
         <Button
           asChild
           variant={'secondary'}
-          className='w-1/4 bg-red-500 rounded-md text-zinc-100 text-xs sm:text-base'
+          className='w-1/4 bg-red-500 rounded-md text-zinc-100 text-s sm:text-base'
         >
           <Link
             href={

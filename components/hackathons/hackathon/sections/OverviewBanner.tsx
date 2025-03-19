@@ -28,7 +28,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
       <h1 className="text-md sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-zinc-50 font-bold sm:mb-2">
         {hackathon.title}
       </h1>
-      <p className="text-xs xl:text-sm 2xl:text-base text-zinc-50 hidden xl:inline">
+      <p className="text-s xl:text-sm 2xl:text-base text-zinc-50 hidden xl:inline">
         {hackathon.description}
       </p>
       <div className="max-w-80">
@@ -49,16 +49,16 @@ export default function OverviewBanner({ hackathon, id }: Props) {
              } target={hackathon.content.join_custom_link? '_blank': '_self'}> { hackathon.content.join_custom_text?? "Join now"} </Link>
         </Button>
         <div className="flex flex-col">
-          <div className="hidden sm:flex flex-col gap-2 max-w-[60%] md:max-w-[50%] xl:max-w-[60%]">
+          <div className="hidden sm:flex flex-col gap-2 max-w-[60%] md:max-w-[45%] xl:max-w-[60%]">
             <div className="flex justify-between gap-2 text-gray-400">
               <Calendar color="#F5F5F9" className="w-4 lg:w-5 h-4 lg:h-5" />
-              <span className="text-xs xl:text-sm text-zinc-50">
+              <span className="text-s xl:text-sm text-zinc-50">
                 {formattedDate}
               </span>
             </div>
             <div className="flex justify-between gap-2 text-gray-400">
               <MapPin color="#F5F5F9" className="w-4 lg:w-5 h-4 lg:h-5" />
-              <span className="text-xs xl:text-sm text-zinc-300">
+              <span className="text-s xl:text-sm text-zinc-300">
                 {hackathon.location}
               </span>
             </div>

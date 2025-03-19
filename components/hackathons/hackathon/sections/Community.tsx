@@ -8,19 +8,14 @@ import Link from 'next/link';
 
 const communityResources = [
   {
-    title: 'Discord / Telegram',
-    icon: 'crown',
-    link: 'https://discord.com/invite/avax',
+    title: 'Join the Telegram chat',
+    icon: 'send',
+    link: 'https://t.me/avalancheacademy',
   },
   {
-    title: 'Mentorship Program',
-    icon: 'circle-user',
-    link: 'https://www.avax.network/blog/avalanche-launches-ambassador-dao',
-  },
-  {
-    title: 'Networking Opportunities',
-    icon: 'handshake',
-    link: 'https://www.avax.network/',
+    title: 'Avalanche Team1 X',
+    icon: 'bird',
+    link: 'https://x.com/AvaxTeam1',
   },
 ];
 
@@ -62,9 +57,8 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
           ))}
         </div>
 
-        {/* Botón de acción */}
-        <div className='flex justify-center'>
-          <Button
+        {/* <div className='flex justify-center'>
+        <Button
             asChild
             variant={'secondary'}
             className='w-fit px-6 bg-red-500 rounded-md text-zinc-100'
@@ -77,7 +71,7 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
               <p className='lg:text-base'>EXPLORE COMMUNITY & NETWORKING</p>
             </a>
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
