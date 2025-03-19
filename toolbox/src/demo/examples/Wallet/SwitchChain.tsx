@@ -1,56 +1,39 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useViemChainStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input, Select } from "../../ui";
-import { createWalletClient, createPublicClient, custom, http, AddEthereumChainParameter } from 'viem';
+import { createPublicClient, http } from 'viem';
 
 
 export default function SwitchChain() {
     const { showBoundary } = useErrorBoundary();
     const [isSwitching, setIsSwitching] = useState(false);
     const [targetChainId, setTargetChainId] = useState<number>(0);
-    const [isTestnet, setIsTestnet] = useState<boolean>(true);
     const {
-        walletChainId,
         evmChainName,
         evmChainRpcUrl,
         evmChainCoinName,
         setEvmChainName,
         setEvmChainRpcUrl,
         setEvmChainCoinName,
+        evmChainIsTestnet,
+        setEvmChainIsTestnet
     } = useToolboxStore();
+    const { walletChainId, coreWalletClient } = useWalletStore();
     const [isCheckingRpc, setIsCheckingRpc] = useState(false);
+    const viemChain = useViemChainStore();
 
 
     async function handleSwitchChain() {
         setIsSwitching(true);
         try {
-            const walletClient = createWalletClient({
-                transport: custom(window.avalanche!),
-            });
+            if (!coreWalletClient) throw new Error("Core wallet client not found");
+            if (!viemChain) throw new Error("Viem chain not found");
 
-            const chain: AddEthereumChainParameter = {
-                chainId: `0x${targetChainId.toString(16)}`,
-                chainName: evmChainName,
-                nativeCurrency: {
-                    name: evmChainCoinName,
-                    symbol: evmChainCoinName,
-                    decimals: 18,
-                },
-                rpcUrls: [evmChainRpcUrl],
-            }
-
-            await walletClient.request({
-                id: "1",
-                method: "wallet_addEthereumChain",
-                params: [{ ...chain, isTestnet } as unknown as AddEthereumChainParameter],//Core wallet supports a custom 
-            });
-
-            await walletClient.switchChain({
-                id: targetChainId,
-            });
+            await coreWalletClient.addChain({ chain: viemChain });
+            await coreWalletClient.switchChain({ id: viemChain.id });
         } catch (error) {
             showBoundary(error);
         } finally {
@@ -107,8 +90,8 @@ export default function SwitchChain() {
                 />
                 <Select
                     label="Is Testnet"
-                    value={isTestnet.toString()}
-                    onChange={(value) => setIsTestnet(value === "true")}
+                    value={evmChainIsTestnet.toString()}
+                    onChange={(value) => setEvmChainIsTestnet(value === "true")}
                     options={[
                         { value: "true", label: "Yes" },
                         { value: "false", label: "No" }

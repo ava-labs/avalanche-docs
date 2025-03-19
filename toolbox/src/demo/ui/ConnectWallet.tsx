@@ -7,7 +7,7 @@ import { createCoreWalletClient } from "../../coreViem";
 import { networkIDs } from "@avalabs/avalanchejs";
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
-    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId } = useWalletStore();
+    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, avalancheNetworkID } = useWalletStore();
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
 
@@ -109,8 +109,11 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                     </div>
                 </div>
                 {walletChainId && (
-                    <div className="text-sm flex-3 min-w-0">
-                        Chain ID: <span className="font-mono truncate whitespace-nowrap overflow-hidden text-ellipsis block">{walletChainId}</span>
+                    <div className="text-sm flex-3 min-w-0 flex items-center gap-2">
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${avalancheNetworkID === networkIDs.FujiID ? 'bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100' : 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'}`}>
+                            {avalancheNetworkID === networkIDs.FujiID ? "Testnet" : "Mainnet"}
+                        </span>
+                        <span className="dark:text-zinc-300">Chain ID: {walletChainId}</span>
                     </div>
                 )}
             </div>}
