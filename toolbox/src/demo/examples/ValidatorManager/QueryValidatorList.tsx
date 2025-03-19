@@ -43,7 +43,6 @@ export default function QueryValidatorList() {
   const [prevPageTokens, setPrevPageTokens] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5;
-  const [totalValidators, setTotalValidators] = useState(0);
 
   // Network names for display
   const networkNames: Record<number, string> = {
