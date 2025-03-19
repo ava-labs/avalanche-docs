@@ -7,7 +7,7 @@ import { Input, Button } from '../../ui';
 import { CodeHighlighter } from '../../ui/CodeHighlighter';
 import { useState, useEffect } from 'react';
 import { useErrorBoundary } from "react-error-boundary";
-import KnownChainIDWarning from '../../ui/KnownChainIDWarning';
+import KnownChainIDWarning from '../../ui/WrongChainIDWarning';
 const randomPrivateKey = generatePrivateKey()
 const MINIMUM_BALANCE = parseEther('100')
 
@@ -56,7 +56,6 @@ export default function ICMRelayer() {
             const hash = await walletClient.sendTransaction({
                 to: relayerAddress,
                 value: MINIMUM_BALANCE - balance,
-                account: address,
                 chain: {
                     id: walletChainId,
                     name: "Chain",

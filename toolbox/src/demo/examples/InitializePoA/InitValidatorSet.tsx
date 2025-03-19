@@ -89,7 +89,6 @@ export default function InitValidatorSet() {
                 functionName: 'initializeValidatorSet',
                 args: txArgs,
                 accessList,
-                account: from,
                 gas: BigInt(1_000_000),
                 chain: {
                     id: walletChainId,

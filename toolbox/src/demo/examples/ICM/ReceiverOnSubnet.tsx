@@ -7,7 +7,7 @@ import { Button } from "../../ui";
 import { Success } from "../../ui/Success";
 import { createWalletClient, custom, createPublicClient } from 'viem';
 import ReceiverOnSubnetABI from "../../../../contracts/example-contracts/compiled/ReceiverOnSubnet.json";
-import KnownChainIDWarning from "../../ui/KnownChainIDWarning";
+import KnownChainIDWarning from "../../ui/WrongChainIDWarning";
 import { avalancheFuji } from "viem/chains";
 import TeleporterMessengerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Contract_Address_v1.0.0.txt.json';
 
@@ -57,7 +57,6 @@ export default function DeployReceiver() {
             const hash = await walletClient.deployContract({
                 abi: ReceiverOnSubnetABI.abi,
                 bytecode: ReceiverOnSubnetABI.bytecode.object as `0x${string}`,
-                account: address,
                 chain: {
                     // The values below (except for chainID) are not important since viem only checks chainID
                     id: walletChainId,

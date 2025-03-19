@@ -1,27 +1,29 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useViemChainStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
 import { createWalletClient, custom, createPublicClient } from 'viem';
 import ProxyAdminABI from "../../../../contracts/openzeppelin-4.9/compiled/ProxyAdmin.json";
+import { RequireChainL1 } from "../../ui/RequireChain";
 
 export default function UpgradeProxy() {
     const { showBoundary } = useErrorBoundary();
     const {
-        walletChainId,
         validatorManagerAddress,
         proxyAddress,
         proxyAdminAddress,
         setProxyAddress,
         setProxyAdminAddress
     } = useToolboxStore();
+    const { walletChainId, coreWalletClient } = useWalletStore();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [currentImplementation, setCurrentImplementation] = useState<string | null>(null);
     const [desiredImplementation, setDesiredImplementation] = useState<string | null>(null);
     const [contractError, setContractError] = useState<string | null>(null);
+    const viemChain = useViemChainStore();
 
     useEffect(() => {
         if (validatorManagerAddress && !desiredImplementation && validatorManagerAddress !== desiredImplementation) {
@@ -68,30 +70,14 @@ export default function UpgradeProxy() {
 
         setIsUpgrading(true);
         try {
-            const walletClient = createWalletClient({
-                transport: custom(window.avalanche!),
-            });
+            if (!coreWalletClient) throw new Error("Core wallet not connected");
 
-            const [address] = await walletClient.requestAddresses();
-
-            const hash = await walletClient.writeContract({
+            const hash = await coreWalletClient.writeContract({
                 address: proxyAdminAddress,
                 abi: ProxyAdminABI.abi,
                 functionName: 'upgrade',
                 args: [proxyAddress, validatorManagerAddress as `0x${string}`],
-                account: address,
-                chain: {
-                    id: walletChainId,
-                    name: "My L1",
-                    rpcUrls: {
-                        default: { http: [] },
-                    },
-                    nativeCurrency: {
-                        name: "COIN",
-                        symbol: "COIN",
-                        decimals: 18,
-                    },
-                },
+                chain: viemChain,
             });
 
             const publicClient = createPublicClient({
@@ -110,49 +96,51 @@ export default function UpgradeProxy() {
     const isUpgradeNeeded = currentImplementation?.toLowerCase() !== desiredImplementation?.toLowerCase();
 
     return (
-        <div className="space-y-4">
-            <h2 className="text-lg font-semibold ">Upgrade Proxy Implementation</h2>
+        <RequireChainL1>
             <div className="space-y-4">
-                <Input
-                    label="Proxy Address"
-                    value={proxyAddress}
-                    onChange={setProxyAddress}
-                    placeholder="Enter proxy address"
-                    error={contractError}
-                />
-                <Input
-                    label="Proxy Admin Address"
-                    value={proxyAdminAddress}
-                    onChange={(value: string) => setProxyAdminAddress(value as `0x${string}`)}
-                    placeholder="Enter proxy admin address"
-                />
-                <Input
-                    label="Desired Implementation"
-                    value={desiredImplementation || ""}
-                    onChange={(value: string) => setDesiredImplementation(value)}
-                    placeholder="Enter desired implementation address"
-                />
-                <Input
+                <h2 className="text-lg font-semibold ">Upgrade Proxy Implementation</h2>
+                <div className="space-y-4">
+                    <Input
+                        label="Proxy Address"
+                        value={proxyAddress}
+                        onChange={setProxyAddress}
+                        placeholder="Enter proxy address"
+                        error={contractError}
+                    />
+                    <Input
+                        label="Proxy Admin Address"
+                        value={proxyAdminAddress}
+                        onChange={(value: string) => setProxyAdminAddress(value as `0x${string}`)}
+                        placeholder="Enter proxy admin address"
+                    />
+                    <Input
+                        label="Desired Implementation"
+                        value={desiredImplementation || ""}
+                        onChange={(value: string) => setDesiredImplementation(value)}
+                        placeholder="Enter desired implementation address"
+                    />
+                    <Input
+                        label="Current Implementation"
+                        value={currentImplementation || ""}
+                        disabled
+                        error={contractError}
+                    />
+                    <Button
+                        type="primary"
+                        onClick={handleUpgrade}
+                        loading={isUpgrading}
+                        disabled={isUpgrading || !validatorManagerAddress || !isUpgradeNeeded}
+                    >
+                        {!validatorManagerAddress ? "Deploy ValidatorManager First" :
+                            !isUpgradeNeeded ? "Already Up To Date" :
+                                "Upgrade Proxy"}
+                    </Button>
+                </div>
+                {!isUpgradeNeeded && <Success
                     label="Current Implementation"
-                    value={currentImplementation || ""}
-                    disabled
-                    error={contractError}
-                />
-                <Button
-                    type="primary"
-                    onClick={handleUpgrade}
-                    loading={isUpgrading}
-                    disabled={isUpgrading || !validatorManagerAddress || !isUpgradeNeeded}
-                >
-                    {!validatorManagerAddress ? "Deploy ValidatorManager First" :
-                        !isUpgradeNeeded ? "Already Up To Date" :
-                            "Upgrade Proxy"}
-                </Button>
+                    value={"No change needed"}
+                />}
             </div>
-            {!isUpgradeNeeded && <Success
-                label="Current Implementation"
-                value={"No change needed"}
-            />}
-        </div>
+        </RequireChainL1>
     );
 };

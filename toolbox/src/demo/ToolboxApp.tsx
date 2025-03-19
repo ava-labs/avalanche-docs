@@ -67,16 +67,16 @@ const componentGroups: Record<string, ComponentType[]> = {
             fileNames: ["toolbox/src/demo/examples/ValidatorManager/DeployValidatorManager.tsx"]
         },
         {
-            id: "readContract",
-            label: "Read Contract",
-            component: lazy(() => import('./examples/ValidatorManager/ReadContract')),
-            fileNames: ["toolbox/src/demo/examples/ValidatorManager/ReadContract.tsx"]
-        },
-        {
             id: "upgradeProxy",
             label: "Upgrade Proxy",
             component: lazy(() => import('./examples/ValidatorManager/UpgradeProxy')),
             fileNames: ["toolbox/src/demo/examples/ValidatorManager/UpgradeProxy.tsx"]
+        },
+        {
+            id: "readContract",
+            label: "Read Contract",
+            component: lazy(() => import('./examples/ValidatorManager/ReadContract')),
+            fileNames: ["toolbox/src/demo/examples/ValidatorManager/ReadContract.tsx"]
         }
     ],
     "Initialize ValidatorManager": [

@@ -52,7 +52,6 @@ export default function DeployReceiver() {
                 abi: SenderOnCChainABI.abi,
                 functionName: 'sendMessage',
                 args: [icmReceiverAddress, message, chainIDHex],
-                account: address,
                 chain: avalancheFuji,
             });
 

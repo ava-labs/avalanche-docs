@@ -11,7 +11,7 @@ import { getEthereumChain } from './methods/getEthereumChain'
 import { extractChainInfo, ExtractChainInfoParams } from './methods/extractChainInfo'
 // import { sendTransaction } from './overrides/sendTransaction'
 
-export function createCoreWalletClient(account?: `0x${string}`) {
+export function createCoreWalletClient(account: `0x${string}`) {
     return createWalletClient({
         transport: custom(window.avalanche!),
         account: account,

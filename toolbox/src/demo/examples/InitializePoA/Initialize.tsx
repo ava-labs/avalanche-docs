@@ -100,7 +100,6 @@ export default function Initialize() {
                 abi: ValidatorManagerABI.abi,
                 functionName: 'initialize',
                 args: [settings],
-                account: address,
                 chain: {
                     id: walletChainId,
                     name: "My L1",

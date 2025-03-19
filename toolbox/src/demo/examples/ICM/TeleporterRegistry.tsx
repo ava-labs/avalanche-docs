@@ -9,7 +9,7 @@ import { createWalletClient, custom, createPublicClient } from 'viem';
 import TeleporterRegistryBytecode from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterRegistry_Bytecode_v1.0.0.txt.json';
 import TeleporterMessengerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Contract_Address_v1.0.0.txt.json';
 import TeleporterRegistryManualyCompiled from '../../../../contracts/icm-contracts/compiled/TeleporterRegistry.json';
-import KnownChainIDWarning from "../../ui/KnownChainIDWarning";
+import KnownChainIDWarning from "../../ui/WrongChainIDWarning";
 
 export default function TeleporterRegistry() {
     const { showBoundary } = useErrorBoundary();
@@ -34,7 +34,6 @@ export default function TeleporterRegistry() {
             const messengerAddress = TeleporterMessengerAddress.content.trim() as `0x${string}`;
 
             const hash = await walletClient.deployContract({
-                account: address,
                 bytecode: TeleporterRegistryBytecode.content.trim() as `0x${string}`,
                 abi: TeleporterRegistryManualyCompiled.abi,
                 args: [

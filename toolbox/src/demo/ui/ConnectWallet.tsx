@@ -5,16 +5,17 @@ import { Wallet } from "lucide-react";
 import { useWalletStore } from "../utils/store";
 import { createCoreWalletClient } from "../../coreViem";
 import { networkIDs } from "@avalabs/avalanchejs";
+import { zeroAddress } from "viem";
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
-    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, avalancheNetworkID } = useWalletStore();
+    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, avalancheNetworkID } = useWalletStore();
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
 
     useEffect(() => {
         async function init() {
             try {
-                const client = createCoreWalletClient();
+                const client = createCoreWalletClient(zeroAddress);
                 setCoreWalletClient(client);
 
                 //first, let's check if there is a wallet at all
@@ -29,9 +30,13 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                     if (accounts.length === 0) {
                         setWalletEVMAddress("");
                         return
+                    } else if (accounts.length > 1) {
+                        showBoundary(new Error("Multiple accounts found, we don't support that yet"));
+                        return
                     }
 
-                    client.account = { address: accounts[0] as `0x${string}`, type: "json-rpc" };
+                    setCoreWalletClient(createCoreWalletClient(accounts[0] as `0x${string}`));
+
                     setWalletEVMAddress(accounts[0] as `0x${string}`);
 
                     client.getPChainAddress().then(setPChainAddress).catch(showBoundary);

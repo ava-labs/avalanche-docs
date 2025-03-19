@@ -9,7 +9,7 @@ import { useToolboxStore } from "../../utils/store";
 import TeleporterMessengerDeploymentTransaction from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployment_Transaction_v1.0.0.txt.json';
 import TeleporterMessengerDeployerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployer_Address_v1.0.0.txt.json';
 import TeleporterMessengerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Contract_Address_v1.0.0.txt.json';
-import KnownChainIDWarning from "../../ui/KnownChainIDWarning";
+import KnownChainIDWarning from "../../ui/WrongChainIDWarning";
 
 const MINIMUM_BALANCE = parseEther('11');
 
@@ -37,7 +37,6 @@ const TopUpComponent = ({
             const hash = await walletClient.sendTransaction({
                 to: deployerAddress as `0x${string}`,
                 value: parseEther(amount),
-                account: address,
                 chain: {
                     id: walletChainId,
                     name: "My L1",
