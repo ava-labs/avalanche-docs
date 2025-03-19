@@ -88,12 +88,11 @@ export const quickAndDirtyGenesisBuilder = (ownerAddress: `${string}`, chainID: 
 
 import { useEffect, useState } from "react";
 import { Input } from "../../ui";
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { CodeHighlighter } from "../../ui/CodeHighlighter";
 
 export default function GenesisBuilder() {
     const {
-        walletEVMAddress,
         evmChainId,
         setEvmChainId,
         genesisData,
@@ -103,6 +102,7 @@ export default function GenesisBuilder() {
         targetBlockRate,
         setTargetBlockRate
     } = useToolboxStore()
+    const { walletEVMAddress } = useWalletStore()
 
     const [ownerAddress, setOwnerAddress] = useState<string>("")
 
