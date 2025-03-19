@@ -6,8 +6,14 @@ authors: [owenwahlgren]
 icon: SearchCheck
 ---
 
+import SubnetDetails from "../../../../toolbox/src/demo/examples/ValidatorManager/SubnetDetails.tsx"
+import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper.tsx"
 
 ### Query the L1 Details
+
+<ToolboxMdxWrapper>
+    <SubnetDetails />
+</ToolboxMdxWrapper>
 
 To query the L1 details, you can simply use the [Glacier API from AvaCloud](https://developers.avacloud.io/data-api/primary-network/get-subnet-details-by-id).
 
@@ -45,5 +51,3 @@ It should display the L1 details similar to the following:
   ]
 }
 ```
-
-We mainly care that the `isL1` field is `true` and that the `l1ValidatorManagerDetails` field is not empty.
