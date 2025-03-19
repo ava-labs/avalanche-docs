@@ -431,7 +431,7 @@ export const eventsMenu: LinkItemType = {
       text: 'Summit Hackathon London',
       description:
         'This hackathon aims to harness the potential of Avalanche’s robust technology stack to address pressing issues and create scalable, practical solutions.',
-      url: '/hackathon',
+      url: '/hackathons',
     },
     {
       menu: {
