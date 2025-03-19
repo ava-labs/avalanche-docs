@@ -26,8 +26,6 @@ import {
   ListFilter,
   Ticket,
   Earth,
-  LayoutTemplate,
-  GithubIcon,
 } from 'lucide-react';
 import Image from 'next/image';
 import Preview9000 from '@/public/nav-banner/9000-logo.png';
@@ -109,7 +107,7 @@ export const integrationsMenu: LinkItemType = {
   ],
 };
 
-const docsMenu: LinkItemType = {
+export const docsMenu: LinkItemType = {
   type: 'menu',
   text: 'Documentation',
   url: '/docs',
