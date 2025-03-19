@@ -96,6 +96,7 @@ export type ExtractWarpMessageFromTxResponse = {
     justification: string;
     signingSubnetId: string;
     networkId: typeof networkIDs.FujiID | typeof networkIDs.MainnetID;
+    validators: Validator[];
 }
 
 //TODO: rename
@@ -146,6 +147,7 @@ export async function extractWarpMessageFromPChainTx(client: WalletClient<any, a
         message: utils.bufferToHex(message),
         justification: utils.bufferToHex(justification),
         signingSubnetId: data.result.tx.unsignedTx.subnetID,
-        networkId
+        networkId,
+        validators: data.result.tx.unsignedTx.validators,
     }
 }

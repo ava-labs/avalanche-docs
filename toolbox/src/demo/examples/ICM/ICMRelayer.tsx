@@ -2,7 +2,7 @@
 
 import { createPublicClient, createWalletClient, custom, formatEther, parseEther } from 'viem'
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
-import { useToolboxStore } from '../../utils/store';
+import { useToolboxStore, useViemChainStore } from '../../utils/store';
 import { Input, Button } from '../../ui';
 import { CodeHighlighter } from '../../ui/CodeHighlighter';
 import { useState, useEffect } from 'react';
@@ -18,6 +18,7 @@ export default function ICMRelayer() {
     const [isSending, setIsSending] = useState(false);
     const { showBoundary } = useErrorBoundary();
     const relayerAddress = privateKeyToAccount(randomPrivateKey).address;
+    const viemChain = useViemChainStore();
 
     const checkBalance = async () => {
         if (!evmChainRpcUrl) return;
@@ -56,18 +57,7 @@ export default function ICMRelayer() {
             const hash = await walletClient.sendTransaction({
                 to: relayerAddress,
                 value: MINIMUM_BALANCE - balance,
-                chain: {
-                    id: walletChainId,
-                    name: "Chain",
-                    rpcUrls: {
-                        default: { http: [] }
-                    },
-                    nativeCurrency: {
-                        name: "COIN",
-                        symbol: "COIN",
-                        decimals: 18
-                    }
-                }
+                chain: viemChain
             });
 
             const publicClient = createPublicClient({

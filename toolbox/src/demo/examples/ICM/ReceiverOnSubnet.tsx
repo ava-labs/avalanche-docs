@@ -1,6 +1,6 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useViemChainStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button } from "../../ui";
@@ -16,6 +16,7 @@ const SENDER_C_CHAIN_ADDRESS = "0x2419133a23EA13EAF3dC3ee2382F083067107386";
 export default function DeployReceiver() {
     const { showBoundary } = useErrorBoundary();
     const { walletChainId, setIcmReceiverAddress, icmReceiverAddress } = useToolboxStore();
+    const viemChain = useViemChainStore();
     const [isDeploying, setIsDeploying] = useState(false);
     const [isTeleporterDeployed, setIsTeleporterDeployed] = useState(false);
 
@@ -57,19 +58,7 @@ export default function DeployReceiver() {
             const hash = await walletClient.deployContract({
                 abi: ReceiverOnSubnetABI.abi,
                 bytecode: ReceiverOnSubnetABI.bytecode.object as `0x${string}`,
-                chain: {
-                    // The values below (except for chainID) are not important since viem only checks chainID
-                    id: walletChainId,
-                    name: "My L1",
-                    rpcUrls: {
-                        default: { http: [] },
-                    },
-                    nativeCurrency: {
-                        name: "COIN",
-                        symbol: "COIN",
-                        decimals: 18,
-                    },
-                },
+                chain: viemChain
             });
 
             const receipt = await publicClient.waitForTransactionReceipt({ hash });

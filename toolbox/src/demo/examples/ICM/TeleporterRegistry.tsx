@@ -1,6 +1,6 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useViemChainStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { Button } from "../../ui";
@@ -15,6 +15,7 @@ export default function TeleporterRegistry() {
     const { showBoundary } = useErrorBoundary();
     const { walletChainId, setTeleporterRegistryAddress, teleporterRegistryAddress } = useToolboxStore();
     const [isDeploying, setIsDeploying] = useState(false);
+    const viemChain = useViemChainStore();
 
     async function handleDeploy() {
         setIsDeploying(true);
@@ -39,18 +40,7 @@ export default function TeleporterRegistry() {
                 args: [
                     [{ version: 1n, protocolAddress: messengerAddress }]
                 ],
-                chain: {
-                    id: walletChainId,
-                    name: "My L1",
-                    rpcUrls: {
-                        default: { http: [] },
-                    },
-                    nativeCurrency: {
-                        name: "COIN",
-                        symbol: "COIN",
-                        decimals: 18,
-                    },
-                },
+                chain: viemChain,
             });
 
             const receipt = await publicClient.waitForTransactionReceipt({ hash });

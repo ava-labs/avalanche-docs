@@ -1,6 +1,6 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useViemChainStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useMemo } from "react";
 import { Button } from "../../ui";
@@ -16,7 +16,8 @@ const SENDER_C_CHAIN_ADDRESS = "0x2419133a23EA13EAF3dC3ee2382F083067107386";
 
 export default function DeployReceiver() {
     const { showBoundary } = useErrorBoundary();
-    const { walletChainId, icmReceiverAddress, chainID, setChainID, evmChainId, evmChainRpcUrl, setEvmChainRpcUrl } = useToolboxStore();
+    const { walletChainId, icmReceiverAddress, chainID, setChainID, evmChainRpcUrl, setEvmChainRpcUrl } = useToolboxStore();
+    const viemChain = useViemChainStore();
     const [message, setMessage] = useState(`It is around ${new Date().toISOString().slice(11, 16)} o'clock in England`);
     const [isSending, setIsSending] = useState(false);
     const [isSwitchingChains, setIsSwitchingChains] = useState(false);
@@ -88,18 +89,7 @@ export default function DeployReceiver() {
         try {
             const publicClient = createPublicClient({
                 transport: http(evmChainRpcUrl),
-                chain: {
-                    id: evmChainId,
-                    name: "EVM Chain",
-                    rpcUrls: {
-                        default: { http: [] }
-                    },
-                    nativeCurrency: {
-                        name: "EVM Chain",
-                        symbol: "EVM",
-                        decimals: 18
-                    }
-                },
+                chain: viemChain,
             });
             if (!icmReceiverAddress) {
                 throw new Error('Receiver contract not deployed');

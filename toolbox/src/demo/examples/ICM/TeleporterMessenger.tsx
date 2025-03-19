@@ -5,7 +5,7 @@ import { useErrorBoundary } from "react-error-boundary";
 import { Button } from "../../ui";
 import { Success } from "../../ui/Success";
 import { createPublicClient, createWalletClient, custom, formatEther, parseEther } from 'viem';
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useViemChainStore } from "../../utils/store";
 import TeleporterMessengerDeploymentTransaction from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployment_Transaction_v1.0.0.txt.json';
 import TeleporterMessengerDeployerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Deployer_Address_v1.0.0.txt.json';
 import TeleporterMessengerAddress from '../../../../contracts/icm-contracts-releases/v1.0.0/TeleporterMessenger_Contract_Address_v1.0.0.txt.json';
@@ -24,7 +24,7 @@ const TopUpComponent = ({
     const [isSending, setIsSending] = useState(false);
     const { showBoundary } = useErrorBoundary();
     const { walletChainId } = useToolboxStore();
-
+    const viemChain = useViemChainStore();
     const handleTopUp = async () => {
         setIsSending(true);
         try {
@@ -37,18 +37,7 @@ const TopUpComponent = ({
             const hash = await walletClient.sendTransaction({
                 to: deployerAddress as `0x${string}`,
                 value: parseEther(amount),
-                chain: {
-                    id: walletChainId,
-                    name: "My L1",
-                    rpcUrls: {
-                        default: { http: [] },
-                    },
-                    nativeCurrency: {
-                        name: "COIN",
-                        symbol: "COIN",
-                        decimals: 18,
-                    },
-                },
+                chain: viemChain
             });
 
             const publicClient = createPublicClient({
