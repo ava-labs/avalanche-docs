@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { useToolboxStore, useViemChainStore, useWalletStore } from "../../utils/store";
-import { custom, createPublicClient, hexToBytes, decodeErrorResult, Abi } from 'viem';
+import { hexToBytes, decodeErrorResult, Abi } from 'viem';
 import { packWarpIntoAccessList } from './packWarp';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
-import { Button, Input, InputArray } from "../../ui";
+import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
 import { networkIDs, utils } from '@avalabs/avalanchejs';
 import { RequireChainL1 } from '../../ui/RequireChain';
-import { Data as AvaCloudSDKData } from "@avalabs/avacloud-sdk/src/sdk/data";
+import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
 import { CodeHighlighter } from '../../ui/CodeHighlighter';
 
 const cb58ToHex = (cb58: string) => utils.bufferToHex(utils.base58check.decode(cb58));
@@ -22,7 +22,7 @@ export default function InitValidatorSet() {
         proxyAddress,
         evmChainRpcUrl } = useToolboxStore();
     const viemChain = useViemChainStore();
-    const { coreWalletClient } = useWalletStore();
+    const { coreWalletClient, publicClient } = useWalletStore();
     const [isInitializing, setIsInitializing] = useState(false);
     const [txHash, setTxHash] = useState<string | null>(null);
     const [simulationWentThrough, setSimulationWentThrough] = useState(false);
@@ -45,10 +45,10 @@ export default function InitValidatorSet() {
         try {
             if (!coreWalletClient) throw new Error('Core wallet client not found');
 
-            const { validators, message, justification, signingSubnetId, networkId, chainId, managerAddress } = await coreWalletClient!.extractWarpMessageFromPChainTx({ txId: L1ID });
+            const { validators, message, justification, signingSubnetId, networkId, chainId, managerAddress } = await coreWalletClient.extractWarpMessageFromPChainTx({ txId: L1ID });
 
 
-            const { signedMessage } = await new AvaCloudSDKData().signatureAggregator.aggregateSignatures({
+            const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
                 network: networkId === networkIDs.FujiID ? "fuji" : "mainnet",
                 signatureAggregatorRequest: {
                     message: message,
@@ -83,11 +83,6 @@ export default function InitValidatorSet() {
             // Convert signature to bytes and pack into access list
             const signatureBytes = hexToBytes(add0x(signedMessage));
             const accessList = packWarpIntoAccessList(signatureBytes);
-
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche)
-            });
-
 
             const sim = await publicClient.simulateContract({
                 address: proxyAddress as `0x${string}`,

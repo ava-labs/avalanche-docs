@@ -3,7 +3,7 @@ import { persist, createJSONStorage, combine } from 'zustand/middleware'
 import { networkIDs } from "@avalabs/avalanchejs";
 import { createCoreWalletClient } from '../../coreViem';
 import { useMemo } from 'react';
-
+import { createPublicClient, custom, http } from 'viem';
 export const initialState = {
     subnetID: "",
     chainName: "My Chain",
@@ -69,10 +69,14 @@ export const useToolboxStore = create(
 )
 
 
+import { avalancheFuji } from 'viem/chains';
 
 export const useWalletStore = create(
     combine({
         coreWalletClient: createCoreWalletClient(zeroAddress) as ReturnType<typeof createCoreWalletClient>,
+        publicClient: createPublicClient({
+            transport: window.avalanche ? custom(window.avalanche) : http(avalancheFuji.rpcUrls.default.http[0]),//just to calm typescript down
+        }) as ReturnType<typeof createPublicClient>,
         walletChainId: 0,
         walletEVMAddress: "",
         avalancheNetworkID: networkIDs.FujiID as typeof networkIDs.FujiID | typeof networkIDs.MainnetID,

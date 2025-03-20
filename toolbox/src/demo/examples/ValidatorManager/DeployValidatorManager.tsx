@@ -5,7 +5,7 @@ import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { Button } from "../../ui";
 import { Success } from "../../ui/Success";
-import { custom, createPublicClient, keccak256 } from 'viem';
+import { keccak256 } from 'viem';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
 import { RequireChainL1 } from "../../ui/RequireChain";
 
@@ -19,7 +19,7 @@ function calculateLibraryHash(libraryPath: string) {
 export default function DeployValidatorManager() {
     const { showBoundary } = useErrorBoundary();
     const { validatorMessagesLibAddress, setValidatorManagerAddress, validatorManagerAddress } = useToolboxStore();
-    const { walletChainId, coreWalletClient } = useWalletStore();
+    const { walletChainId, coreWalletClient, publicClient } = useWalletStore();
     const [isDeploying, setIsDeploying] = useState(false);
     const viemChain = useViemChainStore();
 
@@ -48,13 +48,6 @@ export default function DeployValidatorManager() {
         setValidatorManagerAddress("");
         try {
             if (!viemChain) throw new Error("Viem chain not found");
-
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche!),
-            });
-
-
-            const [address] = await coreWalletClient.requestAddresses();
 
             const hash = await coreWalletClient.deployContract({
                 abi: ValidatorManagerABI.abi,

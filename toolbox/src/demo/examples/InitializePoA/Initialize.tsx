@@ -5,7 +5,7 @@ import { useErrorBoundary } from "react-error-boundary";
 import { useEffect, useState } from "react";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
-import { createPublicClient, custom, AbiEvent } from 'viem';
+import { AbiEvent } from 'viem';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
 import { utils } from "@avalabs/avalanchejs";
 import { RequireChainL1 } from "../../ui/RequireChain";
@@ -13,7 +13,7 @@ import { RequireChainL1 } from "../../ui/RequireChain";
 export default function Initialize() {
     const { showBoundary } = useErrorBoundary();
     const { subnetID, proxyAddress, setProxyAddress, setSubnetID } = useToolboxStore();
-    const { walletEVMAddress, coreWalletClient } = useWalletStore();
+    const { walletEVMAddress, coreWalletClient, publicClient } = useWalletStore();
     const [isChecking, setIsChecking] = useState(false);
     const [isInitializing, setIsInitializing] = useState(false);
     const [isInitialized, setIsInitialized] = useState<boolean | null>(null);
@@ -47,10 +47,6 @@ export default function Initialize() {
 
         setIsChecking(true);
         try {
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche)
-            });
-
             const initializedEvent = ValidatorManagerABI.abi.find(
                 item => item.type === 'event' && item.name === 'Initialized'
             );
@@ -100,9 +96,6 @@ export default function Initialize() {
                 chain: viemChain,
             });
 
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche)
-            });
 
             await publicClient.waitForTransactionReceipt({ hash });
             await checkIfInitialized();

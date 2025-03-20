@@ -29,7 +29,7 @@ import { avalancheFuji } from "viem/chains";
 import { Button } from "./Button";
 import { useState } from "react";
 
-export function RequireChainFuji() {
+export function RequireChainFuji({ children }: { children: React.ReactNode }) {
     const { walletChainId, coreWalletClient } = useWalletStore();
     const [isSwitching, setIsSwitching] = useState(false);
     const { showBoundary } = useErrorBoundary();
@@ -50,6 +50,10 @@ export function RequireChainFuji() {
         return <div>Please confirm the switch in your wallet.</div>
     }
 
+    if (walletChainId === avalancheFuji.id) {
+        return children;
+    }
+
     if (walletChainId !== avalancheFuji.id) {
         return <>
             <div className="mb-4">
@@ -59,6 +63,9 @@ export function RequireChainFuji() {
                 <Button onClick={switchToFuji}>
                     Switch to Fuji
                 </Button>
+            </div>
+            <div className="opacity-50 pointer-events-none">
+                {children}
             </div>
         </>
     }

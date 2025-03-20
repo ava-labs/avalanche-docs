@@ -5,7 +5,6 @@ import { useErrorBoundary } from "react-error-boundary";
 import { useState, useEffect } from "react";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
-import { createWalletClient, custom, createPublicClient } from 'viem';
 import ProxyAdminABI from "../../../../contracts/openzeppelin-4.9/compiled/ProxyAdmin.json";
 import { RequireChainL1 } from "../../ui/RequireChain";
 
@@ -18,7 +17,7 @@ export default function UpgradeProxy() {
         setProxyAddress,
         setProxyAdminAddress
     } = useToolboxStore();
-    const { walletChainId, coreWalletClient } = useWalletStore();
+    const { walletChainId, coreWalletClient, publicClient } = useWalletStore();
     const [isUpgrading, setIsUpgrading] = useState(false);
     const [currentImplementation, setCurrentImplementation] = useState<string | null>(null);
     const [desiredImplementation, setDesiredImplementation] = useState<string | null>(null);
@@ -42,10 +41,6 @@ export default function UpgradeProxy() {
                 setContractError(null);
                 return;
             }
-
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche!),
-            });
 
             const implementation = await publicClient.readContract({
                 address: proxyAdminAddress,
@@ -77,10 +72,6 @@ export default function UpgradeProxy() {
                 functionName: 'upgrade',
                 args: [proxyAddress, validatorManagerAddress as `0x${string}`],
                 chain: viemChain,
-            });
-
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche!),
             });
 
             await publicClient.waitForTransactionReceipt({ hash });

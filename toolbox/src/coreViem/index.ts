@@ -12,6 +12,7 @@ import { extractChainInfo, ExtractChainInfoParams } from './methods/extractChain
 // import { sendTransaction } from './overrides/sendTransaction'
 
 //Warning! This api is not stable yet, it will change in the future
+export { type ConvertToL1Validator } from "./methods/convertToL1"
 
 export function createCoreWalletClient(account: `0x${string}`) {
     return createWalletClient({

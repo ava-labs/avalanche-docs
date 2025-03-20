@@ -1,8 +1,8 @@
 "use client";
 
-import { useToolboxStore } from "../../utils/store";
+import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
-import { AbiEvent, createPublicClient, custom } from 'viem';
+import { AbiEvent } from 'viem';
 import { useEffect, useState } from "react";
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
 import { Button, Input } from "../../ui";
@@ -32,6 +32,7 @@ export default function ReadContract() {
     const [viewData, setViewData] = useState<ViewData>({});
     const [isReading, setIsReading] = useState(false);
     const [eventLogs, setEventLogs] = useState<Record<string, any[]>>({});
+    const { publicClient } = useWalletStore();
 
     async function readContractData() {
         if (!proxyAddress) {
@@ -43,10 +44,6 @@ export default function ReadContract() {
         if (!proxyAddress || !window.avalanche) return;
 
         try {
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche)
-            });
-
             // Read all view functions
             const viewFunctions = ValidatorManagerABI.abi.filter(
                 (item: any) => item.type === "function" &&

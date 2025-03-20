@@ -6,7 +6,7 @@ import { useState } from "react";
 import { networkIDs } from "@avalabs/avalanchejs";
 import { Button, Input } from "../../ui";
 import { Success } from "../../ui/Success";
-import { Data as AvaCloudSDKData } from "@avalabs/avacloud-sdk/src/sdk/data";
+import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
 
 export default function CollectConversionSignatures() {
     const { showBoundary } = useErrorBoundary();
@@ -25,10 +25,10 @@ export default function CollectConversionSignatures() {
         setIsConverting(true);
 
         try {
-            const { message, justification, signingSubnetId, networkId } = await coreWalletClient!.extractWarpMessageFromPChainTx({ txId: L1ID });
+            const { message, justification, signingSubnetId, networkId } = await coreWalletClient.extractWarpMessageFromPChainTx({ txId: L1ID });
 
-            const { signedMessage } = await new AvaCloudSDKData().signatureAggregator.aggregateSignatures({
-                network: networkIDs.FujiID ? "fuji" : "mainnet",
+            const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
+                network: networkId === networkIDs.FujiID ? "fuji" : "mainnet",
                 signatureAggregatorRequest: {
                     message: message,
                     justification: justification,

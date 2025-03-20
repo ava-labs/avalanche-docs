@@ -4,7 +4,7 @@ import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useState } from "react";
 import { Button, Input, InputArray } from "../../ui";
 import { Success } from "../../ui/Success";
-import { ConvertToL1Validator } from "../../utils/wallet/methods/convertToL1";
+import { type ConvertToL1Validator } from "../../../coreViem";
 import { useErrorBoundary } from "react-error-boundary";
 
 export default function ConvertToL1() {
@@ -46,7 +46,7 @@ export default function ConvertToL1() {
                 });
             }
 
-            const txID = await coreWalletClient!.convertToL1({
+            const txID = await coreWalletClient.convertToL1({
                 managerAddress,
                 subnetId: subnetID,
                 chainId: chainID,

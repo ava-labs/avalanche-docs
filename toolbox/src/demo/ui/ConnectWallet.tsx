@@ -5,7 +5,6 @@ import { Wallet } from "lucide-react";
 import { useWalletStore } from "../utils/store";
 import { createCoreWalletClient } from "../../coreViem";
 import { networkIDs } from "@avalabs/avalanchejs";
-import { zeroAddress } from "viem";
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
     const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, avalancheNetworkID } = useWalletStore();

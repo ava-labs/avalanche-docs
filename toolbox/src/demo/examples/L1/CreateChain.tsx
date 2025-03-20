@@ -1,8 +1,5 @@
 "use client";
 
-import { utils, Context } from "@avalabs/avalanchejs";
-import { pvm } from "@avalabs/avalanchejs";
-import { getRPCEndpoint } from "../../utils/rpcEndpoint";
 import { initialState, useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useEffect, useState } from "react";
@@ -39,7 +36,7 @@ export default function CreateChain() {
         setChainID("");
         setIsCreating(true);
 
-        coreWalletClient!.createChain({
+        coreWalletClient.createChain({
             chainName: evmChainName,
             subnetId: subnetID,
             vmId,

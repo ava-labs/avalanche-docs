@@ -5,14 +5,13 @@ import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { Button } from "../../ui";
 import { Success } from "../../ui/Success";
-import { createWalletClient, custom, createPublicClient } from 'viem';
 import ValidatorMessagesABI from "../../../../contracts/icm-contracts/compiled/ValidatorMessages.json";
 import { RequireChainL1 } from "../../ui/RequireChain";
 
 export default function DeployValidatorMessages() {
     const { showBoundary } = useErrorBoundary();
     const { validatorMessagesLibAddress, setValidatorMessagesLibAddress } = useToolboxStore();
-    const { walletChainId, coreWalletClient } = useWalletStore();
+    const { walletChainId, coreWalletClient, publicClient } = useWalletStore();
     const [isDeploying, setIsDeploying] = useState(false);
     const viemChain = useViemChainStore();
 
@@ -20,13 +19,6 @@ export default function DeployValidatorMessages() {
         setIsDeploying(true);
         setValidatorMessagesLibAddress("");
         try {
-            const publicClient = createPublicClient({
-                transport: custom(window.avalanche!),
-            });
-
-
-            const [address] = await coreWalletClient.requestAddresses();
-
             const hash = await coreWalletClient.deployContract({
                 abi: ValidatorMessagesABI.abi,
                 bytecode: ValidatorMessagesABI.bytecode.object as `0x${string}`,
