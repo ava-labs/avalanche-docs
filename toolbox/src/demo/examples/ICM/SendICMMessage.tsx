@@ -4,6 +4,7 @@ import { useToolboxStore, useViemChainStore, useWalletStore } from "../../utils/
 import { useErrorBoundary } from "react-error-boundary";
 import { useState, useMemo } from "react";
 import { Button } from "../../ui";
+import { AlertTriangle } from "lucide-react";
 import { Success } from "../../ui/Success";
 import { createPublicClient, http } from 'viem';
 import ReceiverOnSubnetABI from "../../../../contracts/example-contracts/compiled/ReceiverOnSubnet.json";
@@ -90,81 +91,92 @@ export default function DeployReceiver() {
         <RequireChainFuji>
             <div className="space-y-4">
                 <h2 className="text-lg font-semibold">Send ICM Message</h2>
-                <Success
-                    label="ICM Receiver Address"
-                    value={icmReceiverAddress}
-                />
-                <Input
-                    label="Receiver Chain ID"
-                    value={chainID}
-                    onChange={setChainID}
-                    validator={chainID => utils.base58check.decode(chainID).length === 32 ? undefined : "Invalid chain ID length: " + utils.base58check.decode(chainID).length}
-                />
-                <Input
-                    label="Receiver Chain ID in Hex"
-                    value={chainIDHex}
-                    disabled
-                />
-                <Input
-                    label="Message"
-                    value={message}
-                    onChange={setMessage}
-                    validator={message => message.length > 0 ? undefined : "Message is required"}
-                />
-                <Input
-                    label="C-Chain Sender Address"
-                    value={SENDER_C_CHAIN_ADDRESS}
-                    disabled
-                />
-                <Input
-                    label={`L1 Receiver Address on chain #${viemChain?.id}`}
-                    value={icmReceiverAddress || ""}
-                    disabled
-                />
-                <Input
-                    label="EVM Chain RPC URL"
-                    value={evmChainRpcUrl}
-                    onChange={setEvmChainRpcUrl}
-                />
-                {!icmReceiverAddress && <div className="text-sm">
-                    You must <a href="#receiverOnSubnet" className="text-blue-500 hover:underline">deploy the ReceiverOnSubnet contract first</a>.
-                </div>}
-                <Button
-                    type="primary"
-                    onClick={handleSendMessage}
-                    loading={isSending}
-                    disabled={isSending || !icmReceiverAddress || !message}
-                >
-                    Send Message from C-Chain to Subnet
-                </Button>
-                <div className="space-y-2">
-                    <Success
-                        label="Transaction ID"
-                        value={lastTxId ?? ""}
-                    />
-                    {lastTxId && (
-                        <a
-                            href={`https://subnets-test.avax.network/c-chain/tx/${lastTxId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-blue-500 hover:underline"
-                        >
-                            View on Explorer
-                        </a>
-                    )}
+
+                <div className="flex items-start p-4 mb-4 text-sm border rounded-md bg-amber-50 border-amber-200 text-amber-800 dark:bg-amber-900/30 dark:border-amber-700/50 dark:text-amber-200">
+                    <AlertTriangle className="w-5 h-5 mr-3 flex-shrink-0" />
+                    <p>
+                        🚧 Heads up! This tool is currently under construction and may not work as expected.
+                        We're actively improving it as we ship fast and iterate. Thanks for your patience as we build better tools! 🚧
+                    </p>
                 </div>
-                <Button
-                    type="primary"
-                    onClick={queryLastMessage}
-                    loading={isQuerying}
-                    disabled={isQuerying || !icmReceiverAddress}
-                >
-                    Query Last Message
-                </Button>
-                <Success
-                    label="Last Received Message"
-                    value={lastReceivedMessage ?? ""}
-                />
+                <div className="opacity-50 pointer-events-none">
+
+                    <Success
+                        label="ICM Receiver Address"
+                        value={icmReceiverAddress}
+                    />
+                    <Input
+                        label="Receiver Chain ID"
+                        value={chainID}
+                        onChange={setChainID}
+                        validator={chainID => utils.base58check.decode(chainID).length === 32 ? undefined : "Invalid chain ID length: " + utils.base58check.decode(chainID).length}
+                    />
+                    <Input
+                        label="Receiver Chain ID in Hex"
+                        value={chainIDHex}
+                        disabled
+                    />
+                    <Input
+                        label="Message"
+                        value={message}
+                        onChange={setMessage}
+                        validator={message => message.length > 0 ? undefined : "Message is required"}
+                    />
+                    <Input
+                        label="C-Chain Sender Address"
+                        value={SENDER_C_CHAIN_ADDRESS}
+                        disabled
+                    />
+                    <Input
+                        label={`L1 Receiver Address on chain #${viemChain?.id}`}
+                        value={icmReceiverAddress || ""}
+                        disabled
+                    />
+                    <Input
+                        label="EVM Chain RPC URL"
+                        value={evmChainRpcUrl}
+                        onChange={setEvmChainRpcUrl}
+                    />
+                    {!icmReceiverAddress && <div className="text-sm">
+                        You must <a href="#receiverOnSubnet" className="text-blue-500 hover:underline">deploy the ReceiverOnSubnet contract first</a>.
+                    </div>}
+                    <Button
+                        type="primary"
+                        onClick={handleSendMessage}
+                        loading={isSending}
+                        disabled={isSending || !icmReceiverAddress || !message}
+                    >
+                        Send Message from C-Chain to Subnet
+                    </Button>
+                    <div className="space-y-2">
+                        <Success
+                            label="Transaction ID"
+                            value={lastTxId ?? ""}
+                        />
+                        {lastTxId && (
+                            <a
+                                href={`https://subnets-test.avax.network/c-chain/tx/${lastTxId}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-sm text-blue-500 hover:underline"
+                            >
+                                View on Explorer
+                            </a>
+                        )}
+                    </div>
+                    <Button
+                        type="primary"
+                        onClick={queryLastMessage}
+                        loading={isQuerying}
+                        disabled={isQuerying || !icmReceiverAddress}
+                    >
+                        Query Last Message
+                    </Button>
+                    <Success
+                        label="Last Received Message"
+                        value={lastReceivedMessage ?? ""}
+                    />
+                </div>
             </div>
         </RequireChainFuji>
     );
