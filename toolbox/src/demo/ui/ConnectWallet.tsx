@@ -11,6 +11,39 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
 
+    function handleAccountsChanged(accounts: string[]) {
+        if (accounts.length === 0) {
+            setWalletEVMAddress("");
+            return
+        } else if (accounts.length > 1) {
+            showBoundary(new Error("Multiple accounts found, we don't support that yet"));
+            return
+        }
+
+        //re-create wallet with new account
+        setCoreWalletClient(createCoreWalletClient(accounts[0] as `0x${string}`));
+        setWalletEVMAddress(accounts[0] as `0x${string}`);
+
+        coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+
+        if (walletChainId === 0) {
+            coreWalletClient.getChainId().then(onChainChanged).catch(showBoundary);
+        }
+    }
+
+    const onChainChanged = (chainId: string | number) => {
+        if (typeof chainId === "string") {
+            chainId = parseInt(chainId, 16);
+        }
+
+        setWalletChainId(chainId);
+        coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+
+        coreWalletClient.getEthereumChain().then(({ isTestnet }) => {
+            setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID);
+        }).catch(showBoundary);
+    }
+
     useEffect(() => {
         async function init() {
             try {
@@ -22,42 +55,17 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                     return
                 }
 
-                window.avalanche?.on("accountsChanged", async (accounts: string[]) => {
-                    if (accounts.length === 0) {
-                        setWalletEVMAddress("");
-                        return
-                    } else if (accounts.length > 1) {
-                        showBoundary(new Error("Multiple accounts found, we don't support that yet"));
-                        return
-                    }
-
-                    //re-create wallet with new account
-                    setCoreWalletClient(createCoreWalletClient(accounts[0] as `0x${string}`));
-
-                    setWalletEVMAddress(accounts[0] as `0x${string}`);
-
-                    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary);
-
-                    if (walletChainId === 0) {
-                        coreWalletClient.getChainId().then(onChainChanged).catch(showBoundary);
-                    }
-                });
-
-
-                const onChainChanged = (chainId: string | number) => {
-                    if (typeof chainId === "string") {
-                        chainId = parseInt(chainId, 16);
-                    }
-
-                    setWalletChainId(chainId);
-                    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary);
-
-                    coreWalletClient.getEthereumChain().then(({ isTestnet }) => {
-                        setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID);
-                    }).catch(showBoundary);
-                }
+                window.avalanche?.on("accountsChanged", handleAccountsChanged);
                 window.avalanche.on("chainChanged", onChainChanged);
 
+                try {
+                    const accounts = await window.avalanche?.request<string[]>({ method: "eth_accounts" });
+                    if (accounts) {
+                        handleAccountsChanged(accounts);
+                    }
+                } catch (error) {
+                    //Ignore error, it's expected if the user has not connected their wallet yet
+                }
             } catch (error) {
                 showBoundary(error);
             }
@@ -66,8 +74,13 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
     }, []);
 
     async function connectWallet() {
-        window.avalanche?.request({ method: "eth_requestAccounts" }).catch((error) => {
+        console.log("Connecting wallet");
+        window.avalanche?.request<string[]>({ method: "eth_requestAccounts" }).catch((error) => {
             showBoundary(error);
+        }).then((accounts?: string[] | void) => {
+            if (accounts) {
+                handleAccountsChanged(accounts);
+            }
         });
     }
 
