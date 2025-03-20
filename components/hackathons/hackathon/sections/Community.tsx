@@ -38,8 +38,9 @@ function Community({ hackathon }: { hackathon: HackathonHeader }) {
               href={item.link}
               target='_blank'
               rel='noopener noreferrer'
+              className='w-full'
             >
-              <Card className='hover:border-gray-500 dark:hover:border-gray-600 transition flex-1 rounded-lg py-2'>
+              <Card className='hover:border-gray-500 dark:hover:border-gray-600 transition flex-1 rounded-lg py-2 '>
                 <CardContent className='w-full flex flex-row gap-4 items-center justify-start lg:justify-center p-4'>
                   <div className='p-3 flex items-center justify-center bg-red-500 rounded-full text-zinc-50'>
                     <DynamicIcon

@@ -49,7 +49,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
              } target={hackathon.content.join_custom_link? '_blank': '_self'}> { hackathon.content.join_custom_text?? "Join now"} </Link>
         </Button>
         <div className="flex flex-col">
-          <div className="hidden sm:flex flex-col gap-2 max-w-[60%] md:max-w-[45%] xl:max-w-[60%]">
+          <div className="hidden md:flex flex-col gap-2 max-w-[60%] md:max-w-[45%] xl:max-w-[60%]">
             <div className="flex justify-between gap-2 text-gray-400">
               <Calendar color="#F5F5F9" className="w-4 lg:w-5 h-4 lg:h-5" />
               <span className="text-s xl:text-sm text-zinc-50">
@@ -63,7 +63,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
               </span>
             </div>
           </div>
-          <div className="max-w-[90%] hidden sm:flex justify-center flex-wrap gap-x-2 xl:gap-x-4 gap-y-2 xl:gap-y-2 mt-4">
+          <div className="max-w-[90%] hidden lg:flex justify-center flex-wrap gap-x-2 xl:gap-x-4 gap-y-2 xl:gap-y-2 mt-4">
             {hackathon.tags.map((tag, index) => (
               <Badge
                 key={index}
@@ -73,7 +73,7 @@ export default function OverviewBanner({ hackathon, id }: Props) {
               </Badge>
             ))}
           </div>
-          <div className="flex justify-between gap-4 mt-4 max-w-[90%]">
+          <div className="hidden md:flex justify-between gap-4 mt-4 max-w-[90%]">
             <div className="flex gap-2 text-gray-400">
               <Users color="#F5F5F9" className="w-4 lg:w-5 h-4 lg:h-5" />
               <span className="text-xs xl:text-sm text-zinc-50">
