@@ -37,8 +37,8 @@ export function RequireChainFuji() {
     async function switchToFuji() {
         try {
             setIsSwitching(true);
-            await coreWalletClient?.addChain({ chain: avalancheFuji });
-            await coreWalletClient?.switchChain({ id: avalancheFuji.id });
+            await coreWalletClient.addChain({ chain: avalancheFuji });
+            await coreWalletClient.switchChain({ id: avalancheFuji.id });
         } catch (error) {
             showBoundary(error);
         } finally {

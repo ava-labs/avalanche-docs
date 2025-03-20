@@ -72,7 +72,7 @@ export const useToolboxStore = create(
 
 export const useWalletStore = create(
     combine({
-        coreWalletClient: null as ReturnType<typeof createCoreWalletClient> | null,
+        coreWalletClient: createCoreWalletClient(zeroAddress) as ReturnType<typeof createCoreWalletClient>,
         walletChainId: 0,
         walletEVMAddress: "",
         avalancheNetworkID: networkIDs.FujiID as typeof networkIDs.FujiID | typeof networkIDs.MainnetID,
@@ -88,6 +88,7 @@ export const useWalletStore = create(
 
 
 import { useShallow } from 'zustand/react/shallow'
+import { zeroAddress } from 'viem';
 
 export function useViemChainStore() {
     // Use useShallow to select the primitive state values we need

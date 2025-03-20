@@ -8,16 +8,13 @@ import { networkIDs } from "@avalabs/avalanchejs";
 import { zeroAddress } from "viem";
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
-    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, avalancheNetworkID } = useWalletStore();
+    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, avalancheNetworkID } = useWalletStore();
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
 
     useEffect(() => {
         async function init() {
             try {
-                const client = createCoreWalletClient(zeroAddress);
-                setCoreWalletClient(client);
-
                 //first, let's check if there is a wallet at all
                 if (window.avalanche) {
                     setHasWallet(true);
@@ -35,14 +32,15 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                         return
                     }
 
+                    //re-create wallet with new account
                     setCoreWalletClient(createCoreWalletClient(accounts[0] as `0x${string}`));
 
                     setWalletEVMAddress(accounts[0] as `0x${string}`);
 
-                    client.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+                    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary);
 
                     if (walletChainId === 0) {
-                        client.getChainId().then(onChainChanged).catch(showBoundary);
+                        coreWalletClient.getChainId().then(onChainChanged).catch(showBoundary);
                     }
                 });
 
@@ -53,9 +51,9 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                     }
 
                     setWalletChainId(chainId);
-                    client.getPChainAddress().then(setPChainAddress).catch(showBoundary);
+                    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary);
 
-                    client.getEthereumChain().then(({ isTestnet }) => {
+                    coreWalletClient.getEthereumChain().then(({ isTestnet }) => {
                         setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID);
                     }).catch(showBoundary);
                 }

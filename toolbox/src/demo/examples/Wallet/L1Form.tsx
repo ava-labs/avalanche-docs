@@ -7,9 +7,12 @@ import { Button, Input, Select } from "../../ui";
 import { createPublicClient, http } from 'viem';
 
 
+//From chainlist.org
+const knownEvmChainIds = [1, 43114, 43113]
+
 export default function L1Form() {
     const [isSwitching, setIsSwitching] = useState(false);
-    const { coreWalletClient } = useWalletStore();
+    const { coreWalletClient, walletChainId } = useWalletStore();
     const {
         evmChainId,
         setEvmChainId,
@@ -25,6 +28,22 @@ export default function L1Form() {
     const [localError, setLocalError] = useState<string | null>(null);
     const [isCheckingRpc, setIsCheckingRpc] = useState(false);
     const viemChain = useViemChainStore();
+
+    async function loadFromWallet() {
+        try {
+            setLocalError(null);
+
+            const chain = await coreWalletClient.getEthereumChain()
+            setEvmChainCoinName(chain.nativeCurrency.name)
+            setEvmChainIsTestnet(chain.isTestnet)
+            setEvmChainRpcUrl(chain.rpcUrls[0])
+            refetchChainIdFromRpc()
+        } catch (error) {
+            setLocalError((error as Error)?.message || "Unknown error");
+        } finally {
+            setIsCheckingRpc(false);
+        }
+    }
 
 
     async function refetchChainIdFromRpc() {
@@ -53,7 +72,6 @@ export default function L1Form() {
         try {
             setIsSwitching(true);
 
-            if (!coreWalletClient) throw new Error("Core wallet client not found");
             if (!viemChain) throw new Error("Viem chain not found");
 
             await coreWalletClient.addChain({ chain: viemChain });
@@ -68,6 +86,9 @@ export default function L1Form() {
     return (
         <div className="space-y-4">
             {localError && <p className="text-red-500">{localError}</p>}
+            {
+                evmChainId !== walletChainId && !knownEvmChainIds.includes(walletChainId) && <Button onClick={loadFromWallet}>Load from wallet</Button>
+            }
             <Input
                 label="Chain Name"
                 value={evmChainName}

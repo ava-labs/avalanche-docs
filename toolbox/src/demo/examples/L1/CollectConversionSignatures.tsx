@@ -27,10 +27,8 @@ export default function CollectConversionSignatures() {
         try {
             const { message, justification, signingSubnetId, networkId } = await coreWalletClient!.extractWarpMessageFromPChainTx({ txId: L1ID });
 
-            const networkName = networkId === networkIDs.FujiID ? "fuji" : "mainnet";
-
             const { signedMessage } = await new AvaCloudSDKData().signatureAggregator.aggregateSignatures({
-                network: networkName,
+                network: networkIDs.FujiID ? "fuji" : "mainnet",
                 signatureAggregatorRequest: {
                     message: message,
                     justification: justification,

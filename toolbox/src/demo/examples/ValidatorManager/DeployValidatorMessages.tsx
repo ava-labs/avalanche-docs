@@ -24,7 +24,6 @@ export default function DeployValidatorMessages() {
                 transport: custom(window.avalanche!),
             });
 
-            if (!coreWalletClient) throw new Error("Core wallet not connected");
 
             const [address] = await coreWalletClient.requestAddresses();
 

@@ -70,7 +70,6 @@ export default function UpgradeProxy() {
 
         setIsUpgrading(true);
         try {
-            if (!coreWalletClient) throw new Error("Core wallet not connected");
 
             const hash = await coreWalletClient.writeContract({
                 address: proxyAdminAddress,

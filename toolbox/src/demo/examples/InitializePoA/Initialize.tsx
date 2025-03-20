@@ -91,7 +91,6 @@ export default function Initialize() {
                 maximumChurnPercentage: Number(maximumChurnPercentage)
             };
 
-            if (!coreWalletClient) throw new Error('Core wallet client not found');
 
             const hash = await coreWalletClient.writeContract({
                 address: proxyAddress as `0x${string}`,

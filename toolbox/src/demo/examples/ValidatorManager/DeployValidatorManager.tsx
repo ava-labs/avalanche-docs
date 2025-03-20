@@ -47,7 +47,6 @@ export default function DeployValidatorManager() {
         setIsDeploying(true);
         setValidatorManagerAddress("");
         try {
-            if (!coreWalletClient) throw new Error("Core wallet client not found");
             if (!viemChain) throw new Error("Viem chain not found");
 
             const publicClient = createPublicClient({
