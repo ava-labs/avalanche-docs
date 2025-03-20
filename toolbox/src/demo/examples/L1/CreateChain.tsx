@@ -94,7 +94,7 @@ export default function CreateChain() {
                 helperText={`Default is ${initialState.vmId}`}
             />
 
-            <GenesisInput label="Genesis Data (JSON)" value={genesisData} onChange={setGenesisData} rows={10} />
+            <GenesisInput label="Genesis Data (JSON)" value={genesisData} onChange={setGenesisData} />
 
             <div className="text-sm text-zinc-600 dark:text-zinc-400">
                 Auto-generated for address 0xC8EA6E24567310104a5d3b5d9ab6Ca414987885
