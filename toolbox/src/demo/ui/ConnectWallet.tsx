@@ -7,7 +7,7 @@ import { createCoreWalletClient } from "../../coreViem";
 import { networkIDs } from "@avalabs/avalanchejs";
 
 export const ConnectWallet = ({ children, required }: { children: React.ReactNode, required: boolean }) => {
-    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, avalancheNetworkID } = useWalletStore();
+    const { setWalletChainId, walletEVMAddress, setWalletEVMAddress, setCoreWalletClient, coreWalletClient, setAvalancheNetworkID, setPChainAddress, walletChainId, /*avalancheNetworkID*/ } = useWalletStore();
     const [hasWallet, setHasWallet] = useState<boolean>(false);
     const { showBoundary } = useErrorBoundary();
 
@@ -39,7 +39,7 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
         setWalletChainId(chainId);
         coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary);
 
-        coreWalletClient.getEthereumChain().then(({ isTestnet }) => {
+        coreWalletClient.isTestnet().then((isTestnet) => {
             setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID);
         }).catch(showBoundary);
     }
@@ -112,7 +112,7 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
     return (
         <div className={`space-y-4 transition`}>
             {walletEVMAddress && <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md rounded-xl p-3 flex items-center justify-between">
-                <div className="flex items-center space-x-3 flex-4 min-w-0">
+                <div className="flex items-center space-x-3 flex-1 min-w-0">
                     <div className="p-2 rounded-full">
                         <Wallet className="w-6 h-8 text-blue-600 dark:text-blue-400" />
                     </div>
@@ -124,11 +124,12 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
                     </div>
                 </div>
                 {walletChainId && (
-                    <div className="text-sm flex-3 min-w-0 flex items-center gap-2">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${avalancheNetworkID === networkIDs.FujiID ? 'bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100' : 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'}`}>
+                    <div className="text-sm flex items-center gap-2 ml-auto">
+                        <span className="dark:text-zinc-300 whitespace-nowrap">Chain ID: {walletChainId}</span>
+
+                        {/*<span className={`px-2 py-0.5 rounded-full text-xs font-medium ${avalancheNetworkID === networkIDs.FujiID ? 'bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100' : 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'}`}>
                             {avalancheNetworkID === networkIDs.FujiID ? "Testnet" : "Mainnet"}
-                        </span>
-                        <span className="dark:text-zinc-300">Chain ID: {walletChainId}</span>
+                        </span>*/}{/* TODO: restore after wallet_getEthereumChain is restored in Core */}
                     </div>
                 )}
             </div>}
