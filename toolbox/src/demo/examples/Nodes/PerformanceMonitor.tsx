@@ -1,6 +1,6 @@
 "use client";
 
-import { useExampleStore } from "../../utils/store";
+import { useToolboxStore } from "../../utils/store";
 import { Input, Button, Select } from "../../ui";
 import { useState, useEffect, useRef } from "react";
 import { createPublicClient, http, PublicClient, webSocket } from 'viem';
@@ -68,7 +68,7 @@ export default function PerformanceMonitor() {
     const {
         evmChainRpcUrl,
         setEvmChainRpcUrl,
-    } = useExampleStore();
+    } = useToolboxStore();
 
     const [isMonitoring, setIsMonitoring] = useState(false);
     const [error, setError] = useState<string | null>(null);
