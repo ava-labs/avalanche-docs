@@ -7,6 +7,7 @@ import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import SummitLondonBanner from '@/public/nav-banner/avalanche_summit_london.png';
 import HackathonLondonBanner from '@/public/nav-banner/hackathon_luma.png';
+import HackathonBBABanner from '@/public/nav-banner/hackathon_bba.png';
 import Team1Banner from '@/public/nav-banner/local_events_team1.jpg';
 
 interface EventCardProps {
@@ -143,6 +144,17 @@ export default function Page() {
                 description="This hackathon aims to harness the potential of Avalanche's robust technology stack to address pressing issues and create scalable, practical solutions."
                 icon={<Award className="w-8 h-8" color='white'/>}
                 image={HackathonLondonBanner}
+                url="/hackathon"
+                color="blue"
+                arrowColor={arrowColor}
+              />
+            </a>
+            <a href="/hackathon_bba" target="_blank" rel="noopener noreferrer">
+              <EventCard
+                title="Beantown Showndown Hackathon"
+                description="Boston Blockchain Association + Avalanche Hackathon"
+                icon={<Award className="w-8 h-8" color='white'/>}
+                image={HackathonBBABanner}
                 url="/hackathon"
                 color="blue"
                 arrowColor={arrowColor}
