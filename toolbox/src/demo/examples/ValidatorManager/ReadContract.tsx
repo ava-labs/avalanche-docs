@@ -5,8 +5,10 @@ import { useErrorBoundary } from "react-error-boundary";
 import { AbiEvent } from 'viem';
 import { useEffect, useState } from "react";
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
-import { Button, Input } from "../../ui";
+import { Button } from "../../../components/button";
+import { Input } from "../../../components/input";
 import { RequireChainL1 } from "../../ui/RequireChain";
+import { Container } from "../../../components/container";
 type ViewData = {
     [key: string]: any;
 };
@@ -109,9 +111,11 @@ export default function ReadContract() {
 
     return (
         <RequireChainL1>
-            <div className="space-y-8">
+            <Container
+                title="Read Proxy Contract"
+                description="This will read the data from the ValidatorManager contract."
+            >
                 <div className="space-y-4">
-                    <h2 className="text-lg font-semibold ">Read Proxy Contract</h2>
                     <Input
                         label="Proxy Address"
                         value={proxyAddress || ""}
@@ -119,10 +123,10 @@ export default function ReadContract() {
                         onChange={(value) => setProxyAddress(value)}
                         button={
                             <Button
-                                type="primary"
+                                variant="secondary"
                                 onClick={readContractData}
                                 loading={isReading}
-                                className="h-9 rounded-l-none"
+                                disabled={isReading}
                             >
                                 Refresh
                             </Button>
@@ -175,8 +179,8 @@ export default function ReadContract() {
                             ))}
                         </div>
                     </div>
-                )}
-            </div>
+                )}  
+            </Container>
         </RequireChainL1>
     );
 };

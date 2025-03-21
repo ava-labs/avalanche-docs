@@ -18,7 +18,7 @@ export function ResultField({ label, value, showCheck = false }: ResultFieldProp
       </div>
       <div
         className={cn(
-          "w-full rounded-lg p-3.5 font-mono text-sm shadow-sm",
+          "w-full rounded-lg p-3.5 font-mono text-sm shadow-sm whitespace-pre-wrap break-words",
           "text-zinc-900 dark:text-zinc-100",
           showCheck
             ? "bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-900/30"

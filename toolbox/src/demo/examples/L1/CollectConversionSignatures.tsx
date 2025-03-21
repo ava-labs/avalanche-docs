@@ -4,9 +4,11 @@ import { useToolboxStore, useWalletStore } from "../../utils/store";
 import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { networkIDs } from "@avalabs/avalanchejs";
-import { Button, Input } from "../../ui";
-import { Success } from "../../ui/Success";
+import { Button } from "../../../components/button";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
+import { Container } from "../../../components/container";
+import { Input } from "../../../components/input";
+import { ResultField } from "../../../components/result-field";
 
 export default function CollectConversionSignatures() {
     const { showBoundary } = useErrorBoundary();
@@ -47,8 +49,10 @@ export default function CollectConversionSignatures() {
     }
 
     return (
-        <div className="space-y-4">
-            <h2 className="text-lg font-semibold ">Collect conversion signatures</h2>
+        <Container
+            title="Collect conversion signatures"
+            description="This will collect signatures from the subnet validators to convert the subnet to an L1 chain."
+        >
             <div className="space-y-4">
                 <Input
                     label="Conversion ID"
@@ -56,10 +60,10 @@ export default function CollectConversionSignatures() {
                     onChange={setL1ID}
                     type="text"
                     placeholder="Enter conversion ID"
-                    notes={`Also called L1 ID. Transaction ID of the conversion transaction on the P-Chain.`}
+                    helperText={`Also called L1 ID. Transaction ID of the conversion transaction on the P-Chain.`}
                 />
                 <Button
-                    type="primary"
+                    variant="primary"
                     onClick={handleConvertSignatures}
                     disabled={!L1ID}
                     loading={isConverting}
@@ -67,10 +71,11 @@ export default function CollectConversionSignatures() {
                     Collect Signatures
                 </Button>
             </div>
-            <Success
+            <ResultField
                 label="Collected Signatures"
                 value={L1ConversionSignature}
+                showCheck={!!L1ConversionSignature}
             />
-        </div>
+        </Container>
     );
 };

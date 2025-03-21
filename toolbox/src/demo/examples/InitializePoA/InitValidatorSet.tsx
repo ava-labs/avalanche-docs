@@ -5,12 +5,14 @@ import { useToolboxStore, useViemChainStore, useWalletStore } from "../../utils/
 import { hexToBytes, decodeErrorResult, Abi } from 'viem';
 import { packWarpIntoAccessList } from './packWarp';
 import ValidatorManagerABI from "../../../../contracts/icm-contracts/compiled/ValidatorManager.json";
-import { Button, Input } from "../../ui";
-import { Success } from "../../ui/Success";
+import { Button } from "../../../components/button";
+import { Input } from "../../../components/input";
 import { networkIDs, utils } from '@avalabs/avalanchejs';
 import { RequireChainL1 } from '../../ui/RequireChain';
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
 import { CodeHighlighter } from '../../ui/CodeHighlighter';
+import { Container } from '../../../components/container';
+import { ResultField } from '../../../components/result-field';
 
 const cb58ToHex = (cb58: string) => utils.bufferToHex(utils.base58check.decode(cb58));
 const add0x = (hex: string): `0x${string}` => hex.startsWith('0x') ? hex as `0x${string}` : `0x${hex}`;
@@ -121,8 +123,11 @@ export default function InitValidatorSet() {
 
     return (
         <RequireChainL1>
-            <div className="space-y-4">
-                <h2 className="text-lg font-semibold ">Initialize Validator Set</h2>
+            <Container
+                title="Initialize Validator Set"
+                description="This will initialize the ValidatorManager contract."
+            >
+                <div className="space-y-4">
 
                 {error && (
                     <div className="p-4 text-red-700 bg-red-100 rounded-md">
@@ -157,21 +162,23 @@ export default function InitValidatorSet() {
                 }
 
                 {txHash && (
-                    <Success
+                    <ResultField
                         label="Transaction Successful"
                         value={txHash}
+                        showCheck={true}
                     />
                 )}
 
                 <Button
-                    type="primary"
+                    variant="primary"
                     onClick={() => onInitialize(false)}
                     loading={isInitializing}
                     disabled={!L1ID}
                 >
                     Initialize Validator Set
-                </Button>
-            </div>
+                    </Button>
+                </div>
+            </Container>
         </RequireChainL1>
     );
 }

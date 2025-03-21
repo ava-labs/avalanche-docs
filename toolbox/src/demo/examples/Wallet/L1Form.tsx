@@ -2,9 +2,10 @@
 
 import { useToolboxStore, useViemChainStore, useWalletStore } from "../../utils/store"
 import { useState, useEffect } from "react"
-import { AlertCircle, Loader2, Globe, Server, Coins, CheckCircle } from "lucide-react"
+import { AlertCircle, Loader2, Server, Coins, CheckCircle } from "lucide-react"
 import { createPublicClient, http } from "viem"
-
+import { Button } from "../../../components/button"
+import { Input } from "../../../components/input"
 /*
 //From chainlist.org
 const knownEvmChainIds = [1, 43114, 43113]
@@ -144,42 +145,33 @@ export default function L1Form() {
                     */}
 
           <div className="space-y-1">
-            <label className="flex items-center text-xs font-medium text-zinc-700 dark:text-zinc-300">
-              <Globe className="h-3.5 w-3.5 mr-1.5 text-zinc-500 dark:text-zinc-400" />
-              Chain Name
-            </label>
-            <input
+            <Input
+              label="Chain Name"
               type="text"
               value={evmChainName}
-              onChange={(e) => setEvmChainName(e.target.value)}
+              onChange={setEvmChainName}
               placeholder="Enter chain name"
               className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="flex items-center text-xs font-medium text-zinc-700 dark:text-zinc-300">
-              <Server className="h-3.5 w-3.5 mr-1.5 text-zinc-500 dark:text-zinc-400" />
-              RPC URL
-            </label>
-            <input
+            <Input
+              label="RPC URL"
               type="text"
               value={evmChainRpcUrl}
-              onChange={(e) => setEvmChainRpcUrl(e.target.value)}
+              onChange={setEvmChainRpcUrl}
               placeholder="Enter RPC URL"
               className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="flex items-center text-xs font-medium text-zinc-700 dark:text-zinc-300">
-              <Coins className="h-3.5 w-3.5 mr-1.5 text-zinc-500 dark:text-zinc-400" />
-              Coin Name
-            </label>
-            <input
+            <Input
+              label="Coin Name"
               type="text"
               value={evmChainCoinName}
-              onChange={(e) => setEvmChainCoinName(e.target.value)}
+              onChange={setEvmChainCoinName}
               placeholder="Enter coin name"
               className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
             />
@@ -188,7 +180,8 @@ export default function L1Form() {
           <div className="space-y-1">
             <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">Is Testnet</label>
             <div className="flex space-x-2">
-              <button
+              <Button 
+                variant="secondary"
                 onClick={() => setEvmChainIsTestnet(true)}
                 className={`px-3 py-2 text-sm rounded-md flex-1 transition-colors ${
                   evmChainIsTestnet
@@ -197,8 +190,9 @@ export default function L1Form() {
                 }`}
               >
                 Yes
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="secondary"
                 onClick={() => setEvmChainIsTestnet(false)}
                 className={`px-3 py-2 text-sm rounded-md flex-1 transition-colors ${
                   !evmChainIsTestnet
@@ -207,7 +201,7 @@ export default function L1Form() {
                 }`}
               >
                 No
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -220,7 +214,8 @@ export default function L1Form() {
 
           <div className="pt-2">
             {evmChainId === 0 ? (
-              <button
+              <Button
+                variant="secondary"
                 onClick={refetchChainIdFromRpc}
                 disabled={evmChainRpcUrl === "" || isCheckingRpc}
                 className={`w-full py-2 px-4 rounded-md text-sm font-medium flex items-center justify-center ${
@@ -237,9 +232,10 @@ export default function L1Form() {
                 ) : (
                   "Load Chain ID from RPC"
                 )}
-              </button>
+              </Button>
             ) : (
-              <button
+              <Button
+                variant="secondary"
                 onClick={handleSwitchChain}
                 disabled={isSwitching}
                 className={`w-full py-2.5 px-4 rounded-lg text-sm font-medium flex items-center justify-center transition-all duration-200 ${
@@ -258,7 +254,7 @@ export default function L1Form() {
                     <span>Switch Chain</span>
                   </div>
                 )}
-              </button>
+              </Button>
             )}
           </div>
         </div>

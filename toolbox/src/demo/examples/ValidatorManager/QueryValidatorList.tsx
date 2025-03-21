@@ -3,10 +3,12 @@
 import { useToolboxStore, useWalletStore } from "../../utils/store"
 import { useErrorBoundary } from "react-error-boundary"
 import { useState, useEffect } from "react"
-import { Button } from "../../ui"
 import { Note } from "../../ui/Note"
 import { networkIDs } from "@avalabs/avalanchejs"
 import { InfoIcon, Calendar, Clock, ChevronRight, Users, ChevronLeft, Coins, Database, Globe } from "lucide-react"
+import { Container } from "../../../components/container"
+import { Input } from "../../../components/input"
+import { Button } from "../../../components/button"
 
 interface Validator {
   validationId: string
@@ -174,33 +176,22 @@ export default function QueryValidatorList() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Network Selection Card */}
+   <Container title="L1 Validators" description="Query validators on the Avalanche network" logoSrc="/images/avacloud.png" logoAlt="AvaCloud Logo" logoColorTheme="blue">
       <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800 relative overflow-hidden">
-        {/* Background gradient effect - subtle blue for both light and dark mode */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent dark:from-blue-900/10 dark:to-transparent pointer-events-none"></div>
 
         <div className="relative">
-          <div className="flex items-center mb-4">
-            <div className="bg-blue-100 dark:bg-blue-900/30 rounded-lg p-4 mr-4 h-[70px] w-[70px] flex items-center justify-center">
-              <img src="/images/avacloud.png" alt="Avalanche Logo" className="h-8 w-auto" />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-zinc-800 dark:text-white">L1 Validators</h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">Query validators on the Avalanche network</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
             <div className="space-y-1">
-              <label className="flex items-center text-xs font-medium text-zinc-700 dark:text-zinc-200">
+            <label className="flex items-center text-xs font-medium text-blue-700 dark:text-blue-200">
                 <Database className="h-3.5 w-3.5 mr-1.5 text-blue-500 dark:text-blue-400" />
                 Subnet ID
               </label>
-              <input
+              <Input
+                label=""
                 type="text"
                 value={subnetID}
-                onChange={(e) => setSubnetID(e.target.value)}
+                onChange={setSubnetID}
                 placeholder="Enter subnet ID"
                 className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:focus:ring-blue-400"
               />
@@ -212,7 +203,7 @@ export default function QueryValidatorList() {
                 Network
               </label>
               <div className="flex space-x-2">
-                <button
+                <Button
                   onClick={() => setAvalancheNetworkID(networkIDs.FujiID)}
                   className={`px-3 py-2 text-sm rounded-md flex-1 transition-colors ${
                     avalancheNetworkID === networkIDs.FujiID
@@ -221,8 +212,8 @@ export default function QueryValidatorList() {
                   }`}
                 >
                   Fuji
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => setAvalancheNetworkID(networkIDs.MainnetID)}
                   className={`px-3 py-2 text-sm rounded-md flex-1 transition-colors ${
                     avalancheNetworkID === networkIDs.MainnetID
@@ -231,12 +222,12 @@ export default function QueryValidatorList() {
                   }`}
                 >
                   Mainnet
-                </button>
+                </Button>
               </div>
             </div>
           </div>
 
-          <button
+          <Button
             onClick={() => fetchValidators()}
             disabled={isLoading}
             className={`w-full py-2 px-4 rounded-md text-sm font-medium flex items-center justify-center ${
@@ -253,7 +244,7 @@ export default function QueryValidatorList() {
             ) : (
               "Fetch Validators"
             )}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -266,10 +257,7 @@ export default function QueryValidatorList() {
         <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
-              <h3 className="text-lg font-semibold text-zinc-800 dark:text-white">Validator List</h3>
-              <div className="ml-2 flex items-center text-zinc-500" title="Active validators in the network">
-                <InfoIcon size={16} />
-              </div>
+              <h3 className="text-lg font-semibold text-zinc-800 dark:text-white flex items-center">Validator List</h3> 
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-zinc-500 dark:text-zinc-400">Page {currentPage}</span>
@@ -324,7 +312,7 @@ export default function QueryValidatorList() {
                           </td>
                           <td className="px-4 py-3 whitespace-nowrap">
                             <Button
-                              type="secondary"
+                              variant="secondary"
                               onClick={() => handleViewDetails(validator)}
                               className="text-xs py-1 px-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-300 dark:border-zinc-700"
                             >
@@ -390,7 +378,7 @@ export default function QueryValidatorList() {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-zinc-800 dark:text-white">Validator Details</h3>
             <Button
-              type="secondary"
+              variant="secondary"
               onClick={() => setSelectedValidator(null)}
               className="text-xs py-1 px-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-300 dark:border-zinc-700"
             >
@@ -568,7 +556,7 @@ export default function QueryValidatorList() {
           )}
         </div>
       </Note>
-    </div>
+    </Container>
   )
 }
 

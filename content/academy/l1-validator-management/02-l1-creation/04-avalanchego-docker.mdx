@@ -31,10 +31,3 @@ docker stop avago
 docker rm avago
 ```
 
-### Run Signature Aggregator
-```bash
-docker run -d --network=host -v $(pwd)/.devcontainer/sig-agg-config.json:/sig-agg-config.json avaplatform/signature-aggregator --config-file=/sig-agg-config.json
-```
-
-
-
