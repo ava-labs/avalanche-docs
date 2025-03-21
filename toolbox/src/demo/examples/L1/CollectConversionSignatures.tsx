@@ -78,7 +78,7 @@ export default function CollectConversionSignatures() {
                 />
                 {error && (
                     <div className="space-y-4">
-                        <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+                        <div className="p-4 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-400">
                             <p className="font-medium mb-2">Failed to collect signatures. Please ensure:</p>
                             <ul className="list-disc pl-5">
                                 <li>All validators for this subnet are up and running</li>
@@ -89,7 +89,7 @@ export default function CollectConversionSignatures() {
                                 code={`docker run -it --net=host --rm containerman17/local_agg:latest ${L1ID}`}
                                 lang="bash"
                             />
-                            <p className="text-sm text-gray-600">Paste the last line of its output into the signature field above.</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Paste the last line of its output into the signature field above.</p>
                         </div>
 
                     </div>
