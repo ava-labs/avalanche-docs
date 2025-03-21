@@ -1,15 +1,13 @@
 "use client";
 
 import { useToolboxStore, useWalletStore } from "../../utils/store";
-import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { networkIDs } from "@avalabs/avalanchejs";
 import { Button, Input } from "../../ui";
-import { Success } from "../../ui/Success";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
+import { CodeHighlighter } from "../../ui/CodeHighlighter";
 
 export default function CollectConversionSignatures() {
-    const { showBoundary } = useErrorBoundary();
     const {
         L1ConversionSignature,
         setL1ConversionSignature,
@@ -18,10 +16,11 @@ export default function CollectConversionSignatures() {
     } = useToolboxStore(state => state);
     const { coreWalletClient } = useWalletStore();
     const [isConverting, setIsConverting] = useState(false);
-
+    const [error, setError] = useState<string | null>(null);
 
     async function handleConvertSignatures() {
         setL1ConversionSignature("");
+        setError(null);
         setIsConverting(true);
 
         try {
@@ -35,11 +34,16 @@ export default function CollectConversionSignatures() {
                     signingSubnetId: signingSubnetId,
                     quorumPercentage: 67, // Default threshold for subnet validation
                 },
+            }, {
+                retries: {
+                    strategy: "backoff",
+                    backoff: { initialInterval: 1000, maxInterval: 10000, exponent: 1.5, maxElapsedTime: 30 * 1000 },
+                }
             });
 
             setL1ConversionSignature(signedMessage);
         } catch (error) {
-            showBoundary(error);
+            setError((error as Error)?.message || String(error));
         } finally {
             setIsConverting(false);
         }
@@ -65,11 +69,32 @@ export default function CollectConversionSignatures() {
                 >
                     Collect Signatures
                 </Button>
+                <Input
+                    label="Aggregated Signature"
+                    value={L1ConversionSignature}
+                    onChange={setL1ConversionSignature}
+                    type="textarea"
+                    placeholder="0x...."
+                />
+                {error && (
+                    <div className="space-y-4">
+                        <div className="p-4 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-400">
+                            <p className="font-medium mb-2">Failed to collect signatures. Please ensure:</p>
+                            <ul className="list-disc pl-5">
+                                <li>All validators for this subnet are up and running</li>
+                                <li>Every node has a static IP and port 9651 open to external traffic</li>
+                            </ul>
+                            <p className="mt-4">If you're running this on a device without a dedicated public IP (e.g., laptop), try:</p>
+                            <CodeHighlighter
+                                code={`docker run -it --net=host --rm containerman17/local_agg:latest ${L1ID}`}
+                                lang="bash"
+                            />
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Paste the last line of its output into the signature field above.</p>
+                        </div>
+
+                    </div>
+                )}
             </div>
-            <Success
-                label="Collected Signatures"
-                value={L1ConversionSignature}
-            />
         </div>
     );
 };
