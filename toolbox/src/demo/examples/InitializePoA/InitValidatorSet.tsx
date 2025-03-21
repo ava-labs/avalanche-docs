@@ -20,6 +20,7 @@ export default function InitValidatorSet() {
     const {
         L1ID,
         setL1ID,
+        L1ConversionSignature,
         setL1ConversionSignature,
         proxyAddress,
         evmChainRpcUrl } = useToolboxStore();
@@ -50,17 +51,18 @@ export default function InitValidatorSet() {
             const { validators, message, justification, signingSubnetId, networkId, chainId, managerAddress } = await coreWalletClient.extractWarpMessageFromPChainTx({ txId: L1ID });
 
 
-            const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
-                network: networkId === networkIDs.FujiID ? "fuji" : "mainnet",
-                signatureAggregatorRequest: {
+            if (!L1ConversionSignature) {
+                const { signedMessage } = await new AvaCloudSDK().data.signatureAggregator.aggregateSignatures({
+                    network: networkId === networkIDs.FujiID ? "fuji" : "mainnet",
+                    signatureAggregatorRequest: {
                     message: message,
                     justification: justification,
                     signingSubnetId: signingSubnetId,
                     quorumPercentage: 67, // Default threshold for subnet validation
                 },
             });
-
-            setL1ConversionSignature(signedMessage);
+                setL1ConversionSignature(signedMessage);
+            }
 
 
             // Prepare transaction arguments
@@ -79,11 +81,11 @@ export default function InitValidatorSet() {
             }, 0];
 
 
-            setCollectedData({ ...txArgs[0] as any, signedMessage })
+            setCollectedData({ ...txArgs[0] as any, L1ConversionSignature })
 
 
             // Convert signature to bytes and pack into access list
-            const signatureBytes = hexToBytes(add0x(signedMessage));
+            const signatureBytes = hexToBytes(add0x(L1ConversionSignature));
             const accessList = packWarpIntoAccessList(signatureBytes);
 
             const sim = await publicClient.simulateContract({

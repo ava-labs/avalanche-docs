@@ -5,7 +5,7 @@ import { useErrorBoundary } from "react-error-boundary"
 import { useState, useEffect } from "react"
 import { Note } from "../../ui/Note"
 import { networkIDs } from "@avalabs/avalanchejs"
-import { InfoIcon, Calendar, Clock, ChevronRight, Users, ChevronLeft, Coins, Database, Globe } from "lucide-react"
+import { InfoIcon, Calendar, Clock, ChevronRight, Users, ChevronLeft, Coins, Database, Globe, Info } from "lucide-react"
 import { Container } from "../../../components/container"
 import { Input } from "../../../components/input"
 import { Button } from "../../../components/button"
@@ -200,7 +200,7 @@ export default function QueryValidatorList() {
             <div className="space-y-1">
               <label className="flex items-center text-xs font-medium text-blue-700 dark:text-blue-200">
                 <Globe className="h-3.5 w-3.5 mr-1.5 text-blue-500 dark:text-blue-400" />
-                Network
+                Network ID
               </label>
               <div className="flex space-x-2">
                 <Button
@@ -545,17 +545,10 @@ export default function QueryValidatorList() {
         </div>
       )}
 
-      <Note>
-        <div className="flex items-center text-zinc-500 dark:text-zinc-400 italic">
-          <InfoIcon size={14} className="mr-2" />
-          Data retrieved from Glacier API
-          {validators.length > 0 && (
-            <span className="ml-1">
-              • {validators.length} validators (Page {currentPage})
-            </span>
-          )}
-        </div>
-      </Note>
+          <div className="flex items-center justify-center text-xs text-zinc-500 dark:text-zinc-400 italic p-2 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-md shadow-sm">
+              <Info className="h-3.5 w-3.5 mr-1.5" />
+              <a href="https://developers.avacloud.io/data-api/primary-network/list-validators" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-700 dark:hover:text-zinc-300">Data retrieved from Data API</a>
+            </div>
     </Container>
   )
 }

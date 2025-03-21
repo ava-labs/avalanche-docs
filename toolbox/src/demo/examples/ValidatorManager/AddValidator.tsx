@@ -10,7 +10,9 @@ import { packWarpIntoAccessList } from "../InitializePoA/packWarp"
 import { packL1ValidatorRegistration } from "../L1/convertWarp"
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk"
 import { AlertCircle, CheckCircle, XCircle, Loader2 } from "lucide-react"
-
+import { Container } from "../../../components/container"
+import { Input } from "../../../components/input"
+import { Button } from "../../../components/button"
 // Define interfaces for step status tracking
 interface StepStatus {
   status: "pending" | "loading" | "success" | "error"
@@ -126,7 +128,7 @@ export default function AddValidator() {
       !newNodeID ||
       !newBlsPublicKey ||
       !newBlsProofOfPossession ||
-      !newPChainAddress ||
+      !pChainAddress ||
       !newWeight ||
       !proxyAddress
     ) {
@@ -162,26 +164,24 @@ export default function AddValidator() {
         updateStepStatus("initializeRegistration", "loading")
         try {
           // Process P-Chain Address
-          const pChainAddressBytes = utils.bech32ToBytes(newPChainAddress)
+          const pChainAddressBytes = utils.bech32ToBytes(pChainAddress)
           const pChainAddressHex = fromBytes(pChainAddressBytes, "hex")
           const expiry = BigInt(Math.floor(Date.now() / 1000) + 43200) // 12 hours
 
           // Build arguments for `initializeValidatorRegistration`
           const args = [
+            parseNodeID(newNodeID),
+            newBlsPublicKey,
+            expiry,
             {
-              nodeID: parseNodeID(newNodeID),
-              blsPublicKey: newBlsPublicKey,
-              registrationExpiry: expiry,
-              remainingBalanceOwner: {
-                threshold: 1,
-                addresses: [pChainAddressHex],
-              },
-              disableOwner: {
-                threshold: 1,
-                addresses: [pChainAddressHex],
-              },
+              threshold: 1,
+              addresses: [pChainAddressHex],
             },
-            BigInt(newWeight),
+            {
+              threshold: 1,
+              addresses: [pChainAddressHex],
+            },
+            BigInt(newWeight)
           ]
 
           // Submit transaction
@@ -264,7 +264,7 @@ export default function AddValidator() {
 
           // Get fee state, context and utxos from P-Chain
           const feeState = await pvmApi.getFeeState()
-          const { utxos } = await pvmApi.getUTXOs({ addresses: [newPChainAddress] })
+          const { utxos } = await pvmApi.getUTXOs({ addresses: [pChainAddress] })
           const context = await Context.getContextFromURI(platformEndpoint)
 
           // Convert balance from AVAX to nAVAX (1 AVAX = 1e9 nAVAX)
@@ -276,7 +276,7 @@ export default function AddValidator() {
               blsSignature: new Uint8Array(Buffer.from(newBlsProofOfPossession.slice(2), "hex")),
               message: new Uint8Array(Buffer.from(messageToUse, "hex")),
               feeState,
-              fromAddressesBytes: [utils.bech32ToBytes(newPChainAddress)],
+              fromAddressesBytes: [utils.bech32ToBytes(pChainAddress)],
               utxos,
             },
             context,
@@ -462,27 +462,12 @@ export default function AddValidator() {
   }
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md rounded-xl p-4 relative overflow-hidden">
+
+    <Container title="Add New Validator" description="Add a validator to your L1 by providing the required details">
       {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-900/10 dark:to-transparent pointer-events-none"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-900/10 dark:to-transparent pointer-events-none"></div> */}
 
       <div className="relative">
-        <div className="flex items-center mb-4">
-          <div className="bg-red-100 dark:bg-red-900/30 rounded-lg p-4 mr-4 h-[70px] w-[70px] flex items-center justify-center">
-            <img
-              src="/small-logo.png"
-              alt="Avalanche Logo"
-              className="h-8 w-auto"
-            />
-          </div>
-          <div>
-            <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-100">Add New Validator</h3>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
-              Add a validator to your L1 by providing the required details
-            </p>
-          </div>
-        </div>
-
         {error && (
           <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm">
             <div className="flex items-center">
@@ -503,10 +488,11 @@ export default function AddValidator() {
               <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">
                 Node ID <span className="text-red-500">*</span>
               </label>
-              <input
+              <Input
+                label=""
                 type="text"
                 value={newNodeID}
-                onChange={(e) => setNewNodeID(e.target.value)}
+                onChange={(e) => setNewNodeID(e)}
                 placeholder="Enter validator NodeID-"
                 className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
                 required
@@ -518,10 +504,11 @@ export default function AddValidator() {
               <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">
                 Weight <span className="text-red-500">*</span>
               </label>
-              <input
+              <Input
+                label=""
                 type="text"
                 value={newWeight}
-                onChange={(e) => setNewWeight(e.target.value)}
+                onChange={(e) => setNewWeight(e)}
                 placeholder="Enter validator weight in consensus"
                 className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
                 required
@@ -534,10 +521,11 @@ export default function AddValidator() {
             <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">
               BLS Public Key <span className="text-red-500">*</span>
             </label>
-            <input
+            <Input
+              label=""
               type="text"
               value={newBlsPublicKey}
-              onChange={(e) => setNewBlsPublicKey(e.target.value)}
+              onChange={(e) => setNewBlsPublicKey(e)}
               placeholder="Enter BLS public key (0x...)"
               className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
               required
@@ -549,10 +537,11 @@ export default function AddValidator() {
             <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">
               BLS Proof of Possession <span className="text-red-500">*</span>
             </label>
-            <input
+            <Input
+              label=""
               type="text"
               value={newBlsProofOfPossession}
-              onChange={(e) => setNewBlsProofOfPossession(e.target.value)}
+              onChange={(e) => setNewBlsProofOfPossession(e)}
               placeholder="Enter BLS proof of possession (0x...)"
               className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
               required
@@ -566,39 +555,40 @@ export default function AddValidator() {
             <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">
               Initial Balance (AVAX) <span className="text-red-500">*</span>
             </label>
-            <input
+            <Input
+              label=""
               type="text"
               value={newBalance}
-              onChange={(e) => setNewBalance(e.target.value)}
+              onChange={(e) => setNewBalance(e)}
               placeholder="Enter initial balance"
               className="w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-red-500 dark:focus:ring-red-400"
               required
             />
             <div className="grid grid-cols-4 gap-3 mt-2">
-              <button
+              <Button
                 onClick={() => setNewBalance("0.01")}
                 className="px-2 py-1.5 text-xs bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-300 rounded border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
               >
                 0.01 AVAX
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => setNewBalance("0.1")}
                 className="px-2 py-1.5 text-xs bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-300 rounded border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
               >
                 0.1 AVAX
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => setNewBalance("1")}
                 className="px-2 py-1.5 text-xs bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-300 rounded border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
               >
                 1 AVAX
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => setNewBalance("5")}
                 className="px-2 py-1.5 text-xs bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-300 rounded border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
               >
                 5 AVAX
-              </button>
+              </Button>
             </div>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
               Initial 'Pay As You Go' Balance (1.33 AVAX/month/validator)
@@ -607,7 +597,7 @@ export default function AddValidator() {
         </div>
 
         {!isAddingValidator && (
-          <button
+          <Button
             onClick={() => addValidator()}
             disabled={!proxyAddress}
             className={`mt-4 w-full py-2 px-4 rounded-md text-sm font-medium flex items-center justify-center ${!proxyAddress
@@ -616,7 +606,7 @@ export default function AddValidator() {
               }`}
           >
             {!proxyAddress ? "Set Proxy Address First" : "Add Validator"}
-          </button>
+          </Button>
         )}
 
         {isAddingValidator && (
@@ -669,12 +659,12 @@ export default function AddValidator() {
             />
 
             {!isProcessComplete && (
-              <button
+              <Button
                 onClick={resetValidation}
                 className="mt-4 w-full py-2 px-4 rounded-md text-sm font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
               >
                 Cancel Validation
-              </button>
+              </Button>
             )}
           </div>
         )}
@@ -691,7 +681,7 @@ export default function AddValidator() {
           </div>
         )}
       </div>
-    </div>
+    </Container>
   )
 }
 

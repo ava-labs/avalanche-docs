@@ -172,11 +172,11 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
   }
 
   return (
-    <div className="space-y-4 transition-all duration-300">
+      <div className="space-y-4 transition-all duration-300">
       {walletEVMAddress && (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md rounded-xl p-4 relative overflow-hidden">
           {/* Background gradient effect */}
-          <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-900/10 dark:to-transparent pointer-events-none"></div>
+          {/* <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-900/10 dark:to-transparent pointer-events-none"></div> */}
 
           {/* Header with logo, wallet info, and badges */}
           <div className="flex items-center justify-between mb-4">

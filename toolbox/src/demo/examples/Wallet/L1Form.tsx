@@ -6,6 +6,8 @@ import { AlertCircle, Loader2, Server, Coins, CheckCircle } from "lucide-react"
 import { createPublicClient, http } from "viem"
 import { Button } from "../../../components/button"
 import { Input } from "../../../components/input"
+import { Container } from "../../../components/container"
+
 /*
 //From chainlist.org
 const knownEvmChainIds = [1, 43114, 43113]
@@ -102,25 +104,11 @@ export default function L1Form() {
   }
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-md rounded-xl p-4 relative overflow-hidden">
+  <Container title="Chain Configuration" description="Configure and switch to an EVM-compatible chain">
       {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-900/10 dark:to-transparent pointer-events-none"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-900/10 dark:to-transparent pointer-events-none"></div> */}
 
       <div className="relative">
-        <div className="flex items-center mb-4">
-        <div className="bg-red-100 dark:bg-red-900/30 rounded-lg p-4 mr-4 h-[70px] w-[70px] flex items-center justify-center">
-            <img
-              src="/small-logo.png"
-              alt="Avalanche Logo"
-              className="h-8 w-auto"
-            />
-          </div>
-          <div>
-            <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-100">Chain Configuration</h3>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">Configure and switch to an EVM-compatible chain</p>
-          </div>
-        </div>
-
         {localError && (
           <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm">
             <div className="flex items-center">
@@ -259,7 +247,7 @@ export default function L1Form() {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

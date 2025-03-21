@@ -214,12 +214,14 @@ export default function SubnetDetails() {
                       <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="text-base font-semibold text-zinc-800 dark:text-white">Subnet Found</h3>
-                      <div className="flex items-center">
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mr-2">ID:</p>
-                        <p className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-300">
-                          {subnetDetails.subnetId}
-                        </p>
+                      <div className="flex flex-col">
+                        <h3 className="text-base font-semibold text-zinc-800 dark:text-white mb-1">Subnet Found</h3>
+                        <div className="flex items-center">
+                          <span className="text-xs text-zinc-500 dark:text-zinc-400 mr-2">Subnet ID:</span>
+                          <code className="text-xs font-mono bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-md text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+                            {subnetDetails.subnetId}
+                          </code>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -465,7 +467,7 @@ export default function SubnetDetails() {
 
             <div className="flex items-center justify-center text-xs text-zinc-500 dark:text-zinc-400 italic p-2 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-md shadow-sm">
               <Info className="h-3.5 w-3.5 mr-1.5" />
-              Data retrieved from Glacier API
+              <a href="https://developers.avacloud.io/data-api/primary-network/get-subnet-details-by-id" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-700 dark:hover:text-zinc-300">Data retrieved from Data API</a>
             </div>
           </div>
         )}
