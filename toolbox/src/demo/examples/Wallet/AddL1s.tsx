@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 import { Button, Select } from "../../ui";
-import { createWalletClient, custom, AddEthereumChainParameter } from 'viem';
-import { useExampleStore } from "../../utils/store";
+import { CoreWalletChain } from "../../../coreViem/overrides/addChain";
+import { useWalletStore } from "../../utils/store";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
 import { ChainInfo } from "@avalabs/avacloud-sdk/models/components";
 
@@ -14,8 +14,9 @@ export default function AddL1s() {
   const { showBoundary } = useErrorBoundary();
   const { 
     walletChainId, 
-    setWalletChainId
-  } = useExampleStore();
+    setWalletChainId, 
+    coreWalletClient, 
+  } = useWalletStore();
   
   const [chains, setChains] = useState<ChainInfo[]>([]);
   const [filteredChains, setFilteredChains] = useState<ChainInfo[]>([]);
@@ -89,45 +90,42 @@ export default function AddL1s() {
 
   async function switchToChain(chainId: string) {
     try {
-      if (!window.avalanche) {
-        throw new Error("Core wallet not detected. Please install Core wallet extension.");
-      }
-      
-      const walletClient = createWalletClient({
-        transport: custom(window.avalanche!),
-      });
-
-      // Convert decimal chainId to hex
+      // Convert decimal chainId to hex for wallet_switchEthereumChain
       const chainIdHex = `0x${parseInt(chainId).toString(16)}`;
+      const chainIdNum = parseInt(chainId);
 
-      await walletClient.request({
-        id: "switch-chain",
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: chainIdHex }],
-      });
+      try {
+        // Use the switchChain method if available, otherwise fall back to request
+        if (coreWalletClient.switchChain) {
+          await coreWalletClient.switchChain({ id: chainIdNum });
+        } else {
+          await coreWalletClient.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: chainIdHex }],
+          });
+        }
 
-      // After switching, update the chain ID in our state
-      const newChainId = await walletClient.getChainId();
-      setWalletChainId(Number(newChainId));
-      
-      return true;
-    } catch (error: any) {
-      // Check if the error is because the chain has not been added yet
-      if (error.code === 4902) {
-        // Chain not added yet, return false to let the caller know
-        return false;
+        // After switching, update the chain ID in our state
+        const newChainId = await coreWalletClient.getChainId();
+        setWalletChainId(Number(newChainId));
+        
+        return true;
+      } catch (error: any) {
+        // Check if the error is because the chain has not been added yet
+        if (error.code === 4902) {
+          return false;
+        }
+        throw error;
       }
-      throw error;
+    } catch (error) {
+      showBoundary(error);
+      return false;
     }
   }
 
   async function handleAddToWallet(chain: ChainInfo) {
     setAddingChainId(chain.chainId);
     try {
-      if (!window.avalanche) {
-        throw new Error("Core wallet not detected. Please install Core wallet extension.");
-      }
-      
       // First try to just switch to the chain, in case it's already added
       const switched = await switchToChain(chain.chainId).catch(() => false);
       
@@ -137,47 +135,37 @@ export default function AddL1s() {
         setSelectedChain(null);
         return;
       }
-      
-      // If we get here, the chain needs to be added first
-      const walletClient = createWalletClient({
-        transport: custom(window.avalanche!),
-      });
 
-      // Convert decimal chainId to hex
-      const chainIdHex = `0x${parseInt(chain.chainId).toString(16)}`;
-
-      const chainConfig: AddEthereumChainParameter = {
-        chainId: chainIdHex,
-        chainName: chain.chainName,
+      // Create a CoreWalletChain object
+      const coreWalletChain: CoreWalletChain = {
+        id: Number(chain.chainId),
+        name: chain.chainName,
         nativeCurrency: {
           name: chain.networkToken.name,
           symbol: chain.networkToken.symbol,
           decimals: chain.networkToken.decimals,
         },
-        rpcUrls: [chain.rpcUrl],
+        rpcUrls: {
+          default: {
+            http: [chain.rpcUrl],
+            webSocket: chain.wsUrl ? [chain.wsUrl] : undefined,
+          },
+        },
+        blockExplorers: chain.explorerUrl ? {
+          default: {
+            name: `${chain.chainName} Explorer`,
+            url: chain.explorerUrl,
+          },
+        } : undefined,
+        isTestnet: chain.isTestnet
       };
 
-      // Add the chain to wallet
-      await walletClient.request({
-        id: "1",
-        method: "wallet_addEthereumChain",
-        params: [{ ...chainConfig, isTestnet: chain.isTestnet } as unknown as AddEthereumChainParameter],
-      });
+      await coreWalletClient.addChain({ chain: coreWalletChain });
 
-      // Then request to switch to the newly added chain (this is already handled by most wallets after adding)
-      try {
-        await walletClient.request({
-          id: "2",
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: chainIdHex }],
-        });
-      } catch (switchError) {
+      // Then try to switch to the newly added chain
+      await switchToChain(chain.chainId).catch((switchError) => {
         console.warn("Error switching chain, but chain was added successfully:", switchError);
-      }
-
-      // After adding chain, check if the current chain changed
-      const newChainId = await walletClient.getChainId();
-      setWalletChainId(Number(newChainId));
+      });
       
       // Close the modal if it was open
       setSelectedChain(null);
