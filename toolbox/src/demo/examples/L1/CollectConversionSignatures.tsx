@@ -39,6 +39,7 @@ export default function CollectConversionSignatures() {
 
             setL1ConversionSignature(signedMessage);
         } catch (error) {
+            console.error("Conversion error:", error);
             showBoundary(error);
         } finally {
             setIsConverting(false);
