@@ -1,11 +1,9 @@
 "use client";
 
 import { useToolboxStore, useWalletStore } from "../../utils/store";
-import { useErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { networkIDs } from "@avalabs/avalanchejs";
 import { Button, Input } from "../../ui";
-import { Success } from "../../ui/Success";
 import { AvaCloudSDK } from "@avalabs/avacloud-sdk";
 import { CodeHighlighter } from "../../ui/CodeHighlighter";
 
