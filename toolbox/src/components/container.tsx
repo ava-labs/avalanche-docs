@@ -104,7 +104,7 @@ export function Container({
         "relative",
       )}
     >
-      {/* Gradient background header with logo and descriptions */}
+      {/* Gradient background header */}
       <div className="bg-gradient-to-r from-primary/90 to-primary/60 p-4">
         <div className="flex items-center gap-4">
           <div
@@ -121,7 +121,8 @@ export function Container({
         </div>
       </div>
 
-      <div className="p-6 space-y-6 text-zinc-900 dark:text-zinc-100">
+      {/* Content area with left padding aligned with logo */}
+      <div className="pl-4 pr-6 py-6 space-y-6 text-zinc-900 dark:text-zinc-100">
         <div className="space-y-6">{children}</div>
 
         <div className="pt-4 mt-6 border-t border-zinc-200 dark:border-zinc-800 text-center">
