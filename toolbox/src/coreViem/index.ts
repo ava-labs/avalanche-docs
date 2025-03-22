@@ -15,6 +15,14 @@ import { extractChainInfo, ExtractChainInfoParams } from './methods/extractChain
 export { type ConvertToL1Validator } from "./methods/convertToL1"
 
 export function createCoreWalletClient(account: `0x${string}`) {
+    // Check if we're in a browser environment
+    const isClient = typeof window !== 'undefined'
+    
+    // Only create a wallet client if we're in a browser
+    if (!isClient) {
+        return null as any; // Return null for SSR
+    }
+    
     return createWalletClient({
         transport: custom(window.avalanche!),
         account: account,
