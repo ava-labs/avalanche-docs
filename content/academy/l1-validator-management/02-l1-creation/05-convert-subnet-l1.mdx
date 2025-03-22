@@ -9,50 +9,58 @@ icon: CircleArrowRight
 import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper.tsx"
 import ConvertToL1 from "../../../../toolbox/src/demo/examples/L1/ConvertToL1.tsx"
 
+After creating a blockchain, it doesn't have any validators and cannot process transactions. At this point, you need to decide how to deploy your validators:
 
-### Subnet to L1 Conversion
-
-The blockchain has been created, but it does not yet have any validators and hence can not process any transactions.
-
-At this point, you have two options:
-
-1. Convert the Subnet to an L1 and start with a new validator set. Each validator pays 1.33 `AVAX` / month.
-2. Stay a Subnet and add validators. Each validators stakes 2,000 `AVAX`.
+1. **Convert the Subnet to an L1** - Start with a new validator set with lower barrier to entry (1.33 `AVAX` / month per validator)
+2. **Stay a Subnet** - Add validators with traditional staking requirements (2,000 `AVAX` per validator)
 
 <Callout type="info">
-If you are unsure what setup is right for you, please read details on the [Etna Upgrade](/academy/avalanche-fundamentals/03-multi-chain-architecture-intro/03a-etna-upgrade).
+For a detailed comparison between L1s and Subnets, read about the [Etna Upgrade](/academy/avalanche-fundamentals/03-multi-chain-architecture-intro/03a-etna-upgrade).
 </Callout>
 
+## The Conversion Process
 
-The conversion process is done through the `ConvertSubnetToL1Tx` transaction on the P-Chain.
+Converting a Subnet to an L1 requires executing a `ConvertSubnetToL1Tx` transaction on the P-Chain. This transaction establishes a new validator set for your blockchain and transforms it from a Subnet into a sovereign L1 chain. The `ConvertSubnetToL1Tx` transaction is a one-time transaction that can only be executed once by the Subnet owner(s).
 
-The process takes a few parameters:
+### Key Parameters
 
-- `subnetID`: The ID of the Subnet to convert.
-- `blockchainID`: The ID of the blockchain where Validator Manager will be deployed.
-- `Node Info`: The information for each validator in the new L1.
-- `Weight`: Each validators relative weight in the validator set.
-- `Balance`: The amount of `AVAX` each validator has in their initial AVAX balance (`1000000000` = 1 `AVAX`).
-- `Manager Address`: The address of the `ValidatorManager` contract for the new L1.
+The conversion transaction requires several important parameters:
+
+- **Subnet ID** - The unique identifier of your Subnet
+- **Blockchain ID** - The ID of the blockchain where the Validator Manager contract will be deployed
+- **Node Information** - Details for each validator initial validator in your new L1
+- **Validator Weights** - The relative weight of each validator in the consensus (determines voting power)
+- **Validator Balances** - Initial AVAX balance for each validator (in nAVAX, where `1,000,000,000 nAVAX = 1 AVAX`)
+- **Validator Manager Address** - The address of the contract that will manage validators for your L1
 
 <Callout type="info">
-    As a trick, the `Manager Address` placeholder is actually a Open Zeppelin [TransparentUpgradeableProxy](https://docs.openzeppelin.com/contracts/4.x/api/proxy) contract included in the `genesis.json` file as pre-deployed bytecode.
-    After the L1 is converted, we will deploy the `ValidatorManager` contract and update the proxy to point to the new address.
+The **Validator Manager Address** is initially set to an OpenZeppelin [TransparentUpgradeableProxy](https://docs.openzeppelin.com/contracts/4.x/api/proxy) contract pre-deployed in the `genesis.json`. After conversion, you'll deploy the actual `ValidatorManager` implementation contract and update the proxy to point to it.
 </Callout>
 
+## Conversion Tool
 
-
+Use the following tool to convert your Subnet to an L1:
 
 <ToolboxMdxWrapper>
     <ConvertToL1 />
 </ToolboxMdxWrapper>
 
-<Callout type="info">
-    The initial validator set will always be treated as Proof of Authority (PoA) validators (and be uneligable for rewards), but can be removed and added later for Proof of Stake (PoS) validators.
-</Callout>
+## Important Considerations
 
 <Callout type="warn">
-   If you are a pre-existing (legacy) Subnet with validators, you will need a NEW validator set for the L1 conversion.
+If converting a pre-existing Subnet with validators, you must establish a completely new validator set for the L1 conversion. The existing Subnet validators cannot be automatically transferred.
+</Callout>
+
+<Callout type="info">
+Initially, validators are managed through Proof-of-Authority (PoA) using the `ValidatorManager` contract with a designated admin controlling validator membership. Later, you can upgrade to Proof-of-Stake (PoS) by transferring ownership to a `StakingManager` contract that enables:
+
+- Permissionless validators staking with the L1's native token via `NativeTokenStakingManager`
+- Validators staking using an ERC20 token via `ERC20TokenStakingManager` 
+- Support for delegators to stake with validators and earn rewards
+- Configurable uptime-based validation rewards
+- Customizable minimum stake durations and churn limits
+
+The `StakingManager` contracts follow the [ACP-99 standard](https://github.com/ava-labs/icm-contracts/tree/main/contracts/validator-manager) for validator management functionality.
 </Callout>
 
 

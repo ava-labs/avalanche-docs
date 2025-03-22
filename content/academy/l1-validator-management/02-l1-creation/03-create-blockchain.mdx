@@ -10,25 +10,42 @@ import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper
 import CreateChain from "../../../../toolbox/src/demo/examples/L1/CreateChain.tsx"
 
 
-### Creating a Blockchain
-Now that you have created a `subnet`, and created a `genesis.json` file, you can create a blockchain.
+## Creating a Blockchain on Avalanche
 
-The `CreateChainTx` transaction establishes a new blockchain on the P-Chain, associating it with your previously created `subnetID`.
+Now that you have successfully created a `subnetID` and generated a `genesis.json` file, the next step is to create the blockchain.
 
-During this process, the transaction uploads your `genesis.json` configuration to the P-Chain and generates a unique `blockchainID` that will permanently identify your chain on the network.
+### Understanding the CreateChainTx Transaction
 
+The `CreateChainTx` transaction is a critical operation on the P-Chain that:
 
-The `VM ID` field is the VM ID for the blockchain. When you build default `subnet-evm` chains, the VM ID is `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`.
-If you are using a custom VM (e.g. `subnet-evm` with custom precompiles, or `hypersdk`), you will want to change this field to the correct VM ID.
+- Establishes a new blockchain and associates it with your previously created `subnetID`
+- Uploads your `genesis.json` configuration to the network
+- Generates a unique `blockchainID` that permanently identifies your chain within the Avalanche ecosystem
+
+### Virtual Machine (VM) Configuration
+
+When creating your blockchain, you'll need to specify the appropriate Virtual Machine:
+
+- For standard `subnet-evm` chains, use the default VM ID: `srEXiWaHuhNyGwPUi444Tu47ZEDwxTWrbQiuD7FmgSAQ6X7Dy`
+- If you're deploying a custom VM (such as `subnet-evm` with custom precompiles or a `hypersdk`-based chain), you must specify the correct custom VM ID
+
+### Creating Your Blockchain
+
+Use the interactive tool below to complete the blockchain creation process:
 
 <ToolboxMdxWrapper>
     <CreateChain />
 </ToolboxMdxWrapper>
 
+### Next Steps After Blockchain Creation
 
-Once the transaction is confirmed, you will have a new blockchain on the P-Chain.
+Once the transaction is confirmed by the network, your blockchain will be live on the P-Chain. You can:
 
-You can quickly start an `avalanchego` node in Docker and connect it to your chain using the [L1 Toolbox](https://build.avax.network/tools/l1-toolbox#avalanchegoDocker)
+1. **Quick Start**: Launch an `avalanchego` node in Docker and connect to your chain using the [L1 Toolbox](https://build.avax.network/tools/l1-toolbox#avalanchegoDocker)
 
-If you want a more hands on approach, you can read the [Node & Validator](/docs/nodes) documentation.    
+2. **Advanced Deployment**: For a more hands-on approach with detailed configuration options, refer to the [Node & Validator](/docs/nodes) documentation
+
+### Monitoring and Management
+
+After creation, your blockchain will be visible in explorers and can be managed through standard Avalanche APIs and tools. You'll use the `blockchainID` for all future operations involving your chain.
 

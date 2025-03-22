@@ -15,11 +15,17 @@ import QueryValidatorList from "../../../../toolbox/src/demo/examples/ValidatorM
     <QueryValidatorList />
 </ToolboxMdxWrapper>
 
-To query the validator set, you can use the [Glacier API from AvaCloud](https://developers.avacloud.io/data-api/primary-network/list-l1-validators?playground=open).
+To query the validator set, you can use the [Data API from AvaCloud](https://developers.avacloud.io/data-api/primary-network/list-l1-validators?playground=open).
 
-Enter your `subnetID` and network name (e.g. `mainnet` or `fuji`) and you will receive the validator set.
+#### Using the Data API
 
-It should display the validator set similar to the following:
+1. Navigate to the [List L1 Validators API endpoint](https://developers.avacloud.io/data-api/primary-network/list-l1-validators?playground=open)
+2. Enter your `subnetID` in the required field
+3. Select your network from the dropdown (`mainnet` or `fuji`)
+4. Click "Execute" to send the API request
+5. The response will display your current validator set
+
+The response will show your validator set in the following format:
 
 ```json
 {

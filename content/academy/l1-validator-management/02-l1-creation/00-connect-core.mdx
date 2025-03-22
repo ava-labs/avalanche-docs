@@ -1,6 +1,6 @@
 ---
 title: Connect Core Wallet
-description: Connect your Core wallet to the P-Chain.
+description: Learn how to connect Core wallet to Avalanche and understand different chain address formats.
 updated: 2025-03-13
 authors: [owenwahlgren]
 icon: BookUser
@@ -9,25 +9,22 @@ icon: BookUser
 import ToolboxMdxWrapper from "../../../../toolbox/src/demo/ui/ToolboxMdxWrapper.tsx"
 
 <ToolboxMdxWrapper>
-</ToolboxMdxWrapper>
+
+## Prerequisites
+
 <Callout type="info">
-    If you don't have Core wallet installed, you can download it from the [Core website](https://core.app/).
+Before you begin, make sure you have:
+- [Core wallet](https://core.app/) installed on your device
+- Some AVAX tokens:
+  - For mainnet: Purchase AVAX from supported exchanges
+  - For Fuji testnet: Get test tokens from the [Avalanche Faucet](https://faucet.avax.network/)
 </Callout>
-### P-Chain Address Format
-The P-Chain uses [Bech32](https://en.bitcoin.it/wiki/Bech32) addresses, which follow the [BIP-0173](https://en.bitcoin.it/wiki/BIP_0173) standard. 
 
-These addresses consist of:
-- A Human-Readable Part (HRP) - "avax" for mainnet or "fuji" for testnet
-- The separator `1` 
-- A base32-encoded address
-- A 6-character error correction code
+## Understanding Avalanche Addresses
 
-For example: 
+When working with Avalanche, it's important to understand that each chain in the network uses a different address format. Your wallet will have three different addresses - one for each chain (P-Chain, X-Chain, and C-Chain).
 
-- `P-avax1kj06lhgx84h39snsljcey3tpc046ze68mek3g5`for Avalanche mainnet
-- `P-fuji1n3axecsjsrfxrgcadsd0km0kgcheuxw4t53886` for Fuji testnet.
-
-This differs from C-Chain addresses which use the Ethereum hex format (starting with `0x`).
+### Chain Address Formats
 
 <div className="flex justify-center my-8">
   <div className="flex">
@@ -52,15 +49,43 @@ This differs from C-Chain addresses which use the Ethereum hex format (starting 
   </div>
 </div>
 
-While both P-Chain and X-Chain use Bech32, they are distinguished by their chain prefix (`P-` vs `X-`).
-
 <Callout type="info">
-  The diagram above shows wallet addresses on different chains. Each wallet has a unique address format for each chain, but they're all derived from the same private key.
+  While each chain has its own address format, all addresses in your wallet are derived from the same private key. This means you only need to secure one private key or seed phrase to protect all your chain addresses.
 </Callout>
 
-<Callout type="info">
-    If you don't have funds on Fuji, you can request testnet AVAX from the [Faucet](https://faucet.avax.network/).
-</Callout>
+### P-Chain Address Format
+
+The P-Chain (Platform Chain) uses the [Bech32](https://en.bitcoin.it/wiki/Bech32) address format, which follows the [BIP-0173](https://en.bitcoin.it/wiki/BIP_0173) standard. This format was chosen for its error detection capabilities and human-readable features.
+
+A P-Chain address consists of four parts:
+1. Chain prefix: `P-`
+2. Network identifier (HRP - Human-Readable Part):
+   - `avax` for mainnet
+   - `fuji` for testnet
+3. Separator: `1`
+4. Base32-encoded payload + 6-character error correction code
+
+Examples:
+```
+Mainnet: P-avax1kj06lhgx84h39snsljcey3tpc046ze68mek3g5
+Testnet: P-fuji1n3axecsjsrfxrgcadsd0km0kgcheuxw4t53886
+```
+
+### X-Chain Address Format
+
+The X-Chain (Exchange Chain) also uses the Bech32 format but with an `X-` prefix. The rest of the format follows the same structure as P-Chain addresses.
+
+### C-Chain Address Format
+
+The C-Chain (Contract Chain) uses the Ethereum hex format since it's EVM-compatible. These addresses:
+- Start with `0x`
+- Contain 40 hexadecimal characters
+- Are compatible with all Ethereum tools and standards
+
+Example: `0x1234567890123456789012345678901234567890`
+
+</ToolboxMdxWrapper>
+
 
 
 
