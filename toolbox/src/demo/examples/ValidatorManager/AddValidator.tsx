@@ -45,7 +45,6 @@ export default function AddValidator() {
   const [newNodeID, setNewNodeID] = useState("")
   const [newBlsPublicKey, setNewBlsPublicKey] = useState("")
   const [newBlsProofOfPossession, setNewBlsProofOfPossession] = useState("")
-  const [newPChainAddress, setNewPChainAddress] = useState("")
   const [newWeight, setNewWeight] = useState("")
   const [newBalance, setNewBalance] = useState("0.1")
 
@@ -65,7 +64,7 @@ export default function AddValidator() {
   const [validationID, setValidationID] = useState("")
   const [savedSignedMessage, setSavedSignedMessage] = useState("")
   const [savedPChainWarpMsg, setSavedPChainWarpMsg] = useState("")
-  const [savedPChainResponse, setSavedPChainResponse] = useState<string>("")
+  const [_, setSavedPChainResponse] = useState<string>("")
   const [networkName, setNetworkName] = useState<"fuji" | "mainnet" | undefined>(undefined)
   const [error, setError] = useState<string | null>(null)
 

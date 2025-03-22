@@ -1,14 +1,12 @@
 "use client"
 
 import { useToolboxStore, useWalletStore } from "../../utils/store"
-import { useErrorBoundary } from "react-error-boundary"
 import { useState, useEffect } from "react"
-import { Note } from "../../ui/Note"
-import { networkIDs } from "@avalabs/avalanchejs"
-import { InfoIcon, Calendar, Clock, ChevronRight, Users, ChevronLeft, Coins, Database, Globe, Info } from "lucide-react"
+import { Calendar, Clock, ChevronRight, Users, ChevronLeft, Coins, Database, Globe, Info } from "lucide-react"
 import { Container } from "../../../components/container"
 import { Input } from "../../../components/input"
 import { Button } from "../../../components/button"
+import { networkIDs } from "@avalabs/avalanchejs"
 
 interface Validator {
   validationId: string
@@ -35,7 +33,6 @@ interface L1ValidatorsResponse {
 }
 
 export default function QueryValidatorList() {
-  const { showBoundary } = useErrorBoundary()
   const { subnetID, setSubnetID } = useToolboxStore()
   const { avalancheNetworkID, setAvalancheNetworkID } = useWalletStore()
   const [validators, setValidators] = useState<Validator[]>([])

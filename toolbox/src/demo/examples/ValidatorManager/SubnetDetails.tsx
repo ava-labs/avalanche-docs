@@ -1,7 +1,6 @@
 "use client"
 
 import { useToolboxStore, useWalletStore } from "../../utils/store"
-import { useErrorBoundary } from "react-error-boundary"
 import { useState, useEffect } from "react"
 import {
   AlertCircle,
@@ -43,8 +42,7 @@ interface SubnetDetails {
 }
 
 export default function SubnetDetails() {
-  const { showBoundary } = useErrorBoundary()
-  const { subnetID, setSubnetID, setChainID } = useToolboxStore()
+  const { subnetID, setSubnetID } = useToolboxStore()
   const { avalancheNetworkID, setAvalancheNetworkID } = useWalletStore()
   const [subnetDetails, setSubnetDetails] = useState<SubnetDetails | null>(null)
   const [isLoading, setIsLoading] = useState(false)

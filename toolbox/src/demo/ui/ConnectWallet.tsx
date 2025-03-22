@@ -5,7 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "./Button"
 import { useErrorBoundary } from "react-error-boundary"
-import { Copy, ExternalLink, Wallet } from "lucide-react"
+import { Copy, ExternalLink } from "lucide-react"
 import { useWalletStore } from "../utils/store"
 import { createCoreWalletClient } from "../../coreViem"
 import { networkIDs } from "@avalabs/avalanchejs"
@@ -24,7 +24,6 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
     avalancheNetworkID,
   } = useWalletStore()
   const [hasWallet, setHasWallet] = useState<boolean>(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
   const { showBoundary } = useErrorBoundary()
 
   function handleAccountsChanged(accounts: string[]) {
