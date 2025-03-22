@@ -71,7 +71,7 @@ export default function InitValidatorSet() {
                 validatorManagerBlockchainID: cb58ToHex(chainId),
                 validatorManagerAddress: managerAddress as `0x${string}`,
                 initialValidators: validators
-                    .map(({ nodeID, weight, signer }) => {
+                    .map(({ nodeID, weight, signer }: { nodeID: string, weight: number, signer: { publicKey: string } }) => {
                         return {
                             nodeID: nodeID,
                             blsPublicKey: signer.publicKey,

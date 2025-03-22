@@ -86,7 +86,7 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
 
     coreWalletClient
       .isTestnet()
-      .then((isTestnet) => {
+      .then((isTestnet: boolean) => {
         setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID)
       })
       .catch(showBoundary)

@@ -54,10 +54,8 @@ export const useToolboxStore = create(
             setGasLimit: (gasLimit: number) => set({ gasLimit }),
             setTargetBlockRate: (targetBlockRate: number) => set({ targetBlockRate }),
             reset: () => {
-                if (typeof window !== 'undefined') {
-                    window.localStorage.removeItem('example-storage');
-                    window.location.reload();
-                }
+                window.localStorage.removeItem('example-storage');
+                window.location.reload();
             },
             setEvmChainId: (evmChainId: number) => set({ evmChainId }),
             setTeleporterRegistryAddress: (address: string) => set({ teleporterRegistryAddress: address }),
@@ -65,11 +63,7 @@ export const useToolboxStore = create(
         })),
         {
             name: 'example-storage',
-            storage: createJSONStorage(() => typeof window !== 'undefined' ? localStorage : {
-                getItem: () => null,
-                setItem: () => {},
-                removeItem: () => {}
-            }),
+            storage: createJSONStorage(() => localStorage),
         },
     ),
 )
@@ -81,7 +75,7 @@ export const useWalletStore = create(
     combine({
         coreWalletClient: createCoreWalletClient(zeroAddress) as ReturnType<typeof createCoreWalletClient>,
         publicClient: createPublicClient({
-            transport: typeof window !== 'undefined' && window.avalanche ? custom(window.avalanche) : http(avalancheFuji.rpcUrls.default.http[0]),
+            transport: window.avalanche ? custom(window.avalanche) : http(avalancheFuji.rpcUrls.default.http[0]),//just to calm typescript down
         }) as ReturnType<typeof createPublicClient>,
         walletChainId: 0,
         walletEVMAddress: "",
