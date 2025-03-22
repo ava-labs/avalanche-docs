@@ -30,22 +30,43 @@ class BlockWatcher {
         let currentBlockNumber = BigInt(startFromBlock);
         console.log('Starting from block', currentBlockNumber);
 
+        const maxBatchSize = 25
+
         while (this.isRunning) {
             try {
-                const block = await this.publicClient.getBlock({
-                    blockNumber: currentBlockNumber
-                });
+                let lastBlock = await this.publicClient.getBlockNumber()
+
+                while (lastBlock === currentBlockNumber) {
+                    console.log('Reached end of chain');
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    lastBlock = await this.publicClient.getBlockNumber();
+                }
+
+                const endBlock = currentBlockNumber + BigInt(maxBatchSize) < BigInt(lastBlock)
+                    ? currentBlockNumber + BigInt(maxBatchSize)
+                    : BigInt(lastBlock);
+
+                const blockPromises = [];
+                for (let i = currentBlockNumber; i < endBlock; i++) {
+                    blockPromises.push(this.publicClient.getBlock({
+                        blockNumber: i
+                    }));
+                }
+
+                const blocks = await Promise.all(blockPromises);
 
                 // Send block info to callback
-                this.callback({
-                    blockNumber: Number(currentBlockNumber),
-                    transactionCount: block.transactions.length,
-                    gasUsed: block.gasUsed,
-                    timestamp: Number(block.timestamp)
+                blocks.forEach((block, index) => {
+                    this.callback({
+                        blockNumber: Number(currentBlockNumber) + index,
+                        transactionCount: block.transactions.length,
+                        gasUsed: block.gasUsed,
+                        timestamp: Number(block.timestamp)
+                    });
                 });
 
-                // Move to the next block
-                currentBlockNumber = currentBlockNumber + 1n;
+                console.log('Synced blocks', currentBlockNumber, 'to', endBlock);
+                currentBlockNumber = endBlock;
             } catch (error) {
                 if (error instanceof Error &&
                     error.message.includes('cannot query unfinalized data')) {
@@ -104,8 +125,11 @@ export default function PerformanceMonitor() {
             const now = Math.floor(Date.now() / 1000);
             const maxSecondsToShow = Number(secondsToShow);
 
-            // Create a complete timeline with all seconds
-            const timelineStart = now - maxSecondsToShow + 1;
+            // Adjust to hide the last 5 seconds
+            const endTime = now - 5;
+
+            // Create a complete timeline with all seconds, ending 5 seconds ago
+            const timelineStart = endTime - maxSecondsToShow + 1;
             const completeTimeline: number[] = Array.from(
                 { length: maxSecondsToShow },
                 (_, i) => timelineStart + i
