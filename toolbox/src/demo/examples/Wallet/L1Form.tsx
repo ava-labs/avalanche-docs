@@ -2,7 +2,7 @@
 
 import { useToolboxStore, useViemChainStore, useWalletStore } from "../../utils/store"
 import { useState, useEffect } from "react"
-import { AlertCircle, Loader2, Server, Coins, CheckCircle } from "lucide-react"
+import { AlertCircle, Loader2, CheckCircle } from "lucide-react"
 import { createPublicClient, http } from "viem"
 import { Button } from "../../../components/button"
 import { Input } from "../../../components/input"
