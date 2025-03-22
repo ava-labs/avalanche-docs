@@ -30,7 +30,7 @@ class BlockWatcher {
         let currentBlockNumber = BigInt(startFromBlock);
         console.log('Starting from block', currentBlockNumber);
 
-        const maxBatchSize = 10
+        const maxBatchSize = 25
 
         while (this.isRunning) {
             try {
