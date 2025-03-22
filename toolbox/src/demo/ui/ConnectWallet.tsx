@@ -24,45 +24,12 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
     avalancheNetworkID,
   } = useWalletStore()
   const [hasWallet, setHasWallet] = useState<boolean>(false)
+  const [isBrowser, setIsBrowser] = useState<boolean>(false)
   const { showBoundary } = useErrorBoundary()
 
-  function handleAccountsChanged(accounts: string[]) {
-    if (accounts.length === 0) {
-      setWalletEVMAddress("")
-      return
-    } else if (accounts.length > 1) {
-      showBoundary(new Error("Multiple accounts found, we don't support that yet"))
-      return
-    }
-
-    //re-create wallet with new account
-    setCoreWalletClient(createCoreWalletClient(accounts[0] as `0x${string}`))
-    setWalletEVMAddress(accounts[0] as `0x${string}`)
-
-    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary)
-
-    if (walletChainId === 0) {
-      coreWalletClient.getChainId().then(onChainChanged).catch(showBoundary)
-    }
-  }
-
-  const onChainChanged = (chainId: string | number) => {
-    if (typeof chainId === "string") {
-      chainId = Number.parseInt(chainId, 16)
-    }
-
-    setWalletChainId(chainId)
-    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary)
-
-    coreWalletClient
-      .isTestnet()
-      .then((isTestnet) => {
-        setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID)
-      })
-      .catch(showBoundary)
-  }
-
   useEffect(() => {
+    setIsBrowser(true)
+    
     async function init() {
       try {
         //first, let's check if there is a wallet at all
@@ -88,10 +55,66 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
         showBoundary(error)
       }
     }
-    init()
-  }, [])
+    
+    if (isBrowser) {
+      init()
+    }
+    
+    // Clean up event listeners
+    return () => {
+      // Since we're dealing with a type mismatch between the API's on() and removeListener() methods,
+      // we apply a type-safe workaround by using empty functions of the required signature
+      if (isBrowser && window.avalanche) {
+        try {
+          // Empty functions with matching signatures for removeListener
+          window.avalanche.removeListener("accountsChanged", () => {})
+          window.avalanche.removeListener("chainChanged", () => {})
+        } catch (e) {
+          console.warn("Failed to remove event listeners:", e)
+        }
+      }
+    }
+  }, [isBrowser])
+
+  const onChainChanged = (chainId: string | number) => {
+    if (typeof chainId === "string") {
+      chainId = Number.parseInt(chainId, 16)
+    }
+
+    setWalletChainId(chainId)
+    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary)
+
+    coreWalletClient
+      .isTestnet()
+      .then((isTestnet) => {
+        setAvalancheNetworkID(isTestnet ? networkIDs.FujiID : networkIDs.MainnetID)
+      })
+      .catch(showBoundary)
+  }
+
+  const handleAccountsChanged = (accounts: string[]) => {
+    if (accounts.length === 0) {
+      setWalletEVMAddress("")
+      return
+    } else if (accounts.length > 1) {
+      showBoundary(new Error("Multiple accounts found, we don't support that yet"))
+      return
+    }
+
+    //re-create wallet with new account
+    setCoreWalletClient(createCoreWalletClient(accounts[0] as `0x${string}`))
+    setWalletEVMAddress(accounts[0] as `0x${string}`)
+
+    coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary)
+
+    if (walletChainId === 0) {
+      coreWalletClient.getChainId().then(onChainChanged).catch(showBoundary)
+    }
+  }
 
   async function connectWallet() {
+    if (!isBrowser) return
+    
     console.log("Connecting wallet")
     window.avalanche
       ?.request<string[]>({ method: "eth_requestAccounts" })
@@ -100,17 +123,45 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
       })
       .then((accounts?: string[] | void) => {
         if (accounts) {
-          handleAccountsChanged(accounts)
+          // Use the same handler function as defined in useEffect
+          if (accounts.length === 0) {
+            setWalletEVMAddress("")
+            return
+          } else if (accounts.length > 1) {
+            showBoundary(new Error("Multiple accounts found, we don't support that yet"))
+            return
+          }
+
+          //re-create wallet with new account
+          setCoreWalletClient(createCoreWalletClient(accounts[0] as `0x${string}`))
+          setWalletEVMAddress(accounts[0] as `0x${string}`)
+
+          coreWalletClient.getPChainAddress().then(setPChainAddress).catch(showBoundary)
+
+          if (walletChainId === 0) {
+            coreWalletClient.getChainId().then(onChainChanged).catch(showBoundary)
+          }
         }
       })
   }
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
+    if (isBrowser) {
+      navigator.clipboard.writeText(text)
+    }
   }
 
   const truncateAddress = (address: string) => {
     return `${address.substring(0, 12)}...${address.substring(address.length - 4)}`
+  }
+
+  // Server-side rendering fallback
+  if (!isBrowser) {
+    return (
+      <div className="space-y-4 transition-all duration-300">
+        <div className="transition-all duration-300">{children}</div>
+      </div>
+    )
   }
 
   if (required && !hasWallet) {
@@ -199,7 +250,7 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
               {walletChainId && (
                 <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-full text-xs">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                  <span className="text-zinc-700 dark:text-zinc-700 font-medium">Chain {walletChainId}</span>
+                  <span className="text-zinc-700 dark:text-zinc-300 font-medium">Chain {walletChainId}</span>
                 </div>
               )}
 
@@ -269,4 +320,3 @@ export const ConnectWallet = ({ children, required }: { children: React.ReactNod
     </div>
   )
 }
-
