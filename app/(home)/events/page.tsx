@@ -149,7 +149,7 @@ export default function Page() {
                 arrowColor={arrowColor}
               />
             </a>
-            <a href="/hackathon_bba" target="_blank" rel="noopener noreferrer">
+            <a href="/hackathons/1661940a-d9f4-4811-9d1a-e6e8d4585893" target="_blank" rel="noopener noreferrer">
               <EventCard
                 title="Beantown Showndown Hackathon"
                 description="Boston Blockchain Association + Avalanche Hackathon"
