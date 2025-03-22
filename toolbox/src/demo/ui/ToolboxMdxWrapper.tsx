@@ -28,7 +28,9 @@ export default function ToolboxMdxWrapper({ children }: { children: React.ReactN
     return <ErrorBoundary
         FallbackComponent={ErrorFallback}
         onReset={() => {
-            window.location.reload();
+            if (typeof window !== 'undefined') {
+                window.location.reload();
+            }
         }}
     >
         <ConnectWallet required={true}>
