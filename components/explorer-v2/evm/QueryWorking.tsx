@@ -144,7 +144,7 @@ export function PromptBox({
         autoFocus={autoFocus}
         disabled={disabled}
         placeholder={placeholder}
-        className="min-h-[1.75rem] min-w-0 flex-1 resize-none bg-transparent py-1 font-mono text-[13px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 disabled:opacity-60 dark:text-zinc-50 dark:placeholder:text-zinc-600"
+        className="min-h-[1.75rem] min-w-0 flex-1 resize-none bg-transparent py-1 font-mono text-[16px] leading-relaxed md:text-[13px] text-zinc-900 outline-none placeholder:text-zinc-400 disabled:opacity-60 dark:text-zinc-50 dark:placeholder:text-zinc-600"
       />
       <button
         type="button"
