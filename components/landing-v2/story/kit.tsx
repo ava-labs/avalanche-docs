@@ -22,8 +22,8 @@ import { track } from "@/components/landing-v2/track";
 
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
-export const BODY = "text-[15px] leading-snug text-zinc-500 dark:text-zinc-400";
-export const CAPTION = "text-[13px] leading-snug text-zinc-500 dark:text-zinc-400";
+export const BODY = "text-pretty text-[15px] leading-snug text-zinc-500 dark:text-zinc-400";
+export const CAPTION = "text-pretty text-[13px] leading-snug text-zinc-500 dark:text-zinc-400";
 export const MONO = "font-mono text-xs uppercase tracking-[0.16em]";
 export const SUBHEAD = "v2-heading text-2xl leading-tight tracking-[-0.02em] text-zinc-900 md:text-[1.75rem] dark:text-zinc-50";
 
@@ -118,7 +118,7 @@ export function Title({
 /** the one sentence under a title */
 export function Lead({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`text-pretty max-w-xl text-lg leading-relaxed text-zinc-600 md:text-xl md:leading-relaxed dark:text-zinc-400 ${className}`}>
+    <p className={`text-pretty max-w-xl text-lg leading-[1.4] text-zinc-600 md:text-xl dark:text-zinc-400 ${className}`}>
       {children}
     </p>
   );
@@ -164,7 +164,7 @@ export function TextLink({
     <HoverPrefetchLink
       href={href}
       onClick={() => track("home_cta_clicked", { section, label: children, href })}
-      className={`group -my-3.5 inline-flex items-center gap-1.5 py-3.5 text-zinc-600 transition-colors hover:text-zinc-900 focus-visible:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50 dark:focus-visible:text-zinc-50 ${MONO} ${FOCUS}`}
+      className={`group -my-3.5 inline-flex items-center max-sm:self-start gap-1.5 py-3.5 text-zinc-600 transition-colors hover:text-zinc-900 focus-visible:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50 dark:focus-visible:text-zinc-50 ${MONO} ${FOCUS}`}
     >
       {children}
       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5" />
