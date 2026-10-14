@@ -9,11 +9,12 @@ import type { SceneTheme } from "./palette";
    (so three.js never joins the page load), and only when the box comes
    within about a screen and a half of the viewport. There the canvas draws its
    first frame off screen, fades in once that frame is down, and runs its
-   frame loop only while the box is on screen. Everywhere else a still (a
-   render of the same scene) stands in: the wide still from 768 px up, the
-   narrow one below. CSS picks the still for the theme, so the server's HTML
-   is right before hydration. The box holds a fixed aspect ratio, so no path
-   moves the layout. */
+   frame loop only while the box is on screen. When the canvas is ready with
+   the box already on screen, its intro plays hidden behind the still and the
+   canvas fades in on the settled pose. Everywhere else a still (a render of the same scene)
+   stands in: the wide still from 768 px up, the narrow one below. CSS picks
+   the still for the theme, so the server's HTML is right before hydration.
+   The box holds a fixed aspect ratio, so no path moves the layout. */
 
 export interface SceneProps {
   theme: SceneTheme;
@@ -58,6 +59,10 @@ function canRunScene(): boolean {
 
 /** how far the page must scroll before a scene may load */
 const SCROLLED_PX = 64;
+/** how long a scene's intro runs (the stack's drop, the network's rise) before it settles */
+const SETTLE_MS = 1800;
+/** the canvas fade (duration-700), plus a frame */
+const FADE_MS = 750;
 
 const STILL_CLASS = "pointer-events-none absolute inset-0 h-full w-full object-contain";
 
@@ -118,8 +123,8 @@ export function SceneFrame<P extends object>({
       if (!canRunScene()) return;
       setMode("scene");
       // a reload deep in the page has already scrolled; a fresh visit waits
-      // for the reader's first scroll. Scroll snapping moves a fresh page by
-      // a pixel or so on its own, so only a real distance counts
+      // for the reader's first scroll. Only a real distance counts: the
+      // browser can move a fresh page by a pixel on its own
       if (window.scrollY > SCROLLED_PX) return watch();
       waiting = () => {
         if (window.scrollY <= SCROLLED_PX) return;
@@ -139,8 +144,29 @@ export function SceneFrame<P extends object>({
 
   const onReady = useCallback(() => setReady(true), []);
 
+  // the still hands over to the canvas while the box is off screen, so a
+  // reader never sees an empty box or the scene start over. A box that is
+  // on screen when its canvas is ready (a fast scroll, a reload) plays the
+  // intro hidden behind the still, then fades the canvas in on the settled
+  // pose, which is the pose the still shows
+  const [swapped, setSwapped] = useState(false);
+  useEffect(() => {
+    if (!ready || swapped) return;
+    if (!running) return setSwapped(true);
+    const timer = window.setTimeout(() => setSwapped(true), SETTLE_MS);
+    return () => window.clearTimeout(timer);
+  }, [ready, running, swapped]);
+  // the still stays under the canvas until the canvas has faded in over it,
+  // so the handover is a crossfade, never a dip
+  const [covered, setCovered] = useState(false);
+  useEffect(() => {
+    if (!swapped) return setCovered(false);
+    const timer = window.setTimeout(() => setCovered(true), FADE_MS);
+    return () => window.clearTimeout(timer);
+  }, [swapped]);
+
   // a scene that never reports (a slow first compile, an error in its frame)
-  // still fades in once it has had a moment on screen
+  // counts as ready once it has had a moment on screen
   useEffect(() => {
     if (!mount || !running || ready) return;
     const timer = window.setTimeout(() => setReady(true), 1200);
@@ -154,6 +180,7 @@ export function SceneFrame<P extends object>({
     const lost = (event: Event) => {
       if ((event.target as HTMLElement).tagName !== "CANVAS") return;
       setReady(false);
+      setSwapped(false);
       setMode("still");
     };
     box.addEventListener("webglcontextlost", lost, true);
@@ -169,7 +196,7 @@ export function SceneFrame<P extends object>({
       className={`relative w-full aspect-[var(--scene-an)] md:aspect-[var(--scene-a)] ${className}`}
       style={{ "--scene-a": String(aspect), "--scene-an": String(aspectNarrow ?? aspect) } as CSSProperties}
     >
-      {mode === "still" && (
+      {(mode === "still" || !covered) && (
         <>
           <img src={narrow.light} alt="" loading="lazy" decoding="async" className={`${STILL_CLASS} md:hidden dark:hidden`} />
           <img src={narrow.dark} alt="" loading="lazy" decoding="async" className={`${STILL_CLASS} hidden dark:block md:dark:hidden`} />
@@ -178,7 +205,10 @@ export function SceneFrame<P extends object>({
         </>
       )}
       {mode === "scene" && mount && (
-        <div aria-hidden className={`absolute inset-0 transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0"}`}>
+        <div
+          aria-hidden
+          className={`absolute inset-0 transition-opacity duration-700 ${ready && swapped ? "opacity-100" : "opacity-0"}`}
+        >
           <Scene {...sceneProps} theme={theme} running={running} onReady={onReady} />
         </div>
       )}
