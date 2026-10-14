@@ -66,6 +66,8 @@ export interface NetworkSceneProps {
   routes: NetworkRoute[];
   /** chain ids that carry a name label */
   labelled: string[];
+  /** false until the reader can see the box: the rise, the routes and the first messages wait for it */
+  play?: boolean;
 }
 
 const CELL = 1;
@@ -722,7 +724,9 @@ export default function NetworkScene({
   theme,
   running,
   onReady,
+  play = true,
 }: NetworkSceneProps & SceneProps) {
+  const on = running && play;
   const placed = useMemo(() => layout(chains), [chains]);
   const extent = useMemo(() => Math.max(1, ...placed.map((p) => Math.max(Math.abs(p.x), Math.abs(p.z)))), [placed]);
   const rise = useMemo(() => Math.max(0, ...placed.map((p) => p.ring)) * RING_S + GROW_S, [placed]);
@@ -795,8 +799,8 @@ export default function NetworkScene({
         c.until = Math.max(c.until, c.t + SEND_S);
       }}
     >
-      <Tick clock={clock} running={running} />
-      <Kick running={running} />
+      <Tick clock={clock} running={on} />
+      <Kick running={on} />
       <Ready when={(marks !== null && name !== null) || late} onReady={onReady} />
       <Rig extent={extent}>
         <Plate extent={extent} theme={theme} />

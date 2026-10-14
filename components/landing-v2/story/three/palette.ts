@@ -91,8 +91,8 @@ export function shadedBox(theme: SceneTheme, w = 1, h = 1, d = 1): BoxGeometry {
 
 /** how far a chain's own color is held in, per page theme: saturation cap, lightness band, then a step toward the face tone */
 const BRAND: Record<SceneTheme, { s: number; l: [number, number]; toFace: number }> = {
-  light: { s: 0.5, l: [0.52, 0.66], toFace: 0.25 },
-  dark: { s: 0.45, l: [0.4, 0.52], toFace: 0.15 },
+  light: { s: 0.35, l: [0.55, 0.68], toFace: 0.4 },
+  dark: { s: 0.28, l: [0.38, 0.5], toFace: 0.35 },
 };
 const RED_HUE = new Color(PALETTE.light.red).getHSL({ h: 0, s: 0, l: 0 }, SRGBColorSpace).h;
 
