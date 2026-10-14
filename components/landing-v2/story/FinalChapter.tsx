@@ -29,12 +29,14 @@ interface Mark {
   sign: string;
   said: string;
   seconds: string;
+  /** the mark the chapter is about: it takes the red */
+  accent: boolean;
 }
 
 // left to right: the L1 is final first
 const MARKS: Mark[] = [
-  { chain: "Your L1", ms: L1_MS, sign: "<", said: "under", seconds: "0.5" },
-  { chain: "C-Chain", ms: FINAL_MS, sign: "~", said: "about", seconds: "1" },
+  { chain: "Your L1", ms: L1_MS, sign: "<", said: "under", seconds: "0.5", accent: true },
+  { chain: "C-Chain", ms: FINAL_MS, sign: "~", said: "about", seconds: "1", accent: false },
 ];
 
 const at = (ms: number) => `${(ms / SPAN_MS) * 100}%`;
@@ -95,7 +97,7 @@ function FinalityRuler() {
       aria-label="Time to finality on one axis from 0 to 1.5 seconds: an L1 under 0.5 seconds, the C-Chain about 1 second"
       className="relative select-none"
     >
-      {/* each mark: its figure, the chain, and a red line down to the track */}
+      {/* each mark: its figure, the chain, and a line down to the track; red only on the L1's */}
       <div className="relative h-32 md:h-36 lg:h-40">
         {MARKS.map((m) => (
           <div
@@ -113,28 +115,38 @@ function FinalityRuler() {
               </p>
               <span className={`whitespace-nowrap text-zinc-900 dark:text-zinc-50 ${MONO}`}>{m.chain}</span>
             </div>
-            <span aria-hidden className="mt-3 h-6 w-px bg-[#E6212F]" />
+            <span
+              aria-hidden
+              className={`mt-3 h-6 w-px ${m.accent ? "bg-[#E6212F]" : "bg-zinc-400 dark:bg-zinc-600"}`}
+            />
           </div>
         ))}
       </div>
 
       {/* the track, the stretch the transactions cover, and the
-          transactions: red blocks on the right edge of wrappers that span 0
+          transactions: blocks on the right edge of wrappers that span 0
           to their mark, so the end pose lands on it */}
       <div aria-hidden className="relative h-px w-full bg-zinc-200 dark:bg-zinc-800">
         <div
           className="absolute inset-y-0 left-0 origin-left bg-zinc-900 dark:bg-zinc-100"
           style={{ width: at(FINAL_MS), ...fill }}
         />
+        {/* the trips ride together until 0.5 s, so the L1's red block goes on top */}
         {MARKS.map((m) => (
-          <div key={m.chain} className="absolute inset-y-0 left-0" style={{ width: at(m.ms), ...trip(m) }}>
-            <span className="absolute left-full top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 bg-[#E6212F]" />
+          <div
+            key={m.chain}
+            className={`absolute inset-y-0 left-0 ${m.accent ? "z-10" : ""}`}
+            style={{ width: at(m.ms), ...trip(m) }}
+          >
+            <span
+              className={`absolute left-full top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 ${m.accent ? "bg-[#E6212F]" : "bg-zinc-900 dark:bg-zinc-100"}`}
+            />
           </div>
         ))}
       </div>
 
-      {/* the time scale; mono without the uppercase, so the unit stays "s",
-          and a narrow space so the tracked number keeps its unit close */}
+      {/* the time scale: mono without the uppercase, so the unit stays "s",
+          and a narrow space so the number keeps its unit close */}
       <div aria-hidden className="relative h-10">
         {TICKS.map((s) => (
           <span
@@ -143,7 +155,7 @@ function FinalityRuler() {
             style={{ left: at(s * 1000) }}
           >
             <span className="h-2 w-px bg-zinc-300 dark:bg-zinc-700" />
-            <span className="mt-2 whitespace-nowrap font-mono text-xs tabular-nums tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
+            <span className="mt-2 whitespace-nowrap font-mono text-xs tabular-nums tracking-normal text-zinc-500 dark:text-zinc-400">
               {`${s}\u202Fs`}
             </span>
           </span>
@@ -162,22 +174,21 @@ export default function FinalChapter() {
   return (
     <Chapter id="final">
       <Reveal>
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-          <Title lead="Final in about a second" className="lg:col-span-7" />
-          <Lead className="lg:col-span-5">
-            A transaction is final when consensus accepts its block: in about a second on the{" "}
-            <span className="whitespace-nowrap">C-Chain</span>, and in under half a second on an L1. There are no reorgs,
-            so no extra confirmations are needed.
+        <div className="grid gap-8 xl:grid-cols-12 xl:items-start">
+          <Title lead="Final in about a second" className="xl:col-span-7" />
+          <Lead className="xl:col-span-5">
+            A transaction is final when consensus accepts its block. There are no reorgs, so you need no extra
+            confirmations.
           </Lead>
         </div>
       </Reveal>
 
       <Reveal delay={0.1} className="mt-16 md:mt-20">
         <FinalityRuler />
-        <p className={`mt-6 ${CAPTION}`}>
+        <p className={`mt-6 max-w-3xl ${CAPTION}`}>
           <span className="motion-reduce:hidden">Real time. </span>
-          <span className="whitespace-nowrap">C-Chain</span>: Avalanche consensus gives irreversible finality in about one
-          second. L1: AvaCloud publishes under 500 ms for the L1s it runs.
+          The L1 figure is from AvaCloud, for the L1s it runs. The <span className="whitespace-nowrap">C-Chain</span>{" "}
+          figure is from the Avalanche docs.
         </p>
         <div className="mt-10">
           <TextLink href="/docs/primary-network/exchange-integration#determining-finality" section="final">
