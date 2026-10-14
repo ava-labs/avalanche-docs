@@ -43,7 +43,8 @@ export function BrandButton({
       <LinkTag
         href={href}
         onClick={onClick}
-        className={`relative inline-flex w-full min-w-[220px] items-center justify-between gap-8 overflow-hidden px-6 py-4 text-sm font-semibold transition-colors duration-300 ${
+        // a keyboard focus ring in the brand red, offset clear of the block
+        className={`relative inline-flex w-full min-w-[220px] items-center justify-between gap-8 overflow-hidden px-6 py-4 text-sm font-semibold outline-none transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-[#E6212F] ${
           isLight
             ? "bg-white text-[#1F1F1F] group-hover:text-white"
             : `text-white group-hover:text-[#1F1F1F] ${isPrimary ? "bg-[#E6212F]" : "bg-[#1F1F1F]"}`
