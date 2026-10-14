@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useInView, useScroll, useTransform } from "framer-motion";
 import { BrandButton } from "@/components/landing-v2/BrandButton";
 import { track } from "@/components/landing-v2/track";
-import { BODY, Chapter, Figure, Lead, MONO, Reveal, TextLink, Title } from "./kit";
+import { BODY, Chapter, Figure, Lead, MONO, REVEAL_VIEW, Reveal, TextLink, Title } from "./kit";
 import { SceneFrame } from "./three/SceneFrame";
 import type { StackLayer } from "./three/StackScene";
 
@@ -36,7 +36,7 @@ export default function OwnChapter() {
   const { scrollYProgress } = useScroll({ target: drawingRef, offset: ["start end", "center center"] });
   const open = useTransform(scrollYProgress, [0.1, 0.65], [0, 1], { clamp: true });
   // the drop waits for the drawing's reveal (the Reveal's own trigger), so the reader sees it
-  const shown = useInView(drawingRef, { once: true, amount: 0.3 });
+  const shown = useInView(drawingRef, REVEAL_VIEW);
 
   return (
     <Chapter id="own">
@@ -46,15 +46,15 @@ export default function OwnChapter() {
         <Reveal className="lg:col-span-5">
           <Title lead="Own the chain." rest="Set the rules" />
           <Lead className="mt-8">
-            An Avalanche L1 is a blockchain you configure: its virtual machine, gas token, fee market, validators and who
-            may use it.
+            An Avalanche L1 is a blockchain for your application alone. It can set a higher gas limit than the
+            shared <span className="whitespace-nowrap">C-Chain</span>, so it can process more transactions.
           </Lead>
           <p className={`mt-8 max-w-xl border-l-2 border-[#E6212F] pl-5 ${BODY}`}>
             An L1 can require its validators to be in a given country, pass KYC/AML checks or hold a license.
           </p>
         </Reveal>
 
-        <Reveal delay={0.1} className="-mx-5 md:mx-0 lg:col-span-7">
+        <Reveal delay={0.1} className="-mx-5 md:mx-0 lg:-my-20 lg:col-span-7">
           <div ref={drawingRef}>
             <SceneFrame
               Scene={StackScene}
@@ -102,9 +102,13 @@ export default function OwnChapter() {
             caption="less upfront cost to launch a chain since the Etna upgrade."
           />
           <Figure
-            value="2"
-            unit="cores"
-            caption="with 4 GB of RAM and 100 GB of storage run an L1 validator under 10 TPS."
+            value={
+              <>
+                <span aria-hidden>~</span>
+                <span className="sr-only">about </span>$651
+              </>
+            }
+            caption="a month to run a production L1 on AWS: 5 validators, 2 RPC nodes and monitoring."
           />
         </div>
         <div className="mt-14 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-6">
@@ -116,11 +120,8 @@ export default function OwnChapter() {
           >
             Build an L1
           </BrandButton>
-          <TextLink href="/docs/avalanche-l1s" section="own">
-            Read the architecture
-          </TextLink>
-          <TextLink href="/docs/nodes/system-requirements" section="own">
-            Validator requirements
+          <TextLink href="/docs/tooling/avalanche-deploy/deploy-l1" section="own">
+            Run it in production
           </TextLink>
         </div>
       </Reveal>

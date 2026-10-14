@@ -89,7 +89,7 @@ test('home story doors link where they claim', async ({ app, browser }) => {
   await waitForHydration(browser, '[data-chapter="hero"] h1');
   const own = browser.locator('[data-chapter="own"]');
   await expect(own.getByRole('link', 'Build an L1')).toHaveAttribute('href', '/console/create-l1');
-  await expect(own.getByRole('link', /Read the architecture/i)).toHaveAttribute('href', '/docs/avalanche-l1s');
+  await expect(own.getByRole('link', /Run it in production/i)).toHaveAttribute('href', '/docs/tooling/avalanche-deploy/deploy-l1');
   const interop = browser.locator('[data-chapter="interop"]');
   await expect(interop.getByRole('link', 'Set up ICM')).toHaveAttribute('href', '/console/icm/setup');
   const build = browser.locator('[data-chapter="build"]');
