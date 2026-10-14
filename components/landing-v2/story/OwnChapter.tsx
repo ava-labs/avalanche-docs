@@ -92,7 +92,7 @@ export default function OwnChapter() {
             value={
               <>
                 <span aria-hidden>&gt;</span>
-                <span className="sr-only">more than </span>99.9%
+                <span className="sr-only select-none">more than </span>99.9%
               </>
             }
             caption="less upfront cost to launch an L1 since the Etna upgrade in December 2024."
@@ -101,7 +101,7 @@ export default function OwnChapter() {
             value={
               <>
                 <span aria-hidden>~</span>
-                <span className="sr-only">about </span>1.33
+                <span className="sr-only select-none">about </span>1.33
               </>
             }
             unit="AVAX"
