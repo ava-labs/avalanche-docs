@@ -44,15 +44,19 @@ export function Chapter({
   ref?: Ref<HTMLElement>;
 }) {
   return (
-    <section ref={ref} data-chapter={id} className={`relative py-24 md:py-28 lg:py-32 ${className}`}>
+    <section ref={ref} data-chapter={id} className={`relative py-16 md:py-28 ${className}`}>
       <div className="mx-auto w-full max-w-7xl px-5 md:px-6">{children}</div>
     </section>
   );
 }
 
+/** when a block starts to rise: its top passes 10% above the bottom of the screen, at any block height */
+export const REVEAL_VIEW = { once: true, margin: "0px 0px -10% 0px" } as const;
+
 /**
- * Rises in once when a third of it is on screen; still under reduced
- * motion. data-reveal lets global.css show it when scripts are off.
+ * Rises in once when its top passes 90% of the screen height, at any block
+ * height. Under reduced motion it is in place as soon as the page hydrates.
+ * data-reveal lets global.css show it when scripts are off.
  */
 export function Reveal({
   children,
@@ -72,8 +76,7 @@ export function Reveal({
       data-reveal
       className={className}
       initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
+      {...(reduced ? { animate: { opacity: 1, y: 0 } } : { whileInView: { opacity: 1, y: 0 }, viewport: REVEAL_VIEW })}
       transition={reduced ? { duration: 0 } : { duration: 0.7, delay, ease: EASE_OUT }}
     >
       {children}
@@ -115,7 +118,7 @@ export function Title({
 /** the one sentence under a title */
 export function Lead({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`max-w-xl text-lg leading-relaxed text-zinc-600 md:text-xl md:leading-relaxed dark:text-zinc-400 ${className}`}>
+    <p className={`text-pretty max-w-xl text-lg leading-relaxed text-zinc-600 md:text-xl md:leading-relaxed dark:text-zinc-400 ${className}`}>
       {children}
     </p>
   );
