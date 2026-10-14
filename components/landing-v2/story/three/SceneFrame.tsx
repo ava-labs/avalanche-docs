@@ -56,6 +56,9 @@ function canRunScene(): boolean {
   return capable;
 }
 
+/** how far the page must scroll before a scene may load */
+const SCROLLED_PX = 64;
+
 const STILL_CLASS = "pointer-events-none absolute inset-0 h-full w-full object-contain";
 
 export function SceneFrame<P extends object>({
@@ -114,13 +117,17 @@ export function SceneFrame<P extends object>({
     const handle = idle(() => {
       if (!canRunScene()) return;
       setMode("scene");
-      // a reload deep in the page has already scrolled; a fresh visit waits for the first scroll
-      if (window.scrollY > 0) return watch();
+      // a reload deep in the page has already scrolled; a fresh visit waits
+      // for the reader's first scroll. Scroll snapping moves a fresh page by
+      // a pixel or so on its own, so only a real distance counts
+      if (window.scrollY > SCROLLED_PX) return watch();
       waiting = () => {
+        if (window.scrollY <= SCROLLED_PX) return;
+        window.removeEventListener("scroll", waiting!);
         waiting = null;
         watch();
       };
-      window.addEventListener("scroll", waiting, { once: true, passive: true });
+      window.addEventListener("scroll", waiting, { passive: true });
     });
     return () => {
       cancelIdle(handle as number);
