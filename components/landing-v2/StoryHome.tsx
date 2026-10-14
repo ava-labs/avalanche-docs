@@ -24,6 +24,7 @@ import FinalChapter from "@/components/landing-v2/story/FinalChapter";
 import InteropChapter from "@/components/landing-v2/story/InteropChapter";
 import InstitutionsChapter from "@/components/landing-v2/story/InstitutionsChapter";
 import BuildChapter from "@/components/landing-v2/story/BuildChapter";
+import { FOCUS } from "@/components/landing-v2/story/kit";
 import { formatCompact, formatCompactIn, formatExact } from "@/components/landing-v2/compactFigure";
 import NetworkLanes from "@/components/landing-v2/NetworkLanes";
 import { rosterOf } from "@/components/explorer-v2/network/network-reads";
@@ -106,7 +107,9 @@ function LedgerFigure({ value, animateIn }: { value: number; animateIn: boolean 
   }, [inView, value, animateIn]);
 
   return (
-    <span ref={ref}>
+    // leading-none: the figure's own line sets the height, as tall as the
+    // empty-figure hairline box, so a late figure shifts nothing
+    <span ref={ref} className="leading-none">
       <Figure shown={formatCompactIn(display, value)} exact={formatExact(value)} className={FIGURE_CLASS} />
     </span>
   );
@@ -132,12 +135,7 @@ function LedgerCell({
   const content = (
     <>
       <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400 lg:whitespace-nowrap">
-        {live && (
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E6212F] opacity-60" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#E6212F]" />
-          </span>
-        )}
+        {live && <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E6212F]" />}
         <span>
           {label}
           {period && (
@@ -155,7 +153,7 @@ function LedgerCell({
     return (
       <Link
         href={href}
-        className={`${cellClass} transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900`}
+        className={`${cellClass} transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900 ${CELL_FOCUS}`}
       >
         {content}
       </Link>
@@ -165,6 +163,9 @@ function LedgerCell({
 }
 
 const FIRST_ROW_OF_TWO = "max-lg:border-b max-lg:border-zinc-200 dark:max-lg:border-zinc-800";
+// a board cell's focus: the story's red ring, drawn inside the cell (the
+// cells meet edge to edge), over the same fill as hover
+const CELL_FOCUS = `${FOCUS} focus-visible:-outline-offset-2! focus-visible:bg-zinc-100 dark:focus-visible:bg-zinc-900`;
 
 function LedgerStrip({
   globeData,
@@ -196,9 +197,8 @@ function LedgerStrip({
         </LedgerCell>
         {/* ends the first row of two below lg: no divider at the screen edge */}
         <LedgerCell
-          label="CROSS-CHAIN MSGS"
+          label="ICM MESSAGES"
           period="30D"
-          live
           href="/explorer/mainnet/chains"
           className={`${FIRST_ROW_OF_TWO} max-lg:border-r-0`}
         >
@@ -224,8 +224,14 @@ function UsdFigure({ value }: { value: number | null }) {
   return <Figure shown={formatCompact(value, "usd")} exact={formatExact(value, "usd")} className={FIGURE_CLASS} />;
 }
 
+// no figure yet: a short hairline, in a box as tall as the figure's line, so
+// the cell keeps its height when the figure arrives
 function LedgerDash() {
-  return <span className="font-mono text-2xl text-zinc-300 dark:text-zinc-700">—</span>;
+  return (
+    <span role="img" aria-label="No data" className="flex h-6 items-center md:h-8">
+      <span className="h-px w-6 bg-zinc-300 dark:bg-zinc-700" />
+    </span>
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -459,7 +465,7 @@ function StakeFigure({
   return (
     <Link
       href="/explorer/mainnet/p-chain/validators"
-      className="group flex flex-col gap-2 md:gap-3 lg:items-end lg:text-right"
+      className={`group flex flex-col gap-2 md:gap-3 lg:items-end lg:text-right ${FOCUS}`}
     >
       {/* the same link grammar as the page's other mono links: text plus arrow */}
       <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 transition-colors group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-zinc-100">
@@ -581,7 +587,7 @@ function StatsChapter({
         <div className="mx-auto grid w-full max-w-7xl grid-cols-2 lg:grid-cols-3 lg:divide-x lg:divide-zinc-200 dark:lg:divide-zinc-800">
           <Link
             href="/explorer/mainnet/c-chain/defi/stablecoins"
-            className="flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:col-span-2 max-lg:border-b dark:border-zinc-800"
+            className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:col-span-2 max-lg:border-b dark:border-zinc-800 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
               <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
@@ -593,7 +599,7 @@ function StatsChapter({
           </Link>
           <Link
             href="/explorer/mainnet/c-chain/defi"
-            className="flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:border-r dark:border-zinc-800"
+            className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:border-r dark:border-zinc-800 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
               <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
@@ -605,14 +611,10 @@ function StatsChapter({
           </Link>
           <Link
             href="/explorer/mainnet/c-chain/defi"
-            className="flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900"
+            className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
               <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E6212F] opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#E6212F]" />
-                </span>
                 <span>
                   DEX VOLUME<span className="max-sm:hidden"> · </span>
                   <span className="max-sm:block">30D</span>
@@ -630,17 +632,19 @@ function StatsChapter({
           <HoverPrefetchLink
             href="/explorer"
             onClick={() => track("home_cta_clicked", { section: "stats", label: "Explore the network", href: "/explorer" })}
-            className="group relative flex items-center justify-between overflow-hidden bg-[#E6212F] py-4 md:py-5"
+            // the focus ring is a pseudo-element over the sweep: the bar's own
+            // outline would paint under its positioned children
+            className="group relative flex items-center justify-between overflow-hidden bg-[#E6212F] py-4 outline-none focus-visible:after:pointer-events-none focus-visible:after:absolute focus-visible:after:inset-0.5 focus-visible:after:z-20 focus-visible:after:border-2 focus-visible:after:border-[#1F1F1F] md:py-5"
           >
             <span
               aria-hidden
-              className="absolute inset-0 origin-left scale-x-0 bg-[#EBF0FA] transition-transform duration-300 ease-out group-hover:scale-x-100"
+              className="absolute inset-0 origin-left scale-x-0 bg-[#EBF0FA] transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
             />
             <span className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-5 md:px-6">
-              <span className="text-sm font-medium text-white transition-colors duration-300 group-hover:text-[#1F1F1F]">
+              <span className="text-sm font-medium text-white transition-colors duration-300 group-hover:text-[#1F1F1F] group-focus-visible:text-[#1F1F1F]">
                 Explore the network
               </span>
-              <ArrowRight className="h-4 w-4 text-white transition-colors duration-300 group-hover:text-[#E6212F]" />
+              <ArrowRight className="h-4 w-4 text-white transition-colors duration-300 group-hover:text-[#E6212F] group-focus-visible:text-[#E6212F]" />
             </span>
           </HoverPrefetchLink>
         </motion.div>
