@@ -116,7 +116,9 @@ const STAKE_CLASS =
 function LedgerFigure({ value, animateIn }: { value: number; animateIn: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const [display, setDisplay] = useState(animateIn ? 0 : value);
+  // the server cannot read reduced motion, so both sides start at 0 and the
+  // effect below sets the figure; a reduced-motion start would not hydrate
+  const [display, setDisplay] = useState(0);
   // live refreshes count from the last shown figure, not from zero again
   const shownRef = useRef(0);
 
