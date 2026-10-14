@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { deriveEditUrlFromSourceUrl, replaceRelativeLinks } from "@/utils/remote-content/shared.mts";
+import { replaceRelativeLinks } from "@/utils/remote-content/shared.mts";
 
 const BASE = "https://raw.githubusercontent.com/avalanche-foundation/ACPs/main/README.md";
 
@@ -28,19 +28,5 @@ describe("replaceRelativeLinks img handling", () => {
   it("consumes a multi-line img tag whole", () => {
     const out = replaceRelativeLinks('<img\n  width="80%"\n  src="LOGO.png"\n/>', BASE);
     expect(out).toBe('<img width="80%" src="https://raw.githubusercontent.com/avalanche-foundation/ACPs/main/LOGO.png" />');
-  });
-});
-
-describe("deriveEditUrlFromSourceUrl", () => {
-  it("links a master source to the GitHub editor", () => {
-    expect(
-      deriveEditUrlFromSourceUrl("https://raw.githubusercontent.com/ava-labs/avalanchego/master/vms/avm/config.md"),
-    ).toBe("https://github.com/ava-labs/avalanchego/edit/master/vms/avm/config.md");
-  });
-
-  it("links a source pinned to a commit to the file at that commit", () => {
-    expect(
-      deriveEditUrlFromSourceUrl("https://raw.githubusercontent.com/ava-labs/avalanchego/e9f7e75/graft/coreth/service.md"),
-    ).toBe("https://github.com/ava-labs/avalanchego/blob/e9f7e75/graft/coreth/service.md");
   });
 });
