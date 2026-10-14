@@ -380,6 +380,7 @@ function WaveCanvas({ snowOnly = false }: { snowOnly?: boolean }) {
     const ro = new ResizeObserver(refresh);
     ro.observe(document.body);
     let onScroll: (() => void) | undefined;
+    let io: IntersectionObserver | undefined;
     if (reduced) {
       onScroll = () => {
         if (!raf) {
@@ -392,11 +393,36 @@ function WaveCanvas({ snowOnly = false }: { snowOnly?: boolean }) {
       window.addEventListener("scroll", onScroll, { passive: true });
     } else {
       raf = requestAnimationFrame(tick);
+      // the canvas is fixed, so it always meets the viewport: watch the host
+      // instead. Where the sheet covers only part of the page (the homepage
+      // hero and board), the loop rests while the reader is past it; where
+      // it covers the whole page, the host never leaves and nothing changes.
+      // The margin restarts the loop a little before the sheet shows.
+      io = new IntersectionObserver(
+        (entries) => {
+          // the newest entry wins when several queue up in one frame
+          if (entries[entries.length - 1].isIntersecting) {
+            if (!raf) {
+              last = 0; // no catch-up step for the time spent away
+              raf = requestAnimationFrame(tick);
+            }
+          } else if (raf) {
+            cancelAnimationFrame(raf);
+            raf = 0;
+            // clear once, so a stale frame cannot flash on the way back
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+          }
+        },
+        { rootMargin: "200px 0px" },
+      );
+      io.observe(canvas.parentElement!);
     }
     return () => {
       window.removeEventListener("resize", refresh);
       if (onScroll) window.removeEventListener("scroll", onScroll);
       ro.disconnect();
+      io?.disconnect();
       cancelAnimationFrame(raf);
     };
   }, [snowOnly]);
