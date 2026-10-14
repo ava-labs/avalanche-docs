@@ -58,8 +58,9 @@ const LIFT = 0.24;
 const PLATE_Y = -0.62;
 const PLATE_T = 0.08;
 const PLATE = SIDE + 1.8;
-// the drop: each layer falls this far onto the one below, bottom first
-const FALL = 2.2;
+// the drop: each layer falls this far onto the one below, bottom first; low
+// enough that an open stack never leaves the frame as it falls
+const FALL = 1.4;
 const DROP_S = 0.75;
 const DROP_STAGGER_S = 0.12;
 // the plate's grid stops one 0.4 cell in from its edge: the rim between holds the plate's name
