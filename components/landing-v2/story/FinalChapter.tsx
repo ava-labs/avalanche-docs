@@ -112,10 +112,10 @@ function FinalityRuler() {
                 className={`v2-heading whitespace-nowrap text-3xl leading-none tracking-[-0.04em] md:text-4xl lg:text-5xl ${m.accent ? "text-[#E6212F]" : "text-zinc-900 dark:text-zinc-50"}`}
               >
                 <span aria-hidden>{m.sign}</span>
-                <span className="sr-only">{m.said} </span>
+                <span className="sr-only select-none">{m.said} </span>
                 {m.seconds}
                 <span aria-hidden>{"\u202F"}s</span>
-                <span className="sr-only"> seconds</span>
+                <span className="sr-only select-none"> seconds</span>
               </p>
               <span className={`whitespace-nowrap text-zinc-900 dark:text-zinc-50 ${MONO}`}>{m.chain}</span>
             </div>

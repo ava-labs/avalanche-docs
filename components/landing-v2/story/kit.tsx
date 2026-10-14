@@ -140,7 +140,9 @@ export function Figure({
     <div className={`flex flex-col gap-3 ${className}`}>
       <p className="v2-heading text-3xl tabular-nums leading-none tracking-[-0.04em] text-zinc-900 md:text-4xl lg:text-5xl dark:text-zinc-50">
         {value}
-        {unit && <span className="ml-2 text-lg tracking-[-0.02em] text-zinc-500 md:text-xl lg:text-2xl">{unit}</span>}
+        {/* a no-break space, not a margin, so "1.33 AVAX" stays apart when read or copied */}
+        {unit && "\u00a0"}
+        {unit && <span className="text-lg tracking-[-0.02em] text-zinc-500 md:text-xl lg:text-2xl">{unit}</span>}
       </p>
       <p className={`max-w-[18rem] ${BODY}`}>{caption}</p>
     </div>

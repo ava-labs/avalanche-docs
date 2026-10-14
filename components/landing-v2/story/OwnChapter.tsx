@@ -92,7 +92,7 @@ export default function OwnChapter() {
             value={
               <>
                 <span aria-hidden>&gt;</span>
-                <span className="sr-only">more than </span>99.9%
+                <span className="sr-only select-none">more than </span>99.9%
               </>
             }
             caption="less upfront cost to launch an L1 since the Etna upgrade in December 2024."
@@ -101,21 +101,17 @@ export default function OwnChapter() {
             value={
               <>
                 <span aria-hidden>~</span>
-                <span className="sr-only">about </span>1.33
+                <span className="sr-only select-none">about </span>1.33
               </>
             }
             unit="AVAX"
             caption="a month in P-Chain fees per L1 validator."
           />
-          {/* no-break spaces keep each count with its noun */}
+          {/* no-break spaces keep each count with its unit */}
           <Figure
-            value={
-              <>
-                <span aria-hidden>~</span>
-                <span className="sr-only">about </span>$651
-              </>
-            }
-            caption={"a month to run a production L1 on AWS: 5\u00a0validators, 2\u00a0RPC\u00a0nodes and monitoring."}
+            value="2"
+            unit="cores"
+            caption={"with 4\u00a0GB of RAM and 100\u00a0GB of storage run an L1 validator under 10\u00a0TPS."}
           />
         </div>
         <div className="mt-14 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-6">
