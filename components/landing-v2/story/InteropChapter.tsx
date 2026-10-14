@@ -6,7 +6,7 @@ import { useInView } from "framer-motion";
 import { BrandButton } from "@/components/landing-v2/BrandButton";
 import { track } from "@/components/landing-v2/track";
 import { formatCompact } from "@/components/landing-v2/compactFigure";
-import { CAPTION, Chapter, Figure, Lead, REVEAL_VIEW, Reveal, TextLink, Title } from "./kit";
+import { CAPTION, Chapter, Figure, Lead, Reveal, TextLink, Title } from "./kit";
 import { SceneFrame } from "./three/SceneFrame";
 import type { NetworkChain, NetworkRoute } from "./three/NetworkScene";
 
@@ -55,20 +55,18 @@ export default function InteropChapter({ data }: { data: InteropData }) {
   }, [routes]);
   // the red marks' number: every message on these routes in the window
   const messages = useMemo(() => routes.reduce((sum, r) => sum + r.count, 0), [routes]);
-  // the rise starts as the box fades in, not before
+  // the rise starts when most of the box is on screen, so the reader sees it from the start
   const boxRef = useRef<HTMLDivElement>(null);
-  const shown = useInView(boxRef, REVEAL_VIEW);
+  const shown = useInView(boxRef, { once: true, amount: 0.6 });
 
   return (
     <Chapter id="interop">
       <Reveal>
-        <div className="grid gap-8 xl:grid-cols-12 xl:items-start">
-          <Title lead="Any L1 can connect." rest="No bridge operator" className="xl:col-span-7" />
-          <Lead className="xl:col-span-5">
-            With Interchain Messaging, the sending chain&apos;s validators sign each message. The receiving chain checks
-            the signatures against the sender&apos;s validator set on the <span className="whitespace-nowrap">P-Chain</span>.
-          </Lead>
-        </div>
+        <Title lead="Any L1 can connect." rest="No bridge operator" />
+        <Lead className="mt-8">
+          With Interchain Messaging (ICM), the sending chain&apos;s validators sign each message. The receiving chain checks
+          the signatures against the sender&apos;s validator set on the <span className="whitespace-nowrap">P-Chain</span>.
+        </Lead>
       </Reveal>
 
       <Reveal delay={0.1} className="-mx-5 mt-12 md:mx-0 md:mt-16">
@@ -78,24 +76,23 @@ export default function InteropChapter({ data }: { data: InteropData }) {
             sceneProps={{ chains, routes, labelled, play: shown }}
             still={STILL}
             stillNarrow={STILL_NARROW}
-            alt="The chains the explorer lists, drawn as blocks on the P-Chain with their logos, each as tall as its transactions over 30 days. Chains with no indexed count stand at the base height. Red marks are interchain messages on the routes they took."
+            alt="The chains the explorer lists, drawn as blocks on the P-Chain with their logos, each as tall as its transactions over 30 days, on a log scale. Chains with no indexed count stand at the base height. Red marks are interchain messages on the routes they took."
             aspect={2.15}
             aspectNarrow={1.625}
           />
         </div>
-        <p className={`mt-6 max-w-3xl px-5 md:px-0 ${CAPTION}`}>
-          Height: transactions over 30 days. Chains with no indexed count stand at the base height. Red: interchain messages
-          over the same 30 days.
+        <p className={`mt-6 max-w-xl px-5 md:px-0 ${CAPTION}`}>
+          Height: transactions in 30 days, on a log scale. Base height: no indexed count. Red: ICM messages in the same 30
+          days.
         </p>
       </Reveal>
 
-      <Reveal delay={0.15} className="mt-20 md:mt-28">
-        <div className="grid gap-12 border-t border-zinc-200 pt-12 md:grid-cols-3 md:gap-8 dark:border-zinc-800">
-          <Figure value="67%" caption="of the sender's stake must sign each message, by default." />
-          <Figure value="0" caption="bridge operators, multisigs or oracles in the path." />
+      <Reveal delay={0.15} className="mt-12 md:mt-16">
+        <div className="grid gap-12 border-t border-zinc-200 pt-10 md:grid-cols-3 md:gap-8 md:pt-12 dark:border-zinc-800">
           {messages > 0 && (
             <Figure value={formatCompact(messages)} caption="ICM messages between these chains in the last 30 days." />
           )}
+          <Figure value="67%" caption="of the sender's stake must sign each message, by default." />
         </div>
         <div className="mt-14 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
           <BrandButton

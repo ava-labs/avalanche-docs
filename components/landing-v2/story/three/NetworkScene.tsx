@@ -36,10 +36,11 @@ import type { SceneProps } from "./SceneFrame";
 
    The scene keeps its own clock, which runs only while the box is on
    screen: the blocks rise once, from the center out, the first time the
-   reader sees them, and the messages resume where they stopped. Messages
-   stop leaving about 10 s in, and leave again for 10 s each time the
-   pointer moves over the drawing, so nothing moves without end. The
-   scene draws a frame only while something moves.
+   reader sees them, and the messages resume where they stopped. About
+   10 s in, the messages slow to a stop and hold on their arcs, as the
+   stills show; each pointer move over the drawing sets them flying for
+   another 10 s, so nothing moves without end. The scene draws a frame
+   only while something moves.
 
    Each block takes its company's color from its logo, and the logo lies
    on its roof. Blocks stand in steel at once; the colors and marks arrive
@@ -94,7 +95,7 @@ const MARK_SEG = 32;
 /** a mark or the name sits this far over the face it lies on, so the two never fight */
 const DECAL_LIFT = 0.002;
 /** the plate's name: its capital height on screen, px, and at most this share of the rim */
-const NAME_CAP_PX = 7;
+const NAME_CAP_PX = 8;
 const NAME_FILL = 0.58;
 /** the scene reports ready without the logos or the name after this long */
 const READY_WAIT_MS = 3000;
@@ -116,6 +117,8 @@ interface Placed {
 interface SceneClock {
   t: number;
   until: number;
+  /** the messages' own clock, which slows to a stop when the send window closes */
+  m: number;
 }
 
 /** cells of a square spiral, center first */
@@ -140,13 +143,32 @@ function spiral(n: number): [number, number][] {
   return out;
 }
 
-function layout(chains: NetworkChain[]): Placed[] {
+function layout(chains: NetworkChain[], routed: Set<string>): Placed[] {
   // busiest first; the id breaks ties, so the same data always draws the same plate
   const ranked = [...chains].sort((a, b) => (b.txCount ?? -1) - (a.txCount ?? -1) || a.id.localeCompare(b.id));
   const max = Math.max(1, ...ranked.map((c) => c.txCount ?? 0));
-  const cells = spiral(ranked.length);
+  // in each ring, the busiest chains stand level with the center, then behind it, then in front
+  // (the camera sits at +x +z, so gx + gz > 0 is toward the reader)
+  const cells = spiral(ranked.length).sort(
+    ([ax, az], [bx, bz]) =>
+      Math.max(Math.abs(ax), Math.abs(az)) - Math.max(Math.abs(bx), Math.abs(bz)) ||
+      Math.abs(ax + az) - Math.abs(bx + bz) ||
+      ax + az - (bx + bz),
+  );
+  // the front diagonal, (1,1), (2,2) and on, lies between the reader and the hub: it takes the
+  // lowest chains with no ICM route, so no block hides the C-Chain and no arc runs down the line
+  // of sight onto its leader
+  const front = cells.filter(([gx, gz]) => gx === gz && gx > 0);
+  const quiet = ranked.filter((c, i) => i > 0 && !routed.has(c.id)).reverse();
+  const slot = new Map<string, [number, number]>();
+  front.forEach((cell, k) => {
+    if (quiet[k]) slot.set(quiet[k].id, cell);
+  });
+  const taken = new Set(slot.values());
+  const rest = cells.filter((cell) => !taken.has(cell));
+  let next = 0;
   return ranked.map((c, i) => {
-    const [gx, gz] = cells[i];
+    const [gx, gz] = slot.get(c.id) ?? rest[next++];
     // no indexed count stands at the base, with the 0 counts
     const share = c.txCount ? Math.log10(c.txCount + 1) / Math.log10(max + 1) : 0;
     return {
@@ -232,14 +254,19 @@ function useDisposed(geometry: BufferGeometry) {
 /**
  * Advances the scene clock before anything reads it, only while the box is
  * on screen, and asks for the next frame while something moves: the rise,
- * the routes fading in, messages leaving and landing.
+ * the routes fading in, messages in flight. The messages' clock eases to a
+ * stop over the send window's last 0.8 s, so they hold on their arcs, as
+ * the stills show, and the scene draws nothing more.
  */
 function Tick({ clock, running }: { clock: RefObject<SceneClock>; running: boolean }) {
   useFrame((state, dt) => {
     if (!running) return;
     const c = clock.current;
-    c.t += Math.min(dt, 0.1);
-    if (c.t < c.until + TRIP_S) state.invalidate();
+    const step = Math.min(dt, 0.1);
+    c.t += step;
+    const pace = MathUtils.clamp((c.until - c.t) / 0.8, 0, 1);
+    c.m += step * pace;
+    if (pace > 0) state.invalidate();
   }, -1);
   return null;
 }
@@ -248,12 +275,22 @@ function Tick({ clock, running }: { clock: RefObject<SceneClock>; running: boole
 function Kick({ running }: { running: boolean }) {
   const gl = useThree((s) => s.gl);
   const invalidate = useThree((s) => s.invalidate);
+  const pointer = useThree((s) => s.pointer);
   useEffect(() => {
     const el = gl.domElement;
     const kick = () => invalidate();
+    // a pointer that leaves the drawing lets the rig turn back to rest
+    const leave = () => {
+      pointer.set(0, 0);
+      invalidate();
+    };
     el.addEventListener("pointermove", kick);
-    return () => el.removeEventListener("pointermove", kick);
-  }, [gl, invalidate]);
+    el.addEventListener("pointerleave", leave);
+    return () => {
+      el.removeEventListener("pointermove", kick);
+      el.removeEventListener("pointerleave", leave);
+    };
+  }, [gl, invalidate, pointer]);
   useEffect(() => invalidate(), [running, invalidate]);
   return null;
 }
@@ -485,10 +522,15 @@ function PlateName({
   );
 }
 
-/** the arc a message flies from the sender's roof to the receiver's */
+/** the arc a message flies from the rim of the sender's logo disc to the rim of the receiver's, so it never covers a logo */
 function arcOf(a: Placed, b: Placed): QuadraticBezierCurve3 {
-  const p0 = new Vector3(a.x, a.h, a.z);
-  const p1 = new Vector3(b.x, b.h, b.z);
+  const dx = b.x - a.x;
+  const dz = b.z - a.z;
+  const len = Math.hypot(dx, dz) || 1;
+  const ra = (a.foot * MARK) / 2;
+  const rb = (b.foot * MARK) / 2;
+  const p0 = new Vector3(a.x + (dx / len) * ra, a.h, a.z + (dz / len) * ra);
+  const p1 = new Vector3(b.x - (dx / len) * rb, b.h, b.z - (dz / len) * rb);
   const mid = p0.clone().add(p1).multiplyScalar(0.5);
   mid.y = Math.max(a.h, b.h) + ARC + p0.distanceTo(p1) * 0.12;
   return new QuadraticBezierCurve3(p0, mid, p1);
@@ -590,11 +632,12 @@ function Messages({
   useFrame(() => {
     const m = mesh.current;
     if (!m) return;
-    const now = clock.current.t;
+    // the messages' own clock: it holds still once the send window closes, so the trips hold on their arcs
+    const now = clock.current.m;
     const step = now - (last.current ?? now);
     last.current = now;
-    // the first messages leave as the blocks finish standing
-    if (now >= rise - 0.2 && now < clock.current.until) {
+    // the first messages leave as the blocks finish standing; a held clock sends nothing (step is 0)
+    if (clock.current.t >= rise - 0.2) {
       lanes.forEach((lane, i) => {
         owed.current[i] = (owed.current[i] ?? 0) + lane.perSecond * step;
         while (owed.current[i] >= 1) {
@@ -652,9 +695,16 @@ function Plate({ extent, theme }: { extent: number; theme: SceneProps["theme"] }
   );
 }
 
-/** the hub label's leader: a vertical hairline from its roof up to the lifted label */
+/**
+ * The hub label's leader: a vertical hairline from the back rim of its logo
+ * disc up to the lifted label. Both ends sit on that rim, so the line stays
+ * vertical and rises from the top of the logo on screen, never through it.
+ */
 function Leader({ p, top, theme }: { p: Placed; top: number; theme: SceneProps["theme"] }) {
-  const geometry = useMemo(() => segmentOf([p.x, p.h, p.z], [p.x, top, p.z]), [p, top]);
+  const geometry = useMemo(() => {
+    const o = (p.foot * MARK) / 2 / Math.SQRT2;
+    return segmentOf([p.x - o, p.h, p.z - o], [p.x - o, top, p.z - o]);
+  }, [p, top]);
   useDisposed(geometry);
   return (
     <lineSegments geometry={geometry}>
@@ -726,8 +776,11 @@ export default function NetworkScene({
   onReady,
   play = true,
 }: NetworkSceneProps & SceneProps) {
-  const on = running && play;
-  const placed = useMemo(() => layout(chains), [chains]);
+  // a canvas that mounts with the box already on screen (a reload, a fast scroll) plays the rise behind the
+  // still, so the still hands over to standing blocks, never to a flat plate
+  const [early] = useState(running);
+  const on = running && (play || early);
+  const placed = useMemo(() => layout(chains, new Set(routes.flatMap((r) => [r.from, r.to]))), [chains, routes]);
   const extent = useMemo(() => Math.max(1, ...placed.map((p) => Math.max(Math.abs(p.x), Math.abs(p.z)))), [placed]);
   const rise = useMemo(() => Math.max(0, ...placed.map((p) => p.ring)) * RING_S + GROW_S, [placed]);
   // the hub is where the most routes meet; its label stands over the fan of arcs
@@ -746,7 +799,7 @@ export default function NetworkScene({
     const hubPlaced = best ? byId.get(best[0]) : undefined;
     return { hub: hubPlaced ?? null, lift: hubPlaced ? Math.max(top, hubPlaced.h) + 0.3 : 0 };
   }, [placed, routes]);
-  const clock = useRef<SceneClock>({ t: 0, until: SEND_S });
+  const clock = useRef<SceneClock>({ t: 0, until: SEND_S, m: 0 });
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [stood, setStood] = useState(false);
   const named = placed.filter((p) => labelled.includes(p.id) || p.id === hoverId);
@@ -789,7 +842,9 @@ export default function NetworkScene({
       orthographic
       flat
       camera={{ position: [10, 7.2, 10], zoom: 40, near: 0.1, far: 200 }}
-      dpr={[1, 2]}
+      // the page mounts the canvas only from 768 px up, at 2x at most; below that only the narrow still's
+      // render runs, at 3x, so its logos stay sharp on phones
+      dpr={[1, window.innerWidth < 768 ? 3 : 2]}
       frameloop="demand"
       gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
       onCreated={({ camera }) => camera.lookAt(0, 0.55, 0)}

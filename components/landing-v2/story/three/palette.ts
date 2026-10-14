@@ -41,7 +41,7 @@ export const PALETTE: Record<SceneTheme, ScenePalette> = {
     red: "#e6212f",
     redEdge: "#9e1019",
     ink: "#3b484b",
-    plateInk: "#8b9598",
+    plateInk: "#66727a",
     mark: "#ffffff",
   },
   dark: {
@@ -53,7 +53,7 @@ export const PALETTE: Record<SceneTheme, ScenePalette> = {
     red: "#e6212f",
     redEdge: "#ff6b75",
     ink: "#a2afb2",
-    plateInk: "#68767b",
+    plateInk: "#7d8a8f",
     mark: "#d5dadc",
   },
 };
