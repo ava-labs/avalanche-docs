@@ -3,7 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { HoverPrefetchLink } from "@/components/landing-v2/HoverPrefetchLink";
 import { track } from "@/components/landing-v2/track";
-import { BODY, Chapter, FOCUS, Lead, MONO, Reveal, SUBHEAD, TextLink, Title } from "./kit";
+import { BODY, Chapter, FOCUS, Lead, Reveal, SUBHEAD, TextLink, Title } from "./kit";
 
 /* Who already made the choice. Each entry says what is live, in the
    words of its source in the repo, and links to that source. Each cell
@@ -11,7 +11,6 @@ import { BODY, Chapter, FOCUS, Lead, MONO, Reveal, SUBHEAD, TextLink, Title } fr
    hero tape (see builtOnChains.ts): the brand's own color is its mark. */
 
 interface Case {
-  category: string;
   name: string;
   line: string;
   href: string;
@@ -21,44 +20,38 @@ interface Case {
 
 const CASES: Case[] = [
   {
-    category: "Tokenized fund",
     name: "BlackRock BUIDL",
-    line: "BlackRock's tokenized fund, issued through Securitize, runs on the C-Chain.",
+    line: "A tokenized fund on the C-Chain, issued through Securitize.",
     href: "/integrations/blackrock",
     mark: { src: "/logos/partners/tape/blackrock.svg", chip: "#000000" },
   },
   {
-    category: "Tokenized credit",
     name: "Galaxy CLO 2025-1",
-    line: "A tokenized collateralized loan obligation, issued natively on Avalanche.",
+    line: "Tokenized private credit, issued natively on Avalanche. $75M at the initial closing.",
     href: "/integrations/galaxy",
     mark: { src: "/images/galaxy.svg", chip: "#ffffff", inset: true },
   },
   {
-    category: "State stablecoin",
     name: "Wyoming FRNT",
-    line: "Wyoming's state-issued stablecoin, spendable with Rain-issued Visa cards.",
+    line: "A state-issued, dollar-pegged stablecoin. Holders spend it with Rain-issued Visa cards.",
     href: "/integrations/rain",
     mark: { src: "/logos/partners/tape/wyoming-frnt.png", chip: "#ffffff" },
   },
   {
-    category: "Tokenized securities",
     name: "Dinari Financial Network",
     line: "An Avalanche L1 for tokenized U.S. public securities.",
     href: "/explorer/mainnet/dinari-financial-network",
     mark: { src: "/logos/partners/tape/dinari.png", chip: "#07846d" },
   },
   {
-    category: "Structured finance",
     name: "Intain Market",
-    line: "A debt capital markets platform on a permissioned Avalanche L1.",
+    line: "Permissioned structured finance on an L1. Its gateway serves 2,000+ regional banks.",
     href: "/explorer/mainnet/intainmkt",
     mark: { src: "/logos/partners/tape/intain.png", chip: "#ffffff" },
   },
   {
-    category: "Stablecoin",
     name: "Circle USDC",
-    line: "Native USDC on the C-Chain. CCTP moves it to and from other supported chains with no wrapped token.",
+    line: "Native USDC on the C-Chain. CCTP moves it to other supported chains with no wrapped token.",
     href: "/integrations/circlepay",
     mark: { src: "/logos/tokens/usdc.png", chip: "transparent" },
   },
@@ -70,24 +63,21 @@ function CaseCell({ c }: { c: Case }) {
       href={c.href}
       onClick={() => track("home_cta_clicked", { section: "institutions", label: c.name, href: c.href })}
       // the ring sits inside the cell: the next cell in the hairline grid paints over anything outside it
-      className={`group relative flex flex-col gap-10 bg-white p-6 transition-colors hover:bg-zinc-50 focus-visible:bg-zinc-50 md:p-8 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus-visible:bg-zinc-900 ${FOCUS} focus-visible:-outline-offset-2!`}
+      className={`group relative flex flex-col gap-6 bg-white p-6 transition-colors hover:bg-zinc-50 focus-visible:bg-zinc-50 md:gap-8 md:p-8 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus-visible:bg-zinc-900 ${FOCUS} focus-visible:-outline-offset-2!`}
     >
       <span className="flex items-center justify-between gap-4">
-        <span className="flex items-center gap-3">
-          {/* a hairline ring holds a white chip's edge on the light page and a dark chip's on the dark one */}
-          <span
-            className="h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-inset ring-zinc-950/10 dark:ring-white/15"
-            style={{ background: c.mark.chip }}
-          >
-            <img
-              src={c.mark.src}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className={`h-full w-full object-contain ${c.mark.inset ? "p-2.5" : ""}`}
-            />
-          </span>
-          <span className={`text-zinc-500 dark:text-zinc-400 ${MONO}`}>{c.category}</span>
+        {/* a hairline ring holds a white chip's edge on the light page and a dark chip's on the dark one */}
+        <span
+          className="h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-inset ring-zinc-950/10 dark:ring-white/15"
+          style={{ background: c.mark.chip }}
+        >
+          <img
+            src={c.mark.src}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className={`h-full w-full object-contain ${c.mark.inset ? "p-2.5" : ""}`}
+          />
         </span>
         <ArrowUpRight className="h-4 w-4 shrink-0 text-zinc-300 transition-colors group-hover:text-[#E6212F] group-focus-visible:text-[#E6212F] dark:text-zinc-600" />
       </span>
@@ -103,10 +93,11 @@ export default function InstitutionsChapter() {
   return (
     <Chapter id="institutions">
       <Reveal>
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-          <Title lead="Already in production" className="lg:col-span-7" />
-          <Lead className="lg:col-span-5">
-            Funds, stablecoins, credit and securities run on the C-Chain and on Avalanche L1s today.
+        <div className="grid gap-8 xl:grid-cols-12 xl:items-start">
+          <Title lead="Already in production" className="xl:col-span-7" />
+          <Lead className="xl:col-span-5">
+            Institutions run funds, credit, securities and stablecoins on the{" "}
+            <span className="whitespace-nowrap">C-Chain</span> and on L1s.
           </Lead>
         </div>
       </Reveal>
