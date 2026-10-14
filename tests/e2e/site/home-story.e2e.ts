@@ -9,7 +9,7 @@ import { waitForHydration } from '../lib/hydration';
 // The two drawings are WebGL on wide screens and stills on phones; either way the box has a name.
 const CHAPTERS = [
   { id: 'own', title: /Own the chain\./ },
-  { id: 'final', title: /Final in about a second\./ },
+  { id: 'final', title: /Final in a second or less\./ },
   { id: 'interop', title: /Any L1 can connect\./ },
   { id: 'institutions', title: /Already in production\./ },
   { id: 'build', title: /Build yours\./i },

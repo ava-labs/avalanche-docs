@@ -4,12 +4,12 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 import { CAPTION, Chapter, Lead, MONO, Reveal, TextLink, Title } from "./kit";
 
-/* The first objection, answered. A ruler in real time, one line for both
-   chains: two transactions leave at 0 together. The L1's is final first,
-   under 500 ms (the figure AvaCloud publishes for the L1s it runs,
-   avacloud.io/en/technology); the C-Chain's goes on to about one second
-   (the exchange integration guide). The ruler is the proof, so its marks
-   carry the chapter's figures. */
+/* The first objection, answered: final in a second or less, with no
+   reorgs. A ruler in real time, one line for both chains: two transactions
+   leave at 0 together. The L1's is final first, under 500 ms (the figure
+   AvaCloud publishes for the L1s it runs, avacloud.io/en/technology); the
+   C-Chain's goes on to about one second (the exchange integration guide).
+   The ruler is the proof, so its marks carry the chapter's figures. */
 
 // the ruler spans one and a half seconds; the C-Chain is final at one
 const SPAN_MS = 1500;
@@ -17,7 +17,7 @@ const FINAL_MS = 1000;
 // the L1 mark: final before 500 ms
 const L1_MS = 500;
 // a beat at 0 so the eye finds the start, then the trips, then each mark lights
-const LEAD_MS = 600;
+const LEAD_MS = 300;
 const LIT_MS = 300;
 
 const TICKS = [0, 0.5, 1, 1.5];
@@ -47,9 +47,10 @@ type Pose = "rest" | "start" | "run";
 
 function FinalityRuler() {
   const ref = useRef<HTMLDivElement>(null);
-  // the run plays once when most of the ruler is on screen, and is armed
-  // again only after the ruler leaves the screen, so it never loops in view
-  const watched = useInView(ref, { amount: 0.6 });
+  // the run plays once when the whole ruler sits in the top three quarters
+  // of the screen, and is armed again only after the ruler leaves the
+  // screen, so it never loops in view
+  const watched = useInView(ref, { amount: 1, margin: "0px 0px -25% 0px" });
   const onScreen = useInView(ref);
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState<Pose>("rest");
@@ -97,7 +98,8 @@ function FinalityRuler() {
       aria-label="Time to finality on one axis from 0 to 1.5 seconds: an L1 under 0.5 seconds, the C-Chain about 1 second"
       className="relative select-none"
     >
-      {/* each mark: its figure, the chain, and a line down to the track; red only on the L1's */}
+      {/* each mark: its figure, the chain, and a line down to the track; the
+          L1's figure and line take the red, the chain names stay in ink */}
       <div className="relative h-32 md:h-36 lg:h-40">
         {MARKS.map((m) => (
           <div
@@ -106,7 +108,9 @@ function FinalityRuler() {
             style={{ left: at(m.ms) }}
           >
             <div className="flex flex-col items-center gap-3" style={lit(m)}>
-              <p className="v2-heading whitespace-nowrap text-3xl leading-none tracking-[-0.04em] text-zinc-900 md:text-4xl lg:text-5xl dark:text-zinc-50">
+              <p
+                className={`v2-heading whitespace-nowrap text-3xl leading-none tracking-[-0.04em] md:text-4xl lg:text-5xl ${m.accent ? "text-[#E6212F]" : "text-zinc-900 dark:text-zinc-50"}`}
+              >
                 <span aria-hidden>{m.sign}</span>
                 <span className="sr-only">{m.said} </span>
                 {m.seconds}
@@ -145,8 +149,10 @@ function FinalityRuler() {
         ))}
       </div>
 
-      {/* the time scale: mono without the uppercase, so the unit stays "s",
-          and a narrow space so the number keeps its unit close */}
+      {/* the time scale: a tick at each half second, numbers only at the
+          ends, since the marks above carry their own figures; mono without
+          the uppercase, so the unit stays "s", and a narrow space so the
+          number keeps its unit close */}
       <div aria-hidden className="relative h-10">
         {TICKS.map((s) => (
           <span
@@ -155,9 +161,11 @@ function FinalityRuler() {
             style={{ left: at(s * 1000) }}
           >
             <span className="h-2 w-px bg-zinc-300 dark:bg-zinc-700" />
-            <span className="mt-2 whitespace-nowrap font-mono text-xs tabular-nums tracking-normal text-zinc-500 dark:text-zinc-400">
-              {`${s}\u202Fs`}
-            </span>
+            {(s === 0 || s * 1000 === SPAN_MS) && (
+              <span className="mt-2 whitespace-nowrap font-mono text-xs tabular-nums tracking-normal text-zinc-500 dark:text-zinc-400">
+                {`${s}\u202Fs`}
+              </span>
+            )}
           </span>
         ))}
       </div>
@@ -174,21 +182,17 @@ export default function FinalChapter() {
   return (
     <Chapter id="final">
       <Reveal>
-        <div className="grid gap-8 xl:grid-cols-12 xl:items-start">
-          <Title lead="Final in about a second" className="xl:col-span-7" />
-          <Lead className="xl:col-span-5">
-            A transaction is final when consensus accepts its block. There are no reorgs, so you need no extra
-            confirmations.
-          </Lead>
-        </div>
+        <Title lead="Final in a second or less." rest="No reorgs" />
+        <Lead className="mt-8">
+          A transaction is final when consensus accepts its block. Apps and exchanges need no extra confirmations.
+        </Lead>
       </Reveal>
 
       <Reveal delay={0.1} className="mt-16 md:mt-20">
         <FinalityRuler />
         <p className={`mt-6 max-w-3xl ${CAPTION}`}>
-          <span className="motion-reduce:hidden">Real time. </span>
-          The L1 figure is from AvaCloud, for the L1s it runs. The <span className="whitespace-nowrap">C-Chain</span>{" "}
-          figure is from the Avalanche docs.
+          <span className="motion-reduce:hidden">Shown at true speed. </span>Sources: AvaCloud for its L1s, the
+          Avalanche docs for the <span className="whitespace-nowrap">C-Chain</span>.
         </p>
         <div className="mt-10">
           <TextLink href="/docs/primary-network/exchange-integration#determining-finality" section="final">
