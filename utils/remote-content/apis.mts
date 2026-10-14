@@ -56,11 +56,12 @@ export function getApisConfigs(): FileConfig[] {
       contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/vms/avm/",
     },
     {
-      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/graft/coreth/plugin/evm/service.md",
+      // Pinned: avalanchego#6149 deletes graft/coreth/plugin/evm/service.md, and saevm has no RPC doc yet.
+      sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/e9f7e75e2b97fd64ef82e2b7f9c1d0c79a5dce8e/graft/coreth/plugin/evm/service.md",
       outputPath: "content/docs/rpcs/c-chain/index.mdx",
       title: "AvalancheGo C-Chain RPC",
       description: "This page is an overview of the C-Chain RPC associated with AvalancheGo.",
-      contentUrl: "https://github.com/ava-labs/avalanchego/blob/master/graft/coreth/plugin/evm/",
+      contentUrl: "https://github.com/ava-labs/avalanchego/blob/e9f7e75e2b97fd64ef82e2b7f9c1d0c79a5dce8e/graft/coreth/plugin/evm/",
     },
     {
       sourceUrl: "https://raw.githubusercontent.com/ava-labs/avalanchego/master/graft/subnet-evm/plugin/evm/service.md",

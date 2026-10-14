@@ -43,6 +43,11 @@ export function deriveEditUrlFromSourceUrl(sourceUrl: string): string {
     editUrl = editUrl.replace(/\/master\//, '/edit/master/');
   }
 
+  // A source pinned to a commit cannot be edited, so link to the file at that commit.
+  if (!editUrl.includes('/edit/')) {
+    editUrl = editUrl.replace(/^(https:\/\/github\.com\/[^/]+\/[^/]+)\//, '$1/blob/');
+  }
+
   return editUrl;
 }
 
