@@ -24,7 +24,7 @@ import FinalChapter from "@/components/landing-v2/story/FinalChapter";
 import InteropChapter from "@/components/landing-v2/story/InteropChapter";
 import InstitutionsChapter from "@/components/landing-v2/story/InstitutionsChapter";
 import BuildChapter from "@/components/landing-v2/story/BuildChapter";
-import { FOCUS } from "@/components/landing-v2/story/kit";
+import { FOCUS, MONO } from "@/components/landing-v2/story/kit";
 import { formatCompact, formatCompactIn, formatExact } from "@/components/landing-v2/compactFigure";
 import NetworkLanes from "@/components/landing-v2/NetworkLanes";
 import { rosterOf } from "@/components/explorer-v2/network/network-reads";
@@ -37,7 +37,7 @@ const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 // Arrival cascade: the board rises as one, then its rows stagger in.
 // Everything plays on entry: no reveal is gated behind scroll.
 const BOARD_VARIANTS = {
-  hidden: { opacity: 0, y: 48 },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
@@ -48,6 +48,13 @@ const ROW_VARIANTS = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE_OUT } },
 };
+// Reduced motion: the same hidden start as the server sent (a different
+// start would not hydrate), shown at once with no cascade
+const BOARD_STATIC = {
+  hidden: BOARD_VARIANTS.hidden,
+  show: { opacity: 1, y: 0, transition: { duration: 0, staggerChildren: 0, delayChildren: 0 } },
+};
+const ROW_STATIC = { hidden: ROW_VARIANTS.hidden, show: { opacity: 1, y: 0, transition: { duration: 0 } } };
 
 /* ------------------------------------------------------------------ */
 /* Ledger strip: the network's figures, set like a ledger             */
@@ -134,7 +141,7 @@ function LedgerCell({
   const cellClass = `flex flex-col gap-1.5 px-5 py-3 md:px-6 md:py-5 ${className}`;
   const content = (
     <>
-      <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400 lg:whitespace-nowrap">
+      <span className={`flex items-center gap-2 text-zinc-500 dark:text-zinc-400 lg:whitespace-nowrap ${MONO}`}>
         {live && <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E6212F]" />}
         <span>
           {label}
@@ -211,7 +218,7 @@ function LedgerStrip({
         <LedgerCell label="ACTIVE L1S" href="/explorer/mainnet/chains">
           {l1Count !== null ? <LedgerFigure value={l1Count} animateIn={animateIn} /> : <LedgerDash />}
         </LedgerCell>
-        <LedgerCell label="VALIDATORS" href="/explorer/mainnet/chains">
+        <LedgerCell label="VALIDATOR SEATS" href="/explorer/mainnet/chains">
           {agg ? <LedgerFigure value={agg.totalValidators} animateIn={animateIn} /> : <LedgerDash />}
         </LedgerCell>
       </div>
@@ -468,7 +475,7 @@ function StakeFigure({
       className={`group flex flex-col gap-2 md:gap-3 lg:items-end lg:text-right ${FOCUS}`}
     >
       {/* the same link grammar as the page's other mono links: text plus arrow */}
-      <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 transition-colors group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-zinc-100">
+      <span className={`inline-flex items-center gap-1.5 text-zinc-500 transition-colors group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-zinc-100 ${MONO}`}>
         STAKE SECURING THE NETWORK
         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
       </span>
@@ -489,7 +496,7 @@ function StakeFigure({
           {supplyStakedPct !== null && (
             <>
               {" "}
-              <span className="whitespace-nowrap">{supplyStakedPct.toFixed(1)}% OF CIRCULATING SUPPLY</span>
+              <span className="whitespace-nowrap">{supplyStakedPct.toFixed(1)}% OF TOTAL SUPPLY</span>
             </>
           )}
         </span>
@@ -518,6 +525,7 @@ function StatsChapter({
   reducedMotion: boolean;
 }) {
   const staticMode = reducedMotion;
+  const rowVariants = staticMode ? ROW_STATIC : ROW_VARIANTS;
   // the lanes row is decided at first render: with no chains it stays out
   // for the visit, since a row that came with a later poll would push the board down
   const [lanesRow] = useState(() => rosterOf(globeData?.metrics?.chains ?? []).length > 0);
@@ -530,12 +538,19 @@ function StatsChapter({
       {/* the claim on the left, its proof on the right: the stake that
           secures the network, the figure institutions underwrite */}
       <div className="mx-auto mb-6 w-full max-w-7xl px-5 md:mb-10 md:px-6">
+        {/* the server cannot read reduced motion, so both sides start hidden;
+            reduced motion only shows it at once (the kit's Reveal) */}
         <motion.div
+          data-reveal
           className="flex flex-col gap-5 md:gap-10 lg:flex-row lg:items-end lg:justify-between"
-          initial={staticMode ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: EASE_OUT }}
+          initial={{ opacity: 0, y: 24 }}
+          {...(staticMode
+            ? { animate: { opacity: 1, y: 0 }, transition: { duration: 0 } }
+            : {
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true, amount: 0.4 },
+                transition: { duration: 0.6, ease: EASE_OUT },
+              })}
         >
           {/* staircase stack per the /solutions hero: lines step right,
               the red period closes the set. The page's largest claim after
@@ -558,16 +573,18 @@ function StatsChapter({
           />
         </motion.div>
       </div>
+      {/* the rows take the board's hidden start, so each carries data-reveal too */}
       <motion.div
         className="divide-y divide-zinc-200 border-y border-zinc-200 bg-white/80 backdrop-blur-sm dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-950/80"
-        variants={BOARD_VARIANTS}
-        initial={staticMode ? false : "hidden"}
-        whileInView="show"
-        viewport={{ once: true, amount: 0.35 }}
+        data-reveal
+        initial="hidden"
+        {...(staticMode
+          ? { animate: "show", variants: BOARD_STATIC }
+          : { whileInView: "show", viewport: { once: true, amount: 0.35 }, variants: BOARD_VARIANTS })}
       >
         {/* the network now: every block the busiest chains make, as it lands */}
         {lanesRow && (
-          <motion.div variants={ROW_VARIANTS}>
+          <motion.div data-reveal variants={rowVariants}>
             <div className="mx-auto w-full max-w-7xl px-5 py-3 md:px-6 md:pt-4">
               <NetworkLanes
                 rows={globeData?.metrics?.chains ?? []}
@@ -577,20 +594,20 @@ function StatsChapter({
             </div>
           </motion.div>
         )}
-        <motion.div variants={ROW_VARIANTS}>
+        <motion.div data-reveal variants={rowVariants}>
           <LedgerStrip globeData={globeData} l1Count={l1Count} animateIn={!reducedMotion} />
         </motion.div>
 
         {/* on-chain capital. Row wrappers stay full-width so the board's
             dividers run full-bleed; content insets to the 7xl measure. */}
-        <motion.div variants={ROW_VARIANTS}>
+        <motion.div data-reveal variants={rowVariants}>
         <div className="mx-auto grid w-full max-w-7xl grid-cols-2 lg:grid-cols-3 lg:divide-x lg:divide-zinc-200 dark:lg:divide-zinc-800">
           <Link
             href="/explorer/mainnet/c-chain/defi/stablecoins"
             className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:col-span-2 max-lg:border-b dark:border-zinc-800 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
-              <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+              <span className={`text-zinc-500 dark:text-zinc-400 ${MONO}`}>
                 STABLECOINS ON-CHAIN
               </span>
               <TokenStack srcs={["/logos/tokens/usdc.png", "/logos/tokens/usdt.png", "/logos/tokens/eurc.png", "/logos/tokens/jpyc.png", "/logos/tokens/xsgd.png"]} />
@@ -602,7 +619,7 @@ function StatsChapter({
             className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:border-r dark:border-zinc-800 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
-              <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+              <span className={`text-zinc-500 dark:text-zinc-400 ${MONO}`}>
                 DEFI TVL
               </span>
               <TokenStack srcs={["/logos/tokens/aave.png", "/logos/tokens/benqi.png", "/logos/tokens/gmx.png"]} />
@@ -614,7 +631,7 @@ function StatsChapter({
             className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
-              <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+              <span className={`flex items-center gap-2 text-zinc-500 dark:text-zinc-400 ${MONO}`}>
                 <span>
                   DEX VOLUME<span className="max-sm:hidden"> · </span>
                   <span className="max-sm:block">30D</span>
@@ -628,7 +645,7 @@ function StatsChapter({
         </motion.div>
 
         {/* board footer: the full instrument lives at /stats */}
-        <motion.div variants={ROW_VARIANTS}>
+        <motion.div data-reveal variants={rowVariants}>
           <HoverPrefetchLink
             href="/explorer"
             onClick={() => track("home_cta_clicked", { section: "stats", label: "Explore the network", href: "/explorer" })}
