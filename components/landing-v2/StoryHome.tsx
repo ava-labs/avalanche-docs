@@ -33,8 +33,8 @@ import { track } from "@/components/landing-v2/track";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
-// Arrival cascade for snap sections: the board rises as one, then its rows
-// stagger in. Everything plays on entry: no reveal is gated behind scroll.
+// Arrival cascade: the board rises as one, then its rows stagger in.
+// Everything plays on entry: no reveal is gated behind scroll.
 const BOARD_VARIANTS = {
   hidden: { opacity: 0, y: 48 },
   show: {
@@ -725,14 +725,11 @@ export default function StoryHome({
 }) {
   const reducedMotion = useReducedMotion();
 
-  // Snapping and scroll padding are document-level properties; scope them to
-  // this page by tagging <html> while mounted (CSS lives in global.css under
-  // .v2-snap): proximity snapping on the hero and the board on tall desktops,
-  // and padding under the sticky navbar on every screen.
-  // Layout effect, not effect: the cleanup must drop the class SYNCHRONOUSLY
-  // in the unmount commit. With useEffect the class survives one paint into
-  // the next route, and the browser can snap the homepage's deep scroll
-  // offset against the shorter page, which lands visitors at its bottom.
+  // Scroll padding is a document-level property; scope it to this page by
+  // tagging <html> while mounted (CSS in global.css under .v2-snap), so a
+  // focused link or an anchor jump lands below the sticky navbar. Layout
+  // effect, so the cleanup drops the class in the unmount commit, before
+  // the next route paints.
   useLayoutEffect(() => {
     document.documentElement.classList.add("v2-snap");
     return () => document.documentElement.classList.remove("v2-snap");

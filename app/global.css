@@ -1909,33 +1909,12 @@ html.embed-mode #nd-toc {
   animation: collapsible-up 200ms cubic-bezier(0.21, 0.47, 0.32, 0.98);
 }
 
-/* Homepage scroll rules. StoryHome tags <html> with v2-snap while it is
-   mounted, so no other route is affected. Every screen gets scroll padding:
-   a focused link or an anchor jump lands below the sticky navbar, not under
-   it (WCAG 2.4.11). 4.5rem clears the 57px header with room for the focus
-   ring. */
+/* Homepage scroll padding. StoryHome tags <html> with v2-snap while it is
+   mounted, so no other route is affected. A focused link or an anchor jump
+   lands below the sticky navbar, not under it (WCAG 2.4.11). 4.5rem clears
+   the 57px header with room for the focus ring. */
 html.v2-snap {
   scroll-padding-top: 4.5rem;
-}
-/* Desktop-and-tall only: proximity snapping on the hero and the stats board
-   (.v2-snap-section). Proximity suggests the chapter rhythm but never traps
-   a section that is taller than the screen (WCAG 1.4.4 / 1.4.10); phones
-   keep natural flow. The padding drops to 3.5rem here, so a snapped section
-   sits flush under the navbar (the sections are sized to 100vh - 3.5rem).
-   `scroll-snap-stop: always` keeps a fling from flying past the board; the
-   footer end-aligns so the page bottom stays a resting point. */
-@media (min-width: 1024px) and (min-height: 640px) {
-  html.v2-snap {
-    scroll-snap-type: y proximity;
-    scroll-padding-top: 3.5rem;
-  }
-  html.v2-snap .v2-snap-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-  html.v2-snap footer {
-    scroll-snap-align: end;
-  }
 }
 
 /* Story chapters rise in with framer-motion, which renders them hidden on
