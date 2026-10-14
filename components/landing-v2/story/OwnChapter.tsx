@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useInView, useScroll, useTransform } from "framer-motion";
+import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { BrandButton } from "@/components/landing-v2/BrandButton";
 import { track } from "@/components/landing-v2/track";
-import { BODY, Chapter, Figure, Lead, MONO, REVEAL_VIEW, Reveal, TextLink, Title } from "./kit";
+import { BODY, Chapter, Figure, Lead, MONO, Reveal, TextLink, Title } from "./kit";
 import { SceneFrame } from "./three/SceneFrame";
 import type { StackLayer } from "./three/StackScene";
 
@@ -35,8 +35,16 @@ export default function OwnChapter() {
   // the stack opens as the drawing scrolls in, and is open before it reaches the middle of the screen
   const { scrollYProgress } = useScroll({ target: drawingRef, offset: ["start end", "center center"] });
   const open = useTransform(scrollYProgress, [0.1, 0.65], [0, 1], { clamp: true });
-  // the drop waits for the drawing's reveal (the Reveal's own trigger), so the reader sees it
-  const shown = useInView(drawingRef, REVEAL_VIEW);
+  // the drop starts when the drawing is most of the way to the middle of the
+  // screen, after the stack has opened, so the reader sees each layer land.
+  // A page that loads past that point drops at once
+  const [shown, setShown] = useState(false);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (v >= 0.8) setShown(true);
+  });
+  useEffect(() => {
+    if (scrollYProgress.get() >= 0.8) setShown(true);
+  }, [scrollYProgress]);
 
   return (
     <Chapter id="own">
@@ -46,15 +54,12 @@ export default function OwnChapter() {
         <Reveal className="lg:col-span-5">
           <Title lead="Own the chain." rest="Set the rules" />
           <Lead className="mt-8">
-            An Avalanche L1 is a blockchain for your application alone. It can set a higher gas limit than the
-            shared <span className="whitespace-nowrap">C-Chain</span>, so it can process more transactions.
+            An Avalanche L1 is a blockchain for your application alone. It can require its validators to be in a
+            given country, pass KYC/AML checks or hold a license.
           </Lead>
-          <p className={`mt-8 max-w-xl border-l-2 border-[#E6212F] pl-5 ${BODY}`}>
-            An L1 can require its validators to be in a given country, pass KYC/AML checks or hold a license.
-          </p>
         </Reveal>
 
-        <Reveal delay={0.1} className="-mx-5 md:mx-0 lg:-my-20 lg:col-span-7">
+        <Reveal delay={0.1} className="-mx-5 md:mx-0 md:-my-12 lg:-my-20 lg:col-span-7">
           <div ref={drawingRef}>
             <SceneFrame
               Scene={StackScene}
@@ -63,6 +68,7 @@ export default function OwnChapter() {
               stillNarrow={STILL_NARROW}
               alt="An Avalanche L1 drawn as four layers over the P-Chain: validator set, access, gas token and virtual machine."
               aspect={1.12}
+              aspectNarrow={780 / 720}
             />
           </div>
         </Reveal>
@@ -70,7 +76,7 @@ export default function OwnChapter() {
 
       {/* phones: the layers as text, right after the drawing; from 768 px the drawing labels them */}
       <Reveal delay={0.1} className="mt-12 md:sr-only">
-        <ol className="divide-y divide-zinc-200 border-t border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+        <ol className="divide-y divide-zinc-200 border-y border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
           {[...LAYERS].reverse().map((layer) => (
             <li key={layer.key} className="flex flex-col gap-1 py-4">
               <span className={`${MONO} text-zinc-900 dark:text-zinc-100`}>{layer.label}</span>
@@ -80,8 +86,17 @@ export default function OwnChapter() {
         </ol>
       </Reveal>
 
-      <Reveal delay={0.15} className="mt-20 md:mt-28">
-        <div className="grid gap-12 border-t border-zinc-200 pt-12 md:grid-cols-3 md:gap-8 dark:border-zinc-800">
+      <Reveal delay={0.15} className="mt-16 md:mt-20 lg:mt-28">
+        <div className="grid gap-12 border-t border-zinc-200 pt-12 max-md:border-t-0 max-md:pt-0 md:grid-cols-3 md:gap-8 dark:border-zinc-800">
+          <Figure
+            value={
+              <>
+                <span aria-hidden>&gt;</span>
+                <span className="sr-only">more than </span>99.9%
+              </>
+            }
+            caption="less upfront cost to launch an L1 since the Etna upgrade in December 2024."
+          />
           <Figure
             value={
               <>
@@ -92,15 +107,7 @@ export default function OwnChapter() {
             unit="AVAX"
             caption="a month in P-Chain fees per L1 validator."
           />
-          <Figure
-            value={
-              <>
-                <span aria-hidden>&gt;</span>
-                <span className="sr-only">more than </span>99.9%
-              </>
-            }
-            caption="less upfront cost to launch a chain since the Etna upgrade."
-          />
+          {/* no-break spaces keep each count with its noun */}
           <Figure
             value={
               <>
@@ -108,7 +115,7 @@ export default function OwnChapter() {
                 <span className="sr-only">about </span>$651
               </>
             }
-            caption="a month to run a production L1 on AWS: 5 validators, 2 RPC nodes and monitoring."
+            caption={"a month to run a production L1 on AWS: 5\u00a0validators, 2\u00a0RPC\u00a0nodes and monitoring."}
           />
         </div>
         <div className="mt-14 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-6">

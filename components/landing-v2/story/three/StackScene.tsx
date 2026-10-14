@@ -66,9 +66,10 @@ const DROP_STAGGER_S = 0.12;
 // the plate's grid stops one 0.4 cell in from its edge: the rim between holds the plate's name
 const GRID = PLATE - 0.8;
 const RIM = (PLATE - GRID) / 2;
-// the name's capital height on screen, px, and at most this share of the rim
-const NAME_CAP_PX = 7;
-const NAME_FILL = 0.58;
+// the name's capital height on screen, px, and at most this share of the rim,
+// so the letters stay clear of the rim's hairline
+const NAME_CAP_PX = 8;
+const NAME_FILL = 0.75;
 // the scene reports ready without the name after this long
 const READY_WAIT_MS = 3000;
 
@@ -195,17 +196,25 @@ function Ready({ when, onReady }: { when: boolean; onReady: () => void }) {
 function Kick({ spread, active, running }: { spread: MotionValue<number>; active: number | null; running: boolean }) {
   const gl = useThree((s) => s.gl);
   const invalidate = useThree((s) => s.invalidate);
+  const pointer = useThree((s) => s.pointer);
   useEffect(() => {
     const el = gl.domElement;
     const kick = () => invalidate();
     // the pointer turns the rig; R3F only records it
     el.addEventListener("pointermove", kick);
+    // R3F keeps the last pointer when it leaves: center it, so the rig turns back to rest
+    const leave = () => {
+      pointer.set(0, 0);
+      invalidate();
+    };
+    el.addEventListener("pointerleave", leave);
     const off = spread.on("change", kick);
     return () => {
       el.removeEventListener("pointermove", kick);
+      el.removeEventListener("pointerleave", leave);
       off();
     };
-  }, [gl, invalidate, spread]);
+  }, [gl, invalidate, spread, pointer]);
   useEffect(() => invalidate(), [active, running, invalidate]);
   return null;
 }
@@ -456,12 +465,30 @@ function Stack({
   );
 }
 
-export default function StackScene({ labels = true, play = true, running, ...props }: StackSceneProps & SceneProps) {
+export default function StackScene({
+  labels = true,
+  play = true,
+  running,
+  onReady,
+  ...props
+}: StackSceneProps & SceneProps) {
   // the loop runs every frame only while the drop plays on screen; otherwise
   // the scene draws on demand (off screen too, so its first frame is ready)
   const [landed, setLanded] = useState(false);
   const onLanded = useCallback(() => setLanded(true), []);
-  const on = running && play;
+  // a canvas that is ready with its box on screen (a reload, a fast scroll)
+  // stays hidden behind the still until its intro is over (SceneFrame). The
+  // drop plays then, unseen, so the canvas fades in on the still's pose
+  const [unseen, setUnseen] = useState(false);
+  const onScreen = useRef(running);
+  useEffect(() => {
+    onScreen.current = running;
+  }, [running]);
+  const ready = useCallback(() => {
+    if (onScreen.current) setUnseen(true);
+    onReady();
+  }, [onReady]);
+  const on = running && (play || unseen);
   return (
     <Canvas
       orthographic
@@ -471,7 +498,7 @@ export default function StackScene({ labels = true, play = true, running, ...pro
       frameloop={on && !landed ? "always" : "demand"}
       gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
     >
-      <Stack {...props} labels={labels} running={on} onLanded={onLanded} />
+      <Stack {...props} labels={labels} running={on} onReady={ready} onLanded={onLanded} />
     </Canvas>
   );
 }
