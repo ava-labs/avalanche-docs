@@ -126,4 +126,16 @@ describe('networkAsked', () => {
     ])
       expect(networkAsked(q), q).toBe(false);
   });
+
+  it("sends an ICTT or ICM question about delivery, a message ID or a route to every chain, whose rows alone hold both sides, and leaves one chain's bridges on it", () => {
+    for (const q of [
+      'Trace ICTT transfer 0x9205afdee4202e45e70d90d267f0893d75cead6870abde86b25129c0f247b97c',
+      'Which ICTT transfers are still waiting for delivery?',
+      'Top ICTT routes this week',
+      'Was ICM message 0x9205afdee4202e45e70d90d267f0893d75cead6870abde86b25129c0f247b97c delivered?',
+    ])
+      expect(networkAsked(q), q).toBe(true);
+    for (const q of ['How many stablecoins are currently held in the ICTT bridges on the C-Chain?', 'Top ICTT tokens by volume in the last 30 days', 'Trace transaction 0x9205afdee4202e45e70d90d267f0893d75cead6870abde86b25129c0f247b97c'])
+      expect(networkAsked(q), q).toBe(false);
+  });
 });

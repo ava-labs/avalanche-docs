@@ -7,6 +7,7 @@
 
 import { createHash } from "node:crypto";
 import { HASH_RANGE, MAX_ROWS } from "./guard";
+import { icttExamples, icttRules, icttWithAll } from "./ictt";
 import { CALENDAR, SERIES, chartSpec } from "./prompt";
 import { refSchema, type NetworkChain } from "./sources";
 import { NETWORK_ID } from "./target";
@@ -22,17 +23,23 @@ const RECORD = (since: string) =>
 /** one line per chain: its id, its name and its native token */
 const chainLines = (chains: readonly NetworkChain[]) => chains.map((c) => `${c.chainId}: ${c.name}${c.symbol ? ` (${c.symbol})` : ""}`).join("; ");
 
-let version: string | null = null;
+const versions = new Map<boolean, string>();
 
 /** what a kept network recipe was written against: the rules and worked examples, with no schema, coverage or chain
     list in them, and the reference table's columns (prompt.ts promptVersion is the C-Chain's, an L1's and the
-    P-Chain's) */
-export function networkVersion(): string {
-  version ??= createHash("sha256").update(`${networkPrompt({ schema: "", coverage: null, chains: [] })}\n${refSchema(NETWORK_ID).join("\n")}`).digest("hex").slice(0, 12);
-  return version;
+    P-Chain's); one per variant, so an ICTT question's chapter leaves every other question's key as it was. A kept ICTT
+    answer holds the $ICTT WITH written out, so that variant's version holds it too */
+export function networkVersion(ictt = false): string {
+  let v = versions.get(ictt);
+  if (!v) {
+    v = createHash("sha256").update(`${networkPrompt({ schema: "", coverage: null, chains: [], ictt })}\n${refSchema(NETWORK_ID).join("\n")}${ictt ? `\n${icttWithAll(NETWORK_ID)}` : ""}`).digest("hex").slice(0, 12);
+    versions.set(ictt, v);
+  }
+  return v;
 }
 
-export function networkPrompt(opts: { schema: string; coverage: string | null; chains: readonly NetworkChain[] }): string {
+/** ictt: the ICTT and ICM chapter (ictt.ts), in the prompt of such a question (icttQuestion) */
+export function networkPrompt(opts: { schema: string; coverage: string | null; chains: readonly NetworkChain[]; ictt?: boolean }): string {
   return `You turn a question about the Avalanche network (the C-Chain and every mainnet L1 these tables index, each an EVM chain with its own chain id and native token) into one ClickHouse SELECT and a chart spec. You are precise, terse, and you never invent data.
 
 ## Tables (from the database, this is the whole schema you may read)
@@ -57,7 +64,7 @@ The server reads every table as the network's chains alone, so a query over the 
 - ICM (Teleporter) messages: the messenger is unhex('253b2784c75e510dd0ff1da844684a1ac0aa5fcf') on every chain. SendCrossChainMessage ${SEND_ICM} is a message its chain sent, with topic2 = the destination's blockchain ID, which chain_names holds as blockchain_id: a message from one chain to another is one log, named from both sides, LEFT JOIN chain_names AS d ON d.blockchain_id = l.topic2. A destination outside the network has no name: return its blockchain ID as lower(concat('0x', hex(l.topic2))).
 - Log data is bytes: read a 32-byte word with substring(data, 1 + 32*k, 32), and reverse() before reinterpretAsUInt256.
 - The DEX, lending, staking and MEV registries are the C-Chain's alone (step 3 below).
-
+${opts.ictt ? icttRules(NETWORK_ID) : ""}
 ## Query rules
 - One SELECT (a WITH is fine). No FORMAT, no SETTINGS, no semicolons, no comments. The server sets format, timeouts and memory.
 - At most ${MAX_ROWS} rows come back, and a longer series is cut. Pick the bucket from the window: toStartOfFiveMinutes for windows up to 6 hours, toStartOfHour up to 7 days, toDate beyond, toMonday for weeks. A question that names a bucket but no window reads 6 hours of 5-minute buckets, 24 hours of hourly ones, 30 days of daily ones.
@@ -79,7 +86,7 @@ ${CALENDAR}${SERIES}
 ## How to work
 1. If the question fits a worked example below, adapt it and call render_chart directly. Do not test first: render_chart runs the query and returns the database error if it fails. The one exception is a series by chain: call run_sql first with the ranking, as the query rules say.
 2. Call run_sql first only when you write something the examples do not cover. Fix and retry from the error.
-3. If the question is about the P-Chain (staking, stake, validators, delegators or delegations, uptime, L1 or subnet validators, AVAX supply or issuance), call render_chart with kind "none", route "p-chain", sql "" and a one-line note. If it is about the C-Chain's DEXs, swaps, pools, liquidity, lending, borrowing, vaults, liquid staking, bridges or MEV, call render_chart with kind "none", route "c-chain", sql "" and a one-line note. The page sends the question there.
+3. If the question is about the P-Chain (staking, stake, validators, delegators or delegations, uptime, L1 or subnet validators, AVAX supply or issuance), call render_chart with kind "none", route "p-chain", sql "" and a one-line note. If it is about the C-Chain's DEXs, swaps, pools, liquidity, lending, borrowing, vaults, liquid staking, ${opts.ictt ? "Circle's CCTP (ICTT bridges and ICM are this page's)" : "bridges"} or MEV, call render_chart with kind "none", route "c-chain", sql "" and a one-line note. The page sends the question there.
 4. If the question cannot be answered from these tables, call render_chart with kind "none" and say why in the note.
 5. A drill must find records for the row it opens: keep the main query's window and filters, filter on the row's chain_id and its own values. render_chart tests it on the first row and returns an error if it finds none.
 
@@ -106,7 +113,7 @@ SELECT n.chain AS chain, t.chain_id AS chain_id, count() AS contracts, uniqExact
 
 The network's transactions per hour, by its three busiest chains and the rest (after run_sql ranked the chains over the same window):
 SELECT toStartOfHour(block_time) AS t, countIf(chain_id = 43419) AS gunzilla_txs, countIf(chain_id = 432204) AS dexalot_txs, countIf(chain_id = 43114) AS c_chain_txs, countIf(chain_id NOT IN (43419, 432204, 43114)) AS other_txs FROM raw_txs WHERE block_time >= toStartOfHour(now()) - INTERVAL 24 HOUR GROUP BY t ORDER BY t
-
+${opts.ictt ? `\n${icttExamples(NETWORK_ID).trimEnd()}\n` : ""}
 ## Drill: every group opens into its records
 Whenever a row is a group (a chain, a contract, a sender, a time bucket), render_chart MUST carry drill: a SELECT template that lists the records behind ONE row, plus a title for that list.
 - Placeholders name the picked row's columns: {{col}} inserts the value as a SQL literal; {{col:bytes}} inserts unhex('…') for a 0x hex value. A row about one chain filters its drill on chain_id = {{chain_id}}; a time bucket of the network keeps the main query's window and compares the same bucket expression, toDate(block_time) = {{t}}, and may list its chains.

@@ -8,7 +8,7 @@
    C-Chain only. */
 
 import registryData from "@/data/contract-registry.json";
-import { mentioned } from "./names";
+import { gateWords, mentioned } from "./names";
 import { bare, fitting, packed, strings } from "./protocols";
 
 /** a Benqi market: its qiToken and the asset it lends */
@@ -476,11 +476,12 @@ const LENDING_WORDS = new RegExp(
 );
 
 /** a question about lending, whose prompt carries the lending chapter: it names Aave, Benqi (one slip off counts:
-    names.ts), a qiToken or a lending word, or an earlier turn read the lending tables. Every other question's prompt
-    is the one it was */
+    names.ts), a qiToken or a lending word, or an earlier turn read the lending tables. An ICTT or ICM question's
+    deposits, withdrawals, collateral and assets are its bridges' (names.ts); its loans and borrows are still lending's.
+    Every other question's prompt is the one it was */
 export function lendingQuestion(chainId: number, prompt: string, history: { prompt?: string; sql?: string }[] = []): boolean {
   if (chainId !== LENDING_CHAIN_ID || LENDING_MARKETS.length === 0) return false;
-  const about = (q: string) => LENDING_WORDS.test(q) || mentioned(q, LENDING_NAMES_WORDS).length > 0;
+  const about = (q: string) => LENDING_WORDS.test(gateWords(q)) || mentioned(q, LENDING_NAMES_WORDS).length > 0;
   return about(prompt) || history.some((t) => about(t.prompt ?? "") || /\b(lending_(markets|tokens)|aave_pool|accrue_t)\b/.test(t.sql ?? ""));
 }
 

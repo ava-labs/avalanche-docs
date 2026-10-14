@@ -6,6 +6,7 @@
 import { FILTER_MARK } from "@/components/explorer-v2/evm/query-client";
 import { PCHAIN_LOGO } from "@/components/explorer-v2/network/city-model";
 import { askHref } from "@/lib/explorer-query/board-links";
+import { icttBothSides } from "@/lib/explorer-query/names";
 import { toHexBytes } from "@/lib/explorer-query/pchain-ids";
 import { queryTarget } from "@/lib/explorer-query/target";
 import type { Node } from "@/components/explorer-v2/network/icm-map";
@@ -63,9 +64,10 @@ const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const NETWORK_WORDS =
   /\b(?:all|every|each|across(?: all)?)\s+(?:the\s+)?(?:avalanche\s+)?(?:chains?|l1s?)\b|\b(?:per|by)\s+(?:chain|l1)\b|\b(?:whole|entire)\s+(?:avalanche\s+)?network\b|\bnetwork[- ]wide\b|\bc[- ]?chain\s*(?:and|\+|&)\s*(?:all|every|the)\s+(?:other\s+)?l1s?\b|\b(?:chains|l1s)\s+(?:ranked|by)\b|\bbetween\s+(?:the\s+)?(?:chains|l1s)\b|\b(?:top|busiest|which)\s+(?:\d+\s+)?(?:chains|l1s)\b|^\s*network\b/i;
 
-/** whether a question is about the whole network, the C-Chain and every L1 at once */
+/** whether a question is about the whole network, the C-Chain and every L1 at once: by its words, or as an ICTT or
+    ICM question about a transfer's delivery, a message ID or a route, whose two sides only every chain's rows hold */
 export function networkAsked(q: string): boolean {
-  return NETWORK_WORDS.test(q) && !PCHAIN_WORDS.test(q.replace(/\bl1s?\b/gi, " ")) && !/\bprimary network\b/i.test(q);
+  return (NETWORK_WORDS.test(q) || icttBothSides(q)) && !PCHAIN_WORDS.test(q.replace(/\bl1s?\b/gi, " ")) && !/\bprimary network\b/i.test(q);
 }
 
 /** where a question asked in the city goes: the chain, and the L1 a P-Chain question is for, by slug */

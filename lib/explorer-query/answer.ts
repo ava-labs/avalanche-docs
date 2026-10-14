@@ -5,6 +5,8 @@ import { z } from "zod";
 import { MAX_ROWS, guardSql, literalWindow, negativeFigure } from "./guard";
 import { mixedChains, protocolScope, unitName } from "./checks";
 import { familyQuestion } from "./families";
+import { icttQuestion } from "./ictt";
+import { icttNamed } from "./names";
 import { mevQuestion } from "./mev";
 import { lendingQuestion, pricedNote, zeroUsd } from "./lending";
 import { collapseMacros } from "./macros";
@@ -227,9 +229,11 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     console.warn("[explorer-query] fixed SQL failed:", a.chainId, a.prompt);
   }
 
-  // the registries of DEXs, lending, vaults and MEV are the C-Chain's: the network sends their questions there
+  // the registries of DEXs, lending, vaults and MEV are the C-Chain's: the network sends their questions there. A
+  // question that names ICTT or ICM is the network's own: both sides of a transfer are on its rows alone
   const network = a.chainId === NETWORK_ID;
-  if (network && a.history.length === 0 && [dexQuestion, lendingQuestion, familyQuestion, mevQuestion].some((q) => q(DEX_CHAIN_ID, a.prompt)))
+  const ictt = icttQuestion(a.chainId, a.prompt, a.history);
+  if (network && a.history.length === 0 && !icttNamed(a.prompt) && [dexQuestion, lendingQuestion, familyQuestion, mevQuestion].some((q) => q(DEX_CHAIN_ID, a.prompt)))
     return { title: "", note: "", sql: "", chart: { kind: "none", series: [] }, drill: null, result: null, names: {}, visual: null, coverage: null, route: "c-chain" };
 
   const recipe = a.fresh ? null : await getRecipe(key);
@@ -253,10 +257,10 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
   const canRoute = targetOf(a.chainId).kind === "pchain" || isCChain(a.chainId) || network;
   const coverLine = network ? await networkCoverageText() : cover ? coverageText(a.chainId, cover) : null;
   const system = network
-    ? networkPrompt({ schema, coverage: coverLine, chains: await networkChains() })
+    ? networkPrompt({ schema, coverage: coverLine, chains: await networkChains(), ictt })
     : targetOf(a.chainId).kind === "pchain"
       ? pchainPrompt({ chainId: a.chainId, network: a.chainId === 5 ? "Fuji" : "Mainnet", schema, coverage: coverLine, lines: await versionLines(a.chainId) })
-      : systemPrompt({ chainId: a.chainId, chainName: a.chainName, symbol: a.symbol, schema, coverage: coverLine, dex: dexQuestion(a.chainId, a.prompt, a.history), lending: lendingQuestion(a.chainId, a.prompt, a.history), families: familyQuestion(a.chainId, a.prompt, a.history), mev: mevQuestion(a.chainId, a.prompt, a.history) });
+      : systemPrompt({ chainId: a.chainId, chainName: a.chainName, symbol: a.symbol, schema, coverage: coverLine, dex: dexQuestion(a.chainId, a.prompt, a.history), lending: lendingQuestion(a.chainId, a.prompt, a.history), families: familyQuestion(a.chainId, a.prompt, a.history), mev: mevQuestion(a.chainId, a.prompt, a.history), ictt });
 
   // earlier turns, so "make it weekly" refines the last chart
   const messages: ModelMessage[] = [];
@@ -293,7 +297,9 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
   const fuji = isFuji(a.chainId);
   // the server writes out the WITH a C-Chain shorthand stands for. A writer that writes it out itself spends about
   // 2,300 more output tokens, 25 s a call (D20's final); asked for the shorthand, 6 of 6 replays of that final kept it
-  const shorthand = isCChain(a.chainId) && !fuji;
+  // an ICTT or ICM question is asked for $ICTT on every chain that has it
+  const shorthand = (isCChain(a.chainId) && !fuji) || ictt;
+  const shorthands = ictt ? "$ICTT" : "$DEX, $LEND, $LIQUIDATIONS";
 
   const writers = fuji ? FUJI_WRITERS : WRITERS;
 
@@ -327,7 +333,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     };
 
     const run_sql = tool({
-      description: `Test a query you are unsure of: the first rows and column types, or the database error. Skip it when a worked example fits.${shorthand ? " Write a shorthand ($DEX, $LEND, $LIQUIDATIONS) as it stands, never the WITH it stands for: the server writes its WITH out." : ""}`,
+      description: `Test a query you are unsure of: the first rows and column types, or the database error. Skip it when a worked example fits.${shorthand ? ` Write a shorthand (${shorthands}) as it stands, never the WITH it stands for: the server writes its WITH out.` : ""}`,
       inputSchema: z.object({ sql: z.string() }),
       execute: async ({ sql }) => {
         // a writer past its tests answers from what they showed: a test it still calls runs nothing
@@ -364,7 +370,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     });
 
     const render_chart = tool({
-      description: `Hand back the final query and the chart spec. The server runs the query in full and tests the drill. Returns ok, or the error to fix.${shorthand ? " Write sql and drill.sql with the shorthand your tests used ($DEX, $LEND, $LIQUIDATIONS): the server writes its WITH out." : ""}`,
+      description: `Hand back the final query and the chart spec. The server runs the query in full and tests the drill. Returns ok, or the error to fix.${shorthand ? ` Write sql and drill.sql with the shorthand your tests used (${shorthands}): the server writes its WITH out.` : ""}`,
       inputSchema: z.object({
         title: z.string(),
         note: z.string(),

@@ -4,16 +4,19 @@
 
 import { createHash } from "node:crypto";
 import { HASH_RANGE, MAX_ROWS } from "./guard";
-import { CREATED, FIRST_DAY, QUOTES, U, pxCte, topic } from "./macros";
-import { DEX_CHAIN_ID, DEX_FACTORIES, DEX_PRICE_POOL, DEX_PROTOCOLS, DEX_TOPICS, V2_FEE_PROTOCOLS, dexFamilies, type DexFamily } from "./protocols";
+import { CREATED, QUOTES, U, pxCte, topic } from "./macros";
+import { DEX_CHAIN_ID, DEX_FACTORIES, DEX_PRICE_POOL, DEX_PROTOCOLS, DEX_TOPICS, FIRST_DAY, V2_FEE_PROTOCOLS, dexFamilies, dexQuestion, type DexFamily } from "./protocols";
 import { AAVE_ASSETS, AAVE_SLUG, LENDING_CHAIN_ID, LENDING_MARKETS, LENDING_PROTOCOLS } from "./lending";
 import { FAMILY_CHAIN_ID, OPENTRADE_POOLS, SILOS, VAULTS } from "./families";
 import { sqlWindow, windowWords } from "./scope";
-import { mentioned } from "./names";
 import { registryTurn } from "./registry-turn";
 import { mevExamples, mevRules, mevTurn } from "./mev";
+import { icttChain, icttExamples, icttRules, icttTurn, icttWithAll } from "./ictt";
 import { knownLines, refLine, refSchema } from "./sources";
 import { isCChain, isFuji, PCHAIN_IDS, targetOf } from "./target";
+
+// the DEX gate lives with the DEX registry (protocols.ts), where the ICTT gate reads it too
+export { dexQuestion };
 
 export const KNOWN_ADDRESSES: Record<string, string> = {
   "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7": "WAVAX",
@@ -120,7 +123,7 @@ export function userTurn(chainId: number, prompt: string, now = new Date(), alon
   const series = alone && evm ? seriesTurn(prompt) : "";
   const kept = !alone && evm && before ? keptTurn(before, now) : "";
   const mints = evm ? `${mintsTurn(prompt)}${erc20Turn(prompt)}${nftTurn(chainId, prompt)}${poolsTurn(chainId, prompt)}${feesTurn(chainId, prompt)}${unstakeTurn(prompt)}` : validatorsTurn(prompt);
-  return `Today is ${now.toISOString().slice(0, 10)} (UTC).${series}${kept}${mints}${registryTurn(chainId, prompt)}${mevTurn(chainId, prompt)}\n\n${prompt}`;
+  return `Today is ${now.toISOString().slice(0, 10)} (UTC).${series}${kept}${mints}${registryTurn(chainId, prompt)}${mevTurn(chainId, prompt)}${icttTurn(chainId, prompt)}\n\n${prompt}`;
 }
 
 /** how an answer hands back its chart; the same for every target */
@@ -271,19 +274,6 @@ drill: $POOLS('pharaoh') SELECT ${LOG_RECORD} FROM raw_logs AS l WHERE l.chain_i
   return blocks.map((b) => `${b}\n\n`).join("");
 }
 
-/** the registry's protocol names and slugs, LFJ (Trader Joe's name now), and the words of a DEX question */
-const DEX_NAMES = [...new Set([...Object.entries(DEX_PROTOCOLS).flatMap(([slug, name]) => [slug, slug.replace(/-/g, " "), name, name.replace(/\s+DEX$/i, "")]), "LFJ"])];
-const DEX_WORDS = new RegExp(`\\b(${[...DEX_NAMES.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), "swap(s|ped|ping)?", "pools?", "liquidity", "lps?", "dex(s|es)?"].join("|")})\\b`, "i");
-
-/** a question about DEXs, whose prompt carries the DEX chapter: it names a protocol the registry lists (one slip
-    off counts: names.ts) or a DEX word (volume only when it names no transfer, so "USDC transfers, count and volume"
-    is not one), or an earlier turn read the DEX tables. Every other question's prompt is the one it was */
-export function dexQuestion(chainId: number, prompt: string, history: { prompt?: string; sql?: string }[] = []): boolean {
-  if (chainId !== DEX_CHAIN_ID || DEX_FACTORIES.length === 0) return false;
-  const about = (q: string) => DEX_WORDS.test(q) || mentioned(q, DEX_NAMES).length > 0 || (/\bvolumes?\b/i.test(q) && !/\btransfers?\b/i.test(q));
-  return about(prompt) || history.some((t) => about(t.prompt ?? "") || /\bdex_(factories|tokens)\b/.test(t.sql ?? ""));
-}
-
 /* ------------------------------------------------------------------ */
 /* The C-Chain's lending protocols (lending.ts), mainnet only, in the
    prompt of a question about them (lendingQuestion): every other
@@ -393,7 +383,7 @@ $PRICES(toStartOfMonth(now())), o AS (SELECT toDate(block_time) AS day, address 
     .join("");
 }
 
-export function systemPrompt(opts: { chainId: number; chainName: string; symbol: string; schema: string; coverage: string | null; dex?: boolean; lending?: boolean; families?: boolean; mev?: boolean }): string {
+export function systemPrompt(opts: { chainId: number; chainName: string; symbol: string; schema: string; coverage: string | null; dex?: boolean; lending?: boolean; families?: boolean; mev?: boolean; ictt?: boolean }): string {
   const known = Object.entries(KNOWN_ADDRESSES)
     .map(([a, n]) => `- ${n}: ${a}`)
     .join("\n");
@@ -407,6 +397,8 @@ export function systemPrompt(opts: { chainId: number; chainName: string; symbol:
   const families = !!opts.families && opts.chainId === FAMILY_CHAIN_ID && VAULTS.length > 0;
   // the MEV rules: an MEV question's (mevQuestion), on the mainnet C-Chain only
   const mev = !!opts.mev && opts.chainId === DEX_CHAIN_ID;
+  // the ICTT and ICM rules: such a question's (icttQuestion, ictt.ts), on every mainnet EVM chain
+  const ictt = !!opts.ictt && icttChain(opts.chainId);
   // the rows the flow panel draws, on the mainnet C-Chain, where the contract registry names senders and receivers
   const flows =
     opts.chainId === DEX_CHAIN_ID
@@ -464,7 +456,7 @@ ${known}`
 ${created}- Log data is bytes: read a 32-byte word with substring(data, 1 + 32*k, 32), and reverse() before reinterpretAsUInt256.
 - Active addresses: the distinct addresses that sent or received a transaction, uniqExactArray([\`from\`, \`to\`]) AS active_addresses over raw_txs. Never add uniqExact(\`from\`) and uniqExact(\`to\`) (an address on both sides counts twice), and never arrayJoin them (it repeats every row, so every other figure in the query doubles). ${activeNote}
 - ICM (Teleporter) messages: the messenger is unhex('253b2784c75e510dd0ff1da844684a1ac0aa5fcf') on every chain. Its logs by topic0: SendCrossChainMessage unhex('2a211ad4a59ab9d003852404f9c57c690704ee755f3c79d2c2812ad32da99df8') is a message this chain sent (topic1 = message ID, topic2 = destination blockchain ID); ReceiveCrossChainMessage unhex('292ee90bbaf70b5d4936025e09d56ba08f3e421156b6a568cf3c2840d9343e34') is a message it received (topic1 = message ID, topic2 = source blockchain ID); MessageExecuted unhex('34795cc6b122b9a0ae684946319f1e14a577b4e8f9b3dda9ac94c21a54d3188c') and MessageExecutionFailed unhex('4619adc1017b82e02eaefac01a43d50d6d8de4460774bc370c3ff0210d40c985') say how a received message ran. Return a blockchain ID as lower(concat('0x', hex(topic2))).
-${dex ? dexRules() : ""}${lending ? lendingRules() : ""}${families ? familyRules() : ""}${mev ? mevRules() : ""}
+${dex ? dexRules() : ""}${lending ? lendingRules() : ""}${families ? familyRules() : ""}${mev ? mevRules() : ""}${ictt ? icttRules(opts.chainId) : ""}
 ## Query rules
 - One SELECT (a WITH is fine). No FORMAT, no SETTINGS, no semicolons, no comments. The server sets format, timeouts and memory.
 - At most ${MAX_ROWS} rows come back, and a longer series is cut. Pick the bucket from the window: toStartOfMinute or toStartOfFiveMinutes for windows up to 6 hours, toStartOfHour up to 7 days, toDate beyond, toMonday for weeks. A question that names a bucket but no window reads 6 hours of 5-minute buckets, 24 hours of hourly ones, 30 days of daily ones. ${isFuji(opts.chainId) ? "Windows over raw_logs and raw_traces: 90 days at most. raw_txs: 365 days at most." : "Windows over raw_logs: 90 days at most. raw_traces: 30 days at most. raw_txs: 365 days at most. These limit one query, not the data, which goes back years. So a question that needs more of the history is answered over the longest window these limits allow, and its note names that window as the most one question reads. Over the whole history only a total over raw_txs with no GROUP BY runs in time: count() and countIf over success, with min and max of block_time (under 10 s, bounded as block_number >= 0). A question about all time gets those over the whole history. A sum of fees or gas, a series or a distinct count over raw_txs keeps the 365 days, and its note says so."}
@@ -495,7 +487,7 @@ Answer comparative questions with ONE query that puts the things being compared 
 ${
   c
     ? `3. If the question is about the P-Chain (staking, stake or staking ratio, validators, delegators or delegations, uptime, L1 or subnet validators, AVAX supply or issuance), do not answer it here: call render_chart with kind "none", route "p-chain", sql "" and a one-line note. The page sends the question to the P-Chain.`
-    : `3. These tables hold only ${opts.chainName}'s own blocks. If the question is about another chain, or about validators, staking or AVAX supply (P-Chain data), call render_chart with kind "none", sql "" and a one-line note that says this chain's tables do not hold it. Never set route.`
+    : `3. These tables hold only ${opts.chainName}'s own blocks. If the question is about another chain, or about validators, staking or AVAX supply (P-Chain data), call render_chart with kind "none", sql "" and a one-line note that says this chain's tables do not hold it. Never set route.${ictt ? " A transfer or a message between this chain and another is not about another chain: answer this chain's side of it." : ""}`
 }
 4. If the question cannot be answered from these tables, call render_chart with kind "none" and say why in the note.
 5. A drill must find records for the row it opens: keep the main query's window and filters, and filter on the row's own values. render_chart tests it on the first row and returns an error if it finds none.
@@ -531,7 +523,7 @@ SELECT block_time AS t, block_number, concat('0x', hex(transaction_hash)) AS tx_
 
 `
     : ""
-}${dex ? dexExamples() : ""}${lending ? lendingExamples() : ""}${families ? familyExamples() : ""}${mev ? mevExamples() : ""}The 15 token contracts with the most transfers, with transactions, senders and share (the server names the tokens it knows):
+}${dex ? dexExamples() : ""}${lending ? lendingExamples() : ""}${families ? familyExamples() : ""}${mev ? mevExamples() : ""}${ictt ? icttExamples(opts.chainId) : ""}The 15 token contracts with the most transfers, with transactions, senders and share (the server names the tokens it knows):
 SELECT lower(concat('0x', hex(raw_logs.address))) AS token, count() AS transfers, uniqExact(transaction_hash) AS txs, ${tokenSenders} AS senders, round(100 * count() / sum(count()) OVER (), 2) AS share_pct, count() OVER () AS of_total FROM raw_logs WHERE chain_id = ${opts.chainId} AND block_time >= now() - INTERVAL ${c ? "1 DAY" : "7 DAY"} AND topic0 = unhex('ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef') GROUP BY raw_logs.address ORDER BY transfers DESC LIMIT 15
 
 Active addresses per day, each address once:
@@ -720,15 +712,16 @@ const versions = new Map<string, string>();
     recipe keys (cache.ts), so a fixed question is written again instead of
     served its old SQL. Per chain: the C-Chain, an L1 and the P-Chain are
     told different things. */
-export function promptVersion(chainId: number, dex = false, lending = false, families = false, mev = false): string {
-  const key = `${chainId}:${dex ? "dex" : ""}:${lending ? "lending" : ""}:${families ? "families" : ""}:${mev ? "mev" : ""}`;
+export function promptVersion(chainId: number, dex = false, lending = false, families = false, mev = false, ictt = false): string {
+  const key = `${chainId}:${dex ? "dex" : ""}:${lending ? "lending" : ""}:${families ? "families" : ""}:${mev ? "mev" : ""}:${ictt ? "ictt" : ""}`;
   let v = versions.get(key);
   if (!v) {
     const text =
       targetOf(chainId).kind === "pchain"
         ? pchainPrompt({ chainId, network: "", schema: "", coverage: null, lines: null })
-        : systemPrompt({ chainId, chainName: "", symbol: "", schema: "", coverage: null, dex, lending, families, mev });
-    v = createHash("sha256").update(`${text}\n${refSchema(chainId).join("\n")}`).digest("hex").slice(0, 12);
+        : systemPrompt({ chainId, chainName: "", symbol: "", schema: "", coverage: null, dex, lending, families, mev, ictt });
+    // a kept ICTT answer holds the $ICTT WITH written out: a change to it writes the answer again
+    v = createHash("sha256").update(`${text}\n${refSchema(chainId).join("\n")}${ictt ? `\n${icttWithAll(chainId)}` : ""}`).digest("hex").slice(0, 12);
     versions.set(key, v);
   }
   return v;

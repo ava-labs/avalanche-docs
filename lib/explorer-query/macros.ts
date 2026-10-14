@@ -5,13 +5,16 @@
    swap, and the fee it paid when the query reads that), or $POOLS() or
    $POOLS('slug') for its Swap topic names and pools alone; and $LEND,
    $LIQUIDATIONS, $PRICES, $DEBTS or $MARKETS for a lending WITH
-   (lending.ts). The guard writes it out before it reads the
-   query, so what the guard checks, what runs and what the page shows is
-   the whole WITH. The prompt prints none of it, so the writer has no WITH
-   to copy. Mainnet C-Chain only. */
+   (lending.ts); and $ICTT for interchain token transfers (ictt.ts). The
+   guard writes it out before it reads the query, so what the guard
+   checks, what runs and what the page shows is the whole WITH. The prompt
+   prints none of it, so the writer has no WITH to copy. The DEX and
+   lending shorthands are the mainnet C-Chain's; $ICTT is every mainnet
+   EVM chain's and the network's. */
 
+import { icttChain, icttMisread, icttRests, icttWith } from "./ictt";
 import { debtsWith, LENDING_PROTOCOLS, lendWith, liquidationsWith, marketsWith, pricesWith } from "./lending";
-import { DEX_CHAIN_ID, DEX_PRICE_POOL, DEX_PROTOCOLS, DEX_TOPICS, V2_FEE_PROTOCOLS, type DexFamily } from "./protocols";
+import { DEX_CHAIN_ID, DEX_PRICE_POOL, DEX_PROTOCOLS, DEX_TOPICS, FIRST_DAY, V2_FEE_PROTOCOLS, type DexFamily } from "./protocols";
 
 const T = DEX_TOPICS;
 export const topic = (t: string) => `unhex('${t}')`;
@@ -21,7 +24,6 @@ export const U = (k: number, d = "data") => `toFloat64(reinterpretAsUInt256(reve
 export const I = (k: number, d = "data") => `toFloat64(reinterpretAsInt256(reverse(substring(${d}, ${1 + 32 * k}, 32))))`;
 /** the uint128 in the 16 bytes of a log's data from byte `at` */
 export const H = (at: number | string, d = "data") => `toFloat64(reinterpretAsUInt128(reverse(substring(${d}, ${at}, 16))))`;
-export const FIRST_DAY = "'2020-09-23'";
 
 /** the events that create each family's pools; woofi has no pools to find: each of its WooPP contracts is one */
 export const CREATED: Record<DexFamily, string[]> = {
@@ -113,32 +115,44 @@ const SWAP_ORDER = `WITH ${SWAPS_NAMED}, swap_order AS (SELECT block_number, any
 
 /* ------------------------------------------------------------------ */
 
-/** each shorthand: whether it takes the window's start (and then, optionally, its end), the slugs it takes, and the WITH it stands for */
+/** each shorthand: whether it takes the window's start (and then, optionally, its end; "optional": or no window at
+    all), the slugs it takes, the chains it is written out on, and the WITH it stands for */
 interface Macro {
-  window: boolean;
+  window: boolean | "optional";
   slugs: () => readonly string[];
   /** "optional": with no slug, its WITH reads every protocol */
   slug: "none" | "optional";
+  chains: (chainId: number) => boolean;
   /** `rest` is the query after the shorthand, for a WITH that depends on what it reads */
-  text: (start: string, end: string | undefined, slug: string | undefined, rest: string) => string;
+  text: (start: string, end: string | undefined, slug: string | undefined, rest: string, chainId: number) => string;
+  /** what may follow the WITH, for each of its forms collapseMacros tries on `sql`; RESTS when not given */
+  rests?: (sql: string, chainId: number) => string[];
+  /** why the query after it cannot read its WITH, or null */
+  check?: (rest: string, chainId: number) => string | null;
 }
 const dexSlugs = () => Object.keys(DEX_PROTOCOLS);
 const lendSlugs = () => Object.keys(LENDING_PROTOCOLS);
+const cchain = (chainId: number) => chainId === DEX_CHAIN_ID;
 const dex = (with_: string, start: string, end: string | undefined, slug: string | undefined) =>
   with_.replaceAll("$START", () => start).replace("$END", () => (end ? ` AND block_time < ${end}` : "")).replaceAll("$PROTOCOL", () => (slug ? `AND protocol = '${slug}'` : ""));
 const MACROS: Record<string, Macro> = {
-  DEX: { window: true, slugs: dexSlugs, slug: "optional", text: (start, end, slug, rest) => dex(DEX_WITHS[feesRead(rest)], start, end, slug) },
-  POOLS: { window: false, slugs: dexSlugs, slug: "optional", text: (_s, _e, slug) => dex(DEX_POOLS, "", undefined, slug) },
-  LEND: { window: true, slugs: lendSlugs, slug: "optional", text: lendWith },
-  LIQUIDATIONS: { window: true, slugs: lendSlugs, slug: "optional", text: liquidationsWith },
-  PRICES: { window: true, slugs: () => [], slug: "none", text: (start, end) => pricesWith(start, end) },
-  DEBTS: { window: false, slugs: lendSlugs, slug: "optional", text: (_s, _e, slug) => debtsWith(slug) },
-  MARKETS: { window: false, slugs: lendSlugs, slug: "optional", text: (_s, _e, slug) => marketsWith(slug) },
-  SWAPORDER: { window: true, slugs: () => [], slug: "none", text: (start, end) => SWAP_ORDER.replace("$START", () => start).replace("$END", () => (end ? ` AND block_time < ${end}` : "")) },
+  DEX: { window: true, slugs: dexSlugs, slug: "optional", chains: cchain, text: (start, end, slug, rest) => dex(DEX_WITHS[feesRead(rest)], start, end, slug) },
+  POOLS: { window: false, slugs: dexSlugs, slug: "optional", chains: cchain, text: (_s, _e, slug) => dex(DEX_POOLS, "", undefined, slug) },
+  LEND: { window: true, slugs: lendSlugs, slug: "optional", chains: cchain, text: lendWith },
+  LIQUIDATIONS: { window: true, slugs: lendSlugs, slug: "optional", chains: cchain, text: liquidationsWith },
+  PRICES: { window: true, slugs: () => [], slug: "none", chains: cchain, text: (start, end) => pricesWith(start, end) },
+  DEBTS: { window: false, slugs: lendSlugs, slug: "optional", chains: cchain, text: (_s, _e, slug) => debtsWith(slug) },
+  MARKETS: { window: false, slugs: lendSlugs, slug: "optional", chains: cchain, text: (_s, _e, slug) => marketsWith(slug) },
+  SWAPORDER: { window: true, slugs: () => [], slug: "none", chains: cchain, text: (start, end) => SWAP_ORDER.replace("$START", () => start).replace("$END", () => (end ? ` AND block_time < ${end}` : "")) },
+  ICTT: { window: "optional", slugs: () => [], slug: "none", chains: icttChain, text: (start, end, _slug, rest, chainId) => icttWith(start, end, rest, chainId), rests: icttRests, check: icttMisread },
 };
 
-const USAGE =
-  "open the query with one shorthand: $DEX, $LEND or $LIQUIDATIONS with the window's start, then its end if it has one, then a slug for one protocol, as in $DEX(start, end, 'slug'); $PRICES(start) or $PRICES(start, end); $POOLS() or $POOLS('slug'); $DEBTS() or $DEBTS('slug'); $MARKETS() or $MARKETS('slug'); $SWAPORDER(start) or $SWAPORDER(start, end) for MEV. Then SELECT, or , name AS (…)";
+const ICTT_USAGE = "$ICTT(start), $ICTT(start, end) or $ICTT() for interchain token transfers";
+/** how to open a query with a shorthand, on this chain */
+const usage = (chainId: number) =>
+  chainId === DEX_CHAIN_ID
+    ? `open the query with one shorthand: $DEX, $LEND or $LIQUIDATIONS with the window's start, then its end if it has one, then a slug for one protocol, as in $DEX(start, end, 'slug'); $PRICES(start) or $PRICES(start, end); $POOLS() or $POOLS('slug'); $DEBTS() or $DEBTS('slug'); $MARKETS() or $MARKETS('slug'); $SWAPORDER(start) or $SWAPORDER(start, end) for MEV; ${ICTT_USAGE}. Then SELECT, or , name AS (…)`
+    : `open the query with ${ICTT_USAGE}. Then SELECT, or , name AS (…)`;
 const quoted = (xs: readonly string[]) => xs.map((s) => `'${s}'`).join(", ");
 /** a quoted word, as a slug is; a quoted date is a DateTime */
 const WORD = /^'([a-z][\w-]*)'$/i;
@@ -163,27 +177,31 @@ function slugAt(sql: string, blank: string, at: number): string | undefined {
 /** why a query has a second shorthand, or one after its start. One shorthand typed for two protocols is answered
     plainly, since a writer asked about both tries to join them (a replay of L07 spent 4 of its 8 steps so): with no
     slug, it reads them all */
-function onceOnly(sql: string, blank: string, found: RegExpMatchArray[]): string {
+function onceOnly(sql: string, blank: string, found: RegExpMatchArray[], chainId: number): string {
   const names = [...new Set(found.map((m) => m[1]))];
   const slugs = [...new Set(found.map((m) => slugAt(sql, blank, (m.index ?? 0) + m[0].length)).filter((x): x is string => !!x))];
   const macro = names.length === 1 ? MACROS[names[0]] : undefined;
-  if (!macro || slugs.length < 2) return `the shorthand stands for the query's WITH, once, at its start: ${USAGE}`;
+  if (!macro || slugs.length < 2) return `the shorthand stands for the query's WITH, once, at its start: ${usage(chainId)}`;
   const [name] = names;
   return `a query takes one shorthand, once, at its start, and $${name} with no slug reads every protocol: open the query once with $${name}(${macro.window ? "start" : ""}) and keep protocol as a column, or filter protocol IN (${quoted(slugs)})`;
 }
 
 /** the query with the shorthand it opens with written out. Any other $NAME, a second one, or one after the start is
-    refused, and so is a slug the shorthand has no protocol for. Every chain but the mainnet C-Chain gets its query back as it came */
+    refused, and so is a slug the shorthand has no protocol for. A chain no shorthand serves (Fuji, the P-Chain) gets
+    its query back as it came, and so does a query that names only shorthands of another chain, which the guard
+    refuses as it did before $ICTT (the C-Chain's $DEX on an L1 or the network) */
 export function expandMacros(sql: string, chainId: number): Expanded {
-  if (chainId !== DEX_CHAIN_ID) return { ok: true, sql };
+  const here = Object.keys(MACROS).filter((n) => MACROS[n].chains(chainId));
+  if (here.length === 0) return { ok: true, sql };
   // strings and quoted names are blanked, so a $ inside one is text
   const blank = sql.replace(/'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`|"(?:[^"\\]|\\.)*"/g, (s) => s[0] + " ".repeat(s.length - 2) + s[0]);
   const found = [...blank.matchAll(/\$([A-Za-z_]\w*)/g)];
   if (found.length === 0) return { ok: true, sql };
-  const other = found.find((m) => !Object.hasOwn(MACROS, m[1]));
-  if (other) return { ok: false, error: `$${other[1]} is no shorthand here: ${USAGE}` };
+  if (found.every((m) => Object.hasOwn(MACROS, m[1]) && !here.includes(m[1]))) return { ok: true, sql };
+  const other = found.find((m) => !here.includes(m[1]));
+  if (other) return { ok: false, error: `$${other[1]} is no shorthand here: ${usage(chainId)}` };
   const lead = /^\s*(?:WITH\s+)?\$([A-Z]+)\s*\(/i.exec(blank);
-  if (!lead || !Object.hasOwn(MACROS, lead[1]) || found.length > 1) return { ok: false, error: onceOnly(sql, blank, found) };
+  if (!lead || !here.includes(lead[1]) || found.length > 1) return { ok: false, error: onceOnly(sql, blank, found, chainId) };
   const name = lead[1];
   const macro = MACROS[name];
   // the arguments run to the parenthesis that closes the first one, split at its own commas
@@ -195,7 +213,7 @@ export function expandMacros(sql: string, chainId: number): Expanded {
     else if (blank[i] === ")" && --depth === 0) close = i;
     else if (blank[i] === "," && depth === 1) cuts.push(i);
   }
-  if (close < 0) return { ok: false, error: `$${name}( is not closed: ${USAGE}` };
+  if (close < 0) return { ok: false, error: `$${name}( is not closed: ${usage(chainId)}` };
   const args = [open, ...cuts].map((at, j) => sql.slice(at + 1, cuts[j] ?? close).trim()).filter((a, _j, all) => a !== "" || all.length > 1);
   const slugs = macro.slugs();
   // a slug comes last, a quoted word; the start and the end come first
@@ -208,15 +226,18 @@ export function expandMacros(sql: string, chainId: number): Expanded {
   const some = slugs.includes("pharaoh") ? "pharaoh" : slugs[slugs.length - 1];
   const example = `$${name}(toStartOfDay(now())${macro.slug === "none" ? "" : `, '${some}'`})`;
   if (args.length > most || times.length > (macro.window ? 2 : 0))
-    return { ok: false, error: `$${name} takes at most ${[...(macro.window ? ["the window's start", "its end"] : []), ...(macro.slug === "none" ? [] : ["a slug"])].join(", ").replace(/, ([^,]*)$/, " and $1")}: ${USAGE}` };
-  if (macro.window && (!start || WORD.test(start))) return { ok: false, error: `$${name} takes the window's start first${macro.slug === "none" ? "" : ", then the slug"}: ${example}` };
+    return { ok: false, error: `$${name} takes at most ${[...(macro.window ? ["the window's start", "its end"] : []), ...(macro.slug === "none" ? [] : ["a slug"])].join(", ").replace(/, ([^,]*)$/, " and $1")}: ${usage(chainId)}` };
+  if ((macro.window === true && !start) || (macro.window && start && WORD.test(start))) return { ok: false, error: `$${name} takes the window's start first${macro.slug === "none" ? "" : ", then the slug"}: ${example}` };
+  if (end !== undefined && !start) return { ok: false, error: `$${name} takes the window's start before its end: ${example}` };
   if (end !== undefined && WORD.test(end))
-    return { ok: false, error: macro.slug === "none" ? `$${name} takes no slug: ${USAGE}` : `$${name} takes one slug, last: $${name}(toStartOfDay(now()) - INTERVAL 1 DAY, toStartOfDay(now()), '${some}')` };
+    return { ok: false, error: macro.slug === "none" ? `$${name} takes no slug: ${usage(chainId)}` : `$${name} takes one slug, last: $${name}(toStartOfDay(now()) - INTERVAL 1 DAY, toStartOfDay(now()), '${some}')` };
   if (slugArg !== undefined && !slugs.includes(slug!)) return { ok: false, error: `${slugArg} is not a protocol's slug; the slugs are ${quoted(slugs)}` };
   // a WITH of the query's own goes on after the shorthand's
   const rest = sql.slice(close + 1).replace(/^\s*WITH\b/i, ",");
-  if (!/\S/.test(rest)) return { ok: false, error: `$${name}(…) is only the WITH: ${USAGE}` };
-  const text = macro.text(start ? time(start) : "", end ? time(end) : undefined, slug, rest);
+  if (!/\S/.test(rest)) return { ok: false, error: `$${name}(…) is only the WITH: ${usage(chainId)}` };
+  const misread = macro.check?.(rest, chainId);
+  if (misread) return { ok: false, error: misread };
+  const text = macro.text(start ? time(start) : "", end ? time(end) : undefined, slug, rest, chainId);
   return { ok: true, sql: text + rest, macro: { name, size: text.length } };
 }
 
@@ -232,38 +253,54 @@ const escaped = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /** what follows a shorthand, for each form of its WITH: a query that reads no fee, fee_usd, and fee_in */
 const RESTS = [" SELECT 1", " SELECT fee_usd", " SELECT fee_in"];
 
-/** each shorthand's WITH, for every slug, with or without an end and in each form, as a pattern that finds it at a
-    query's start; the forms with an end come first, since the form without one could read an end as part of the start */
-let patterns: { name: string; slug?: string; re: RegExp }[] | undefined;
-function patternsOf() {
-  return (patterns ??= Object.entries(MACROS).flatMap(([name, macro]) => {
-    const slugs = macro.slug === "none" ? [undefined] : [undefined, ...macro.slugs()];
-    return (macro.window ? [true, false] : [false]).flatMap((end) =>
-      slugs.flatMap((slug) =>
-        [...new Set(RESTS.map((rest) => macro.text(macro.window ? MARK.start : "", end ? MARK.end : undefined, slug, rest)))].map((text) => {
-          const seen = new Set<string>();
-          const source = text
-            .split(/(\u0001(?:start|end)\u0001)/)
-            .map((part) => {
-              const arg = part === MARK.start ? "s" : part === MARK.end ? "e" : null;
-              if (!arg) return escaped(part);
-              if (seen.has(arg)) return `\\k<${arg}>`;
-              seen.add(arg);
-              return `(?<${arg}>[\\s\\S]+?)`;
-            })
-            .join("");
-          return { name, slug, re: new RegExp(`^${source}`) };
-        }),
-      ),
-    );
-  }));
+/** each shorthand's WITH on this chain, for every slug, with or without an end (or with no window, for $ICTT()) and in
+    each form, as a pattern that finds it at a query's start; the forms with an end come first, since the form without
+    one could read an end as part of the start. A WITH that depends on the chain and on the parts a query names
+    ($ICTT) has one form per chain and set of parts, made the first time a query needs it */
+const patterns = new Map<string, { name: string; slug?: string; re: RegExp }[]>();
+function patternsOf(chainId: number, sql: string) {
+  return Object.entries(MACROS)
+    .filter(([, macro]) => macro.chains(chainId))
+    .flatMap(([name, macro]) => {
+      const rests = macro.rests?.(sql, chainId) ?? RESTS;
+      // the C-Chain's own shorthands read no chain but the C-Chain, so one set of patterns serves every query
+      const key = macro.rests ? `${name}:${chainId}:${rests.join("|")}` : name;
+      let found = patterns.get(key);
+      if (!found) {
+        found = formsOf(name, macro, rests, chainId);
+        patterns.set(key, found);
+      }
+      return found;
+    });
+}
+
+function formsOf(name: string, macro: Macro, rests: readonly string[], chainId: number) {
+  const slugs = macro.slug === "none" ? [undefined] : [undefined, ...macro.slugs()];
+  const windows: ("end" | "start" | "none")[] = macro.window === "optional" ? ["end", "start", "none"] : macro.window ? ["end", "start"] : ["none"];
+  return windows.flatMap((w) =>
+    slugs.flatMap((slug) =>
+      [...new Set(rests.map((rest) => macro.text(w === "none" ? "" : MARK.start, w === "end" ? MARK.end : undefined, slug, rest, chainId)))].map((text) => {
+        const seen = new Set<string>();
+        const source = text
+          .split(/(\u0001(?:start|end)\u0001)/)
+          .map((part) => {
+            const arg = part === MARK.start ? "s" : part === MARK.end ? "e" : null;
+            if (!arg) return escaped(part);
+            if (seen.has(arg)) return `\\k<${arg}>`;
+            seen.add(arg);
+            return `(?<${arg}>[\\s\\S]+?)`;
+          })
+          .join("");
+        return { name, slug, re: new RegExp(`^${source}`) };
+      }),
+    ),
+  );
 }
 
 /** a query whose WITH a shorthand wrote, with the shorthand back in its place; any other query as it came. A form is
     kept only when it writes out to the same query again */
 export function collapseMacros(sql: string, chainId: number): string {
-  if (chainId !== DEX_CHAIN_ID) return sql;
-  for (const p of patternsOf()) {
+  for (const p of patternsOf(chainId, sql)) {
     const m = p.re.exec(sql);
     if (!m) continue;
     const args = [m.groups?.s, m.groups?.e, p.slug === undefined ? undefined : `'${p.slug}'`].filter((a): a is string => a !== undefined);
