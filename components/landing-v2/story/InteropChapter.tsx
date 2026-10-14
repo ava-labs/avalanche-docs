@@ -2,10 +2,13 @@
 
 import { useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useInView } from "framer-motion";
 import { BrandButton } from "@/components/landing-v2/BrandButton";
 import { track } from "@/components/landing-v2/track";
 import { formatCompact } from "@/components/landing-v2/compactFigure";
+import { catalogOf } from "@/lib/explorer-catalog";
+import l1ChainsData from "@/constants/l1-chains.json";
 import { CAPTION, Chapter, Figure, Lead, Reveal, TextLink, Title } from "./kit";
 import { SceneFrame } from "./three/SceneFrame";
 import type { NetworkChain, NetworkRoute } from "./three/NetworkScene";
@@ -19,6 +22,17 @@ const NetworkScene = dynamic(() => import("./three/NetworkScene"), { ssr: false 
 const C_CHAIN_ID = "43114";
 const STILL = { light: "/home/story/network-light.webp", dark: "/home/story/network-dark.webp" };
 const STILL_NARROW = { light: "/home/story/network-narrow-light.webp", dark: "/home/story/network-narrow-dark.webp" };
+
+/* a chain's explorer page: the feed's ID is the catalog's chain ID, else its name is the catalog's */
+function explorerHref(chainId: string, chainName: string): string | null {
+  const name = chainName.toLowerCase();
+  const cat =
+    catalogOf("mainnet").get(chainId) ??
+    (l1ChainsData as { chainName: string; slug: string; isTestnet?: boolean }[]).find(
+      (c) => c.isTestnet !== true && c.chainName.toLowerCase() === name,
+    );
+  return cat?.slug ? `/explorer/mainnet/${cat.slug}` : null;
+}
 
 export interface InteropData {
   chains: { chainId: string; chainName: string; txCount?: number | null; logo?: string | null }[];
@@ -34,6 +48,7 @@ export default function InteropChapter({ data }: { data: InteropData }) {
         // 0 is a count (a flat block); only a missing count draws an outline
         txCount: typeof c.txCount === "number" ? c.txCount : null,
         logo: c.logo ?? null,
+        href: explorerHref(String(c.chainId), c.chainName),
       })),
     [data.chains],
   );
@@ -58,6 +73,12 @@ export default function InteropChapter({ data }: { data: InteropData }) {
   // the rise starts when most of the box is on screen, so the reader sees it from the start
   const boxRef = useRef<HTMLDivElement>(null);
   const shown = useInView(boxRef, { once: true, amount: 0.6 });
+  const router = useRouter();
+  const onSelect = (chain: NetworkChain) => {
+    if (!chain.href) return;
+    track("home_chain_clicked", { chain: chain.name, section: "interop", href: chain.href });
+    router.push(chain.href);
+  };
 
   return (
     <Chapter id="interop">
@@ -73,7 +94,7 @@ export default function InteropChapter({ data }: { data: InteropData }) {
         <div ref={boxRef}>
           <SceneFrame
             Scene={NetworkScene}
-            sceneProps={{ chains, routes, labelled, play: shown }}
+            sceneProps={{ chains, routes, labelled, play: shown, onSelect }}
             still={STILL}
             stillNarrow={STILL_NARROW}
             alt="The chains the explorer lists, drawn as blocks on the P-Chain with their logos, each as tall as its transactions over 30 days, on a log scale. Chains with no indexed count stand at the base height. Red marks are interchain messages on the routes they took."

@@ -53,6 +53,8 @@ export interface NetworkChain {
   txCount: number | null;
   /** the chain's logo URL (resolved by the page), or null for none */
   logo: string | null;
+  /** the chain's explorer page, or null when the explorer has none */
+  href: string | null;
 }
 
 export interface NetworkRoute {
@@ -69,6 +71,8 @@ export interface NetworkSceneProps {
   labelled: string[];
   /** false until the reader can see the box: the rise, the routes and the first messages wait for it */
   play?: boolean;
+  /** a click on a block with an explorer page */
+  onSelect?: (chain: NetworkChain) => void;
 }
 
 const CELL = 1;
@@ -322,6 +326,7 @@ function Blocks({
   clock,
   theme,
   onHover,
+  onSelect,
   onStood,
 }: {
   solid: Placed[];
@@ -332,6 +337,7 @@ function Blocks({
   clock: RefObject<SceneClock>;
   theme: SceneProps["theme"];
   onHover: (id: string | null) => void;
+  onSelect: (id: string) => void;
   onStood: () => void;
 }) {
   const mesh = useRef<InstancedMesh>(null);
@@ -400,6 +406,11 @@ function Blocks({
           onHover(e.instanceId !== undefined ? (solid[e.instanceId]?.id ?? null) : null);
         }}
         onPointerOut={() => onHover(null)}
+        onClick={(e) => {
+          e.stopPropagation();
+          const id = e.instanceId !== undefined ? solid[e.instanceId]?.id : undefined;
+          if (id) onSelect(id);
+        }}
       >
         <meshBasicMaterial vertexColors polygonOffset polygonOffsetFactor={1} polygonOffsetUnits={1} />
       </instancedMesh>
@@ -775,6 +786,7 @@ export default function NetworkScene({
   running,
   onReady,
   play = true,
+  onSelect,
 }: NetworkSceneProps & SceneProps) {
   // a canvas that mounts with the box already on screen (a reload, a fast scroll) plays the rise behind the
   // still, so the still hands over to standing blocks, never to a flat plate
@@ -803,6 +815,12 @@ export default function NetworkScene({
   const [hoverId, setHoverId] = useState<string | null>(null);
   const [stood, setStood] = useState(false);
   const named = placed.filter((p) => labelled.includes(p.id) || p.id === hoverId);
+  const byId = useMemo(() => new Map(chains.map((c) => [c.id, c])), [chains]);
+  const hoverLinks = onSelect !== undefined && hoverId !== null && !!byId.get(hoverId)?.href;
+  const select = (id: string) => {
+    const chain = byId.get(id);
+    if (chain?.href && onSelect) onSelect(chain);
+  };
   const hubNamed = hub !== null && named.some((p) => p.id === hub.id);
 
   // the logos load together after mount; a chain without one keeps the steel face and no mark
@@ -846,6 +864,7 @@ export default function NetworkScene({
       // render runs, at 3x, so its logos stay sharp on phones
       dpr={[1, window.innerWidth < 768 ? 3 : 2]}
       frameloop="demand"
+      style={{ cursor: hoverLinks ? "pointer" : undefined }}
       gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
       onCreated={({ camera }) => camera.lookAt(0, 0.55, 0)}
       onPointerMove={() => {
@@ -867,6 +886,7 @@ export default function NetworkScene({
           clock={clock}
           theme={theme}
           onHover={setHoverId}
+          onSelect={select}
           onStood={() => setStood(true)}
         />
         {atlas && <Decals decals={atlas.decals} texture={atlas.texture} rise={rise} clock={clock} theme={theme} />}
