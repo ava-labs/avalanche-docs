@@ -18,12 +18,13 @@ import type { SettledBalance } from "./seat-balance";
    L1. The seat is the hinted one when the node document holds no seat or
    holds that one (a seat newer than the document); a hint from an old tx
    whose L1 the node has left gives way to the seat the document holds.
+   Of several seats, one with a balance leads over one that has run out.
    undefined when no seat leads, so the indexer document's view does. */
 export function leadSeat(n: NodeResponse | null, subnetHint: string | undefined): string | undefined {
   if (!n || n.hasSnapshot) return undefined;
   const seats = n.validations?.filter((v) => v.kind === "l1") ?? [];
   if (subnetHint && (seats.length === 0 || seats.some((v) => v.subnetId === subnetHint))) return subnetHint;
-  return seats[0]?.subnetId;
+  return (seats.find((v) => (v.balance ?? 0) > 0) ?? seats[0])?.subnetId;
 }
 
 /* The node validated this subnet before it became an L1: a completed subnet
