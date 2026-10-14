@@ -57,8 +57,8 @@ async function getGlobeData() {
 
 const PRIMARY_NETWORK_ID = '11111111111111111111111111111111LpoYY';
 
-// P-Chain-derived figures: L1 count (subnets flagged isL1 in the registry —
-// the Glacier activity aggregate undercounts at ~27) and the AVAX staked on
+// P-Chain-derived figures: L1 count (subnets flagged isL1 in the registry.
+// The Glacier activity aggregate undercounts at ~27) and the AVAX staked on
 // the primary network (economic security, the number institutions evaluate).
 async function getPChainStats(): Promise<{
   l1Count: number | null;
@@ -82,7 +82,7 @@ async function getPChainStats(): Promise<{
   }
 }
 
-// Live AVAX/USD for the stake figure — short revalidate keeps it honest,
+// Live AVAX/USD for the stake figure. A short revalidate keeps it honest,
 // and a failed fetch degrades to showing AVAX only (never a stale price).
 async function getAvaxUsdPrice(): Promise<number | null> {
   try {
@@ -114,7 +114,7 @@ async function getCirculatingSupply(): Promise<number | null> {
   }
 }
 
-// DeFiLlama: capital metrics institutions screen for — TVL (committed
+// DeFiLlama: capital metrics institutions screen for: TVL (committed
 // capital), stablecoin float (settlement liquidity), DEX volume (depth).
 async function getDefiStats(): Promise<{
   tvlUsd: number | null;
@@ -130,7 +130,7 @@ async function getDefiStats(): Promise<{
     fetch('https://stablecoins.llama.fi/stablecoinchains', opts)
       .then((r) => (r.ok ? r.json() : null))
       .then((rows) => {
-        // sum every peg (USD, EUR, JPY, SGD, ...) — values are USD-denominated
+        // sum every peg (USD, EUR, JPY, SGD, ...): values are USD-denominated
         const pegs = rows?.find((c: any) => c.name === 'Avalanche')?.totalCirculatingUSD;
         if (!pegs) return null;
         return Object.values(pegs).reduce(
