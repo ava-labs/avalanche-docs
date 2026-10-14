@@ -20,6 +20,21 @@ import { CAPTION, MONO } from "../kit";
 import { plateNameCap, usePlateName } from "./logos";
 import { PALETTE, shadedBox, type SceneTheme } from "./palette";
 import type { SceneProps } from "./SceneFrame";
+import {
+  GAP_OPEN,
+  GAP_SHUT,
+  LABEL_H,
+  LABEL_PITCH,
+  LIFT,
+  PLATE,
+  PLATE_T,
+  PLATE_Y,
+  SIDE,
+  THICK,
+  UP_Y,
+  VIEW,
+  frameFor,
+} from "./stackLayout";
 
 /* Your L1 as an exploded drawing: the layers a team sets, stacked over the
    P-Chain plate every L1 registers on. Once the box is on screen the layers
@@ -49,15 +64,6 @@ export interface StackSceneProps {
   play?: boolean;
 }
 
-const SIDE = 3;
-const THICK = 0.3;
-const GAP_SHUT = 0.04;
-// the least open gap: a narrow box opens the stack wider, so its labels keep their pitch
-const GAP_OPEN = 0.7;
-const LIFT = 0.24;
-const PLATE_Y = -0.62;
-const PLATE_T = 0.08;
-const PLATE = SIDE + 1.8;
 // the drop: each layer falls this far onto the one below, bottom first; low
 // enough that an open stack never leaves the frame as it falls
 const FALL = 1.4;
@@ -72,56 +78,6 @@ const NAME_CAP_PX = 8;
 const NAME_FILL = 0.75;
 // the scene reports ready without the name after this long
 const READY_WAIT_MS = 3000;
-
-// the camera sits at target + VIEW. On screen, right is (1, 0, -1) / sqrt 2
-// and up is (-UP_XZ, UP_Y, -UP_XZ)
-const VIEW: [number, number, number] = [10, 8.2, 10];
-const VIEW_LEN = Math.hypot(...VIEW);
-const UP_Y = Math.hypot(VIEW[0], VIEW[2]) / VIEW_LEN;
-const UP_XZ = VIEW[1] / VIEW_LEN / Math.SQRT2;
-
-// the label column in px (pl-3, the w-12 rule, gap-3, the w-56 text) plus air at the box edge
-const LABEL_PX = 12 + 48 + 12 + 224 + 8;
-// a label is two lines, about 54 px tall; open, the labels sit LABEL_PITCH px apart
-const LABEL_H = 54;
-const LABEL_PITCH = 64;
-// air around the drawing, in units
-const MARGIN = 0.25;
-
-// screen extents in units from the origin: across, the plate's left corner
-// and the layers' right corner (where the labels hang); up, the plate's
-// front corner (lowest) and the top layer's back corner, lifted (highest)
-const PLATE_R = PLATE / Math.SQRT2;
-const ANCHOR_R = SIDE / Math.SQRT2;
-const BOTTOM_U = -UP_XZ * PLATE + UP_Y * (PLATE_Y - PLATE_T / 2);
-const topU = (count: number, gap: number) => UP_XZ * SIDE + UP_Y * ((count - 1) * (THICK + gap) + THICK / 2 + LIFT);
-
-interface Framing {
-  zoom: number;
-  /** the open gap for this box */
-  gap: number;
-  target: [number, number, number];
-}
-
-/** fit the whole plate, and the labels when there are any, in a box of width x height px */
-function frameFor(width: number, height: number, count: number, labels: boolean): Framing {
-  // the drawing's height in units, with its margin, at an open gap
-  const tall = (gap: number) => topU(count, gap) - BOTTOM_U + 2 * MARGIN;
-  const wide = PLATE_R + MARGIN + (labels ? ANCHOR_R : PLATE_R + MARGIN);
-  const room = labels ? width - LABEL_PX : width;
-  let zoom = Math.min(room / wide, height / tall(GAP_OPEN));
-  // the labels need LABEL_PITCH px between layers: a small zoom opens the
-  // gap past GAP_OPEN, and this bound keeps that taller stack in the box
-  if (labels) zoom = Math.min(zoom, (height - (count - 1) * LABEL_PITCH) / tall(-THICK));
-  zoom = Math.max(zoom, 1);
-  const gap = labels ? Math.max(GAP_OPEN, LABEL_PITCH / (UP_Y * zoom) - THICK) : GAP_OPEN;
-  // across: spare px split evenly at the two ends; alone, the plate is centered
-  const spare = room - wide * zoom;
-  const right = labels ? width / (2 * zoom) - (PLATE_R + MARGIN) - spare / (2 * zoom) : 0;
-  // up: halfway between the lowest and the highest point
-  const up = (topU(count, gap) + BOTTOM_U) / 2;
-  return { zoom, gap, target: [right / Math.SQRT2, up / UP_Y, -right / Math.SQRT2] };
-}
 
 /** what the frame callbacks read; one object per scene, written in place */
 interface Shared {
