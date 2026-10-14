@@ -20,6 +20,12 @@ interface Path {
 // the CTA labels match the hero buttons on purpose, as a bookend
 const PATHS: Path[] = [
   {
+    title: "Your own L1",
+    line: "Deploy an L1 on the Fuji testnet in one click, with a managed validator node.",
+    cta: { label: "Build an L1", href: "/console/create-l1" },
+    primary: true,
+  },
+  {
     // the name stays on one line: a narrow cell broke it at its hyphen
     title: (
       <>
@@ -29,12 +35,6 @@ const PATHS: Path[] = [
     line: "Deploy Solidity contracts and verify them from Foundry or Hardhat. Each transaction is final in about a second.",
     cta: { label: "Build on C-Chain", href: "/docs/primary-network#c-chain-contract-chain" },
     primary: false,
-  },
-  {
-    title: "Your own L1",
-    line: "Deploy an L1 on the Fuji testnet in one click, with a managed validator node.",
-    cta: { label: "Build an L1", href: "/console/create-l1" },
-    primary: true,
   },
 ];
 
@@ -59,7 +59,7 @@ export default function BuildChapter({ academyLine }: { academyLine: string | nu
     <Chapter id="build">
       <Reveal>
         {/* the period holds still: a loop with no pause control fails WCAG 2.2.2 */}
-        <h2 className="v2-display text-[3rem] text-zinc-900 md:text-[4.5rem] xl:text-[5.5rem] dark:text-zinc-50">
+        <h2 className="v2-display text-[3rem] text-zinc-900 md:text-[4rem] xl:text-[5rem] dark:text-zinc-50">
           Build yours<span className="text-[#E6212F]">.</span>
         </h2>
       </Reveal>
@@ -91,7 +91,7 @@ export default function BuildChapter({ academyLine }: { academyLine: string | nu
             line={academyLine?.replaceAll(" · ", ", ") ?? "Courses with certificates"}
           />
           <Resource href="/console/primary-network/faucet" label="Testnet faucet" line="Free test tokens for Fuji" />
-          <Resource href="/grants" label="Grants" line="Team1 grants and the Blizzard Fund" />
+          <Resource href="/grants" label="Funding" line="Grants and the Blizzard Fund" />
           <Resource href="/audits" label="Audits" line="Vetted firms, subsidized up to 75%" />
         </div>
       </Reveal>
