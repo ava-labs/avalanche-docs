@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { BrandButton } from "@/components/landing-v2/BrandButton";
 import { HoverPrefetchLink } from "@/components/landing-v2/HoverPrefetchLink";
@@ -10,7 +11,7 @@ import { BODY, Chapter, FOCUS, Reveal, SUBHEAD } from "./kit";
    two ways in, then the help a builder gets on either path. */
 
 interface Path {
-  title: string;
+  title: ReactNode;
   line: string;
   cta: { label: string; href: string };
   primary: boolean;
@@ -19,14 +20,19 @@ interface Path {
 // the CTA labels match the hero buttons on purpose, as a bookend
 const PATHS: Path[] = [
   {
-    title: "Build on the C-Chain",
-    line: "An EVM chain with Geth's API. Deploy Solidity contracts and verify them from Foundry or Hardhat.",
+    // the name stays on one line: a narrow cell broke it at its hyphen
+    title: (
+      <>
+        Your app on the <span className="whitespace-nowrap">C-Chain</span>
+      </>
+    ),
+    line: "Deploy Solidity contracts and verify them from Foundry or Hardhat. Each transaction is final in about a second.",
     cta: { label: "Build on C-Chain", href: "/docs/primary-network#c-chain-contract-chain" },
     primary: false,
   },
   {
-    title: "Launch your own L1",
-    line: "Basic setup deploys it in one click on the Fuji testnet: genesis, a managed validator node and the Validator Manager.",
+    title: "Your own L1",
+    line: "Deploy an L1 on the Fuji testnet in one click, with a managed validator node.",
     cta: { label: "Build an L1", href: "/console/create-l1" },
     primary: true,
   },
@@ -37,14 +43,13 @@ function Resource({ href, label, line }: { href: string; label: string; line: st
     <HoverPrefetchLink
       href={href}
       onClick={() => track("home_cta_clicked", { section: "build", label, href })}
-      className={`group flex items-start justify-between gap-6 py-6 transition-colors md:px-6 md:first:pl-0 md:last:pr-0 ${FOCUS}`}
+      // the ring sits inside the cell: the next cell in the hairline grid paints over anything outside it
+      className={`group relative flex flex-col gap-1.5 bg-white p-6 transition-colors hover:bg-zinc-50 focus-visible:bg-zinc-50 md:p-8 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus-visible:bg-zinc-900 ${FOCUS} focus-visible:-outline-offset-2!`}
     >
-      <span className="flex flex-col gap-1.5">
-        {/* the lead's 18 px step: a label, quieter than the path titles above */}
-        <span className="v2-heading text-lg text-zinc-900 dark:text-zinc-50">{label}</span>
-        <span className={`text-pretty ${BODY}`}>{line}</span>
-      </span>
-      <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-zinc-300 transition-all group-hover:translate-x-0.5 group-hover:text-[#E6212F] group-focus-visible:translate-x-0.5 group-focus-visible:text-[#E6212F] dark:text-zinc-600" />
+      {/* the lead's 18 px step: a label, quieter than the path titles above */}
+      <span className="v2-heading pr-6 text-lg text-zinc-900 dark:text-zinc-50">{label}</span>
+      <span className={`text-pretty ${BODY}`}>{line}</span>
+      <ArrowRight className="absolute top-6.5 right-6 h-4 w-4 text-zinc-300 transition-all group-hover:translate-x-0.5 group-hover:text-[#E6212F] group-focus-visible:translate-x-0.5 group-focus-visible:text-[#E6212F] md:top-8.5 md:right-8 dark:text-zinc-600" />
     </HoverPrefetchLink>
   );
 }
@@ -60,9 +65,10 @@ export default function BuildChapter({ academyLine }: { academyLine: string | nu
       </Reveal>
 
       <Reveal delay={0.1} className="mt-16 md:mt-20">
-        <div className="grid gap-px border border-zinc-200 bg-zinc-200 md:grid-cols-2 dark:border-zinc-800 dark:bg-zinc-800">
+        {/* one hairline grid: the two paths, then the four resources under them */}
+        <div className="grid gap-px border border-zinc-200 bg-zinc-200 md:grid-cols-2 lg:grid-cols-4 dark:border-zinc-800 dark:bg-zinc-800">
           {PATHS.map((p) => (
-            <div key={p.title} className="flex flex-col gap-10 bg-white p-6 md:p-10 dark:bg-zinc-950">
+            <div key={p.cta.href} className="flex flex-col gap-10 bg-white p-6 md:p-8 lg:col-span-2 dark:bg-zinc-950">
               <div className="flex flex-col gap-4">
                 <h3 className={SUBHEAD}>{p.title}</h3>
                 <p className={`max-w-md ${BODY}`}>{p.line}</p>
@@ -78,15 +84,15 @@ export default function BuildChapter({ academyLine }: { academyLine: string | nu
               </BrandButton>
             </div>
           ))}
-        </div>
-      </Reveal>
-
-      <Reveal delay={0.15} className="mt-12">
-        <div className="grid divide-y divide-zinc-200 border-y border-zinc-200 md:grid-cols-4 md:divide-x md:divide-y-0 dark:divide-zinc-800 dark:border-zinc-800">
-          <Resource href="/academy" label="Academy" line={academyLine ?? "Courses with certificates"} />
+          {/* commas, not the Academy's dots: a line may break after a comma, never strand a dot */}
+          <Resource
+            href="/academy"
+            label="Academy"
+            line={academyLine?.replaceAll(" · ", ", ") ?? "Courses with certificates"}
+          />
           <Resource href="/console/primary-network/faucet" label="Testnet faucet" line="Free test tokens for Fuji" />
-          <Resource href="/grants" label="Grants" line="Team1 Builder Grants and the Blizzard Fund" />
-          <Resource href="/audits" label="Audits" line="Quotes from vetted firms, subsidized up to 75%" />
+          <Resource href="/grants" label="Grants" line="Team1 grants and the Blizzard Fund" />
+          <Resource href="/audits" label="Audits" line="Vetted firms, subsidized up to 75%" />
         </div>
       </Reveal>
     </Chapter>
