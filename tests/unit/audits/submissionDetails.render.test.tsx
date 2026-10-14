@@ -55,6 +55,7 @@ const adminDetail = (over: Partial<AdminRequestDetail> = {}): AdminRequestDetail
     contact_handle: "@ada_glacier",
     contact_calendar_url: "https://cal.com/ada-glacierswap",
     contact_consent_at: new Date("2026-09-28T09:00:00Z"),
+    contact_handle_shared_at: null,
     status: "pending_review",
     accepted_quote_id: null,
     submitted_at: new Date("2026-09-28T09:00:00Z"),
@@ -172,6 +173,23 @@ describe("SubmissionDetails", () => {
     expect(collecting).not.toContain("quotes close");
   });
 
+  it("tags the Telegram handle the project shared with the firms, in any status", () => {
+    const sharedAt = new Date("2026-09-28T09:00:00Z");
+    expect(render(adminDetail({ contact_handle_shared_at: sharedAt }))).toContain(
+      "shared with firms",
+    );
+    expect(
+      render(
+        adminDetail({
+          contact_handle_shared_at: sharedAt,
+          status: "engaged",
+          display_status: "engaged",
+        }),
+      ),
+    ).toContain("shared with firms");
+    expect(render(adminDetail())).not.toContain("shared with firms");
+  });
+
   it("names the Builder Hub account only when it differs from the contact", () => {
     expect(render(adminDetail())).toContain("Same as the contact");
     const other = render(
@@ -196,5 +214,23 @@ describe("admin request page", () => {
     expect(html).toContain("A concentrated-liquidity DEX on C-Chain.");
     expect(html).toContain("https://github.com/glacierswap/core");
     expect(html).toContain("Nothing is sent");
+  });
+
+  // The gate reads the STORED status: a collecting request past its deadline
+  // displays as deciding (or expired) and is still deletable.
+  it("offers the delete on a request whose quote window has closed", async () => {
+    vi.mocked(getAdminRequestDetail).mockResolvedValue(
+      adminDetail({ status: "collecting", display_status: "deciding" }),
+    );
+    const page = await AuditAdminDrilldownPage({ params: Promise.resolve({ id: "req-1" }) });
+    expect(renderToStaticMarkup(page as React.ReactElement)).toContain("Delete request");
+  });
+
+  it("never offers the delete on an engaged request", async () => {
+    vi.mocked(getAdminRequestDetail).mockResolvedValue(
+      adminDetail({ status: "engaged", display_status: "engaged" }),
+    );
+    const page = await AuditAdminDrilldownPage({ params: Promise.resolve({ id: "req-1" }) });
+    expect(renderToStaticMarkup(page as React.ReactElement)).not.toContain("Delete request");
   });
 });

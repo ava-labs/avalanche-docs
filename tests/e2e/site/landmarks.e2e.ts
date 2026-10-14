@@ -9,7 +9,7 @@ import { openAsReturningVisitor } from './helpers';
 // The site layout (fumadocs HomeLayout, app/layout-wrapper.client.tsx) renders a <main> around every page.
 const DOCS_LAYOUT_BUG = 'fumadocs DocsLayout renders a second <main> inside the HomeLayout <main>';
 const PAGES: { path: string; bug?: string }[] = [
-  { path: '/', bug: 'components/landing-v2 StoryHome renders a second <main> inside the HomeLayout <main>' },
+  { path: '/' },
   { path: '/docs/primary-network', bug: DOCS_LAYOUT_BUG },
   { path: '/academy' },
   { path: '/ecosystem' },

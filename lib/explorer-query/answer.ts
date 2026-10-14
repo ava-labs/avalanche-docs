@@ -3,19 +3,21 @@ import { anthropic, type ModelCall } from "./meter";
 import { generateText, tool, stepCountIs, type ModelMessage } from "ai";
 import { z } from "zod";
 import { MAX_ROWS, guardSql, literalWindow, negativeFigure } from "./guard";
-import { protocolScope, unitName } from "./checks";
+import { mixedChains, protocolScope, unitName } from "./checks";
 import { familyQuestion } from "./families";
 import { mevQuestion } from "./mev";
 import { lendingQuestion, pricedNote, zeroUsd } from "./lending";
 import { collapseMacros } from "./macros";
-import { runQuery, schemaCard, coverage, coverageText, anchored, type QueryResult } from "./clickhouse";
+import { DEX_CHAIN_ID } from "./protocols";
+import { runQuery, schemaCard, coverage, coverageText, anchored, networkCoverageText, type QueryResult } from "./clickhouse";
 import { chartSpecSchema, drillSchema, type QueryAnswer, type StepTiming, type Turn } from "./types";
 import { fillDrill, nameRows } from "./enrich";
+import { networkPrompt } from "./network-prompt";
 import { dexQuestion, pchainPrompt, systemPrompt, userTurn } from "./prompt";
-import { isCChain, isFuji, targetOf } from "./target";
+import { NETWORK_ID, isCChain, isFuji, targetOf } from "./target";
 import { getRecipe, putRecipe, recipeKey, type Recipe } from "./cache";
 import { fixedRecipe, fixedRoute } from "./fixed";
-import { versionLines } from "./sources";
+import { networkChains, versionLines, withSources } from "./sources";
 import { codeWords, plainLabel, sqlNames, withoutCode } from "./visual";
 import { basicVisual } from "./draft";
 import { labelError } from "./stat-label";
@@ -155,7 +157,7 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
     const visual = stale ? null : recipe.visual;
     const said = keptWords(recipe, sql, result.rows, run.anchor, a.chainId);
     // a snapshot's figures stand at its time, read after the rows and their totals, beside no other query
-    const span = said.span ?? (isFuji(a.chainId) ? null : await snapshotSpan(run.sql));
+    const span = said.span ?? (isFuji(a.chainId) ? null : await snapshotSpan(run.sql, a.chainId));
     return {
       anchor: run.anchor,
       sources: run.sources,
@@ -179,13 +181,13 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
   }
 }
 
-/** the time a snapshot answer's figures stand at, read by the snapshot's own subquery run alone; null for an answer
-    that reads no snapshot, and when the read fails */
-async function snapshotSpan(sql: string): Promise<string | null> {
+/** the time a snapshot answer's figures stand at, read by the snapshot's own subquery run alone, its tables defined
+    as the run's are; null for an answer that reads no snapshot, and when the read fails */
+async function snapshotSpan(sql: string, chainId: number): Promise<string | null> {
   const pick = snapshotSql(sql);
   if (!pick) return null;
   try {
-    const t = msOf((await runQuery(pick)).rows[0]?.at);
+    const t = msOf((await runQuery((await withSources(pick, chainId)).sql)).rows[0]?.at);
     return t > 0 ? asOfWords(t, Date.now()) : null;
   } catch {
     return null;
@@ -225,6 +227,11 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     console.warn("[explorer-query] fixed SQL failed:", a.chainId, a.prompt);
   }
 
+  // the registries of DEXs, lending, vaults and MEV are the C-Chain's: the network sends their questions there
+  const network = a.chainId === NETWORK_ID;
+  if (network && a.history.length === 0 && [dexQuestion, lendingQuestion, familyQuestion, mevQuestion].some((q) => q(DEX_CHAIN_ID, a.prompt)))
+    return { title: "", note: "", sql: "", chart: { kind: "none", series: [] }, drill: null, result: null, names: {}, visual: null, coverage: null, route: "c-chain" };
+
   const recipe = a.fresh ? null : await getRecipe(key);
   if (recipe) {
     a.emit({ type: "stage", stage: "cached", writer: recipe.writer });
@@ -242,11 +249,12 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     return null;
   }
   const cover = await coverage(a.chainId);
-  // only the C-Chain and the P-Chain send a question to each other; an L1 answers or says why not
-  const canRoute = targetOf(a.chainId).kind === "pchain" || isCChain(a.chainId);
-  const coverLine = cover ? coverageText(a.chainId, cover) : null;
-  const system =
-    targetOf(a.chainId).kind === "pchain"
+  // only the C-Chain, the P-Chain and the network send a question elsewhere; an L1 answers or says why not
+  const canRoute = targetOf(a.chainId).kind === "pchain" || isCChain(a.chainId) || network;
+  const coverLine = network ? await networkCoverageText() : cover ? coverageText(a.chainId, cover) : null;
+  const system = network
+    ? networkPrompt({ schema, coverage: coverLine, chains: await networkChains() })
+    : targetOf(a.chainId).kind === "pchain"
       ? pchainPrompt({ chainId: a.chainId, network: a.chainId === 5 ? "Fuji" : "Mainnet", schema, coverage: coverLine, lines: await versionLines(a.chainId) })
       : systemPrompt({ chainId: a.chainId, chainName: a.chainName, symbol: a.symbol, schema, coverage: coverLine, dex: dexQuestion(a.chainId, a.prompt, a.history), lending: lendingQuestion(a.chainId, a.prompt, a.history), families: familyQuestion(a.chainId, a.prompt, a.history), mev: mevQuestion(a.chainId, a.prompt, a.history) });
 
@@ -305,6 +313,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     let scopeOnce = false;
     let unitOnce = false;
     let noteOnce = false;
+    let mixedOnce = false;
     let tested = 0;
     // the rows of the last final query: a final sent back for its words reads them again rather than the database
     let lastRun: { sql: string; result: QueryResult } | null = null;
@@ -456,6 +465,12 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
             bigOnce = true;
             return fail(big, Date.now() - q0);
           }
+          // a network answer keeps each chain's amounts and records on that chain: ask once
+          const mixed = !network || mixedOnce ? null : mixedChains(result);
+          if (mixed) {
+            mixedOnce = true;
+            return fail(mixed, Date.now() - q0);
+          }
           // a USD figure NULL where its amount is 0 is a sum over no rows, not a missing price: ask once
           const zero = zeroOnce ? null : zeroUsd(g.sql, note, result, a.chainId);
           if (zero) {
@@ -510,7 +525,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
           // what is left of a wrong window's words gives way to the window the query reads, or else its rows cover
           const words = { title: plainLabel(title), note: withoutCode(against.length ? withoutContradictions(note, title, rows) : note, own) };
           const said = fuji ? words : withWindow(words, read, rows.rows, chart.x, now, Date.now());
-          final = { title: said.title, note: said.note, span: fuji ? null : (windowSpan(read, rows.rows, chart.x, now, Date.now()) ?? (await snapshotSpan(ran.sql))), sql: kept, chart: { ...chart, series: chart.series.map((s) => ({ ...s, label: plainLabel(s.label) })) }, drill: drill ?? null, result: rows, names: {}, visual: null, coverage: null, anchor: ran.anchor, sources: ran.sources };
+          final = { title: said.title, note: said.note, span: fuji ? null : (windowSpan(read, rows.rows, chart.x, now, Date.now()) ?? (await snapshotSpan(ran.sql, a.chainId))), sql: kept, chart: { ...chart, series: chart.series.map((s) => ({ ...s, label: plainLabel(s.label) })) }, drill: drill ?? null, result: rows, names: {}, visual: null, coverage: null, anchor: ran.anchor, sources: ran.sources };
           keptSql = kept;
           step("final", Date.now() - q0, true, `${rows.rowCount} rows`);
           return { ok: true, rows: rows.rowCount };

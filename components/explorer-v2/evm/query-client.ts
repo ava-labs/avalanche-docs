@@ -62,17 +62,20 @@ export async function streamQuery(body: object, onEvent: (e: QueryEvent) => void
   }
 }
 
+/** the loader's line before the first answer event */
+export const WRITING = "Writing the SQL";
+
 /* the loader's line: the phase a reader would name, never which model
    does it and never the engine's own words for its steps. An event ends a
    step, so the line names the phase that step leaves the question in */
 export function progress(events: QueryEvent[]): string {
-  let line = "Writing the SQL";
+  let line = WRITING;
   let fixes = 0;
   for (const e of events) {
     if (e.type === "stage") {
       // a kept answer runs its SQL; one that no longer runs is written again
       fixes = 0;
-      line = e.stage === "cached" ? "Running the query" : e.stage === "escalated" ? "Writing the SQL again" : "Writing the SQL";
+      line = e.stage === "cached" ? "Running the query" : e.stage === "escalated" ? "Writing the SQL again" : WRITING;
     } else if (e.type === "step") {
       if (!e.ok) {
         // an answer in the SQL's own words is written again; the SQL itself stands
@@ -181,7 +184,10 @@ export function reads(callouts: string[]): string {
         // a bare figure of four digits or more gets its separators: 2,095 and 14,302; a year stays a year
         .replace(/(?<![\w.,#…-])\d{4,}(?:\.\d+)?(?![\w,-])/g, (m: string, at: number, s: string) => (YEAR.test(m) && YEAR_BEFORE.test(s.slice(Math.max(0, at - 24), at)) ? m : formatNumber(Number(m))))
         // a time reads to the minute: 05:35, never 05:35:00
-        .replace(/\b(\d{2}:\d{2}):00\b/g, "$1"),
+        .replace(/\b(\d{2}:\d{2}):00\b/g, "$1")
+        // the writer reads UTC rows, so a time it writes is UTC; the chart's axis reads in the viewer's zone, so the
+        // time names its zone: 05:35 UTC, 14:00 to 16:00 UTC
+        .replace(/\b\d{2}:\d{2}(?::\d{2})?(?:(?:\s*-\s*|\s+(?:to|and)\s+)\d{2}:\d{2}(?::\d{2})?)?\b/g, (m: string, at: number, s: string) => (/^\s*\(?(?:UTC|GMT)\b/.test(s.slice(at + m.length)) ? m : `${m} UTC`)),
     )
     .filter(Boolean)
     .map((c) => (/[.!?]$/.test(c) ? c : `${c}.`))

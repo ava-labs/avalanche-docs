@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { liteClient } from "algoliasearch/lite";
 import {
   createContentHighlighter,
+  type HighlightedText,
   type SortedResult,
 } from "fumadocs-core/search";
 import {
@@ -22,6 +23,7 @@ import {
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
 import { cn } from "@/lib/utils";
+import { dialogRows, type AlgoliaHit } from "@/lib/search/dialog-rows";
 import {
   ChainHitRow,
   EntityHitRow,
@@ -46,45 +48,28 @@ const indexName = "builder-hub";
 
 const client = liteClient(appId, apiKey);
 
-interface AlgoliaHit {
-  objectID: string;
-  title: string;
-  section?: string;
-  section_id?: string;
-  content: string;
-  url: string;
+// Unlike fumadocs-core's algolia client, the heading/text rows are KEPT, so
+// each page shows the sections that matched under it (lib/search/dialog-rows.ts).
+function highlightRows(hits: AlgoliaHit[], query: string): SortedResult[] {
+  const highlighter = createContentHighlighter(query);
+  return dialogRows(hits).map((row) => ({
+    ...row,
+    contentWithHighlights: highlighter.highlight(row.content),
+  }));
 }
 
-// Same grouping as fumadocs-core's algolia client, but the heading/text
-// rows are KEPT so every page shows the matching section context under it.
-function groupHits(hits: AlgoliaHit[], query: string): SortedResult[] {
-  const highlighter = createContentHighlighter(query);
-  const grouped: SortedResult[] = [];
-  const scannedUrls = new Set<string>();
-
-  for (const hit of hits) {
-    if (!scannedUrls.has(hit.url)) {
-      scannedUrls.add(hit.url);
-      grouped.push({
-        id: hit.url,
-        type: "page",
-        url: hit.url,
-        content: hit.title,
-        contentWithHighlights: highlighter.highlight(hit.title),
-      });
-    }
-    // a row that just repeats the page title adds no context
-    if (hit.content === hit.title) continue;
-    grouped.push({
-      id: hit.objectID,
-      type: hit.content === hit.section ? "heading" : "text",
-      url: hit.section_id ? `${hit.url}#${hit.section_id}` : hit.url,
-      content: hit.content,
-      contentWithHighlights: highlighter.highlight(hit.content),
-    });
-  }
-
-  return grouped;
+// fumadocs' highlight color (text-fd-primary, #1F66F4 here) misses 4.5:1 in
+// dark mode and on the selected row in light mode
+function renderHighlights(highlights: HighlightedText<ReactNode>[]): ReactNode {
+  return highlights.map((node, i) =>
+    node.styles?.highlight ? (
+      <span key={i} className="text-[#1858D6] underline dark:text-[#6C9DFF]">
+        {node.content}
+      </span>
+    ) : (
+      <Fragment key={i}>{node.content}</Fragment>
+    ),
+  );
 }
 
 /* Explorer routing: the site search sends explorer identifiers (tx hashes,
@@ -177,13 +162,14 @@ export default function CustomSearchDialog(props: SharedProps) {
 
   useEffect(() => {
     if (pending === null) return;
-    if (pending !== query || !entity || entity.status === "notfound") {
+    const first = entity[0];
+    if (pending !== query || !first || first.status === "notfound") {
       setPending(null);
-    } else if (entity.href) {
-      go(entity.href);
+    } else if (first.href) {
+      go(first.href);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pending, query, entity?.href, entity?.status]);
+  }, [pending, query, entity]);
 
   const handleOpenChange = (open: boolean) => {
     if (!open && holdOpen.current) {
@@ -203,18 +189,19 @@ export default function CustomSearchDialog(props: SharedProps) {
       list.push({ id, type: "action", node: null, onSelect });
     };
 
-    if (entity) {
-      const hit = entity;
-      push(top, ENTITY_ITEM_ID, { kind: "entity", hit }, () => {
+    // an identifier can earn more than one row — a bare bech32 address
+    // both chains claim offers a row per chain
+    entity.forEach((hit, i) => {
+      push(top, `${ENTITY_ITEM_ID}:${i}`, { kind: "entity", hit }, () => {
         if (hit.href) {
           router.push(hit.href);
           return;
         }
-        // nothing to open yet: the dialog stays, and a resolving hash opens itself
+        // nothing to open yet: the dialog stays, and a resolving id opens itself
         holdOpen.current = true;
         if (hit.status === "searching") setPending(hit.id);
       });
-    }
+    });
 
     const identifier = looksLikeIdentifier(query);
     for (const m of chains) {
@@ -229,7 +216,7 @@ export default function CustomSearchDialog(props: SharedProps) {
     explorerRows.current = rows;
     return [...top, ...(results ?? []), ...bottom];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, entity?.href, entity?.status, entity?.detail, chains, results]);
+  }, [query, entity, chains, results]);
 
   useEffect(() => {
     if (search.trim().length === 0) {
@@ -248,13 +235,18 @@ export default function CustomSearchDialog(props: SharedProps) {
               indexName,
               query: search,
               distinct: 5,
-              hitsPerPage: 12,
+              // 20 pages, so most queries still list 12 once the explorer's
+              // Accounts pages are left out
+              hitsPerPage: 20,
+              attributesToRetrieve: ["title", "url", "section", "section_id", "content", "tag"],
+              attributesToSnippet: ["content:12"],
+              snippetEllipsisText: "…",
             },
           ],
         });
         if (!cancelled) {
           setResults(
-            groupHits(res.results[0].hits as unknown as AlgoliaHit[], search),
+            highlightRows(res.results[0].hits as unknown as AlgoliaHit[], search),
           );
         }
       } catch {
@@ -288,8 +280,19 @@ export default function CustomSearchDialog(props: SharedProps) {
           items={items}
           Item={({ item, onClick }) => {
             const row = item.type === "action" ? explorerRows.current.get(item.id) : undefined;
-            if (!row) return <SearchDialogListItem item={item} onClick={onClick} />;
-            return <ExplorerListRow id={item.id} row={row} onSelect={onClick} />;
+            if (row) return <ExplorerListRow id={item.id} row={row} onSelect={onClick} />;
+            if (item.type !== "page" || !item.breadcrumbs?.length) {
+              return <SearchDialogListItem item={item} onClick={onClick} renderHighlights={renderHighlights} />;
+            }
+            // where the page lives, on a line above its title
+            return (
+              <SearchDialogListItem item={item} onClick={onClick}>
+                <p className="truncate text-xs text-fd-popover-foreground/70">{item.breadcrumbs.join(" › ")}</p>
+                <p className="min-w-0 truncate font-medium">
+                  {item.contentWithHighlights ? renderHighlights(item.contentWithHighlights) : item.content}
+                </p>
+              </SearchDialogListItem>
+            );
           }}
         />
       </SearchDialogContent>

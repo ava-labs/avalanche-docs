@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import { RouterRef, type Router } from "@/components/explorer-v2/router-ref";
 import { ResponsiveContainer, Sankey } from "recharts";
 import { cn } from "@/lib/utils";
 import { TipPlate } from "@/components/explorer-v2/staking/bits";
@@ -9,6 +9,7 @@ import { truncate } from "@/components/explorer-v2/format";
 import type { Names } from "@/lib/explorer-query/types";
 import { matches, type Selection } from "@/lib/explorer-query/selection";
 import type { Format, Panel } from "@/lib/explorer-query/visual";
+import { rowBase } from "@/lib/explorer-query/target";
 import { FADE_CLASS, useNarrow } from "./motion";
 import { flowOf, type Flow, type FlowNode } from "./flow";
 
@@ -21,12 +22,13 @@ import { flowOf, type Flow, type FlowNode } from "./flow";
    the bands restyles the chart's marks and nothing else. */
 
 type Row = Record<string, unknown>;
-type Router = ReturnType<typeof useRouter>;
 
 /** the senders' inks, largest sender first; red is kept for what failed */
 const TONES = ["#0061E2", "#0d9488", "#d97706", "#7c3aed"];
 const OTHER_INK = "#a1a1aa";
 const MONO = { fontSize: 10, fontFamily: "var(--font-geist-mono)" };
+/** a character's width in MONO, in px */
+const CH = 6;
 /** a band's ink at rest (an inked band a little more on the dark sheet, or it sinks into the ground), dimmed under a hover or outside the selection, and lit */
 const REST = 0.3;
 const REST_DARK = 0.42;
@@ -38,7 +40,9 @@ type NodeMark = { x: number; y: number; width: number; height: number; index: nu
 type LinkMark = { sourceX: number; sourceY: number; sourceControlX: number; targetX: number; targetY: number; targetControlX: number; linkWidth: number; index: number };
 
 /** the page a node opens: an address or a P-Chain id opens its own page, as a row's cell does */
-function doorOf(key: string, base?: string): string | null {
+function doorOf(key: string, page?: string): string | null {
+  // a node is no row, so on the network's page it names no chain and opens nothing
+  const base = page && rowBase(page);
   if (!base) return null;
   if (/^0x[0-9a-fA-F]{40}$/.test(key)) return `${base}/address/${key}`;
   if (/^NodeID-[1-9A-HJ-NP-Za-km-z]{20,}$/.test(key)) return `${base}/node/${key}`;
@@ -60,16 +64,6 @@ const pct = (v: number, total: number) => {
   const p = total > 0 ? (v / total) * 100 : 0;
   return `${p >= 10 || p === 0 ? p.toFixed(0) : p >= 0.1 ? p.toFixed(1) : "<0.1"}%`;
 };
-
-/* Next's router for the node links, kept in a ref by a child that renders nothing: useRouter reads the layout's
-   context, which changes with every change of the URL, so a chart that called it would render again for each one */
-function RouterRef({ into }: { into: { current: Router | null } }) {
-  const router = useRouter();
-  useEffect(() => {
-    into.current = router;
-  }, [into, router]);
-  return null;
-}
 
 export type FlowChartProps = {
   panel: Panel;
@@ -144,6 +138,10 @@ export function FlowChart({ panel, rows, names, sym, fmt, base, live, canDrill, 
       // the first column is named on its left, every other on its right; a stage between is named over the bands
       const first = n.depth === 0 && flow.depth > 0;
       const between = !first && n.depth < flow.depth;
+      const figure = fmt(Math.max(n.drawnIn, n.drawnOut), format, sym, true);
+      // a column at the chart's edge is named in its margin, which the svg ends: the name gets what the margin leaves
+      // after the 6 px gap to its node, the 6 px before its figure, and the figure
+      const room = between ? chars : Math.max(1, Math.min(chars, Math.floor((labelW - 14) / CH) - figure.length));
       const mark = (
         <>
           <rect x={p.x} y={p.y} width={p.width} height={Math.max(1, p.height)} rx={1} fill={n.other ? OTHER_INK : "currentColor"} fillOpacity={0.85} />
@@ -156,9 +154,9 @@ export function FlowChart({ panel, rows, names, sym, fmt, base, live, canDrill, 
             strokeWidth={between ? 3 : 0}
             className={cn("fill-zinc-700 dark:fill-zinc-300", between && "stroke-white [paint-order:stroke] dark:stroke-zinc-950")}
           >
-            {nodeText(n, chars)}
+            {nodeText(n, room)}
             <tspan dx={6} className="fill-zinc-400 dark:fill-zinc-500">
-              {fmt(Math.max(n.drawnIn, n.drawnOut), format, sym, true)}
+              {figure}
             </tspan>
           </text>
         </>
@@ -175,7 +173,7 @@ export function FlowChart({ panel, rows, names, sym, fmt, base, live, canDrill, 
         </g>
       );
     },
-    [flow, base, chars, fmt, format, sym, go],
+    [flow, base, chars, labelW, fmt, format, sym, go],
   );
 
   const link = useCallback(

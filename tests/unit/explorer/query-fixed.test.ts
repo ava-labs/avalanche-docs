@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const runQuery = vi.hoisted(() => vi.fn());
+const withSources = vi.hoisted(() => vi.fn(async (sql: string) => ({ sql, sources: [] })));
 vi.mock('ai', async (importOriginal) => ({ ...(await importOriginal<typeof import('ai')>()), generateText: vi.fn() }));
 vi.mock('@/lib/explorer-query/clickhouse', () => ({
   runQuery,
@@ -12,17 +13,19 @@ vi.mock('@/lib/explorer-query/clickhouse', () => ({
 vi.mock('@/lib/explorer-query/cache', () => ({ getRecipe: vi.fn(async () => null), putRecipe: vi.fn(async () => {}), recipeKey: vi.fn(() => 'key') }));
 vi.mock('@/lib/explorer-query/enrich', () => ({ fillDrill: vi.fn(), nameRows: vi.fn(async () => ({})) }));
 vi.mock('@/lib/explorer-query/cut', () => ({ cutOf: vi.fn(() => null), newestSql: vi.fn(() => null), totalsOf: vi.fn(async () => null) }));
-vi.mock('@/lib/explorer-query/sources', () => ({ versionLines: vi.fn(async () => []) }));
+vi.mock('@/lib/explorer-query/sources', () => ({ versionLines: vi.fn(async () => []), withSources }));
 
 import { generateText } from 'ai';
 import { answerQuestion } from '@/lib/explorer-query/answer';
-import { EXAMPLES, L1_EXAMPLES, PCHAIN_EXAMPLES } from '@/lib/explorer-query/examples';
+import { EXAMPLES, L1_EXAMPLES, NETWORK_EXAMPLES, PCHAIN_EXAMPLES } from '@/lib/explorer-query/examples';
 import { fixedRecipe, fixedRoute } from '@/lib/explorer-query/fixed';
 import { guardSql } from '@/lib/explorer-query/guard';
+import { NETWORK_ID } from '@/lib/explorer-query/target';
 
 const CCHAIN = EXAMPLES.flatMap((g) => g.items.map((i) => i.q));
 const PCHAIN = PCHAIN_EXAMPLES.flatMap((g) => g.items.map((i) => i.q));
 const L1 = L1_EXAMPLES.flatMap((g) => g.items.map((i) => i.q));
+const NETWORK = NETWORK_EXAMPLES.flatMap((g) => g.items.map((i) => i.q));
 // Gunzilla and Dexalot on mainnet, and Dexalot's L1 on Fuji
 const GUNZILLA = 43419;
 const DEXALOT = 432204;
@@ -33,7 +36,7 @@ const ask = (chainId: number, prompt: string) =>
 
 describe('the suggested questions', () => {
   it('each have fixed SQL that passes the guard, with a layout', () => {
-    for (const [chainId, qs] of [[43114, CCHAIN], [1, PCHAIN]] as const) {
+    for (const [chainId, qs] of [[43114, CCHAIN], [1, PCHAIN], [NETWORK_ID, NETWORK]] as const) {
       for (const q of qs) {
         const r = fixedRecipe(chainId, q);
         expect(r, q).not.toBeNull();
@@ -41,6 +44,19 @@ describe('the suggested questions', () => {
         expect(r!.visual, q).not.toBeNull();
       }
     }
+  });
+
+  it("on the network keep each chain's amounts and records on that chain, and say nothing of one day's rows", () => {
+    for (const q of NETWORK) {
+      const r = fixedRecipe(NETWORK_ID, q)!;
+      // no fee or value is named for AVAX, and every drill opens one chain's records
+      expect(r.sql, q).not.toMatch(/_avax\b/);
+      if (r.drill && /\bchain_id\b/.test(r.sql)) expect(r.drill.sql, q).toMatch(/chain_id = \{\{chain_id\}\}|\{\{t\}\}/);
+      expect(r.visual?.callouts, q).toEqual([]);
+      // a stat names no chain: the ranking moves under it
+      for (const s of r.visual?.stats ?? []) expect(`${s.label} ${s.sub ?? ''}`, q).not.toMatch(/C-Chain|Gunzilla|Dexalot|Kite|Beam/);
+    }
+    expect(fixedRecipe(43114, NETWORK[0])).toBeNull();
   });
 
   it('are found however they are typed, and only on their own chain', () => {
@@ -87,7 +103,7 @@ describe('a suggestion asked', () => {
   });
 
   it('runs its fixed SQL and asks no model, for the layout either', async () => {
-    for (const [chainId, qs] of [[43114, CCHAIN], [1, PCHAIN], [GUNZILLA, L1]] as const) {
+    for (const [chainId, qs] of [[43114, CCHAIN], [1, PCHAIN], [GUNZILLA, L1], [NETWORK_ID, NETWORK]] as const) {
       for (const q of qs) {
         const a = await ask(chainId, q);
         expect(a?.sql, q).toBe(fixedRecipe(chainId, q)!.sql);
@@ -108,7 +124,10 @@ describe('a suggestion asked', () => {
     const a = await ask(1, 'L1s by active validators, with the balance left for fees');
     expect(a?.span).toBe('as of 11:45 UTC');
     // one query at a time: the rows, then the time
-    expect(runQuery.mock.calls.map(([sql]) => sql)).toEqual([a?.sql, 'SELECT (SELECT max(snapshot_time) FROM p_l1_validator_snapshots WHERE chain_id = 1 AND snapshot_time <= now() - INTERVAL 15 MINUTE AND snapshot_time >= now() - INTERVAL 1 DAY) AS at']);
+    const pick = 'SELECT (SELECT max(snapshot_time) FROM p_l1_validator_snapshots WHERE chain_id = 1 AND snapshot_time <= now() - INTERVAL 15 MINUTE AND snapshot_time >= now() - INTERVAL 1 DAY) AS at';
+    expect(runQuery.mock.calls.map(([sql]) => sql)).toEqual([a?.sql, pick]);
+    // the time's own read has its tables defined as the run's are (sources.ts)
+    expect(withSources).toHaveBeenCalledWith(pick, 1);
     // a snapshot a day old names its day, and a time that fails to come names none
     runQuery.mockImplementation(async (sql: string) => (sql.startsWith('SELECT (SELECT') ? time('2026-09-27 11:45:00') : ROWS));
     expect((await ask(1, 'Validators whose staking period ends in the next 7 days'))?.span).toBe('as of September 27, 11:45 UTC');
