@@ -70,7 +70,7 @@ export function Footer() {
               <FooterLink href="/explorer/mainnet">Explorer</FooterLink>
               <FooterLink href="https://github.com/ava-labs" external>GitHub</FooterLink>
               <FooterLink href="https://status.avax.network/" external>Network Status</FooterLink>
-              <FooterLink href="https://avalabs.org/whitepapers" external>Whitepapers</FooterLink>
+              <FooterLink href="https://www.avalabs.org/products#whitepapers" external>Whitepapers</FooterLink>
             </ul>
           </FooterSection>
 
