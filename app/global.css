@@ -119,7 +119,7 @@ nav#nd-nav {
   /* True-center the primary nav cluster. Flex tricks center it in the
      leftover space, but the search cluster is wider than the logo, so that
      center reads off-axis. Absolutely pin the menu ul to the bar's midpoint
-     instead. Only at xl+ — below that the centered menu would collide with
+     instead. Only at xl+: below that the centered menu would collide with
      the search cluster. */
   #nd-nav nav {
     position: relative;
@@ -327,7 +327,7 @@ svg.lucide.lucide-folder-open {
   }
 }
 
-/* Streaming markdown — rendered via marked.parse() on a 100ms throttle.
+/* Streaming markdown, rendered via marked.parse() on a 100ms throttle.
    These styles ensure code blocks, inline code, and links look correct
    while the markdown is still being assembled by the LLM. */
 .streaming-markdown {
@@ -658,7 +658,7 @@ div[style*="scrollbarWidth: 'thin'"]::-webkit-scrollbar-thumb:hover {
 
 /* Workaround for https://github.com/shadcn-ui/ui/issues/4227
    `padding-right` is required for Radix Dialog/Sheet/Drawer consumers that
-   opt into `modal={true}` — without it the body gets an injected
+   opt into `modal={true}`. Without it the body gets an injected
    `padding-right: var(--removed-body-scroll-bar-size)` and the page visibly
    shifts left when the overlay opens. */
 html body[data-scroll-locked] {
@@ -996,7 +996,7 @@ nav button {
   padding: 0 !important;
 }
 
-/* v2: hover inverts the label into a solid ink block — unambiguous, no
+/* v2: hover inverts the label into a solid ink block: unambiguous, no
    grey halo. Open mega-menu triggers hold the same state while their
    sheet is visible. */
 #nd-nav nav > ul li > a:hover:not([data-active="true"]):not([aria-current="page"]),
@@ -1135,7 +1135,7 @@ nav li > a {
   align-items: center !important;
 }
 
-/* Docs subnav hover and active states — same grammar as the top navbar:
+/* Docs subnav hover and active states, in the same grammar as the top navbar:
    squared inverted-ink hover, red rule under the active tab, no pills. */
 .docs-subnav-link {
   border-radius: 0 !important;
@@ -1169,7 +1169,7 @@ nav li > a {
 }
 
 /* Hover state for type: 'main' nav links (Blog) - direct <a> children, not wrapped in buttons */
-/* v2: quiet squared hover — a whisper of surface, ink darkens, no shadow */
+/* v2: quiet squared hover: a whisper of surface, ink darkens, no shadow */
 nav li > a:hover:not([data-active="true"]):not([aria-current="page"]) {
   background-color: rgba(0, 0, 0, 0.04) !important;
   box-shadow: none !important;
