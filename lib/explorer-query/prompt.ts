@@ -11,7 +11,7 @@ import { FAMILY_CHAIN_ID, OPENTRADE_POOLS, SILOS, VAULTS } from "./families";
 import { sqlWindow, windowWords } from "./scope";
 import { registryTurn } from "./registry-turn";
 import { mevExamples, mevRules, mevTurn } from "./mev";
-import { icttChain, icttExamples, icttRules, icttTurn, icttWithAll } from "./ictt";
+import { ICTT_VERSION, icttChain, icttExamples, icttRules, icttTurn } from "./ictt";
 import { knownLines, refLine, refSchema } from "./sources";
 import { isCChain, isFuji, PCHAIN_IDS, targetOf } from "./target";
 
@@ -721,7 +721,7 @@ export function promptVersion(chainId: number, dex = false, lending = false, fam
         ? pchainPrompt({ chainId, network: "", schema: "", coverage: null, lines: null })
         : systemPrompt({ chainId, chainName: "", symbol: "", schema: "", coverage: null, dex, lending, families, mev, ictt });
     // a kept ICTT answer holds the $ICTT WITH written out: a change to it writes the answer again
-    v = createHash("sha256").update(`${text}\n${refSchema(chainId).join("\n")}${ictt ? `\n${icttWithAll(chainId)}` : ""}`).digest("hex").slice(0, 12);
+    v = createHash("sha256").update(`${text}\n${refSchema(chainId).join("\n")}${ictt ? `\n${ICTT_VERSION}` : ""}`).digest("hex").slice(0, 12);
     versions.set(key, v);
   }
   return v;

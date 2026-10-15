@@ -8,6 +8,7 @@
    the query reads no table past those definitions. */
 
 import { FAMILY_EVENTS, familyHex } from "./families";
+import { icttServed } from "./ictt";
 import { LENDING_EVENTS, strayHex, typedLending } from "./lending";
 import { expandMacros } from "./macros";
 import { DEX_TOPICS } from "./protocols";
@@ -322,7 +323,9 @@ export function guardSql(raw: string, chainId: number): GuardResult {
   if (!isFuji(chainId) && /\bhex\s*\(\s*unhex\s*\(/i.test(sql)) return { ok: false, error: "hex(unhex(x)) garbles x: hashes, addresses and topics are bytes already, so write lower(concat('0x', hex(x)))" };
   if (!isFuji(chainId) && STARTS_WITH_KEY.test(sql))
     return { ok: false, error: `startsWith on a hash misses rows in a filter, since ClickHouse reads the table's index wrong for it: write a prefix as a range on the bytes, ${HASH_RANGE}` };
-  if (!/^(SELECT|WITH)\b/i.test(sql)) return { ok: false, error: "the query must start with SELECT or WITH" };
+  // stats-api writes $ICTT out (ictt.ts), so its parts are tables the query reads
+  const ictt = x.macro?.name === "ICTT";
+  if (!/^(SELECT|WITH)\b/i.test(sql) && !(ictt && /^\$ICTT\s*\(/.test(sql))) return { ok: false, error: "the query must start with SELECT or WITH" };
   const kw = sql.match(KEYWORDS);
   if (kw) return { ok: false, error: `${kw[1].toUpperCase()} is not allowed; write a plain SELECT (the server sets FORMAT and settings)` };
   const fn = sql.match(TABLE_FUNCTIONS);
@@ -338,6 +341,7 @@ export function guardSql(raw: string, chainId: number): GuardResult {
   // every table read must be one of the raw tables, or a reference table our server builds (sources.ts)
   // names a WITH defines (WITH snaps AS (…)) are the query's own, not tables
   const ctes = new Set([...sql.matchAll(/(?:\bWITH|,)\s*([A-Za-z_]\w*)\s+AS\s*\(/gi)].map((m) => m[1].toLowerCase()));
+  const parts = new Set<string>(ictt ? icttServed(chainId) : []);
   // a WITH may not take the name of a table the server defines, and it defines every table
   const taken = [...target.tables, ...target.refs].find((r) => ctes.has(r.toLowerCase()));
   if (taken) return { ok: false, error: `${taken} is a table here; give the WITH another name` };
@@ -349,7 +353,7 @@ export function guardSql(raw: string, chainId: number): GuardResult {
   const refs = [...sql.matchAll(/(?<!\bFILL\s+)(?<!\bARRAY\s+)\b(?:FROM|JOIN)\s+(?!\()([`"]?)([A-Za-z_][\w.]*)\1/gi)].map((m) => m[2]);
   for (const name of [...refs, ...commas.names]) {
     const ident = name.replace(/^default\./i, "");
-    if (ctes.has(ident.toLowerCase())) continue;
+    if (ctes.has(ident.toLowerCase()) || parts.has(ident)) continue;
     if (!readable.includes(ident)) {
       return { ok: false, error: `table ${name} is not readable here; use ${readable.join(", ")}` };
     }
@@ -357,7 +361,7 @@ export function guardSql(raw: string, chainId: number): GuardResult {
     if (ident !== name) return { ok: false, error: `write ${ident} without a database name` };
     tables.add(ident as AllowedTable);
   }
-  if (tables.size === 0) return { ok: false, error: typedLending(sql, chainId) ?? `the query reads no table; use ${readable.join(", ")}` };
+  if (tables.size === 0 && !ictt) return { ok: false, error: typedLending(sql, chainId) ?? `the query reads no table; use ${readable.join(", ")}` };
   const shadow = shadowedAlias(sql);
   if (shadow) return { ok: false, error: `the alias ${shadow} hides the column ${shadow}, so its WHERE or ON reads the alias; give the alias another name` };
   const top = isFuji(chainId) ? null : windowedTop(sql);
@@ -368,7 +372,8 @@ export function guardSql(raw: string, chainId: number): GuardResult {
   // network query names the chains it reads, or none: the server reads each table as the network's chains alone
   if (chainId !== NETWORK_ID) {
     const chainRe = new RegExp(`\\bchain_id\\s*(=|==)\\s*${chainId}\\b`);
-    if (!chainRe.test(sql)) return { ok: false, error: `filter every table on chain_id = ${chainId}` };
+    // stats-api reads $ICTT's parts as this chain's rows: only a raw table read beside them names its chain
+    if (tables.size > 0 && !chainRe.test(sql)) return { ok: false, error: `filter every table on chain_id = ${chainId}` };
     const otherChain = sql.match(/\bchain_id\s*(=|==)\s*(\d+)/g)?.find((s) => !new RegExp(`\\b${chainId}\\b`).test(s));
     if (otherChain) return { ok: false, error: `only chain_id = ${chainId} is readable on this page` };
   }

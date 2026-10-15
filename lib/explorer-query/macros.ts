@@ -10,9 +10,10 @@
    checks, what runs and what the page shows is the whole WITH. The prompt
    prints none of it, so the writer has no WITH to copy. The DEX and
    lending shorthands are the mainnet C-Chain's; $ICTT is every mainnet
-   EVM chain's and the network's. */
+   EVM chain's and the network's, and stats-api writes it out: the guard
+   checks it and sends it on as typed, with its window. */
 
-import { icttChain, icttMisread, icttRests, icttWith } from "./ictt";
+import { icttChain, icttMisread } from "./ictt";
 import { debtsWith, LENDING_PROTOCOLS, lendWith, liquidationsWith, marketsWith, pricesWith } from "./lending";
 import { DEX_CHAIN_ID, DEX_PRICE_POOL, DEX_PROTOCOLS, DEX_TOPICS, FIRST_DAY, V2_FEE_PROTOCOLS, type DexFamily } from "./protocols";
 
@@ -144,7 +145,8 @@ const MACROS: Record<string, Macro> = {
   DEBTS: { window: false, slugs: lendSlugs, slug: "optional", chains: cchain, text: (_s, _e, slug) => debtsWith(slug) },
   MARKETS: { window: false, slugs: lendSlugs, slug: "optional", chains: cchain, text: (_s, _e, slug) => marketsWith(slug) },
   SWAPORDER: { window: true, slugs: () => [], slug: "none", chains: cchain, text: (start, end) => SWAP_ORDER.replace("$START", () => start).replace("$END", () => (end ? ` AND block_time < ${end}` : "")) },
-  ICTT: { window: "optional", slugs: () => [], slug: "none", chains: icttChain, text: (start, end, _slug, rest, chainId) => icttWith(start, end, rest, chainId), rests: icttRests, check: icttMisread },
+  // stats-api writes $ICTT out (ictt.ts): checked here, it leaves as the shorthand with its window
+  ICTT: { window: "optional", slugs: () => [], slug: "none", chains: icttChain, text: (start, end) => `$ICTT(${[start, end].filter(Boolean).join(", ")})`, check: icttMisread },
 };
 
 const ICTT_USAGE = "$ICTT(start), $ICTT(start, end) or $ICTT() for interchain token transfers";

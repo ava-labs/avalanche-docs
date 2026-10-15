@@ -1,18 +1,17 @@
 /* Interchain Token Transfer (ICTT) and ICM as Query reads them, on the C-Chain, on every mainnet L1 and on the
-   network. No table decodes a bridge: the writer took the ERC-20 Transfers inside a Teleporter transaction for a
-   "stand-in", and the held balance of a bridge from them. $ICTT(start), $ICTT(start, end) or $ICTT() (macros.ts)
-   stands for a WITH of decoded events, from the layouts of icm-contracts (ITokenTransferrer.sol, ITokenHome.sol,
-   ITeleporterMessenger.sol), each checked on real logs: the registry of bridges, each home's token and what it holds,
-   the window's sends and arrivals, and on the network the two sides of each transfer joined on the message ID. The
-   writer never types a byte offset or a topic. A chain page sees its own side of a transfer only: the other side is
-   on another chain's rows, which only the network target reads. Fuji stays as it was. */
+   network. $ICTT(start), $ICTT(start, end) or $ICTT() (macros.ts) stands for a WITH of decoded events that stats-api
+   writes out itself (/v2/query with the page's chainId, stats-api icm/ictt_expand.go): the registry of bridges, each
+   home's token and what it holds, the window's sends and arrivals, and on the network the two sides of each transfer
+   joined on the message ID. The query leaves this server with the shorthand as the writer typed it. A chain page sees
+   its own side of a transfer only: the other side is on another chain's rows, which only the network target reads.
+   Fuji stays as it was. */
 
 import l1ChainsData from "@/constants/l1-chains.json";
 import { TELEPORTER_ADDRESS, toHexBlockchainId } from "@/lib/icm-message";
 import { familyQuestion } from "./families";
-import { LENDING_TOKENS, lendingQuestion } from "./lending";
+import { lendingQuestion } from "./lending";
 import { mevQuestion } from "./mev";
-import { DEX_TOPICS, FIRST_DAY, dexQuestion } from "./protocols";
+import { FIRST_DAY, dexQuestion } from "./protocols";
 import { icttAsked, icttBothSides, icttNamed } from "./names";
 import { registryNames } from "./registry-turn";
 import { NETWORK_ID, isFuji, targetOf } from "./target";
@@ -46,208 +45,34 @@ export function icttChain(chainId: number): boolean {
 }
 
 /* ------------------------------------------------------------------ */
-/* The WITH. Each part reads raw_logs by topic0, a rare topic over its whole history in a few seconds (raw_logs sorts
-   by chain_id, topic0 and block_number), and only the parts a query names, with the parts they read, are written
-   out: an unused one costs only text, and the network's chain list and chain_names take about 3 KB of the 16 KiB
-   the query service takes. Addresses and IDs read from data are FixedStrings: a String cast drops trailing zero
-   bytes, and an address that ends in 00 would match nothing. No name holds a word the query service refuses
-   before a space or a parenthesis (set, use, file, url, remote): the remote bridge is token_remote. */
+/* The parts stats-api writes out, as a query names them. Only the checks the guard needs before the query leaves:
+   which parts a chain serves, and that the query reads one. */
 
-/* Each topic is named once at the WITH's head, as the DEX WITH names its Swap topics: a topic written out is 75
-   characters, and ictt_held reads 25 of them */
-type Topic = keyof typeof ICTT_TOPICS | "transfer";
-const TOPIC_NAMES: Record<Topic, string> = {
-  tokensSent: "ictt_sent_t",
-  tokensAndCallSent: "ictt_call_sent_t",
-  tokensRouted: "ictt_routed_t",
-  tokensAndCallRouted: "ictt_call_routed_t",
-  tokensWithdrawn: "ictt_withdrawn_t",
-  callSucceeded: "ictt_call_ok_t",
-  callFailed: "ictt_call_failed_t",
-  remoteRegistered: "ictt_registered_t",
-  collateralAdded: "ictt_collateral_t",
-  sendMessage: "icm_send_t",
-  receiveMessage: "icm_receive_t",
-  messageExecuted: "icm_executed_t",
-  messageExecutionFailed: "icm_failed_t",
-  receiptReceived: "icm_receipt_t",
-  deposit: "ictt_deposit_t",
-  transfer: "ictt_transfer_t",
-};
-const t = (k: Topic) => TOPIC_NAMES[k];
-const topicOf = (k: Topic) => (k === "transfer" ? DEX_TOPICS.transfer : ICTT_TOPICS[k]);
-/** word k of `d` as the exact uint256, or as a Float64 for an amount a query adds up */
-const word = (k: number | string, d = "data") => `reinterpretAsUInt256(reverse(substring(${d}, ${typeof k === "number" ? 1 + 32 * k : k}, 32)))`;
-const float = (at: string, d = "data") => `toFloat64(${word(at, d)})`;
-/** 20 or 32 bytes of `d` from byte `at` (1-based), as a FixedString */
-const bytesAt = (at: number | string, n: 20 | 32, d = "data") => `toFixedString(substring(${d}, ${at}, ${n}), ${n})`;
-
-/** the WITH's parts: the ones a query reads by name, and the ones each reads */
-export const ICTT_PARTS = ["ictt_bridges", "ictt_first", "ictt_tokens", "ictt_held", "ictt_sends", "ictt_arrivals", "ictt_transfers", "ictt_chains"] as const;
+/** the parts a query reads after $ICTT */
+export const ICTT_PARTS = ["ictt_bridges", "ictt_tokens", "ictt_held", "ictt_sends", "ictt_arrivals", "ictt_transfers", "ictt_chains"] as const;
 type Part = (typeof ICTT_PARTS)[number];
-/** the parts a query reads; ictt_first is ictt_tokens' own */
-const ICTT_PUBLIC = ICTT_PARTS.filter((p) => p !== "ictt_first");
-const NEEDS: Partial<Record<Part, Part[]>> = { ictt_held: ["ictt_bridges", "ictt_tokens"], ictt_tokens: ["ictt_first", "ictt_bridges"], ictt_transfers: ["ictt_sends"] };
 /** ictt_transfers is the network's, whose rows hold both sides; ictt_chains a chain page's, as the network has chain_names */
 const served = (p: Part, chainId: number) => (p === "ictt_transfers" ? chainId === NETWORK_ID : p !== "ictt_chains" || chainId !== NETWORK_ID);
 
-/** the parts a query names, with the parts they read, of the ones this chain serves */
+/** the parts this chain serves, which a query after $ICTT reads as tables */
+export const icttServed = (chainId: number): Part[] => ICTT_PARTS.filter((p) => served(p, chainId));
+
+/** the parts a query names, of the ones this chain serves */
 function icttParts(sql: string, chainId: number): Part[] {
-  const named = new Set<Part>(ICTT_PARTS.filter((p) => new RegExp(`\\b${p}\\b`).test(sql) && served(p, chainId)));
-  for (let grew = true; grew; ) {
-    grew = false;
-    for (const p of [...named]) for (const n of NEEDS[p] ?? []) if (!named.has(n)) grew = !!named.add(n);
-  }
-  return ICTT_PARTS.filter((p) => named.has(p));
+  return icttServed(chainId).filter((p) => new RegExp(`\\b${p}\\b`).test(sql));
 }
 
-/** the tokens our lending list holds, USD stablecoins first, for a home's decimals: one list, so a held balance is in
-    tokens only where Query knows the token (a C-Chain token; an L1's tokens are not listed) */
-const LISTED = [...LENDING_TOKENS.filter((x) => x.price === "usd"), ...LENDING_TOKENS.filter((x) => x.price !== "usd" && !/^0x0{40}$/.test(x.token))];
-const STABLES = LENDING_TOKENS.filter((x) => x.price === "usd").length;
-const LISTED_BLOB = Buffer.from(LISTED.map((x) => x.token.slice(2)).join(""), "hex").toString("base64");
+/** stats-api's decoder, for the version of an ICTT question's prompt: bump it when stats-api changes what a part
+    holds, so a kept answer is written again */
+export const ICTT_VERSION = "stats-api-ictt-1";
 
-/** a home's decimals and whether it is a USD stablecoin, by its token (tk): the list's decimals on the C-Chain, else
-    the home's own from its registration (dec), which is known for every home with a token; stable on the C-Chain only */
-function listedOf(chainId: number): string {
-  if (chainId !== NETWORK_ID && chainId !== 43114) return "toNullable(dec) AS decimals, false AS stable";
-  const here = chainId === NETWORK_ID ? "chain_id = 43114 AND " : "";
-  return `indexOf(arrayMap(i -> ${bytesAt("20 * i - 19", 20, `base64Decode('${LISTED_BLOB}')`)}, range(1, ${LISTED.length + 1})), tk) AS li, toNullable(if(${here}li > 0, [${LISTED.map((x) => x.decimals).join(",")}][li], dec)) AS decimals, ${here}li BETWEEN 1 AND ${STABLES} AS stable`;
-}
-
-/** each catalog chain's blockchain ID as 0x hex, for a chain page, whose tables cannot name the other side */
+/** each catalog chain's blockchain ID as 0x hex, which the chapter lists for a chain page */
 const CHAIN_IDS: readonly { name: string; id: string }[] = (l1ChainsData as { chainId: string; chainName: string; blockchainId?: string; isTestnet?: boolean }[])
   .filter((c) => c.isTestnet !== true && c.blockchainId)
   .flatMap((c) => {
     const id = toHexBlockchainId(c.blockchainId!);
     return id ? [{ name: c.chainId === "43114" ? "C-Chain" : c.chainName, id }] : [];
   });
-/** ictt_chains' rows as the query service takes them */
-const CHAINS_BLOB = Buffer.from(CHAIN_IDS.map((c) => c.id.slice(2)).join(""), "hex").toString("base64");
-const NAMES_BLOB = Buffer.from(CHAIN_IDS.map((c) => c.name.replace(/\|/g, "/")).join("|"), "utf8").toString("base64");
-
-/** the home's amount of a send in the units of the remote it went to: scaled to the home's own (TokenHome.sol) */
-const toHome = (x: string) => `if(b.home_decimals >= b.remote_decimals, ${x} * toInt256(exp10(b.home_decimals - b.remote_decimals)), intDivOrZero(${x}, toInt256(exp10(b.remote_decimals - b.home_decimals))))`;
-
-/** each part's text, for this chain, from the window's start (since) to its end bound (until, or empty) */
-function partText(p: Part, chainId: number, since: string, until: string): string {
-  // a chain page's every read names its chain (guard.ts); the network's reads are its chains' rows already
-  const on = (q = "") => (chainId === NETWORK_ID ? "" : `${q}chain_id = ${chainId} AND `);
-  const all = `${on()}block_time >= ${FIRST_DAY}`;
-  const homes = `(SELECT chain_id, address FROM raw_logs WHERE ${all} AND topic0 = ${t("remoteRegistered")})`;
-  const window = `${on()}block_time >= ${since}`;
-  switch (p) {
-    /* A home registers a remote when the remote's REGISTER_REMOTE message arrives: RemoteRegistered (topic1 the
-       remote's chain, topic2 the remote, word 1 its decimals) follows the ReceiveCrossChainMessage that carried it, in
-       the same transaction. The home's decimals are in that message only: the TransferrerMessage starts at byte 97 +
-       m (m its word 9), its type at byte 160 + m (0 is REGISTER_REMOTE), then initialReserveImbalance,
-       homeTokenDecimals (last byte at 288 + m) and remoteTokenDecimals (320 + m). On 2026-10-13 all 159 of the
-       network's registrations had the two equal */
-    case "ictt_bridges":
-      return `ictt_bridges AS (SELECT r.chain_id AS chain_id, r.address AS home, assumeNotNull(r.topic1) AS remote_blockchain_id, ${bytesAt(13, 20, "assumeNotNull(r.topic2)")} AS token_remote, toUInt8(${word(1, "r.data")}) AS remote_decimals, if(x.m > 0, reinterpretAsUInt8(substring(x.data, 288 + x.m, 1)), remote_decimals) AS home_decimals, r.block_time AS registered_at FROM raw_logs AS r ASOF LEFT JOIN (SELECT chain_id, block_number, transaction_hash, log_index, toUInt32(${word(9)}) AS m, data FROM raw_logs WHERE ${all} AND topic0 = ${t("receiveMessage")} AND block_number IN (SELECT block_number FROM raw_logs WHERE ${all} AND topic0 = ${t("remoteRegistered")})) AS x ON x.chain_id = r.chain_id AND x.block_number = r.block_number AND x.transaction_hash = r.transaction_hash AND x.log_index < r.log_index WHERE ${on("r.")}r.block_time >= ${FIRST_DAY} AND r.topic0 = ${t("remoteRegistered")})`;
-    // each home's first send or collateral, whose transaction moves its token into it
-    case "ictt_first":
-      return `ictt_first AS (SELECT chain_id, address AS home, argMin(transaction_hash, block_number) AS tx, min(block_number) AS bn FROM raw_logs WHERE ${all} AND topic0 IN (${t("tokensSent")}, ${t("tokensAndCallSent")}, ${t("collateralAdded")}) AND (chain_id, address) IN ${homes} GROUP BY chain_id, address)`;
-    /* No event names a home's token, and a pre-v1 home has no getTokenAddress(). Its first send, or the collateral
-       added before it (_addCollateral moves the token as a send does), moves the token in: an ERC20TokenHome's as an
-       ERC-20 Transfer to it, a NativeTokenHome's as the wrapped coin's Deposit to it. Only those blocks are read: a
-       read of every Transfer since 2024 is past the query service's 1.2 billion rows. A read of sends alone found no
-       token for 0x87e8fdae, a C-Chain home with collateral and no send. A home that never moved tokens has no row: no
-       event of 0x68cb4ea4 or 0x735593b9, two C-Chain USDC homes that hold none, names their token (Routescan lists no
-       token transfer of either). Its decimals are its registration's homeTokenDecimals, which _registerRemote checks
-       against the home's own. Token and decimals are Nullable, so a LEFT JOIN that finds no home reads NULL, never the
-       zero address (the token list's native AVAX) or 0 */
-    case "ictt_tokens":
-      return `ictt_tokens AS (SELECT chain_id, home, toNullable(tk) AS token, ${listedOf(chainId)} FROM (SELECT f.chain_id AS chain_id, f.home AS home, any(l.address) AS tk, any(b.home_decimals) AS dec FROM ictt_first AS f INNER JOIN (SELECT chain_id, transaction_hash, address, ${bytesAt(13, 20, `assumeNotNull(if(topic0 = ${t("deposit")}, topic1, topic2))`)} AS dst FROM raw_logs WHERE ${all} AND topic0 IN (${t("transfer")}, ${t("deposit")}) AND block_number IN (SELECT bn FROM ictt_first)) AS l ON l.chain_id = f.chain_id AND l.transaction_hash = f.tx AND l.dst = f.home INNER JOIN ictt_bridges AS b ON b.chain_id = f.chain_id AND b.home = f.home GROUP BY f.chain_id, f.home))`;
-    /* What a home holds, by its own events from the first day (TokenHome.sol): each send locks its amount, in the
-       units of the remote it went to (word 8 of TokensSent, word 1 of TokensAndCallSent), scaled to the home's;
-       CollateralAdded adds its word 0; TokensWithdrawn, CallSucceeded and CallFailed release their word 0; a multi-hop
-       route keeps its amount and pays its primary fee out (word 4 of TokensRouted, word 11 of TokensAndCallRouted).
-       CollateralAdded logs only the collateral that was needed and returns the rest to the sender with a
-       TokensWithdrawn in the same transaction (_addCollateral), so that refund is no release: without this rule a
-       C-Chain home read 898 tokens below zero. Exact in Int256: on 2026-10-13 it matched balanceOf to the unit for
-       every USDC home on the C-Chain. TokensWithdrawn has the topic0 of contracts that are no bridge, so only the
-       homes' own logs are read */
-    case "ictt_held": {
-      const sent = `topic0 IN (${t("tokensSent")}, ${t("tokensAndCallSent")})`;
-      const call = `topic0 = ${t("tokensAndCallSent")}`;
-      // each event's amount, the one word that holds it, and its sign: a send or collateral in, any other event out
-      const at = `multiIf(topic0 = ${t("tokensSent")}, 257, ${call}, 33, topic0 = ${t("tokensRouted")}, 129, topic0 = ${t("tokensAndCallRouted")}, 353, 1)`;
-      const events = `SELECT chain_id, address, ${sent} AS locks, if(locks OR topic0 = ${t("collateralAdded")}, 1, -1) * toInt256(${word(at)}) AS v, ${bytesAt(`if(${call}, 65, 1)`, 32)} AS dest, ${bytesAt(`if(${call}, 109, 45)`, 20)} AS dest_bridge FROM raw_logs WHERE ${all} AND topic0 IN (${(["tokensSent", "tokensAndCallSent", "tokensRouted", "tokensAndCallRouted", "tokensWithdrawn", "callSucceeded", "callFailed", "collateralAdded"] as const).map(t).join(", ")}) AND (chain_id, address) IN ${homes} AND NOT (topic0 = ${t("tokensWithdrawn")} AND (chain_id, transaction_hash, address) IN (SELECT chain_id, transaction_hash, address FROM raw_logs WHERE ${all} AND topic0 = ${t("collateralAdded")}))`;
-      const sums = `SELECT e.chain_id AS chain_id, e.address AS home, sum(if(e.locks, ${toHome("e.v")}, e.v)) AS raw_held FROM (${events}) AS e LEFT JOIN ictt_bridges AS b ON b.chain_id = e.chain_id AND b.home = e.address AND b.remote_blockchain_id = e.dest AND b.token_remote = e.dest_bridge GROUP BY e.chain_id, e.address`;
-      // a home whose token no send or collateral named has a NULL token (a Nullable's default), never the zero address,
-      // which the token list names native AVAX
-      return `ictt_held AS (SELECT h.chain_id AS chain_id, h.home AS home, k.named AS token, toFloat64(h.raw_held) AS held, k.decimals AS decimals, k.stable AS stable, held / pow(10, decimals) AS held_tokens FROM (${sums}) AS h LEFT JOIN (SELECT chain_id, home, toNullable(token) AS named, decimals, stable FROM ictt_tokens) AS k ON k.chain_id = h.chain_id AND k.home = h.home)`;
-    }
-    /* The window's sends: TokensSent and TokensAndCallSent by a home or a remote, and TokensRouted and
-       TokensAndCallRouted, the second hop a home sends on with a new message ID. TokensSent and TokensRouted carry
-       SendTokensInput in words 0 to 7 and the amount in word 8; the AndCall events put the amount in word 1 and the
-       input from word 2 (TokensSent's destination at byte 1 is theirs at 65, and so on). A routed send names no
-       sender. Each send names its token's home (home_chain_id, home), so one token is one key across chains: a home's
-       send its own, a remote's the home that registered it. A remote is never on its home's chain (_registerRemote), so
-       on a chain page its home is on another chain's rows, NULL here; the network finds it in the registrations, by the
-       sending chain's blockchain ID and the remote. A remote registers once, with one home: the GROUP BY reads a
-       duplicate row of the index once */
-    case "ictt_sends": {
-      const at = (sent: number, call: number) => `if(with_call, ${call}, ${sent})`;
-      const network = chainId === NETWORK_ID;
-      const theirs = network ? ["g.home_chain", "g.home_contract"] : ["NULL", "NULL"];
-      const registry = network
-        ? ` LEFT JOIN (SELECT n.chain_id AS remote_chain, ${bytesAt(13, 20, "assumeNotNull(r.topic2)")} AS token_remote, toNullable(any(r.chain_id)) AS home_chain, toNullable(any(r.address)) AS home_contract FROM raw_logs AS r INNER JOIN chain_names AS n ON n.blockchain_id = assumeNotNull(r.topic1) WHERE r.block_time >= ${FIRST_DAY} AND r.topic0 = ${t("remoteRegistered")} GROUP BY remote_chain, token_remote) AS g ON g.remote_chain = chain_id AND g.token_remote = address`
-        : "";
-      return `ictt_sends AS (SELECT chain_id, block_time, block_number, transaction_hash AS tx, address AS bridge, if((chain_id, address) IN ${homes}, 'home', 'remote') AS role, topic0 IN (${t("tokensRouted")}, ${t("tokensAndCallRouted")}) AS routed, topic0 IN (${t("tokensAndCallSent")}, ${t("tokensAndCallRouted")}) AS with_call, assumeNotNull(topic1) AS message_id, ${bytesAt(13, 20, "ifNull(topic2, '')")} AS sender, ${bytesAt(at(1, 65), 32)} AS destination_blockchain_id, ${bytesAt(at(45, 109), 20)} AS destination_bridge, ${bytesAt(at(77, 141), 20)} AS recipient, ${float(at(257, 33))} AS amount, if(role = 'home', chain_id, ${theirs[0]}) AS home_chain_id, if(role = 'home', address, ${theirs[1]}) AS home FROM raw_logs${registry} WHERE ${window}${until} AND topic0 IN (${t("tokensSent")}, ${t("tokensAndCallSent")}, ${t("tokensRouted")}, ${t("tokensAndCallRouted")}))`;
-    }
-    case "ictt_arrivals":
-      return `ictt_arrivals AS (${arrivals(window, until)})`;
-    /* Both sides of each of the window's sends, on the network. A send's arrival may land after the window's end, so
-       the arrivals read from its start to now. A message is received once; a duplicate row of the index is read once.
-       A message whose execution failed has no transferrer event: execution_failed, until a retry runs it, which logs
-       MessageExecuted but no ReceiveCrossChainMessage, so its arrival is not joined: delivered by that MessageExecuted
-       (5 of the 6 execution failures on 2026-10-13). The index misses some destination blocks (Numi's 444565 held a
-       receive), and a chain it does not hold has no rows at all: the source chain's ReceiptReceived for the message
-       proves it arrived there (received). On 2026-10-13, 7 of 9 sends to an indexed chain with no arrival, and 184,072
-       of 193,904 to a chain not indexed, had one */
-    case "ictt_transfers": {
-      const got = `(SELECT message_id, any(chain_id) AS arrival_chain_id, any(block_time) AS arrived_at, any(tx) AS arrival_tx, any(outcome) AS arrival_outcome, any(amount) AS arrival_amount FROM (${arrivals(window, "")}) GROUP BY message_id)`;
-      const logged = (k: Topic) => `s.message_id IN (SELECT topic1 FROM raw_logs WHERE ${window} AND topic0 = ${t(k)})`;
-      const status = `multiIf(a.arrival_outcome IN ('withdrawn', 'call_succeeded'), 'delivered', a.arrival_outcome != '', a.arrival_outcome, ${logged("messageExecuted")}, 'delivered', ${logged("messageExecutionFailed")}, 'execution_failed', ${logged("receiptReceived")}, 'received', s.destination_blockchain_id IN (SELECT blockchain_id FROM chain_names), 'undelivered', 'destination_not_indexed')`;
-      return `ictt_transfers AS (SELECT s.chain_id AS chain_id, s.block_time AS block_time, s.tx AS tx, s.message_id AS message_id, s.bridge AS bridge, s.role AS role, s.routed AS routed, s.with_call AS with_call, s.sender AS sender, s.destination_blockchain_id AS destination_blockchain_id, s.destination_bridge AS destination_bridge, s.recipient AS recipient, s.amount AS amount, s.home_chain_id AS home_chain_id, s.home AS home, a.arrival_chain_id AS destination_chain_id, a.arrived_at AS delivered_at, a.arrival_tx AS destination_tx, a.arrival_outcome AS outcome, a.arrival_amount AS delivered_amount, ${status} AS status FROM ictt_sends AS s LEFT JOIN ${got} AS a ON a.message_id = s.message_id)`;
-    }
-    /* The catalog's chains by blockchain ID, for a chain page, whose tables cannot name the other side (the network
-       reads chain_names): the IDs as one blob of 32-byte words, the names as base64, since the query service refuses
-       some words (use, file, set) even inside a string. About 3.5 KB, written only for a query that names it */
-    case "ictt_chains":
-      return `ictt_chains AS (SELECT ${bytesAt("32 * i - 31", 32, `base64Decode('${CHAINS_BLOB}')`)} AS blockchain_id, splitByChar('|', base64Decode('${NAMES_BLOB}'))[i] AS chain FROM (SELECT arrayJoin(range(1, ${CHAIN_IDS.length + 1})) AS i))`;
-  }
-}
-
-/* A transfer's arrival: the ReceiveCrossChainMessage that delivers its message (topic1 the message ID, topic2 the
-   source chain, word 5 the destination bridge), paired with the first transferrer event after it in its
-   transaction that the destination bridge logged: TokensWithdrawn, CallSucceeded or CallFailed (recipient topic1,
-   amount word 0, in the local token's units), or on a home a route on to another remote. Pairing by the next log,
-   not by the transaction alone: one transaction can hold an arrival and a new send (0xc7373b2b) */
-function arrivals(window: string, until: string): string {
-  const ev = (k: Topic) => `e.topic0 = ${t(k)}`;
-  const outcome = `multiIf(${ev("tokensWithdrawn")}, 'withdrawn', ${ev("callSucceeded")}, 'call_succeeded', ${ev("callFailed")}, 'call_failed', 'routed')`;
-  const recipient = `multiIf(${ev("tokensRouted")}, ${bytesAt(77, 20, "e.data")}, ${ev("tokensAndCallRouted")}, ${bytesAt(141, 20, "e.data")}, ${bytesAt(13, 20, "assumeNotNull(e.topic1)")})`;
-  const amount = `${float(`multiIf(${ev("tokensRouted")}, 257, ${ev("tokensAndCallRouted")}, 33, 1)`, "e.data")}`;
-  const received = `SELECT chain_id, block_time, block_number, transaction_hash, log_index, assumeNotNull(topic1) AS message_id, assumeNotNull(topic2) AS source_blockchain_id, ${bytesAt(173, 20)} AS bridge FROM raw_logs WHERE ${window}${until} AND topic0 = ${t("receiveMessage")}`;
-  const events = `SELECT chain_id, block_number, transaction_hash, log_index, address, topic0, topic1, data FROM raw_logs WHERE ${window}${until} AND topic0 IN (${(["tokensWithdrawn", "callSucceeded", "callFailed", "tokensRouted", "tokensAndCallRouted"] as const).map(t).join(", ")})`;
-  return `SELECT r.chain_id AS chain_id, r.block_time AS block_time, r.transaction_hash AS tx, r.message_id AS message_id, r.source_blockchain_id AS source_blockchain_id, r.bridge AS bridge, ${outcome} AS outcome, ${recipient} AS recipient, ${amount} AS amount FROM (${received}) AS r ASOF JOIN (${events}) AS e ON e.chain_id = r.chain_id AND e.block_number = r.block_number AND e.transaction_hash = r.transaction_hash AND e.address = r.bridge AND r.log_index < e.log_index`;
-}
-
-/** the ICTT WITH for this chain and what the query after it reads: its window from `start` (the whole history when
-    there is none) to `end` (now when there is none). A kept recipe holds it written out, so its key holds every
-    part's text (icttWithAll, prompt.ts promptVersion), and a change here writes the answer again */
-export function icttWith(start: string, end: string | undefined, rest: string, chainId: number): string {
-  const until = end ? ` AND block_time < ${end}` : "";
-  const parts = icttParts(rest, chainId).map((p) => partText(p, chainId, start || FIRST_DAY, until));
-  const named = (Object.keys(TOPIC_NAMES) as Topic[]).filter((k) => parts.some((x) => new RegExp(`\\b${t(k)}\\b`).test(x)));
-  return `WITH ${[...named.map((k) => `unhex('${topicOf(k)}') AS ${t(k)}`), ...parts].join(", ")}`;
-}
-
-/** the whole WITH on this chain, every part, for the version of an ICTT question's prompt */
-export const icttWithAll = (chainId: number) => icttWith("", undefined, ` SELECT ${ICTT_PARTS.join(", ")}`, chainId);
 
 /** why the query after $ICTT cannot read its WITH, or null: it names none of the parts, ictt_transfers on a chain
     page, whose rows hold one side of a transfer, or ictt_chains on the network, which names chains with chain_names */
@@ -256,12 +81,9 @@ export function icttMisread(rest: string, chainId: number): string | null {
   if (/\bictt_transfers\b/.test(rest) && !network)
     return "ictt_transfers is the network's: a chain page holds one side of a transfer. Read ictt_sends for this chain's sends and ictt_arrivals for what arrived here; the page sends a question about both sides to every chain";
   if (/\bictt_chains\b/.test(rest) && network) return "ictt_chains is a chain page's: on the network, name a chain from chain_names, by its blockchain_id";
-  if (icttParts(rest, chainId).length === 0) return `$ICTT stands for ${ICTT_PUBLIC.filter((p) => served(p, chainId)).join(", ")}: read one of them after it`;
+  if (icttParts(rest, chainId).length === 0) return `$ICTT stands for ${icttServed(chainId).join(", ")}: read one of them after it`;
   return null;
 }
-
-/** what may follow the WITH in a query, for each form of it collapseMacros tries: the parts the written-out query names */
-export const icttRests = (sql: string, chainId: number) => [` SELECT ${icttParts(sql, chainId).join(", ")}`];
 
 /* ------------------------------------------------------------------ */
 /* What the writer is told: the chapter, in the prompt of an ICTT or ICM question (icttQuestion), so every other
@@ -297,7 +119,7 @@ export function icttTurn(chainId: number, prompt: string): string {
 const hx = (c: string) => `lower(concat('0x', hex(${c})))`;
 /** a chain page's other chain by its catalog name (ictt_chains AS c), or its blockchain ID where the catalog has none */
 const named = (id: string) => `if(c.chain = '', ${hx(id)}, c.chain)`;
-const icm = (k: Topic) => `unhex('${topicOf(k)}')`;
+const icm = (k: keyof typeof ICTT_TOPICS) => `unhex('${ICTT_TOPICS[k]}')`;
 /** the C-Chain's blockchain ID, which an L1's sends to it name */
 const C_CHAIN_ID = "0427d4b22a2a78bcddd456742caf91b56badbff985ee19aef14573e7343fd652";
 const NUMI_ID = "d32cc4660bcf8fa7971589f666fddb5ab22aee7e75dcb30b19829a65d4fb0063";
@@ -321,7 +143,7 @@ Interchain Token Transfer (ICTT) is Avalanche's token bridge over ICM (Teleporte
       ? `
   - ictt_transfers: each of the window's sends with its arrival on any chain: the columns of ictt_sends (with home_chain_id and home), then destination_chain_id (0 with no arrival), delivered_at, destination_tx (the arrival's transaction), outcome, delivered_amount and status: 'delivered' (it paid out, or ran on a retry after it failed), 'call_failed', 'routed', 'execution_failed' (the message failed to run, and no retry ran it), 'received' (the source chain holds the destination's receipt, so it arrived, but the index holds no row of its arrival: count it as delivered, its outcome unknown), 'undelivered' (its destination chain is indexed and holds no arrival and no receipt: say not yet delivered, never waiting or pending) or 'destination_not_indexed' (no arrival and no receipt, to a chain the index does not hold).`
       : `
-  - ictt_chains: the catalog's chains, to name the other chain: blockchain_id (32 bytes), chain (its name). Read it only to name chains: it adds about 3.5 KB to the query.`
+  - ictt_chains: the indexed chains, to name the other chain: blockchain_id (32 bytes), chain (its name). A chain the index does not hold has no row, so a LEFT JOIN names it by its blockchain ID.`
   }
 - Units. Amounts are raw, in the token of their leg: a home's send is in the units of the remote it goes to, a remote's send in the remote's own units, and an arrival in the units of the bridge it arrived at. A home's token is ictt_tokens.token, and a remote is its own token. remote_decimals = home_decimals on every bridge registered so far, so an amount of a token in either direction over pow(10, decimals) of its home's token is in tokens. Add up the amounts of one token only (its homes and their remotes, or one bridge); never two tokens. ${network ? "Every send with a home has its decimals through ictt_tokens" : "A remote's decimals are on its home's rows, another chain's: for a remote's token count transfers, or return the raw sum named amount_raw"}. A USD stablecoin (stable) is 1 token = 1 USD, so the stablecoins' held_tokens add up in USD (name it held_usd).
 - What a bridge holds, locks or has as TVL now is ictt_held, never Transfer logs or a token's balance, and its note says it is counted from the bridges' own events.

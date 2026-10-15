@@ -7,7 +7,7 @@
 
 import { createHash } from "node:crypto";
 import { HASH_RANGE, MAX_ROWS } from "./guard";
-import { icttExamples, icttRules, icttWithAll } from "./ictt";
+import { ICTT_VERSION, icttExamples, icttRules } from "./ictt";
 import { CALENDAR, SERIES, chartSpec } from "./prompt";
 import { refSchema, type NetworkChain } from "./sources";
 import { NETWORK_ID } from "./target";
@@ -32,7 +32,7 @@ const versions = new Map<boolean, string>();
 export function networkVersion(ictt = false): string {
   let v = versions.get(ictt);
   if (!v) {
-    v = createHash("sha256").update(`${networkPrompt({ schema: "", coverage: null, chains: [], ictt })}\n${refSchema(NETWORK_ID).join("\n")}${ictt ? `\n${icttWithAll(NETWORK_ID)}` : ""}`).digest("hex").slice(0, 12);
+    v = createHash("sha256").update(`${networkPrompt({ schema: "", coverage: null, chains: [], ictt })}\n${refSchema(NETWORK_ID).join("\n")}${ictt ? `\n${ICTT_VERSION}` : ""}`).digest("hex").slice(0, 12);
     versions.set(ictt, v);
   }
   return v;

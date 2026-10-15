@@ -6,10 +6,11 @@ vi.mock('@/lib/sourcify', () => ({ getVerifiedContractResolvingProxies: vi.fn(as
 
 import { recipeKey } from '@/lib/explorer-query/cache';
 import { protocolScope } from '@/lib/explorer-query/checks';
+import { runQuery } from '@/lib/explorer-query/clickhouse';
 import { fillDrill } from '@/lib/explorer-query/enrich';
 import { familyQuestion } from '@/lib/explorer-query/families';
 import { guardSql, shadowedAlias } from '@/lib/explorer-query/guard';
-import { ICTT_PARTS, ICTT_TOPICS, icttExamples, icttQuestion, icttTurn, icttWith, icttWithAll } from '@/lib/explorer-query/ictt';
+import { ICTT_PARTS, ICTT_TOPICS, icttExamples, icttQuestion, icttTurn } from '@/lib/explorer-query/ictt';
 import { lendingQuestion } from '@/lib/explorer-query/lending';
 import { collapseMacros, expandMacros } from '@/lib/explorer-query/macros';
 import { mevQuestion } from '@/lib/explorer-query/mev';
@@ -191,82 +192,21 @@ describe('$ICTT', () => {
     return x.ok ? x.sql : `refused: ${x.error}`;
   };
 
-  it("writes out only the parts a query reads, with the parts they read, on this chain's rows", () => {
-    const c = out(held, C);
-    expect(c).toMatch(/ictt_bridges AS \(.*ictt_first AS \(.*ictt_tokens AS \(.*ictt_held AS \(/);
-    expect(c).not.toContain('ictt_sends AS (');
-    expect(c).toContain('WHERE chain_id = 43114 AND block_time >= \'2020-09-23\' AND topic0 = ictt_registered_t');
-    // an L1's rows: its own chain, and no C-Chain token list: decimals come from the home's registration
-    const l1 = out(held, NUMI);
-    expect(l1).toContain('chain_id = 8021 AND');
-    expect(l1).not.toContain('43114');
-    expect(l1).toContain('toNullable(dec) AS decimals, false AS stable');
-    // the network's rows need no chain filter; the token list is the C-Chain's
-    const net = out(held, NETWORK_ID);
-    expect(net).not.toMatch(/WHERE chain_id = \d+ AND block_time/);
-    expect(net).toContain('if(chain_id = 43114 AND li > 0');
-    const sends = out('$ICTT(now() - INTERVAL 7 DAY, now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_sends', C);
-    expect(sends).toContain('block_time >= now() - INTERVAL 7 DAY AND block_time < now() - INTERVAL 1 DAY AND topic0 IN');
-    expect(sends).not.toContain('ictt_held AS (');
-    expect(out('$ICTT(\'2026-10-01\') SELECT count() AS n FROM ictt_arrivals', C)).toContain("block_time >= toDateTime('2026-10-01')");
-    // a home's token comes from its first send or collateral, and is NULL, never the zero address, where neither named it
-    expect(c).toContain('topic0 IN (ictt_sent_t, ictt_call_sent_t, ictt_collateral_t) AND (chain_id, address) IN');
-    expect(c).toContain('k.named AS token');
-    expect(c).toContain('toNullable(token) AS named');
-    // a token's decimals: the C-Chain list's, else its home's registration, so ictt_tokens reads the registry
-    expect(c).toContain('toNullable(if(li > 0, [');
-    expect(c).toContain('][li], dec)) AS decimals');
-    expect(c).toContain('INNER JOIN ictt_bridges AS b ON b.chain_id = f.chain_id AND b.home = f.home');
-    const tokens = out('$ICTT() SELECT count() AS n FROM ictt_tokens', C);
-    expect(tokens).toMatch(/ictt_bridges AS \(.*ictt_first AS \(.*ictt_tokens AS \(/);
+  it('leaves as the shorthand with its window, for stats-api to write out', () => {
+    expect(out(held, C)).toBe(held);
+    expect(out('$ICTT(now() - INTERVAL 7 DAY, now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_sends', C)).toBe('$ICTT(now() - INTERVAL 7 DAY, now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_sends');
+    // a quoted date is a DateTime, a WITH typed before it is its own, and a WITH after it goes on after its parts
+    expect(out("$ICTT('2026-10-01') SELECT count() AS n FROM ictt_arrivals", C)).toBe("$ICTT(toDateTime('2026-10-01')) SELECT count() AS n FROM ictt_arrivals");
+    expect(out('WITH $ICTT(toMonday(now())) SELECT count() AS n FROM ictt_sends', NETWORK_ID)).toBe('$ICTT(toMonday(now())) SELECT count() AS n FROM ictt_sends');
+    expect(out('$ICTT() WITH s AS (SELECT home FROM ictt_held) SELECT count() AS n FROM s', NUMI)).toBe('$ICTT(), s AS (SELECT home FROM ictt_held) SELECT count() AS n FROM s');
+    // no decoder leaves this server
+    expect(out(held, NETWORK_ID)).not.toMatch(/ AS \(|unhex\(|raw_logs/);
   });
 
-  it("names each send's token home: its own on a chain page, a remote's from the registry on the network", () => {
-    const sends = '$ICTT(now() - INTERVAL 30 DAY) SELECT home_chain_id, home, count() AS n FROM ictt_sends GROUP BY home_chain_id, home';
-    // a remote's home is on another chain's rows, so a chain page leaves it NULL
-    const c = out(sends, C);
-    expect(c).toContain("if(role = 'home', chain_id, NULL) AS home_chain_id, if(role = 'home', address, NULL) AS home FROM raw_logs WHERE");
-    expect(c).not.toContain('chain_names');
-    // the network maps a remote by its chain's blockchain ID and its address, each remote once
-    const net = out(sends, NETWORK_ID);
-    expect(net).toContain("if(role = 'home', chain_id, g.home_chain) AS home_chain_id, if(role = 'home', address, g.home_contract) AS home FROM raw_logs LEFT JOIN (SELECT n.chain_id AS remote_chain");
-    expect(net).toContain('INNER JOIN chain_names AS n ON n.blockchain_id = assumeNotNull(r.topic1)');
-    expect(net).toContain('GROUP BY remote_chain, token_remote) AS g ON g.remote_chain = chain_id AND g.token_remote = address');
-    // ictt_transfers carries them
-    expect(out('$ICTT(now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_transfers', NETWORK_ID)).toContain('s.home_chain_id AS home_chain_id, s.home AS home');
-  });
-
-  it("names the catalog's chains on a chain page with ictt_chains, and refuses it on the network", () => {
-    const sql = '$ICTT() SELECT chain, lower(concat(\'0x\', hex(blockchain_id))) AS id FROM ictt_chains';
-    const c = out(sql, NUMI);
-    const blob = (i: number) => Buffer.from([...c.matchAll(/base64Decode\('([^']+)'\)/g)][i][1], 'base64');
-    const names = blob(1).toString('utf8').split('|');
-    const ids = blob(0);
-    expect(ids.length).toBe(32 * names.length);
-    // the C-Chain's row holds its blockchain ID
-    const at = names.indexOf('C-Chain');
-    expect(at).toBeGreaterThanOrEqual(0);
-    expect(ids.subarray(32 * at, 32 * at + 32).toString('hex')).toBe('0427d4b22a2a78bcddd456742caf91b56badbff985ee19aef14573e7343fd652');
-    expect(c).toContain(`arrayJoin(range(1, ${names.length + 1}))`);
-    expect(out(sql, NETWORK_ID)).toMatch(/^refused: ictt_chains is a chain page's: on the network, name a chain from chain_names/);
-    // a query that does not name it carries none of its 3.5 KB
-    expect(out('$ICTT() SELECT count() AS n FROM ictt_bridges', C)).not.toContain('ictt_chains');
-  });
-
-  it("gives each network transfer its delivery from the destination's rows, a retry's MessageExecuted, or the source's receipt", () => {
-    const x = out('$ICTT(now() - INTERVAL 7 DAY) SELECT status, count() AS n FROM ictt_transfers GROUP BY status', NETWORK_ID);
-    expect(x).toContain(`unhex('${ICTT_TOPICS.receiptReceived}') AS icm_receipt_t`);
-    const order = ["('withdrawn', 'call_succeeded'), 'delivered', a.arrival_outcome", "topic0 = icm_executed_t), 'delivered'", "topic0 = icm_failed_t), 'execution_failed'", "topic0 = icm_receipt_t), 'received'", "'undelivered', 'destination_not_indexed')"];
-    const at = order.map((s) => x.indexOf(s));
-    expect(at.every((i) => i > 0), JSON.stringify(at)).toBe(true);
-    expect([...at].sort((a, b) => a - b)).toEqual(at);
-    // the version of an ICTT prompt holds every part, so a kept answer is written again when one changes
-    for (const chainId of [C, NETWORK_ID]) for (const p of ICTT_PARTS.filter((q) => served(q, chainId))) expect(icttWithAll(chainId), p).toContain(`${p} AS (`);
-  });
-
-  it('serves ictt_transfers on the network alone, needs a part, and stays off Fuji', () => {
-    expect(out('$ICTT(now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_transfers', NETWORK_ID)).toContain('ictt_transfers AS (SELECT s.chain_id AS chain_id');
+  it('serves ictt_transfers on the network alone, ictt_chains on a chain page alone, needs a part, and stays off Fuji', () => {
+    expect(out('$ICTT(now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_transfers', NETWORK_ID)).toBe('$ICTT(now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_transfers');
     expect(out('$ICTT(now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_transfers', C)).toMatch(/^refused: ictt_transfers is the network's/);
+    expect(out('$ICTT() SELECT chain FROM ictt_chains', NETWORK_ID)).toMatch(/^refused: ictt_chains is a chain page's: on the network, name a chain from chain_names/);
     expect(out('$ICTT(now() - INTERVAL 1 DAY) SELECT 1 AS n FROM raw_logs WHERE chain_id = 43114 AND block_time >= now() - INTERVAL 1 HOUR', C)).toMatch(/^refused: \$ICTT stands for ictt_bridges, ictt_tokens, ictt_held, ictt_sends, ictt_arrivals, ictt_chains: read one/);
     expect(out('$ICTT(now() - INTERVAL 1 DAY) SELECT 1 AS n FROM raw_logs WHERE block_time >= now() - INTERVAL 1 HOUR', NETWORK_ID)).toMatch(/^refused: \$ICTT stands for ictt_bridges, ictt_tokens, ictt_held, ictt_sends, ictt_arrivals, ictt_transfers: read one/);
     expect(out('$ICTT(\'x\') SELECT count() AS n FROM ictt_sends', C)).toMatch(/^refused: \$ICTT takes the window's start first/);
@@ -277,32 +217,70 @@ describe('$ICTT', () => {
     for (const chainId of [NUMI, NETWORK_ID]) expect(guardSql('$DEX(now() - INTERVAL 1 DAY) SELECT count() AS swaps FROM legs', chainId).ok, String(chainId)).toBe(false);
   });
 
-  it('passes the guard and the query service screen in every part, and goes back to its shorthand', () => {
+  it('passes the guard and the query service screen in every part, and keeps its window', () => {
     const now = Date.UTC(2026, 9, 13, 12);
     for (const chainId of [C, NUMI, NETWORK_ID]) {
-      // ictt_first is ictt_tokens' own, and ictt_chains names chains for a query that reads another part
-      for (const part of ICTT_PARTS.filter((p) => p !== 'ictt_first' && p !== 'ictt_chains' && served(p, chainId))) {
+      for (const part of ICTT_PARTS.filter((p) => served(p, chainId))) {
         for (const call of ['$ICTT()', '$ICTT(now() - INTERVAL 7 DAY)', '$ICTT(toStartOfDay(now()) - INTERVAL 7 DAY, toStartOfDay(now()))']) {
           const sql = `${call} SELECT count() AS n FROM ${part}`;
           const g = guardSql(sql, chainId);
           expect(g.ok ? '' : g.error, `${chainId} ${sql}`).toBe('');
           if (!g.ok) continue;
+          // stats-api reads the parts as this chain's rows, so a chain page names no chain_id for them
+          expect(g.sql, `${chainId} ${sql}`).toBe(`${sql}\nLIMIT 2000`);
+          expect(g.tables, `${chainId} ${sql}`).toEqual([]);
           expect(SCREEN.test(g.sql), `${chainId} ${sql}`).toBe(false);
           expect(shadowedAlias(g.sql, true), `${chainId} ${sql}`).toBeNull();
-          // a part that reads no window (the registry, the tokens, what the homes hold) goes back as $ICTT()
-          const short = collapseMacros(g.sql, chainId);
-          const windowless = ['ictt_bridges', 'ictt_tokens', 'ictt_held'].includes(part);
-          expect(short, `${chainId} ${sql}`).toBe(`${windowless ? sql.replace(call, '$ICTT()') : sql}\nLIMIT 2000`);
-          // the window is the shorthand's own, never the first day its registry reads from
-          const w = sqlWindow(short, now);
-          if (call === '$ICTT()' || windowless) expect(w).toBeNull();
+          expect(collapseMacros(g.sql, chainId), `${chainId} ${sql}`).toBe(g.sql);
+          const w = sqlWindow(g.sql, now);
+          if (call === '$ICTT()') expect(w).toBeNull();
           else expect(w !== null && w !== 'unknown' && w.start, sql).toBeGreaterThan(now - 8 * 86_400_000);
         }
       }
     }
-    // the chain filter and the parts come from the query, so a form is made per chain and set of parts
-    expect(icttWith('', undefined, ' SELECT ictt_sends, ictt_held', C)).toContain('ictt_held AS (');
-    expect(icttWith('', undefined, ' SELECT ictt_sends', C)).not.toContain('ictt_held AS (');
+  });
+
+  it("names its chain where it reads a raw table beside the parts, and reads no other chain's", () => {
+    const beside = (filter: string) => `$ICTT(now() - INTERVAL 1 DAY) SELECT count() AS n FROM ictt_sends AS s INNER JOIN raw_txs AS t ON t.hash = s.tx WHERE ${filter}t.block_time >= now() - INTERVAL 1 DAY`;
+    const bare = guardSql(beside(''), C);
+    expect(bare.ok ? '' : bare.error).toBe('filter every table on chain_id = 43114');
+    const named = guardSql(beside('t.chain_id = 43114 AND '), C);
+    expect(named.ok ? named.tables : named.error).toEqual(['raw_txs']);
+    const other = guardSql('$ICTT() SELECT count() AS n FROM ictt_held WHERE chain_id = 8021', C);
+    expect(other.ok ? '' : other.error).toBe('only chain_id = 43114 is readable on this page');
+  });
+});
+
+describe('a query with $ICTT, sent to stats-api', () => {
+  const env = { ...process.env };
+  afterEach(() => {
+    process.env = { ...env };
+    vi.unstubAllGlobals();
+  });
+
+  it("carries the page's chain, which stats-api writes the shorthand out on", async () => {
+    process.env.STATS_QUERY_KEY = 'k';
+    delete process.env.QUERY_CLICKHOUSE_URL;
+    const sent: unknown[] = [];
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (_url: string, init: RequestInit) => {
+        sent.push(JSON.parse(String(init.body)));
+        return new Response(JSON.stringify({ columns: ['n'], types: ['UInt64'], rows: [[1]], rowCount: 1, truncated: false, elapsedMs: 1, complete: true }), { status: 200 });
+      }),
+    );
+    const sql = '$ICTT() SELECT count() AS n FROM ictt_held\nLIMIT 2000';
+    await runQuery(sql, NETWORK_ID);
+    await runQuery(sql, NUMI);
+    expect(sent).toMatchObject([
+      { sql, chainId: 0 },
+      { sql, chainId: NUMI },
+    ]);
+  });
+
+  it('is refused on a direct ClickHouse URL, which cannot write it out', async () => {
+    process.env.QUERY_CLICKHOUSE_URL = 'http://localhost:8123';
+    await expect(runQuery('$ICTT() SELECT count() AS n FROM ictt_held', C)).rejects.toThrow(/written out by stats-api/);
   });
 });
 

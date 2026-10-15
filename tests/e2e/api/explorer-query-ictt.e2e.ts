@@ -152,7 +152,7 @@ describe('Explorer query: ICTT bridges', { platforms: ['api'], tags: ['api', 'ex
     expect(decimals.n).toBeGreaterThan(0);
     expect(decimals.unknown, JSON.stringify(decimals)).toBe(0);
 
-    // a chain page names the other chain from the catalog with ictt_chains
+    // a chain page names the other chain from stats-api's indexed chains with ictt_chains
     const [named] = (await read(app, 43114, "$ICTT() SELECT count() AS n, countIf(c.chain != '') AS named FROM ictt_bridges AS b LEFT JOIN ictt_chains AS c ON c.blockchain_id = b.remote_blockchain_id")).rows;
     expect(named.n).toBeGreaterThan(0);
     expect(named.named, JSON.stringify(named)).toBeGreaterThan(0);

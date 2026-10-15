@@ -135,7 +135,7 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
   try {
     let sql = recipe.sql;
     let run = await anchored(sql, a.chainId);
-    let result = await runQuery(run.sql);
+    let result = await runQuery(run.sql, a.chainId);
     // a kept recipe that finds nothing is written again; a suggestion's fixed SQL says it found nothing, and asks no model
     if (result.rowCount === 0 && !emptyOk) throw new Error("empty");
     // a time series the row cap cut from its latest end keeps its newest rows, from now on
@@ -143,7 +143,7 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
     if (newest) {
       sql = newest;
       run = await anchored(sql, a.chainId);
-      result = await runQuery(run.sql);
+      result = await runQuery(run.sql, a.chainId);
       if (key) await putRecipe(key, { ...recipe, sql });
     }
     // rows that stop at the query's own LIMIT are cut too, not only rows at the cap
@@ -189,7 +189,7 @@ async function snapshotSpan(sql: string, chainId: number): Promise<string | null
   const pick = snapshotSql(sql);
   if (!pick) return null;
   try {
-    const t = msOf((await runQuery((await withSources(pick, chainId)).sql)).rows[0]?.at);
+    const t = msOf((await runQuery((await withSources(pick, chainId)).sql, chainId)).rows[0]?.at);
     return t > 0 ? asOfWords(t, Date.now()) : null;
   } catch {
     return null;
@@ -354,7 +354,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
         const q0 = Date.now();
         try {
           const run = await anchored(`SELECT * FROM (${g.sql.replace(/\nLIMIT \d+$/, "")}) LIMIT 20`, a.chainId);
-          const r = await runQuery(run.sql);
+          const r = await runQuery(run.sql, a.chainId);
           ranFine += 1;
           step("test", Date.now() - q0, true, `${r.rowCount} rows`);
           return { columns: r.columns, rows: r.rows, rowCount: r.rowCount, elapsedMs: r.elapsedMs, rowsRead: r.rowsRead, ...left };
@@ -445,7 +445,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
             step("final", Date.now() - q0, false, "window words");
             return { error: unnamed };
           }
-          const result = !fuji && lastRun?.sql === run.sql ? lastRun.result : await runQuery(run.sql);
+          const result = !fuji && lastRun?.sql === run.sql ? lastRun.result : await runQuery(run.sql, a.chainId);
           lastRun = { sql: run.sql, result };
           ranFine += 1;
           // an empty answer is usually a window that misses the data; ask once
@@ -499,7 +499,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
           if (newest) {
             kept = newest;
             ran = await anchored(newest, a.chainId);
-            rows = await runQuery(ran.sql);
+            rows = await runQuery(ran.sql, a.chainId);
           }
           // the drill must work on a real row before the answer ships
           if (drill && rows.rows[0]) {
@@ -509,7 +509,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
               const probeSql = (await anchored(d.sql, a.chainId)).sql.replace(/\bLIMIT\s+\d+\s*$/i, "LIMIT 1");
               // a probe byte for byte the same as one that found records in this request is not run again
               if (fuji || !probed.has(probeSql)) {
-                const probe = await runQuery(probeSql);
+                const probe = await runQuery(probeSql, a.chainId);
                 // a drill that opens onto nothing is the "No records matched" a reader hits
                 if (probe.rowCount === 0) return fail("drill: it found no records for the first row. Keep the main query's window and filters, and filter on that row's own values (use :bytes for hex ids and addresses).", Date.now() - q0);
                 probed.add(probeSql);
