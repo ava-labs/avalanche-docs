@@ -63,6 +63,7 @@ E2E_BASE_URL=http://localhost:3000 npm test
 | `.github/workflows/unit.yml` | Every PR, and each push to `master` | The whole Vitest suite (`npx vitest run`) |
 | `.github/workflows/e2e.yml` | Every PR, each push to `master`, and nightly | Browser tests (desktop, phone and in-app browsers) and API tests. A PR runs the tests its changed files reach plus a smoke set (`tests/e2e/select`); `master` and the nightly run all of them |
 | `.github/workflows/e2e-explore.yml` | Nightly, or by hand | AI bug hunt: one `e2e explore` per charter in `tests/e2e/explore/charters.json`, on production. Findings go to the job summary |
+| `.github/workflows/link-check.yml` | PRs that touch `content/`, and nightly | lychee (`lychee.toml`) on external links: a PR checks the lines it adds; the nightly run checks all of `content/` after syncing the remote docs |
 | `.github/workflows/commitlint.yml` | Every PR | Conventional Commits on every commit |
 | `.husky/pre-commit` (lint-staged) | Each local commit | Prettier and ESLint on the toolbox, the design check on the Console, ESLint on other files that a block covers, then `tsc --noEmit` |
 | `.husky/commit-msg` | Each local commit | commitlint |

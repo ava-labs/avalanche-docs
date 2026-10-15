@@ -1,0 +1,88 @@
+name: Link check
+
+# Checks the external links in content/ with lychee (config: lychee.toml). Internal links are covered by the e2e
+# route sweep.
+#
+# - A PR checks only the links on the lines it adds, so a dead link already in a file does not block it.
+# - The nightly run checks every link on master, after the remote docs are synced from upstream
+#   (utils/remote-content.mts). Most dead links come from an upstream repo moving or deleting a file, which no
+#   builders-hub PR touches. The job fails and the job summary lists the dead links.
+
+on:
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'lychee.toml'
+      - '.github/workflows/link-check.yml'
+  schedule:
+    - cron: '29 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: link-check-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  pr:
+    name: Link check (added lines)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Collect added lines
+        id: added
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git diff -U0 "$BASE_SHA"...HEAD -- 'content/**/*.md' 'content/**/*.mdx' \
+            | grep '^+[^+]' | cut -c2- > added-lines.md || true
+          echo "lines=$(wc -l < added-lines.md)" >> "$GITHUB_OUTPUT"
+
+      - name: Lychee
+        if: steps.added.outputs.lines != '0'
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: --config lychee.toml added-lines.md
+          failIfEmpty: false
+
+  nightly:
+    name: Link check (all content)
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Sync remote docs
+        run: npx tsx ./utils/remote-content.mts
+
+      - name: Restore lychee cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .lycheecache
+          key: lychee-${{ github.run_id }}
+          restore-keys: lychee-
+
+      # The synced docs are gitignored, so --no-ignore is needed to check them.
+      - name: Lychee
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: --config lychee.toml --no-ignore --cache --max-cache-age 1d 'content/**/*.md' 'content/**/*.mdx'
