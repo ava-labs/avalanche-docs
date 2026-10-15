@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Suspense, lazy, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { rosterOf, type LiveChain, type RosterRow } from "@/components/explorer-v2/network/network-reads";
+import { MONO } from "@/components/landing-v2/story/kit";
 
 /* The stats chapter's live element: one lane per busy chain (the C-Chain
    and the busiest L1s by 30-day transactions), where every block the
@@ -58,7 +59,7 @@ export function LanesFrame({
   const live = state === "live";
   return (
     <div className={`grid gap-x-3 [--k:30px] md:gap-x-6 ${ROW_GRID}`}>
-      <span className="col-span-2 mb-1 flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+      <span className={`col-span-2 mb-1 flex items-center gap-2 text-zinc-500 dark:text-zinc-400 ${MONO}`}>
         <span className="relative flex h-1.5 w-1.5">
           {live && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E6212F] opacity-60" />}
           <span
@@ -77,7 +78,7 @@ export function LanesFrame({
         {/* phones have no axis: the edge where blocks land is named here */}
         {state !== "down" && <span className="ml-auto text-[#E6212F] md:hidden">NOW</span>}
       </span>
-      <span className="mb-1 text-right font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 max-md:hidden dark:text-zinc-400">
+      <span className={`mb-1 text-right text-zinc-500 max-md:hidden dark:text-zinc-400 ${MONO}`}>
         NEWEST
       </span>
       {chains.map((chain, i) => (

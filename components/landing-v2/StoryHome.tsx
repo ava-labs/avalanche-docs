@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   animate,
@@ -18,23 +18,26 @@ import BuiltOnMarquee from "@/components/landing-v2/BuiltOnMarquee";
 import { BrandButton } from "@/components/landing-v2/BrandButton";
 import { HoverPrefetchLink } from "@/components/landing-v2/HoverPrefetchLink";
 import HeroSplash from "@/components/landing-v2/HeroSplash";
-import AvaxCoin from "@/components/landing-v2/AvaxCoin";
 import SheetBackdrop from "@/components/landing-v2/SheetBackdrop";
-import PillarsChapter from "@/components/landing-v2/PillarsChapter";
-import ChainDiagram from "@/components/landing-v2/diagrams/ChainDiagram";
+import OwnChapter from "@/components/landing-v2/story/OwnChapter";
+import FinalChapter from "@/components/landing-v2/story/FinalChapter";
+import InteropChapter from "@/components/landing-v2/story/InteropChapter";
+import InstitutionsChapter from "@/components/landing-v2/story/InstitutionsChapter";
+import BuildChapter from "@/components/landing-v2/story/BuildChapter";
+import { FOCUS, MONO } from "@/components/landing-v2/story/kit";
 import { formatCompact, formatCompactIn, formatExact } from "@/components/landing-v2/compactFigure";
 import NetworkLanes from "@/components/landing-v2/NetworkLanes";
 import { rosterOf } from "@/components/explorer-v2/network/network-reads";
 import l1ChainsData from "@/constants/l1-chains.json";
-import { ROTATE_MS, SCRUB_SPRING } from "@/components/landing-v2/scrub";
+import { SCRUB_SPRING } from "@/components/landing-v2/scrub";
 import { track } from "@/components/landing-v2/track";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
-// Arrival cascade for snap sections: the board rises as one, then its rows
-// stagger in. Everything plays on entry — no reveal is gated behind scroll.
+// Arrival cascade: the board rises as one, then its rows stagger in.
+// Everything plays on entry: no reveal is gated behind scroll.
 const BOARD_VARIANTS = {
-  hidden: { opacity: 0, y: 48 },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
@@ -45,52 +48,17 @@ const ROW_VARIANTS = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE_OUT } },
 };
-const TABLE_VARIANTS = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: EASE_OUT, staggerChildren: 0.07, delayChildren: 0.1 },
-  },
+// Reduced motion: the same hidden start as the server sent (a different
+// start would not hydrate), shown at once with no cascade
+const BOARD_STATIC = {
+  hidden: BOARD_VARIANTS.hidden,
+  show: { opacity: 1, y: 0, transition: { duration: 0, staggerChildren: 0, delayChildren: 0 } },
 };
-const CHAIN_ROW_VARIANTS = {
-  hidden: { opacity: 0, x: -14 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: EASE_OUT } },
-};
+const ROW_STATIC = { hidden: ROW_VARIANTS.hidden, show: { opacity: 1, y: 0, transition: { duration: 0 } } };
 
 /* ------------------------------------------------------------------ */
-/* Ledger strip — live figures set like a settlement ledger            */
+/* Ledger strip: the network's figures, set like a ledger             */
 /* ------------------------------------------------------------------ */
-
-const DAY_SECONDS = 86_400;
-// every flow metric on the page reads over the same 30-day window
-const MONTH_SECONDS = 30 * DAY_SECONDS;
-
-// Extrapolated live counter for FLOW metrics (transactions, messages,
-// volume): the figure climbs at the average rate the aggregate implies,
-// then re-anchors when fresh data arrives. Levels (validators, stake)
-// must never use this — a ticking level would be fiction.
-// Re-anchoring never steps the visible figure backwards unless the
-// measurement window clearly rolled (new value well below what's shown).
-function useExtrapolatedCount(value: number, periodSeconds?: number): number {
-  const [display, setDisplay] = useState(value);
-  const shownRef = useRef(value);
-
-  useEffect(() => {
-    shownRef.current =
-      value < shownRef.current * 0.95 ? value : Math.max(shownRef.current, value);
-    setDisplay(Math.floor(shownRef.current));
-    if (!periodSeconds || value <= 0) return;
-    const rate = value / periodSeconds;
-    const timer = setInterval(() => {
-      shownRef.current += rate * 0.25;
-      setDisplay(Math.floor(shownRef.current));
-    }, 250);
-    return () => clearInterval(timer);
-  }, [value, periodSeconds]);
-
-  return display;
-}
 
 // Compact on screen; the exact figure in the hover title and for screen
 // readers. The exact copy is unselectable, so a copied figure is the one shown.
@@ -116,7 +84,9 @@ const STAKE_CLASS =
 function LedgerFigure({ value, animateIn }: { value: number; animateIn: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const [display, setDisplay] = useState(animateIn ? 0 : value);
+  // the server cannot read reduced motion, so both sides start at 0 and the
+  // effect below sets the figure; a reduced-motion start would not hydrate
+  const [display, setDisplay] = useState(0);
   // live refreshes count from the last shown figure, not from zero again
   const shownRef = useRef(0);
 
@@ -144,7 +114,9 @@ function LedgerFigure({ value, animateIn }: { value: number; animateIn: boolean 
   }, [inView, value, animateIn]);
 
   return (
-    <span ref={ref}>
+    // leading-none: the figure's own line sets the height, as tall as the
+    // empty-figure hairline box, so a late figure shifts nothing
+    <span ref={ref} className="leading-none">
       <Figure shown={formatCompactIn(display, value)} exact={formatExact(value)} className={FIGURE_CLASS} />
     </span>
   );
@@ -169,13 +141,8 @@ function LedgerCell({
   const cellClass = `flex flex-col gap-1.5 px-5 py-3 md:px-6 md:py-5 ${className}`;
   const content = (
     <>
-      <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400 lg:whitespace-nowrap">
-        {live && (
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E6212F] opacity-60" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#E6212F]" />
-          </span>
-        )}
+      <span className={`flex items-center gap-2 text-zinc-500 dark:text-zinc-400 lg:whitespace-nowrap ${MONO}`}>
+        {live && <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E6212F]" />}
         <span>
           {label}
           {period && (
@@ -193,7 +160,7 @@ function LedgerCell({
     return (
       <Link
         href={href}
-        className={`${cellClass} transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900`}
+        className={`${cellClass} transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900 ${CELL_FOCUS}`}
       >
         {content}
       </Link>
@@ -203,6 +170,9 @@ function LedgerCell({
 }
 
 const FIRST_ROW_OF_TWO = "max-lg:border-b max-lg:border-zinc-200 dark:max-lg:border-zinc-800";
+// a board cell's focus: the story's red ring, drawn inside the cell (the
+// cells meet edge to edge), over the same fill as hover
+const CELL_FOCUS = `${FOCUS} focus-visible:-outline-offset-2! focus-visible:bg-zinc-100 dark:focus-visible:bg-zinc-900`;
 
 function LedgerStrip({
   globeData,
@@ -234,9 +204,8 @@ function LedgerStrip({
         </LedgerCell>
         {/* ends the first row of two below lg: no divider at the screen edge */}
         <LedgerCell
-          label="CROSS-CHAIN MSGS"
+          label="ICM MESSAGES"
           period="30D"
-          live
           href="/explorer/mainnet/chains"
           className={`${FIRST_ROW_OF_TWO} max-lg:border-r-0`}
         >
@@ -249,7 +218,7 @@ function LedgerStrip({
         <LedgerCell label="ACTIVE L1S" href="/explorer/mainnet/chains">
           {l1Count !== null ? <LedgerFigure value={l1Count} animateIn={animateIn} /> : <LedgerDash />}
         </LedgerCell>
-        <LedgerCell label="VALIDATORS" href="/explorer/mainnet/chains">
+        <LedgerCell label="VALIDATOR SEATS" href="/explorer/mainnet/chains">
           {agg ? <LedgerFigure value={agg.totalValidators} animateIn={animateIn} /> : <LedgerDash />}
         </LedgerCell>
       </div>
@@ -262,12 +231,18 @@ function UsdFigure({ value }: { value: number | null }) {
   return <Figure shown={formatCompact(value, "usd")} exact={formatExact(value, "usd")} className={FIGURE_CLASS} />;
 }
 
+// no figure yet: a short hairline, in a box as tall as the figure's line, so
+// the cell keeps its height when the figure arrives
 function LedgerDash() {
-  return <span className="font-mono text-2xl text-zinc-300 dark:text-zinc-700">—</span>;
+  return (
+    <span role="img" aria-label="No data" className="flex h-6 items-center md:h-8">
+      <span className="h-px w-6 bg-zinc-300 dark:bg-zinc-700" />
+    </span>
+  );
 }
 
 /* ------------------------------------------------------------------ */
-/* Chapter 1 — statement hero with the live network                    */
+/* Chapter 1: statement hero with the network                         */
 /* ------------------------------------------------------------------ */
 
 
@@ -291,7 +266,7 @@ function ChapterOne() {
   const reducedMotion = useReducedMotion();
 
   // Exit dim: the hero hands off by fading as it scrolls away, so the rising
-  // stats board is the only thing asking for attention. Opacity only — a y
+  // stats board is the only thing asking for attention. Opacity only: a y
   // parallax here could collide with the board entering below the fold.
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress: exit } = useScroll({
@@ -376,7 +351,7 @@ function ChapterOne() {
           {...rise(0.05)}
         >
           Build {article}{" "}
-          {/* on mobile the noun always takes its own line — short nouns like
+          {/* on mobile the noun always takes its own line. Short nouns like
               "agent" would otherwise fit inline and make the headline jump
               between one and two lines as the words cycle */}
           <br className="md:hidden" />
@@ -471,13 +446,13 @@ function TokenStack({ srcs }: { srcs: string[] }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Chapter furniture — brand layout devices from the visual-narrative  */
+/* Chapter furniture: brand layout devices from the visual-narrative  */
 /* guidelines: an arrowed eyebrow opening each chapter, and vertical   */
 /* measurement rules in the technical-drawing grammar                  */
 /* ------------------------------------------------------------------ */
 
 /* ------------------------------------------------------------------ */
-/* Chapter 2 — proof: one dominant figure and its quiet receipts       */
+/* Chapter 2, proof: one dominant figure and its quiet receipts       */
 /* ------------------------------------------------------------------ */
 
 // The dominant figure: stake in USD, or in AVAX when the price is down
@@ -497,10 +472,10 @@ function StakeFigure({
   return (
     <Link
       href="/explorer/mainnet/p-chain/validators"
-      className="group flex flex-col gap-2 md:gap-3 lg:items-end lg:text-right"
+      className={`group flex flex-col gap-2 md:gap-3 lg:items-end lg:text-right ${FOCUS}`}
     >
       {/* the same link grammar as the page's other mono links: text plus arrow */}
-      <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 transition-colors group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-zinc-100">
+      <span className={`inline-flex items-center gap-1.5 text-zinc-500 transition-colors group-hover:text-zinc-900 dark:text-zinc-400 dark:group-hover:text-zinc-100 ${MONO}`}>
         STAKE SECURING THE NETWORK
         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
       </span>
@@ -521,7 +496,7 @@ function StakeFigure({
           {supplyStakedPct !== null && (
             <>
               {" "}
-              <span className="whitespace-nowrap">{supplyStakedPct.toFixed(1)}% OF CIRCULATING SUPPLY</span>
+              <span className="whitespace-nowrap">{supplyStakedPct.toFixed(1)}% OF TOTAL SUPPLY</span>
             </>
           )}
         </span>
@@ -550,24 +525,32 @@ function StatsChapter({
   reducedMotion: boolean;
 }) {
   const staticMode = reducedMotion;
+  const rowVariants = staticMode ? ROW_STATIC : ROW_VARIANTS;
   // the lanes row is decided at first render: with no chains it stays out
   // for the visit, since a row that came with a later poll would push the board down
   const [lanesRow] = useState(() => rosterOf(globeData?.metrics?.chains ?? []).length > 0);
 
   return (
     // One panel: ledger, figures, and table are rows of the same board.
-    // The whole board loads when the section snaps into view — rows cascade
+    // The whole board loads when the section comes into view: rows cascade
     // in; nothing is gated behind further scrolling.
     <section data-chapter="stats" className="v2-snap-section relative flex flex-col justify-center pt-8 md:py-16 lg:min-h-[calc(100vh-3.5rem)] lg:py-0">
       {/* the claim on the left, its proof on the right: the stake that
           secures the network, the figure institutions underwrite */}
       <div className="mx-auto mb-6 w-full max-w-7xl px-5 md:mb-10 md:px-6">
+        {/* the server cannot read reduced motion, so both sides start hidden;
+            reduced motion only shows it at once (the kit's Reveal) */}
         <motion.div
+          data-reveal
           className="flex flex-col gap-5 md:gap-10 lg:flex-row lg:items-end lg:justify-between"
-          initial={staticMode ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: EASE_OUT }}
+          initial={{ opacity: 0, y: 24 }}
+          {...(staticMode
+            ? { animate: { opacity: 1, y: 0 }, transition: { duration: 0 } }
+            : {
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true, amount: 0.4 },
+                transition: { duration: 0.6, ease: EASE_OUT },
+              })}
         >
           {/* staircase stack per the /solutions hero: lines step right,
               the red period closes the set. The page's largest claim after
@@ -590,16 +573,18 @@ function StatsChapter({
           />
         </motion.div>
       </div>
+      {/* the rows take the board's hidden start, so each carries data-reveal too */}
       <motion.div
         className="divide-y divide-zinc-200 border-y border-zinc-200 bg-white/80 backdrop-blur-sm dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-950/80"
-        variants={BOARD_VARIANTS}
-        initial={staticMode ? false : "hidden"}
-        whileInView="show"
-        viewport={{ once: true, amount: 0.35 }}
+        data-reveal
+        initial="hidden"
+        {...(staticMode
+          ? { animate: "show", variants: BOARD_STATIC }
+          : { whileInView: "show", viewport: { once: true, amount: 0.35 }, variants: BOARD_VARIANTS })}
       >
         {/* the network now: every block the busiest chains make, as it lands */}
         {lanesRow && (
-          <motion.div variants={ROW_VARIANTS}>
+          <motion.div data-reveal variants={rowVariants}>
             <div className="mx-auto w-full max-w-7xl px-5 py-3 md:px-6 md:pt-4">
               <NetworkLanes
                 rows={globeData?.metrics?.chains ?? []}
@@ -609,20 +594,20 @@ function StatsChapter({
             </div>
           </motion.div>
         )}
-        <motion.div variants={ROW_VARIANTS}>
+        <motion.div data-reveal variants={rowVariants}>
           <LedgerStrip globeData={globeData} l1Count={l1Count} animateIn={!reducedMotion} />
         </motion.div>
 
         {/* on-chain capital. Row wrappers stay full-width so the board's
             dividers run full-bleed; content insets to the 7xl measure. */}
-        <motion.div variants={ROW_VARIANTS}>
+        <motion.div data-reveal variants={rowVariants}>
         <div className="mx-auto grid w-full max-w-7xl grid-cols-2 lg:grid-cols-3 lg:divide-x lg:divide-zinc-200 dark:lg:divide-zinc-800">
           <Link
             href="/explorer/mainnet/c-chain/defi/stablecoins"
-            className="flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:col-span-2 max-lg:border-b dark:border-zinc-800"
+            className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:col-span-2 max-lg:border-b dark:border-zinc-800 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
-              <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+              <span className={`text-zinc-500 dark:text-zinc-400 ${MONO}`}>
                 STABLECOINS ON-CHAIN
               </span>
               <TokenStack srcs={["/logos/tokens/usdc.png", "/logos/tokens/usdt.png", "/logos/tokens/eurc.png", "/logos/tokens/jpyc.png", "/logos/tokens/xsgd.png"]} />
@@ -631,10 +616,10 @@ function StatsChapter({
           </Link>
           <Link
             href="/explorer/mainnet/c-chain/defi"
-            className="flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:border-r dark:border-zinc-800"
+            className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 border-zinc-200 max-lg:border-r dark:border-zinc-800 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
-              <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+              <span className={`text-zinc-500 dark:text-zinc-400 ${MONO}`}>
                 DEFI TVL
               </span>
               <TokenStack srcs={["/logos/tokens/aave.png", "/logos/tokens/benqi.png", "/logos/tokens/gmx.png"]} />
@@ -643,14 +628,10 @@ function StatsChapter({
           </Link>
           <Link
             href="/explorer/mainnet/c-chain/defi"
-            className="flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900"
+            className={`flex flex-col justify-between gap-1 px-5 py-3 transition-colors hover:bg-zinc-100 md:gap-1.5 md:px-6 md:py-6 dark:hover:bg-zinc-900 ${CELL_FOCUS}`}
           >
             <span className="flex items-center justify-between">
-              <span className="flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E6212F] opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#E6212F]" />
-                </span>
+              <span className={`flex items-center gap-2 text-zinc-500 dark:text-zinc-400 ${MONO}`}>
                 <span>
                   DEX VOLUME<span className="max-sm:hidden"> · </span>
                   <span className="max-sm:block">30D</span>
@@ -664,21 +645,23 @@ function StatsChapter({
         </motion.div>
 
         {/* board footer: the full instrument lives at /stats */}
-        <motion.div variants={ROW_VARIANTS}>
+        <motion.div data-reveal variants={rowVariants}>
           <HoverPrefetchLink
             href="/explorer"
             onClick={() => track("home_cta_clicked", { section: "stats", label: "Explore the network", href: "/explorer" })}
-            className="group relative flex items-center justify-between overflow-hidden bg-[#E6212F] py-4 md:py-5"
+            // the focus ring is a pseudo-element over the sweep: the bar's own
+            // outline would paint under its positioned children
+            className="group relative flex items-center justify-between overflow-hidden bg-[#E6212F] py-4 outline-none focus-visible:after:pointer-events-none focus-visible:after:absolute focus-visible:after:inset-0.5 focus-visible:after:z-20 focus-visible:after:border-2 focus-visible:after:border-[#1F1F1F] md:py-5"
           >
             <span
               aria-hidden
-              className="absolute inset-0 origin-left scale-x-0 bg-[#EBF0FA] transition-transform duration-300 ease-out group-hover:scale-x-100"
+              className="absolute inset-0 origin-left scale-x-0 bg-[#EBF0FA] transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
             />
             <span className="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-5 md:px-6">
-              <span className="text-sm font-medium text-white transition-colors duration-300 group-hover:text-[#1F1F1F]">
+              <span className="text-sm font-medium text-white transition-colors duration-300 group-hover:text-[#1F1F1F] group-focus-visible:text-[#1F1F1F]">
                 Explore the network
               </span>
-              <ArrowRight className="h-4 w-4 text-white transition-colors duration-300 group-hover:text-[#E6212F]" />
+              <ArrowRight className="h-4 w-4 text-white transition-colors duration-300 group-hover:text-[#E6212F] group-focus-visible:text-[#E6212F]" />
             </span>
           </HoverPrefetchLink>
         </motion.div>
@@ -688,131 +671,7 @@ function StatsChapter({
 }
 
 /* ------------------------------------------------------------------ */
-/* Chapter 3 — the offering: one network, two ways to build            */
-/* ------------------------------------------------------------------ */
-
-const OFFERINGS = [
-  {
-    mark: "avax" as const,
-    eyebrow: "C-CHAIN",
-    title: "Build on the C-Chain",
-    lines: [
-      "One public EVM chain, hundreds of live applications.",
-      "Deep stablecoin liquidity, institutional custody.",
-      "Every major wallet and data integration in place.",
-    ],
-    cta: { text: "Build on C-Chain", href: "/docs/primary-network#c-chain-contract-chain" },
-    secondary: { text: "BROWSE INTEGRATIONS", href: "/integrations" },
-  },
-  {
-    mark: "yours" as const,
-    eyebrow: "SOVEREIGN L1",
-    title: "Build your own L1",
-    lines: [
-      "One sovereign chain, customized end to end.",
-      "Your own VM, gas token, fees, and permissioning.",
-      "Validated by operators you choose, ICM optional.",
-    ],
-    cta: { text: "Build an L1", href: "/console" },
-    secondary: { text: "READ THE ARCHITECTURE", href: "/docs/avalanche-l1s" },
-  },
-];
-
-function OfferingChapter({ reducedMotion }: { reducedMotion: boolean }) {
-  return (
-    <section data-chapter="offering" className="v2-snap-section relative flex flex-col justify-center py-24 lg:min-h-[calc(100vh-3.5rem)] lg:py-0">
-      <div className="mx-auto w-full max-w-7xl px-5 md:px-6">
-        <motion.h2
-          className="v2-display text-3xl text-zinc-900 dark:text-zinc-50 md:text-5xl xl:text-6xl"
-          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: EASE_OUT }}
-        >
-          One network. Two ways to build
-          <span className="text-[#E6212F]">.</span>
-        </motion.h2>
-
-        <motion.div
-          className="relative mt-12 grid grid-cols-1 divide-y divide-zinc-200 border-y border-zinc-200 bg-white/80 backdrop-blur-sm lg:grid-cols-2 lg:divide-x lg:divide-y-0 dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-950/80"
-          initial={reducedMotion ? false : { opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT }}
-        >
-          {/* the wire: both chains hang off one network. Node centers sit at
-              25% and 75% of the board, so the wire spans the middle half. */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-[calc(25%+32px)] right-[calc(25%+32px)] top-[72px] hidden lg:block"
-          >
-            <div className="h-px w-full bg-zinc-300 dark:bg-zinc-700" />
-            <span className="v2-wire-dot absolute -top-[3px] h-[7px] w-[7px] rounded-full bg-[#E6212F]" />
-            <span className="absolute left-1/2 top-3 -translate-x-1/2 font-mono text-[9px] tracking-[0.18em] text-zinc-400 dark:text-zinc-500">
-              INTERCHAIN MESSAGING
-            </span>
-          </div>
-          {/* the choice: one or the other */}
-          <span className="absolute left-1/2 top-[55%] z-10 hidden -translate-x-1/2 -translate-y-1/2 border border-zinc-200 bg-white px-2.5 py-1.5 font-mono text-[10px] tracking-[0.18em] text-zinc-500 lg:block dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
-            OR
-          </span>
-
-          {OFFERINGS.map((offering) => (
-            <div
-              key={offering.eyebrow}
-              className="flex flex-col items-center px-5 pb-10 pt-12 text-center md:px-8 lg:pb-12"
-            >
-              {/* the known chain wears the mark; yours is still to be drawn */}
-              {offering.mark === "avax" ? (
-                <AvaxCoin />
-              ) : (
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-dashed border-zinc-400 dark:border-zinc-500">
-                  <span className="font-mono text-base text-zinc-500 dark:text-zinc-400">?</span>
-                </span>
-              )}
-              <span className="mt-4 font-mono text-[10px] tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-                {offering.eyebrow}
-              </span>
-              <h3 className="mt-4 text-2xl font-light tracking-[-0.02em] text-zinc-900 dark:text-zinc-50 md:text-3xl">
-                {offering.title}
-              </h3>
-              {/* three matched beats, one fact each — the same count and
-                  rhythm on both sides so the panels mirror line for line */}
-              <div className="mt-4 max-w-md space-y-1.5">
-                {offering.lines.map((line) => (
-                  <p key={line} className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-base">
-                    {line}
-                  </p>
-                ))}
-              </div>
-              <div className="mt-auto flex flex-col items-center gap-5 pt-9 sm:flex-row sm:gap-7">
-                <BrandButton
-                  href={offering.cta.href}
-                  prefetchOnIntent
-                  onClick={() => track("home_cta_clicked", { section: "offering", path: offering.eyebrow, label: offering.cta.text, href: offering.cta.href })}
-                  className="w-full sm:w-auto"
-                >
-                  {offering.cta.text}
-                </BrandButton>
-                <HoverPrefetchLink
-                  href={offering.secondary.href}
-                  onClick={() => track("home_cta_clicked", { section: "offering", path: offering.eyebrow, label: offering.secondary.text, href: offering.secondary.href })}
-                  className="group inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.18em] text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
-                >
-                  {offering.secondary.text}
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                </HoverPrefetchLink>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Already live — the closing evidence, one screen before the CTA      */
+/* Chain marks for the live lanes                                      */
 /* ------------------------------------------------------------------ */
 
 // Glacier serves a generic AvaCloud placeholder when a chain has no brand
@@ -829,36 +688,6 @@ const LOCAL_CHAIN_LOGOS: Record<string, string> = {
 // them, so they sit inset on a white disc instead
 const INSET_MARKS = new Set(["kite"]);
 
-// Glacier registry names aren't always the brand names
-const DISPLAY_NAMES: Record<string, string> = {
-  kite: "Kite AI",
-  "intain market": "Intain",
-  "lynq 01": "Lynq",
-};
-
-// Showcase pins: chains the shared Metrics API doesn't rank fairly but that
-// carry the story. Kite AI's figure is injected from its dedicated metrics
-// source (see getKiteTxCount in the page). Pins merge into the ranked list —
-// they earn their row position by activity like everyone else.
-const FEATURED_CHAINS: { name: string }[] = [
-  { name: "kite" },
-  { name: "dinari financial network" },
-  { name: "beam" },
-  { name: "fifa" },
-];
-
-// Private L1s: real institutional deployments whose activity ends at the
-// network's edge. Their validator sets are public P-Chain facts; their
-// transactions are not — so the activity column says "private" instead of
-// pretending zero is the truth.
-const PRIVATE_CHAINS: { name: string }[] = [
-  { name: "intain market" },
-  { name: "lynq 01" },
-];
-
-// public rows shown before the private tier
-const PUBLIC_ROW_COUNT = 8;
-
 function resolveChainLogo(chain: { chainId?: string; chainName: string; chainLogoURI?: string }) {
   const GENERIC = "AvaCloud-512x512";
   const local = LOCAL_CHAIN_LOGOS[chain.chainName.toLowerCase()];
@@ -869,16 +698,6 @@ function resolveChainLogo(chain: { chainId?: string; chainName: string; chainLog
   );
   if (curated?.chainLogoURI && !curated.chainLogoURI.includes(GENERIC)) return curated.chainLogoURI;
   return null;
-}
-
-function resolveChainStatsHref(chain: { chainId?: string; chainName: string }): string | null {
-  if (chain.chainId === "43114" || chain.chainName.toLowerCase().includes("c-chain")) {
-    return "/explorer/mainnet/c-chain/accounts";
-  }
-  const curated = (l1ChainsData as any[]).find(
-    (c) => c.chainId === chain.chainId || c.chainName?.toLowerCase() === chain.chainName.toLowerCase(),
-  );
-  return curated?.slug ? `/explorer/mainnet/${curated.slug}/accounts` : null;
 }
 
 function ChainMark({ chain }: { chain: { chainId?: string; chainName: string; chainLogoURI?: string } }) {
@@ -903,429 +722,11 @@ function ChainMark({ chain }: { chain: { chainId?: string; chainName: string; ch
   );
 }
 
-function TopChainRow({
-  index,
-  chain,
-  isPrivate = false,
-  staticMode,
-}: {
-  index: number;
-  chain: {
-    chainId?: string;
-    chainName: string;
-    chainLogoURI?: string;
-    txCount: number;
-    tps: number;
-    validatorCount: number | string;
-  };
-  isPrivate?: boolean;
-  staticMode: boolean;
-}) {
-  // chains without a curated slug still land somewhere real: the full chain list
-  const href = resolveChainStatsHref(chain) ?? "/explorer/mainnet/chains";
-  const liveTxCount = useExtrapolatedCount(chain.txCount, MONTH_SECONDS);
-  const rowClass =
-    "grid grid-cols-[2rem_1.5rem_1fr_6rem] items-center gap-4 py-3 sm:grid-cols-[2rem_1.5rem_1fr_10rem_6rem]";
-
-  return (
-    <motion.div
-      className="border-b border-zinc-200 last:border-b-0 dark:border-zinc-800"
-      variants={staticMode ? undefined : CHAIN_ROW_VARIANTS}
-    >
-      <Link
-        href={href}
-        onClick={() => track("home_chain_clicked", { chain: chain.chainName, href })}
-        className={`${rowClass} transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900`}
-      >
-        <span className="font-mono text-[10px] tracking-[0.18em] text-zinc-400 dark:text-zinc-600">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <ChainMark chain={chain} />
-        <span className="truncate text-sm font-medium text-zinc-900 dark:text-zinc-50">
-          {DISPLAY_NAMES[chain.chainName.toLowerCase()] ?? chain.chainName}
-        </span>
-        {isPrivate ? (
-          // activity is sealed by design — the label is the datum
-          <span className="text-right font-mono text-[10px] tracking-[0.18em] text-zinc-400 dark:text-zinc-500">
-            PRIVATE
-          </span>
-        ) : (
-          <span className="text-right font-mono text-sm tabular-nums text-zinc-700 dark:text-zinc-300">
-            {liveTxCount > 0 ? liveTxCount.toLocaleString("en-US") : "—"}
-          </span>
-        )}
-        <span className="hidden text-right font-mono text-sm tabular-nums text-zinc-500 sm:block dark:text-zinc-400">
-          {typeof chain.validatorCount === "number" ? chain.validatorCount : "—"}
-        </span>
-      </Link>
-    </motion.div>
-  );
-}
-
-function LiveChainsChapter({
-  globeData,
-  kiteTxCount,
-  reducedMotion,
-}: {
-  globeData: GlobeData;
-  kiteTxCount: number | null;
-  reducedMotion: boolean;
-}) {
-  // curated exclusions for the marketing surface (unbranded / low-tier / staging)
-  const EXCLUDED_CHAINS = ["andromeda", "defi kingdoms", "kitestaging2", "orange"];
-  const privateNames = PRIVATE_CHAINS.map((p) => p.name);
-  const byActivity = (globeData?.metrics?.chains || [])
-    .filter((c) => !EXCLUDED_CHAINS.includes(c.chainName.toLowerCase()))
-    .sort((a, b) => (b.txCount || 0) - (a.txCount || 0));
-
-  const featured = FEATURED_CHAINS.map((f) => {
-    const chain = byActivity.find((c) => c.chainName.toLowerCase() === f.name);
-    if (!chain) return null;
-    // Kite AI's real figure comes from its dedicated metrics source
-    if (f.name === "kite" && kiteTxCount !== null) return { ...chain, txCount: kiteTxCount };
-    return chain;
-  }).filter(Boolean) as (typeof byActivity)[number][];
-  // organic activity leaders fill the remaining public rows, then the whole
-  // public set re-ranks by activity so a pin never outranks a busier chain
-  const organic = byActivity
-    .filter(
-      (c) =>
-        !featured.some((f) => f.chainName === c.chainName) &&
-        !privateNames.includes(c.chainName.toLowerCase()),
-    )
-    .slice(0, PUBLIC_ROW_COUNT - featured.length);
-  const publicRows = [...organic, ...featured].sort(
-    (a, b) => (b.txCount || 0) - (a.txCount || 0),
-  );
-  // the private tier closes the table: sealed activity, public validator sets
-  const privateRows = PRIVATE_CHAINS.map((p) =>
-    byActivity.find((c) => c.chainName.toLowerCase() === p.name),
-  ).filter(Boolean) as (typeof byActivity)[number][];
-  const rows = [
-    ...publicRows.map((chain) => ({ chain, isPrivate: false })),
-    ...privateRows.map((chain) => ({ chain, isPrivate: true })),
-  ];
-
-  return (
-    <section data-chapter="live-chains" className="v2-snap-section relative flex flex-col justify-center py-24 lg:min-h-[calc(100vh-3.5rem)] lg:py-0">
-      <div className="mx-auto w-full max-w-7xl px-5 md:px-6">
-        <motion.h2
-          className="v2-display text-3xl text-zinc-900 dark:text-zinc-50 md:text-5xl xl:text-6xl"
-          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: EASE_OUT }}
-        >
-          Already live
-          <span className="text-[#E6212F]">.</span>
-        </motion.h2>
-
-        <motion.div
-          className="mt-12 border-y border-zinc-200 bg-white/80 px-5 py-4 backdrop-blur-sm md:px-6 dark:border-zinc-800 dark:bg-zinc-950/80"
-          variants={TABLE_VARIANTS}
-          initial={reducedMotion ? false : "hidden"}
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <div className="grid grid-cols-[2rem_1.5rem_1fr_6rem] gap-4 border-b border-zinc-300 pb-2 sm:grid-cols-[2rem_1.5rem_1fr_10rem_6rem] dark:border-zinc-700">
-            <span />
-            <span />
-            <span className="font-mono text-[10px] tracking-[0.18em] text-zinc-900 dark:text-zinc-100">
-              CHAIN
-            </span>
-            <span className="whitespace-nowrap text-right font-mono text-[10px] tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
-              <span className="sm:hidden">TXS · 30D</span>
-              <span className="hidden sm:inline">TRANSACTIONS · 30D</span>
-            </span>
-            <span className="hidden whitespace-nowrap text-right font-mono text-[10px] tracking-[0.18em] text-zinc-500 sm:block dark:text-zinc-400">
-              VALIDATORS
-            </span>
-          </div>
-          {rows.map(({ chain, isPrivate }, i) => (
-            <TopChainRow
-              key={chain.chainName + i}
-              index={i}
-              chain={chain}
-              isPrivate={isPrivate}
-              staticMode={reducedMotion}
-            />
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3"
-          initial={reducedMotion ? false : { opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <Link
-            href="/explorer/mainnet/chains"
-            onClick={() => track("home_cta_clicked", { section: "live-chains", label: "All chains", href: "/explorer/mainnet/chains" })}
-            className="group inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.18em] text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
-          >
-            ALL CHAINS
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-          <HoverPrefetchLink
-            href="/explorer"
-            onClick={() => track("home_cta_clicked", { section: "live-chains", label: "Explorer", href: "/explorer" })}
-            className="group inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.18em] text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
-          >
-            EXPLORER
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-          </HoverPrefetchLink>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Chapter 6: playbooks, one L1 in three access modes                  */
-/* ------------------------------------------------------------------ */
-
-const PLAYBOOKS = [
-  {
-    key: "public",
-    title: "Public",
-    body: "Anyone can validate; anyone can transact. Build on the shared C-Chain, or run an open L1 of your own.",
-  },
-  {
-    key: "permissioned",
-    title: "Permissioned",
-    body: "Named operators run consensus; the application stays open. Accountability at the validator layer, reach at the user layer.",
-  },
-  {
-    key: "private",
-    title: "Private",
-    body: "Participation, data, and access end at the network\u2019s edge. To anyone outside, the chain doesn\u2019t exist.",
-  },
-] as const;
-
-type PlaybookKey = (typeof PLAYBOOKS)[number]["key"];
-
-function PlaybookSelector({
-  mode,
-  onSelect,
-  progressKey,
-  animate,
-}: {
-  mode: PlaybookKey;
-  onSelect: (key: PlaybookKey) => void;
-  progressKey: string;
-  animate: boolean;
-}) {
-  return (
-    <div className="divide-y divide-zinc-200 border-y border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
-      {PLAYBOOKS.map((pb) => {
-        const isActive = pb.key === mode;
-        return (
-          <button
-            key={pb.key}
-            type="button"
-            onClick={() => onSelect(pb.key)}
-            aria-pressed={isActive}
-            className={`relative block w-full py-7 pl-6 pr-4 text-left transition-opacity duration-300 ${
-              isActive ? "" : "opacity-40 hover:opacity-70"
-            }`}
-          >
-            {/* active edge-rule fills over the rotation interval — same
-                3px red line as the accordion's floor */}
-            {isActive &&
-              (animate ? (
-                <span
-                  key={progressKey}
-                  aria-hidden
-                  className="absolute left-0 top-0 h-full w-[3px] origin-top bg-[#E6212F]"
-                  style={{ animation: `v2-fill-y ${ROTATE_MS}ms linear forwards`, transform: "scaleY(0)" }}
-                />
-              ) : (
-                <span aria-hidden className="absolute left-0 top-0 h-full w-[3px] bg-[#E6212F]" />
-              ))}
-            <span className="v2-display text-xl text-zinc-900 dark:text-zinc-50 md:text-2xl">
-              {pb.title}
-            </span>
-            <span className="mt-2 block max-w-md text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-              {pb.body}
-            </span>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function PlaybooksChapter({ reducedMotion }: { reducedMotion: boolean }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const inView = useInView(sectionRef, { amount: 0.5 });
-  const [modeIdx, setModeIdx] = useState(0);
-  // bumping restarts the rotation timer so a click always buys a full interval
-  const [cycle, setCycle] = useState(0);
-
-  // The section is complete on arrival; the stage walks the three playbooks
-  // on its own while in view. Scrolling only ever moves between sections.
-  useEffect(() => {
-    if (reducedMotion || !inView) return;
-    const timer = setInterval(() => setModeIdx((i) => (i + 1) % PLAYBOOKS.length), ROTATE_MS);
-    return () => clearInterval(timer);
-  }, [reducedMotion, inView, cycle]);
-
-  const select = (key: PlaybookKey) => {
-    track("home_playbook_selected", { playbook: key });
-    setCycle((c) => c + 1);
-    setModeIdx(PLAYBOOKS.findIndex((pb) => pb.key === key));
-  };
-
-  const mode = PLAYBOOKS[modeIdx].key;
-
-  const body = (
-    <div className="mx-auto w-full max-w-7xl px-5 md:px-6">
-      {/* the last word is the surprise, so it takes the red — the same
-          lead/punch grammar as the accordion headlines */}
-      <h2 className="v2-display text-3xl text-zinc-900 dark:text-zinc-50 md:text-5xl xl:text-6xl">
-        Open, permissioned, or <span className="text-[#E6212F]">invisible.</span>
-      </h2>
-
-      {/* a bounded card, not a full-bleed wall — the sheet (and the
-          avalanche gathering on it) stays visible around the board */}
-      <div className="mt-12 grid items-center gap-12 border-y border-zinc-200 bg-white/80 px-5 py-10 backdrop-blur-sm md:px-8 lg:grid-cols-2 dark:border-zinc-800 dark:bg-zinc-950/80">
-        <div>
-          <PlaybookSelector
-            mode={mode}
-            onSelect={select}
-            progressKey={`${mode}-${cycle}`}
-            animate={!reducedMotion && inView}
-          />
-          {/* the chapter's door: every playbook is a Console configuration */}
-          <div className="mt-8 hidden lg:block">
-            <BrandButton
-              variant="secondary"
-              href="/console"
-              prefetchOnIntent
-              onClick={() => track("home_cta_clicked", { section: "playbooks", label: "Configure your L1", href: "/console" })}
-            >
-              Configure your L1
-            </BrandButton>
-          </div>
-        </div>
-        <div className="hidden flex-col items-center lg:flex">
-          <ChainDiagram mode={mode} cycle={cycle} />
-        </div>
-
-        {/* sub-lg stage: same instrument, compact, below the selector so the
-            rotating list visibly drives something */}
-        <div className="flex flex-col items-center gap-4 lg:hidden">
-          <ChainDiagram mode={mode} cycle={cycle} className="-mx-5 w-[calc(100%+2.5rem)]" />
-          <BrandButton
-            variant="secondary"
-            href="/console"
-            prefetchOnIntent
-            onClick={() => track("home_cta_clicked", { section: "playbooks", label: "Configure your L1", href: "/console" })}
-            className="mt-4 w-full sm:w-auto"
-          >
-            Configure your L1
-          </BrandButton>
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <section
-      ref={sectionRef}
-      data-chapter="playbooks"
-      className="v2-snap-section flex items-center py-24 lg:min-h-[calc(100vh-3.5rem)] lg:py-0"
-    >
-      <motion.div
-        className="w-full"
-        initial={reducedMotion ? false : { opacity: 0, y: 48 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.7, ease: EASE_OUT }}
-      >
-        {body}
-      </motion.div>
-    </section>
-  );
-}
-
-function FinaleRow({
-  href,
-  title,
-  description,
-}: {
-  href: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <HoverPrefetchLink
-      href={href}
-      onClick={() => track("home_cta_clicked", { section: "finale", label: title, href })}
-      className="group grid grid-cols-[1fr_auto] items-center gap-6 px-5 py-7 transition-colors hover:bg-zinc-100 md:px-6 dark:hover:bg-zinc-900"
-    >
-      <span>
-        <span className="block text-lg font-medium text-zinc-900 dark:text-zinc-50 md:text-xl">
-          {title}
-        </span>
-        <span className="mt-1 block text-sm text-zinc-500 dark:text-zinc-400">
-          {description}
-        </span>
-      </span>
-      <ArrowRight className="h-5 w-5 text-zinc-400 transition-transform group-hover:translate-x-1 group-hover:text-zinc-900 dark:group-hover:text-zinc-50" />
-    </HoverPrefetchLink>
-  );
-}
-
-function FinaleChapter({ reducedMotion }: { reducedMotion: boolean }) {
-  return (
-    <section data-chapter="finale" className="v2-snap-section flex flex-col justify-center py-28 lg:min-h-[calc(100vh-3.5rem)] lg:py-0">
-      <motion.div
-        className="mx-auto w-full max-w-7xl px-5 md:px-6"
-        initial={reducedMotion ? false : { opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.7, ease: EASE_OUT }}
-      >
-        <h2 className="v2-display text-[2.5rem] text-zinc-900 dark:text-zinc-50 md:text-[4rem] xl:text-[5rem]">
-          Build yours
-          <span className="text-[#E6212F] motion-safe:animate-[pulse_3s_ease-in-out_infinite]">.</span>
-        </h2>
-
-        {/* a solid panel: the rows read on paper, not over the sheet's lattice */}
-        <div className="mt-14 divide-y divide-zinc-200 border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-950">
-          <FinaleRow
-            href="/docs/primary-network"
-            title="Build on the C-Chain"
-            description="Ship on the shared, permissionless EVM chain today."
-          />
-          <FinaleRow
-            href="/console"
-            title="Build an L1 in the Console"
-            description="From configuration to mainnet validators, in one guided session."
-          />
-          <FinaleRow
-            href="/docs/avalanche-l1s"
-            title="Read the architecture"
-            description="How sovereign L1s, the primary network, and interchain messaging fit together."
-          />
-          <FinaleRow
-            href="/explorer"
-            title="Explore the live network"
-            description="Every chain, validator, and message, observed on-chain."
-          />
-        </div>
-      </motion.div>
-    </section>
-  );
-}
-
 /* ------------------------------------------------------------------ */
 
 export default function StoryHome({
   globeData,
-  kiteTxCount,
+  academyLine,
   l1Count,
   primaryStakeAvax,
   primaryStakeUsd,
@@ -1334,7 +735,8 @@ export default function StoryHome({
   defi,
 }: {
   globeData: GlobeData;
-  kiteTxCount: number | null;
+  /** "13 courses · 377 lessons · 26 hours", from the Academy's own stats */
+  academyLine: string | null;
   l1Count: number | null;
   primaryStakeAvax: number | null;
   primaryStakeUsd: number | null;
@@ -1344,13 +746,11 @@ export default function StoryHome({
 }) {
   const reducedMotion = useReducedMotion();
 
-  // Section snapping is a document-level property; scope it to this page by
-  // tagging <html> while mounted (CSS lives in global.css under .v2-snap).
-  // Layout effect, not effect: the cleanup must remove mandatory snapping
-  // SYNCHRONOUSLY in the unmount commit. With useEffect the class survives
-  // one paint into the next route, and the browser re-snaps the homepage's
-  // deep scroll offset against the shorter page — landing visitors at the
-  // bottom of /solutions.
+  // Scroll padding is a document-level property; scope it to this page by
+  // tagging <html> while mounted (CSS in global.css under .v2-snap), so a
+  // focused link or an anchor jump lands below the sticky navbar. Layout
+  // effect, so the cleanup drops the class in the unmount commit, before
+  // the next route paints.
   useLayoutEffect(() => {
     document.documentElement.classList.add("v2-snap");
     return () => document.documentElement.classList.remove("v2-snap");
@@ -1374,6 +774,15 @@ export default function StoryHome({
     return () => clearInterval(timer);
   }, []);
   const liveGlobeData = { ...globeData, metrics: liveMetrics ?? globeData?.metrics };
+  // the server snapshot, not the 60 s poll: the network drawing shows a 30-day
+  // window, and a new array each minute would rebuild the whole scene
+  const interopData = useMemo(
+    () => ({
+      chains: (globeData?.metrics?.chains ?? []).map((c) => ({ ...c, logo: resolveChainLogo(c) })),
+      flows: globeData?.icmFlows ?? [],
+    }),
+    [globeData],
+  );
 
   // Funnel depth: fire once per chapter per pageload as it enters view.
   useEffect(() => {
@@ -1395,17 +804,29 @@ export default function StoryHome({
   }, []);
 
   return (
-    <main className="relative bg-white dark:bg-zinc-950">
-      <SheetBackdrop />
+    // a div, not a <main>: the site layout (fumadocs HomeLayout) owns the
+    // page's one main landmark
+    <div className="relative bg-white dark:bg-zinc-950">
+      {/* the hero and the board stand on the drafting sheet; it fades out
+          under the board's foot, and the story reads on a clean page */}
       <div className="relative">
-        <ChapterOne />
-        <StatsChapter globeData={liveGlobeData} l1Count={l1Count} primaryStakeAvax={primaryStakeAvax} primaryStakeUsd={primaryStakeUsd} avaxUsdPrice={avaxUsdPrice} supplyStakedPct={supplyStakedPct} defi={defi} reducedMotion={!!reducedMotion} />
-        <OfferingChapter reducedMotion={!!reducedMotion} />
-        <PillarsChapter reducedMotion={!!reducedMotion} />
-        <PlaybooksChapter reducedMotion={!!reducedMotion} />
-        <LiveChainsChapter globeData={liveGlobeData} kiteTxCount={kiteTxCount} reducedMotion={!!reducedMotion} />
-        <FinaleChapter reducedMotion={!!reducedMotion} />
+        <div aria-hidden className="absolute inset-0 [mask-image:linear-gradient(to_bottom,#000_calc(100%-14rem),transparent)]">
+          {/* snow only: the avalanche released at the old offering chapter,
+              below this sheet, so the hero and the board never had it */}
+          <SheetBackdrop snowOnly />
+        </div>
+        <div className="relative">
+          <ChapterOne />
+          <StatsChapter globeData={liveGlobeData} l1Count={l1Count} primaryStakeAvax={primaryStakeAvax} primaryStakeUsd={primaryStakeUsd} avaxUsdPrice={avaxUsdPrice} supplyStakedPct={supplyStakedPct} defi={defi} reducedMotion={!!reducedMotion} />
+        </div>
       </div>
-    </main>
+      <div className="relative bg-white dark:bg-zinc-950">
+        <OwnChapter />
+        <FinalChapter />
+        <InteropChapter data={interopData} />
+        <InstitutionsChapter />
+        <BuildChapter academyLine={academyLine} />
+      </div>
+    </div>
   );
 }
