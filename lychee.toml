@@ -23,6 +23,9 @@ exclude = [
   # RPC and API endpoints: they answer POST, not GET
   '^https://api\.avax(-test)?\.network/ext/',
   # Placeholders in examples
+  '^https?://nodeipaddress',
   '[<{]',
   '^https?://(www\.)?example\.(com|org)',
+  # Archived snapshots are immutable and the archive refuses bursts
+  '^https://web\.archive\.org/',
 ]
