@@ -141,11 +141,12 @@ state exist only after execution:
 ### (Optional) Custom Golang SDK
 
 If you plan on extracting data from the C-Chain into your own systems using
-Golang, we recommend using our custom
-[`ethclient`](https://github.com/ava-labs/avalanchego/tree/master/graft/coreth/ethclient). The
+Golang, we recommend using our
+[`evmclient`](https://github.com/ava-labs/avalanchego/tree/master/vms/evm/evmclient), and calling
+`customtypes.Register()` from `graft/coreth/plugin/evm/customtypes` once in your `main` package. The
 standard `go-ethereum` Ethereum client does not compute block hashes correctly
 (when you call `block.Hash()`) because it doesn't take into account the added
-[ExtDataHash](https://github.com/ava-labs/avalanchego/blob/master/graft/coreth/plugin/evm/customtypes/header_ext.go#L42)
+[`extDataHash`](https://github.com/ava-labs/avalanchego/blob/master/vms/saevm/cchain/README.md#block-header-changes)
 header field in Avalanche C-Chain blocks, which is used move AVAX between chains
 (X-Chain and P-Chain). You can read more about our multi-chain abstraction
 [here](/docs/primary-network) (out of scope for a
