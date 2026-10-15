@@ -15,7 +15,7 @@ Avalanche node (which has the [same API](https://ethereum.org/en/developers/docs
 Avalanche's ChainID (43114) when constructing transactions.
 
 Additionally, Ava Labs maintains an implementation of the [Rosetta
-API](https://docs.cdp.coinbase.com/mesh/docs/welcome) for the C-Chain called
+API](https://github.com/coinbase/mesh-specifications) for the C-Chain called
 [avalanche-rosetta](https://github.com/ava-labs/avalanche-rosetta). You can
 learn more about this standardized integration path on the attached Rosetta API
 website.
@@ -82,13 +82,13 @@ groups that the node serves, set `apis` in the C-Chain config file. Do not use `
 
 ## Integration Using Rosetta
 
-[Rosetta](https://docs.cdp.coinbase.com/mesh/docs/welcome) is an open-source specification and set
+[Rosetta](https://github.com/coinbase/mesh-specifications) is an open-source specification and set
 of tools that makes integrating with different blockchain networks easier by
 presenting the same set of APIs for every network. The Rosetta API is made up of
 2 core components, the [Data
-API](https://docs.cdp.coinbase.com/mesh/docs/api-data) and the
+API](https://github.com/coinbase/mesh-specifications/blob/master/api.yaml) and the
 [Construction
-API](https://docs.cdp.coinbase.com/mesh/docs/api-construction).
+API](https://github.com/coinbase/mesh-specifications/blob/master/api.yaml).
 
 Together, these APIs allow for anyone to read and write to blockchains in a
 standard format over a standard communication protocol. The specifications for
