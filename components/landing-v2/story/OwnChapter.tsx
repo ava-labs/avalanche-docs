@@ -125,9 +125,31 @@ export default function OwnChapter() {
   useEffect(() => {
     if (point !== null) router.prefetch((point === "plate" ? PLATE : LAYERS[point]).href);
   }, [point, router]);
+  // leaving a part keeps its light while the pointer is still on the drawing,
+  // so a move from one part to the next (across a label's leader, or the gap
+  // between two labels) never flashes the rest pose; off the drawing, the light rests
+  const overDrawing = useRef(false);
   const pointAt = useCallback((to: StackPoint) => {
     hover.current = to;
-    setPoint(to ?? focus.current);
+    if (to !== null || !overDrawing.current) setPoint(to ?? focus.current);
+  }, []);
+  useEffect(() => {
+    const el = drawingRef.current;
+    if (!el) return;
+    const enter = () => {
+      overDrawing.current = true;
+    };
+    const leave = () => {
+      overDrawing.current = false;
+      hover.current = null;
+      setPoint(focus.current);
+    };
+    el.addEventListener("pointerenter", enter);
+    el.addEventListener("pointerleave", leave);
+    return () => {
+      el.removeEventListener("pointerenter", enter);
+      el.removeEventListener("pointerleave", leave);
+    };
   }, []);
   const pointAtStill = useCallback(
     (to: StackPoint) => {

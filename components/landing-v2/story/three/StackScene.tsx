@@ -354,7 +354,8 @@ function Layer({
       // a label that is not there takes no clicks
       text.current.style.pointerEvents = show > 0.5 ? "auto" : "none";
     }
-    if (rule.current) rule.current.style.backgroundColor = lit.current > 0.5 ? palette.red : "";
+    // the leader's red comes and goes with its layer's
+    if (rule.current) rule.current.style.opacity = lit.current.toFixed(3);
   }, -1);
 
   return (
@@ -417,7 +418,9 @@ function Layer({
           zIndexRange={[10, 0]}
         >
           <div ref={tag} className="flex -translate-y-1/2 items-center gap-3 pl-3" style={{ opacity: 0 }}>
-            <span ref={rule} className="h-px w-12 shrink-0 bg-zinc-300 dark:bg-zinc-700" />
+            <span className="relative h-px w-12 shrink-0 bg-zinc-300 dark:bg-zinc-700">
+              <span ref={rule} className="absolute inset-0" style={{ backgroundColor: palette.red, opacity: 0 }} />
+            </span>
             <span
               ref={text}
               data-stack-label={index}
