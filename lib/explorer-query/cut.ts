@@ -84,7 +84,7 @@ export async function totalsOf(sql: string, result: QueryResult, chainId: number
     parts.push(...(num ? [`sum(${q}) AS s${i}`, `count(${q}) AS n${i}`, `min(${q}) AS lo${i}`, `max(${q}) AS hi${i}`, ...at] : [`uniqExact(${q}) AS d${i}`]));
   }
   try {
-    const r = await runQuery((await anchored(`SELECT ${parts.join(", ")} FROM (\n${cut.inner}\n)`, chainId)).sql);
+    const r = await runQuery((await anchored(`SELECT ${parts.join(", ")} FROM (\n${cut.inner}\n)`, chainId)).sql, chainId);
     const row = r.rows[0];
     if (!row) return null;
     const w: Totals = { rows: Number(row.__rows), newest: cut.newest, sum: {}, count: {}, min: {}, max: {}, distinct: {}, ...(label ? { label: label.name, maxAt: {}, minAt: {} } : {}) };

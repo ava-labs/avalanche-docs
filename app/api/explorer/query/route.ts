@@ -82,7 +82,7 @@ async function readOf(key: string, sql: string, chainId: number, baseUrl: string
   const hit = reads.get(key);
   if (hit && Date.now() - hit.at < READ_MS) return hit;
   const run = await anchored(sql, chainId);
-  const result = await runQuery(run.sql);
+  const result = await runQuery(run.sql, chainId);
   // the totals read follows the main query and runs beside no other query on stats-api: naming the rows runs none
   const [names, totals] = await Promise.all([nameRows(chainId, result.columns, result.rows, baseUrl), totalsOf(sql, result, chainId)]);
   return { result, names, totals, anchor: run.anchor };

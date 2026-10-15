@@ -52,3 +52,23 @@ export function mentioned(question: string, candidates: readonly string[], capit
     return typed.some((t) => !NOT_A_SLIP.has(t) && slips(t, joined, max) <= max);
   });
 }
+
+/* A question about Avalanche's own interchain token transfers (ICTT) and messages (ICM), whose prompt carries the
+   ICTT chapter (ictt.ts). One that names ICTT or ICM (icttNamed) keeps the words it shares with the DEX and lending
+   gates, and the registry's turn, to itself: "top ICTT tokens by volume" is no DEX question, "ICTT withdrawals" no
+   lending one, "bridged USDC over ICTT" no CCTP one, and Dexalot in "ICM messages Dexalot sent" is an L1, not the
+   registry's Dexalot contracts. A bridge word alone (icttAsked) only adds the chapter, and only to a question no other
+   chapter claims (ictt.ts), when it names no other bridge: "swap volume of bridged tokens" stays the DEX's */
+const ICTT_WORDS = /\b(?:ictt|icm|teleporter|inter-?chain (?:token|transfer|messag)\w*|token (?:home|remote|transferrer)s?|cross[- ]chain messag\w*|message ids?)\b/i;
+const OTHER_BRIDGES = /\b(?:cctp|circle|stargate|layer ?zero|wormhole|axelar|celer|synapse|avalanche bridge|core bridge|usdc\.e|bridged usdc|usdc (?:bridge|bridged)|cross[- ]chain usdc)\b/i;
+export const icttNamed = (question: string): boolean => ICTT_WORDS.test(question);
+export const icttAsked = (question: string): boolean => icttNamed(question) || (/\bbridg(?:e|es|ed|ing)\b/i.test(question) && !OTHER_BRIDGES.test(question));
+/** the words a bridge's own events share with the DEX and lending gates: its volume, liquidity and pools, its
+    deposits, withdrawals, collateral and assets. A swap, a DEX, a loan or a borrow is still theirs */
+const SHARED = /\b(?:volumes?|liquidity|pools?|deposit(?:s|ed|ors?)?|withdraw(?:s|als?|n)?|collateral|assets?)\b/gi;
+/** the question as the DEX and lending gates read it: an ICTT or ICM question without the words it shares with them */
+export const gateWords = (question: string): string => (icttNamed(question) ? question.replace(SHARED, " ") : question);
+/** an ICTT or ICM question about one transfer's or message's delivery, or both sides of a route: the network's, whose
+    rows alone hold both sides (the page routes it there, and a chain page's turn answers its own side) */
+const BOTH_SIDES = /\b(?:deliver\w*|undelivered|arriv\w*|trace|track|stuck|waiting|in flight|both sides|routes?|message ids?|0x[0-9a-f]{64})\b/i;
+export const icttBothSides = (question: string): boolean => icttAsked(question) && BOTH_SIDES.test(question);

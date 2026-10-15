@@ -124,6 +124,12 @@ describe('select', () => {
     expect(unitsFor('app/api/mcp/route.ts').units).toContain('api');
   });
 
+  it('runs the API tests, beside the Explorer pages, for the Explorer query route and the modules it imports', () => {
+    for (const file of ['app/api/explorer/query/route.ts', 'lib/explorer-query/ictt.ts', 'lib/explorer-query/macros.ts']) {
+      expect(unitsFor(file).units, file).toEqual(expect.arrayContaining(['api', 'explorer']));
+    }
+  });
+
   it('runs the sign-up and login tests, in the in-app browsers too, for the auth pages', () => {
     for (const page of ['app/(home)/signup/page.tsx', 'app/(home)/login/page.tsx']) {
       expect(unitsFor(page).units, page).toEqual(expect.arrayContaining(['site', 'routes', 'ai:site', 'webview']));

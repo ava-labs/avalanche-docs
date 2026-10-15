@@ -35,7 +35,7 @@ export function runKept(sql: string, chainId: number): Promise<KeptRun> {
   if (hit && Date.now() - hit.at < TTL_MS) return hit.run;
   const run = (async () => {
     const a = await anchored(sql, chainId);
-    return { result: await runQuery(a.sql), anchor: a.anchor, sources: a.sources };
+    return { result: await runQuery(a.sql, chainId), anchor: a.anchor, sources: a.sources };
   })();
   kept.delete(key);
   kept.set(key, { at: Date.now(), run });
