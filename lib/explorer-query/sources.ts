@@ -297,7 +297,7 @@ const versions: Source = {
 /* ------------------------------------------------------------------ */
 /* p_avax_supply                                                       */
 
-/* The AVAX supply as the Avalanche Data API counts it (/api/avax-supply):
+/* The AVAX supply as the Avalanche Data API counts it, the source /api/avax-supply passes on:
    the total net of what every chain burned, the burns per chain, staked,
    locked and rewards, and the continuous fees L1 validators have paid.
    The P-Chain's own supply (p_exec_state_history) is gross of the C-Chain
@@ -323,9 +323,12 @@ const SUPPLY_FIELDS = [
   ["genesis_unlock_avax", "genesisUnlock"],
 ] as const;
 
+const DATA_API_SUPPLY = "https://data-api.avax.network/v1/avax/supply";
+
 async function readSupply(network: Network): Promise<Supply> {
   if (network !== "mainnet") throw new Error("the Data API publishes the AVAX supply for mainnet only");
-  const body = await getJson<Record<string, unknown>>(`${siteBaseUrl()}/api/avax-supply`, "the AVAX supply");
+  // read at the source, not through our own route: a preview's own host is behind Vercel's login (lib/chat/site-url.ts)
+  const body = await getJson<Record<string, unknown>>(DATA_API_SUPPLY, "the AVAX supply");
   const values = SUPPLY_FIELDS.map(([, f]) => Number(body[f]));
   if (values.some((v) => !Number.isFinite(v) || v < 0)) throw new Error("the AVAX supply is incomplete");
   const updated = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.exec(String(body.lastUpdated ?? ""))?.[0].replace("T", " ") ?? "";
