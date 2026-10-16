@@ -140,6 +140,7 @@ describe("the firm's quote composer keeps the unit on file", () => {
   const ownQuote = (over: Partial<OwnQuote> = {}): OwnQuote => ({
     id: "q-1",
     status: "submitted",
+    display_status: "submitted",
     price_usd: 12500,
     duration: 10,
     duration_unit: "days",

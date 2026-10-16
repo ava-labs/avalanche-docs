@@ -283,7 +283,9 @@ export async function reopen(userId: string, requestId: string): Promise<ReopenR
       include: { _count: { select: { quotes: true } } },
     });
     if (!row) return { kind: "not_found" };
-    if (deriveRequestStatus(row, row._count.quotes) !== "expired") {
+    // A zero-quote expiry only: a lapsed request (quotes in, none accepted by
+    // its pick-by date) also reads expired, and starts again from a copy.
+    if (row._count.quotes > 0 || deriveRequestStatus(row, row._count.quotes) !== "expired") {
       return { kind: "not_reopenable" };
     }
     const priorReopens = await tx.auditEventLog.count({
@@ -327,6 +329,76 @@ export async function reopen(userId: string, requestId: string): Promise<ReopenR
 
   const { emailFailures } = await deliverFanoutEmails(requestId, outcome.auditors, outcome.request);
   return { success: true, auditorCount: outcome.auditors.length, emailFailures };
+}
+
+export type StartAgainResult =
+  | { success: true; id: string }
+  | { success: false; code: "not_found" | "not_restartable" };
+
+// What a new round copies. Not the files: their keys are bound to the old
+// request id, and the draft would refuse them. Not the two dates: a new round
+// needs new ones. Not a consent or share stamp: those are given at submit.
+const START_AGAIN_FIELDS = {
+  source_project_id: true,
+  project_name: true,
+  website: true,
+  description: true,
+  scope: true,
+  project_types: true,
+  deployment_target: true,
+  multichain: true,
+  services: true,
+  shortlist_auditor_ids: true,
+  repos: true,
+  languages: true,
+  frameworks: true,
+  nsloc: true,
+  doc_links: true,
+  urgency: true,
+  contact_name: true,
+  contact_email: true,
+  contact_handle: true,
+  contact_calendar_url: true,
+} as const;
+
+/**
+ * A new round for a lapsed request (quotes came in, none was accepted by the
+ * pick-by date): a new draft for the same owner, copied from it, that goes
+ * back through review and a fresh quote window. The old request stays as it
+ * is, with request_restarted on its trail. Repeat calls make repeat drafts.
+ */
+export async function startAgain(userId: string, requestId: string): Promise<StartAgainResult> {
+  return prisma.$transaction(async (tx): Promise<StartAgainResult> => {
+    const row = await tx.auditRequest.findFirst({
+      where: { id: requestId, user_id: userId },
+      select: {
+        ...START_AGAIN_FIELDS,
+        status: true,
+        quote_deadline: true,
+        _count: { select: { quotes: true } },
+      },
+    });
+    if (!row) return { success: false, code: "not_found" };
+
+    const { status, quote_deadline, _count, repos, ...fields } = row;
+    const quoteCount = _count.quotes;
+    const lapsed =
+      quoteCount > 0 && deriveRequestStatus({ status, quote_deadline }, quoteCount) === "expired";
+    if (!lapsed) return { success: false, code: "not_restartable" };
+
+    const draft = await tx.auditRequest.create({
+      data: { user_id: userId, ...fields, repos: repos as Prisma.InputJsonValue },
+      select: { id: true },
+    });
+    await logAuditEvent(tx, {
+      request_id: requestId,
+      actor_type: "project_user",
+      actor_id: userId,
+      action: "request_restarted",
+      meta: { new_request_id: draft.id },
+    });
+    return { success: true, id: draft.id };
+  });
 }
 
 export async function withdraw(userId: string, requestId: string): Promise<MutationResult> {

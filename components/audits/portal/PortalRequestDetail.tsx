@@ -251,6 +251,7 @@ export function PortalRequestDetail({
             deadline={view.quote_deadline}
             firmActive={firmActive}
             subsidy={view.subsidy}
+            pickBy={view.pick_by}
           />
         </div>
       </div>

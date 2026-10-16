@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { afterEach, describe, expect, it, vi, beforeEach } from "vitest";
 
 const {
   requestFindManyMock,
@@ -611,6 +611,167 @@ describe("auditor scope · Telegram share", () => {
 
     expect(await getRequestForAuditor("aud-1", "req-1")).toBeNull();
     expect(requestFindUniqueMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("the week to pick, as each audience reads it", () => {
+  // At 2026-12-01 12:00: DECIDING closed 2026-11-28 and picks by 2026-12-05;
+  // LAPSED closed 2026-11-10, its pick-by 2026-11-17 has passed.
+  const DECIDING = new Date("2026-11-28T00:00:00Z");
+  const LAPSED = new Date("2026-11-10T12:00:00Z");
+
+  const ownerQuoteRow = {
+    id: "q-1",
+    status: "submitted",
+    price_usd: 20000,
+    duration: 4,
+    duration_unit: "weeks",
+    earliest_start: new Date("2026-12-15T00:00:00Z"),
+    message: "Four weeks, two auditors.",
+    deal_doc_url: null,
+    submitted_by_email: null,
+    auditor: {
+      firm_name: "Nordlicht Security",
+      services: [],
+      quote_email: "quotes@nordlicht.example",
+      members: [],
+    },
+  };
+  // What AUDITOR_SAFE_REQUEST_SELECT returns, past the quote deadline.
+  const firmRow = {
+    id: "req-1",
+    project_name: "Glacierswap",
+    description: "A concentrated-liquidity DEX on C-Chain.",
+    scope: "Router and pool factory contracts.",
+    project_types: ["DeFi protocol"],
+    deployment_target: "c_chain",
+    multichain: false,
+    services: ["Smart contract audit (Solidity / Vyper)"],
+    repos: [],
+    languages: ["Solidity"],
+    frameworks: ["Foundry"],
+    nsloc: 4200,
+    doc_links: [],
+    attachments: [],
+    needed_by: null,
+    quote_deadline: DECIDING,
+    urgency: null,
+    status: "collecting",
+    submitted_at: new Date("2026-11-18T09:00:00Z"),
+    created_at: new Date("2026-11-17T12:00:00Z"),
+  };
+  const ownQuoteRow = {
+    id: "q-1",
+    request_id: "req-1",
+    auditor_id: "aud-1",
+    status: "submitted",
+    price_usd: 28000,
+    duration: 4,
+    duration_unit: "weeks",
+    earliest_start: new Date("2026-12-15T00:00:00Z"),
+    message: "Fixed fee.",
+    deal_doc_url: null,
+    submitted_by_email: null,
+    updated_at: new Date("2026-11-25T10:00:00Z"),
+  };
+
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-12-01T12:00:00Z"));
+    deliveryFindUniqueMock.mockResolvedValue({ auditor: { active: true } });
+    quoteFindUniqueMock.mockResolvedValue(ownQuoteRow);
+    requestFindUniqueMock.mockResolvedValue({ contact_handle: null, contact_handle_shared_at: null });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("gives the owner's list the pick-by date of a collecting request, and none to a draft", async () => {
+    requestFindManyMock.mockResolvedValue([
+      { ...baseRequest, quote_deadline: DECIDING, quotes: [{ price_usd: 20000 }] },
+      { ...baseRequest, id: "req-2", quote_deadline: LAPSED, quotes: [{ price_usd: 20000 }] },
+      // The wizard stores a deadline on a draft too; it means nothing yet.
+      { ...baseRequest, id: "req-3", status: "draft", quote_deadline: DECIDING, quotes: [] },
+    ]);
+
+    const rows = await getOwnerRequests(OWNER);
+
+    expect(rows.map((row) => row.display_status)).toEqual(["deciding", "expired", "draft"]);
+    expect(rows.map((row) => row.pick_by)).toEqual([
+      new Date("2026-12-05T00:00:00Z"),
+      new Date("2026-11-17T12:00:00Z"),
+      null,
+    ]);
+  });
+
+  it("gives the owner's lapsed request its pick-by date and expired quotes", async () => {
+    requestFindFirstMock.mockResolvedValue({
+      ...baseRequest,
+      quote_deadline: LAPSED,
+      _count: { fanout_deliveries: 3 },
+      quotes: [ownerQuoteRow],
+      subsidy_decisions: [],
+    });
+
+    const detail = await getOwnerRequestDetail(OWNER, "req-1");
+
+    expect(detail!.display_status).toBe("expired");
+    expect(detail!.pick_by).toEqual(new Date("2026-11-17T12:00:00Z"));
+    expect(detail!.quotes[0].display_status).toBe("expired");
+  });
+
+  it("tells a firm that quoted when the project picks by, while the request is deciding", async () => {
+    requestFindFirstMock.mockResolvedValue(firmRow);
+
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.window_open).toBe(false);
+    expect(view!.pick_by).toEqual(new Date("2026-12-05T00:00:00Z"));
+    expect(view!.own_quote!.display_status).toBe("submitted");
+  });
+
+  it("shows the firm its quote expired once the pick-by date passed with none picked", async () => {
+    requestFindFirstMock.mockResolvedValue({ ...firmRow, quote_deadline: LAPSED });
+
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.pick_by).toEqual(new Date("2026-11-17T12:00:00Z"));
+    expect(view!.own_quote!.display_status).toBe("expired");
+  });
+
+  it("gives a withdrawn request no pick-by date, so no screen can promise a pick", async () => {
+    requestFindFirstMock.mockResolvedValue({ ...firmRow, status: "withdrawn" });
+
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.pick_by).toBeNull();
+    // A submitted quote on a withdrawn request reads expired, as owners and admins see it.
+    expect(view!.own_quote!.display_status).toBe("expired");
+  });
+
+  it("derives a firm's inbox quote status from its own quote alone, never the quote count", async () => {
+    deliveryFindManyMock.mockResolvedValue([
+      { request_id: "req-1", request: { ...firmRow, quote_deadline: LAPSED } },
+      { request_id: "req-2", request: { ...firmRow, id: "req-2", quote_deadline: LAPSED } },
+    ]);
+    quoteFindManyMock.mockResolvedValue([
+      {
+        id: "q-1",
+        request_id: "req-1",
+        status: "submitted",
+        price_usd: 28000,
+        updated_at: new Date("2026-11-08T10:00:00Z"),
+      },
+    ]);
+
+    const items = await getAuditorInbox("aud-1");
+
+    expect(items[0].own_quote!.display_status).toBe("expired");
+    // A firm that did not quote reads the same whether or not others quoted.
+    expect(items[1].own_quote).toBeNull();
+    expect(quoteFindManyMock.mock.calls[0][0].where).toEqual({ auditor_id: "aud-1" });
+    expect(deliveryFindManyMock.mock.calls[0][0].include.request.select._count).toBeUndefined();
   });
 });
 

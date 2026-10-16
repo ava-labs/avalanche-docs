@@ -9,6 +9,7 @@ import { isLegacyAttachmentSrc, isRequestAttachmentSrc } from "@/lib/audits/blob
 import { findAuditorByEmail } from "@/server/services/audits/auditors";
 import { firmContact, recipientsOf } from "@/server/services/audits/emails/recipients";
 import {
+  decisionDeadline,
   deriveQuoteDisplayStatus,
   deriveRequestStatus,
   isQuoteWindowOpen,
@@ -26,6 +27,23 @@ import {
  * mentions auditQuote (tests/unit/audits/visibility.test.ts, source guard,
  * lands with the auditor portal phase).
  */
+
+/** The pick-by date while the request is stored collecting (deciding and
+    lapsed included), the only time it means anything; null otherwise. */
+function pickByOf(row: { status: string; quote_deadline: Date | null }): Date | null {
+  return row.status === "collecting" && row.quote_deadline
+    ? decisionDeadline(row.quote_deadline)
+    : null;
+}
+
+/** A firm's own quote as the project reads it. The firm never learns the
+    quote count: its own quote makes it at least one, all the rule needs. */
+function firmQuoteStatus(
+  quoteStatus: string,
+  request: { status: string; quote_deadline: Date | null },
+): DisplayQuoteStatus {
+  return deriveQuoteDisplayStatus(quoteStatus, deriveRequestStatus(request, 1));
+}
 
 // What the owner may see about a quoting firm. quote_email is stripped below
 // unless that quote was accepted (contacts reveal only after acceptance).
@@ -49,6 +67,8 @@ export interface OwnerRequestSummary {
   /** min/max of received quotes, for the "quotes ready" list cards. */
   quote_price_range: { min: number; max: number } | null;
   quote_deadline: Date | null;
+  /** The last day to accept a quote, while the request collects. */
+  pick_by: Date | null;
   needed_by: Date | null;
   submitted_at: Date | null;
   created_at: Date;
@@ -102,6 +122,7 @@ export async function getOwnerRequests(userId: string): Promise<OwnerRequestSumm
       quote_price_range:
         prices.length > 0 ? { min: Math.min(...prices), max: Math.max(...prices) } : null,
       quote_deadline: row.quote_deadline,
+      pick_by: pickByOf(row),
       needed_by: row.needed_by,
       submitted_at: row.submitted_at,
       created_at: row.created_at,
@@ -178,6 +199,7 @@ export async function getOwnerRequestDetail(userId: string, requestId: string) {
   return {
     ...request,
     display_status,
+    pick_by: pickByOf(row),
     quote_count: quotes.length,
     fanout_count: _count.fanout_deliveries,
     shortlist_firms,
@@ -329,6 +351,7 @@ export const getAuditorInbox = cache(async (auditorId: string) => {
         ? {
             id: quote.id,
             status: quote.status,
+            display_status: firmQuoteStatus(quote.status, delivery.request),
             price_usd: quote.price_usd,
             updated_at: quote.updated_at,
           }
@@ -416,6 +439,7 @@ export async function getRequestForAuditor(auditorId: string, requestId: string)
       ? {
           id: own_quote.id,
           status: own_quote.status,
+          display_status: firmQuoteStatus(own_quote.status, request),
           price_usd: own_quote.price_usd,
           duration: own_quote.duration,
           duration_unit: own_quote.duration_unit,
@@ -429,6 +453,7 @@ export async function getRequestForAuditor(auditorId: string, requestId: string)
     shared_handle,
     subsidy,
     window_open: isQuoteWindowOpen(request),
+    pick_by: pickByOf(request),
   };
 }
 

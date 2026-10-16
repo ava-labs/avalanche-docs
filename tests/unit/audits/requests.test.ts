@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { afterEach, describe, expect, it, vi, beforeEach } from "vitest";
 
 const {
   updateManyMock,
@@ -8,6 +8,7 @@ const {
   eventCreateMock,
   txRequestFindFirstMock,
   txRequestUpdateMock,
+  txRequestCreateMock,
   txRequestDeleteManyMock,
   txEventCountMock,
   txEventCreateMock,
@@ -23,6 +24,7 @@ const {
   eventCreateMock: vi.fn(),
   txRequestFindFirstMock: vi.fn(),
   txRequestUpdateMock: vi.fn(),
+  txRequestCreateMock: vi.fn(),
   txRequestDeleteManyMock: vi.fn(),
   txEventCountMock: vi.fn(),
   txEventCreateMock: vi.fn(),
@@ -36,6 +38,7 @@ const tx = {
   auditRequest: {
     findFirst: txRequestFindFirstMock,
     update: txRequestUpdateMock,
+    create: txRequestCreateMock,
     deleteMany: txRequestDeleteManyMock,
   },
   auditEventLog: { count: txEventCountMock, create: txEventCreateMock },
@@ -69,6 +72,7 @@ import {
   deleteDraft,
   deleteRequest,
   reopen,
+  startAgain,
   withdraw,
 } from "@/server/services/audits/requests";
 
@@ -253,6 +257,10 @@ describe("reopen", () => {
     deliverFanoutEmailsMock.mockResolvedValue({ emailFailures: 0 });
   });
 
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("gives an expired request a fresh +10d deadline and re-fans out, history intact", async () => {
     const result = await reopen(OWNER, "req-1");
 
@@ -300,6 +308,140 @@ describe("reopen", () => {
     txAuditorCountMock.mockResolvedValueOnce(1).mockResolvedValueOnce(15);
     await reopen(OWNER, "req-1");
     expect(txEventCreateMock.mock.calls[0][0].data.meta).toMatchObject({ auditor_count: 1, shortlist_count: 1, whitelist_count: 15 });
+  });
+
+  it("refuses a lapsed request (quotes came in, none picked in time): it starts again instead", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-12-01T12:00:00Z"));
+    // Window closed 2026-11-10, pick-by 2026-11-17: past it, two quotes, none accepted.
+    txRequestFindFirstMock.mockResolvedValue({
+      ...expiredRow,
+      quote_deadline: new Date("2026-11-10T12:00:00Z"),
+      _count: { quotes: 2 },
+    });
+
+    const result = await reopen(OWNER, "req-1");
+
+    expect(result).toEqual({ success: false, code: "not_reopenable" });
+    expect(txRequestUpdateMock).not.toHaveBeenCalled();
+    expect(deliverFanoutEmailsMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("startAgain", () => {
+  // Exactly the columns a new round copies (design D1.5).
+  const copied = {
+    source_project_id: "proj-1",
+    project_name: "Glacierswap",
+    website: "https://glacierswap.example",
+    description: "A concentrated-liquidity DEX on C-Chain.",
+    scope: "Router and pool factory contracts.",
+    project_types: ["DeFi protocol"],
+    deployment_target: "c_chain",
+    multichain: false,
+    services: ["Smart contract audit (Solidity / Vyper)"],
+    shortlist_auditor_ids: ["aud-1"],
+    repos: [{ url: "https://github.com/glacierswap/core", ref: "v1.2.0" }],
+    languages: ["Solidity"],
+    frameworks: ["Foundry"],
+    nsloc: 4200,
+    doc_links: ["https://docs.glacierswap.example"],
+    urgency: "within_6_weeks",
+    contact_name: "Ada Stone",
+    contact_email: "ada@glacierswap.example",
+    contact_handle: "@ada_glacier",
+    contact_calendar_url: "https://cal.com/ada-glacierswap",
+  };
+  // Lapsed at 2026-12-01: window closed 2026-11-10, pick-by 2026-11-17, two quotes.
+  const lapsedRow = {
+    ...copied,
+    status: "collecting",
+    quote_deadline: new Date("2026-11-10T12:00:00Z"),
+    _count: { quotes: 2 },
+  };
+
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-12-01T12:00:00Z"));
+    txRequestFindFirstMock.mockResolvedValue(lapsedRow);
+    txRequestCreateMock.mockResolvedValue({ id: "req-new" });
+    txEventCreateMock.mockResolvedValue({});
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("copies exactly the listed fields into a new draft for the same owner", async () => {
+    const result = await startAgain(OWNER, "req-1");
+
+    expect(result).toEqual({ success: true, id: "req-new" });
+    // No files, no dates, no consent or share stamp: toEqual fails on any extra key.
+    expect(txRequestCreateMock.mock.calls[0][0]).toEqual({
+      data: { user_id: OWNER, ...copied },
+      select: { id: true },
+    });
+  });
+
+  it("reads the request under the owner pin, selecting only what it copies or checks", async () => {
+    await startAgain(OWNER, "req-1");
+
+    const { where, select } = txRequestFindFirstMock.mock.calls[0][0];
+    expect(where).toEqual({ id: "req-1", user_id: OWNER });
+    expect(Object.keys(select).sort()).toEqual(
+      [...Object.keys(copied), "status", "quote_deadline", "_count"].sort(),
+    );
+  });
+
+  it("logs request_restarted on the old request, pointing at the copy", async () => {
+    await startAgain(OWNER, "req-1");
+
+    expect(txEventCreateMock.mock.calls[0][0].data).toEqual({
+      request_id: "req-1",
+      actor_type: "project_user",
+      actor_id: OWNER,
+      action: "request_restarted",
+      meta: { new_request_id: "req-new" },
+    });
+  });
+
+  it("finds nothing for someone else's request and copies nothing", async () => {
+    txRequestFindFirstMock.mockResolvedValue(null);
+
+    const result = await startAgain("someone-else", "req-1");
+
+    expect(result).toEqual({ success: false, code: "not_found" });
+    expect(txRequestCreateMock).not.toHaveBeenCalled();
+    expect(txEventCreateMock).not.toHaveBeenCalled();
+  });
+
+  const refused: [string, Record<string, unknown>][] = [
+    ["a draft", { status: "draft", quote_deadline: null, _count: { quotes: 0 } }],
+    ["a request still collecting quotes", { quote_deadline: new Date("2026-12-05T00:00:00Z") }],
+    ["a request inside its week to pick", { quote_deadline: new Date("2026-11-28T00:00:00Z") }],
+    ["a window that closed without quotes", { _count: { quotes: 0 } }],
+    ["an engaged request", { status: "engaged" }],
+    ["a withdrawn request", { status: "withdrawn" }],
+  ];
+
+  it.each(refused)("refuses %s and writes nothing", async (_case, over) => {
+    txRequestFindFirstMock.mockResolvedValue({ ...lapsedRow, ...over });
+
+    const result = await startAgain(OWNER, "req-1");
+
+    expect(result).toEqual({ success: false, code: "not_restartable" });
+    expect(txRequestCreateMock).not.toHaveBeenCalled();
+    expect(txEventCreateMock).not.toHaveBeenCalled();
+  });
+
+  it("starts again a request that already used its one reopen", async () => {
+    // Reopen's one-round rule counts request_reopened events; a new round
+    // from a copy must not be blocked by it.
+    txEventCountMock.mockResolvedValue(1);
+
+    const result = await startAgain(OWNER, "req-1");
+
+    expect(result).toEqual({ success: true, id: "req-new" });
   });
 });
 
