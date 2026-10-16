@@ -848,6 +848,10 @@ model Auditor {
   // ALWAYS stored lowercase (no citext in this database); every write path
   // and the session resolver normalize with trim().toLowerCase().
   quote_email    String    @unique
+  // The quote-email person's own GitHub username, set or cleared only by that
+  // person from the portal firm page, so projects can add them to a private
+  // repo. Not unique, stored as typed (GitHub names are case-insensitive).
+  github_username String?
   // Offered services, tagged by the firm from the portal (admins may edit).
   // Shown on the whitelist, on quote headers and on the public firms page.
   // Never filters fan-out on the server; the wizard's quick-pick alone reads
@@ -888,6 +892,9 @@ model AuditorMember {
   id             String    @id @default(uuid())
   auditor_id     String
   email          String    @unique
+  // This teammate's own GitHub username, like Auditor.github_username; it
+  // goes with the row when the teammate is removed.
+  github_username String?
   added_by       String?
   invited_at     DateTime  @default(now()) @db.Timestamptz(3)
   first_login_at DateTime? @db.Timestamptz(3) // null = invited, never signed in

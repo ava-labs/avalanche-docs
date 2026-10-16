@@ -11,6 +11,7 @@ const {
   deliveryFindUniqueMock,
   quoteFindManyMock,
   quoteFindUniqueMock,
+  quoteFindFirstMock,
   subsidyFindFirstMock,
 } = vi.hoisted(() => ({
   requestFindManyMock: vi.fn(),
@@ -23,6 +24,7 @@ const {
   deliveryFindUniqueMock: vi.fn(),
   quoteFindManyMock: vi.fn(),
   quoteFindUniqueMock: vi.fn(),
+  quoteFindFirstMock: vi.fn(),
   subsidyFindFirstMock: vi.fn(),
 }));
 
@@ -48,12 +50,15 @@ vi.mock("@/prisma/prisma", () => ({
     auditQuote: {
       findMany: quoteFindManyMock,
       findUnique: quoteFindUniqueMock,
+      findFirst: quoteFindFirstMock,
     },
   },
 }));
 
 import {
   countActiveFirms,
+  getAcceptanceParticipants,
+  getAcceptedQuoteForAdmin,
   getAdminAuditors,
   getAdminOverview,
   getAdminRequestDetail,
@@ -350,12 +355,14 @@ describe("admin scope", () => {
         first_login_at: new Date("2026-05-12"),
         deactivated_at: null,
         attio_ref: "NL-114",
+        github_username: "nordlicht-sec",
         members: [
           {
             id: "mem-1",
             email: "alice@nordlicht.example",
             invited_at: new Date("2026-09-01"),
             first_login_at: null,
+            github_username: "alice-audits",
           },
         ],
         _count: { fanout_deliveries: 9 },
@@ -380,6 +387,42 @@ describe("admin scope", () => {
     expect(rows[0].members).toEqual([
       expect.objectContaining({ id: "mem-1", email: "alice@nordlicht.example", first_login_at: null }),
     ]);
+  });
+
+  it("hands the whitelist each person's GitHub username, read-only (D2.6)", async () => {
+    auditorFindManyMock.mockResolvedValue([
+      {
+        id: "aud-1",
+        firm_name: "Nordlicht Security",
+        quote_email: "quotes@nordlicht.example",
+        services: [],
+        active: true,
+        invited_at: new Date("2026-05-02"),
+        first_login_at: new Date("2026-05-12"),
+        deactivated_at: null,
+        attio_ref: null,
+        website: null,
+        logo_url: null,
+        github_username: "nordlicht-sec",
+        members: [
+          {
+            id: "mem-1",
+            email: "alice@nordlicht.example",
+            invited_at: new Date("2026-09-01"),
+            first_login_at: null,
+            github_username: "alice-audits",
+          },
+        ],
+        _count: { fanout_deliveries: 0 },
+        quotes: [],
+      },
+    ]);
+
+    const rows = await getAdminAuditors();
+
+    expect(auditorFindManyMock.mock.calls[0][0].include.members.select.github_username).toBe(true);
+    expect(rows[0].github_username).toBe("nordlicht-sec");
+    expect(rows[0].members[0].github_username).toBe("alice-audits");
   });
 });
 
@@ -838,7 +881,62 @@ describe("getOwnFirm", () => {
       email: true,
       invited_at: true,
       first_login_at: true,
+      github_username: true,
     });
+  });
+
+  it("carries the quote-email person's GitHub username for the firm page", async () => {
+    auditorFindUniqueMock.mockResolvedValue(null);
+
+    await getOwnFirm("aud-1");
+
+    expect(auditorFindUniqueMock.mock.calls[0][0].select.github_username).toBe(true);
+  });
+});
+
+describe("GitHub usernames stay between the firm and the program (D2.7)", () => {
+  // Each read below feeds a project, a firm's request view or an email; its
+  // auditor select is pinned whole so a username can never ride along.
+  const NOTICE_AUDITOR = {
+    select: { firm_name: true, quote_email: true, members: { select: { email: true } } },
+  };
+
+  it("the owner's quote list reads no username", async () => {
+    requestFindFirstMock.mockResolvedValue(null);
+
+    await getOwnerRequestDetail(OWNER, "req-1");
+
+    expect(requestFindFirstMock.mock.calls[0][0].include.quotes.include.auditor).toEqual({
+      select: {
+        firm_name: true,
+        services: true,
+        quote_email: true,
+        members: { select: { email: true } },
+      },
+    });
+  });
+
+  it("a firm's request view reads no firm field but its active flag", async () => {
+    deliveryFindUniqueMock.mockResolvedValue(null);
+
+    await getRequestForAuditor("aud-1", "req-1");
+
+    expect(deliveryFindUniqueMock.mock.calls[0][0].select).toEqual({
+      auditor: { select: { active: true } },
+    });
+  });
+
+  it("the acceptance and subsidy notices read no username", async () => {
+    requestFindUniqueMock.mockResolvedValue(null);
+    quoteFindFirstMock.mockResolvedValue(null);
+
+    await getAcceptanceParticipants("req-1");
+    await getAcceptedQuoteForAdmin("req-1");
+
+    expect(requestFindUniqueMock.mock.calls[0][0].select.quotes.select.auditor).toEqual(
+      NOTICE_AUDITOR,
+    );
+    expect(quoteFindFirstMock.mock.calls[0][0].include.auditor).toEqual(NOTICE_AUDITOR);
   });
 });
 

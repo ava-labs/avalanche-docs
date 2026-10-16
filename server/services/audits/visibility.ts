@@ -245,7 +245,8 @@ export async function countActiveFirms(): Promise<number> {
 /**
  * A firm's own details for the portal firm page: identity, services, website,
  * logo (the firm uploads it there through the portal logo route) and its
- * teammates. Never attio_ref or created_by.
+ * teammates, each person with their own GitHub username. Never attio_ref or
+ * created_by.
  */
 export async function getOwnFirm(auditorId: string) {
   return prisma.auditor.findUnique({
@@ -254,6 +255,7 @@ export async function getOwnFirm(auditorId: string) {
       id: true,
       firm_name: true,
       quote_email: true,
+      github_username: true,
       services: true,
       website: true,
       logo_url: true,
@@ -263,7 +265,13 @@ export async function getOwnFirm(auditorId: string) {
       deactivated_at: true,
       members: {
         orderBy: { created_at: "asc" },
-        select: { id: true, email: true, invited_at: true, first_login_at: true },
+        select: {
+          id: true,
+          email: true,
+          invited_at: true,
+          first_login_at: true,
+          github_username: true,
+        },
       },
     },
   });
@@ -787,12 +795,16 @@ export interface AdminAuditorMember {
   email: string;
   invited_at: Date;
   first_login_at: Date | null;
+  /** Set by the teammate from the portal; admins read it, never write it. */
+  github_username: string | null;
 }
 
 export interface AdminAuditorRow {
   id: string;
   firm_name: string;
   quote_email: string;
+  /** The quote-email person's, set by them from the portal. */
+  github_username: string | null;
   services: string[];
   active: boolean;
   invited_at: Date;
@@ -817,7 +829,13 @@ export async function getAdminAuditors(): Promise<AdminAuditorRow[]> {
       quotes: { select: { status: true, created_at: true } },
       members: {
         orderBy: { created_at: "asc" },
-        select: { id: true, email: true, invited_at: true, first_login_at: true },
+        select: {
+          id: true,
+          email: true,
+          invited_at: true,
+          first_login_at: true,
+          github_username: true,
+        },
       },
     },
   });
@@ -826,6 +844,7 @@ export async function getAdminAuditors(): Promise<AdminAuditorRow[]> {
     id: row.id,
     firm_name: row.firm_name,
     quote_email: row.quote_email,
+    github_username: row.github_username,
     services: row.services,
     active: row.active,
     invited_at: row.invited_at,

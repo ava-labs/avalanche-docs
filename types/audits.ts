@@ -269,6 +269,46 @@ export const auditorMemberCreateSchema = z.strictObject({
 });
 export type AuditorMemberCreateInput = z.infer<typeof auditorMemberCreateSchema>;
 
+// GitHub's own rule: 1 to 39 letters, digits and single inner hyphens.
+const GITHUB_USERNAME_RE = /^[A-Za-z0-9](?:-?[A-Za-z0-9])*$/;
+const GITHUB_USERNAME_MESSAGE =
+  "Enter a valid GitHub username: up to 39 letters, digits or single hyphens, no hyphen at the start or end.";
+
+/**
+ * A pasted "@name" or profile link works: the prefixes and one trailing slash
+ * are stripped before GitHub's rule applies. Empty clears the username.
+ * Anything else that is not a string passes through to fail the check.
+ */
+const normalizeGithubUsername = (value: unknown) => {
+  if (typeof value !== "string") return value;
+  const raw = value.trim();
+  if (raw === "") return null;
+  return raw
+    .replace(/^@/, "")
+    .replace(/^https?:\/\//i, "")
+    .replace(/^www\./i, "")
+    .replace(/^github\.com\//i, "")
+    .replace(/\/$/, "");
+};
+
+/**
+ * One person's own GitHub username, the only body the portal's GitHub route
+ * takes: it names the value and nothing else, so the signed-in address alone
+ * decides whose row it lands on. Stored as typed (GitHub names are
+ * case-insensitive); null clears it.
+ */
+export const auditorGithubUpdateSchema = z.strictObject({
+  github_username: z.preprocess(
+    normalizeGithubUsername,
+    z
+      .string()
+      .max(39, GITHUB_USERNAME_MESSAGE)
+      .regex(GITHUB_USERNAME_RE, GITHUB_USERNAME_MESSAGE)
+      .nullable(),
+  ),
+});
+export type AuditorGithubUpdateInput = z.infer<typeof auditorGithubUpdateSchema>;
+
 export const adminRequestFiltersSchema = z.object({
   // Must track DISPLAY_REQUEST_STATUSES: a value missing here fails
   // validation and the filter silently does nothing.

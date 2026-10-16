@@ -187,6 +187,17 @@ describe("approveRequestAndFanout", () => {
     txRequestFindFirstMock.mockResolvedValue(pendingRow);
   });
 
+  it("reads only addresses for the fan-out mail, never a GitHub username (D2.7)", async () => {
+    await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
+
+    expect(txAuditorFindManyMock.mock.calls[0][0].select).toEqual({
+      id: true,
+      firm_name: true,
+      quote_email: true,
+      members: { select: { email: true } },
+    });
+  });
+
   it("fans out to ACTIVE firms only, one delivery per firm", async () => {
     const result = await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
 
