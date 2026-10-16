@@ -27,9 +27,10 @@ export const PCHAIN_TABLES = [
 
 /** tables our server builds and sends with the query (sources.ts); the
     ClickHouse box does not hold them. The Data API counts the AVAX
-    supply on mainnet only, and the upgrade times are mainnet's, so Fuji
-    keeps p_validator_versions alone, as it was */
-export const PCHAIN_REFS = ["p_validator_versions", "p_avax_supply", "network_upgrades"] as const;
+    supply on mainnet only, and the stake on the days the snapshots miss
+    and the upgrade times are mainnet's, so Fuji keeps p_validator_versions
+    alone, as it was */
+export const PCHAIN_REFS = ["p_validator_versions", "p_avax_supply", "p_stake_fill", "network_upgrades"] as const;
 const FUJI_REFS = ["p_validator_versions"] as const;
 
 /** tables our server builds for the C-Chain's DEXs (protocols.ts): its

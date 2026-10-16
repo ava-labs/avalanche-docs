@@ -13,6 +13,7 @@ import { registryTurn } from "./registry-turn";
 import { mevExamples, mevRules, mevTurn } from "./mev";
 import { ICTT_VERSION, icttChain, icttExamples, icttRules, icttTurn } from "./ictt";
 import { knownLines, refLine, refSchema } from "./sources";
+import { gapsLine } from "./gaps";
 import { upgradeTurn, upgradesLine } from "./upgrades";
 import { isCChain, isFuji, PCHAIN_IDS, targetOf } from "./target";
 import { andList } from "./values";
@@ -626,6 +627,7 @@ ${opts.coverage ? `\n${opts.coverage}` : ""}
   supply
     ? `
 - p_avax_supply: one row, the AVAX supply now as the Avalanche Data API counts it, in AVAX: total_supply_avax (net of every chain's burns), circulating_supply_avax, staked_avax, locked_avax, rewards_avax, burned_p_avax, burned_c_avax and burned_x_avax (what each chain has burned), l1_validator_fees_avax (all the continuous fees L1 validators have paid), genesis_unlock_avax, and updated_at (when the Data API counted). Like p_validator_versions, our server sends it with the query, so it has no history and a read of it needs no time bound. The page states when the figures were counted, so never put that in the note.
+${gapsLine()}
 ${upgradesLine(true)}`
     : ""
 }
@@ -661,8 +663,8 @@ The 20 largest validators now, with their delegations, of all validators; drill 
 SELECT node_id, weight / 1e9 AS stake_avax, delegator_weight / 1e9 AS delegated_avax, delegator_count, delegation_fee_percent AS fee_pct, toString(end_time) AS ends, count() OVER () AS of_total FROM p_validator_snapshots WHERE chain_id = ${id} AND subnet_id = ${primary} AND snapshot_time = ${latest("p_validator_snapshots")} ORDER BY weight DESC LIMIT 20
 drill: SELECT block_time AS t, block_height, ${CB58("tx_id")} AS tx_id, tx_type, weight / 1e9 AS amount_avax, toString(end_time) AS ends FROM decoded_p_txs WHERE chain_id = ${id} AND block_time >= now() - INTERVAL 365 DAY AND node_id = {{node_id:bytes}} ORDER BY block_time DESC LIMIT 50
 
-AVAX staked on the Primary Network per day, from the last complete snapshot of each day:
-WITH snaps AS (SELECT snapshot_time, sum(weight + delegator_weight) / 1e9 AS staked FROM p_validator_snapshots WHERE chain_id = ${id} AND subnet_id = ${primary} AND snapshot_time >= toDate(now()) - INTERVAL 30 DAY AND snapshot_time <= now() - INTERVAL 15 MINUTE GROUP BY snapshot_time) SELECT toDate(snapshot_time) AS t, toNullable(argMax(staked, snapshot_time)) AS staked_avax FROM snaps GROUP BY t ORDER BY t WITH FILL FROM toDate(now()) - INTERVAL 30 DAY TO toDate(now()) + INTERVAL 1 DAY STEP INTERVAL 1 DAY
+AVAX staked on the Primary Network per day, from the last complete snapshot of each day${supply ? ", the days the snapshots miss added from p_stake_fill" : ""}:
+WITH snaps AS (SELECT snapshot_time, sum(weight + delegator_weight) / 1e9 AS staked FROM p_validator_snapshots WHERE chain_id = ${id} AND subnet_id = ${primary} AND snapshot_time >= toDate(now()) - INTERVAL 30 DAY AND snapshot_time <= now() - INTERVAL 15 MINUTE GROUP BY snapshot_time${supply ? ` UNION ALL SELECT snapshot_time, staked_avax FROM p_stake_fill WHERE chain_id = ${id} AND snapshot_time >= toDate(now()) - INTERVAL 30 DAY` : ""}) SELECT toDate(snapshot_time) AS t, toNullable(argMax(staked, snapshot_time)) AS staked_avax FROM snaps GROUP BY t ORDER BY t WITH FILL FROM toDate(now()) - INTERVAL 30 DAY TO toDate(now()) + INTERVAL 1 DAY STEP INTERVAL 1 DAY
 
 Transactions by type; drill into one type:
 SELECT tx_type, count() AS txs, round(100 * count() / sum(count()) OVER (), 2) AS share_pct FROM decoded_p_txs WHERE chain_id = ${id} AND block_time >= now() - INTERVAL 7 DAY GROUP BY tx_type ORDER BY txs DESC
