@@ -18,6 +18,7 @@ import type { SourceNote } from "./types";
 import { DAY, WEEK } from "./values";
 import { MAINNET_UPGRADES } from "@/constants/network-upgrades";
 import { STAKE_FILL, gapNotes } from "./gaps";
+import { sqlWindow } from "./scope";
 import { upgradeTime } from "./upgrades";
 
 /* What the server puts in front of a question's SQL. Two kinds of table:
@@ -352,6 +353,38 @@ const supply: Source = {
   },
 };
 
+/* The supply at the end of each day, which the Data API does not
+   publish: its total now, less the staking rewards paid after the day
+   (raw_p_reward_utxos, up to when the Data API counted). Burns since the
+   day are not added back: about 78k AVAX from 2026-07-01 to 2026-10-15,
+   under 0.02% of the supply. The Data API counts circulating as total.
+   Rows from the query's own window when the SQL states one, else from the
+   first day it can rebuild: the P-Chain's blocks carry a time only since
+   Banff (2022-10-18 16:00 UTC), so 534,442 reward outputs before it have
+   none and a day before it would miss them. Mainnet only. */
+const FIRST_SUPPLY_DAY = "2022-10-18";
+/** a window that starts this close to now has burned under 0.02% of the supply since (78k AVAX in 107 days) */
+const RECENT_MS = 100 * DAY;
+
+const supplyDaily: Source = {
+  columns: [["chain_id", "UInt8"], ["t", "Date"], ["total_supply_avax", "Float64"], ["circulating_supply_avax", "Float64"]],
+  async build(chainId, sql) {
+    const s = await supplyFeed.get(networkOf(chainId));
+    const w = sqlWindow(sql, Date.now());
+    const asked = w && w !== "unknown" ? new Date(w.start - DAY).toISOString().slice(0, 10) : FIRST_SUPPLY_DAY;
+    const from = asked < FIRST_SUPPLY_DAY ? FIRST_SUPPLY_DAY : asked;
+    const until = s.updated ? `toDateTime('${s.updated}', 'UTC')` : "now()";
+    const paid = `SELECT toDate(block_time) AS t, sum(reinterpretAsUInt64(reverse(substring(utxo_bytes, 75, 8)))) / 1e9 AS paid FROM raw_p_reward_utxos WHERE chain_id = ${chainId} AND block_time >= toDateTime('${from} 00:00:00', 'UTC') AND block_time <= ${until} GROUP BY t ORDER BY t WITH FILL FROM toDate('${from}') TO toDate(now()) + INTERVAL 1 DAY STEP INTERVAL 1 DAY`;
+    const total = `toFloat64(${s.values[0]}) - ifNull(sum(paid) OVER (ORDER BY t DESC ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING), 0)`;
+    const out = `SELECT toUInt8(${chainId}) AS chain_id, t, ${total} AS total_supply_avax, total_supply_avax AS circulating_supply_avax FROM (${paid})`;
+    // the burns not added back: under 0.02% for a recent window, else at most what every chain has burned
+    const burned = s.values[5] + s.values[6] + s.values[7];
+    const bound = w && w !== "unknown" && w.start >= Date.now() - RECENT_MS ? "less than 0.02% of the supply" : `at most ${((100 * burned) / s.values[0]).toFixed(1)}% of the supply on the first days, as every chain has burned ${Math.round(burned / 1e6 * 10) / 10}M AVAX in all`;
+    const text = `The supply on each day is rebuilt: the Avalanche Data API's total supply${s.updated ? ` at ${s.updated.slice(0, 16)} UTC` : ""}, less the staking rewards paid after that day. Burns after that day are not added back, a difference of ${bound}. The rebuilt supply starts at ${FIRST_SUPPLY_DAY}, the Banff upgrade, as P-Chain blocks before it carry no time. The Data API counts the circulating supply as equal to the total supply.`;
+    return { sql: out, note: { table: "p_avax_supply_daily", label: "daily AVAX supply", at: s.at, total: 1, known: 1, text } };
+  },
+};
+
 /** the Primary Network stake on the days the snapshot tables miss (gaps.ts), as rows like a snapshot's total */
 const stakeFill: Source = {
   columns: [["chain_id", "UInt8"], ["snapshot_time", "DateTime64(3, 'UTC')"], ["block_height", "UInt64"], ["validators", "UInt32"], ["staked_avax", "Float64"]],
@@ -598,6 +631,7 @@ const SOURCES: Record<string, Source> = {
   chain_names: chainNames,
   p_validator_versions: versions,
   p_avax_supply: supply,
+  p_avax_supply_daily: supplyDaily,
   p_stake_fill: stakeFill,
   network_upgrades: upgrades,
   dex_factories: factories,

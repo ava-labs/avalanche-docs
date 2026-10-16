@@ -4,7 +4,7 @@ import { HELICON_ACTIVATION } from '@/constants/helicon';
 import { MAINNET_UPGRADES } from '@/constants/network-upgrades';
 import { recipeKey } from '@/lib/explorer-query/cache';
 import { literalWindow } from '@/lib/explorer-query/guard';
-import { pchainPrompt, promptVersion, systemPrompt, userTurn } from '@/lib/explorer-query/prompt';
+import { pchainPrompt, promptVersion, shareTurn, systemPrompt, userTurn } from '@/lib/explorer-query/prompt';
 import { scoped } from '@/lib/explorer-query/scope';
 import { markUpgrades, namedUpgrades, namesUpgrade, upgradeLines, upgradeTurn, upgradesLine } from '@/lib/explorer-query/upgrades';
 import type { VisualSpec } from '@/lib/explorer-query/visual';
@@ -100,11 +100,11 @@ describe('an upgrade a question names', () => {
     expect(userTurn(43113, q, NOW)).toBe(q);
   });
 
-  it("is in the recipe key, so a kept recipe written before a change to it is asked again", () => {
+  it("is in the recipe key with the share turn, so a kept recipe written before a change to either is asked again", () => {
     const q = 'staking ratio since helicon';
     const norm = q;
     const version = promptVersion(1);
-    expect(recipeKey(1, q)).toBe(createHash('sha256').update(`1\n${version}\n${norm}\n\n${upgradeTurn(q)}`).digest('hex').slice(0, 32));
+    expect(recipeKey(1, q)).toBe(createHash('sha256').update(`1\n${version}\n${norm}\n\n${upgradeTurn(q)}${shareTurn(1, q)}`).digest('hex').slice(0, 32));
     // the C-Chain's key holds its own turn, with the table limit
     const c = 'daily transactions since etna';
     expect(recipeKey(43114, c)).toBe(createHash('sha256').update(`43114\n${promptVersion(43114)}\n${c}\n\n${upgradeTurn(c, new Date(), true)}`).digest('hex').slice(0, 32));
