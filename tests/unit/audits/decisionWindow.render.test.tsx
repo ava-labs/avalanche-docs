@@ -130,6 +130,7 @@ const firmView = (over: Partial<AuditorRequestView> = {}): AuditorRequestView =>
     own_quote: ownQuote(),
     contacts: null,
     shared_handle: null,
+    shared_calendar_url: null,
     subsidy: null,
     window_open: false,
     pick_by: PICK_BY,

@@ -140,6 +140,44 @@ describe("submitRequestSchema · Telegram share", () => {
   });
 });
 
+describe("submitRequestSchema · calendar share", () => {
+  it("reads consent alone as sharing nothing", () => {
+    expect(submitRequestSchema.safeParse({ contact_consent: true })).toMatchObject({
+      success: true,
+      data: { share_contact_handle: false, share_calendar: false },
+    });
+  });
+
+  it("carries the calendar choice next to the consent", () => {
+    for (const share of [true, false]) {
+      expect(
+        submitRequestSchema.safeParse({ contact_consent: true, share_calendar: share }),
+      ).toMatchObject({
+        success: true,
+        data: { share_contact_handle: false, share_calendar: share },
+      });
+    }
+  });
+
+  it("carries both choices when the project shares both", () => {
+    expect(
+      submitRequestSchema.safeParse({
+        contact_consent: true,
+        share_contact_handle: true,
+        share_calendar: true,
+      }),
+    ).toMatchObject({ success: true, data: { share_contact_handle: true, share_calendar: true } });
+  });
+
+  it("rejects a calendar choice that is not a boolean", () => {
+    for (const share of ["true", 1, null]) {
+      expect(
+        submitRequestSchema.safeParse({ contact_consent: true, share_calendar: share }).success,
+      ).toBe(false);
+    }
+  });
+});
+
 describe("auditorGithubUpdateSchema · one person's GitHub username", () => {
   const parse = (value: unknown) => auditorGithubUpdateSchema.safeParse({ github_username: value });
   const stored = (value: unknown) => {

@@ -121,6 +121,7 @@ export async function submitRequestForReview(
   requestId: string,
   userId: string,
   shareContactHandle = false,
+  shareCalendar = false,
 ): Promise<SubmitResult> {
   const outcome = await prisma.$transaction(async (tx): Promise<SubmitOutcome> => {
     // Owner + draft pinned in the where clause: nobody submits someone
@@ -148,6 +149,9 @@ export async function submitRequestForReview(
         // clears the stamp of an earlier submit.
         contact_handle_shared_at:
           shareContactHandle && row.contact_handle?.trim() ? new Date() : null,
+        // The calendar share likewise, with a link that passed the gate above.
+        contact_calendar_shared_at:
+          shareCalendar && parsed.data.contact_calendar_url ? new Date() : null,
         // Store the normalized values the gate produced, not the raw draft:
         // the email lowercased, and the URLs with their scheme filled in, so
         // a bare "avax.network" is not what firms end up clicking.

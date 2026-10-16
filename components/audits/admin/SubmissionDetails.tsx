@@ -197,8 +197,14 @@ export function SubmissionDetails({ detail }: { detail: AdminRequestDetail }) {
           {
             label: "Calendar",
             children: (
-              <span className={URL_TEXT}>
-                <ProjectLink url={detail.contact_calendar_url} />
+              <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                <span className={URL_TEXT}>
+                  <ProjectLink url={detail.contact_calendar_url} />
+                </span>
+                {/* The calendar share: the project let the firms see it. */}
+                {detail.contact_calendar_shared_at ? (
+                  <span className={SHARED_TAG}>shared with firms</span>
+                ) : null}
               </span>
             ),
           },

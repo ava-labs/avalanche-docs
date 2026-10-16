@@ -560,6 +560,8 @@ describe("auditor scope · Telegram share", () => {
   const shareRow = (over: Record<string, unknown> = {}) => ({
     contact_handle: "@ada_glacier",
     contact_handle_shared_at: new Date("2026-10-01T09:00:00Z"),
+    contact_calendar_url: null,
+    contact_calendar_shared_at: null,
     ...over,
   });
   const submittedQuote = { id: "q-1", status: "submitted", price_usd: 28000 };
@@ -579,12 +581,17 @@ describe("auditor scope · Telegram share", () => {
     expect(view!.contacts).toBeNull();
   });
 
-  it("reads the handle alone, apart from the contact-free request select", async () => {
+  it("reads the shared contact fields alone, apart from the contact-free request select", async () => {
     await getRequestForAuditor("aud-1", "req-1");
 
     expect(requestFindUniqueMock.mock.calls[0][0]).toEqual({
       where: { id: "req-1" },
-      select: { contact_handle: true, contact_handle_shared_at: true },
+      select: {
+        contact_handle: true,
+        contact_handle_shared_at: true,
+        contact_calendar_url: true,
+        contact_calendar_shared_at: true,
+      },
     });
     const safeSelect = requestFindFirstMock.mock.calls[0][0].select;
     for (const column of [
@@ -593,6 +600,7 @@ describe("auditor scope · Telegram share", () => {
       "contact_handle",
       "contact_calendar_url",
       "contact_handle_shared_at",
+      "contact_calendar_shared_at",
     ]) {
       expect(safeSelect[column]).toBeUndefined();
     }
@@ -647,6 +655,149 @@ describe("auditor scope · Telegram share", () => {
 
     expect(view!.contacts).toEqual(contacts);
     expect(view!.shared_handle).toBeNull();
+  });
+
+  it("reads nothing for a firm the request never reached", async () => {
+    deliveryFindUniqueMock.mockResolvedValue(null);
+
+    expect(await getRequestForAuditor("aud-1", "req-1")).toBeNull();
+    expect(requestFindUniqueMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("auditor scope · calendar share", () => {
+  const LINK = "https://cal.com/ada-glacierswap";
+  // What AUDITOR_SAFE_REQUEST_SELECT returns for a request open to quotes.
+  const collectingRow = {
+    id: "req-1",
+    project_name: "Glacierswap",
+    description: "A concentrated-liquidity DEX on C-Chain.",
+    scope: "Router and pool factory contracts.",
+    project_types: ["DeFi protocol"],
+    deployment_target: "c_chain",
+    multichain: false,
+    services: ["Smart contract audit (Solidity / Vyper)"],
+    repos: [],
+    languages: ["Solidity"],
+    frameworks: ["Foundry"],
+    nsloc: 4200,
+    doc_links: [],
+    attachments: [],
+    needed_by: FUTURE,
+    quote_deadline: FUTURE,
+    urgency: "within_6_weeks",
+    status: "collecting",
+    submitted_at: new Date("2026-10-01T09:00:00Z"),
+    created_at: new Date("2026-09-30T12:00:00Z"),
+  };
+  // The guarded read, with only the calendar link shared.
+  const shareRow = (over: Record<string, unknown> = {}) => ({
+    contact_handle: null,
+    contact_handle_shared_at: null,
+    contact_calendar_url: LINK,
+    contact_calendar_shared_at: new Date("2026-10-01T09:00:00Z"),
+    ...over,
+  });
+  const submittedQuote = { id: "q-1", status: "submitted", price_usd: 28000 };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    deliveryFindUniqueMock.mockResolvedValue({ auditor: { active: true } });
+    requestFindFirstMock.mockResolvedValue(collectingRow);
+    quoteFindUniqueMock.mockResolvedValue(null);
+    requestFindUniqueMock.mockResolvedValue(shareRow());
+  });
+
+  it("shows an active notified firm the link the project shared, and only the link", async () => {
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.shared_calendar_url).toBe(LINK);
+    expect(view!.shared_handle).toBeNull();
+    expect(view!.contacts).toBeNull();
+  });
+
+  describe("past the quote deadline, where the stored status is still collecting", () => {
+    // At 2026-12-01 12:00: a window closed 2026-11-28 picks by 2026-12-05;
+    // one closed 2026-11-10 12:00 had to pick by 2026-11-17.
+    beforeEach(() => {
+      vi.useFakeTimers({ toFake: ["Date"] });
+      vi.setSystemTime(new Date("2026-12-01T12:00:00Z"));
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it.each([
+      ["while the project decides", new Date("2026-11-28T00:00:00Z"), submittedQuote, "submitted"],
+      ["once the pick-by date passed", new Date("2026-11-10T12:00:00Z"), submittedQuote, "expired"],
+      ["when the window closed without quotes", new Date("2026-11-28T00:00:00Z"), null, undefined],
+    ])("keeps it %s", async (_case, quote_deadline, quote, quoteStatus) => {
+      requestFindFirstMock.mockResolvedValue({ ...collectingRow, quote_deadline });
+      quoteFindUniqueMock.mockResolvedValue(quote);
+
+      const view = await getRequestForAuditor("aud-1", "req-1");
+
+      expect(view!.window_open).toBe(false);
+      expect(view!.own_quote?.display_status).toBe(quoteStatus);
+      expect(view!.shared_calendar_url).toBe(LINK);
+    });
+  });
+
+  const hidden: [string, { share?: object; status?: string; quote?: object; active?: boolean }][] = [
+    ["the project did not share it", { share: shareRow({ contact_calendar_shared_at: null }) }],
+    ["the stored link is null", { share: shareRow({ contact_calendar_url: null }) }],
+    ["the stored link is blank", { share: shareRow({ contact_calendar_url: "   " }) }],
+    ["the firm lost to an accepted quote", { status: "engaged", quote: { ...submittedQuote, status: "not_selected" } }],
+    ["the project withdrew the request", { status: "withdrawn", quote: submittedQuote }],
+    ["the request waits for approval", { status: "pending_review" }],
+    ["the request was rejected", { status: "rejected" }],
+    ["the request went back to draft", { status: "draft" }],
+    ["the firm is deactivated", { active: false }],
+  ];
+
+  it.each(hidden)("hides it when %s", async (_case, setup) => {
+    if (setup.share) requestFindUniqueMock.mockResolvedValue(setup.share);
+    if (setup.status) requestFindFirstMock.mockResolvedValue({ ...collectingRow, status: setup.status });
+    if (setup.quote) quoteFindUniqueMock.mockResolvedValue(setup.quote);
+    if (setup.active === false) deliveryFindUniqueMock.mockResolvedValue({ auditor: { active: false } });
+
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.shared_calendar_url).toBeNull();
+  });
+
+  it("leaves the link out when the project shared only its handle", async () => {
+    requestFindUniqueMock.mockResolvedValue(
+      shareRow({
+        contact_handle: "@ada_glacier",
+        contact_handle_shared_at: new Date("2026-10-01T09:00:00Z"),
+        contact_calendar_shared_at: null,
+      }),
+    );
+
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.shared_handle).toBe("@ada_glacier");
+    expect(view!.shared_calendar_url).toBeNull();
+  });
+
+  it("gives the winner the full contact block instead, never both", async () => {
+    const contacts = {
+      contact_name: "Ada Stone",
+      contact_email: "ada@glacierswap.example",
+      contact_handle: null,
+      contact_calendar_url: LINK,
+    };
+    requestFindFirstMock.mockResolvedValue({ ...collectingRow, status: "engaged" });
+    quoteFindUniqueMock.mockResolvedValue({ ...submittedQuote, status: "accepted" });
+    requestFindUniqueMock.mockResolvedValue(contacts);
+    subsidyFindFirstMock.mockResolvedValue(null);
+
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.contacts).toEqual(contacts);
+    expect(view!.shared_calendar_url).toBeNull();
   });
 
   it("reads nothing for a firm the request never reached", async () => {
@@ -723,7 +874,12 @@ describe("the week to pick, as each audience reads it", () => {
     vi.setSystemTime(new Date("2026-12-01T12:00:00Z"));
     deliveryFindUniqueMock.mockResolvedValue({ auditor: { active: true } });
     quoteFindUniqueMock.mockResolvedValue(ownQuoteRow);
-    requestFindUniqueMock.mockResolvedValue({ contact_handle: null, contact_handle_shared_at: null });
+    requestFindUniqueMock.mockResolvedValue({
+      contact_handle: null,
+      contact_handle_shared_at: null,
+      contact_calendar_url: null,
+      contact_calendar_shared_at: null,
+    });
   });
 
   afterEach(() => {

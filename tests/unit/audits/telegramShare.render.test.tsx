@@ -47,6 +47,7 @@ const firmView = (over: Partial<AuditorRequestView> = {}): AuditorRequestView =>
     own_quote: null,
     contacts: null,
     shared_handle: null,
+    shared_calendar_url: null,
     subsidy: null,
     window_open: true,
     ...over,
@@ -101,6 +102,8 @@ const ownerDetail = (over: Partial<OwnerRequestDetail> = {}): OwnerRequestDetail
     contact_email: "ada@glacierswap.example",
     contact_handle: "@ada_glacier",
     contact_handle_shared_at: null,
+    contact_calendar_url: null,
+    contact_calendar_shared_at: null,
     status: "collecting",
     shortlist_auditor_ids: [],
     shortlist_firms: [],
@@ -193,6 +196,7 @@ describe("wizard submit", () => {
     expect(calls.find((call) => call.url === "/api/audits/requests/draft-1/submit")?.body).toEqual({
       contact_consent: true,
       share_contact_handle: false,
+      share_calendar: false,
     });
   });
 });

@@ -815,6 +815,11 @@ model AuditRequest {
   // the request reached sees that handle, and nothing else of the contact.
   // Null otherwise; each submit stamps or clears it.
   contact_handle_shared_at DateTime? @db.Timestamptz(3)
+  // Stamped server-side at submission when the project ticked the calendar
+  // share and the row holds a link that passed the submit gate: until a quote
+  // is accepted, every firm the request reached sees that link. Null
+  // otherwise; each submit stamps or clears it.
+  contact_calendar_shared_at DateTime? @db.Timestamptz(3)
   // Stored: draft | pending_review | rejected | collecting | engaged |
   // withdrawn. "deciding" and "expired" are derived at read time from
   // quote_deadline + quote count. Plain text on purpose: the vocabulary lives
