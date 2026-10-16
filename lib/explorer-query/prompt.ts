@@ -13,7 +13,9 @@ import { registryTurn } from "./registry-turn";
 import { mevExamples, mevRules, mevTurn } from "./mev";
 import { ICTT_VERSION, icttChain, icttExamples, icttRules, icttTurn } from "./ictt";
 import { knownLines, refLine, refSchema } from "./sources";
+import { upgradeTurn, upgradesLine } from "./upgrades";
 import { isCChain, isFuji, PCHAIN_IDS, targetOf } from "./target";
+import { andList } from "./values";
 
 // the DEX gate lives with the DEX registry (protocols.ts), where the ICTT gate reads it too
 export { dexQuestion };
@@ -123,7 +125,7 @@ export function userTurn(chainId: number, prompt: string, now = new Date(), alon
   const series = alone && evm ? seriesTurn(prompt) : "";
   const kept = !alone && evm && before ? keptTurn(before, now) : "";
   const mints = evm ? `${mintsTurn(prompt)}${erc20Turn(prompt)}${nftTurn(chainId, prompt)}${poolsTurn(chainId, prompt)}${feesTurn(chainId, prompt)}${unstakeTurn(prompt)}` : validatorsTurn(prompt);
-  return `Today is ${now.toISOString().slice(0, 10)} (UTC).${series}${kept}${mints}${registryTurn(chainId, prompt)}${mevTurn(chainId, prompt)}${icttTurn(chainId, prompt)}\n\n${prompt}`;
+  return `Today is ${now.toISOString().slice(0, 10)} (UTC).${series}${kept}${mints}${upgradeTurn(prompt, now, evm)}${registryTurn(chainId, prompt)}${mevTurn(chainId, prompt)}${icttTurn(chainId, prompt)}\n\n${prompt}`;
 }
 
 /** how an answer hands back its chart; the same for every target */
@@ -444,7 +446,7 @@ ${opts.coverage ? `\n${opts.coverage}` : ""}
 ${
   c
     ? `- Gas, per ACP-194 (Continuous Execution, live since the Helicon upgrade): raw_blocks.gas_used is the gas RESERVED (the sum of the block's tx gas limits, what fills the block against gas_limit). raw_txs.gas_used is the gas CHARGED per receipt, max(used, half the limit); fees are paid on it. Fees paid in wei = toFloat64(gas_used) * gas_price. Divide by 1e18 for ${opts.symbol}. The C-Chain burns every fee.
-- Use these names in titles and notes, never "gas used" for the block figure. A sum of raw_txs.gas_used is gas charged, per block, per hour or per contract alike (name it gas_charged); gas reserved comes only from raw_blocks.gas_used.`
+- Use these names in titles and notes, never "gas used" for the block figure. A sum of raw_txs.gas_used is gas charged, per block, per hour or per contract alike (name it gas_charged); gas reserved comes only from raw_blocks.gas_used.${opts.chainId === 43114 ? `\n${upgradesLine(true)}` : ""}`
     : `- Gas: raw_blocks.gas_used is the block's gas used, against gas_limit. raw_txs.gas_used is the gas charged per receipt; fees are paid on it. Fees paid in wei = toFloat64(gas_used) * gas_price. Divide by 1e18 for ${opts.symbol}. Whether an L1 burns its fees or pays them to a fee recipient depends on its configuration: say "fees paid", never "burned". A fee question also reads raw_blocks.miner over the same window, as the worked example "Fees per bucket" shows, and the note says where the fees went: to the burn address when not_burned is 0, that is when every block's miner is 0x0100000000000000000000000000000000000000, the one case where it may say "burned"; else to the one recipient, by its full address, when recipients is 1; else to how many recipients. That address or count is the one exception to the note rules against hex, addresses and counts.`
 }
 - ERC-20 Transfer logs: topic0 = unhex('ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'); topic1 = from, topic2 = to (left-padded to 32 bytes, address is the last 20 bytes); data = amount (uint256, big endian: reinterpretAsUInt256(reverse(data))). A transfer's sender and recipient are lower(concat('0x', hex(substring(topic1, 13, 20)))) AS from_address and the same over topic2 AS to_address. Never take them from tx_from, tx_to or raw_logs.address: those are the transaction's sender, the contract it called and the token contract. An ERC-20 transfer has no topic3 (topic3 IS NULL): an ERC-721 Transfer has the same topic0 and its token id in topic3, so a count of token transfers filters topic3 IS NULL, and a note that says ERC-20 or three topics holds only with that filter. ${
@@ -598,7 +600,7 @@ export function pchainPrompt(opts: { chainId: number; network: string; schema: s
   const lastDays = isFuji(id) ? "" : "\n- The last N days as a daily series are N whole days and today, from toDate(now()) - INTERVAL N DAY: the last 7 days start at toDate(now()) - INTERVAL 7 DAY, never 6, and the note says so.";
   return `You turn a question about the Avalanche P-Chain (${opts.network}; its rows carry chain_id = ${id}) into one ClickHouse SELECT and a chart spec. The P-Chain is Avalanche's platform chain: validators and delegators of the Primary Network, L1s and their validators, and the AVAX that moves between the P-Chain and the C-Chain and X-Chain. You are precise, terse, and you never invent data.
 
-## Tables (from the database, and ${supply ? "p_validator_versions and p_avax_supply" : "p_validator_versions"}, which our server sends with the query; this is the whole schema you may read)
+## Tables (from the database, and ${andList(targetOf(id).refs)}, which our server sends with the query; this is the whole schema you may read)
 ${opts.schema}
 ${opts.coverage ? `\n${opts.coverage}` : ""}
 
@@ -623,7 +625,8 @@ ${opts.coverage ? `\n${opts.coverage}` : ""}
 - p_validator_versions: the AvalancheGo version line of every validator seat now, on the Primary Network and on every L1, one row per subnet and line; it has no row per node, so no node's own version is readable. It is not in the database: our server builds it from the explorer's validator feed and sends it with the query, so it has no history and no time column, and a read of it needs no time bound. It counts every active seat, as the explorer's validator pages do. version is the line ('1.15'), or 'Unknown' for the seats no source has a version for: keep the Unknown rows, they are part of the set. The page states how many seats have a known version, so never put that figure in the note. seats is the number of validator seats (name its sum validators, never seats). seen_day and seen_week count the seats whose version was seen in the last day and in the last 7 days, and from_crawler the seats whose version comes from a discovery crawler, which keeps the last version it saw of a node, so an old sighting may be out of date. For a question about upgrades, carry sum(seen_week) AS seen_7d with the counts; the page states how recent the versions are. weight is stake plus delegations in nAVAX on the Primary Network (is_l1 = 0) and the L1's own unitless weight on an L1 (is_l1 = 1): compare weight only inside one subnet. subnet_id is CB58 text, as the other tables return it with the CB58 expression below; return it as subnet_id and the server names the L1. A drill opens one L1's seats in p_l1_validator_snapshots on {{subnet_id:bytes}}, as in the worked example; a drill that stays in p_validator_versions compares subnet_id = {{subnet_id}}, with no quotes around the placeholder.${live?.length ? ` Version lines in the set now: ${live.join(", ")}.` : ""}${
   supply
     ? `
-- p_avax_supply: one row, the AVAX supply now as the Avalanche Data API counts it, in AVAX: total_supply_avax (net of every chain's burns), circulating_supply_avax, staked_avax, locked_avax, rewards_avax, burned_p_avax, burned_c_avax and burned_x_avax (what each chain has burned), l1_validator_fees_avax (all the continuous fees L1 validators have paid), genesis_unlock_avax, and updated_at (when the Data API counted). Like p_validator_versions, our server sends it with the query, so it has no history and a read of it needs no time bound. The page states when the figures were counted, so never put that in the note.`
+- p_avax_supply: one row, the AVAX supply now as the Avalanche Data API counts it, in AVAX: total_supply_avax (net of every chain's burns), circulating_supply_avax, staked_avax, locked_avax, rewards_avax, burned_p_avax, burned_c_avax and burned_x_avax (what each chain has burned), l1_validator_fees_avax (all the continuous fees L1 validators have paid), genesis_unlock_avax, and updated_at (when the Data API counted). Like p_validator_versions, our server sends it with the query, so it has no history and a read of it needs no time bound. The page states when the figures were counted, so never put that in the note.
+${upgradesLine(true)}`
     : ""
 }
 - Validators, unqualified ("how many validators", "validators now"): answer for the Primary Network and the L1s side by side, primary_validators and l1_validators (the active L1 seats), as in the worked example; never the Primary Network alone.

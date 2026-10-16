@@ -16,6 +16,8 @@ import { toHexBlockchainId } from "@/lib/icm-message";
 import { NETWORK_ID, PCHAIN_IDS, targetOf } from "./target";
 import type { SourceNote } from "./types";
 import { DAY, WEEK } from "./values";
+import { MAINNET_UPGRADES } from "@/constants/network-upgrades";
+import { upgradeTime } from "./upgrades";
 
 /* What the server puts in front of a question's SQL. Two kinds of table:
 
@@ -349,6 +351,17 @@ const supply: Source = {
   },
 };
 
+/** each network upgrade's mainnet activation (constants/network-upgrades.ts), on the mainnet P-Chain and C-Chain */
+const upgrades: Source = {
+  columns: [["chain_id", "UInt64"], ["upgrade", "String"], ["activated_at", "DateTime('UTC')"], ["acps", "String"]],
+  async build(chainId) {
+    const rows = MAINNET_UPGRADES.map((u) => `('${u.name}','${upgradeTime(u)}','${u.acps.map((a) => `ACP-${a}`).join(", ")}')`);
+    const sql = `SELECT toUInt64(${chainId}) AS chain_id, tupleElement(r, 1) AS upgrade, toDateTime(tupleElement(r, 2), 'UTC') AS activated_at, tupleElement(r, 3) AS acps FROM (SELECT arrayJoin([${rows.join(",")}]) AS r)`;
+    const text = "Upgrade times come from AvalancheGo's mainnet config (upgrade/upgrade.go).";
+    return { sql, note: { table: "network_upgrades", label: "network upgrade times", at: Date.now(), total: rows.length, known: rows.length, text } };
+  },
+};
+
 /* ------------------------------------------------------------------ */
 /* dex_factories, dex_tokens                                           */
 
@@ -573,6 +586,7 @@ const SOURCES: Record<string, Source> = {
   chain_names: chainNames,
   p_validator_versions: versions,
   p_avax_supply: supply,
+  network_upgrades: upgrades,
   dex_factories: factories,
   dex_tokens: tokens,
   lending_markets: markets,

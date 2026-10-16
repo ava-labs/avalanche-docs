@@ -150,7 +150,8 @@ describe('guard', () => {
     const sql = 'SELECT total_supply_avax FROM p_avax_supply WHERE chain_id = ';
     expect(guardSql(`${sql}1`, 1).ok).toBe(true);
     expect(guardSql(`${sql}5`, 5).ok).toBe(false);
-    expect(refSchema(1).map((l) => l.split('(')[0])).toEqual(['p_validator_versions', 'p_avax_supply']);
+    // mainnet also has the upgrade times
+    expect(refSchema(1).map((l) => l.split('(')[0])).toEqual(['p_validator_versions', 'p_avax_supply', 'network_upgrades']);
     expect(refSchema(5).map((l) => l.split('(')[0])).toEqual(['p_validator_versions']);
   });
 });

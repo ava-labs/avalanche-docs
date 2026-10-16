@@ -843,7 +843,7 @@ export function QueryPage({
                       <div className="flex flex-col gap-5 pb-2 pl-5 pt-4">
                         {visual && visual.callouts.length > 0 && answer.note && <p className="max-w-3xl text-[13.5px] leading-relaxed text-zinc-600 dark:text-zinc-400"><NoteText text={answer.note} base={base} /></p>}
                         <dl className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-3">
-                          <Fact label="Source" sub={answer.sources?.length ? `Indexed ClickHouse tables, read-only, with ${answer.sources.map((s) => s.label).join(" and ")} from our API` : "Indexed ClickHouse tables, read-only"}>
+                          <Fact label="Source" sub={answer.sources?.some((s) => s.label) ? `Indexed ClickHouse tables, read-only, with ${answer.sources.filter((s) => s.label).map((s) => s.label).join(" and ")} from our API` : "Indexed ClickHouse tables, read-only"}>
                             {tables.length ? tables.join(", ") : "none"}
                           </Fact>
                           {cov && (
