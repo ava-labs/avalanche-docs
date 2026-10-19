@@ -8,7 +8,7 @@ import { prisma } from '@/prisma/prisma';
 /**
  * POST /api/internal/quick-l1/register-node
  *
- * Service-to-service callback from the Quick L1 Railway orchestrator.
+ * Service-to-service callback from the quick-l1 orchestrator.
  * After it provisions a managed node for a deploy, it pings this
  * endpoint so we attach a `prisma.nodeRegistration` row to the user's
  * builders-hub account — the same way a manual creation via
@@ -22,7 +22,7 @@ import { prisma } from '@/prisma/prisma';
  *     compare; missing/wrong secret returns 401 without any hint.
  *   - The `userId` in the request body is trusted because the deploy
  *     proxy injected it from the authenticated session before
- *     forwarding to Railway. The orchestrator only relays it back; it
+ *     forwarding it on. The orchestrator only relays it back; it
  *     can't fabricate a user.
  *
  * Why a separate endpoint instead of reusing `POST /api/managed-testnet-nodes`:
@@ -127,13 +127,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   // `NodeInfo.expiresAt` exists on the type for parity with the
   // upstream managed-testnet-nodes service shape, but `createDbNode`
   // ignores it — it sets `expires_at` itself via `NODE_TTL_MS`. We
-  // derive a plausible value (dateCreated + 3 days, in epoch seconds)
+  // derive a plausible value (dateCreated + the TTL, in epoch seconds)
   // so the type checks out without misleading downstream readers.
-  const THREE_DAYS_EPOCH_S = 3 * 24 * 60 * 60;
+  const NODE_TTL_EPOCH_S = 7 * 24 * 60 * 60;
   const newestNode = {
     nodeIndex: body.nodeIndex,
     dateCreated: body.dateCreated,
-    expiresAt: body.dateCreated + THREE_DAYS_EPOCH_S,
+    expiresAt: body.dateCreated + NODE_TTL_EPOCH_S,
     nodeInfo: {
       result: {
         nodeID: body.nodeId,

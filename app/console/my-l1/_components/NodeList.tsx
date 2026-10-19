@@ -96,7 +96,7 @@ export function NodeListCard({
           <div>
             <CardTitle className="text-lg">Managed Nodes</CardTitle>
             <CardDescription>
-              Builder Hub-managed nodes provisioned for this L1. Each runs for 3 days from
+              Builder Hub-managed nodes provisioned for this L1. Each runs for 7 days from
               creation. Provision a fresh one to extend the L1&apos;s lifetime.
             </CardDescription>
           </div>
