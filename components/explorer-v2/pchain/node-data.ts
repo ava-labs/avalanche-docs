@@ -65,6 +65,15 @@ export interface P2PDetail {
   slots: { slot: number; cnt: number }[];
 }
 
+/** the uptime the node page leads with: the observatory's peer median,
+ *  the reading the validators list and the uptime chart also show. The node
+ *  document's own figure swings a few points hour to hour, so it stands in
+ *  only where the observatory has no reading (Fuji, or the feed is down) */
+export function currentUptime(n: Pick<NodeResponse, "uptime">, p2p: Pick<P2PDetail, "current_p50_uptime"> | null): number {
+  const fleet = p2p?.current_p50_uptime;
+  return typeof fleet === "number" && Number.isFinite(fleet) ? fleet : n.uptime.currentP50;
+}
+
 /** the feed's daily block buckets less the UTC day still running: the chart
  *  shows whole days only, as the explorer's other daily charts do, so it
  *  never names a day that has not begun for a viewer west of UTC */
