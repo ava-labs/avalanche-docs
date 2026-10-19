@@ -215,14 +215,17 @@ export function PortalRequestDetail({
               )}
             >
               <span className={MONO_LABEL_SM}>Project calendar</span>
-              <a
-                href={view.shared_calendar_url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-zinc-900 underline underline-offset-2 dark:text-zinc-100"
-              >
-                Schedule a meeting
-              </a>
+              <span className="text-xs text-zinc-900 dark:text-zinc-100">
+                <a
+                  href={view.shared_calendar_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  Schedule a meeting
+                </a>{" "}
+                if you need to talk with the team to understand or discuss any details.
+              </span>
             </p>
           ) : null}
           <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">

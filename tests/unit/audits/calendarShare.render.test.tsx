@@ -85,6 +85,14 @@ describe("firm request page", () => {
     expect(html).not.toContain("Project Telegram");
   });
 
+  it("says what the call is for, right after the link", () => {
+    const html = renderFirmPage(firmView({ shared_calendar_url: LINK }));
+
+    expect(html).toMatch(
+      />Schedule a meeting<\/a> if you need to talk with the team to understand or discuss any details\./,
+    );
+  });
+
   it("lists the calendar under the Telegram row when both are shared, with one reminder", () => {
     const html = renderFirmPage(
       firmView({ shared_handle: "@ada_glacier", shared_calendar_url: LINK }),
