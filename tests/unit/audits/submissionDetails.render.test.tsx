@@ -56,6 +56,7 @@ const adminDetail = (over: Partial<AdminRequestDetail> = {}): AdminRequestDetail
     contact_calendar_url: "https://cal.com/ada-glacierswap",
     contact_consent_at: new Date("2026-09-28T09:00:00Z"),
     contact_handle_shared_at: null,
+    contact_calendar_shared_at: null,
     status: "pending_review",
     accepted_quote_id: null,
     submitted_at: new Date("2026-09-28T09:00:00Z"),
@@ -188,6 +189,29 @@ describe("SubmissionDetails", () => {
       ),
     ).toContain("shared with firms");
     expect(render(adminDetail())).not.toContain("shared with firms");
+  });
+
+  it("tags the calendar link the project shared with the firms, in any status", () => {
+    const sharedAt = new Date("2026-09-28T09:00:00Z");
+    const tags = (html: string) => html.split("shared with firms").length - 1;
+
+    const calendarOnly = render(adminDetail({ contact_calendar_shared_at: sharedAt }));
+    expect(tags(calendarOnly)).toBe(1);
+    expect(calendarOnly.indexOf("shared with firms")).toBeGreaterThan(
+      calendarOnly.indexOf(">Calendar<"),
+    );
+    const engaged = render(
+      adminDetail({
+        contact_calendar_shared_at: sharedAt,
+        status: "engaged",
+        display_status: "engaged",
+      }),
+    );
+    expect(tags(engaged)).toBe(1);
+    const both = render(
+      adminDetail({ contact_handle_shared_at: sharedAt, contact_calendar_shared_at: sharedAt }),
+    );
+    expect(tags(both)).toBe(2);
   });
 
   it("names the Builder Hub account only when it differs from the contact", () => {

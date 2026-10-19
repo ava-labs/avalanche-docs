@@ -186,6 +186,39 @@ function ReopenButton({ requestId }: { requestId: string }) {
   );
 }
 
+/** A lapsed request's way on: a copy as a new draft, back through review. */
+function StartAgainButton({ requestId }: { requestId: string }) {
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+
+  const startAgain = async () => {
+    setBusy(true);
+    let started = false;
+    try {
+      const res = await fetch(`/api/audits/requests/${requestId}/start-again`, { method: "POST" });
+      const body = await res.json().catch(() => null);
+      if (!res.ok || !body?.success) {
+        toast.error(body?.message ?? "We couldn't start this request again.");
+        return;
+      }
+      started = true;
+      router.push(`/audits/new?draft=${body.id}`);
+    } catch {
+      toast.error("We couldn't start this request again.");
+    } finally {
+      // Stays disabled once started: the wizard is loading, and a second
+      // click would make a second copy.
+      if (!started) setBusy(false);
+    }
+  };
+
+  return (
+    <Button variant="outline" disabled={busy} onClick={() => void startAgain()} className="h-11 md:h-10">
+      Start again
+    </Button>
+  );
+}
+
 export function RequestDetailView({
   detail,
   userId,
@@ -262,7 +295,11 @@ export function RequestDetailView({
                 </span>
               </p>
               <span className="flex-1" />
-              <p className={MONO_LABEL_SM}>Pick one to reveal contacts</p>
+              <p className={MONO_LABEL_SM}>
+                {detail.pick_by
+                  ? `Pick one by ${formatIsoDate(detail.pick_by)}`
+                  : "Pick one to reveal contacts"}
+              </p>
             </div>
             <QuotesPanel
               quotes={detail.quotes}
@@ -294,15 +331,32 @@ export function RequestDetailView({
         ) : null}
 
         {status === "expired" ? (
-          <StateCard
-            title="The quote window closed without quotes."
-            body={
-              detail.shortlist_auditor_ids.length > 0
-                ? "This request can be reopened for one more round; the firms you chose are notified again."
-                : "This request can be reopened for one more round; every active firm is notified again."
-            }
-            action={<ReopenButton requestId={detail.id} />}
-          />
+          detail.quotes.length > 0 ? (
+            // Lapsed: quotes came in and none was picked by the pick-by date.
+            // Dated, never "a week after the window": under the release grace
+            // that would be false.
+            <>
+              <StateCard
+                title="No quote was picked in time."
+                body={`The quotes expired${detail.pick_by ? ` on ${formatIsoDate(detail.pick_by)}` : ""}. Start again from a copy of this request: it goes back through review and a fresh quote window. Files are not copied.`}
+                action={<StartAgainButton requestId={detail.id} />}
+              />
+              <div className="space-y-3">
+                <p className={MONO_LABEL_SM}>Expired quotes · read-only</p>
+                <QuotesPanel quotes={detail.quotes} userId={userId} neededBy={detail.needed_by} />
+              </div>
+            </>
+          ) : (
+            <StateCard
+              title="The quote window closed without quotes."
+              body={
+                detail.shortlist_auditor_ids.length > 0
+                  ? "This request can be reopened for one more round; the firms you chose are notified again."
+                  : "This request can be reopened for one more round; every active firm is notified again."
+              }
+              action={<ReopenButton requestId={detail.id} />}
+            />
+          )
         ) : null}
 
         {status === "withdrawn" ? (

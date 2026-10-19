@@ -75,6 +75,21 @@ describe("sendFanoutNotification", () => {
     expect(html).not.toContain("—");
     expect(text).not.toContain("—");
   });
+
+  it("tells the firm how long its quote is held: the project picks within a week", async () => {
+    await sendFanoutNotification(AUDITOR, {
+      ...REQUEST,
+      quote_deadline: new Date("2026-11-10T12:00:00Z"),
+    });
+
+    expect(htmlOf()).toContain("closes 2026-11-10 · project picks by 2026-11-17");
+  });
+
+  it("names the grace day for a window that closes before 2026-10-23", async () => {
+    await sendFanoutNotification(AUDITOR, REQUEST);
+
+    expect(htmlOf()).toContain("closes 2026-08-09 · project picks by 2026-10-30");
+  });
 });
 
 describe("sendNotSelectedNotice", () => {

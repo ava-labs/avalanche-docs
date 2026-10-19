@@ -3,6 +3,8 @@
 // source of the allowed values, and display states are DERIVED at read time
 // so no cron ever has to flip a stored status.
 
+import { DECISION_LIMIT_START, DECISION_WINDOW_DAYS } from "@/lib/audits/constants";
+
 // "pending_review" is where every submission now lands: nothing reaches an
 // auditor until an admin approves it, so a bad request cannot spam the
 // whitelist. "rejected" is the terminal side of that decision.
@@ -17,7 +19,8 @@ export const STORED_REQUEST_STATUSES = [
 export type StoredRequestStatus = (typeof STORED_REQUEST_STATUSES)[number];
 
 // "deciding" (quotes ready) and "expired" exist only at read time:
-// collecting past its deadline becomes deciding with quotes, expired without.
+// collecting past its deadline becomes deciding with quotes, expired without,
+// and expired too once its pick-by date passes with no quote accepted.
 export const DISPLAY_REQUEST_STATUSES = [
   "draft",
   "pending_review",
@@ -78,6 +81,7 @@ export const AUDIT_EVENT_ACTIONS = [
   "subsidy_declined",
   "request_withdrawn",
   "request_reopened",
+  "request_restarted",
   "request_deleted",
   "auditor_added",
   "auditor_updated",
@@ -90,13 +94,49 @@ export const AUDIT_EVENT_ACTIONS = [
 ] as const;
 export type AuditEventAction = (typeof AUDIT_EVENT_ACTIONS)[number];
 
+const DECISION_WINDOW_MS = DECISION_WINDOW_DAYS * 24 * 60 * 60 * 1000;
+
+/** The pick-by date: the end of the decision window after a quote deadline. */
+export function decisionDeadline(quoteDeadline: Date): Date {
+  const start = Math.max(quoteDeadline.getTime(), DECISION_LIMIT_START.getTime());
+  return new Date(start + DECISION_WINDOW_MS);
+}
+
+/**
+ * Whether the project may still accept a quote: the request is stored
+ * "collecting" and its pick-by date has not passed (an early pick while
+ * quotes are open included). deriveRequestStatus reads it, and the acceptance
+ * write carries it as oldestAcceptableQuoteDeadline, so the screens and the
+ * service can never disagree.
+ */
+export function isAcceptanceOpen(
+  request: { status: string; quote_deadline: Date | null },
+  now: Date = new Date(),
+): boolean {
+  if (request.status !== "collecting") return false;
+  if (!request.quote_deadline) return true;
+  return now <= decisionDeadline(request.quote_deadline);
+}
+
+/**
+ * isAcceptanceOpen as a where clause: the oldest quote deadline whose pick-by
+ * date has not passed at `now`, or null while DECISION_LIMIT_START still holds
+ * every decision window open.
+ */
+export function oldestAcceptableQuoteDeadline(now: Date = new Date()): Date | null {
+  const oldest = new Date(now.getTime() - DECISION_WINDOW_MS);
+  return oldest <= DECISION_LIMIT_START ? null : oldest;
+}
+
 /**
  * Effective request status shown everywhere in the UI.
  * Stored draft / engaged / withdrawn pass through untouched. A stored
  * "collecting" row stays collecting until its quote deadline passes, then
- * reads as "deciding" (quotes ready) when at least one quote came in, or
- * "expired" (reopenable) when none did. A missing deadline never expires a
- * request: submission always sets one, so this is purely defensive.
+ * reads as "deciding" (quotes ready) when at least one quote came in, until
+ * its pick-by date passes. It reads "expired" when no quote came in
+ * (reopenable) or none was accepted in time (lapsed: it starts again from a
+ * copy). A missing deadline never expires a request: submission always sets
+ * one, so this is purely defensive.
  */
 export function deriveRequestStatus(
   row: { status: string; quote_deadline: Date | null },
@@ -105,7 +145,7 @@ export function deriveRequestStatus(
 ): DisplayRequestStatus {
   if (row.status !== "collecting") return row.status as DisplayRequestStatus;
   if (!row.quote_deadline || now <= row.quote_deadline) return "collecting";
-  return quoteCount > 0 ? "deciding" : "expired";
+  return quoteCount > 0 && isAcceptanceOpen(row, now) ? "deciding" : "expired";
 }
 
 /**

@@ -38,6 +38,7 @@ export async function POST(request: NextRequest, context: RouteParams<{ id: stri
       id,
       caller.userId,
       consent.data.share_contact_handle,
+      consent.data.share_calendar,
     );
     if (!result.success && result.code === "not_found") {
       return NextResponse.json(

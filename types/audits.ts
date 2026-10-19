@@ -204,14 +204,15 @@ export type AuditQuoteInput = z.infer<typeof auditQuoteSchema>;
 /**
  * Submission carries the consent explicitly rather than reading a stored
  * flag: consent is given at the moment of sending, so it is re-affirmed on
- * every submit and the server stamps the time itself. The Telegram share is
- * chosen the same way; a body without it shares nothing.
+ * every submit and the server stamps the time itself. The Telegram and
+ * calendar shares are chosen the same way; a body without them shares nothing.
  */
 export const submitRequestSchema = z.strictObject({
   contact_consent: z.literal(true, {
     message: "Confirm that your contact details can be shared with the audit firms",
   }),
   share_contact_handle: z.boolean().default(false),
+  share_calendar: z.boolean().default(false),
 });
 
 export const acceptQuoteSchema = z.strictObject({
@@ -268,6 +269,46 @@ export const auditorMemberCreateSchema = z.strictObject({
   email: normalizedEmail,
 });
 export type AuditorMemberCreateInput = z.infer<typeof auditorMemberCreateSchema>;
+
+// GitHub's own rule: 1 to 39 letters, digits and single inner hyphens.
+const GITHUB_USERNAME_RE = /^[A-Za-z0-9](?:-?[A-Za-z0-9])*$/;
+const GITHUB_USERNAME_MESSAGE =
+  "Enter a valid GitHub username: up to 39 letters, digits or single hyphens, no hyphen at the start or end.";
+
+/**
+ * A pasted "@name" or profile link works: the prefixes and one trailing slash
+ * are stripped before GitHub's rule applies. Empty clears the username.
+ * Anything else that is not a string passes through to fail the check.
+ */
+const normalizeGithubUsername = (value: unknown) => {
+  if (typeof value !== "string") return value;
+  const raw = value.trim();
+  if (raw === "") return null;
+  return raw
+    .replace(/^@/, "")
+    .replace(/^https?:\/\//i, "")
+    .replace(/^www\./i, "")
+    .replace(/^github\.com\//i, "")
+    .replace(/\/$/, "");
+};
+
+/**
+ * One person's own GitHub username, the only body the portal's GitHub route
+ * takes: it names the value and nothing else, so the signed-in address alone
+ * decides whose row it lands on. Stored as typed (GitHub names are
+ * case-insensitive); null clears it.
+ */
+export const auditorGithubUpdateSchema = z.strictObject({
+  github_username: z.preprocess(
+    normalizeGithubUsername,
+    z
+      .string()
+      .max(39, GITHUB_USERNAME_MESSAGE)
+      .regex(GITHUB_USERNAME_RE, GITHUB_USERNAME_MESSAGE)
+      .nullable(),
+  ),
+});
+export type AuditorGithubUpdateInput = z.infer<typeof auditorGithubUpdateSchema>;
 
 export const adminRequestFiltersSchema = z.object({
   // Must track DISPLAY_REQUEST_STATUSES: a value missing here fails
