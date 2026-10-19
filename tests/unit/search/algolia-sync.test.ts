@@ -1,6 +1,9 @@
 import { createHash } from 'node:crypto';
-import { describe, expect, it, vi } from 'vitest';
-import { syncIfChanged } from '@/utils/algolia-sync';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { findStaticJsonBody, syncIfChanged } from '@/utils/algolia-sync';
 
 const body = Buffer.from(
   JSON.stringify([{ _id: '/docs/a', title: 'A', url: '/docs/a', structured: { headings: [], contents: [] } }]),
@@ -64,5 +67,35 @@ describe('syncIfChanged', () => {
       'replace failed',
     );
     expect(client.setSettings).not.toHaveBeenCalled();
+  });
+});
+
+describe('findStaticJsonBody', () => {
+  let distDir = '';
+  afterEach(() => rmSync(distDir, { recursive: true, force: true }));
+
+  function write(...parts: string[]) {
+    mkdirSync(join(distDir, ...parts.slice(0, -1)), { recursive: true });
+    writeFileSync(join(distDir, ...parts), '[]');
+    return join(distDir, ...parts);
+  }
+
+  it('finds the body that a build with no adapter writes to server/app', () => {
+    distDir = mkdtempSync(join(tmpdir(), 'next-'));
+    const file = write('server', 'app', 'static.json.body');
+    expect(findStaticJsonBody(distDir)).toBe(file);
+  });
+
+  it('finds the body that an adapter build of next 16.3.8 writes to the route cache', () => {
+    distDir = mkdtempSync(join(tmpdir(), 'next-'));
+    write('server', 'route-cache', 'APP_ROUTE', 'aaa', '$', 'llms.txt.body');
+    const file = write('server', 'route-cache', 'APP_ROUTE', 'ff714dfd', '$', 'static.json.body');
+    expect(findStaticJsonBody(distDir)).toBe(file);
+  });
+
+  it('throws when the build has no static.json body', () => {
+    distDir = mkdtempSync(join(tmpdir(), 'next-'));
+    write('server', 'route-cache', 'APP_ROUTE', 'aaa', '$', 'llms.txt.body');
+    expect(() => findStaticJsonBody(distDir)).toThrow('found 0');
   });
 });
