@@ -10,6 +10,7 @@ import registryData from "@/data/contract-registry.json";
 import { FAMILY_LISTS, FAMILY_NAMES } from "./families";
 import { AAVE_SLUG, LENDING_NAMES, LENDING_PROTOCOLS, LENDING_TOKENS } from "./lending";
 import { DEX_CHAIN_ID, DEX_PROTOCOLS, DEX_TOKENS } from "./protocols";
+import { icttNamed } from "./names";
 import { FOUND_BY } from "./registry-turn";
 import { isFuji } from "./target";
 
@@ -96,9 +97,10 @@ const FAMILIES = [
 
 /** why a query does not read the protocol its question names, or null. `sql` is the query as the writer typed it (a
     shorthand not written out); `questions` is the question, then the turns before it, newest first. A shorthand with no
-    slug reads every protocol of its family, so it counts for a question that names two of them, and for one it does not */
+    slug reads every protocol of its family, so it counts for a question that names two of them, and for one it does not.
+    A question that names ICTT or ICM names chains, not the registry's contracts: Dexalot there is an L1 */
 export function protocolScope(sql: string, questions: readonly string[], chainId: number): string | null {
-  if (chainId !== DEX_CHAIN_ID) return null;
+  if (chainId !== DEX_CHAIN_ID || icttNamed(questions[0] ?? "")) return null;
   const text = sql.toLowerCase();
   const addresses = new Set([...text.matchAll(/(?<![0-9a-f])[0-9a-f]{40}(?![0-9a-f])/g)].map((m) => m[0]));
   const groups = namedIn(questions);

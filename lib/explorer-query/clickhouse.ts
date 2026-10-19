@@ -149,7 +149,7 @@ async function statsSlot<T>(run: () => Promise<T>): Promise<T> {
 /** what a writer and a reader are told when the rows stop short, and how to write the query so they do not */
 const CUT_OFF = "the query service cut its answer off, as it does when a value is NaN or infinite: divide by nullIf(x, 0), and wrap ratios and quantiles in ifNotFinite(x, NULL)";
 
-async function postStats(sql: string): Promise<RawJson> {
+async function postStats(sql: string, chainId?: number): Promise<RawJson> {
   const key = process.env.STATS_QUERY_KEY;
   if (!key) throw new Error("STATS_QUERY_KEY is not set");
   // busy (503) and over the rate (429) are worth a short wait; other
@@ -163,7 +163,8 @@ async function postStats(sql: string): Promise<RawJson> {
       const r = await fetch(STATS_QUERY_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-Query-Key": key },
-        body: JSON.stringify({ sql, maxRows: MAX_ROWS, timeoutSeconds: QUERY_TIMEOUT_S, format: "json" }),
+        // chainId is the chain stats-api reads $ICTT on (ictt.ts); other SQL ignores it
+        body: JSON.stringify({ sql, maxRows: MAX_ROWS, timeoutSeconds: QUERY_TIMEOUT_S, format: "json", chainId }),
         signal: AbortSignal.timeout((QUERY_TIMEOUT_S + 10) * 1000),
       });
       return { r, t: await r.text() };
@@ -216,8 +217,9 @@ async function postStats(sql: string): Promise<RawJson> {
   return { meta, data, rows: body.rowCount ?? data.length, statistics: { elapsed: body.elapsedMs / 1000, rows_read: 0, bytes_read: 0 } };
 }
 
-async function post(sql: string): Promise<RawJson> {
-  if (!process.env.QUERY_CLICKHOUSE_URL && process.env.STATS_QUERY_KEY) return postStats(sql);
+async function post(sql: string, chainId?: number): Promise<RawJson> {
+  if (!process.env.QUERY_CLICKHOUSE_URL && process.env.STATS_QUERY_KEY) return postStats(sql, chainId);
+  if (/\$ICTT\b/.test(sql)) throw new Error("$ICTT is written out by stats-api: run it through STATS_QUERY_KEY, not QUERY_CLICKHOUSE_URL");
   const base = endpoint();
   const qs = new URLSearchParams(SETTINGS);
   // the box rejects a fifth concurrent query outright; share the site's gate
@@ -291,8 +293,9 @@ function reread(type: string): { sql: (q: string) => string; back?: (v: string) 
   return { sql: (q) => `toString(${plain(q)})`, back };
 }
 
-export async function runQuery(sql: string): Promise<QueryResult> {
-  let body = await post(sql);
+/** chainId: the page's chain, which stats-api reads a query's $ICTT on */
+export async function runQuery(sql: string, chainId?: number): Promise<QueryResult> {
+  let body = await post(sql, chainId);
   // a query that returned bytes (a model forgot hex()) runs once more with
   // those columns as 0x text, so the page never shows mangled bytes; one
   // with a column whose NULLs arrive wrong runs once more with it read so a NULL stays NULL
@@ -309,7 +312,7 @@ export async function runQuery(sql: string): Promise<QueryResult> {
         return bytes.includes(c.name) ? `lower(concat('0x', hex(${q}))) AS ${q}` : s ? `${s.sql(q)} AS ${q}` : q;
       })
       .join(", ");
-    const again = await post(`SELECT ${cols} FROM (${sql.replace(/\nLIMIT (\d+)$/, " LIMIT $1")})`);
+    const again = await post(`SELECT ${cols} FROM (${sql.replace(/\nLIMIT (\d+)$/, " LIMIT $1")})`, chainId);
     // each keeps its type, and its values read as the endpoint writes them: a big integer as a number, a Bool as
     // true or false, a decimal, UUID or IP as text
     for (const { column, back } of stale) {

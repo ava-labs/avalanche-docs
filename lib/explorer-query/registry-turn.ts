@@ -5,7 +5,7 @@
    themselves. Mainnet C-Chain only. */
 
 import registryData from "@/data/contract-registry.json";
-import { mentioned, wordsOf } from "./names";
+import { icttNamed, mentioned, wordsOf } from "./names";
 import { DEX_CHAIN_ID } from "./protocols";
 
 type Entry = { address: string; category: string; name: string; protocol?: string; family?: string; version?: string };
@@ -40,9 +40,10 @@ const PROTOCOLS: ReadonlyMap<string, Entry[]> = registry.contracts.reduce((m, e)
 }, new Map<string, Entry[]>());
 const NAMES = [...PROTOCOLS.keys()];
 
-/** the registry protocols a question names that no chapter reads, on the mainnet C-Chain; the recipe key holds them */
+/** the registry protocols a question names that no chapter reads, on the mainnet C-Chain; the recipe key holds them.
+    A question that names ICTT or ICM has the ICTT chapter, and names L1s (Dexalot), not the registry's contracts */
 export function registryNames(chainId: number, prompt: string): string[] {
-  return chainId === DEX_CHAIN_ID ? mentioned(prompt, NAMES, CAPITAL) : [];
+  return chainId === DEX_CHAIN_ID && !icttNamed(prompt) ? mentioned(prompt, NAMES, CAPITAL) : [];
 }
 
 const t = (hash: string) => `unhex('${hash}')`;

@@ -75,6 +75,16 @@ describe('the seat that leads the node page', () => {
     expect(leadSeat(doc(), OTHER)).toBe(L1);
   });
 
+  it('is a seat with a balance over one that has run out', () => {
+    const seats = [
+      { kind: 'l1' as const, subnetId: OTHER, validationId: 'spent', weight: 1000 },
+      { kind: 'l1' as const, subnetId: L1, validationId: 'seat', weight: 1000, balance: 3_083_618_048 },
+    ];
+    expect(leadSeat(doc({ validations: seats }), undefined)).toBe(L1);
+    expect(leadSeat(doc({ validations: seats }), OTHER)).toBe(OTHER);
+    expect(leadSeat(doc({ validations: seats.slice(0, 1) }), undefined)).toBe(OTHER);
+  });
+
   it('is none for a node in the Primary Network snapshot: its stake leads', () => {
     expect(leadSeat(doc({ hasSnapshot: true }), undefined)).toBeUndefined();
     expect(leadSeat(doc({ hasSnapshot: true }), L1)).toBeUndefined();

@@ -7,7 +7,7 @@
    Mainnet C-Chain only. */
 
 import registryData from "@/data/contract-registry.json";
-import { mentioned } from "./names";
+import { icttNamed, mentioned } from "./names";
 import { packed, strings } from "./protocols";
 
 interface RegistryEntry {
@@ -180,10 +180,12 @@ const FAMILY_WORDS =
 const SLIPPED = ["OpenTrade", "GoGoPool"];
 
 /** a question about the vaults, sAVAX or CCTP, whose prompt carries their chapter: it names one of them (OpenTrade or
-    GoGoPool one slip off), or an earlier turn read their contracts. Every other question's prompt is the one it was */
+    GoGoPool one slip off), or an earlier turn read their contracts. In a question that names ICTT or ICM, bridged or
+    cross-chain USDC is ICTT's unless it names CCTP or Circle. Every other question's prompt is the one it was */
 export function familyQuestion(chainId: number, prompt: string, history: { prompt?: string; sql?: string }[] = []): boolean {
   if (chainId !== FAMILY_CHAIN_ID || VAULTS.length + OPENTRADE_POOLS.length === 0 || !SAVAX) return false;
-  const about = (q: string) => FAMILY_WORDS.test(q) || mentioned(q, SLIPPED).length > 0;
+  const words = (q: string) => (icttNamed(q) ? q.replace(/\b(?:bridged usdc|usdc (?:bridge|bridged)|cross[- ]chain usdc)\b/gi, " ") : q);
+  const about = (q: string) => FAMILY_WORDS.test(words(q)) || mentioned(q, SLIPPED).length > 0;
   return about(prompt) || history.some((t) => about(t.prompt ?? "") || /\b(vaults|ot_pools|savax_token|cctp_\w+)\b/.test(t.sql ?? ""));
 }
 

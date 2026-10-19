@@ -2,6 +2,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 import { redis } from "@/lib/redis";
 import { familyQuestion } from "./families";
+import { icttQuestion, icttTurn } from "./ictt";
 import { mevQuestion, mevTurn } from "./mev";
 import { lendingQuestion } from "./lending";
 import { networkVersion } from "./network-prompt";
@@ -37,16 +38,19 @@ const PREFIX = "explorer-query:v2:";
 const LOCAL_MAX = 500;
 const local = new Map<string, Recipe>();
 
-/** the same question on the same chain, however it was typed, against the same prompt: a DEX, lending or family
-    question's names its variant, and a question that names a registry protocol with no chapter, or an MEV question,
-    holds its turn's lines (registry-turn.ts, mev.ts), so a change to them or to the registry asks again; any other
-    question's key is the one it was */
+/** the same question on the same chain, however it was typed, against the same prompt: a DEX, lending, family or
+    ICTT question's names its variant, and a question that names a registry protocol with no chapter, an MEV question
+    or an ICTT question holds its turn's lines (registry-turn.ts, mev.ts, ictt.ts), so a change to them or to the
+    registry asks again; any other question's key is the one it was */
 export function recipeKey(chainId: number, prompt: string, history: Turn[] = []): string {
   const norm = prompt.toLowerCase().replace(/\s+/g, " ").replace(/[?.!\s]+$/, "").trim();
   const past = history.map((t) => t.sql).join("\n");
+  const ictt = icttQuestion(chainId, prompt, history);
   const version =
-    chainId === NETWORK_ID ? networkVersion() : promptVersion(chainId, dexQuestion(chainId, prompt, history), lendingQuestion(chainId, prompt, history), familyQuestion(chainId, prompt, history), mevQuestion(chainId, prompt, history));
-  const named = `${registryTurn(chainId, prompt)}${mevTurn(chainId, prompt)}`;
+    chainId === NETWORK_ID
+      ? networkVersion(ictt)
+      : promptVersion(chainId, dexQuestion(chainId, prompt, history), lendingQuestion(chainId, prompt, history), familyQuestion(chainId, prompt, history), mevQuestion(chainId, prompt, history), ictt);
+  const named = `${registryTurn(chainId, prompt)}${mevTurn(chainId, prompt)}${icttTurn(chainId, prompt)}`;
   return createHash("sha256").update(`${chainId}\n${version}\n${norm}\n${past}${named && `\n${named}`}`).digest("hex").slice(0, 32);
 }
 
