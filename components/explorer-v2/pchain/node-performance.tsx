@@ -4,7 +4,7 @@ import { StackBlock, TraceBlock, type StackCol, type StackLayer, type TraceRow }
 import { SectionHeader } from "@/components/explorer-v2/ui";
 import { dayLong, dayShort, formatNumber, localDayShort, localHourLong } from "@/components/explorer-v2/format";
 import type { NodeResponse } from "@/lib/pchain-explorer";
-import { wholeDays, type P2PDetail } from "./node-data";
+import { currentUptime, wholeDays, type P2PDetail } from "./node-data";
 
 /* How a validator has done: its peers' median view of its uptime, hour by
    hour, and the blocks it proposed and missed, day by day, as the gas
@@ -64,7 +64,7 @@ export function NodePerformance({ n, p2p, uptimeReq }: { n: NodeResponse; p2p: P
         {uptime.length > 1 && (
           <TraceBlock
             label="Uptime"
-            figure={n.uptime.currentP50.toFixed(2)}
+            figure={currentUptime(n, p2p).toFixed(2)}
             unit="%"
             sub={
               <>
