@@ -3,19 +3,23 @@ import { anthropic, type ModelCall } from "./meter";
 import { generateText, tool, stepCountIs, type ModelMessage } from "ai";
 import { z } from "zod";
 import { MAX_ROWS, guardSql, literalWindow, negativeFigure } from "./guard";
-import { protocolScope, unitName } from "./checks";
+import { mixedChains, protocolScope, unitName } from "./checks";
 import { familyQuestion } from "./families";
+import { icttQuestion } from "./ictt";
+import { icttNamed } from "./names";
 import { mevQuestion } from "./mev";
 import { lendingQuestion, pricedNote, zeroUsd } from "./lending";
 import { collapseMacros } from "./macros";
-import { runQuery, schemaCard, coverage, coverageText, anchored, type QueryResult } from "./clickhouse";
+import { DEX_CHAIN_ID } from "./protocols";
+import { runQuery, schemaCard, coverage, coverageText, anchored, networkCoverageText, type QueryResult } from "./clickhouse";
 import { chartSpecSchema, drillSchema, type QueryAnswer, type StepTiming, type Turn } from "./types";
 import { fillDrill, nameRows } from "./enrich";
+import { networkPrompt } from "./network-prompt";
 import { dexQuestion, pchainPrompt, systemPrompt, userTurn } from "./prompt";
-import { isCChain, isFuji, targetOf } from "./target";
+import { NETWORK_ID, isCChain, isFuji, targetOf } from "./target";
 import { getRecipe, putRecipe, recipeKey, type Recipe } from "./cache";
 import { fixedRecipe, fixedRoute } from "./fixed";
-import { versionLines } from "./sources";
+import { networkChains, versionLines, withSources } from "./sources";
 import { codeWords, plainLabel, sqlNames, withoutCode } from "./visual";
 import { basicVisual } from "./draft";
 import { labelError } from "./stat-label";
@@ -131,7 +135,7 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
   try {
     let sql = recipe.sql;
     let run = await anchored(sql, a.chainId);
-    let result = await runQuery(run.sql);
+    let result = await runQuery(run.sql, a.chainId);
     // a kept recipe that finds nothing is written again; a suggestion's fixed SQL says it found nothing, and asks no model
     if (result.rowCount === 0 && !emptyOk) throw new Error("empty");
     // a time series the row cap cut from its latest end keeps its newest rows, from now on
@@ -139,7 +143,7 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
     if (newest) {
       sql = newest;
       run = await anchored(sql, a.chainId);
-      result = await runQuery(run.sql);
+      result = await runQuery(run.sql, a.chainId);
       if (key) await putRecipe(key, { ...recipe, sql });
     }
     // rows that stop at the query's own LIMIT are cut too, not only rows at the cap
@@ -155,7 +159,7 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
     const visual = stale ? null : recipe.visual;
     const said = keptWords(recipe, sql, result.rows, run.anchor, a.chainId);
     // a snapshot's figures stand at its time, read after the rows and their totals, beside no other query
-    const span = said.span ?? (isFuji(a.chainId) ? null : await snapshotSpan(run.sql));
+    const span = said.span ?? (isFuji(a.chainId) ? null : await snapshotSpan(run.sql, a.chainId));
     return {
       anchor: run.anchor,
       sources: run.sources,
@@ -179,13 +183,13 @@ async function fromRecipe(a: Ask, recipe: Recipe, key: string | null, t0: number
   }
 }
 
-/** the time a snapshot answer's figures stand at, read by the snapshot's own subquery run alone; null for an answer
-    that reads no snapshot, and when the read fails */
-async function snapshotSpan(sql: string): Promise<string | null> {
+/** the time a snapshot answer's figures stand at, read by the snapshot's own subquery run alone, its tables defined
+    as the run's are; null for an answer that reads no snapshot, and when the read fails */
+async function snapshotSpan(sql: string, chainId: number): Promise<string | null> {
   const pick = snapshotSql(sql);
   if (!pick) return null;
   try {
-    const t = msOf((await runQuery(pick)).rows[0]?.at);
+    const t = msOf((await runQuery((await withSources(pick, chainId)).sql, chainId)).rows[0]?.at);
     return t > 0 ? asOfWords(t, Date.now()) : null;
   } catch {
     return null;
@@ -225,6 +229,13 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     console.warn("[explorer-query] fixed SQL failed:", a.chainId, a.prompt);
   }
 
+  // the registries of DEXs, lending, vaults and MEV are the C-Chain's: the network sends their questions there. A
+  // question that names ICTT or ICM is the network's own: both sides of a transfer are on its rows alone
+  const network = a.chainId === NETWORK_ID;
+  const ictt = icttQuestion(a.chainId, a.prompt, a.history);
+  if (network && a.history.length === 0 && !icttNamed(a.prompt) && [dexQuestion, lendingQuestion, familyQuestion, mevQuestion].some((q) => q(DEX_CHAIN_ID, a.prompt)))
+    return { title: "", note: "", sql: "", chart: { kind: "none", series: [] }, drill: null, result: null, names: {}, visual: null, coverage: null, route: "c-chain" };
+
   const recipe = a.fresh ? null : await getRecipe(key);
   if (recipe) {
     a.emit({ type: "stage", stage: "cached", writer: recipe.writer });
@@ -242,13 +253,14 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     return null;
   }
   const cover = await coverage(a.chainId);
-  // only the C-Chain and the P-Chain send a question to each other; an L1 answers or says why not
-  const canRoute = targetOf(a.chainId).kind === "pchain" || isCChain(a.chainId);
-  const coverLine = cover ? coverageText(a.chainId, cover) : null;
-  const system =
-    targetOf(a.chainId).kind === "pchain"
+  // only the C-Chain, the P-Chain and the network send a question elsewhere; an L1 answers or says why not
+  const canRoute = targetOf(a.chainId).kind === "pchain" || isCChain(a.chainId) || network;
+  const coverLine = network ? await networkCoverageText() : cover ? coverageText(a.chainId, cover) : null;
+  const system = network
+    ? networkPrompt({ schema, coverage: coverLine, chains: await networkChains(), ictt })
+    : targetOf(a.chainId).kind === "pchain"
       ? pchainPrompt({ chainId: a.chainId, network: a.chainId === 5 ? "Fuji" : "Mainnet", schema, coverage: coverLine, lines: await versionLines(a.chainId) })
-      : systemPrompt({ chainId: a.chainId, chainName: a.chainName, symbol: a.symbol, schema, coverage: coverLine, dex: dexQuestion(a.chainId, a.prompt, a.history), lending: lendingQuestion(a.chainId, a.prompt, a.history), families: familyQuestion(a.chainId, a.prompt, a.history), mev: mevQuestion(a.chainId, a.prompt, a.history) });
+      : systemPrompt({ chainId: a.chainId, chainName: a.chainName, symbol: a.symbol, schema, coverage: coverLine, dex: dexQuestion(a.chainId, a.prompt, a.history), lending: lendingQuestion(a.chainId, a.prompt, a.history), families: familyQuestion(a.chainId, a.prompt, a.history), mev: mevQuestion(a.chainId, a.prompt, a.history), ictt });
 
   // earlier turns, so "make it weekly" refines the last chart
   const messages: ModelMessage[] = [];
@@ -285,7 +297,9 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
   const fuji = isFuji(a.chainId);
   // the server writes out the WITH a C-Chain shorthand stands for. A writer that writes it out itself spends about
   // 2,300 more output tokens, 25 s a call (D20's final); asked for the shorthand, 6 of 6 replays of that final kept it
-  const shorthand = isCChain(a.chainId) && !fuji;
+  // an ICTT or ICM question is asked for $ICTT on every chain that has it
+  const shorthand = (isCChain(a.chainId) && !fuji) || ictt;
+  const shorthands = ictt ? "$ICTT" : "$DEX, $LEND, $LIQUIDATIONS";
 
   const writers = fuji ? FUJI_WRITERS : WRITERS;
 
@@ -305,6 +319,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     let scopeOnce = false;
     let unitOnce = false;
     let noteOnce = false;
+    let mixedOnce = false;
     let tested = 0;
     // the rows of the last final query: a final sent back for its words reads them again rather than the database
     let lastRun: { sql: string; result: QueryResult } | null = null;
@@ -318,7 +333,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     };
 
     const run_sql = tool({
-      description: `Test a query you are unsure of: the first rows and column types, or the database error. Skip it when a worked example fits.${shorthand ? " Write a shorthand ($DEX, $LEND, $LIQUIDATIONS) as it stands, never the WITH it stands for: the server writes its WITH out." : ""}`,
+      description: `Test a query you are unsure of: the first rows and column types, or the database error. Skip it when a worked example fits.${shorthand ? ` Write a shorthand (${shorthands}) as it stands, never the WITH it stands for: the server writes its WITH out.` : ""}`,
       inputSchema: z.object({ sql: z.string() }),
       execute: async ({ sql }) => {
         // a writer past its tests answers from what they showed: a test it still calls runs nothing
@@ -339,7 +354,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
         const q0 = Date.now();
         try {
           const run = await anchored(`SELECT * FROM (${g.sql.replace(/\nLIMIT \d+$/, "")}) LIMIT 20`, a.chainId);
-          const r = await runQuery(run.sql);
+          const r = await runQuery(run.sql, a.chainId);
           ranFine += 1;
           step("test", Date.now() - q0, true, `${r.rowCount} rows`);
           return { columns: r.columns, rows: r.rows, rowCount: r.rowCount, elapsedMs: r.elapsedMs, rowsRead: r.rowsRead, ...left };
@@ -355,7 +370,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
     });
 
     const render_chart = tool({
-      description: `Hand back the final query and the chart spec. The server runs the query in full and tests the drill. Returns ok, or the error to fix.${shorthand ? " Write sql and drill.sql with the shorthand your tests used ($DEX, $LEND, $LIQUIDATIONS): the server writes its WITH out." : ""}`,
+      description: `Hand back the final query and the chart spec. The server runs the query in full and tests the drill. Returns ok, or the error to fix.${shorthand ? ` Write sql and drill.sql with the shorthand your tests used (${shorthands}): the server writes its WITH out.` : ""}`,
       inputSchema: z.object({
         title: z.string(),
         note: z.string(),
@@ -430,7 +445,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
             step("final", Date.now() - q0, false, "window words");
             return { error: unnamed };
           }
-          const result = !fuji && lastRun?.sql === run.sql ? lastRun.result : await runQuery(run.sql);
+          const result = !fuji && lastRun?.sql === run.sql ? lastRun.result : await runQuery(run.sql, a.chainId);
           lastRun = { sql: run.sql, result };
           ranFine += 1;
           // an empty answer is usually a window that misses the data; ask once
@@ -456,6 +471,12 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
             bigOnce = true;
             return fail(big, Date.now() - q0);
           }
+          // a network answer keeps each chain's amounts and records on that chain: ask once
+          const mixed = !network || mixedOnce ? null : mixedChains(result);
+          if (mixed) {
+            mixedOnce = true;
+            return fail(mixed, Date.now() - q0);
+          }
           // a USD figure NULL where its amount is 0 is a sum over no rows, not a missing price: ask once
           const zero = zeroOnce ? null : zeroUsd(g.sql, note, result, a.chainId);
           if (zero) {
@@ -478,7 +499,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
           if (newest) {
             kept = newest;
             ran = await anchored(newest, a.chainId);
-            rows = await runQuery(ran.sql);
+            rows = await runQuery(ran.sql, a.chainId);
           }
           // the drill must work on a real row before the answer ships
           if (drill && rows.rows[0]) {
@@ -488,7 +509,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
               const probeSql = (await anchored(d.sql, a.chainId)).sql.replace(/\bLIMIT\s+\d+\s*$/i, "LIMIT 1");
               // a probe byte for byte the same as one that found records in this request is not run again
               if (fuji || !probed.has(probeSql)) {
-                const probe = await runQuery(probeSql);
+                const probe = await runQuery(probeSql, a.chainId);
                 // a drill that opens onto nothing is the "No records matched" a reader hits
                 if (probe.rowCount === 0) return fail("drill: it found no records for the first row. Keep the main query's window and filters, and filter on that row's own values (use :bytes for hex ids and addresses).", Date.now() - q0);
                 probed.add(probeSql);
@@ -510,7 +531,7 @@ export async function answerQuestion(a: Ask): Promise<QueryAnswer | null> {
           // what is left of a wrong window's words gives way to the window the query reads, or else its rows cover
           const words = { title: plainLabel(title), note: withoutCode(against.length ? withoutContradictions(note, title, rows) : note, own) };
           const said = fuji ? words : withWindow(words, read, rows.rows, chart.x, now, Date.now());
-          final = { title: said.title, note: said.note, span: fuji ? null : (windowSpan(read, rows.rows, chart.x, now, Date.now()) ?? (await snapshotSpan(ran.sql))), sql: kept, chart: { ...chart, series: chart.series.map((s) => ({ ...s, label: plainLabel(s.label) })) }, drill: drill ?? null, result: rows, names: {}, visual: null, coverage: null, anchor: ran.anchor, sources: ran.sources };
+          final = { title: said.title, note: said.note, span: fuji ? null : (windowSpan(read, rows.rows, chart.x, now, Date.now()) ?? (await snapshotSpan(ran.sql, a.chainId))), sql: kept, chart: { ...chart, series: chart.series.map((s) => ({ ...s, label: plainLabel(s.label) })) }, drill: drill ?? null, result: rows, names: {}, visual: null, coverage: null, anchor: ran.anchor, sources: ran.sources };
           keptSql = kept;
           step("final", Date.now() - q0, true, `${rows.rowCount} rows`);
           return { ok: true, rows: rows.rowCount };

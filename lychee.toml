@@ -1,0 +1,31 @@
+# Dead-link check for the external links in content/ (.github/workflows/link-check.yml).
+# Internal links are covered by the e2e route sweep. Root-relative links (/docs/...) resolve against the site
+# and are then excluded below, so only external http(s) links are checked.
+base_url = "https://build.avax.network"
+scheme = ["https", "http"]
+exclude_loopback = true
+exclude_private = true
+
+# 403 and 429 are bot blocks and rate limits, not dead pages.
+accept = ["200..=299", "403", "429"]
+
+max_concurrency = 32
+max_retries = 2
+timeout = 20
+max_redirects = 10
+no_progress = true
+
+exclude = [
+  # Internal links
+  '^https://build\.avax\.network',
+  # Sites that block or log-wall bots
+  '^https?://(www\.)?(x|twitter|linkedin)\.com',
+  # RPC and API endpoints: they answer POST, not GET
+  '^https://api\.avax(-test)?\.network/ext/',
+  # Placeholders in examples
+  '^https?://nodeipaddress',
+  '[<{]',
+  '^https?://(www\.)?example\.(com|org)',
+  # Archived snapshots are immutable and the archive refuses bursts
+  '^https://web\.archive\.org/',
+]

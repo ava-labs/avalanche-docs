@@ -10,6 +10,7 @@ import registryData from "@/data/contract-registry.json";
 import { FAMILY_LISTS, FAMILY_NAMES } from "./families";
 import { AAVE_SLUG, LENDING_NAMES, LENDING_PROTOCOLS, LENDING_TOKENS } from "./lending";
 import { DEX_CHAIN_ID, DEX_PROTOCOLS, DEX_TOKENS } from "./protocols";
+import { icttNamed } from "./names";
 import { FOUND_BY } from "./registry-turn";
 import { isFuji } from "./target";
 
@@ -96,9 +97,10 @@ const FAMILIES = [
 
 /** why a query does not read the protocol its question names, or null. `sql` is the query as the writer typed it (a
     shorthand not written out); `questions` is the question, then the turns before it, newest first. A shorthand with no
-    slug reads every protocol of its family, so it counts for a question that names two of them, and for one it does not */
+    slug reads every protocol of its family, so it counts for a question that names two of them, and for one it does not.
+    A question that names ICTT or ICM names chains, not the registry's contracts: Dexalot there is an L1 */
 export function protocolScope(sql: string, questions: readonly string[], chainId: number): string | null {
-  if (chainId !== DEX_CHAIN_ID) return null;
+  if (chainId !== DEX_CHAIN_ID || icttNamed(questions[0] ?? "")) return null;
   const text = sql.toLowerCase();
   const addresses = new Set([...text.matchAll(/(?<![0-9a-f])[0-9a-f]{40}(?![0-9a-f])/g)].map((m) => m[0]));
   const groups = namedIn(questions);
@@ -229,4 +231,38 @@ export function unitName(sql: string, chainId: number): string | null {
     ? `${net.name} is one sumIf of usd less another, and a sumIf over no rows is NULL, so it is NULL for an asset with only one of the two actions. Write it as one sum with a sign that is 0 where neither action happened: if(countIf(action IN ('borrow', 'repay')) = 0, 0, sumIf(if(action = 'borrow', usd, -usd), action IN ('borrow', 'repay'))).`
     : "";
   return named || rounded || netted ? `${[named, rounded, netted].filter(Boolean).join(" ")} Then call render_chart again.` : null;
+}
+
+/* ------------------------------------------------------------------ */
+/* A network answer's rows hold many chains. Each chain's fees and values
+   are in its own native token, and each contract, address and
+   transaction is its own chain's, which the page opens it on. */
+
+/** a fee, a value or an amount in a chain's native token */
+const NATIVE = /(^|_)(fees?|values?|amounts?)(_|$)|_(native|avax)$/i;
+/** a column that names a record */
+const RECORD_KEY = /^(tx_hash|address|contract|from_address|to_address|block_number)$/i;
+
+/** whether a column holds native amounts of more than one chain: on the network's rows each is in its own token, so
+    no total, extreme or share spans them */
+export function ownTokens(column: string, rows: readonly Record<string, unknown>[]): boolean {
+  return NATIVE.test(column) && !IN_USD.test(column) && !NOT_AN_AMOUNT.test(column) && new Set(rows.map((r) => String(r.chain_id))).size > 1;
+}
+
+/** why a network answer's rows mix chains that cannot be mixed, or null: an amount with no chain beside it adds
+    different native tokens, a column named for AVAX holds other chains' tokens, and a record with no chain beside it
+    opens on no chain */
+export function mixedChains(result: { columns: readonly { name: string }[]; rows: readonly Record<string, unknown>[] }): string | null {
+  const names = result.columns.map((c) => c.name);
+  const perChain = names.includes("chain_id");
+  const amount = names.find((n) => NATIVE.test(n) && !IN_USD.test(n) && !NOT_AN_AMOUNT.test(n));
+  if (amount && !perChain)
+    return `${amount} adds up amounts of different native tokens: each chain's fees and values are in its own token. Group by chain_id, and return t.chain_id AS chain_id and n.token AS token beside the amount. Then call render_chart again.`;
+  const avax = names.find((n) => /(^|_)avax$/i.test(n));
+  if (avax && new Set(result.rows.map((r) => String(r.chain_id))).size > 1)
+    return `${avax} is named for AVAX, and its rows hold other chains' tokens: name it ${avax.replace(/avax$/i, "native")} and return n.token AS token beside it. Then call render_chart again.`;
+  const key = names.find((n) => RECORD_KEY.test(n));
+  if (key && !perChain)
+    return `the rows name records (${key}) with no chain_id: a contract, an address or a transaction belongs to one chain, and the page opens it there. Return t.chain_id AS chain_id beside it, and group by it. Then call render_chart again.`;
+  return null;
 }

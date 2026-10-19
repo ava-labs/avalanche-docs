@@ -29,9 +29,9 @@ const SECTION_TAGLINES: Record<string, string> = {
   explorer: 'BLOCKS · TRANSACTIONS · VALIDATORS',
   console: 'LAUNCH AND OPERATE L1S',
   solutions: 'INTEROP · PERFORMANCE · PRIVACY · COMPLIANCE',
-  university: 'STUDENTS · EDUCATORS · RESEARCH',
   showcase: 'PROJECTS FROM THE COMMUNITY',
   audits: 'AVA LABS AUDIT PROGRAM · FREE FOR BUILDERS',
+  ecosystem: 'EVENTS · PROGRAMS · GUIDES · TOOLS',
   tools: 'DEVELOPER TOOLS',
 };
 

@@ -5,6 +5,7 @@ import { describe, test, type Browser } from '@e2e-dev/web';
 import { expect, type Screen } from 'e2e';
 import { CONSOLE_TOOL_MOUNTED } from '../lib/console-tool';
 import { knownBug } from '../lib/skip';
+import { answerFirstVisitPrompts } from '../lib/visitor';
 import { listConsoleRoutes, pageFolderOf, REGISTRY_FILE, type ConsoleRoute } from './console-routes';
 
 // The runner runs one file at a time on each worker. The routes are split over SHARDS files
@@ -33,13 +34,12 @@ const MOUNTED_VISIBLE = `${CONSOLE_TOOL_MOUNTED} >> visible=true`;
 // Routes that render no mount signal. Each shows its own visible heading instead.
 // Key: the final path, after the redirects. Value: the heading name and level.
 const HEADINGS: Record<string, { name: string; level: number }> = {
-  // The dashboard h1 is sr-only (app/console/page.tsx). Its first card heading is visible.
-  '/console': { name: 'Create L1', level: 2 },
-  '/console/history': { name: 'History', level: 1 },
-  '/console/toolbox': { name: 'Toolbox', level: 1 },
+  '/console': { name: 'Avalanche Builder Console', level: 1 },
+  '/console/history': { name: 'What you deployed and signed.', level: 1 },
+  '/console/studio': { name: 'What do you want to build?', level: 1 },
+  '/console/toolbox': { name: 'Every console tool, in one place.', level: 1 },
   '/console/encrypted-erc/overview': { name: 'Private balances, public accountability.', level: 1 },
-  // The alerts need an account: a visitor without a session sees the sign-in prompt.
-  '/console/primary-network/validator-alerts': { name: 'Sign in to manage validator alerts', level: 1 },
+  '/console/primary-network/validator-alerts': { name: 'Validator alerts', level: 1 },
 };
 
 // Routes that break today. The test states the right behavior and is skipped (lib/skip.ts).
@@ -71,6 +71,10 @@ async function openRoute(browser: Browser, path: string): Promise<void> {
 }
 
 async function checkRoute(route: ConsoleRoute, screen: Screen, browser: Browser): Promise<void> {
+  // Visit as a returning visitor. On a first visit the Console welcome dialog opens 800 ms after the page mounts and
+  // hides the page, so a heading check that runs after it opens finds no heading.
+  await openRoute(browser, '/small-logo.png');
+  await answerFirstVisitPrompts(browser);
   await openRoute(browser, route.route);
 
   // The status of the document response, as the browser received it. After a redirect it is the status of the last hop.

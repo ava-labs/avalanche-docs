@@ -2,11 +2,56 @@
 
 import { useEffect, useState } from "react";
 import { PRIMARY_SUBNET_ID, getBlockTime, getCurrentValidators, getL1Validator, getPrimaryTotalStake, getValidatorFeeState, type CurrentValidator } from "@/lib/pchain-node";
-import type { ValidationsResponse } from "@/lib/pchain-explorer";
+import type { ConversionResponse, NodeResponse, ValidationsResponse } from "@/lib/pchain-explorer";
+import { SOFT_READ, isOk } from "@/lib/explorer-soft-status";
+import { DAY } from "@/lib/explorer-query/values";
 import type { SettledBalance } from "./seat-balance";
 
 /* The node page's reads beyond the indexer's node document, and the
    staking arithmetic its parts share. */
+
+/* --- which record leads the page --- */
+
+/* A node in the Primary Network's current snapshot leads with its stake. A
+   node off it leads with its L1 seat, even when it has staking history: that
+   history is past terms, often on the very subnet that has since become its
+   L1. The seat is the hinted one when the node document holds no seat or
+   holds that one (a seat newer than the document); a hint from an old tx
+   whose L1 the node has left gives way to the seat the document holds.
+   Of several seats, one with a balance leads over one that has run out.
+   undefined when no seat leads, so the indexer document's view does. */
+export function leadSeat(n: NodeResponse | null, subnetHint: string | undefined): string | undefined {
+  if (!n || n.hasSnapshot) return undefined;
+  const seats = n.validations?.filter((v) => v.kind === "l1") ?? [];
+  if (subnetHint && (seats.length === 0 || seats.some((v) => v.subnetId === subnetHint))) return subnetHint;
+  return (seats.find((v) => (v.balance ?? 0) > 0) ?? seats[0])?.subnetId;
+}
+
+/* The node validated this subnet before it became an L1: a completed subnet
+   term on it, or an AddSubnetValidatorTx in its recent staking txs. */
+export function validatedAsSubnet(subnetId: string | undefined, n: NodeResponse | null, terms: ValidationsResponse | null): boolean {
+  if (!subnetId) return false;
+  return !!terms?.periods.some((p) => p.subnetId === subnetId) || !!n?.history?.some((h) => h.txType === "AddSubnetValidatorTx" && h.subnetId === subnetId);
+}
+
+/* When the node's L1 was still a subnet: its ConvertSubnetToL1Tx and that
+   tx's time, for the line that says why the node's subnet terms end. Asked
+   only for a subnet the node validated before; null otherwise. */
+export function useConversion(network: string, subnetId: string | undefined): ConversionResponse | null {
+  const [data, setData] = useState<ConversionResponse | null>(null);
+  useEffect(() => {
+    if (!subnetId) return;
+    const controller = new AbortController();
+    fetch(`/api/pchain-conversion/${network}/${subnetId}`, { ...SOFT_READ, signal: controller.signal })
+      .then((r) => (isOk(r) ? r.json() : null))
+      .then((d: ConversionResponse | null) => d?.txHash && setData(d))
+      .catch(() => {
+        /* no conversion line: the seat and the terms still read on their own */
+      });
+    return () => controller.abort();
+  }, [network, subnetId]);
+  return data?.subnetId === subnetId ? data : null;
+}
 
 /* --- the P2P observatory feed (hourly uptime, block production, slots) --- */
 
@@ -18,6 +63,13 @@ export interface P2PDetail {
   uptime: { bucket: string; p50_uptime: number }[];
   blocks: { hour: string; proposed: number; missed: number }[];
   slots: { slot: number; cnt: number }[];
+}
+
+/** the feed's daily block buckets less the UTC day still running: the chart
+ *  shows whole days only, as the explorer's other daily charts do, so it
+ *  never names a day that has not begun for a viewer west of UTC */
+export function wholeDays<T extends { hour: string }>(days: T[], now: number): T[] {
+  return days.filter((d) => Date.parse(d.hour) + DAY <= now);
 }
 
 export function useP2PDetail(nodeId: string, enabled: boolean) {

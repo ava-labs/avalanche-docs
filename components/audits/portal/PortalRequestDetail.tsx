@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Lock } from "lucide-react";
+import { cn } from "@/lib/utils";
 import type { AuditorRequestView } from "@/server/services/audits/visibility";
 import { DEPLOYMENT_TARGET_LABELS, URGENCY_LABELS } from "@/lib/audits/constants";
 import type { DeploymentTarget, UrgencyOption } from "@/lib/audits/status";
@@ -75,7 +76,7 @@ function buildSpecItems(view: AuditorRequestView): SpecItem[] {
                 ))}
                 {attachments.map((attachment) => (
                   <p key={attachment.href} className="break-all font-mono text-xs">
-                    <a href={attachment.href} rel="noreferrer" className="underline underline-offset-2">
+                    <a href={attachment.href} target="_blank" rel="noreferrer" className="underline underline-offset-2">
                       {attachment.name}
                     </a>
                   </p>
@@ -192,6 +193,48 @@ export function PortalRequestDetail({
         </div>
       ) : null}
 
+      {/* The Telegram and calendar shares: before any acceptance, the contact
+          fields the project chose to show every firm it reached
+          (visibility.ts). Never together with the won block above. */}
+      {view.shared_handle || view.shared_calendar_url ? (
+        <div className="mt-5 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-white/10 dark:bg-white/[0.03]">
+          {view.shared_handle ? (
+            <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span className={MONO_LABEL_SM}>Project Telegram</span>
+              <ContactHandle
+                handle={view.shared_handle}
+                className="font-mono text-xs text-zinc-900 dark:text-zinc-100"
+              />
+            </p>
+          ) : null}
+          {view.shared_calendar_url ? (
+            <p
+              className={cn(
+                "flex flex-wrap items-center gap-x-3 gap-y-1",
+                view.shared_handle && "mt-1.5",
+              )}
+            >
+              <span className={MONO_LABEL_SM}>Project calendar</span>
+              <span className="text-xs text-zinc-900 dark:text-zinc-100">
+                <a
+                  href={view.shared_calendar_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  Schedule a meeting
+                </a>{" "}
+                if you need to talk with the team to understand or discuss any details.
+              </span>
+            </p>
+          ) : null}
+          <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">
+            Send your quote here: the program can only subsidize a quote the project accepts on
+            Builder Hub.
+          </p>
+        </div>
+      ) : null}
+
       <div className="mt-6 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
         <div>
           <div className={`${CARD} p-5`}>
@@ -218,8 +261,9 @@ export function PortalRequestDetail({
           </div>
           <p className="mt-3.5 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
             <Lock aria-hidden className="h-3.5 w-3.5 shrink-0" />
-            Project contact is revealed only if your quote is accepted. Competing quotes are never
-            visible to you.
+            {view.shared_handle || view.shared_calendar_url
+              ? "The project's name and email are revealed only if your quote is accepted. Competing quotes are never visible to you."
+              : "Project contact is revealed only if your quote is accepted. Competing quotes are never visible to you."}
           </p>
         </div>
 
@@ -231,6 +275,7 @@ export function PortalRequestDetail({
             deadline={view.quote_deadline}
             firmActive={firmActive}
             subsidy={view.subsidy}
+            pickBy={view.pick_by}
           />
         </div>
       </div>

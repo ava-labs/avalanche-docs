@@ -7,7 +7,7 @@ import {
 import type { AuditEmailDetail } from "@/server/services/audits/emails/template";
 import { PORTAL_URL, portalRequestUrl } from "@/server/services/audits/emails/links";
 import { DEPLOYMENT_TARGET_LABELS, URGENCY_LABELS } from "@/lib/audits/constants";
-import type { DeploymentTarget, UrgencyOption } from "@/lib/audits/status";
+import { decisionDeadline, type DeploymentTarget, type UrgencyOption } from "@/lib/audits/status";
 
 export type FanoutAuditor = FirmRecipient;
 
@@ -89,9 +89,11 @@ function detailRows(request: FanoutRequest): AuditEmailDetail[] {
   }
 
   if (request.quote_deadline) {
+    // The pick-by date tells the firm how long its quote is held.
+    const pickBy = isoDate(decisionDeadline(request.quote_deadline));
     rows.push({
       label: "Your window",
-      value: `closes ${isoDate(request.quote_deadline)}`,
+      value: `closes ${isoDate(request.quote_deadline)} · project picks by ${pickBy}`,
       mono: true,
       urgent: true,
     });

@@ -2,44 +2,37 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { MotionConfig } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Board, SectionHeader, HEAD, ROW, INK, MUTED, RowSkeleton, RowDoor, idInk, fnInk } from "@/components/explorer-v2/ui";
+import { Board, EmptyRow, SectionHeader, HEAD, ROW, INK, MUTED, RowSkeleton, RowDoor, idInk, fnInk } from "@/components/explorer-v2/ui";
 import { ageShort, truncate } from "@/components/explorer-v2/format";
 import { Belt, GasBar, Height, MotionRow, Party, fmtAmount } from "@/components/explorer-v2/evm/LiveBoards";
 import { useTicker } from "./ticker";
 import { methodLabel } from "@/components/explorer-v2/evm/bits";
 import { getFunctionBySelector } from "@/abi/event-signatures.generated";
 import { useSignatures } from "@/lib/token-list";
-import { hasRealChainLogo } from "@/lib/pchain-explorer";
-import type { TxListResponse } from "@/lib/evm-explorer";
+import { hasRealChainLogo, type PchainNetwork } from "@/lib/pchain-explorer";
 import { readJson, recall } from "@/components/explorer-v2/page-data";
 import { SOFT_READ, isOk, statusOf } from "@/lib/explorer-soft-status";
 import { RATE_WINDOW_MS, chainClock, coverRates, extendCover, type Cover } from "./throughput";
-import { blocksFeed, txsFeed, type LiveChain } from "./network-reads";
+import { blocksFeed, type LiveChain } from "./network-reads";
+import type { NewBlock, NewBlocks, NewestTx } from "@/app/api/explorer/[chainId]/new-blocks";
 
 /* The splash's live boards: the C-Chain home's Latest Blocks and Latest
    Transactions, merged across the busiest chains. Every row wears the
    logo and name of the chain it came from and doors into that chain's
    own explorer.
 
-   Feeds: blocks from each chain's RPC through the explorer route's
-   blocksOnly diet (headers only), transactions from the indexer. A
-   chain's transactions are only asked for when its block feed has seen a
-   block with transactions the indexer has not yet returned, so a quiet
-   chain costs nothing past its block poll. A chain that returns no new
-   block backs off to one poll in four sweeps. Polls stop while the tab is
-   hidden, and a chain that fails three times drops out silently. */
-
-interface ApiBlock {
-  number: string;
-  timestamp: string;
-  transactionCount: number;
-  gasUsed: string;
-  gasLimit: string;
-  /** hex-parsed ms precision where the chain provides it (Avalanche does) */
-  timestampMilliseconds?: number;
-}
+   Feed: one read of each chain's RPC through the explorer route's
+   blocksOnly diet (new-blocks.ts): the new block headers, and the newest
+   few of their transactions with each one's status. So both boards are as
+   current as the chains' RPCs; the indexer trails the chains by 8 to 22 s.
+   A chain that returns no new block backs off to one poll in four sweeps.
+   Each chain's rows go up as its read lands, and a chain whose read is
+   still out sits the next sweep out, so a slow chain holds back only its
+   own rows. Polls stop while the tab is hidden, and a chain that fails
+   three times drops out silently. */
 
 interface LiveBlock {
   /** chain and height: the drip's identity */
@@ -53,27 +46,16 @@ interface LiveBlock {
   at: number;
 }
 
-interface LiveTx {
-  hash: string;
+interface LiveTx extends Omit<NewestTx, "timestampMs"> {
   chain: LiveChain;
-  blockNumber: number;
-  txIndex: number;
-  from: string;
-  to: string;
-  value: string;
-  methodId?: string;
-  success: boolean;
-  /** unix seconds */
-  timestamp: number;
+  /** epoch ms, the merge order across chains */
+  at: number;
 }
 
 const POLL_MS = 5_000;
 /* a chain with no new block waits up to this many sweeps */
 const MAX_BACKOFF = 4;
 const MAX_FAILURES = 3;
-/* the indexer trails the RPC by seconds; give up on a block after this
-   many sweeps without it */
-const TX_LAG_SWEEPS = 3;
 /* rows each chain may add per sweep, so the fastest chain cannot take
    the whole board: the opening frame gets a few more */
 const OPEN_PER_CHAIN = 3;
@@ -85,7 +67,7 @@ const ROWS = 10;
 
 const toNum = (v: string | number) => Number(String(v).replace(/,/g, ""));
 
-function toLiveBlocks(chain: LiveChain, blocks: ApiBlock[]): LiveBlock[] {
+function toLiveBlocks(chain: LiveChain, blocks: NewBlock[]): LiveBlock[] {
   return blocks.flatMap((b) => {
     const height = toNum(b.number);
     const at = b.timestampMilliseconds ?? Date.parse(b.timestamp);
@@ -104,19 +86,8 @@ function toLiveBlocks(chain: LiveChain, blocks: ApiBlock[]): LiveBlock[] {
   });
 }
 
-function toLiveTxs(chain: LiveChain, txs: TxListResponse["transactions"]): LiveTx[] {
-  return txs.map((t) => ({
-    hash: t.hash,
-    chain,
-    blockNumber: t.blockNumber,
-    txIndex: t.txIndex,
-    from: t.from,
-    to: t.to,
-    value: t.value,
-    methodId: t.methodId,
-    success: t.success,
-    timestamp: t.timestamp,
-  }));
+function toLiveTxs(chain: LiveChain, txs: NewestTx[]): LiveTx[] {
+  return txs.map(({ timestampMs, ...t }) => ({ ...t, chain, at: timestampMs }));
 }
 
 /* newest first, each chain limited to its share */
@@ -134,26 +105,23 @@ function sample<T extends { chain: LiveChain }>(rows: T[], perChain: number, new
 }
 
 const blockNewer = (a: LiveBlock, b: LiveBlock) => b.at - a.at || b.height - a.height;
-const txNewer = (a: LiveTx, b: LiveTx) =>
-  b.timestamp - a.timestamp || b.blockNumber - a.blockNumber || b.txIndex - a.txIndex;
+const txNewer = (a: LiveTx, b: LiveTx) => b.at - a.at || b.blockNumber - a.blockNumber || b.txIndex - a.txIndex;
 
 /* The boards a visit leaves behind: the overview opened again within
    MEMORY_MS (the back button from a chain) starts from them, and asks each
-   chain only for what came after. */
+   chain only for what came after. They hold their network, so a visit to
+   the other network does not open on them. */
 const MEMORY_MS = 30_000;
-let left: { blocks: LiveBlock[]; txs: LiveTx[]; at: number } | null = null;
-const recallBoards = () => (left && Date.now() - left.at < MEMORY_MS ? left : null);
+let left: { network: PchainNetwork; blocks: LiveBlock[]; txs: LiveTx[]; at: number } | null = null;
+const recallBoards = (network: PchainNetwork) =>
+  left && left.network === network && Date.now() - left.at < MEMORY_MS ? left : null;
 
 /* The boards a hovered link's reads hold (the page memory): the overview
    opens on them as on the boards a visit left, once half the chains are
    there, the first sweep's own rule */
 function warmBoards(chains: LiveChain[]): { blocks: LiveBlock[]; txs: LiveTx[] } | null {
-  const reads = chains.map((c) => ({
-    c,
-    blocks: recall<{ blocks?: ApiBlock[] }>(blocksFeed(c.chainId), true)?.data.blocks,
-    txs: recall<TxListResponse>(txsFeed(c.chainId, true), true)?.data.transactions,
-  }));
-  if (!chains.length || reads.filter((r) => r.blocks && r.txs).length * 2 < chains.length) return null;
+  const reads = chains.map((c) => ({ c, ...recall<NewBlocks>(blocksFeed(c.chainId), true)?.data }));
+  if (!chains.length || reads.filter((r) => r.blocks).length * 2 < chains.length) return null;
   return {
     blocks: sample(reads.flatMap((r) => toLiveBlocks(r.c, r.blocks ?? [])), OPEN_PER_CHAIN, blockNewer),
     txs: sample(reads.flatMap((r) => toLiveTxs(r.c, r.txs ?? [])), OPEN_PER_CHAIN, txNewer),
@@ -162,65 +130,80 @@ function warmBoards(chains: LiveChain[]): { blocks: LiveBlock[]; txs: LiveTx[] }
 
 /* A feed's read. The first sweep's opening read goes through the page
    memory, so a hovered link's read (in flight, or a moment old) stands in
-   for it; `init` is for the polls, which read afresh. */
-async function readFeed<T>(url: string, viaMemory: boolean, init?: RequestInit): Promise<T> {
+   for it; the polls read afresh. */
+async function readFeed<T>(url: string, viaMemory: boolean): Promise<T> {
   if (viaMemory) {
     const data = await readJson<T>(url);
     if (data == null) throw new Error("no answer");
     return data;
   }
-  const res = await fetch(url, { ...SOFT_READ, ...init, signal: AbortSignal.timeout(POLL_MS * 2) });
+  const res = await fetch(url, { ...SOFT_READ, signal: AbortSignal.timeout(POLL_MS * 2) });
   if (!isOk(res)) throw new Error(`HTTP ${statusOf(res)}`);
   return (await res.json()) as T;
 }
 
-function useNetworkLive(chains: LiveChain[], onRates?: (rates: Map<string, number>) => void) {
-  const [opening] = useState(() => recallBoards() ?? warmBoards(chains));
+/* `chains` is null until the overview feed names the roster */
+function useNetworkLive(
+  chains: LiveChain[] | null,
+  network: PchainNetwork,
+  onRates?: (rates: Map<string, number>) => void,
+) {
+  const [opening] = useState(() => recallBoards(network) ?? warmBoards(chains ?? []));
   const [blocks, setBlocks] = useState<LiveBlock[]>(opening?.blocks ?? []);
   const [txs, setTxs] = useState<LiveTx[]>(opening?.txs ?? []);
   const [settled, setSettled] = useState(!!opening);
 
   useEffect(() => {
-    if (blocks.length || txs.length) left = { blocks, txs, at: Date.now() };
-  }, [blocks, txs]);
+    if (blocks.length || txs.length) left = { network, blocks, txs, at: Date.now() };
+  }, [network, blocks, txs]);
 
   useEffect(() => {
-    if (chains.length === 0) return;
+    // no roster yet, or an empty one: no chain to read (the boards say which)
+    if (!chains?.length) return;
+    const roster = chains;
     let cancelled = false;
-    let sweeping = false;
     let sweepN = 0;
+    // the chains whose reads are still out
+    const busy = new Set<string>();
     const lastBlock = new Map<string, number>();
     const nextSweep = new Map<string, number>();
     const idle = new Map<string, number>();
     const failures = new Map<string, number>();
-    const txFailures = new Map<string, number>();
-    // the newest tx-bearing block the RPC showed, and the newest the indexer returned
-    const wantTx = new Map<string, number>();
-    const haveTx = new Map<string, number>();
-    const lag = new Map<string, number>();
-    const seenTx = new Set<string>();
     // from the boards left behind: each chain is asked for what came after
-    const was = recallBoards();
+    const was = recallBoards(network);
     for (const b of was?.blocks ?? []) lastBlock.set(b.chain.chainId, Math.max(lastBlock.get(b.chain.chainId) ?? 0, b.height));
-    for (const t of was?.txs ?? []) seenTx.add(t.hash);
     // every fresh block feeds its chain's run, so the reading is real
     // throughput, not what the board chooses to show
     const covers = new Map<string, Cover>();
+    let lastRates = new Map<string, number>();
 
     const reportRates = () => {
       if (!onRates) return;
       const now = chainClock(covers, Date.now());
-      onRates(coverRates(covers, now));
+      const rates = coverRates(covers, now);
+      // a chain whose read is still out keeps its last rate: its run waits
+      // for the read, the chain did not go quiet
+      for (const id of busy) {
+        const was = lastRates.get(id);
+        if (was === undefined) rates.delete(id);
+        else rates.set(id, was);
+      }
+      lastRates = rates;
+      onRates(rates);
       for (const c of covers.values()) c.blocks = c.blocks.filter((b) => b.at >= now - RATE_WINDOW_MS);
     };
 
-    async function pollBlocks(chain: LiveChain, first: boolean): Promise<LiveBlock[]> {
+    // a chain's new blocks and their newest transactions, in one read
+    async function readChain(chain: LiveChain, first: boolean): Promise<{ b: LiveBlock[]; t: LiveTx[] }> {
       const id = chain.chainId;
-      if ((failures.get(id) ?? 0) >= MAX_FAILURES) return [];
-      if (!first && (nextSweep.get(id) ?? 0) > sweepN) return [];
+      const none = { b: [], t: [] };
+      if ((failures.get(id) ?? 0) >= MAX_FAILURES) return none;
+      if (!first && (nextSweep.get(id) ?? 0) > sweepN) return none;
       const last = lastBlock.get(id);
+      // the backoff counts from the sweep that asked: sweeps go on while a read is out
+      const asked = sweepN;
       try {
-        const data = await readFeed<{ blocks?: ApiBlock[] }>(blocksFeed(id, last), first && !last);
+        const data = await readFeed<NewBlocks>(blocksFeed(id, last), first && !last);
         const fresh = toLiveBlocks(chain, data.blocks ?? []);
         // three failures in a row drop a chain, not three in a session
         failures.set(id, 0);
@@ -229,56 +212,24 @@ function useNetworkLive(chains: LiveChain[], onRates?: (rates: Map<string, numbe
           if (run) covers.set(id, run);
           lastBlock.set(id, Math.max(...fresh.map((b) => b.height)));
           idle.set(id, 0);
-          nextSweep.set(id, sweepN + 1);
-          const withTxs = fresh.filter((b) => b.txCount > 0).map((b) => b.height);
-          if (withTxs.length > 0) wantTx.set(id, Math.max(wantTx.get(id) ?? 0, ...withTxs));
+          nextSweep.set(id, asked + 1);
         } else {
           const n = Math.min(MAX_BACKOFF, (idle.get(id) ?? 0) + 1);
           idle.set(id, n);
-          nextSweep.set(id, sweepN + n);
+          nextSweep.set(id, asked + n);
         }
-        return fresh;
+        // the read asks only for blocks after the last, so its transactions are new too
+        return { b: fresh, t: toLiveTxs(chain, data.txs ?? []) };
       } catch {
         failures.set(id, (failures.get(id) ?? 0) + 1);
         // a missed poll breaks the run: the pulse rates the chain until a new run covers it
         covers.delete(id);
-        return [];
-      }
-    }
-
-    async function pollTxs(chain: LiveChain, first: boolean): Promise<LiveTx[]> {
-      const id = chain.chainId;
-      if ((txFailures.get(id) ?? 0) >= MAX_FAILURES) return [];
-      const have = haveTx.get(id) ?? 0;
-      if (!first && (wantTx.get(id) ?? 0) <= have) return [];
-      try {
-        // no-store: the proxy's stale-while-revalidate would otherwise make
-        // the browser send each poll twice
-        const data = await readFeed<TxListResponse>(txsFeed(id, first), first, { cache: "no-store" });
-        const fresh = toLiveTxs(chain, (data.transactions ?? []).filter((t) => !seenTx.has(t.hash)));
-        fresh.forEach((t) => seenTx.add(t.hash));
-        const newest = Math.max(have, ...fresh.map((t) => t.blockNumber));
-        haveTx.set(id, newest);
-        // the indexer has not caught up to the block yet: ask again next
-        // sweep, a few times at most
-        const behind = (wantTx.get(id) ?? 0) > newest;
-        const tries = behind ? (lag.get(id) ?? 0) + 1 : 0;
-        lag.set(id, tries);
-        if (tries >= TX_LAG_SWEEPS) {
-          haveTx.set(id, wantTx.get(id) ?? newest);
-          lag.set(id, 0);
-        }
-        return fresh;
-      } catch {
-        txFailures.set(id, (txFailures.get(id) ?? 0) + 1);
-        return [];
+        return none;
       }
     }
 
     async function sweep(first: boolean) {
-      if (sweeping) return; // a slow round still in flight: let it finish
       if (!first && document.visibilityState === "hidden") return;
-      sweeping = true;
       sweepN += 1;
       const perChain = first ? OPEN_PER_CHAIN : SWEEP_PER_CHAIN;
       const publish = (freshBlocks: LiveBlock[], freshTxs: LiveTx[]) => {
@@ -303,25 +254,26 @@ function useNetworkLive(chains: LiveChain[], onRates?: (rates: Map<string, numbe
         publish(early.flatMap((r) => r.b), early.flatMap((r) => r.t));
       };
       const wait = first ? setTimeout(open, OPEN_WAIT_MS) : undefined;
-      const results = await Promise.all(
-        chains.map(async (chain) => {
-          const b = await pollBlocks(chain, first);
-          const t = await pollTxs(chain, first);
-          if (first && opened) publish(b, t);
-          else if (first) {
+      await Promise.all(
+        roster.map(async (chain) => {
+          if (busy.has(chain.chainId)) return;
+          busy.add(chain.chainId);
+          const { b, t } = await readChain(chain, first);
+          busy.delete(chain.chainId);
+          if (opened) publish(b, t);
+          else {
             early.push({ b, t });
-            if (early.length * 2 >= chains.length) open();
+            if (early.length * 2 >= roster.length) open();
           }
-          return { b, t };
         }),
       );
       clearTimeout(wait);
-      sweeping = false;
       if (cancelled) return;
-      setSettled(true);
+      // only the first sweep settles the boards: a later one can end at once,
+      // every chain still busy with the first sweep's reads
+      if (first) setSettled(true);
       reportRates();
       if (first) open();
-      else publish(results.flatMap((r) => r.b), results.flatMap((r) => r.t));
     }
 
     // back in view: catch up at once rather than wait out the interval
@@ -336,7 +288,7 @@ function useNetworkLive(chains: LiveChain[], onRates?: (rates: Map<string, numbe
       clearInterval(poll);
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, [chains, onRates]);
+  }, [chains, network, onRates]);
 
   return { blocks, txs, settled };
 }
@@ -344,9 +296,9 @@ function useNetworkLive(chains: LiveChain[], onRates?: (rates: Map<string, numbe
 /* ------------------------------------------------------------------ */
 
 /* the network prefix is noise in a narrow column: "C-Chain", not
-   "Avalanche C-Chain" */
+   "Avalanche C-Chain". Fuji's catalog writes "Avalanche (C-Chain)" */
 function displayName(name: string): string {
-  return name.replace(/^Avalanche\s+/i, "");
+  return name.replace(/^Avalanche\s+/i, "").replace(/^\((.*)\)$/, "$1");
 }
 
 /** the chain a row came from: its round logo, else a letter tile */
@@ -386,16 +338,37 @@ function ViewAll({ href }: { href: string }) {
   );
 }
 
-const chainBase = (c: LiveChain) => `/explorer/mainnet/${c.slug}`;
+const chainBase = (c: LiveChain, network: PchainNetwork) => `/explorer/${network}/${c.slug}`;
 
-function NetworkBlocksBoard({ blocks, loading }: { blocks: LiveBlock[]; loading: boolean }) {
+interface BoardProps<T> {
+  rows: T[];
+  loading: boolean;
+  /** the message in place of rows when the roster has no chain */
+  empty?: string;
+  network: PchainNetwork;
+}
+
+/* Both boards play the rows of each sweep over most of the sweep's
+   interval, so a row enters about every second instead of a clump of rows
+   and then a pause, and no row waits more than an interval and a half. The
+   chains' reads land at different times in a sweep, so the queue keeps
+   their rows in time order (`merged`). Every row goes in at the top: one
+   older than the top row when it lands (a slow read's) is let go, not
+   slotted in under it, so the board only ever moves down. */
+function NetworkBlocksBoard({ rows: blocks, loading, empty, network }: BoardProps<LiveBlock>) {
   // the belt holds still under the pointer so a row can be clicked
   const [hover, setHover] = useState(false);
-  const rows = useTicker(blocks, ROWS + 1, { key: (b) => b.hash, newer: blockNewer, paused: hover });
+  const rows = useTicker(blocks, ROWS + 1, {
+    key: (b) => b.hash,
+    newer: blockNewer,
+    paused: hover,
+    every: POLL_MS,
+    merged: true,
+  });
   const cols = "md:grid-cols-[minmax(0,8rem)_6.5rem_2.5rem_minmax(0,1fr)_2.5rem]";
   return (
     <section className="flex flex-col gap-4">
-      <SectionHeader label="Latest Blocks" action={<ViewAll href="/explorer/mainnet/chains" />} />
+      <SectionHeader label="Latest Blocks" action={<ViewAll href={`/explorer/${network}/chains`} />} />
       <Board divide={false} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         <div className={cn(HEAD, cols, "border-b border-zinc-200 dark:border-zinc-800")}>
           <span>Chain</span>
@@ -405,10 +378,12 @@ function NetworkBlocksBoard({ blocks, loading }: { blocks: LiveBlock[]; loading:
           <span className="text-right">Age</span>
         </div>
         {loading && rows.length === 0 && <RowSkeleton n={ROWS} />}
-        <Belt>
+        {empty && rows.length === 0 && <EmptyRow>{empty}</EmptyRow>}
+        {/* an empty roster keeps no room for rows */}
+        <Belt rows={empty ? 0 : ROWS}>
           {rows.map((b, i) => (
             <MotionRow key={b.hash} animateIn overflow={i >= ROWS}>
-              <Link href={`${chainBase(b.chain)}/block/${b.height}`} className={cn(ROW, cols)}>
+              <Link href={`${chainBase(b.chain, network)}/block/${b.height}`} className={cn(ROW, cols)}>
                 <ChainMark chain={b.chain} />
                 <span className="max-md:text-right">
                   <Height value={b.height} />
@@ -449,15 +424,21 @@ function useMethodLabels(rows: LiveTx[]) {
   };
 }
 
-function NetworkTxsBoard({ txs, loading }: { txs: LiveTx[]; loading: boolean }) {
+function NetworkTxsBoard({ rows: txs, loading, empty, network }: BoardProps<LiveTx>) {
   const [hover, setHover] = useState(false);
-  const rows = useTicker(txs, ROWS + 1, { key: (t) => t.hash, newer: txNewer, paused: hover });
+  const rows = useTicker(txs, ROWS + 1, {
+    key: (t) => t.hash,
+    newer: txNewer,
+    paused: hover,
+    every: POLL_MS,
+    merged: true,
+  });
   const method = useMethodLabels(rows);
   const cols =
     "md:grid-cols-[0.75rem_minmax(0,6.5rem)_6rem_minmax(0,6rem)_minmax(0,1fr)_minmax(0,6.5rem)_2.5rem]";
   return (
     <section className="flex flex-col gap-4">
-      <SectionHeader label="Latest Transactions" action={<ViewAll href="/explorer/mainnet/chains" />} />
+      <SectionHeader label="Latest Transactions" action={<ViewAll href={`/explorer/${network}/chains`} />} />
       <Board divide={false} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
         {/* a tablet scrolls the ledger sideways; phones stack, desktops fit */}
         <div className="overflow-x-auto">
@@ -472,9 +453,10 @@ function NetworkTxsBoard({ txs, loading }: { txs: LiveTx[]; loading: boolean }) 
               <span className="text-right">Age</span>
             </div>
             {loading && rows.length === 0 && <RowSkeleton n={ROWS} />}
-            <Belt>
+            {empty && rows.length === 0 && <EmptyRow>{empty}</EmptyRow>}
+            <Belt rows={empty ? 0 : ROWS}>
               {rows.map((t, i) => {
-                const base = chainBase(t.chain);
+                const base = chainBase(t.chain, network);
                 const m = method(t);
                 const value = Number(t.value);
                 return (
@@ -518,7 +500,7 @@ function NetworkTxsBoard({ txs, loading }: { txs: LiveTx[]; loading: boolean }) 
                           <span className="text-zinc-300 dark:text-zinc-700">—</span>
                         )}
                       </span>
-                      <span className={cn(MUTED, "text-right max-md:hidden")}>{ageShort(t.timestamp)}</span>
+                      <span className={cn(MUTED, "text-right max-md:hidden")}>{ageShort(t.at / 1000)}</span>
                     </RowDoor>
                   </MotionRow>
                 );
@@ -533,22 +515,36 @@ function NetworkTxsBoard({ txs, loading }: { txs: LiveTx[]; loading: boolean }) 
 
 /** Both boards side by side, fed by one poller. Reports each chain's
  *  transactions a second off the block feed, once the feed covers enough
- *  of that chain (see throughput.ts). */
+ *  of that chain (see throughput.ts). `chains` is null while the overview
+ *  feed loads; an empty roster shows a message in place of rows. */
 export function OverviewLiveBoards({
   chains,
+  network = "mainnet",
   onRates,
 }: {
-  chains: LiveChain[];
+  chains: LiveChain[] | null;
+  network?: PchainNetwork;
   onRates?: (rates: Map<string, number>) => void;
 }) {
-  const { blocks, txs, settled } = useNetworkLive(chains, onRates);
+  const { blocks, txs, settled } = useNetworkLive(chains, network, onRates);
+  const none = chains?.length === 0;
   // every chain failed: the boards bow out rather than sit empty
-  if (settled && blocks.length === 0 && txs.length === 0) return null;
-  const loading = !settled;
+  if (settled && !none && blocks.length === 0 && txs.length === 0) return null;
+  const loading = !settled && !none;
+  const empty = none
+    ? network === "fuji"
+      ? "No chain on Fuji has transactions in this window"
+      : "No chain has transactions in this window"
+    : undefined;
+  // a row enters about every second for as long as the page is open: with
+  // reduced motion it fades in where it lands, and the rows below it step
+  // down without sliding
   return (
-    <div className="grid grid-cols-1 gap-12 xl:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-      <NetworkBlocksBoard blocks={blocks} loading={loading} />
-      <NetworkTxsBoard txs={txs} loading={loading} />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="grid grid-cols-1 gap-12 xl:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+        <NetworkBlocksBoard rows={blocks} loading={loading} empty={empty} network={network} />
+        <NetworkTxsBoard rows={txs} loading={loading} empty={empty} network={network} />
+      </div>
+    </MotionConfig>
   );
 }

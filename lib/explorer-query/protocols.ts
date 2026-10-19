@@ -6,6 +6,7 @@
    the query (sources.ts). Mainnet C-Chain only. */
 
 import registryData from "@/data/contract-registry.json";
+import { gateWords, mentioned } from "./names";
 
 /** the event layouts pools emit, as the registry names them; the prompt gives each one's topics and offsets */
 export type DexFamily = "univ2" | "solidly" | "univ3" | "cl-ramses" | "algebra" | "lb" | "univ4" | "woofi";
@@ -36,6 +37,8 @@ export interface DexToken {
 
 /** the C-Chain the tables describe */
 export const DEX_CHAIN_ID = 43114;
+/** the C-Chain's first day: a read of a figure now (a pool's, a bridge's) starts here */
+export const FIRST_DAY = "'2020-09-23'";
 
 interface RegistryEntry {
   address: string;
@@ -71,6 +74,24 @@ export const DEX_PROTOCOLS: Record<string, string> = Object.fromEntries(
     .filter(([, slug]) => DEX_FACTORIES.some((f) => f.protocol === slug))
     .map(([name, slug]) => [slug, name]),
 );
+
+/** the registry's protocol names and slugs, LFJ (Trader Joe's name now), and the words of a DEX question */
+const DEX_NAMES = [...new Set([...Object.entries(DEX_PROTOCOLS).flatMap(([slug, name]) => [slug, slug.replace(/-/g, " "), name, name.replace(/\s+DEX$/i, "")]), "LFJ"])];
+const DEX_WORDS = new RegExp(`\\b(${[...DEX_NAMES.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), "swap(s|ped|ping)?", "pools?", "liquidity", "lps?", "dex(s|es)?"].join("|")})\\b`, "i");
+
+/** a question about DEXs, whose prompt carries the DEX chapter: it names a protocol the registry lists (one slip
+    off counts: names.ts) or a DEX word (volume only when it names no transfer, so "USDC transfers, count and volume"
+    is not one), or an earlier turn read the DEX tables. An ICTT or ICM question's volume, liquidity and pools are its
+    bridges' (names.ts): "ICTT tokens by volume" is none, "ICTT tokens swapped on DEXs" is one. Every other question's
+    prompt is the one it was */
+export function dexQuestion(chainId: number, prompt: string, history: { prompt?: string; sql?: string }[] = []): boolean {
+  if (chainId !== DEX_CHAIN_ID || DEX_FACTORIES.length === 0) return false;
+  const about = (q: string) => {
+    const w = gateWords(q);
+    return DEX_WORDS.test(w) || mentioned(q, DEX_NAMES).length > 0 || (/\bvolumes?\b/i.test(w) && !/\btransfers?\b/i.test(w));
+  };
+  return about(prompt) || history.some((t) => about(t.prompt ?? "") || /\bdex_(factories|tokens)\b/.test(t.sql ?? ""));
+}
 
 /** the tokens with the most DEX volume, and native AVAX (a univ4 pool's zero address); decimals as the token list gives them, checked 2026-09-27 */
 export const DEX_TOKENS: readonly DexToken[] = [

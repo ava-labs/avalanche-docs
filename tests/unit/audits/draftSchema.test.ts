@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { auditDraftSchema, auditSubmitSchema } from "@/types/audits";
+import {
+  auditDraftSchema,
+  auditorGithubUpdateSchema,
+  auditSubmitSchema,
+  submitRequestSchema,
+} from "@/types/audits";
 import {
   STEP_FIELDS,
   wizardDefaults,
@@ -107,5 +112,136 @@ describe("auditDraftSchema · shortlist_auditor_ids", () => {
     expect(auditDraftSchema.safeParse({ status: "collecting" }).success).toBe(false);
     expect(auditDraftSchema.safeParse({ user_id: "u1" }).success).toBe(false);
     expect(auditDraftSchema.safeParse({ id: "r1" }).success).toBe(false);
+  });
+});
+
+describe("submitRequestSchema · Telegram share", () => {
+  it("passes consent alone and reads it as not sharing", () => {
+    expect(submitRequestSchema.safeParse({ contact_consent: true })).toMatchObject({
+      success: true,
+      data: { share_contact_handle: false },
+    });
+  });
+
+  it("carries the share choice next to the consent", () => {
+    for (const share of [true, false]) {
+      expect(
+        submitRequestSchema.safeParse({ contact_consent: true, share_contact_handle: share }),
+      ).toMatchObject({ success: true, data: { share_contact_handle: share } });
+    }
+  });
+
+  it("rejects a share choice that is not a boolean", () => {
+    for (const share of ["true", 1, null]) {
+      expect(
+        submitRequestSchema.safeParse({ contact_consent: true, share_contact_handle: share }).success,
+      ).toBe(false);
+    }
+  });
+});
+
+describe("submitRequestSchema · calendar share", () => {
+  it("reads consent alone as sharing nothing", () => {
+    expect(submitRequestSchema.safeParse({ contact_consent: true })).toMatchObject({
+      success: true,
+      data: { share_contact_handle: false, share_calendar: false },
+    });
+  });
+
+  it("carries the calendar choice next to the consent", () => {
+    for (const share of [true, false]) {
+      expect(
+        submitRequestSchema.safeParse({ contact_consent: true, share_calendar: share }),
+      ).toMatchObject({
+        success: true,
+        data: { share_contact_handle: false, share_calendar: share },
+      });
+    }
+  });
+
+  it("carries both choices when the project shares both", () => {
+    expect(
+      submitRequestSchema.safeParse({
+        contact_consent: true,
+        share_contact_handle: true,
+        share_calendar: true,
+      }),
+    ).toMatchObject({ success: true, data: { share_contact_handle: true, share_calendar: true } });
+  });
+
+  it("rejects a calendar choice that is not a boolean", () => {
+    for (const share of ["true", 1, null]) {
+      expect(
+        submitRequestSchema.safeParse({ contact_consent: true, share_calendar: share }).success,
+      ).toBe(false);
+    }
+  });
+});
+
+describe("auditorGithubUpdateSchema · one person's GitHub username", () => {
+  const parse = (value: unknown) => auditorGithubUpdateSchema.safeParse({ github_username: value });
+  const stored = (value: unknown) => {
+    const parsed = parse(value);
+    return parsed.success ? parsed.data.github_username : "REJECTED";
+  };
+
+  it("takes a pasted @name or profile link down to the username", () => {
+    for (const input of [
+      "octocat",
+      "@octocat",
+      " octocat ",
+      "https://github.com/octocat",
+      "http://github.com/octocat/",
+      "https://www.github.com/octocat",
+      "github.com/octocat",
+      "www.github.com/octocat/",
+    ]) {
+      expect(stored(input)).toBe("octocat");
+    }
+  });
+
+  it("stores the name as typed, case and all", () => {
+    expect(stored("GitHub.com/OctoCat")).toBe("OctoCat");
+  });
+
+  it("follows GitHub's rule: 1 to 39 letters, digits and single inner hyphens", () => {
+    for (const ok of ["a", "0", "a-b-c", "a".repeat(39)]) expect(stored(ok)).toBe(ok);
+    for (const bad of [
+      "a".repeat(40),
+      "-octocat",
+      "octocat-",
+      "octo--cat",
+      "octo_cat",
+      "octo.cat",
+    ]) {
+      expect(stored(bad)).toBe("REJECTED");
+    }
+  });
+
+  it("refuses a link to anything but a profile and says what a username is", () => {
+    for (const bad of [
+      "https://github.com/octocat?tab=repositories",
+      "github.com/octocat/hello-world",
+      "https://gist.github.com/octocat",
+    ]) {
+      const parsed = parse(bad);
+      expect(parsed.success).toBe(false);
+      if (!parsed.success) expect(parsed.error.issues[0].message).toContain("GitHub username");
+    }
+  });
+
+  it("clears on an empty value", () => {
+    for (const empty of ["", "   ", null]) expect(stored(empty)).toBeNull();
+  });
+
+  it("names the value and nothing else, so a body cannot pick another person", () => {
+    expect(auditorGithubUpdateSchema.safeParse({}).success).toBe(false);
+    expect(
+      auditorGithubUpdateSchema.safeParse({
+        github_username: "octocat",
+        email: "quotes@nordlicht.example",
+      }).success,
+    ).toBe(false);
+    expect(parse(7).success).toBe(false);
   });
 });

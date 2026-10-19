@@ -21,13 +21,21 @@ export interface KeptRun {
 
 const kept = new Map<string, { at: number; run: Promise<KeptRun> }>();
 
+const keyOf = (sql: string, chainId: number) => `${chainId}\n${sql}`;
+
+/** whether a run of this SQL on this chain is kept, in flight or done, so running it again reads nothing */
+export function isKept(sql: string, chainId: number): boolean {
+  const hit = kept.get(keyOf(sql, chainId));
+  return !!hit && Date.now() - hit.at < TTL_MS;
+}
+
 export function runKept(sql: string, chainId: number): Promise<KeptRun> {
-  const key = `${chainId}\n${sql}`;
+  const key = keyOf(sql, chainId);
   const hit = kept.get(key);
   if (hit && Date.now() - hit.at < TTL_MS) return hit.run;
   const run = (async () => {
     const a = await anchored(sql, chainId);
-    return { result: await runQuery(a.sql), anchor: a.anchor, sources: a.sources };
+    return { result: await runQuery(a.sql, chainId), anchor: a.anchor, sources: a.sources };
   })();
   kept.delete(key);
   kept.set(key, { at: Date.now(), run });

@@ -2,7 +2,7 @@ import { test } from '@e2e-dev/web';
 import { expect } from 'e2e';
 import { z } from 'zod';
 import { openDocsPage } from '../docs/docs-page';
-import { desktopOnly, knownBug, needsModel } from '../lib/skip';
+import { desktopOnly, needsModel } from '../lib/skip';
 
 // Data tests: the agent reads facts off a page, and plain code compares them with the known truth.
 // One extract per test, because extract calls the model on every run (the replay cache covers act only).
@@ -45,13 +45,9 @@ test('primary network docs list the right chain IDs and RPC URLs', async (fixtur
   });
 });
 
-// net_version returns the networkID. Coreth sets it to the chain ID (avalanchego graft/coreth/plugin/evm/vm.go:333,
-// vm.ethConfig.NetworkId = vm.chainID.Uint64()), so the C-Chain answers 43114 on Mainnet and 43113 on Fuji.
+// net_version returns the chain ID (avalanchego vms/saevm/sae/rpc/server.go, newNetAPI(..., ChainID.Uint64())),
+// so the C-Chain answers 43114 on Mainnet and 43113 on Fuji.
 test('C-Chain RPC docs state the right networkID and chainID', async (fixtures) => {
-  knownBug(
-    'content/docs/rpcs/c-chain/index.mdx:7 (synced from avalanchego graft/coreth/plugin/evm/service.md:6 by ' +
-      'utils/remote-content/apis.mts:59) says the C-Chain networkID is 1; net_version returns the chain ID',
-  );
   needsModel();
   const { app, agent, browser } = fixtures;
   await openDocsPage(app, browser, '/docs/rpcs/c-chain');

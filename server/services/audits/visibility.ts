@@ -9,6 +9,7 @@ import { isLegacyAttachmentSrc, isRequestAttachmentSrc } from "@/lib/audits/blob
 import { findAuditorByEmail } from "@/server/services/audits/auditors";
 import { firmContact, recipientsOf } from "@/server/services/audits/emails/recipients";
 import {
+  decisionDeadline,
   deriveQuoteDisplayStatus,
   deriveRequestStatus,
   isQuoteWindowOpen,
@@ -26,6 +27,23 @@ import {
  * mentions auditQuote (tests/unit/audits/visibility.test.ts, source guard,
  * lands with the auditor portal phase).
  */
+
+/** The pick-by date while the request is stored collecting (deciding and
+    lapsed included), the only time it means anything; null otherwise. */
+function pickByOf(row: { status: string; quote_deadline: Date | null }): Date | null {
+  return row.status === "collecting" && row.quote_deadline
+    ? decisionDeadline(row.quote_deadline)
+    : null;
+}
+
+/** A firm's own quote as the project reads it. The firm never learns the
+    quote count: its own quote makes it at least one, all the rule needs. */
+function firmQuoteStatus(
+  quoteStatus: string,
+  request: { status: string; quote_deadline: Date | null },
+): DisplayQuoteStatus {
+  return deriveQuoteDisplayStatus(quoteStatus, deriveRequestStatus(request, 1));
+}
 
 // What the owner may see about a quoting firm. quote_email is stripped below
 // unless that quote was accepted (contacts reveal only after acceptance).
@@ -49,6 +67,8 @@ export interface OwnerRequestSummary {
   /** min/max of received quotes, for the "quotes ready" list cards. */
   quote_price_range: { min: number; max: number } | null;
   quote_deadline: Date | null;
+  /** The last day to accept a quote, while the request collects. */
+  pick_by: Date | null;
   needed_by: Date | null;
   submitted_at: Date | null;
   created_at: Date;
@@ -102,6 +122,7 @@ export async function getOwnerRequests(userId: string): Promise<OwnerRequestSumm
       quote_price_range:
         prices.length > 0 ? { min: Math.min(...prices), max: Math.max(...prices) } : null,
       quote_deadline: row.quote_deadline,
+      pick_by: pickByOf(row),
       needed_by: row.needed_by,
       submitted_at: row.submitted_at,
       created_at: row.created_at,
@@ -178,6 +199,7 @@ export async function getOwnerRequestDetail(userId: string, requestId: string) {
   return {
     ...request,
     display_status,
+    pick_by: pickByOf(row),
     quote_count: quotes.length,
     fanout_count: _count.fanout_deliveries,
     shortlist_firms,
@@ -223,7 +245,8 @@ export async function countActiveFirms(): Promise<number> {
 /**
  * A firm's own details for the portal firm page: identity, services, website,
  * logo (the firm uploads it there through the portal logo route) and its
- * teammates. Never attio_ref or created_by.
+ * teammates, each person with their own GitHub username. Never attio_ref or
+ * created_by.
  */
 export async function getOwnFirm(auditorId: string) {
   return prisma.auditor.findUnique({
@@ -232,6 +255,7 @@ export async function getOwnFirm(auditorId: string) {
       id: true,
       firm_name: true,
       quote_email: true,
+      github_username: true,
       services: true,
       website: true,
       logo_url: true,
@@ -241,7 +265,13 @@ export async function getOwnFirm(auditorId: string) {
       deactivated_at: true,
       members: {
         orderBy: { created_at: "asc" },
-        select: { id: true, email: true, invited_at: true, first_login_at: true },
+        select: {
+          id: true,
+          email: true,
+          invited_at: true,
+          first_login_at: true,
+          github_username: true,
+        },
       },
     },
   });
@@ -329,6 +359,7 @@ export const getAuditorInbox = cache(async (auditorId: string) => {
         ? {
             id: quote.id,
             status: quote.status,
+            display_status: firmQuoteStatus(quote.status, delivery.request),
             price_usd: quote.price_usd,
             updated_at: quote.updated_at,
           }
@@ -349,10 +380,11 @@ export interface AuditorContacts {
 
 export async function getRequestForAuditor(auditorId: string, requestId: string) {
   // The fan-out delivery row IS the invitation: without it the request does
-  // not exist for this firm (routes 404).
+  // not exist for this firm (routes 404). The firm's active flag rides along
+  // for the Telegram and calendar shares below.
   const delivery = await prisma.auditFanoutDelivery.findUnique({
     where: { request_id_auditor_id: { request_id: requestId, auditor_id: auditorId } },
-    select: { request_id: true },
+    select: { auditor: { select: { active: true } } },
   });
   if (!delivery) return null;
 
@@ -390,6 +422,30 @@ export async function getRequestForAuditor(auditorId: string, requestId: string)
     subsidy = decision?.state === "approved" ? decision : null;
   }
 
+  // The Telegram and calendar shares: each one the project opted into at
+  // submit shows its handle or link to every active firm the request reached,
+  // and nothing else of its contact, while the stored status is collecting
+  // (deciding and expired included). Acceptance, withdrawal or deactivation
+  // take them away. Read apart from AUDITOR_SAFE_REQUEST_SELECT, which stays
+  // contact-free.
+  let shared_handle: string | null = null;
+  let shared_calendar_url: string | null = null;
+  if (request.status === "collecting" && delivery.auditor.active) {
+    const share = await prisma.auditRequest.findUnique({
+      where: { id: requestId },
+      select: {
+        contact_handle: true,
+        contact_handle_shared_at: true,
+        contact_calendar_url: true,
+        contact_calendar_shared_at: true,
+      },
+    });
+    const handle = share?.contact_handle?.trim();
+    shared_handle = share?.contact_handle_shared_at && handle ? handle : null;
+    const calendar = share?.contact_calendar_url?.trim();
+    shared_calendar_url = share?.contact_calendar_shared_at && calendar ? calendar : null;
+  }
+
   return {
     ...request,
     // The store URL never leaves the server: a blob URL is a bearer token and
@@ -400,6 +456,7 @@ export async function getRequestForAuditor(auditorId: string, requestId: string)
       ? {
           id: own_quote.id,
           status: own_quote.status,
+          display_status: firmQuoteStatus(own_quote.status, request),
           price_usd: own_quote.price_usd,
           duration: own_quote.duration,
           duration_unit: own_quote.duration_unit,
@@ -410,8 +467,11 @@ export async function getRequestForAuditor(auditorId: string, requestId: string)
         }
       : null,
     contacts,
+    shared_handle,
+    shared_calendar_url,
     subsidy,
     window_open: isQuoteWindowOpen(request),
+    pick_by: pickByOf(request),
   };
 }
 
@@ -745,12 +805,16 @@ export interface AdminAuditorMember {
   email: string;
   invited_at: Date;
   first_login_at: Date | null;
+  /** Set by the teammate from the portal; admins read it, never write it. */
+  github_username: string | null;
 }
 
 export interface AdminAuditorRow {
   id: string;
   firm_name: string;
   quote_email: string;
+  /** The quote-email person's, set by them from the portal. */
+  github_username: string | null;
   services: string[];
   active: boolean;
   invited_at: Date;
@@ -775,7 +839,13 @@ export async function getAdminAuditors(): Promise<AdminAuditorRow[]> {
       quotes: { select: { status: true, created_at: true } },
       members: {
         orderBy: { created_at: "asc" },
-        select: { id: true, email: true, invited_at: true, first_login_at: true },
+        select: {
+          id: true,
+          email: true,
+          invited_at: true,
+          first_login_at: true,
+          github_username: true,
+        },
       },
     },
   });
@@ -784,6 +854,7 @@ export async function getAdminAuditors(): Promise<AdminAuditorRow[]> {
     id: row.id,
     firm_name: row.firm_name,
     quote_email: row.quote_email,
+    github_username: row.github_username,
     services: row.services,
     active: row.active,
     invited_at: row.invited_at,

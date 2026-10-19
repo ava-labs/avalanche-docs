@@ -1,9 +1,9 @@
 import { test } from '@e2e-dev/web';
 import { expect } from 'e2e';
-import { NAVIGATION, expectActiveTab } from './explorer-page';
+import { NAVIGATION, expectActiveTab, networkSwitch, pathPattern } from './explorer-page';
 
 // Rule: the Mainnet/Fuji switch keeps the tab the user is on.
-// The switch targets come from networkSwitchTarget in components/explorer-v2/network-switch.ts.
+// The switch targets come from switchTarget in components/explorer-v2/network-switch.ts.
 // tests/unit/explorer/network-switch.test.ts checks the same table without a browser.
 
 interface SwitchCase {
@@ -55,35 +55,40 @@ const CASES: SwitchCase[] = [
   { from: '/explorer/fuji/p-chain/blocks', fromTab: 'Blocks', to: 'Mainnet', expected: '/explorer/mainnet/p-chain/blocks', toTab: 'Blocks' },
   { from: '/explorer/fuji/p-chain/validators', fromTab: 'Validators', to: 'Mainnet', expected: '/explorer/mainnet/p-chain/validators', toTab: 'Validators' },
   { from: '/explorer/fuji/x-chain/txs', fromTab: 'Transactions', to: 'Mainnet', expected: '/explorer/mainnet/x-chain/txs', toTab: 'Transactions' },
-];
 
-// The full URL with this exact path. A query string may follow, because a page can keep its own state there.
-function pathPattern(path: string): RegExp {
-  const escaped = path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`^https?://[^/]+${escaped}(\\?[^#]*)?$`);
-}
+  // The network scope (All Networks) runs on both networks and keeps its view
+  { from: '/explorer/mainnet', fromTab: 'Explorer', to: 'Fuji', expected: '/explorer/fuji', toTab: 'Explorer' },
+  { from: '/explorer/fuji', fromTab: 'Explorer', to: 'Mainnet', expected: '/explorer/mainnet', toTab: 'Explorer' },
+  // AVAX is mainnet only (a test token has no price), so the switch lands on the Fuji home
+  { from: '/explorer/mainnet/token', fromTab: 'AVAX', to: 'Fuji', expected: '/explorer/fuji', toTab: 'Explorer' },
+];
 
 for (const c of CASES) {
   test(`${c.to} switch from ${c.from} lands on ${c.expected}`, async ({ app, screen, browser }) => {
     await app.open(c.from);
     await expectActiveTab(screen, browser, c.fromTab);
 
-    // The phone layout moves the switch to a strip under the tab rail. The hidden copy is not in the role tree.
-    await screen.getByRole('link', c.to).tap();
+    // The phone layout moves the switch into the chain switcher menu in the site navbar. The hidden copy in the
+    // tab rail is not in the role tree.
+    await (await networkSwitch(screen, browser)).getByRole('link', c.to).tap();
 
     await expect(browser).toHaveURL(pathPattern(c.expected), NAVIGATION);
     await expectActiveTab(screen, browser, c.toTab);
     // The segment of the current network says so to assistive tech, not by colour alone.
-    await expect(screen.getByRole('link', c.to)).toHaveAttribute('aria-current', 'page');
-    await expect(screen.getByRole('link', c.to === 'Fuji' ? 'Mainnet' : 'Fuji')).not.toHaveAttribute('aria-current');
+    const after = await networkSwitch(screen, browser);
+    await expect(after.getByRole('link', c.to)).toHaveAttribute('aria-current', 'page');
+    await expect(after.getByRole('link', c.to === 'Fuji' ? 'Mainnet' : 'Fuji')).not.toHaveAttribute('aria-current');
   });
 }
 
-// The network-scope aggregates are mainnet only, so the page shows a label and no switch.
-test('network home names Mainnet and shows no switch', async ({ app, screen, browser }) => {
+// The network scope runs on both networks, so its home shows the switch, and the current network says so.
+test('network home shows the switch with Mainnet current', async ({ app, screen, browser }) => {
   await app.open('/explorer/mainnet');
   await expectActiveTab(screen, browser, 'Explorer');
-  await expect(screen.getByText('Mainnet', { visible: true })).toBeVisible();
-  await expect(screen.getByRole('link', 'Fuji')).toHaveCount(0);
-  await expect(screen.getByRole('link', 'Mainnet')).toHaveCount(0);
+  // On a phone the switch is in the chain switcher menu.
+  const area = await networkSwitch(screen, browser);
+  await expect(area.getByRole('link', 'Mainnet')).toHaveAttribute('aria-current', 'page');
+  const fuji = area.getByRole('link', 'Fuji');
+  await expect(fuji).not.toHaveAttribute('aria-current');
+  await expect(fuji).toHaveAttribute('href', '/explorer/fuji');
 });

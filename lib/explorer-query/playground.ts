@@ -9,7 +9,7 @@
 
 import { adoptBoards, type Board, type MetricSeries, type MetricTile } from "./board";
 import { playgroundBoardId } from "./board-links";
-import { MAX_TILES } from "./board-wire";
+import { MAX_TILES } from "./board-limits";
 import { DEFAULT_DAYS, MAX_METRIC_SERIES, METRIC_CHAIN, isMetricKey } from "./stats-metrics";
 
 /** the boards a Playground dashboard comes over to */
@@ -102,7 +102,7 @@ export function boardFromPlayground(d: PlaygroundDashboard): Board | null {
   // the dashboard's own time, so an edit made on the board since is newer and wins
   const updatedAt = Date.parse(d.updated_at ?? "") || createdAt;
   const name = typeof d.name === "string" ? d.name.trim().slice(0, 80) : "";
-  return { id: playgroundBoardId(d.id), name: name || "Playground dashboard", createdAt, updatedAt, tiles };
+  return { id: playgroundBoardId(d.id), name: name || "Untitled board", createdAt, updatedAt, tiles };
 }
 
 // one read of the reader's dashboards per page, once it answers

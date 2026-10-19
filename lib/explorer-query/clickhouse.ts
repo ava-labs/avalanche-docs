@@ -6,8 +6,8 @@
 import { withQuerySlot } from "@/lib/clickhouse/client";
 import { MAX_ROWS } from "./guard";
 import { headTime } from "./head";
-import { refSchema, withSources } from "./sources";
-import { targetOf } from "./target";
+import { networkChains, refSchema, withSources, type NetworkChain } from "./sources";
+import { NETWORK_ID, targetOf } from "./target";
 import type { SourceNote } from "./types";
 
 export interface ColumnMeta {
@@ -35,6 +35,14 @@ export class ScanLimitError extends Error {
   constructor(rows: number | null, max: number | null) {
     super(`This question scans too much of the chain${rows ? `: about ${quantity(rows)} rows${max ? `, and one question may read ${quantity(max)}` : ""}` : ""}. Narrow the time range or add a filter.`);
     this.name = "ScanLimitError";
+  }
+}
+
+/** the query service was still busy (503) or over the rate (429) after the short waits: the same read works again shortly */
+export class QueryBusyError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "QueryBusyError";
   }
 }
 
@@ -141,7 +149,7 @@ async function statsSlot<T>(run: () => Promise<T>): Promise<T> {
 /** what a writer and a reader are told when the rows stop short, and how to write the query so they do not */
 const CUT_OFF = "the query service cut its answer off, as it does when a value is NaN or infinite: divide by nullIf(x, 0), and wrap ratios and quantiles in ifNotFinite(x, NULL)";
 
-async function postStats(sql: string): Promise<RawJson> {
+async function postStats(sql: string, chainId?: number): Promise<RawJson> {
   const key = process.env.STATS_QUERY_KEY;
   if (!key) throw new Error("STATS_QUERY_KEY is not set");
   // busy (503) and over the rate (429) are worth a short wait; other
@@ -155,7 +163,8 @@ async function postStats(sql: string): Promise<RawJson> {
       const r = await fetch(STATS_QUERY_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-Query-Key": key },
-        body: JSON.stringify({ sql, maxRows: MAX_ROWS, timeoutSeconds: QUERY_TIMEOUT_S, format: "json" }),
+        // chainId is the chain stats-api reads $ICTT on (ictt.ts); other SQL ignores it
+        body: JSON.stringify({ sql, maxRows: MAX_ROWS, timeoutSeconds: QUERY_TIMEOUT_S, format: "json", chainId }),
         signal: AbortSignal.timeout((QUERY_TIMEOUT_S + 10) * 1000),
       });
       return { r, t: await r.text() };
@@ -189,7 +198,9 @@ async function postStats(sql: string): Promise<RawJson> {
     const inner = why.match(/message:\s*(.+?)(?:\s*\(version [^)]*\))?$/s)?.[1] ?? why;
     const over = scanLimit(why);
     if (over) throw over;
-    throw new Error(inner.replace(/^clickhouse:\s*/, "").slice(0, 500));
+    const message = inner.replace(/^clickhouse:\s*/, "").slice(0, 500);
+    if (res.status === 429 || res.status === 503) throw new QueryBusyError(message);
+    throw new Error(message);
   }
   // an empty answer can carry null in place of its lists
   const meta = (body.columns ?? []).map((name, i) => ({ name, type: body.types?.[i] ?? "String" }));
@@ -206,8 +217,9 @@ async function postStats(sql: string): Promise<RawJson> {
   return { meta, data, rows: body.rowCount ?? data.length, statistics: { elapsed: body.elapsedMs / 1000, rows_read: 0, bytes_read: 0 } };
 }
 
-async function post(sql: string): Promise<RawJson> {
-  if (!process.env.QUERY_CLICKHOUSE_URL && process.env.STATS_QUERY_KEY) return postStats(sql);
+async function post(sql: string, chainId?: number): Promise<RawJson> {
+  if (!process.env.QUERY_CLICKHOUSE_URL && process.env.STATS_QUERY_KEY) return postStats(sql, chainId);
+  if (/\$ICTT\b/.test(sql)) throw new Error("$ICTT is written out by stats-api: run it through STATS_QUERY_KEY, not QUERY_CLICKHOUSE_URL");
   const base = endpoint();
   const qs = new URLSearchParams(SETTINGS);
   // the box rejects a fifth concurrent query outright; share the site's gate
@@ -281,8 +293,9 @@ function reread(type: string): { sql: (q: string) => string; back?: (v: string) 
   return { sql: (q) => `toString(${plain(q)})`, back };
 }
 
-export async function runQuery(sql: string): Promise<QueryResult> {
-  let body = await post(sql);
+/** chainId: the page's chain, which stats-api reads a query's $ICTT on */
+export async function runQuery(sql: string, chainId?: number): Promise<QueryResult> {
+  let body = await post(sql, chainId);
   // a query that returned bytes (a model forgot hex()) runs once more with
   // those columns as 0x text, so the page never shows mangled bytes; one
   // with a column whose NULLs arrive wrong runs once more with it read so a NULL stays NULL
@@ -299,7 +312,7 @@ export async function runQuery(sql: string): Promise<QueryResult> {
         return bytes.includes(c.name) ? `lower(concat('0x', hex(${q}))) AS ${q}` : s ? `${s.sql(q)} AS ${q}` : q;
       })
       .join(", ");
-    const again = await post(`SELECT ${cols} FROM (${sql.replace(/\nLIMIT (\d+)$/, " LIMIT $1")})`);
+    const again = await post(`SELECT ${cols} FROM (${sql.replace(/\nLIMIT (\d+)$/, " LIMIT $1")})`, chainId);
     // each keeps its type, and its values read as the endpoint writes them: a big integer as a number, a Bool as
     // true or false, a decimal, UUID or IP as text
     for (const { column, back } of stale) {
@@ -401,8 +414,9 @@ async function queryCoverage(chainId: number): Promise<Coverage | null> {
   return value;
 }
 
-/** what window of this chain the database holds */
+/** what window of this chain the database holds; null for the network, whose chains each hold their own */
 export async function coverage(chainId: number): Promise<Coverage | null> {
+  if (chainId === NETWORK_ID) return null;
   try {
     return await readCoverage(chainId);
   } catch {
@@ -413,12 +427,56 @@ export async function coverage(chainId: number): Promise<Coverage | null> {
 /** for the page: the chain's window, "empty" when nothing is indexed, or
     null when the database did not answer in time (the page then says nothing) */
 export async function indexState(chainId: number, timeoutMs = 4000): Promise<Coverage | "empty" | null> {
+  if (chainId === NETWORK_ID) return null;
   const read = readCoverage(chainId).then(
     (c) => c ?? ("empty" as const),
     () => null,
   );
   const late = new Promise<null>((resolve) => setTimeout(() => resolve(null), timeoutMs));
   return Promise.race([read, late]);
+}
+
+/** every network chain's window, from one read of raw_blocks grouped by chain; each seeds that chain's own window, so
+    the network costs one read where its chains would cost one each. Kept as a chain's own is */
+let networkRead: { at: number; value: Promise<Map<number, Coverage>> } | null = null;
+function networkCoverage(chains: readonly NetworkChain[]): Promise<Map<number, Coverage>> {
+  if (networkRead && Date.now() - networkRead.at < COVERAGE_TTL_MS) return networkRead.value;
+  const value = runQuery(
+    `SELECT chain_id, toString(min(block_time), 'UTC') AS since, toString(max(block_time), 'UTC') AS until, toUnixTimestamp(max(block_time)) AS until_unix, min(block_number) AS lo, max(block_number) AS hi, count() AS blocks FROM raw_blocks WHERE chain_id IN (${chains.map((c) => c.chainId).join(", ")}) GROUP BY chain_id`,
+  ).then((r) => {
+    const by = new Map<number, Coverage>();
+    for (const row of r.rows) {
+      const c = { since: String(row.since), until: String(row.until), untilUnix: Number(row.until_unix), lo: Number(row.lo), hi: Number(row.hi), blocks: Number(row.blocks) };
+      by.set(Number(row.chain_id), c);
+      coverageCache.set(Number(row.chain_id), { at: Date.now(), value: c });
+    }
+    return by;
+  });
+  networkRead = { at: Date.now(), value };
+  value.catch(() => {
+    if (networkRead?.value === value) networkRead = null;
+  });
+  return value;
+}
+
+/** what the network's prompt says of its windows: the chains that stop more than a day before the C-Chain, and those
+    with no rows. Null when the database does not answer */
+export async function networkCoverageText(): Promise<string | null> {
+  const chains = await networkChains();
+  try {
+    const by = await networkCoverage(chains);
+    const c = by.get(43114);
+    if (!c) return null;
+    const behind = chains.filter((x) => (by.get(x.chainId)?.untilUnix ?? Infinity) < c.untilUnix - 86_400);
+    const empty = chains.filter((x) => !by.has(x.chainId));
+    const day = (x: NetworkChain) => by.get(x.chainId)!.until.slice(0, 10);
+    return [
+      `raw_blocks holds the network's ${by.size} chains to within a day of the C-Chain's last block (${c.until} UTC)${behind.length ? `, except these, whose index stops earlier: ${behind.map((x) => `${x.name} (${x.chainId}) on ${day(x)}`).join("; ")}` : ""}.`,
+      empty.length ? `No rows for: ${empty.map((x) => `${x.name} (${x.chainId})`).join(", ")}.` : "",
+    ].join(" ").trim();
+  } catch {
+    return null;
+  }
 }
 
 export function coverageText(chainId: number, c: Coverage): string {
@@ -442,8 +500,10 @@ export async function anchored(sql: string, chainId: number): Promise<{ sql: str
     window such as the last hour would end past the data and come back
     empty; so now() is read as the time of the last indexed block. The
     query as written keeps now(), so it stays right once the index is live. */
-async function anchorNow(sql: string, chainId: number): Promise<{ sql: string; anchor: string | null }> {
+async function anchorNow(sql: string, target: number): Promise<{ sql: string; anchor: string | null }> {
   if (!/\bnow\(\s*\)/i.test(sql)) return { sql, anchor: null };
+  // the network reads every chain over one window, the C-Chain's
+  const chainId = target === NETWORK_ID ? 43114 : target;
   const c = await coverage(chainId);
   if (!c) return { sql, anchor: null };
   if (!Number.isFinite(c.untilUnix) || Date.now() / 1000 - c.untilUnix < LAG_S) return { sql, anchor: null };

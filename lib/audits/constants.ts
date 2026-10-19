@@ -57,6 +57,15 @@ export const URGENCY_LABELS: Record<UrgencyOption, string> = {
 
 // Verbatim helper copy the designs repeat; kept here so screens cannot drift.
 export const QUOTE_DEADLINE_DEFAULT_DAYS = 10;
+/** Days a project has to accept a quote once its quote window closes (Joey,
+    2026-10-13). Past that pick-by date the quotes expire and the project starts
+    again from a copy. */
+export const DECISION_WINDOW_DAYS = 7;
+/** No decision window counts from before this day: a request whose quote window
+    closed earlier gets its week from here, so no project loses its quotes
+    overnight at release (Federico, 2026-10-16). A later date only adds grace;
+    if the merge lands after it, move it to the release day first. */
+export const DECISION_LIMIT_START = new Date("2026-10-23T00:00:00Z");
 /** A quote's duration ceiling: one year, in whichever unit the firm quotes.
     Shared so the composer's message and the schema's cap can never drift apart. */
 export const MAX_QUOTE_DURATION: Record<QuoteDurationUnit, number> = { weeks: 52, days: 365 };
