@@ -51,6 +51,9 @@ interface QuoteComposerProps {
   firmActive?: boolean;
   /** Approved subsidy on a won request, shown in the resting summary. */
   subsidy?: AuditorRequestView["subsidy"];
+  /** The project's pick-by date while the request collects; the resting
+      summary names it once the window has closed. */
+  pickBy?: Date | null;
 }
 
 /**
@@ -65,6 +68,7 @@ export function QuoteComposer({
   deadline,
   firmActive = true,
   subsidy,
+  pickBy = null,
 }: QuoteComposerProps) {
   const router = useRouter();
   const editable =
@@ -95,7 +99,11 @@ export function QuoteComposer({
 
   // Decided or closed with a quote on file: the form rests (design iteration
   // 2026-07-31). Closed with no quote needs no dead disabled form either.
-  if (!editable && existing) return <QuoteSummary quote={existing} subsidy={subsidy} />;
+  if (!editable && existing) {
+    return (
+      <QuoteSummary quote={existing} subsidy={subsidy} pickBy={windowOpen ? null : pickBy} />
+    );
+  }
   if (!firmActive && !existing) {
     return (
       <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 text-sm text-zinc-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-[#A2AFB2]">

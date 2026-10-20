@@ -11,7 +11,7 @@ import { PRIMARY_SUBNET_ID, getCurrentValidators, type CurrentValidator } from "
 import { isPrimaryTerm, type NodeResponse, type NodeStakingTx, type TxSummary } from "@/lib/pchain-explorer";
 import { usePchainData } from "./hooks";
 import { SubscribeAlerts } from "./SubscribeAlerts";
-import { MAX_TOTAL_STAKE_NAVAX, avax, delegationFeeCut, leadSeat, useConversion, useP2PDetail, useStakeContext, useValidationHistory, validatedAsSubnet } from "./node-data";
+import { MAX_TOTAL_STAKE_NAVAX, avax, currentUptime, delegationFeeCut, leadSeat, useConversion, useP2PDetail, useStakeContext, useValidationHistory, validatedAsSubnet } from "./node-data";
 import { NodePerformance } from "./node-performance";
 import { ActivityTable, DelegatorsTable, SubnetTerms, ValidationHistory, ValidationsTable } from "./node-record";
 import { L1ValidatorView } from "./node-l1";
@@ -337,7 +337,7 @@ export function PchainNode({
                   {n.validator.connected ? <span className={GOOD}>Connected</span> : <span className="text-zinc-400">Offline</span>}
                 </RailRow>
                 <RailRow label="Uptime" sub={p2p?.uptime?.length ? "peers' median view, last 14 days" : "peers' median view"}>
-                  <span className={n.uptime.currentP50 >= uptimeReq ? undefined : "text-[#E6212F]"}>{n.uptime.currentP50.toFixed(2)}%</span>
+                  <span className={currentUptime(n, p2p) >= uptimeReq ? undefined : "text-[#E6212F]"}>{currentUptime(n, p2p).toFixed(2)}%</span>
                 </RailRow>
                 <RailRow label="Total Stake" sub={stake.sharePct != null ? `${stake.sharePct.toFixed(2)}% of the network` : undefined}>
                   {avax(n.validator.totalStake)}

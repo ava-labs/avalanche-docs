@@ -1,6 +1,13 @@
 
+// The OCI deployment. One service replaces the prod/staging EC2 pair, so
+// previews and production share it. MANAGED_NODES_OVERRIDE still wins locally.
 export let MANAGED_TESTNET_NODES_SERVICE_URL =
   process.env.MANAGED_NODES_OVERRIDE || 'https://managed-nodes.avax.network';
+
+// Legacy EC2 box. Still serving chains created before the cutover, so the
+// studio keeps probing it as a fallback candidate — see
+// server/services/studio/quick-l1.ts. Remove once those chains have expired.
+export const MANAGED_NODES_PRODUCTION_URL = 'https://nodes-prod.43.207.73.245.sslip.io';
 
 if (MANAGED_TESTNET_NODES_SERVICE_URL.endsWith('/')) {
   MANAGED_TESTNET_NODES_SERVICE_URL = MANAGED_TESTNET_NODES_SERVICE_URL.slice(0, -1);

@@ -1,9 +1,12 @@
 import { describe, it, expect } from "vitest";
 import {
+  decisionDeadline,
   deriveRequestStatus,
   deriveQuoteDisplayStatus,
+  isAcceptanceOpen,
   isAdminDeletable,
   isQuoteWindowOpen,
+  oldestAcceptableQuoteDeadline,
   STORED_REQUEST_STATUSES,
 } from "@/lib/audits/status";
 
@@ -53,6 +56,120 @@ describe("deriveRequestStatus", () => {
     expect(
       deriveRequestStatus({ status: "collecting", quote_deadline: null }, 0, NOW),
     ).toBe("collecting");
+  });
+});
+
+// A window that closes after the release grace: its pick-by date is a week later.
+const CLOSED = new Date("2026-11-10T12:00:00Z");
+const PICK_BY = new Date("2026-11-17T12:00:00Z");
+const JUST_AFTER_PICK_BY = new Date("2026-11-17T12:00:00.001Z");
+// A window that closed before 2026-10-23: its week counts from that day.
+const CLOSED_EARLY = new Date("2026-08-05T12:00:00Z");
+const GRACE_END = new Date("2026-10-30T00:00:00Z");
+const JUST_AFTER_GRACE = new Date("2026-10-30T00:00:00.001Z");
+
+describe("decisionDeadline", () => {
+  it("is a week after the quote deadline once the window closes after the limit start", () => {
+    expect(decisionDeadline(CLOSED)).toEqual(PICK_BY);
+  });
+
+  it("counts the week from 2026-10-23 for a window that closed before it", () => {
+    expect(decisionDeadline(CLOSED_EARLY)).toEqual(GRACE_END);
+    expect(decisionDeadline(new Date("2026-10-23T00:00:00Z"))).toEqual(GRACE_END);
+  });
+});
+
+describe("deriveRequestStatus · decision window", () => {
+  const row = { status: "collecting", quote_deadline: CLOSED };
+
+  it("stays deciding through the pick-by instant", () => {
+    expect(deriveRequestStatus(row, 2, PICK_BY)).toBe("deciding");
+  });
+
+  it("reads expired once the pick-by date passes with no quote accepted", () => {
+    expect(deriveRequestStatus(row, 2, JUST_AFTER_PICK_BY)).toBe("expired");
+  });
+
+  it("still expires a window without quotes the moment it closes", () => {
+    expect(deriveRequestStatus(row, 0, new Date("2026-11-10T12:00:00.001Z"))).toBe("expired");
+  });
+
+  it("keeps a window that closed before the limit start deciding until 2026-10-30", () => {
+    const early = { status: "collecting", quote_deadline: CLOSED_EARLY };
+    expect(deriveRequestStatus(early, 1, GRACE_END)).toBe("deciding");
+    expect(deriveRequestStatus(early, 1, JUST_AFTER_GRACE)).toBe("expired");
+  });
+});
+
+describe("isAcceptanceOpen", () => {
+  const collecting = { status: "collecting", quote_deadline: CLOSED };
+
+  it("allows an early pick while quotes are still open", () => {
+    expect(isAcceptanceOpen(collecting, new Date("2026-11-01T00:00:00Z"))).toBe(true);
+  });
+
+  it("allows a pick through the pick-by instant and not after it", () => {
+    expect(isAcceptanceOpen(collecting, PICK_BY)).toBe(true);
+    expect(isAcceptanceOpen(collecting, JUST_AFTER_PICK_BY)).toBe(false);
+  });
+
+  it("stays open defensively without a deadline", () => {
+    expect(
+      isAcceptanceOpen({ status: "collecting", quote_deadline: null }, new Date("2027-01-01T00:00:00Z")),
+    ).toBe(true);
+  });
+
+  it("is closed for every stored status but collecting", () => {
+    for (const status of ["draft", "pending_review", "rejected", "engaged", "withdrawn"]) {
+      expect(
+        isAcceptanceOpen({ status, quote_deadline: CLOSED }, new Date("2026-11-01T00:00:00Z")),
+      ).toBe(false);
+    }
+  });
+});
+
+describe("oldestAcceptableQuoteDeadline", () => {
+  it("is null while the release grace still holds every decision window open", () => {
+    expect(oldestAcceptableQuoteDeadline(new Date("2026-10-29T12:00:00Z"))).toBeNull();
+    expect(oldestAcceptableQuoteDeadline(GRACE_END)).toBeNull();
+  });
+
+  it("is a week before now once the grace is over", () => {
+    expect(oldestAcceptableQuoteDeadline(new Date("2026-12-01T12:00:00Z"))).toEqual(
+      new Date("2026-11-24T12:00:00Z"),
+    );
+  });
+
+  // The acceptance write uses this where-clause form of isAcceptanceOpen; the
+  // two must agree on both sides of every boundary or a screen offers an
+  // accept the server refuses (or the reverse).
+  it("agrees with isAcceptanceOpen on both sides of every boundary", () => {
+    const nows = [
+      "2026-10-20T00:00:00Z",
+      "2026-10-30T00:00:00Z",
+      "2026-10-30T00:00:00.001Z",
+      "2026-11-17T12:00:00Z",
+      "2026-11-17T12:00:00.001Z",
+      "2026-12-01T12:00:00Z",
+    ];
+    const deadlines = [
+      "2026-08-05T12:00:00Z",
+      "2026-10-23T00:00:00Z",
+      "2026-11-10T12:00:00Z",
+      "2026-11-24T12:00:00Z",
+      "2026-12-20T00:00:00Z",
+    ];
+    for (const nowIso of nows) {
+      const now = new Date(nowIso);
+      const oldest = oldestAcceptableQuoteDeadline(now);
+      for (const deadlineIso of deadlines) {
+        const quote_deadline = new Date(deadlineIso);
+        const whereMatches = oldest === null || quote_deadline >= oldest;
+        expect(whereMatches, `deadline ${deadlineIso} at ${nowIso}`).toBe(
+          isAcceptanceOpen({ status: "collecting", quote_deadline }, now),
+        );
+      }
+    }
   });
 });
 

@@ -187,6 +187,17 @@ describe("approveRequestAndFanout", () => {
     txRequestFindFirstMock.mockResolvedValue(pendingRow);
   });
 
+  it("reads only addresses for the fan-out mail, never a GitHub username (D2.7)", async () => {
+    await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
+
+    expect(txAuditorFindManyMock.mock.calls[0][0].select).toEqual({
+      id: true,
+      firm_name: true,
+      quote_email: true,
+      members: { select: { email: true } },
+    });
+  });
+
   it("fans out to ACTIVE firms only, one delivery per firm", async () => {
     const result = await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
 
@@ -373,5 +384,94 @@ describe("Telegram share", () => {
     await submitRequestForReview("req-1", OWNER);
 
     expect(sharedAt()).toBeNull();
+  });
+});
+
+describe("calendar share", () => {
+  const withLink = { ...completeDraft, contact_calendar_url: "https://cal.com/alexstone" };
+  const updateData = () => txRequestUpdateMock.mock.calls[0][0].data;
+  const calendarSharedAt = () => updateData().contact_calendar_shared_at;
+
+  it("stamps the share at submission when the project ticked it and the row holds a link", async () => {
+    txRequestFindFirstMock.mockResolvedValue(withLink);
+    const before = Date.now();
+
+    await submitRequestForReview("req-1", OWNER, false, true);
+
+    expect(calendarSharedAt()).toBeInstanceOf(Date);
+    expect(calendarSharedAt().getTime()).toBeGreaterThanOrEqual(before);
+  });
+
+  it("stamps a bare link the gate completes, and stores it completed", async () => {
+    txRequestFindFirstMock.mockResolvedValue({
+      ...completeDraft,
+      contact_calendar_url: "cal.com/alexstone",
+    });
+
+    await submitRequestForReview("req-1", OWNER, false, true);
+
+    expect(calendarSharedAt()).toBeInstanceOf(Date);
+    expect(updateData().contact_calendar_url).toBe("https://cal.com/alexstone");
+  });
+
+  it("writes null without the tick, which clears the stamp of an earlier submit", async () => {
+    txRequestFindFirstMock.mockResolvedValue({
+      ...withLink,
+      contact_calendar_shared_at: new Date("2026-10-01T09:00:00Z"),
+    });
+
+    await submitRequestForReview("req-1", OWNER, false, false);
+
+    // null, not undefined: Prisma leaves a column untouched on undefined.
+    expect(calendarSharedAt()).toBeNull();
+  });
+
+  it("writes null with the tick when the row holds no link", async () => {
+    for (const contact_calendar_url of [null, ""]) {
+      txRequestUpdateMock.mockClear();
+      txRequestFindFirstMock.mockResolvedValue({ ...completeDraft, contact_calendar_url });
+
+      await submitRequestForReview("req-1", OWNER, false, true);
+
+      expect(calendarSharedAt()).toBeNull();
+    }
+  });
+
+  // The stamp needs a link that passes the gate: one that fails it stops the
+  // whole submission, so there is no row to stamp.
+  it("submits nothing, so stamps nothing, when the stored link fails the gate", async () => {
+    txRequestFindFirstMock.mockResolvedValue({
+      ...completeDraft,
+      contact_calendar_url: "not a link",
+    });
+
+    const result = await submitRequestForReview("req-1", OWNER, false, true);
+
+    expect(result).toMatchObject({ success: false, code: "invalid" });
+    if (!result.success && result.code === "invalid") {
+      expect(result.errors.contact_calendar_url).toBeDefined();
+    }
+    expect(txRequestUpdateMock).not.toHaveBeenCalled();
+  });
+
+  it("shares nothing when the caller does not say", async () => {
+    txRequestFindFirstMock.mockResolvedValue(withLink);
+
+    await submitRequestForReview("req-1", OWNER);
+
+    expect(calendarSharedAt()).toBeNull();
+  });
+
+  it("keeps the two shares apart", async () => {
+    txRequestFindFirstMock.mockResolvedValue({ ...withLink, contact_handle: "@alexstone" });
+
+    await submitRequestForReview("req-1", OWNER, true, false);
+    expect(updateData().contact_handle_shared_at).toBeInstanceOf(Date);
+    expect(calendarSharedAt()).toBeNull();
+
+    txRequestUpdateMock.mockClear();
+    await submitRequestForReview("req-1", OWNER, false, true);
+    expect(updateData().contact_handle_shared_at).toBeNull();
+    expect(calendarSharedAt()).toBeInstanceOf(Date);
   });
 });

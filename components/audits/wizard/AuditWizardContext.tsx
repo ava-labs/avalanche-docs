@@ -43,6 +43,9 @@ interface AuditWizardContextValue {
       reason: the choice is made at sending, so a resubmit asks again. */
   shareHandle: boolean;
   setShareHandle: (next: boolean) => void;
+  /** Step 4's calendar share checkbox, not autosaved for the same reason. */
+  shareCalendar: boolean;
+  setShareCalendar: (next: boolean) => void;
   /** The public firm list, server-rendered once and held for the wizard's
       lifetime; its length is the whitelist count. */
   firms: PublicFirm[];
@@ -74,6 +77,7 @@ export function AuditWizardProvider({
   const [submitting, setSubmitting] = useState(false);
   const [consent, setConsent] = useState(false);
   const [shareHandle, setShareHandle] = useState(false);
+  const [shareCalendar, setShareCalendar] = useState(false);
 
   const form = useForm<AuditWizardValues>({
     // The resolver carries the SUBMIT-level rules; steps only ever trigger
@@ -138,7 +142,11 @@ export function AuditWizardProvider({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // The server refuses without it; the checkbox on step 4 is what sets it.
-        body: JSON.stringify({ contact_consent: true, share_contact_handle: shareHandle }),
+        body: JSON.stringify({
+          contact_consent: true,
+          share_contact_handle: shareHandle,
+          share_calendar: shareCalendar,
+        }),
       });
       const body = await res.json().catch(() => null);
       if (!res.ok || !body?.success) {
@@ -161,7 +169,7 @@ export function AuditWizardProvider({
     } finally {
       setSubmitting(false);
     }
-  }, [flush, form, router, setStep, shareHandle]);
+  }, [flush, form, router, setStep, shareHandle, shareCalendar]);
 
   const value = useMemo(
     () => ({
@@ -181,6 +189,8 @@ export function AuditWizardProvider({
       setConsent,
       shareHandle,
       setShareHandle,
+      shareCalendar,
+      setShareCalendar,
       firms,
     }),
     [
@@ -198,6 +208,7 @@ export function AuditWizardProvider({
       ensureDraftId,
       consent,
       shareHandle,
+      shareCalendar,
       firms,
     ],
   );
