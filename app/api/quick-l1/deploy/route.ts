@@ -3,6 +3,7 @@ import { startMockDeployment } from '@/lib/quick-l1/mock-orchestrator';
 import type { DeployRequest, DeployResponse } from '@/lib/quick-l1/types';
 import { getUserId, rateLimited } from '@/app/api/managed-testnet-nodes/utils';
 import { getAuthSession } from '@/lib/auth/authSession';
+import { withQuickL1WafToken } from '@/lib/quick-l1/waf';
 
 /**
  * POST /api/quick-l1/deploy
@@ -138,7 +139,7 @@ async function handlePost(
         { status: 503 },
       );
     }
-    const res = await fetch(`${upstream.replace(/\/$/, '')}/deploy`, {
+    const res = await fetch(withQuickL1WafToken(`${upstream.replace(/\/$/, '')}/deploy`), {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
