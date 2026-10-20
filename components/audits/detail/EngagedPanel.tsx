@@ -3,6 +3,7 @@ import { CARD, MONO_LABEL_SM } from "@/components/audits/shared/classes";
 import { durationLabel, formatIsoDate, formatUsd } from "@/components/audits/shared/format";
 import { ContactHandle } from "@/components/audits/shared/ContactHandle";
 import { QuoteDocLink } from "@/components/audits/quotes/QuoteDocLink";
+import { GithubUsernameLinks } from "@/components/audits/detail/FirmUsernamesCard";
 import { parseRepos } from "@/components/audits/wizard/types";
 
 type OwnerQuote = OwnerRequestDetail["quotes"][number];
@@ -32,9 +33,12 @@ function ContactBox({ label, lines }: { label: string; lines: React.ReactNode[] 
 export function EngagedPanel({
   detail,
   acceptedQuote,
+  githubUsernames = [],
 }: {
   detail: OwnerRequestDetail;
   acceptedQuote: OwnerQuote;
+  /** The winner's people's GitHub usernames (getOwnerFirmUsernames once engaged). */
+  githubUsernames?: string[];
 }) {
   const otherCount = detail.quotes.length - 1;
   const hasRepos = parseRepos(detail.repos).length > 0;
@@ -50,6 +54,15 @@ export function EngagedPanel({
       >
         {acceptedQuote.quote_email}
       </a>
+    ) : null,
+    githubUsernames.length > 0 ? (
+      <span key="github" className="block text-zinc-500 dark:text-zinc-400">
+        GitHub ·{" "}
+        <GithubUsernameLinks
+          usernames={githubUsernames}
+          className="text-zinc-900 dark:text-zinc-100"
+        />
+      </span>
     ) : null,
   ].filter(Boolean) as React.ReactNode[];
 
@@ -111,7 +124,9 @@ export function EngagedPanel({
         </div>
         <p className="mt-3.5 text-xs text-zinc-500 dark:text-zinc-400">
           The engagement continues off-platform under the program's standardized terms.
-          {hasRepos ? " Grant private-repo read access to the firm now." : ""}
+          {hasRepos
+            ? " Private repos: make sure the firm has access, and remove any other firm you added."
+            : ""}
         </p>
       </div>
 

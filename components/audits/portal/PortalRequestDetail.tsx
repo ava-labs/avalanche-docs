@@ -46,7 +46,15 @@ function buildSpecItems(view: AuditorRequestView): SpecItem[] {
                   </p>
                 ))}
                 <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
-                  Private repos: read access granted if your quote is accepted.
+                  Private repos: the project sees your team&apos;s GitHub usernames and may add
+                  them before you quote. Each person sets theirs on{" "}
+                  <Link
+                    href="/audits/portal/firm"
+                    className="underline underline-offset-2 hover:text-zinc-800 dark:hover:text-zinc-200"
+                  >
+                    Firm details
+                  </Link>
+                  .
                 </p>
               </div>
             ),

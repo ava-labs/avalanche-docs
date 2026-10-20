@@ -20,8 +20,8 @@ export interface SubsidyDecisionNotice {
 
 /**
  * The subsidy outcome, sent to the requesting project AND to the engaged firm.
- * Everything else on the project side is pull-based ("no emails to you, check
- * back here"), but a funding decision is money and lands on the program's
+ * Besides the approval notice, the project side is pull-based (quotes wait on
+ * the request page), but a funding decision is money and lands on the program's
  * schedule rather than theirs, so silence leaves people waiting on an answer
  * they cannot see. The firm gets it because part of its fee may be coming from
  * the program, which changes who it invoices.

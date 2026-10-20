@@ -60,7 +60,7 @@ function detailRows(request: FanoutRequest): AuditEmailDetail[] {
   if (request.repo_count && request.repo_count > 0) {
     rows.push({
       label: "Repositories",
-      value: `${request.repo_count} pinned · read access on acceptance`,
+      value: `${request.repo_count} pinned · private ones: the project may add your team by GitHub username`,
       mono: true,
     });
   }

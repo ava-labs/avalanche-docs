@@ -12,6 +12,8 @@ const {
   requestUpdateManyMock,
   eventCreateMock,
   sendFanoutMock,
+  getApprovalNoticeMock,
+  sendApprovalNoticeMock,
 } = vi.hoisted(() => ({
   txRequestFindFirstMock: vi.fn(),
   txRequestUpdateMock: vi.fn(),
@@ -24,6 +26,8 @@ const {
   requestUpdateManyMock: vi.fn(),
   eventCreateMock: vi.fn(),
   sendFanoutMock: vi.fn(),
+  getApprovalNoticeMock: vi.fn(),
+  sendApprovalNoticeMock: vi.fn(),
 }));
 
 const tx = {
@@ -46,11 +50,20 @@ vi.mock("@/server/services/audits/emails/sendFanoutNotification", () => ({
   sendFanoutNotification: sendFanoutMock,
 }));
 
+// The project's approval notice: its read and its send.
+vi.mock("@/server/services/audits/visibility", () => ({
+  getApprovalNotice: getApprovalNoticeMock,
+}));
+vi.mock("@/server/services/audits/emails/sendApprovalNotice", () => ({
+  sendApprovalNotice: sendApprovalNoticeMock,
+}));
+
 import {
   approveRequestAndFanout,
   rejectRequest,
   submitRequestForReview,
 } from "@/server/services/audits/fanout";
+import { prisma } from "@/prisma/prisma";
 
 const OWNER = "user-owner";
 const ADMIN = "user-admin";
@@ -473,5 +486,115 @@ describe("calendar share", () => {
     await submitRequestForReview("req-1", OWNER, false, true);
     expect(updateData().contact_handle_shared_at).toBeNull();
     expect(calendarSharedAt()).toBeInstanceOf(Date);
+  });
+});
+
+describe("approveRequestAndFanout · the project's notice (step 2)", () => {
+  const NOTICE = {
+    email: "owner@glacierswap.example",
+    request_id: "req-1",
+    project_name: "Glacierswap",
+    quote_deadline: new Date(Date.now() + 10 * DAY),
+    pins_repository: true,
+    shared_handle: false,
+    shared_calendar: false,
+    firms: [{ id: "aud-1", firm_name: "Nordlicht Security", github_usernames: ["nordlicht-sec"] }],
+  };
+
+  beforeEach(() => {
+    txRequestFindFirstMock.mockResolvedValue(pendingRow);
+    getApprovalNoticeMock.mockResolvedValue(NOTICE);
+    sendApprovalNoticeMock.mockResolvedValue(undefined);
+  });
+
+  it("sends the project one notice after the commit, before the firm mail", async () => {
+    const order: string[] = [];
+    // "commit" is the transaction resolving: a notifier moved inside the
+    // transaction callback would land before it.
+    vi.mocked(prisma.$transaction).mockImplementationOnce((async (
+      fn: (client: typeof tx) => Promise<unknown>,
+    ) => {
+      const outcome = await fn(tx);
+      order.push("commit");
+      return outcome;
+    }) as never);
+    getApprovalNoticeMock.mockImplementation(async () => {
+      order.push("notice read");
+      return NOTICE;
+    });
+    sendApprovalNoticeMock.mockImplementation(async () => {
+      order.push("notice send");
+    });
+    sendFanoutMock.mockImplementation(async () => {
+      order.push("firm mail");
+    });
+
+    await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
+
+    expect(order).toEqual([
+      "commit",
+      "notice read",
+      "notice send",
+      "firm mail",
+      "firm mail",
+      "firm mail",
+    ]);
+    expect(getApprovalNoticeMock).toHaveBeenCalledWith("req-1");
+    expect(sendApprovalNoticeMock).toHaveBeenCalledTimes(1);
+    expect(sendApprovalNoticeMock).toHaveBeenCalledWith(NOTICE);
+  });
+
+  it("sends nothing when the request is no longer awaiting review", async () => {
+    txRequestFindFirstMock.mockResolvedValue(null);
+
+    const result = await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
+
+    expect(result).toEqual({ success: false, code: "not_found" });
+    expect(getApprovalNoticeMock).not.toHaveBeenCalled();
+    expect(sendApprovalNoticeMock).not.toHaveBeenCalled();
+  });
+
+  it("sends nothing when the request reached no firm, or is no longer collecting (C2)", async () => {
+    for (const value of [{ ...NOTICE, firms: [] }, null]) {
+      getApprovalNoticeMock.mockResolvedValueOnce(value);
+
+      const result = await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
+
+      expect(result).toMatchObject({ success: true });
+    }
+    expect(sendApprovalNoticeMock).not.toHaveBeenCalled();
+  });
+
+  it("a failing notice read or send never fails the approval", async () => {
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      getApprovalNoticeMock.mockRejectedValueOnce(new Error("db down"));
+      expect(await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME)).toEqual({
+        success: true,
+        auditorCount: 3,
+        emailFailures: 0,
+      });
+
+      sendApprovalNoticeMock.mockRejectedValueOnce(new Error("sendgrid down"));
+      expect(await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME)).toEqual({
+        success: true,
+        auditorCount: 3,
+        emailFailures: 0,
+      });
+
+      expect(errorSpy.mock.calls.map(([message]) => message)).toEqual([
+        "[Audits] approval notice failed:",
+        "[Audits] approval notice failed:",
+      ]);
+    } finally {
+      errorSpy.mockRestore();
+    }
+  });
+
+  it("a delivery-row update that throws after the commit does not stop the notice", async () => {
+    deliveryUpdateMock.mockRejectedValue(new Error("P2025"));
+
+    await expect(approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME)).rejects.toThrow("P2025");
+    expect(sendApprovalNoticeMock).toHaveBeenCalledTimes(1);
   });
 });

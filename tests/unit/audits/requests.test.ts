@@ -16,6 +16,7 @@ const {
   txAuditorCountMock,
   txDeliveryCreateManyMock,
   deliverFanoutEmailsMock,
+  sendApprovalNoticeMock,
 } = vi.hoisted(() => ({
   updateManyMock: vi.fn(),
   deleteManyMock: vi.fn(),
@@ -32,6 +33,7 @@ const {
   txAuditorCountMock: vi.fn(),
   txDeliveryCreateManyMock: vi.fn(),
   deliverFanoutEmailsMock: vi.fn(),
+  sendApprovalNoticeMock: vi.fn(),
 }));
 
 const tx = {
@@ -65,6 +67,11 @@ vi.mock("@/prisma/prisma", () => ({
 vi.mock("@/server/services/audits/fanout", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@/server/services/audits/fanout")>()),
   deliverFanoutEmails: deliverFanoutEmailsMock,
+}));
+
+// The project's approval notice: a reopen must never send it (decision e).
+vi.mock("@/server/services/audits/emails/sendApprovalNotice", () => ({
+  sendApprovalNotice: sendApprovalNoticeMock,
 }));
 
 import {
@@ -272,6 +279,13 @@ describe("reopen", () => {
       action: "request_reopened",
     });
     expect(deliverFanoutEmailsMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("sends the project no approval notice: the request page lists the firms (decision e)", async () => {
+    const result = await reopen(OWNER, "req-1");
+
+    expect(result).toMatchObject({ success: true });
+    expect(sendApprovalNoticeMock).not.toHaveBeenCalled();
   });
 
   it("refuses anything that is not derived-expired (quotes exist)", async () => {

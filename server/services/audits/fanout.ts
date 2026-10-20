@@ -4,6 +4,8 @@ import { auditSubmitSchema } from "@/types/audits";
 import { QUOTE_DEADLINE_DEFAULT_DAYS } from "@/lib/audits/constants";
 import { sendFanoutNotification } from "@/server/services/audits/emails/sendFanoutNotification";
 import type { FanoutRequest } from "@/server/services/audits/emails/sendFanoutNotification";
+import { sendApprovalNotice } from "@/server/services/audits/emails/sendApprovalNotice";
+import { getApprovalNotice } from "@/server/services/audits/visibility";
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -182,11 +184,27 @@ export async function submitRequestForReview(
 }
 
 /**
+ * The project's one email at approval (FDE-249 step 2), sent only when the
+ * request reached a firm. It runs before the firm mail, whose delivery-row
+ * updates can throw after the commit, so they can never skip it, and it never
+ * throws itself: like every send here, a failure must not undo the approval.
+ */
+async function notifyProjectOfApproval(requestId: string): Promise<void> {
+  try {
+    const notice = await getApprovalNotice(requestId);
+    if (notice && notice.firms.length > 0) await sendApprovalNotice(notice);
+  } catch (err) {
+    console.error("[Audits] approval notice failed:", err);
+  }
+}
+
+/**
  * The admin decision that actually opens a request to the market: flip to
  * collecting, START the quote window here (board B-4), create one delivery
- * per ACTIVE firm, then email AFTER commit. An email failure NEVER fails the
- * approval: it degrades that delivery to email_status "failed", visible in
- * the drill-down. Quotes are not pre-created; auditors create their own.
+ * per ACTIVE firm, then email AFTER commit: the project first (its approval
+ * notice), then every firm. An email failure NEVER fails the approval: a
+ * firm's degrades that delivery to email_status "failed", visible in the
+ * drill-down. Quotes are not pre-created; auditors create their own.
  */
 export async function approveRequestAndFanout(
   requestId: string,
@@ -255,6 +273,7 @@ export async function approveRequestAndFanout(
 
   if (outcome.kind === "not_found") return { success: false, code: "not_found" };
 
+  await notifyProjectOfApproval(requestId);
   const { emailFailures } = await deliverFanoutEmails(requestId, outcome.auditors, outcome.request);
   return { success: true, auditorCount: outcome.auditors.length, emailFailures };
 }
