@@ -1,4 +1,5 @@
 import type { OwnerRequestDetail } from "@/server/services/audits/visibility";
+import { isFundedSubsidy } from "@/lib/audits/subsidy";
 import { CARD, MONO_LABEL_SM } from "@/components/audits/shared/classes";
 import { durationLabel, formatIsoDate, formatUsd } from "@/components/audits/shared/format";
 import { ContactHandle } from "@/components/audits/shared/ContactHandle";
@@ -42,6 +43,9 @@ export function EngagedPanel({
 }) {
   const otherCount = detail.quotes.length - 1;
   const hasRepos = parseRepos(detail.repos).length > 0;
+  // Good news only (2026-10-20): the card is for money the program pays; the
+  // server already drops a decline or a $0 approval (visibility.ts).
+  const subsidy = detail.subsidy && isFundedSubsidy(detail.subsidy) ? detail.subsidy : null;
 
   const theirLines = [
     acceptedQuote.quote_email ? (
@@ -131,37 +135,29 @@ export function EngagedPanel({
       </div>
 
       <div className="space-y-3">
-        {detail.subsidy ? (
+        {subsidy ? (
           <div className={`${CARD} p-4`}>
             <p className={MONO_LABEL_SM}>Subsidy</p>
-            {detail.subsidy.state === "approved" ? (
-              <>
-                <div className="mt-2.5 space-y-1.5 text-sm">
-                  <p className="flex items-baseline justify-between gap-3">
-                    <span className="text-zinc-600 dark:text-[#A2AFB2]">Program pays</span>
-                    <span className="font-mono text-[15px] font-bold">
-                      {formatUsd(detail.subsidy.program_amount_usd)}
-                    </span>
-                  </p>
-                  <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                    {detail.subsidy.pct}% of {formatUsd(acceptedQuote.price_usd)}
-                  </p>
-                  <p className="flex items-baseline justify-between gap-3">
-                    <span className="text-zinc-600 dark:text-[#A2AFB2]">You pay</span>
-                    <span className="font-mono font-bold">
-                      {formatUsd(detail.subsidy.project_amount_usd)}
-                    </span>
-                  </p>
-                </div>
-                <p className="mt-2.5 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-                  Approved by the audit program. Payment is handled off-platform with the firm.
-                </p>
-              </>
-            ) : (
-              <p className="mt-2 text-sm text-zinc-600 dark:text-[#A2AFB2]">
-                A subsidy was not approved for this engagement.
+            <div className="mt-2.5 space-y-1.5 text-sm">
+              <p className="flex items-baseline justify-between gap-3">
+                <span className="text-zinc-600 dark:text-[#A2AFB2]">Program pays</span>
+                <span className="font-mono text-[15px] font-bold">
+                  {formatUsd(subsidy.program_amount_usd)}
+                </span>
               </p>
-            )}
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                {subsidy.pct}% of {formatUsd(acceptedQuote.price_usd)}
+              </p>
+              <p className="flex items-baseline justify-between gap-3">
+                <span className="text-zinc-600 dark:text-[#A2AFB2]">You pay</span>
+                <span className="font-mono font-bold">
+                  {formatUsd(subsidy.project_amount_usd)}
+                </span>
+              </p>
+            </div>
+            <p className="mt-2.5 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+              Approved by the audit program. Payment is handled off-platform with the firm.
+            </p>
           </div>
         ) : null}
 

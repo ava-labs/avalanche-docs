@@ -6,6 +6,7 @@ import {
   type StoredAttachment,
 } from "@/lib/audits/attachments";
 import { isLegacyAttachmentSrc, isRequestAttachmentSrc } from "@/lib/audits/blobSrc";
+import { isFundedSubsidy } from "@/lib/audits/subsidy";
 import { isGithubUsername } from "@/types/audits";
 import { findAuditorByEmail } from "@/server/services/audits/auditors";
 import { firmContact, recipientsOf } from "@/server/services/audits/emails/recipients";
@@ -170,9 +171,11 @@ export async function getOwnerRequestDetail(userId: string, requestId: string) {
       : {}),
   }));
 
-  // The project sees the OUTCOME only: never the deciding admin, never the note.
+  // The project sees the OUTCOME only: never the deciding admin, never the note,
+  // and only money the program pays: a decline or a $0 approval never reaches
+  // the project's browser (good news only, 2026-10-20).
   const decision = row.subsidy_decisions[0];
-  const subsidy: OwnerSubsidyOutcome | null = decision
+  const subsidy: OwnerSubsidyOutcome | null = decision && isFundedSubsidy(decision)
     ? {
         state: decision.state,
         pct: decision.pct,
@@ -540,9 +543,9 @@ export async function getRequestForAuditor(auditorId: string, requestId: string)
       orderBy: { decided_at: "desc" },
       select: { state: true, program_amount_usd: true, pct: true },
     });
-    // A decline is the program's own business, not the firm's: only an
-    // approved subsidy changes anything for them.
-    subsidy = decision?.state === "approved" ? decision : null;
+    // A decline or a $0 approval is the program's own business, not the
+    // firm's: only money from the program changes anything for them.
+    subsidy = decision && isFundedSubsidy(decision) ? decision : null;
   }
 
   // The Telegram and calendar shares: each one the project opted into at

@@ -273,6 +273,47 @@ describe("getOwnerRequestDetail", () => {
     expect(JSON.stringify(detail!.subsidy)).not.toContain("admin-1");
     expect(JSON.stringify(detail!.subsidy)).not.toContain("Board approved");
   });
+
+  // Good news only (2026-10-20): the latest decision reaches the project's
+  // browser only when the program pays something.
+  const engagedWithLatest = (latest: Record<string, unknown>) => ({
+    ...baseRequest,
+    status: "engaged",
+    _count: { fanout_deliveries: 12 },
+    quotes: [],
+    subsidy_decisions: [
+      { decided_by: "admin-1", note: null, decided_at: new Date(), ...latest },
+    ],
+  });
+
+  it("never hands the project a declined decision", async () => {
+    requestFindFirstMock.mockResolvedValue(
+      engagedWithLatest({ state: "declined", pct: 0, program_amount_usd: 0, project_amount_usd: 24000 }),
+    );
+
+    const detail = await getOwnerRequestDetail(OWNER, "req-1");
+
+    expect(detail!.subsidy).toBeNull();
+    // Nor the raw row: the whole detail reaches the browser.
+    expect(detail).not.toHaveProperty("subsidy_decisions");
+    expect(JSON.stringify(detail)).not.toContain("admin-1");
+    // The latest decision is the one that counts, so a decline that
+    // supersedes an approval hides it.
+    expect(requestFindFirstMock.mock.calls[0][0].include.subsidy_decisions).toEqual({
+      orderBy: { decided_at: "desc" },
+      take: 1,
+    });
+  });
+
+  it("never hands the project a $0 approval", async () => {
+    requestFindFirstMock.mockResolvedValue(
+      engagedWithLatest({ state: "approved", pct: 0, program_amount_usd: 0, project_amount_usd: 24000 }),
+    );
+
+    const detail = await getOwnerRequestDetail(OWNER, "req-1");
+
+    expect(detail!.subsidy).toBeNull();
+  });
 });
 
 describe("admin scope", () => {
@@ -522,6 +563,20 @@ describe("auditor scope · subsidy", () => {
     const view = await getRequestForAuditor("aud-1", "req-1");
 
     expect(view!.subsidy).toBeNull();
+  });
+
+  it("hides a $0 approval from the winning firm", async () => {
+    quoteFindUniqueMock.mockResolvedValue({ id: "q-1", status: "accepted", price_usd: 12500 });
+    subsidyFindFirstMock.mockResolvedValue({ state: "approved", program_amount_usd: 0, pct: 0 });
+
+    const view = await getRequestForAuditor("aud-1", "req-1");
+
+    expect(view!.subsidy).toBeNull();
+    // The latest decision is the one the firm reads.
+    expect(subsidyFindFirstMock.mock.calls[0][0]).toMatchObject({
+      where: { request_id: "req-1" },
+      orderBy: { decided_at: "desc" },
+    });
   });
 
   it("never looks up a subsidy for a firm that did not win", async () => {

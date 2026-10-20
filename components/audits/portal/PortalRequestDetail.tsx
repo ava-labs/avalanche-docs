@@ -237,8 +237,7 @@ export function PortalRequestDetail({
             </p>
           ) : null}
           <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">
-            Send your quote here: the program can only subsidize a quote the project accepts on
-            Builder Hub.
+            Send your quote here: the project compares and accepts quotes on Builder Hub.
           </p>
         </div>
       ) : null}

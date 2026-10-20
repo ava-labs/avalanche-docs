@@ -247,22 +247,45 @@ describe("sendSubsidyDecisionNotice", () => {
     }
   });
 
-  it("carries NO amounts when the subsidy was declined", async () => {
+  // Good news only (2026-10-20): the approval is the only variant left, and
+  // it keeps every word.
+  it("reads word for word for the project", async () => {
+    await sendSubsidyDecisionNotice("owner@glacierswap.example", APPROVED);
+
+    const [, html, subject, text] = sendMailMock.mock.calls[0] as string[];
+    expect(subject).toBe("The audit program is covering $12,000 of «Glacierswap»");
+    expect(text).toBe(
+      [
+        "The Ava Labs audit program approved a subsidy for Glacierswap.",
+        "Program pays $12,000 (50% of the accepted quote). You pay $12,000.",
+        "Payment is handled off-platform.",
+        "Your request: https://build.avax.network/audits/req-1",
+      ].join("\n"),
+    );
+    for (const line of [
+      "Subsidy approved",
+      "The program is covering $12,000.",
+      "Payment is handled off-platform, on the terms in the accepted quote.",
+      "Subsidy · Glacierswap",
+      "Program pays",
+      "50% of the accepted quote",
+      "You pay",
+      "Open your request",
+      "Sent by the Ava Labs audit program · the full decision is on the request page.",
+    ]) {
+      expect(html).toContain(line);
+    }
+  });
+
+  it("sends nothing for a decision that pays nothing, whatever the caller", async () => {
     await sendSubsidyDecisionNotice("owner@glacierswap.example", {
       ...APPROVED,
-      state: "declined",
       program_amount_usd: 0,
       project_amount_usd: 24000,
       pct: 0,
     });
 
-    const [, html, subject, text] = sendMailMock.mock.calls[0] as string[];
-    for (const part of [subject, html, text]) {
-      expect(part).not.toContain("$");
-      expect(part).not.toContain("—");
-    }
-    // It must still say the engagement is unaffected, which is the whole point.
-    expect(text).toContain("the audit goes ahead");
+    expect(sendMailMock).not.toHaveBeenCalled();
   });
 
   it("never names the deciding admin", async () => {
@@ -319,18 +342,30 @@ describe("sendSubsidyDecisionNotice · auditor audience", () => {
     }
   });
 
-  it("reassures the firm on a decline, with no amounts", async () => {
-    await sendSubsidyDecisionNotice(
-      "quotes@nordlicht.example",
-      { ...APPROVED, state: "declined", program_amount_usd: 0, project_amount_usd: 24000, pct: 0 },
-      "auditor",
-    );
+  it("reads word for word for the firm", async () => {
+    await sendSubsidyDecisionNotice("quotes@nordlicht.example", APPROVED, "auditor");
 
     const [, html, subject, text] = sendMailMock.mock.calls[0] as string[];
-    for (const part of [subject, html, text]) {
-      expect(part).not.toContain("$");
+    expect(subject).toBe("The audit program is covering $12,000 of «Glacierswap»");
+    expect(text).toBe(
+      [
+        "The Ava Labs audit program approved a subsidy toward your engagement with Glacierswap.",
+        "Program covers $12,000 (50% of your accepted quote). The project covers $12,000.",
+        "Payment is handled off-platform.",
+        "Your request: https://build.avax.network/audits/portal/requests/req-1",
+      ].join("\n"),
+    );
+    for (const line of [
+      "Subsidy approved",
+      "The program is covering $12,000.",
+      "Payment is handled off-platform, on the terms in the accepted quote.",
+      "Program covers",
+      "Project covers",
+      "Open the request",
+      "Sent by the Ava Labs audit program · the full decision is on the request page.",
+    ]) {
+      expect(html).toContain(line);
     }
-    expect(text).toContain("payment terms with the project stand");
   });
 
   it("still sends the project wording when no audience is given", async () => {
