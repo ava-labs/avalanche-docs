@@ -11,7 +11,7 @@ import { PRIMARY_SUBNET_ID, getCurrentValidators, type CurrentValidator } from "
 import { isPrimaryTerm, type NodeResponse, type NodeStakingTx, type TxSummary } from "@/lib/pchain-explorer";
 import { usePchainData } from "./hooks";
 import { SubscribeAlerts } from "./SubscribeAlerts";
-import { MAX_TOTAL_STAKE_NAVAX, avax, currentUptime, delegationFeeCut, leadSeat, useConversion, useP2PDetail, useStakeContext, useValidationHistory, validatedAsSubnet } from "./node-data";
+import { MAX_TOTAL_STAKE_NAVAX, avax, currentUptime, delegationFeeCut, feePercentAt, leadSeat, useConversion, useP2PDetail, useStakeContext, useValidationHistory, validatedAsSubnet } from "./node-data";
 import { NodePerformance } from "./node-performance";
 import { ActivityTable, DelegatorsTable, SubnetTerms, ValidationHistory, ValidationsTable } from "./node-record";
 import { L1ValidatorView } from "./node-l1";
@@ -164,7 +164,7 @@ export function PchainNode({
     <>
       {n.validations.length > 1 && <ValidationsTable n={n} />}
       {n.delegators.length > 0 && <DelegatorsTable n={n} base={base} />}
-      {n.history.length > 0 && <ActivityTable history={fullHistory} base={base} more={{ done: historyDone, loading: loadingOlder, onMore: loadOlderHistory }} />}
+      {n.history.length > 0 && <ActivityTable n={n} history={fullHistory} network={network} base={base} feeAt={(ts) => feePercentAt(n, validations, ts)} more={{ done: historyDone, loading: loadingOlder, onMore: loadOlderHistory }} />}
     </>
   );
 
