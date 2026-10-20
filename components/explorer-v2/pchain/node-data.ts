@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PRIMARY_SUBNET_ID, getBlockTime, getCurrentValidators, getL1Validator, getPrimaryTotalStake, getValidatorFeeState, type CurrentValidator } from "@/lib/pchain-node";
-import type { ConversionResponse, NodeResponse, ValidationsResponse } from "@/lib/pchain-explorer";
+import { isPrimaryTerm, type ConversionResponse, type NodeResponse, type Tx, type ValidationsResponse } from "@/lib/pchain-explorer";
 import { SOFT_READ, isOk } from "@/lib/explorer-soft-status";
 import { DAY } from "@/lib/explorer-query/values";
 import type { SettledBalance } from "./seat-balance";
@@ -116,6 +116,64 @@ export function useValidationHistory(network: string, nodeId: string): Validatio
     return () => controller.abort();
   }, [network, nodeId]);
   return data;
+}
+
+/* --- the terms a staking tx set: start, end and the reward it stands to earn --- */
+
+/* The node document's staking txs carry only their weight, and its
+   delegator list holds only the 500 largest stakes: a newer, smaller
+   delegation is in neither with its terms. Each tx carries its own (and a
+   tx is final, so the route caches it hard). */
+const TERMS_TX = new Set(["AddPermissionlessDelegatorTx", "AddDelegatorTx", "AddPermissionlessValidatorTx", "AddValidatorTx", "AddAutoRenewedValidatorTx"]);
+export const DELEGATION_TX = new Set(["AddPermissionlessDelegatorTx", "AddDelegatorTx"]);
+export const hasStakeTerms = (txType: string) => TERMS_TX.has(txType);
+
+export interface StakeTerms {
+  start: number;
+  end: number;
+  /** nAVAX, gross: a delegation's still owes the validator its fee */
+  reward?: number;
+}
+
+const TERMS_BATCH = 6;
+
+/** each tx's terms by hash: absent while it is read, null when it has none */
+export function useStakeTerms(network: string, txHashes: string[]): Record<string, StakeTerms | null> {
+  const [terms, setTerms] = useState<Record<string, StakeTerms | null>>({});
+  const asked = useRef(new Set<string>());
+  const key = txHashes.join(",");
+  useEffect(() => {
+    const todo = key.split(",").filter((h) => h && !asked.current.has(`${network}:${h}`));
+    if (todo.length === 0) return;
+    for (const h of todo) asked.current.add(`${network}:${h}`);
+    // a read in flight finishes: its terms are the same whoever asks next
+    void (async () => {
+      for (let i = 0; i < todo.length; i += TERMS_BATCH) {
+        const got = await Promise.all(
+          todo.slice(i, i + TERMS_BATCH).map(async (h): Promise<[string, StakeTerms | null]> => {
+            try {
+              const res = await fetch(`/api/pchain/${network}/tx/${h}`, SOFT_READ);
+              const tx: Tx | null = isOk(res) ? await res.json() : null;
+              if (!tx?.startTimestamp || !tx.endTimestamp) return [h, null];
+              return [h, { start: tx.startTimestamp, end: tx.endTimestamp, reward: tx.estimatedReward ? Number(tx.estimatedReward) : undefined }];
+            } catch {
+              return [h, null];
+            }
+          }),
+        );
+        setTerms((t) => ({ ...t, ...Object.fromEntries(got) }));
+      }
+    })();
+  }, [network, key]);
+  return terms;
+}
+
+/** the fee the validator charged a delegation that began at `ts`: the
+ *  current term's, else the closed term it fell in. undefined when no term
+ *  on record covers it */
+export function feePercentAt(n: NodeResponse, record: ValidationsResponse | null, ts: number): number | undefined {
+  if (n.hasSnapshot && ts >= n.validator.startTimestamp) return n.validator.delegationFeePercent;
+  return record?.periods.find((p) => isPrimaryTerm(p) && p.startTimestamp <= ts && ts <= p.endTimestamp)?.delegationFeePercent;
 }
 
 /* the money context the indexer doesn't mirror: the live validator entry

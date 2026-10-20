@@ -7,7 +7,7 @@ import { Board, CellLabel, FIG, HEAD, INK, LoadMore, MUTED, ROW, RowDoor, Sectio
 import { dayLong, dayShort, formatAvax, formatNumber, formatTime, timeAgo, truncate } from "@/components/explorer-v2/format";
 import { PRIMARY_SUBNET_ID } from "@/lib/pchain-node";
 import { isPrimaryTerm, txTypeLabel, type NodeResponse, type NodeStakingTx, type ValidationsResponse } from "@/lib/pchain-explorer";
-import { LIST_CAP, avax, delegationFeeCut } from "./node-data";
+import { DELEGATION_TX, LIST_CAP, avax, delegationFeeCut, hasStakeTerms, useStakeTerms } from "./node-data";
 import { subnetName } from "./names";
 
 /* A validator's record, in the explorer's ledger grammar: the terms it
@@ -18,6 +18,14 @@ import { subnetName } from "./names";
 const RULE = "border-b border-zinc-200 dark:border-zinc-800";
 const GOOD = "text-emerald-600 dark:text-emerald-400";
 const stop = (e: React.MouseEvent) => e.stopPropagation();
+/** a term's last day, without the weekday */
+const endDay = (ts: number) => dayLong(ts).replace(/^\w+, /, "");
+/* a cell whose figure is still being read off its tx */
+const Pending = () => (
+  <span className="text-zinc-300 dark:text-zinc-600" title="reading the tx">
+    …
+  </span>
+);
 
 /* the escape hatch that keeps long lists from becoming the page */
 function ExpandRow({ expanded, count, onClick }: { expanded: boolean; count: number; onClick: () => void }) {
@@ -198,13 +206,14 @@ export function DelegatorsTable({ n, base }: { n: NodeResponse; base: string }) 
     return ds;
   }, [n, sort]);
   const feePct = n.validator?.delegationFeePercent ?? 0;
+  const capped = !!n.validator && n.validator.delegatorCount > n.delegators.length;
   const cols = "md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.8fr)_6rem_minmax(0,1fr)]";
   return (
     <section className="flex min-w-0 flex-col gap-4">
       <SectionHeader
         label={
           // the feed lists at most 500: say so rather than contradict the count
-          n.validator && n.validator.delegatorCount > n.delegators.length
+          capped
             ? `Delegators · top ${formatNumber(n.delegators.length)} of ${formatNumber(n.validator.delegatorCount)}`
             : `Delegators · ${formatNumber(n.delegators.length)}`
         }
@@ -230,6 +239,12 @@ export function DelegatorsTable({ n, base }: { n: NodeResponse; base: string }) 
         <p className={cn("px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 sm:hidden dark:text-zinc-500", RULE)}>
           Σ reward <span className={cn("font-bold", GOOD)}>{avax(n.delegatorsPotentialReward)}</span>
         </p>
+        {/* the newest delegations are often small: below the cut, only the activity feed has them */}
+        {capped && sort === "recent" && (
+          <p className={cn("px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 md:px-6 dark:text-zinc-500", RULE)}>
+            The newest of the top {formatNumber(n.delegators.length)} by stake. Every new delegation is under Recent Staking Activity
+          </p>
+        )}
         <div className={cn(HEAD, cols, RULE)}>
           <span>Delegation</span>
           <span className="text-right">Stake</span>
@@ -267,7 +282,7 @@ export function DelegatorsTable({ n, base }: { n: NodeResponse; base: string }) 
                 </span>
                 <span className={cn(MUTED, "text-right")}>
                   <CellLabel>Ends</CellLabel>
-                  {d.endTimestamp > 0 ? dayLong(d.endTimestamp).replace(/^\w+, /, "") : ""}
+                  {d.endTimestamp > 0 ? endDay(d.endTimestamp) : ""}
                 </span>
               </RowDoor>
             );
@@ -281,45 +296,93 @@ export function DelegatorsTable({ n, base }: { n: NodeResponse; base: string }) 
 
 /* ------------------------------------------------------------------ */
 /* Not the validation record (that is Past Validation Terms): the raw
-   recent staking-tx feed, which on a busy validator is all delegator additions */
+   recent staking-tx feed, which on a busy validator is all delegator
+   additions. A staking tx reads in the Delegators table's columns, so a
+   delegation outside its top 500 still shows its reward, fee and term. */
 
 export function ActivityTable({
+  n,
   history,
+  network,
   base,
+  feeAt,
   more,
 }: {
+  n: NodeResponse;
   history: NodeStakingTx[];
+  network: string;
   base: string;
+  feeAt: (ts: number) => number | undefined;
   more: { done: boolean; loading: boolean; onMore: () => void };
 }) {
   const [showAll, setShowAll] = useState(false);
-  const cols = "md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_6rem]";
+  const rows = showAll ? history : history.slice(0, LIST_CAP);
+  // a current delegation's terms are already in the document: only the rest are read
+  const known = useMemo(() => new Map(n.delegators.map((d) => [d.txId, { start: d.startTimestamp, end: d.endTimestamp, reward: d.potentialReward }])), [n]);
+  const read = useStakeTerms(
+    network,
+    rows.filter((h) => hasStakeTerms(h.txType) && !known.has(h.txHash)).map((h) => h.txHash),
+  );
+  const cols = "md:grid-cols-[minmax(0,1.3fr)_minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.8fr)_6rem_minmax(0,1fr)]";
   return (
     <section className="flex min-w-0 flex-col gap-4">
       <SectionHeader label={`Recent Staking Activity · ${formatNumber(history.length)}`} />
       <Board divide={false}>
         <div className={cn(HEAD, cols, RULE)}>
-          <span>Hash</span>
+          <span>Tx</span>
           <span>Type</span>
-          <span className="text-right">Weight</span>
-          <span className="text-right">Age</span>
+          <span className="text-right">Stake</span>
+          <span className="text-right" title="a delegator's reward net of the validator's fee; a validator's on its own stake">
+            Reward
+          </span>
+          <span className="text-right" title="the validator's fee on a delegator's reward">
+            Fee
+          </span>
+          <span className="text-right">Started</span>
+          <span className="text-right">Ends</span>
         </div>
         <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {(showAll ? history : history.slice(0, LIST_CAP)).map((h) => (
-            <RowDoor key={h.txHash} href={`${base}/tx/${h.txHash}`} className={cn(ROW, cols)}>
-              <Link href={`${base}/tx/${h.txHash}`} className={cn("truncate font-mono text-[12.5px] hover:text-[#E6212F]", idInk)} onClick={stop}>
-                {truncate(h.txHash, 12)}
-              </Link>
-              <span className="flex min-w-0 max-md:justify-end">
-                <TxTypePill type={h.txType} label={txTypeLabel(h.txType)} />
-              </span>
-              {/* a subnet validator's weight is the subnet's own number, not nAVAX */}
-              <span className={cn(INK, "text-right")}>{(h.weight ?? 0) > 0 ? (h.subnetId && h.subnetId !== PRIMARY_SUBNET_ID ? formatNumber(h.weight!) : avax(h.weight!)) : ""}</span>
-              <span className={cn(MUTED, "text-right")} title={formatTime(h.blockTimestamp)}>
-                {timeAgo(h.blockTimestamp)}
-              </span>
-            </RowDoor>
-          ))}
+          {rows.map((h) => {
+            const staking = hasStakeTerms(h.txType);
+            const terms = known.get(h.txHash) ?? read[h.txHash];
+            const reading = staking && terms === undefined;
+            const delegation = DELEGATION_TX.has(h.txType);
+            const feePct = delegation && terms ? feeAt(terms.start) : undefined;
+            const feeCut = terms?.reward !== undefined && feePct !== undefined ? Number(delegationFeeCut(terms.reward, feePct)) : 0;
+            // a delegation whose term's fee is off the record shows its gross reward
+            const reward = terms?.reward !== undefined ? terms.reward - feeCut : undefined;
+            return (
+              <RowDoor key={h.txHash} href={`${base}/tx/${h.txHash}`} className={cn(ROW, cols)}>
+                <Link href={`${base}/tx/${h.txHash}`} className={cn("truncate font-mono text-[12.5px] hover:text-[#E6212F]", idInk)} onClick={stop}>
+                  {truncate(h.txHash, 12)}
+                </Link>
+                <span className="flex min-w-0 max-md:justify-end">
+                  <TxTypePill type={h.txType} label={txTypeLabel(h.txType)} />
+                </span>
+                {/* a subnet validator's weight is the subnet's own number, not nAVAX */}
+                <span className={cn(INK, "text-right font-bold")}>
+                  <CellLabel>Stake</CellLabel>
+                  {(h.weight ?? 0) > 0 ? (h.subnetId && h.subnetId !== PRIMARY_SUBNET_ID ? `${formatNumber(h.weight!)} weight` : avax(h.weight!)) : ""}
+                </span>
+                <span className={cn("font-mono text-[12.5px] tabular-nums md:text-right", GOOD)} title={delegation && feePct === undefined && reward ? "before the validator's fee" : undefined}>
+                  <CellLabel>Reward</CellLabel>
+                  {reading ? <Pending /> : reward ? `+${avax(reward)}` : ""}
+                </span>
+                <span className={cn(MUTED, "text-right")}>
+                  <CellLabel>Fee</CellLabel>
+                  {reading && delegation ? <Pending /> : feeCut > 0 ? avax(feeCut) : ""}
+                </span>
+                <span className={cn(MUTED, "md:text-right")} title={formatTime(terms?.start ?? h.blockTimestamp)}>
+                  <CellLabel>Started</CellLabel>
+                  {timeAgo(terms?.start ?? h.blockTimestamp)}
+                </span>
+                <span className={cn(MUTED, "text-right")}>
+                  <CellLabel>Ends</CellLabel>
+                  {reading ? <Pending /> : terms ? endDay(terms.end) : ""}
+                </span>
+              </RowDoor>
+            );
+          })}
         </div>
         {history.length > LIST_CAP && <ExpandRow expanded={showAll} count={history.length - LIST_CAP} onClick={() => setShowAll((v) => !v)} />}
       </Board>
