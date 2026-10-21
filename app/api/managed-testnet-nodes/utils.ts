@@ -49,7 +49,9 @@ export function rateLimited(handler: (request: NextRequest) => Promise<NextRespo
   });
 }
 
-export const NODE_TTL_MS = 3 * 24 * 60 * 60 * 1000; // 3 days
+// Must match slimnode's ASSIGNMENT_EXPIRATION_TIME. Shorter and the UI
+// expires a node the service is still serving.
+export const NODE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 export function jsonOk(payload: any, status = 200) {
   return NextResponse.json(payload, { status });

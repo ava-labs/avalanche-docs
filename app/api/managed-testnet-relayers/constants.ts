@@ -1,8 +1,6 @@
-// Reuse the same base URLs as managed testnet nodes
-export let MANAGED_TESTNET_RELAYERS_SERVICE_URL = process.env.MANAGED_NODES_OVERRIDE ||
-  (process.env.VERCEL_ENV === "production"
-    ? 'https://nodes-prod.43.207.73.245.sslip.io'
-    : 'https://nodes-staging.35.74.237.34.sslip.io');
+// Same service as managed testnet nodes — see its constants.ts.
+export let MANAGED_TESTNET_RELAYERS_SERVICE_URL =
+  process.env.MANAGED_NODES_OVERRIDE || 'https://managed-nodes.avax.network';
 
 if (MANAGED_TESTNET_RELAYERS_SERVICE_URL.endsWith('/')) {
   MANAGED_TESTNET_RELAYERS_SERVICE_URL = MANAGED_TESTNET_RELAYERS_SERVICE_URL.slice(0, -1);

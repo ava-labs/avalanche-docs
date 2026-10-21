@@ -318,7 +318,7 @@ describe('registering the launch nodes', () => {
     expect(conversionTxOf([{ label: 'ConvertSubnetToL1Tx', chain: 'p-chain', hash: '../x' }])).toBeNull();
   });
 
-  it("writes each validator of the conversion to the builder's nodes, with the 3-day expiry", async () => {
+  it("writes each validator of the conversion to the builder's nodes, with the 7-day expiry", async () => {
     pChainAnswers();
     nodeFindMany.mockResolvedValue([]);
     expect(await registerLaunchedNodes('user-1', launch)).toBe(1);
@@ -332,7 +332,7 @@ describe('registering the launch nodes', () => {
         proof_of_possession: POP,
         rpc_url: productionRpc,
         chain_name: 'Moon Chain',
-        expires_at: new Date('2026-10-03T14:20:00Z'),
+        expires_at: new Date('2026-10-07T14:20:00Z'),
         status: 'active',
       }),
     });

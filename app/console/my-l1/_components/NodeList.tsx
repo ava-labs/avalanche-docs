@@ -105,7 +105,7 @@ export function NodeListCard({
       <BoardHeader label="Managed nodes" action={<span className={COUNT}>{activeCount} active</span>} />
       <div className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-start sm:justify-between md:px-6">
         <p className="max-w-xl text-[13px] leading-relaxed text-zinc-500 dark:text-zinc-400">
-          Builder Hub-managed nodes provisioned for this L1. Each runs for 3 days from creation. Provision a fresh one
+          Builder Hub-managed nodes provisioned for this L1. Each runs for 7 days from creation. Provision a fresh one
           to extend the L1&apos;s lifetime.
         </p>
         <ProvisionNodeButton
