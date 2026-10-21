@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { describe, expect, it, vi, afterEach, beforeEach } from "vitest";
 
 const {
   txRequestFindFirstMock,
@@ -200,6 +200,10 @@ describe("approveRequestAndFanout", () => {
     txRequestFindFirstMock.mockResolvedValue(pendingRow);
   });
 
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("reads only addresses for the fan-out mail, never a GitHub username (D2.7)", async () => {
     await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
 
@@ -243,22 +247,29 @@ describe("approveRequestAndFanout", () => {
     expect(sendFanoutMock).not.toHaveBeenCalled();
   });
 
-  it("starts the quote window at approval, not at submission", async () => {
+  // A quote window closes at 23:59 UTC on its date (2026-10-20, calls T2 and C3).
+  const END_OF_29TH = new Date("2026-10-29T23:59:59.999Z");
+
+  it("starts the quote window at approval, closing at 23:59 UTC ten days on", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-10-19T14:37:00Z"));
+
     await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
 
     const data = txRequestUpdateMock.mock.calls[0][0].data;
     expect(data.status).toBe("collecting");
-    const tenDays = Date.now() + 10 * DAY;
-    expect(Math.abs(data.quote_deadline.getTime() - tenDays)).toBeLessThan(60_000);
+    expect(data.quote_deadline).toEqual(END_OF_29TH);
   });
 
-  it("keeps a deadline the project picked", async () => {
-    const picked = new Date(Date.now() + 5 * DAY);
-    txRequestFindFirstMock.mockResolvedValue({ ...pendingRow, quote_deadline: picked });
+  it("moves a stored deadline to 23:59 UTC of its own date, drafts saved before the rule included", async () => {
+    for (const stored of ["2026-10-29T00:00:00.000Z", "2026-10-29T14:37:00.000Z", "2026-10-29T23:59:59.999Z"]) {
+      txRequestUpdateMock.mockClear();
+      txRequestFindFirstMock.mockResolvedValue({ ...pendingRow, quote_deadline: new Date(stored) });
 
-    await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
+      await approveRequestAndFanout("req-1", ADMIN, ADMIN_NAME);
 
-    expect(txRequestUpdateMock.mock.calls[0][0].data.quote_deadline).toEqual(picked);
+      expect(txRequestUpdateMock.mock.calls[0][0].data.quote_deadline, stored).toEqual(END_OF_29TH);
+    }
   });
 
   it("logs the approving admin on the trail", async () => {

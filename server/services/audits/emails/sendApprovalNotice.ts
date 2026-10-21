@@ -2,6 +2,7 @@ import { sendMail } from "@/server/services/mail";
 import { renderAuditEmail, type AuditEmailDetail } from "@/server/services/audits/emails/template";
 import { ownerRequestUrl } from "@/server/services/audits/emails/links";
 import { GITHUB_ACCESS_LIMITS, GITHUB_PROFILE_WARNING } from "@/lib/audits/constants";
+import { formatUtcDeadline, formatUtcTime } from "@/lib/audits/status";
 import { githubProfileUrl } from "@/types/audits";
 import type { ApprovalNotice } from "@/server/services/audits/visibility";
 
@@ -82,14 +83,14 @@ function usernameText(notice: ApprovalNotice): string[] {
  */
 export async function sendApprovalNotice(notice: ApprovalNotice): Promise<void> {
   const count = notice.firms.length === 1 ? "1 firm" : `${notice.firms.length} firms`;
-  const deadline = notice.quote_deadline ? isoDate(notice.quote_deadline) : null;
+  const deadline = notice.quote_deadline;
   const requestUrl = ownerRequestUrl(notice.request_id);
   const shares = sharesLine(notice);
   const anyUsername = notice.firms.some((firm) => firm.github_usernames.length > 0);
 
   const subject = `«${notice.project_name}» is open for quotes from ${count}`;
   const text = [
-    `${notice.project_name} is open for quotes from ${count}.${deadline ? ` Quotes close ${deadline}.` : ""}`,
+    `${notice.project_name} is open for quotes from ${count}.${deadline ? ` Quotes close ${isoDate(deadline)} at ${formatUtcTime(deadline)} UTC.` : ""}`,
     ...(notice.pins_repository
       ? [REPO_BODY, ...usernameText(notice), GITHUB_ACCESS_LIMITS, ...(anyUsername ? [LATER] : [])]
       : [NO_REPO_BODY]),
@@ -101,7 +102,7 @@ export async function sendApprovalNotice(notice: ApprovalNotice): Promise<void> 
     eyebrow: "Request approved",
     eyebrowColor: "#34D399",
     title: `«${notice.project_name}» is open for quotes.`,
-    metaLine: [count, ...(deadline ? [`quotes close ${deadline}`] : [])].join(" · "),
+    metaLine: [count, ...(deadline ? [`quotes close ${formatUtcDeadline(deadline)}`] : [])].join(" · "),
     body: notice.pins_repository ? REPO_BODY : NO_REPO_BODY,
     panel: notice.pins_repository
       ? {

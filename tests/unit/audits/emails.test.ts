@@ -80,19 +80,20 @@ describe("sendFanoutNotification", () => {
     expect(text).not.toContain("—");
   });
 
-  it("tells the firm how long its quote is held: the project picks within a week", async () => {
+  it("tells the firm how long its quote is held, to the minute: the project picks within a week", async () => {
     await sendFanoutNotification(AUDITOR, {
       ...REQUEST,
-      quote_deadline: new Date("2026-11-10T12:00:00Z"),
+      quote_deadline: new Date("2026-11-10T23:59:59.999Z"),
     });
 
-    expect(htmlOf()).toContain("closes 2026-11-10 · project picks by 2026-11-17");
+    expect(htmlOf()).toContain("closes 2026-11-10 23:59 UTC · project picks by 2026-11-17");
+    expect(sendMailMock.mock.calls[0][3]).toContain("quotes close 2026-11-10 23:59 UTC");
   });
 
-  it("names the grace day for a window that closes before 2026-10-23", async () => {
+  it("names the grace day for a window that closes before 2026-10-23, at its stored time", async () => {
     await sendFanoutNotification(AUDITOR, REQUEST);
 
-    expect(htmlOf()).toContain("closes 2026-08-09 · project picks by 2026-10-30");
+    expect(htmlOf()).toContain("closes 2026-08-09 12:00 UTC · project picks by 2026-10-30");
   });
 });
 
@@ -434,7 +435,7 @@ describe("sendApprovalNotice", () => {
     email: "owner@glacierswap.example",
     request_id: "req-1",
     project_name: "Glacierswap",
-    quote_deadline: new Date("2026-10-29T12:00:00Z"),
+    quote_deadline: new Date("2026-10-29T23:59:59.999Z"),
     pins_repository: true,
     shared_handle: false,
     shared_calendar: false,
@@ -484,12 +485,13 @@ describe("sendApprovalNotice", () => {
   it("names the count in the subject and the meta line, singular and plural", async () => {
     await sendApprovalNotice(notice());
     expect(sent().subject).toBe("«Glacierswap» is open for quotes from 3 firms");
-    expect(sent().html).toContain("3 firms · quotes close 2026-10-29");
+    expect(sent().html).toContain("3 firms · quotes close 2026-10-29 23:59 UTC");
+    expect(sent().text).toContain("Quotes close 2026-10-29 at 23:59 UTC.");
 
     sendMailMock.mockClear();
     await sendApprovalNotice(notice({ firms: [notice().firms[1]] }));
     expect(sent().subject).toBe("«Glacierswap» is open for quotes from 1 firm");
-    expect(sent().html).toContain("1 firm · quotes close 2026-10-29");
+    expect(sent().html).toContain("1 firm · quotes close 2026-10-29 23:59 UTC");
   });
 
   it("lists firms with usernames first, each linked to its profile, then the firms without one", async () => {

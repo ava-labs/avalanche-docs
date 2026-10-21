@@ -2,6 +2,7 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/prisma/prisma";
 import { auditSubmitSchema } from "@/types/audits";
 import { QUOTE_DEADLINE_DEFAULT_DAYS } from "@/lib/audits/constants";
+import { endOfUtcDay } from "@/lib/audits/status";
 import { sendFanoutNotification } from "@/server/services/audits/emails/sendFanoutNotification";
 import type { FanoutRequest } from "@/server/services/audits/emails/sendFanoutNotification";
 import { sendApprovalNotice } from "@/server/services/audits/emails/sendApprovalNotice";
@@ -220,8 +221,11 @@ export async function approveRequestAndFanout(
     });
     if (!row) return { kind: "not_found" };
 
-    const quote_deadline =
-      row.quote_deadline ?? new Date(Date.now() + QUOTE_DEADLINE_DEFAULT_DAYS * DAY);
+    // 23:59 UTC of the window's date (call C3): a picked day, the +10 day
+    // default and a draft saved before the rule all close at the same moment.
+    const quote_deadline = endOfUtcDay(
+      row.quote_deadline ?? new Date(Date.now() + QUOTE_DEADLINE_DEFAULT_DAYS * DAY),
+    );
 
     await tx.auditRequest.update({
       where: { id: row.id, status: "pending_review" },

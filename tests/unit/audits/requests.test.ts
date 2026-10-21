@@ -268,12 +268,19 @@ describe("reopen", () => {
     vi.useRealTimers();
   });
 
-  it("gives an expired request a fresh +10d deadline and re-fans out, history intact", async () => {
+  it("gives an expired request a fresh deadline, 23:59 UTC ten days on, and re-fans out, history intact", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-10-19T14:37:00Z"));
+    txRequestFindFirstMock.mockResolvedValue({
+      ...expiredRow,
+      quote_deadline: new Date("2026-10-17T23:59:59.999Z"),
+    });
+
     const result = await reopen(OWNER, "req-1");
 
     expect(result).toMatchObject({ success: true, auditorCount: 1 });
     const deadline = txRequestUpdateMock.mock.calls[0][0].data.quote_deadline as Date;
-    expect(Math.abs(deadline.getTime() - (Date.now() + 10 * DAY))).toBeLessThan(60_000);
+    expect(deadline).toEqual(new Date("2026-10-29T23:59:59.999Z"));
     expect(txDeliveryCreateManyMock.mock.calls[0][0].skipDuplicates).toBe(true);
     expect(txEventCreateMock.mock.calls[0][0].data).toMatchObject({
       action: "request_reopened",

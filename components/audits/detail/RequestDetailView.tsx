@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { DEPLOYMENT_TARGET_LABELS } from "@/lib/audits/constants";
-import type { DeploymentTarget } from "@/lib/audits/status";
+import { formatUtcDeadline, type DeploymentTarget } from "@/lib/audits/status";
 import type { FirmUsernames, OwnerRequestDetail } from "@/server/services/audits/visibility";
 import { AUDITS_DIALOG, MONO_LABEL, MONO_LABEL_SM } from "@/components/audits/shared/classes";
 import { StatusBadge } from "@/components/audits/shared/StatusBadge";
@@ -294,7 +294,7 @@ export function RequestDetailView({
               <p className="text-sm">
                 <span className="font-medium">
                   Window closed
-                  {detail.quote_deadline ? ` ${formatIsoDate(detail.quote_deadline)}` : ""}
+                  {detail.quote_deadline ? ` ${formatUtcDeadline(detail.quote_deadline)}` : ""}
                 </span>{" "}
                 <span className="text-zinc-500 dark:text-zinc-400">
                   · quotes visible only to you and program admins
