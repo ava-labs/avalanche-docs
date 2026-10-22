@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/prisma/prisma', () => ({ prisma: {} }));
 
+import { ManagedTestnetNodesServiceURLs } from '@/app/api/managed-testnet-nodes/constants';
 import { builderHubDeleteNode } from '@/app/api/managed-testnet-nodes/service';
 import { readJsonResponse } from '@/lib/read-json-response';
 
@@ -39,6 +40,15 @@ describe('builderHubDeleteNode', () => {
   it('treats a 404 as already deleted', async () => {
     answer(JSON.stringify({ error: 'not found' }), 404, 'application/json');
     expect(await builderHubDeleteNode(SUBNET, 11)).toEqual({ deletedExternally: false });
+  });
+
+  it('sends the WAF bypass token on the delete, and never puts it in the stored RPC URL', async () => {
+    vi.stubEnv('QUICK_L1_WAF_BYPASS_TOKEN', 'waf-token');
+    answer('{}', 200, 'application/json');
+    await builderHubDeleteNode(SUBNET, 11);
+    const url = String(vi.mocked(fetch).mock.calls[0][0]);
+    expect(new URL(url).searchParams.get('token')).toBe('waf-token');
+    expect(ManagedTestnetNodesServiceURLs.rpcEndpoint(SUBNET)).not.toContain('token');
   });
 });
 
