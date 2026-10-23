@@ -500,7 +500,8 @@ function GasProfiler({
         {[
           { k: "Gas limit", v: limit, tone: "#e4e4e7" },
           ...(charged !== undefined ? [{ k: "Gas charged", v: charged, tone: "#A2AFB2" }] : []),
-          { k: "Gas used", v: used, tone: "#0061E2" },
+          // with no struct log, the root reports gas charged: a "used" bar would repeat it
+          ...(gas || charged === undefined ? [{ k: "Gas used", v: used, tone: "#0061E2" }] : []),
         ].map((r) => (
           <div key={r.k} className="grid grid-cols-[6.5rem_minmax(0,1fr)] items-center gap-4">
             <span className="uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">{r.k}</span>

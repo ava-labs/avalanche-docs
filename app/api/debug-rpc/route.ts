@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
   const nodeParamsList = nodeParams(method, params);
   if (!nodeParamsList) {
     return NextResponse.json(
-      { error: 'Only callTracer traces are allowed: params must name { tracer: "callTracer" }' },
+      { error: 'Only a callTracer trace of a tx hash, or of a call on the latest block, is allowed' },
       { status: 400 },
     );
   }
