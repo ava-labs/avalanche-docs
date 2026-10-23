@@ -54,8 +54,10 @@ export function clientCallTracer(cfg: unknown): CallTracerConfig | null {
    and the gas of the first and the last top-level (depth 1) step, with the
    last one's cost. A step adds to these numbers and keeps nothing else.
    `seen` lists the opcodes in the order they first ran, the order the
-   struct log had. result() adds the tx gas limit and the EVM's gas used
-   from ctx. The names are libevm's JS tracer API (eth/tracers/js/goja.go). */
+   struct log had. result() adds what ctx holds of the tx: the gas limit,
+   the gas used, the top call's kind, its error and the length of its
+   output, and whether the tx was a plain call to an account with no code.
+   The names are libevm's JS tracer API (eth/tracers/js/goja.go). */
 export const GAS_TRACER = `{
   count: [], cost: [], name: [], seen: [],
   steps: 0, first: -1, last: 0, lastCost: 0,
@@ -79,14 +81,19 @@ export const GAS_TRACER = `{
     }
   },
   fault: function () {},
-  result: function (ctx) {
+  result: function (ctx, db) {
     var ops = [];
     for (var i = 0; i < this.seen.length; i++) {
       var op = this.seen[i];
       ops.push({ op: this.name[op], count: this.count[op], gas: this.cost[op] });
     }
     var top = this.first < 0 ? null : { first: this.first, last: this.last, cost: this.lastCost };
-    return { limit: ctx.gas, used: ctx.gasUsed, steps: this.steps, ops: ops, top: top };
+    var error = ctx.error || null;
+    var plain = !top && ctx.type === "CALL" && !error && !isPrecompiled(ctx.to) && db.getCode(ctx.to).length === 0;
+    return {
+      limit: ctx.gas, used: ctx.gasUsed, steps: this.steps, ops: ops, top: top,
+      create: ctx.type === "CREATE", error: error, out: ctx.output ? ctx.output.length : 0, plain: plain
+    };
   }
 }`;
 
@@ -94,7 +101,8 @@ export const GAS_TRACER = `{
 export interface GasTracerResult {
   /** the tx gas limit */
   limit: number;
-  /** the EVM's gas used: the limit less the gas left at the end */
+  /** the limit less the gas left at the end: since Helicon, the gas
+   *  charged (ACP-194), which can be more than the EVM used */
   used: number;
   steps: number;
   /** per opcode, in the order each first ran */
@@ -102,6 +110,18 @@ export interface GasTracerResult {
   /** the first top-level step's gas, and the last one's gas and cost; null
    *  when the tx ran no code */
   top: { first: number; last: number; cost: number } | null;
+  /** the tx created a contract */
+  create: boolean;
+  /** the top call's error: "execution reverted", or a halt such as
+   *  "invalid opcode: INVALID" or "out of gas" */
+  error: string | null;
+  /** the bytes the top call returned: for a creation, the code it stores */
+  out: number;
+  /** a call that ran no code: no error, to an account with no code that
+   *  is not a precompile. A stateful precompile (warp) is missing from
+   *  libevm's precompile list, but has code (0x01), so the code check
+   *  covers it */
+  plain: boolean;
 }
 
 /** the gas profile from one replay of the tx (GAS_TRACER) */
@@ -109,18 +129,38 @@ export function gasTracer() {
   return { tracer: GAS_TRACER, timeout: TRACE_TIMEOUT };
 }
 
-/** the gas tracer's answer as the tx page reads it, by the struct log's
- *  rules: the first top-level step starts with the limit less intrinsic
- *  gas, and the last one ends with what is left. Gas used is the EVM's own
- *  figure, so the refund is what separates the two (none since Apricot
- *  Phase 1). Where the EVM reports more than the two add up to (gas
- *  charged, under ACP-194), their sum stands */
+/** what a creation pays per byte of the code it stores */
+const CODE_DEPOSIT_GAS = 200;
+
+/** the gas tracer's answer as the tx page reads it: the opcodes by gas,
+ *  and gas used split into intrinsic gas and execution (gasSplit) */
 export function gasProfile(r: GasTracerResult): GasProfile {
   const opcodes = [...r.ops].sort((a, b) => b.gas - a.gas);
-  if (!r.top || !r.limit) return { opcodes, steps: r.steps, gas: null };
-  const intrinsic = r.limit - r.top.first;
-  const execution = r.top.first - (r.top.last - r.top.cost);
-  const before = intrinsic + execution;
-  const used = r.used > 0 && r.used <= before ? r.used : before;
-  return { opcodes, steps: r.steps, gas: { limit: r.limit, intrinsic, execution, refund: before - used, used } };
+  return { opcodes, steps: r.steps, gas: r.limit ? gasSplit(r) : null };
+}
+
+/** Gas used, split by the struct log's rules: the first top-level step
+ *  starts with the limit less intrinsic gas, and the last one ends with
+ *  what is left. Two costs fall outside the steps, and are added here: the
+ *  code a creation stores, and the gas a halt burns (an error other than a
+ *  revert takes all the gas left). The EVM's figure (r.used) is the check:
+ *  since Helicon it is the gas charged, at least half the limit, so where
+ *  it is that floor, gas used can be less. Before Apricot Phase 1 a refund
+ *  could make it less. Null where the split cannot be told exactly. */
+function gasSplit(r: GasTracerResult): GasProfile["gas"] {
+  const { limit } = r;
+  const floor = r.used === Math.ceil(limit / 2);
+  // a plain call ran no code, so all its gas is intrinsic, and the EVM's
+  // figure is it; at the floor that figure is the charge, which says nothing
+  // of the access list. Any other call with no step (a precompile, a
+  // failure) has gas that no step shows
+  if (!r.top) return r.plain && !floor ? { limit, intrinsic: r.used, execution: 0, refund: 0, used: r.used } : null;
+  const intrinsic = limit - r.top.first;
+  if (r.error && r.error !== "execution reverted") return { limit, intrinsic, execution: r.used - intrinsic, refund: 0, used: r.used };
+  const execution = r.top.first - (r.top.last - r.top.cost) + (r.create && !r.error ? CODE_DEPOSIT_GAS * r.out : 0);
+  const sum = intrinsic + execution;
+  if (r.used <= 0 || r.used === sum || (r.used > sum && floor)) return { limit, intrinsic, execution, refund: 0, used: sum };
+  // more than the steps show, and not the floor: the EVM's figure stands
+  if (r.used > sum) return { limit, intrinsic, execution: r.used - intrinsic, refund: 0, used: r.used };
+  return { limit, intrinsic, execution, refund: sum - r.used, used: r.used };
 }

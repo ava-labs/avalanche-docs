@@ -41,7 +41,7 @@ async function get(hash: string, headers: Record<string, string> = {}) {
 }
 
 /** the gas tracer's answer for a plain transfer */
-const GAS_RAW = { limit: 21000, used: 21000, steps: 0, ops: [], top: null };
+const GAS_RAW = { limit: 21000, used: 21000, steps: 0, ops: [], top: null, create: false, error: null, out: 0, plain: true };
 
 async function getGas(hash: string, headers: Record<string, string> = {}) {
   const { GET } = await import('@/app/api/trace/[chainId]/[txHash]/gas/route');
@@ -201,7 +201,7 @@ describe('the gas route', () => {
     const res = await getGas(hashOf(301));
     expect(res.status).toBe(200);
     expect(res.headers.get('cache-control')).toContain('immutable');
-    expect(await res.json()).toEqual({ opcodes: [], steps: 0, gas: null });
+    expect(await res.json()).toEqual({ opcodes: [], steps: 0, gas: { limit: 21000, intrinsic: 21000, execution: 0, refund: 0, used: 21000 } });
     expect(fetches).toBe(1);
   });
 

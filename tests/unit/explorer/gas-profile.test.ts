@@ -8,17 +8,27 @@ import { RedisFake } from './redis-fake';
    the debug node runs at every opcode step (GAS_TRACER). It must keep a
    fixed set of numbers, whatever the step count, and give the numbers the
    struct log gave. Here the tracer source runs in node:vm on made-up step
-   logs; the node URL and the hashes are made up, and fetch is stubbed, so
-   no test reaches a node. */
+   logs, with the step values libevm logs; the node URL and the hashes are
+   made up, and fetch is stubbed, so no test reaches a node. */
 
 type Step = [op: string, code: number, gas: number, cost: number, depth: number];
 
-/** the tracer as the node builds it: the source as one expression */
+/** what the node's ctx holds of the tx (the fields the tracer reads), and
+ *  the code at the target, which the tracer reads from the state */
+type Ctx = { gas: number; gasUsed: number; type?: 'CALL' | 'CREATE'; error?: string; to?: Uint8Array; output?: Uint8Array; code?: Uint8Array };
+
+/** an address as the node's ctx holds it, from its last byte */
+const address = (last: number) => Uint8Array.from({ length: 20 }, (_, i) => (i === 19 ? last : 0));
+/** the precompiles at 0x01 to 0x09, as libevm's isPrecompiled reads them */
+const isPrecompiled = (a: Uint8Array) => a.slice(0, 19).every((b) => b === 0) && a[19] >= 1 && a[19] <= 9;
+
+/** the tracer as the node builds it: the source as one expression, with
+ *  the node's isPrecompiled in scope */
 function newTracer() {
-  return runInNewContext(`(${GAS_TRACER})`) as {
+  return runInNewContext(`(${GAS_TRACER})`, { isPrecompiled }) as {
     step(log: unknown): void;
     fault(log: unknown): void;
-    result(ctx: { gas: number; gasUsed: number }): unknown;
+    result(ctx: Ctx, db: { getCode(a: Uint8Array): Uint8Array }): unknown;
     [field: string]: unknown;
   };
 }
@@ -39,12 +49,14 @@ function logOf([op, code, gas, cost, depth]: Step, names: { calls: number }) {
   };
 }
 
-/** the tracer's answer for these steps, as JSON, the way the node sends it */
-function run(steps: Step[], ctx: { gas: number; gasUsed: number }): GasTracerResult {
+/** the tracer's answer for these steps, as JSON, the way the node sends
+ *  it. By default the tx calls an account with no code, with no error */
+function run(steps: Step[], { code = new Uint8Array(), ...ctx }: Ctx): GasTracerResult {
   const t = newTracer();
   const names = { calls: 0 };
   for (const s of steps) t.step(logOf(s, names));
-  return JSON.parse(JSON.stringify(t.result(ctx)));
+  const full = { type: 'CALL', to: address(0xaa), output: new Uint8Array(), ...ctx };
+  return JSON.parse(JSON.stringify(t.result(full, { getCode: () => code })));
 }
 
 /** what the trace route computed from the struct log before #4802
@@ -142,8 +154,29 @@ describe('the gas tracer', () => {
     ]);
   });
 
-  it('answers no top-level step for a tx that runs no code', () => {
-    expect(run([], { gas: 21_000, gasUsed: 21_000 })).toEqual({ limit: 21_000, used: 21_000, steps: 0, ops: [], top: null });
+  it('answers no top-level step for a tx that runs no code, and whether it was a plain call', () => {
+    expect(run([], { gas: 21_000, gasUsed: 21_000 })).toEqual({
+      limit: 21_000,
+      used: 21_000,
+      steps: 0,
+      ops: [],
+      top: null,
+      create: false,
+      error: null,
+      out: 0,
+      plain: true,
+    });
+    // a precompile, a stateful one (warp: libevm does not list it, but its code is 0x01), a creation and a failed
+    // call ran no opcode either, but spent gas that no step shows
+    expect(run([], { gas: 50_000, gasUsed: 25_000, to: address(0x02) }).plain).toBe(false);
+    expect(run([], { gas: 100_000, gasUsed: 64_000, to: address(0x05), code: Uint8Array.from([1]) }).plain).toBe(false);
+    expect(run([], { gas: 60_000, gasUsed: 53_000, type: 'CREATE' }).plain).toBe(false);
+    expect(run([], { gas: 50_000, gasUsed: 50_000, error: 'out of gas' }).plain).toBe(false);
+  });
+
+  it('reads the top call\'s kind, error and output from ctx', () => {
+    const r = run(STEPS, { gas: LIMIT, gasUsed: LIMIT, type: 'CREATE', error: 'invalid opcode: INVALID', output: new Uint8Array(7) });
+    expect([r.create, r.error, r.out, r.plain]).toEqual([true, 'invalid opcode: INVALID', 7, false]);
   });
 
   it('is sent with the node-side timeout', () => {
@@ -158,8 +191,10 @@ describe('the gas profile', () => {
       const [op, code, cost] = ([['JUMPDEST', 0x5b, 1], ['PUSH1', 0x60, 3], ['MLOAD', 0x51, 3]] as const)[i % 3];
       return [op, code, 90_000 - i * 3, cost, 1];
     });
-    for (const steps of [STEPS, STEPS.slice(0, 7), [...STEPS, ['INVALID', 0xfe, 54_997, 54_997, 1] as Step], ties]) {
-      for (const gasUsed of [USED, USED - 4_800, 500_000, 0]) {
+    for (const steps of [STEPS, STEPS.slice(0, 7), ties]) {
+      // the gas the steps add up to, with a refund under it, and no figure at all
+      const sum = fromStructLog(LIMIT, 0, structLog(steps)).gas!.used;
+      for (const gasUsed of [sum, sum - 4_800, 0]) {
         expect(gasProfile(run(steps, { gas: LIMIT, gasUsed })), `${steps.length} steps, gas used ${gasUsed}`).toEqual(
           fromStructLog(LIMIT, gasUsed, structLog(steps)),
         );
@@ -174,8 +209,61 @@ describe('the gas profile', () => {
     expect(p.gas).toEqual({ limit: LIMIT, intrinsic: 21_640, execution: 23_363, refund: 0, used: USED });
   });
 
-  it('has no gas split for a plain transfer, and an empty opcode table', () => {
-    expect(gasProfile(run([], { gas: 21_000, gasUsed: 21_000 }))).toEqual({ opcodes: [], steps: 0, gas: null });
+  it('splits a plain call that ran no code: all its gas is intrinsic, the EVM\'s figure', () => {
+    expect(gasProfile(run([], { gas: 21_000, gasUsed: 21_000 }))).toEqual({
+      opcodes: [],
+      steps: 0,
+      gas: { limit: 21_000, intrinsic: 21_000, execution: 0, refund: 0, used: 21_000 },
+    });
+    // an access list is intrinsic gas too, and shows in the EVM's figure
+    expect(gasProfile(run([], { gas: 30_000, gasUsed: 23_400 })).gas).toMatchObject({ intrinsic: 23_400, used: 23_400 });
+  });
+
+  it('gives no split where the steps cannot tell it exactly', () => {
+    // charged half a 50,000 limit (ACP-194): the figure is the charge, and the access list is unknown
+    expect(gasProfile(run([], { gas: 50_000, gasUsed: 25_000 })).gas).toBeNull();
+    // a precompile's own gas, warp's included, cannot be told apart from intrinsic gas
+    expect(gasProfile(run([], { gas: 50_000, gasUsed: 25_000, to: address(0x01) })).gas).toBeNull();
+    expect(gasProfile(run([], { gas: 100_000, gasUsed: 64_000, to: address(0x05), code: Uint8Array.from([1]) })).gas).toBeNull();
+  });
+
+  it('counts the code a creation stores: 200 gas a byte, after its last step', () => {
+    // intrinsic 150,000; the init code runs 200,000 and returns 5,000 bytes of code
+    const limit = 2_000_000;
+    const init: Step[] = [
+      ['PUSH1', 0x60, 1_850_000, 3, 1],
+      ['RETURN', 0xf3, 1_650_000, 0, 1],
+    ];
+    const output = new Uint8Array(5_000);
+    const gas = { limit, intrinsic: 150_000, execution: 1_200_000, refund: 0, used: 1_350_000 };
+    expect(gasProfile(run(init, { gas: limit, gasUsed: 1_350_000, type: 'CREATE', output })).gas).toEqual(gas);
+    // charged half a 4,000,000 limit, it used the same
+    const steps = init.map(([op, code, g, cost, depth]): Step => [op, code, g + 2_000_000, cost, depth]);
+    expect(gasProfile(run(steps, { gas: 4_000_000, gasUsed: 2_000_000, type: 'CREATE', output })).gas).toEqual({ ...gas, limit: 4_000_000 });
+    // a creation that reverts stores no code, whatever it returned
+    const reverted = gasProfile(run(init, { gas: limit, gasUsed: 350_000, type: 'CREATE', error: 'execution reverted', output })).gas;
+    expect(reverted).toEqual({ limit, intrinsic: 150_000, execution: 200_000, refund: 0, used: 350_000 });
+  });
+
+  it('counts the gas a halt burns: an error other than a revert takes all the gas left', () => {
+    // libevm logs INVALID at cost 0, then burns the 78,354 left
+    const invalid: Step[] = [...STEPS.slice(0, 2), ['INVALID', 0xfe, 78_354, 0, 1]];
+    const halted = { limit: LIMIT, intrinsic: 21_640, execution: 78_360, refund: 0, used: LIMIT };
+    expect(gasProfile(run(invalid, { gas: LIMIT, gasUsed: LIMIT, error: 'invalid opcode: INVALID' })).gas).toEqual(halted);
+    // out of gas: the last step costs more than the gas left, and no refund appears
+    const short: Step[] = [...STEPS.slice(0, 2), ['SLOAD', 0x54, 1_000, 2_100, 1]];
+    expect(gasProfile(run(short, { gas: LIMIT, gasUsed: LIMIT, error: 'out of gas' })).gas).toEqual(halted);
+  });
+
+  it('gives back the gas a revert leaves', () => {
+    const steps: Step[] = [...STEPS.slice(0, 2), ['REVERT', 0xfd, 70_000, 6, 1]];
+    const { gas } = gasProfile(run(steps, { gas: LIMIT, gasUsed: 30_006, error: 'execution reverted' }));
+    expect(gas).toEqual({ limit: LIMIT, intrinsic: 21_640, execution: 8_366, refund: 0, used: 30_006 });
+  });
+
+  it('takes the EVM\'s figure where it is more than the steps show and not the floor', () => {
+    const { gas } = gasProfile(run(STEPS, { gas: LIMIT, gasUsed: USED + 1_000 }));
+    expect(gas).toEqual({ limit: LIMIT, intrinsic: 21_640, execution: 24_363, refund: 0, used: USED + 1_000 });
   });
 
   it('gives the gas execution used for a tx charged half its limit', () => {

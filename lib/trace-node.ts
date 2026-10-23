@@ -117,9 +117,10 @@ function slim(prestate: { pre: Record<string, PrestateAccount>; post: Record<str
   return { pre: strip(prestate.pre), post: strip(prestate.post) };
 }
 
-/** one replay for both tracers. When the node rejects the pair, one more
- *  replay for the call tree alone (no state diff); never after a timeout
- *  or a transport failure, which a second replay would only repeat */
+/** one replay for both tracers. When the node rejects the pair or stops it
+ *  at its timeout, one more replay for the call tree alone, which is
+ *  lighter (no state diff); never after a transport failure, which a second
+ *  replay would only repeat */
 async function trace(url: string, hash: string): Promise<TraceResponse> {
   try {
     const both = await rpc<{ callTracer: TraceFrame; prestateTracer: TraceResponse["prestate"] }>(url, "debug_traceTransaction", [hash, muxTrace()]);
