@@ -4,9 +4,10 @@ import { DATA } from './explorer-page';
 
 // A C-Chain tx page's Gas tab shows gas by opcode (components/explorer-v2/evm/EvmTraceGas.tsx), and its Gas Charged
 // box shows the gas execution used. Both come from the gas profile, which the page asks for apart from the trace
-// (useGasProfile.ts): when the Gas tab opens, when the trace comes in after the person has clicked or typed, and on load
-// for a tx charged half its gas limit. The trace route and the gas route answer from fixtures here, so no test runs a
-// trace on the debug node. The txs are past mainnet txs; the page reads their receipts from the public RPC.
+// (useGasProfile.ts): when the Gas tab opens or the focus or the pointer comes to it, and on load for a tx charged half
+// its gas limit. A click or a key elsewhere on the page does not ask: each ask is a replay on the shared debug node. The
+// trace route and the gas route answer from fixtures here, so no test runs a trace on the debug node. The txs are past
+// mainnet txs; the page reads their receipts from the public RPC.
 
 // a legacy tx charged 500,000 gas, half its 1,000,000 limit (tx-fee.e2e.ts)
 const AT_HALF_LIMIT = '0xe6d1f7c5e6b4394ef839e79fb584ca3abe9d0c8eaa08d09623da9247dfdf9874';
@@ -37,8 +38,12 @@ const PROFILE = {
 type Fixtures = { lanes: (string | null)[]; traceAsked: boolean; releaseTrace: () => void };
 
 /** answers the trace and the gas profile of every tx from the fixtures, and records the lane of each gas profile
-    request. With holdTrace, the trace waits for releaseTrace; with gasMs, the profile comes that late */
-async function answerFromFixtures(browser: Browser, opts: { holdTrace?: boolean; gasMs?: number } = {}): Promise<Fixtures> {
+    request. With holdTrace, the trace waits for releaseTrace; with gasMs, the profile comes that late; with
+    refuseFirst, the first gas profile request finds the node budget spent (a soft 503, as the route answers it) */
+async function answerFromFixtures(
+  browser: Browser,
+  opts: { holdTrace?: boolean; gasMs?: number; refuseFirst?: boolean } = {},
+): Promise<Fixtures> {
   let release = () => {};
   const held = opts.holdTrace ? new Promise<void>((resolve) => (release = resolve)) : Promise.resolve();
   const seen: Fixtures = { lanes: [], traceAsked: false, releaseTrace: () => release() };
@@ -49,6 +54,7 @@ async function answerFromFixtures(browser: Browser, opts: { holdTrace?: boolean;
   });
   await browser.route(/\/api\/trace\/43114\/0x[0-9a-f]{64}\/gas$/, async (route: WebRoute) => {
     seen.lanes.push(route.request.headers['x-trace-lane'] ?? null);
+    if (opts.refuseFirst && seen.lanes.length === 1) return route.fulfill({ headers: { 'x-status': '503' }, json: { error: 'busy' } });
     if (opts.gasMs) await new Promise((resolve) => setTimeout(resolve, opts.gasMs));
     await route.fulfill({ json: PROFILE });
   });
@@ -77,19 +83,38 @@ test('the Gas tab asks for the gas profile when it opens, and shows gas by opcod
   expect(seen.lanes).toEqual(['gesture']);
 });
 
-test('a person who typed before the trace came in has the gas profile before opening the tab', async ({ app, screen, browser }) => {
+test('a key on the page does not ask for the gas profile; the focus on the Gas tab does', async ({ app, screen, browser }) => {
   const seen = await answerFromFixtures(browser, { holdTrace: true });
   await app.open(`/explorer/mainnet/c-chain/tx/${ABOVE_HALF_LIMIT}`);
   await expect.poll(() => seen.traceAsked, DATA).toBe(true);
-  // a key that does nothing on the page, but marks the page as used by a person
-  await browser.keyboard.press('Tab');
+  // the page counts as used by a person (the harness's own reads run as user gestures), which alone asks for no replay
+  await browser.keyboard.press('Escape');
   seen.releaseTrace();
-  await expect(screen.getByRole('button', 'Gas')).toBeVisible(DATA);
-  await expect.poll(() => seen.lanes, DATA).toEqual(['gesture']);
+  const gasTab = screen.getByRole('button', 'Gas');
+  await expect(gasTab).toBeVisible(DATA);
+  await new Promise((resolve) => setTimeout(resolve, 1_500));
+  expect(seen.lanes).toEqual([]);
 
-  await screen.getByRole('button', 'Gas').tap();
+  // the focus on the tab asks, so the table is often in when the tab opens
+  await gasTab.focus();
+  await expect.poll(() => seen.lanes, DATA).toEqual(['gesture']);
+  await gasTab.tap();
   await expect(screen.getByRole('table', 'Gas by opcode')).toBeVisible();
   expect(seen.lanes).toHaveLength(1);
+});
+
+test('a spent node budget says the node is busy, and the next tap asks again', async ({ app, screen, browser }) => {
+  const seen = await answerFromFixtures(browser, { refuseFirst: true });
+  await app.open(`/explorer/mainnet/c-chain/tx/${ABOVE_HALF_LIMIT}`);
+  await screen.getByRole('button', 'Gas').tap();
+  const busy = screen.getByText('the trace node is busy · tap or click anywhere to count gas by opcode');
+  await expect(busy).toBeVisible(DATA);
+  await expect(screen.getByRole('table', 'Gas by opcode')).toHaveCount(0);
+
+  await busy.tap();
+  await expect(screen.getByRole('table', 'Gas by opcode')).toBeVisible(DATA);
+  // one ask for the refusal, one for the tap: a tap's pointerdown and touchend ask once
+  expect(seen.lanes).toEqual(['gesture', 'gesture']);
 });
 
 test('a tx charged half its gas limit shows the gas execution used on load', async ({ app, screen, browser }) => {

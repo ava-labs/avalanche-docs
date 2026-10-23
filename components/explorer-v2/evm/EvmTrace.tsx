@@ -445,7 +445,7 @@ export function EvmTrace({
   symbol,
   charged,
   gasState,
-  onTab,
+  onGasWanted,
 }: {
   /** the receipt's gasUsed: what ACP-194 charged */
   charged?: number;
@@ -453,8 +453,9 @@ export function EvmTrace({
   state: TraceState;
   /** the gas profile, which joins the trace later (useGasProfile.ts) */
   gasState: GasState;
-  /** the tab the user opened, so the page can ask for the gas profile */
-  onTab: (tab: Tab) => void;
+  /** the Gas tab opened, or the pointer or the focus came to it: the page
+   *  asks for the gas profile */
+  onGasWanted: () => void;
   chainId: string;
   base: string;
   sender: string;
@@ -594,8 +595,9 @@ export function EvmTrace({
             active={tab}
             onChange={(t) => {
               setTab(t);
-              onTab(t);
+              if (t === "gas") onGasWanted();
             }}
+            onIntent={(t) => t === "gas" && onGasWanted()}
             labels={{ ...LABELS, events: logs.length ? `Events · ${logs.length}` : "Events" }}
           />
 

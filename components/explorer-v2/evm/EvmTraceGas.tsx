@@ -103,7 +103,7 @@ function GasProfiler({
             </span>
           </div>
         ))}
-        {charged !== undefined && charged > used && (
+        {charged !== undefined && charged > used && charged === Math.ceil(limit / 2) && (
           <p className="pt-1 text-zinc-400 dark:text-zinc-500">Charged is half the limit: ACP-194 charges the larger of gas used and half the limit.</p>
         )}
       </Board>
@@ -242,8 +242,10 @@ function OpcodeTable({ opcodes, steps }: { opcodes: NonNullable<GasProfile["opco
 }
 
 /** The Gas tab: the flame graph, then the opcode table once the gas
- *  profile is in. While it loads, a line says so; with no profile (a spent
- *  budget, a node that did not answer) the tab shows the graph alone */
+ *  profile is in. While it loads, a line says so; when the node budget is
+ *  spent, a line says the node is busy (the page asks again on the next
+ *  tap, click or key); with no profile (a node that did not answer) the
+ *  tab shows the graph alone */
 export function GasTab({
   frames,
   profile,
@@ -269,7 +271,9 @@ export function GasTab({
       ) : (
         state !== "none" && (
           <Board divide={false}>
-            <div className="px-5 py-6 font-mono text-[11px] text-zinc-400 md:px-6 dark:text-zinc-500">counting gas by opcode…</div>
+            <div className="px-5 py-6 font-mono text-[11px] text-zinc-400 md:px-6 dark:text-zinc-500">
+              {state === "later" ? "the trace node is busy · tap or click anywhere to count gas by opcode" : "counting gas by opcode…"}
+            </div>
           </Board>
         )
       )}
