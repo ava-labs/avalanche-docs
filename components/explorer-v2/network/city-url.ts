@@ -2,6 +2,7 @@ import { useEffect, type RefObject } from "react";
 import type { CameraHandle } from "@/components/explorer-v2/network/icm-map";
 import { PCHAIN_PICK } from "@/components/explorer-v2/network/city-model";
 import type { District } from "@/components/explorer-v2/network/districts";
+import { untilLinkTap } from "@/components/explorer-v2/network/link-tap";
 
 /* The City writes its open chain, district and route into the URL, so a link opens them. It starts once the City has
    restored them from the URL (restored), and it writes after the camera lands. */
@@ -23,12 +24,14 @@ export function useCityUrl({
   useEffect(() => {
     if (!restored.current) return;
     /* it follows once the camera lands, in an idle slot: the router's render of the page, which the URL's change sets off,
-       holds no frame of the flight */
-    let live = true;
+       holds no frame of the flight. It stops at a link tap (link-tap.ts), and once the page's path has changed: a write
+       then would put this page's chain on the next page's URL, or undo the navigation */
+    const stay = untilLinkTap();
+    const path = window.location.pathname;
     let idle = 0;
     let asked = false;
     const sync = () => {
-      if (!live) return;
+      if (!stay.live || window.location.pathname !== path) return;
       const p = new URLSearchParams(window.location.search);
       const r = selected ? rowById.get(selected) : null;
       if (r) p.set("chain", r.chain?.slug ?? r.id);
@@ -46,14 +49,14 @@ export function useCityUrl({
       if (next !== `${window.location.pathname}${window.location.search}${window.location.hash}`) window.history.replaceState(null, "", next);
     };
     const later = () => {
-      if (!live || asked) return;
+      if (!stay.live || asked) return;
       asked = true;
       idle = window.requestIdleCallback ? window.requestIdleCallback(sync, { timeout: 1500 }) : window.setTimeout(sync, 200);
     };
     const clock = setTimeout(later, 2200);
     void (camera.current?.settled() ?? Promise.resolve()).then(later);
     return () => {
-      live = false;
+      stay.end();
       clearTimeout(clock);
       if (idle) (window.cancelIdleCallback ?? window.clearTimeout)(idle);
     };
