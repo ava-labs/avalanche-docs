@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'e2e';
 import { appFetch } from './app-fetch';
 
-// The trace route runs work on the shared C-Chain debug node. Crawlers get a 403 from it, and robots.txt asks them
-// to stay off it. Chain 1 has no trace node here, so no request in this file reaches a node.
+// The trace route runs work on the shared C-Chain debug node. Crawlers get a 403 there (from the Vercel firewall rule
+// on the deployed site, and from the route itself), and robots.txt asks them to stay off it. Chain 1 has no trace node here, so no request in this file reaches a node.
 const HASH = `0x${'0'.repeat(63)}1`;
 const CRAWLER = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
 const BROWSER =
@@ -16,10 +16,11 @@ describe('trace route gate', { platforms: ['api'], tags: ['api', 'explorer'] }, 
     expect(text).toMatch(/^Disallow: \/api\/trace\/$/m);
     expect(text).toMatch(/^Disallow: \/api\/debug-rpc$/m);
     expect(text).not.toMatch(/^Disallow: \/$/m);
+    expect(text).not.toMatch(/^Allow:/m);
     expect(text).not.toMatch(/^Disallow: \/api\/og/m);
   });
 
-  test('a crawler gets a 403 from the trace route', async ({ app }) => {
+  test('a crawler gets a 403 on the trace route', async ({ app }) => {
     const res = await appFetch(app, `/api/trace/1/${HASH}`, { headers: { 'user-agent': CRAWLER } });
     expect(res.status).toBe(403);
   });

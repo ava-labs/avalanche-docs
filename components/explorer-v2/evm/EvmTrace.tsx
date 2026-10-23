@@ -789,9 +789,9 @@ export function EvmTrace({
           <div className="px-5 py-6 font-mono text-[11px] text-zinc-400 md:px-6 dark:text-zinc-500">tracing execution…</div>
         </Board>
       )}
-      {state === "error" && (
+      {(state === "error" || state === "later") && (
         <Board divide={false}>
-          <div className="px-5 py-6 font-mono text-[11px] text-zinc-400 md:px-6 dark:text-zinc-500">the trace node did not answer</div>
+          <div className="px-5 py-6 font-mono text-[11px] text-zinc-400 md:px-6 dark:text-zinc-500">{state === "later" ? "the trace node is busy · tap or click anywhere to load the trace" : "the trace node did not answer"}</div>
         </Board>
       )}
       {trace && (

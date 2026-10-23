@@ -1,10 +1,12 @@
 /* An in-memory stand-in for the node-redis client, with the commands the
-   trace gate sends: GET, SET with NX and PX, INCR and EXPIRE in a MULTI,
+   trace gate sends: GET, MGET, SET with NX and PX, INCR and EXPIRE in a MULTI,
    and the one EVAL script that frees a slot for its owner. Time comes from
    Date.now(), so vi.useFakeTimers() moves leases and windows. Several gates
    that share one fake act as Vercel instances that share one Redis. */
 
 type Entry = { value: string; expiresAt: number | null };
+
+const OWNER_DEL = 'if redis.call("get", KEYS[1]) == ARGV[1] then return redis.call("del", KEYS[1]) else return 0 end';
 
 export class RedisFake {
   readonly store = new Map<string, Entry>();
@@ -32,6 +34,10 @@ export class RedisFake {
     return this.run(() => this.live(key)?.value ?? null);
   }
 
+  mGet(keys: string[]) {
+    return this.run(() => keys.map((k) => this.live(k)?.value ?? null));
+  }
+
   set(key: string, value: string, opts: { NX?: boolean; PX?: number } = {}) {
     return this.run(() => {
       if (opts.NX && this.live(key)) return null;
@@ -42,7 +48,9 @@ export class RedisFake {
 
   eval(script: string, opts: { keys: string[]; arguments: string[] }) {
     return this.run(() => {
-      if (!script.includes('redis.call("del"')) throw new Error("unknown script");
+      // the one script the fake knows, as text: a script without the owner
+      // check must fail here, not pass as if it had one
+      if (script !== OWNER_DEL) throw new Error("unknown script");
       const [key] = opts.keys;
       if (this.live(key)?.value !== opts.arguments[0]) return 0;
       this.store.delete(key);

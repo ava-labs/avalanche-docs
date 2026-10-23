@@ -33,9 +33,13 @@ const CACHE_MAX = 400;
  *  own timeout, and this covers the queue and the block replay before it */
 const FETCH_MS = 15_000;
 
-/** a node failure as a fixed kind, never as the fetch's or the node's text */
+/** a node failure as a fixed kind, never as the fetch's or the node's text.
+ *  rpc marks an error the node answered in JSON-RPC: the node is up */
 class NodeFailure extends Error {
-  constructor(readonly kind: "not_found" | "timeout" | "node_error" | "abandoned") {
+  constructor(
+    readonly kind: "not_found" | "timeout" | "node_error" | "abandoned",
+    readonly rpc = false,
+  ) {
     super(kind);
   }
 }
@@ -57,16 +61,17 @@ async function rpc<T>(url: string, method: string, params: unknown[]): Promise<T
   if (!body) throw new NodeFailure("node_error");
   if (body.error) {
     const msg = body.error.message ?? "";
-    throw new NodeFailure(/not found/i.test(msg) ? "not_found" : /timeout|deadline/i.test(msg) ? "timeout" : "node_error");
+    throw new NodeFailure(/not found/i.test(msg) ? "not_found" : /timeout|deadline/i.test(msg) ? "timeout" : "node_error", true);
   }
   return body.result as T;
 }
 
-/** what a failure means for the gate: a tx the node does not know is an
- *  answer, not a node error */
-function outcomeOf(kind: NodeFailure["kind"]): Outcome {
-  if (kind === "abandoned") return "abandoned";
-  return kind === "not_found" ? "answered" : "node_error";
+/** what a failure means for the gate: any answer from the node, an error
+ *  answer included, frees the slot and is no node failure */
+function outcomeOf(failure: unknown): Outcome {
+  if (!(failure instanceof NodeFailure)) return "node_error";
+  if (failure.kind === "abandoned") return "abandoned";
+  return failure.rpc ? "answered" : "node_error";
 }
 
 export async function getTrace(chainId: string, txHash: string, from: { lane: Lane; ip: string }): Promise<TraceResult> {
@@ -78,21 +83,23 @@ export async function getTrace(chainId: string, txHash: string, from: { lane: La
   const hit = cache.get(key);
   if (hit) return { trace: hit };
 
-  const gate = await enterGate(from.lane, from.ip);
+  const gate = await enterGate(chainId, from.lane, from.ip);
   if ("refused" in gate) return { miss: gate.refused };
-  try {
-    const [call, prestate] = await Promise.all([
-      rpc<TraceFrame>(url, "debug_traceTransaction", [hash, callTracer({ withLog: true })]),
-      rpc<TraceResponse["prestate"]>(url, "debug_traceTransaction", [hash, prestateDiff()]).catch(() => null),
-    ]);
-    await gate.pass.done("answered");
-    const out: TraceResponse = { call, prestate, opcodes: null, steps: null, gas: null };
-    if (cache.size >= CACHE_MAX) cache.delete(cache.keys().next().value!);
-    cache.set(key, out);
-    return { trace: out };
-  } catch (e) {
-    const kind = e instanceof NodeFailure ? e.kind : "node_error";
-    await gate.pass.done(outcomeOf(kind));
+  // both replays settle before the slot is freed: one still on the node holds it
+  const [call, prestate] = await Promise.allSettled([
+    rpc<TraceFrame>(url, "debug_traceTransaction", [hash, callTracer({ withLog: true })]),
+    rpc<TraceResponse["prestate"]>(url, "debug_traceTransaction", [hash, prestateDiff()]),
+  ]);
+  const kindOf = (r: PromiseSettledResult<unknown>) => (r.status === "rejected" ? (r.reason instanceof NodeFailure ? r.reason.kind : "node_error") : null);
+  const abandoned = kindOf(call) === "abandoned" || kindOf(prestate) === "abandoned";
+  if (call.status === "rejected") {
+    const kind = kindOf(call)!;
+    await gate.pass.done(abandoned ? "abandoned" : outcomeOf(call.reason));
     return { miss: kind === "abandoned" ? "timeout" : kind };
   }
+  await gate.pass.done(abandoned ? "abandoned" : prestate.status === "rejected" ? outcomeOf(prestate.reason) : "answered");
+  const out: TraceResponse = { call: call.value, prestate: prestate.status === "fulfilled" ? prestate.value : null, opcodes: null, steps: null, gas: null };
+  if (cache.size >= CACHE_MAX) cache.delete(cache.keys().next().value!);
+  cache.set(key, out);
+  return { trace: out };
 }

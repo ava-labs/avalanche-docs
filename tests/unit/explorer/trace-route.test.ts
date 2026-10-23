@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 
 import { SOFT_READ, statusOf } from '@/lib/explorer-soft-status';
-import { IP_PER_MINUTE } from '@/lib/trace-gate';
+import { BREAKER_ERRORS, IP_PER_MINUTE, LEASE_MS, SLOTS } from '@/lib/trace-gate';
 import { RedisFake } from './redis-fake';
 
 /* /api/trace in front of the shared C-Chain debug node: crawlers get no
@@ -39,6 +39,8 @@ async function get(hash: string, headers: Record<string, string> = {}) {
 }
 
 beforeEach(() => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(new Date('2026-10-23T21:00:05Z'));
   vi.resetModules();
   vi.stubEnv('CCHAIN_DEBUG_RPC_URL', NODE);
   vi.stubEnv('REDIS_URL', 'redis://redis.invalid:6379');
@@ -46,6 +48,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.unstubAllEnvs();
 });
@@ -74,6 +77,8 @@ describe('crawlers', () => {
       'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1',
       'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Mobile Safari/537.36 Instagram 350.0',
       'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.0.0 Safari/537.36',
+      'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 SogouMobileBrowser/5.28.4',
+      'Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0 YaBrowser/23.9 YandexSearch/8.10 Mobile Safari/537.36',
     ]) {
       expect((await get(hashOf(2), { 'user-agent': ua })).status, ua).toBe(200);
     }
@@ -117,10 +122,37 @@ describe('the node budget', () => {
   it('keys the per-IP limit on the IP the edge sets, not on x-forwarded-for', async () => {
     stubNode(() => rpcResult(ROOT));
     const from = (i: number) => ({ 'cf-connecting-ip': '198.51.100.9', 'x-forwarded-for': `203.0.113.${i}`, ...SOFT_READ.headers });
-    for (let i = 0; i < IP_PER_MINUTE; i++) expect((await get(hashOf(100 + i), from(i))).status).toBe(200);
+    for (let i = 0; i < IP_PER_MINUTE.open; i++) expect((await get(hashOf(100 + i), from(i))).status).toBe(200);
     const res = await get(hashOf(200), from(99));
     expect(statusOf(res)).toBe(429);
-    expect(fetches).toBe(IP_PER_MINUTE * 2);
+    expect(fetches).toBe(IP_PER_MINUTE.open * 2);
+  });
+
+  it(`trips the breaker after ${BREAKER_ERRORS} node failures, but not after error answers from the node`, async () => {
+    stubNode(() => new Response(JSON.stringify({ jsonrpc: '2.0', id: 1, error: { code: -32000, message: 'execution timeout' } })));
+    // a new client IP each request, so the per-IP limit stays out of the way
+    const as = (i: number) => ({ 'cf-connecting-ip': `198.51.100.${i}`, ...SOFT_READ.headers });
+    for (let i = 0; i < BREAKER_ERRORS + 1; i++) expect(statusOf(await get(hashOf(300 + i), as(i)))).toBe(504);
+    stubNode(() => new Response('bad gateway', { status: 502 }));
+    for (let i = 0; i < BREAKER_ERRORS; i++) expect(statusOf(await get(hashOf(400 + i), as(50 + i)))).toBe(502);
+    stubNode(() => rpcResult(MUX));
+    const res = await get(hashOf(500), as(99));
+    expect(statusOf(res)).toBe(503);
+    expect(await res.json()).toEqual({ error: 'breaker' });
+    expect(fetches).toBe(0);
+  });
+
+  it('keeps the slot of a trace whose fetch gave up, until the lease runs out', async () => {
+    stubNode(() => {
+      throw new DOMException('The operation timed out.', 'TimeoutError');
+    });
+    const gesture = { 'x-trace-lane': 'gesture', ...SOFT_READ.headers };
+    for (let i = 0; i < SLOTS; i++) expect(statusOf(await get(hashOf(600 + i), gesture))).toBe(504);
+    stubNode(() => rpcResult(MUX));
+    expect(statusOf(await get(hashOf(700), gesture))).toBe(503);
+    expect(fetches).toBe(0);
+    vi.setSystemTime(Date.now() + LEASE_MS);
+    expect((await get(hashOf(701), gesture)).status).toBe(200);
   });
 
   it('serves a trace this instance already has without asking the gate or the node', async () => {
@@ -138,7 +170,7 @@ describe('robots.txt', () => {
   it('keeps crawlers off the routes that run work on the debug node, and off nothing else', async () => {
     const { default: robots } = await import('@/app/robots');
     const { rules } = robots();
-    expect(rules).toEqual({ userAgent: '*', allow: '/', disallow: ['/api/trace/', '/api/debug-rpc'] });
+    expect(rules).toEqual({ userAgent: '*', disallow: ['/api/trace/', '/api/debug-rpc'] });
     // social previews fetch the OG images; pages stay crawlable
     const disallow = ['/api/trace/', '/api/debug-rpc'];
     for (const path of ['/api/og/tx', '/explorer/mainnet/c-chain/tx/0xabc', '/']) {
