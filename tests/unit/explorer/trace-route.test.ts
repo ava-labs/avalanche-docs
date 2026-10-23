@@ -5,10 +5,11 @@ import { SOFT_READ, statusOf } from '@/lib/explorer-soft-status';
 import { BREAKER_ERRORS, IP_PER_MINUTE, LEASE_MS, SLOTS } from '@/lib/trace-gate';
 import { RedisFake } from './redis-fake';
 
-/* /api/trace in front of the shared C-Chain debug node: crawlers get no
-   trace, a refused or failed trace never reaches or names the node, and the
-   per-IP budget keys on the IP the edge sets. The node URL, the token and
-   the hashes are made up; fetch is stubbed, so no test reaches a node. */
+/* /api/trace and its /gas in front of the shared C-Chain debug node:
+   crawlers get no trace or gas profile, a refused or failed read never
+   reaches or names the node, and the per-IP budget keys on the IP the edge
+   sets. The node URL, the token and the hashes are made up; fetch is
+   stubbed, so no test reaches a node. */
 
 const SECRET = 'tok_made_up_for_this_test';
 const NODE = `https://debug-node.invalid/ext/bc/C/rpc?token=${SECRET}`;
@@ -36,6 +37,15 @@ const MUX = { callTracer: ROOT, prestateTracer: { pre: {}, post: {} } };
 async function get(hash: string, headers: Record<string, string> = {}) {
   const { GET } = await import('@/app/api/trace/[chainId]/[txHash]/route');
   const req = new NextRequest(`http://localhost/api/trace/43114/${hash}`, { headers: { 'user-agent': BROWSER, ...headers } });
+  return GET(req, { params: Promise.resolve({ chainId: '43114', txHash: hash }) });
+}
+
+/** the gas tracer's answer for a plain transfer */
+const GAS_RAW = { limit: 21000, used: 21000, steps: 0, ops: [], top: null };
+
+async function getGas(hash: string, headers: Record<string, string> = {}) {
+  const { GET } = await import('@/app/api/trace/[chainId]/[txHash]/gas/route');
+  const req = new NextRequest(`http://localhost/api/trace/43114/${hash}/gas`, { headers: { 'user-agent': BROWSER, ...headers } });
   return GET(req, { params: Promise.resolve({ chainId: '43114', txHash: hash }) });
 }
 
@@ -172,6 +182,46 @@ describe('the node budget', () => {
     expect(again.status).toBe(200);
     expect(again.headers.get('cache-control')).toContain('immutable');
     expect(fetches).toBe(1);
+  });
+});
+
+describe('the gas route', () => {
+  it('gives a crawler a 403, and the node is never asked', async () => {
+    stubNode(() => rpcResult(GAS_RAW));
+    for (const ua of ['Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'Mozilla/5.0 (compatible; GoogleOther)']) {
+      const res = await getGas(hashOf(300), { 'user-agent': ua });
+      expect(res.status, ua).toBe(403);
+      expect(res.headers.get('cache-control')).toBe('private, no-store');
+    }
+    expect(fetches).toBe(0);
+  });
+
+  it('answers the gas profile, cached hard', async () => {
+    stubNode(() => rpcResult(GAS_RAW));
+    const res = await getGas(hashOf(301));
+    expect(res.status).toBe(200);
+    expect(res.headers.get('cache-control')).toContain('immutable');
+    expect(await res.json()).toEqual({ opcodes: [], steps: 0, gas: null });
+    expect(fetches).toBe(1);
+  });
+
+  it('answers a fixed code, never the node error, and a soft status for a read that asks', async () => {
+    stubNode(() => {
+      throw new TypeError(`fetch failed: could not reach ${NODE}`);
+    });
+    const res = await getGas(hashOf(302), SOFT_READ.headers);
+    expect(res.status).toBe(200);
+    expect(statusOf(res)).toBe(502);
+    const text = await res.text();
+    expect(text).toBe('{"error":"node_error"}');
+    expect(text).not.toContain(SECRET);
+    expect(res.headers.get('cache-control')).toBe('no-store');
+  });
+
+  it('refuses a bad hash before the node', async () => {
+    stubNode(() => rpcResult(GAS_RAW));
+    expect((await getGas('0x1234')).status).toBe(400);
+    expect(fetches).toBe(0);
   });
 });
 

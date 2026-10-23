@@ -2,31 +2,34 @@ import "server-only";
 import { gunzipSync, gzipSync } from "node:zlib";
 import { redis } from "@/lib/redis";
 import { RELEASE, within } from "@/lib/trace-gate";
-import type { TraceResponse } from "@/lib/trace";
+import type { GasProfile, TraceResponse } from "@/lib/trace";
 
-/* The traces this site already has, so the debug node traces each tx once.
-   A trace is final once its block is, so it can be kept: in this instance's
-   memory (LOCAL_MAX_BYTES, oldest out first) and in the Redis that every
-   instance shares (gzip, TTL by kind). A trace with no state diff (the node
-   rejected the diff, and only the call tree came back) is kept a short time,
-   so a later ask can get the whole trace. A few answers that are not traces
-   are kept too, so a tx that has none is not asked for again at once: a tx
-   the node does not know (a few seconds: it may be pending), a trace that
-   ran out of time, and a trace too large to send. Errors and refusals are
-   never kept.
+/* The traces and gas profiles this site already has, so the debug node
+   reads each tx once for each. An answer is final once its block is, so it
+   can be kept: in this instance's memory (LOCAL_MAX_BYTES, oldest out
+   first) and in the Redis that every instance shares (gzip, TTL by kind).
+   A trace with no state diff (the node rejected the diff, and only the call
+   tree came back) is kept a short time, so a later ask can get the whole
+   trace. A few misses are kept too, so a tx that has no answer is not asked
+   for again at once: a tx the node does not know (a few seconds: it may be
+   pending), a read that ran out of time, and an answer too large to send.
+   Errors and refusals are never kept.
 
    Keys carry the Vercel environment: a preview shares the production Redis
-   and node budget, but its code must not write the traces production serves.
-   A lock in Redis lets one instance trace a tx while the others wait for its
-   answer. Every Redis call has the gate's timeout; a Redis failure reads as
-   a miss and writes nothing. */
+   and node budget, but its code must not write the answers production
+   serves. A lock in Redis lets one instance read a tx while the others wait
+   for its answer. Every Redis call has the gate's timeout; a Redis failure
+   reads as a miss and writes nothing. */
 
-export type Kept = { trace: TraceResponse } | { miss: "not_found" | "timeout" | "too_large" };
+/** what the node answers for a tx: its trace, or its gas profile */
+export type Answer = { trace: TraceResponse } | { profile: GasProfile };
+type KeptMiss = { miss: "not_found" | "timeout" | "too_large" };
+export type Kept<A extends Answer = Answer> = A | KeptMiss;
 
 const KEY = `trace:v1:${process.env.VERCEL_ENV ?? "local"}:`;
 /** how long each kind is kept, in seconds */
 const TTL = {
-  trace: 86_400,
+  answer: 86_400,
   partial: 300,
   not_found: 5,
   timeout: 300,
@@ -41,7 +44,7 @@ export const LOCK_MS = 60_000;
 const local = new Map<string, { kept: Kept; bytes: number; until: number }>();
 let localBytes = 0;
 
-const kindOf = (k: Kept): keyof typeof TTL => ("trace" in k ? (k.trace.prestate ? "trace" : "partial") : k.miss);
+const kindOf = (k: Kept): keyof typeof TTL => ("miss" in k ? k.miss : "trace" in k && !k.trace.prestate ? "partial" : "answer");
 
 function remember(key: string, kept: Kept, bytes: number) {
   forget(key);
@@ -60,13 +63,14 @@ function forget(key: string) {
   local.delete(key);
 }
 
-export async function readKept(key: string): Promise<Kept | null> {
+/** what is kept for a key; the key names the read, so the caller names its answer */
+export async function readKept<A extends Answer>(key: string): Promise<Kept<A> | null> {
   const mine = local.get(key);
   if (mine && mine.until > Date.now()) {
     // the newest read goes last, so the oldest unread one leaves first
     local.delete(key);
     local.set(key, mine);
-    return mine.kept;
+    return mine.kept as Kept<A>;
   }
   if (mine) forget(key);
   try {
@@ -74,7 +78,7 @@ export async function readKept(key: string): Promise<Kept | null> {
     const raw = r ? await within(r.get(KEY + key)) : null;
     if (!raw) return null;
     const json = gunzipSync(Buffer.from(raw, "base64")).toString("utf8");
-    const kept = JSON.parse(json) as Kept;
+    const kept = JSON.parse(json) as Kept<A>;
     remember(key, kept, json.length);
     return kept;
   } catch {
@@ -95,8 +99,8 @@ export async function keep(key: string, kept: Kept, json: string): Promise<void>
   }
 }
 
-/** the right to trace a tx: an id to give back, "taken" when another
- *  instance traces it now, or null when Redis does not answer */
+/** the right to read a tx from the node: an id to give back, "taken" when
+ *  another instance reads it now, or null when Redis does not answer */
 export async function lock(key: string, id: string): Promise<"held" | "taken" | null> {
   try {
     const r = await within(redis());
