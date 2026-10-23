@@ -17,6 +17,7 @@ import { useBlockLifecycle } from "./useBlockLifecycle";
 import { useRpcTx } from "./useRpcTx";
 import { EvmTrace } from "./EvmTrace";
 import { useTrace } from "./useTrace";
+import { useGasProfile } from "./useGasProfile";
 import { CONTINUOUS_EXECUTION_CHAINS } from "./useHeadStream";
 import { useVerifiedContracts, functionNameFromAbi, decodeEventWithAbi, decodeFunctionWithAbi } from "@/lib/sourcify-client";
 import { getEventByTopic, getFunctionBySelector } from "@/abi/event-signatures.generated";
@@ -218,8 +219,13 @@ export function EvmTx({ network, txHash }: { network: string; txHash: string }) 
   // the execution trace, from the debug node; when it is here it carries
   // the internal calls, token movements and events, so the flat sections
   // for those step aside
-  const { trace, state: traceState } = useTrace(c.chainId, txHash, !!liveRpc);
+  const { trace: callTrace, state: traceState } = useTrace(c.chainId, txHash, !!liveRpc);
   const traced = traceState === "ready";
+  // its gas profile, asked for apart: for the Gas tab, and for a tx charged
+  // half its limit, where the Gas Charged box shows what execution used
+  const [gasTab, setGasTab] = useState(false);
+  const atHalfLimit = !!t && t.gasUsed === Math.ceil(t.gasLimit / 2);
+  const { trace, state: gasState } = useGasProfile(c.chainId, txHash, callTrace, { tab: gasTab, floor: atHalfLimit });
 
   // where the tx's block stands in Continuous Execution
   const life = useBlockLifecycle(liveRpc, t?.blockNumber ?? null);
@@ -257,7 +263,7 @@ export function EvmTx({ network, txHash }: { network: string; txHash: string }) 
   const feeFacts = fromRpc.data?.fees ?? fromFallback.data?.fees ?? null;
   const feeSplit = useFeeSplit(liveRpc ?? fallbackRpc, t?.blockNumber, feeFacts);
   // since Helicon (its headers carry the price floor) a tx pays for at least half its gas limit
-  const halfLimit = !!t && feeFacts?.floor != null && t.gasUsed === Math.ceil(t.gasLimit / 2);
+  const halfLimit = atHalfLimit && feeFacts?.floor != null;
   // the fee to eight places with the RPC's fee facts, as the Fee box's table reads; a fee under a millionth of the coin in its nano unit or in wei
   const feeFigure = unitParts(formatFeeAmount(feeWei, sym, feeFacts ? 8 : 6));
   const feeNote = [usdOfWei(feeWei, usd), BURN_CHAINS.has(String(c.chainId)) ? "burned" : null, feeFacts ? null : formatNano(gasPriceWei, sym)].filter(Boolean).join(" · ");
@@ -464,7 +470,7 @@ export function EvmTx({ network, txHash }: { network: string; txHash: string }) 
                 </RailRow>
                 {/* ACP-194: the receipt charges max(used, limit / 2), and the fee
                     is paid on that; what execution actually used comes from
-                    the trace's struct log */}
+                    the gas profile */}
                 <RailRow
                   label="Gas Charged"
                   sub={
@@ -489,7 +495,7 @@ export function EvmTx({ network, txHash }: { network: string; txHash: string }) 
             </div>
           </section>
 
-          {liveRpc && <EvmTrace trace={trace} state={traceState} chainId={c.chainId} base={base} sender={t.from} symbol={sym} charged={t.gasUsed} />}
+          {liveRpc && <EvmTrace trace={trace} state={traceState} gasState={gasState} onTab={(tab) => setGasTab(tab === "gas")} chainId={c.chainId} base={base} sender={t.from} symbol={sym} charged={t.gasUsed} />}
 
           {!traced && transfers.length > 0 && (
             <section className="flex flex-col gap-4">
