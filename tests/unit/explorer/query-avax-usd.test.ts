@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { AVAX_USD_PROXY, avaxUsdNotes, avaxUsdWith } from '@/lib/explorer-query/avax-usd';
+import { fmt } from '@/components/explorer-v2/evm/query-format';
+import { AVAX_USD_PROXY, avaxUsdNotes, avaxUsdWith, missingPrice, showPrice } from '@/lib/explorer-query/avax-usd';
 import { guardSql } from '@/lib/explorer-query/guard';
 import { collapseMacros, expandMacros } from '@/lib/explorer-query/macros';
 import { systemPrompt } from '@/lib/explorer-query/prompt';
@@ -79,5 +80,41 @@ describe('the AVAX/USD source line', () => {
     expect(avaxUsdNotes(typed, 43113)).toEqual([]);
     const { sources } = await withSources(out.ok ? out.sql : '', C);
     expect(sources.map((s) => s.table)).toEqual(['avax_usd']);
+  });
+});
+
+describe('the AVAX price on a priced answer', () => {
+  const sql = `$AVAXUSD(${since})${FEES}`;
+  const rows = [
+    { t: '2026-10-21', fees_usd: 8488.62, fees_avax: 870.05, avax_price_usd: 9.7565 },
+    { t: '2026-10-22', fees_usd: 6700.76, fees_avax: 722.96, avax_price_usd: 9.254 },
+  ];
+  const tile = (label: string, column: string, format: 'usd' | 'avax' | 'number') => ({ label, column, agg: 'sum' as const, format });
+  const panel = { title: 'Fees', kind: 'bar' as const, x: 't', series: [{ column: 'fees_usd', label: 'Fees', format: 'usd' as const, axis: 'left' as const, mark: 'auto' as const, transform: 'none' as const, dashed: false }], markers: [], bands: [], stacked: false, sortDir: 'desc' as const, referenceLines: [], width: 'full' as const };
+
+  it('sends a query back once when its rows do not carry the price, and lets one that does pass', () => {
+    expect(missingPrice(sql, { columns: [{ name: 't' }, { name: 'fees_usd' }] }, C)).toMatch(/^the rows are valued at the AVAX price but do not show it: add round\(avg\(nullIf\(p\.price, 0\)\), 4\) AS avax_price_usd/);
+    expect(missingPrice(sql, { columns: [{ name: 'fees_usd' }, { name: 'avax_price_usd' }] }, C)).toBeNull();
+    expect(missingPrice(`SELECT count() AS txs FROM raw_txs WHERE chain_id = ${C} AND block_time >= ${since}`, { columns: [{ name: 'txs' }] }, C)).toBeNull();
+    expect(missingPrice(sql, { columns: [{ name: 'fees_usd' }] }, 43113)).toBeNull();
+  });
+
+  it('adds a price tile in place of a fourth, a price line on the right axis, and names twin tiles by unit', () => {
+    const v = showPrice({ stats: [tile('Fees burned', 'fees_usd', 'usd'), tile('Fees burned', 'fees_avax', 'avax'), tile('Txs', 'txs', 'number'), tile('Most', 'txs', 'number')], panels: [panel], callouts: [] }, rows, C);
+    expect(v.stats.map((s) => s.label)).toEqual(['Fees burned in USD', 'Fees burned in AVAX', 'Txs', 'AVAX price']);
+    expect(v.stats[3]).toMatchObject({ column: 'avax_price_usd', agg: 'last', format: 'usd', sub: '$9.25 to $9.76 in these rows' });
+    expect(v.panels[0].series.map((s) => [s.column, s.axis, s.mark])).toEqual([['fees_usd', 'left', 'auto'], ['avax_price_usd', 'right', 'line']]);
+    // a layout that shows the price already, and rows with no price, are left as they are
+    expect(showPrice(v, rows, C)).toEqual(v);
+    const plain = { stats: [], panels: [panel], callouts: [] };
+    expect(showPrice(plain, [{ t: '2026-10-22', fees_usd: 1 }], C)).toEqual(plain);
+    expect(showPrice(plain, rows, 43113)).toEqual(plain);
+  });
+
+  it('shows a fee of a fraction of a cent to three significant digits', () => {
+    expect(fmt(0.025658, 'usd', 'AVAX')).toBe('$0.0257');
+    expect(fmt(0.45, 'usd', 'AVAX')).toBe('$0.45');
+    expect(fmt(9.254, 'usd', 'AVAX')).toBe('$9.25');
+    expect(fmt(64600, 'usd', 'AVAX')).toBe('$64.6k');
   });
 });

@@ -30,6 +30,7 @@ const Answer = z.object({
   route: z.string().optional(),
   result: z.object({ columns: Columns, rows: Rows }),
   sources: z.array(Note).optional(),
+  visual: z.object({ stats: z.array(z.object({ column: z.string() }).passthrough()), panels: z.array(z.object({ series: z.array(z.object({ column: z.string(), axis: z.string().optional() }).passthrough()) }).passthrough()) }).passthrough().nullable().optional(),
 });
 const Event = z.discriminatedUnion('type', [
   z.object({ type: z.literal('stage'), stage: z.string() }).passthrough(),
@@ -127,6 +128,15 @@ async function checkPriced(app: App, answer: z.infer<typeof Answer>): Promise<vo
   const { result } = await read(app, `$AVAXUSD(${start}) SELECT min(price) AS lo, max(price) AS hi, count() AS hours FROM avax_usd`);
   const [{ lo, hi, hours }] = result.rows as { lo: number; hi: number; hours: number }[];
   expect(Number(hours)).toBeGreaterThan(0);
+  // every row shows the AVAX price it was valued at, a mean of the window's hourly prices, and the layout shows it
+  expect(names, `no AVAX price in ${names.join(', ')}`).toContain('avax_price_usd');
+  for (const r of rows) {
+    const p = num(r.avax_price_usd);
+    if (p === null) continue;
+    expect(p, `avax_price_usd in ${JSON.stringify(r)}, hourly prices ${lo} to ${hi}`).toBeGreaterThanOrEqual(lo - 1e-4);
+    expect(p, `avax_price_usd in ${JSON.stringify(r)}, hourly prices ${lo} to ${hi}`).toBeLessThanOrEqual(hi + 1e-4);
+  }
+  if (answer.visual) expect(answer.visual.stats.map((t) => t.column)).toContain('avax_price_usd');
   if (feeUsd && feeAvax) {
     for (const r of rows) {
       const [u, a] = [num(r[feeUsd]), num(r[feeAvax])];
