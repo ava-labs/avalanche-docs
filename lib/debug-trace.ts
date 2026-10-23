@@ -23,9 +23,15 @@ export function callTracer(opts: { withLog?: boolean; onlyTopCall?: boolean } = 
   };
 }
 
-/** the accounts and storage slots the tx changed, before and after */
-export function prestateDiff() {
-  return { tracer: "prestateTracer", tracerConfig: { diffMode: true }, timeout: TRACE_TIMEOUT };
+/** the call tree with logs and the state diff from ONE replay of the tx:
+ *  the answer is { callTracer, prestateTracer }. If either tracer fails,
+ *  the whole call fails */
+export function muxTrace() {
+  return {
+    tracer: "muxTracer",
+    tracerConfig: { callTracer: { withLog: true, onlyTopCall: false }, prestateTracer: { diffMode: true } },
+    timeout: TRACE_TIMEOUT,
+  };
 }
 
 /** a client's trace config as a callTracer config, or null when it asks for

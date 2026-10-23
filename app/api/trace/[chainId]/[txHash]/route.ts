@@ -10,15 +10,20 @@ import { getTrace, type TraceMiss } from "@/lib/trace-node";
 // load sends x-trace-lane: gesture once the user has tapped, clicked or
 // typed, which gives it the larger share of the node budget
 // (lib/trace-gate.ts). A trace is final once its block is, so a success is
-// cached hard; every miss is no-store and carries a fixed code, never the
-// node's or the fetch's text.
+// cached hard, and a trace without its state diff for a few minutes; every
+// miss is no-store and carries a fixed code, never the node's or the fetch's
+// text.
 
 const FINAL = { "Cache-Control": "public, max-age=3600, s-maxage=31536000, immutable" };
+/** a trace without its state diff: a later ask can get the whole trace */
+const PARTIAL = { "Cache-Control": "public, max-age=60, s-maxage=300" };
 const NO_STORE = { "cache-control": "private, no-store" };
 
 const STATUS: Record<TraceMiss, number> = {
   no_node: 404,
   not_found: 404,
+  // the page keeps its receipt view, as for a tx with no trace
+  too_large: 404,
   rate: 429,
   busy: 503,
   breaker: 503,
@@ -35,6 +40,6 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ chai
 
   const lane = req.headers.get("x-trace-lane") === "gesture" ? "gesture" : "open";
   const out = await getTrace(chainId, hash, { lane, ip: getClientIP(req) });
-  if ("trace" in out) return NextResponse.json(out.trace, { headers: FINAL });
+  if ("trace" in out) return NextResponse.json(out.trace, { headers: out.trace.prestate ? FINAL : PARTIAL });
   return NextResponse.json({ error: out.miss }, softStatus(req, STATUS[out.miss], NO_STORE));
 }

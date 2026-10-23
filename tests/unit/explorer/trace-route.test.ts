@@ -31,6 +31,7 @@ function stubNode(answer: () => Response | Promise<Response>) {
   );
 }
 const rpcResult = (result: unknown) => new Response(JSON.stringify({ jsonrpc: '2.0', id: 1, result }));
+const MUX = { callTracer: ROOT, prestateTracer: { pre: {}, post: {} } };
 
 async function get(hash: string, headers: Record<string, string> = {}) {
   const { GET } = await import('@/app/api/trace/[chainId]/[txHash]/route');
@@ -55,7 +56,7 @@ afterEach(() => {
 
 describe('crawlers', () => {
   it('get a 403 and the node is never asked', async () => {
-    stubNode(() => rpcResult(ROOT));
+    stubNode(() => rpcResult(MUX));
     for (const ua of [
       'Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',
       'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
@@ -71,7 +72,7 @@ describe('crawlers', () => {
   });
 
   it('do not include a person in a browser, an in-app browser, or a headless test browser', async () => {
-    stubNode(() => rpcResult(ROOT));
+    stubNode(() => rpcResult(MUX));
     for (const ua of [
       BROWSER,
       'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1',
@@ -110,7 +111,7 @@ describe('a failed trace', () => {
 
 describe('the node budget', () => {
   it('answers a soft 503 when Redis is down, and the node is never asked', async () => {
-    stubNode(() => rpcResult(ROOT));
+    stubNode(() => rpcResult(MUX));
     fake.client!.down = true;
     const res = await get(hashOf(6), SOFT_READ.headers);
     expect(res.status).toBe(200);
@@ -120,12 +121,12 @@ describe('the node budget', () => {
   });
 
   it('keys the per-IP limit on the IP the edge sets, not on x-forwarded-for', async () => {
-    stubNode(() => rpcResult(ROOT));
+    stubNode(() => rpcResult(MUX));
     const from = (i: number) => ({ 'cf-connecting-ip': '198.51.100.9', 'x-forwarded-for': `203.0.113.${i}`, ...SOFT_READ.headers });
     for (let i = 0; i < IP_PER_MINUTE.open; i++) expect((await get(hashOf(100 + i), from(i))).status).toBe(200);
     const res = await get(hashOf(200), from(99));
     expect(statusOf(res)).toBe(429);
-    expect(fetches).toBe(IP_PER_MINUTE.open * 2);
+    expect(fetches).toBe(IP_PER_MINUTE.open);
   });
 
   it(`trips the breaker after ${BREAKER_ERRORS} node failures, but not after error answers from the node`, async () => {
@@ -155,14 +156,22 @@ describe('the node budget', () => {
     expect((await get(hashOf(701), gesture)).status).toBe(200);
   });
 
+  it('caches a trace without its state diff for minutes only', async () => {
+    stubNode(() => rpcResult(MUX));
+    expect((await get(hashOf(800))).headers.get('cache-control')).toContain('immutable');
+    stubNode(() => rpcResult({ ...MUX, prestateTracer: null }));
+    const partial = await get(hashOf(801));
+    expect(partial.headers.get('cache-control')).toBe('public, max-age=60, s-maxage=300');
+  });
+
   it('serves a trace this instance already has without asking the gate or the node', async () => {
-    stubNode(() => rpcResult(ROOT));
+    stubNode(() => rpcResult(MUX));
     expect((await get(hashOf(7))).status).toBe(200);
     fake.client!.down = true;
     const again = await get(hashOf(7));
     expect(again.status).toBe(200);
     expect(again.headers.get('cache-control')).toContain('immutable');
-    expect(fetches).toBe(2);
+    expect(fetches).toBe(1);
   });
 });
 

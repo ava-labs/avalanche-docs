@@ -1,5 +1,5 @@
 /* An in-memory stand-in for the node-redis client, with the commands the
-   trace gate sends: GET, MGET, SET with NX and PX, INCR and EXPIRE in a MULTI,
+   trace gate and cache send: GET, MGET, SET with NX, PX or EX, INCR and EXPIRE in a MULTI,
    and the one EVAL script that frees a slot for its owner. Time comes from
    Date.now(), so vi.useFakeTimers() moves leases and windows. Several gates
    that share one fake act as Vercel instances that share one Redis. */
@@ -38,10 +38,11 @@ export class RedisFake {
     return this.run(() => keys.map((k) => this.live(k)?.value ?? null));
   }
 
-  set(key: string, value: string, opts: { NX?: boolean; PX?: number } = {}) {
+  set(key: string, value: string, opts: { NX?: boolean; PX?: number; EX?: number } = {}) {
     return this.run(() => {
       if (opts.NX && this.live(key)) return null;
-      this.store.set(key, { value, expiresAt: opts.PX ? Date.now() + opts.PX : null });
+      const ttlMs = opts.PX ?? (opts.EX !== undefined ? opts.EX * 1000 : null);
+      this.store.set(key, { value, expiresAt: ttlMs !== null ? Date.now() + ttlMs : null });
       return "OK";
     });
   }

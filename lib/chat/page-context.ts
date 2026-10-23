@@ -631,7 +631,7 @@ async function txData(ref: Extract<PageRef, { kind: "evm-tx" }>, baseUrl: string
     }
   } else {
     const miss = "miss" in traced ? traced.miss : null;
-    const reason = miss === "no_node" ? "this chain has no trace node, so internal calls are not available" : miss === "not_found" ? "the trace node does not know this transaction yet" : "the trace node is busy or did not answer";
+    const reason = miss === "no_node" ? "this chain has no trace node, so internal calls are not available" : miss === "not_found" ? "the trace node does not know this transaction yet" : miss === "too_large" ? "the trace is too large to read" : "the trace node is busy or did not answer";
     out.push(`No execution trace: ${reason}. The receipt's events follow.`);
     const d = head.tx.to && head.tx.input.length >= 10 ? decodeCall({ type: "CALL", from: head.tx.from, to: head.tx.to, input: head.tx.input, gas: head.tx.gas, gasUsed: head.receipt.gasUsed } as TraceFrame, n, seen) : null;
     if (d) out.push(`Top-level call: ${who(head.tx.to!, n, seen)}.${d.name}(${d.args.join(", ")})`);
